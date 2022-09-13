@@ -51,52 +51,42 @@ def parseAsn1Files(files: List[str]) -> Dict:
     return asn1tools.parse_files(files)
 
 
-def typesInAsn1(asn1: Dict):
+def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
-    return list(asn1["types"].keys())
-
-def docByTypeInAsn1(asn1_docs: Dict) -> Dict[str, str]:
-
-    doc_by_type = {}
+    asn1_types = {}
     for doc, asn1 in asn1_docs.items():
-        types = typesInAsn1(asn1)
-        for t in types:
-            doc_by_type[t] = doc
-    
-    return doc_by_type
+        asn1_types.update(asn1["types"])
+
+    return asn1_types
 
 
-def checkTypeMembersInAsn1(asn1_docs: Dict, known_types: List[str]):
+def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
-    # loop all docs
-    for doc, asn1 in asn1_docs.items():
+    known_types = list(asn1_types.keys())
 
-        # loop all types in doc
-        for t_name, type in asn1["types"].items():
+    # loop all types
+    for t_name, type in asn1_types.items():
 
-            # loop all members in type
-            for member in type.get("members", []):
+        # loop all members in type
+        for member in type.get("members", []):
 
-                if member is None:
-                    continue
+            if member is None:
+                continue
 
-                # check if type is known
-                if member["type"] not in known_types and member["type"] not in ASN1_PRIMITIVE_TYPES:
-                    raise TypeError(f"Member '{member['name']}' of type '{member['type']}' in '{t_name}' is undefined")
+            # check if type is known
+            if member["type"] not in known_types and member["type"] not in ASN1_PRIMITIVE_TYPES:
+                raise TypeError(f"Member '{member['name']}' of type '{member['type']}' in '{t_name}' is undefined")
 
 
-def asn1TypesToRosMsgStr(asn1_docs: Dict) -> Dict[str, str]:
+def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
 
     ros_msg_by_type = {}
 
-    # loop all docs
-    for doc, asn1 in asn1_docs.items():
+    # loop all types
+    for t_name, type in asn1_types.items():
 
-        # loop all types in doc
-        for t_name, type in asn1["types"].items():
-
-            # ASN1 to ROS message
-            ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(type)
+        # ASN1 to ROS message
+        ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(type)
 
     return ros_msg_by_type
 
@@ -178,11 +168,11 @@ def main():
 
     asn1_docs = parseAsn1Files(args.files)
 
-    doc_by_type = docByTypeInAsn1(asn1_docs)
+    asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
-    checkTypeMembersInAsn1(asn1_docs, list(doc_by_type.keys()))
+    checkTypeMembersInAsn1(asn1_types)
 
-    ros_msg_by_type = asn1TypesToRosMsgStr(asn1_docs)
+    ros_msg_by_type = asn1TypesToRosMsgStr(asn1_types)
 
     exportRosMsg(ros_msg_by_type, args.output_dir)
 
