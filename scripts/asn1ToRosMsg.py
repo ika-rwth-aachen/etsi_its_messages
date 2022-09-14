@@ -9,7 +9,6 @@ import asn1tools
 
 # TODO:
 # BIT STRING
-# ENUMERATE
 # SEQUENCE OF
 # ProtectedZoneID
 # NumericString
@@ -86,7 +85,7 @@ def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
     for t_name, type in asn1_types.items():
 
         # ASN1 to ROS message
-        ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(type)
+        ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(type, asn1_types)
 
     return ros_msg_by_type
 
@@ -109,7 +108,7 @@ def exportRosMsg(ros_msg_by_type: Dict[str, str], output_dir):
         print(filename)
 
 
-def asn1TypeToRosMsgStr(asn1_type: Dict) -> Optional[str]:
+def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optional[str]:
 
     ros_msg = ""
 
@@ -121,6 +120,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict) -> Optional[str]:
         if type_type == "CHOICE":
             ros_msg += f"INTEGER type\n\n"
 
+        # loop members
         for i_member, member in enumerate(asn1_type["members"]):
 
             member_lines = []
@@ -129,7 +129,25 @@ def asn1TypeToRosMsgStr(asn1_type: Dict) -> Optional[str]:
             if member is None:
                 continue
 
-            member_lines.append(f"{member['type']} {member['name']}")
+            member_type = member["type"]
+
+            # resolve naive types
+            if member_type in asn1_types:
+                member_info = asn1_types[member_type]
+
+                # enumerations to integer constants
+                if member_info["type"] == "ENUMERATED":
+                    member_type = "INTEGER"
+                    member_lines.append(f"{member_type} {member['name']}")
+                    for val in member_info.get("values", {}):
+                        if val is None:
+                            continue
+                        (k, v) = val
+                        member_lines.append(f"INTEGER {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
+                else:
+                    member_lines.append(f"{member_type} {member['name']}")
+            else:
+                member_lines.append(f"{member_type} {member['name']}")
 
             # constant for choice flag
             if type_type == "CHOICE":
@@ -137,7 +155,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict) -> Optional[str]:
 
             # named constants
             for k, v in member.get("named-numbers", {}).items():
-                member_lines.append(f"{member['type']} {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
+                member_lines.append(f"{member_type} {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
 
             # remaining info as comments
             for k, v in member.items():
@@ -155,9 +173,14 @@ def asn1TypeToRosMsgStr(asn1_type: Dict) -> Optional[str]:
 
         return None
 
+    elif type_type in ("ENUMERATED"):
+
+        return None
+
     else:
 
-        raise NotImplementedError
+        # raise NotImplementedError
+        pass
 
     return ros_msg
 
