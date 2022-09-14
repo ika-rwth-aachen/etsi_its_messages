@@ -9,8 +9,7 @@ from typing import Dict, List, Optional
 import asn1tools
 
 # TODO:
-# ProtectedZoneID
-# NumericString
+# ProtectedZoneID -> resolve primitive datatypes recursively -> CenDsrcTollingZoneID -> ProtectedZoneID -> INTEGER
 
 ASN1_PRIMITIVE_TYPES = [
     "BOOLEAN",
@@ -19,10 +18,7 @@ ASN1_PRIMITIVE_TYPES = [
     "UTF8String",
     "BIT STRING",
     "OCTET STRING",
-]
-
-ASN1_ARRAY_TYPES = [
-    "SEQUENCE",
+    "NumericString",
 ]
 
 
@@ -131,8 +127,15 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
             if member["type"] in asn1_types:
                 member_info = asn1_types[member["type"]]
 
+                # primitive datatypes
+                if member_info["type"] in ASN1_PRIMITIVE_TYPES:
+                    member_name = member["name"]
+                    member = deepcopy(member_info)
+                    member["name"] = member_name
+                    member_lines.append(f"{member['type']} {member['name']}")
+
                 # arrays
-                if member_info["type"] == "SEQUENCE OF":
+                elif member_info["type"] == "SEQUENCE OF":
                     member_name = member["name"]
                     member = deepcopy(member_info)
                     member["name"] = member_name
@@ -151,7 +154,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
                             continue
                         (k, v) = val
                         member_lines.append(f"INTEGER {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
-
+                
                 else:
                     member_lines.append(f"{member['type']} {member['name']}")
             else:
@@ -179,16 +182,22 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
 
     elif asn1_type["type"] in ASN1_PRIMITIVE_TYPES:
 
+        # resolved as members
+        return None
+
+    elif asn1_type["type"] in asn1_types:
+
+        # resolved as members
         return None
 
     elif asn1_type["type"] in ("ENUMERATED", "SEQUENCE OF"):
 
+        # resolved as members
         return None
 
     else:
 
         raise NotImplementedError
-        # pass
 
     return ros_msg
 
