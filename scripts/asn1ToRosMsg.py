@@ -11,15 +11,15 @@ import asn1tools
 # TODO:
 # ProtectedZoneID -> resolve primitive datatypes recursively -> CenDsrcTollingZoneID -> ProtectedZoneID -> INTEGER
 
-ASN1_PRIMITIVE_TYPES = [
-    "BOOLEAN",
-    "INTEGER",
-    "IA5String",
-    "UTF8String",
-    "BIT STRING",
-    "OCTET STRING",
-    "NumericString",
-]
+ASN1_PRIMITIVES_2_ROS = {
+    "BOOLEAN": "bool",
+    "INTEGER": "int32",
+    "IA5String": "string",
+    "UTF8String": "string",
+    "BIT STRING": "string",
+    "OCTET STRING": "string",
+    "NumericString": "string",
+}
 
 
 def parseCli():
@@ -69,7 +69,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                 continue
 
             # check if type is known
-            if member["type"] not in known_types and member["type"] not in ASN1_PRIMITIVE_TYPES:
+            if member["type"] not in known_types and member["type"] not in ASN1_PRIMITIVES_2_ROS:
                 raise TypeError(f"Member '{member['name']}' of type '{member['type']}' in '{t_name}' is undefined")
 
 
@@ -128,7 +128,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
                 member_info = asn1_types[member["type"]]
 
                 # primitive datatypes
-                if member_info["type"] in ASN1_PRIMITIVE_TYPES:
+                if member_info["type"] in ASN1_PRIMITIVES_2_ROS:
                     member_name = member["name"]
                     member = deepcopy(member_info)
                     member["name"] = member_name
@@ -173,6 +173,12 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
                 if k not in ("type", "name", "values", "named-numbers", "element"):
                     member_comments.append(f"{k}: {v}")
 
+            # replace ASN1 with ROS primitives
+            for idx, line in enumerate(member_lines):
+                member_type = line.split(" ")[0]
+                if member_type in ASN1_PRIMITIVES_2_ROS:
+                    member_lines[idx] = line.replace(member_type, ASN1_PRIMITIVES_2_ROS[member_type], 1)
+
             # append to ROS message
             for line in member_comments:
                 ros_msg += f"# {line}\n"
@@ -180,7 +186,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
                 ros_msg += f"{line}\n"
             ros_msg += "\n"
 
-    elif asn1_type["type"] in ASN1_PRIMITIVE_TYPES:
+    elif asn1_type["type"] in ASN1_PRIMITIVES_2_ROS:
 
         # resolved as members
         return None
