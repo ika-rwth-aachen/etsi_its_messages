@@ -3,22 +3,22 @@
 import argparse
 import os
 import re
+from copy import deepcopy
 from typing import Dict, List, Optional
 
 import asn1tools
 
 # TODO:
-# BIT STRING
-# SEQUENCE OF
 # ProtectedZoneID
 # NumericString
-# OCTET STRING
 
 ASN1_PRIMITIVE_TYPES = [
     "BOOLEAN",
     "INTEGER",
     "IA5String",
     "UTF8String",
+    "BIT STRING",
+    "OCTET STRING",
 ]
 
 ASN1_ARRAY_TYPES = [
@@ -112,12 +112,10 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
 
     ros_msg = ""
 
-    type_type = asn1_type["type"]
-
-    if type_type in ("SEQUENCE", "CHOICE"):
+    if asn1_type["type"] in ("SEQUENCE", "CHOICE"):
 
         # flag for choices
-        if type_type == "CHOICE":
+        if asn1_type["type"] == "CHOICE":
             ros_msg += f"INTEGER type\n\n"
 
         # loop members
@@ -129,33 +127,43 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
             if member is None:
                 continue
 
-            member_type = member["type"]
-
             # resolve naive types
-            if member_type in asn1_types:
-                member_info = asn1_types[member_type]
+            if member["type"] in asn1_types:
+                member_info = asn1_types[member["type"]]
+
+                # arrays
+                if member_info["type"] == "SEQUENCE OF":
+                    member_name = member["name"]
+                    member = deepcopy(member_info)
+                    member["name"] = member_name
+                    member["type"] = member_info["element"]["type"] + "[]"
+                    member_lines.append(f"{member['type']} {member['name']}")
 
                 # enumerations to integer constants
-                if member_info["type"] == "ENUMERATED":
-                    member_type = "INTEGER"
-                    member_lines.append(f"{member_type} {member['name']}")
+                elif member_info["type"] == "ENUMERATED":
+                    member_name = member["name"]
+                    member = deepcopy(member_info)
+                    member["name"] = member_name
+                    member["type"] = "INTEGER"
+                    member_lines.append(f"{member['type']} {member['name']}")
                     for val in member_info.get("values", {}):
                         if val is None:
                             continue
                         (k, v) = val
                         member_lines.append(f"INTEGER {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
+
                 else:
-                    member_lines.append(f"{member_type} {member['name']}")
+                    member_lines.append(f"{member['type']} {member['name']}")
             else:
-                member_lines.append(f"{member_type} {member['name']}")
+                member_lines.append(f"{member['type']} {member['name']}")
 
             # constant for choice flag
-            if type_type == "CHOICE":
+            if asn1_type["type"] == "CHOICE":
                 member_lines.append(f"INTEGER TYPE_{camel2SNAKE(member['name'])} = {i_member}")
 
             # named constants
             for k, v in member.get("named-numbers", {}).items():
-                member_lines.append(f"{member_type} {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
+                member_lines.append(f"{member['type']} {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
 
             # remaining info as comments
             for k, v in member.items():
@@ -169,18 +177,18 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
                 ros_msg += f"{line}\n"
             ros_msg += "\n"
 
-    elif type_type in ASN1_PRIMITIVE_TYPES:
+    elif asn1_type["type"] in ASN1_PRIMITIVE_TYPES:
 
         return None
 
-    elif type_type in ("ENUMERATED"):
+    elif asn1_type["type"] in ("ENUMERATED", "SEQUENCE OF"):
 
         return None
 
     else:
 
-        # raise NotImplementedError
-        pass
+        raise NotImplementedError
+        # pass
 
     return ros_msg
 
