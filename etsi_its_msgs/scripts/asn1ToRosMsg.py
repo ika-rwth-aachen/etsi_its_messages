@@ -9,6 +9,21 @@ from typing import Dict, List, Optional
 import asn1tools
 
 
+# TODO: merge all extra dict info, e.g.
+# ImpactReductionContainer.positionOfPillars should have PositionOfPillars size and PosPillar named keys
+#   OR e.g.
+# Traces ::= SEQUENCE SIZE(1..7) OF PathHistory
+# PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
+# PathPoint ::= SEQUENCE {
+#     pathPosition DeltaReferencePosition,
+#     pathDeltaTime PathDeltaTime OPTIONAL
+# }
+
+# TODO: nested arrays like PathPoint[][] not possible in ROS msg
+# instead of PathPoint[][] traces
+# create PathHistory[] traces
+# with   PathPoint[] array in PathHistory.msg
+
 ASN1_PRIMITIVES_2_ROS = {
     "BOOLEAN": "bool",
     "INTEGER": "int32",
@@ -112,6 +127,14 @@ def resolveAsn1Type(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Dict:
         return type_type
     elif asn1_type["type"] in ASN1_PRIMITIVES_2_ROS:
         return asn1_type
+    elif asn1_type["type"] == "SEQUENCE OF":
+        array_type = resolveAsn1Type(asn1_types[asn1_type["element"]["type"]], asn1_types)
+        asn1_type = deepcopy(asn1_type)
+        if array_type is None:
+            asn1_type["type"] = asn1_type["element"]["type"] + "[]"
+        else:
+            asn1_type["type"] = array_type["type"] + "[]"
+        return asn1_type
     else:
         return None
 
@@ -135,23 +158,15 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
             if member is None:
                 continue
 
-            # resolve type aliases
+            # get member definition and resolve type aliases
             member = deepcopy(resolveAsn1Type(member, asn1_types))
 
-            # resolve arrays/enumerations
+            # resolve enumerations
             if member["type"] in asn1_types:
                 member_info = asn1_types[member["type"]]
 
-                # arrays
-                if member_info["type"] == "SEQUENCE OF":
-                    member_name = member["name"]
-                    member = deepcopy(member_info)
-                    member["name"] = member_name
-                    member["type"] = member_info["element"]["type"] + "[]"
-                    member_lines.append(f"{member['type']} {member['name']}")
-
                 # enumerations to integer constants
-                elif member_info["type"] == "ENUMERATED":
+                if member_info["type"] == "ENUMERATED":
                     member_name = member["name"]
                     member = deepcopy(member_info)
                     member["name"] = member_name
