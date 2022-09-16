@@ -124,7 +124,7 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
 
         # flag for choices
         if asn1_type["type"] == "CHOICE":
-            ros_msg += f"INTEGER type\n\n"
+            ros_msg += f"int32 type\n\n"
 
         # loop members
         for i_member, member in enumerate(asn1_type["members"]):
@@ -183,9 +183,10 @@ def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optiona
 
             # replace ASN1 with ROS primitives
             for idx, line in enumerate(member_lines):
-                member_type = line.split(" ")[0]
-                if member_type in ASN1_PRIMITIVES_2_ROS:
-                    member_lines[idx] = line.replace(member_type, ASN1_PRIMITIVES_2_ROS[member_type], 1)
+                for asn1_primitive in ASN1_PRIMITIVES_2_ROS:
+                    if line.startswith(asn1_primitive):
+                        line = line.replace(asn1_primitive, ASN1_PRIMITIVES_2_ROS[asn1_primitive], 1)
+                member_lines[idx] = line
 
             # append to ROS message
             for line in member_comments:
