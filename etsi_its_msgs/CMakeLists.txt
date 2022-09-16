@@ -49,6 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   ActionID.msg
+  AlacarteContainer.msg
   Altitude.msg
   BasicContainer.msg
   BasicVehicleContainerHighFrequency.msg
@@ -60,30 +61,38 @@ add_message_files(
   ClosedLanes.msg
   CoopAwareness.msg
   Curvature.msg
+  DENM.msg
   DangerousGoodsContainer.msg
   DangerousGoodsExtended.msg
+  DecentralizedEnvironmentalNotificationMessage.msg
   DeltaReferencePosition.msg
   EmergencyContainer.msg
   EventPoint.msg
   Heading.msg
   HighFrequencyContainer.msg
+  ImpactReductionContainer.msg
   ItsPduHeader.msg
   LateralAcceleration.msg
+  LocationContainer.msg
   LongitudinalAcceleration.msg
   LowFrequencyContainer.msg
+  ManagementContainer.msg
   PathPoint.msg
   PosConfidenceEllipse.msg
   ProtectedCommunicationZone.msg
   PtActivation.msg
   PublicTransportContainer.msg
+  RSUContainerHighFrequency.msg
   ReferencePosition.msg
   RescueContainer.msg
   RoadWorksContainerBasic.msg
-  RSUContainerHighFrequency.msg
+  RoadWorksContainerExtended.msg
   SafetyCarContainer.msg
+  SituationContainer.msg
   SpecialTransportContainer.msg
   SpecialVehicleContainer.msg
   Speed.msg
+  StationaryVehicleContainer.msg
   SteeringWheelAngle.msg
   VehicleIdentification.msg
   VehicleLength.msg
