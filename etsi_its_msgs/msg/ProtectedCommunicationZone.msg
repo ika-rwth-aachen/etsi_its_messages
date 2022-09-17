@@ -1,28 +1,15 @@
-int32 protectedZoneType
-int32 PROTECTED_ZONE_TYPE_PERMANENT_CEN_DSRC_TOLLING = 0
-int32 PROTECTED_ZONE_TYPE_TEMPORARY_CEN_DSRC_TOLLING = 1
+ProtectedZoneType protectedZoneType
 
-# restricted-to: [(0, 4398046511103)]
-int32 expiryTime
-int32 EXPIRY_TIME_UTC_START_OF_2_0_0_4 = 0
-int32 EXPIRY_TIME_ONE_MILLISEC_AFTER_U_T_C_START_OF_2_0_0_4 = 1
+# optional: True
+TimestampIts expiryTime
 
-# restricted-to: [(-900000000, 900000001)]
-int32 protectedZoneLatitude
-int32 PROTECTED_ZONE_LATITUDE_ONE_MICRODEGREE_NORTH = 10
-int32 PROTECTED_ZONE_LATITUDE_ONE_MICRODEGREE_SOUTH = -10
-int32 PROTECTED_ZONE_LATITUDE_UNAVAILABLE = 900000001
+Latitude protectedZoneLatitude
 
-# restricted-to: [(-1800000000, 1800000001)]
-int32 protectedZoneLongitude
-int32 PROTECTED_ZONE_LONGITUDE_ONE_MICRODEGREE_EAST = 10
-int32 PROTECTED_ZONE_LONGITUDE_ONE_MICRODEGREE_WEST = -10
-int32 PROTECTED_ZONE_LONGITUDE_UNAVAILABLE = 1800000001
+Longitude protectedZoneLongitude
 
-# restricted-to: [(1, 255), None]
-int32 protectedZoneRadius
-int32 PROTECTED_ZONE_RADIUS_ONE_METER = 1
+# optional: True
+ProtectedZoneRadius protectedZoneRadius
 
-# restricted-to: [(0, 134217727)]
-int32 protectedZoneID
+# optional: True
+ProtectedZoneID protectedZoneID
 

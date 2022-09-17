@@ -1,4 +1,4 @@
-bool embarkationStatus
+EmbarkationStatus embarkationStatus
 
 # optional: True
 PtActivation ptActivation

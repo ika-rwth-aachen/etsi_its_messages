@@ -1,0 +1,4 @@
+# restricted-to: [(-1023, 1023)]
+int16 STRAIGHT = 0
+int16 UNAVAILABLE = 1023
+int16 value

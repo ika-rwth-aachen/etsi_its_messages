@@ -1,6 +1,6 @@
-# size: [(1, 3)]
-string wMInumber
+# optional: True
+WMInumber wMInumber
 
-# size: [6]
-string vDS
+# optional: True
+VDS vDS
 

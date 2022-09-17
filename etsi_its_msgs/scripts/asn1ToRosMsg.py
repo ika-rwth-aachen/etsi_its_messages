@@ -3,26 +3,11 @@
 import argparse
 import os
 import re
-from copy import deepcopy
 from typing import Dict, List, Optional
 
 import asn1tools
+import numpy as np
 
-
-# TODO: merge all extra dict info, e.g.
-# ImpactReductionContainer.positionOfPillars should have PositionOfPillars size and PosPillar named keys
-#   OR e.g.
-# Traces ::= SEQUENCE SIZE(1..7) OF PathHistory
-# PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
-# PathPoint ::= SEQUENCE {
-#     pathPosition DeltaReferencePosition,
-#     pathDeltaTime PathDeltaTime OPTIONAL
-# }
-
-# TODO: nested arrays like PathPoint[][] not possible in ROS msg
-# instead of PathPoint[][] traces
-# create PathHistory[] traces
-# with   PathPoint[] array in PathHistory.msg
 
 ASN1_PRIMITIVES_2_ROS = {
     "BOOLEAN": "bool",
@@ -51,7 +36,7 @@ def parseCli():
 
 def camel2SNAKE(s: str) -> str:
 
-    return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_")
+    return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
 
 
 def parseAsn1Files(files: List[str]) -> Dict:
@@ -117,119 +102,128 @@ def exportRosMsg(ros_msg_by_type: Dict[str, str], output_dir):
         print(filename)
 
 
-def resolveAsn1Type(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Dict:
+def simplestRosIntegerType(min_value, max_value):
 
-    if asn1_type["type"] in asn1_types:
-        type_type = resolveAsn1Type(asn1_types[asn1_type["type"]], asn1_types)
-        type_type = asn1_type if type_type is None else type_type
-        if "name" in asn1_type:
-            type_type["name"] = asn1_type["name"]
-        return type_type
-    elif asn1_type["type"] in ASN1_PRIMITIVES_2_ROS:
-        return asn1_type
-    elif asn1_type["type"] == "SEQUENCE OF":
-        array_type = resolveAsn1Type(asn1_types[asn1_type["element"]["type"]], asn1_types)
-        asn1_type = deepcopy(asn1_type)
-        if array_type is None:
-            asn1_type["type"] = asn1_type["element"]["type"] + "[]"
-        else:
-            asn1_type["type"] = array_type["type"] + "[]"
-        return asn1_type
+    if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
+        return "uint8"
+    elif min_value >= np.iinfo(np.uint16).min and max_value <= np.iinfo(np.uint16).max:
+        return "uint16"
+    elif min_value >= np.iinfo(np.uint32).min and max_value <= np.iinfo(np.uint32).max:
+        return "uint32"
+    elif min_value >= np.iinfo(np.uint64).min and max_value <= np.iinfo(np.uint64).max:
+        return "uint64"
+    elif min_value >= np.iinfo(np.int8).min and max_value <= np.iinfo(np.int8).max:
+        return "int8"
+    elif min_value >= np.iinfo(np.int16).min and max_value <= np.iinfo(np.int16).max:
+        return "int16"
+    elif min_value >= np.iinfo(np.int32).min and max_value <= np.iinfo(np.int32).max:
+        return "int32"
+    elif min_value >= np.iinfo(np.int64).min and max_value <= np.iinfo(np.int64).max:
+        return "int64"
     else:
-        return None
+        return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
 
 
-def asn1TypeToRosMsgStr(asn1_type: Dict, asn1_types: Dict[str, Dict]) -> Optional[str]:
+def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str]:
 
-    ros_msg = ""
+    msg = ""
+    type = asn1["type"]
 
-    if asn1_type["type"] in ("SEQUENCE", "CHOICE"):
+    # extra information (e.g. optional) as comments
+    for k, v in asn1.items():
+        if k not in ("type", "name", "members", "values", "element", "named-numbers"):
+            msg += f"# {k}: {v}"
+            msg += "\n"
 
-        # flag for choices
-        if asn1_type["type"] == "CHOICE":
-            ros_msg += f"int32 type\n\n"
+    # primitives
+    if type in ASN1_PRIMITIVES_2_ROS:
 
-        # loop members
-        for i_member, member in enumerate(asn1_type["members"]):
+        # resolve ROS msg type
+        ros_type = ASN1_PRIMITIVES_2_ROS[type]
+        name = asn1["name"] if "name" in asn1 else "value"
 
-            member_lines = []
-            member_comments = []
+        # choose simplest possible integer type
+        if "restricted-to" in asn1 and type == "INTEGER":
+            min_value = asn1["restricted-to"][0][0]
+            max_value = asn1["restricted-to"][0][1]
+            ros_type = simplestRosIntegerType(min_value, max_value)
 
+        # add constants for named numbers
+        if "named-numbers" in asn1:
+            for k, v in asn1["named-numbers"].items():
+                constant_name = f"{camel2SNAKE(k)}"
+                if "name" in asn1:
+                    constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
+                msg += f"{ros_type} {constant_name} = {v}"
+                msg += "\n"
+
+        msg += f"{ros_type} {name}"
+        msg += "\n"
+
+    # nested types
+    elif type == "SEQUENCE":
+
+        # recursively add all members
+        for member in asn1["members"]:
             if member is None:
                 continue
+            msg += asn1TypeToRosMsgStr(member, asn1_types)
+            msg += "\n"
 
-            # get member definition and resolve type aliases
-            member = deepcopy(resolveAsn1Type(member, asn1_types))
+    # type aliases with multiple options
+    elif type == "CHOICE":
 
-            # resolve enumerations
-            if member["type"] in asn1_types:
-                member_info = asn1_types[member["type"]]
+        # add flag for indicating active option
+        msg += "uint8 choice"
+        msg += "\n"
+        msg += "\n"
 
-                # enumerations to integer constants
-                if member_info["type"] == "ENUMERATED":
-                    member_name = member["name"]
-                    member = deepcopy(member_info)
-                    member["name"] = member_name
-                    member["type"] = "INTEGER"
-                    member_lines.append(f"{member['type']} {member['name']}")
-                    for val in member_info.get("values", {}):
-                        if val is None:
-                            continue
-                        (k, v) = val
-                        member_lines.append(f"INTEGER {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
-                
-                else:
-                    member_lines.append(f"{member['type']} {member['name']}")
-            else:
-                member_lines.append(f"{member['type']} {member['name']}")
+        # recursively add members for all options, incl. constant for flag
+        for im, member in enumerate(asn1["members"]):
+            if member is None:
+                continue
+            msg += asn1TypeToRosMsgStr(member, asn1_types)
+            msg += f"uint8 CHOICE_{camel2SNAKE(member['name'])} = {im}"
+            msg += "\n"
 
-            # constant for choice flag
-            if asn1_type["type"] == "CHOICE":
-                member_lines.append(f"INTEGER TYPE_{camel2SNAKE(member['name'])} = {i_member}")
+    # arrays
+    elif type == "SEQUENCE OF":
 
-            # named constants
-            for k, v in member.get("named-numbers", {}).items():
-                member_lines.append(f"{member['type']} {camel2SNAKE(member['name'])}_{camel2SNAKE(k)} = {v}")
+        msg += f"{asn1['element']['type']}[] array"
+        msg += "\n"
 
-            # remaining info as comments
-            for k, v in member.items():
-                if k not in ("type", "name", "values", "named-numbers", "element"):
-                    member_comments.append(f"{k}: {v}")
+    # enums
+    elif type == "ENUMERATED":
 
-            # replace ASN1 with ROS primitives
-            for idx, line in enumerate(member_lines):
-                for asn1_primitive in ASN1_PRIMITIVES_2_ROS:
-                    if line.startswith(asn1_primitive):
-                        line = line.replace(asn1_primitive, ASN1_PRIMITIVES_2_ROS[asn1_primitive], 1)
-                member_lines[idx] = line
+        # choose simplest possible integer type
+        values = [val[1] for val in asn1["values"] if val is not None]
+        min_value = min(values)
+        max_value = max(values)
+        ros_type = simplestRosIntegerType(min_value, max_value)
 
-            # append to ROS message
-            for line in member_comments:
-                ros_msg += f"# {line}\n"
-            for line in member_lines:
-                ros_msg += f"{line}\n"
-            ros_msg += "\n"
+        # add constants for all values
+        for val in asn1["values"]:
+            if val is None:
+                continue
+            msg += f"{ros_type} {camel2SNAKE(val[0])} = {val[1]}"
+            msg += "\n"
 
-    elif asn1_type["type"] in ASN1_PRIMITIVES_2_ROS:
+        # add field for active value
+        msg += f"{ros_type} value"
+        msg += "\n"
 
-        # resolved as members
-        return None
+    # custom types
+    elif type in asn1_types:
 
-    elif asn1_type["type"] in asn1_types:
-
-        # resolved as members
-        return None
-
-    elif asn1_type["type"] in ("ENUMERATED", "SEQUENCE OF"):
-
-        # resolved as members
-        return None
+        name = asn1["name"] if "name" in asn1 else "value"
+        msg += f"{asn1['type']} {name}"
+        msg += "\n"
 
     else:
 
-        raise NotImplementedError
+        raise NotImplementedError(f"Cannot handle type '{type}'")
 
-    return ros_msg
+    return msg
 
 
 def main():

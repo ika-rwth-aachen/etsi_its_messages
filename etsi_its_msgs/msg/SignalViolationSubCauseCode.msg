@@ -1,0 +1,6 @@
+# restricted-to: [(0, 255)]
+uint8 UNAVAILABLE = 0
+uint8 STOP_SIGN_VIOLATION = 1
+uint8 TRAFFIC_LIGHT_VIOLATION = 2
+uint8 TURNING_REGULATION_VIOLATION = 3
+uint8 value

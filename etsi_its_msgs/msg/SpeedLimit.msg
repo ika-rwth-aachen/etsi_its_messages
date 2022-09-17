@@ -1,0 +1,3 @@
+# restricted-to: [(1, 255)]
+uint8 ONE_KM_PER_HOUR = 1
+uint8 value

@@ -4,12 +4,8 @@ Speed eventSpeed
 # optional: True
 Heading eventPositionHeading
 
-# size: [(1, 7)]
-PathPoint[][] traces
+Traces traces
 
-int32 roadType
-int32 ROAD_TYPE_URBAN-_NO_STRUCTURAL_SEPARATION_TO_OPPOSITE_LANES = 0
-int32 ROAD_TYPE_URBAN-_WITH_STRUCTURAL_SEPARATION_TO_OPPOSITE_LANES = 1
-int32 ROAD_TYPE_NON_URBAN-_NO_STRUCTURAL_SEPARATION_TO_OPPOSITE_LANES = 2
-int32 ROAD_TYPE_NON_URBAN-_WITH_STRUCTURAL_SEPARATION_TO_OPPOSITE_LANES = 3
+# optional: True
+RoadType roadType
 

@@ -1,3 +1,3 @@
-# size: [(1, 16)]
-ProtectedCommunicationZone[] protectedCommunicationZonesRSU
+# optional: True
+ProtectedCommunicationZonesRSU protectedCommunicationZonesRSU
 

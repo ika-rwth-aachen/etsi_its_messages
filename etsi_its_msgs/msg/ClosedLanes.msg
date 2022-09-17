@@ -1,13 +1,9 @@
-int32 innerhardShoulderStatus
-int32 INNERHARD_SHOULDER_STATUS_AVAILABLE_FOR_STOPPING = 0
-int32 INNERHARD_SHOULDER_STATUS_CLOSED = 1
-int32 INNERHARD_SHOULDER_STATUS_AVAILABLE_FOR_DRIVING = 2
+# optional: True
+HardShoulderStatus innerhardShoulderStatus
 
-int32 outerhardShoulderStatus
-int32 OUTERHARD_SHOULDER_STATUS_AVAILABLE_FOR_STOPPING = 0
-int32 OUTERHARD_SHOULDER_STATUS_CLOSED = 1
-int32 OUTERHARD_SHOULDER_STATUS_AVAILABLE_FOR_DRIVING = 2
+# optional: True
+HardShoulderStatus outerhardShoulderStatus
 
-# size: [(1, 13)]
-string drivingLaneStatus
+# optional: True
+DrivingLaneStatus drivingLaneStatus
 

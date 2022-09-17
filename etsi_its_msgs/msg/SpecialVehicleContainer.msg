@@ -1,23 +1,16 @@
-int32 type
+uint8 choice
 
 PublicTransportContainer publicTransportContainer
-int32 TYPE_PUBLIC_TRANSPORT_CONTAINER = 0
-
+uint8 CHOICE_PUBLIC_TRANSPORT_CONTAINER = 0
 SpecialTransportContainer specialTransportContainer
-int32 TYPE_SPECIAL_TRANSPORT_CONTAINER = 1
-
+uint8 CHOICE_SPECIAL_TRANSPORT_CONTAINER = 1
 DangerousGoodsContainer dangerousGoodsContainer
-int32 TYPE_DANGEROUS_GOODS_CONTAINER = 2
-
+uint8 CHOICE_DANGEROUS_GOODS_CONTAINER = 2
 RoadWorksContainerBasic roadWorksContainerBasic
-int32 TYPE_ROAD_WORKS_CONTAINER_BASIC = 3
-
+uint8 CHOICE_ROAD_WORKS_CONTAINER_BASIC = 3
 RescueContainer rescueContainer
-int32 TYPE_RESCUE_CONTAINER = 4
-
+uint8 CHOICE_RESCUE_CONTAINER = 4
 EmergencyContainer emergencyContainer
-int32 TYPE_EMERGENCY_CONTAINER = 5
-
+uint8 CHOICE_EMERGENCY_CONTAINER = 5
 SafetyCarContainer safetyCarContainer
-int32 TYPE_SAFETY_CAR_CONTAINER = 6
-
+uint8 CHOICE_SAFETY_CAR_CONTAINER = 6

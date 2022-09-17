@@ -1,5 +1,4 @@
-int32 type
+uint8 choice
 
 BasicVehicleContainerLowFrequency basicVehicleContainerLowFrequency
-int32 TYPE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY = 0
-
+uint8 CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY = 0

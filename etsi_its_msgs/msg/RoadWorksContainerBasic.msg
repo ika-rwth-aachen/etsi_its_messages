@@ -1,16 +1,7 @@
-# restricted-to: [(0, 255)]
-int32 roadworksSubCauseCode
-int32 ROADWORKS_SUB_CAUSE_CODE_UNAVAILABLE = 0
-int32 ROADWORKS_SUB_CAUSE_CODE_MAJOR_ROADWORKS = 1
-int32 ROADWORKS_SUB_CAUSE_CODE_ROAD_MARKING_WORK = 2
-int32 ROADWORKS_SUB_CAUSE_CODE_SLOW_MOVING_ROAD_MAINTENANCE = 3
-int32 ROADWORKS_SUB_CAUSE_CODE_SHORT_TERM_STATIONARY_ROADWORKS = 4
-int32 ROADWORKS_SUB_CAUSE_CODE_STREET_CLEANING = 5
-int32 ROADWORKS_SUB_CAUSE_CODE_WINTER_SERVICE = 6
+# optional: True
+RoadworksSubCauseCode roadworksSubCauseCode
 
-# named-bits: [('lightBarActivated', '0'), ('sirenActivated', '1')]
-# size: [2]
-string lightBarSirenInUse
+LightBarSirenInUse lightBarSirenInUse
 
 # optional: True
 ClosedLanes closedLanes
