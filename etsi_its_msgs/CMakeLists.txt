@@ -46,6 +46,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
+
 add_message_files(
   DIRECTORY
     msg/ITS-Container
@@ -226,6 +227,26 @@ add_message_files(
     SituationContainer.msg
     StationaryVehicleContainer.msg
     Termination.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/EVCSN-PDU-Descriptions
+  FILES
+    ChargingSpotType.msg
+    DigitalMap.msg
+    EVChargingSpotNotificationPOIMessage.msg
+    EvcsnPdu.msg
+    ItsChargingSpotDataElements.msg
+    ItsChargingSpots.msg
+    ItsChargingStationData.msg
+    ItsEVCSNData.msg
+    ItsPOIHeader.msg
+    NumberStations.msg
+    ParkingPlacesData.msg
+    POIType.msg
+    SpotAvailability.msg
+    TypeOfReceptacle.msg
 )
 
 ## Generate services in the 'srv' folder
