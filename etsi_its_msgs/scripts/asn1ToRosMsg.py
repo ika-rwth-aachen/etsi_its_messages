@@ -69,7 +69,9 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
-    known_types = list(asn1_types.keys())
+    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED"]
+    known_types += list(asn1_types.keys())
+    known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
 
     # loop all types
     for t_name, type in asn1_types.items():
@@ -81,8 +83,8 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                 continue
 
             # check if type is known
-            if member["type"] not in known_types and member["type"] not in ASN1_PRIMITIVES_2_ROS:
-                raise TypeError(f"Member '{member['name']}' of type '{member['type']}' in '{t_name}' is undefined")
+            if member["type"] not in known_types:
+                raise TypeError(f"Type '{member['type']}' of member '{member['name']}' in '{t_name}' is undefined")
 
 
 def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
