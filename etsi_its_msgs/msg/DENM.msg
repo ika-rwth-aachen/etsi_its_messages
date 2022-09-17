@@ -1,0 +1,4 @@
+ItsPduHeader header
+
+DecentralizedEnvironmentalNotificationMessage denm
+

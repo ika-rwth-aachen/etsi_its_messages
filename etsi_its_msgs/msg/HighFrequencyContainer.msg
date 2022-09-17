@@ -1,0 +1,8 @@
+int32 type
+
+BasicVehicleContainerHighFrequency basicVehicleContainerHighFrequency
+int32 TYPE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY = 0
+
+RSUContainerHighFrequency rsuContainerHighFrequency
+int32 TYPE_RSU_CONTAINER_HIGH_FREQUENCY = 1
+

@@ -1,0 +1,23 @@
+int32 type
+
+PublicTransportContainer publicTransportContainer
+int32 TYPE_PUBLIC_TRANSPORT_CONTAINER = 0
+
+SpecialTransportContainer specialTransportContainer
+int32 TYPE_SPECIAL_TRANSPORT_CONTAINER = 1
+
+DangerousGoodsContainer dangerousGoodsContainer
+int32 TYPE_DANGEROUS_GOODS_CONTAINER = 2
+
+RoadWorksContainerBasic roadWorksContainerBasic
+int32 TYPE_ROAD_WORKS_CONTAINER_BASIC = 3
+
+RescueContainer rescueContainer
+int32 TYPE_RESCUE_CONTAINER = 4
+
+EmergencyContainer emergencyContainer
+int32 TYPE_EMERGENCY_CONTAINER = 5
+
+SafetyCarContainer safetyCarContainer
+int32 TYPE_SAFETY_CAR_CONTAINER = 6
+

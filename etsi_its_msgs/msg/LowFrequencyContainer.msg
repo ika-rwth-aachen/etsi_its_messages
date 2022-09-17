@@ -1,0 +1,5 @@
+int32 type
+
+BasicVehicleContainerLowFrequency basicVehicleContainerLowFrequency
+int32 TYPE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY = 0
+
