@@ -39,9 +39,23 @@ def camel2SNAKE(s: str) -> str:
     return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
 
 
+def validRosType(s: str) -> str:
+
+    return s.replace("-", "_")
+
+
 def parseAsn1Files(files: List[str]) -> Dict:
 
     return asn1tools.parse_files(files)
+
+
+def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
+
+    for doc, asn1 in asn1_docs.items():
+        if asn1_type in asn1["types"]:
+            return doc
+    
+    return None
 
 
 def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
@@ -84,10 +98,7 @@ def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
     return ros_msg_by_type
 
 
-def exportRosMsg(ros_msg_by_type: Dict[str, str], output_dir):
-
-    # create output directory
-    os.makedirs(output_dir, exist_ok=True)
+def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, output_dir):
 
     # loop over all types
     for type, ros_msg in ros_msg_by_type.items():
@@ -95,8 +106,12 @@ def exportRosMsg(ros_msg_by_type: Dict[str, str], output_dir):
         if ros_msg is None:
             continue
 
+        # create output directory
+        doc_output_dir = os.path.join(output_dir, docForAsn1Type(type, asn1_docs))
+        os.makedirs(doc_output_dir, exist_ok=True)
+
         # export ROS .msg
-        filename = os.path.join(output_dir, f"{type}.msg")
+        filename = os.path.join(doc_output_dir, f"{validRosType(type)}.msg")
         with open(filename, "w", encoding="utf-8") as file:
             file.write(ros_msg)
         print(filename)
@@ -216,7 +231,7 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
     elif type in asn1_types:
 
         name = asn1["name"] if "name" in asn1 else "value"
-        msg += f"{asn1['type']} {name}"
+        msg += f"{validRosType(type)} {name}"
         msg += "\n"
 
     else:
@@ -238,7 +253,7 @@ def main():
 
     ros_msg_by_type = asn1TypesToRosMsgStr(asn1_types)
 
-    exportRosMsg(ros_msg_by_type, args.output_dir)
+    exportRosMsg(ros_msg_by_type, asn1_docs, args.output_dir)
 
 
 if __name__ == "__main__":
