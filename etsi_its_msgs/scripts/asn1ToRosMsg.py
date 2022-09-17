@@ -75,7 +75,7 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
-    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED"]
+    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL"]
     known_types += list(asn1_types.keys())
     known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
 
@@ -197,7 +197,10 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
     elif type == "CHOICE":
 
         # add flag for indicating active option
-        msg += "uint8 choice"
+        name = "choice"
+        if "name" in asn1:
+            name = f"{asn1['name']}_{name}"
+        msg += f"uint8 {name}"
         msg += "\n"
         msg += "\n"
 
@@ -206,7 +209,10 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
             if member is None:
                 continue
             msg += asn1TypeToRosMsgStr(member, asn1_types)
-            msg += f"uint8 CHOICE_{camel2SNAKE(member['name'])} = {im}"
+            name = f"CHOICE_{camel2SNAKE(member['name'])}"
+            if "name" in asn1:
+                name = f"{camel2SNAKE(asn1['name'])}_{name}"
+            msg += f"uint8 {name} = {im}"
             msg += "\n"
 
     # arrays
@@ -242,6 +248,10 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
         msg += f"{validRosType(type)} {validRosField(name)}"
         msg += "\n"
 
+    elif type == "NULL":
+
+        pass
+        
     else:
 
         raise NotImplementedError(f"Cannot handle type '{type}'")

@@ -16,3 +16,6 @@
 [submodule "ETSI-ITS-ASN1/poti_en302890_2"]
 	path = ETSI-ITS-ASN1/poti_en302890_2
 	url = https://forge.etsi.org/rep/ITS/asn1/poti_en302890_2.git
+[submodule "ETSI-ITS-ASN1/tistpg_ts101556_2"]
+	path = ETSI-ITS-ASN1/tistpg_ts101556_2
+	url = https://forge.etsi.org/rep/ITS/asn1/tistpg_ts101556_2.git

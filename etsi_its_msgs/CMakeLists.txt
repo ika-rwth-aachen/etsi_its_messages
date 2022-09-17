@@ -297,6 +297,75 @@ add_message_files(
     RoadAngles.msg
 )
 
+add_message_files(
+  DIRECTORY
+    msg/TIS-TPG-Transactions-Descriptions
+  FILES
+    Accessibility.msg
+    AppliedTyrePressure.msg
+    AppliedTyrePressures.msg
+    AvailableTpgNumber.msg
+    AxlePlacardPressure.msg
+    BookingInfo.msg
+    CancellationCondition.msg
+    CurrentVehicleConfiguration.msg
+    CustomerContract.msg
+    DriverLanguage.msg
+    FillingStatus.msg
+    Language.msg
+    NumberOfAppliedPressure.msg
+    PairingID.msg
+    PlacardTable.msg
+    PressureConfiguration.msg
+    PressureVariant.msg
+    PressureVariantsList.msg
+    ReservationID.msg
+    ReservationStatus.msg
+    SearchCondition.msg
+    SearchRange.msg
+    SensorState.msg
+    TIN.msg
+    TisProfile.msg
+    TisTpgDRM_Location.msg
+    TisTpgDRM_Management.msg
+    TisTpgDRM.msg
+    TisTpgDRM_Situation.msg
+    TisTpgEOFM_Management.msg
+    TisTpgEOFM.msg
+    TisTpgSNM_Management.msg
+    TisTpgSNM.msg
+    TisTpgTCM_Location.msg
+    TisTpgTCM_Management.msg
+    TisTpgTCM.msg
+    TisTpgTCM_Situation.msg
+    TisTpgTransaction.msg
+    TisTpgTransactionsPdu.msg
+    TisTpgTRM_Location.msg
+    TisTpgTRM_Management.msg
+    TisTpgTRM.msg
+    TisTpgTRM_Situation.msg
+    TisTpgVDPM_Management.msg
+    TisTpgVDPM.msg
+    TisTpgVDRM_Management.msg
+    TisTpgVDRM.msg
+    TotalTpgStations.msg
+    TpgAutomation.msg
+    TpgLocation.msg
+    TpgNotifContainer.msg
+    TpgNumber.msg
+    TpgProvider.msg
+    TpgStationData.msg
+    TyreAirTemperature.msg
+    TyreData.msg
+    TyrePressure.msg
+    TyreSetVariantID.msg
+    TyreSetVariant.msg
+    TyreSidewallInformation.msg
+    TyreTempCondition.msg
+    UNVehicleClassifcation.msg
+    VehicleSpecificData.msg
+)
+
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
