@@ -10,3 +10,6 @@
 [submodule "ETSI-ITS-ASN1/cdd_ts102894_2"]
 	path = ETSI-ITS-ASN1/cdd_ts102894_2
 	url = https://forge.etsi.org/rep/ITS/asn1/cdd_ts102894_2.git
+[submodule "ETSI-ITS-ASN1/evrsr_ts101556_3"]
+	path = ETSI-ITS-ASN1/evrsr_ts101556_3
+	url = https://forge.etsi.org/rep/ITS/asn1/evrsr_ts101556_3.git

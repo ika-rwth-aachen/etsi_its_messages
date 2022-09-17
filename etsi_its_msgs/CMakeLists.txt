@@ -249,6 +249,46 @@ add_message_files(
     TypeOfReceptacle.msg
 )
 
+add_message_files(
+  DIRECTORY
+    msg/EV-RechargingSpotReservation-PDU-Descriptions
+  FILES
+    AvailabilityStatus.msg
+    BatteryType.msg
+    CancellationRequestMessage.msg
+    CancellationResponseCode.msg
+    CancellationResponseMessage.msg
+    ChargingPower.msg
+    ChargingSpotLabel.msg
+    ContractID.msg
+    EAmount.msg
+    EV_RSR_MessageBody.msg
+    EV_RSR.msg
+    EVSE_ID.msg
+    ExternalIdentificationMeans.msg
+    Pairing_ID.msg
+    Payment_ID.msg
+    PaymentType.msg
+    PowerSource.msg
+    PreReservation_ID.msg
+    PreReservationRequestMessage.msg
+    PreReservationResponseMessage.msg
+    RechargingMode.msg
+    RechargingType.msg
+    Reservation_ID.msg
+    Reservation_Password.msg
+    ReservationRequestMessage.msg
+    ReservationResponseCode.msg
+    ReservationResponseMessage.msg
+    StationDetails.msg
+    StatusResponseCode.msg
+    SupportedPaymentTypes.msg
+    TimestampUTC.msg
+    UpdateRequestMessage.msg
+    UpdateResponseCode.msg
+    UpdateResponseMessage.msg
+)
+
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES

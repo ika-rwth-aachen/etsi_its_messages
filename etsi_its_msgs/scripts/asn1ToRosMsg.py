@@ -17,6 +17,7 @@ ASN1_PRIMITIVES_2_ROS = {
     "BIT STRING": "string",
     "OCTET STRING": "string",
     "NumericString": "string",
+    "VisibleString": "string",
 }
 
 
@@ -40,6 +41,11 @@ def camel2SNAKE(s: str) -> str:
 
 
 def validRosType(s: str) -> str:
+
+    return s.replace("-", "_")
+
+
+def validRosField(s: str) -> str:
 
     return s.replace("-", "_")
 
@@ -171,10 +177,10 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
                 constant_name = f"{camel2SNAKE(k)}"
                 if "name" in asn1:
                     constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
-                msg += f"{ros_type} {constant_name} = {v}"
+                msg += f"{ros_type} {validRosField(constant_name)} = {v}"
                 msg += "\n"
 
-        msg += f"{ros_type} {name}"
+        msg += f"{ros_type} {validRosField(name)}"
         msg += "\n"
 
     # nested types
@@ -233,7 +239,7 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
     elif type in asn1_types:
 
         name = asn1["name"] if "name" in asn1 else "value"
-        msg += f"{validRosType(type)} {name}"
+        msg += f"{validRosType(type)} {validRosField(name)}"
         msg += "\n"
 
     else:

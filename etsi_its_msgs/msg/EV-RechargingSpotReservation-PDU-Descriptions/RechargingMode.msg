@@ -1,0 +1,9 @@
+# restricted-to: [(0, 15)]
+uint8 MODE_1 = 0
+uint8 MODE_2 = 1
+uint8 MODE_3 = 2
+uint8 MODE_4 = 3
+uint8 QUICK_DROP = 8
+uint8 INDUCTIVE_CHARGING_WHILE_STATIONARY = 12
+uint8 INDUCTIVE_CHARGING_WHILE_DRIVING = 14
+uint8 value

@@ -1,0 +1,4 @@
+Reservation_ID reservation_ID
+
+CancellationResponseCode cancellationResponseCode
+

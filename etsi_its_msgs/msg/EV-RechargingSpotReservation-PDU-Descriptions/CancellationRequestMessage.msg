@@ -1,0 +1,6 @@
+Reservation_ID reservation_ID
+
+Reservation_Password reservation_Password
+
+TimestampUTC currentTime
+

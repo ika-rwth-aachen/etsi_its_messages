@@ -1,0 +1,4 @@
+RechargingMode rechargingMode
+
+PowerSource powerSource
+

@@ -1,0 +1,8 @@
+PreReservation_ID preReservation_ID
+
+AvailabilityStatus availabilityStatus
+
+TimestampUTC preReservationExpirationTime
+
+SupportedPaymentTypes supportedPaymentTypes
+
