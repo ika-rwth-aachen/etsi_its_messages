@@ -1,0 +1,99 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "cam_en302637_2",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "cdd_ts102894_2",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "denm_en302637_3",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/denm_en302637_3/DENM-PDU-Descriptions.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "evcsn-ts101556_1",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "evrsr_ts101556_3",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "poti_en302890_2",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/poti_en302890_2/ITSRangingSAMData.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "tistpg_ts101556_2",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "args": [
+        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/tistpg_ts101556_2/TIS-TPG-Transactions-Descriptions.asn",
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+  ]
+}
