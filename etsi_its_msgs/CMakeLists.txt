@@ -234,7 +234,6 @@ add_message_files(
     msg/EVCSN-PDU-Descriptions
   FILES
     ChargingSpotType.msg
-    DigitalMap.msg
     EVChargingSpotNotificationPOIMessage.msg
     EvcsnPdu.msg
     ItsChargingSpotDataElements.msg
