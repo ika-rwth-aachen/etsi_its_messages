@@ -13,3 +13,6 @@
 [submodule "ETSI-ITS-ASN1/evrsr_ts101556_3"]
 	path = ETSI-ITS-ASN1/evrsr_ts101556_3
 	url = https://forge.etsi.org/rep/ITS/asn1/evrsr_ts101556_3.git
+[submodule "ETSI-ITS-ASN1/poti_en302890_2"]
+	path = ETSI-ITS-ASN1/poti_en302890_2
+	url = https://forge.etsi.org/rep/ITS/asn1/poti_en302890_2.git

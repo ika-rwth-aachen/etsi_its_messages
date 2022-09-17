@@ -288,6 +288,15 @@ add_message_files(
     UpdateResponseMessage.msg
 )
 
+add_message_files(
+  DIRECTORY
+    msg/ITSRangingSAMData
+  FILES
+    ACKResponseService.msg
+    ITSRangingSAMAppData.msg
+    RoadAngles.msg
+)
+
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
