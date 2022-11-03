@@ -250,10 +250,14 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
         for im, member in enumerate(asn1["members"]):
             if member is None:
                 continue
-            msg += asn1TypeToRosMsgStr(member, asn1_types)
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
             if "name" in asn1:
+                member_msg = asn1TypeToRosMsgStr(member, asn1_types)
+                member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
+                msg += member_msg
                 name = f"{camel2SNAKE(asn1['name'])}_{name}"
+            else:
+                msg += asn1TypeToRosMsgStr(member, asn1_types)
             msg += f"uint8 {name} = {im}"
             msg += "\n"
 

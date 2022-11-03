@@ -49,6 +49,333 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   DIRECTORY
+    msg/AddGrpC
+  FILES
+    BatteryStatus.msg
+    ConnectionManeuverAssist_addGrpC.msg
+    ConnectionTrajectory_addGrpC.msg
+    EmissionType.msg
+    ExceptionalCondition.msg
+    IntersectionState_addGrpC.msg
+    ItsStationPositionList.msg
+    ItsStationPosition.msg
+    LaneAttributes_addGrpC.msg
+    MapData_addGrpC.msg
+    MovementEvent_addGrpC.msg
+    NodeAttributeSet_addGrpC.msg
+    NodeLink.msg
+    Node.msg
+    Position3D_addGrpC.msg
+    PrioritizationResponseList.msg
+    PrioritizationResponse.msg
+    PtvRequestType.msg
+    RejectedReason.msg
+    RequestorDescription_addGrpC.msg
+    RestrictionUserType_addGrpC.msg
+    SignalHeadLocationList.msg
+    SignalHeadLocation.msg
+    SignalStatusPackage_addGrpC.msg
+    TimeReference.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/CAM-PDU-Descriptions
+  FILES
+    BasicContainer.msg
+    BasicVehicleContainerHighFrequency.msg
+    BasicVehicleContainerLowFrequency.msg
+    CAM.msg
+    CamParameters.msg
+    CoopAwareness.msg
+    DangerousGoodsContainer.msg
+    EmergencyContainer.msg
+    GenerationDeltaTime.msg
+    HighFrequencyContainer.msg
+    LowFrequencyContainer.msg
+    PublicTransportContainer.msg
+    RSUContainerHighFrequency.msg
+    RescueContainer.msg
+    RoadWorksContainerBasic.msg
+    SafetyCarContainer.msg
+    SpecialTransportContainer.msg
+    SpecialVehicleContainer.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/DENM-PDU-Descriptions
+  FILES
+    AlacarteContainer.msg
+    DENM.msg
+    DecentralizedEnvironmentalNotificationMessage.msg
+    ImpactReductionContainer.msg
+    LocationContainer.msg
+    ManagementContainer.msg
+    ReferenceDenms.msg
+    RoadWorksContainerExtended.msg
+    SituationContainer.msg
+    StationaryVehicleContainer.msg
+    Termination.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/DSRC
+  FILES
+    AdvisorySpeedList.msg
+    AdvisorySpeed.msg
+    AdvisorySpeedType.msg
+    AllowedManeuvers.msg
+    Angle.msg
+    AntennaOffsetSet.msg
+    ApproachID.msg
+    BasicVehicleRole.msg
+    ComputedLane.msg
+    ConnectingLane.msg
+    ConnectionManeuverAssist.msg
+    Connection.msg
+    ConnectsToList.msg
+    DataParameters.msg
+    DDateTime.msg
+    DDay.msg
+    DeltaAngle.msg
+    DeltaTime.msg
+    DescriptiveName.msg
+    DHour.msg
+    DMinute.msg
+    DMonth.msg
+    DOffset.msg
+    DrivenLineOffsetLg.msg
+    DrivenLineOffsetSm.msg
+    DSecond.msg
+    DSRCmsgID.msg
+    DYear.msg
+    ElevationConfidence.msg
+    Elevation.msg
+    EnabledLaneList.msg
+    FuelType.msg
+    FullPositionVector.msg
+    GenericLane.msg
+    GNSSstatus.msg
+    IntersectionAccessPoint.msg
+    IntersectionGeometryList.msg
+    IntersectionGeometry.msg
+    IntersectionID.msg
+    IntersectionReferenceID.msg
+    IntersectionStateList.msg
+    IntersectionState.msg
+    IntersectionStatusObject.msg
+    LaneAttributes_Barrier.msg
+    LaneAttributes_Bike.msg
+    LaneAttributes_Crosswalk.msg
+    LaneAttributes.msg
+    LaneAttributes_Parking.msg
+    LaneAttributes_Sidewalk.msg
+    LaneAttributes_Striping.msg
+    LaneAttributes_TrackedVehicle.msg
+    LaneAttributes_Vehicle.msg
+    LaneConnectionID.msg
+    LaneDataAttributeList.msg
+    LaneDataAttribute.msg
+    LaneDirection.msg
+    LaneID.msg
+    LaneList.msg
+    LaneSharing.msg
+    LaneTypeAttributes.msg
+    LaneWidth.msg
+    LayerID.msg
+    LayerType.msg
+    ManeuverAssistList.msg
+    MapData.msg
+    MergeDivergeNodeAngle.msg
+    MinuteOfTheYear.msg
+    MovementEventList.msg
+    MovementEvent.msg
+    MovementList.msg
+    MovementPhaseState.msg
+    MovementState.msg
+    MsgCount.msg
+    NodeAttributeSetXY.msg
+    NodeAttributeXYList.msg
+    NodeAttributeXY.msg
+    NodeListXY.msg
+    Node_LLmD_64b.msg
+    NodeOffsetPointXY.msg
+    NodeSetXY.msg
+    Node_XY_20b.msg
+    Node_XY_22b.msg
+    Node_XY_24b.msg
+    Node_XY_26b.msg
+    Node_XY_28b.msg
+    Node_XY_32b.msg
+    NodeXY.msg
+    Offset_B09.msg
+    Offset_B10.msg
+    Offset_B11.msg
+    Offset_B12.msg
+    Offset_B13.msg
+    Offset_B14.msg
+    Offset_B16.msg
+    OverlayLaneList.msg
+    PedestrianBicycleDetect.msg
+    Position3D.msg
+    PositionalAccuracy.msg
+    PositionConfidence.msg
+    PositionConfidenceSet.msg
+    PreemptPriorityList.msg
+    PrioritizationResponseStatus.msg
+    PriorityRequestType.msg
+    RegionalExtension.msg
+    RegionId.msg
+    RegulatorySpeedLimit.msg
+    RequestID.msg
+    RequestImportanceLevel.msg
+    RequestorDescription.msg
+    RequestorPositionVector.msg
+    RequestorType.msg
+    RequestSubRole.msg
+    RestrictionAppliesTo.msg
+    RestrictionClassAssignment.msg
+    RestrictionClassID.msg
+    RestrictionClassList.msg
+    RestrictionUserTypeList.msg
+    RestrictionUserType.msg
+    RoadLaneSetList.msg
+    RoadRegulatorID.msg
+    RoadSegmentID.msg
+    RoadSegmentList.msg
+    RoadSegment.msg
+    RoadSegmentReferenceID.msg
+    RoadwayCrownAngle.msg
+    RTCMcorrections.msg
+    RTCMheader.msg
+    RTCMmessageList.msg
+    RTCMmessage.msg
+    RTCM_Revision.msg
+    Scale_B12.msg
+    SegmentAttributeXYList.msg
+    SegmentAttributeXY.msg
+    SemiMajorAxisAccuracy.msg
+    SemiMajorAxisOrientation.msg
+    SemiMinorAxisAccuracy.msg
+    SignalControlZone.msg
+    SignalGroupID.msg
+    SignalRequesterInfo.msg
+    SignalRequestList.msg
+    SignalRequestMessage.msg
+    SignalRequest.msg
+    SignalRequestPackage.msg
+    SignalStatusList.msg
+    SignalStatusMessage.msg
+    SignalStatus.msg
+    SignalStatusPackageList.msg
+    SignalStatusPackage.msg
+    SPAT.msg
+    SpeedAdvice.msg
+    SpeedandHeadingandThrottleConfidence.msg
+    SpeedLimitList.msg
+    SpeedLimitType.msg
+    TemporaryID.msg
+    ThrottleConfidence.msg
+    TimeChangeDetails.msg
+    TimeConfidence.msg
+    TimeIntervalConfidence.msg
+    TimeMark.msg
+    TransitVehicleOccupancy.msg
+    TransitVehicleStatus.msg
+    TransmissionAndSpeed.msg
+    TransmissionState.msg
+    VehicleHeight.msg
+    VehicleID.msg
+    VehicleType.msg
+    Velocity.msg
+    WaitOnStopline.msg
+    ZoneLength.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/ElectronicRegistrationIdentificationVehicleDataModule
+  FILES
+    EuVehicleCategoryCode.msg
+    EuVehicleCategoryL.msg
+    EuVehicleCategoryM.msg
+    EuVehicleCategoryN.msg
+    EuVehicleCategoryO.msg
+    Iso3833VehicleType.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/EVCSN-PDU-Descriptions
+  FILES
+    ChargingSpotType.msg
+    EVChargingSpotNotificationPOIMessage.msg
+    EvcsnPdu.msg
+    ItsChargingSpotDataElements.msg
+    ItsChargingSpots.msg
+    ItsChargingStationData.msg
+    ItsEVCSNData.msg
+    ItsPOIHeader.msg
+    NumberStations.msg
+    ParkingPlacesData.msg
+    POIType.msg
+    SpotAvailability.msg
+    TypeOfReceptacle.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/EV-RechargingSpotReservation-PDU-Descriptions
+  FILES
+    AvailabilityStatus.msg
+    BatteryType.msg
+    CancellationRequestMessage.msg
+    CancellationResponseCode.msg
+    CancellationResponseMessage.msg
+    ChargingPower.msg
+    ChargingSpotLabel.msg
+    ContractID.msg
+    EAmount.msg
+    EV_RSR_MessageBody.msg
+    EV_RSR.msg
+    EVSE_ID.msg
+    ExternalIdentificationMeans.msg
+    Pairing_ID.msg
+    Payment_ID.msg
+    PaymentType.msg
+    PowerSource.msg
+    PreReservation_ID.msg
+    PreReservationRequestMessage.msg
+    PreReservationResponseMessage.msg
+    RechargingMode.msg
+    RechargingType.msg
+    Reservation_ID.msg
+    Reservation_Password.msg
+    ReservationRequestMessage.msg
+    ReservationResponseCode.msg
+    ReservationResponseMessage.msg
+    StationDetails.msg
+    StatusResponseCode.msg
+    SupportedPaymentTypes.msg
+    TimestampUTC.msg
+    UpdateRequestMessage.msg
+    UpdateResponseCode.msg
+    UpdateResponseMessage.msg
+)
+
+add_message_files(
+  DIRECTORY
+    msg/ITSRangingSAMData
+  FILES
+    ACKResponseService.msg
+    ITSRangingSAMAppData.msg
+    RoadAngles.msg
+)
+
+add_message_files(
+  DIRECTORY
     msg/ITS-Container
   FILES
     AccelerationConfidence.msg
@@ -190,111 +517,9 @@ add_message_files(
 
 add_message_files(
   DIRECTORY
-    msg/CAM-PDU-Descriptions
+    msg/MAPEM-PDU-Descriptions
   FILES
-    BasicContainer.msg
-    BasicVehicleContainerHighFrequency.msg
-    BasicVehicleContainerLowFrequency.msg
-    CAM.msg
-    CamParameters.msg
-    CoopAwareness.msg
-    DangerousGoodsContainer.msg
-    EmergencyContainer.msg
-    GenerationDeltaTime.msg
-    HighFrequencyContainer.msg
-    LowFrequencyContainer.msg
-    PublicTransportContainer.msg
-    RSUContainerHighFrequency.msg
-    RescueContainer.msg
-    RoadWorksContainerBasic.msg
-    SafetyCarContainer.msg
-    SpecialTransportContainer.msg
-    SpecialVehicleContainer.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/DENM-PDU-Descriptions
-  FILES
-    AlacarteContainer.msg
-    DENM.msg
-    DecentralizedEnvironmentalNotificationMessage.msg
-    ImpactReductionContainer.msg
-    LocationContainer.msg
-    ManagementContainer.msg
-    ReferenceDenms.msg
-    RoadWorksContainerExtended.msg
-    SituationContainer.msg
-    StationaryVehicleContainer.msg
-    Termination.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/EVCSN-PDU-Descriptions
-  FILES
-    ChargingSpotType.msg
-    EVChargingSpotNotificationPOIMessage.msg
-    EvcsnPdu.msg
-    ItsChargingSpotDataElements.msg
-    ItsChargingSpots.msg
-    ItsChargingStationData.msg
-    ItsEVCSNData.msg
-    ItsPOIHeader.msg
-    NumberStations.msg
-    ParkingPlacesData.msg
-    POIType.msg
-    SpotAvailability.msg
-    TypeOfReceptacle.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/EV-RechargingSpotReservation-PDU-Descriptions
-  FILES
-    AvailabilityStatus.msg
-    BatteryType.msg
-    CancellationRequestMessage.msg
-    CancellationResponseCode.msg
-    CancellationResponseMessage.msg
-    ChargingPower.msg
-    ChargingSpotLabel.msg
-    ContractID.msg
-    EAmount.msg
-    EV_RSR_MessageBody.msg
-    EV_RSR.msg
-    EVSE_ID.msg
-    ExternalIdentificationMeans.msg
-    Pairing_ID.msg
-    Payment_ID.msg
-    PaymentType.msg
-    PowerSource.msg
-    PreReservation_ID.msg
-    PreReservationRequestMessage.msg
-    PreReservationResponseMessage.msg
-    RechargingMode.msg
-    RechargingType.msg
-    Reservation_ID.msg
-    Reservation_Password.msg
-    ReservationRequestMessage.msg
-    ReservationResponseCode.msg
-    ReservationResponseMessage.msg
-    StationDetails.msg
-    StatusResponseCode.msg
-    SupportedPaymentTypes.msg
-    TimestampUTC.msg
-    UpdateRequestMessage.msg
-    UpdateResponseCode.msg
-    UpdateResponseMessage.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/ITSRangingSAMData
-  FILES
-    ACKResponseService.msg
-    ITSRangingSAMAppData.msg
-    RoadAngles.msg
+    MAPEM.msg
 )
 
 add_message_files(
