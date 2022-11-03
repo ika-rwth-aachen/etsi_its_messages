@@ -3,7 +3,7 @@
 import argparse
 import os
 import re
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import asn1tools
 import numpy as np
@@ -50,9 +50,32 @@ def validRosField(s: str) -> str:
     return s.replace("-", "_")
 
 
-def parseAsn1Files(files: List[str]) -> Dict:
+def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
 
-    return asn1tools.parse_files(files)
+    asn1_raw = {}
+    for file in files:
+        with open(file) as f:
+            lines = f.readlines()
+        raw_def = None
+        for line in lines:
+            if "::=" in line:
+                if "{" in line:
+                    type = line.split("::=")[0].strip()
+                    raw_def = ""
+                elif len(line.split("::=")) == 2:
+                    type = line.split("::=")[0].strip()
+                    raw_def = line
+                    asn1_raw[type] = raw_def
+                    raw_def = None
+            if raw_def is not None:
+                raw_def += line
+                if "}" in line:
+                    asn1_raw[type] = raw_def
+                    raw_def = None
+
+    asn1_docs = asn1tools.parse_files(files)
+
+    return asn1_docs, asn1_raw
 
 
 def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
@@ -106,13 +129,19 @@ def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
     return ros_msg_by_type
 
 
-def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, output_dir):
+def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dict[str, str], output_dir: str):
 
     # loop over all types
     for type, ros_msg in ros_msg_by_type.items():
 
         if ros_msg is None:
             continue
+
+        # add raw asn1 definition as comment to ROS .msg
+        if type in asn1_raw:
+            raw_lines = [f"# {l}" for l in asn1_raw[type].split("\n")]
+            raw = "# " + "-"*78 + "\n" + "\n".join(raw_lines) + "-"*78 + "\n"
+            ros_msg = raw + "\n" + ros_msg
 
         # create output directory
         doc_output_dir = os.path.join(output_dir, docForAsn1Type(type, asn1_docs))
@@ -256,6 +285,8 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
 
         raise NotImplementedError(f"Cannot handle type '{type}'")
 
+    msg = msg.rstrip("\n") + "\n"
+
     return msg
 
 
@@ -263,7 +294,7 @@ def main():
 
     args = parseCli()
 
-    asn1_docs = parseAsn1Files(args.files)
+    asn1_docs, asn1_raw = parseAsn1Files(args.files)
 
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
@@ -271,7 +302,7 @@ def main():
 
     ros_msg_by_type = asn1TypesToRosMsgStr(asn1_types)
 
-    exportRosMsg(ros_msg_by_type, asn1_docs, args.output_dir)
+    exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
 
 
 if __name__ == "__main__":
