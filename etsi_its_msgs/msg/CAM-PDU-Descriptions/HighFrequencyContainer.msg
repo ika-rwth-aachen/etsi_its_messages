@@ -1,3 +1,11 @@
+# ------------------------------------------------------------------------------
+# HighFrequencyContainer ::= CHOICE {
+# 	basicVehicleContainerHighFrequency BasicVehicleContainerHighFrequency,
+# 	rsuContainerHighFrequency RSUContainerHighFrequency,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 BasicVehicleContainerHighFrequency basicVehicleContainerHighFrequency

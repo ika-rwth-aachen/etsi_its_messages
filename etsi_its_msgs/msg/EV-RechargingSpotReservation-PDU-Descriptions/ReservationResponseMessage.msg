@@ -1,3 +1,16 @@
+# ------------------------------------------------------------------------------
+# ReservationResponseMessage ::= SEQUENCE {
+#  reservationResponseCode			ReservationResponseCode,
+#  reservation-ID							Reservation-ID OPTIONAL,
+#  reservation-Password					Reservation-Password OPTIONAL,
+#  stationDetails							StationDetails OPTIONAL,
+#  chargingSpotLabel						ChargingSpotLabel OPTIONAL,
+#  expirationTime							TimestampUTC,
+#  freeCancelTimeLimit					TimestampUTC OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 ReservationResponseCode reservationResponseCode
 
 # optional: True
@@ -16,4 +29,3 @@ TimestampUTC expirationTime
 
 # optional: True
 TimestampUTC freeCancelTimeLimit
-

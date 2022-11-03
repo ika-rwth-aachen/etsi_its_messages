@@ -1,2 +1,8 @@
-TisTpgVDRM_Management management
+# ------------------------------------------------------------------------------
+# TisTpgVDRM ::= SEQUENCE {
+#  management TisTpgVDRM-Management,
+#  ...
+# }
+# ------------------------------------------------------------------------------
 
+TisTpgVDRM_Management management

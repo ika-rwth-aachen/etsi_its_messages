@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# AdverseWeatherCondition-VisibilitySubCauseCode ::= INTEGER {unavailable(0), fog(1), smoke(2), heavySnowfall(3), heavyRain(4), heavyHail(5), lowSunGlare(6), sandstorms(7), swarmsOfInsects(8)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 FOG = 1

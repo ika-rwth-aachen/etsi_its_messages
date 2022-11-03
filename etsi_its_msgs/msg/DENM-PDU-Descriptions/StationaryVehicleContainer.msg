@@ -1,3 +1,14 @@
+# ------------------------------------------------------------------------------
+# StationaryVehicleContainer ::= SEQUENCE {
+# 	stationarySince StationarySince OPTIONAL,
+# 	stationaryCause CauseCode OPTIONAL,
+# 	carryingDangerousGoods DangerousGoodsExtended OPTIONAL,
+# 	numberOfOccupants NumberOfOccupants OPTIONAL,
+# 	vehicleIdentification VehicleIdentification OPTIONAL,
+# 	energyStorageType EnergyStorageType OPTIONAL
+# }
+# ------------------------------------------------------------------------------
+
 # optional: True
 StationarySince stationarySince
 
@@ -15,4 +26,3 @@ VehicleIdentification vehicleIdentification
 
 # optional: True
 EnergyStorageType energyStorageType
-

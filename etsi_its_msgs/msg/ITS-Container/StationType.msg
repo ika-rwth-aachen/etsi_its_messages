@@ -1,3 +1,8 @@
+# ------------------------------------------------------------------------------
+# StationType ::= INTEGER {unknown(0), pedestrian(1), cyclist(2), moped(3), motorcycle(4), passengerCar(5), bus(6), 
+# lightTruck(7), heavyTruck(8), trailer(9), specialVehicles(10), tram(11), roadSideUnit(15)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNKNOWN = 0
 uint8 PEDESTRIAN = 1

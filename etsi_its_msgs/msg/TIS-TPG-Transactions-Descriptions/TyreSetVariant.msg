@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# TyreSetVariant ::= SEQUENCE 
+# ------------------------------------------------------------------------------
+
 TyreSetVariantID variantID
 
 # optional: True
@@ -7,4 +11,3 @@ TyreSidewallInformation frontAxleDimension
 TyreSidewallInformation rearAxleDimension
 
 PressureVariantsList pressureVariantsList
-

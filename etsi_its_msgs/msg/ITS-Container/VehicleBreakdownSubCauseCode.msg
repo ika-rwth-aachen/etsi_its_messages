@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# VehicleBreakdownSubCauseCode ::= INTEGER {unavailable(0), lackOfFuel (1), lackOfBatteryPower (2), engineProblem(3), transmissionProblem(4), engineCoolingProblem(5), brakingSystemProblem(6), steeringProblem(7), tyrePuncture(8), tyrePressureProblem(9)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 LACK_OF_FUEL = 1

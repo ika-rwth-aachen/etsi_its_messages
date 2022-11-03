@@ -1,3 +1,35 @@
+# ------------------------------------------------------------------------------
+# CauseCodeType ::= INTEGER {
+#     reserved (0),
+#     trafficCondition (1),
+#     accident (2),
+#     roadworks (3),
+#         impassability (5),
+#     adverseWeatherCondition-Adhesion (6),
+#         aquaplannning (7),
+#     hazardousLocation-SurfaceCondition (9),
+#     hazardousLocation-ObstacleOnTheRoad (10),
+#     hazardousLocation-AnimalOnTheRoad (11),
+#     humanPresenceOnTheRoad (12),
+#     wrongWayDriving (14),
+#     rescueAndRecoveryWorkInProgress (15),
+#     adverseWeatherCondition-ExtremeWeatherCondition (17),
+#     adverseWeatherCondition-Visibility (18),
+#     adverseWeatherCondition-Precipitation (19),
+#     slowVehicle (26),
+#     dangerousEndOfQueue (27),
+#     vehicleBreakdown (91),
+#     postCrash (92),
+#     humanProblem (93),
+#     stationaryVehicle (94),
+#     emergencyVehicleApproaching (95),
+#     hazardousLocation-DangerousCurve (96),
+#     collisionRisk (97),
+#     signalViolation (98),
+#     dangerousSituation (99)
+# } (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 RESERVED = 0
 uint8 TRAFFIC_CONDITION = 1

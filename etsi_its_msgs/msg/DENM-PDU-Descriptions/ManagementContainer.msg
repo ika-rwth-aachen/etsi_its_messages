@@ -1,3 +1,19 @@
+# ------------------------------------------------------------------------------
+# ManagementContainer ::= SEQUENCE {
+# 	actionID ActionID,
+# 	detectionTime TimestampIts,
+# 	referenceTime TimestampIts,
+# 	termination Termination OPTIONAL,
+# 	eventPosition ReferencePosition,
+# 	relevanceDistance RelevanceDistance OPTIONAL,
+# 	relevanceTrafficDirection RelevanceTrafficDirection OPTIONAL,
+# 	validityDuration ValidityDuration DEFAULT defaultValidity,
+# 	transmissionInterval TransmissionInterval OPTIONAL,
+# 	stationType	StationType,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 ActionID actionID
 
 TimestampIts detectionTime
@@ -22,4 +38,3 @@ ValidityDuration validityDuration
 TransmissionInterval transmissionInterval
 
 StationType stationType
-

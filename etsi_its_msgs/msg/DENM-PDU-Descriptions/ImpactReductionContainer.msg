@@ -1,3 +1,20 @@
+# ------------------------------------------------------------------------------
+# ImpactReductionContainer ::= SEQUENCE {
+# 	heightLonCarrLeft HeightLonCarr,
+# 	heightLonCarrRight HeightLonCarr,
+# 	posLonCarrLeft PosLonCarr,
+# 	posLonCarrRight PosLonCarr,
+# 	positionOfPillars PositionOfPillars,
+# 	posCentMass PosCentMass,
+# 	wheelBaseVehicle WheelBaseVehicle,
+# 	turningRadius TurningRadius,
+# 	posFrontAx PosFrontAx,
+# 	positionOfOccupants PositionOfOccupants,
+# 	vehicleMass VehicleMass,
+# 	requestResponseIndication RequestResponseIndication
+# }
+# ------------------------------------------------------------------------------
+
 HeightLonCarr heightLonCarrLeft
 
 HeightLonCarr heightLonCarrRight
@@ -21,4 +38,3 @@ PositionOfOccupants positionOfOccupants
 VehicleMass vehicleMass
 
 RequestResponseIndication requestResponseIndication
-

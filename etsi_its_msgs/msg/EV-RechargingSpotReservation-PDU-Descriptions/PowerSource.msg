@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# PowerSource::=  INTEGER { notApplicable(0), ac1Phase(1), ac2Phase(2), ac3Phase(3), dcc(4), chaDeMo(5) } (0..7)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 7)]
 uint8 NOT_APPLICABLE = 0
 uint8 AC_1_PHASE = 1

@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# TrafficConditionSubCauseCode ::= INTEGER {unavailable(0), increasedVolumeOfTraffic(1), trafficJamSlowlyIncreasing(2), trafficJamIncreasing(3), trafficJamStronglyIncreasing(4), trafficStationary(5), trafficJamSlightlyDecreasing(6), trafficJamDecreasing(7), trafficJamStronglyDecreasing(8)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 INCREASED_VOLUME_OF_TRAFFIC = 1

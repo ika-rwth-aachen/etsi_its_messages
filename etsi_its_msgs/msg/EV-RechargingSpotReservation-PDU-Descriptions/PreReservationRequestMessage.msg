@@ -1,3 +1,14 @@
+# ------------------------------------------------------------------------------
+# PreReservationRequestMessage ::= SEQUENCE {
+#  evse-ID 			EVSE-ID,
+#  arrivalTime		TimestampUTC,
+#  departureTime	TimestampUTC OPTIONAL,
+#  rechargingType	RechargingType,
+#  batteryType		BatteryType OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 EVSE_ID evse_ID
 
 TimestampUTC arrivalTime
@@ -9,4 +20,3 @@ RechargingType rechargingType
 
 # optional: True
 BatteryType batteryType
-

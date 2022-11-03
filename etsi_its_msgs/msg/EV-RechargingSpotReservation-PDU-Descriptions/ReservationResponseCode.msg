@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# ReservationResponseCode ::= ENUMERATED {ok, invalid-EVSE-ID, payment-type-not-supported, payment-error, authentication-error, insufficient-power-availability }
+# ------------------------------------------------------------------------------
+
 uint8 OK = 0
 uint8 INVALID_E_V_S_E_I_D = 1
 uint8 PAYMENTTYPENOTSUPPORTED = 2

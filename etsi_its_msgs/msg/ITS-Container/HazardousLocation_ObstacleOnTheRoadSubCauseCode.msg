@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# HazardousLocation-ObstacleOnTheRoadSubCauseCode ::= INTEGER {unavailable(0), shedLoad(1), partsOfVehicles(2), partsOfTyres(3), bigObjects(4), fallenTrees(5), hubCaps(6), waitingVehicles(7)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 SHED_LOAD = 1

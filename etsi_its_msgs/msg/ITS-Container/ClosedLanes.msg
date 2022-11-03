@@ -1,3 +1,12 @@
+# ------------------------------------------------------------------------------
+# ClosedLanes ::= SEQUENCE {
+#     innerhardShoulderStatus HardShoulderStatus OPTIONAL,
+#         outerhardShoulderStatus HardShoulderStatus OPTIONAL,
+#     drivingLaneStatus DrivingLaneStatus OPTIONAL,
+#     ...
+# }
+# ------------------------------------------------------------------------------
+
 # optional: True
 HardShoulderStatus innerhardShoulderStatus
 
@@ -6,4 +15,3 @@ HardShoulderStatus outerhardShoulderStatus
 
 # optional: True
 DrivingLaneStatus drivingLaneStatus
-

@@ -1,3 +1,13 @@
+# ------------------------------------------------------------------------------
+# CamParameters ::= SEQUENCE {
+# 	basicContainer BasicContainer,
+# 	highFrequencyContainer HighFrequencyContainer,
+# 	lowFrequencyContainer LowFrequencyContainer OPTIONAL,
+# 	specialVehicleContainer SpecialVehicleContainer OPTIONAL,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 BasicContainer basicContainer
 
 HighFrequencyContainer highFrequencyContainer
@@ -7,4 +17,3 @@ LowFrequencyContainer lowFrequencyContainer
 
 # optional: True
 SpecialVehicleContainer specialVehicleContainer
-

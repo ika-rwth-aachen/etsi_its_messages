@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# RechargingMode ::=  INTEGER { mode1(0), mode2(1), mode3(2), mode4(3), quickDrop(8), inductiveChargingWhileStationary(12), inductiveChargingWhileDriving(14) } (0..15)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 15)]
 uint8 MODE_1 = 0
 uint8 MODE_2 = 1

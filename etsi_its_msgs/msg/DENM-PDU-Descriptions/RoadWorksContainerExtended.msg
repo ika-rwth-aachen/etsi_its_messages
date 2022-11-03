@@ -1,3 +1,17 @@
+# ------------------------------------------------------------------------------
+# RoadWorksContainerExtended ::= SEQUENCE {
+# 	lightBarSirenInUse LightBarSirenInUse OPTIONAL,
+# 	closedLanes ClosedLanes OPTIONAL,
+# 	restriction RestrictedTypes OPTIONAL,
+# 	speedLimit SpeedLimit OPTIONAL,
+# 	incidentIndication CauseCode OPTIONAL,
+# 	recommendedPath ItineraryPath OPTIONAL,
+# 	startingPointSpeedLimit DeltaReferencePosition OPTIONAL,
+# 	trafficFlowRule TrafficRule OPTIONAL,
+# 	referenceDenms ReferenceDenms OPTIONAL
+#  }
+# ------------------------------------------------------------------------------
+
 # optional: True
 LightBarSirenInUse lightBarSirenInUse
 
@@ -24,4 +38,3 @@ TrafficRule trafficFlowRule
 
 # optional: True
 ReferenceDenms referenceDenms
-

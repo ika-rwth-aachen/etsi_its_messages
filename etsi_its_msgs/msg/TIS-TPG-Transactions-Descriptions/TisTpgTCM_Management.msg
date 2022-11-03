@@ -1,3 +1,16 @@
+# ------------------------------------------------------------------------------
+# TisTpgTCM-Management ::= SEQUENCE {
+#  generationTime	TimestampIts,
+#  tpgStationID StationID,
+#  reservationStatus ReservationStatus,
+#  reservedTpg INTEGER(1..65535)	OPTIONAL,
+#  costumercontract CustomerContract OPTIONAL,
+#  reservationID	ReservationID OPTIONAL,
+#  tpgAutomationLevel	TpgAutomation OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 TimestampIts generationTime
 
 StationID tpgStationID
@@ -16,4 +29,3 @@ ReservationID reservationID
 
 # optional: True
 TpgAutomation tpgAutomationLevel
-

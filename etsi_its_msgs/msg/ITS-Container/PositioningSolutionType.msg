@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# PositioningSolutionType ::= ENUMERATED {noPositioningSolution(0), sGNSS(1), dGNSS(2), sGNSSplusDR(3), dGNSSplusDR(4), dR(5), ...}
+# ------------------------------------------------------------------------------
+
 uint8 NO_POSITIONING_SOLUTION = 0
 uint8 S_G_N_S_S = 1
 uint8 D_G_N_S_S = 2

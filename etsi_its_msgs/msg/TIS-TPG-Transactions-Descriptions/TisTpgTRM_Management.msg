@@ -1,3 +1,15 @@
+# ------------------------------------------------------------------------------
+# TisTpgTRM-Management ::= SEQUENCE {
+#  generationTime	TimestampIts,
+#  vehicleType UNVehicleClassifcation,
+#  tpgStationID StationID, 
+#  reservationStatus ReservationStatus,
+#  costumercontract CustomerContract OPTIONAL,
+#  reservationID ReservationID OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 TimestampIts generationTime
 
 UNVehicleClassifcation vehicleType
@@ -11,4 +23,3 @@ CustomerContract costumercontract
 
 # optional: True
 ReservationID reservationID
-

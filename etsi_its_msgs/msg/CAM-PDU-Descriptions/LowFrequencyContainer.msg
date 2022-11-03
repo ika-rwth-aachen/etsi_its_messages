@@ -1,3 +1,10 @@
+# ------------------------------------------------------------------------------
+#  LowFrequencyContainer ::= CHOICE {
+#   basicVehicleContainerLowFrequency BasicVehicleContainerLowFrequency,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 BasicVehicleContainerLowFrequency basicVehicleContainerLowFrequency

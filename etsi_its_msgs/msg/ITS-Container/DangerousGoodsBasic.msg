@@ -1,3 +1,28 @@
+# ------------------------------------------------------------------------------
+# DangerousGoodsBasic::= ENUMERATED {
+#     explosives1(0),
+#     explosives2(1),
+#     explosives3(2),
+#     explosives4(3),
+#     explosives5(4),
+#     explosives6(5),
+#     flammableGases(6),
+#     nonFlammableGases(7),
+#     toxicGases(8),
+#     flammableLiquids(9),
+#     flammableSolids(10),
+#     substancesLiableToSpontaneousCombustion(11),
+#     substancesEmittingFlammableGasesUponContactWithWater(12),
+#     oxidizingSubstances(13),
+#     organicPeroxides(14),
+#     toxicSubstances(15),
+#     infectiousSubstances(16),
+#     radioactiveMaterial(17),
+#     corrosiveSubstances(18),
+#     miscellaneousDangerousSubstances(19)
+# }
+# ------------------------------------------------------------------------------
+
 uint8 EXPLOSIVES_1 = 0
 uint8 EXPLOSIVES_2 = 1
 uint8 EXPLOSIVES_3 = 2

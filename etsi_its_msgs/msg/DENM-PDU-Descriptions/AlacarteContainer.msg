@@ -1,3 +1,15 @@
+# ------------------------------------------------------------------------------
+# AlacarteContainer ::= SEQUENCE {
+# 	lanePosition LanePosition OPTIONAL,
+# 	impactReduction ImpactReductionContainer OPTIONAL,
+# 	externalTemperature Temperature OPTIONAL,
+# 	roadWorks RoadWorksContainerExtended OPTIONAL,
+# 	positioningSolution PositioningSolutionType OPTIONAL,
+# 	stationaryVehicle StationaryVehicleContainer OPTIONAL,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 # optional: True
 LanePosition lanePosition
 
@@ -15,4 +27,3 @@ PositioningSolutionType positioningSolution
 
 # optional: True
 StationaryVehicleContainer stationaryVehicle
-

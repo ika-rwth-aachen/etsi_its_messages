@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# SignalViolationSubCauseCode ::= INTEGER {unavailable(0), stopSignViolation(1), trafficLightViolation(2), turningRegulationViolation(3)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 STOP_SIGN_VIOLATION = 1

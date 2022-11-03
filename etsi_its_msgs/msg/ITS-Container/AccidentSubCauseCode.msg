@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# AccidentSubCauseCode ::= INTEGER {unavailable(0), multiVehicleAccident(1), heavyAccident(2), accidentInvolvingLorry(3), accidentInvolvingBus(4), accidentInvolvingHazardousMaterials(5), accidentOnOppositeLane(6), unsecuredAccident(7), assistanceRequested(8)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 MULTI_VEHICLE_ACCIDENT = 1

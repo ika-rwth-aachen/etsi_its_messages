@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# TyreAirTemperature ::= INTEGER { invalid (0), lessThanMinus50Celsius(1), minus50Celsius(2), minus49Celsius(3), zeroCelsius(52), overflowThreshold1(240), overflowThreshold2(241), overflowThreshold3(242), overflowThreshold4(243), overflowThreshold5(244), overflowThreshold6(245), overflowThreshold7(246), overflowThreshold8(247), overflowThreshold9(248), overflowThreshold10(249), overflowThreshold11(250), overflowThreshold12(251), overflowThreshold13(252), overflowThreshold14(253), overflowThreshold15(254), overflowThreshold16(255) } (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 INVALID = 0
 uint8 LESS_THAN_MINUS_5_0_CELSIUS = 1

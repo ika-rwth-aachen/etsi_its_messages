@@ -1,3 +1,13 @@
+# ------------------------------------------------------------------------------
+# TisTpgDRM-Management ::= SEQUENCE {
+#  generationTime	TimestampIts,
+#  vehicleType UNVehicleClassifcation,
+#  costumerContract CustomerContract OPTIONAL,
+#  tisProfile	TisProfile, 
+#  ... 
+# }
+# ------------------------------------------------------------------------------
+
 TimestampIts generationTime
 
 UNVehicleClassifcation vehicleType
@@ -6,4 +16,3 @@ UNVehicleClassifcation vehicleType
 CustomerContract costumerContract
 
 TisProfile tisProfile
-

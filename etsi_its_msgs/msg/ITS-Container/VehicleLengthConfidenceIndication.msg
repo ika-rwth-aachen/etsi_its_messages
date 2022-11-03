@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# VehicleLengthConfidenceIndication ::= ENUMERATED {noTrailerPresent(0), trailerPresentWithKnownLength(1), trailerPresentWithUnknownLength(2), trailerPresenceIsUnknown(3), unavailable(4)}
+# ------------------------------------------------------------------------------
+
 uint8 NO_TRAILER_PRESENT = 0
 uint8 TRAILER_PRESENT_WITH_KNOWN_LENGTH = 1
 uint8 TRAILER_PRESENT_WITH_UNKNOWN_LENGTH = 2

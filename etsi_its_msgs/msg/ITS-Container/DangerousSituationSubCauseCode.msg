@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# DangerousSituationSubCauseCode ::= INTEGER {unavailable(0), emergencyElectronicBrakeEngaged(1), preCrashSystemEngaged(2), espEngaged(3), absEngaged(4), aebEngaged(5), brakeWarningEngaged(6), collisionRiskWarningEngaged(7)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 EMERGENCY_ELECTRONIC_BRAKE_ENGAGED = 1

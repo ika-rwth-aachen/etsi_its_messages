@@ -1,3 +1,16 @@
+# ------------------------------------------------------------------------------
+# SpecialVehicleContainer ::= CHOICE {
+# 	publicTransportContainer PublicTransportContainer,
+# 	specialTransportContainer SpecialTransportContainer,
+# 	dangerousGoodsContainer DangerousGoodsContainer,
+# 	roadWorksContainerBasic RoadWorksContainerBasic,
+# 	rescueContainer RescueContainer,
+# 	emergencyContainer EmergencyContainer,
+# 	safetyCarContainer SafetyCarContainer,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 PublicTransportContainer publicTransportContainer

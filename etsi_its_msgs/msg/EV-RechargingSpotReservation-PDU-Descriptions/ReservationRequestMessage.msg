@@ -1,3 +1,19 @@
+# ------------------------------------------------------------------------------
+# ReservationRequestMessage ::= SEQUENCE {
+#  currentTime			TimestampUTC,
+#  preReservation-ID	PreReservation-ID,
+#  arrivalTime			TimestampUTC,
+#  departureTime		TimestampUTC OPTIONAL,
+#  eAmount				EAmount,
+#  eAmountMin			EAmount,
+#  paymentType			PaymentType,
+#  payment-ID 			Payment-ID,
+#  secondPayment-ID	Payment-ID OPTIONAL,
+#  pairing-ID			Pairing-ID OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 TimestampUTC currentTime
 
 PreReservation_ID preReservation_ID
@@ -20,4 +36,3 @@ Payment_ID secondPayment_ID
 
 # optional: True
 Pairing_ID pairing_ID
-

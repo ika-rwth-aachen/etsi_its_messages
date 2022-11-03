@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# HazardousLocation-SurfaceConditionSubCauseCode ::= INTEGER {unavailable(0), rockfalls(1), earthquakeDamage(2), sewerCollapse(3), subsidence(4), snowDrifts(5), stormDamage(6), burstPipe(7), volcanoEruption(8), fallingIce(9)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 ROCKFALLS = 1

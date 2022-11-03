@@ -1,3 +1,13 @@
+# ------------------------------------------------------------------------------
+# SituationContainer ::= SEQUENCE {
+# 	informationQuality InformationQuality,
+# 	eventType CauseCode,
+# 	linkedCause CauseCode OPTIONAL,
+# 	eventHistory EventHistory OPTIONAL,
+# 	...
+# }
+# ------------------------------------------------------------------------------
+
 InformationQuality informationQuality
 
 CauseCode eventType
@@ -7,4 +17,3 @@ CauseCode linkedCause
 
 # optional: True
 EventHistory eventHistory
-

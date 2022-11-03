@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# StationaryVehicleSubCauseCode ::= INTEGER {unavailable(0), humanProblem(1), vehicleBreakdown(2), postCrash(3), publicTransportStop(4), carryingDangerousGoods(5)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 HUMAN_PROBLEM = 1

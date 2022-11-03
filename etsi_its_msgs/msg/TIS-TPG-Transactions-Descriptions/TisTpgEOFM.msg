@@ -1,2 +1,8 @@
-TisTpgEOFM_Management management
+# ------------------------------------------------------------------------------
+# TisTpgEOFM ::= SEQUENCE {
+#  management TisTpgEOFM-Management,
+#  ...
+# }
+# ------------------------------------------------------------------------------
 
+TisTpgEOFM_Management management

@@ -1,3 +1,17 @@
+# ------------------------------------------------------------------------------
+# EV-RSR-MessageBody ::= CHOICE {
+#  preReservationRequestMessage		PreReservationRequestMessage,
+#  preReservationResponseMessage		PreReservationResponseMessage,
+#  reservationRequestMessage				ReservationRequestMessage,
+#  reservationResponseMessage			ReservationResponseMessage,
+#  cancellationRequestMessage			CancellationRequestMessage,
+#  cancellationResponseMessage			CancellationResponseMessage,
+#  updateRequestMessage						UpdateRequestMessage,
+#  updateResponseMessage					UpdateResponseMessage,
+# ...
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 PreReservationRequestMessage preReservationRequestMessage

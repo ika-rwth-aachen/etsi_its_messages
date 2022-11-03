@@ -1,3 +1,10 @@
+# ------------------------------------------------------------------------------
+# Payment-ID ::= CHOICE {
+#  contractID ContractID,
+#  externalIdentificationMeans	ExternalIdentificationMeans
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 ContractID contractID

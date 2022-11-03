@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# SlowVehicleSubCauseCode ::= INTEGER {unavailable(0), maintenanceVehicle(1), vehiclesSlowingToLookAtAccident(2), abnormalLoad(3), abnormalWideLoad(4), convoy(5), snowplough(6), deicing(7), saltingVehicles(8)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 MAINTENANCE_VEHICLE = 1

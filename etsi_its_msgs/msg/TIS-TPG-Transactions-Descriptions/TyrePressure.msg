@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# TyrePressure ::= INTEGER { invalid (0), lessThanOneBar (1), oneBar (2), oneBarPlusTwoAndHalfKPa (3), inflation (254), overflow(255)  } (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 INVALID = 0
 uint8 LESS_THAN_ONE_BAR = 1

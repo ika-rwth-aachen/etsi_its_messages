@@ -1,3 +1,15 @@
+# ------------------------------------------------------------------------------
+# TisTpgTransaction ::= CHOICE {
+# 	drm	TisTpgDRM,
+# 	snm	TisTpgSNM,
+# 	trm	TisTpgTRM,
+# 	tcm	TisTpgTCM,
+# 	vdrm TisTpgVDRM,
+# 	vdpm TisTpgVDPM,
+# 	eofm TisTpgEOFM
+# }
+# ------------------------------------------------------------------------------
+
 uint8 choice
 
 TisTpgDRM drm

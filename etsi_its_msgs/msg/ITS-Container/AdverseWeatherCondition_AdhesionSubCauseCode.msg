@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# AdverseWeatherCondition-AdhesionSubCauseCode ::= INTEGER {unavailable(0), heavyFrostOnRoad(1), fuelOnRoad(2), mudOnRoad(3), snowOnRoad(4), iceOnRoad(5), blackIceOnRoad(6), oilOnRoad(7), looseChippings(8), instantBlackIce(9), roadsSalted(10)} (0..255)
+# ------------------------------------------------------------------------------
+
 # restricted-to: [(0, 255)]
 uint8 UNAVAILABLE = 0
 uint8 HEAVY_FROST_ON_ROAD = 1

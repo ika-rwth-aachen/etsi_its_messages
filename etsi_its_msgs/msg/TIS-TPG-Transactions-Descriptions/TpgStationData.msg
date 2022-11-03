@@ -1,3 +1,22 @@
+# ------------------------------------------------------------------------------
+# TpgStationData ::= SEQUENCE {
+#  tpgStationID StationID,
+#  tpgAutomationLevel TpgAutomation, 
+#  tpgNumber TpgNumber,
+#  tpgProvider TpgProvider,
+#  tpgLocation ReferencePosition,
+#  accessibility Accessibility,
+#  address UTF8String(SIZE(1..128))  OPTIONAL,
+#  phoneNumber PhoneNumber OPTIONAL,
+#  digitalMap DigitalMap OPTIONAL,
+#  openingDaysHours OpeningDaysHours OPTIONAL,
+#  bookingInfo BookingInfo OPTIONAL,
+#  availableTpgNumber AvailableTpgNumber OPTIONAL,
+#  cancellationCondition CancellationCondition OPTIONAL,
+#  ...
+# }
+# ------------------------------------------------------------------------------
+
 StationID tpgStationID
 
 TpgAutomation tpgAutomationLevel
@@ -31,4 +50,3 @@ AvailableTpgNumber availableTpgNumber
 
 # optional: True
 CancellationCondition cancellationCondition
-
