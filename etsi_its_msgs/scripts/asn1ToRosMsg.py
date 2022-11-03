@@ -3,6 +3,7 @@
 import argparse
 import os
 import re
+import warnings
 from typing import Dict, List, Optional, Tuple
 
 import asn1tools
@@ -91,7 +92,11 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
     asn1_types = {}
     for doc, asn1 in asn1_docs.items():
-        asn1_types.update(asn1["types"])
+        for type in asn1["types"]:
+            if type not in asn1_types:
+                asn1_types[type] = asn1["types"][type]
+            else:
+                warnings.warn(f"Type '{type}' from '{doc}' is a duplicate")
 
     return asn1_types
 
@@ -113,7 +118,15 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
             # check if type is known
             if member["type"] not in known_types:
-                raise TypeError(f"Type '{member['type']}' of member '{member['name']}' in '{t_name}' is undefined")
+                if ".&" in member["type"]:
+                    warnings.warn(
+                        f"Type '{member['type']}' of member '{member['name']}' "
+                        f"in '{t_name}' seems to relate to a 'CLASS' type, not "
+                        f"yet supported")
+                else:
+                    raise TypeError(
+                        f"Type '{member['type']}' of member '{member['name']}' "
+                        f"in '{t_name}' is undefined")
 
 
 def asn1TypesToRosMsgStr(asn1_types: Dict[str, Dict]) -> Dict[str, str]:
@@ -283,7 +296,7 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
         
     else:
 
-        raise NotImplementedError(f"Cannot handle type '{type}'")
+        warnings.warn(f"Cannot handle type '{type}'")
 
     msg = msg.rstrip("\n") + "\n"
 

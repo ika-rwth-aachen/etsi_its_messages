@@ -77,6 +77,8 @@
       "args": [
         "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
         "ETSI-ITS-ASN1/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn",
       ],
       "console": "integratedTerminal",
       "justMyCode": true
