@@ -6,7 +6,7 @@
   "configurations": [
 
     {
-      "name": "cam_en302637_2",
+      "name": "CAM",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
@@ -19,7 +19,7 @@
     },
 
     {
-      "name": "cdd_ts102894_2",
+      "name": "ITS-Container",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
@@ -31,7 +31,7 @@
     },
 
     {
-      "name": "denm_en302637_3",
+      "name": "DENM",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
@@ -44,7 +44,7 @@
     },
 
     {
-      "name": "evcsn-ts101556_1",
+      "name": "EVCSN",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
@@ -57,7 +57,7 @@
     },
 
     {
-      "name": "evrsr_ts101556_3",
+      "name": "EVRSR",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
@@ -70,7 +70,7 @@
     },
 
     {
-      "name": "is_ts103301",
+      "name": "MAPEM",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
