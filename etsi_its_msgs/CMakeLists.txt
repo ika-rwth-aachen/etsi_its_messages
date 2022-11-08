@@ -524,6 +524,13 @@ add_message_files(
 
 add_message_files(
   DIRECTORY
+    msg/SPATEM-PDU-Descriptions
+  FILES
+    SPATEM.msg
+)
+
+add_message_files(
+  DIRECTORY
     msg/TIS-TPG-Transactions-Descriptions
   FILES
     Accessibility.msg
