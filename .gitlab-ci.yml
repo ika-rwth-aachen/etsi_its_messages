@@ -11,7 +11,7 @@ default:
 
 stages:
   - Generate ROS Messages
-  - Build ROS Messages
+  - Build ROS Packages
 
 
 CAM:
@@ -68,7 +68,7 @@ SPATEM:
 
 
 Build Workspace:
-  stage: Build ROS Messages
+  stage: Build ROS Packages
   image: docker:git
   variables:
     ROS_DISTRO: noetic
