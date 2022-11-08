@@ -3,16 +3,60 @@ variables:
 
 default:
   image: python:3.9-slim
+  before_script:
+    - pip install -r etsi_its_msgs/requirements.txt
 
 stages:
   - Generate ROS Messages
 
 CAM:
   stage: Generate ROS Messages
-  before_script:
-    - pip install -r etsi_its_msgs/requirements.txt
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn
       ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+
+DENM:
+  stage: Generate ROS Messages
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/denm_en302637_3/DENM-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+
+EVCSN:
+  stage: Generate ROS Messages
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+
+EVRSR:
+  stage: Generate ROS Messages
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+
+MAPEM:
+  stage: Generate ROS Messages
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/is_ts103301/MAPEM-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+      ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn
+
+SPATEM:
+  stage: Generate ROS Messages
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/is_ts103301/SPATEM-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
+      ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn
