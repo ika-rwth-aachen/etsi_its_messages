@@ -1,0 +1,15 @@
+default:
+  image: python:3.9-slim
+
+stages:
+  - Generate ROS Messages
+
+CAM:
+  stage: Generate ROS Messages
+  before_script:
+    - pip install -r etsi_its_msgs/requirements.txt
+  script:
+    - >
+      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
+      ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn
+      ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
