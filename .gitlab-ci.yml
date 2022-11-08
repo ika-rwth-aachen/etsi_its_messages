@@ -1,3 +1,6 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive  
+
 default:
   image: python:3.9-slim
 
@@ -8,9 +11,6 @@ CAM:
   stage: Generate ROS Messages
   before_script:
     - pip install -r etsi_its_msgs/requirements.txt
-    - ls -la
-    - ls -la ETSI-ITS-ASN1
-    - ls -la ETSI-ITS-ASN1/cam_en302637_2
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
