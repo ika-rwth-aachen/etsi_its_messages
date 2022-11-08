@@ -8,6 +8,8 @@ default:
 
 stages:
   - Generate ROS Messages
+  - Build ROS Messages
+
 
 CAM:
   stage: Generate ROS Messages
@@ -60,3 +62,15 @@ SPATEM:
       ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn
       ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn
+
+
+Build Workspace:
+  stage: Build ROS Messages
+  image: docker:git
+  variables:
+    ROS_DISTRO: noetic
+  before_script:
+    - apk add --update bash coreutils tar
+    - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
+  script:
+    - .industrial_ci/gitlab.sh
