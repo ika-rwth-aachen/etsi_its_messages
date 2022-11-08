@@ -1,3 +1,6 @@
+services:
+  - docker:20.10.16-dind
+
 variables:
   GIT_SUBMODULE_STRATEGY: recursive  
 
