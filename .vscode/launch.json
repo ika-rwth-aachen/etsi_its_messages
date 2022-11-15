@@ -54,7 +54,8 @@
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
         "ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
+        "ETSI-ITS-ASN1/evrsr_ts101556_3/cdd/ITS-Container.asn",
+        "-o", "etsi_its_msgs/etsi_its_evrsr_msgs/msg"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
