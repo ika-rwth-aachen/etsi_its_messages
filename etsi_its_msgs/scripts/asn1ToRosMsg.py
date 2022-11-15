@@ -29,7 +29,7 @@ def parseCli():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
-    parser.add_argument("-o", "--output-dir", type=str, default=os.path.realpath(os.path.join(os.path.dirname(__file__), os.pardir, "msg")), help="output directory")
+    parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
 
     args = parser.parse_args()
 
