@@ -93,31 +93,5 @@
       "justMyCode": true
     },
 
-    {
-      "name": "poti_en302890_2",
-      "type": "python",
-      "request": "launch",
-      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
-      "args": [
-        "ETSI-ITS-ASN1/poti_en302890_2/ITSRangingSAMData.asn",
-        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "tistpg_ts101556_2",
-      "type": "python",
-      "request": "launch",
-      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
-      "args": [
-        "ETSI-ITS-ASN1/tistpg_ts101556_2/TIS-TPG-Transactions-Descriptions.asn",
-        "ETSI-ITS-ASN1/cdd_ts102894_2/ITS-Container.asn",
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
   ]
 }
