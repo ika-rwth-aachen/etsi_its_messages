@@ -14,7 +14,7 @@ function loop_subfolders {
 }
 
 # Get all ASN-Files in given input directory
-cd input
+cd /input
 shopt -s nullglob
 loop_subfolders
 
@@ -39,9 +39,7 @@ done
 asn1c ${unique_asn_files[@]} -fcompound-names -no-gen-example -gen-PER
 
 # Move resulting output to the output folder and clean-up
-chmod a+rw *
-mkdir ../output/src ../output/include
-chmod a+rw ../output/src ../output/include
-mv *.c ../output/src
-mv *.h ../output/include
+mkdir /output/src /output/include
+mv *.c /output/src
+mv *.h /output/include
 rm *.libasncodec
