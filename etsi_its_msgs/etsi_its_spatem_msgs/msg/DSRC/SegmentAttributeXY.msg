@@ -1,0 +1,83 @@
+# ------------------------------------------------------------------------------
+# SegmentAttributeXY ::= ENUMERATED {
+#   reserved                  ,  
+#   doNotBlock                ,
+#   whiteLine                 ,
+#   mergingLaneLeft           ,
+#   mergingLaneRight          ,
+#   curbOnLeft                ,
+#   curbOnRight               ,
+#   loadingzoneOnLeft         ,
+#   loadingzoneOnRight        ,
+#   turnOutPointOnLeft        ,
+#   turnOutPointOnRight       ,
+#   adjacentParkingOnLeft     ,
+#   adjacentParkingOnRight    ,
+#   adjacentBikeLaneOnLeft    ,
+#   adjacentBikeLaneOnRight   ,
+#   sharedBikeLane            ,
+#   bikeBoxInFront            ,
+#   transitStopOnLeft         ,
+#   transitStopOnRight        ,
+#   transitStopInLane         ,
+#   sharedWithTrackedVehicle  ,
+#   safeIsland                ,
+#   lowCurbsPresent           ,
+#   rumbleStripPresent        ,
+#   audibleSignalingPresent   ,
+#   adaptiveTimingPresent     ,
+#   rfSignalRequestPresent    ,
+#   partialCurbIntrusion      ,
+#   taperToLeft               ,
+#   taperToRight              ,
+#   taperToCenterLine         ,
+#   parallelParking           ,
+#   headInParking             ,
+#   freeParking               ,
+#   timeRestrictionsOnParking ,
+#   costToPark                ,
+#   midBlockCurbPresent       ,
+#   unEvenPavementPresent     ,
+#   ...
+# }
+# ------------------------------------------------------------------------------
+
+uint8 RESERVED = 0
+uint8 DO_NOT_BLOCK = 1
+uint8 WHITE_LINE = 2
+uint8 MERGING_LANE_LEFT = 3
+uint8 MERGING_LANE_RIGHT = 4
+uint8 CURB_ON_LEFT = 5
+uint8 CURB_ON_RIGHT = 6
+uint8 LOADINGZONE_ON_LEFT = 7
+uint8 LOADINGZONE_ON_RIGHT = 8
+uint8 TURN_OUT_POINT_ON_LEFT = 9
+uint8 TURN_OUT_POINT_ON_RIGHT = 10
+uint8 ADJACENT_PARKING_ON_LEFT = 11
+uint8 ADJACENT_PARKING_ON_RIGHT = 12
+uint8 ADJACENT_BIKE_LANE_ON_LEFT = 13
+uint8 ADJACENT_BIKE_LANE_ON_RIGHT = 14
+uint8 SHARED_BIKE_LANE = 15
+uint8 BIKE_BOX_IN_FRONT = 16
+uint8 TRANSIT_STOP_ON_LEFT = 17
+uint8 TRANSIT_STOP_ON_RIGHT = 18
+uint8 TRANSIT_STOP_IN_LANE = 19
+uint8 SHARED_WITH_TRACKED_VEHICLE = 20
+uint8 SAFE_ISLAND = 21
+uint8 LOW_CURBS_PRESENT = 22
+uint8 RUMBLE_STRIP_PRESENT = 23
+uint8 AUDIBLE_SIGNALING_PRESENT = 24
+uint8 ADAPTIVE_TIMING_PRESENT = 25
+uint8 RF_SIGNAL_REQUEST_PRESENT = 26
+uint8 PARTIAL_CURB_INTRUSION = 27
+uint8 TAPER_TO_LEFT = 28
+uint8 TAPER_TO_RIGHT = 29
+uint8 TAPER_TO_CENTER_LINE = 30
+uint8 PARALLEL_PARKING = 31
+uint8 HEAD_IN_PARKING = 32
+uint8 FREE_PARKING = 33
+uint8 TIME_RESTRICTIONS_ON_PARKING = 34
+uint8 COST_TO_PARK = 35
+uint8 MID_BLOCK_CURB_PRESENT = 36
+uint8 UN_EVEN_PAVEMENT_PRESENT = 37
+uint8 value
