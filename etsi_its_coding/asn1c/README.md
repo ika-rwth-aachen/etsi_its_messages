@@ -23,6 +23,17 @@ _Make sure that your ASN1 dependency-files are matching since duplicate-files wi
 docker run --volume <local_input_folder>:/home/input --volume <local_output_folder>:/home/output gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
 ```
 
+### Alternative: Usage of makefile
+
+We prepared a makefile to build specifc coding packages for each etsi message type.
+Simply run one of the following commands from within the `etsi_its_coding/asn1c/docker` directory:
+
+```bash
+make <all/cam/denm/evcsn/evrsr/ivim/mapem/poti/rtcmem/spatem/srem/ssem/tistpg>
+```
+
+The generated `*.c` and `*.h`-files will be placed into the specific `etsi_its_<...>_coding` directory.
+
 ### Build docker image locally
 
 ```bash
