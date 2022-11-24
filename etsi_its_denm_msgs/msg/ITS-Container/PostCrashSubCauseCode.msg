@@ -1,0 +1,11 @@
+# ------------------------------------------------------------------------------
+# PostCrashSubCauseCode ::= INTEGER {unavailable(0), accidentWithoutECallTriggered (1), accidentWithECallManuallyTriggered (2), accidentWithECallAutomaticallyTriggered (3), accidentWithECallTriggeredWithoutAccessToCellularNetwork(4)} (0..255)
+# ------------------------------------------------------------------------------
+
+# restricted-to: [(0, 255)]
+uint8 UNAVAILABLE = 0
+uint8 ACCIDENT_WITHOUT_E_CALL_TRIGGERED = 1
+uint8 ACCIDENT_WITH_E_CALL_MANUALLY_TRIGGERED = 2
+uint8 ACCIDENT_WITH_E_CALL_AUTOMATICALLY_TRIGGERED = 3
+uint8 ACCIDENT_WITH_E_CALL_TRIGGERED_WITHOUT_ACCESS_TO_CELLULAR_NETWORK = 4
+uint8 value
