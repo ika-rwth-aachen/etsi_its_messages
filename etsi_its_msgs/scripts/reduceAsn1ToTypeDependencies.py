@@ -27,7 +27,7 @@ def parseAsn1Files(files: List[str]) -> Dict:
     return asn1tools.parse_files(files)
 
 
-def findTypeDependencies(docs: Dict, type: str) -> Dict[str, Dict]:
+def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int = 0) -> Dict[str, Dict]:
 
     relevant_type_infos = {}
 
@@ -40,6 +40,8 @@ def findTypeDependencies(docs: Dict, type: str) -> Dict[str, Dict]:
     if type_info is None:
         return {}
     relevant_type_infos[type] = type_info
+    if log:
+        print(f"{' ' * indent}{type}")
 
     # get dependency types
     member_types = []
@@ -48,7 +50,7 @@ def findTypeDependencies(docs: Dict, type: str) -> Dict[str, Dict]:
 
     # recursively find dependencies of dependencies
     for member_type in member_types:
-        rti = findTypeDependencies(docs, member_type)
+        rti = findTypeDependencies(docs, member_type, log=log, indent=indent+2)
         relevant_type_infos.update(rti)
     
     return relevant_type_infos
@@ -111,9 +113,7 @@ def main():
 
     docs = parseAsn1Files(args.files)
 
-    relevant_type_infos = findTypeDependencies(docs, args.type)
-    for type in sorted(relevant_type_infos):
-        print(type)
+    relevant_type_infos = findTypeDependencies(docs, args.type, log=True)
 
     reduceAsn1Files(args.files, list(relevant_type_infos.keys()), args.output_dir)
 
