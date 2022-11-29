@@ -1,5 +1,7 @@
 # ------------------------------------------------------------------------------
-# CenDsrcTollingZoneID ::= ProtectedZoneID
+# ProtectedZoneRadius ::= INTEGER {oneMeter(1)} (1..255,...)
 # ------------------------------------------------------------------------------
 
-ProtectedZoneID value
+# restricted-to: [(1, 255), None]
+uint8 ONE_METER = 1
+uint8 value

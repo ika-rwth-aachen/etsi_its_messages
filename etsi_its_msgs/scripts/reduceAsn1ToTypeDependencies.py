@@ -44,13 +44,15 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
         print(f"{' ' * indent}{type}")
 
     # get dependency types
-    member_types = []
+    dependency_types = []
     if "members" in type_info:
-        member_types = [m["type"] for m in type_info["members"] if m is not None]
+        dependency_types = [m["type"] for m in type_info["members"] if m is not None]
+    if "element" in type_info:
+        dependency_types += [type_info["element"]["type"]]
 
     # recursively find dependencies of dependencies
-    for member_type in member_types:
-        rti = findTypeDependencies(docs, member_type, log=log, indent=indent+2)
+    for dependency_type in dependency_types:
+        rti = findTypeDependencies(docs, dependency_type, log=log, indent=indent+2)
         relevant_type_infos.update(rti)
     
     return relevant_type_infos

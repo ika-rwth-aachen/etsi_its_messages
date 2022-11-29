@@ -90,6 +90,10 @@ add_message_files(
     Curvature.msg
     CurvatureValue.msg
     DangerousGoodsBasic.msg
+    DeltaAltitude.msg
+    DeltaLatitude.msg
+    DeltaLongitude.msg
+    DeltaReferencePosition.msg
     DriveDirection.msg
     DrivingLaneStatus.msg
     EmbarkationStatus.msg
@@ -108,10 +112,16 @@ add_message_files(
     Longitude.msg
     LongitudinalAcceleration.msg
     LongitudinalAccelerationValue.msg
+    PathDeltaTime.msg
     PathHistory.msg
+    PathPoint.msg
     PerformanceClass.msg
     PosConfidenceEllipse.msg
+    ProtectedCommunicationZone.msg
     ProtectedCommunicationZonesRSU.msg
+    ProtectedZoneID.msg
+    ProtectedZoneRadius.msg
+    ProtectedZoneType.msg
     PtActivationData.msg
     PtActivation.msg
     PtActivationType.msg
@@ -129,6 +139,7 @@ add_message_files(
     SteeringWheelAngle.msg
     SteeringWheelAngleValue.msg
     SubCauseCodeType.msg
+    TimestampIts.msg
     TrafficRule.msg
     VehicleLengthConfidenceIndication.msg
     VehicleLength.msg

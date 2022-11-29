@@ -1,5 +1,6 @@
 # ------------------------------------------------------------------------------
-# CenDsrcTollingZoneID ::= ProtectedZoneID
+# ProtectedZoneID ::= INTEGER (0.. 134217727)
 # ------------------------------------------------------------------------------
 
-ProtectedZoneID value
+# restricted-to: [(0, 134217727)]
+uint32 value
