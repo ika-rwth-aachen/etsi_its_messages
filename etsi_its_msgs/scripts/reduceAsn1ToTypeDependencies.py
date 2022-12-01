@@ -37,6 +37,9 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
         if type in info["types"].keys():
             type_info = info["types"][type]
             break
+        if type in info["values"].keys():
+            type_info = info["values"][type]
+            break
     if type_info is None:
         return {}
     relevant_type_infos[type] = type_info
@@ -47,9 +50,10 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
     dependency_types = []
     if "members" in type_info:
         dependency_types = [m["type"] for m in type_info["members"] if m is not None]
+        dependency_types += [m["default"] for m in type_info["members"] if m is not None and "default" in m]
     if "element" in type_info:
         dependency_types += [type_info["element"]["type"]]
-
+    
     # recursively find dependencies of dependencies
     for dependency_type in dependency_types:
         rti = findTypeDependencies(docs, dependency_type, log=log, indent=indent+2)
@@ -92,7 +96,7 @@ def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
 
         # detect type to keep, entering copy mode
         if "::=" in line:
-            if line.split("::=")[0].strip() in types:
+            if line.split("::=")[0].split(" ")[0].strip() in types:
                 copying_type = True
                 copying = False
 
