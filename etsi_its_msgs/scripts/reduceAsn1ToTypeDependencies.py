@@ -96,7 +96,7 @@ def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
 
         # detect type to keep, entering copy mode
         if "::=" in line:
-            if line.split("::=")[0].split(" ")[0].strip() in types:
+            if line.split("::=")[0].strip().split(" ")[0] in types:
                 copying_type = True
                 copying = False
 
