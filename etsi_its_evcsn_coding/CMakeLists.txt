@@ -103,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    INCLUDE_DIRS include
-#  LIBRARIES hx_testmanager
+   LIBRARIES ${PROJECT_NAME}
 #  CATKIN_DEPENDS dynamic_reconfigure message_runtime nodelet roscpp std_msgs
 #  DEPENDS system_lib
 )

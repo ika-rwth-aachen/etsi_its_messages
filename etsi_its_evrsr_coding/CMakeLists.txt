@@ -2,17 +2,14 @@ cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
 project(etsi_its_evrsr_coding)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+# add_compile_options(-std=c++11)
+
+AUX_SOURCE_DIRECTORY(src SRC_FILES)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-    dynamic_reconfigure
-    nodelet
-    roscpp
-    roslaunch
-    std_msgs
 )
 
 
@@ -91,8 +88,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 ## DYNAMIC RECONFIGURE START ##
-generate_dynamic_reconfigure_options(
-)
+# generate_dynamic_reconfigure_options(
+# )
 ## DYNAMIC RECONFIGURE END ##
 
 ###################################
@@ -105,9 +102,9 @@ generate_dynamic_reconfigure_options(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES hx_testmanager
-   CATKIN_DEPENDS dynamic_reconfigure message_runtime nodelet roscpp std_msgs
+   INCLUDE_DIRS include
+   LIBRARIES ${PROJECT_NAME}
+#  CATKIN_DEPENDS dynamic_reconfigure message_runtime nodelet roscpp std_msgs
 #  DEPENDS system_lib
 )
 
@@ -123,9 +120,9 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/hx_testmanager.cpp
-# )
+add_library(${PROJECT_NAME} SHARED
+   ${SRC_FILES}
+)
 
 ## LIBRARIES START ##
 
