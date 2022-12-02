@@ -29,7 +29,7 @@ We prepared a makefile to build specifc coding packages for each etsi message ty
 Simply run one of the following commands from within the `etsi_its_coding/asn1c/docker` directory:
 
 ```bash
-make <all/cam/denm/evcsn/evrsr/ivim/mapem/poti/rtcmem/spatem/srem/ssem/tistpg>
+make <all/cam/denm/...>
 ```
 
 The generated `*.c` and `*.h`-files will be placed into the specific `etsi_its_<...>_coding` directory.

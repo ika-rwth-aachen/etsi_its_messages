@@ -8,7 +8,6 @@ ID_GROUP = $(shell id -g ${USER})
 
 all: 
 	$(MAKE) -s cam 
-	$(MAKE) -s cdd 
 	$(MAKE) -s denm 
 	$(MAKE) -s evcsn 
 	$(MAKE) -s evrsr 
@@ -21,9 +20,6 @@ all:
 
 cam:
 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/cam_en302637_2:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_cam_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
-
-cdd:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/cdd_ts102894_2:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_cdd_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
 
 denm:
 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/denm_en302637_3:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_denm_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
