@@ -45,15 +45,56 @@ ItsEVCSNData ::= SEQUENCE {
 	chargingStationsData    SEQUENCE (SIZE(1..256)) OF ItsChargingStationData
 }
 
+ItsChargingStationData ::= SEQUENCE {
+	chargingStationID     	StationID,
+	utilityDistributorId  	UTF8String (SIZE(1..32))	OPTIONAL,
+	providerID            	UTF8String (SIZE(1..32))	OPTIONAL,
+	chargingStationLocation	ReferencePosition,
+	address               	UTF8String 	        	OPTIONAL,
+	phoneNumber           	NumericString (SIZE(1..16))    	OPTIONAL,
+	accessibility         	UTF8String (SIZE(1..32)),
+	digitalMap            	DigitalMap           		OPTIONAL,
+	openingDaysHours      	UTF8String,
+	pricing               	UTF8String,
+	bookingContactInfo    	UTF8String          		OPTIONAL,
+	payment               	UTF8String          		OPTIONAL,
+	chargingSpotsAvailable  ItsChargingSpots,
+	...
+}
 
 
+ItsChargingSpots ::= SEQUENCE (SIZE(1..16)) OF ItsChargingSpotDataElements
 
 
+ItsChargingSpotDataElements ::= SEQUENCE {
+	type			ChargingSpotType,
+	evEquipmentID	UTF8String	OPTIONAL,
+	typeOfReceptacle	TypeOfReceptacle,
+	energyAvailability	UTF8String,
+	parkingPlacesData	ParkingPlacesData	OPTIONAL
+}
 
+DigitalMap ::= SEQUENCE (SIZE(1..256)) OF ReferencePosition
 
+ChargingSpotType ::= BIT STRING {
+	standardChargeMode1(0),
+	standardChargeMode2(1),
+	standardOrFastChargeMode3(2),
+	fastChargeWithExternalCharger(3),         
+	quickDrop(8),
+	inductiveChargeWhileStationary(12),
+	inductiveChargeWhileDriving(14)
+}
 
+TypeOfReceptacle	::= BIT STRING
 
+ParkingPlacesData	::= SEQUENCE (SIZE(1..4)) OF SpotAvailability
 
+SpotAvailability 	::= SEQUENCE {
+	maxWaitingTimeMinutes INTEGER (0..1400), -- 0 if available or max waiting
+						 -- time (minutes)
+	blocking              BOOLEAN            -- true if the spot can be blocked
+}
 
 POIType                ::= INTEGER(0..65535)
 NumberStations         ::= INTEGER(1..256)

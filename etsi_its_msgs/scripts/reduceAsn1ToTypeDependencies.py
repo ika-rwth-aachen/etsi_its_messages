@@ -49,7 +49,8 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
     # get dependency types
     dependency_types = []
     if "members" in type_info:
-        dependency_types = [m["type"] for m in type_info["members"] if m is not None]
+        dependency_types += [m["type"] for m in type_info["members"] if m is not None and "SEQUENCE" not in m["type"]]
+        dependency_types += [m["element"]["type"] for m in type_info["members"] if m is not None and "SEQUENCE" in m["type"]]
         dependency_types += [m["default"] for m in type_info["members"] if m is not None and "default" in m]
     if "element" in type_info:
         dependency_types += [type_info["element"]["type"]]
