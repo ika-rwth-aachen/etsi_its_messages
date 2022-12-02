@@ -51,19 +51,36 @@ add_message_files(
   DIRECTORY
     msg/EVCSN-PDU-Descriptions
   FILES
+    ChargingSpotType.msg
+    DigitalMap.msg
     EVChargingSpotNotificationPOIMessage.msg
     EvcsnPdu.msg
+    ItsChargingSpotDataElements.msg
+    ItsChargingSpots.msg
+    ItsChargingStationData.msg
     ItsEVCSNData.msg
     ItsPOIHeader.msg
     NumberStations.msg
+    ParkingPlacesData.msg
     POIType.msg
+    SpotAvailability.msg
+    TypeOfReceptacle.msg
 )
 
 add_message_files(
   DIRECTORY
     msg/ITS-Container
   FILES
+    AltitudeConfidence.msg
+    Altitude.msg
+    AltitudeValue.msg
+    HeadingValue.msg
     ItsPduHeader.msg
+    Latitude.msg
+    Longitude.msg
+    PosConfidenceEllipse.msg
+    ReferencePosition.msg
+    SemiAxisLength.msg
     StationID.msg
     TimestampIts.msg
 )
