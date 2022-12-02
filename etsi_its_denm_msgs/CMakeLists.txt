@@ -68,73 +68,39 @@ add_message_files(
   DIRECTORY
     msg/ITS-Container
   FILES
-    AccelerationConfidence.msg
-    AccelerationControl.msg
-    AccidentSubCauseCode.msg
     ActionID.msg
-    AdverseWeatherCondition_AdhesionSubCauseCode.msg
-    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode.msg
-    AdverseWeatherCondition_PrecipitationSubCauseCode.msg
-    AdverseWeatherCondition_VisibilitySubCauseCode.msg
     AltitudeConfidence.msg
     Altitude.msg
     AltitudeValue.msg
     CauseCode.msg
     CauseCodeType.msg
-    CenDsrcTollingZoneID.msg
-    CenDsrcTollingZone.msg
     ClosedLanes.msg
-    CollisionRiskSubCauseCode.msg
-    CurvatureCalculationMode.msg
-    CurvatureConfidence.msg
-    Curvature.msg
-    CurvatureValue.msg
-    DangerousEndOfQueueSubCauseCode.msg
     DangerousGoodsBasic.msg
     DangerousGoodsExtended.msg
-    DangerousSituationSubCauseCode.msg
     DeltaAltitude.msg
     DeltaLatitude.msg
     DeltaLongitude.msg
     DeltaReferencePosition.msg
-    DigitalMap.msg
-    DriveDirection.msg
     DrivingLaneStatus.msg
-    EmbarkationStatus.msg
-    EmergencyPriority.msg
-    EmergencyVehicleApproachingSubCauseCode.msg
     EnergyStorageType.msg
     EventHistory.msg
     EventPoint.msg
-    ExteriorLights.msg
     HardShoulderStatus.msg
-    HazardousLocation_AnimalOnTheRoadSubCauseCode.msg
-    HazardousLocation_DangerousCurveSubCauseCode.msg
-    HazardousLocation_ObstacleOnTheRoadSubCauseCode.msg
-    HazardousLocation_SurfaceConditionSubCauseCode.msg
     HeadingConfidence.msg
     Heading.msg
     HeadingValue.msg
     HeightLonCarr.msg
-    HumanPresenceOnTheRoadSubCauseCode.msg
-    HumanProblemSubCauseCode.msg
     InformationQuality.msg
     ItineraryPath.msg
     ItsPduHeader.msg
     LanePosition.msg
-    LateralAcceleration.msg
-    LateralAccelerationValue.msg
     Latitude.msg
     LightBarSirenInUse.msg
     Longitude.msg
-    LongitudinalAcceleration.msg
-    LongitudinalAccelerationValue.msg
     NumberOfOccupants.msg
-    OpeningDaysHours.msg
     PathDeltaTime.msg
     PathHistory.msg
     PathPoint.msg
-    PerformanceClass.msg
     PhoneNumber.msg
     PosCentMass.msg
     PosConfidenceEllipse.msg
@@ -144,65 +110,34 @@ add_message_files(
     PositionOfPillars.msg
     PosLonCarr.msg
     PosPillar.msg
-    PostCrashSubCauseCode.msg
-    ProtectedCommunicationZone.msg
-    ProtectedCommunicationZonesRSU.msg
-    ProtectedZoneID.msg
-    ProtectedZoneRadius.msg
-    ProtectedZoneType.msg
-    PtActivationData.msg
-    PtActivation.msg
-    PtActivationType.msg
     ReferencePosition.msg
     RelevanceDistance.msg
     RelevanceTrafficDirection.msg
     RequestResponseIndication.msg
-    RescueAndRecoveryWorkInProgressSubCauseCode.msg
     RestrictedTypes.msg
     RoadType.msg
-    RoadworksSubCauseCode.msg
     SemiAxisLength.msg
     SequenceNumber.msg
-    SignalViolationSubCauseCode.msg
-    SlowVehicleSubCauseCode.msg
-    SpecialTransportType.msg
     SpeedConfidence.msg
     SpeedLimit.msg
     Speed.msg
     SpeedValue.msg
     StationarySince.msg
-    StationaryVehicleSubCauseCode.msg
     StationID.msg
     StationType.msg
-    SteeringWheelAngleConfidence.msg
-    SteeringWheelAngle.msg
-    SteeringWheelAngleValue.msg
     SubCauseCodeType.msg
     Temperature.msg
     TimestampIts.msg
     Traces.msg
-    TrafficConditionSubCauseCode.msg
     TrafficRule.msg
     TransmissionInterval.msg
     TurningRadius.msg
     ValidityDuration.msg
     VDS.msg
-    VehicleBreakdownSubCauseCode.msg
     VehicleIdentification.msg
-    VehicleLengthConfidenceIndication.msg
-    VehicleLength.msg
-    VehicleLengthValue.msg
     VehicleMass.msg
-    VehicleRole.msg
-    VehicleWidth.msg
-    VerticalAcceleration.msg
-    VerticalAccelerationValue.msg
     WheelBaseVehicle.msg
     WMInumber.msg
-    WrongWayDrivingSubCauseCode.msg
-    YawRateConfidence.msg
-    YawRate.msg
-    YawRateValue.msg
 )
 
 ## Generate services in the 'srv' folder

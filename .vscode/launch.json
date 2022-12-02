@@ -6,13 +6,28 @@
   "configurations": [
 
     {
-      "name": "CAM",
+      "name": "CAM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "CAM",
+        "-o", "ETSI-ITS-ASN1-REDUCED/CAM",
+        "ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/cam_en302637_2/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/cam_en302637_2/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/CAM/CAM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/CAM/ITS-Container.asn",
         "-o", "etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -20,13 +35,28 @@
     },
 
     {
-      "name": "DENM",
+      "name": "DENM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "DENM",
+        "-o", "ETSI-ITS-ASN1-REDUCED/DENM",
+        "ETSI-ITS-ASN1/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/denm_en302637_3/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "DENM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/denm_en302637_3/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/DENM/DENM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/DENM/ITS-Container.asn",
         "-o", "etsi_its_denm_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -34,13 +64,28 @@
     },
 
     {
-      "name": "EVCSN",
+      "name": "EVCSN reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "EvcsnPdu",
+        "-o", "ETSI-ITS-ASN1-REDUCED/EVCSN",
+        "ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/evcsn-ts101556_1/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "EVCSN asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/evcsn-ts101556_1/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/EVCSN/EVCSN-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/EVCSN/ITS-Container.asn",
         "-o", "etsi_its_evcsn_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -48,13 +93,28 @@
     },
 
     {
-      "name": "EVRSR",
+      "name": "EVRSR reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "EV-RSR",
+        "-o", "ETSI-ITS-ASN1-REDUCED/EVRSR",
+        "ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/evrsr_ts101556_3/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "EVRSR asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/evrsr_ts101556_3/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/EVRSR/EV-RSR-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/EVRSR/ITS-Container.asn",
         "-o", "etsi_its_evrsr_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -62,15 +122,32 @@
     },
 
     {
-      "name": "MAPEM",
+      "name": "MAPEM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "MAPEM",
+        "-o", "ETSI-ITS-ASN1-REDUCED/MAPEM",
+        "ETSI-ITS-ASN1/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "MAPEM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/is_ts103301/MAPEM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
-        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
-        "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn",
+        "ETSI-ITS-ASN1-REDUCED/MAPEM/MAPEM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/MAPEM/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/MAPEM/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "ETSI-ITS-ASN1-REDUCED/MAPEM/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_mapem_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -78,15 +155,32 @@
     },
 
     {
-      "name": "SPATEM",
+      "name": "SPATEM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "SPATEM",
+        "-o", "ETSI-ITS-ASN1-REDUCED/SPATEM",
+        "ETSI-ITS-ASN1/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
+        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "SPATEM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
       "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1/is_ts103301/SPATEM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
-        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
-        "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn",
+        "ETSI-ITS-ASN1-REDUCED/SPATEM/SPATEM-PDU-Descriptions.asn",
+        "ETSI-ITS-ASN1-REDUCED/SPATEM/ITS-Container.asn",
+        "ETSI-ITS-ASN1-REDUCED/SPATEM/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "ETSI-ITS-ASN1-REDUCED/SPATEM/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_spatem_msgs/msg"
       ],
       "console": "integratedTerminal",
