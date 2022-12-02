@@ -69,7 +69,7 @@
       "request": "launch",
       "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
       "args": [
-        "-t", "EVCSN",
+        "-t", "EvcsnPdu",
         "-o", "ETSI-ITS-ASN1-REDUCED/EVCSN",
         "ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1/evcsn-ts101556_1/cdd/ITS-Container.asn"
@@ -98,7 +98,7 @@
       "request": "launch",
       "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
       "args": [
-        "-t", "EVCSN",
+        "-t", "EV-RSR",
         "-o", "ETSI-ITS-ASN1-REDUCED/EVRSR",
         "ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1/evrsr_ts101556_3/cdd/ITS-Container.asn"

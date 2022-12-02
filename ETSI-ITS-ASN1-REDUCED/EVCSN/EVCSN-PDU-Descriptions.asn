@@ -1,0 +1,61 @@
+-- Point of Interest (POI) notification for charging spot 
+-- for electric vehicle
+-- EVCSN Message definition
+-- ASN.1 Start Definition
+
+EVCSN-PDU-Descriptions {
+itu-t (0) identified-organization (4) etsi (0) itsDomain (5)
+wg1 (1) ts (101556) evcsn (1) version (1)
+}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+ 
+BEGIN
+
+IMPORTS
+    ItsPduHeader,
+    StationID,
+    TimestampIts,
+    ReferencePosition
+FROM ITS-Container {
+ itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts (102894) cdd (2) version (1)
+};
+ 
+-- Root Message PDU: EvcsnPdu
+
+EvcsnPdu ::= SEQUENCE {
+	header	ItsPduHeader, 
+	evcsn	EVChargingSpotNotificationPOIMessage
+}
+
+EVChargingSpotNotificationPOIMessage ::= SEQUENCE {
+	poiHeader	ItsPOIHeader, -- Specific POI Message Header
+	evcsnData	ItsEVCSNData  -- Electric Vehicle Charging Spot Data Elements
+}
+
+ItsPOIHeader ::= SEQUENCE {
+	poiType                 POIType, -- set to "EV charging station POI ID = 1"
+    timeStamp               TimestampIts,
+	relayCapable            BOOLEAN
+}
+
+
+ItsEVCSNData ::= SEQUENCE {
+	totalNumberOfStations   NumberStations,
+	chargingStationsData    SEQUENCE (SIZE(1..256)) OF ItsChargingStationData
+}
+
+
+
+
+
+
+
+
+
+
+
+POIType                ::= INTEGER(0..65535)
+NumberStations         ::= INTEGER(1..256)
+
+END
