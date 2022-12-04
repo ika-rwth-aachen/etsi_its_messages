@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 4095)]
-uint16 ONE_CENTIMETER = 1
-uint16 OUT_OF_RANGE = 4094
-uint16 UNAVAILABLE = 4095
-uint16 value
+int64 ONE_CENTIMETER = 1
+int64 OUT_OF_RANGE = 4094
+int64 UNAVAILABLE = 4095
+int64 value

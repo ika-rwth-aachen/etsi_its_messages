@@ -3,11 +3,11 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 255)]
-uint8 UNAVAILABLE = 0
-uint8 MAJOR_ROADWORKS = 1
-uint8 ROAD_MARKING_WORK = 2
-uint8 SLOW_MOVING_ROAD_MAINTENANCE = 3
-uint8 SHORT_TERM_STATIONARY_ROADWORKS = 4
-uint8 STREET_CLEANING = 5
-uint8 WINTER_SERVICE = 6
-uint8 value
+int64 UNAVAILABLE = 0
+int64 MAJOR_ROADWORKS = 1
+int64 ROAD_MARKING_WORK = 2
+int64 SLOW_MOVING_ROAD_MAINTENANCE = 3
+int64 SHORT_TERM_STATIONARY_ROADWORKS = 4
+int64 STREET_CLEANING = 5
+int64 WINTER_SERVICE = 6
+int64 value

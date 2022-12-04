@@ -3,5 +3,5 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(1, 255), None]
-uint8 ONE_METER = 1
-uint8 value
+int64 ONE_METER = 1
+int64 value

@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-12700, 12800)]
-int16 ONE_CENTIMETER_UP = 1
-int16 ONE_CENTIMETER_DOWN = -1
-int16 UNAVAILABLE = 12800
-int16 value
+int64 ONE_CENTIMETER_UP = 1
+int64 ONE_CENTIMETER_DOWN = -1
+int64 UNAVAILABLE = 12800
+int64 value

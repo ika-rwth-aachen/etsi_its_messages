@@ -3,6 +3,6 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-1023, 1023)]
-int16 STRAIGHT = 0
-int16 UNAVAILABLE = 1023
-int16 value
+int64 STRAIGHT = 0
+int64 UNAVAILABLE = 1023
+int64 value

@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-160, 161)]
-int16 POINT_ONE_METER_PER_SEC_SQUARED_TO_RIGHT = -1
-int16 POINT_ONE_METER_PER_SEC_SQUARED_TO_LEFT = 1
-int16 UNAVAILABLE = 161
-int16 value
+int64 POINT_ONE_METER_PER_SEC_SQUARED_TO_RIGHT = -1
+int64 POINT_ONE_METER_PER_SEC_SQUARED_TO_LEFT = 1
+int64 UNAVAILABLE = 161
+int64 value

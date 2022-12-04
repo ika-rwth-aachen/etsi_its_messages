@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-100000, 800001)]
-int32 REFERENCE_ELLIPSOID_SURFACE = 0
-int32 ONE_CENTIMETER = 1
-int32 UNAVAILABLE = 800001
-int32 value
+int64 REFERENCE_ELLIPSOID_SURFACE = 0
+int64 ONE_CENTIMETER = 1
+int64 UNAVAILABLE = 800001
+int64 value
