@@ -1,0 +1,10 @@
+<launch>
+
+  <group ns="/sample_package">
+    <node pkg="sample_package" type="SampleNode" name="SampleNode" output="screen">
+      <remap to="/sample_package/topic_1" from="topic_1"/>  <!-- remaps a global topic to the relative topic of the node -->
+    </node>
+  </group>
+
+</launch>
+
