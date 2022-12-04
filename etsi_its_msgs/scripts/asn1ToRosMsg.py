@@ -284,7 +284,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
         # Converter
         if f"convert{noSpace(type)}.h" not in header:
-            header += f"#include <convert{noSpace(type)}.h>\n"
+            header += f"#include <primitives/convert{noSpace(type)}.h>\n"
         c2ros += convertToPrimitiv(type,t_name,name)[0]
         ros2c += convertToPrimitiv(type,t_name,name)[1]
 
@@ -301,9 +301,9 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             # Converter
             memberName = member["name"]
             memberType = member["type"]
-            if f"convert{memberType}.h" not in header:    
-                header += f"#include <convert{memberType}.h>\n"
             if "optional" in member.keys():
+                if f"convert{memberType}.h" not in header:    
+                    header += f"#include <convert{memberType}.h>\n"
                 c2ros+=f"\t\tif(_{t_name}_in.{memberName})\n"
                 ros2c+=f"\t\tif(XY.msg)\n"
                 c2ros+="\t\t{\n"
@@ -314,9 +314,13 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 ros2c+="\t\t}\n"
             else:
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
+                    if f"convert{memberType}.h" not in header:    
+                        header += f"#include <primitives/convert{memberType}.h>\n"
                     c2ros += convertToPrimitiv(memberType,t_name,memberName)[0]
                     ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
+                    if f"convert{memberType}.h" not in header:    
+                        header += f"#include <convert{memberType}.h>\n"
                     c2ros += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.{memberName});\n"
                     ros2c += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
 
@@ -432,8 +436,9 @@ def main():
     ros_msg_by_type, converter_by_type = asn1TypesToFileStr(args.type, asn1_types)
 
     exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
-
-    exportConverterFiles(converter_by_type, "/home/jpbusch/git/ros_etsi_its_messages/etsi_its_conversion/include")
+    
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    exportConverterFiles(converter_by_type, f"{file_path}/../../etsi_its_conversion/etsi_its_{args.type}_conversion/include")
 
 if __name__ == "__main__":
     
