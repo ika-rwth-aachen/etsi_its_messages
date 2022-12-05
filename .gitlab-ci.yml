@@ -10,48 +10,52 @@ default:
     - pip install -r etsi_its_msgs/requirements.txt
 
 stages:
-  - Generate ROS Messages
+  - Generate ROS Messages & Conversion Functions
   - Build ROS Packages
 
 
 CAM:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn
       ETSI-ITS-ASN1/cam_en302637_2/cdd/ITS-Container.asn
+      -t cam
       -o etsi_its_cam_msgs/msg
 
 DENM:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1/denm_en302637_3/DENM-PDU-Descriptions.asn
       ETSI-ITS-ASN1/denm_en302637_3/cdd/ITS-Container.asn
+      -t denm
       -o etsi_its_denm_msgs/msg
 
 EVCSN:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1/evcsn-ts101556_1/EVCSN-PDU-Descriptions.asn
       ETSI-ITS-ASN1/evcsn-ts101556_1/cdd/ITS-Container.asn
+      -t evcsn
       -o etsi_its_evcsn_msgs/msg
 
 EVRSR:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1/evrsr_ts101556_3/EV-RSR-PDU-Descriptions.asn
       ETSI-ITS-ASN1/evrsr_ts101556_3/cdd/ITS-Container.asn
+      -t evrsr
       -o etsi_its_evrsr_msgs/msg
 
 MAPEM:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
@@ -59,10 +63,11 @@ MAPEM:
       ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn
       ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn
+      -t mapem
       -o etsi_its_mapem_msgs/msg
 
 SPATEM:
-  stage: Generate ROS Messages
+  stage: Generate ROS Messages & Conversion Functions
   script:
     - >
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
@@ -70,6 +75,7 @@ SPATEM:
       ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn
       ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn
+      -t spatem
       -o etsi_its_spatem_msgs/msg
 
 
