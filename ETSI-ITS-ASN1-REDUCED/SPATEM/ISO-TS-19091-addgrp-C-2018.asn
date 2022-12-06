@@ -1,0 +1,385 @@
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ISO TS 19091 2018
+--
+-- This document includes three ASN.1 modules
+--    AddGrpC
+--    REGION
+--    DSRC
+--
+-- This document contains the data element needed for the encoding the SPAT, MapData, SignalRequestMessage, SignalStatusMessage, RTCMcorrections
+-- as defined in ISO TS 19091 and basic data element referenced to SAEJ2735
+--
+-- It includes the addendum extensions for Addgrp-C (e.g. Europe)
+-- 
+-- ISO Standards maintenance Portal:
+-- http://standards.iso.org/iso/ts/19091/addgrp_c/
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-- ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+-- 
+-- module: AddGrpC
+-- 
+-- ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+DSRC { 
+  iso (1) standard (0) signalizedIntersection (19091) profilec(2) dsrc (2) version2 (2)
+} 
+
+DEFINITIONS AUTOMATIC TAGS::= BEGIN 
+
+IMPORTS
+
+Longitude, Latitude, StationID
+FROM ITS-Container { itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts (102894) cdd (2) version (2) }
+
+Reg-AdvisorySpeed, Reg-ComputedLane, Reg-ConnectionManeuverAssist, Reg-GenericLane,
+Reg-IntersectionGeometry, Reg-IntersectionState, Reg-LaneAttributes, Reg-MapData,
+Reg-LaneDataAttribute, Reg-MovementEvent, Reg-MovementState,
+Reg-NodeAttributeSetXY, Reg-NodeOffsetPointXY, Reg-Position3D, Reg-RequestorDescription, Reg-RequestorType, Reg-RestrictionUserType, Reg-RoadSegment,
+Reg-RTCMcorrections, Reg-SignalControlZone, Reg-SignalRequestPackage, Reg-SignalRequest, Reg-SignalStatus, Reg-SignalStatusPackage, Reg-SignalRequestMessage,
+Reg-SignalStatusMessage, Reg-SPAT
+FROM REGION  {iso (1) standard (0) signalizedIntersection (19091) profilec(2) region (1) version2 (2)}
+
+
+Iso3833VehicleType
+FROM ElectronicRegistrationIdentificationVehicleDataModule { iso(1) standard(0) iso24534 (24534) vehicleData (1) version1 (1) };
+
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+-- Messages
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+
+RegionalExtension {REG-EXT-ID-AND-TYPE : Set} ::= SEQUENCE {
+  regionId     REG-EXT-ID-AND-TYPE.&id( {Set} ),
+  regExtValue  REG-EXT-ID-AND-TYPE.&Type( {Set}{@regionId} )
+}
+ 
+
+
+SPAT ::= SEQUENCE { 
+  timeStamp     MinuteOfTheYear OPTIONAL,  
+  name          DescriptiveName OPTIONAL, 
+  intersections IntersectionStateList,
+  regional      SEQUENCE (SIZE(1..4)) OF 
+                RegionalExtension {{Reg-SPAT}} OPTIONAL,
+  ...
+}
+
+
+
+
+
+
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+-- Start of entries from table Data_Frames...
+-- Data frames 
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+AdvisorySpeed ::= SEQUENCE {
+  type        AdvisorySpeedType,
+  speed       SpeedAdvice OPTIONAL,
+  confidence  SpeedConfidence OPTIONAL,
+  distance    ZoneLength OPTIONAL,
+  class       RestrictionClassID OPTIONAL,
+  regional    SEQUENCE (SIZE(1..4)) OF 
+              RegionalExtension {{Reg-AdvisorySpeed}} OPTIONAL,
+  ...
+}
+
+AdvisorySpeedList ::= SEQUENCE (SIZE(1..16)) OF AdvisorySpeed
+
+
+
+
+
+
+ConnectionManeuverAssist ::= SEQUENCE {
+  connectionID         LaneConnectionID,
+  queueLength          ZoneLength OPTIONAL,
+  availableStorageLength ZoneLength OPTIONAL,
+  waitOnStop           WaitOnStopline OPTIONAL,
+  pedBicycleDetect     PedestrianBicycleDetect OPTIONAL,
+  regional  SEQUENCE (SIZE(1..4)) OF 
+            RegionalExtension {{Reg-ConnectionManeuverAssist}} OPTIONAL,
+  ...  
+}
+
+
+
+
+EnabledLaneList ::= SEQUENCE (SIZE(1..16)) OF LaneID
+
+
+
+
+
+
+   
+IntersectionReferenceID ::= SEQUENCE {
+  region  RoadRegulatorID OPTIONAL,
+  id      IntersectionID
+}
+
+IntersectionState ::= SEQUENCE {
+  name         DescriptiveName OPTIONAL, 
+  id           IntersectionReferenceID,  
+  revision     MsgCount,    
+  status       IntersectionStatusObject,
+  moy          MinuteOfTheYear OPTIONAL,
+  timeStamp    DSecond OPTIONAL, 
+  enabledLanes EnabledLaneList OPTIONAL,  
+  states       MovementList,
+  maneuverAssistList  ManeuverAssistList OPTIONAL,
+  regional     SEQUENCE (SIZE(1..4)) OF 
+               RegionalExtension {{Reg-IntersectionState}} OPTIONAL,
+  ... 
+}
+
+IntersectionStateList ::= SEQUENCE (SIZE(1..32)) OF  IntersectionState
+
+
+
+
+
+
+
+ManeuverAssistList ::= SEQUENCE (SIZE(1..16)) OF ConnectionManeuverAssist
+
+MovementEvent ::= SEQUENCE {
+  eventState   MovementPhaseState,
+  timing       TimeChangeDetails OPTIONAL,
+  speeds       AdvisorySpeedList OPTIONAL,
+  regional     SEQUENCE (SIZE(1..4)) OF 
+               RegionalExtension {{Reg-MovementEvent}} OPTIONAL,
+  ...  
+}
+
+MovementEventList ::= SEQUENCE (SIZE(1..16)) OF MovementEvent
+
+MovementList ::= SEQUENCE (SIZE(1..255)) OF MovementState
+
+MovementState ::= SEQUENCE {
+  movementName       DescriptiveName OPTIONAL,
+  signalGroup        SignalGroupID,    
+  state-time-speed   MovementEventList,   
+  maneuverAssistList ManeuverAssistList OPTIONAL,
+  regional           SEQUENCE (SIZE(1..4)) OF 
+                     RegionalExtension {{Reg-MovementState}} OPTIONAL,
+  ...  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+TimeChangeDetails ::= SEQUENCE {
+  startTime   TimeMark           OPTIONAL,
+  minEndTime  TimeMark,
+  maxEndTime  TimeMark           OPTIONAL,
+  likelyTime  TimeMark           OPTIONAL,
+  confidence  TimeIntervalConfidence OPTIONAL,
+  nextTime    TimeMark           OPTIONAL
+}
+
+TimeMark ::= INTEGER (0..36001) 
+
+
+
+   
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+-- data elements
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+AdvisorySpeedType ::= ENUMERATED {
+  none       (0),
+  greenwave  (1),
+  ecoDrive   (2),
+  transit    (3),
+  ...  
+}
+
+
+
+   
+
+
+
+
+DescriptiveName ::= IA5String (SIZE(1..63))
+
+
+
+
+
+
+
+DSecond ::= INTEGER (0..65535)
+
+
+
+
+
+
+   
+
+   
+
+IntersectionID ::= INTEGER (0..65535)
+
+IntersectionStatusObject ::= BIT STRING {
+  manualControlIsEnabled                (0),
+  stopTimeIsActivated                   (1),
+  failureFlash                          (2), 
+  preemptIsActive                       (3),
+  signalPriorityIsActive                (4),   
+  fixedTimeOperation                    (5),
+  trafficDependentOperation             (6),
+  standbyOperation                      (7),
+  failureMode                           (8),
+  off                                   (9),
+  recentMAPmessageUpdate                (10),
+  recentChangeInMAPassignedLanesIDsUsed (11),
+  noValidMAPisAvailableAtThisTime       (12),
+  noValidSPATisAvailableAtThisTime      (13)
+} (SIZE(16))
+
+
+
+
+
+
+
+
+
+
+LaneConnectionID ::= INTEGER (0..255)
+
+
+LaneID ::= INTEGER (0..255)
+
+
+   
+
+
+MinuteOfTheYear ::= INTEGER (0..527040) 
+
+MovementPhaseState ::= ENUMERATED {
+  unavailable (0), 
+  dark (1),   
+  stop-Then-Proceed (2), 
+  stop-And-Remain (3),
+  pre-Movement (4), 
+  permissive-Movement-Allowed (5), 
+  protected-Movement-Allowed (6), 
+  permissive-clearance (7), 
+  protected-clearance (8),  
+  caution-Conflicting-Traffic (9)
+}
+
+MsgCount ::= INTEGER (0..127)
+
+
+
+
+
+
+
+
+PedestrianBicycleDetect ::= BOOLEAN 
+
+
+
+
+
+
+
+
+
+RestrictionClassID ::= INTEGER (0..255)
+
+RoadRegulatorID ::= INTEGER (0..65535)
+
+
+
+   
+   
+
+SignalGroupID ::= INTEGER (0..255) 
+
+
+
+
+
+SpeedAdvice ::= INTEGER (0..500) 
+
+SpeedConfidence ::= ENUMERATED {
+   unavailable (0), -- Not Equipped or unavailable
+   prec100ms   (1), -- 100  meters / sec
+   prec10ms    (2), -- 10   meters / sec
+   prec5ms     (3), -- 5    meters / sec
+   prec1ms     (4), -- 1    meters / sec
+   prec0-1ms   (5), -- 0.1  meters / sec
+   prec0-05ms  (6), -- 0.05 meters / sec
+   prec0-01ms  (7)  -- 0.01 meters / sec
+   }
+
+
+
+
+TimeIntervalConfidence ::= INTEGER (0..15)   
+
+
+
+
+
+
+
+WaitOnStopline ::= BOOLEAN 
+
+ZoneLength ::= INTEGER (0..10000)
+
+END

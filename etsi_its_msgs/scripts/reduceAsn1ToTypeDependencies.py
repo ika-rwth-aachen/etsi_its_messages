@@ -2,7 +2,7 @@
 
 import argparse
 import os
-from typing import Dict, List
+from typing import Dict, List, Set
 
 import asn1tools
 
@@ -27,13 +27,18 @@ def parseAsn1Files(files: List[str]) -> Dict:
     return asn1tools.parse_files(files)
 
 
-def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int = 0) -> Dict[str, Dict]:
+def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None, log: bool = False, indent: int = 0) -> Dict[str, Set[str]]:
 
-    relevant_type_infos = {}
+    relevant_types_per_module = {doc: set() for doc in docs}
 
     # find given type
     type_info = None
-    for doc, info in docs.items():
+    if docs_to_search is None:
+        docs_to_search = list(docs.keys())
+    for doc in docs_to_search:
+        if doc not in docs:
+            continue
+        info = docs[doc]
         if type in info["types"].keys():
             type_info = info["types"][type]
             break
@@ -41,8 +46,9 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
             type_info = info["values"][type]
             break
     if type_info is None:
-        return {}
-    relevant_type_infos[type] = type_info
+        return relevant_types_per_module
+    module, module_info = doc, info
+    relevant_types_per_module[module].add(type)
     if log:
         print(f"{' ' * indent}{type}")
 
@@ -65,20 +71,27 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
     
     # recursively find dependencies of dependencies
     for dependency_type in dependency_types:
-        rti = findTypeDependencies(docs, dependency_type, log=log, indent=indent+2)
-        relevant_type_infos.update(rti)
+        dependency_docs = [module]
+        for doc, imports_from_doc in module_info["imports"].items():
+            if dependency_type in imports_from_doc:
+                dependency_docs = [doc]
+                break
+        rt = findTypeDependencies(dependency_type, docs, dependency_docs, log=log, indent=indent+2)
+        for doc in docs:
+            if doc in rt:
+                relevant_types_per_module[doc] = relevant_types_per_module[doc].union(rt[doc])
     
-    return relevant_type_infos
+    return relevant_types_per_module
 
 
-def reduceAsn1Files(files: List[str], types: List[str], output_dir: str):
+def reduceAsn1Files(files: List[str], relevant_types_per_module: Dict[str, Set[str]], output_dir: str):
 
     for file in files:
 
         # read file and reduce
         with open(file, "r") as f:
             lines = f.readlines()
-        reduced_lines = reduceAsn1File(lines, types)
+        reduced_lines = reduceAsn1File(lines, relevant_types_per_module)
 
         # write reduced file
         new_file = os.path.join(output_dir, os.path.basename(file))
@@ -88,7 +101,7 @@ def reduceAsn1Files(files: List[str], types: List[str], output_dir: str):
                 f.write(line)
 
 
-def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
+def reduceAsn1File(lines: List[str], relevant_types_per_module: Dict[str, Set[str]]) -> List[str]:
 
     reduced_lines = []
     
@@ -111,8 +124,10 @@ def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
             current_module = line.split("{")[0].strip()
 
         # detect relevant type to keep, saving current module name
+        if current_module not in relevant_types_per_module:
+            continue
         if "::=" in line:
-            if line.split("::=")[0].strip().split(" ")[0] in types:
+            if line.split("::=")[0].strip().split(" ")[0] in relevant_types_per_module[current_module]:
                 modules_with_definitions.add(current_module)
 
         brace_level += line.count("{")
@@ -153,8 +168,10 @@ def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
             copying = False
 
         # detect relevant type to keep, entering copy mode
+        if current_module not in relevant_types_per_module:
+            continue
         if "::=" in line:
-            if line.split("::=")[0].strip().split(" ")[0] in types:
+            if line.split("::=")[0].strip().split(" ")[0] in relevant_types_per_module[current_module]:
                 copying_type = True
                 modules_with_definitions.add(current_module)
 
@@ -177,9 +194,9 @@ def main():
 
     docs = parseAsn1Files(args.files)
 
-    relevant_type_infos = findTypeDependencies(docs, args.type, log=True)
+    relevant_types_per_module = findTypeDependencies(args.type, docs, log=True)
 
-    reduceAsn1Files(args.files, list(relevant_type_infos.keys()), args.output_dir)
+    reduceAsn1Files(args.files, relevant_types_per_module, args.output_dir)
 
 
 if __name__ == "__main__":
