@@ -96,7 +96,7 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
             if type not in asn1_types:
                 asn1_types[type] = asn1["types"][type]
             else:
-                warnings.warn(f"Type '{type}' from '{doc}' is a duplicate")
+                raise ValueError(f"Type '{type}' from '{doc}' is a duplicate")
 
     return asn1_types
 

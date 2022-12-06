@@ -49,9 +49,17 @@ def findTypeDependencies(docs: Dict, type: str, log: bool = False, indent: int =
     # get dependency types
     dependency_types = []
     if "members" in type_info:
-        dependency_types += [m["type"] for m in type_info["members"] if m is not None and "SEQUENCE" not in m["type"]]
-        dependency_types += [m["element"]["type"] for m in type_info["members"] if m is not None and "SEQUENCE" in m["type"]]
-        dependency_types += [m["default"] for m in type_info["members"] if m is not None and "default" in m]
+        for m in type_info["members"]:
+            if m is None:
+                continue
+            if m["type"] in ("SEQUENCE", "SEQUENCE OF"):
+                dependency_types.append(m["element"]["type"])
+            elif m["type"] == "CHOICE":
+                dependency_types += [mm["type"] for mm in m["members"] if mm is not None]
+            else:
+                dependency_types.append(m["type"])
+            if "default" in m:
+                dependency_types.append(m["default"])
     if "element" in type_info:
         dependency_types += [type_info["element"]["type"]]
     
@@ -83,23 +91,72 @@ def reduceAsn1Files(files: List[str], types: List[str], output_dir: str):
 def reduceAsn1File(lines: List[str], types: List[str]) -> List[str]:
 
     reduced_lines = []
-    copying = True # start copying header
-    copying_type = False
+    
+    current_module = None
     brace_level = 0
+    is_between_begin_end = False
+    modules_with_definitions = set()
 
-    # loop over all lines to check which ones to keep
+    # find modules that have relevant definitions
     for line in lines:
 
-        # always copy empty lines and keyword lines
-        if line.isspace() or line.strip() in ("BEGIN", "END"):
-            reduced_lines.append(line)
+        # detect when inside module
+        if "BEGIN" in line:
+            is_between_begin_end = True
+        if "END" in line:
+            is_between_begin_end = False
+
+        # detect module name
+        if brace_level == 0 and not is_between_begin_end and "{" in line and " " not in line.split("{")[0].strip():
+            current_module = line.split("{")[0].strip()
+
+        # detect relevant type to keep, saving current module name
+        if "::=" in line:
+            if line.split("::=")[0].strip().split(" ")[0] in types:
+                modules_with_definitions.add(current_module)
+
+        brace_level += line.count("{")
+        brace_level -= line.count("}")
+
+    current_module = None
+    brace_level = 0
+    is_between_begin_end = False
+    copying = True
+    copying_type = False
+
+    # second pass over all lines to decide which ones to keep
+    for line in lines:
+
+        # detect when inside module
+        if "BEGIN" in line:
+            is_between_begin_end = True
+        if "END" in line:
+            is_between_begin_end = False
+
+        # detect module name
+        if brace_level == 0 and not is_between_begin_end and "{" in line and " " not in line.split("{")[0].strip():
+            current_module = line.split("{")[0].strip()
+
+        # skip modules without relevant definitions
+        if current_module is not None and current_module not in modules_with_definitions:
             continue
 
-        # detect type to keep, entering copy mode
+        # always copy empty lines, comments, and keyword lines
+        if line.isspace() or line.startswith("--") or "BEGIN" in line or "END" in line:
+            reduced_lines.append(line)
+            continue
+        
+        # start copying until first definition
+        if not is_between_begin_end:
+            copying = True
+        elif is_between_begin_end and "::=" in line:
+            copying = False
+
+        # detect relevant type to keep, entering copy mode
         if "::=" in line:
             if line.split("::=")[0].strip().split(" ")[0] in types:
                 copying_type = True
-                copying = False
+                modules_with_definitions.add(current_module)
 
         # copy line
         if copying_type or copying:
