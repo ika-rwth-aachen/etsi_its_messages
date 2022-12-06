@@ -185,7 +185,15 @@ def reduceAsn1File(lines: List[str], relevant_types_per_module: Dict[str, Set[st
         if brace_level == 0:
             copying_type = False
 
-    return reduced_lines
+    # remove consecutive blank lines
+    prev_line_is_space = False
+    reduced_lines_less_blanks = []
+    for line in reduced_lines:
+        if not line.isspace() or not prev_line_is_space:
+            reduced_lines_less_blanks.append(line)
+        prev_line_is_space = line.isspace()
+
+    return reduced_lines_less_blanks
 
 
 def main():

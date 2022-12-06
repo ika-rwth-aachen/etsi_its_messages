@@ -39,14 +39,12 @@ Reg-RTCMcorrections, Reg-SignalControlZone, Reg-SignalRequestPackage, Reg-Signal
 Reg-SignalStatusMessage, Reg-SPAT
 FROM REGION  {iso (1) standard (0) signalizedIntersection (19091) profilec(2) region (1) version2 (2)}
 
-
 Iso3833VehicleType
 FROM ElectronicRegistrationIdentificationVehicleDataModule { iso(1) standard(0) iso24534 (24534) vehicleData (1) version1 (1) };
 
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 -- Messages
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-
 
 RegionalExtension {REG-EXT-ID-AND-TYPE : Set} ::= SEQUENCE {
   regionId     REG-EXT-ID-AND-TYPE.&id( {Set} ),
@@ -67,20 +65,10 @@ MapData ::= SEQUENCE {
   ...
 }
 
-
-
-
-
-
-
-
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 -- Start of entries from table Data_Frames...
 -- Data frames 
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-
-
-
 
 ComputedLane ::= SEQUENCE {
   referenceLaneId    LaneID,
@@ -115,7 +103,6 @@ Connection ::= SEQUENCE {
   connectionID       LaneConnectionID OPTIONAL
 }
 
-
 DataParameters ::= SEQUENCE {
   processMethod     IA5String(SIZE(1..255)) OPTIONAL, 
   processAgency     IA5String(SIZE(1..255)) OPTIONAL, 
@@ -123,11 +110,6 @@ DataParameters ::= SEQUENCE {
   geoidUsed         IA5String(SIZE(1..255)) OPTIONAL, 
   ...  
 }
-
-
-
-
-
 
 GenericLane ::= SEQUENCE { 
   laneID           LaneID, 
@@ -143,7 +125,6 @@ GenericLane ::= SEQUENCE {
             RegionalExtension {{Reg-GenericLane}} OPTIONAL,
   ...
 }
-
 
 IntersectionGeometry ::= SEQUENCE {
   name        DescriptiveName OPTIONAL, 
@@ -165,8 +146,6 @@ IntersectionReferenceID ::= SEQUENCE {
   region  RoadRegulatorID OPTIONAL,
   id      IntersectionID
 }
-
-
 
 LaneAttributes ::= SEQUENCE {
   directionalUse  LaneDirection,
@@ -215,11 +194,6 @@ LaneTypeAttributes ::= CHOICE {
   parking        LaneAttributes-Parking,
   ...
 }
-
-
-
-
-
 
 NodeAttributeSetXY ::= SEQUENCE {
   localNode    NodeAttributeXYList OPTIONAL,
@@ -313,9 +287,6 @@ NodeSetXY ::= SEQUENCE (SIZE(2..63)) OF NodeXY
 
 OverlayLaneList ::= SEQUENCE (SIZE(1..5)) OF LaneID
 
-
-
-
 Position3D ::= SEQUENCE {
   lat        Latitude,
   long       Longitude,
@@ -331,9 +302,6 @@ RegulatorySpeedLimit ::= SEQUENCE {
   type        SpeedLimitType, 
   speed       Velocity
 }
-
-
-
 
 RestrictionClassAssignment ::= SEQUENCE {
   id       RestrictionClassID,
@@ -373,8 +341,6 @@ RoadSegment ::= SEQUENCE {
 
 RoadSegmentList ::= SEQUENCE (SIZE(1..32)) OF RoadSegment
 
-
-
 SegmentAttributeXYList ::= SEQUENCE (SIZE(1..8)) OF SegmentAttributeXY
 
 SignalControlZone ::=  SEQUENCE {
@@ -382,17 +348,6 @@ SignalControlZone ::=  SEQUENCE {
   ...
 }
 
-
-
-
-
-
-
-
-
-
-
-   
 SpeedLimitList ::= SEQUENCE (SIZE(1..9)) OF RegulatorySpeedLimit
 
 SpeedLimitType ::= ENUMERATED {
@@ -412,15 +367,9 @@ SpeedLimitType ::= ENUMERATED {
    ...
 }
 
-
-
-
-
-   
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 -- data elements
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-
 
 AllowedManeuvers ::= BIT STRING {
   maneuverStraightAllowed      (0), 
@@ -441,34 +390,17 @@ Angle ::= INTEGER (0..28800)
 
 ApproachID ::= INTEGER (0..15)
    
-
-
 DeltaAngle ::= INTEGER (-150..150) 
 
-
 DescriptiveName ::= IA5String (SIZE(1..63))
-
-
-
-
 
 DrivenLineOffsetLg ::= INTEGER (-32767..32767) 
 
 DrivenLineOffsetSm ::= INTEGER (-2047..2047) 
 
-
-
-
 Elevation ::= INTEGER (-4096..61439)
 
-
-
-   
-
-   
-
 IntersectionID ::= INTEGER (0..65535)
-
 
 LaneAttributes-Barrier ::= BIT STRING {
   median-RevocableLane     (0),
@@ -539,7 +471,6 @@ LaneAttributes-TrackedVehicle ::= BIT STRING {
   spec-otherRailType         (4)
 } (SIZE (16))
 
-
 LaneAttributes-Vehicle ::= BIT STRING {  
   isVehicleRevocableLane       (0),
   isVehicleFlyOverLane         (1),
@@ -580,9 +511,7 @@ MergeDivergeNodeAngle ::= INTEGER (-180..180)
 
 MinuteOfTheYear ::= INTEGER (0..527040) 
 
-
 MsgCount ::= INTEGER (0..127)
-
 
 Offset-B10 ::= INTEGER (-512..511)
 
@@ -595,14 +524,6 @@ Offset-B13 ::= INTEGER (-4096..4095)
 Offset-B14 ::= INTEGER (-8192..8191)
 
 Offset-B16 ::= INTEGER (-32768..32767)
-
-
-
-
-
-
-
-
 
 RestrictionAppliesTo ::= ENUMERATED {
   none,
@@ -630,8 +551,6 @@ RoadSegmentID ::= INTEGER (0..65535)
 
 RoadwayCrownAngle ::= INTEGER (-128..127) 
 
-   
-   
 Scale-B12 ::= INTEGER (-2048..2047)
 
 SignalGroupID ::= INTEGER (0..255) 
@@ -678,22 +597,6 @@ SegmentAttributeXY ::= ENUMERATED {
   ...
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Velocity ::= INTEGER (0..8191)
-
-
 
 END

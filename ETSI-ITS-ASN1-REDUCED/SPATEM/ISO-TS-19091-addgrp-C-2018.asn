@@ -39,7 +39,6 @@ Reg-RTCMcorrections, Reg-SignalControlZone, Reg-SignalRequestPackage, Reg-Signal
 Reg-SignalStatusMessage, Reg-SPAT
 FROM REGION  {iso (1) standard (0) signalizedIntersection (19091) profilec(2) region (1) version2 (2)}
 
-
 Iso3833VehicleType
 FROM ElectronicRegistrationIdentificationVehicleDataModule { iso(1) standard(0) iso24534 (24534) vehicleData (1) version1 (1) };
 
@@ -47,14 +46,11 @@ FROM ElectronicRegistrationIdentificationVehicleDataModule { iso(1) standard(0) 
 -- Messages
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
-
 RegionalExtension {REG-EXT-ID-AND-TYPE : Set} ::= SEQUENCE {
   regionId     REG-EXT-ID-AND-TYPE.&id( {Set} ),
   regExtValue  REG-EXT-ID-AND-TYPE.&Type( {Set}{@regionId} )
 }
  
-
-
 SPAT ::= SEQUENCE { 
   timeStamp     MinuteOfTheYear OPTIONAL,  
   name          DescriptiveName OPTIONAL, 
@@ -63,11 +59,6 @@ SPAT ::= SEQUENCE {
                 RegionalExtension {{Reg-SPAT}} OPTIONAL,
   ...
 }
-
-
-
-
-
 
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 -- Start of entries from table Data_Frames...
@@ -87,11 +78,6 @@ AdvisorySpeed ::= SEQUENCE {
 
 AdvisorySpeedList ::= SEQUENCE (SIZE(1..16)) OF AdvisorySpeed
 
-
-
-
-
-
 ConnectionManeuverAssist ::= SEQUENCE {
   connectionID         LaneConnectionID,
   queueLength          ZoneLength OPTIONAL,
@@ -103,17 +89,8 @@ ConnectionManeuverAssist ::= SEQUENCE {
   ...  
 }
 
-
-
-
 EnabledLaneList ::= SEQUENCE (SIZE(1..16)) OF LaneID
 
-
-
-
-
-
-   
 IntersectionReferenceID ::= SEQUENCE {
   region  RoadRegulatorID OPTIONAL,
   id      IntersectionID
@@ -135,12 +112,6 @@ IntersectionState ::= SEQUENCE {
 }
 
 IntersectionStateList ::= SEQUENCE (SIZE(1..32)) OF  IntersectionState
-
-
-
-
-
-
 
 ManeuverAssistList ::= SEQUENCE (SIZE(1..16)) OF ConnectionManeuverAssist
 
@@ -167,55 +138,6 @@ MovementState ::= SEQUENCE {
   ...  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
 TimeChangeDetails ::= SEQUENCE {
   startTime   TimeMark           OPTIONAL,
   minEndTime  TimeMark,
@@ -227,9 +149,6 @@ TimeChangeDetails ::= SEQUENCE {
 
 TimeMark ::= INTEGER (0..36001) 
 
-
-
-   
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 -- data elements
 -- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -242,31 +161,9 @@ AdvisorySpeedType ::= ENUMERATED {
   ...  
 }
 
-
-
-   
-
-
-
-
 DescriptiveName ::= IA5String (SIZE(1..63))
 
-
-
-
-
-
-
 DSecond ::= INTEGER (0..65535)
-
-
-
-
-
-
-   
-
-   
 
 IntersectionID ::= INTEGER (0..65535)
 
@@ -287,23 +184,9 @@ IntersectionStatusObject ::= BIT STRING {
   noValidSPATisAvailableAtThisTime      (13)
 } (SIZE(16))
 
-
-
-
-
-
-
-
-
-
 LaneConnectionID ::= INTEGER (0..255)
 
-
 LaneID ::= INTEGER (0..255)
-
-
-   
-
 
 MinuteOfTheYear ::= INTEGER (0..527040) 
 
@@ -322,37 +205,13 @@ MovementPhaseState ::= ENUMERATED {
 
 MsgCount ::= INTEGER (0..127)
 
-
-
-
-
-
-
-
 PedestrianBicycleDetect ::= BOOLEAN 
-
-
-
-
-
-
-
-
 
 RestrictionClassID ::= INTEGER (0..255)
 
 RoadRegulatorID ::= INTEGER (0..65535)
 
-
-
-   
-   
-
 SignalGroupID ::= INTEGER (0..255) 
-
-
-
-
 
 SpeedAdvice ::= INTEGER (0..500) 
 
@@ -367,16 +226,7 @@ SpeedConfidence ::= ENUMERATED {
    prec0-01ms  (7)  -- 0.01 meters / sec
    }
 
-
-
-
 TimeIntervalConfidence ::= INTEGER (0..15)   
-
-
-
-
-
-
 
 WaitOnStopline ::= BOOLEAN 
 

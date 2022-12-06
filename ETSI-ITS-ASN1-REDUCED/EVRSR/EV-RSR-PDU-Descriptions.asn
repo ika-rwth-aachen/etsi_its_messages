@@ -98,8 +98,6 @@ UpdateResponseMessage ::= SEQUENCE {
  ...
 }
 
-
-
 AvailabilityStatus ::= ENUMERATED { available, no-free-capacity }
 
 BatteryType ::= UTF8String (SIZE(1..16))
@@ -111,7 +109,6 @@ ChargingSpotLabel ::= UTF8String (SIZE(1..4))
 ContractID ::= UTF8String (SIZE(1..24))
 
 EAmount ::= INTEGER { oneWh(1) } (1..500000)
-
 
 EVSE-ID ::= OCTET STRING (SIZE(1..32))
 
@@ -142,7 +139,6 @@ PreReservation-ID ::= Reservation-ID
 
 Reservation-Password ::= VisibleString (SIZE(8))
 
-
 StationDetails ::= UTF8String (SIZE(1..32))
 
 SupportedPaymentTypes ::= BIT STRING { contract(0), externalIdentification (1) } (SIZE(2))
@@ -150,6 +146,5 @@ SupportedPaymentTypes ::= BIT STRING { contract(0), externalIdentification (1) }
 TimestampUTC ::= INTEGER { utcStartOf2013(0), oneSecondAfterUTCStartOf2013(1) }
 
 UpdateResponseCode ::= ENUMERATED { ok, unknown-Reservation-ID, mismatching-Reservation-Password, invalid-Arrival-Time, invalid-Departure-Time }
-
 
 END
