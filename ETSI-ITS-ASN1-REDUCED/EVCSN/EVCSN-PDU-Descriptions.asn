@@ -39,7 +39,6 @@ ItsPOIHeader ::= SEQUENCE {
 	relayCapable            BOOLEAN
 }
 
-
 ItsEVCSNData ::= SEQUENCE {
 	totalNumberOfStations   NumberStations,
 	chargingStationsData    SEQUENCE (SIZE(1..256)) OF ItsChargingStationData
@@ -62,9 +61,7 @@ ItsChargingStationData ::= SEQUENCE {
 	...
 }
 
-
 ItsChargingSpots ::= SEQUENCE (SIZE(1..16)) OF ItsChargingSpotDataElements
-
 
 ItsChargingSpotDataElements ::= SEQUENCE {
 	type			ChargingSpotType,

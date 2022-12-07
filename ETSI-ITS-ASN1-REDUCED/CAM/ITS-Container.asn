@@ -95,7 +95,6 @@ AccelerationControl ::= BIT STRING {
     speedLimiterEngaged (6)
 } (SIZE(7))
 
-
 SemiAxisLength ::= INTEGER{oneCentimeter(1), outOfRange(4094), unavailable(4095)} (0..4095)
 
 CauseCode ::= SEQUENCE {
@@ -136,30 +135,7 @@ CauseCodeType ::= INTEGER {
 
 SubCauseCodeType ::= INTEGER (0..255)
 
-
-
 RoadworksSubCauseCode ::= INTEGER {unavailable(0), majorRoadworks(1), roadMarkingWork(2), slowMovingRoadMaintenance(3), shortTermStationaryRoadworks(4), streetCleaning(5), winterService(6)} (0..255)
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- 
-
-
-
-
-
 
 Curvature ::= SEQUENCE {
  curvatureValue CurvatureValue,
@@ -204,13 +180,11 @@ HardShoulderStatus ::= ENUMERATED {availableForStopping(0), closed(1), available
 
 DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
 
-
 PerformanceClass ::= INTEGER {unavailable(0), performanceClassA(1), performanceClassB(2)} (0..7)
 
 SpeedValue ::= INTEGER {standstill(0), oneCentimeterPerSec(1), unavailable(16383)} (0..16383)
 
 SpeedConfidence ::= INTEGER {equalOrWithinOneCentimeterPerSec(1), equalOrWithinOneMeterPerSec(100), outOfRange(126), unavailable(127)} (1..127)
-
 
 Speed ::= SEQUENCE {
     speedValue SpeedValue,
@@ -281,7 +255,6 @@ DangerousGoodsBasic::= ENUMERATED {
     miscellaneousDangerousSubstances(19)
 }
 
-
 SpecialTransportType ::= BIT STRING {heavyLoad(0), excessWidth(1), excessLength(2), excessHeight(3)} (SIZE(4))
 
 LightBarSirenInUse ::= BIT STRING {
@@ -289,26 +262,10 @@ LightBarSirenInUse ::= BIT STRING {
     sirenActivated (1)
 } (SIZE(2))
 
-
-
-
-
-
 SpeedLimit ::= INTEGER {oneKmPerHour(1)} (1..255)
-
-
 
 TrafficRule ::= ENUMERATED {noPassing(0), noPassingForTrucks(1), passToRight(2), passToLeft(3), ...
 }
-
-
-
-
-
-
-
-
-
 
 VehicleLength ::= SEQUENCE {
     vehicleLengthValue VehicleLengthValue,
@@ -324,8 +281,6 @@ VehicleWidth ::= INTEGER {tenCentimeters(1), outOfRange(61), unavailable(62)} (1
 PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
 
 EmergencyPriority ::= BIT STRING {requestForRightOfWay(0), requestForFreeCrossingAtATrafficLight(1)} (SIZE(2))
-
-
 
 SteeringWheelAngle ::= SEQUENCE {
     steeringWheelAngleValue SteeringWheelAngleValue,
@@ -361,12 +316,6 @@ YawRateConfidence ::= ENUMERATED {
 
 ProtectedZoneType::= ENUMERATED { permanentCenDsrcTolling (0), ..., temporaryCenDsrcTolling (1) }
 
-
-
-
-
-
-
 ProtectedCommunicationZone ::= SEQUENCE {
     protectedZoneType       ProtectedZoneType,
     expiryTime TimestampIts OPTIONAL,
@@ -377,16 +326,7 @@ ProtectedCommunicationZone ::= SEQUENCE {
         ...
 }
 
-
-
-
-
-
-
-
 ProtectedCommunicationZonesRSU ::= SEQUENCE (SIZE(1..16)) OF ProtectedCommunicationZone 
-
-
 
 CenDsrcTollingZone ::= SEQUENCE {
     protectedZoneLatitude Latitude,
@@ -400,8 +340,5 @@ ProtectedZoneRadius ::= INTEGER {oneMeter(1)} (1..255,...)
 ProtectedZoneID ::= INTEGER (0.. 134217727)
 
 CenDsrcTollingZoneID ::= ProtectedZoneID
-
-
-
 
 END

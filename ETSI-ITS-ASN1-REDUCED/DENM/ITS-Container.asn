@@ -76,11 +76,6 @@ PathPoint ::= SEQUENCE {
 
 PathDeltaTime ::= INTEGER {tenMilliSecondsInPast(1)} (1..65535, ...)
 
-
-
-
-
-
 SemiAxisLength ::= INTEGER{oneCentimeter(1), outOfRange(4094), unavailable(4095)} (0..4095)
 
 CauseCode ::= SEQUENCE {
@@ -121,34 +116,6 @@ CauseCodeType ::= INTEGER {
 
 SubCauseCodeType ::= INTEGER (0..255)
 
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
 Heading ::= SEQUENCE {
     headingValue HeadingValue,
     headingConfidence HeadingConfidence
@@ -172,8 +139,6 @@ HardShoulderStatus ::= ENUMERATED {availableForStopping(0), closed(1), available
 
 DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
 
-
-
 SpeedValue ::= INTEGER {standstill(0), oneCentimeterPerSec(1), unavailable(16383)} (0..16383)
 
 SpeedConfidence ::= INTEGER {equalOrWithinOneCentimeterPerSec(1), equalOrWithinOneMeterPerSec(100), outOfRange(126), unavailable(127)} (1..127)
@@ -185,18 +150,8 @@ Speed ::= SEQUENCE {
     speedConfidence SpeedConfidence
 }
 
-
-
-
-
-
-
-
-
-
 StationType ::= INTEGER {unknown(0), pedestrian(1), cyclist(2), moped(3), motorcycle(4), passengerCar(5), bus(6), 
 lightTruck(7), heavyTruck(8), trailer(9), specialVehicles(10), tram(11), roadSideUnit(15)} (0..255)
-
 
 DangerousGoodsBasic::= ENUMERATED {
     explosives1(0),
@@ -232,7 +187,6 @@ DangerousGoodsExtended ::= SEQUENCE {
     companyName UTF8String (SIZE (1..24)) OPTIONAL,
         ...
 }
-
 
 LightBarSirenInUse ::= BIT STRING {
     lightBarActivated (0),
@@ -300,12 +254,7 @@ VDS ::= IA5String (SIZE(6))
 
 EnergyStorageType ::= BIT STRING {hydrogenStorage(0), electricEnergyStorage(1), liquidPropaneGas(2), compressedNaturalGas(3), diesel(4), gasoline(5), ammonia(6)} (SIZE(7))
 
-
-
-
-
 PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
-
 
 InformationQuality ::= INTEGER {unavailable(0), lowest(1), highest(7)} (0..7)
 
@@ -315,15 +264,7 @@ RoadType ::= ENUMERATED {
     nonUrban-NoStructuralSeparationToOppositeLanes(2),
     nonUrban-WithStructuralSeparationToOppositeLanes(3)}
 
-
-
-
 TimestampIts ::= INTEGER {utcStartOf2004(0), oneMillisecAfterUTCStartOf2004(1)} (0..4398046511103)
-
-
-
-
-
 
 RelevanceDistance ::= ENUMERATED {lessThan50m(0), lessThan100m(1), lessThan200m(2), lessThan500m(3), lessThan1000m(4), lessThan5km(5), lessThan10km(6), over10km(7)}
 
@@ -339,7 +280,6 @@ ActionID ::= SEQUENCE {
 }
 
 ItineraryPath ::= SEQUENCE SIZE(1..40) OF ReferencePosition
-
 
 Traces ::= SEQUENCE SIZE(1..7) OF PathHistory
 
@@ -358,15 +298,6 @@ EventPoint ::= SEQUENCE {
     eventDeltaTime PathDeltaTime OPTIONAL,
     informationQuality InformationQuality
 }
-
-
-
-
-
-
-
-
-
 
 PhoneNumber ::= NumericString (SIZE(1..16))
 

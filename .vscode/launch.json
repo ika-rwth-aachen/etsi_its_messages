@@ -131,7 +131,6 @@
         "-o", "ETSI-ITS-ASN1-REDUCED/MAPEM",
         "ETSI-ITS-ASN1/is_ts103301/MAPEM-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
-        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
         "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn"
       ],
       "console": "integratedTerminal",
@@ -146,7 +145,6 @@
       "args": [
         "ETSI-ITS-ASN1-REDUCED/MAPEM/MAPEM-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1-REDUCED/MAPEM/ITS-Container.asn",
-        "ETSI-ITS-ASN1-REDUCED/MAPEM/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
         "ETSI-ITS-ASN1-REDUCED/MAPEM/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_mapem_msgs/msg"
       ],
@@ -164,7 +162,6 @@
         "-o", "ETSI-ITS-ASN1-REDUCED/SPATEM",
         "ETSI-ITS-ASN1/is_ts103301/SPATEM-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1/is_ts103301/cdd/ITS-Container.asn",
-        "ETSI-ITS-ASN1/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
         "ETSI-ITS-ASN1/dependencies/ISO-TS-19091-addgrp-C-2018.asn"
       ],
       "console": "integratedTerminal",
@@ -179,7 +176,6 @@
       "args": [
         "ETSI-ITS-ASN1-REDUCED/SPATEM/SPATEM-PDU-Descriptions.asn",
         "ETSI-ITS-ASN1-REDUCED/SPATEM/ITS-Container.asn",
-        "ETSI-ITS-ASN1-REDUCED/SPATEM/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
         "ETSI-ITS-ASN1-REDUCED/SPATEM/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_spatem_msgs/msg"
       ],

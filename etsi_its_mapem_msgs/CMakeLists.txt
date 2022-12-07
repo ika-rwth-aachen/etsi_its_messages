@@ -58,221 +58,34 @@ add_message_files(
   DIRECTORY
     msg/ITS-Container
   FILES
-    AccelerationConfidence.msg
-    AccelerationControl.msg
-    AccidentSubCauseCode.msg
-    ActionID.msg
-    AdverseWeatherCondition_AdhesionSubCauseCode.msg
-    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode.msg
-    AdverseWeatherCondition_PrecipitationSubCauseCode.msg
-    AdverseWeatherCondition_VisibilitySubCauseCode.msg
-    AltitudeConfidence.msg
-    Altitude.msg
-    AltitudeValue.msg
-    CauseCode.msg
-    CauseCodeType.msg
-    CenDsrcTollingZoneID.msg
-    CenDsrcTollingZone.msg
-    ClosedLanes.msg
-    CollisionRiskSubCauseCode.msg
-    CurvatureCalculationMode.msg
-    CurvatureConfidence.msg
-    Curvature.msg
-    CurvatureValue.msg
-    DangerousEndOfQueueSubCauseCode.msg
-    DangerousGoodsBasic.msg
-    DangerousGoodsExtended.msg
-    DangerousSituationSubCauseCode.msg
-    DeltaAltitude.msg
-    DeltaLatitude.msg
-    DeltaLongitude.msg
-    DeltaReferencePosition.msg
-    DigitalMap.msg
-    DriveDirection.msg
-    DrivingLaneStatus.msg
-    EmbarkationStatus.msg
-    EmergencyPriority.msg
-    EmergencyVehicleApproachingSubCauseCode.msg
-    EnergyStorageType.msg
-    EventHistory.msg
-    EventPoint.msg
-    ExteriorLights.msg
-    HardShoulderStatus.msg
-    HazardousLocation_AnimalOnTheRoadSubCauseCode.msg
-    HazardousLocation_DangerousCurveSubCauseCode.msg
-    HazardousLocation_ObstacleOnTheRoadSubCauseCode.msg
-    HazardousLocation_SurfaceConditionSubCauseCode.msg
-    HeadingConfidence.msg
-    Heading.msg
-    HeadingValue.msg
-    HeightLonCarr.msg
-    HumanPresenceOnTheRoadSubCauseCode.msg
-    HumanProblemSubCauseCode.msg
-    InformationQuality.msg
-    ItineraryPath.msg
     ItsPduHeader.msg
-    LanePosition.msg
-    LateralAcceleration.msg
-    LateralAccelerationValue.msg
     Latitude.msg
-    LightBarSirenInUse.msg
     Longitude.msg
-    LongitudinalAcceleration.msg
-    LongitudinalAccelerationValue.msg
-    NumberOfOccupants.msg
-    OpeningDaysHours.msg
-    PathDeltaTime.msg
-    PathHistory.msg
-    PathPoint.msg
-    PerformanceClass.msg
-    PhoneNumber.msg
-    PosCentMass.msg
-    PosConfidenceEllipse.msg
-    PosFrontAx.msg
-    PositioningSolutionType.msg
-    PositionOfOccupants.msg
-    PositionOfPillars.msg
-    PosLonCarr.msg
-    PosPillar.msg
-    PostCrashSubCauseCode.msg
-    ProtectedCommunicationZone.msg
-    ProtectedCommunicationZonesRSU.msg
-    ProtectedZoneID.msg
-    ProtectedZoneRadius.msg
-    ProtectedZoneType.msg
-    PtActivationData.msg
-    PtActivation.msg
-    PtActivationType.msg
-    ReferencePosition.msg
-    RelevanceDistance.msg
-    RelevanceTrafficDirection.msg
-    RequestResponseIndication.msg
-    RescueAndRecoveryWorkInProgressSubCauseCode.msg
-    RestrictedTypes.msg
-    RoadType.msg
-    RoadworksSubCauseCode.msg
-    SemiAxisLength.msg
-    SequenceNumber.msg
-    SignalViolationSubCauseCode.msg
-    SlowVehicleSubCauseCode.msg
-    SpecialTransportType.msg
-    SpeedConfidence.msg
-    SpeedLimit.msg
-    Speed.msg
-    SpeedValue.msg
-    StationarySince.msg
-    StationaryVehicleSubCauseCode.msg
     StationID.msg
-    StationType.msg
-    SteeringWheelAngleConfidence.msg
-    SteeringWheelAngle.msg
-    SteeringWheelAngleValue.msg
-    SubCauseCodeType.msg
-    Temperature.msg
-    TimestampIts.msg
-    Traces.msg
-    TrafficConditionSubCauseCode.msg
-    TrafficRule.msg
-    TransmissionInterval.msg
-    TurningRadius.msg
-    ValidityDuration.msg
-    VDS.msg
-    VehicleBreakdownSubCauseCode.msg
-    VehicleIdentification.msg
-    VehicleLengthConfidenceIndication.msg
-    VehicleLength.msg
-    VehicleLengthValue.msg
-    VehicleMass.msg
-    VehicleRole.msg
-    VehicleWidth.msg
-    VerticalAcceleration.msg
-    VerticalAccelerationValue.msg
-    WheelBaseVehicle.msg
-    WMInumber.msg
-    WrongWayDrivingSubCauseCode.msg
-    YawRateConfidence.msg
-    YawRate.msg
-    YawRateValue.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/AddGrpC
-  FILES
-    BatteryStatus.msg
-    ConnectionManeuverAssist_addGrpC.msg
-    ConnectionTrajectory_addGrpC.msg
-    EmissionType.msg
-    ExceptionalCondition.msg
-    IntersectionState_addGrpC.msg
-    ItsStationPositionList.msg
-    ItsStationPosition.msg
-    LaneAttributes_addGrpC.msg
-    MapData_addGrpC.msg
-    MovementEvent_addGrpC.msg
-    NodeAttributeSet_addGrpC.msg
-    NodeLink.msg
-    Node.msg
-    Position3D_addGrpC.msg
-    PrioritizationResponseList.msg
-    PrioritizationResponse.msg
-    PtvRequestType.msg
-    RejectedReason.msg
-    RequestorDescription_addGrpC.msg
-    RestrictionUserType_addGrpC.msg
-    SignalHeadLocationList.msg
-    SignalHeadLocation.msg
-    SignalStatusPackage_addGrpC.msg
-    TimeReference.msg
 )
 
 add_message_files(
   DIRECTORY
     msg/DSRC
   FILES
-    AdvisorySpeedList.msg
-    AdvisorySpeed.msg
-    AdvisorySpeedType.msg
     AllowedManeuvers.msg
     Angle.msg
-    AntennaOffsetSet.msg
     ApproachID.msg
-    BasicVehicleRole.msg
     ComputedLane.msg
     ConnectingLane.msg
-    ConnectionManeuverAssist.msg
     Connection.msg
     ConnectsToList.msg
     DataParameters.msg
-    DDateTime.msg
-    DDay.msg
     DeltaAngle.msg
-    DeltaTime.msg
     DescriptiveName.msg
-    DHour.msg
-    DMinute.msg
-    DMonth.msg
-    DOffset.msg
     DrivenLineOffsetLg.msg
     DrivenLineOffsetSm.msg
-    DSecond.msg
-    DSRCmsgID.msg
-    DYear.msg
-    ElevationConfidence.msg
     Elevation.msg
-    EnabledLaneList.msg
-    FuelType.msg
-    FullPositionVector.msg
     GenericLane.msg
-    GNSSstatus.msg
-    IntersectionAccessPoint.msg
     IntersectionGeometryList.msg
     IntersectionGeometry.msg
     IntersectionID.msg
     IntersectionReferenceID.msg
-    IntersectionStateList.msg
-    IntersectionState.msg
-    IntersectionStatusObject.msg
     LaneAttributes_Barrier.msg
     LaneAttributes_Bike.msg
     LaneAttributes_Crosswalk.msg
@@ -293,15 +106,9 @@ add_message_files(
     LaneWidth.msg
     LayerID.msg
     LayerType.msg
-    ManeuverAssistList.msg
     MapData.msg
     MergeDivergeNodeAngle.msg
     MinuteOfTheYear.msg
-    MovementEventList.msg
-    MovementEvent.msg
-    MovementList.msg
-    MovementPhaseState.msg
-    MovementState.msg
     MsgCount.msg
     NodeAttributeSetXY.msg
     NodeAttributeXYList.msg
@@ -317,7 +124,6 @@ add_message_files(
     Node_XY_28b.msg
     Node_XY_32b.msg
     NodeXY.msg
-    Offset_B09.msg
     Offset_B10.msg
     Offset_B11.msg
     Offset_B12.msg
@@ -325,23 +131,10 @@ add_message_files(
     Offset_B14.msg
     Offset_B16.msg
     OverlayLaneList.msg
-    PedestrianBicycleDetect.msg
     Position3D.msg
-    PositionalAccuracy.msg
-    PositionConfidence.msg
-    PositionConfidenceSet.msg
     PreemptPriorityList.msg
-    PrioritizationResponseStatus.msg
-    PriorityRequestType.msg
     RegionalExtension.msg
-    RegionId.msg
     RegulatorySpeedLimit.msg
-    RequestID.msg
-    RequestImportanceLevel.msg
-    RequestorDescription.msg
-    RequestorPositionVector.msg
-    RequestorType.msg
-    RequestSubRole.msg
     RestrictionAppliesTo.msg
     RestrictionClassAssignment.msg
     RestrictionClassID.msg
@@ -355,62 +148,14 @@ add_message_files(
     RoadSegment.msg
     RoadSegmentReferenceID.msg
     RoadwayCrownAngle.msg
-    RTCMcorrections.msg
-    RTCMheader.msg
-    RTCMmessageList.msg
-    RTCMmessage.msg
-    RTCM_Revision.msg
     Scale_B12.msg
     SegmentAttributeXYList.msg
     SegmentAttributeXY.msg
-    SemiMajorAxisAccuracy.msg
-    SemiMajorAxisOrientation.msg
-    SemiMinorAxisAccuracy.msg
     SignalControlZone.msg
     SignalGroupID.msg
-    SignalRequesterInfo.msg
-    SignalRequestList.msg
-    SignalRequestMessage.msg
-    SignalRequest.msg
-    SignalRequestPackage.msg
-    SignalStatusList.msg
-    SignalStatusMessage.msg
-    SignalStatus.msg
-    SignalStatusPackageList.msg
-    SignalStatusPackage.msg
-    SPAT.msg
-    SpeedAdvice.msg
-    SpeedandHeadingandThrottleConfidence.msg
     SpeedLimitList.msg
     SpeedLimitType.msg
-    TemporaryID.msg
-    ThrottleConfidence.msg
-    TimeChangeDetails.msg
-    TimeConfidence.msg
-    TimeIntervalConfidence.msg
-    TimeMark.msg
-    TransitVehicleOccupancy.msg
-    TransitVehicleStatus.msg
-    TransmissionAndSpeed.msg
-    TransmissionState.msg
-    VehicleHeight.msg
-    VehicleID.msg
-    VehicleType.msg
     Velocity.msg
-    WaitOnStopline.msg
-    ZoneLength.msg
-)
-
-add_message_files(
-  DIRECTORY
-    msg/ElectronicRegistrationIdentificationVehicleDataModule
-  FILES
-    EuVehicleCategoryCode.msg
-    EuVehicleCategoryL.msg
-    EuVehicleCategoryM.msg
-    EuVehicleCategoryN.msg
-    EuVehicleCategoryO.msg
-    Iso3833VehicleType.msg
 )
 
 ## Generate services in the 'srv' folder
