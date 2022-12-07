@@ -13,19 +13,19 @@
 
 ReservationResponseCode reservationResponseCode
 
-# optional: True
 Reservation_ID reservation_ID
+bool reservation-ID_isPresent
 
-# optional: True
 Reservation_Password reservation_Password
+bool reservation-Password_isPresent
 
-# optional: True
 StationDetails stationDetails
+bool stationDetails_isPresent
 
-# optional: True
 ChargingSpotLabel chargingSpotLabel
+bool chargingSpotLabel_isPresent
 
 TimestampUTC expirationTime
 
-# optional: True
 TimestampUTC freeCancelTimeLimit
+bool freeCancelTimeLimit_isPresent

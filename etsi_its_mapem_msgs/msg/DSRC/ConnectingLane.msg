@@ -7,5 +7,5 @@
 
 LaneID lane
 
-# optional: True
 AllowedManeuvers maneuver
+bool maneuver_isPresent

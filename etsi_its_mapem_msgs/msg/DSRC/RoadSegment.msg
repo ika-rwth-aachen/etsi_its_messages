@@ -11,8 +11,8 @@
 #               RegionalExtension {{Reg-RoadSegment}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 DescriptiveName name
+bool name_isPresent
 
 RoadSegmentReferenceID id
 
@@ -20,14 +20,14 @@ MsgCount revision
 
 Position3D refPoint
 
-# optional: True
 LaneWidth laneWidth
+bool laneWidth_isPresent
 
-# optional: True
 SpeedLimitList speedLimits
+bool speedLimits_isPresent
 
 RoadLaneSetList roadLaneSet
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

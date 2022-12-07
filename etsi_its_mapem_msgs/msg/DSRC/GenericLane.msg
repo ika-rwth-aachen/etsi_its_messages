@@ -15,28 +15,28 @@
 
 LaneID laneID
 
-# optional: True
 DescriptiveName name
+bool name_isPresent
 
-# optional: True
 ApproachID ingressApproach
+bool ingressApproach_isPresent
 
-# optional: True
 ApproachID egressApproach
+bool egressApproach_isPresent
 
 LaneAttributes laneAttributes
 
-# optional: True
 AllowedManeuvers maneuvers
+bool maneuvers_isPresent
 
 NodeListXY nodeList
 
-# optional: True
 ConnectsToList connectsTo
+bool connectsTo_isPresent
 
-# optional: True
 OverlayLaneList overlays
+bool overlays_isPresent
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

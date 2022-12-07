@@ -23,15 +23,15 @@ uint8 OFFSET_YAXIS_CHOICE_SMALL = 0
 DrivenLineOffsetLg offsetYaxis_large
 uint8 OFFSET_YAXIS_CHOICE_LARGE = 1
 
-# optional: True
 Angle rotateXY
+bool rotateXY_isPresent
 
-# optional: True
 Scale_B12 scaleXaxis
+bool scaleXaxis_isPresent
 
-# optional: True
 Scale_B12 scaleYaxis
+bool scaleYaxis_isPresent
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

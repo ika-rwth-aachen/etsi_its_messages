@@ -11,18 +11,18 @@
 
 AdvisorySpeedType type
 
-# optional: True
 SpeedAdvice speed
+bool speed_isPresent
 
-# optional: True
 SpeedConfidence confidence
+bool confidence_isPresent
 
-# optional: True
 ZoneLength distance
+bool distance_isPresent
 
-# optional: True
 RestrictionClassID class
+bool class_isPresent
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

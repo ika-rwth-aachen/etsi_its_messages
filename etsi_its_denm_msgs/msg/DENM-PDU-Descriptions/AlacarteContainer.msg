@@ -10,20 +10,20 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 LanePosition lanePosition
+bool lanePosition_isPresent
 
-# optional: True
 ImpactReductionContainer impactReduction
+bool impactReduction_isPresent
 
-# optional: True
 Temperature externalTemperature
+bool externalTemperature_isPresent
 
-# optional: True
 RoadWorksContainerExtended roadWorks
+bool roadWorks_isPresent
 
-# optional: True
 PositioningSolutionType positioningSolution
+bool positioningSolution_isPresent
 
-# optional: True
 StationaryVehicleContainer stationaryVehicle
+bool stationaryVehicle_isPresent

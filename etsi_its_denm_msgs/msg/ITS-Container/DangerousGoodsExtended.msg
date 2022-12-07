@@ -24,12 +24,12 @@ bool tunnelsRestricted
 bool limitedQuantity
 
 # size: [(1, 24)]
-# optional: True
 string emergencyActionCode
+bool emergencyActionCode_isPresent
 
-# optional: True
 PhoneNumber phoneNumber
+bool phoneNumber_isPresent
 
 # size: [(1, 24)]
-# optional: True
 string companyName
+bool companyName_isPresent

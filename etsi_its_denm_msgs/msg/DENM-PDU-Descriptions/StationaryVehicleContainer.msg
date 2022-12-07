@@ -9,20 +9,20 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 StationarySince stationarySince
+bool stationarySince_isPresent
 
-# optional: True
 CauseCode stationaryCause
+bool stationaryCause_isPresent
 
-# optional: True
 DangerousGoodsExtended carryingDangerousGoods
+bool carryingDangerousGoods_isPresent
 
-# optional: True
 NumberOfOccupants numberOfOccupants
+bool numberOfOccupants_isPresent
 
-# optional: True
 VehicleIdentification vehicleIdentification
+bool vehicleIdentification_isPresent
 
-# optional: True
 EnergyStorageType energyStorageType
+bool energyStorageType_isPresent

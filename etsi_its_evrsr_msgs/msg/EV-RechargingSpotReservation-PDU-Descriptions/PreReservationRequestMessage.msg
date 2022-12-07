@@ -13,10 +13,10 @@ EVSE_ID evse_ID
 
 TimestampUTC arrivalTime
 
-# optional: True
 TimestampUTC departureTime
+bool departureTime_isPresent
 
 RechargingType rechargingType
 
-# optional: True
 BatteryType batteryType
+bool batteryType_isPresent

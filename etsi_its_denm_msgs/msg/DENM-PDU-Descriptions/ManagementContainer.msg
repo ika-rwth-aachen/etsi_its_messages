@@ -20,21 +20,21 @@ TimestampIts detectionTime
 
 TimestampIts referenceTime
 
-# optional: True
 Termination termination
+bool termination_isPresent
 
 ReferencePosition eventPosition
 
-# optional: True
 RelevanceDistance relevanceDistance
+bool relevanceDistance_isPresent
 
-# optional: True
 RelevanceTrafficDirection relevanceTrafficDirection
+bool relevanceTrafficDirection_isPresent
 
 # default: defaultValidity
 ValidityDuration validityDuration
 
-# optional: True
 TransmissionInterval transmissionInterval
+bool transmissionInterval_isPresent
 
 StationType stationType

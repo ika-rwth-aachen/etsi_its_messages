@@ -8,13 +8,13 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 Speed eventSpeed
+bool eventSpeed_isPresent
 
-# optional: True
 Heading eventPositionHeading
+bool eventPositionHeading_isPresent
 
 Traces traces
 
-# optional: True
 RoadType roadType
+bool roadType_isPresent

@@ -12,29 +12,29 @@
 #                     RegionalExtension {{Reg-MapData}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 MinuteOfTheYear timeStamp
+bool timeStamp_isPresent
 
 MsgCount msgIssueRevision
 
-# optional: True
 LayerType layerType
+bool layerType_isPresent
 
-# optional: True
 LayerID layerID
+bool layerID_isPresent
 
-# optional: True
 IntersectionGeometryList intersections
+bool intersections_isPresent
 
-# optional: True
 RoadSegmentList roadSegments
+bool roadSegments_isPresent
 
-# optional: True
 DataParameters dataParameters
+bool dataParameters_isPresent
 
-# optional: True
 RestrictionClassList restrictionList
+bool restrictionList_isPresent
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

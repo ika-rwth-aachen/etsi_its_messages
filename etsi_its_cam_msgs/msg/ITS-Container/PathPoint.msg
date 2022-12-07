@@ -7,5 +7,5 @@
 
 DeltaReferencePosition pathPosition
 
-# optional: True
 PathDeltaTime pathDeltaTime
+bool pathDeltaTime_isPresent

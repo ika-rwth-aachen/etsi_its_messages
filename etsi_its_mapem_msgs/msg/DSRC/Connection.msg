@@ -10,14 +10,14 @@
 
 ConnectingLane connectingLane
 
-# optional: True
 IntersectionReferenceID remoteIntersection
+bool remoteIntersection_isPresent
 
-# optional: True
 SignalGroupID signalGroup
+bool signalGroup_isPresent
 
-# optional: True
 RestrictionClassID userClass
+bool userClass_isPresent
 
-# optional: True
 LaneConnectionID connectionID
+bool connectionID_isPresent

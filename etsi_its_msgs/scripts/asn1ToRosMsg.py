@@ -196,7 +196,7 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-numbers"):
+        if k not in ("type", "name", "members", "values", "element", "named-numbers", "optional"):
             msg += f"# {k}: {v}"
             msg += "\n"
 
@@ -233,6 +233,8 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
             if member is None:
                 continue
             msg += asn1TypeToRosMsgStr(member, asn1_types)
+            if "optional" in member:
+                msg += f"bool {member['name']}_isPresent\n"
             msg += "\n"
 
     # type aliases with multiple options

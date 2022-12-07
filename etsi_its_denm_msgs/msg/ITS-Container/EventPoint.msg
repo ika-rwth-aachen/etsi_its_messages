@@ -8,7 +8,7 @@
 
 DeltaReferencePosition eventPosition
 
-# optional: True
 PathDeltaTime eventDeltaTime
+bool eventDeltaTime_isPresent
 
 InformationQuality informationQuality

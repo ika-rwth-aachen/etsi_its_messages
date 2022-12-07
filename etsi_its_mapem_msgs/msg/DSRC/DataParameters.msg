@@ -9,17 +9,17 @@
 # ------------------------------------------------------------------------------
 
 # size: [(1, 255)]
-# optional: True
 string processMethod
+bool processMethod_isPresent
 
 # size: [(1, 255)]
-# optional: True
 string processAgency
+bool processAgency_isPresent
 
 # size: [(1, 255)]
-# optional: True
 string lastCheckedDate
+bool lastCheckedDate_isPresent
 
 # size: [(1, 255)]
-# optional: True
 string geoidUsed
+bool geoidUsed_isPresent

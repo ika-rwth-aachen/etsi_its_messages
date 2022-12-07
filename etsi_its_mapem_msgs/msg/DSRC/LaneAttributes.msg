@@ -13,5 +13,5 @@ LaneSharing sharedWith
 LaneTypeAttributes laneType
 
 # actual-parameters: ['{']
-# optional: True
 RegionalExtension regional
+bool regional_isPresent

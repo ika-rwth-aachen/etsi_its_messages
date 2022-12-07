@@ -12,8 +12,8 @@
 #                RegionalExtension {{Reg-IntersectionGeometry}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 DescriptiveName name
+bool name_isPresent
 
 IntersectionReferenceID id
 
@@ -21,17 +21,17 @@ MsgCount revision
 
 Position3D refPoint
 
-# optional: True
 LaneWidth laneWidth
+bool laneWidth_isPresent
 
-# optional: True
 SpeedLimitList speedLimits
+bool speedLimits_isPresent
 
 LaneList laneSet
 
-# optional: True
 PreemptPriorityList preemptPriorityData
+bool preemptPriorityData_isPresent
 
 # size: [(1, 4)]
-# optional: True
 RegionalExtension[] array
+bool regional_isPresent

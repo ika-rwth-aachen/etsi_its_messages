@@ -20,36 +20,36 @@
 StationID chargingStationID
 
 # size: [(1, 32)]
-# optional: True
 string utilityDistributorId
+bool utilityDistributorId_isPresent
 
 # size: [(1, 32)]
-# optional: True
 string providerID
+bool providerID_isPresent
 
 ReferencePosition chargingStationLocation
 
-# optional: True
 string address
+bool address_isPresent
 
 # size: [(1, 16)]
-# optional: True
 string phoneNumber
+bool phoneNumber_isPresent
 
 # size: [(1, 32)]
 string accessibility
 
-# optional: True
 DigitalMap digitalMap
+bool digitalMap_isPresent
 
 string openingDaysHours
 
 string pricing
 
-# optional: True
 string bookingContactInfo
+bool bookingContactInfo_isPresent
 
-# optional: True
 string payment
+bool payment_isPresent
 
 ItsChargingSpots chargingSpotsAvailable

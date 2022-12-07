@@ -6,8 +6,8 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 WMInumber wMInumber
+bool wMInumber_isPresent
 
-# optional: True
 VDS vDS
+bool vDS_isPresent
