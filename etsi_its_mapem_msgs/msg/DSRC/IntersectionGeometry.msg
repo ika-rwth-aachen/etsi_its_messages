@@ -33,5 +33,5 @@ PreemptPriorityList preemptPriorityData
 bool preemptPriorityData_isPresent
 
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 bool regional_isPresent

@@ -38,5 +38,5 @@ OverlayLaneList overlays
 bool overlays_isPresent
 
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 bool regional_isPresent

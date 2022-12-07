@@ -16,5 +16,5 @@ bool name_isPresent
 IntersectionStateList intersections
 
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 bool regional_isPresent

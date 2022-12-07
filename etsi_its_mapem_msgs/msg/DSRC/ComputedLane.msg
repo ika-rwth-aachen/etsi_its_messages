@@ -33,5 +33,5 @@ Scale_B12 scaleYaxis
 bool scaleYaxis_isPresent
 
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 bool regional_isPresent

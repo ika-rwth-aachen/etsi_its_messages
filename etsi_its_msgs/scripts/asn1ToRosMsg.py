@@ -266,7 +266,8 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
     # arrays
     elif type == "SEQUENCE OF":
 
-        msg += f"{asn1['element']['type']}[] array"
+        array_name = asn1["name"] if "name" in asn1 else "array"
+        msg += f"{asn1['element']['type']}[] {array_name}"
         msg += "\n"
 
     # enums

@@ -29,5 +29,5 @@ bool speedLimits_isPresent
 RoadLaneSetList roadLaneSet
 
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 bool regional_isPresent
