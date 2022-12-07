@@ -234,7 +234,7 @@ def asn1TypeToRosMsgStr(asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[str
                 continue
             msg += asn1TypeToRosMsgStr(member, asn1_types)
             if "optional" in member:
-                msg += f"bool {member['name']}_isPresent\n"
+                msg += f"bool {validRosField(member['name'])}_isPresent\n"
             msg += "\n"
 
     # type aliases with multiple options

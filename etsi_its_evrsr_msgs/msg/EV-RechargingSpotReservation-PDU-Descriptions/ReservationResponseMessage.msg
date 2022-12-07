@@ -14,10 +14,10 @@
 ReservationResponseCode reservationResponseCode
 
 Reservation_ID reservation_ID
-bool reservation-ID_isPresent
+bool reservation_ID_isPresent
 
 Reservation_Password reservation_Password
-bool reservation-Password_isPresent
+bool reservation_Password_isPresent
 
 StationDetails stationDetails
 bool stationDetails_isPresent

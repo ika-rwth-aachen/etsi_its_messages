@@ -32,7 +32,7 @@ PaymentType paymentType
 Payment_ID payment_ID
 
 Payment_ID secondPayment_ID
-bool secondPayment-ID_isPresent
+bool secondPayment_ID_isPresent
 
 Pairing_ID pairing_ID
-bool pairing-ID_isPresent
+bool pairing_ID_isPresent
