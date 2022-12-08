@@ -55,6 +55,17 @@ def noSpace(s: str) -> str:
     
     return s.replace(" ", "_")
 
+def includeHeader(header: str, include_type: str, primitives=False) -> str:
+    output = ""
+    pre = ""
+    if (primitives):
+        pre = "primitives/"
+        if include_type == "IA5String" or include_type == "UTF8String" or include_type == "NumericString" or include_type == "VisibleString":
+            include_type = "OCTET_STRING"
+    if f"convert{include_type}.h" not in header:
+        output = f"#include <{pre}convert{include_type}.h>\n"
+
+    return output
 
 def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
 
@@ -284,8 +295,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         msg += "\n"
 
         # Converter
-        if f"convert{noSpace(type)}.h" not in header:
-            header += f"#include <primitives/convert{noSpace(type)}.h>\n"
+        header += includeHeader(header, noSpace(type), True)
         c2ros += convertToPrimitiv(type,t_name,name)[0]
         ros2c += convertToPrimitiv(type,t_name,name)[1]
 
@@ -305,26 +315,28 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             memberName = member["name"]
             memberType = member["type"]
             if "optional" in member.keys():
-                if f"convert{memberType}.h" not in header:    
-                    header += f"#include <convert{memberType}.h>\n"
                 c2ros+=f"\t\tif(_{t_name}_in.{memberName})\n"
                 ros2c+=f"\t\tif(_{t_name}_in.{memberName}_isPresent)\n"
                 c2ros+="\t\t{\n"
                 ros2c+="\t\t{\n"
-                c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
-                c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
-                ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
+                if (memberType in ASN1_PRIMITIVES_2_ROS):
+                    header += includeHeader(header, memberType, True)
+                    c2ros += "\t"+convertToPrimitiv(memberType,t_name,memberName)[0]
+                    ros2c += "\t"+convertToPrimitiv(memberType,t_name,memberName)[1]
+                else:
+                    header += includeHeader(header, memberType)
+                    c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
+                    c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
+                    ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
                 c2ros+="\t\t}\n"
                 ros2c+="\t\t}\n"
             else:
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    if f"convert{memberType}.h" not in header:    
-                        header += f"#include <primitives/convert{memberType}.h>\n"
+                    header += includeHeader(header, memberType, True)
                     c2ros += convertToPrimitiv(memberType,t_name,memberName)[0]
                     ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
-                    if f"convert{memberType}.h" not in header:    
-                        header += f"#include <convert{memberType}.h>\n"
+                    header += includeHeader(header, memberType)
                     c2ros += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.{memberName});\n"
                     ros2c += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
 
@@ -357,8 +369,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             # Converter
             memberName = member["name"]
             memberType = member["type"]
-            if f"convert{memberType}.h" not in header:
-                header += f"#include <convert{memberType}.h>\n"
+            header += includeHeader(header, memberType)
             c2ros += f"\t\tif(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})\n"
             c2ros += "\t\t{\n"
             c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.choice.{memberName});\n"
