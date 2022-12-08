@@ -82,4 +82,5 @@ Build Workspace:
   script:
     - .industrial_ci/gitlab.sh
   variables:
+    ROS_DISTRO: noetic
     CATKIN_LINT: 'true'
