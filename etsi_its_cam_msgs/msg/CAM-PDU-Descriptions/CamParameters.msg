@@ -14,6 +14,8 @@ HighFrequencyContainer highFrequencyContainer
 
 # optional: True
 LowFrequencyContainer lowFrequencyContainer
+bool lowFrequencyContainer_isPresent
 
 # optional: True
 SpecialVehicleContainer specialVehicleContainer
+bool specialVehicleContainer_isPresent

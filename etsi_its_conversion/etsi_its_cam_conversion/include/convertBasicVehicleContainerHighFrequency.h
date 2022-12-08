@@ -36,30 +36,37 @@ namespace etsi_its_cam_conversion
 		if(_BasicVehicleContainerHighFrequency_in.accelerationControl)
 		{
 			BasicVehicleContainerHighFrequency_out.accelerationControl = convert_AccelerationControltoRos(*_BasicVehicleContainerHighFrequency_in.accelerationControl);
+			BasicVehicleContainerHighFrequency_out.accelerationControl_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lanePosition)
 		{
 			BasicVehicleContainerHighFrequency_out.lanePosition = convert_LanePositiontoRos(*_BasicVehicleContainerHighFrequency_in.lanePosition);
+			BasicVehicleContainerHighFrequency_out.lanePosition_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.steeringWheelAngle)
 		{
 			BasicVehicleContainerHighFrequency_out.steeringWheelAngle = convert_SteeringWheelAngletoRos(*_BasicVehicleContainerHighFrequency_in.steeringWheelAngle);
+			BasicVehicleContainerHighFrequency_out.steeringWheelAngle_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lateralAcceleration)
 		{
 			BasicVehicleContainerHighFrequency_out.lateralAcceleration = convert_LateralAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.lateralAcceleration);
+			BasicVehicleContainerHighFrequency_out.lateralAcceleration_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.verticalAcceleration)
 		{
 			BasicVehicleContainerHighFrequency_out.verticalAcceleration = convert_VerticalAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.verticalAcceleration);
+			BasicVehicleContainerHighFrequency_out.verticalAcceleration_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.performanceClass)
 		{
 			BasicVehicleContainerHighFrequency_out.performanceClass = convert_PerformanceClasstoRos(*_BasicVehicleContainerHighFrequency_in.performanceClass);
+			BasicVehicleContainerHighFrequency_out.performanceClass_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone)
 		{
 			BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone = convert_CenDsrcTollingZonetoRos(*_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone);
+			BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone_isPresent = true;
 		}
 		return BasicVehicleContainerHighFrequency_out;
 	}

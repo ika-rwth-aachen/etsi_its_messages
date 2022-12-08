@@ -192,19 +192,19 @@ def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dic
 def simplestRosIntegerType(min_value, max_value):
 
     if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
-        return "int64"
+        return "uint8"
     elif min_value >= np.iinfo(np.uint16).min and max_value <= np.iinfo(np.uint16).max:
-        return "int64"
+        return "uint16"
     elif min_value >= np.iinfo(np.uint32).min and max_value <= np.iinfo(np.uint32).max:
-        return "int64"
+        return "uint32"
     elif min_value >= np.iinfo(np.uint64).min and max_value <= np.iinfo(np.uint64).max:
-        return "int64"
+        return "uint64"
     elif min_value >= np.iinfo(np.int8).min and max_value <= np.iinfo(np.int8).max:
-        return "int64"
+        return "int8"
     elif min_value >= np.iinfo(np.int16).min and max_value <= np.iinfo(np.int16).max:
-        return "int64"
+        return "int16"
     elif min_value >= np.iinfo(np.int32).min and max_value <= np.iinfo(np.int32).max:
-        return "int64"
+        return "int32"
     elif min_value >= np.iinfo(np.int64).min and max_value <= np.iinfo(np.int64).max:
         return "int64"
     else:
@@ -268,7 +268,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         if "restricted-to" in asn1 and type == "INTEGER":
             min_value = asn1["restricted-to"][0][0]
             max_value = asn1["restricted-to"][0][1]
-            ros_type = simplestRosIntegerType(min_value, max_value)
+            #ros_type = simplestRosIntegerType(min_value, max_value)
+            ros_type = "int64"
 
         # add constants for named numbers
         if "named-numbers" in asn1:
@@ -296,6 +297,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             if member is None:
                 continue
             msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
+            if "optional" in member:
+                msg += f"bool {member['name']}_isPresent\n"
             msg += "\n"
 
             # Converter
@@ -305,10 +308,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 if f"convert{memberType}.h" not in header:    
                     header += f"#include <convert{memberType}.h>\n"
                 c2ros+=f"\t\tif(_{t_name}_in.{memberName})\n"
-                ros2c+=f"\t\tif(XY.msg)\n"
+                ros2c+=f"\t\tif(_{t_name}_in.{memberName}_isPresent)\n"
                 c2ros+="\t\t{\n"
                 ros2c+="\t\t{\n"
                 c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
+                c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
                 ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
                 c2ros+="\t\t}\n"
                 ros2c+="\t\t}\n"
@@ -370,7 +374,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     # arrays
     elif type == "SEQUENCE OF":
 
-        msg += f"{asn1['element']['type']}[] array"
+        array_name = asn1["name"] if "name" in asn1 else "array"
+        msg += f"{asn1['element']['type']}[] {array_name}"
         msg += "\n"
 
     # enums
@@ -380,7 +385,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         values = [val[1] for val in asn1["values"] if val is not None]
         min_value = min(values)
         max_value = max(values)
-        ros_type = simplestRosIntegerType(min_value, max_value)
+        #ros_type = simplestRosIntegerType(min_value, max_value)
+        ros_type = "int64"
 
         # add constants for all values
         for val in asn1["values"]:

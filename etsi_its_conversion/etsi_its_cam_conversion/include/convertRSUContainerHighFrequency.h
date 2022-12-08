@@ -12,6 +12,7 @@ namespace etsi_its_cam_conversion
 		if(_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU)
 		{
 			RSUContainerHighFrequency_out.protectedCommunicationZonesRSU = convert_ProtectedCommunicationZonesRSUtoRos(*_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU);
+			RSUContainerHighFrequency_out.protectedCommunicationZonesRSU_isPresent = true;
 		}
 		return RSUContainerHighFrequency_out;
 	}

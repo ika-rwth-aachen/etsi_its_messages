@@ -50,8 +50,8 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <depend>etsi_its_cam_msgs</depend>
   <depend>etsi_its_cam_coding</depend>
+  <depend>etsi_its_cam_msgs</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

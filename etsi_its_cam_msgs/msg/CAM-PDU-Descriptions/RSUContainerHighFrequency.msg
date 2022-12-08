@@ -7,3 +7,4 @@
 
 # optional: True
 ProtectedCommunicationZonesRSU protectedCommunicationZonesRSU
+bool protectedCommunicationZonesRSU_isPresent

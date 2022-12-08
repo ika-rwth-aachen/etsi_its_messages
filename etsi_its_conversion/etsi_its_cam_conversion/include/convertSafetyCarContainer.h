@@ -16,14 +16,17 @@ namespace etsi_its_cam_conversion
 		if(_SafetyCarContainer_in.incidentIndication)
 		{
 			SafetyCarContainer_out.incidentIndication = convert_CauseCodetoRos(*_SafetyCarContainer_in.incidentIndication);
+			SafetyCarContainer_out.incidentIndication_isPresent = true;
 		}
 		if(_SafetyCarContainer_in.trafficRule)
 		{
 			SafetyCarContainer_out.trafficRule = convert_TrafficRuletoRos(*_SafetyCarContainer_in.trafficRule);
+			SafetyCarContainer_out.trafficRule_isPresent = true;
 		}
 		if(_SafetyCarContainer_in.speedLimit)
 		{
 			SafetyCarContainer_out.speedLimit = convert_SpeedLimittoRos(*_SafetyCarContainer_in.speedLimit);
+			SafetyCarContainer_out.speedLimit_isPresent = true;
 		}
 		return SafetyCarContainer_out;
 	}

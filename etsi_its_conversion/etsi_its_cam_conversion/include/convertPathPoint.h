@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 		if(_PathPoint_in.pathDeltaTime)
 		{
 			PathPoint_out.pathDeltaTime = convert_PathDeltaTimetoRos(*_PathPoint_in.pathDeltaTime);
+			PathPoint_out.pathDeltaTime_isPresent = true;
 		}
 		return PathPoint_out;
 	}

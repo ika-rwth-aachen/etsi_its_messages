@@ -15,10 +15,12 @@ namespace etsi_its_cam_conversion
 		if(_EmergencyContainer_in.incidentIndication)
 		{
 			EmergencyContainer_out.incidentIndication = convert_CauseCodetoRos(*_EmergencyContainer_in.incidentIndication);
+			EmergencyContainer_out.incidentIndication_isPresent = true;
 		}
 		if(_EmergencyContainer_in.emergencyPriority)
 		{
 			EmergencyContainer_out.emergencyPriority = convert_EmergencyPrioritytoRos(*_EmergencyContainer_in.emergencyPriority);
+			EmergencyContainer_out.emergencyPriority_isPresent = true;
 		}
 		return EmergencyContainer_out;
 	}

@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 		if(_PublicTransportContainer_in.ptActivation)
 		{
 			PublicTransportContainer_out.ptActivation = convert_PtActivationtoRos(*_PublicTransportContainer_in.ptActivation);
+			PublicTransportContainer_out.ptActivation_isPresent = true;
 		}
 		return PublicTransportContainer_out;
 	}

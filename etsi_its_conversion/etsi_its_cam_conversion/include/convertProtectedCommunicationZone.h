@@ -18,16 +18,19 @@ namespace etsi_its_cam_conversion
 		if(_ProtectedCommunicationZone_in.expiryTime)
 		{
 			ProtectedCommunicationZone_out.expiryTime = convert_TimestampItstoRos(*_ProtectedCommunicationZone_in.expiryTime);
+			ProtectedCommunicationZone_out.expiryTime_isPresent = true;
 		}
 		ProtectedCommunicationZone_out.protectedZoneLatitude = convert_LatitudetoRos(_ProtectedCommunicationZone_in.protectedZoneLatitude);
 		ProtectedCommunicationZone_out.protectedZoneLongitude = convert_LongitudetoRos(_ProtectedCommunicationZone_in.protectedZoneLongitude);
 		if(_ProtectedCommunicationZone_in.protectedZoneRadius)
 		{
 			ProtectedCommunicationZone_out.protectedZoneRadius = convert_ProtectedZoneRadiustoRos(*_ProtectedCommunicationZone_in.protectedZoneRadius);
+			ProtectedCommunicationZone_out.protectedZoneRadius_isPresent = true;
 		}
 		if(_ProtectedCommunicationZone_in.protectedZoneID)
 		{
 			ProtectedCommunicationZone_out.protectedZoneID = convert_ProtectedZoneIDtoRos(*_ProtectedCommunicationZone_in.protectedZoneID);
+			ProtectedCommunicationZone_out.protectedZoneID_isPresent = true;
 		}
 		return ProtectedCommunicationZone_out;
 	}

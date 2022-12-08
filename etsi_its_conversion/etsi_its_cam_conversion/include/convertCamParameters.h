@@ -17,10 +17,12 @@ namespace etsi_its_cam_conversion
 		if(_CamParameters_in.lowFrequencyContainer)
 		{
 			CamParameters_out.lowFrequencyContainer = convert_LowFrequencyContainertoRos(*_CamParameters_in.lowFrequencyContainer);
+			CamParameters_out.lowFrequencyContainer_isPresent = true;
 		}
 		if(_CamParameters_in.specialVehicleContainer)
 		{
 			CamParameters_out.specialVehicleContainer = convert_SpecialVehicleContainertoRos(*_CamParameters_in.specialVehicleContainer);
+			CamParameters_out.specialVehicleContainer_isPresent = true;
 		}
 		return CamParameters_out;
 	}

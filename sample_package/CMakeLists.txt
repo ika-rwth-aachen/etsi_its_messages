@@ -8,13 +8,13 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  etsi_its_cam_coding
+  etsi_its_cam_conversion
+  etsi_its_cam_msgs
   nodelet
   roscpp
   roslaunch  
   std_msgs
-  etsi_its_cam_msgs
-  etsi_its_cam_coding
-  etsi_its_cam_conversion
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES etsi_its_conversion
-  CATKIN_DEPENDS message_runtime etsi_its_cam_msgs etsi_its_cam_coding etsi_its_cam_conversion std_msgs
+  CATKIN_DEPENDS message_runtime etsi_its_cam_msgs etsi_its_cam_coding etsi_its_cam_conversion std_msgs nodelet roscpp
 #  DEPENDS system_lib
 )
 

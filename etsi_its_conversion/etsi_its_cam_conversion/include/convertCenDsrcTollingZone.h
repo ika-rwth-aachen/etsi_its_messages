@@ -16,6 +16,7 @@ namespace etsi_its_cam_conversion
 		if(_CenDsrcTollingZone_in.cenDsrcTollingZoneID)
 		{
 			CenDsrcTollingZone_out.cenDsrcTollingZoneID = convert_CenDsrcTollingZoneIDtoRos(*_CenDsrcTollingZone_in.cenDsrcTollingZoneID);
+			CenDsrcTollingZone_out.cenDsrcTollingZoneID_isPresent = true;
 		}
 		return CenDsrcTollingZone_out;
 	}

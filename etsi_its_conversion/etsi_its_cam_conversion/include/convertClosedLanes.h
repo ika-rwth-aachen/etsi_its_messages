@@ -13,14 +13,17 @@ namespace etsi_its_cam_conversion
 		if(_ClosedLanes_in.innerhardShoulderStatus)
 		{
 			ClosedLanes_out.innerhardShoulderStatus = convert_HardShoulderStatustoRos(*_ClosedLanes_in.innerhardShoulderStatus);
+			ClosedLanes_out.innerhardShoulderStatus_isPresent = true;
 		}
 		if(_ClosedLanes_in.outerhardShoulderStatus)
 		{
 			ClosedLanes_out.outerhardShoulderStatus = convert_HardShoulderStatustoRos(*_ClosedLanes_in.outerhardShoulderStatus);
+			ClosedLanes_out.outerhardShoulderStatus_isPresent = true;
 		}
 		if(_ClosedLanes_in.drivingLaneStatus)
 		{
 			ClosedLanes_out.drivingLaneStatus = convert_DrivingLaneStatustoRos(*_ClosedLanes_in.drivingLaneStatus);
+			ClosedLanes_out.drivingLaneStatus_isPresent = true;
 		}
 		return ClosedLanes_out;
 	}

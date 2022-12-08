@@ -14,11 +14,13 @@ namespace etsi_its_cam_conversion
 		if(_RoadWorksContainerBasic_in.roadworksSubCauseCode)
 		{
 			RoadWorksContainerBasic_out.roadworksSubCauseCode = convert_RoadworksSubCauseCodetoRos(*_RoadWorksContainerBasic_in.roadworksSubCauseCode);
+			RoadWorksContainerBasic_out.roadworksSubCauseCode_isPresent = true;
 		}
 		RoadWorksContainerBasic_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_RoadWorksContainerBasic_in.lightBarSirenInUse);
 		if(_RoadWorksContainerBasic_in.closedLanes)
 		{
 			RoadWorksContainerBasic_out.closedLanes = convert_ClosedLanestoRos(*_RoadWorksContainerBasic_in.closedLanes);
+			RoadWorksContainerBasic_out.closedLanes_isPresent = true;
 		}
 		return RoadWorksContainerBasic_out;
 	}

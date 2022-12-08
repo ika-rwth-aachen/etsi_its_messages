@@ -39,21 +39,28 @@ YawRate yawRate
 
 # optional: True
 AccelerationControl accelerationControl
+bool accelerationControl_isPresent
 
 # optional: True
 LanePosition lanePosition
+bool lanePosition_isPresent
 
 # optional: True
 SteeringWheelAngle steeringWheelAngle
+bool steeringWheelAngle_isPresent
 
 # optional: True
 LateralAcceleration lateralAcceleration
+bool lateralAcceleration_isPresent
 
 # optional: True
 VerticalAcceleration verticalAcceleration
+bool verticalAcceleration_isPresent
 
 # optional: True
 PerformanceClass performanceClass
+bool performanceClass_isPresent
 
 # optional: True
 CenDsrcTollingZone cenDsrcTollingZone
+bool cenDsrcTollingZone_isPresent
