@@ -25,5 +25,5 @@ uint8 CHOICE_LANE_ANGLE = 4
 SpeedLimitList speedLimits
 uint8 CHOICE_SPEED_LIMITS = 5
 # size: [(1, 4)]
-RegionalExtension[] array
+RegionalExtension[] regional
 uint8 CHOICE_REGIONAL = 6

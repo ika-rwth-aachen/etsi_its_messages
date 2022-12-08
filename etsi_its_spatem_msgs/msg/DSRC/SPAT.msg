@@ -7,14 +7,14 @@
 #                 RegionalExtension {{Reg-SPAT}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 MinuteOfTheYear timeStamp
+bool timeStamp_isPresent
 
-# optional: True
 DescriptiveName name
+bool name_isPresent
 
 IntersectionStateList intersections
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

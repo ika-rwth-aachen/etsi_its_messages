@@ -12,8 +12,8 @@ InformationQuality informationQuality
 
 CauseCode eventType
 
-# optional: True
 CauseCode linkedCause
+bool linkedCause_isPresent
 
-# optional: True
 EventHistory eventHistory
+bool eventHistory_isPresent

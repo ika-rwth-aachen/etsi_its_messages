@@ -20,8 +20,8 @@ PreReservation_ID preReservation_ID
 
 TimestampUTC arrivalTime
 
-# optional: True
 TimestampUTC departureTime
+bool departureTime_isPresent
 
 EAmount eAmount
 
@@ -31,8 +31,8 @@ PaymentType paymentType
 
 Payment_ID payment_ID
 
-# optional: True
 Payment_ID secondPayment_ID
+bool secondPayment_ID_isPresent
 
-# optional: True
 Pairing_ID pairing_ID
+bool pairing_ID_isPresent

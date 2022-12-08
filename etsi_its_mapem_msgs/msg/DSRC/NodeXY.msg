@@ -8,5 +8,5 @@
 
 NodeOffsetPointXY delta
 
-# optional: True
 NodeAttributeSetXY attributes
+bool attributes_isPresent

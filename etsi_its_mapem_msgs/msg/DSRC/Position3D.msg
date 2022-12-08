@@ -11,9 +11,9 @@ Latitude lat
 
 Longitude long
 
-# optional: True
 Elevation elevation
+bool elevation_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

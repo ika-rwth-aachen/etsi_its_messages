@@ -8,16 +8,16 @@
 #                      RegionalExtension {{Reg-MovementState}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 DescriptiveName movementName
+bool movementName_isPresent
 
 SignalGroupID signalGroup
 
 MovementEventList state_time_speed
 
-# optional: True
 ManeuverAssistList maneuverAssistList
+bool maneuverAssistList_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

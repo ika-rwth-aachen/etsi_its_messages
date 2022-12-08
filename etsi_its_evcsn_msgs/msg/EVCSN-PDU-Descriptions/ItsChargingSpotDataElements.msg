@@ -10,12 +10,12 @@
 
 ChargingSpotType type
 
-# optional: True
 string evEquipmentID
+bool evEquipmentID_isPresent
 
 TypeOfReceptacle typeOfReceptacle
 
 string energyAvailability
 
-# optional: True
 ParkingPlacesData parkingPlacesData
+bool parkingPlacesData_isPresent

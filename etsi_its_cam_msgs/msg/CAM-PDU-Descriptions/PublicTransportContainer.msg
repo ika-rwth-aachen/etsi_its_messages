@@ -7,5 +7,5 @@
 
 EmbarkationStatus embarkationStatus
 
-# optional: True
 PtActivation ptActivation
+bool ptActivation_isPresent

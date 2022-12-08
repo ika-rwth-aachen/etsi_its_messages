@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 RoadRegulatorID region
+bool region_isPresent
 
 IntersectionID id

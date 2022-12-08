@@ -9,19 +9,19 @@
 # }
 # ------------------------------------------------------------------------------
 
-# optional: True
 TimeMark startTime
+bool startTime_isPresent
 
 TimeMark minEndTime
 
-# optional: True
 TimeMark maxEndTime
+bool maxEndTime_isPresent
 
-# optional: True
 TimeMark likelyTime
+bool likelyTime_isPresent
 
-# optional: True
 TimeIntervalConfidence confidence
+bool confidence_isPresent
 
-# optional: True
 TimeMark nextTime
+bool nextTime_isPresent

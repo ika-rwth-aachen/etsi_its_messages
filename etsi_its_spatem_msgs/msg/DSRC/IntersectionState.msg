@@ -13,8 +13,8 @@
 #                RegionalExtension {{Reg-IntersectionState}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 DescriptiveName name
+bool name_isPresent
 
 IntersectionReferenceID id
 
@@ -22,20 +22,20 @@ MsgCount revision
 
 IntersectionStatusObject status
 
-# optional: True
 MinuteOfTheYear moy
+bool moy_isPresent
 
-# optional: True
 DSecond timeStamp
+bool timeStamp_isPresent
 
-# optional: True
 EnabledLaneList enabledLanes
+bool enabledLanes_isPresent
 
 MovementList states
 
-# optional: True
 ManeuverAssistList maneuverAssistList
+bool maneuverAssistList_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

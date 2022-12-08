@@ -10,24 +10,24 @@
 #                RegionalExtension {{Reg-NodeAttributeSetXY}} OPTIONAL,
 # ------------------------------------------------------------------------------
 
-# optional: True
 NodeAttributeXYList localNode
+bool localNode_isPresent
 
-# optional: True
 SegmentAttributeXYList disabled
+bool disabled_isPresent
 
-# optional: True
 SegmentAttributeXYList enabled
+bool enabled_isPresent
 
-# optional: True
 LaneDataAttributeList data
+bool data_isPresent
 
-# optional: True
 Offset_B10 dWidth
+bool dWidth_isPresent
 
-# optional: True
 Offset_B10 dElevation
+bool dElevation_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

@@ -9,11 +9,11 @@
 
 ManagementContainer management
 
-# optional: True
 SituationContainer situation
+bool situation_isPresent
 
-# optional: True
 LocationContainer location
+bool location_isPresent
 
-# optional: True
 AlacarteContainer alacarte
+bool alacarte_isPresent

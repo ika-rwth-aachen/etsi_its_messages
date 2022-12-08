@@ -12,29 +12,29 @@
 #  }
 # ------------------------------------------------------------------------------
 
-# optional: True
 LightBarSirenInUse lightBarSirenInUse
+bool lightBarSirenInUse_isPresent
 
-# optional: True
 ClosedLanes closedLanes
+bool closedLanes_isPresent
 
-# optional: True
 RestrictedTypes restriction
+bool restriction_isPresent
 
-# optional: True
 SpeedLimit speedLimit
+bool speedLimit_isPresent
 
-# optional: True
 CauseCode incidentIndication
+bool incidentIndication_isPresent
 
-# optional: True
 ItineraryPath recommendedPath
+bool recommendedPath_isPresent
 
-# optional: True
 DeltaReferencePosition startingPointSpeedLimit
+bool startingPointSpeedLimit_isPresent
 
-# optional: True
 TrafficRule trafficFlowRule
+bool trafficFlowRule_isPresent
 
-# optional: True
 ReferenceDenms referenceDenms
+bool referenceDenms_isPresent

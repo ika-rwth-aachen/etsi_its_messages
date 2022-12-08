@@ -9,12 +9,12 @@
 
 MovementPhaseState eventState
 
-# optional: True
 TimeChangeDetails timing
+bool timing_isPresent
 
-# optional: True
 AdvisorySpeedList speeds
+bool speeds_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent

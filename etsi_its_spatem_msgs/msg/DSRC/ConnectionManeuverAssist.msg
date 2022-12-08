@@ -11,18 +11,18 @@
 
 LaneConnectionID connectionID
 
-# optional: True
 ZoneLength queueLength
+bool queueLength_isPresent
 
-# optional: True
 ZoneLength availableStorageLength
+bool availableStorageLength_isPresent
 
-# optional: True
 WaitOnStopline waitOnStop
+bool waitOnStop_isPresent
 
-# optional: True
 PedestrianBicycleDetect pedBicycleDetect
+bool pedBicycleDetect_isPresent
 
 # size: [(1, 4)]
-# optional: True
-RegionalExtension[] array
+RegionalExtension[] regional
+bool regional_isPresent
