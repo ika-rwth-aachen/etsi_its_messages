@@ -8,7 +8,7 @@ Follow these steps to quickly generate your `*.h` and `*.c` files from a given s
 
 ```bash
 docker login gitlab.ika.rwth-aachen.de:5050
-docker pull gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
+docker pull gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
 ```
 
 ### Run the container
@@ -20,7 +20,7 @@ All ASN1 Files within the `<local_input_folder>` will be compiled by asn1c. The 
 _Make sure that your ASN1 dependency-files are matching since duplicate-files will be ignored (only the file-version found first is used)!_
 
 ```bash
-docker run --volume <local_input_folder>:/home/input --volume <local_output_folder>:/home/output gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest
+docker run --volume <local_input_folder>:/home/input --volume <local_output_folder>:/home/output gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
 ```
 
 ### Alternative: Usage of makefile
@@ -38,5 +38,5 @@ The generated `*.c` and `*.h`-files will be placed into the specific `etsi_its_<
 
 ```bash
 cd docker
-docker build --tag gitlab.ika.rwth-aachen.de:5050/automated-driving/ros_etsi_its_messages/asn1c:latest .
+docker build --tag gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest .
 ```
