@@ -112,7 +112,7 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
             if type not in asn1_types:
                 asn1_types[type] = asn1["types"][type]
             else:
-                warnings.warn(f"Type '{type}' from '{doc}' is a duplicate")
+                raise ValueError(f"Type '{type}' from '{doc}' is a duplicate")
 
     return asn1_types
 
@@ -264,7 +264,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-numbers"):
+        if k not in ("type", "name", "members", "values", "element", "named-numbers", "optional"):
             msg += f"# {k}: {v}"
             msg += "\n"
 
@@ -308,7 +308,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 continue
             msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
             if "optional" in member:
-                msg += f"bool {member['name']}_isPresent\n"
+                msg += f"bool {validRosField(member['name'])}_isPresent\n"
             msg += "\n"
 
             # Converter
