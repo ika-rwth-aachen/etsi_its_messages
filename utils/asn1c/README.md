@@ -26,7 +26,7 @@ docker run --volume <local_input_folder>:/home/input --volume <local_output_fold
 ### Alternative: Usage of makefile
 
 We prepared a makefile to build specifc coding packages for each etsi message type.
-Simply run one of the following commands from within the `etsi_its_coding/asn1c/docker` directory:
+Simply run one of the following commands from within the `utils/asn1c/docker` directory:
 
 ```bash
 make <all/cam/denm/...>

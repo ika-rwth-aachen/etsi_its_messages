@@ -18,11 +18,11 @@ CAM:
   stage: Generate ROS Messages & Conversion Functions
   script:
     - >
-      ./etsi_its_msgs/scripts/asn1ToRosMsg.py
-      ETSI-ITS-ASN1-REDUCED/CAM/CAM-PDU-Descriptions.asn
-      ETSI-ITS-ASN1-REDUCED/CAM/ITS-Container.asn
+      ./utils/scripts/asn1ToRosMsg.py
+      utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn
+      utils/asn1/reduced/cam/ITS-Container.asn
       -t cam
-      -o etsi_its_cam_msgs/msg
+      -o etsi_its_msgs/etsi_its_cam_msgs/msg
 
 
 Build Workspace:
