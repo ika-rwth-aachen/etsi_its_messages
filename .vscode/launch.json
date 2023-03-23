@@ -9,12 +9,12 @@
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "etsi_its_msgs/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "CAM",
-        "-o", "ETSI-ITS-ASN1-REDUCED/CAM",
-        "ETSI-ITS-ASN1/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1/cam_en302637_2/cdd/ITS-Container.asn"
+        "-o", "utils/asn1/reduced/cam",
+        "utils/asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "utils/asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -24,11 +24,11 @@
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "etsi_its_msgs/scripts/asn1ToRosMsg.py",
+      "program": "utils/scripts/asn1ToRosMsg.py",
       "args": [
-        "ETSI-ITS-ASN1-REDUCED/CAM/CAM-PDU-Descriptions.asn",
-        "ETSI-ITS-ASN1-REDUCED/CAM/ITS-Container.asn",
-        "-o", "etsi_its_cam_msgs/msg"
+        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
       "justMyCode": true

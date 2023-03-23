@@ -52,16 +52,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <exec_depend>etsi_its_cam_coding</exec_depend>
-  <exec_depend>etsi_its_cdd_coding</exec_depend>
-  <exec_depend>etsi_its_denm_coding</exec_depend>
-  <exec_depend>etsi_its_evcsn_coding</exec_depend>
-  <exec_depend>etsi_its_evrsr_coding</exec_depend>
-  <exec_depend>etsi_its_ivim_coding</exec_depend>
-  <exec_depend>etsi_its_mapem_coding</exec_depend>
-  <exec_depend>etsi_its_rtcmem_coding</exec_depend>
-  <exec_depend>etsi_its_spatem_coding</exec_depend>
-  <exec_depend>etsi_its_srem_coding</exec_depend>
-  <exec_depend>etsi_its_ssem_coding</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

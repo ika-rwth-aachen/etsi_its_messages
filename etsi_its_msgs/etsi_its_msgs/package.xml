@@ -52,12 +52,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <exec_depend>etsi_its_cam_msgs</exec_depend>
-  <exec_depend>etsi_its_denm_msgs</exec_depend>
-  <exec_depend>etsi_its_evcsn_msgs</exec_depend>
-  <exec_depend>etsi_its_evrsr_msgs</exec_depend>
-  <exec_depend>etsi_its_mapem_msgs</exec_depend>
-  <exec_depend>etsi_its_spatem_msgs</exec_depend>
-
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
