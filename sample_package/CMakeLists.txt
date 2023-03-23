@@ -11,7 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
   etsi_its_cam_coding
   etsi_its_cam_conversion
   etsi_its_cam_msgs
-  nodelet
   roscpp
   roslaunch  
   std_msgs
@@ -105,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES etsi_its_conversion
-  CATKIN_DEPENDS message_runtime etsi_its_cam_msgs etsi_its_cam_coding etsi_its_cam_conversion std_msgs nodelet roscpp
+  CATKIN_DEPENDS message_runtime etsi_its_cam_msgs etsi_its_cam_coding etsi_its_cam_conversion std_msgs roscpp
 #  DEPENDS system_lib
 )
 

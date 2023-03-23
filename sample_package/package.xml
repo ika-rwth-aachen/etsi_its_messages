@@ -52,7 +52,6 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
   <depend>roslaunch</depend>
-  <depend>nodelet</depend>
   <depend>std_msgs</depend>
   <depend>etsi_its_cam_msgs</depend>
   <depend>etsi_its_cam_coding</depend>
