@@ -31,6 +31,17 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
 
     relevant_types_per_module = {doc: set() for doc in docs}
 
+    for doc, doc_info in docs.items():
+        for oset in doc_info["object-sets"]:
+            relevant_types_per_module[doc].add(oset)
+            # we need to find dependencies of the current object-set 'oset' --> parse the file because asn1tools does not support class?
+            # Example: Reg-ConnectionManeuverAssist
+            # Reg-ConnectionManeuverAssist	REG-EXT-ID-AND-TYPE ::= {
+	        #   {ConnectionManeuverAssist-addGrpC  IDENTIFIED BY addGrpC},
+	        #   ...
+            # }
+            # In the asn1tools-dict ConnectionManeuverAssist-addGrpC is not a member of Reg-ConnectionManeuverAssist
+
     # find given type
     type_info = None
     if docs_to_search is None:
@@ -44,6 +55,10 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
             break
         if type in info["values"].keys():
             type_info = info["values"][type]
+            break
+        if type.split(".")[0] in info["object-classes"].keys():
+            type=type.split(".")[0]
+            type_info = info["object-classes"][type.split(".")[0]]
             break
     if type_info is None:
         return relevant_types_per_module
@@ -171,7 +186,7 @@ def reduceAsn1File(lines: List[str], relevant_types_per_module: Dict[str, Set[st
         if current_module not in relevant_types_per_module:
             continue
         if "::=" in line:
-            if line.split("::=")[0].strip().split(" ")[0] in relevant_types_per_module[current_module]:
+            if line.split("::=")[0].strip().split()[0] in relevant_types_per_module[current_module]:
                 copying_type = True
                 modules_with_definitions.add(current_module)
 

@@ -1,18 +1,3 @@
 [submodule "cam_en302637_2"]
 	path = ETSI-ITS-ASN1/cam_en302637_2
 	url = https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2
-[submodule "ETSI-ITS-ASN1/denm_en302637_3"]
-	path = ETSI-ITS-ASN1/denm_en302637_3
-	url = https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3.git
-[submodule "ETSI-ITS-ASN1/evcsn-ts101556_1"]
-	path = ETSI-ITS-ASN1/evcsn-ts101556_1
-	url = https://forge.etsi.org/rep/ITS/asn1/evcsn-ts101556_1.git
-[submodule "ETSI-ITS-ASN1/cdd_ts102894_2"]
-	path = ETSI-ITS-ASN1/cdd_ts102894_2
-	url = https://forge.etsi.org/rep/ITS/asn1/cdd_ts102894_2.git
-[submodule "ETSI-ITS-ASN1/evrsr_ts101556_3"]
-	path = ETSI-ITS-ASN1/evrsr_ts101556_3
-	url = https://forge.etsi.org/rep/ITS/asn1/evrsr_ts101556_3.git
-[submodule "ETSI-ITS-ASN1/is_ts103301"]
-	path = ETSI-ITS-ASN1/is_ts103301
-	url = https://forge.etsi.org/rep/ITS/asn1/is_ts103301.git
