@@ -21,6 +21,7 @@ CAM:
       ./etsi_its_msgs/scripts/asn1ToRosMsg.py
       ETSI-ITS-ASN1-REDUCED/CAM/CAM-PDU-Descriptions.asn
       ETSI-ITS-ASN1-REDUCED/CAM/ITS-Container.asn
+      -t cam
       -o etsi_its_cam_msgs/msg
 
 
