@@ -7,37 +7,7 @@ ID_GROUP = $(shell id -g ${USER})
 # === Compile ====================================================================
 
 all: 
-	$(MAKE) -s cam 
-	$(MAKE) -s denm 
-	$(MAKE) -s evcsn 
-	$(MAKE) -s evrsr 
+	$(MAKE) -s cam
 
 cam:
 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/CAM:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_cam_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-denm:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/DENM:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_denm_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-evcsn:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/EVCSN:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_evcsn_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-evrsr:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/EVRSR:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_evrsr_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-# ivim:
-# 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/IVIM-PDU-Descriptions.asn:/input/IVIM-PDU-Descriptions.asn --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/cdd:/input/cdd --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/iso-patched:/input/iso-patched --volume ${MAKEFILE_DIR}/../../../etsi_its_ivim_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-mapem:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/MAPEM:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_mapem_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-# rtcmem:
-# 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/RTCMEM-PDU-Descriptions.asn:/input/RTCMEM-PDU-Descriptions.asn --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/cdd:/input/cdd --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/iso-patched:/input/iso-patched --volume ${MAKEFILE_DIR}/../../../etsi_its_rtcmem_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-spatem:
-	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1-REDUCED/SPATEM:/input --volume ${MAKEFILE_DIR}/../../../etsi_its_spatem_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-# srem:
-# 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/SREM-PDU-Descriptions.asn:/input/SREM-PDU-Descriptions.asn --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/cdd:/input/cdd --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/iso-patched:/input/iso-patched --volume ${MAKEFILE_DIR}/../../../etsi_its_srem_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
-
-# ssem:
-# 	@docker run --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/SSEM-PDU-Descriptions.asn:/input/SSEM-PDU-Descriptions.asn --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/cdd:/input/cdd --volume ${MAKEFILE_DIR}/../../../ETSI-ITS-ASN1/is_ts103301/iso-patched:/input/iso-patched --volume ${MAKEFILE_DIR}/../../../etsi_its_ssem_coding:/output -u ${ID_USER}:${ID_GROUP} gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
