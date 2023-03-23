@@ -7,7 +7,7 @@ variables:
 default:
   image: python:3.9-slim
   before_script:
-    - pip install -r etsi_its_msgs/requirements.txt
+    - pip install -r utils/scripts/requirements.txt
 
 stages:
   - Generate ROS Messages & Conversion Functions
