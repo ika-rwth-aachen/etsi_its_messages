@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "PublicTransportContainer.h"
+#include "etsi_its_cam_coding/PublicTransportContainer.h"
 
 asn_TYPE_member_t asn_MBR_PublicTransportContainer_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct PublicTransportContainer, embarkationStatus),

@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "DangerousGoodsContainer.h"
+#include "etsi_its_cam_coding/DangerousGoodsContainer.h"
 
 asn_TYPE_member_t asn_MBR_DangerousGoodsContainer_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct DangerousGoodsContainer, dangerousGoodsBasic),

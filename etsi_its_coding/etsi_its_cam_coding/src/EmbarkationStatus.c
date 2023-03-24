@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "EmbarkationStatus.h"
+#include "etsi_its_cam_coding/EmbarkationStatus.h"
 
 /*
  * This type is implemented using BOOLEAN,

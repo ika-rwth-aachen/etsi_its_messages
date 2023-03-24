@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "DeltaReferencePosition.h"
+#include "etsi_its_cam_coding/DeltaReferencePosition.h"
 
 asn_TYPE_member_t asn_MBR_DeltaReferencePosition_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct DeltaReferencePosition, deltaLatitude),

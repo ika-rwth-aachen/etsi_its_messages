@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "VerticalAccelerationValue.h"
+#include "etsi_its_cam_coding/VerticalAccelerationValue.h"
 
 int
 VerticalAccelerationValue_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,

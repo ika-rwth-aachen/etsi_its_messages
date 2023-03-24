@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "ItsPduHeader.h"
+#include "etsi_its_cam_coding/ItsPduHeader.h"
 
 static int
 memb_protocolVersion_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,

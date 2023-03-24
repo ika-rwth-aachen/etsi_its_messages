@@ -4,8 +4,8 @@
  * 	All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_system.h>
-#include <xer_support.h>
+#include <etsi_its_cam_coding/asn_system.h>
+#include <etsi_its_cam_coding/xer_support.h>
 
 /* Parser states */
 typedef enum {

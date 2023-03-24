@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "DeltaAltitude.h"
+#include "etsi_its_cam_coding/DeltaAltitude.h"
 
 int
 DeltaAltitude_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,

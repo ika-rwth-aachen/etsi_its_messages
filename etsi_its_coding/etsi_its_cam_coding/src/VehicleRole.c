@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "VehicleRole.h"
+#include "etsi_its_cam_coding/VehicleRole.h"
 
 /*
  * This type is implemented using NativeEnumerated,

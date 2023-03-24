@@ -1,5 +1,5 @@
-#include <asn_internal.h>
-#include <constraints.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/constraints.h>
 
 int
 asn_generic_no_constraint(const asn_TYPE_descriptor_t *type_descriptor,

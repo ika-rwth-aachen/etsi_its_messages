@@ -5,9 +5,9 @@
  */
 #ifndef ASN_DISABLE_OER_SUPPORT
 
-#include <asn_internal.h>
-#include <constr_SET_OF.h>
-#include <asn_SET_OF.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/constr_SET_OF.h>
+#include <etsi_its_cam_coding/asn_SET_OF.h>
 #include <errno.h>
 
 /*

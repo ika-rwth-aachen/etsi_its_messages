@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "PtActivation.h"
+#include "etsi_its_cam_coding/PtActivation.h"
 
 asn_TYPE_member_t asn_MBR_PtActivation_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct PtActivation, ptActivationType),

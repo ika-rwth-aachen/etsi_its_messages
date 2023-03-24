@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "VehicleLength.h"
+#include "etsi_its_cam_coding/VehicleLength.h"
 
 asn_TYPE_member_t asn_MBR_VehicleLength_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct VehicleLength, vehicleLengthValue),

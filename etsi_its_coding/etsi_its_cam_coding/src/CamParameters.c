@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "CamParameters.h"
+#include "etsi_its_cam_coding/CamParameters.h"
 
 asn_TYPE_member_t asn_MBR_CamParameters_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct CamParameters, basicContainer),

@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "SteeringWheelAngle.h"
+#include "etsi_its_cam_coding/SteeringWheelAngle.h"
 
 asn_TYPE_member_t asn_MBR_SteeringWheelAngle_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct SteeringWheelAngle, steeringWheelAngleValue),

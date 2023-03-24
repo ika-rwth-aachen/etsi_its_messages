@@ -55,11 +55,11 @@ def noSpace(s: str) -> str:
     
     return s.replace(" ", "_")
 
-def includeHeader(header: str, include_type: str, primitives=False) -> str:
+def includeHeader(etsi_type: str, header: str, include_type: str, primitives=False) -> str:
     output = ""
-    pre = ""
+    pre = f"etsi_its_{etsi_type}_conversion/"
     if (primitives):
-        pre = "primitives/"
+        pre += "primitives/"
         if include_type == "IA5String" or include_type == "UTF8String" or include_type == "NumericString" or include_type == "VisibleString":
             include_type = "OCTET_STRING"
     if f"convert{include_type}.h" not in header:
@@ -248,11 +248,12 @@ def convertToPrimitiv(type, t_name, name) -> List[str]:
     return c2ros, ros2c
 
 def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[List[str]]:
+
     ns_msgs = f"etsi_its_{etsi_type}_msgs"
     msg = ""
     type = asn1["type"]
     header = f"#pragma once\n\n"
-    header += f"#include <{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>\n"
+    header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>\n"
     namespace = f"namespace etsi_its_{etsi_type}_conversion\n"
     namespace += "{\n"
     c2ros = f"\t{ns_msgs}::{t_name} convert_{t_name}toRos(const {t_name}_t& _{t_name}_in)\n"
@@ -295,7 +296,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         msg += "\n"
 
         # Converter
-        header += includeHeader(header, noSpace(type), True)
+        header += includeHeader(etsi_type, header, noSpace(type), True)
         c2ros += convertToPrimitiv(type,t_name,name)[0]
         ros2c += convertToPrimitiv(type,t_name,name)[1]
 
@@ -320,11 +321,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 c2ros+="\t\t{\n"
                 ros2c+="\t\t{\n"
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(header, memberType, True)
+                    header += includeHeader(etsi_type, header, memberType, True)
                     c2ros += "\t"+convertToPrimitiv(memberType,t_name,memberName)[0]
                     ros2c += "\t"+convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
-                    header += includeHeader(header, memberType)
+                    header += includeHeader(etsi_type, header, memberType)
                     c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
                     c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
                     ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
@@ -332,11 +333,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 ros2c+="\t\t}\n"
             else:
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(header, memberType, True)
+                    header += includeHeader(etsi_type, header, memberType, True)
                     c2ros += convertToPrimitiv(memberType,t_name,memberName)[0]
                     ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
-                    header += includeHeader(header, memberType)
+                    header += includeHeader(etsi_type, header, memberType)
                     c2ros += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.{memberName});\n"
                     ros2c += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
 
@@ -369,7 +370,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             # Converter
             memberName = member["name"]
             memberType = member["type"]
-            header += includeHeader(header, memberType)
+            header += includeHeader(etsi_type, header, memberType)
             c2ros += f"\t\tif(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})\n"
             c2ros += "\t\t{\n"
             c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.choice.{memberName});\n"
@@ -455,7 +456,7 @@ def main():
     exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
     
     file_path = os.path.dirname(os.path.realpath(__file__))
-    exportConverterFiles(converter_by_type, f"{file_path}/../../etsi_its_conversion/etsi_its_{args.type}_conversion/include")
+    exportConverterFiles(converter_by_type, f"{file_path}/../../etsi_its_conversion/etsi_its_{args.type}_conversion/include/etsi_its_{args.type}_conversion")
 
 if __name__ == "__main__":
     

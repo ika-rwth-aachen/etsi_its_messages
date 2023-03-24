@@ -8,7 +8,7 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 
-#include <convertCAM.h>
+#include <etsi_its_cam_conversion/convertCAM.h>
 
 namespace sample_package {
 

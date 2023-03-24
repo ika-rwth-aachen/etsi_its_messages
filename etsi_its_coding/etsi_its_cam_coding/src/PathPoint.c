@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "PathPoint.h"
+#include "etsi_its_cam_coding/PathPoint.h"
 
 asn_TYPE_member_t asn_MBR_PathPoint_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct PathPoint, pathPosition),

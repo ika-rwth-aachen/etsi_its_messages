@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "YawRateConfidence.h"
+#include "etsi_its_cam_coding/YawRateConfidence.h"
 
 /*
  * This type is implemented using NativeEnumerated,

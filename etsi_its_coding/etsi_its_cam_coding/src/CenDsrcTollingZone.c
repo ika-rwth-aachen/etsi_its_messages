@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "CenDsrcTollingZone.h"
+#include "etsi_its_cam_coding/CenDsrcTollingZone.h"
 
 asn_TYPE_member_t asn_MBR_CenDsrcTollingZone_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct CenDsrcTollingZone, protectedZoneLatitude),

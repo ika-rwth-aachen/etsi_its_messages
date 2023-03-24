@@ -5,8 +5,8 @@
  */
 #ifndef ASN_DISABLE_OER_SUPPORT
 
-#include <asn_internal.h>
-#include <NativeEnumerated.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/NativeEnumerated.h>
 #include <errno.h>
 
 static long
