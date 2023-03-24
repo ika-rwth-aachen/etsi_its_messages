@@ -9,7 +9,7 @@
 #define	ASN_SYSTEM_H
 
 #ifdef	HAVE_CONFIG_H
-#include "etsi_its_cam_coding/config.h"
+#include "config.h"
 #endif
 
 #ifndef _DEFAULT_SOURCE
