@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <INTEGER.h>
-#include <asn_codecs_prim.h>	/* Encoder and decoder of a primitive type */
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/INTEGER.h>
+#include <etsi_its_cam_coding/asn_codecs_prim.h>	/* Encoder and decoder of a primitive type */
 #include <errno.h>
 
 /*

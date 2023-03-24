@@ -3,10 +3,10 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <constr_SEQUENCE.h>
-#include <OPEN_TYPE.h>
-#include <per_opentype.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/constr_SEQUENCE.h>
+#include <etsi_its_cam_coding/OPEN_TYPE.h>
+#include <etsi_its_cam_coding/per_opentype.h>
 
 /*
  * Number of bytes left for this structure.

@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "ExteriorLights.h"
+#include "etsi_its_cam_coding/ExteriorLights.h"
 
 int
 ExteriorLights_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,

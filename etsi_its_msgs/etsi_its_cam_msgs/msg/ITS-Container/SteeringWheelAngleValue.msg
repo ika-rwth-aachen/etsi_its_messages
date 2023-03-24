@@ -3,8 +3,8 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-511, 512)]
-int16 STRAIGHT = 0
-int16 ONE_POINT_FIVE_DEGREES_TO_RIGHT = -1
-int16 ONE_POINT_FIVE_DEGREES_TO_LEFT = 1
-int16 UNAVAILABLE = 512
-int16 value
+int64 STRAIGHT = 0
+int64 ONE_POINT_FIVE_DEGREES_TO_RIGHT = -1
+int64 ONE_POINT_FIVE_DEGREES_TO_LEFT = 1
+int64 UNAVAILABLE = 512
+int64 value

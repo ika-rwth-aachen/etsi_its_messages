@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "RoadWorksContainerBasic.h"
+#include "etsi_its_cam_coding/RoadWorksContainerBasic.h"
 
 asn_TYPE_member_t asn_MBR_RoadWorksContainerBasic_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct RoadWorksContainerBasic, roadworksSubCauseCode),

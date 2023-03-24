@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "SpecialTransportContainer.h"
+#include "etsi_its_cam_coding/SpecialTransportContainer.h"
 
 asn_TYPE_member_t asn_MBR_SpecialTransportContainer_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct SpecialTransportContainer, specialTransportType),

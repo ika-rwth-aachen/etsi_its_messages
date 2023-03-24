@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "ProtectedZoneType.h"
+#include "etsi_its_cam_coding/ProtectedZoneType.h"
 
 /*
  * This type is implemented using NativeEnumerated,

@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <OCTET_STRING.h>
-#include <BIT_STRING.h>	/* for .bits_unused member */
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/OCTET_STRING.h>
+#include <etsi_its_cam_coding/BIT_STRING.h>	/* for .bits_unused member */
 #include <errno.h>
 
 /*

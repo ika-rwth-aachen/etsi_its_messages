@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_system.h>
-#include <asn_internal.h>
-#include <asn_bit_data.h>
+#include <etsi_its_cam_coding/asn_system.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/asn_bit_data.h>
 
 /*
  * Create a contiguous non-refillable bit data structure.

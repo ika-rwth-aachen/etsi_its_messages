@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "AltitudeConfidence.h"
+#include "etsi_its_cam_coding/AltitudeConfidence.h"
 
 /*
  * This type is implemented using NativeEnumerated,

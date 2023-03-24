@@ -2,8 +2,8 @@
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <asn_SEQUENCE_OF.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/asn_SEQUENCE_OF.h>
 
 typedef A_SEQUENCE_OF(void) asn_sequence;
 

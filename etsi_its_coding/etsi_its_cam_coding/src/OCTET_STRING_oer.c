@@ -5,8 +5,8 @@
  */
 #ifndef ASN_DISABLE_OER_SUPPORT
 
-#include <asn_internal.h>
-#include <OCTET_STRING.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/OCTET_STRING.h>
 #include <errno.h>
 
 asn_dec_rval_t

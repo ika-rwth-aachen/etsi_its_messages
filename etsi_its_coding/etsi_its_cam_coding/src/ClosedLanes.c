@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "ClosedLanes.h"
+#include "etsi_its_cam_coding/ClosedLanes.h"
 
 asn_TYPE_member_t asn_MBR_ClosedLanes_1[] = {
 	{ ATF_POINTER, 3, offsetof(struct ClosedLanes, innerhardShoulderStatus),

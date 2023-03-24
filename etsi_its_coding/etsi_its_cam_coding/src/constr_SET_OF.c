@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <constr_SET_OF.h>
-#include <asn_SET_OF.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/constr_SET_OF.h>
+#include <etsi_its_cam_coding/asn_SET_OF.h>
 
 /*
  * Number of bytes left for this structure.

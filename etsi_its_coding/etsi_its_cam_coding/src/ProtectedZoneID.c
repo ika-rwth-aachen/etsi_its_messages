@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "ProtectedZoneID.h"
+#include "etsi_its_cam_coding/ProtectedZoneID.h"
 
 int
 ProtectedZoneID_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,

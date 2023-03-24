@@ -1,6 +1,6 @@
-#include <asn_application.h>
-#include <asn_internal.h>
-#include <per_encoder.h>
+#include <etsi_its_cam_coding/asn_application.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/per_encoder.h>
 
 static int _uper_encode_flush_outp(asn_per_outp_t *po);
 

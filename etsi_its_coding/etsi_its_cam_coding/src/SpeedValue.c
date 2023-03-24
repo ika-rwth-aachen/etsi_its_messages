@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "SpeedValue.h"
+#include "etsi_its_cam_coding/SpeedValue.h"
 
 int
 SpeedValue_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,

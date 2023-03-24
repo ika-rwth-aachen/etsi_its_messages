@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "RSUContainerHighFrequency.h"
+#include "etsi_its_cam_coding/RSUContainerHighFrequency.h"
 
 asn_TYPE_member_t asn_MBR_RSUContainerHighFrequency_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct RSUContainerHighFrequency, protectedCommunicationZonesRSU),

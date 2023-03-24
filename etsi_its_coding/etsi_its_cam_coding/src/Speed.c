@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "Speed.h"
+#include "etsi_its_cam_coding/Speed.h"
 
 asn_TYPE_member_t asn_MBR_Speed_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct Speed, speedValue),

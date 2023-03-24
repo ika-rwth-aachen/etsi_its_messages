@@ -2,9 +2,9 @@
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
-#include <OPEN_TYPE.h>
-#include <constr_CHOICE.h>
+#include <etsi_its_cam_coding/asn_internal.h>
+#include <etsi_its_cam_coding/OPEN_TYPE.h>
+#include <etsi_its_cam_coding/constr_CHOICE.h>
 #include <errno.h>
 
 asn_dec_rval_t

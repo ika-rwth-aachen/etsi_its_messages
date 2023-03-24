@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "HighFrequencyContainer.h"
+#include "etsi_its_cam_coding/HighFrequencyContainer.h"
 
 static asn_oer_constraints_t asn_OER_type_HighFrequencyContainer_constr_1 CC_NOTUSED = {
 	{ 0, 0 },

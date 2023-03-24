@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(1, 62)]
-uint8 TEN_CENTIMETERS = 1
-uint8 OUT_OF_RANGE = 61
-uint8 UNAVAILABLE = 62
-uint8 value
+int64 TEN_CENTIMETERS = 1
+int64 OUT_OF_RANGE = 61
+int64 UNAVAILABLE = 62
+int64 value

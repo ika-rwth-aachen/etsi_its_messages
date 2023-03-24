@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 7)]
-uint8 UNAVAILABLE = 0
-uint8 PERFORMANCE_CLASS_A = 1
-uint8 PERFORMANCE_CLASS_B = 2
-uint8 value
+int64 UNAVAILABLE = 0
+int64 PERFORMANCE_CLASS_A = 1
+int64 PERFORMANCE_CLASS_B = 2
+int64 value

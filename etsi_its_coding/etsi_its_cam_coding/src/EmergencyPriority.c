@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
 
-#include "EmergencyPriority.h"
+#include "etsi_its_cam_coding/EmergencyPriority.h"
 
 int
 EmergencyPriority_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
