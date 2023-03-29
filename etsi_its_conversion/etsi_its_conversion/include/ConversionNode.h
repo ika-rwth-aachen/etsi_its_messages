@@ -10,16 +10,16 @@
 
 #include <etsi_its_cam_conversion/convertCAM.h>
 
-namespace sample_package {
+namespace etsi_its_conversion {
 
-class SampleNode {
+class ConversionNode {
 
   public:
-    SampleNode();
+    ConversionNode();
 
   private:
-    void timerCallback(const ros::TimerEvent& event);
-    void messageCallback(const etsi_its_cam_msgs::CAM& msg);
+    void generateDummyCAM(const ros::TimerEvent& event);
+    void CAMCallback(const etsi_its_cam_msgs::CAM& msg);
 
     ros::NodeHandle node_handle_;
     ros::NodeHandle private_node_handle_;
@@ -32,4 +32,4 @@ class SampleNode {
 };
 
 
-}  // end of namespace sample_package
+}  // end of namespace etsi_its_conversion

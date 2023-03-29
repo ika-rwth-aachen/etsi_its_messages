@@ -1,23 +1,23 @@
-#include <SampleNode.h>
+#include <ConversionNode.h>
 
 
-namespace sample_package {
+namespace etsi_its_conversion {
 
 
-SampleNode::SampleNode() : node_handle_(), private_node_handle_("~") {
-  ROS_INFO("SampleNode starting...");
+ConversionNode::ConversionNode() : node_handle_(), private_node_handle_("~") {
+  ROS_INFO("ConversionNode starting...");
 
   // setup publisher and subscriber
   pub_ = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>("message", 1);
-  sub_ = private_node_handle_.subscribe("message", 1, &SampleNode::messageCallback, this);
+  sub_ = private_node_handle_.subscribe("message", 1, &ConversionNode::CAMCallback, this);
 
   // create timer for publishing messages
-  timer_ = node_handle_.createTimer(ros::Duration(1.0), &SampleNode::timerCallback, this);
+  timer_ = node_handle_.createTimer(ros::Duration(1.0), &ConversionNode::generateDummyCAM, this);
 
   ros::spin();
 }
 
-void SampleNode::timerCallback(const ros::TimerEvent& event) {
+void ConversionNode::generateDummyCAM(const ros::TimerEvent& event) {
 
   ROS_INFO("CAM Generator started.");
 
@@ -130,9 +130,9 @@ void SampleNode::timerCallback(const ros::TimerEvent& event) {
 }
 
 
-void SampleNode::messageCallback(const etsi_its_cam_msgs::CAM& msg) {
+void ConversionNode::CAMCallback(const etsi_its_cam_msgs::CAM& msg) {
 
-  ROS_INFO("Received message.");
+  ROS_INFO("Received CAM.");
 }
 
 
@@ -141,9 +141,9 @@ void SampleNode::messageCallback(const etsi_its_cam_msgs::CAM& msg) {
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "SampleNode");
+  ros::init(argc, argv, "ConversionNode");
 
-  sample_package::SampleNode node;
+  etsi_its_conversion::ConversionNode node;
 
   return 0;
 }
