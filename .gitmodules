@@ -1,6 +1,6 @@
 [submodule "cam_en302637_2"]
 	path = utils/asn1/raw/cam_en302637_2
 	url = https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2
-[submodule "etsi_its_conversion/etsi_its_conversion/docker/docker-ros"]
-	path = etsi_its_conversion/etsi_its_conversion/docker/docker-ros
+[submodule "docker/docker-ros"]
+	path = docker/docker-ros
 	url = ../../ops/docker-ros.git
