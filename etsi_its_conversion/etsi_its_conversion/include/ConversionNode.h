@@ -19,7 +19,7 @@ class ConversionNode {
     ConversionNode();
 
   private:
-    void generateDummyCAM(const ros::TimerEvent& event);
+    void cam_callback(etsi_its_cam_msgs::CAM msg);
     void cam_asn1_callback(etsi_its_asn1_msgs::ASN1_udp msg);
 
     ros::NodeHandle node_handle_;
@@ -28,6 +28,7 @@ class ConversionNode {
     ros::Publisher cam_ros_pub_;
     ros::Publisher cam_asn1_pub_;
     ros::Subscriber cam_asn1_sub_;
+    ros::Subscriber cam_ros_sub_;
 
     ros::Timer timer_;
 

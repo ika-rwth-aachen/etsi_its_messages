@@ -138,6 +138,7 @@ include_directories(
 ## EXECUTABLES START ##
 
 add_executable(${PROJECT_NAME}_node src/ConversionNode.cpp)
+add_executable(${PROJECT_NAME}_generator src/CamGenerator.cpp)
 ## EXECUTABLES END ##
 
 ## Rename C++ executable without prefix
@@ -149,6 +150,7 @@ add_executable(${PROJECT_NAME}_node src/ConversionNode.cpp)
 ## TARGET PROPERTIES START ##
 
 set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME ConversionNode)
+set_target_properties(${PROJECT_NAME}_generator PROPERTIES OUTPUT_NAME CamGenerator)
 ## TARGET PROPERTIES END ##
 
 ## Add cmake target dependencies of the executable
@@ -158,6 +160,7 @@ set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME ConversionNode
 ## DEPENDENCIES START ##
 
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_generator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 ## DEPENDENCIES END ##
 
 ## Specify libraries to link a library or executable target against
@@ -168,6 +171,7 @@ add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catk
 ## LINKING START ##
 
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_generator ${catkin_LIBRARIES})
 ## LINKING END ##
 
 #############
@@ -196,6 +200,7 @@ target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 ## INSTALL START ##
 install(TARGETS 
     ${PROJECT_NAME}_node
+    ${PROJECT_NAME}_generator
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
