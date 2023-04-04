@@ -1,44 +1,16 @@
-include:
-  - project: fb-fi/ops/docker-ros
-    ref: main
-    file: templates/.gitlab-ci.template.yml
-
-variables:
-  DISABLE_ARCH_ARM64: 'true'
-  GIT_SUBMODULE_STRATEGY: recursive  
-
-default:
-  image: python:3.9-slim
-  services:
-    - docker:20.10.22-dind
-  before_script:
-    - pip install -r utils/scripts/requirements.txt
-
-stages:
-  - Generate ROS Messages & Conversion Functions
-  - Build ROS Packages
-
-
-CAM:
-  stage: Generate ROS Messages & Conversion Functions
-  script:
-    - >
-      ./utils/scripts/asn1ToRosMsg.py
-      utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn
-      utils/asn1/reduced/cam/ITS-Container.asn
-      -t cam
-      -o etsi_its_msgs/etsi_its_cam_msgs/msg
-
-
-Build Workspace:
-  stage: Build ROS Packages
-  image: docker:git
-  tags: [privileged, amd64]
-  before_script:
-    - apk add --update bash coreutils tar
-    - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
-  script:
-    - .industrial_ci/gitlab.sh
+etsi2ros:
   variables:
-    ROS_DISTRO: noetic
-    CATKIN_LINT: 'true'
+    GIT_SUBMODULE_STRATEGY: recursive
+  trigger:
+    include: .gitlab-ci.generate-msgs.yml
+    strategy: depend
+
+docker-ros:
+  variables:
+    DISABLE_ARCH_ARM64: 'true'
+  trigger:
+    include:
+    - project: fb-fi/ops/docker-ros
+      ref: main
+      file: templates/.gitlab-ci.template.yml
+    strategy: depend
