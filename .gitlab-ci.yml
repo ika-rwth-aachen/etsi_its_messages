@@ -1,11 +1,16 @@
-services:
-  - docker:20.10.16-dind
+include:
+  - project: fb-fi/ops/docker-ros
+    ref: main
+    file: templates/.gitlab-ci.template.yml
 
 variables:
+  DISABLE_ARCH_ARM64: 'true'
   GIT_SUBMODULE_STRATEGY: recursive  
 
 default:
   image: python:3.9-slim
+  services:
+    - docker:20.10.22-dind
   before_script:
     - pip install -r utils/scripts/requirements.txt
 
