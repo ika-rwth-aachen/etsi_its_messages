@@ -8,6 +8,8 @@ etsi2ros:
 docker-ros:
   variables:
     DISABLE_ARCH_ARM64: 'true'
+    IMAGE_DEV_TARGET: gitlab.ika.rwth-aachen.de:5050/${CI_PROJECT_PATH}/etsi_its_conversion:latest-dev
+    IMAGE_RUN_TARGET: gitlab.ika.rwth-aachen.de:5050/${CI_PROJECT_PATH}/etsi_its_conversion:latest
   trigger:
     include:
     - project: fb-fi/ops/docker-ros
