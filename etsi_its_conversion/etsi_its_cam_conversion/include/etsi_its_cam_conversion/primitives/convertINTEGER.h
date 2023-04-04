@@ -23,5 +23,9 @@ namespace etsi_its_cam_conversion
 	{
         INTEGER_out = _INTEGER_in;
 	}
-
+	
+	void convert_toC(const long& _INTEGER_in, unsigned long& INTEGER_out)
+	{
+        INTEGER_out = _INTEGER_in;
+	}
 }
