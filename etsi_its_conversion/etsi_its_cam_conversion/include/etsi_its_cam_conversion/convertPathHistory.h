@@ -13,6 +13,7 @@ namespace etsi_its_cam_conversion
 	PathHistory_t convert_PathHistorytoC(const etsi_its_cam_msgs::PathHistory& _PathHistory_in)
 	{
 		PathHistory_t PathHistory_out;
+		memset(&PathHistory_out, 0, sizeof(PathHistory_t));
 		return PathHistory_out;
 	}
 }

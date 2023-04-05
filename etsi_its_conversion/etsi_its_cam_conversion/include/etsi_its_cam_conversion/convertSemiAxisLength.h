@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	SemiAxisLength_t convert_SemiAxisLengthtoC(const etsi_its_cam_msgs::SemiAxisLength& _SemiAxisLength_in)
 	{
 		SemiAxisLength_t SemiAxisLength_out;
+		memset(&SemiAxisLength_out, 0, sizeof(SemiAxisLength_t));
 		convert_toC(_SemiAxisLength_in.value, SemiAxisLength_out);
 		return SemiAxisLength_out;
 	}

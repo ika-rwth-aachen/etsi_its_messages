@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	Latitude_t convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in)
 	{
 		Latitude_t Latitude_out;
+		memset(&Latitude_out, 0, sizeof(Latitude_t));
 		convert_toC(_Latitude_in.value, Latitude_out);
 		return Latitude_out;
 	}

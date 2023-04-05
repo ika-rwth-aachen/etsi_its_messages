@@ -17,6 +17,7 @@ namespace etsi_its_cam_conversion
 	LongitudinalAcceleration_t convert_LongitudinalAccelerationtoC(const etsi_its_cam_msgs::LongitudinalAcceleration& _LongitudinalAcceleration_in)
 	{
 		LongitudinalAcceleration_t LongitudinalAcceleration_out;
+		memset(&LongitudinalAcceleration_out, 0, sizeof(LongitudinalAcceleration_t));
 		LongitudinalAcceleration_out.longitudinalAccelerationValue = convert_LongitudinalAccelerationValuetoC(_LongitudinalAcceleration_in.longitudinalAccelerationValue);
 		LongitudinalAcceleration_out.longitudinalAccelerationConfidence = convert_AccelerationConfidencetoC(_LongitudinalAcceleration_in.longitudinalAccelerationConfidence);
 		return LongitudinalAcceleration_out;

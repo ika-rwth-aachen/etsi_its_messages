@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	SteeringWheelAngleConfidence_t convert_SteeringWheelAngleConfidencetoC(const etsi_its_cam_msgs::SteeringWheelAngleConfidence& _SteeringWheelAngleConfidence_in)
 	{
 		SteeringWheelAngleConfidence_t SteeringWheelAngleConfidence_out;
+		memset(&SteeringWheelAngleConfidence_out, 0, sizeof(SteeringWheelAngleConfidence_t));
 		convert_toC(_SteeringWheelAngleConfidence_in.value, SteeringWheelAngleConfidence_out);
 		return SteeringWheelAngleConfidence_out;
 	}

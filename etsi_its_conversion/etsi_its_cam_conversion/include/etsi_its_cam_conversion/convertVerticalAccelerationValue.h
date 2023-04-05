@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	VerticalAccelerationValue_t convert_VerticalAccelerationValuetoC(const etsi_its_cam_msgs::VerticalAccelerationValue& _VerticalAccelerationValue_in)
 	{
 		VerticalAccelerationValue_t VerticalAccelerationValue_out;
+		memset(&VerticalAccelerationValue_out, 0, sizeof(VerticalAccelerationValue_t));
 		convert_toC(_VerticalAccelerationValue_in.value, VerticalAccelerationValue_out);
 		return VerticalAccelerationValue_out;
 	}

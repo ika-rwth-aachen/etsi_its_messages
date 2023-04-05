@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	CurvatureValue_t convert_CurvatureValuetoC(const etsi_its_cam_msgs::CurvatureValue& _CurvatureValue_in)
 	{
 		CurvatureValue_t CurvatureValue_out;
+		memset(&CurvatureValue_out, 0, sizeof(CurvatureValue_t));
 		convert_toC(_CurvatureValue_in.value, CurvatureValue_out);
 		return CurvatureValue_out;
 	}

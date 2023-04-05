@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	LanePosition_t convert_LanePositiontoC(const etsi_its_cam_msgs::LanePosition& _LanePosition_in)
 	{
 		LanePosition_t LanePosition_out;
+		memset(&LanePosition_out, 0, sizeof(LanePosition_t));
 		convert_toC(_LanePosition_in.value, LanePosition_out);
 		return LanePosition_out;
 	}

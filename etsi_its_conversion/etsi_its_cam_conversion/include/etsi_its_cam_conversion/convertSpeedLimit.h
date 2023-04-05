@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	SpeedLimit_t convert_SpeedLimittoC(const etsi_its_cam_msgs::SpeedLimit& _SpeedLimit_in)
 	{
 		SpeedLimit_t SpeedLimit_out;
+		memset(&SpeedLimit_out, 0, sizeof(SpeedLimit_t));
 		convert_toC(_SpeedLimit_in.value, SpeedLimit_out);
 		return SpeedLimit_out;
 	}

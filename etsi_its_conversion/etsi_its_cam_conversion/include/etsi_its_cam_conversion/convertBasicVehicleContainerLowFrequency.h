@@ -19,6 +19,7 @@ namespace etsi_its_cam_conversion
 	BasicVehicleContainerLowFrequency_t convert_BasicVehicleContainerLowFrequencytoC(const etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& _BasicVehicleContainerLowFrequency_in)
 	{
 		BasicVehicleContainerLowFrequency_t BasicVehicleContainerLowFrequency_out;
+		memset(&BasicVehicleContainerLowFrequency_out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
 		BasicVehicleContainerLowFrequency_out.vehicleRole = convert_VehicleRoletoC(_BasicVehicleContainerLowFrequency_in.vehicleRole);
 		BasicVehicleContainerLowFrequency_out.exteriorLights = convert_ExteriorLightstoC(_BasicVehicleContainerLowFrequency_in.exteriorLights);
 		BasicVehicleContainerLowFrequency_out.pathHistory = convert_PathHistorytoC(_BasicVehicleContainerLowFrequency_in.pathHistory);

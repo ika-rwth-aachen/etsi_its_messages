@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	RoadworksSubCauseCode_t convert_RoadworksSubCauseCodetoC(const etsi_its_cam_msgs::RoadworksSubCauseCode& _RoadworksSubCauseCode_in)
 	{
 		RoadworksSubCauseCode_t RoadworksSubCauseCode_out;
+		memset(&RoadworksSubCauseCode_out, 0, sizeof(RoadworksSubCauseCode_t));
 		convert_toC(_RoadworksSubCauseCode_in.value, RoadworksSubCauseCode_out);
 		return RoadworksSubCauseCode_out;
 	}

@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	HeadingConfidence_t convert_HeadingConfidencetoC(const etsi_its_cam_msgs::HeadingConfidence& _HeadingConfidence_in)
 	{
 		HeadingConfidence_t HeadingConfidence_out;
+		memset(&HeadingConfidence_out, 0, sizeof(HeadingConfidence_t));
 		convert_toC(_HeadingConfidence_in.value, HeadingConfidence_out);
 		return HeadingConfidence_out;
 	}

@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	DrivingLaneStatus_t convert_DrivingLaneStatustoC(const etsi_its_cam_msgs::DrivingLaneStatus& _DrivingLaneStatus_in)
 	{
 		DrivingLaneStatus_t DrivingLaneStatus_out;
+		memset(&DrivingLaneStatus_out, 0, sizeof(DrivingLaneStatus_t));
 		convert_BIT_STRINGtoC(_DrivingLaneStatus_in.value, DrivingLaneStatus_out);
 		return DrivingLaneStatus_out;
 	}

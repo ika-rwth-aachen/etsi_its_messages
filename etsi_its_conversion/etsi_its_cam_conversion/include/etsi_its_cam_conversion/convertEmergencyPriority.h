@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	EmergencyPriority_t convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in)
 	{
 		EmergencyPriority_t EmergencyPriority_out;
+		memset(&EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
 		convert_BIT_STRINGtoC(_EmergencyPriority_in.value, EmergencyPriority_out);
 		return EmergencyPriority_out;
 	}

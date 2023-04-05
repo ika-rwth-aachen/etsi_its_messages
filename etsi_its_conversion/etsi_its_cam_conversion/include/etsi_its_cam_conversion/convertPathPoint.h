@@ -21,11 +21,12 @@ namespace etsi_its_cam_conversion
 	PathPoint_t convert_PathPointtoC(const etsi_its_cam_msgs::PathPoint& _PathPoint_in)
 	{
 		PathPoint_t PathPoint_out;
+		memset(&PathPoint_out, 0, sizeof(PathPoint_t));
 		PathPoint_out.pathPosition = convert_DeltaReferencePositiontoC(_PathPoint_in.pathPosition);
 		if(_PathPoint_in.pathDeltaTime_isPresent)
 		{
 			auto pathDeltaTime = convert_PathDeltaTimetoC(_PathPoint_in.pathDeltaTime);
-			PathPoint_out.pathDeltaTime = &pathDeltaTime;
+			PathPoint_out.pathDeltaTime = new PathDeltaTime_t(pathDeltaTime);
 		}
 		return PathPoint_out;
 	}

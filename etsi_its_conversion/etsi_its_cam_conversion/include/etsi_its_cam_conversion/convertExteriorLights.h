@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	ExteriorLights_t convert_ExteriorLightstoC(const etsi_its_cam_msgs::ExteriorLights& _ExteriorLights_in)
 	{
 		ExteriorLights_t ExteriorLights_out;
+		memset(&ExteriorLights_out, 0, sizeof(ExteriorLights_t));
 		convert_BIT_STRINGtoC(_ExteriorLights_in.value, ExteriorLights_out);
 		return ExteriorLights_out;
 	}

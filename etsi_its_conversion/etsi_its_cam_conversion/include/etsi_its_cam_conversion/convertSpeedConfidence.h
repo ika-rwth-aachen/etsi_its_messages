@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	SpeedConfidence_t convert_SpeedConfidencetoC(const etsi_its_cam_msgs::SpeedConfidence& _SpeedConfidence_in)
 	{
 		SpeedConfidence_t SpeedConfidence_out;
+		memset(&SpeedConfidence_out, 0, sizeof(SpeedConfidence_t));
 		convert_toC(_SpeedConfidence_in.value, SpeedConfidence_out);
 		return SpeedConfidence_out;
 	}

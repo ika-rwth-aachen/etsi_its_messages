@@ -19,6 +19,7 @@ namespace etsi_its_cam_conversion
 	LowFrequencyContainer_t convert_LowFrequencyContainertoC(const etsi_its_cam_msgs::LowFrequencyContainer& _LowFrequencyContainer_in)
 	{
 		LowFrequencyContainer_t LowFrequencyContainer_out;
+		memset(&LowFrequencyContainer_out, 0, sizeof(LowFrequencyContainer_t));
 		if(_LowFrequencyContainer_in.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY)
 		{
 			LowFrequencyContainer_out.choice.basicVehicleContainerLowFrequency = convert_BasicVehicleContainerLowFrequencytoC(_LowFrequencyContainer_in.basicVehicleContainerLowFrequency);

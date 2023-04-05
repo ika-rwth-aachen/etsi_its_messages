@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 	CurvatureCalculationMode_t convert_CurvatureCalculationModetoC(const etsi_its_cam_msgs::CurvatureCalculationMode& _CurvatureCalculationMode_in)
 	{
 		CurvatureCalculationMode_t CurvatureCalculationMode_out;
+		memset(&CurvatureCalculationMode_out, 0, sizeof(CurvatureCalculationMode_t));
 		CurvatureCalculationMode_out = _CurvatureCalculationMode_in.value;
 		return CurvatureCalculationMode_out;
 	}

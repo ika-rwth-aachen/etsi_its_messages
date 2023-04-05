@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 	YawRateConfidence_t convert_YawRateConfidencetoC(const etsi_its_cam_msgs::YawRateConfidence& _YawRateConfidence_in)
 	{
 		YawRateConfidence_t YawRateConfidence_out;
+		memset(&YawRateConfidence_out, 0, sizeof(YawRateConfidence_t));
 		YawRateConfidence_out = _YawRateConfidence_in.value;
 		return YawRateConfidence_out;
 	}

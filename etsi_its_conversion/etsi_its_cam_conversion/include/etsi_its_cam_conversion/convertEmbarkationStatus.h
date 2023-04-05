@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	EmbarkationStatus_t convert_EmbarkationStatustoC(const etsi_its_cam_msgs::EmbarkationStatus& _EmbarkationStatus_in)
 	{
 		EmbarkationStatus_t EmbarkationStatus_out;
+		memset(&EmbarkationStatus_out, 0, sizeof(EmbarkationStatus_t));
 		convert_BOOLEANtoC(_EmbarkationStatus_in.value, EmbarkationStatus_out);
 		return EmbarkationStatus_out;
 	}

@@ -25,6 +25,7 @@ namespace etsi_its_cam_conversion
 	HighFrequencyContainer_t convert_HighFrequencyContainertoC(const etsi_its_cam_msgs::HighFrequencyContainer& _HighFrequencyContainer_in)
 	{
 		HighFrequencyContainer_t HighFrequencyContainer_out;
+		memset(&HighFrequencyContainer_out, 0, sizeof(HighFrequencyContainer_t));
 		if(_HighFrequencyContainer_in.choice == etsi_its_cam_msgs::HighFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY)
 		{
 			HighFrequencyContainer_out.choice.basicVehicleContainerHighFrequency = convert_BasicVehicleContainerHighFrequencytoC(_HighFrequencyContainer_in.basicVehicleContainerHighFrequency);

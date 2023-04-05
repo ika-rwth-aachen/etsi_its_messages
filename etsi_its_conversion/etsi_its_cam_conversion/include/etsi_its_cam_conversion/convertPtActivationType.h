@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	PtActivationType_t convert_PtActivationTypetoC(const etsi_its_cam_msgs::PtActivationType& _PtActivationType_in)
 	{
 		PtActivationType_t PtActivationType_out;
+		memset(&PtActivationType_out, 0, sizeof(PtActivationType_t));
 		convert_toC(_PtActivationType_in.value, PtActivationType_out);
 		return PtActivationType_out;
 	}

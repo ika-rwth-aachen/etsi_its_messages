@@ -17,6 +17,7 @@ namespace etsi_its_cam_conversion
 	CAM_t convert_CAMtoC(const etsi_its_cam_msgs::CAM& _CAM_in)
 	{
 		CAM_t CAM_out;
+		memset(&CAM_out, 0, sizeof(CAM_t));
 		CAM_out.header = convert_ItsPduHeadertoC(_CAM_in.header);
 		CAM_out.cam = convert_CoopAwarenesstoC(_CAM_in.cam);
 		return CAM_out;

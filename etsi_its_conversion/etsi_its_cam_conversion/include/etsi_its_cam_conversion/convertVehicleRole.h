@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 	VehicleRole_t convert_VehicleRoletoC(const etsi_its_cam_msgs::VehicleRole& _VehicleRole_in)
 	{
 		VehicleRole_t VehicleRole_out;
+		memset(&VehicleRole_out, 0, sizeof(VehicleRole_t));
 		VehicleRole_out = _VehicleRole_in.value;
 		return VehicleRole_out;
 	}

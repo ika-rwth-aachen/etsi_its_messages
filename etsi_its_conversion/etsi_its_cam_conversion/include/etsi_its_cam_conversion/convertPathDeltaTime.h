@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	PathDeltaTime_t convert_PathDeltaTimetoC(const etsi_its_cam_msgs::PathDeltaTime& _PathDeltaTime_in)
 	{
 		PathDeltaTime_t PathDeltaTime_out;
+		memset(&PathDeltaTime_out, 0, sizeof(PathDeltaTime_t));
 		convert_toC(_PathDeltaTime_in.value, PathDeltaTime_out);
 		return PathDeltaTime_out;
 	}

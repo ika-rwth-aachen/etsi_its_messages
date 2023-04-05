@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	PerformanceClass_t convert_PerformanceClasstoC(const etsi_its_cam_msgs::PerformanceClass& _PerformanceClass_in)
 	{
 		PerformanceClass_t PerformanceClass_out;
+		memset(&PerformanceClass_out, 0, sizeof(PerformanceClass_t));
 		convert_toC(_PerformanceClass_in.value, PerformanceClass_out);
 		return PerformanceClass_out;
 	}

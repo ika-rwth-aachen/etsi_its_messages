@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	PtActivationData_t convert_PtActivationDatatoC(const etsi_its_cam_msgs::PtActivationData& _PtActivationData_in)
 	{
 		PtActivationData_t PtActivationData_out;
+		memset(&PtActivationData_out, 0, sizeof(PtActivationData_t));
 		convert_OCTET_STRINGtoC(_PtActivationData_in.value, PtActivationData_out);
 		return PtActivationData_out;
 	}

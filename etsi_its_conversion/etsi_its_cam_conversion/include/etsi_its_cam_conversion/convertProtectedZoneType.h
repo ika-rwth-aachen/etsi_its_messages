@@ -14,6 +14,7 @@ namespace etsi_its_cam_conversion
 	ProtectedZoneType_t convert_ProtectedZoneTypetoC(const etsi_its_cam_msgs::ProtectedZoneType& _ProtectedZoneType_in)
 	{
 		ProtectedZoneType_t ProtectedZoneType_out;
+		memset(&ProtectedZoneType_out, 0, sizeof(ProtectedZoneType_t));
 		ProtectedZoneType_out = _ProtectedZoneType_in.value;
 		return ProtectedZoneType_out;
 	}

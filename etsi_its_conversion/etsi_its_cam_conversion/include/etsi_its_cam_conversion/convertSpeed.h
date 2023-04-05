@@ -17,6 +17,7 @@ namespace etsi_its_cam_conversion
 	Speed_t convert_SpeedtoC(const etsi_its_cam_msgs::Speed& _Speed_in)
 	{
 		Speed_t Speed_out;
+		memset(&Speed_out, 0, sizeof(Speed_t));
 		Speed_out.speedValue = convert_SpeedValuetoC(_Speed_in.speedValue);
 		Speed_out.speedConfidence = convert_SpeedConfidencetoC(_Speed_in.speedConfidence);
 		return Speed_out;

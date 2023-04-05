@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	GenerationDeltaTime_t convert_GenerationDeltaTimetoC(const etsi_its_cam_msgs::GenerationDeltaTime& _GenerationDeltaTime_in)
 	{
 		GenerationDeltaTime_t GenerationDeltaTime_out;
+		memset(&GenerationDeltaTime_out, 0, sizeof(GenerationDeltaTime_t));
 		convert_toC(_GenerationDeltaTime_in.value, GenerationDeltaTime_out);
 		return GenerationDeltaTime_out;
 	}

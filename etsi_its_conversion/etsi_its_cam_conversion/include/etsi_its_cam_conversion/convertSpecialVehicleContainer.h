@@ -55,6 +55,7 @@ namespace etsi_its_cam_conversion
 	SpecialVehicleContainer_t convert_SpecialVehicleContainertoC(const etsi_its_cam_msgs::SpecialVehicleContainer& _SpecialVehicleContainer_in)
 	{
 		SpecialVehicleContainer_t SpecialVehicleContainer_out;
+		memset(&SpecialVehicleContainer_out, 0, sizeof(SpecialVehicleContainer_t));
 		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER)
 		{
 			SpecialVehicleContainer_out.choice.publicTransportContainer = convert_PublicTransportContainertoC(_SpecialVehicleContainer_in.publicTransportContainer);

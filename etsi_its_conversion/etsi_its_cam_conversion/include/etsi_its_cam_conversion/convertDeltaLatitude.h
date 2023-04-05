@@ -15,6 +15,7 @@ namespace etsi_its_cam_conversion
 	DeltaLatitude_t convert_DeltaLatitudetoC(const etsi_its_cam_msgs::DeltaLatitude& _DeltaLatitude_in)
 	{
 		DeltaLatitude_t DeltaLatitude_out;
+		memset(&DeltaLatitude_out, 0, sizeof(DeltaLatitude_t));
 		convert_toC(_DeltaLatitude_in.value, DeltaLatitude_out);
 		return DeltaLatitude_out;
 	}
