@@ -262,6 +262,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     ros2c += "\t{\n"
     c2ros += f"\t\t{ns_msgs}::{t_name} {t_name}_out;\n"
     ros2c += f"\t\t{t_name}_t {t_name}_out;\n"
+    ros2c += f"\t\tmemset(&{t_name}_out, 0, sizeof({t_name}_t));\n"
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
@@ -329,7 +330,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                     c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
                     c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
                     ros2c += f"\t\t\tauto {memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
-                    ros2c += f"\t\t\t{t_name}_out.{memberName} = &{memberName};\n"
+                    ros2c += f"\t\t\t{t_name}_out.{memberName} = new {memberType}_t({memberName});\n"
                 c2ros+="\t\t}\n"
                 ros2c+="\t\t}\n"
             else:
