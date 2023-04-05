@@ -328,7 +328,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                     header += includeHeader(etsi_type, header, memberType)
                     c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
                     c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
-                    ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
+                    ros2c += f"\t\t\tauto {memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
+                    ros2c += f"\t\t\t{t_name}_out.{memberName} = &{memberName};\n"
                 c2ros+="\t\t}\n"
                 ros2c+="\t\t}\n"
             else:
@@ -436,7 +437,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     return_value = f"\t\treturn {t_name}_out;\n"
     return_value += "\t}\n"
 
-    converter_str = header + "\n" + namespace + c2ros + return_value + "}"
+    converter_str = header + "\n" + namespace + c2ros + return_value + ros2c + return_value + "}"
 
     return msg, converter_str
 
