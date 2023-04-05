@@ -27,6 +27,7 @@
   <!-- Example: -->
   <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
   <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
 
 
   <!-- The *depend tags are used to specify dependencies -->
@@ -51,11 +52,6 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>etsi_its_cam_msgs</exec_depend>
-
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
-    <metapackage/>
-  </export>
+  <depend>etsi_its_cam_msgs</depend>
 
 </package>
