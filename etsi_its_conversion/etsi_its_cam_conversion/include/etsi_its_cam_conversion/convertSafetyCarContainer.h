@@ -30,4 +30,25 @@ namespace etsi_its_cam_conversion
 		}
 		return SafetyCarContainer_out;
 	}
+	SafetyCarContainer_t convert_SafetyCarContainertoC(const etsi_its_cam_msgs::SafetyCarContainer& _SafetyCarContainer_in)
+	{
+		SafetyCarContainer_t SafetyCarContainer_out;
+		SafetyCarContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_SafetyCarContainer_in.lightBarSirenInUse);
+		if(_SafetyCarContainer_in.incidentIndication_isPresent)
+		{
+			auto incidentIndication = convert_CauseCodetoC(_SafetyCarContainer_in.incidentIndication);
+			SafetyCarContainer_out.incidentIndication = &incidentIndication;
+		}
+		if(_SafetyCarContainer_in.trafficRule_isPresent)
+		{
+			auto trafficRule = convert_TrafficRuletoC(_SafetyCarContainer_in.trafficRule);
+			SafetyCarContainer_out.trafficRule = &trafficRule;
+		}
+		if(_SafetyCarContainer_in.speedLimit_isPresent)
+		{
+			auto speedLimit = convert_SpeedLimittoC(_SafetyCarContainer_in.speedLimit);
+			SafetyCarContainer_out.speedLimit = &speedLimit;
+		}
+		return SafetyCarContainer_out;
+	}
 }

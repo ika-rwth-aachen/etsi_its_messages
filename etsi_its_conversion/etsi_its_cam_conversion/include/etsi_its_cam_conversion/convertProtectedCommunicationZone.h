@@ -34,4 +34,27 @@ namespace etsi_its_cam_conversion
 		}
 		return ProtectedCommunicationZone_out;
 	}
+	ProtectedCommunicationZone_t convert_ProtectedCommunicationZonetoC(const etsi_its_cam_msgs::ProtectedCommunicationZone& _ProtectedCommunicationZone_in)
+	{
+		ProtectedCommunicationZone_t ProtectedCommunicationZone_out;
+		ProtectedCommunicationZone_out.protectedZoneType = convert_ProtectedZoneTypetoC(_ProtectedCommunicationZone_in.protectedZoneType);
+		if(_ProtectedCommunicationZone_in.expiryTime_isPresent)
+		{
+			auto expiryTime = convert_TimestampItstoC(_ProtectedCommunicationZone_in.expiryTime);
+			ProtectedCommunicationZone_out.expiryTime = &expiryTime;
+		}
+		ProtectedCommunicationZone_out.protectedZoneLatitude = convert_LatitudetoC(_ProtectedCommunicationZone_in.protectedZoneLatitude);
+		ProtectedCommunicationZone_out.protectedZoneLongitude = convert_LongitudetoC(_ProtectedCommunicationZone_in.protectedZoneLongitude);
+		if(_ProtectedCommunicationZone_in.protectedZoneRadius_isPresent)
+		{
+			auto protectedZoneRadius = convert_ProtectedZoneRadiustoC(_ProtectedCommunicationZone_in.protectedZoneRadius);
+			ProtectedCommunicationZone_out.protectedZoneRadius = &protectedZoneRadius;
+		}
+		if(_ProtectedCommunicationZone_in.protectedZoneID_isPresent)
+		{
+			auto protectedZoneID = convert_ProtectedZoneIDtoC(_ProtectedCommunicationZone_in.protectedZoneID);
+			ProtectedCommunicationZone_out.protectedZoneID = &protectedZoneID;
+		}
+		return ProtectedCommunicationZone_out;
+	}
 }

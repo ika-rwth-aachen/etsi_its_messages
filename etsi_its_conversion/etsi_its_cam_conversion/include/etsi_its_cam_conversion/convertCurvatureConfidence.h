@@ -11,4 +11,10 @@ namespace etsi_its_cam_conversion
 		CurvatureConfidence_out.value = _CurvatureConfidence_in;
 		return CurvatureConfidence_out;
 	}
+	CurvatureConfidence_t convert_CurvatureConfidencetoC(const etsi_its_cam_msgs::CurvatureConfidence& _CurvatureConfidence_in)
+	{
+		CurvatureConfidence_t CurvatureConfidence_out;
+		CurvatureConfidence_out = _CurvatureConfidence_in.value;
+		return CurvatureConfidence_out;
+	}
 }

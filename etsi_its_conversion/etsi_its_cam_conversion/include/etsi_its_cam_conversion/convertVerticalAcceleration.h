@@ -14,4 +14,11 @@ namespace etsi_its_cam_conversion
 		VerticalAcceleration_out.verticalAccelerationConfidence = convert_AccelerationConfidencetoRos(_VerticalAcceleration_in.verticalAccelerationConfidence);
 		return VerticalAcceleration_out;
 	}
+	VerticalAcceleration_t convert_VerticalAccelerationtoC(const etsi_its_cam_msgs::VerticalAcceleration& _VerticalAcceleration_in)
+	{
+		VerticalAcceleration_t VerticalAcceleration_out;
+		VerticalAcceleration_out.verticalAccelerationValue = convert_VerticalAccelerationValuetoC(_VerticalAcceleration_in.verticalAccelerationValue);
+		VerticalAcceleration_out.verticalAccelerationConfidence = convert_AccelerationConfidencetoC(_VerticalAcceleration_in.verticalAccelerationConfidence);
+		return VerticalAcceleration_out;
+	}
 }

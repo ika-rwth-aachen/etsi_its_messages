@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_PerformanceClass_in, PerformanceClass_out.value);
 		return PerformanceClass_out;
 	}
+	PerformanceClass_t convert_PerformanceClasstoC(const etsi_its_cam_msgs::PerformanceClass& _PerformanceClass_in)
+	{
+		PerformanceClass_t PerformanceClass_out;
+		convert_toC(_PerformanceClass_in.value, PerformanceClass_out);
+		return PerformanceClass_out;
+	}
 }

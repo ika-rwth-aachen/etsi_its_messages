@@ -24,4 +24,20 @@ namespace etsi_its_cam_conversion
 		}
 		return RoadWorksContainerBasic_out;
 	}
+	RoadWorksContainerBasic_t convert_RoadWorksContainerBasictoC(const etsi_its_cam_msgs::RoadWorksContainerBasic& _RoadWorksContainerBasic_in)
+	{
+		RoadWorksContainerBasic_t RoadWorksContainerBasic_out;
+		if(_RoadWorksContainerBasic_in.roadworksSubCauseCode_isPresent)
+		{
+			auto roadworksSubCauseCode = convert_RoadworksSubCauseCodetoC(_RoadWorksContainerBasic_in.roadworksSubCauseCode);
+			RoadWorksContainerBasic_out.roadworksSubCauseCode = &roadworksSubCauseCode;
+		}
+		RoadWorksContainerBasic_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_RoadWorksContainerBasic_in.lightBarSirenInUse);
+		if(_RoadWorksContainerBasic_in.closedLanes_isPresent)
+		{
+			auto closedLanes = convert_ClosedLanestoC(_RoadWorksContainerBasic_in.closedLanes);
+			RoadWorksContainerBasic_out.closedLanes = &closedLanes;
+		}
+		return RoadWorksContainerBasic_out;
+	}
 }

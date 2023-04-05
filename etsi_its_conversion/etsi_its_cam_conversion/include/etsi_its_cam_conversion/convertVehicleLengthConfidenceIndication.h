@@ -11,4 +11,10 @@ namespace etsi_its_cam_conversion
 		VehicleLengthConfidenceIndication_out.value = _VehicleLengthConfidenceIndication_in;
 		return VehicleLengthConfidenceIndication_out;
 	}
+	VehicleLengthConfidenceIndication_t convert_VehicleLengthConfidenceIndicationtoC(const etsi_its_cam_msgs::VehicleLengthConfidenceIndication& _VehicleLengthConfidenceIndication_in)
+	{
+		VehicleLengthConfidenceIndication_t VehicleLengthConfidenceIndication_out;
+		VehicleLengthConfidenceIndication_out = _VehicleLengthConfidenceIndication_in.value;
+		return VehicleLengthConfidenceIndication_out;
+	}
 }

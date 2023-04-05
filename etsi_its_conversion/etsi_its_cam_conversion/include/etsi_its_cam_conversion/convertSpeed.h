@@ -14,4 +14,11 @@ namespace etsi_its_cam_conversion
 		Speed_out.speedConfidence = convert_SpeedConfidencetoRos(_Speed_in.speedConfidence);
 		return Speed_out;
 	}
+	Speed_t convert_SpeedtoC(const etsi_its_cam_msgs::Speed& _Speed_in)
+	{
+		Speed_t Speed_out;
+		Speed_out.speedValue = convert_SpeedValuetoC(_Speed_in.speedValue);
+		Speed_out.speedConfidence = convert_SpeedConfidencetoC(_Speed_in.speedConfidence);
+		return Speed_out;
+	}
 }

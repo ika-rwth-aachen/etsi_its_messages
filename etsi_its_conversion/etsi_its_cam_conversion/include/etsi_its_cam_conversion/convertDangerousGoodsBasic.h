@@ -11,4 +11,10 @@ namespace etsi_its_cam_conversion
 		DangerousGoodsBasic_out.value = _DangerousGoodsBasic_in;
 		return DangerousGoodsBasic_out;
 	}
+	DangerousGoodsBasic_t convert_DangerousGoodsBasictoC(const etsi_its_cam_msgs::DangerousGoodsBasic& _DangerousGoodsBasic_in)
+	{
+		DangerousGoodsBasic_t DangerousGoodsBasic_out;
+		DangerousGoodsBasic_out = _DangerousGoodsBasic_in.value;
+		return DangerousGoodsBasic_out;
+	}
 }

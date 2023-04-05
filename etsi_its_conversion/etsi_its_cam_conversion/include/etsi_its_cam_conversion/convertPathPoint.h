@@ -18,4 +18,15 @@ namespace etsi_its_cam_conversion
 		}
 		return PathPoint_out;
 	}
+	PathPoint_t convert_PathPointtoC(const etsi_its_cam_msgs::PathPoint& _PathPoint_in)
+	{
+		PathPoint_t PathPoint_out;
+		PathPoint_out.pathPosition = convert_DeltaReferencePositiontoC(_PathPoint_in.pathPosition);
+		if(_PathPoint_in.pathDeltaTime_isPresent)
+		{
+			auto pathDeltaTime = convert_PathDeltaTimetoC(_PathPoint_in.pathDeltaTime);
+			PathPoint_out.pathDeltaTime = &pathDeltaTime;
+		}
+		return PathPoint_out;
+	}
 }

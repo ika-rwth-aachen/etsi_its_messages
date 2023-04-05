@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_LanePosition_in, LanePosition_out.value);
 		return LanePosition_out;
 	}
+	LanePosition_t convert_LanePositiontoC(const etsi_its_cam_msgs::LanePosition& _LanePosition_in)
+	{
+		LanePosition_t LanePosition_out;
+		convert_toC(_LanePosition_in.value, LanePosition_out);
+		return LanePosition_out;
+	}
 }

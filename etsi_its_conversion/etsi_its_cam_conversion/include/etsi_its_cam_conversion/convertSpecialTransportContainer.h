@@ -14,4 +14,11 @@ namespace etsi_its_cam_conversion
 		SpecialTransportContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_SpecialTransportContainer_in.lightBarSirenInUse);
 		return SpecialTransportContainer_out;
 	}
+	SpecialTransportContainer_t convert_SpecialTransportContainertoC(const etsi_its_cam_msgs::SpecialTransportContainer& _SpecialTransportContainer_in)
+	{
+		SpecialTransportContainer_t SpecialTransportContainer_out;
+		SpecialTransportContainer_out.specialTransportType = convert_SpecialTransportTypetoC(_SpecialTransportContainer_in.specialTransportType);
+		SpecialTransportContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_SpecialTransportContainer_in.lightBarSirenInUse);
+		return SpecialTransportContainer_out;
+	}
 }

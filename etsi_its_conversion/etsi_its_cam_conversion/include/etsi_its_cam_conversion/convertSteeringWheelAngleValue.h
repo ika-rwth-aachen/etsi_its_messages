@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_SteeringWheelAngleValue_in, SteeringWheelAngleValue_out.value);
 		return SteeringWheelAngleValue_out;
 	}
+	SteeringWheelAngleValue_t convert_SteeringWheelAngleValuetoC(const etsi_its_cam_msgs::SteeringWheelAngleValue& _SteeringWheelAngleValue_in)
+	{
+		SteeringWheelAngleValue_t SteeringWheelAngleValue_out;
+		convert_toC(_SteeringWheelAngleValue_in.value, SteeringWheelAngleValue_out);
+		return SteeringWheelAngleValue_out;
+	}
 }

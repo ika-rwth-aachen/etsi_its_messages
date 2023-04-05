@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_PathDeltaTime_in, PathDeltaTime_out.value);
 		return PathDeltaTime_out;
 	}
+	PathDeltaTime_t convert_PathDeltaTimetoC(const etsi_its_cam_msgs::PathDeltaTime& _PathDeltaTime_in)
+	{
+		PathDeltaTime_t PathDeltaTime_out;
+		convert_toC(_PathDeltaTime_in.value, PathDeltaTime_out);
+		return PathDeltaTime_out;
+	}
 }

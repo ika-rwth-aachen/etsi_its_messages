@@ -10,4 +10,9 @@ namespace etsi_its_cam_conversion
 		etsi_its_cam_msgs::CenDsrcTollingZoneID CenDsrcTollingZoneID_out;
 		return CenDsrcTollingZoneID_out;
 	}
+	CenDsrcTollingZoneID_t convert_CenDsrcTollingZoneIDtoC(const etsi_its_cam_msgs::CenDsrcTollingZoneID& _CenDsrcTollingZoneID_in)
+	{
+		CenDsrcTollingZoneID_t CenDsrcTollingZoneID_out;
+		return CenDsrcTollingZoneID_out;
+	}
 }

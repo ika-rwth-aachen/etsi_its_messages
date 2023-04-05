@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_HeadingValue_in, HeadingValue_out.value);
 		return HeadingValue_out;
 	}
+	HeadingValue_t convert_HeadingValuetoC(const etsi_its_cam_msgs::HeadingValue& _HeadingValue_in)
+	{
+		HeadingValue_t HeadingValue_out;
+		convert_toC(_HeadingValue_in.value, HeadingValue_out);
+		return HeadingValue_out;
+	}
 }

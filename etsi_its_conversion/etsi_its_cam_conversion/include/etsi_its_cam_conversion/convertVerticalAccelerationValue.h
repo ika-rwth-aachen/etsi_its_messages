@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_VerticalAccelerationValue_in, VerticalAccelerationValue_out.value);
 		return VerticalAccelerationValue_out;
 	}
+	VerticalAccelerationValue_t convert_VerticalAccelerationValuetoC(const etsi_its_cam_msgs::VerticalAccelerationValue& _VerticalAccelerationValue_in)
+	{
+		VerticalAccelerationValue_t VerticalAccelerationValue_out;
+		convert_toC(_VerticalAccelerationValue_in.value, VerticalAccelerationValue_out);
+		return VerticalAccelerationValue_out;
+	}
 }

@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_Latitude_in, Latitude_out.value);
 		return Latitude_out;
 	}
+	Latitude_t convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in)
+	{
+		Latitude_t Latitude_out;
+		convert_toC(_Latitude_in.value, Latitude_out);
+		return Latitude_out;
+	}
 }

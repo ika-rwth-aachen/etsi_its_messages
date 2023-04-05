@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		RescueContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_RescueContainer_in.lightBarSirenInUse);
 		return RescueContainer_out;
 	}
+	RescueContainer_t convert_RescueContainertoC(const etsi_its_cam_msgs::RescueContainer& _RescueContainer_in)
+	{
+		RescueContainer_t RescueContainer_out;
+		RescueContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_RescueContainer_in.lightBarSirenInUse);
+		return RescueContainer_out;
+	}
 }

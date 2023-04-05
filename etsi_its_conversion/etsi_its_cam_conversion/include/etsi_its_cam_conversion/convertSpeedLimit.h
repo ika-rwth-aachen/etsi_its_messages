@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_SpeedLimit_in, SpeedLimit_out.value);
 		return SpeedLimit_out;
 	}
+	SpeedLimit_t convert_SpeedLimittoC(const etsi_its_cam_msgs::SpeedLimit& _SpeedLimit_in)
+	{
+		SpeedLimit_t SpeedLimit_out;
+		convert_toC(_SpeedLimit_in.value, SpeedLimit_out);
+		return SpeedLimit_out;
+	}
 }

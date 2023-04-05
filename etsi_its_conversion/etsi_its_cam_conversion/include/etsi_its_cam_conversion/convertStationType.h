@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_StationType_in, StationType_out.value);
 		return StationType_out;
 	}
+	StationType_t convert_StationTypetoC(const etsi_its_cam_msgs::StationType& _StationType_in)
+	{
+		StationType_t StationType_out;
+		convert_toC(_StationType_in.value, StationType_out);
+		return StationType_out;
+	}
 }

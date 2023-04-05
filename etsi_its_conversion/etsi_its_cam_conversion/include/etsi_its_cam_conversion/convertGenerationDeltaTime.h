@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_GenerationDeltaTime_in, GenerationDeltaTime_out.value);
 		return GenerationDeltaTime_out;
 	}
+	GenerationDeltaTime_t convert_GenerationDeltaTimetoC(const etsi_its_cam_msgs::GenerationDeltaTime& _GenerationDeltaTime_in)
+	{
+		GenerationDeltaTime_t GenerationDeltaTime_out;
+		convert_toC(_GenerationDeltaTime_in.value, GenerationDeltaTime_out);
+		return GenerationDeltaTime_out;
+	}
 }

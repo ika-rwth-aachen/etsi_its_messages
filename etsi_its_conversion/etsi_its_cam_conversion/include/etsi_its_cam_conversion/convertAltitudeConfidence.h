@@ -11,4 +11,10 @@ namespace etsi_its_cam_conversion
 		AltitudeConfidence_out.value = _AltitudeConfidence_in;
 		return AltitudeConfidence_out;
 	}
+	AltitudeConfidence_t convert_AltitudeConfidencetoC(const etsi_its_cam_msgs::AltitudeConfidence& _AltitudeConfidence_in)
+	{
+		AltitudeConfidence_t AltitudeConfidence_out;
+		AltitudeConfidence_out = _AltitudeConfidence_in.value;
+		return AltitudeConfidence_out;
+	}
 }

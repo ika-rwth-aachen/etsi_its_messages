@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_SpeedValue_in, SpeedValue_out.value);
 		return SpeedValue_out;
 	}
+	SpeedValue_t convert_SpeedValuetoC(const etsi_its_cam_msgs::SpeedValue& _SpeedValue_in)
+	{
+		SpeedValue_t SpeedValue_out;
+		convert_toC(_SpeedValue_in.value, SpeedValue_out);
+		return SpeedValue_out;
+	}
 }

@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_PtActivationType_in, PtActivationType_out.value);
 		return PtActivationType_out;
 	}
+	PtActivationType_t convert_PtActivationTypetoC(const etsi_its_cam_msgs::PtActivationType& _PtActivationType_in)
+	{
+		PtActivationType_t PtActivationType_out;
+		convert_toC(_PtActivationType_in.value, PtActivationType_out);
+		return PtActivationType_out;
+	}
 }

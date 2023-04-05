@@ -18,4 +18,15 @@ namespace etsi_its_cam_conversion
 		}
 		return PublicTransportContainer_out;
 	}
+	PublicTransportContainer_t convert_PublicTransportContainertoC(const etsi_its_cam_msgs::PublicTransportContainer& _PublicTransportContainer_in)
+	{
+		PublicTransportContainer_t PublicTransportContainer_out;
+		PublicTransportContainer_out.embarkationStatus = convert_EmbarkationStatustoC(_PublicTransportContainer_in.embarkationStatus);
+		if(_PublicTransportContainer_in.ptActivation_isPresent)
+		{
+			auto ptActivation = convert_PtActivationtoC(_PublicTransportContainer_in.ptActivation);
+			PublicTransportContainer_out.ptActivation = &ptActivation;
+		}
+		return PublicTransportContainer_out;
+	}
 }

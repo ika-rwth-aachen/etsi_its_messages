@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_AccelerationConfidence_in, AccelerationConfidence_out.value);
 		return AccelerationConfidence_out;
 	}
+	AccelerationConfidence_t convert_AccelerationConfidencetoC(const etsi_its_cam_msgs::AccelerationConfidence& _AccelerationConfidence_in)
+	{
+		AccelerationConfidence_t AccelerationConfidence_out;
+		convert_toC(_AccelerationConfidence_in.value, AccelerationConfidence_out);
+		return AccelerationConfidence_out;
+	}
 }

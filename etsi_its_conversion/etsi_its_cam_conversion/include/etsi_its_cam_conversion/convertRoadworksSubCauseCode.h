@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_RoadworksSubCauseCode_in, RoadworksSubCauseCode_out.value);
 		return RoadworksSubCauseCode_out;
 	}
+	RoadworksSubCauseCode_t convert_RoadworksSubCauseCodetoC(const etsi_its_cam_msgs::RoadworksSubCauseCode& _RoadworksSubCauseCode_in)
+	{
+		RoadworksSubCauseCode_t RoadworksSubCauseCode_out;
+		convert_toC(_RoadworksSubCauseCode_in.value, RoadworksSubCauseCode_out);
+		return RoadworksSubCauseCode_out;
+	}
 }

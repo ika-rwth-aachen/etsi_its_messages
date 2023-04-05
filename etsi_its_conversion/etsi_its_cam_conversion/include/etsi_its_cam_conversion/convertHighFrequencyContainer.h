@@ -22,4 +22,19 @@ namespace etsi_its_cam_conversion
 		}
 		return HighFrequencyContainer_out;
 	}
+	HighFrequencyContainer_t convert_HighFrequencyContainertoC(const etsi_its_cam_msgs::HighFrequencyContainer& _HighFrequencyContainer_in)
+	{
+		HighFrequencyContainer_t HighFrequencyContainer_out;
+		if(_HighFrequencyContainer_in.choice == etsi_its_cam_msgs::HighFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY)
+		{
+			HighFrequencyContainer_out.choice.basicVehicleContainerHighFrequency = convert_BasicVehicleContainerHighFrequencytoC(_HighFrequencyContainer_in.basicVehicleContainerHighFrequency);
+			HighFrequencyContainer_out.present = HighFrequencyContainer_PR::HighFrequencyContainer_PR_basicVehicleContainerHighFrequency;
+		}
+		if(_HighFrequencyContainer_in.choice == etsi_its_cam_msgs::HighFrequencyContainer::CHOICE_RSU_CONTAINER_HIGH_FREQUENCY)
+		{
+			HighFrequencyContainer_out.choice.rsuContainerHighFrequency = convert_RSUContainerHighFrequencytoC(_HighFrequencyContainer_in.rsuContainerHighFrequency);
+			HighFrequencyContainer_out.present = HighFrequencyContainer_PR::HighFrequencyContainer_PR_rsuContainerHighFrequency;
+		}
+		return HighFrequencyContainer_out;
+	}
 }

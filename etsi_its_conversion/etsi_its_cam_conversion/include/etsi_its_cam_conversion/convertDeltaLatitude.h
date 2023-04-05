@@ -12,4 +12,10 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_DeltaLatitude_in, DeltaLatitude_out.value);
 		return DeltaLatitude_out;
 	}
+	DeltaLatitude_t convert_DeltaLatitudetoC(const etsi_its_cam_msgs::DeltaLatitude& _DeltaLatitude_in)
+	{
+		DeltaLatitude_t DeltaLatitude_out;
+		convert_toC(_DeltaLatitude_in.value, DeltaLatitude_out);
+		return DeltaLatitude_out;
+	}
 }
