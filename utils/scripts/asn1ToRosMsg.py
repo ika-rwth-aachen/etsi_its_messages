@@ -15,7 +15,7 @@ ASN1_PRIMITIVES_2_ROS = {
     "INTEGER": "int32",
     "IA5String": "string",
     "UTF8String": "string",
-    "BIT STRING": "uint8[]",
+    "BIT STRING": "bool[]",
     "OCTET STRING": "string",
     "NumericString": "string",
     "VisibleString": "string",
@@ -266,7 +266,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-numbers", "optional"):
+        if k not in ("type", "name", "members", "values", "element", "named-bits", "named-numbers", "optional"):
             msg += f"# {k}: {v}"
             msg += "\n"
 
@@ -276,6 +276,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         # resolve ROS msg type
         ros_type = ASN1_PRIMITIVES_2_ROS[type]
         name = asn1["name"] if "name" in asn1 else "value"
+        
+        # add fixed array size to BIT STRING boolean arrays
+        if type == "BIT STRING" and "size" in asn1:
+            if not isinstance(asn1["size"][0], tuple):
+                ros_type = f"bool[{asn1['size'][0]}]"
 
         # choose simplest possible integer type
         if "restricted-to" in asn1 and type == "INTEGER":
@@ -291,6 +296,13 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 if "name" in asn1:
                     constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
                 msg += f"{ros_type} {validRosField(constant_name)} = {v}"
+                msg += "\n"
+
+        # add index constants for named bits
+        if "named-bits" in asn1:
+            for k, v in asn1["named-bits"]:
+                constant_name = f"{camel2SNAKE(k)}"
+                msg += f"uint8 INDEX_{validRosField(constant_name)} = {v}"
                 msg += "\n"
 
         msg += f"{ros_type} {validRosField(name)}"
