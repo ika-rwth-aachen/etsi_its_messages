@@ -74,7 +74,7 @@ void CamGeneratorNode::generateDummyCAM(const ros::TimerEvent& event) {
   highFreqCont.choice.basicVehicleContainerHighFrequency.curvatureCalculationMode = CurvatureCalculationMode_yawRateUsed;
   highFreqCont.choice.basicVehicleContainerHighFrequency.yawRate.yawRateValue = YawRateValue_straight;
   highFreqCont.choice.basicVehicleContainerHighFrequency.yawRate.yawRateConfidence = YawRateConfidence_degSec_000_01;
-    cam.camParameters.highFrequencyContainer = highFreqCont;
+  cam.camParameters.highFrequencyContainer = highFreqCont;
 
   ROS_INFO("High Freq done.");
 
@@ -84,7 +84,8 @@ void CamGeneratorNode::generateDummyCAM(const ros::TimerEvent& event) {
   BIT_STRING_t extLights;
   extLights.size = 1;
   extLights.buf = (uint8_t*)calloc(extLights.size, sizeof(uint8_t));
-  *(extLights.buf) = ExteriorLights_daytimeRunningLightsOn;
+  bool extLights_bits[8] = {false, false, true, false, true, false, true, false};
+  for (int b = 0; b < 8; b++) *extLights.buf |= extLights_bits[b] << b;
   extLights.bits_unused = 0;
 
   lowFreqCont->choice.basicVehicleContainerLowFrequency.exteriorLights = extLights;
