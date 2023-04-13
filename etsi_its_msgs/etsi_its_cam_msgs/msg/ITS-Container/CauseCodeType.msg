@@ -30,7 +30,8 @@
 # } (0..255)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(0, 255)]
+int64 MIN = 0
+int64 MAX = 255
 int64 RESERVED = 0
 int64 TRAFFIC_CONDITION = 1
 int64 ACCIDENT = 2

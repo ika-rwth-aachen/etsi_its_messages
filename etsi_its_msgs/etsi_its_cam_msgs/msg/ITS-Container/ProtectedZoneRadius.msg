@@ -2,6 +2,7 @@
 # ProtectedZoneRadius ::= INTEGER {oneMeter(1)} (1..255,...)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(1, 255), None]
+int64 MIN = 1
+int64 MAX = 255
 int64 ONE_METER = 1
 int64 value

@@ -265,7 +265,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-numbers", "optional"):
+        if k not in ("type", "name", "members", "values", "element", "restricted-to", "named-numbers", "optional"):
             msg += f"# {k}: {v}"
             msg += "\n"
 
@@ -276,12 +276,16 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         ros_type = ASN1_PRIMITIVES_2_ROS[type]
         name = asn1["name"] if "name" in asn1 else "value"
 
-        # choose simplest possible integer type
+        # choose simplest possible integer type and add constants for limits
         if "restricted-to" in asn1 and type == "INTEGER":
             min_value = asn1["restricted-to"][0][0]
             max_value = asn1["restricted-to"][0][1]
             #ros_type = simplestRosIntegerType(min_value, max_value)
             ros_type = "int64"
+            min_constant_name = "MIN"
+            max_constant_name = "MAX"
+            msg += f"{ros_type} {validRosField(min_constant_name)} = {min_value}\n"
+            msg += f"{ros_type} {validRosField(max_constant_name)} = {max_value}\n"
 
         # add constants for named numbers
         if "named-numbers" in asn1:

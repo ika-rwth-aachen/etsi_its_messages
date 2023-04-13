@@ -2,7 +2,8 @@
 # RoadworksSubCauseCode ::= INTEGER {unavailable(0), majorRoadworks(1), roadMarkingWork(2), slowMovingRoadMaintenance(3), shortTermStationaryRoadworks(4), streetCleaning(5), winterService(6)} (0..255)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(0, 255)]
+int64 MIN = 0
+int64 MAX = 255
 int64 UNAVAILABLE = 0
 int64 MAJOR_ROADWORKS = 1
 int64 ROAD_MARKING_WORK = 2

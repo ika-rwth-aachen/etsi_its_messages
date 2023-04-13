@@ -3,7 +3,8 @@
 # lightTruck(7), heavyTruck(8), trailer(9), specialVehicles(10), tram(11), roadSideUnit(15)} (0..255)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(0, 255)]
+int64 MIN = 0
+int64 MAX = 255
 int64 UNKNOWN = 0
 int64 PEDESTRIAN = 1
 int64 CYCLIST = 2

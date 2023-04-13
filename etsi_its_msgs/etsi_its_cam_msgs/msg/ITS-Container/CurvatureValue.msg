@@ -2,7 +2,8 @@
 # CurvatureValue ::= INTEGER {straight(0), unavailable(1023)} (-1023..1023)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(-1023, 1023)]
+int64 MIN = -1023
+int64 MAX = 1023
 int64 STRAIGHT = 0
 int64 UNAVAILABLE = 1023
 int64 value
