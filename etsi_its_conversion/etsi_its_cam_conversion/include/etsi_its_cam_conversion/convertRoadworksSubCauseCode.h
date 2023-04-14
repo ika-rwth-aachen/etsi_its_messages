@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::RoadworksSubCauseCode convert_RoadworksSubCauseCodetoRos(const RoadworksSubCauseCode_t& _RoadworksSubCauseCode_in)
+	void convert_RoadworksSubCauseCodetoRos(const RoadworksSubCauseCode_t& _RoadworksSubCauseCode_in, etsi_its_cam_msgs::RoadworksSubCauseCode& _RoadworksSubCauseCode_out)
 	{
-		etsi_its_cam_msgs::RoadworksSubCauseCode RoadworksSubCauseCode_out;
-		convert_toRos(_RoadworksSubCauseCode_in, RoadworksSubCauseCode_out.value);
-		return RoadworksSubCauseCode_out;
+		convert_toRos(_RoadworksSubCauseCode_in, _RoadworksSubCauseCode_out.value);
 	}
-	RoadworksSubCauseCode_t convert_RoadworksSubCauseCodetoC(const etsi_its_cam_msgs::RoadworksSubCauseCode& _RoadworksSubCauseCode_in)
+	void convert_RoadworksSubCauseCodetoC(const etsi_its_cam_msgs::RoadworksSubCauseCode& _RoadworksSubCauseCode_in, RoadworksSubCauseCode_t& _RoadworksSubCauseCode_out)
 	{
-		RoadworksSubCauseCode_t RoadworksSubCauseCode_out;
-		memset(&RoadworksSubCauseCode_out, 0, sizeof(RoadworksSubCauseCode_t));
-		convert_toC(_RoadworksSubCauseCode_in.value, RoadworksSubCauseCode_out);
-		return RoadworksSubCauseCode_out;
+		memset(&_RoadworksSubCauseCode_out, 0, sizeof(RoadworksSubCauseCode_t));
+		convert_toC(_RoadworksSubCauseCode_in.value, _RoadworksSubCauseCode_out);
 	}
 }

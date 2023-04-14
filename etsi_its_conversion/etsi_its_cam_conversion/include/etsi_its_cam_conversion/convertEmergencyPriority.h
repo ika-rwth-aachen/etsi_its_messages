@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::EmergencyPriority convert_EmergencyPrioritytoRos(const EmergencyPriority_t& _EmergencyPriority_in)
+	void convert_EmergencyPrioritytoRos(const EmergencyPriority_t& _EmergencyPriority_in, etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_out)
 	{
-		etsi_its_cam_msgs::EmergencyPriority EmergencyPriority_out;
-		convert_BIT_STRINGtoRos(_EmergencyPriority_in, EmergencyPriority_out.value);
-		return EmergencyPriority_out;
+		convert_BIT_STRINGtoRos(_EmergencyPriority_in, _EmergencyPriority_out.value);
 	}
-	EmergencyPriority_t convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in)
+	void convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in, EmergencyPriority_t& _EmergencyPriority_out)
 	{
-		EmergencyPriority_t EmergencyPriority_out;
-		memset(&EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
-		convert_BIT_STRINGtoC(_EmergencyPriority_in.value, EmergencyPriority_out);
-		return EmergencyPriority_out;
+		memset(&_EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
+		convert_BIT_STRINGtoC(_EmergencyPriority_in.value, _EmergencyPriority_out);
 	}
 }

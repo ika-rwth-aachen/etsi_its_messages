@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::StationID convert_StationIDtoRos(const StationID_t& _StationID_in)
+	void convert_StationIDtoRos(const StationID_t& _StationID_in, etsi_its_cam_msgs::StationID& _StationID_out)
 	{
-		etsi_its_cam_msgs::StationID StationID_out;
-		convert_toRos(_StationID_in, StationID_out.value);
-		return StationID_out;
+		convert_toRos(_StationID_in, _StationID_out.value);
 	}
-	StationID_t convert_StationIDtoC(const etsi_its_cam_msgs::StationID& _StationID_in)
+	void convert_StationIDtoC(const etsi_its_cam_msgs::StationID& _StationID_in, StationID_t& _StationID_out)
 	{
-		StationID_t StationID_out;
-		memset(&StationID_out, 0, sizeof(StationID_t));
-		convert_toC(_StationID_in.value, StationID_out);
-		return StationID_out;
+		memset(&_StationID_out, 0, sizeof(StationID_t));
+		convert_toC(_StationID_in.value, _StationID_out);
 	}
 }

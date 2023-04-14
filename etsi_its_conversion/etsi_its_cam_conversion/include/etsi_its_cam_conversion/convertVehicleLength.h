@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::VehicleLength convert_VehicleLengthtoRos(const VehicleLength_t& _VehicleLength_in)
+	void convert_VehicleLengthtoRos(const VehicleLength_t& _VehicleLength_in, etsi_its_cam_msgs::VehicleLength& _VehicleLength_out)
 	{
-		etsi_its_cam_msgs::VehicleLength VehicleLength_out;
-		VehicleLength_out.vehicleLengthValue = convert_VehicleLengthValuetoRos(_VehicleLength_in.vehicleLengthValue);
-		VehicleLength_out.vehicleLengthConfidenceIndication = convert_VehicleLengthConfidenceIndicationtoRos(_VehicleLength_in.vehicleLengthConfidenceIndication);
-		return VehicleLength_out;
+		convert_VehicleLengthValuetoRos(_VehicleLength_in.vehicleLengthValue, _VehicleLength_out.vehicleLengthValue);
+		convert_VehicleLengthConfidenceIndicationtoRos(_VehicleLength_in.vehicleLengthConfidenceIndication, _VehicleLength_out.vehicleLengthConfidenceIndication);
 	}
-	VehicleLength_t convert_VehicleLengthtoC(const etsi_its_cam_msgs::VehicleLength& _VehicleLength_in)
+	void convert_VehicleLengthtoC(const etsi_its_cam_msgs::VehicleLength& _VehicleLength_in, VehicleLength_t& _VehicleLength_out)
 	{
-		VehicleLength_t VehicleLength_out;
-		memset(&VehicleLength_out, 0, sizeof(VehicleLength_t));
-		VehicleLength_out.vehicleLengthValue = convert_VehicleLengthValuetoC(_VehicleLength_in.vehicleLengthValue);
-		VehicleLength_out.vehicleLengthConfidenceIndication = convert_VehicleLengthConfidenceIndicationtoC(_VehicleLength_in.vehicleLengthConfidenceIndication);
-		return VehicleLength_out;
+		memset(&_VehicleLength_out, 0, sizeof(VehicleLength_t));
+		convert_VehicleLengthValuetoC(_VehicleLength_in.vehicleLengthValue, _VehicleLength_out.vehicleLengthValue);
+		convert_VehicleLengthConfidenceIndicationtoC(_VehicleLength_in.vehicleLengthConfidenceIndication, _VehicleLength_out.vehicleLengthConfidenceIndication);
 	}
 }

@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::SteeringWheelAngleValue convert_SteeringWheelAngleValuetoRos(const SteeringWheelAngleValue_t& _SteeringWheelAngleValue_in)
+	void convert_SteeringWheelAngleValuetoRos(const SteeringWheelAngleValue_t& _SteeringWheelAngleValue_in, etsi_its_cam_msgs::SteeringWheelAngleValue& _SteeringWheelAngleValue_out)
 	{
-		etsi_its_cam_msgs::SteeringWheelAngleValue SteeringWheelAngleValue_out;
-		convert_toRos(_SteeringWheelAngleValue_in, SteeringWheelAngleValue_out.value);
-		return SteeringWheelAngleValue_out;
+		convert_toRos(_SteeringWheelAngleValue_in, _SteeringWheelAngleValue_out.value);
 	}
-	SteeringWheelAngleValue_t convert_SteeringWheelAngleValuetoC(const etsi_its_cam_msgs::SteeringWheelAngleValue& _SteeringWheelAngleValue_in)
+	void convert_SteeringWheelAngleValuetoC(const etsi_its_cam_msgs::SteeringWheelAngleValue& _SteeringWheelAngleValue_in, SteeringWheelAngleValue_t& _SteeringWheelAngleValue_out)
 	{
-		SteeringWheelAngleValue_t SteeringWheelAngleValue_out;
-		memset(&SteeringWheelAngleValue_out, 0, sizeof(SteeringWheelAngleValue_t));
-		convert_toC(_SteeringWheelAngleValue_in.value, SteeringWheelAngleValue_out);
-		return SteeringWheelAngleValue_out;
+		memset(&_SteeringWheelAngleValue_out, 0, sizeof(SteeringWheelAngleValue_t));
+		convert_toC(_SteeringWheelAngleValue_in.value, _SteeringWheelAngleValue_out);
 	}
 }

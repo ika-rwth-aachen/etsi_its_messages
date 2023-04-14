@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::LightBarSirenInUse convert_LightBarSirenInUsetoRos(const LightBarSirenInUse_t& _LightBarSirenInUse_in)
+	void convert_LightBarSirenInUsetoRos(const LightBarSirenInUse_t& _LightBarSirenInUse_in, etsi_its_cam_msgs::LightBarSirenInUse& _LightBarSirenInUse_out)
 	{
-		etsi_its_cam_msgs::LightBarSirenInUse LightBarSirenInUse_out;
-		convert_BIT_STRINGtoRos(_LightBarSirenInUse_in, LightBarSirenInUse_out.value);
-		return LightBarSirenInUse_out;
+		convert_BIT_STRINGtoRos(_LightBarSirenInUse_in, _LightBarSirenInUse_out.value);
 	}
-	LightBarSirenInUse_t convert_LightBarSirenInUsetoC(const etsi_its_cam_msgs::LightBarSirenInUse& _LightBarSirenInUse_in)
+	void convert_LightBarSirenInUsetoC(const etsi_its_cam_msgs::LightBarSirenInUse& _LightBarSirenInUse_in, LightBarSirenInUse_t& _LightBarSirenInUse_out)
 	{
-		LightBarSirenInUse_t LightBarSirenInUse_out;
-		memset(&LightBarSirenInUse_out, 0, sizeof(LightBarSirenInUse_t));
-		convert_BIT_STRINGtoC(_LightBarSirenInUse_in.value, LightBarSirenInUse_out);
-		return LightBarSirenInUse_out;
+		memset(&_LightBarSirenInUse_out, 0, sizeof(LightBarSirenInUse_t));
+		convert_BIT_STRINGtoC(_LightBarSirenInUse_in.value, _LightBarSirenInUse_out);
 	}
 }

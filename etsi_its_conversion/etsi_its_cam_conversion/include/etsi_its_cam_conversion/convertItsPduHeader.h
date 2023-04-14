@@ -7,21 +7,17 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::ItsPduHeader convert_ItsPduHeadertoRos(const ItsPduHeader_t& _ItsPduHeader_in)
+	void convert_ItsPduHeadertoRos(const ItsPduHeader_t& _ItsPduHeader_in, etsi_its_cam_msgs::ItsPduHeader& _ItsPduHeader_out)
 	{
-		etsi_its_cam_msgs::ItsPduHeader ItsPduHeader_out;
-		convert_toRos(_ItsPduHeader_in.protocolVersion, ItsPduHeader_out.protocolVersion);
-		convert_toRos(_ItsPduHeader_in.messageID, ItsPduHeader_out.messageID);
-		ItsPduHeader_out.stationID = convert_StationIDtoRos(_ItsPduHeader_in.stationID);
-		return ItsPduHeader_out;
+		convert_toRos(_ItsPduHeader_in.protocolVersion, _ItsPduHeader_out.protocolVersion);
+		convert_toRos(_ItsPduHeader_in.messageID, _ItsPduHeader_out.messageID);
+		convert_StationIDtoRos(_ItsPduHeader_in.stationID, _ItsPduHeader_out.stationID);
 	}
-	ItsPduHeader_t convert_ItsPduHeadertoC(const etsi_its_cam_msgs::ItsPduHeader& _ItsPduHeader_in)
+	void convert_ItsPduHeadertoC(const etsi_its_cam_msgs::ItsPduHeader& _ItsPduHeader_in, ItsPduHeader_t& _ItsPduHeader_out)
 	{
-		ItsPduHeader_t ItsPduHeader_out;
-		memset(&ItsPduHeader_out, 0, sizeof(ItsPduHeader_t));
-		convert_toC(_ItsPduHeader_in.protocolVersion, ItsPduHeader_out.protocolVersion);
-		convert_toC(_ItsPduHeader_in.messageID, ItsPduHeader_out.messageID);
-		ItsPduHeader_out.stationID = convert_StationIDtoC(_ItsPduHeader_in.stationID);
-		return ItsPduHeader_out;
+		memset(&_ItsPduHeader_out, 0, sizeof(ItsPduHeader_t));
+		convert_toC(_ItsPduHeader_in.protocolVersion, _ItsPduHeader_out.protocolVersion);
+		convert_toC(_ItsPduHeader_in.messageID, _ItsPduHeader_out.messageID);
+		convert_StationIDtoC(_ItsPduHeader_in.stationID, _ItsPduHeader_out.stationID);
 	}
 }

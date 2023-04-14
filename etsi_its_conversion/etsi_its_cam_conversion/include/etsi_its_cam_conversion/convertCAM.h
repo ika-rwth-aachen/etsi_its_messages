@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::CAM convert_CAMtoRos(const CAM_t& _CAM_in)
+	void convert_CAMtoRos(const CAM_t& _CAM_in, etsi_its_cam_msgs::CAM& _CAM_out)
 	{
-		etsi_its_cam_msgs::CAM CAM_out;
-		CAM_out.header = convert_ItsPduHeadertoRos(_CAM_in.header);
-		CAM_out.cam = convert_CoopAwarenesstoRos(_CAM_in.cam);
-		return CAM_out;
+		convert_ItsPduHeadertoRos(_CAM_in.header, _CAM_out.header);
+		convert_CoopAwarenesstoRos(_CAM_in.cam, _CAM_out.cam);
 	}
-	CAM_t convert_CAMtoC(const etsi_its_cam_msgs::CAM& _CAM_in)
+	void convert_CAMtoC(const etsi_its_cam_msgs::CAM& _CAM_in, CAM_t& _CAM_out)
 	{
-		CAM_t CAM_out;
-		memset(&CAM_out, 0, sizeof(CAM_t));
-		CAM_out.header = convert_ItsPduHeadertoC(_CAM_in.header);
-		CAM_out.cam = convert_CoopAwarenesstoC(_CAM_in.cam);
-		return CAM_out;
+		memset(&_CAM_out, 0, sizeof(CAM_t));
+		convert_ItsPduHeadertoC(_CAM_in.header, _CAM_out.header);
+		convert_CoopAwarenesstoC(_CAM_in.cam, _CAM_out.cam);
 	}
 }

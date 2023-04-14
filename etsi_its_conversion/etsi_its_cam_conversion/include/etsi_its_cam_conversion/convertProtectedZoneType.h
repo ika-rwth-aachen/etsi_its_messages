@@ -5,17 +5,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::ProtectedZoneType convert_ProtectedZoneTypetoRos(const ProtectedZoneType_t& _ProtectedZoneType_in)
+	void convert_ProtectedZoneTypetoRos(const ProtectedZoneType_t& _ProtectedZoneType_in, etsi_its_cam_msgs::ProtectedZoneType& _ProtectedZoneType_out)
 	{
-		etsi_its_cam_msgs::ProtectedZoneType ProtectedZoneType_out;
-		ProtectedZoneType_out.value = _ProtectedZoneType_in;
-		return ProtectedZoneType_out;
+		_ProtectedZoneType_out.value = _ProtectedZoneType_in;
 	}
-	ProtectedZoneType_t convert_ProtectedZoneTypetoC(const etsi_its_cam_msgs::ProtectedZoneType& _ProtectedZoneType_in)
+	void convert_ProtectedZoneTypetoC(const etsi_its_cam_msgs::ProtectedZoneType& _ProtectedZoneType_in, ProtectedZoneType_t& _ProtectedZoneType_out)
 	{
-		ProtectedZoneType_t ProtectedZoneType_out;
-		memset(&ProtectedZoneType_out, 0, sizeof(ProtectedZoneType_t));
-		ProtectedZoneType_out = _ProtectedZoneType_in.value;
-		return ProtectedZoneType_out;
+		memset(&_ProtectedZoneType_out, 0, sizeof(ProtectedZoneType_t));
+		_ProtectedZoneType_out = _ProtectedZoneType_in.value;
 	}
 }

@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::DeltaAltitude convert_DeltaAltitudetoRos(const DeltaAltitude_t& _DeltaAltitude_in)
+	void convert_DeltaAltitudetoRos(const DeltaAltitude_t& _DeltaAltitude_in, etsi_its_cam_msgs::DeltaAltitude& _DeltaAltitude_out)
 	{
-		etsi_its_cam_msgs::DeltaAltitude DeltaAltitude_out;
-		convert_toRos(_DeltaAltitude_in, DeltaAltitude_out.value);
-		return DeltaAltitude_out;
+		convert_toRos(_DeltaAltitude_in, _DeltaAltitude_out.value);
 	}
-	DeltaAltitude_t convert_DeltaAltitudetoC(const etsi_its_cam_msgs::DeltaAltitude& _DeltaAltitude_in)
+	void convert_DeltaAltitudetoC(const etsi_its_cam_msgs::DeltaAltitude& _DeltaAltitude_in, DeltaAltitude_t& _DeltaAltitude_out)
 	{
-		DeltaAltitude_t DeltaAltitude_out;
-		memset(&DeltaAltitude_out, 0, sizeof(DeltaAltitude_t));
-		convert_toC(_DeltaAltitude_in.value, DeltaAltitude_out);
-		return DeltaAltitude_out;
+		memset(&_DeltaAltitude_out, 0, sizeof(DeltaAltitude_t));
+		convert_toC(_DeltaAltitude_in.value, _DeltaAltitude_out);
 	}
 }

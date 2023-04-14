@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::PathDeltaTime convert_PathDeltaTimetoRos(const PathDeltaTime_t& _PathDeltaTime_in)
+	void convert_PathDeltaTimetoRos(const PathDeltaTime_t& _PathDeltaTime_in, etsi_its_cam_msgs::PathDeltaTime& _PathDeltaTime_out)
 	{
-		etsi_its_cam_msgs::PathDeltaTime PathDeltaTime_out;
-		convert_toRos(_PathDeltaTime_in, PathDeltaTime_out.value);
-		return PathDeltaTime_out;
+		convert_toRos(_PathDeltaTime_in, _PathDeltaTime_out.value);
 	}
-	PathDeltaTime_t convert_PathDeltaTimetoC(const etsi_its_cam_msgs::PathDeltaTime& _PathDeltaTime_in)
+	void convert_PathDeltaTimetoC(const etsi_its_cam_msgs::PathDeltaTime& _PathDeltaTime_in, PathDeltaTime_t& _PathDeltaTime_out)
 	{
-		PathDeltaTime_t PathDeltaTime_out;
-		memset(&PathDeltaTime_out, 0, sizeof(PathDeltaTime_t));
-		convert_toC(_PathDeltaTime_in.value, PathDeltaTime_out);
-		return PathDeltaTime_out;
+		memset(&_PathDeltaTime_out, 0, sizeof(PathDeltaTime_t));
+		convert_toC(_PathDeltaTime_in.value, _PathDeltaTime_out);
 	}
 }

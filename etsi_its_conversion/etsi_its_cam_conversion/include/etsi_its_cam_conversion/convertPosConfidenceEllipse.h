@@ -7,21 +7,17 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::PosConfidenceEllipse convert_PosConfidenceEllipsetoRos(const PosConfidenceEllipse_t& _PosConfidenceEllipse_in)
+	void convert_PosConfidenceEllipsetoRos(const PosConfidenceEllipse_t& _PosConfidenceEllipse_in, etsi_its_cam_msgs::PosConfidenceEllipse& _PosConfidenceEllipse_out)
 	{
-		etsi_its_cam_msgs::PosConfidenceEllipse PosConfidenceEllipse_out;
-		PosConfidenceEllipse_out.semiMajorConfidence = convert_SemiAxisLengthtoRos(_PosConfidenceEllipse_in.semiMajorConfidence);
-		PosConfidenceEllipse_out.semiMinorConfidence = convert_SemiAxisLengthtoRos(_PosConfidenceEllipse_in.semiMinorConfidence);
-		PosConfidenceEllipse_out.semiMajorOrientation = convert_HeadingValuetoRos(_PosConfidenceEllipse_in.semiMajorOrientation);
-		return PosConfidenceEllipse_out;
+		convert_SemiAxisLengthtoRos(_PosConfidenceEllipse_in.semiMajorConfidence, _PosConfidenceEllipse_out.semiMajorConfidence);
+		convert_SemiAxisLengthtoRos(_PosConfidenceEllipse_in.semiMinorConfidence, _PosConfidenceEllipse_out.semiMinorConfidence);
+		convert_HeadingValuetoRos(_PosConfidenceEllipse_in.semiMajorOrientation, _PosConfidenceEllipse_out.semiMajorOrientation);
 	}
-	PosConfidenceEllipse_t convert_PosConfidenceEllipsetoC(const etsi_its_cam_msgs::PosConfidenceEllipse& _PosConfidenceEllipse_in)
+	void convert_PosConfidenceEllipsetoC(const etsi_its_cam_msgs::PosConfidenceEllipse& _PosConfidenceEllipse_in, PosConfidenceEllipse_t& _PosConfidenceEllipse_out)
 	{
-		PosConfidenceEllipse_t PosConfidenceEllipse_out;
-		memset(&PosConfidenceEllipse_out, 0, sizeof(PosConfidenceEllipse_t));
-		PosConfidenceEllipse_out.semiMajorConfidence = convert_SemiAxisLengthtoC(_PosConfidenceEllipse_in.semiMajorConfidence);
-		PosConfidenceEllipse_out.semiMinorConfidence = convert_SemiAxisLengthtoC(_PosConfidenceEllipse_in.semiMinorConfidence);
-		PosConfidenceEllipse_out.semiMajorOrientation = convert_HeadingValuetoC(_PosConfidenceEllipse_in.semiMajorOrientation);
-		return PosConfidenceEllipse_out;
+		memset(&_PosConfidenceEllipse_out, 0, sizeof(PosConfidenceEllipse_t));
+		convert_SemiAxisLengthtoC(_PosConfidenceEllipse_in.semiMajorConfidence, _PosConfidenceEllipse_out.semiMajorConfidence);
+		convert_SemiAxisLengthtoC(_PosConfidenceEllipse_in.semiMinorConfidence, _PosConfidenceEllipse_out.semiMinorConfidence);
+		convert_HeadingValuetoC(_PosConfidenceEllipse_in.semiMajorOrientation, _PosConfidenceEllipse_out.semiMajorOrientation);
 	}
 }

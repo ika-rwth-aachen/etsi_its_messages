@@ -21,103 +21,106 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::BasicVehicleContainerHighFrequency convert_BasicVehicleContainerHighFrequencytoRos(const BasicVehicleContainerHighFrequency_t& _BasicVehicleContainerHighFrequency_in)
+	void convert_BasicVehicleContainerHighFrequencytoRos(const BasicVehicleContainerHighFrequency_t& _BasicVehicleContainerHighFrequency_in, etsi_its_cam_msgs::BasicVehicleContainerHighFrequency& _BasicVehicleContainerHighFrequency_out)
 	{
-		etsi_its_cam_msgs::BasicVehicleContainerHighFrequency BasicVehicleContainerHighFrequency_out;
-		BasicVehicleContainerHighFrequency_out.heading = convert_HeadingtoRos(_BasicVehicleContainerHighFrequency_in.heading);
-		BasicVehicleContainerHighFrequency_out.speed = convert_SpeedtoRos(_BasicVehicleContainerHighFrequency_in.speed);
-		BasicVehicleContainerHighFrequency_out.driveDirection = convert_DriveDirectiontoRos(_BasicVehicleContainerHighFrequency_in.driveDirection);
-		BasicVehicleContainerHighFrequency_out.vehicleLength = convert_VehicleLengthtoRos(_BasicVehicleContainerHighFrequency_in.vehicleLength);
-		BasicVehicleContainerHighFrequency_out.vehicleWidth = convert_VehicleWidthtoRos(_BasicVehicleContainerHighFrequency_in.vehicleWidth);
-		BasicVehicleContainerHighFrequency_out.longitudinalAcceleration = convert_LongitudinalAccelerationtoRos(_BasicVehicleContainerHighFrequency_in.longitudinalAcceleration);
-		BasicVehicleContainerHighFrequency_out.curvature = convert_CurvaturetoRos(_BasicVehicleContainerHighFrequency_in.curvature);
-		BasicVehicleContainerHighFrequency_out.curvatureCalculationMode = convert_CurvatureCalculationModetoRos(_BasicVehicleContainerHighFrequency_in.curvatureCalculationMode);
-		BasicVehicleContainerHighFrequency_out.yawRate = convert_YawRatetoRos(_BasicVehicleContainerHighFrequency_in.yawRate);
+		convert_HeadingtoRos(_BasicVehicleContainerHighFrequency_in.heading, _BasicVehicleContainerHighFrequency_out.heading);
+		convert_SpeedtoRos(_BasicVehicleContainerHighFrequency_in.speed, _BasicVehicleContainerHighFrequency_out.speed);
+		convert_DriveDirectiontoRos(_BasicVehicleContainerHighFrequency_in.driveDirection, _BasicVehicleContainerHighFrequency_out.driveDirection);
+		convert_VehicleLengthtoRos(_BasicVehicleContainerHighFrequency_in.vehicleLength, _BasicVehicleContainerHighFrequency_out.vehicleLength);
+		convert_VehicleWidthtoRos(_BasicVehicleContainerHighFrequency_in.vehicleWidth, _BasicVehicleContainerHighFrequency_out.vehicleWidth);
+		convert_LongitudinalAccelerationtoRos(_BasicVehicleContainerHighFrequency_in.longitudinalAcceleration, _BasicVehicleContainerHighFrequency_out.longitudinalAcceleration);
+		convert_CurvaturetoRos(_BasicVehicleContainerHighFrequency_in.curvature, _BasicVehicleContainerHighFrequency_out.curvature);
+		convert_CurvatureCalculationModetoRos(_BasicVehicleContainerHighFrequency_in.curvatureCalculationMode, _BasicVehicleContainerHighFrequency_out.curvatureCalculationMode);
+		convert_YawRatetoRos(_BasicVehicleContainerHighFrequency_in.yawRate, _BasicVehicleContainerHighFrequency_out.yawRate);
 		if(_BasicVehicleContainerHighFrequency_in.accelerationControl)
 		{
-			BasicVehicleContainerHighFrequency_out.accelerationControl = convert_AccelerationControltoRos(*_BasicVehicleContainerHighFrequency_in.accelerationControl);
-			BasicVehicleContainerHighFrequency_out.accelerationControl_isPresent = true;
+			convert_AccelerationControltoRos(*_BasicVehicleContainerHighFrequency_in.accelerationControl, _BasicVehicleContainerHighFrequency_out.accelerationControl);
+			_BasicVehicleContainerHighFrequency_out.accelerationControl_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lanePosition)
 		{
-			BasicVehicleContainerHighFrequency_out.lanePosition = convert_LanePositiontoRos(*_BasicVehicleContainerHighFrequency_in.lanePosition);
-			BasicVehicleContainerHighFrequency_out.lanePosition_isPresent = true;
+			convert_LanePositiontoRos(*_BasicVehicleContainerHighFrequency_in.lanePosition, _BasicVehicleContainerHighFrequency_out.lanePosition);
+			_BasicVehicleContainerHighFrequency_out.lanePosition_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.steeringWheelAngle)
 		{
-			BasicVehicleContainerHighFrequency_out.steeringWheelAngle = convert_SteeringWheelAngletoRos(*_BasicVehicleContainerHighFrequency_in.steeringWheelAngle);
-			BasicVehicleContainerHighFrequency_out.steeringWheelAngle_isPresent = true;
+			convert_SteeringWheelAngletoRos(*_BasicVehicleContainerHighFrequency_in.steeringWheelAngle, _BasicVehicleContainerHighFrequency_out.steeringWheelAngle);
+			_BasicVehicleContainerHighFrequency_out.steeringWheelAngle_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lateralAcceleration)
 		{
-			BasicVehicleContainerHighFrequency_out.lateralAcceleration = convert_LateralAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.lateralAcceleration);
-			BasicVehicleContainerHighFrequency_out.lateralAcceleration_isPresent = true;
+			convert_LateralAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.lateralAcceleration, _BasicVehicleContainerHighFrequency_out.lateralAcceleration);
+			_BasicVehicleContainerHighFrequency_out.lateralAcceleration_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.verticalAcceleration)
 		{
-			BasicVehicleContainerHighFrequency_out.verticalAcceleration = convert_VerticalAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.verticalAcceleration);
-			BasicVehicleContainerHighFrequency_out.verticalAcceleration_isPresent = true;
+			convert_VerticalAccelerationtoRos(*_BasicVehicleContainerHighFrequency_in.verticalAcceleration, _BasicVehicleContainerHighFrequency_out.verticalAcceleration);
+			_BasicVehicleContainerHighFrequency_out.verticalAcceleration_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.performanceClass)
 		{
-			BasicVehicleContainerHighFrequency_out.performanceClass = convert_PerformanceClasstoRos(*_BasicVehicleContainerHighFrequency_in.performanceClass);
-			BasicVehicleContainerHighFrequency_out.performanceClass_isPresent = true;
+			convert_PerformanceClasstoRos(*_BasicVehicleContainerHighFrequency_in.performanceClass, _BasicVehicleContainerHighFrequency_out.performanceClass);
+			_BasicVehicleContainerHighFrequency_out.performanceClass_isPresent = true;
 		}
 		if(_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone)
 		{
-			BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone = convert_CenDsrcTollingZonetoRos(*_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone);
-			BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone_isPresent = true;
+			convert_CenDsrcTollingZonetoRos(*_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone, _BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone);
+			_BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone_isPresent = true;
 		}
-		return BasicVehicleContainerHighFrequency_out;
 	}
-	BasicVehicleContainerHighFrequency_t convert_BasicVehicleContainerHighFrequencytoC(const etsi_its_cam_msgs::BasicVehicleContainerHighFrequency& _BasicVehicleContainerHighFrequency_in)
+	void convert_BasicVehicleContainerHighFrequencytoC(const etsi_its_cam_msgs::BasicVehicleContainerHighFrequency& _BasicVehicleContainerHighFrequency_in, BasicVehicleContainerHighFrequency_t& _BasicVehicleContainerHighFrequency_out)
 	{
-		BasicVehicleContainerHighFrequency_t BasicVehicleContainerHighFrequency_out;
-		memset(&BasicVehicleContainerHighFrequency_out, 0, sizeof(BasicVehicleContainerHighFrequency_t));
-		BasicVehicleContainerHighFrequency_out.heading = convert_HeadingtoC(_BasicVehicleContainerHighFrequency_in.heading);
-		BasicVehicleContainerHighFrequency_out.speed = convert_SpeedtoC(_BasicVehicleContainerHighFrequency_in.speed);
-		BasicVehicleContainerHighFrequency_out.driveDirection = convert_DriveDirectiontoC(_BasicVehicleContainerHighFrequency_in.driveDirection);
-		BasicVehicleContainerHighFrequency_out.vehicleLength = convert_VehicleLengthtoC(_BasicVehicleContainerHighFrequency_in.vehicleLength);
-		BasicVehicleContainerHighFrequency_out.vehicleWidth = convert_VehicleWidthtoC(_BasicVehicleContainerHighFrequency_in.vehicleWidth);
-		BasicVehicleContainerHighFrequency_out.longitudinalAcceleration = convert_LongitudinalAccelerationtoC(_BasicVehicleContainerHighFrequency_in.longitudinalAcceleration);
-		BasicVehicleContainerHighFrequency_out.curvature = convert_CurvaturetoC(_BasicVehicleContainerHighFrequency_in.curvature);
-		BasicVehicleContainerHighFrequency_out.curvatureCalculationMode = convert_CurvatureCalculationModetoC(_BasicVehicleContainerHighFrequency_in.curvatureCalculationMode);
-		BasicVehicleContainerHighFrequency_out.yawRate = convert_YawRatetoC(_BasicVehicleContainerHighFrequency_in.yawRate);
+		memset(&_BasicVehicleContainerHighFrequency_out, 0, sizeof(BasicVehicleContainerHighFrequency_t));
+		convert_HeadingtoC(_BasicVehicleContainerHighFrequency_in.heading, _BasicVehicleContainerHighFrequency_out.heading);
+		convert_SpeedtoC(_BasicVehicleContainerHighFrequency_in.speed, _BasicVehicleContainerHighFrequency_out.speed);
+		convert_DriveDirectiontoC(_BasicVehicleContainerHighFrequency_in.driveDirection, _BasicVehicleContainerHighFrequency_out.driveDirection);
+		convert_VehicleLengthtoC(_BasicVehicleContainerHighFrequency_in.vehicleLength, _BasicVehicleContainerHighFrequency_out.vehicleLength);
+		convert_VehicleWidthtoC(_BasicVehicleContainerHighFrequency_in.vehicleWidth, _BasicVehicleContainerHighFrequency_out.vehicleWidth);
+		convert_LongitudinalAccelerationtoC(_BasicVehicleContainerHighFrequency_in.longitudinalAcceleration, _BasicVehicleContainerHighFrequency_out.longitudinalAcceleration);
+		convert_CurvaturetoC(_BasicVehicleContainerHighFrequency_in.curvature, _BasicVehicleContainerHighFrequency_out.curvature);
+		convert_CurvatureCalculationModetoC(_BasicVehicleContainerHighFrequency_in.curvatureCalculationMode, _BasicVehicleContainerHighFrequency_out.curvatureCalculationMode);
+		convert_YawRatetoC(_BasicVehicleContainerHighFrequency_in.yawRate, _BasicVehicleContainerHighFrequency_out.yawRate);
 		if(_BasicVehicleContainerHighFrequency_in.accelerationControl_isPresent)
 		{
-			auto accelerationControl = convert_AccelerationControltoC(_BasicVehicleContainerHighFrequency_in.accelerationControl);
-			BasicVehicleContainerHighFrequency_out.accelerationControl = new AccelerationControl_t(accelerationControl);
+			AccelerationControl_t accelerationControl;
+			convert_AccelerationControltoC(_BasicVehicleContainerHighFrequency_in.accelerationControl, accelerationControl);
+			_BasicVehicleContainerHighFrequency_out.accelerationControl = new AccelerationControl_t(accelerationControl);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lanePosition_isPresent)
 		{
-			auto lanePosition = convert_LanePositiontoC(_BasicVehicleContainerHighFrequency_in.lanePosition);
-			BasicVehicleContainerHighFrequency_out.lanePosition = new LanePosition_t(lanePosition);
+			LanePosition_t lanePosition;
+			convert_LanePositiontoC(_BasicVehicleContainerHighFrequency_in.lanePosition, lanePosition);
+			_BasicVehicleContainerHighFrequency_out.lanePosition = new LanePosition_t(lanePosition);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.steeringWheelAngle_isPresent)
 		{
-			auto steeringWheelAngle = convert_SteeringWheelAngletoC(_BasicVehicleContainerHighFrequency_in.steeringWheelAngle);
-			BasicVehicleContainerHighFrequency_out.steeringWheelAngle = new SteeringWheelAngle_t(steeringWheelAngle);
+			SteeringWheelAngle_t steeringWheelAngle;
+			convert_SteeringWheelAngletoC(_BasicVehicleContainerHighFrequency_in.steeringWheelAngle, steeringWheelAngle);
+			_BasicVehicleContainerHighFrequency_out.steeringWheelAngle = new SteeringWheelAngle_t(steeringWheelAngle);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.lateralAcceleration_isPresent)
 		{
-			auto lateralAcceleration = convert_LateralAccelerationtoC(_BasicVehicleContainerHighFrequency_in.lateralAcceleration);
-			BasicVehicleContainerHighFrequency_out.lateralAcceleration = new LateralAcceleration_t(lateralAcceleration);
+			LateralAcceleration_t lateralAcceleration;
+			convert_LateralAccelerationtoC(_BasicVehicleContainerHighFrequency_in.lateralAcceleration, lateralAcceleration);
+			_BasicVehicleContainerHighFrequency_out.lateralAcceleration = new LateralAcceleration_t(lateralAcceleration);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.verticalAcceleration_isPresent)
 		{
-			auto verticalAcceleration = convert_VerticalAccelerationtoC(_BasicVehicleContainerHighFrequency_in.verticalAcceleration);
-			BasicVehicleContainerHighFrequency_out.verticalAcceleration = new VerticalAcceleration_t(verticalAcceleration);
+			VerticalAcceleration_t verticalAcceleration;
+			convert_VerticalAccelerationtoC(_BasicVehicleContainerHighFrequency_in.verticalAcceleration, verticalAcceleration);
+			_BasicVehicleContainerHighFrequency_out.verticalAcceleration = new VerticalAcceleration_t(verticalAcceleration);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.performanceClass_isPresent)
 		{
-			auto performanceClass = convert_PerformanceClasstoC(_BasicVehicleContainerHighFrequency_in.performanceClass);
-			BasicVehicleContainerHighFrequency_out.performanceClass = new PerformanceClass_t(performanceClass);
+			PerformanceClass_t performanceClass;
+			convert_PerformanceClasstoC(_BasicVehicleContainerHighFrequency_in.performanceClass, performanceClass);
+			_BasicVehicleContainerHighFrequency_out.performanceClass = new PerformanceClass_t(performanceClass);
 		}
 		if(_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone_isPresent)
 		{
-			auto cenDsrcTollingZone = convert_CenDsrcTollingZonetoC(_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone);
-			BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone = new CenDsrcTollingZone_t(cenDsrcTollingZone);
+			CenDsrcTollingZone_t cenDsrcTollingZone;
+			convert_CenDsrcTollingZonetoC(_BasicVehicleContainerHighFrequency_in.cenDsrcTollingZone, cenDsrcTollingZone);
+			_BasicVehicleContainerHighFrequency_out.cenDsrcTollingZone = new CenDsrcTollingZone_t(cenDsrcTollingZone);
 		}
-		return BasicVehicleContainerHighFrequency_out;
 	}
 }

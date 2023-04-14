@@ -8,37 +8,35 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::EmergencyContainer convert_EmergencyContainertoRos(const EmergencyContainer_t& _EmergencyContainer_in)
+	void convert_EmergencyContainertoRos(const EmergencyContainer_t& _EmergencyContainer_in, etsi_its_cam_msgs::EmergencyContainer& _EmergencyContainer_out)
 	{
-		etsi_its_cam_msgs::EmergencyContainer EmergencyContainer_out;
-		EmergencyContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_EmergencyContainer_in.lightBarSirenInUse);
+		convert_LightBarSirenInUsetoRos(_EmergencyContainer_in.lightBarSirenInUse, _EmergencyContainer_out.lightBarSirenInUse);
 		if(_EmergencyContainer_in.incidentIndication)
 		{
-			EmergencyContainer_out.incidentIndication = convert_CauseCodetoRos(*_EmergencyContainer_in.incidentIndication);
-			EmergencyContainer_out.incidentIndication_isPresent = true;
+			convert_CauseCodetoRos(*_EmergencyContainer_in.incidentIndication, _EmergencyContainer_out.incidentIndication);
+			_EmergencyContainer_out.incidentIndication_isPresent = true;
 		}
 		if(_EmergencyContainer_in.emergencyPriority)
 		{
-			EmergencyContainer_out.emergencyPriority = convert_EmergencyPrioritytoRos(*_EmergencyContainer_in.emergencyPriority);
-			EmergencyContainer_out.emergencyPriority_isPresent = true;
+			convert_EmergencyPrioritytoRos(*_EmergencyContainer_in.emergencyPriority, _EmergencyContainer_out.emergencyPriority);
+			_EmergencyContainer_out.emergencyPriority_isPresent = true;
 		}
-		return EmergencyContainer_out;
 	}
-	EmergencyContainer_t convert_EmergencyContainertoC(const etsi_its_cam_msgs::EmergencyContainer& _EmergencyContainer_in)
+	void convert_EmergencyContainertoC(const etsi_its_cam_msgs::EmergencyContainer& _EmergencyContainer_in, EmergencyContainer_t& _EmergencyContainer_out)
 	{
-		EmergencyContainer_t EmergencyContainer_out;
-		memset(&EmergencyContainer_out, 0, sizeof(EmergencyContainer_t));
-		EmergencyContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_EmergencyContainer_in.lightBarSirenInUse);
+		memset(&_EmergencyContainer_out, 0, sizeof(EmergencyContainer_t));
+		convert_LightBarSirenInUsetoC(_EmergencyContainer_in.lightBarSirenInUse, _EmergencyContainer_out.lightBarSirenInUse);
 		if(_EmergencyContainer_in.incidentIndication_isPresent)
 		{
-			auto incidentIndication = convert_CauseCodetoC(_EmergencyContainer_in.incidentIndication);
-			EmergencyContainer_out.incidentIndication = new CauseCode_t(incidentIndication);
+			CauseCode_t incidentIndication;
+			convert_CauseCodetoC(_EmergencyContainer_in.incidentIndication, incidentIndication);
+			_EmergencyContainer_out.incidentIndication = new CauseCode_t(incidentIndication);
 		}
 		if(_EmergencyContainer_in.emergencyPriority_isPresent)
 		{
-			auto emergencyPriority = convert_EmergencyPrioritytoC(_EmergencyContainer_in.emergencyPriority);
-			EmergencyContainer_out.emergencyPriority = new EmergencyPriority_t(emergencyPriority);
+			EmergencyPriority_t emergencyPriority;
+			convert_EmergencyPrioritytoC(_EmergencyContainer_in.emergencyPriority, emergencyPriority);
+			_EmergencyContainer_out.emergencyPriority = new EmergencyPriority_t(emergencyPriority);
 		}
-		return EmergencyContainer_out;
 	}
 }

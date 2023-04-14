@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::SteeringWheelAngle convert_SteeringWheelAngletoRos(const SteeringWheelAngle_t& _SteeringWheelAngle_in)
+	void convert_SteeringWheelAngletoRos(const SteeringWheelAngle_t& _SteeringWheelAngle_in, etsi_its_cam_msgs::SteeringWheelAngle& _SteeringWheelAngle_out)
 	{
-		etsi_its_cam_msgs::SteeringWheelAngle SteeringWheelAngle_out;
-		SteeringWheelAngle_out.steeringWheelAngleValue = convert_SteeringWheelAngleValuetoRos(_SteeringWheelAngle_in.steeringWheelAngleValue);
-		SteeringWheelAngle_out.steeringWheelAngleConfidence = convert_SteeringWheelAngleConfidencetoRos(_SteeringWheelAngle_in.steeringWheelAngleConfidence);
-		return SteeringWheelAngle_out;
+		convert_SteeringWheelAngleValuetoRos(_SteeringWheelAngle_in.steeringWheelAngleValue, _SteeringWheelAngle_out.steeringWheelAngleValue);
+		convert_SteeringWheelAngleConfidencetoRos(_SteeringWheelAngle_in.steeringWheelAngleConfidence, _SteeringWheelAngle_out.steeringWheelAngleConfidence);
 	}
-	SteeringWheelAngle_t convert_SteeringWheelAngletoC(const etsi_its_cam_msgs::SteeringWheelAngle& _SteeringWheelAngle_in)
+	void convert_SteeringWheelAngletoC(const etsi_its_cam_msgs::SteeringWheelAngle& _SteeringWheelAngle_in, SteeringWheelAngle_t& _SteeringWheelAngle_out)
 	{
-		SteeringWheelAngle_t SteeringWheelAngle_out;
-		memset(&SteeringWheelAngle_out, 0, sizeof(SteeringWheelAngle_t));
-		SteeringWheelAngle_out.steeringWheelAngleValue = convert_SteeringWheelAngleValuetoC(_SteeringWheelAngle_in.steeringWheelAngleValue);
-		SteeringWheelAngle_out.steeringWheelAngleConfidence = convert_SteeringWheelAngleConfidencetoC(_SteeringWheelAngle_in.steeringWheelAngleConfidence);
-		return SteeringWheelAngle_out;
+		memset(&_SteeringWheelAngle_out, 0, sizeof(SteeringWheelAngle_t));
+		convert_SteeringWheelAngleValuetoC(_SteeringWheelAngle_in.steeringWheelAngleValue, _SteeringWheelAngle_out.steeringWheelAngleValue);
+		convert_SteeringWheelAngleConfidencetoC(_SteeringWheelAngle_in.steeringWheelAngleConfidence, _SteeringWheelAngle_out.steeringWheelAngleConfidence);
 	}
 }

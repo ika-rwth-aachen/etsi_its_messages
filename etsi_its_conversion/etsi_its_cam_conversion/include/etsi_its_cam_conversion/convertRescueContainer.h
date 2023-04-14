@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::RescueContainer convert_RescueContainertoRos(const RescueContainer_t& _RescueContainer_in)
+	void convert_RescueContainertoRos(const RescueContainer_t& _RescueContainer_in, etsi_its_cam_msgs::RescueContainer& _RescueContainer_out)
 	{
-		etsi_its_cam_msgs::RescueContainer RescueContainer_out;
-		RescueContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_RescueContainer_in.lightBarSirenInUse);
-		return RescueContainer_out;
+		convert_LightBarSirenInUsetoRos(_RescueContainer_in.lightBarSirenInUse, _RescueContainer_out.lightBarSirenInUse);
 	}
-	RescueContainer_t convert_RescueContainertoC(const etsi_its_cam_msgs::RescueContainer& _RescueContainer_in)
+	void convert_RescueContainertoC(const etsi_its_cam_msgs::RescueContainer& _RescueContainer_in, RescueContainer_t& _RescueContainer_out)
 	{
-		RescueContainer_t RescueContainer_out;
-		memset(&RescueContainer_out, 0, sizeof(RescueContainer_t));
-		RescueContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_RescueContainer_in.lightBarSirenInUse);
-		return RescueContainer_out;
+		memset(&_RescueContainer_out, 0, sizeof(RescueContainer_t));
+		convert_LightBarSirenInUsetoC(_RescueContainer_in.lightBarSirenInUse, _RescueContainer_out.lightBarSirenInUse);
 	}
 }

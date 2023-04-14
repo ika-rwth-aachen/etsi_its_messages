@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::PtActivation convert_PtActivationtoRos(const PtActivation_t& _PtActivation_in)
+	void convert_PtActivationtoRos(const PtActivation_t& _PtActivation_in, etsi_its_cam_msgs::PtActivation& _PtActivation_out)
 	{
-		etsi_its_cam_msgs::PtActivation PtActivation_out;
-		PtActivation_out.ptActivationType = convert_PtActivationTypetoRos(_PtActivation_in.ptActivationType);
-		PtActivation_out.ptActivationData = convert_PtActivationDatatoRos(_PtActivation_in.ptActivationData);
-		return PtActivation_out;
+		convert_PtActivationTypetoRos(_PtActivation_in.ptActivationType, _PtActivation_out.ptActivationType);
+		convert_PtActivationDatatoRos(_PtActivation_in.ptActivationData, _PtActivation_out.ptActivationData);
 	}
-	PtActivation_t convert_PtActivationtoC(const etsi_its_cam_msgs::PtActivation& _PtActivation_in)
+	void convert_PtActivationtoC(const etsi_its_cam_msgs::PtActivation& _PtActivation_in, PtActivation_t& _PtActivation_out)
 	{
-		PtActivation_t PtActivation_out;
-		memset(&PtActivation_out, 0, sizeof(PtActivation_t));
-		PtActivation_out.ptActivationType = convert_PtActivationTypetoC(_PtActivation_in.ptActivationType);
-		PtActivation_out.ptActivationData = convert_PtActivationDatatoC(_PtActivation_in.ptActivationData);
-		return PtActivation_out;
+		memset(&_PtActivation_out, 0, sizeof(PtActivation_t));
+		convert_PtActivationTypetoC(_PtActivation_in.ptActivationType, _PtActivation_out.ptActivationType);
+		convert_PtActivationDatatoC(_PtActivation_in.ptActivationData, _PtActivation_out.ptActivationData);
 	}
 }

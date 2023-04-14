@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::SemiAxisLength convert_SemiAxisLengthtoRos(const SemiAxisLength_t& _SemiAxisLength_in)
+	void convert_SemiAxisLengthtoRos(const SemiAxisLength_t& _SemiAxisLength_in, etsi_its_cam_msgs::SemiAxisLength& _SemiAxisLength_out)
 	{
-		etsi_its_cam_msgs::SemiAxisLength SemiAxisLength_out;
-		convert_toRos(_SemiAxisLength_in, SemiAxisLength_out.value);
-		return SemiAxisLength_out;
+		convert_toRos(_SemiAxisLength_in, _SemiAxisLength_out.value);
 	}
-	SemiAxisLength_t convert_SemiAxisLengthtoC(const etsi_its_cam_msgs::SemiAxisLength& _SemiAxisLength_in)
+	void convert_SemiAxisLengthtoC(const etsi_its_cam_msgs::SemiAxisLength& _SemiAxisLength_in, SemiAxisLength_t& _SemiAxisLength_out)
 	{
-		SemiAxisLength_t SemiAxisLength_out;
-		memset(&SemiAxisLength_out, 0, sizeof(SemiAxisLength_t));
-		convert_toC(_SemiAxisLength_in.value, SemiAxisLength_out);
-		return SemiAxisLength_out;
+		memset(&_SemiAxisLength_out, 0, sizeof(SemiAxisLength_t));
+		convert_toC(_SemiAxisLength_in.value, _SemiAxisLength_out);
 	}
 }

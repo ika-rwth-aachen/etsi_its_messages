@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::CoopAwareness convert_CoopAwarenesstoRos(const CoopAwareness_t& _CoopAwareness_in)
+	void convert_CoopAwarenesstoRos(const CoopAwareness_t& _CoopAwareness_in, etsi_its_cam_msgs::CoopAwareness& _CoopAwareness_out)
 	{
-		etsi_its_cam_msgs::CoopAwareness CoopAwareness_out;
-		CoopAwareness_out.generationDeltaTime = convert_GenerationDeltaTimetoRos(_CoopAwareness_in.generationDeltaTime);
-		CoopAwareness_out.camParameters = convert_CamParameterstoRos(_CoopAwareness_in.camParameters);
-		return CoopAwareness_out;
+		convert_GenerationDeltaTimetoRos(_CoopAwareness_in.generationDeltaTime, _CoopAwareness_out.generationDeltaTime);
+		convert_CamParameterstoRos(_CoopAwareness_in.camParameters, _CoopAwareness_out.camParameters);
 	}
-	CoopAwareness_t convert_CoopAwarenesstoC(const etsi_its_cam_msgs::CoopAwareness& _CoopAwareness_in)
+	void convert_CoopAwarenesstoC(const etsi_its_cam_msgs::CoopAwareness& _CoopAwareness_in, CoopAwareness_t& _CoopAwareness_out)
 	{
-		CoopAwareness_t CoopAwareness_out;
-		memset(&CoopAwareness_out, 0, sizeof(CoopAwareness_t));
-		CoopAwareness_out.generationDeltaTime = convert_GenerationDeltaTimetoC(_CoopAwareness_in.generationDeltaTime);
-		CoopAwareness_out.camParameters = convert_CamParameterstoC(_CoopAwareness_in.camParameters);
-		return CoopAwareness_out;
+		memset(&_CoopAwareness_out, 0, sizeof(CoopAwareness_t));
+		convert_GenerationDeltaTimetoC(_CoopAwareness_in.generationDeltaTime, _CoopAwareness_out.generationDeltaTime);
+		convert_CamParameterstoC(_CoopAwareness_in.camParameters, _CoopAwareness_out.camParameters);
 	}
 }

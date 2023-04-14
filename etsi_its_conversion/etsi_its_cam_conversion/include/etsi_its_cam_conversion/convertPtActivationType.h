@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::PtActivationType convert_PtActivationTypetoRos(const PtActivationType_t& _PtActivationType_in)
+	void convert_PtActivationTypetoRos(const PtActivationType_t& _PtActivationType_in, etsi_its_cam_msgs::PtActivationType& _PtActivationType_out)
 	{
-		etsi_its_cam_msgs::PtActivationType PtActivationType_out;
-		convert_toRos(_PtActivationType_in, PtActivationType_out.value);
-		return PtActivationType_out;
+		convert_toRos(_PtActivationType_in, _PtActivationType_out.value);
 	}
-	PtActivationType_t convert_PtActivationTypetoC(const etsi_its_cam_msgs::PtActivationType& _PtActivationType_in)
+	void convert_PtActivationTypetoC(const etsi_its_cam_msgs::PtActivationType& _PtActivationType_in, PtActivationType_t& _PtActivationType_out)
 	{
-		PtActivationType_t PtActivationType_out;
-		memset(&PtActivationType_out, 0, sizeof(PtActivationType_t));
-		convert_toC(_PtActivationType_in.value, PtActivationType_out);
-		return PtActivationType_out;
+		memset(&_PtActivationType_out, 0, sizeof(PtActivationType_t));
+		convert_toC(_PtActivationType_in.value, _PtActivationType_out);
 	}
 }

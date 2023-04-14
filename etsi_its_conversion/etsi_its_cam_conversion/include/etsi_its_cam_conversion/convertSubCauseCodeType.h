@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::SubCauseCodeType convert_SubCauseCodeTypetoRos(const SubCauseCodeType_t& _SubCauseCodeType_in)
+	void convert_SubCauseCodeTypetoRos(const SubCauseCodeType_t& _SubCauseCodeType_in, etsi_its_cam_msgs::SubCauseCodeType& _SubCauseCodeType_out)
 	{
-		etsi_its_cam_msgs::SubCauseCodeType SubCauseCodeType_out;
-		convert_toRos(_SubCauseCodeType_in, SubCauseCodeType_out.value);
-		return SubCauseCodeType_out;
+		convert_toRos(_SubCauseCodeType_in, _SubCauseCodeType_out.value);
 	}
-	SubCauseCodeType_t convert_SubCauseCodeTypetoC(const etsi_its_cam_msgs::SubCauseCodeType& _SubCauseCodeType_in)
+	void convert_SubCauseCodeTypetoC(const etsi_its_cam_msgs::SubCauseCodeType& _SubCauseCodeType_in, SubCauseCodeType_t& _SubCauseCodeType_out)
 	{
-		SubCauseCodeType_t SubCauseCodeType_out;
-		memset(&SubCauseCodeType_out, 0, sizeof(SubCauseCodeType_t));
-		convert_toC(_SubCauseCodeType_in.value, SubCauseCodeType_out);
-		return SubCauseCodeType_out;
+		memset(&_SubCauseCodeType_out, 0, sizeof(SubCauseCodeType_t));
+		convert_toC(_SubCauseCodeType_in.value, _SubCauseCodeType_out);
 	}
 }

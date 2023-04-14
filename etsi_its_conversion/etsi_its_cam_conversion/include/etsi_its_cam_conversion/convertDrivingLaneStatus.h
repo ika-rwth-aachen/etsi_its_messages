@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::DrivingLaneStatus convert_DrivingLaneStatustoRos(const DrivingLaneStatus_t& _DrivingLaneStatus_in)
+	void convert_DrivingLaneStatustoRos(const DrivingLaneStatus_t& _DrivingLaneStatus_in, etsi_its_cam_msgs::DrivingLaneStatus& _DrivingLaneStatus_out)
 	{
-		etsi_its_cam_msgs::DrivingLaneStatus DrivingLaneStatus_out;
-		convert_BIT_STRINGtoRos(_DrivingLaneStatus_in, DrivingLaneStatus_out.value);
-		return DrivingLaneStatus_out;
+		convert_BIT_STRINGtoRos(_DrivingLaneStatus_in, _DrivingLaneStatus_out.value);
 	}
-	DrivingLaneStatus_t convert_DrivingLaneStatustoC(const etsi_its_cam_msgs::DrivingLaneStatus& _DrivingLaneStatus_in)
+	void convert_DrivingLaneStatustoC(const etsi_its_cam_msgs::DrivingLaneStatus& _DrivingLaneStatus_in, DrivingLaneStatus_t& _DrivingLaneStatus_out)
 	{
-		DrivingLaneStatus_t DrivingLaneStatus_out;
-		memset(&DrivingLaneStatus_out, 0, sizeof(DrivingLaneStatus_t));
-		convert_BIT_STRINGtoC(_DrivingLaneStatus_in.value, DrivingLaneStatus_out);
-		return DrivingLaneStatus_out;
+		memset(&_DrivingLaneStatus_out, 0, sizeof(DrivingLaneStatus_t));
+		convert_BIT_STRINGtoC(_DrivingLaneStatus_in.value, _DrivingLaneStatus_out);
 	}
 }

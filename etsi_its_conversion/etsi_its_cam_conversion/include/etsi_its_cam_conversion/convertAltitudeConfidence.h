@@ -5,17 +5,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::AltitudeConfidence convert_AltitudeConfidencetoRos(const AltitudeConfidence_t& _AltitudeConfidence_in)
+	void convert_AltitudeConfidencetoRos(const AltitudeConfidence_t& _AltitudeConfidence_in, etsi_its_cam_msgs::AltitudeConfidence& _AltitudeConfidence_out)
 	{
-		etsi_its_cam_msgs::AltitudeConfidence AltitudeConfidence_out;
-		AltitudeConfidence_out.value = _AltitudeConfidence_in;
-		return AltitudeConfidence_out;
+		_AltitudeConfidence_out.value = _AltitudeConfidence_in;
 	}
-	AltitudeConfidence_t convert_AltitudeConfidencetoC(const etsi_its_cam_msgs::AltitudeConfidence& _AltitudeConfidence_in)
+	void convert_AltitudeConfidencetoC(const etsi_its_cam_msgs::AltitudeConfidence& _AltitudeConfidence_in, AltitudeConfidence_t& _AltitudeConfidence_out)
 	{
-		AltitudeConfidence_t AltitudeConfidence_out;
-		memset(&AltitudeConfidence_out, 0, sizeof(AltitudeConfidence_t));
-		AltitudeConfidence_out = _AltitudeConfidence_in.value;
-		return AltitudeConfidence_out;
+		memset(&_AltitudeConfidence_out, 0, sizeof(AltitudeConfidence_t));
+		_AltitudeConfidence_out = _AltitudeConfidence_in.value;
 	}
 }

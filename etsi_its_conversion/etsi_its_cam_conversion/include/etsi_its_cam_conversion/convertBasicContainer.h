@@ -7,19 +7,15 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::BasicContainer convert_BasicContainertoRos(const BasicContainer_t& _BasicContainer_in)
+	void convert_BasicContainertoRos(const BasicContainer_t& _BasicContainer_in, etsi_its_cam_msgs::BasicContainer& _BasicContainer_out)
 	{
-		etsi_its_cam_msgs::BasicContainer BasicContainer_out;
-		BasicContainer_out.stationType = convert_StationTypetoRos(_BasicContainer_in.stationType);
-		BasicContainer_out.referencePosition = convert_ReferencePositiontoRos(_BasicContainer_in.referencePosition);
-		return BasicContainer_out;
+		convert_StationTypetoRos(_BasicContainer_in.stationType, _BasicContainer_out.stationType);
+		convert_ReferencePositiontoRos(_BasicContainer_in.referencePosition, _BasicContainer_out.referencePosition);
 	}
-	BasicContainer_t convert_BasicContainertoC(const etsi_its_cam_msgs::BasicContainer& _BasicContainer_in)
+	void convert_BasicContainertoC(const etsi_its_cam_msgs::BasicContainer& _BasicContainer_in, BasicContainer_t& _BasicContainer_out)
 	{
-		BasicContainer_t BasicContainer_out;
-		memset(&BasicContainer_out, 0, sizeof(BasicContainer_t));
-		BasicContainer_out.stationType = convert_StationTypetoC(_BasicContainer_in.stationType);
-		BasicContainer_out.referencePosition = convert_ReferencePositiontoC(_BasicContainer_in.referencePosition);
-		return BasicContainer_out;
+		memset(&_BasicContainer_out, 0, sizeof(BasicContainer_t));
+		convert_StationTypetoC(_BasicContainer_in.stationType, _BasicContainer_out.stationType);
+		convert_ReferencePositiontoC(_BasicContainer_in.referencePosition, _BasicContainer_out.referencePosition);
 	}
 }

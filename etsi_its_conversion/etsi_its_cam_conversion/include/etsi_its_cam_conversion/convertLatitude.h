@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::Latitude convert_LatitudetoRos(const Latitude_t& _Latitude_in)
+	void convert_LatitudetoRos(const Latitude_t& _Latitude_in, etsi_its_cam_msgs::Latitude& _Latitude_out)
 	{
-		etsi_its_cam_msgs::Latitude Latitude_out;
-		convert_toRos(_Latitude_in, Latitude_out.value);
-		return Latitude_out;
+		convert_toRos(_Latitude_in, _Latitude_out.value);
 	}
-	Latitude_t convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in)
+	void convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in, Latitude_t& _Latitude_out)
 	{
-		Latitude_t Latitude_out;
-		memset(&Latitude_out, 0, sizeof(Latitude_t));
-		convert_toC(_Latitude_in.value, Latitude_out);
-		return Latitude_out;
+		memset(&_Latitude_out, 0, sizeof(Latitude_t));
+		convert_toC(_Latitude_in.value, _Latitude_out);
 	}
 }

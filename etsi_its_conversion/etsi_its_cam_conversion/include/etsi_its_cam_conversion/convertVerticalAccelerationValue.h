@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::VerticalAccelerationValue convert_VerticalAccelerationValuetoRos(const VerticalAccelerationValue_t& _VerticalAccelerationValue_in)
+	void convert_VerticalAccelerationValuetoRos(const VerticalAccelerationValue_t& _VerticalAccelerationValue_in, etsi_its_cam_msgs::VerticalAccelerationValue& _VerticalAccelerationValue_out)
 	{
-		etsi_its_cam_msgs::VerticalAccelerationValue VerticalAccelerationValue_out;
-		convert_toRos(_VerticalAccelerationValue_in, VerticalAccelerationValue_out.value);
-		return VerticalAccelerationValue_out;
+		convert_toRos(_VerticalAccelerationValue_in, _VerticalAccelerationValue_out.value);
 	}
-	VerticalAccelerationValue_t convert_VerticalAccelerationValuetoC(const etsi_its_cam_msgs::VerticalAccelerationValue& _VerticalAccelerationValue_in)
+	void convert_VerticalAccelerationValuetoC(const etsi_its_cam_msgs::VerticalAccelerationValue& _VerticalAccelerationValue_in, VerticalAccelerationValue_t& _VerticalAccelerationValue_out)
 	{
-		VerticalAccelerationValue_t VerticalAccelerationValue_out;
-		memset(&VerticalAccelerationValue_out, 0, sizeof(VerticalAccelerationValue_t));
-		convert_toC(_VerticalAccelerationValue_in.value, VerticalAccelerationValue_out);
-		return VerticalAccelerationValue_out;
+		memset(&_VerticalAccelerationValue_out, 0, sizeof(VerticalAccelerationValue_t));
+		convert_toC(_VerticalAccelerationValue_in.value, _VerticalAccelerationValue_out);
 	}
 }

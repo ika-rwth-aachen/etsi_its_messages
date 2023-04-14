@@ -6,17 +6,13 @@
 
 namespace etsi_its_cam_conversion
 {
-	etsi_its_cam_msgs::SpecialTransportType convert_SpecialTransportTypetoRos(const SpecialTransportType_t& _SpecialTransportType_in)
+	void convert_SpecialTransportTypetoRos(const SpecialTransportType_t& _SpecialTransportType_in, etsi_its_cam_msgs::SpecialTransportType& _SpecialTransportType_out)
 	{
-		etsi_its_cam_msgs::SpecialTransportType SpecialTransportType_out;
-		convert_BIT_STRINGtoRos(_SpecialTransportType_in, SpecialTransportType_out.value);
-		return SpecialTransportType_out;
+		convert_BIT_STRINGtoRos(_SpecialTransportType_in, _SpecialTransportType_out.value);
 	}
-	SpecialTransportType_t convert_SpecialTransportTypetoC(const etsi_its_cam_msgs::SpecialTransportType& _SpecialTransportType_in)
+	void convert_SpecialTransportTypetoC(const etsi_its_cam_msgs::SpecialTransportType& _SpecialTransportType_in, SpecialTransportType_t& _SpecialTransportType_out)
 	{
-		SpecialTransportType_t SpecialTransportType_out;
-		memset(&SpecialTransportType_out, 0, sizeof(SpecialTransportType_t));
-		convert_BIT_STRINGtoC(_SpecialTransportType_in.value, SpecialTransportType_out);
-		return SpecialTransportType_out;
+		memset(&_SpecialTransportType_out, 0, sizeof(SpecialTransportType_t));
+		convert_BIT_STRINGtoC(_SpecialTransportType_in.value, _SpecialTransportType_out);
 	}
 }
