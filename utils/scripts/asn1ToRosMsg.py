@@ -394,6 +394,9 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         array_name = asn1["name"] if "name" in asn1 else "array"
         msg += f"{asn1['element']['type']}[] {array_name}"
         msg += "\n"
+        
+        # Converter
+        # TODO: #8
 
     # enums
     elif type == "ENUMERATED":
