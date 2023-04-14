@@ -20,4 +20,17 @@ namespace etsi_its_cam_conversion
 		}
 		return CenDsrcTollingZone_out;
 	}
+	CenDsrcTollingZone_t convert_CenDsrcTollingZonetoC(const etsi_its_cam_msgs::CenDsrcTollingZone& _CenDsrcTollingZone_in)
+	{
+		CenDsrcTollingZone_t CenDsrcTollingZone_out;
+		memset(&CenDsrcTollingZone_out, 0, sizeof(CenDsrcTollingZone_t));
+		CenDsrcTollingZone_out.protectedZoneLatitude = convert_LatitudetoC(_CenDsrcTollingZone_in.protectedZoneLatitude);
+		CenDsrcTollingZone_out.protectedZoneLongitude = convert_LongitudetoC(_CenDsrcTollingZone_in.protectedZoneLongitude);
+		if(_CenDsrcTollingZone_in.cenDsrcTollingZoneID_isPresent)
+		{
+			auto cenDsrcTollingZoneID = convert_CenDsrcTollingZoneIDtoC(_CenDsrcTollingZone_in.cenDsrcTollingZoneID);
+			CenDsrcTollingZone_out.cenDsrcTollingZoneID = new CenDsrcTollingZoneID_t(cenDsrcTollingZoneID);
+		}
+		return CenDsrcTollingZone_out;
+	}
 }

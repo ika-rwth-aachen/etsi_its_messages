@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_Longitude_in, Longitude_out.value);
 		return Longitude_out;
 	}
+	Longitude_t convert_LongitudetoC(const etsi_its_cam_msgs::Longitude& _Longitude_in)
+	{
+		Longitude_t Longitude_out;
+		memset(&Longitude_out, 0, sizeof(Longitude_t));
+		convert_toC(_Longitude_in.value, Longitude_out);
+		return Longitude_out;
+	}
 }

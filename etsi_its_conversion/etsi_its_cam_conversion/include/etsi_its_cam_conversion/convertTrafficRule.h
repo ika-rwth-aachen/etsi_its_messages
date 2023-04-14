@@ -11,4 +11,11 @@ namespace etsi_its_cam_conversion
 		TrafficRule_out.value = _TrafficRule_in;
 		return TrafficRule_out;
 	}
+	TrafficRule_t convert_TrafficRuletoC(const etsi_its_cam_msgs::TrafficRule& _TrafficRule_in)
+	{
+		TrafficRule_t TrafficRule_out;
+		memset(&TrafficRule_out, 0, sizeof(TrafficRule_t));
+		TrafficRule_out = _TrafficRule_in.value;
+		return TrafficRule_out;
+	}
 }

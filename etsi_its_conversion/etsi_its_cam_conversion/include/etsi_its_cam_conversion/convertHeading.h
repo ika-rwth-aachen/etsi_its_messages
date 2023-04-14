@@ -14,4 +14,12 @@ namespace etsi_its_cam_conversion
 		Heading_out.headingConfidence = convert_HeadingConfidencetoRos(_Heading_in.headingConfidence);
 		return Heading_out;
 	}
+	Heading_t convert_HeadingtoC(const etsi_its_cam_msgs::Heading& _Heading_in)
+	{
+		Heading_t Heading_out;
+		memset(&Heading_out, 0, sizeof(Heading_t));
+		Heading_out.headingValue = convert_HeadingValuetoC(_Heading_in.headingValue);
+		Heading_out.headingConfidence = convert_HeadingConfidencetoC(_Heading_in.headingConfidence);
+		return Heading_out;
+	}
 }

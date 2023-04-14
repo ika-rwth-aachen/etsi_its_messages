@@ -26,4 +26,22 @@ namespace etsi_its_cam_conversion
 		}
 		return CamParameters_out;
 	}
+	CamParameters_t convert_CamParameterstoC(const etsi_its_cam_msgs::CamParameters& _CamParameters_in)
+	{
+		CamParameters_t CamParameters_out;
+		memset(&CamParameters_out, 0, sizeof(CamParameters_t));
+		CamParameters_out.basicContainer = convert_BasicContainertoC(_CamParameters_in.basicContainer);
+		CamParameters_out.highFrequencyContainer = convert_HighFrequencyContainertoC(_CamParameters_in.highFrequencyContainer);
+		if(_CamParameters_in.lowFrequencyContainer_isPresent)
+		{
+			auto lowFrequencyContainer = convert_LowFrequencyContainertoC(_CamParameters_in.lowFrequencyContainer);
+			CamParameters_out.lowFrequencyContainer = new LowFrequencyContainer_t(lowFrequencyContainer);
+		}
+		if(_CamParameters_in.specialVehicleContainer_isPresent)
+		{
+			auto specialVehicleContainer = convert_SpecialVehicleContainertoC(_CamParameters_in.specialVehicleContainer);
+			CamParameters_out.specialVehicleContainer = new SpecialVehicleContainer_t(specialVehicleContainer);
+		}
+		return CamParameters_out;
+	}
 }

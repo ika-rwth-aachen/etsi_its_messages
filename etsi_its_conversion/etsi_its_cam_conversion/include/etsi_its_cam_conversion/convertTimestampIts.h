@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_TimestampIts_in, TimestampIts_out.value);
 		return TimestampIts_out;
 	}
+	TimestampIts_t convert_TimestampItstoC(const etsi_its_cam_msgs::TimestampIts& _TimestampIts_in)
+	{
+		TimestampIts_t TimestampIts_out;
+		memset(&TimestampIts_out, 0, sizeof(TimestampIts_t));
+		convert_toC(_TimestampIts_in.value, TimestampIts_out);
+		return TimestampIts_out;
+	}
 }

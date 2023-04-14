@@ -24,4 +24,21 @@ namespace etsi_its_cam_conversion
 		}
 		return EmergencyContainer_out;
 	}
+	EmergencyContainer_t convert_EmergencyContainertoC(const etsi_its_cam_msgs::EmergencyContainer& _EmergencyContainer_in)
+	{
+		EmergencyContainer_t EmergencyContainer_out;
+		memset(&EmergencyContainer_out, 0, sizeof(EmergencyContainer_t));
+		EmergencyContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_EmergencyContainer_in.lightBarSirenInUse);
+		if(_EmergencyContainer_in.incidentIndication_isPresent)
+		{
+			auto incidentIndication = convert_CauseCodetoC(_EmergencyContainer_in.incidentIndication);
+			EmergencyContainer_out.incidentIndication = new CauseCode_t(incidentIndication);
+		}
+		if(_EmergencyContainer_in.emergencyPriority_isPresent)
+		{
+			auto emergencyPriority = convert_EmergencyPrioritytoC(_EmergencyContainer_in.emergencyPriority);
+			EmergencyContainer_out.emergencyPriority = new EmergencyPriority_t(emergencyPriority);
+		}
+		return EmergencyContainer_out;
+	}
 }

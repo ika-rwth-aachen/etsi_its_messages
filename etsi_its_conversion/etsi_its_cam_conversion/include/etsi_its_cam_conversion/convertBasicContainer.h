@@ -14,4 +14,12 @@ namespace etsi_its_cam_conversion
 		BasicContainer_out.referencePosition = convert_ReferencePositiontoRos(_BasicContainer_in.referencePosition);
 		return BasicContainer_out;
 	}
+	BasicContainer_t convert_BasicContainertoC(const etsi_its_cam_msgs::BasicContainer& _BasicContainer_in)
+	{
+		BasicContainer_t BasicContainer_out;
+		memset(&BasicContainer_out, 0, sizeof(BasicContainer_t));
+		BasicContainer_out.stationType = convert_StationTypetoC(_BasicContainer_in.stationType);
+		BasicContainer_out.referencePosition = convert_ReferencePositiontoC(_BasicContainer_in.referencePosition);
+		return BasicContainer_out;
+	}
 }

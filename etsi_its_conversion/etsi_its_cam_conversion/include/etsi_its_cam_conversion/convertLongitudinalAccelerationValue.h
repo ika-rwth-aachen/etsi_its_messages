@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_LongitudinalAccelerationValue_in, LongitudinalAccelerationValue_out.value);
 		return LongitudinalAccelerationValue_out;
 	}
+	LongitudinalAccelerationValue_t convert_LongitudinalAccelerationValuetoC(const etsi_its_cam_msgs::LongitudinalAccelerationValue& _LongitudinalAccelerationValue_in)
+	{
+		LongitudinalAccelerationValue_t LongitudinalAccelerationValue_out;
+		memset(&LongitudinalAccelerationValue_out, 0, sizeof(LongitudinalAccelerationValue_t));
+		convert_toC(_LongitudinalAccelerationValue_in.value, LongitudinalAccelerationValue_out);
+		return LongitudinalAccelerationValue_out;
+	}
 }

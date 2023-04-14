@@ -15,7 +15,7 @@ ASN1_PRIMITIVES_2_ROS = {
     "INTEGER": "int32",
     "IA5String": "string",
     "UTF8String": "string",
-    "BIT STRING": "string",
+    "BIT STRING": "bool[]",
     "OCTET STRING": "string",
     "NumericString": "string",
     "VisibleString": "string",
@@ -262,10 +262,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     ros2c += "\t{\n"
     c2ros += f"\t\t{ns_msgs}::{t_name} {t_name}_out;\n"
     ros2c += f"\t\t{t_name}_t {t_name}_out;\n"
+    ros2c += f"\t\tmemset(&{t_name}_out, 0, sizeof({t_name}_t));\n"
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-numbers", "optional"):
+        if k not in ("type", "name", "members", "values", "element", "named-bits", "named-numbers", "optional"):
             msg += f"# {k}: {v}"
             msg += "\n"
 
@@ -275,6 +276,11 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         # resolve ROS msg type
         ros_type = ASN1_PRIMITIVES_2_ROS[type]
         name = asn1["name"] if "name" in asn1 else "value"
+        
+        # add fixed array size to BIT STRING boolean arrays
+        if type == "BIT STRING" and "size" in asn1:
+            if not isinstance(asn1["size"][0], tuple):
+                ros_type = f"bool[{asn1['size'][0]}]"
 
         # choose simplest possible integer type
         if "restricted-to" in asn1 and type == "INTEGER":
@@ -290,6 +296,13 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 if "name" in asn1:
                     constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
                 msg += f"{ros_type} {validRosField(constant_name)} = {v}"
+                msg += "\n"
+
+        # add index constants for named bits
+        if "named-bits" in asn1:
+            for k, v in asn1["named-bits"]:
+                constant_name = f"{camel2SNAKE(k)}"
+                msg += f"uint8 INDEX_{validRosField(constant_name)} = {v}"
                 msg += "\n"
 
         msg += f"{ros_type} {validRosField(name)}"
@@ -328,7 +341,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                     header += includeHeader(etsi_type, header, memberType)
                     c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
                     c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
-                    ros2c += f"\t\t\t{t_name}_out.{memberName} = *convert_{memberType}toC(_{t_name}_in.{memberName});\n"
+                    ros2c += f"\t\t\tauto {memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
+                    ros2c += f"\t\t\t{t_name}_out.{memberName} = new {memberType}_t({memberName});\n"
                 c2ros+="\t\t}\n"
                 ros2c+="\t\t}\n"
             else:
@@ -436,7 +450,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     return_value = f"\t\treturn {t_name}_out;\n"
     return_value += "\t}\n"
 
-    converter_str = header + "\n" + namespace + c2ros + return_value + "}"
+    converter_str = header + "\n" + namespace + c2ros + return_value + ros2c + return_value + "}"
 
     return msg, converter_str
 

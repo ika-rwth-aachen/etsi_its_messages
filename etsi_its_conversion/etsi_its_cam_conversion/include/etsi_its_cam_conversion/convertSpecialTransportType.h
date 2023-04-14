@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_BIT_STRINGtoRos(_SpecialTransportType_in, SpecialTransportType_out.value);
 		return SpecialTransportType_out;
 	}
+	SpecialTransportType_t convert_SpecialTransportTypetoC(const etsi_its_cam_msgs::SpecialTransportType& _SpecialTransportType_in)
+	{
+		SpecialTransportType_t SpecialTransportType_out;
+		memset(&SpecialTransportType_out, 0, sizeof(SpecialTransportType_t));
+		convert_BIT_STRINGtoC(_SpecialTransportType_in.value, SpecialTransportType_out);
+		return SpecialTransportType_out;
+	}
 }

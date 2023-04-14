@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_CauseCodeType_in, CauseCodeType_out.value);
 		return CauseCodeType_out;
 	}
+	CauseCodeType_t convert_CauseCodeTypetoC(const etsi_its_cam_msgs::CauseCodeType& _CauseCodeType_in)
+	{
+		CauseCodeType_t CauseCodeType_out;
+		memset(&CauseCodeType_out, 0, sizeof(CauseCodeType_t));
+		convert_toC(_CauseCodeType_in.value, CauseCodeType_out);
+		return CauseCodeType_out;
+	}
 }

@@ -11,4 +11,11 @@ namespace etsi_its_cam_conversion
 		HardShoulderStatus_out.value = _HardShoulderStatus_in;
 		return HardShoulderStatus_out;
 	}
+	HardShoulderStatus_t convert_HardShoulderStatustoC(const etsi_its_cam_msgs::HardShoulderStatus& _HardShoulderStatus_in)
+	{
+		HardShoulderStatus_t HardShoulderStatus_out;
+		memset(&HardShoulderStatus_out, 0, sizeof(HardShoulderStatus_t));
+		HardShoulderStatus_out = _HardShoulderStatus_in.value;
+		return HardShoulderStatus_out;
+	}
 }

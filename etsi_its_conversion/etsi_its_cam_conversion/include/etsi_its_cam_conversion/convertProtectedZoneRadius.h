@@ -12,4 +12,11 @@ namespace etsi_its_cam_conversion
 		convert_toRos(_ProtectedZoneRadius_in, ProtectedZoneRadius_out.value);
 		return ProtectedZoneRadius_out;
 	}
+	ProtectedZoneRadius_t convert_ProtectedZoneRadiustoC(const etsi_its_cam_msgs::ProtectedZoneRadius& _ProtectedZoneRadius_in)
+	{
+		ProtectedZoneRadius_t ProtectedZoneRadius_out;
+		memset(&ProtectedZoneRadius_out, 0, sizeof(ProtectedZoneRadius_t));
+		convert_toC(_ProtectedZoneRadius_in.value, ProtectedZoneRadius_out);
+		return ProtectedZoneRadius_out;
+	}
 }

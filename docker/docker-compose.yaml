@@ -1,0 +1,27 @@
+x-base-image: &base-image gitlab.ika.rwth-aachen.de:5050/fb-fi/ops/docker-base/ros1:latest
+x-dev-image:  &dev-image  gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/etsi_its_conversion:latest-dev
+x-run-image:  &run-image  gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/etsi_its_conversion:latest
+x-command:    &command    roslaunch etsi_its_conversion start_ConversionNode.launch
+
+# ==============================================================================
+
+x-build: &build
+  dockerfile: ./docker/docker-ros/Dockerfile
+  context: ../
+  args:
+    BASE_IMAGE: *base-image
+    COMMAND: *command
+    GIT_HTTPS_USER: $GIT_HTTPS_USER
+    GIT_HTTPS_PASSWORD: $GIT_HTTPS_PASSWORD
+
+services:
+  dev:
+    image: *dev-image
+    build:
+      target: dev
+      <<: *build
+  run:
+    image: *run-image
+    build:
+      target: run
+      <<: *build

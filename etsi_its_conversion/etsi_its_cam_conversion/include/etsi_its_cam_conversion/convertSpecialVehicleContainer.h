@@ -52,4 +52,45 @@ namespace etsi_its_cam_conversion
 		}
 		return SpecialVehicleContainer_out;
 	}
+	SpecialVehicleContainer_t convert_SpecialVehicleContainertoC(const etsi_its_cam_msgs::SpecialVehicleContainer& _SpecialVehicleContainer_in)
+	{
+		SpecialVehicleContainer_t SpecialVehicleContainer_out;
+		memset(&SpecialVehicleContainer_out, 0, sizeof(SpecialVehicleContainer_t));
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.publicTransportContainer = convert_PublicTransportContainertoC(_SpecialVehicleContainer_in.publicTransportContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.specialTransportContainer = convert_SpecialTransportContainertoC(_SpecialVehicleContainer_in.specialTransportContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.dangerousGoodsContainer = convert_DangerousGoodsContainertoC(_SpecialVehicleContainer_in.dangerousGoodsContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC)
+		{
+			SpecialVehicleContainer_out.choice.roadWorksContainerBasic = convert_RoadWorksContainerBasictoC(_SpecialVehicleContainer_in.roadWorksContainerBasic);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.rescueContainer = convert_RescueContainertoC(_SpecialVehicleContainer_in.rescueContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.emergencyContainer = convert_EmergencyContainertoC(_SpecialVehicleContainer_in.emergencyContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer;
+		}
+		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER)
+		{
+			SpecialVehicleContainer_out.choice.safetyCarContainer = convert_SafetyCarContainertoC(_SpecialVehicleContainer_in.safetyCarContainer);
+			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer;
+		}
+		return SpecialVehicleContainer_out;
+	}
 }

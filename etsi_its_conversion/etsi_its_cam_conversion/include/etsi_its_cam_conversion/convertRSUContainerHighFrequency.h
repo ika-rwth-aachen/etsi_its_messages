@@ -16,4 +16,15 @@ namespace etsi_its_cam_conversion
 		}
 		return RSUContainerHighFrequency_out;
 	}
+	RSUContainerHighFrequency_t convert_RSUContainerHighFrequencytoC(const etsi_its_cam_msgs::RSUContainerHighFrequency& _RSUContainerHighFrequency_in)
+	{
+		RSUContainerHighFrequency_t RSUContainerHighFrequency_out;
+		memset(&RSUContainerHighFrequency_out, 0, sizeof(RSUContainerHighFrequency_t));
+		if(_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU_isPresent)
+		{
+			auto protectedCommunicationZonesRSU = convert_ProtectedCommunicationZonesRSUtoC(_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU);
+			RSUContainerHighFrequency_out.protectedCommunicationZonesRSU = new ProtectedCommunicationZonesRSU_t(protectedCommunicationZonesRSU);
+		}
+		return RSUContainerHighFrequency_out;
+	}
 }

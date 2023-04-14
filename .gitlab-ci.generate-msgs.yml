@@ -1,0 +1,17 @@
+default:
+  image: python:3.9-slim
+  before_script:
+    - pip install -r utils/scripts/requirements.txt
+
+stages:
+  - Generate ROS Messages & Conversion Functions
+
+CAM:
+  stage: Generate ROS Messages & Conversion Functions
+  script:
+    - >
+      ./utils/scripts/asn1ToRosMsg.py
+      utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn
+      utils/asn1/reduced/cam/ITS-Container.asn
+      -t cam
+      -o etsi_its_msgs/etsi_its_cam_msgs/msg
