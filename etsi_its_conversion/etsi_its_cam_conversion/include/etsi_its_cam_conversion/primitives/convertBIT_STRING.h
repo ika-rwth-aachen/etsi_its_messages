@@ -7,7 +7,7 @@
 
 namespace etsi_its_cam_conversion {
 
-  void convert_BIT_STRINGtoRos(const BIT_STRING_t& _BIT_STRING_in, std::vector<uint8_t>& BIT_STRING_out) {
+  void toRos_BIT_STRING(const BIT_STRING_t& _BIT_STRING_in, std::vector<uint8_t>& BIT_STRING_out) {
     
     // bit string size
     const int bits_per_byte = 8;
@@ -34,7 +34,7 @@ namespace etsi_its_cam_conversion {
     }
   }
 
-  void convert_BIT_STRINGtoC(const std::vector<uint8_t>& _BIT_STRING_in, BIT_STRING_t& BIT_STRING_out) {
+  void toStruct_BIT_STRING(const std::vector<uint8_t>& _BIT_STRING_in, BIT_STRING_t& BIT_STRING_out) {
     
     // bit string size
     const int bits_per_byte = 8;
@@ -64,20 +64,20 @@ namespace etsi_its_cam_conversion {
   }
 
   template <std::size_t N>
-  void convert_BIT_STRINGtoRos(const BIT_STRING_t& _BIT_STRING_in, boost::array<uint8_t, N>& BIT_STRING_out) {
+  void toRos_BIT_STRING(const BIT_STRING_t& _BIT_STRING_in, boost::array<uint8_t, N>& BIT_STRING_out) {
 
     std::vector<uint8_t> BIT_STRING_out_vector;
-    convert_BIT_STRINGtoRos(_BIT_STRING_in, BIT_STRING_out_vector);
+    toRos_BIT_STRING(_BIT_STRING_in, BIT_STRING_out_vector);
     std::copy(BIT_STRING_out_vector.begin(), BIT_STRING_out_vector.end(), BIT_STRING_out.begin());
   }
 
 
   template <std::size_t N>
-  void convert_BIT_STRINGtoC(const boost::array<uint8_t, N>& _BIT_STRING_in, BIT_STRING_t& BIT_STRING_out) {
+  void toStruct_BIT_STRING(const boost::array<uint8_t, N>& _BIT_STRING_in, BIT_STRING_t& BIT_STRING_out) {
 
     std::vector<uint8_t> _BIT_STRING_in_vector(N);
     std::copy(_BIT_STRING_in.begin(), _BIT_STRING_in.end(), _BIT_STRING_in_vector.begin());
-    convert_BIT_STRINGtoC(_BIT_STRING_in_vector, BIT_STRING_out);
+    toStruct_BIT_STRING(_BIT_STRING_in_vector, BIT_STRING_out);
   }
 
 }

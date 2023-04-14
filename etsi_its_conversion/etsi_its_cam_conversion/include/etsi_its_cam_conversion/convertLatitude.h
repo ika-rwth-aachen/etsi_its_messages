@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_LatitudetoRos(const Latitude_t& _Latitude_in, etsi_its_cam_msgs::Latitude& _Latitude_out) {
-  convert_toRos(_Latitude_in, _Latitude_out.value);
+void toRos_Latitude(const Latitude_t& in, etsi_its_cam_msgs::Latitude& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in, Latitude_t& _Latitude_out) {
-  memset(&_Latitude_out, 0, sizeof(Latitude_t));
-  convert_toC(_Latitude_in.value, _Latitude_out);
+void toStruct_Latitude(const etsi_its_cam_msgs::Latitude& in, Latitude_t& out) {
+  memset(&out, 0, sizeof(Latitude_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

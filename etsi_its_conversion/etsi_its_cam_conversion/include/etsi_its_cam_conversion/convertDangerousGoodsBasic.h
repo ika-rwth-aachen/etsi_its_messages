@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_DangerousGoodsBasictoRos(const DangerousGoodsBasic_t& _DangerousGoodsBasic_in, etsi_its_cam_msgs::DangerousGoodsBasic& _DangerousGoodsBasic_out) {
-  _DangerousGoodsBasic_out.value = _DangerousGoodsBasic_in;
+void toRos_DangerousGoodsBasic(const DangerousGoodsBasic_t& in, etsi_its_cam_msgs::DangerousGoodsBasic& out) {
+  out.value = in;
 }
 
-void convert_DangerousGoodsBasictoC(const etsi_its_cam_msgs::DangerousGoodsBasic& _DangerousGoodsBasic_in, DangerousGoodsBasic_t& _DangerousGoodsBasic_out) {
-  memset(&_DangerousGoodsBasic_out, 0, sizeof(DangerousGoodsBasic_t));
-  _DangerousGoodsBasic_out = _DangerousGoodsBasic_in.value;
+void toStruct_DangerousGoodsBasic(const etsi_its_cam_msgs::DangerousGoodsBasic& in, DangerousGoodsBasic_t& out) {
+  memset(&out, 0, sizeof(DangerousGoodsBasic_t));
+  out = in.value;
 }
 
 }

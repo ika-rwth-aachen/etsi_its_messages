@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_YawRatetoRos(const YawRate_t& _YawRate_in, etsi_its_cam_msgs::YawRate& _YawRate_out) {
-  convert_YawRateValuetoRos(_YawRate_in.yawRateValue, _YawRate_out.yawRateValue);
-  convert_YawRateConfidencetoRos(_YawRate_in.yawRateConfidence, _YawRate_out.yawRateConfidence);
+void toRos_YawRate(const YawRate_t& in, etsi_its_cam_msgs::YawRate& out) {
+  toRos_YawRateValue(in.yawRateValue, out.yawRateValue);
+  toRos_YawRateConfidence(in.yawRateConfidence, out.yawRateConfidence);
 }
 
-void convert_YawRatetoC(const etsi_its_cam_msgs::YawRate& _YawRate_in, YawRate_t& _YawRate_out) {
-  memset(&_YawRate_out, 0, sizeof(YawRate_t));
-  convert_YawRateValuetoC(_YawRate_in.yawRateValue, _YawRate_out.yawRateValue);
-  convert_YawRateConfidencetoC(_YawRate_in.yawRateConfidence, _YawRate_out.yawRateConfidence);
+void toStruct_YawRate(const etsi_its_cam_msgs::YawRate& in, YawRate_t& out) {
+  memset(&out, 0, sizeof(YawRate_t));
+  toStruct_YawRateValue(in.yawRateValue, out.yawRateValue);
+  toStruct_YawRateConfidence(in.yawRateConfidence, out.yawRateConfidence);
 }
 
 }

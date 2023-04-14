@@ -6,19 +6,19 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_RSUContainerHighFrequencytoRos(const RSUContainerHighFrequency_t& _RSUContainerHighFrequency_in, etsi_its_cam_msgs::RSUContainerHighFrequency& _RSUContainerHighFrequency_out) {
-  if (_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU) {
-    convert_ProtectedCommunicationZonesRSUtoRos(*_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU, _RSUContainerHighFrequency_out.protectedCommunicationZonesRSU);
-    _RSUContainerHighFrequency_out.protectedCommunicationZonesRSU_isPresent = true;
+void toRos_RSUContainerHighFrequency(const RSUContainerHighFrequency_t& in, etsi_its_cam_msgs::RSUContainerHighFrequency& out) {
+  if (in.protectedCommunicationZonesRSU) {
+    toRos_ProtectedCommunicationZonesRSU(*in.protectedCommunicationZonesRSU, out.protectedCommunicationZonesRSU);
+    out.protectedCommunicationZonesRSU_isPresent = true;
   }
 }
 
-void convert_RSUContainerHighFrequencytoC(const etsi_its_cam_msgs::RSUContainerHighFrequency& _RSUContainerHighFrequency_in, RSUContainerHighFrequency_t& _RSUContainerHighFrequency_out) {
-  memset(&_RSUContainerHighFrequency_out, 0, sizeof(RSUContainerHighFrequency_t));
-  if (_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU_isPresent) {
+void toStruct_RSUContainerHighFrequency(const etsi_its_cam_msgs::RSUContainerHighFrequency& in, RSUContainerHighFrequency_t& out) {
+  memset(&out, 0, sizeof(RSUContainerHighFrequency_t));
+  if (in.protectedCommunicationZonesRSU_isPresent) {
     ProtectedCommunicationZonesRSU_t protectedCommunicationZonesRSU;
-    convert_ProtectedCommunicationZonesRSUtoC(_RSUContainerHighFrequency_in.protectedCommunicationZonesRSU, protectedCommunicationZonesRSU);
-    _RSUContainerHighFrequency_out.protectedCommunicationZonesRSU = new ProtectedCommunicationZonesRSU_t(protectedCommunicationZonesRSU);
+    toStruct_ProtectedCommunicationZonesRSU(in.protectedCommunicationZonesRSU, protectedCommunicationZonesRSU);
+    out.protectedCommunicationZonesRSU = new ProtectedCommunicationZonesRSU_t(protectedCommunicationZonesRSU);
   }
 }
 

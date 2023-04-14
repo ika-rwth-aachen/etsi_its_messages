@@ -8,37 +8,37 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_ClosedLanestoRos(const ClosedLanes_t& _ClosedLanes_in, etsi_its_cam_msgs::ClosedLanes& _ClosedLanes_out) {
-  if (_ClosedLanes_in.innerhardShoulderStatus) {
-    convert_HardShoulderStatustoRos(*_ClosedLanes_in.innerhardShoulderStatus, _ClosedLanes_out.innerhardShoulderStatus);
-    _ClosedLanes_out.innerhardShoulderStatus_isPresent = true;
+void toRos_ClosedLanes(const ClosedLanes_t& in, etsi_its_cam_msgs::ClosedLanes& out) {
+  if (in.innerhardShoulderStatus) {
+    toRos_HardShoulderStatus(*in.innerhardShoulderStatus, out.innerhardShoulderStatus);
+    out.innerhardShoulderStatus_isPresent = true;
   }
-  if (_ClosedLanes_in.outerhardShoulderStatus) {
-    convert_HardShoulderStatustoRos(*_ClosedLanes_in.outerhardShoulderStatus, _ClosedLanes_out.outerhardShoulderStatus);
-    _ClosedLanes_out.outerhardShoulderStatus_isPresent = true;
+  if (in.outerhardShoulderStatus) {
+    toRos_HardShoulderStatus(*in.outerhardShoulderStatus, out.outerhardShoulderStatus);
+    out.outerhardShoulderStatus_isPresent = true;
   }
-  if (_ClosedLanes_in.drivingLaneStatus) {
-    convert_DrivingLaneStatustoRos(*_ClosedLanes_in.drivingLaneStatus, _ClosedLanes_out.drivingLaneStatus);
-    _ClosedLanes_out.drivingLaneStatus_isPresent = true;
+  if (in.drivingLaneStatus) {
+    toRos_DrivingLaneStatus(*in.drivingLaneStatus, out.drivingLaneStatus);
+    out.drivingLaneStatus_isPresent = true;
   }
 }
 
-void convert_ClosedLanestoC(const etsi_its_cam_msgs::ClosedLanes& _ClosedLanes_in, ClosedLanes_t& _ClosedLanes_out) {
-  memset(&_ClosedLanes_out, 0, sizeof(ClosedLanes_t));
-  if (_ClosedLanes_in.innerhardShoulderStatus_isPresent) {
+void toStruct_ClosedLanes(const etsi_its_cam_msgs::ClosedLanes& in, ClosedLanes_t& out) {
+  memset(&out, 0, sizeof(ClosedLanes_t));
+  if (in.innerhardShoulderStatus_isPresent) {
     HardShoulderStatus_t innerhardShoulderStatus;
-    convert_HardShoulderStatustoC(_ClosedLanes_in.innerhardShoulderStatus, innerhardShoulderStatus);
-    _ClosedLanes_out.innerhardShoulderStatus = new HardShoulderStatus_t(innerhardShoulderStatus);
+    toStruct_HardShoulderStatus(in.innerhardShoulderStatus, innerhardShoulderStatus);
+    out.innerhardShoulderStatus = new HardShoulderStatus_t(innerhardShoulderStatus);
   }
-  if (_ClosedLanes_in.outerhardShoulderStatus_isPresent) {
+  if (in.outerhardShoulderStatus_isPresent) {
     HardShoulderStatus_t outerhardShoulderStatus;
-    convert_HardShoulderStatustoC(_ClosedLanes_in.outerhardShoulderStatus, outerhardShoulderStatus);
-    _ClosedLanes_out.outerhardShoulderStatus = new HardShoulderStatus_t(outerhardShoulderStatus);
+    toStruct_HardShoulderStatus(in.outerhardShoulderStatus, outerhardShoulderStatus);
+    out.outerhardShoulderStatus = new HardShoulderStatus_t(outerhardShoulderStatus);
   }
-  if (_ClosedLanes_in.drivingLaneStatus_isPresent) {
+  if (in.drivingLaneStatus_isPresent) {
     DrivingLaneStatus_t drivingLaneStatus;
-    convert_DrivingLaneStatustoC(_ClosedLanes_in.drivingLaneStatus, drivingLaneStatus);
-    _ClosedLanes_out.drivingLaneStatus = new DrivingLaneStatus_t(drivingLaneStatus);
+    toStruct_DrivingLaneStatus(in.drivingLaneStatus, drivingLaneStatus);
+    out.drivingLaneStatus = new DrivingLaneStatus_t(drivingLaneStatus);
   }
 }
 

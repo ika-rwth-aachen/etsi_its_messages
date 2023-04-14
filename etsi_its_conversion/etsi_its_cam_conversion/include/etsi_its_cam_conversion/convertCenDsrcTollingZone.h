@@ -8,23 +8,23 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_CenDsrcTollingZonetoRos(const CenDsrcTollingZone_t& _CenDsrcTollingZone_in, etsi_its_cam_msgs::CenDsrcTollingZone& _CenDsrcTollingZone_out) {
-  convert_LatitudetoRos(_CenDsrcTollingZone_in.protectedZoneLatitude, _CenDsrcTollingZone_out.protectedZoneLatitude);
-  convert_LongitudetoRos(_CenDsrcTollingZone_in.protectedZoneLongitude, _CenDsrcTollingZone_out.protectedZoneLongitude);
-  if (_CenDsrcTollingZone_in.cenDsrcTollingZoneID) {
-    convert_CenDsrcTollingZoneIDtoRos(*_CenDsrcTollingZone_in.cenDsrcTollingZoneID, _CenDsrcTollingZone_out.cenDsrcTollingZoneID);
-    _CenDsrcTollingZone_out.cenDsrcTollingZoneID_isPresent = true;
+void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, etsi_its_cam_msgs::CenDsrcTollingZone& out) {
+  toRos_Latitude(in.protectedZoneLatitude, out.protectedZoneLatitude);
+  toRos_Longitude(in.protectedZoneLongitude, out.protectedZoneLongitude);
+  if (in.cenDsrcTollingZoneID) {
+    toRos_CenDsrcTollingZoneID(*in.cenDsrcTollingZoneID, out.cenDsrcTollingZoneID);
+    out.cenDsrcTollingZoneID_isPresent = true;
   }
 }
 
-void convert_CenDsrcTollingZonetoC(const etsi_its_cam_msgs::CenDsrcTollingZone& _CenDsrcTollingZone_in, CenDsrcTollingZone_t& _CenDsrcTollingZone_out) {
-  memset(&_CenDsrcTollingZone_out, 0, sizeof(CenDsrcTollingZone_t));
-  convert_LatitudetoC(_CenDsrcTollingZone_in.protectedZoneLatitude, _CenDsrcTollingZone_out.protectedZoneLatitude);
-  convert_LongitudetoC(_CenDsrcTollingZone_in.protectedZoneLongitude, _CenDsrcTollingZone_out.protectedZoneLongitude);
-  if (_CenDsrcTollingZone_in.cenDsrcTollingZoneID_isPresent) {
+void toStruct_CenDsrcTollingZone(const etsi_its_cam_msgs::CenDsrcTollingZone& in, CenDsrcTollingZone_t& out) {
+  memset(&out, 0, sizeof(CenDsrcTollingZone_t));
+  toStruct_Latitude(in.protectedZoneLatitude, out.protectedZoneLatitude);
+  toStruct_Longitude(in.protectedZoneLongitude, out.protectedZoneLongitude);
+  if (in.cenDsrcTollingZoneID_isPresent) {
     CenDsrcTollingZoneID_t cenDsrcTollingZoneID;
-    convert_CenDsrcTollingZoneIDtoC(_CenDsrcTollingZone_in.cenDsrcTollingZoneID, cenDsrcTollingZoneID);
-    _CenDsrcTollingZone_out.cenDsrcTollingZoneID = new CenDsrcTollingZoneID_t(cenDsrcTollingZoneID);
+    toStruct_CenDsrcTollingZoneID(in.cenDsrcTollingZoneID, cenDsrcTollingZoneID);
+    out.cenDsrcTollingZoneID = new CenDsrcTollingZoneID_t(cenDsrcTollingZoneID);
   }
 }
 

@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_StationIDtoRos(const StationID_t& _StationID_in, etsi_its_cam_msgs::StationID& _StationID_out) {
-  convert_toRos(_StationID_in, _StationID_out.value);
+void toRos_StationID(const StationID_t& in, etsi_its_cam_msgs::StationID& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_StationIDtoC(const etsi_its_cam_msgs::StationID& _StationID_in, StationID_t& _StationID_out) {
-  memset(&_StationID_out, 0, sizeof(StationID_t));
-  convert_toC(_StationID_in.value, _StationID_out);
+void toStruct_StationID(const etsi_its_cam_msgs::StationID& in, StationID_t& out) {
+  memset(&out, 0, sizeof(StationID_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

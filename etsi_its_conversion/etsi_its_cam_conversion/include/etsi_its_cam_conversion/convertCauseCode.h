@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_CauseCodetoRos(const CauseCode_t& _CauseCode_in, etsi_its_cam_msgs::CauseCode& _CauseCode_out) {
-  convert_CauseCodeTypetoRos(_CauseCode_in.causeCode, _CauseCode_out.causeCode);
-  convert_SubCauseCodeTypetoRos(_CauseCode_in.subCauseCode, _CauseCode_out.subCauseCode);
+void toRos_CauseCode(const CauseCode_t& in, etsi_its_cam_msgs::CauseCode& out) {
+  toRos_CauseCodeType(in.causeCode, out.causeCode);
+  toRos_SubCauseCodeType(in.subCauseCode, out.subCauseCode);
 }
 
-void convert_CauseCodetoC(const etsi_its_cam_msgs::CauseCode& _CauseCode_in, CauseCode_t& _CauseCode_out) {
-  memset(&_CauseCode_out, 0, sizeof(CauseCode_t));
-  convert_CauseCodeTypetoC(_CauseCode_in.causeCode, _CauseCode_out.causeCode);
-  convert_SubCauseCodeTypetoC(_CauseCode_in.subCauseCode, _CauseCode_out.subCauseCode);
+void toStruct_CauseCode(const etsi_its_cam_msgs::CauseCode& in, CauseCode_t& out) {
+  memset(&out, 0, sizeof(CauseCode_t));
+  toStruct_CauseCodeType(in.causeCode, out.causeCode);
+  toStruct_SubCauseCodeType(in.subCauseCode, out.subCauseCode);
 }
 
 }

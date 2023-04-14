@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_LongitudinalAccelerationValuetoRos(const LongitudinalAccelerationValue_t& _LongitudinalAccelerationValue_in, etsi_its_cam_msgs::LongitudinalAccelerationValue& _LongitudinalAccelerationValue_out) {
-  convert_toRos(_LongitudinalAccelerationValue_in, _LongitudinalAccelerationValue_out.value);
+void toRos_LongitudinalAccelerationValue(const LongitudinalAccelerationValue_t& in, etsi_its_cam_msgs::LongitudinalAccelerationValue& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_LongitudinalAccelerationValuetoC(const etsi_its_cam_msgs::LongitudinalAccelerationValue& _LongitudinalAccelerationValue_in, LongitudinalAccelerationValue_t& _LongitudinalAccelerationValue_out) {
-  memset(&_LongitudinalAccelerationValue_out, 0, sizeof(LongitudinalAccelerationValue_t));
-  convert_toC(_LongitudinalAccelerationValue_in.value, _LongitudinalAccelerationValue_out);
+void toStruct_LongitudinalAccelerationValue(const etsi_its_cam_msgs::LongitudinalAccelerationValue& in, LongitudinalAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(LongitudinalAccelerationValue_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_SteeringWheelAngleConfidencetoRos(const SteeringWheelAngleConfidence_t& _SteeringWheelAngleConfidence_in, etsi_its_cam_msgs::SteeringWheelAngleConfidence& _SteeringWheelAngleConfidence_out) {
-  convert_toRos(_SteeringWheelAngleConfidence_in, _SteeringWheelAngleConfidence_out.value);
+void toRos_SteeringWheelAngleConfidence(const SteeringWheelAngleConfidence_t& in, etsi_its_cam_msgs::SteeringWheelAngleConfidence& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_SteeringWheelAngleConfidencetoC(const etsi_its_cam_msgs::SteeringWheelAngleConfidence& _SteeringWheelAngleConfidence_in, SteeringWheelAngleConfidence_t& _SteeringWheelAngleConfidence_out) {
-  memset(&_SteeringWheelAngleConfidence_out, 0, sizeof(SteeringWheelAngleConfidence_t));
-  convert_toC(_SteeringWheelAngleConfidence_in.value, _SteeringWheelAngleConfidence_out);
+void toStruct_SteeringWheelAngleConfidence(const etsi_its_cam_msgs::SteeringWheelAngleConfidence& in, SteeringWheelAngleConfidence_t& out) {
+  memset(&out, 0, sizeof(SteeringWheelAngleConfidence_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

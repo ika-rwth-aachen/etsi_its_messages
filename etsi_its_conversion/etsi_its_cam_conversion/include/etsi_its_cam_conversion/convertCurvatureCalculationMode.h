@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_CurvatureCalculationModetoRos(const CurvatureCalculationMode_t& _CurvatureCalculationMode_in, etsi_its_cam_msgs::CurvatureCalculationMode& _CurvatureCalculationMode_out) {
-  _CurvatureCalculationMode_out.value = _CurvatureCalculationMode_in;
+void toRos_CurvatureCalculationMode(const CurvatureCalculationMode_t& in, etsi_its_cam_msgs::CurvatureCalculationMode& out) {
+  out.value = in;
 }
 
-void convert_CurvatureCalculationModetoC(const etsi_its_cam_msgs::CurvatureCalculationMode& _CurvatureCalculationMode_in, CurvatureCalculationMode_t& _CurvatureCalculationMode_out) {
-  memset(&_CurvatureCalculationMode_out, 0, sizeof(CurvatureCalculationMode_t));
-  _CurvatureCalculationMode_out = _CurvatureCalculationMode_in.value;
+void toStruct_CurvatureCalculationMode(const etsi_its_cam_msgs::CurvatureCalculationMode& in, CurvatureCalculationMode_t& out) {
+  memset(&out, 0, sizeof(CurvatureCalculationMode_t));
+  out = in.value;
 }
 
 }

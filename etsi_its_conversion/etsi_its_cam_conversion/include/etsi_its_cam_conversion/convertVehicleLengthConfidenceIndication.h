@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_VehicleLengthConfidenceIndicationtoRos(const VehicleLengthConfidenceIndication_t& _VehicleLengthConfidenceIndication_in, etsi_its_cam_msgs::VehicleLengthConfidenceIndication& _VehicleLengthConfidenceIndication_out) {
-  _VehicleLengthConfidenceIndication_out.value = _VehicleLengthConfidenceIndication_in;
+void toRos_VehicleLengthConfidenceIndication(const VehicleLengthConfidenceIndication_t& in, etsi_its_cam_msgs::VehicleLengthConfidenceIndication& out) {
+  out.value = in;
 }
 
-void convert_VehicleLengthConfidenceIndicationtoC(const etsi_its_cam_msgs::VehicleLengthConfidenceIndication& _VehicleLengthConfidenceIndication_in, VehicleLengthConfidenceIndication_t& _VehicleLengthConfidenceIndication_out) {
-  memset(&_VehicleLengthConfidenceIndication_out, 0, sizeof(VehicleLengthConfidenceIndication_t));
-  _VehicleLengthConfidenceIndication_out = _VehicleLengthConfidenceIndication_in.value;
+void toStruct_VehicleLengthConfidenceIndication(const etsi_its_cam_msgs::VehicleLengthConfidenceIndication& in, VehicleLengthConfidenceIndication_t& out) {
+  memset(&out, 0, sizeof(VehicleLengthConfidenceIndication_t));
+  out = in.value;
 }
 
 }

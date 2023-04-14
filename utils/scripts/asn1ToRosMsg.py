@@ -12,7 +12,7 @@ import numpy as np
 
 ASN1_PRIMITIVES_2_ROS = {
     "BOOLEAN": "bool",
-    "INTEGER": "int32",
+    "INTEGER": "long",
     "IA5String": "string",
     "UTF8String": "string",
     "BIT STRING": "bool[]",
@@ -20,6 +20,10 @@ ASN1_PRIMITIVES_2_ROS = {
     "NumericString": "string",
     "VisibleString": "string",
 }
+
+
+TO_ROS = "toRos"
+TO_STRUCT = "toStruct"
 
 
 class CppFileStr:
@@ -260,12 +264,8 @@ def convertToPrimitiv(type, t_name, name) -> List[str]:
     if name != "value":
         c_name = f".{name}"
     
-    if memberType == "INTEGER":
-        c2ros = f"convert_toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
-        ros2c = f"convert_toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
-    else:
-        c2ros = f"convert_{memberType}toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
-        ros2c = f"convert_{memberType}toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
+    c2ros = f"{TO_ROS}_{memberType}(in{c_name}, out.{name});\n"
+    ros2c = f"{TO_STRUCT}_{memberType}(in.{name}, out{c_name});\n"
     
     return c2ros, ros2c
 
@@ -283,9 +283,9 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     header += f"#pragma once\n"
     header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>"
     namespace += f"namespace etsi_its_{etsi_type}_conversion {{"
-    c2ros += f"void convert_{t_name}toRos(const {t_name}_t& _{t_name}_in, {ns_msgs}::{t_name}& _{t_name}_out) {{"
-    ros2c += f"void convert_{t_name}toC(const {ns_msgs}::{t_name}& _{t_name}_in, {t_name}_t& _{t_name}_out) {{"
-    ros2c += f"memset(&_{t_name}_out, 0, sizeof({t_name}_t));"
+    c2ros += f"void {TO_ROS}_{t_name}(const {t_name}_t& in, {ns_msgs}::{t_name}& out) {{"
+    ros2c += f"void {TO_STRUCT}_{t_name}(const {ns_msgs}::{t_name}& in, {t_name}_t& out) {{"
+    ros2c += f"memset(&out, 0, sizeof({t_name}_t));"
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
@@ -351,19 +351,19 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             memberName = member["name"]
             memberType = member["type"]
             if "optional" in member.keys():
-                c2ros+=f"if (_{t_name}_in.{memberName}) {{"
-                ros2c+=f"if (_{t_name}_in.{memberName}_isPresent) {{"
+                c2ros+=f"if (in.{memberName}) {{"
+                ros2c+=f"if (in.{memberName}_isPresent) {{"
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
                     header += includeHeader(etsi_type, header, memberType, True)
                     c2ros += ""+convertToPrimitiv(memberType,t_name,memberName)[0]
                     ros2c += ""+convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
                     header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"convert_{memberType}toRos(*_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
-                    c2ros += f"_{t_name}_out.{memberName}_isPresent = true;"
+                    c2ros += f"{TO_ROS}_{memberType}(*in.{memberName}, out.{memberName});"
+                    c2ros += f"out.{memberName}_isPresent = true;"
                     ros2c += f"{memberType}_t {memberName};"
-                    ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, {memberName});"
-                    ros2c += f"_{t_name}_out.{memberName} = new {memberType}_t({memberName});"
+                    ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, {memberName});"
+                    ros2c += f"out.{memberName} = new {memberType}_t({memberName});"
                 c2ros+="}"
                 ros2c+="}"
             else:
@@ -373,8 +373,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                     ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
                     header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"convert_{memberType}toRos(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
-                    ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
+                    c2ros += f"{TO_ROS}_{memberType}(in.{memberName}, out.{memberName});"
+                    ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, out.{memberName});"
 
     # type aliases with multiple options
     elif type == "CHOICE":
@@ -406,16 +406,16 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             memberName = member["name"]
             memberType = member["type"]
             header += includeHeader(etsi_type, header, memberType)
-            c2ros += f"if(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})"
+            c2ros += f"if(in.present == {t_name}_PR::{t_name}_PR_{memberName})"
             c2ros += "{"
-            c2ros += f"convert_{memberType}toRos(_{t_name}_in.choice.{memberName}, _{t_name}_out.{memberName});"
-            c2ros += f"_{t_name}_out.choice = {ns_msgs}::{t_name}::{name};"
+            c2ros += f"{TO_ROS}_{memberType}(in.choice.{memberName}, out.{memberName});"
+            c2ros += f"out.choice = {ns_msgs}::{t_name}::{name};"
             c2ros += "}"
 
-            ros2c += f"if(_{t_name}_in.choice == {ns_msgs}::{t_name}::{name})"
+            ros2c += f"if(in.choice == {ns_msgs}::{t_name}::{name})"
             ros2c += "{"
-            ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.choice.{memberName});"
-            ros2c += f"_{t_name}_out.present = {t_name}_PR::{t_name}_PR_{memberName};"
+            ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, out.choice.{memberName});"
+            ros2c += f"out.present = {t_name}_PR::{t_name}_PR_{memberName};"
             ros2c += "}"
 
     # arrays
@@ -450,8 +450,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
         # Converter
         name = asn1["name"] if "name" in asn1 else "value"
-        c2ros += f"_{t_name}_out.{name} = _{t_name}_in;"
-        ros2c += f"_{t_name}_out = _{t_name}_in.{name};"
+        c2ros += f"out.{name} = in;"
+        ros2c += f"out = in.{name};"
 
     # custom types
     elif type in asn1_types:

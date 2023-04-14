@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_SpeedLimittoRos(const SpeedLimit_t& _SpeedLimit_in, etsi_its_cam_msgs::SpeedLimit& _SpeedLimit_out) {
-  convert_toRos(_SpeedLimit_in, _SpeedLimit_out.value);
+void toRos_SpeedLimit(const SpeedLimit_t& in, etsi_its_cam_msgs::SpeedLimit& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_SpeedLimittoC(const etsi_its_cam_msgs::SpeedLimit& _SpeedLimit_in, SpeedLimit_t& _SpeedLimit_out) {
-  memset(&_SpeedLimit_out, 0, sizeof(SpeedLimit_t));
-  convert_toC(_SpeedLimit_in.value, _SpeedLimit_out);
+void toStruct_SpeedLimit(const etsi_its_cam_msgs::SpeedLimit& in, SpeedLimit_t& out) {
+  memset(&out, 0, sizeof(SpeedLimit_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

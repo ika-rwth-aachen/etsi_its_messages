@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_CurvatureValuetoRos(const CurvatureValue_t& _CurvatureValue_in, etsi_its_cam_msgs::CurvatureValue& _CurvatureValue_out) {
-  convert_toRos(_CurvatureValue_in, _CurvatureValue_out.value);
+void toRos_CurvatureValue(const CurvatureValue_t& in, etsi_its_cam_msgs::CurvatureValue& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_CurvatureValuetoC(const etsi_its_cam_msgs::CurvatureValue& _CurvatureValue_in, CurvatureValue_t& _CurvatureValue_out) {
-  memset(&_CurvatureValue_out, 0, sizeof(CurvatureValue_t));
-  convert_toC(_CurvatureValue_in.value, _CurvatureValue_out);
+void toStruct_CurvatureValue(const etsi_its_cam_msgs::CurvatureValue& in, CurvatureValue_t& out) {
+  memset(&out, 0, sizeof(CurvatureValue_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

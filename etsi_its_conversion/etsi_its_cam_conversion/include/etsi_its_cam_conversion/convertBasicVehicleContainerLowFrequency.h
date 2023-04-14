@@ -8,17 +8,17 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_BasicVehicleContainerLowFrequencytoRos(const BasicVehicleContainerLowFrequency_t& _BasicVehicleContainerLowFrequency_in, etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& _BasicVehicleContainerLowFrequency_out) {
-  convert_VehicleRoletoRos(_BasicVehicleContainerLowFrequency_in.vehicleRole, _BasicVehicleContainerLowFrequency_out.vehicleRole);
-  convert_ExteriorLightstoRos(_BasicVehicleContainerLowFrequency_in.exteriorLights, _BasicVehicleContainerLowFrequency_out.exteriorLights);
-  convert_PathHistorytoRos(_BasicVehicleContainerLowFrequency_in.pathHistory, _BasicVehicleContainerLowFrequency_out.pathHistory);
+void toRos_BasicVehicleContainerLowFrequency(const BasicVehicleContainerLowFrequency_t& in, etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& out) {
+  toRos_VehicleRole(in.vehicleRole, out.vehicleRole);
+  toRos_ExteriorLights(in.exteriorLights, out.exteriorLights);
+  toRos_PathHistory(in.pathHistory, out.pathHistory);
 }
 
-void convert_BasicVehicleContainerLowFrequencytoC(const etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& _BasicVehicleContainerLowFrequency_in, BasicVehicleContainerLowFrequency_t& _BasicVehicleContainerLowFrequency_out) {
-  memset(&_BasicVehicleContainerLowFrequency_out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
-  convert_VehicleRoletoC(_BasicVehicleContainerLowFrequency_in.vehicleRole, _BasicVehicleContainerLowFrequency_out.vehicleRole);
-  convert_ExteriorLightstoC(_BasicVehicleContainerLowFrequency_in.exteriorLights, _BasicVehicleContainerLowFrequency_out.exteriorLights);
-  convert_PathHistorytoC(_BasicVehicleContainerLowFrequency_in.pathHistory, _BasicVehicleContainerLowFrequency_out.pathHistory);
+void toStruct_BasicVehicleContainerLowFrequency(const etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& in, BasicVehicleContainerLowFrequency_t& out) {
+  memset(&out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
+  toStruct_VehicleRole(in.vehicleRole, out.vehicleRole);
+  toStruct_ExteriorLights(in.exteriorLights, out.exteriorLights);
+  toStruct_PathHistory(in.pathHistory, out.pathHistory);
 }
 
 }

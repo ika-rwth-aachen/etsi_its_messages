@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_HeadingtoRos(const Heading_t& _Heading_in, etsi_its_cam_msgs::Heading& _Heading_out) {
-  convert_HeadingValuetoRos(_Heading_in.headingValue, _Heading_out.headingValue);
-  convert_HeadingConfidencetoRos(_Heading_in.headingConfidence, _Heading_out.headingConfidence);
+void toRos_Heading(const Heading_t& in, etsi_its_cam_msgs::Heading& out) {
+  toRos_HeadingValue(in.headingValue, out.headingValue);
+  toRos_HeadingConfidence(in.headingConfidence, out.headingConfidence);
 }
 
-void convert_HeadingtoC(const etsi_its_cam_msgs::Heading& _Heading_in, Heading_t& _Heading_out) {
-  memset(&_Heading_out, 0, sizeof(Heading_t));
-  convert_HeadingValuetoC(_Heading_in.headingValue, _Heading_out.headingValue);
-  convert_HeadingConfidencetoC(_Heading_in.headingConfidence, _Heading_out.headingConfidence);
+void toStruct_Heading(const etsi_its_cam_msgs::Heading& in, Heading_t& out) {
+  memset(&out, 0, sizeof(Heading_t));
+  toStruct_HeadingValue(in.headingValue, out.headingValue);
+  toStruct_HeadingConfidence(in.headingConfidence, out.headingConfidence);
 }
 
 }

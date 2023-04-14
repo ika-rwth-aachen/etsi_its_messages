@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_HeadingConfidencetoRos(const HeadingConfidence_t& _HeadingConfidence_in, etsi_its_cam_msgs::HeadingConfidence& _HeadingConfidence_out) {
-  convert_toRos(_HeadingConfidence_in, _HeadingConfidence_out.value);
+void toRos_HeadingConfidence(const HeadingConfidence_t& in, etsi_its_cam_msgs::HeadingConfidence& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_HeadingConfidencetoC(const etsi_its_cam_msgs::HeadingConfidence& _HeadingConfidence_in, HeadingConfidence_t& _HeadingConfidence_out) {
-  memset(&_HeadingConfidence_out, 0, sizeof(HeadingConfidence_t));
-  convert_toC(_HeadingConfidence_in.value, _HeadingConfidence_out);
+void toStruct_HeadingConfidence(const etsi_its_cam_msgs::HeadingConfidence& in, HeadingConfidence_t& out) {
+  memset(&out, 0, sizeof(HeadingConfidence_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

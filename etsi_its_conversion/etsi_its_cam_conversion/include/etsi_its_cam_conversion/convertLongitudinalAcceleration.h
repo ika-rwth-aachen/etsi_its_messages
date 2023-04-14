@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_LongitudinalAccelerationtoRos(const LongitudinalAcceleration_t& _LongitudinalAcceleration_in, etsi_its_cam_msgs::LongitudinalAcceleration& _LongitudinalAcceleration_out) {
-  convert_LongitudinalAccelerationValuetoRos(_LongitudinalAcceleration_in.longitudinalAccelerationValue, _LongitudinalAcceleration_out.longitudinalAccelerationValue);
-  convert_AccelerationConfidencetoRos(_LongitudinalAcceleration_in.longitudinalAccelerationConfidence, _LongitudinalAcceleration_out.longitudinalAccelerationConfidence);
+void toRos_LongitudinalAcceleration(const LongitudinalAcceleration_t& in, etsi_its_cam_msgs::LongitudinalAcceleration& out) {
+  toRos_LongitudinalAccelerationValue(in.longitudinalAccelerationValue, out.longitudinalAccelerationValue);
+  toRos_AccelerationConfidence(in.longitudinalAccelerationConfidence, out.longitudinalAccelerationConfidence);
 }
 
-void convert_LongitudinalAccelerationtoC(const etsi_its_cam_msgs::LongitudinalAcceleration& _LongitudinalAcceleration_in, LongitudinalAcceleration_t& _LongitudinalAcceleration_out) {
-  memset(&_LongitudinalAcceleration_out, 0, sizeof(LongitudinalAcceleration_t));
-  convert_LongitudinalAccelerationValuetoC(_LongitudinalAcceleration_in.longitudinalAccelerationValue, _LongitudinalAcceleration_out.longitudinalAccelerationValue);
-  convert_AccelerationConfidencetoC(_LongitudinalAcceleration_in.longitudinalAccelerationConfidence, _LongitudinalAcceleration_out.longitudinalAccelerationConfidence);
+void toStruct_LongitudinalAcceleration(const etsi_its_cam_msgs::LongitudinalAcceleration& in, LongitudinalAcceleration_t& out) {
+  memset(&out, 0, sizeof(LongitudinalAcceleration_t));
+  toStruct_LongitudinalAccelerationValue(in.longitudinalAccelerationValue, out.longitudinalAccelerationValue);
+  toStruct_AccelerationConfidence(in.longitudinalAccelerationConfidence, out.longitudinalAccelerationConfidence);
 }
 
 }

@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_AccelerationControltoRos(const AccelerationControl_t& _AccelerationControl_in, etsi_its_cam_msgs::AccelerationControl& _AccelerationControl_out) {
-  convert_BIT_STRINGtoRos(_AccelerationControl_in, _AccelerationControl_out.value);
+void toRos_AccelerationControl(const AccelerationControl_t& in, etsi_its_cam_msgs::AccelerationControl& out) {
+  toRos_BIT_STRING(in, out.value);
 
 }
 
-void convert_AccelerationControltoC(const etsi_its_cam_msgs::AccelerationControl& _AccelerationControl_in, AccelerationControl_t& _AccelerationControl_out) {
-  memset(&_AccelerationControl_out, 0, sizeof(AccelerationControl_t));
-  convert_BIT_STRINGtoC(_AccelerationControl_in.value, _AccelerationControl_out);
+void toStruct_AccelerationControl(const etsi_its_cam_msgs::AccelerationControl& in, AccelerationControl_t& out) {
+  memset(&out, 0, sizeof(AccelerationControl_t));
+  toStruct_BIT_STRING(in.value, out);
 
 }
 

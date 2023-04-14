@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_SpeedtoRos(const Speed_t& _Speed_in, etsi_its_cam_msgs::Speed& _Speed_out) {
-  convert_SpeedValuetoRos(_Speed_in.speedValue, _Speed_out.speedValue);
-  convert_SpeedConfidencetoRos(_Speed_in.speedConfidence, _Speed_out.speedConfidence);
+void toRos_Speed(const Speed_t& in, etsi_its_cam_msgs::Speed& out) {
+  toRos_SpeedValue(in.speedValue, out.speedValue);
+  toRos_SpeedConfidence(in.speedConfidence, out.speedConfidence);
 }
 
-void convert_SpeedtoC(const etsi_its_cam_msgs::Speed& _Speed_in, Speed_t& _Speed_out) {
-  memset(&_Speed_out, 0, sizeof(Speed_t));
-  convert_SpeedValuetoC(_Speed_in.speedValue, _Speed_out.speedValue);
-  convert_SpeedConfidencetoC(_Speed_in.speedConfidence, _Speed_out.speedConfidence);
+void toStruct_Speed(const etsi_its_cam_msgs::Speed& in, Speed_t& out) {
+  memset(&out, 0, sizeof(Speed_t));
+  toStruct_SpeedValue(in.speedValue, out.speedValue);
+  toStruct_SpeedConfidence(in.speedConfidence, out.speedConfidence);
 }
 
 }

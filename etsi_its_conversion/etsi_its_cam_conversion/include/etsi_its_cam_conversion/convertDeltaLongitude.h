@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_DeltaLongitudetoRos(const DeltaLongitude_t& _DeltaLongitude_in, etsi_its_cam_msgs::DeltaLongitude& _DeltaLongitude_out) {
-  convert_toRos(_DeltaLongitude_in, _DeltaLongitude_out.value);
+void toRos_DeltaLongitude(const DeltaLongitude_t& in, etsi_its_cam_msgs::DeltaLongitude& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_DeltaLongitudetoC(const etsi_its_cam_msgs::DeltaLongitude& _DeltaLongitude_in, DeltaLongitude_t& _DeltaLongitude_out) {
-  memset(&_DeltaLongitude_out, 0, sizeof(DeltaLongitude_t));
-  convert_toC(_DeltaLongitude_in.value, _DeltaLongitude_out);
+void toStruct_DeltaLongitude(const etsi_its_cam_msgs::DeltaLongitude& in, DeltaLongitude_t& out) {
+  memset(&out, 0, sizeof(DeltaLongitude_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

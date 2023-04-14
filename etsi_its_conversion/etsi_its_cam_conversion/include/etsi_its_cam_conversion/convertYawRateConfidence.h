@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_YawRateConfidencetoRos(const YawRateConfidence_t& _YawRateConfidence_in, etsi_its_cam_msgs::YawRateConfidence& _YawRateConfidence_out) {
-  _YawRateConfidence_out.value = _YawRateConfidence_in;
+void toRos_YawRateConfidence(const YawRateConfidence_t& in, etsi_its_cam_msgs::YawRateConfidence& out) {
+  out.value = in;
 }
 
-void convert_YawRateConfidencetoC(const etsi_its_cam_msgs::YawRateConfidence& _YawRateConfidence_in, YawRateConfidence_t& _YawRateConfidence_out) {
-  memset(&_YawRateConfidence_out, 0, sizeof(YawRateConfidence_t));
-  _YawRateConfidence_out = _YawRateConfidence_in.value;
+void toStruct_YawRateConfidence(const etsi_its_cam_msgs::YawRateConfidence& in, YawRateConfidence_t& out) {
+  memset(&out, 0, sizeof(YawRateConfidence_t));
+  out = in.value;
 }
 
 }

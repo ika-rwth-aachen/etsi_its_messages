@@ -8,30 +8,30 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_RoadWorksContainerBasictoRos(const RoadWorksContainerBasic_t& _RoadWorksContainerBasic_in, etsi_its_cam_msgs::RoadWorksContainerBasic& _RoadWorksContainerBasic_out) {
-  if (_RoadWorksContainerBasic_in.roadworksSubCauseCode) {
-    convert_RoadworksSubCauseCodetoRos(*_RoadWorksContainerBasic_in.roadworksSubCauseCode, _RoadWorksContainerBasic_out.roadworksSubCauseCode);
-    _RoadWorksContainerBasic_out.roadworksSubCauseCode_isPresent = true;
+void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, etsi_its_cam_msgs::RoadWorksContainerBasic& out) {
+  if (in.roadworksSubCauseCode) {
+    toRos_RoadworksSubCauseCode(*in.roadworksSubCauseCode, out.roadworksSubCauseCode);
+    out.roadworksSubCauseCode_isPresent = true;
   }
-  convert_LightBarSirenInUsetoRos(_RoadWorksContainerBasic_in.lightBarSirenInUse, _RoadWorksContainerBasic_out.lightBarSirenInUse);
-  if (_RoadWorksContainerBasic_in.closedLanes) {
-    convert_ClosedLanestoRos(*_RoadWorksContainerBasic_in.closedLanes, _RoadWorksContainerBasic_out.closedLanes);
-    _RoadWorksContainerBasic_out.closedLanes_isPresent = true;
+  toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
+  if (in.closedLanes) {
+    toRos_ClosedLanes(*in.closedLanes, out.closedLanes);
+    out.closedLanes_isPresent = true;
   }
 }
 
-void convert_RoadWorksContainerBasictoC(const etsi_its_cam_msgs::RoadWorksContainerBasic& _RoadWorksContainerBasic_in, RoadWorksContainerBasic_t& _RoadWorksContainerBasic_out) {
-  memset(&_RoadWorksContainerBasic_out, 0, sizeof(RoadWorksContainerBasic_t));
-  if (_RoadWorksContainerBasic_in.roadworksSubCauseCode_isPresent) {
+void toStruct_RoadWorksContainerBasic(const etsi_its_cam_msgs::RoadWorksContainerBasic& in, RoadWorksContainerBasic_t& out) {
+  memset(&out, 0, sizeof(RoadWorksContainerBasic_t));
+  if (in.roadworksSubCauseCode_isPresent) {
     RoadworksSubCauseCode_t roadworksSubCauseCode;
-    convert_RoadworksSubCauseCodetoC(_RoadWorksContainerBasic_in.roadworksSubCauseCode, roadworksSubCauseCode);
-    _RoadWorksContainerBasic_out.roadworksSubCauseCode = new RoadworksSubCauseCode_t(roadworksSubCauseCode);
+    toStruct_RoadworksSubCauseCode(in.roadworksSubCauseCode, roadworksSubCauseCode);
+    out.roadworksSubCauseCode = new RoadworksSubCauseCode_t(roadworksSubCauseCode);
   }
-  convert_LightBarSirenInUsetoC(_RoadWorksContainerBasic_in.lightBarSirenInUse, _RoadWorksContainerBasic_out.lightBarSirenInUse);
-  if (_RoadWorksContainerBasic_in.closedLanes_isPresent) {
+  toStruct_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
+  if (in.closedLanes_isPresent) {
     ClosedLanes_t closedLanes;
-    convert_ClosedLanestoC(_RoadWorksContainerBasic_in.closedLanes, closedLanes);
-    _RoadWorksContainerBasic_out.closedLanes = new ClosedLanes_t(closedLanes);
+    toStruct_ClosedLanes(in.closedLanes, closedLanes);
+    out.closedLanes = new ClosedLanes_t(closedLanes);
   }
 }
 

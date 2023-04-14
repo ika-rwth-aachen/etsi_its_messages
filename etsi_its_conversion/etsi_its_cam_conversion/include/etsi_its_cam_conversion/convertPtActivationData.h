@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_PtActivationDatatoRos(const PtActivationData_t& _PtActivationData_in, etsi_its_cam_msgs::PtActivationData& _PtActivationData_out) {
-  convert_OCTET_STRINGtoRos(_PtActivationData_in, _PtActivationData_out.value);
+void toRos_PtActivationData(const PtActivationData_t& in, etsi_its_cam_msgs::PtActivationData& out) {
+  toRos_OCTET_STRING(in, out.value);
 
 }
 
-void convert_PtActivationDatatoC(const etsi_its_cam_msgs::PtActivationData& _PtActivationData_in, PtActivationData_t& _PtActivationData_out) {
-  memset(&_PtActivationData_out, 0, sizeof(PtActivationData_t));
-  convert_OCTET_STRINGtoC(_PtActivationData_in.value, _PtActivationData_out);
+void toStruct_PtActivationData(const etsi_its_cam_msgs::PtActivationData& in, PtActivationData_t& out) {
+  memset(&out, 0, sizeof(PtActivationData_t));
+  toStruct_OCTET_STRING(in.value, out);
 
 }
 

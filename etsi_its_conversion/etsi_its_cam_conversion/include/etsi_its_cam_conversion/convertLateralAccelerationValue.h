@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_LateralAccelerationValuetoRos(const LateralAccelerationValue_t& _LateralAccelerationValue_in, etsi_its_cam_msgs::LateralAccelerationValue& _LateralAccelerationValue_out) {
-  convert_toRos(_LateralAccelerationValue_in, _LateralAccelerationValue_out.value);
+void toRos_LateralAccelerationValue(const LateralAccelerationValue_t& in, etsi_its_cam_msgs::LateralAccelerationValue& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_LateralAccelerationValuetoC(const etsi_its_cam_msgs::LateralAccelerationValue& _LateralAccelerationValue_in, LateralAccelerationValue_t& _LateralAccelerationValue_out) {
-  memset(&_LateralAccelerationValue_out, 0, sizeof(LateralAccelerationValue_t));
-  convert_toC(_LateralAccelerationValue_in.value, _LateralAccelerationValue_out);
+void toStruct_LateralAccelerationValue(const etsi_its_cam_msgs::LateralAccelerationValue& in, LateralAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(LateralAccelerationValue_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_CurvatureConfidencetoRos(const CurvatureConfidence_t& _CurvatureConfidence_in, etsi_its_cam_msgs::CurvatureConfidence& _CurvatureConfidence_out) {
-  _CurvatureConfidence_out.value = _CurvatureConfidence_in;
+void toRos_CurvatureConfidence(const CurvatureConfidence_t& in, etsi_its_cam_msgs::CurvatureConfidence& out) {
+  out.value = in;
 }
 
-void convert_CurvatureConfidencetoC(const etsi_its_cam_msgs::CurvatureConfidence& _CurvatureConfidence_in, CurvatureConfidence_t& _CurvatureConfidence_out) {
-  memset(&_CurvatureConfidence_out, 0, sizeof(CurvatureConfidence_t));
-  _CurvatureConfidence_out = _CurvatureConfidence_in.value;
+void toStruct_CurvatureConfidence(const etsi_its_cam_msgs::CurvatureConfidence& in, CurvatureConfidence_t& out) {
+  memset(&out, 0, sizeof(CurvatureConfidence_t));
+  out = in.value;
 }
 
 }

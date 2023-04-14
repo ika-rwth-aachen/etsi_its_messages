@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_EmergencyPrioritytoRos(const EmergencyPriority_t& _EmergencyPriority_in, etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_out) {
-  convert_BIT_STRINGtoRos(_EmergencyPriority_in, _EmergencyPriority_out.value);
+void toRos_EmergencyPriority(const EmergencyPriority_t& in, etsi_its_cam_msgs::EmergencyPriority& out) {
+  toRos_BIT_STRING(in, out.value);
 
 }
 
-void convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in, EmergencyPriority_t& _EmergencyPriority_out) {
-  memset(&_EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
-  convert_BIT_STRINGtoC(_EmergencyPriority_in.value, _EmergencyPriority_out);
+void toStruct_EmergencyPriority(const etsi_its_cam_msgs::EmergencyPriority& in, EmergencyPriority_t& out) {
+  memset(&out, 0, sizeof(EmergencyPriority_t));
+  toStruct_BIT_STRING(in.value, out);
 
 }
 

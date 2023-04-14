@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_VehicleLengthValuetoRos(const VehicleLengthValue_t& _VehicleLengthValue_in, etsi_its_cam_msgs::VehicleLengthValue& _VehicleLengthValue_out) {
-  convert_toRos(_VehicleLengthValue_in, _VehicleLengthValue_out.value);
+void toRos_VehicleLengthValue(const VehicleLengthValue_t& in, etsi_its_cam_msgs::VehicleLengthValue& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_VehicleLengthValuetoC(const etsi_its_cam_msgs::VehicleLengthValue& _VehicleLengthValue_in, VehicleLengthValue_t& _VehicleLengthValue_out) {
-  memset(&_VehicleLengthValue_out, 0, sizeof(VehicleLengthValue_t));
-  convert_toC(_VehicleLengthValue_in.value, _VehicleLengthValue_out);
+void toStruct_VehicleLengthValue(const etsi_its_cam_msgs::VehicleLengthValue& in, VehicleLengthValue_t& out) {
+  memset(&out, 0, sizeof(VehicleLengthValue_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

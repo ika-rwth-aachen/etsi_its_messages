@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_LateralAccelerationtoRos(const LateralAcceleration_t& _LateralAcceleration_in, etsi_its_cam_msgs::LateralAcceleration& _LateralAcceleration_out) {
-  convert_LateralAccelerationValuetoRos(_LateralAcceleration_in.lateralAccelerationValue, _LateralAcceleration_out.lateralAccelerationValue);
-  convert_AccelerationConfidencetoRos(_LateralAcceleration_in.lateralAccelerationConfidence, _LateralAcceleration_out.lateralAccelerationConfidence);
+void toRos_LateralAcceleration(const LateralAcceleration_t& in, etsi_its_cam_msgs::LateralAcceleration& out) {
+  toRos_LateralAccelerationValue(in.lateralAccelerationValue, out.lateralAccelerationValue);
+  toRos_AccelerationConfidence(in.lateralAccelerationConfidence, out.lateralAccelerationConfidence);
 }
 
-void convert_LateralAccelerationtoC(const etsi_its_cam_msgs::LateralAcceleration& _LateralAcceleration_in, LateralAcceleration_t& _LateralAcceleration_out) {
-  memset(&_LateralAcceleration_out, 0, sizeof(LateralAcceleration_t));
-  convert_LateralAccelerationValuetoC(_LateralAcceleration_in.lateralAccelerationValue, _LateralAcceleration_out.lateralAccelerationValue);
-  convert_AccelerationConfidencetoC(_LateralAcceleration_in.lateralAccelerationConfidence, _LateralAcceleration_out.lateralAccelerationConfidence);
+void toStruct_LateralAcceleration(const etsi_its_cam_msgs::LateralAcceleration& in, LateralAcceleration_t& out) {
+  memset(&out, 0, sizeof(LateralAcceleration_t));
+  toStruct_LateralAccelerationValue(in.lateralAccelerationValue, out.lateralAccelerationValue);
+  toStruct_AccelerationConfidence(in.lateralAccelerationConfidence, out.lateralAccelerationConfidence);
 }
 
 }

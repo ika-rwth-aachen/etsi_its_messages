@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_DriveDirectiontoRos(const DriveDirection_t& _DriveDirection_in, etsi_its_cam_msgs::DriveDirection& _DriveDirection_out) {
-  _DriveDirection_out.value = _DriveDirection_in;
+void toRos_DriveDirection(const DriveDirection_t& in, etsi_its_cam_msgs::DriveDirection& out) {
+  out.value = in;
 }
 
-void convert_DriveDirectiontoC(const etsi_its_cam_msgs::DriveDirection& _DriveDirection_in, DriveDirection_t& _DriveDirection_out) {
-  memset(&_DriveDirection_out, 0, sizeof(DriveDirection_t));
-  _DriveDirection_out = _DriveDirection_in.value;
+void toStruct_DriveDirection(const etsi_its_cam_msgs::DriveDirection& in, DriveDirection_t& out) {
+  memset(&out, 0, sizeof(DriveDirection_t));
+  out = in.value;
 }
 
 }

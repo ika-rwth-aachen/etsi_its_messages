@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_ProtectedZoneRadiustoRos(const ProtectedZoneRadius_t& _ProtectedZoneRadius_in, etsi_its_cam_msgs::ProtectedZoneRadius& _ProtectedZoneRadius_out) {
-  convert_toRos(_ProtectedZoneRadius_in, _ProtectedZoneRadius_out.value);
+void toRos_ProtectedZoneRadius(const ProtectedZoneRadius_t& in, etsi_its_cam_msgs::ProtectedZoneRadius& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_ProtectedZoneRadiustoC(const etsi_its_cam_msgs::ProtectedZoneRadius& _ProtectedZoneRadius_in, ProtectedZoneRadius_t& _ProtectedZoneRadius_out) {
-  memset(&_ProtectedZoneRadius_out, 0, sizeof(ProtectedZoneRadius_t));
-  convert_toC(_ProtectedZoneRadius_in.value, _ProtectedZoneRadius_out);
+void toStruct_ProtectedZoneRadius(const etsi_its_cam_msgs::ProtectedZoneRadius& in, ProtectedZoneRadius_t& out) {
+  memset(&out, 0, sizeof(ProtectedZoneRadius_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 

@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_HardShoulderStatustoRos(const HardShoulderStatus_t& _HardShoulderStatus_in, etsi_its_cam_msgs::HardShoulderStatus& _HardShoulderStatus_out) {
-  _HardShoulderStatus_out.value = _HardShoulderStatus_in;
+void toRos_HardShoulderStatus(const HardShoulderStatus_t& in, etsi_its_cam_msgs::HardShoulderStatus& out) {
+  out.value = in;
 }
 
-void convert_HardShoulderStatustoC(const etsi_its_cam_msgs::HardShoulderStatus& _HardShoulderStatus_in, HardShoulderStatus_t& _HardShoulderStatus_out) {
-  memset(&_HardShoulderStatus_out, 0, sizeof(HardShoulderStatus_t));
-  _HardShoulderStatus_out = _HardShoulderStatus_in.value;
+void toStruct_HardShoulderStatus(const etsi_its_cam_msgs::HardShoulderStatus& in, HardShoulderStatus_t& out) {
+  memset(&out, 0, sizeof(HardShoulderStatus_t));
+  out = in.value;
 }
 
 }

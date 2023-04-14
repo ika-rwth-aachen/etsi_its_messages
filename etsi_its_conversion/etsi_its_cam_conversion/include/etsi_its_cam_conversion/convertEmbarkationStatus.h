@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_EmbarkationStatustoRos(const EmbarkationStatus_t& _EmbarkationStatus_in, etsi_its_cam_msgs::EmbarkationStatus& _EmbarkationStatus_out) {
-  convert_BOOLEANtoRos(_EmbarkationStatus_in, _EmbarkationStatus_out.value);
+void toRos_EmbarkationStatus(const EmbarkationStatus_t& in, etsi_its_cam_msgs::EmbarkationStatus& out) {
+  toRos_BOOLEAN(in, out.value);
 
 }
 
-void convert_EmbarkationStatustoC(const etsi_its_cam_msgs::EmbarkationStatus& _EmbarkationStatus_in, EmbarkationStatus_t& _EmbarkationStatus_out) {
-  memset(&_EmbarkationStatus_out, 0, sizeof(EmbarkationStatus_t));
-  convert_BOOLEANtoC(_EmbarkationStatus_in.value, _EmbarkationStatus_out);
+void toStruct_EmbarkationStatus(const etsi_its_cam_msgs::EmbarkationStatus& in, EmbarkationStatus_t& out) {
+  memset(&out, 0, sizeof(EmbarkationStatus_t));
+  toStruct_BOOLEAN(in.value, out);
 
 }
 

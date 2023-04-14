@@ -5,11 +5,11 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_PathHistorytoRos(const PathHistory_t& _PathHistory_in, etsi_its_cam_msgs::PathHistory& _PathHistory_out) {
+void toRos_PathHistory(const PathHistory_t& in, etsi_its_cam_msgs::PathHistory& out) {
 }
 
-void convert_PathHistorytoC(const etsi_its_cam_msgs::PathHistory& _PathHistory_in, PathHistory_t& _PathHistory_out) {
-  memset(&_PathHistory_out, 0, sizeof(PathHistory_t));
+void toStruct_PathHistory(const etsi_its_cam_msgs::PathHistory& in, PathHistory_t& out) {
+  memset(&out, 0, sizeof(PathHistory_t));
 }
 
 }

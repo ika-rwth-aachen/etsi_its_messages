@@ -5,13 +5,13 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_TrafficRuletoRos(const TrafficRule_t& _TrafficRule_in, etsi_its_cam_msgs::TrafficRule& _TrafficRule_out) {
-  _TrafficRule_out.value = _TrafficRule_in;
+void toRos_TrafficRule(const TrafficRule_t& in, etsi_its_cam_msgs::TrafficRule& out) {
+  out.value = in;
 }
 
-void convert_TrafficRuletoC(const etsi_its_cam_msgs::TrafficRule& _TrafficRule_in, TrafficRule_t& _TrafficRule_out) {
-  memset(&_TrafficRule_out, 0, sizeof(TrafficRule_t));
-  _TrafficRule_out = _TrafficRule_in.value;
+void toStruct_TrafficRule(const etsi_its_cam_msgs::TrafficRule& in, TrafficRule_t& out) {
+  memset(&out, 0, sizeof(TrafficRule_t));
+  out = in.value;
 }
 
 }

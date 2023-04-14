@@ -7,15 +7,15 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_SpecialTransportContainertoRos(const SpecialTransportContainer_t& _SpecialTransportContainer_in, etsi_its_cam_msgs::SpecialTransportContainer& _SpecialTransportContainer_out) {
-  convert_SpecialTransportTypetoRos(_SpecialTransportContainer_in.specialTransportType, _SpecialTransportContainer_out.specialTransportType);
-  convert_LightBarSirenInUsetoRos(_SpecialTransportContainer_in.lightBarSirenInUse, _SpecialTransportContainer_out.lightBarSirenInUse);
+void toRos_SpecialTransportContainer(const SpecialTransportContainer_t& in, etsi_its_cam_msgs::SpecialTransportContainer& out) {
+  toRos_SpecialTransportType(in.specialTransportType, out.specialTransportType);
+  toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
 }
 
-void convert_SpecialTransportContainertoC(const etsi_its_cam_msgs::SpecialTransportContainer& _SpecialTransportContainer_in, SpecialTransportContainer_t& _SpecialTransportContainer_out) {
-  memset(&_SpecialTransportContainer_out, 0, sizeof(SpecialTransportContainer_t));
-  convert_SpecialTransportTypetoC(_SpecialTransportContainer_in.specialTransportType, _SpecialTransportContainer_out.specialTransportType);
-  convert_LightBarSirenInUsetoC(_SpecialTransportContainer_in.lightBarSirenInUse, _SpecialTransportContainer_out.lightBarSirenInUse);
+void toStruct_SpecialTransportContainer(const etsi_its_cam_msgs::SpecialTransportContainer& in, SpecialTransportContainer_t& out) {
+  memset(&out, 0, sizeof(SpecialTransportContainer_t));
+  toStruct_SpecialTransportType(in.specialTransportType, out.specialTransportType);
+  toStruct_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
 }
 
 }

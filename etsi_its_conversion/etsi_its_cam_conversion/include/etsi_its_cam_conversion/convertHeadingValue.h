@@ -6,14 +6,14 @@
 
 namespace etsi_its_cam_conversion {
   
-void convert_HeadingValuetoRos(const HeadingValue_t& _HeadingValue_in, etsi_its_cam_msgs::HeadingValue& _HeadingValue_out) {
-  convert_toRos(_HeadingValue_in, _HeadingValue_out.value);
+void toRos_HeadingValue(const HeadingValue_t& in, etsi_its_cam_msgs::HeadingValue& out) {
+  toRos_INTEGER(in, out.value);
 
 }
 
-void convert_HeadingValuetoC(const etsi_its_cam_msgs::HeadingValue& _HeadingValue_in, HeadingValue_t& _HeadingValue_out) {
-  memset(&_HeadingValue_out, 0, sizeof(HeadingValue_t));
-  convert_toC(_HeadingValue_in.value, _HeadingValue_out);
+void toStruct_HeadingValue(const etsi_its_cam_msgs::HeadingValue& in, HeadingValue_t& out) {
+  memset(&out, 0, sizeof(HeadingValue_t));
+  toStruct_INTEGER(in.value, out);
 
 }
 
