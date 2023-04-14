@@ -54,7 +54,7 @@
   <depend>roslaunch</depend>
   <depend>std_msgs</depend>
   <depend>etsi_its_cam_msgs</depend>
-  <depend>etsi_its_asn1_msgs</depend>
+  <depend>bitstring_msgs</depend>
   <depend>etsi_its_cam_coding</depend>
   <depend>etsi_its_cam_conversion</depend>
   <exec_depend>message_runtime</exec_depend>

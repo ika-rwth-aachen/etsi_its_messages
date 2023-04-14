@@ -8,7 +8,7 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 
-#include <etsi_its_asn1_msgs/ASN1_udp.h>
+#include <bitstring_msgs/UInt8ArrayStamped.h>
 #include <etsi_its_cam_coding/CAM.h>
 
 namespace etsi_its_conversion {

@@ -11,7 +11,7 @@ ConversionNode::ConversionNode() : node_handle_(), private_node_handle_("~") {
   cam_ros_pub_ = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>("/out/CAM", 1);
   cam_ros_sub_ = private_node_handle_.subscribe("/out/CAM", 1, &ConversionNode::cam_callback, this);
 
-  cam_asn1_pub_ = private_node_handle_.advertise<etsi_its_asn1_msgs::ASN1_udp>("/out/asn1/CAM", 1);
+  cam_asn1_pub_ = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>("/out/asn1/CAM", 1);
   cam_asn1_sub_ = private_node_handle_.subscribe("/in/asn1/CAM", 1, &ConversionNode::cam_asn1_callback, this);
 
   ros::spin();
@@ -38,14 +38,14 @@ void ConversionNode::cam_callback(etsi_its_cam_msgs::CAM msg) {
 
   asn_fprint(stdout, &asn_DEF_CAM, &etsiCAM);
 
-  etsi_its_asn1_msgs::ASN1_udp cam_asn1;
+  bitstring_msgs::UInt8ArrayStamped cam_asn1;
   cam_asn1.header.stamp = ros::Time::now();
   cam_asn1.header.frame_id = "base_link";
   cam_asn1.data = std::vector<uint8_t>((char *)res.buffer, (char *)res.buffer + (int)res.result.encoded);
   cam_asn1_pub_.publish(cam_asn1);
 }
 
-void ConversionNode::cam_asn1_callback(etsi_its_asn1_msgs::ASN1_udp msg) {
+void ConversionNode::cam_asn1_callback(bitstring_msgs::UInt8ArrayStamped msg) {
 
   CAM_t *camPdu = 0;
   asn_dec_rval_t decodeRet = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&camPdu, &msg.data[0], msg.data.size());

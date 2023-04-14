@@ -9,7 +9,7 @@
 #include <std_msgs/String.h>
 
 #include <etsi_its_cam_conversion/convertCAM.h>
-#include <etsi_its_asn1_msgs/ASN1_udp.h>
+#include <bitstring_msgs/UInt8ArrayStamped.h>
 
 namespace etsi_its_conversion {
 
@@ -20,7 +20,7 @@ class ConversionNode {
 
   private:
     void cam_callback(etsi_its_cam_msgs::CAM msg);
-    void cam_asn1_callback(etsi_its_asn1_msgs::ASN1_udp msg);
+    void cam_asn1_callback(bitstring_msgs::UInt8ArrayStamped msg);
 
     ros::NodeHandle node_handle_;
     ros::NodeHandle private_node_handle_;

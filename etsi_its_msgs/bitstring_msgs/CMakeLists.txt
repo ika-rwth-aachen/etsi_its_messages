@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(etsi_its_asn1_msgs)
+project(bitstring_msgs)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -51,7 +51,7 @@ add_message_files(
   DIRECTORY
     msg
   FILES
-    ASN1_udp.msg
+    UInt8ArrayStamped.msg
 )
 
 ## Generate services in the 'srv' folder

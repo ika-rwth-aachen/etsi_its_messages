@@ -8,7 +8,7 @@ CamGeneratorNode::CamGeneratorNode() : node_handle_(), private_node_handle_("~")
   ROS_INFO("CamGeneratorNode starting...");
 
   // setup publisher and subscriber
-  asn1_pub_ = private_node_handle_.advertise<etsi_its_asn1_msgs::ASN1_udp>("/in/asn1/CAM", 1);
+  asn1_pub_ = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>("/in/asn1/CAM", 1);
 
   // create timer for publishing messages
   timer_ = node_handle_.createTimer(ros::Duration(1.0), &CamGeneratorNode::generateDummyCAM, this);
@@ -142,7 +142,7 @@ void CamGeneratorNode::generateDummyCAM(const ros::TimerEvent& event) {
 
   asn_fprint(stdout, &asn_DEF_CAM, &etsiCAM);
 
-  etsi_its_asn1_msgs::ASN1_udp cam_asn1;
+  bitstring_msgs::UInt8ArrayStamped cam_asn1;
   cam_asn1.header.stamp = ros::Time::now();
   cam_asn1.header.frame_id = "base_link";
   cam_asn1.data = std::vector<uint8_t>((char *)res.buffer, (char *)res.buffer + (int)res.result.encoded);

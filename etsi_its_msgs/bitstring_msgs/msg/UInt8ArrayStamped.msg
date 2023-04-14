@@ -1,2 +1,2 @@
 Header header
-char[] data
+uint8[] data
