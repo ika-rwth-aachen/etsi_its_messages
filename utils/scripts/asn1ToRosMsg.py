@@ -286,8 +286,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         if "restricted-to" in asn1 and type == "INTEGER":
             min_value = asn1["restricted-to"][0][0]
             max_value = asn1["restricted-to"][0][1]
-            #ros_type = simplestRosIntegerType(min_value, max_value)
-            ros_type = "int64"
+            ros_type = simplestRosIntegerType(min_value, max_value)
 
         # add constants for named numbers
         if "named-numbers" in asn1:
@@ -411,8 +410,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         values = [val[1] for val in asn1["values"] if val is not None]
         min_value = min(values)
         max_value = max(values)
-        #ros_type = simplestRosIntegerType(min_value, max_value)
-        ros_type = "int64"
+        ros_type = simplestRosIntegerType(min_value, max_value)
 
         # add constants for all values
         for val in asn1["values"]:

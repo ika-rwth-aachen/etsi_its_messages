@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 16383)]
-int64 STANDSTILL = 0
-int64 ONE_CENTIMETER_PER_SEC = 1
-int64 UNAVAILABLE = 16383
-int64 value
+uint16 STANDSTILL = 0
+uint16 ONE_CENTIMETER_PER_SEC = 1
+uint16 UNAVAILABLE = 16383
+uint16 value

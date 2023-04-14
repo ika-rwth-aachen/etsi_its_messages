@@ -3,9 +3,9 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 3601)]
-int64 WGS_8_4_NORTH = 0
-int64 WGS_8_4_EAST = 900
-int64 WGS_8_4_SOUTH = 1800
-int64 WGS_8_4_WEST = 2700
-int64 UNAVAILABLE = 3601
-int64 value
+uint16 WGS_8_4_NORTH = 0
+uint16 WGS_8_4_EAST = 900
+uint16 WGS_8_4_SOUTH = 1800
+uint16 WGS_8_4_WEST = 2700
+uint16 UNAVAILABLE = 3601
+uint16 value

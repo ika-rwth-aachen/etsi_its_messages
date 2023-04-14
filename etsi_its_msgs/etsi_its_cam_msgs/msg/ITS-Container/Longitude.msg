@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-1800000000, 1800000001)]
-int64 ONE_MICRODEGREE_EAST = 10
-int64 ONE_MICRODEGREE_WEST = -10
-int64 UNAVAILABLE = 1800000001
-int64 value
+int32 ONE_MICRODEGREE_EAST = 10
+int32 ONE_MICRODEGREE_WEST = -10
+int32 UNAVAILABLE = 1800000001
+int32 value

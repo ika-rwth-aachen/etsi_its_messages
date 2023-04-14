@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(1, 1023)]
-int64 TEN_CENTIMETERS = 1
-int64 OUT_OF_RANGE = 1022
-int64 UNAVAILABLE = 1023
-int64 value
+uint16 TEN_CENTIMETERS = 1
+uint16 OUT_OF_RANGE = 1022
+uint16 UNAVAILABLE = 1023
+uint16 value

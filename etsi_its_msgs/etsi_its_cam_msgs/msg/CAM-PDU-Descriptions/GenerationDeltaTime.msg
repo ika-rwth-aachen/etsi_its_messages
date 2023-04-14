@@ -3,5 +3,5 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 65535)]
-int64 ONE_MILLI_SEC = 1
-int64 value
+uint16 ONE_MILLI_SEC = 1
+uint16 value

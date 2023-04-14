@@ -3,8 +3,8 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(-32766, 32767)]
-int64 STRAIGHT = 0
-int64 DEG_SEC_0_0_0_0_1_TO_RIGHT = -1
-int64 DEG_SEC_0_0_0_0_1_TO_LEFT = 1
-int64 UNAVAILABLE = 32767
-int64 value
+int16 STRAIGHT = 0
+int16 DEG_SEC_0_0_0_0_1_TO_RIGHT = -1
+int16 DEG_SEC_0_0_0_0_1_TO_LEFT = 1
+int16 UNAVAILABLE = 32767
+int16 value

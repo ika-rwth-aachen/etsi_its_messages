@@ -4,17 +4,17 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 255)]
-int64 UNKNOWN = 0
-int64 PEDESTRIAN = 1
-int64 CYCLIST = 2
-int64 MOPED = 3
-int64 MOTORCYCLE = 4
-int64 PASSENGER_CAR = 5
-int64 BUS = 6
-int64 LIGHT_TRUCK = 7
-int64 HEAVY_TRUCK = 8
-int64 TRAILER = 9
-int64 SPECIAL_VEHICLES = 10
-int64 TRAM = 11
-int64 ROAD_SIDE_UNIT = 15
-int64 value
+uint8 UNKNOWN = 0
+uint8 PEDESTRIAN = 1
+uint8 CYCLIST = 2
+uint8 MOPED = 3
+uint8 MOTORCYCLE = 4
+uint8 PASSENGER_CAR = 5
+uint8 BUS = 6
+uint8 LIGHT_TRUCK = 7
+uint8 HEAVY_TRUCK = 8
+uint8 TRAILER = 9
+uint8 SPECIAL_VEHICLES = 10
+uint8 TRAM = 11
+uint8 ROAD_SIDE_UNIT = 15
+uint8 value

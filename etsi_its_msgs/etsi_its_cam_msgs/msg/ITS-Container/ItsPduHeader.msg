@@ -5,22 +5,22 @@
 # ------------------------------------------------------------------------------
 
 # restricted-to: [(0, 255)]
-int64 protocolVersion
+uint8 protocolVersion
 
 # restricted-to: [(0, 255)]
-int64 MESSAGE_I_D_DENM = 1
-int64 MESSAGE_I_D_CAM = 2
-int64 MESSAGE_I_D_POI = 3
-int64 MESSAGE_I_D_SPATEM = 4
-int64 MESSAGE_I_D_MAPEM = 5
-int64 MESSAGE_I_D_IVIM = 6
-int64 MESSAGE_I_D_EVRSR = 7
-int64 MESSAGE_I_D_TISTPGTRANSACTION = 8
-int64 MESSAGE_I_D_SREM = 9
-int64 MESSAGE_I_D_SSEM = 10
-int64 MESSAGE_I_D_EVCSN = 11
-int64 MESSAGE_I_D_SAEM = 12
-int64 MESSAGE_I_D_RTCMEM = 13
-int64 messageID
+uint8 MESSAGE_I_D_DENM = 1
+uint8 MESSAGE_I_D_CAM = 2
+uint8 MESSAGE_I_D_POI = 3
+uint8 MESSAGE_I_D_SPATEM = 4
+uint8 MESSAGE_I_D_MAPEM = 5
+uint8 MESSAGE_I_D_IVIM = 6
+uint8 MESSAGE_I_D_EVRSR = 7
+uint8 MESSAGE_I_D_TISTPGTRANSACTION = 8
+uint8 MESSAGE_I_D_SREM = 9
+uint8 MESSAGE_I_D_SSEM = 10
+uint8 MESSAGE_I_D_EVCSN = 11
+uint8 MESSAGE_I_D_SAEM = 12
+uint8 MESSAGE_I_D_RTCMEM = 13
+uint8 messageID
 
 StationID stationID
