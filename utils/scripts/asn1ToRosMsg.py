@@ -284,6 +284,9 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             ros_type = "int64"
             min_constant_name = "MIN"
             max_constant_name = "MAX"
+            if "name" in asn1:
+                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_constant_name}"
+                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_constant_name}"
             msg += f"{ros_type} {validRosField(min_constant_name)} = {min_value}\n"
             msg += f"{ros_type} {validRosField(max_constant_name)} = {max_value}\n"
 
