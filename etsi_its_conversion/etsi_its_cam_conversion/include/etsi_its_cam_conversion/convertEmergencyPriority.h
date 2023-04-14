@@ -4,15 +4,17 @@
 #include <etsi_its_cam_msgs/EmergencyPriority.h>
 #include <etsi_its_cam_conversion/primitives/convertBIT_STRING.h>
 
-namespace etsi_its_cam_conversion
-{
-	void convert_EmergencyPrioritytoRos(const EmergencyPriority_t& _EmergencyPriority_in, etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_out)
-	{
-		convert_BIT_STRINGtoRos(_EmergencyPriority_in, _EmergencyPriority_out.value);
-	}
-	void convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in, EmergencyPriority_t& _EmergencyPriority_out)
-	{
-		memset(&_EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
-		convert_BIT_STRINGtoC(_EmergencyPriority_in.value, _EmergencyPriority_out);
-	}
+namespace etsi_its_cam_conversion {
+  
+void convert_EmergencyPrioritytoRos(const EmergencyPriority_t& _EmergencyPriority_in, etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_out) {
+  convert_BIT_STRINGtoRos(_EmergencyPriority_in, _EmergencyPriority_out.value);
+
+}
+
+void convert_EmergencyPrioritytoC(const etsi_its_cam_msgs::EmergencyPriority& _EmergencyPriority_in, EmergencyPriority_t& _EmergencyPriority_out) {
+  memset(&_EmergencyPriority_out, 0, sizeof(EmergencyPriority_t));
+  convert_BIT_STRINGtoC(_EmergencyPriority_in.value, _EmergencyPriority_out);
+
+}
+
 }

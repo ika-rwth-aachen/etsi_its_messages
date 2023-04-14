@@ -22,6 +22,34 @@ ASN1_PRIMITIVES_2_ROS = {
 }
 
 
+class CppFileStr:
+    
+    INDENT_PLACEHOLDER = "<INDENT>"
+    INDENT = "  "
+    
+    # TODO: better to track lines and indentation per line?
+    def __init__(self, s: str = "", indentation: int = 0):
+        self.s = s
+        self.indentation = indentation
+    
+    def __add__(self, other: str):
+        br = "\n" if len(self.s) > 0 else ""
+        if isinstance(other, CppFileStr):
+            s = self.s + br + other.s
+            indentation = other.indentation
+        elif isinstance(other, str):
+            delta_indentation = other.count("{") - other.count("}")
+            indentation = self.indentation if delta_indentation >= 0 else self.indentation + delta_indentation
+            indentation = max(indentation, 0)
+            s = self.s + br
+            s += indentation * self.INDENT_PLACEHOLDER + other
+            indentation = max(self.indentation + delta_indentation, 0)
+        return CppFileStr(s, indentation)
+
+    def __str__(self) -> str:
+        return self.s.replace(self.INDENT_PLACEHOLDER, self.INDENT)
+
+
 def parseCli():
 
     parser = argparse.ArgumentParser(
@@ -62,8 +90,8 @@ def includeHeader(etsi_type: str, header: str, include_type: str, primitives=Fal
         pre += "primitives/"
         if include_type == "IA5String" or include_type == "UTF8String" or include_type == "NumericString" or include_type == "VisibleString":
             include_type = "OCTET_STRING"
-    if f"convert{include_type}.h" not in header:
-        output = f"#include <{pre}convert{include_type}.h>\n"
+    if f"convert{include_type}.h" not in str(header):
+        output = f"#include <{pre}convert{include_type}.h>"
 
     return output
 
@@ -222,6 +250,7 @@ def simplestRosIntegerType(min_value, max_value):
         return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
 
 def convertToPrimitiv(type, t_name, name) -> List[str]:
+    
     if type == "IA5String" or type == "UTF8String" or type == "NumericString" or type == "VisibleString":
         memberType = "OCTET_STRING"
     else:
@@ -232,28 +261,31 @@ def convertToPrimitiv(type, t_name, name) -> List[str]:
         c_name = f".{name}"
     
     if memberType == "INTEGER":
-        c2ros = f"\t\tconvert_toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
-        ros2c = f"\t\tconvert_toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
+        c2ros = f"convert_toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
+        ros2c = f"convert_toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
     else:
-        c2ros = f"\t\tconvert_{memberType}toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
-        ros2c = f"\t\tconvert_{memberType}toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
+        c2ros = f"convert_{memberType}toRos(_{t_name}_in{c_name}, _{t_name}_out.{name});\n"
+        ros2c = f"convert_{memberType}toC(_{t_name}_in.{name}, _{t_name}_out{c_name});\n"
     
     return c2ros, ros2c
 
 def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[List[str]]:
 
+    header = CppFileStr()
+    namespace = CppFileStr()
+    c2ros = CppFileStr()
+    ros2c = CppFileStr()
+
+    # TODO: also use file str manager class for ros msg
     ns_msgs = f"etsi_its_{etsi_type}_msgs"
     msg = ""
     type = asn1["type"]
-    header = f"#pragma once\n\n"
-    header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>\n"
-    namespace = f"namespace etsi_its_{etsi_type}_conversion\n"
-    namespace += "{\n"
-    c2ros = f"\tvoid convert_{t_name}toRos(const {t_name}_t& _{t_name}_in, {ns_msgs}::{t_name}& _{t_name}_out)\n"
-    ros2c = f"\tvoid convert_{t_name}toC(const {ns_msgs}::{t_name}& _{t_name}_in, {t_name}_t& _{t_name}_out)\n"
-    c2ros += "\t{\n"
-    ros2c += "\t{\n"
-    ros2c += f"\t\tmemset(&_{t_name}_out, 0, sizeof({t_name}_t));\n"
+    header += f"#pragma once\n"
+    header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>"
+    namespace += f"namespace etsi_its_{etsi_type}_conversion {{"
+    c2ros += f"void convert_{t_name}toRos(const {t_name}_t& _{t_name}_in, {ns_msgs}::{t_name}& _{t_name}_out) {{"
+    ros2c += f"void convert_{t_name}toC(const {ns_msgs}::{t_name}& _{t_name}_in, {t_name}_t& _{t_name}_out) {{"
+    ros2c += f"memset(&_{t_name}_out, 0, sizeof({t_name}_t));"
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
@@ -319,23 +351,21 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             memberName = member["name"]
             memberType = member["type"]
             if "optional" in member.keys():
-                c2ros+=f"\t\tif(_{t_name}_in.{memberName})\n"
-                ros2c+=f"\t\tif(_{t_name}_in.{memberName}_isPresent)\n"
-                c2ros+="\t\t{\n"
-                ros2c+="\t\t{\n"
+                c2ros+=f"if (_{t_name}_in.{memberName}) {{"
+                ros2c+=f"if (_{t_name}_in.{memberName}_isPresent) {{"
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
                     header += includeHeader(etsi_type, header, memberType, True)
-                    c2ros += "\t"+convertToPrimitiv(memberType,t_name,memberName)[0]
-                    ros2c += "\t"+convertToPrimitiv(memberType,t_name,memberName)[1]
+                    c2ros += ""+convertToPrimitiv(memberType,t_name,memberName)[0]
+                    ros2c += ""+convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
                     header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"\t\t\tconvert_{memberType}toRos(*_{t_name}_in.{memberName}, _{t_name}_out.{memberName});\n"
-                    c2ros += f"\t\t\t_{t_name}_out.{memberName}_isPresent = true;\n"
-                    ros2c += f"\t\t\t{memberType}_t {memberName};\n"
-                    ros2c += f"\t\t\tconvert_{memberType}toC(_{t_name}_in.{memberName}, {memberName});\n"
-                    ros2c += f"\t\t\t_{t_name}_out.{memberName} = new {memberType}_t({memberName});\n"
-                c2ros+="\t\t}\n"
-                ros2c+="\t\t}\n"
+                    c2ros += f"convert_{memberType}toRos(*_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
+                    c2ros += f"_{t_name}_out.{memberName}_isPresent = true;"
+                    ros2c += f"{memberType}_t {memberName};"
+                    ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, {memberName});"
+                    ros2c += f"_{t_name}_out.{memberName} = new {memberType}_t({memberName});"
+                c2ros+="}"
+                ros2c+="}"
             else:
                 if (memberType in ASN1_PRIMITIVES_2_ROS):
                     header += includeHeader(etsi_type, header, memberType, True)
@@ -343,8 +373,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                     ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
                 else:
                     header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"\t\tconvert_{memberType}toRos(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});\n"
-                    ros2c += f"\t\tconvert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});\n"
+                    c2ros += f"convert_{memberType}toRos(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
+                    ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.{memberName});"
 
     # type aliases with multiple options
     elif type == "CHOICE":
@@ -376,17 +406,17 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             memberName = member["name"]
             memberType = member["type"]
             header += includeHeader(etsi_type, header, memberType)
-            c2ros += f"\t\tif(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})\n"
-            c2ros += "\t\t{\n"
-            c2ros += f"\t\t\tconvert_{memberType}toRos(_{t_name}_in.choice.{memberName}, _{t_name}_out.{memberName});\n"
-            c2ros += f"\t\t\t_{t_name}_out.choice = {ns_msgs}::{t_name}::{name};\n"
-            c2ros += "\t\t}\n"
+            c2ros += f"if(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})"
+            c2ros += "{"
+            c2ros += f"convert_{memberType}toRos(_{t_name}_in.choice.{memberName}, _{t_name}_out.{memberName});"
+            c2ros += f"_{t_name}_out.choice = {ns_msgs}::{t_name}::{name};"
+            c2ros += "}"
 
-            ros2c += f"\t\tif(_{t_name}_in.choice == {ns_msgs}::{t_name}::{name})\n"
-            ros2c += "\t\t{\n"
-            ros2c += f"\t\t\tconvert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.choice.{memberName});\n"
-            ros2c += f"\t\t\t_{t_name}_out.present = {t_name}_PR::{t_name}_PR_{memberName};\n"
-            ros2c += "\t\t}\n"
+            ros2c += f"if(_{t_name}_in.choice == {ns_msgs}::{t_name}::{name})"
+            ros2c += "{"
+            ros2c += f"convert_{memberType}toC(_{t_name}_in.{memberName}, _{t_name}_out.choice.{memberName});"
+            ros2c += f"_{t_name}_out.present = {t_name}_PR::{t_name}_PR_{memberName};"
+            ros2c += "}"
 
     # arrays
     elif type == "SEQUENCE OF":
@@ -420,8 +450,8 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
         # Converter
         name = asn1["name"] if "name" in asn1 else "value"
-        c2ros += f"\t\t_{t_name}_out.{name} = _{t_name}_in;\n"
-        ros2c += f"\t\t_{t_name}_out = _{t_name}_in.{name};\n"
+        c2ros += f"_{t_name}_out.{name} = _{t_name}_in;"
+        ros2c += f"_{t_name}_out = _{t_name}_in.{name};"
 
     # custom types
     elif type in asn1_types:
@@ -440,9 +470,9 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     msg = msg.rstrip("\n") + "\n"
 
-    converter_str = header + "\n" + namespace + c2ros + "\t}\n" + ros2c + "\t}\n" + "}"
+    converter_str = header + "" + namespace + "" + c2ros + "}" + "" + ros2c + "}" + "" + "}"
 
-    return msg, converter_str
+    return msg, str(converter_str)
 
 
 def main():
