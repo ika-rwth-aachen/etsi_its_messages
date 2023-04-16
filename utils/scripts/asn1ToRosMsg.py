@@ -422,11 +422,29 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     elif type == "SEQUENCE OF":
 
         array_name = asn1["name"] if "name" in asn1 else "array"
-        msg += f"{asn1['element']['type']}[] {array_name}"
+        array_type = asn1['element']['type']
+        element_name = array_type[0].lower() + array_type[1:]
+        msg += f"{array_type}[] {array_name}"
         msg += "\n"
         
         # Converter
-        # TODO: #8
+        header += f"#include <etsi_its_{etsi_type}_coding/{array_type}.h>\n#include <{ns_msgs}/{array_type}.h>"
+        header += includeHeader(etsi_type, header, array_type)
+        header += "\n#include <stdexcept>\n#include <etsi_its_cam_coding/asn_SEQUENCE_OF.h>"
+        c2ros += "for (int i = 0; i < in.list.count; i++) {"
+        c2ros += f"{ns_msgs}::{array_type} {element_name};"
+        c2ros += f"{TO_ROS}_{array_type}(*(in.list.array[i]), {element_name});"
+        c2ros += f"out.array.push_back({element_name});"
+        c2ros += "}"
+
+        ros2c += f"for (int i = 0; i < in.{array_name}.size(); i++) {{"
+        ros2c += f"{array_type}_t {element_name};"
+        ros2c += f"{TO_STRUCT}_{array_type}(in.{array_name}[i], {element_name});"
+        ros2c += f"{array_type}_t* {element_name}_ptr = new {array_type}_t({element_name});"
+        ros2c += f"int status = asn_sequence_add(&out, {element_name}_ptr);"
+        ros2c += f"if (status != 0) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");"
+        ros2c += "}"
+
 
     # enums
     elif type == "ENUMERATED":
