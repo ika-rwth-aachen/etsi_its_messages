@@ -13,6 +13,12 @@ namespace etsi_its_cam_conversion {
       throw std::range_error("Failed to convert INTEGER_t to long");
   }
 
+  void toRos_INTEGER(const INTEGER_t& _INTEGER_in, unsigned long& INTEGER_out) {
+    int status = asn_INTEGER2ulong(&_INTEGER_in, &INTEGER_out);
+    if (status != 0)
+      throw std::range_error("Failed to convert INTEGER_t to unsigned long");
+  }
+
   template <typename T>
   void toRos_INTEGER(const long& _INTEGER_in, T& INTEGER_out) {
     if (std::numeric_limits<T>::max() < _INTEGER_in)
