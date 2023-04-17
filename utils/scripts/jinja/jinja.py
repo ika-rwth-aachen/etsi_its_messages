@@ -5,6 +5,9 @@ from jinja2 import Environment, FileSystemLoader
 
 asn1_definition = "multi\nline\ntest"
 
+etsi_type = "cam"
+t_name = "HighFrequencyContainer"
+
 members = [
     {
         "type": "uint8",
@@ -38,13 +41,20 @@ members = [
 
 
 environment = Environment(loader=FileSystemLoader("templates/"), trim_blocks=False)
-template = environment.get_template("RosMessageType.msg")
+template_msgs = environment.get_template("RosMessageType.msg")
+template_conv = environment.get_template("ConvertFunction.h")
 context = {
     "asn1_definition": asn1_definition,
+    "etsi_type": etsi_type,
+    "t_name": t_name,
     "members": members,
 }
 
-content = template.render(context)
+content_msgs = template_msgs.render(context)
+content_conv = template_conv.render(context)
 
-with open("output/HighFrequencyContainer.msg", "w") as f:
-    f.write(content)
+with open(f"output/{t_name}.msg", "w") as f:
+    f.write(content_msgs)
+
+with open(f"output/convert{t_name}.h", "w") as f:
+    f.write(content_conv)
