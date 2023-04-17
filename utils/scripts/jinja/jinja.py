@@ -9,6 +9,9 @@ members = [
     {
         "type": "uint8",
         "name": "choice",
+        "comments": [
+            "restricted-to: [(0, 65535)]"
+        ]
     }, {
         "type": "BasicVehicleContainerHighFrequency",
         "name": "basicVehicleContainerHighFrequency",
@@ -28,7 +31,8 @@ members = [
                 "name": "CHOICE_RSU_CONTAINER_HIGH_FREQUENCY",
                 "value": "1",
             }
-        ]
+        ],
+        "optional": True
     },
 ]
 
