@@ -7,6 +7,7 @@ asn1_definition = "multi\nline\ntest"
 
 etsi_type = "cam"
 t_name = "HighFrequencyContainer"
+t_type = "choice"
 
 members = [
     {
@@ -42,10 +43,11 @@ members = [
 
 environment = Environment(loader=FileSystemLoader("templates/"), trim_blocks=False)
 template_msgs = environment.get_template("RosMessageType.msg")
-template_conv = environment.get_template("ConvertFunction.h")
+template_conv = environment.get_template("ConvertFunction.h.jinja2")
 context = {
     "asn1_definition": asn1_definition,
     "etsi_type": etsi_type,
+    "t_type": t_type,
     "t_name": t_name,
     "members": members,
 }
