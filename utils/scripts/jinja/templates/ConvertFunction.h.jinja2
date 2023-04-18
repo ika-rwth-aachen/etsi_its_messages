@@ -1,50 +1,50 @@
 #pragma once
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
-#include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 {% for member in members -%}
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
 {% endfor -%}
+#include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
+
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-// struct2ros
 void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
 {% for member in members -%}
-{% if t_type == "choice" -%}
-    if(in.present == {{ t_name }}_PR::{{ t_name }}_PR_{{ member.type }}) {
+{% if t_type == "choice" %}
+    if (in.present == {{ t_name }}_PR::{{ t_name }}_PR_{{ member.type }}) {
         toRos_{{ member.type }}(in.choice.{{ member.type }}, out.{{ member.type }});
         out.choice = etsi_its_{{ etsi_type }}_msgs::{{ t_name }}::CHOICE_{{ member.type }};
     }
 {% elif t_type == "sequence" %}
-{% if member.optional -%}
+{% if member.optional %}
     if (in.{{ member.name }}) {
         toRos_{{ member.type }}(*in.{{ member.name }}, out.{{ member.name }});
         out.{{ member.name }}_isPresent = true;
     }
-{% endif -%}
+{% endif %}
     toRos_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
 {% endif -%}
 {% endfor -%}
 }
 
-//ros2struct
 void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
-memset(&out, 0, sizeof({{ t_name }}_t));
+    
+    memset(&out, 0, sizeof({{ t_name }}_t));
 {% for member in members -%}
-{% if t_type == "choice" -%}
-    if(in.choice == etsi_its_{{ etsi_type }}_msgs::{{ t_name }}::CHOICE_{{ member.type }}) {
+{% if t_type == "choice" %}
+    if (in.choice == etsi_its_{{ etsi_type }}_msgs::{{ t_name }}::CHOICE_{{ member.type }}) {
         toStruct_{{ member.type }}(in.choice.{{ member.type }}, out.{{ member.type }});
         out.present = {{ t_name }}_PR::{{ t_name }}_PR_{{ member.type }};
     }
 {% elif t_type == "sequence" %}
-{% if member.optional -%}
+{% if member.optional %}
     if (in.{{ member.name }}_isPresent) {
         {{ member.type }}_t = {{ member.name }};
         toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
         out.{{ member.name }} = new {{ member.type }}_t({{ member.name }});
     }
-{% endif -%}
+{% endif %}
     toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
 {% endif -%}
 {% endfor -%}
