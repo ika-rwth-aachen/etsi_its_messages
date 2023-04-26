@@ -83,21 +83,11 @@ def validRosField(s: str) -> str:
 
     return s.replace("-", "_")
 
+
 def noSpace(s: str) -> str:
     
     return s.replace(" ", "_")
 
-def includeHeader(etsi_type: str, header: str, include_type: str, primitives=False) -> str:
-    output = ""
-    pre = f"etsi_its_{etsi_type}_conversion/"
-    if (primitives):
-        pre += "primitives/"
-        if include_type == "IA5String" or include_type == "UTF8String" or include_type == "NumericString" or include_type == "VisibleString":
-            include_type = "OCTET_STRING"
-    if f"convert{include_type}.h" not in str(header):
-        output = f"#include <{pre}convert{include_type}.h>"
-
-    return output
 
 def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
 
@@ -177,35 +167,18 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{t_name}' is undefined")
 
 
-def asn1TypesToFileStr(etsi_type: str, asn1_types: Dict[str, Dict]) -> List[Dict[str, str]]:
+def asn1TypesToFileStr(etsi_type: str, asn1_types: Dict[str, Dict]) -> Dict[str, str]:
 
     ros_msg_by_type = {}
-    converter_by_type = {}
 
     # loop all types
     for t_name, type in asn1_types.items():
 
         # ASN1 to ROS message and Converter
-        ros_msg_by_type[t_name], converter_by_type[t_name] = asn1TypeToRosMsgStr(etsi_type, t_name, type, asn1_types)
+        ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(etsi_type, t_name, type, asn1_types)
 
-    return ros_msg_by_type, converter_by_type
+    return ros_msg_by_type
 
-def exportConverterFiles(converter_by_type: Dict[str, str], output_dir: str):
-
-    # loop over all types
-    for type, h_str in converter_by_type.items():
-
-        if h_str is None:
-            continue
-
-        # create output directory
-        os.makedirs(output_dir, exist_ok=True)
-
-        # export ROS .msg
-        filename = os.path.join(output_dir, f"convert{type}.h")
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(h_str)
-        print(filename)
 
 def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dict[str, str], output_dir: str):
 
@@ -253,39 +226,11 @@ def simplestRosIntegerType(min_value, max_value):
     else:
         return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
 
-def convertToPrimitiv(type, t_name, name) -> List[str]:
-    
-    if type == "IA5String" or type == "UTF8String" or type == "NumericString" or type == "VisibleString":
-        memberType = "OCTET_STRING"
-    else:
-        memberType = noSpace(type)
 
-    c_name = ""
-    if name != "value":
-        c_name = f".{name}"
-    
-    c2ros = f"{TO_ROS}_{memberType}(in{c_name}, out.{name});\n"
-    ros2c = f"{TO_STRUCT}_{memberType}(in.{name}, out{c_name});\n"
-    
-    return c2ros, ros2c
+def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> str:
 
-def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[List[str]]:
-
-    header = CppFileStr()
-    namespace = CppFileStr()
-    c2ros = CppFileStr()
-    ros2c = CppFileStr()
-
-    # TODO: also use file str manager class for ros msg
-    ns_msgs = f"etsi_its_{etsi_type}_msgs"
     msg = ""
     type = asn1["type"]
-    header += f"#pragma once\n"
-    header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>"
-    namespace += f"namespace etsi_its_{etsi_type}_conversion {{"
-    c2ros += f"void {TO_ROS}_{t_name}(const {t_name}_t& in, {ns_msgs}::{t_name}& out) {{"
-    ros2c += f"void {TO_STRUCT}_{t_name}(const {ns_msgs}::{t_name}& in, {t_name}_t& out) {{"
-    ros2c += f"memset(&out, 0, sizeof({t_name}_t));"
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
@@ -330,11 +275,6 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         msg += f"{ros_type} {validRosField(name)}"
         msg += "\n"
 
-        # Converter
-        header += includeHeader(etsi_type, header, noSpace(type), True)
-        c2ros += convertToPrimitiv(type,t_name,name)[0]
-        ros2c += convertToPrimitiv(type,t_name,name)[1]
-
     # nested types
     elif type == "SEQUENCE":
 
@@ -342,39 +282,10 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         for member in asn1["members"]:
             if member is None:
                 continue
-            msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
+            msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
             if "optional" in member:
                 msg += f"bool {validRosField(member['name'])}_isPresent\n"
             msg += "\n"
-
-            # Converter
-            memberName = member["name"]
-            memberType = member["type"]
-            if "optional" in member.keys():
-                c2ros+=f"if (in.{memberName}) {{"
-                ros2c+=f"if (in.{memberName}_isPresent) {{"
-                if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(etsi_type, header, memberType, True)
-                    c2ros += ""+convertToPrimitiv(memberType,t_name,memberName)[0]
-                    ros2c += ""+convertToPrimitiv(memberType,t_name,memberName)[1]
-                else:
-                    header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"{TO_ROS}_{memberType}(*in.{memberName}, out.{memberName});"
-                    c2ros += f"out.{memberName}_isPresent = true;"
-                    ros2c += f"{memberType}_t {memberName};"
-                    ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, {memberName});"
-                    ros2c += f"out.{memberName} = new {memberType}_t({memberName});"
-                c2ros+="}"
-                ros2c+="}"
-            else:
-                if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(etsi_type, header, memberType, True)
-                    c2ros += convertToPrimitiv(memberType,t_name,memberName)[0]
-                    ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
-                else:
-                    header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"{TO_ROS}_{memberType}(in.{memberName}, out.{memberName});"
-                    ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, out.{memberName});"
 
     # type aliases with multiple options
     elif type == "CHOICE":
@@ -393,30 +304,14 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
             if "name" in asn1:
-                member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
+                member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
                 member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
                 msg += member_msg
                 name = f"{camel2SNAKE(asn1['name'])}_{name}"
             else:
-                msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
+                msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
             msg += f"uint8 {name} = {im}"
             msg += "\n"
-
-            # Converter
-            memberName = member["name"]
-            memberType = member["type"]
-            header += includeHeader(etsi_type, header, memberType)
-            c2ros += f"if(in.present == {t_name}_PR::{t_name}_PR_{memberName})"
-            c2ros += "{"
-            c2ros += f"{TO_ROS}_{memberType}(in.choice.{memberName}, out.{memberName});"
-            c2ros += f"out.choice = {ns_msgs}::{t_name}::{name};"
-            c2ros += "}"
-
-            ros2c += f"if(in.choice == {ns_msgs}::{t_name}::{name})"
-            ros2c += "{"
-            ros2c += f"{TO_STRUCT}_{memberType}(in.{memberName}, out.choice.{memberName});"
-            ros2c += f"out.present = {t_name}_PR::{t_name}_PR_{memberName};"
-            ros2c += "}"
 
     # arrays
     elif type == "SEQUENCE OF":
@@ -426,25 +321,6 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         element_name = array_type[0].lower() + array_type[1:]
         msg += f"{array_type}[] {array_name}"
         msg += "\n"
-        
-        # Converter
-        header += f"#include <etsi_its_{etsi_type}_coding/{array_type}.h>\n#include <{ns_msgs}/{array_type}.h>"
-        header += includeHeader(etsi_type, header, array_type)
-        header += "\n#include <stdexcept>\n#include <etsi_its_cam_coding/asn_SEQUENCE_OF.h>"
-        c2ros += "for (int i = 0; i < in.list.count; i++) {"
-        c2ros += f"{ns_msgs}::{array_type} {element_name};"
-        c2ros += f"{TO_ROS}_{array_type}(*(in.list.array[i]), {element_name});"
-        c2ros += f"out.array.push_back({element_name});"
-        c2ros += "}"
-
-        ros2c += f"for (int i = 0; i < in.{array_name}.size(); i++) {{"
-        ros2c += f"{array_type}_t {element_name};"
-        ros2c += f"{TO_STRUCT}_{array_type}(in.{array_name}[i], {element_name});"
-        ros2c += f"{array_type}_t* {element_name}_ptr = new {array_type}_t({element_name});"
-        ros2c += f"int status = asn_sequence_add(&out, {element_name}_ptr);"
-        ros2c += f"if (status != 0) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");"
-        ros2c += "}"
-
 
     # enums
     elif type == "ENUMERATED":
@@ -466,11 +342,6 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         msg += f"{ros_type} value"
         msg += "\n"
 
-        # Converter
-        name = asn1["name"] if "name" in asn1 else "value"
-        c2ros += f"out.{name} = in;"
-        ros2c += f"out = in.{name};"
-
     # custom types
     elif type in asn1_types:
 
@@ -488,9 +359,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     msg = msg.rstrip("\n") + "\n"
 
-    converter_str = header + "" + namespace + "" + c2ros + "}" + "" + ros2c + "}" + "" + "}"
-
-    return msg, str(converter_str)
+    return msg
 
 
 def main():
@@ -503,12 +372,10 @@ def main():
 
     checkTypeMembersInAsn1(asn1_types)
 
-    ros_msg_by_type, converter_by_type = asn1TypesToFileStr(args.type, asn1_types)
+    ros_msg_by_type = asn1TypesToFileStr(args.type, asn1_types)
 
     exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
-    
-    file_path = os.path.dirname(os.path.realpath(__file__))
-    exportConverterFiles(converter_by_type, f"{file_path}/../../etsi_its_conversion/etsi_its_{args.type}_conversion/include/etsi_its_{args.type}_conversion")
+
 
 if __name__ == "__main__":
     
