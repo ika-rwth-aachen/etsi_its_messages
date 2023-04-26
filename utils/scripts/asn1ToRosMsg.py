@@ -7,6 +7,7 @@ import warnings
 from typing import Dict, List, Optional, Tuple
 
 import asn1tools
+import jinja2
 import numpy as np
 
 
@@ -174,34 +175,37 @@ def asn1TypesToFileStr(etsi_type: str, asn1_types: Dict[str, Dict]) -> Dict[str,
     # loop all types
     for t_name, type in asn1_types.items():
 
-        # ASN1 to ROS message and Converter
-        ros_msg_by_type[t_name] = asn1TypeToRosMsgStr(etsi_type, t_name, type, asn1_types)
+        # ASN1 to ROS message
+        ros_msg_by_type[t_name] = asn1TypeToJinjaContext(etsi_type, t_name, type, asn1_types)
 
     return ros_msg_by_type
 
 
 def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dict[str, str], output_dir: str):
 
-    # loop over all types
-    for type, ros_msg in ros_msg_by_type.items():
+    # load jinja template
+    template_dir = os.path.join(os.path.dirname(__file__), "templates")
+    jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
+    jinja_template = jinja_env.get_template("RosMessageType.msg")
 
-        if ros_msg is None:
+    # loop over all types
+    for type, jinja_context in ros_msg_by_type.items():
+
+        if jinja_context is None:
             continue
 
         # add raw asn1 definition as comment to ROS .msg
         if type in asn1_raw:
-            raw_lines = [f"# {l}" for l in asn1_raw[type].split("\n")]
-            raw = "# " + "-"*78 + "\n" + "\n".join(raw_lines) + "-"*78 + "\n"
-            ros_msg = raw + "\n" + ros_msg
+            jinja_context["asn1_definition"] = asn1_raw[type].rstrip("\n")
 
         # create output directory
         doc_output_dir = os.path.join(output_dir, docForAsn1Type(type, asn1_docs))
         os.makedirs(doc_output_dir, exist_ok=True)
 
-        # export ROS .msg
+        # export ROS .msg using jinja template
         filename = os.path.join(doc_output_dir, f"{validRosType(type)}.msg")
         with open(filename, "w", encoding="utf-8") as file:
-            file.write(ros_msg)
+            file.write(jinja_template.render(jinja_context))
         print(filename)
 
 
@@ -227,16 +231,26 @@ def simplestRosIntegerType(min_value, max_value):
         return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
 
 
-def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> str:
+def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
 
+    # TODO: remove msg
     msg = ""
+
     type = asn1["type"]
+    
+    context = {
+        "asn1_definition": None,
+        "comments": [],
+        "etsi_type": None,
+        "members": [],
+        "t_name": None,
+        "t_type": None,
+    }
 
     # extra information (e.g. optional) as comments
     for k, v in asn1.items():
         if k not in ("type", "name", "members", "values", "element", "named-bits", "named-numbers", "optional"):
-            msg += f"# {k}: {v}"
-            msg += "\n"
+            context["comments"].append(f"{k}: {v}")
 
     # primitives
     if type in ASN1_PRIMITIVES_2_ROS:
@@ -256,24 +270,36 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
             max_value = asn1["restricted-to"][0][1]
             ros_type = simplestRosIntegerType(min_value, max_value)
 
+        # parse member to jinja context
+        member_context = {
+            "type": ros_type,
+            "name": validRosField(name),
+            "constants": [],
+        }
+
         # add constants for named numbers
         if "named-numbers" in asn1:
             for k, v in asn1["named-numbers"].items():
                 constant_name = f"{camel2SNAKE(k)}"
                 if "name" in asn1:
                     constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
-                msg += f"{ros_type} {validRosField(constant_name)} = {v}"
-                msg += "\n"
+                member_context["constants"].append({
+                    "type": ros_type,
+                    "name": validRosField(constant_name),
+                    "value": v
+                })
 
         # add index constants for named bits
         if "named-bits" in asn1:
             for k, v in asn1["named-bits"]:
                 constant_name = f"{camel2SNAKE(k)}"
-                msg += f"uint8 INDEX_{validRosField(constant_name)} = {v}"
-                msg += "\n"
+                member_context["constants"].append({
+                    "type": "uint8",
+                    "name": f"INDEX_{validRosField(constant_name)}",
+                    "value": v
+                })
 
-        msg += f"{ros_type} {validRosField(name)}"
-        msg += "\n"
+        context["members"].append(member_context)
 
     # nested types
     elif type == "SEQUENCE":
@@ -282,10 +308,10 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
         for member in asn1["members"]:
             if member is None:
                 continue
-            msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
             if "optional" in member:
-                msg += f"bool {validRosField(member['name'])}_isPresent\n"
-            msg += "\n"
+                member_context["members"][0]["optional"] = True
+            context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
     elif type == "CHOICE":
@@ -304,12 +330,12 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
             if "name" in asn1:
-                member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
+                # member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
                 member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
                 msg += member_msg
                 name = f"{camel2SNAKE(asn1['name'])}_{name}"
-            else:
-                msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
+            # else:
+                # msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
             msg += f"uint8 {name} = {im}"
             msg += "\n"
 
@@ -346,8 +372,10 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
     elif type in asn1_types:
 
         name = asn1["name"] if "name" in asn1 else "value"
-        msg += f"{validRosType(type)} {validRosField(name)}"
-        msg += "\n"
+        context["members"].append({
+            "type": validRosType(type),
+            "name": validRosField(name),
+        })
 
     elif type == "NULL":
 
@@ -359,7 +387,7 @@ def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dic
 
     msg = msg.rstrip("\n") + "\n"
 
-    return msg
+    return context
 
 
 def main():

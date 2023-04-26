@@ -4,10 +4,10 @@
 {% endfor -%}
 # ------------------------------------------------------------------------------
 
-{% for member in members -%}
-{% for comment in member.comments -%}
+{% for comment in comments -%}
 # {{ comment }}
 {% endfor -%}
+{% for member in members -%}
 {{ member.type }} {{ member.name }}
 {% if member.optional -%}
 bool {{ member.name }}_isPresent
