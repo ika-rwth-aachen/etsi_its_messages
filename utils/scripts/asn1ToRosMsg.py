@@ -244,9 +244,9 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
         "t_type": None,
     }
 
-    # extra information (e.g. optional) as comments
+    # extra information / asn1 fields that are not processed as comments
     for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-bits", "named-numbers", "optional"):
+        if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values"):
             context["comments"].append(f"{k}: {v}")
 
     # primitives
@@ -266,13 +266,54 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
             min_value = asn1["restricted-to"][0][0]
             max_value = asn1["restricted-to"][0][1]
             ros_type = simplestRosIntegerType(min_value, max_value)
-
+        
         # parse member to jinja context
         member_context = {
             "type": ros_type,
             "name": validRosField(name),
             "constants": [],
         }
+        
+        # add constants for limits
+        if "restricted-to" in asn1:
+            min_value = asn1["restricted-to"][0][0]
+            max_value = asn1["restricted-to"][0][1]
+            min_constant_name = "MIN"
+            max_constant_name = "MAX"
+            if "name" in asn1:
+                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_constant_name}"
+                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_constant_name}"
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(min_constant_name),
+                "value": min_value
+            })
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(max_constant_name),
+                "value": max_value
+            })
+        
+        # add constants for size limits
+        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
+            min_size = asn1["size"][0][0]
+            max_size = asn1["size"][0][1]
+            ros_type = simplestRosIntegerType(min_size, max_size)
+            min_size_constant_name = "MIN_SIZE"
+            max_size_constant_name = "MAX_SIZE"
+            if "name" in asn1:
+                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
+                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(min_size_constant_name),
+                "value": min_size
+            })
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(max_size_constant_name),
+                "value": max_size
+            })
 
         # add constants for named numbers
         if "named-numbers" in asn1:
@@ -347,13 +388,37 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
     # arrays
     elif type == "SEQUENCE OF":
 
+        # add field for array
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
-        
-        context["members"].append({
+        member_context = {
             "type": f"{array_type}[]",
-            "name": array_name
-        })
+            "name": array_name,
+            "constants": []
+        }
+        
+        # add constants for size limits
+        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
+            min_size = asn1["size"][0][0]
+            max_size = asn1["size"][0][1]
+            ros_type = simplestRosIntegerType(min_size, max_size)
+            min_size_constant_name = "MIN_SIZE"
+            max_size_constant_name = "MAX_SIZE"
+            if "name" in asn1:
+                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
+                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(min_size_constant_name),
+                "value": min_size
+            })
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(max_size_constant_name),
+                "value": max_size
+            })
+            
+        context["members"].append(member_context)
 
     # enums
     elif type == "ENUMERATED":
