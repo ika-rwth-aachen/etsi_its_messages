@@ -233,9 +233,6 @@ def simplestRosIntegerType(min_value, max_value):
 
 def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
 
-    # TODO: remove msg
-    msg = ""
-
     type = asn1["type"]
     
     context = {
@@ -320,9 +317,10 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
         name = "choice"
         if "name" in asn1:
             name = f"{asn1['name']}_{name}"
-        msg += f"uint8 {name}"
-        msg += "\n"
-        msg += "\n"
+        context["members"].append({
+            "type": "uint8",
+            "name": name,
+        })
 
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1["members"]):
@@ -330,26 +328,37 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
             if "name" in asn1:
+                # TODO
                 # member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
-                member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
-                msg += member_msg
-                name = f"{camel2SNAKE(asn1['name'])}_{name}"
-            # else:
-                # msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
-            msg += f"uint8 {name} = {im}"
-            msg += "\n"
+                # member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
+                # msg += member_msg
+                # name = f"{camel2SNAKE(asn1['name'])}_{name}"
+                pass
+            else:
+                member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
+            member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
+            member_context["members"][0]["constants"].append({
+                "type": "uint8",
+                "name": name,
+                "value": im
+            })
+            context["members"].extend(member_context["members"])
 
     # arrays
     elif type == "SEQUENCE OF":
 
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
-        element_name = array_type[0].lower() + array_type[1:]
-        msg += f"{array_type}[] {array_name}"
-        msg += "\n"
+        
+        context["members"].append({
+            "type": f"{array_type}[]",
+            "name": array_name
+        })
 
     # enums
     elif type == "ENUMERATED":
+
+        # TODO: add array size
 
         # choose simplest possible integer type
         values = [val[1] for val in asn1["values"] if val is not None]
@@ -357,16 +366,24 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
         max_value = max(values)
         ros_type = simplestRosIntegerType(min_value, max_value)
 
+        # add field for active value
+        member_context = {
+            "type": ros_type,
+            "name": "value",
+            "constants": [],
+        }
+
         # add constants for all values
         for val in asn1["values"]:
             if val is None:
                 continue
-            msg += f"{ros_type} {camel2SNAKE(val[0])} = {val[1]}"
-            msg += "\n"
-
-        # add field for active value
-        msg += f"{ros_type} value"
-        msg += "\n"
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": camel2SNAKE(val[0]),
+                "value": val[1]
+            })
+        
+        context["members"].append(member_context)
 
     # custom types
     elif type in asn1_types:
@@ -374,7 +391,7 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
         name = asn1["name"] if "name" in asn1 else "value"
         context["members"].append({
             "type": validRosType(type),
-            "name": validRosField(name),
+            "name": validRosField(name)
         })
 
     elif type == "NULL":
@@ -384,8 +401,6 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
     else:
 
         warnings.warn(f"Cannot handle type '{type}'")
-
-    msg = msg.rstrip("\n") + "\n"
 
     return context
 
