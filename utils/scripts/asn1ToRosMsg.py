@@ -368,15 +368,7 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
             if member is None:
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
-            if "name" in asn1:
-                # TODO
-                # member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)
-                # member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
-                # msg += member_msg
-                # name = f"{camel2SNAKE(asn1['name'])}_{name}"
-                pass
-            else:
-                member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
             member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
             member_context["members"][0]["constants"].append({
                 "type": "uint8",
