@@ -9,3 +9,4 @@ EmbarkationStatus embarkationStatus
 
 PtActivation ptActivation
 bool ptActivation_isPresent
+

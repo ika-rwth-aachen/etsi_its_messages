@@ -2,6 +2,8 @@
 # GenerationDeltaTime ::= INTEGER { oneMilliSec(1) } (0..65535)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(0, 65535)]
-uint16 ONE_MILLI_SEC = 1
 uint16 value
+uint16 MIN = 0
+uint16 MAX = 65535
+uint16 ONE_MILLI_SEC = 1
+

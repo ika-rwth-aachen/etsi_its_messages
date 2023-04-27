@@ -23,6 +23,7 @@
 # }
 # ------------------------------------------------------------------------------
 
+uint8 value
 uint8 EXPLOSIVES_1 = 0
 uint8 EXPLOSIVES_2 = 1
 uint8 EXPLOSIVES_3 = 2
@@ -43,4 +44,4 @@ uint8 INFECTIOUS_SUBSTANCES = 16
 uint8 RADIOACTIVE_MATERIAL = 17
 uint8 CORROSIVE_SUBSTANCES = 18
 uint8 MISCELLANEOUS_DANGEROUS_SUBSTANCES = 19
-uint8 value
+

@@ -2,5 +2,7 @@
 # DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
 # ------------------------------------------------------------------------------
 
-# size: [(1, 13)]
 bool[] value
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 13
+

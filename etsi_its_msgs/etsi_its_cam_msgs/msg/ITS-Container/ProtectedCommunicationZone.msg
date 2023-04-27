@@ -24,3 +24,4 @@ bool protectedZoneRadius_isPresent
 
 ProtectedZoneID protectedZoneID
 bool protectedZoneID_isPresent
+
