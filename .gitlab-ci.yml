@@ -15,3 +15,4 @@ docker-ros:
     TARGET: dev,run
     BASE_IMAGE: rwthika/ros:latest
     COMMAND: roslaunch etsi_its_conversion start_ConversionNode.launch
+    ENABLE_INDUSTRIAL_CI: 'true'
