@@ -249,7 +249,21 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{t_name}' is undefined")
 
 
-def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str]) -> str:
+def loadJinjaTemplate() -> jinja2.environment.Template:
+    """Loads the jinja template for ROS message files.
+
+    Returns:
+        jinja2.environment.Template: jinja template
+    """
+    
+    template_dir = os.path.join(os.path.dirname(__file__), "templates")
+    jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
+    jinja_template = jinja_env.get_template("RosMessageType.msg")
+    
+    return jinja_template
+
+
+def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str], jinja_template: jinja2.environment.Template) -> str:
     """Converts parsed ASN1 type information to a ROS message file string.
 
     Args:
@@ -257,16 +271,11 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_raw (Dict[str, str]): raw string definition by type
+        jinja_template (jinja2.environment.Template): jinja template
 
     Returns:
         str: ROS message file string
     """
-
-    # load jinja template
-    # TODO: no need to load this every time
-    template_dir = os.path.join(os.path.dirname(__file__), "templates")
-    jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
-    jinja_template = jinja_env.get_template("RosMessageType.msg")
 
     # build jinja context based on asn1 type information
     jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types)
@@ -307,7 +316,7 @@ def exportRosMsg(ros_msg: str, type_name: str, doc_name: str, output_dir: str):
 
 
 def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
-    """Builds a Jinja2 context containing all type information required to fill the templates / code generation.
+    """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
         t_name (str): type name
@@ -315,7 +324,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         asn1_types (Dict[str, Dict]): type information of all types by type
 
     Returns:
-        Dict: Jinja2 context
+        Dict: jinja context
     """
 
     type = asn1["type"]
@@ -556,10 +565,12 @@ def main():
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
+    
+    jinja_template = loadJinjaTemplate()
 
     for type_name, asn1_type in asn1_types.items():
         
-        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw)
+        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw, jinja_template)
 
         exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
         
