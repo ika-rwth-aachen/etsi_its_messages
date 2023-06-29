@@ -27,34 +27,6 @@ TO_ROS = "toRos"
 TO_STRUCT = "toStruct"
 
 
-class CppFileStr:
-    
-    INDENT_PLACEHOLDER = "<INDENT>"
-    INDENT = "  "
-    
-    # TODO: better to track lines and indentation per line?
-    def __init__(self, s: str = "", indentation: int = 0):
-        self.s = s
-        self.indentation = indentation
-    
-    def __add__(self, other: str):
-        br = "\n" if len(self.s) > 0 else ""
-        if isinstance(other, CppFileStr):
-            s = self.s + br + other.s
-            indentation = other.indentation
-        elif isinstance(other, str):
-            delta_indentation = other.count("{") - other.count("}")
-            indentation = self.indentation if delta_indentation >= 0 else self.indentation + delta_indentation
-            indentation = max(indentation, 0)
-            s = self.s + br
-            s += indentation * self.INDENT_PLACEHOLDER + other
-            indentation = max(self.indentation + delta_indentation, 0)
-        return CppFileStr(s, indentation)
-
-    def __str__(self) -> str:
-        return self.s.replace(self.INDENT_PLACEHOLDER, self.INDENT)
-
-
 def parseCli():
 
     parser = argparse.ArgumentParser(
