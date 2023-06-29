@@ -28,6 +28,11 @@ TO_STRUCT = "toStruct"
 
 
 def parseCli():
+    """Parses script's CLI arguments.
+
+    Returns:
+        argparse.Namespace: arguments
+    """
 
     parser = argparse.ArgumentParser(
         description="Creates ROS .msg files from ASN1 definitions.",
@@ -43,26 +48,100 @@ def parseCli():
 
 
 def camel2SNAKE(s: str) -> str:
+    """Converts a camelCase string to SNAKE_CASE.
+
+    Args:
+        s (str): camelCaseString
+
+    Returns:
+        str: SNAKE_CASE_STRING
+    """
 
     return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
 
 
 def validRosType(s: str) -> str:
+    """Converts a string to make it a valid ROS message type.
+
+    Args:
+        s (str): Not-A-Message-Type
+
+    Returns:
+        str: A_Message_Type
+    """
 
     return s.replace("-", "_")
 
 
 def validRosField(s: str) -> str:
+    """Converts a string to make it a valid ROS message field name.
+
+    Args:
+        s (str): Not-A-Ros-Message-Field
+
+    Returns:
+        str: A_Ros_Message_Field
+    """
 
     return s.replace("-", "_")
 
 
 def noSpace(s: str) -> str:
+    """Replaces any spaces in a string with underscores.
+
+    Args:
+        s (str): my string
+
+    Returns:
+        str: my_string
+    """
     
     return s.replace(" ", "_")
 
 
+def simplestRosIntegerType(min_value: int, max_value: int) -> str:
+    """Returns the simplest/smallest ROS integer type covering the specified range.
+
+    Args:
+        min_value (int): minimum value
+        max_value (int): maximum value
+    
+    Raises:
+        ValueError: if specified range is not supported by any ROS integer type
+
+    Returns:
+        str: simplest/smallest ROS integer type, e.g., `uint32`
+    """
+
+    if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
+        return "uint8"
+    elif min_value >= np.iinfo(np.uint16).min and max_value <= np.iinfo(np.uint16).max:
+        return "uint16"
+    elif min_value >= np.iinfo(np.uint32).min and max_value <= np.iinfo(np.uint32).max:
+        return "uint32"
+    elif min_value >= np.iinfo(np.uint64).min and max_value <= np.iinfo(np.uint64).max:
+        return "uint64"
+    elif min_value >= np.iinfo(np.int8).min and max_value <= np.iinfo(np.int8).max:
+        return "int8"
+    elif min_value >= np.iinfo(np.int16).min and max_value <= np.iinfo(np.int16).max:
+        return "int16"
+    elif min_value >= np.iinfo(np.int32).min and max_value <= np.iinfo(np.int32).max:
+        return "int32"
+    elif min_value >= np.iinfo(np.int64).min and max_value <= np.iinfo(np.int64).max:
+        return "int64"
+    else:
+        return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
+
+
 def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
+    """Parses ASN1 files.
+
+    Args:
+        files (List[str]): filepaths
+
+    Returns:
+        Tuple[Dict, Dict[str, str]]: parsed type information by document, raw string definition by type
+    """
 
     asn1_raw = {}
     for file in files:
@@ -91,6 +170,15 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
 
 
 def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
+    """Finds the ASN1 document where a specific type is defined.
+
+    Args:
+        asn1_type (str): type name
+        asn1_docs (Dict): parsed type information by document (from `parseAsn1Files`)
+
+    Returns:
+        Optional[str]: document name where type is defined, `None` if not found
+    """
 
     for doc, asn1 in asn1_docs.items():
         if asn1_type in asn1["types"]:
@@ -100,6 +188,17 @@ def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
 
 
 def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 type information from multiple ASN1 documents.
+
+    Args:
+        asn1_docs (Dict): type information by document
+
+    Raises:
+        ValueError: if a type is found in multiple documents
+
+    Returns:
+        Dict[str, Dict]: type information by type
+    """
 
     asn1_types = {}
     for doc, asn1 in asn1_docs.items():
@@ -113,6 +212,16 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
+    """Checks if all type information is known and supported.
+    
+    This helps to check whether the types of all members of a type are also known.
+
+    Args:
+        asn1_types (Dict[str, Dict]): type information by type
+
+    Raises:
+        TypeError: if the type of a member is not part of the given types, hence unknown
+    """
 
     known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL"]
     known_types += list(asn1_types.keys())
@@ -141,6 +250,17 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
 
 def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str]) -> str:
+    """Converts parsed ASN1 type information to a ROS message file string.
+
+    Args:
+        type_name (str): type name
+        asn1_type (Dict): type information
+        asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_raw (Dict[str, str]): raw string definition by type
+
+    Returns:
+        str: ROS message file string
+    """
 
     # load jinja template
     # TODO: no need to load this every time
@@ -163,10 +283,20 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     return ros_msg
 
 
-def exportRosMsg(type_name: str, ros_msg: str, asn1_docs: Dict, output_dir: str):
+def exportRosMsg(ros_msg: str, type_name: str, doc_name: str, output_dir: str):
+    """Exports a ROS message file.
+
+    Exports to `output_dir`/`doc_name`/`type_name`.msg.
+
+    Args:
+        ros_msg (str): ROS message file string
+        type_name (str): type name / file name
+        doc_name (str): document name
+        output_dir (str): output directory
+    """
 
     # create output directory
-    doc_output_dir = os.path.join(output_dir, docForAsn1Type(type_name, asn1_docs))
+    doc_output_dir = os.path.join(output_dir, doc_name)
     os.makedirs(doc_output_dir, exist_ok=True)
 
     # export ROS .msg using jinja template
@@ -176,30 +306,17 @@ def exportRosMsg(type_name: str, ros_msg: str, asn1_docs: Dict, output_dir: str)
     print(filename)
 
 
-# TODO: move up
-def simplestRosIntegerType(min_value, max_value):
-
-    if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
-        return "uint8"
-    elif min_value >= np.iinfo(np.uint16).min and max_value <= np.iinfo(np.uint16).max:
-        return "uint16"
-    elif min_value >= np.iinfo(np.uint32).min and max_value <= np.iinfo(np.uint32).max:
-        return "uint32"
-    elif min_value >= np.iinfo(np.uint64).min and max_value <= np.iinfo(np.uint64).max:
-        return "uint64"
-    elif min_value >= np.iinfo(np.int8).min and max_value <= np.iinfo(np.int8).max:
-        return "int8"
-    elif min_value >= np.iinfo(np.int16).min and max_value <= np.iinfo(np.int16).max:
-        return "int16"
-    elif min_value >= np.iinfo(np.int32).min and max_value <= np.iinfo(np.int32).max:
-        return "int32"
-    elif min_value >= np.iinfo(np.int64).min and max_value <= np.iinfo(np.int64).max:
-        return "int64"
-    else:
-        return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
-
-
 def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
+    """Builds a Jinja2 context containing all type information required to fill the templates / code generation.
+
+    Args:
+        t_name (str): type name
+        asn1 (Dict): type information
+        asn1_types (Dict[str, Dict]): type information of all types by type
+
+    Returns:
+        Dict: Jinja2 context
+    """
 
     type = asn1["type"]
     
@@ -444,7 +561,7 @@ def main():
         
         ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw)
 
-        exportRosMsg(type_name, ros_msg, asn1_docs, args.output_dir)
+        exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
         
 
 if __name__ == "__main__":
