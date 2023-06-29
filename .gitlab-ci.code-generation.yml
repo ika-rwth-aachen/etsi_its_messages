@@ -12,6 +12,7 @@ stages:
 
 asn1_reduced_cam:
   stage: ASN1 Reduction
+  needs: []
   script:
     - >
       ./utils/scripts/reduceAsn1ToTypeDependencies.py
@@ -24,6 +25,7 @@ asn1_reduced_cam:
 
 etsi_its_cam_msgs:
   stage: ROS Messages
+  needs: []
   script:
     - >
       ./utils/scripts/asn1ToRosMsg.py
@@ -35,6 +37,7 @@ etsi_its_cam_msgs:
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
+  needs: []
   script:
     - >
       ./utils/scripts/asn1ToConversionHeader.py
