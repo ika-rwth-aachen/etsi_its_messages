@@ -1,0 +1,20 @@
+#pragma once
+
+#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+#include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
+
+
+namespace etsi_its_{{ etsi_type }}_conversion {
+
+void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
+
+  out.value = in;
+}
+
+void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+    
+  memset(&out, 0, sizeof({{ t_name }}_t));
+  out = in.value;
+}
+
+}

@@ -254,7 +254,7 @@ def loadJinjaTemplate() -> jinja2.environment.Template:
     
     template_dir = os.path.join(os.path.dirname(__file__), "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
-    jinja_template = jinja_env.get_template("RosMessageType.msg")
+    jinja_template = jinja_env.get_template("RosMessageType.msg.jinja2")
     
     return jinja_template
 

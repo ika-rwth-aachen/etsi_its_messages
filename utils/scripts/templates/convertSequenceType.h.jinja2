@@ -1,0 +1,42 @@
+#pragma once
+
+#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+{# TODO: will add duplicate includes, e.g., for ClosedLanes -#}
+{% for member in members -%}
+#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
+{% endfor -%}
+#include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
+
+
+namespace etsi_its_{{ etsi_type }}_conversion {
+
+void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
+{% for member in members -%}
+{% if member.optional %}
+  if (in.{{ member.name }}) {
+    toRos_{{ member.type }}(*in.{{ member.name }}, out.{{ member.name }});
+    out.{{ member.name }}_isPresent = true;
+  }
+{% else %}
+  toRos_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
+{%- endif -%}
+{% endfor %}
+}
+
+void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+    
+  memset(&out, 0, sizeof({{ t_name }}_t));
+{% for member in members -%}
+{% if member.optional %}
+  if (in.{{ member.name }}_isPresent) {
+    {{ member.type }}_t {{ member.name }};
+    toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
+    out.{{ member.name }} = new {{ member.type }}_t({{ member.name }});
+  }
+{% else %}
+  toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
+{%- endif -%}
+{% endfor %}
+}
+
+}

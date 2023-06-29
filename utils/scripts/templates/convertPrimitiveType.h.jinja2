@@ -1,6 +1,7 @@
 #pragma once
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+#include <etsi_its_{{ etsi_type }}_conversion/primitives/convert{{ type }}.h>
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 
 
@@ -8,12 +9,13 @@ namespace etsi_its_{{ etsi_type }}_conversion {
 
 void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
 
-    out.{{ element_name }} = in;
+  toRos_{{ type }}(in, out.value);
 }
 
 void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
     
-    memset(&out, 0, sizeof({{ t_name }}_t));
-    out = in.{{ element_name }};
+  memset(&out, 0, sizeof({{ t_name }}_t));
+  toStruct_{{ type }}(in.value, out);
 }
+
 }
