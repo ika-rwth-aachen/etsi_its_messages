@@ -28,7 +28,6 @@
       "args": [
         "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
         "utils/asn1/reduced/cam/ITS-Container.asn",
-        "-t", "cam",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
