@@ -1,5 +1,5 @@
 default:
-  image: python:3.9-slim
+  image: python:3.9
   before_script:
     - pip install -r utils/scripts/requirements.txt
 
@@ -19,6 +19,7 @@ asn1_reduced_cam:
       -o utils/asn1/reduced/cam
       utils/asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       utils/asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
 etsi_its_cam_msgs:
@@ -29,6 +30,7 @@ etsi_its_cam_msgs:
       utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn
       utils/asn1/reduced/cam/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
 etsi_its_cam_conversion:
@@ -40,3 +42,4 @@ etsi_its_cam_conversion:
       utils/asn1/reduced/cam/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
