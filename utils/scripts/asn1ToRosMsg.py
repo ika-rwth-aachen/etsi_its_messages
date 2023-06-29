@@ -23,10 +23,6 @@ ASN1_PRIMITIVES_2_ROS = {
 }
 
 
-TO_ROS = "toRos"
-TO_STRUCT = "toStruct"
-
-
 def parseCli():
     """Parses script's CLI arguments.
 
@@ -505,11 +501,9 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
             })
             
         context["members"].append(member_context)
-
+        
     # enums
     elif type == "ENUMERATED":
-
-        # TODO: add array size
 
         # choose simplest possible integer type
         values = [val[1] for val in asn1["values"] if val is not None]
