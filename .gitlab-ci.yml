@@ -1,18 +1,18 @@
 Code Generation:
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
   trigger:
     include: .gitlab-ci.code-generation.yml
     strategy: depend
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 docker-ros:
-  variables:
-    DISABLE_ARCH_ARM64: 'true'
-    IMAGE_DEV_TARGET: gitlab.ika.rwth-aachen.de:5050/${CI_PROJECT_PATH}/etsi_its_conversion:latest-dev
-    IMAGE_RUN_TARGET: gitlab.ika.rwth-aachen.de:5050/${CI_PROJECT_PATH}/etsi_its_conversion:latest
   trigger:
     include:
-    - project: fb-fi/ops/docker-ros
-      ref: main
-      file: templates/.gitlab-ci.template.yml
+    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/v1.2.0/.gitlab-ci/docker-ros.yml
     strategy: depend
+  variables:
+    PLATFORM: amd64
+    TARGET: dev,run
+    BASE_IMAGE: rwthika/ros:latest
+    COMMAND: roslaunch etsi_its_conversion start_ConversionNode.launch
+    ENABLE_INDUSTRIAL_CI: 'true'
