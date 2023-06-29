@@ -1,8 +1,8 @@
-etsi2ros:
+Code Generation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   trigger:
-    include: .gitlab-ci.generate-msgs.yml
+    include: .gitlab-ci.code-generation.yml
     strategy: depend
 
 docker-ros:
