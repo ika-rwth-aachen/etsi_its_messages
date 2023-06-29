@@ -140,47 +140,43 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{t_name}' is undefined")
 
 
-def asn1TypesToFileStr(etsi_type: str, asn1_types: Dict[str, Dict]) -> Dict[str, str]:
-
-    ros_msg_by_type = {}
-
-    # loop all types
-    for t_name, type in asn1_types.items():
-
-        # ASN1 to ROS message
-        ros_msg_by_type[t_name] = asn1TypeToJinjaContext(etsi_type, t_name, type, asn1_types)
-
-    return ros_msg_by_type
-
-
-def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dict[str, str], output_dir: str):
+def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str]) -> str:
 
     # load jinja template
+    # TODO: no need to load this every time
     template_dir = os.path.join(os.path.dirname(__file__), "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
     jinja_template = jinja_env.get_template("RosMessageType.msg")
 
-    # loop over all types
-    for type, jinja_context in ros_msg_by_type.items():
+    # build jinja context based on asn1 type information
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types)
+    if jinja_context is None:
+        return None
 
-        if jinja_context is None:
-            continue
-
-        # add raw asn1 definition as comment to ROS .msg
-        if type in asn1_raw:
-            jinja_context["asn1_definition"] = asn1_raw[type].rstrip("\n")
-
-        # create output directory
-        doc_output_dir = os.path.join(output_dir, docForAsn1Type(type, asn1_docs))
-        os.makedirs(doc_output_dir, exist_ok=True)
-
-        # export ROS .msg using jinja template
-        filename = os.path.join(doc_output_dir, f"{validRosType(type)}.msg")
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(jinja_template.render(jinja_context))
-        print(filename)
+    # add raw asn1 definition as comment to ROS .msg
+    if type_name in asn1_raw:
+        jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
+    
+    # render jinja template with context
+    ros_msg = jinja_template.render(jinja_context)
+    
+    return ros_msg
 
 
+def exportRosMsg(type_name: str, ros_msg: str, asn1_docs: Dict, output_dir: str):
+
+    # create output directory
+    doc_output_dir = os.path.join(output_dir, docForAsn1Type(type_name, asn1_docs))
+    os.makedirs(doc_output_dir, exist_ok=True)
+
+    # export ROS .msg using jinja template
+    filename = os.path.join(doc_output_dir, f"{validRosType(type_name)}.msg")
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(ros_msg)
+    print(filename)
+
+
+# TODO: move up
 def simplestRosIntegerType(min_value, max_value):
 
     if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
@@ -203,7 +199,7 @@ def simplestRosIntegerType(min_value, max_value):
         return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
 
 
-def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
 
     type = asn1["type"]
     
@@ -318,7 +314,7 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
         for member in asn1["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types)
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             context["members"].extend(member_context["members"])
@@ -340,7 +336,7 @@ def asn1TypeToJinjaContext(etsi_type: str, t_name: str, asn1: Dict, asn1_types: 
             if member is None:
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
-            member_context = asn1TypeToJinjaContext(etsi_type, t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types)
             member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
             member_context["members"][0]["constants"].append({
                 "type": "uint8",
@@ -444,10 +440,12 @@ def main():
 
     checkTypeMembersInAsn1(asn1_types)
 
-    ros_msg_by_type = asn1TypesToFileStr(args.type, asn1_types)
+    for type_name, asn1_type in asn1_types.items():
+        
+        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw)
 
-    exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
-
+        exportRosMsg(type_name, ros_msg, asn1_docs, args.output_dir)
+        
 
 if __name__ == "__main__":
     
