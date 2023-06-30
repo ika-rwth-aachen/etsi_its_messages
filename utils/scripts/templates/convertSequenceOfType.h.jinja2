@@ -18,7 +18,7 @@ void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs:
 {% for member in members %}
   for (int i = 0; i < in.list.count; i++) {
     etsi_its_{{ etsi_type }}_msgs::{{ member.type|replace("[]", "") }} {{ member.name }};
-    toRos_{{ etsi_type }}(*(in.list.array[i]), {{ member.name }});
+    toRos_{{ member.type|replace("[]", "") }}(*(in.list.array[i]), {{ member.name }});
     out.array.push_back({{ member.name }});
   }
 {% endfor %}

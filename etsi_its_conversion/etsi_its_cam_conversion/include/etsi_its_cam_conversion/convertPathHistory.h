@@ -16,7 +16,7 @@ void toRos_PathHistory(const PathHistory_t& in, etsi_its_cam_msgs::PathHistory& 
 
   for (int i = 0; i < in.list.count; i++) {
     etsi_its_cam_msgs::PathPoint array;
-    toRos_cam(*(in.list.array[i]), array);
+    toRos_PathPoint(*(in.list.array[i]), array);
     out.array.push_back(array);
   }
 

@@ -243,6 +243,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         "members": [],
         "t_name": t_name,
         "type": noSpace(type),
+        "asn1_type": type,
+        "is_primitive": False,
     }
 
     # extra information / asn1 fields that are not processed as comments
@@ -271,8 +273,10 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         # parse member to jinja context
         member_context = {
             "type": ros_type,
+            "asn1_type": type,
             "name": validRosField(name),
             "constants": [],
+            "is_primitive": True,
         }
         
         # add constants for limits

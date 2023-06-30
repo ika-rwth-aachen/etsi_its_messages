@@ -1,6 +1,9 @@
 #pragma once
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+{% for member in members -%}
+#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
+{% endfor -%}
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <etsi_its_cam_coding/CenDsrcTollingZoneID.h>
+#include <etsi_its_cam_conversion/convertProtectedZoneID.h>
 #include <etsi_its_cam_msgs/CenDsrcTollingZoneID.h>
 
 

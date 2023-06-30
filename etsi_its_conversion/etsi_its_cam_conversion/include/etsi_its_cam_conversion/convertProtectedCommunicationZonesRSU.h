@@ -16,7 +16,7 @@ void toRos_ProtectedCommunicationZonesRSU(const ProtectedCommunicationZonesRSU_t
 
   for (int i = 0; i < in.list.count; i++) {
     etsi_its_cam_msgs::ProtectedCommunicationZone array;
-    toRos_cam(*(in.list.array[i]), array);
+    toRos_ProtectedCommunicationZone(*(in.list.array[i]), array);
     out.array.push_back(array);
   }
 
