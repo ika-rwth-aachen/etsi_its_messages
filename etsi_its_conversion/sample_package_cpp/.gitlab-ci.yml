@@ -1,0 +1,19 @@
+Docker ROS CI:
+  trigger:
+    include:
+      - remote: 'https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml'
+  variables:
+    BASE_IMAGE: rwthika/ros:noetic
+    COMMAND: roslaunch sample_package_cpp start_SampleNode.launch
+    TARGET: dev,run
+    ENABLE_INDUSTRIAL_CI: 'true'
+
+ROS Industrial CI:
+  trigger:
+    include:
+      - project: fb-fi/ops/templates/ci-templates
+        ref: main
+        file: .industrial_ci.template.yml
+    strategy: depend
+  variables:
+    ROS_DISTRO: noetic

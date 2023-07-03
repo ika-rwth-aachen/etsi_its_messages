@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="node_name" default="SampleNode" /> <!-- name of the node -->
+  <arg name="custom_params" default="false" />  <!-- custom parameter yaml file to overwrite parameters of this package -->
+  <arg name="create_publisher" default="true" />  <!-- create a publisher -->
+  <arg name="create_subscriber" default="true" /> <!-- create a subscriber -->
+
+  <group ns="/sample_package_cpp">
+    <node pkg="sample_package_cpp" type="SampleNode" name="$(arg node_name)" output="screen">
+      <rosparam command="load" file="$(find sample_package_cpp)/launch/params_SampleNode.yaml" />  <!-- common parameters from config file -->
+      <rosparam if="$(eval custom_params != false)" command="load" file="$(arg custom_params)" />
+      <param name="create_publisher" value="$(arg create_publisher)"/>
+      <param name="create_subscriber" value="$(arg create_subscriber)"/>
+      <remap to="/message" from="~/message"/>  <!-- remaps a global topic to the topic of the node -->
+    </node>
+  </group>
+
+</launch>
+

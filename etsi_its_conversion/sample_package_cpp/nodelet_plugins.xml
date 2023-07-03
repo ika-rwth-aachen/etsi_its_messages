@@ -1,0 +1,5 @@
+<library path="lib/libSampleNodelet">
+    <class name="sample_package_cpp/SampleNodelet" type="sample_package_cpp::SampleNodelet" base_class_type="nodelet::Nodelet">
+        <description>Nodelet</description>
+    </class>
+</library>
