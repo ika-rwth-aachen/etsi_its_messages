@@ -9,7 +9,7 @@
   <group ns="/sample_package_cpp">
     <!-- standalone nodelet -->
     <node if="$(eval nodelet_manager == false)" pkg="nodelet" type="nodelet" name="$(arg nodelet_name)" args="standalone sample_package_cpp/SampleNodelet" output="screen">
-      <rosparam command="load" file="$(find sample_package_cpp)/launch/params_SampleNodelet.yaml" />  <!-- common parameters from config file -->
+      <rosparam command="load" file="$(find sample_package_cpp)/config/params.yml" />  <!-- common parameters from config file -->
       <rosparam if="$(eval custom_params != false)" command="load" file="$(arg custom_params)" />
       <param name="create_publisher" value="$(arg create_publisher)"/>
       <param name="create_subscriber" value="$(arg create_subscriber)"/>
@@ -18,7 +18,7 @@
 
     <!-- nodelet with external nodelet manager -->
     <node if="$(eval nodelet_manager != false)" pkg="nodelet" type="nodelet" name="$(arg nodelet_name)" args="load sample_package_cpp/SampleNodelet $(arg nodelet_manager)" output="screen">
-      <rosparam command="load" file="$(find sample_package_cpp)/launch/params_SampleNodelet.yaml" />
+      <rosparam command="load" file="$(find sample_package_cpp)/config/params.yml" />
       <rosparam if="$(eval custom_params != false)" command="load" file="$(arg custom_params)" />
       <param name="create_publisher" value="$(arg create_publisher)"/>
       <param name="create_subscriber" value="$(arg create_subscriber)"/>
@@ -27,4 +27,3 @@
   </group>
 
 </launch>
-
