@@ -9,76 +9,80 @@ PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 namespace etsi_its_conversion {
 
 
-Converter::Converter() {}
-
-
-Converter::~Converter() {
-  NODELET_INFO("Converter stopped");
-}
+const std::string Converter::kInputTopicCam{"~/in/cam"};
+const std::string Converter::kOutputTopicCam{"~/out/cam"};
+const std::string Converter::kInputTopicAsn1Cam{"~/bitstring/in/cam"};
+const std::string Converter::kOutputTopicAsn1Cam{"~/bitstring/out/cam"};
 
 
 void Converter::onInit() {
 
-  // NodeHandles cannot be used before this point
-  node_handle_ = this->getMTNodeHandle();
   private_node_handle_ = this->getMTPrivateNodeHandle();
-  NODELET_INFO("Converter starting...");
-
-  // load parameters (defaults and min/max are also handled by dynamic_reconfigure)
-  if(!private_node_handle_.param("parameter_float", parameter_float_, 0.0f)) NODELET_WARN("parameter_float not set, defaulting to %f.", parameter_float_);
-  if(!private_node_handle_.param("parameter_bool", parameter_bool_, false)) NODELET_WARN("parameter_bool not set, defaulting to %d.", parameter_bool_);
-  if(!private_node_handle_.param<std::string>("parameter_string", parameter_string_, "none")) NODELET_WARN("parameter_string not set, defaulting to %s.", parameter_string_.c_str());
-
-  // load parameters that can not be dynamically reconfigured
-  if(!private_node_handle_.param("create_publisher", create_publisher_, true)) ROS_WARN("create_publisher not set, defaulting to %d.", create_publisher_);
-  if(!private_node_handle_.param("create_subscriber", create_subscriber_, true)) ROS_WARN("create_subscriber not set, defaulting to %d.", create_subscriber_);
-
-  NODELET_INFO("Config: parameter_float = %f, parameter_bool = %d, parameter_string = %s, create_publisher = %d, create_subscriber = %d", parameter_float_, parameter_bool_, parameter_string_.c_str(), create_publisher_, create_subscriber_);
-
 
   // setup dynamic_reconfigure
   dynamic_reconfigure_server_ = std::make_shared<dynamic_reconfigure::Server<dynamicReconfigureConfig>>(private_node_handle_);
-  dynamic_reconfigure::Server<dynamicReconfigureConfig>::CallbackType config_callback = boost::bind(&Converter::dynamicReconfigureCallback, this, _1, _2);
-  dynamic_reconfigure_server_->setCallback(config_callback);
+  dynamic_reconfigure::Server<dynamicReconfigureConfig>::CallbackType dynamic_reconfigure_callback = boost::bind(&Converter::dynamicReconfigureCallback, this, _1, _2);
+  dynamic_reconfigure_server_->setCallback(dynamic_reconfigure_callback);
 
-  // setup publisher and subscriber
-  if (create_publisher_) pub_ = private_node_handle_.advertise<std_msgs::String>("message", 1);
-  if (create_subscriber_) sub_ = private_node_handle_.subscribe("message", 1, &Converter::messageCallback, this);
-
-  // create timer for publishing messages
-  if (create_publisher_) timer_ = node_handle_.createTimer(ros::Duration(2.0), &Converter::timerCallback, this);
+  // create subscribers and publishers
+  publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
+  publishers_asn1_["cam"] = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>(kOutputTopicAsn1Cam, 1);
+  subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
+  subscribers_asn1_["cam"] = private_node_handle_.subscribe(kInputTopicAsn1Cam, 1, &Converter::asn1CallbackCam, this);
 }
 
 
 void Converter::dynamicReconfigureCallback(dynamicReconfigureConfig &config, uint32_t level) {
 
-  ROS_INFO("dynamic_reconfigure request: parameter_float = %f, parameter_bool = %d, parameter_string = %s", 
-            config.parameter_float,
-            config.parameter_bool,
-            config.parameter_string.c_str());
-
-  parameter_float_ = config.parameter_float;
-  parameter_bool_ = config.parameter_bool;
-  parameter_string_ = config.parameter_string;
+  
 }
 
 
-void Converter::timerCallback(const ros::TimerEvent& event) {
+void Converter::asn1CallbackCam(const bitstring_msgs::UInt8ArrayStamped::ConstPtr bitstring_msg) {
 
-  NODELET_INFO("Publishing message at time %f", event.current_real.toSec());
+  // decode ASN1 bitstring to struct
+  CAM_t* asn1_struct;
+  asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &bitstring_msg->data[0], bitstring_msg->data.size());
+  if (ret.code != RC_OK) {
+    NODELET_ERROR("Failed to decode message");
+    return;
+  }
 
-  // messages must be published as pointers in nodelets
-  std_msgs::StringPtr msg = std_msgs::StringPtr(new std_msgs::String);
-  msg->data = "Converter is running";
+  // convert struct to ROS msg
+  etsi_its_cam_msgs::CAM msg;
+  etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
 
-  pub_.publish(msg);
+  publishers_["cam"].publish(msg);
 }
 
 
-void Converter::messageCallback(const std_msgs::StringConstPtr msg) {
+void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 
-  // DO NOT change the received message, it is shared among all other nodelets!
-  NODELET_INFO("Received message: %s", msg->data.c_str());
+  // convert ROS msg to struct
+  CAM_t asn1_struct;
+  etsi_its_cam_conversion::toStruct_CAM(*msg, asn1_struct);
+
+  // encode struct to ASN1 bitstring
+  char error_buffer[1024];
+  size_t error_length = sizeof(error_buffer);
+  int check_ret = asn_check_constraints(&asn_DEF_CAM, &asn1_struct, error_buffer, &error_length);
+  if (check_ret != 0) {
+    NODELET_ERROR("Check of struct failed: %s", error_buffer);
+    return;
+  }
+  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, &asn1_struct);
+  if (ret.result.encoded == -1) {
+    NODELET_ERROR("Failed to encode message: %s", ret.result.failed_type->xml_tag);
+    return;
+  }
+  
+  // TODO: debug statements
+
+  bitstring_msgs::UInt8ArrayStamped bitstring_msg;
+  bitstring_msg.header.stamp = ros::Time::now(); // TODO: use msg time?
+  bitstring_msg.header.frame_id = ""; // TODO
+  bitstring_msg.data = std::vector<uint8_t>((uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
+  publishers_asn1_["cam"].publish(bitstring_msg);
 }
 
 
