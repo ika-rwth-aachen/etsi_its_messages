@@ -8,7 +8,7 @@ Code Generation:
 docker-ros:
   trigger:
     include:
-    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/v1.2.0/.gitlab-ci/docker-ros.yml
+    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
     PLATFORM: amd64
