@@ -9,7 +9,6 @@ project(etsi_its_conversion)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   bitstring_msgs
-  dynamic_reconfigure
   etsi_its_cam_conversion
   nodelet
   roscpp
@@ -91,9 +90,9 @@ find_package(catkin REQUIRED COMPONENTS
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-generate_dynamic_reconfigure_options(
-  cfg/dynamicReconfigure.cfg
-)
+# generate_dynamic_reconfigure_options(
+#   cfg/dynamicReconfigure.cfg
+# )
 
 ###################################
 ## catkin specific configuration ##
@@ -109,7 +108,6 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
     bitstring_msgs
-    dynamic_reconfigure
     etsi_its_cam_conversion
     nodelet
     roscpp

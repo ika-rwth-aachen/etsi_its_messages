@@ -51,7 +51,6 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <depend>bitstring_msgs</depend>
-  <depend>dynamic_reconfigure</depend>
   <depend>etsi_its_cam_conversion</depend>
   <depend>nodelet</depend>
   <depend>roscpp</depend>

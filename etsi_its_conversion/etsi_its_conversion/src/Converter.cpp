@@ -19,22 +19,11 @@ void Converter::onInit() {
 
   private_node_handle_ = this->getMTPrivateNodeHandle();
 
-  // setup dynamic_reconfigure
-  dynamic_reconfigure_server_ = std::make_shared<dynamic_reconfigure::Server<dynamicReconfigureConfig>>(private_node_handle_);
-  dynamic_reconfigure::Server<dynamicReconfigureConfig>::CallbackType dynamic_reconfigure_callback = boost::bind(&Converter::dynamicReconfigureCallback, this, _1, _2);
-  dynamic_reconfigure_server_->setCallback(dynamic_reconfigure_callback);
-
   // create subscribers and publishers
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
   publishers_asn1_["cam"] = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>(kOutputTopicAsn1Cam, 1);
   subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
   subscribers_asn1_["cam"] = private_node_handle_.subscribe(kInputTopicAsn1Cam, 1, &Converter::asn1CallbackCam, this);
-}
-
-
-void Converter::dynamicReconfigureCallback(dynamicReconfigureConfig &config, uint32_t level) {
-
-  
 }
 
 

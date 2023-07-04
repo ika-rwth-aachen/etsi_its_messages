@@ -5,9 +5,7 @@
 #include <unordered_map>
 
 #include <bitstring_msgs/UInt8ArrayStamped.h>
-#include <dynamic_reconfigure/server.h>
 #include <etsi_its_cam_conversion/convertCAM.h>
-#include <etsi_its_conversion/dynamicReconfigureConfig.h>
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
 
@@ -23,9 +21,8 @@ class Converter : public nodelet::Nodelet {
 
   protected:
 
-    void dynamicReconfigureCallback(dynamicReconfigureConfig& config, uint32_t level);
-
     void asn1CallbackCam(const bitstring_msgs::UInt8ArrayStamped::ConstPtr bitstring_msg);
+
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
 
   protected:
@@ -36,8 +33,6 @@ class Converter : public nodelet::Nodelet {
     static const std::string kOutputTopicAsn1Cam;
 
     ros::NodeHandle private_node_handle_;
-
-    std::shared_ptr<dynamic_reconfigure::Server<dynamicReconfigureConfig>> dynamic_reconfigure_server_;
 
     std::unordered_map<std::string, ros::Subscriber> subscribers_asn1_;
     std::unordered_map<std::string, ros::Publisher> publishers_;
