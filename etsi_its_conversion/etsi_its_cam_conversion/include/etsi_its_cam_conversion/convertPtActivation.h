@@ -1,25 +1,25 @@
 #pragma once
 
 #include <etsi_its_cam_coding/PtActivation.h>
-#include <etsi_its_cam_msgs/PtActivation.h>
 #include <etsi_its_cam_conversion/convertPtActivationType.h>
 #include <etsi_its_cam_conversion/convertPtActivationData.h>
+#include <etsi_its_cam_msgs/PtActivation.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::PtActivation convert_PtActivationtoRos(const PtActivation_t& _PtActivation_in)
-	{
-		etsi_its_cam_msgs::PtActivation PtActivation_out;
-		PtActivation_out.ptActivationType = convert_PtActivationTypetoRos(_PtActivation_in.ptActivationType);
-		PtActivation_out.ptActivationData = convert_PtActivationDatatoRos(_PtActivation_in.ptActivationData);
-		return PtActivation_out;
-	}
-	PtActivation_t convert_PtActivationtoC(const etsi_its_cam_msgs::PtActivation& _PtActivation_in)
-	{
-		PtActivation_t PtActivation_out;
-		memset(&PtActivation_out, 0, sizeof(PtActivation_t));
-		PtActivation_out.ptActivationType = convert_PtActivationTypetoC(_PtActivation_in.ptActivationType);
-		PtActivation_out.ptActivationData = convert_PtActivationDatatoC(_PtActivation_in.ptActivationData);
-		return PtActivation_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_PtActivation(const PtActivation_t& in, etsi_its_cam_msgs::PtActivation& out) {
+
+  toRos_PtActivationType(in.ptActivationType, out.ptActivationType);
+  toRos_PtActivationData(in.ptActivationData, out.ptActivationData);
+}
+
+void toStruct_PtActivation(const etsi_its_cam_msgs::PtActivation& in, PtActivation_t& out) {
+    
+  memset(&out, 0, sizeof(PtActivation_t));
+
+  toStruct_PtActivationType(in.ptActivationType, out.ptActivationType);
+  toStruct_PtActivationData(in.ptActivationData, out.ptActivationData);
+}
+
 }

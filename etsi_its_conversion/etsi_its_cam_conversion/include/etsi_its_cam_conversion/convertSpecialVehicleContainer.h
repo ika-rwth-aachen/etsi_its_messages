@@ -1,7 +1,6 @@
 #pragma once
 
 #include <etsi_its_cam_coding/SpecialVehicleContainer.h>
-#include <etsi_its_cam_msgs/SpecialVehicleContainer.h>
 #include <etsi_its_cam_conversion/convertPublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialTransportContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsContainer.h>
@@ -9,88 +8,88 @@
 #include <etsi_its_cam_conversion/convertRescueContainer.h>
 #include <etsi_its_cam_conversion/convertEmergencyContainer.h>
 #include <etsi_its_cam_conversion/convertSafetyCarContainer.h>
+#include <etsi_its_cam_msgs/SpecialVehicleContainer.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::SpecialVehicleContainer convert_SpecialVehicleContainertoRos(const SpecialVehicleContainer_t& _SpecialVehicleContainer_in)
-	{
-		etsi_its_cam_msgs::SpecialVehicleContainer SpecialVehicleContainer_out;
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer)
-		{
-			SpecialVehicleContainer_out.publicTransportContainer = convert_PublicTransportContainertoRos(_SpecialVehicleContainer_in.choice.publicTransportContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer)
-		{
-			SpecialVehicleContainer_out.specialTransportContainer = convert_SpecialTransportContainertoRos(_SpecialVehicleContainer_in.choice.specialTransportContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer)
-		{
-			SpecialVehicleContainer_out.dangerousGoodsContainer = convert_DangerousGoodsContainertoRos(_SpecialVehicleContainer_in.choice.dangerousGoodsContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic)
-		{
-			SpecialVehicleContainer_out.roadWorksContainerBasic = convert_RoadWorksContainerBasictoRos(_SpecialVehicleContainer_in.choice.roadWorksContainerBasic);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer)
-		{
-			SpecialVehicleContainer_out.rescueContainer = convert_RescueContainertoRos(_SpecialVehicleContainer_in.choice.rescueContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer)
-		{
-			SpecialVehicleContainer_out.emergencyContainer = convert_EmergencyContainertoRos(_SpecialVehicleContainer_in.choice.emergencyContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER;
-		}
-		if(_SpecialVehicleContainer_in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer)
-		{
-			SpecialVehicleContainer_out.safetyCarContainer = convert_SafetyCarContainertoRos(_SpecialVehicleContainer_in.choice.safetyCarContainer);
-			SpecialVehicleContainer_out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER;
-		}
-		return SpecialVehicleContainer_out;
-	}
-	SpecialVehicleContainer_t convert_SpecialVehicleContainertoC(const etsi_its_cam_msgs::SpecialVehicleContainer& _SpecialVehicleContainer_in)
-	{
-		SpecialVehicleContainer_t SpecialVehicleContainer_out;
-		memset(&SpecialVehicleContainer_out, 0, sizeof(SpecialVehicleContainer_t));
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.publicTransportContainer = convert_PublicTransportContainertoC(_SpecialVehicleContainer_in.publicTransportContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.specialTransportContainer = convert_SpecialTransportContainertoC(_SpecialVehicleContainer_in.specialTransportContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.dangerousGoodsContainer = convert_DangerousGoodsContainertoC(_SpecialVehicleContainer_in.dangerousGoodsContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC)
-		{
-			SpecialVehicleContainer_out.choice.roadWorksContainerBasic = convert_RoadWorksContainerBasictoC(_SpecialVehicleContainer_in.roadWorksContainerBasic);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.rescueContainer = convert_RescueContainertoC(_SpecialVehicleContainer_in.rescueContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.emergencyContainer = convert_EmergencyContainertoC(_SpecialVehicleContainer_in.emergencyContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer;
-		}
-		if(_SpecialVehicleContainer_in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER)
-		{
-			SpecialVehicleContainer_out.choice.safetyCarContainer = convert_SafetyCarContainertoC(_SpecialVehicleContainer_in.safetyCarContainer);
-			SpecialVehicleContainer_out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer;
-		}
-		return SpecialVehicleContainer_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_SpecialVehicleContainer(const SpecialVehicleContainer_t& in, etsi_its_cam_msgs::SpecialVehicleContainer& out) {
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer) {
+    toRos_PublicTransportContainer(in.choice.publicTransportContainer, out.publicTransportContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer) {
+    toRos_SpecialTransportContainer(in.choice.specialTransportContainer, out.specialTransportContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer) {
+    toRos_DangerousGoodsContainer(in.choice.dangerousGoodsContainer, out.dangerousGoodsContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic) {
+    toRos_RoadWorksContainerBasic(in.choice.roadWorksContainerBasic, out.roadWorksContainerBasic);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer) {
+    toRos_RescueContainer(in.choice.rescueContainer, out.rescueContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer) {
+    toRos_EmergencyContainer(in.choice.emergencyContainer, out.emergencyContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER;
+  }
+
+  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer) {
+    toRos_SafetyCarContainer(in.choice.safetyCarContainer, out.safetyCarContainer);
+    out.choice = etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER;
+  }
+}
+
+void toStruct_SpecialVehicleContainer(const etsi_its_cam_msgs::SpecialVehicleContainer& in, SpecialVehicleContainer_t& out) {
+    
+  memset(&out, 0, sizeof(SpecialVehicleContainer_t));
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER) {
+    toStruct_PublicTransportContainer(in.publicTransportContainer, out.choice.publicTransportContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER) {
+    toStruct_SpecialTransportContainer(in.specialTransportContainer, out.choice.specialTransportContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER) {
+    toStruct_DangerousGoodsContainer(in.dangerousGoodsContainer, out.choice.dangerousGoodsContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC) {
+    toStruct_RoadWorksContainerBasic(in.roadWorksContainerBasic, out.choice.roadWorksContainerBasic);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER) {
+    toStruct_RescueContainer(in.rescueContainer, out.choice.rescueContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER) {
+    toStruct_EmergencyContainer(in.emergencyContainer, out.choice.emergencyContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer;
+  }
+
+  if (in.choice == etsi_its_cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER) {
+    toStruct_SafetyCarContainer(in.safetyCarContainer, out.choice.safetyCarContainer);
+    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer;
+  }
+
+}
+
 }

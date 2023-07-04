@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/Latitude.h>
-#include <etsi_its_cam_msgs/Latitude.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/Latitude.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::Latitude convert_LatitudetoRos(const Latitude_t& _Latitude_in)
-	{
-		etsi_its_cam_msgs::Latitude Latitude_out;
-		convert_toRos(_Latitude_in, Latitude_out.value);
-		return Latitude_out;
-	}
-	Latitude_t convert_LatitudetoC(const etsi_its_cam_msgs::Latitude& _Latitude_in)
-	{
-		Latitude_t Latitude_out;
-		memset(&Latitude_out, 0, sizeof(Latitude_t));
-		convert_toC(_Latitude_in.value, Latitude_out);
-		return Latitude_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_Latitude(const Latitude_t& in, etsi_its_cam_msgs::Latitude& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_Latitude(const etsi_its_cam_msgs::Latitude& in, Latitude_t& out) {
+    
+  memset(&out, 0, sizeof(Latitude_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

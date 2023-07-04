@@ -2,5 +2,7 @@
 # SubCauseCodeType ::= INTEGER (0..255)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(0, 255)]
-int64 value
+uint8 value
+uint8 MIN = 0
+uint8 MAX = 255
+

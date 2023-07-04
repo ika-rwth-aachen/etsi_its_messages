@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/SemiAxisLength.h>
-#include <etsi_its_cam_msgs/SemiAxisLength.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/SemiAxisLength.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::SemiAxisLength convert_SemiAxisLengthtoRos(const SemiAxisLength_t& _SemiAxisLength_in)
-	{
-		etsi_its_cam_msgs::SemiAxisLength SemiAxisLength_out;
-		convert_toRos(_SemiAxisLength_in, SemiAxisLength_out.value);
-		return SemiAxisLength_out;
-	}
-	SemiAxisLength_t convert_SemiAxisLengthtoC(const etsi_its_cam_msgs::SemiAxisLength& _SemiAxisLength_in)
-	{
-		SemiAxisLength_t SemiAxisLength_out;
-		memset(&SemiAxisLength_out, 0, sizeof(SemiAxisLength_t));
-		convert_toC(_SemiAxisLength_in.value, SemiAxisLength_out);
-		return SemiAxisLength_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_SemiAxisLength(const SemiAxisLength_t& in, etsi_its_cam_msgs::SemiAxisLength& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_SemiAxisLength(const etsi_its_cam_msgs::SemiAxisLength& in, SemiAxisLength_t& out) {
+    
+  memset(&out, 0, sizeof(SemiAxisLength_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

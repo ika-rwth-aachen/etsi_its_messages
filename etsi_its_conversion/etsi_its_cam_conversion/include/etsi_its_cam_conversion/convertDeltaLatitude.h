@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/DeltaLatitude.h>
-#include <etsi_its_cam_msgs/DeltaLatitude.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/DeltaLatitude.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::DeltaLatitude convert_DeltaLatitudetoRos(const DeltaLatitude_t& _DeltaLatitude_in)
-	{
-		etsi_its_cam_msgs::DeltaLatitude DeltaLatitude_out;
-		convert_toRos(_DeltaLatitude_in, DeltaLatitude_out.value);
-		return DeltaLatitude_out;
-	}
-	DeltaLatitude_t convert_DeltaLatitudetoC(const etsi_its_cam_msgs::DeltaLatitude& _DeltaLatitude_in)
-	{
-		DeltaLatitude_t DeltaLatitude_out;
-		memset(&DeltaLatitude_out, 0, sizeof(DeltaLatitude_t));
-		convert_toC(_DeltaLatitude_in.value, DeltaLatitude_out);
-		return DeltaLatitude_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_DeltaLatitude(const DeltaLatitude_t& in, etsi_its_cam_msgs::DeltaLatitude& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_DeltaLatitude(const etsi_its_cam_msgs::DeltaLatitude& in, DeltaLatitude_t& out) {
+    
+  memset(&out, 0, sizeof(DeltaLatitude_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

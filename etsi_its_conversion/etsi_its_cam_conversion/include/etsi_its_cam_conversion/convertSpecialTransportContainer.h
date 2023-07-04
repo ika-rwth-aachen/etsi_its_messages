@@ -1,25 +1,25 @@
 #pragma once
 
 #include <etsi_its_cam_coding/SpecialTransportContainer.h>
-#include <etsi_its_cam_msgs/SpecialTransportContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialTransportType.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
+#include <etsi_its_cam_msgs/SpecialTransportContainer.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::SpecialTransportContainer convert_SpecialTransportContainertoRos(const SpecialTransportContainer_t& _SpecialTransportContainer_in)
-	{
-		etsi_its_cam_msgs::SpecialTransportContainer SpecialTransportContainer_out;
-		SpecialTransportContainer_out.specialTransportType = convert_SpecialTransportTypetoRos(_SpecialTransportContainer_in.specialTransportType);
-		SpecialTransportContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoRos(_SpecialTransportContainer_in.lightBarSirenInUse);
-		return SpecialTransportContainer_out;
-	}
-	SpecialTransportContainer_t convert_SpecialTransportContainertoC(const etsi_its_cam_msgs::SpecialTransportContainer& _SpecialTransportContainer_in)
-	{
-		SpecialTransportContainer_t SpecialTransportContainer_out;
-		memset(&SpecialTransportContainer_out, 0, sizeof(SpecialTransportContainer_t));
-		SpecialTransportContainer_out.specialTransportType = convert_SpecialTransportTypetoC(_SpecialTransportContainer_in.specialTransportType);
-		SpecialTransportContainer_out.lightBarSirenInUse = convert_LightBarSirenInUsetoC(_SpecialTransportContainer_in.lightBarSirenInUse);
-		return SpecialTransportContainer_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_SpecialTransportContainer(const SpecialTransportContainer_t& in, etsi_its_cam_msgs::SpecialTransportContainer& out) {
+
+  toRos_SpecialTransportType(in.specialTransportType, out.specialTransportType);
+  toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
+}
+
+void toStruct_SpecialTransportContainer(const etsi_its_cam_msgs::SpecialTransportContainer& in, SpecialTransportContainer_t& out) {
+    
+  memset(&out, 0, sizeof(SpecialTransportContainer_t));
+
+  toStruct_SpecialTransportType(in.specialTransportType, out.specialTransportType);
+  toStruct_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
+}
+
 }

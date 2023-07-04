@@ -2,5 +2,7 @@
 # PtActivationData ::= OCTET STRING (SIZE(1..20))
 # ------------------------------------------------------------------------------
 
-# size: [(1, 20)]
 string value
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 20
+

@@ -1,6 +1,6 @@
-etsi2ros:
+Code Generation:
   trigger:
-    include: .gitlab-ci.generate-msgs.yml
+    include: .gitlab-ci.code-generation.yml
     strategy: depend
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -8,7 +8,7 @@ etsi2ros:
 docker-ros:
   trigger:
     include:
-    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/v1.2.0/.gitlab-ci/docker-ros.yml
+    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
     PLATFORM: amd64

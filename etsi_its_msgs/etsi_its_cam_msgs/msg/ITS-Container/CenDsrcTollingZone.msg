@@ -13,3 +13,4 @@ Longitude protectedZoneLongitude
 
 CenDsrcTollingZoneID cenDsrcTollingZoneID
 bool cenDsrcTollingZoneID_isPresent
+

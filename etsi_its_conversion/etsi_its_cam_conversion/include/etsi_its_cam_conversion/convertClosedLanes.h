@@ -1,51 +1,55 @@
 #pragma once
 
 #include <etsi_its_cam_coding/ClosedLanes.h>
-#include <etsi_its_cam_msgs/ClosedLanes.h>
+#include <etsi_its_cam_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_cam_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_cam_conversion/convertDrivingLaneStatus.h>
+#include <etsi_its_cam_msgs/ClosedLanes.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::ClosedLanes convert_ClosedLanestoRos(const ClosedLanes_t& _ClosedLanes_in)
-	{
-		etsi_its_cam_msgs::ClosedLanes ClosedLanes_out;
-		if(_ClosedLanes_in.innerhardShoulderStatus)
-		{
-			ClosedLanes_out.innerhardShoulderStatus = convert_HardShoulderStatustoRos(*_ClosedLanes_in.innerhardShoulderStatus);
-			ClosedLanes_out.innerhardShoulderStatus_isPresent = true;
-		}
-		if(_ClosedLanes_in.outerhardShoulderStatus)
-		{
-			ClosedLanes_out.outerhardShoulderStatus = convert_HardShoulderStatustoRos(*_ClosedLanes_in.outerhardShoulderStatus);
-			ClosedLanes_out.outerhardShoulderStatus_isPresent = true;
-		}
-		if(_ClosedLanes_in.drivingLaneStatus)
-		{
-			ClosedLanes_out.drivingLaneStatus = convert_DrivingLaneStatustoRos(*_ClosedLanes_in.drivingLaneStatus);
-			ClosedLanes_out.drivingLaneStatus_isPresent = true;
-		}
-		return ClosedLanes_out;
-	}
-	ClosedLanes_t convert_ClosedLanestoC(const etsi_its_cam_msgs::ClosedLanes& _ClosedLanes_in)
-	{
-		ClosedLanes_t ClosedLanes_out;
-		memset(&ClosedLanes_out, 0, sizeof(ClosedLanes_t));
-		if(_ClosedLanes_in.innerhardShoulderStatus_isPresent)
-		{
-			auto innerhardShoulderStatus = convert_HardShoulderStatustoC(_ClosedLanes_in.innerhardShoulderStatus);
-			ClosedLanes_out.innerhardShoulderStatus = new HardShoulderStatus_t(innerhardShoulderStatus);
-		}
-		if(_ClosedLanes_in.outerhardShoulderStatus_isPresent)
-		{
-			auto outerhardShoulderStatus = convert_HardShoulderStatustoC(_ClosedLanes_in.outerhardShoulderStatus);
-			ClosedLanes_out.outerhardShoulderStatus = new HardShoulderStatus_t(outerhardShoulderStatus);
-		}
-		if(_ClosedLanes_in.drivingLaneStatus_isPresent)
-		{
-			auto drivingLaneStatus = convert_DrivingLaneStatustoC(_ClosedLanes_in.drivingLaneStatus);
-			ClosedLanes_out.drivingLaneStatus = new DrivingLaneStatus_t(drivingLaneStatus);
-		}
-		return ClosedLanes_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_ClosedLanes(const ClosedLanes_t& in, etsi_its_cam_msgs::ClosedLanes& out) {
+
+  if (in.innerhardShoulderStatus) {
+    toRos_HardShoulderStatus(*in.innerhardShoulderStatus, out.innerhardShoulderStatus);
+    out.innerhardShoulderStatus_isPresent = true;
+  }
+
+  if (in.outerhardShoulderStatus) {
+    toRos_HardShoulderStatus(*in.outerhardShoulderStatus, out.outerhardShoulderStatus);
+    out.outerhardShoulderStatus_isPresent = true;
+  }
+
+  if (in.drivingLaneStatus) {
+    toRos_DrivingLaneStatus(*in.drivingLaneStatus, out.drivingLaneStatus);
+    out.drivingLaneStatus_isPresent = true;
+  }
+
+}
+
+void toStruct_ClosedLanes(const etsi_its_cam_msgs::ClosedLanes& in, ClosedLanes_t& out) {
+    
+  memset(&out, 0, sizeof(ClosedLanes_t));
+
+  if (in.innerhardShoulderStatus_isPresent) {
+    HardShoulderStatus_t innerhardShoulderStatus;
+    toStruct_HardShoulderStatus(in.innerhardShoulderStatus, innerhardShoulderStatus);
+    out.innerhardShoulderStatus = new HardShoulderStatus_t(innerhardShoulderStatus);
+  }
+
+  if (in.outerhardShoulderStatus_isPresent) {
+    HardShoulderStatus_t outerhardShoulderStatus;
+    toStruct_HardShoulderStatus(in.outerhardShoulderStatus, outerhardShoulderStatus);
+    out.outerhardShoulderStatus = new HardShoulderStatus_t(outerhardShoulderStatus);
+  }
+
+  if (in.drivingLaneStatus_isPresent) {
+    DrivingLaneStatus_t drivingLaneStatus;
+    toStruct_DrivingLaneStatus(in.drivingLaneStatus, drivingLaneStatus);
+    out.drivingLaneStatus = new DrivingLaneStatus_t(drivingLaneStatus);
+  }
+
+}
+
 }

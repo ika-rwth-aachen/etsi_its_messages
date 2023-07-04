@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/HeadingConfidence.h>
-#include <etsi_its_cam_msgs/HeadingConfidence.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/HeadingConfidence.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::HeadingConfidence convert_HeadingConfidencetoRos(const HeadingConfidence_t& _HeadingConfidence_in)
-	{
-		etsi_its_cam_msgs::HeadingConfidence HeadingConfidence_out;
-		convert_toRos(_HeadingConfidence_in, HeadingConfidence_out.value);
-		return HeadingConfidence_out;
-	}
-	HeadingConfidence_t convert_HeadingConfidencetoC(const etsi_its_cam_msgs::HeadingConfidence& _HeadingConfidence_in)
-	{
-		HeadingConfidence_t HeadingConfidence_out;
-		memset(&HeadingConfidence_out, 0, sizeof(HeadingConfidence_t));
-		convert_toC(_HeadingConfidence_in.value, HeadingConfidence_out);
-		return HeadingConfidence_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_HeadingConfidence(const HeadingConfidence_t& in, etsi_its_cam_msgs::HeadingConfidence& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_HeadingConfidence(const etsi_its_cam_msgs::HeadingConfidence& in, HeadingConfidence_t& out) {
+    
+  memset(&out, 0, sizeof(HeadingConfidence_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

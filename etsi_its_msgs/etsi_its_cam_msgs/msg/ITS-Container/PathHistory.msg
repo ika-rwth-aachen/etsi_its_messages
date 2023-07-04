@@ -2,5 +2,7 @@
 # PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
 # ------------------------------------------------------------------------------
 
-# size: [(0, 40)]
 PathPoint[] array
+uint8 MIN_SIZE = 0
+uint8 MAX_SIZE = 40
+

@@ -28,8 +28,22 @@
       "args": [
         "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
         "utils/asn1/reduced/cam/ITS-Container.asn",
-        "-t", "cam",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "CAM asn1ToConversionHeader",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "args": [
+        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "-t", "cam",
+        "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
       ],
       "console": "integratedTerminal",
       "justMyCode": true

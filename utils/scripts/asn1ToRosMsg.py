@@ -2,34 +2,25 @@
 
 import argparse
 import os
-import re
-import warnings
-from typing import Dict, List, Optional, Tuple
+from typing import Dict
 
-import asn1tools
-import numpy as np
+import jinja2
 
-
-ASN1_PRIMITIVES_2_ROS = {
-    "BOOLEAN": "bool",
-    "INTEGER": "int32",
-    "IA5String": "string",
-    "UTF8String": "string",
-    "BIT STRING": "bool[]",
-    "OCTET STRING": "string",
-    "NumericString": "string",
-    "VisibleString": "string",
-}
+from asn1CodeGenerationUtils import *
 
 
 def parseCli():
+    """Parses script's CLI arguments.
+
+    Returns:
+        argparse.Namespace: arguments
+    """
 
     parser = argparse.ArgumentParser(
         description="Creates ROS .msg files from ASN1 definitions.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
-    parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
 
     args = parser.parse_args()
@@ -37,422 +28,70 @@ def parseCli():
     return args
 
 
-def camel2SNAKE(s: str) -> str:
+def loadJinjaTemplate() -> jinja2.environment.Template:
+    """Loads the jinja template for ROS message files.
 
-    return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
-
-
-def validRosType(s: str) -> str:
-
-    return s.replace("-", "_")
-
-
-def validRosField(s: str) -> str:
-
-    return s.replace("-", "_")
-
-def noSpace(s: str) -> str:
+    Returns:
+        jinja2.environment.Template: jinja template
+    """
     
-    return s.replace(" ", "_")
-
-def includeHeader(etsi_type: str, header: str, include_type: str, primitives=False) -> str:
-    output = ""
-    pre = f"etsi_its_{etsi_type}_conversion/"
-    if (primitives):
-        pre += "primitives/"
-        if include_type == "IA5String" or include_type == "UTF8String" or include_type == "NumericString" or include_type == "VisibleString":
-            include_type = "OCTET_STRING"
-    if f"convert{include_type}.h" not in header:
-        output = f"#include <{pre}convert{include_type}.h>\n"
-
-    return output
-
-def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
-
-    asn1_raw = {}
-    for file in files:
-        with open(file) as f:
-            lines = f.readlines()
-        raw_def = None
-        for line in lines:
-            if "::=" in line:
-                if "{" in line:
-                    type = line.split("::=")[0].strip()
-                    raw_def = ""
-                elif len(line.split("::=")) == 2:
-                    type = line.split("::=")[0].strip()
-                    raw_def = line
-                    asn1_raw[type] = raw_def
-                    raw_def = None
-            if raw_def is not None:
-                raw_def += line
-                if "}" in line:
-                    asn1_raw[type] = raw_def
-                    raw_def = None
-
-    asn1_docs = asn1tools.parse_files(files)
-
-    return asn1_docs, asn1_raw
-
-
-def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
-
-    for doc, asn1 in asn1_docs.items():
-        if asn1_type in asn1["types"]:
-            return doc
+    template_dir = os.path.join(os.path.dirname(__file__), "templates")
+    jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
+    jinja_template = jinja_env.get_template("RosMessageType.msg.jinja2")
     
-    return None
+    return jinja_template
 
 
-def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str], jinja_template: jinja2.environment.Template) -> str:
+    """Converts parsed ASN1 type information to a ROS message file string.
 
-    asn1_types = {}
-    for doc, asn1 in asn1_docs.items():
-        for type in asn1["types"]:
-            if type not in asn1_types:
-                asn1_types[type] = asn1["types"][type]
-            else:
-                raise ValueError(f"Type '{type}' from '{doc}' is a duplicate")
+    Args:
+        type_name (str): type name
+        asn1_type (Dict): type information
+        asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_raw (Dict[str, str]): raw string definition by type
+        jinja_template (jinja2.environment.Template): jinja template
 
-    return asn1_types
+    Returns:
+        str: ROS message file string
+    """
 
+    # build jinja context based on asn1 type information
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types)
+    if jinja_context is None:
+        return None
 
-def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
-
-    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL"]
-    known_types += list(asn1_types.keys())
-    known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
-
-    # loop all types
-    for t_name, type in asn1_types.items():
-
-        # loop all members in type
-        for member in type.get("members", []):
-
-            if member is None:
-                continue
-
-            # check if type is known
-            if member["type"] not in known_types:
-                if ".&" in member["type"]:
-                    warnings.warn(
-                        f"Type '{member['type']}' of member '{member['name']}' "
-                        f"in '{t_name}' seems to relate to a 'CLASS' type, not "
-                        f"yet supported")
-                else:
-                    raise TypeError(
-                        f"Type '{member['type']}' of member '{member['name']}' "
-                        f"in '{t_name}' is undefined")
-
-
-def asn1TypesToFileStr(etsi_type: str, asn1_types: Dict[str, Dict]) -> List[Dict[str, str]]:
-
-    ros_msg_by_type = {}
-    converter_by_type = {}
-
-    # loop all types
-    for t_name, type in asn1_types.items():
-
-        # ASN1 to ROS message and Converter
-        ros_msg_by_type[t_name], converter_by_type[t_name] = asn1TypeToRosMsgStr(etsi_type, t_name, type, asn1_types)
-
-    return ros_msg_by_type, converter_by_type
-
-def exportConverterFiles(converter_by_type: Dict[str, str], output_dir: str):
-
-    # loop over all types
-    for type, h_str in converter_by_type.items():
-
-        if h_str is None:
-            continue
-
-        # create output directory
-        os.makedirs(output_dir, exist_ok=True)
-
-        # export ROS .msg
-        filename = os.path.join(output_dir, f"convert{type}.h")
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(h_str)
-        print(filename)
-
-def exportRosMsg(ros_msg_by_type: Dict[str, str], asn1_docs: Dict, asn1_raw: Dict[str, str], output_dir: str):
-
-    # loop over all types
-    for type, ros_msg in ros_msg_by_type.items():
-
-        if ros_msg is None:
-            continue
-
-        # add raw asn1 definition as comment to ROS .msg
-        if type in asn1_raw:
-            raw_lines = [f"# {l}" for l in asn1_raw[type].split("\n")]
-            raw = "# " + "-"*78 + "\n" + "\n".join(raw_lines) + "-"*78 + "\n"
-            ros_msg = raw + "\n" + ros_msg
-
-        # create output directory
-        doc_output_dir = os.path.join(output_dir, docForAsn1Type(type, asn1_docs))
-        os.makedirs(doc_output_dir, exist_ok=True)
-
-        # export ROS .msg
-        filename = os.path.join(doc_output_dir, f"{validRosType(type)}.msg")
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(ros_msg)
-        print(filename)
-
-
-def simplestRosIntegerType(min_value, max_value):
-
-    if min_value >= np.iinfo(np.uint8).min and max_value <= np.iinfo(np.uint8).max:
-        return "uint8"
-    elif min_value >= np.iinfo(np.uint16).min and max_value <= np.iinfo(np.uint16).max:
-        return "uint16"
-    elif min_value >= np.iinfo(np.uint32).min and max_value <= np.iinfo(np.uint32).max:
-        return "uint32"
-    elif min_value >= np.iinfo(np.uint64).min and max_value <= np.iinfo(np.uint64).max:
-        return "uint64"
-    elif min_value >= np.iinfo(np.int8).min and max_value <= np.iinfo(np.int8).max:
-        return "int8"
-    elif min_value >= np.iinfo(np.int16).min and max_value <= np.iinfo(np.int16).max:
-        return "int16"
-    elif min_value >= np.iinfo(np.int32).min and max_value <= np.iinfo(np.int32).max:
-        return "int32"
-    elif min_value >= np.iinfo(np.int64).min and max_value <= np.iinfo(np.int64).max:
-        return "int64"
-    else:
-        return ValueError(f"No ROS integer type supports range [{min_value}, {max_value}]")
-
-def convertToPrimitiv(type, t_name, name) -> List[str]:
-    if type == "IA5String" or type == "UTF8String" or type == "NumericString" or type == "VisibleString":
-        memberType = "OCTET_STRING"
-    else:
-        memberType = noSpace(type)
-
-    c_name = ""
-    if name != "value":
-        c_name = f".{name}"
+    # add raw asn1 definition as comment to ROS .msg
+    if type_name in asn1_raw:
+        jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
     
-    if memberType == "INTEGER":
-        c2ros = f"\t\tconvert_toRos(_{t_name}_in{c_name}, {t_name}_out.{name});\n"
-        ros2c = f"\t\tconvert_toC(_{t_name}_in.{name}, {t_name}_out{c_name});\n"
-    else:
-        c2ros = f"\t\tconvert_{memberType}toRos(_{t_name}_in{c_name}, {t_name}_out.{name});\n"
-        ros2c = f"\t\tconvert_{memberType}toC(_{t_name}_in.{name}, {t_name}_out{c_name});\n"
+    # render jinja template with context
+    ros_msg = jinja_template.render(jinja_context)
     
-    # if memberType == "INTEGER":
-    #     c2ros = f"\t\tconvert_toRos(_{t_name}_in{c_name}, {t_name}_out.{name});\n"
-    #     ros2c = f"\t\tconvert_toC(_{t_name}_in.{name}, {t_name}_out{c_name});\n"
-    # else:
-    #     c2ros = f"\t\t{t_name}_out.{name} = convert_toRos(_{t_name}_in{c_name});\n"
-    #     ros2c = f"\t\t{t_name}_out{c_name} = convert_toC(_{t_name}_in.{name});\n"
+    return ros_msg
 
-    return c2ros, ros2c
 
-def asn1TypeToRosMsgStr(etsi_type: str, t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Optional[List[str]]:
+def exportRosMsg(ros_msg: str, type_name: str, doc_name: str, output_dir: str):
+    """Exports a ROS message file.
 
-    ns_msgs = f"etsi_its_{etsi_type}_msgs"
-    msg = ""
-    type = asn1["type"]
-    header = f"#pragma once\n\n"
-    header += f"#include <etsi_its_{etsi_type}_coding/{t_name}.h>\n#include <{ns_msgs}/{t_name}.h>\n"
-    namespace = f"namespace etsi_its_{etsi_type}_conversion\n"
-    namespace += "{\n"
-    c2ros = f"\t{ns_msgs}::{t_name} convert_{t_name}toRos(const {t_name}_t& _{t_name}_in)\n"
-    ros2c = f"\t{t_name}_t convert_{t_name}toC(const {ns_msgs}::{t_name}& _{t_name}_in)\n"
-    c2ros += "\t{\n"
-    ros2c += "\t{\n"
-    c2ros += f"\t\t{ns_msgs}::{t_name} {t_name}_out;\n"
-    ros2c += f"\t\t{t_name}_t {t_name}_out;\n"
-    ros2c += f"\t\tmemset(&{t_name}_out, 0, sizeof({t_name}_t));\n"
+    Exports to `output_dir`/`doc_name`/`type_name`.msg.
 
-    # extra information (e.g. optional) as comments
-    for k, v in asn1.items():
-        if k not in ("type", "name", "members", "values", "element", "named-bits", "named-numbers", "optional"):
-            msg += f"# {k}: {v}"
-            msg += "\n"
+    Args:
+        ros_msg (str): ROS message file string
+        type_name (str): type name / file name
+        doc_name (str): document name
+        output_dir (str): output directory
+    """
 
-    # primitives
-    if type in ASN1_PRIMITIVES_2_ROS:
+    # create output directory
+    doc_output_dir = os.path.join(output_dir, doc_name)
+    os.makedirs(doc_output_dir, exist_ok=True)
 
-        # resolve ROS msg type
-        ros_type = ASN1_PRIMITIVES_2_ROS[type]
-        name = asn1["name"] if "name" in asn1 else "value"
-        
-        # add fixed array size to BIT STRING boolean arrays
-        if type == "BIT STRING" and "size" in asn1:
-            if not isinstance(asn1["size"][0], tuple):
-                ros_type = f"bool[{asn1['size'][0]}]"
-
-        # choose simplest possible integer type
-        if "restricted-to" in asn1 and type == "INTEGER":
-            min_value = asn1["restricted-to"][0][0]
-            max_value = asn1["restricted-to"][0][1]
-            #ros_type = simplestRosIntegerType(min_value, max_value)
-            ros_type = "int64"
-
-        # add constants for named numbers
-        if "named-numbers" in asn1:
-            for k, v in asn1["named-numbers"].items():
-                constant_name = f"{camel2SNAKE(k)}"
-                if "name" in asn1:
-                    constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
-                msg += f"{ros_type} {validRosField(constant_name)} = {v}"
-                msg += "\n"
-
-        # add index constants for named bits
-        if "named-bits" in asn1:
-            for k, v in asn1["named-bits"]:
-                constant_name = f"{camel2SNAKE(k)}"
-                msg += f"uint8 INDEX_{validRosField(constant_name)} = {v}"
-                msg += "\n"
-
-        msg += f"{ros_type} {validRosField(name)}"
-        msg += "\n"
-
-        # Converter
-        header += includeHeader(etsi_type, header, noSpace(type), True)
-        c2ros += convertToPrimitiv(type,t_name,name)[0]
-        ros2c += convertToPrimitiv(type,t_name,name)[1]
-
-    # nested types
-    elif type == "SEQUENCE":
-
-        # recursively add all members
-        for member in asn1["members"]:
-            if member is None:
-                continue
-            msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
-            if "optional" in member:
-                msg += f"bool {validRosField(member['name'])}_isPresent\n"
-            msg += "\n"
-
-            # Converter
-            memberName = member["name"]
-            memberType = member["type"]
-            if "optional" in member.keys():
-                c2ros+=f"\t\tif(_{t_name}_in.{memberName})\n"
-                ros2c+=f"\t\tif(_{t_name}_in.{memberName}_isPresent)\n"
-                c2ros+="\t\t{\n"
-                ros2c+="\t\t{\n"
-                if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(etsi_type, header, memberType, True)
-                    c2ros += "\t"+convertToPrimitiv(memberType,t_name,memberName)[0]
-                    ros2c += "\t"+convertToPrimitiv(memberType,t_name,memberName)[1]
-                else:
-                    header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(*_{t_name}_in.{memberName});\n"
-                    c2ros += f"\t\t\t{t_name}_out.{memberName}_isPresent = true;\n"
-                    ros2c += f"\t\t\tauto {memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
-                    ros2c += f"\t\t\t{t_name}_out.{memberName} = new {memberType}_t({memberName});\n"
-                c2ros+="\t\t}\n"
-                ros2c+="\t\t}\n"
-            else:
-                if (memberType in ASN1_PRIMITIVES_2_ROS):
-                    header += includeHeader(etsi_type, header, memberType, True)
-                    c2ros += convertToPrimitiv(memberType,t_name,memberName)[0]
-                    ros2c += convertToPrimitiv(memberType,t_name,memberName)[1]
-                else:
-                    header += includeHeader(etsi_type, header, memberType)
-                    c2ros += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.{memberName});\n"
-                    ros2c += f"\t\t{t_name}_out.{memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
-
-    # type aliases with multiple options
-    elif type == "CHOICE":
-
-        # add flag for indicating active option
-        name = "choice"
-        if "name" in asn1:
-            name = f"{asn1['name']}_{name}"
-        msg += f"uint8 {name}"
-        msg += "\n"
-        msg += "\n"
-
-        # recursively add members for all options, incl. constant for flag
-        for im, member in enumerate(asn1["members"]):
-            if member is None:
-                continue
-            name = f"CHOICE_{camel2SNAKE(member['name'])}"
-            if "name" in asn1:
-                member_msg = asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
-                member_msg = member_msg.split()[0] + f" {asn1['name']}_{member_msg.split()[1]}\n"
-                msg += member_msg
-                name = f"{camel2SNAKE(asn1['name'])}_{name}"
-            else:
-                msg += asn1TypeToRosMsgStr(etsi_type, t_name, member, asn1_types)[0]
-            msg += f"uint8 {name} = {im}"
-            msg += "\n"
-
-            # Converter
-            memberName = member["name"]
-            memberType = member["type"]
-            header += includeHeader(etsi_type, header, memberType)
-            c2ros += f"\t\tif(_{t_name}_in.present == {t_name}_PR::{t_name}_PR_{memberName})\n"
-            c2ros += "\t\t{\n"
-            c2ros += f"\t\t\t{t_name}_out.{memberName} = convert_{memberType}toRos(_{t_name}_in.choice.{memberName});\n"
-            c2ros += f"\t\t\t{t_name}_out.choice = {ns_msgs}::{t_name}::{name};\n"
-            c2ros += "\t\t}\n"
-
-            ros2c += f"\t\tif(_{t_name}_in.choice == {ns_msgs}::{t_name}::{name})\n"
-            ros2c += "\t\t{\n"
-            ros2c += f"\t\t\t{t_name}_out.choice.{memberName} = convert_{memberType}toC(_{t_name}_in.{memberName});\n"
-            ros2c += f"\t\t\t{t_name}_out.present = {t_name}_PR::{t_name}_PR_{memberName};\n"
-            ros2c += "\t\t}\n"
-
-    # arrays
-    elif type == "SEQUENCE OF":
-
-        array_name = asn1["name"] if "name" in asn1 else "array"
-        msg += f"{asn1['element']['type']}[] {array_name}"
-        msg += "\n"
-
-    # enums
-    elif type == "ENUMERATED":
-
-        # choose simplest possible integer type
-        values = [val[1] for val in asn1["values"] if val is not None]
-        min_value = min(values)
-        max_value = max(values)
-        #ros_type = simplestRosIntegerType(min_value, max_value)
-        ros_type = "int64"
-
-        # add constants for all values
-        for val in asn1["values"]:
-            if val is None:
-                continue
-            msg += f"{ros_type} {camel2SNAKE(val[0])} = {val[1]}"
-            msg += "\n"
-
-        # add field for active value
-        msg += f"{ros_type} value"
-        msg += "\n"
-
-        # Converter
-        name = asn1["name"] if "name" in asn1 else "value"
-        c2ros += f"\t\t{t_name}_out.{name} = _{t_name}_in;\n"
-        ros2c += f"\t\t{t_name}_out = _{t_name}_in.{name};\n"
-
-    # custom types
-    elif type in asn1_types:
-
-        name = asn1["name"] if "name" in asn1 else "value"
-        msg += f"{validRosType(type)} {validRosField(name)}"
-        msg += "\n"
-
-    elif type == "NULL":
-
-        pass
-        
-    else:
-
-        warnings.warn(f"Cannot handle type '{type}'")
-
-    msg = msg.rstrip("\n") + "\n"
-
-    return_value = f"\t\treturn {t_name}_out;\n"
-    return_value += "\t}\n"
-
-    converter_str = header + "\n" + namespace + c2ros + return_value + ros2c + return_value + "}"
-
-    return msg, converter_str
+    # export ROS .msg using jinja template
+    filename = os.path.join(doc_output_dir, f"{validRosType(type_name)}.msg")
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(ros_msg)
+    print(filename)
 
 
 def main():
@@ -464,13 +103,15 @@ def main():
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
-
-    ros_msg_by_type, converter_by_type = asn1TypesToFileStr(args.type, asn1_types)
-
-    exportRosMsg(ros_msg_by_type, asn1_docs, asn1_raw, args.output_dir)
     
-    file_path = os.path.dirname(os.path.realpath(__file__))
-    exportConverterFiles(converter_by_type, f"{file_path}/../../etsi_its_conversion/etsi_its_{args.type}_conversion/include/etsi_its_{args.type}_conversion")
+    jinja_template = loadJinjaTemplate()
+
+    for type_name, asn1_type in asn1_types.items():
+        
+        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw, jinja_template)
+
+        exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
+        
 
 if __name__ == "__main__":
     

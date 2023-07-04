@@ -8,3 +8,4 @@
 LongitudinalAccelerationValue longitudinalAccelerationValue
 
 AccelerationConfidence longitudinalAccelerationConfidence
+

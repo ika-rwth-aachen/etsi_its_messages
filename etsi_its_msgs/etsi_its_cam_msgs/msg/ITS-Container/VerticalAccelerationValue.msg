@@ -2,8 +2,10 @@
 # VerticalAccelerationValue ::= INTEGER {pointOneMeterPerSecSquaredUp(1), pointOneMeterPerSecSquaredDown(-1), unavailable(161)} (-160 .. 161)
 # ------------------------------------------------------------------------------
 
-# restricted-to: [(-160, 161)]
-int64 POINT_ONE_METER_PER_SEC_SQUARED_UP = 1
-int64 POINT_ONE_METER_PER_SEC_SQUARED_DOWN = -1
-int64 UNAVAILABLE = 161
-int64 value
+int16 value
+int16 MIN = -160
+int16 MAX = 161
+int16 POINT_ONE_METER_PER_SEC_SQUARED_UP = 1
+int16 POINT_ONE_METER_PER_SEC_SQUARED_DOWN = -1
+int16 UNAVAILABLE = 161
+

@@ -19,7 +19,8 @@ ConversionNode::ConversionNode() : node_handle_(), private_node_handle_("~") {
 
 void ConversionNode::cam_callback(etsi_its_cam_msgs::CAM msg) {
 
-  auto etsiCAM = etsi_its_cam_conversion::convert_CAMtoC(msg);
+  CAM_t etsiCAM;
+  etsi_its_cam_conversion::toStruct_CAM(msg, etsiCAM);
   // ASN.1-Coding
   char errbuf[1024];
   size_t errlen = sizeof(errbuf);
@@ -50,7 +51,8 @@ void ConversionNode::cam_asn1_callback(bitstring_msgs::UInt8ArrayStamped msg) {
   CAM_t *camPdu = 0;
   asn_dec_rval_t decodeRet = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&camPdu, &msg.data[0], msg.data.size());
   // asn_fprint(stdout, &asn_DEF_CAM, camPdu);
-  auto camROS = etsi_its_cam_conversion::convert_CAMtoRos(*camPdu);
+  etsi_its_cam_msgs::CAM camROS;
+  etsi_its_cam_conversion::toRos_CAM(*camPdu, camROS);
   cam_ros_pub_.publish(camROS);
 }
 

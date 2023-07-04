@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/SteeringWheelAngleConfidence.h>
-#include <etsi_its_cam_msgs/SteeringWheelAngleConfidence.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/SteeringWheelAngleConfidence.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::SteeringWheelAngleConfidence convert_SteeringWheelAngleConfidencetoRos(const SteeringWheelAngleConfidence_t& _SteeringWheelAngleConfidence_in)
-	{
-		etsi_its_cam_msgs::SteeringWheelAngleConfidence SteeringWheelAngleConfidence_out;
-		convert_toRos(_SteeringWheelAngleConfidence_in, SteeringWheelAngleConfidence_out.value);
-		return SteeringWheelAngleConfidence_out;
-	}
-	SteeringWheelAngleConfidence_t convert_SteeringWheelAngleConfidencetoC(const etsi_its_cam_msgs::SteeringWheelAngleConfidence& _SteeringWheelAngleConfidence_in)
-	{
-		SteeringWheelAngleConfidence_t SteeringWheelAngleConfidence_out;
-		memset(&SteeringWheelAngleConfidence_out, 0, sizeof(SteeringWheelAngleConfidence_t));
-		convert_toC(_SteeringWheelAngleConfidence_in.value, SteeringWheelAngleConfidence_out);
-		return SteeringWheelAngleConfidence_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_SteeringWheelAngleConfidence(const SteeringWheelAngleConfidence_t& in, etsi_its_cam_msgs::SteeringWheelAngleConfidence& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_SteeringWheelAngleConfidence(const etsi_its_cam_msgs::SteeringWheelAngleConfidence& in, SteeringWheelAngleConfidence_t& out) {
+    
+  memset(&out, 0, sizeof(SteeringWheelAngleConfidence_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

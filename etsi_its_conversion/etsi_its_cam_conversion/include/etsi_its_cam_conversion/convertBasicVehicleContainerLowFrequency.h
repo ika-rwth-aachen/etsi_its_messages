@@ -1,28 +1,28 @@
 #pragma once
 
 #include <etsi_its_cam_coding/BasicVehicleContainerLowFrequency.h>
-#include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
 #include <etsi_its_cam_conversion/convertVehicleRole.h>
 #include <etsi_its_cam_conversion/convertExteriorLights.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
+#include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::BasicVehicleContainerLowFrequency convert_BasicVehicleContainerLowFrequencytoRos(const BasicVehicleContainerLowFrequency_t& _BasicVehicleContainerLowFrequency_in)
-	{
-		etsi_its_cam_msgs::BasicVehicleContainerLowFrequency BasicVehicleContainerLowFrequency_out;
-		BasicVehicleContainerLowFrequency_out.vehicleRole = convert_VehicleRoletoRos(_BasicVehicleContainerLowFrequency_in.vehicleRole);
-		BasicVehicleContainerLowFrequency_out.exteriorLights = convert_ExteriorLightstoRos(_BasicVehicleContainerLowFrequency_in.exteriorLights);
-		BasicVehicleContainerLowFrequency_out.pathHistory = convert_PathHistorytoRos(_BasicVehicleContainerLowFrequency_in.pathHistory);
-		return BasicVehicleContainerLowFrequency_out;
-	}
-	BasicVehicleContainerLowFrequency_t convert_BasicVehicleContainerLowFrequencytoC(const etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& _BasicVehicleContainerLowFrequency_in)
-	{
-		BasicVehicleContainerLowFrequency_t BasicVehicleContainerLowFrequency_out;
-		memset(&BasicVehicleContainerLowFrequency_out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
-		BasicVehicleContainerLowFrequency_out.vehicleRole = convert_VehicleRoletoC(_BasicVehicleContainerLowFrequency_in.vehicleRole);
-		BasicVehicleContainerLowFrequency_out.exteriorLights = convert_ExteriorLightstoC(_BasicVehicleContainerLowFrequency_in.exteriorLights);
-		BasicVehicleContainerLowFrequency_out.pathHistory = convert_PathHistorytoC(_BasicVehicleContainerLowFrequency_in.pathHistory);
-		return BasicVehicleContainerLowFrequency_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_BasicVehicleContainerLowFrequency(const BasicVehicleContainerLowFrequency_t& in, etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& out) {
+
+  toRos_VehicleRole(in.vehicleRole, out.vehicleRole);
+  toRos_ExteriorLights(in.exteriorLights, out.exteriorLights);
+  toRos_PathHistory(in.pathHistory, out.pathHistory);
+}
+
+void toStruct_BasicVehicleContainerLowFrequency(const etsi_its_cam_msgs::BasicVehicleContainerLowFrequency& in, BasicVehicleContainerLowFrequency_t& out) {
+    
+  memset(&out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
+
+  toStruct_VehicleRole(in.vehicleRole, out.vehicleRole);
+  toStruct_ExteriorLights(in.exteriorLights, out.exteriorLights);
+  toStruct_PathHistory(in.pathHistory, out.pathHistory);
+}
+
 }

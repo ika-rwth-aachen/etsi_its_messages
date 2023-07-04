@@ -13,3 +13,4 @@ bool incidentIndication_isPresent
 
 EmergencyPriority emergencyPriority
 bool emergencyPriority_isPresent
+

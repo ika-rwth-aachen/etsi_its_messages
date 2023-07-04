@@ -1,22 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/PtActivationData.h>
-#include <etsi_its_cam_msgs/PtActivationData.h>
 #include <etsi_its_cam_conversion/primitives/convertOCTET_STRING.h>
+#include <etsi_its_cam_msgs/PtActivationData.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::PtActivationData convert_PtActivationDatatoRos(const PtActivationData_t& _PtActivationData_in)
-	{
-		etsi_its_cam_msgs::PtActivationData PtActivationData_out;
-		convert_OCTET_STRINGtoRos(_PtActivationData_in, PtActivationData_out.value);
-		return PtActivationData_out;
-	}
-	PtActivationData_t convert_PtActivationDatatoC(const etsi_its_cam_msgs::PtActivationData& _PtActivationData_in)
-	{
-		PtActivationData_t PtActivationData_out;
-		memset(&PtActivationData_out, 0, sizeof(PtActivationData_t));
-		convert_OCTET_STRINGtoC(_PtActivationData_in.value, PtActivationData_out);
-		return PtActivationData_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_PtActivationData(const PtActivationData_t& in, etsi_its_cam_msgs::PtActivationData& out) {
+
+  toRos_OCTET_STRING(in, out.value);
+}
+
+void toStruct_PtActivationData(const etsi_its_cam_msgs::PtActivationData& in, PtActivationData_t& out) {
+    
+  memset(&out, 0, sizeof(PtActivationData_t));
+  toStruct_OCTET_STRING(in.value, out);
+}
+
 }

@@ -8,3 +8,4 @@
 LateralAccelerationValue lateralAccelerationValue
 
 AccelerationConfidence lateralAccelerationConfidence
+
