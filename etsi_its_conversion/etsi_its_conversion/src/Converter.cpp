@@ -1,4 +1,5 @@
 #include <pluginlib/class_list_macros.h>
+#include <ros/console.h>
 
 #include "etsi_its_conversion/Converter.h"
 
@@ -13,6 +14,23 @@ const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicAsn1Cam{"cam/bitstring/in"};
 const std::string Converter::kOutputTopicAsn1Cam{"cam/bitstring/out"};
+
+
+bool logLevelIsDebug() {
+
+  std::map<std::string, ros::console::levels::Level> loggers;
+  bool ret = ros::console::get_loggers(loggers);
+  std::string node_logger = ROSCONSOLE_DEFAULT_NAME;
+  node_logger += "." + ros::this_node::getName();
+  if (loggers.count(node_logger) > 0) {
+    if (loggers[node_logger] == ros::console::levels::Level::Debug) return true;
+  }
+  std::string nodelet_logger = "ros.nodelet." + ros::this_node::getName();
+  if (loggers.count(nodelet_logger) > 0) {
+    if (loggers[nodelet_logger] == ros::console::levels::Level::Debug) return true;
+  }
+  return false;
+}
 
 
 void Converter::onInit() {
@@ -40,7 +58,7 @@ void Converter::asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitst
     NODELET_ERROR("Failed to decode message");
     return;
   }
-  // asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
 
   // convert struct to ROS msg
   etsi_its_cam_msgs::CAM msg;
@@ -58,7 +76,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   // convert ROS msg to struct
   CAM_t asn1_struct;
   etsi_its_cam_conversion::toStruct_CAM(*msg, asn1_struct);
-  // asn_fprint(stdout, &asn_DEF_CAM, &asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, &asn1_struct);
 
   // encode struct to ASN1 bitstring
   char error_buffer[1024];
