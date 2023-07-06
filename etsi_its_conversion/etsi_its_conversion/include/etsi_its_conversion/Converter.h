@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-#include <bitstring_msgs/UInt8ArrayStamped.h>
+#include <bitstring_msgs/UInt8Array.h>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
@@ -21,7 +21,7 @@ class Converter : public nodelet::Nodelet {
 
   protected:
 
-    void asn1CallbackCam(const bitstring_msgs::UInt8ArrayStamped::ConstPtr bitstring_msg);
+    void asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitstring_msg);
 
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
 

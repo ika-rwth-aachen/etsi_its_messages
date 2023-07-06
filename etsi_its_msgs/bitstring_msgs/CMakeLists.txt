@@ -51,7 +51,7 @@ add_message_files(
   DIRECTORY
     msg
   FILES
-    UInt8ArrayStamped.msg
+    UInt8Array.msg
 )
 
 ## Generate services in the 'srv' folder

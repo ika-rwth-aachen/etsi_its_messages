@@ -21,7 +21,7 @@ void Converter::onInit() {
 
   // create subscribers and publishers
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
-  publishers_asn1_["cam"] = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>(kOutputTopicAsn1Cam, 1);
+  publishers_asn1_["cam"] = private_node_handle_.advertise<bitstring_msgs::UInt8Array>(kOutputTopicAsn1Cam, 1);
   subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
   subscribers_asn1_["cam"] = private_node_handle_.subscribe(kInputTopicAsn1Cam, 1, &Converter::asn1CallbackCam, this);
   NODELET_INFO("Converting CAM bitstrings on '%s' to CAM messages on '%s'", subscribers_asn1_["cam"].getTopic().c_str(), publishers_["cam"].getTopic().c_str());
@@ -29,7 +29,7 @@ void Converter::onInit() {
 }
 
 
-void Converter::asn1CallbackCam(const bitstring_msgs::UInt8ArrayStamped::ConstPtr bitstring_msg) {
+void Converter::asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitstring_msg) {
 
   NODELET_DEBUG("Received CAM bitstring");
 
@@ -74,9 +74,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
     return;
   }
 
-  bitstring_msgs::UInt8ArrayStamped bitstring_msg;
-  bitstring_msg.header.stamp = ros::Time::now(); // TODO: use msg time?
-  bitstring_msg.header.frame_id = ""; // TODO
+  bitstring_msgs::UInt8Array bitstring_msg;
   bitstring_msg.data = std::vector<uint8_t>((uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
   publishers_asn1_["cam"].publish(bitstring_msg);
   NODELET_DEBUG("Published CAM bitstring");
