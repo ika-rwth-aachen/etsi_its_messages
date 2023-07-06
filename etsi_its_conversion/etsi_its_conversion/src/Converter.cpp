@@ -9,10 +9,10 @@ PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 namespace etsi_its_conversion {
 
 
-const std::string Converter::kInputTopicCam{"in/cam"};
-const std::string Converter::kOutputTopicCam{"out/cam"};
-const std::string Converter::kInputTopicAsn1Cam{"bitstring/in/cam"};
-const std::string Converter::kOutputTopicAsn1Cam{"bitstring/out/cam"};
+const std::string Converter::kInputTopicCam{"cam/in"};
+const std::string Converter::kOutputTopicCam{"cam/out"};
+const std::string Converter::kInputTopicAsn1Cam{"cam/bitstring/in"};
+const std::string Converter::kOutputTopicAsn1Cam{"cam/bitstring/out"};
 
 
 void Converter::onInit() {

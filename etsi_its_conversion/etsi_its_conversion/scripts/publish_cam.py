@@ -9,7 +9,7 @@ def publish():
     rospy.init_node("cam_publisher", anonymous=True)
 
     rate = rospy.Rate(1)
-    topic = "/etsi_its_converter/in/cam"
+    topic = "/etsi_its_converter/cam/in"
     publisher = rospy.Publisher(topic, CAM, queue_size=1)
 
     msg = CAM()
