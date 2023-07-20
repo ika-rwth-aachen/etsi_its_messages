@@ -52,7 +52,7 @@ void Converter::asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitst
   NODELET_DEBUG("Received CAM bitstring");
 
   // decode ASN1 bitstring to struct
-  CAM_t* asn1_struct;
+  CAM_t* asn1_struct = 0;
   asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &bitstring_msg->data[0], bitstring_msg->data.size());
   if (ret.code != RC_OK) {
     NODELET_ERROR("Failed to decode message");
