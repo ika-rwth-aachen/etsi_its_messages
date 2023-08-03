@@ -79,7 +79,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
   int offset = 0;
   if (etsi_type_ == "auto") {
     offset = 4;
-    const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(udp_msg->data[0]);
+    const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
     uint16_t destination_port = ntohs(btp_header[0]);
     if (destination_port == 2001) detected_etsi_type = "cam";
     else if (destination_port == 2002) detected_etsi_type = "denm";
@@ -147,7 +147,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
-    udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + sizeof(uint16_t));
+    udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + 2 * sizeof(uint16_t));
     delete[] btp_header;
   }
   udp_msg.data.insert(udp_msg.data.end(), (uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
