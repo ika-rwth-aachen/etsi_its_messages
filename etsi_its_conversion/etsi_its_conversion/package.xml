@@ -50,11 +50,11 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <depend>bitstring_msgs</depend>
   <depend>etsi_its_cam_conversion</depend>
   <depend>nodelet</depend>
   <depend>roscpp</depend>
   <depend>std_msgs</depend>
+  <depend>udp_msgs</depend>
   <exec_depend>roslaunch</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->

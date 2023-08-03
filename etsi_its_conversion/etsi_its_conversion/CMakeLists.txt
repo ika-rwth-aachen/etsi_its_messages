@@ -8,11 +8,11 @@ project(etsi_its_conversion)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  bitstring_msgs
   etsi_its_cam_conversion
   nodelet
   roscpp
   std_msgs
+  udp_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,11 +107,11 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
-    bitstring_msgs
     etsi_its_cam_conversion
     nodelet
     roscpp
     std_msgs
+    udp_msgs
 #  DEPENDS system_lib
 )
 

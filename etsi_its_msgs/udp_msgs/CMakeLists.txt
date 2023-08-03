@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(bitstring_msgs)
+project(udp_msgs)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -51,7 +51,7 @@ add_message_files(
   DIRECTORY
     msg
   FILES
-    UInt8Array.msg
+    UdpPacket.msg
 )
 
 ## Generate services in the 'srv' folder

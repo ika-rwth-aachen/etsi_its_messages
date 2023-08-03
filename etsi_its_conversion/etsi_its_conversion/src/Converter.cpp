@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <pluginlib/class_list_macros.h>
 #include <ros/console.h>
 
@@ -10,10 +12,10 @@ PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 namespace etsi_its_conversion {
 
 
-const std::string Converter::kInputTopicCam{"cam/in"};
+const std::string Converter::kInputTopicUdp{"udp/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
-const std::string Converter::kInputTopicAsn1Cam{"cam/bitstring/in"};
-const std::string Converter::kOutputTopicAsn1Cam{"cam/bitstring/out"};
+const std::string Converter::kInputTopicCam{"cam/in"};
+const std::string Converter::kOutputTopicUdp{"udp/out"};
 
 
 bool logLevelIsDebug() {
@@ -37,23 +39,45 @@ void Converter::onInit() {
 
   private_node_handle_ = this->getMTPrivateNodeHandle();
 
-  // create subscribers and publishers
-  publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
-  publishers_asn1_["cam"] = private_node_handle_.advertise<bitstring_msgs::UInt8Array>(kOutputTopicAsn1Cam, 1);
-  subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
-  subscribers_asn1_["cam"] = private_node_handle_.subscribe(kInputTopicAsn1Cam, 1, &Converter::asn1CallbackCam, this);
-  NODELET_INFO("Converting CAM bitstrings on '%s' to CAM messages on '%s'", subscribers_asn1_["cam"].getTopic().c_str(), publishers_["cam"].getTopic().c_str());
-  NODELET_INFO("Converting CAM messages on '%s' to CAM bitstrings on '%s'", subscribers_["cam"].getTopic().c_str(), publishers_asn1_["cam"].getTopic().c_str());
+  this->loadParameters();
+  this->setup();
 }
 
 
-void Converter::asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitstring_msg) {
+void Converter::loadParameters() {
+
+  std::vector<std::string> known_etsi_types = {"auto", "cam"};
+  if (!private_node_handle_.param<std::string>("etsi_type", etsi_type_, "auto")) {
+    NODELET_WARN("Parameter '%s' is not set, defaulting to '%s'", "etsi_type", "auto");
+  }
+  if (std::find(known_etsi_types.begin(), known_etsi_types.end(), etsi_type_) == known_etsi_types.end()) {
+    NODELET_WARN("Invalid value for parameter '%s', defaulting to '%s'", "etsi_type", "auto");
+  }
+}
+
+
+void Converter::setup() {
+
+  // create subscribers and publishers
+  publisher_udp_ = private_node_handle_.advertise<udp_msgs::UdpPacket>(kOutputTopicUdp, 1);
+  publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
+  subscriber_udp_ = private_node_handle_.subscribe(kInputTopicUdp, 1, &Converter::udpCallback, this);
+  subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
+  
+  NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["cam"].getTopic().c_str());
+  NODELET_INFO("Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+}
+
+
+void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 
   NODELET_DEBUG("Received CAM bitstring");
 
+  // TODO: decode and strip TP-Header, if etsi_type==auto
+
   // decode ASN1 bitstring to struct
   CAM_t* asn1_struct = nullptr;
-  asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &bitstring_msg->data[0], bitstring_msg->data.size());
+  asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[0], udp_msg->data.size());
   if (ret.code != RC_OK) {
     NODELET_ERROR("Failed to decode message");
     return;
@@ -92,9 +116,11 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
     return;
   }
 
-  bitstring_msgs::UInt8Array bitstring_msg;
-  bitstring_msg.data = std::vector<uint8_t>((uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
-  publishers_asn1_["cam"].publish(bitstring_msg);
+  // TODO: add BTP-header, if etsi_type==auto
+
+  udp_msgs::UdpPacket udp_msg;
+  udp_msg.data = std::vector<uint8_t>((uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
+  publisher_udp_.publish(udp_msg);
   NODELET_DEBUG("Published CAM bitstring");
 }
 

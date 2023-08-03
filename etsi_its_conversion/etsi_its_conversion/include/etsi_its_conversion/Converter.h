@@ -4,10 +4,10 @@
 #include <string>
 #include <unordered_map>
 
-#include <bitstring_msgs/UInt8Array.h>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
+#include <udp_msgs/UdpPacket.h>
 
 
 namespace etsi_its_conversion {
@@ -21,23 +21,29 @@ class Converter : public nodelet::Nodelet {
 
   protected:
 
-    void asn1CallbackCam(const bitstring_msgs::UInt8Array::ConstPtr bitstring_msg);
+    void loadParameters();
+
+    void setup();
+
+    void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
 
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
 
   protected:
 
-    static const std::string kInputTopicAsn1Cam;
+    static const std::string kInputTopicUdp;
     static const std::string kOutputTopicCam;
     static const std::string kInputTopicCam;
-    static const std::string kOutputTopicAsn1Cam;
+    static const std::string kOutputTopicUdp;
 
     ros::NodeHandle private_node_handle_;
 
-    std::unordered_map<std::string, ros::Subscriber> subscribers_asn1_;
+    std::string etsi_type_;
+
+    ros::Subscriber subscriber_udp_;
     std::unordered_map<std::string, ros::Publisher> publishers_;
     std::unordered_map<std::string, ros::Subscriber> subscribers_;
-    std::unordered_map<std::string, ros::Publisher> publishers_asn1_;
+    ros::Publisher publisher_udp_;
 };
 
 
