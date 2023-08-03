@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <arpa/inet.h>
 
 #include <pluginlib/class_list_macros.h>
 #include <ros/console.h>
@@ -73,23 +74,45 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 
   NODELET_DEBUG("Received CAM bitstring");
 
-  // TODO: decode and strip TP-Header, if etsi_type==auto
+  // decode BTP-Header, if type detection is enabled
+  std::string detected_etsi_type = etsi_type_;
+  int offset = 0;
+  if (etsi_type_ == "auto") {
+    offset = 4;
+    const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(udp_msg->data[0]);
+    uint16_t destination_port = ntohs(btp_header[0]);
+    if (destination_port == 2001) detected_etsi_type = "cam";
+    else if (destination_port == 2002) detected_etsi_type = "denm";
+    else if (destination_port == 2003) detected_etsi_type = "map";
+    else if (destination_port == 2004) detected_etsi_type = "spat";
+    else if (destination_port == 2006) detected_etsi_type = "ivi";
+    else if (destination_port == 2009) detected_etsi_type = "cpm";
+    else detected_etsi_type = "unknown";
+  }
 
-  // decode ASN1 bitstring to struct
-  CAM_t* asn1_struct = nullptr;
-  asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[0], udp_msg->data.size());
-  if (ret.code != RC_OK) {
-    NODELET_ERROR("Failed to decode message");
+  if (detected_etsi_type == "cam") {
+
+    // decode ASN1 bitstring to struct
+    CAM_t* asn1_struct = nullptr;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
+    if (ret.code != RC_OK) {
+      NODELET_ERROR("Failed to decode message");
+      return;
+    }
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
+
+    // convert struct to ROS msg and publish
+    etsi_its_cam_msgs::CAM msg;
+    etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
+
+    // publish msg
+    publishers_["cam"].publish(msg);
+    NODELET_DEBUG("Published CAM");
+
+  } else {
+    NODELET_ERROR("Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
   }
-  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
-
-  // convert struct to ROS msg
-  etsi_its_cam_msgs::CAM msg;
-  etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
-
-  publishers_["cam"].publish(msg);
-  NODELET_DEBUG("Published CAM");
 }
 
 
@@ -116,10 +139,20 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
     return;
   }
 
-  // TODO: add BTP-header, if etsi_type==auto
-
+  // copy bitstring to ROS UDP msg
   udp_msgs::UdpPacket udp_msg;
-  udp_msg.data = std::vector<uint8_t>((uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
+  if (etsi_type_ == "auto") {
+    // add BTP-Header, if type detection is enabled
+    uint16_t destination_port = htons(2001);
+    uint16_t destination_port_info = 0;
+    uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
+    uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
+    udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + sizeof(uint16_t));
+    delete[] btp_header;
+  }
+  udp_msg.data.insert(udp_msg.data.end(), (uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
+
+  // publish UDP msg
   publisher_udp_.publish(udp_msg);
   NODELET_DEBUG("Published CAM bitstring");
 }
