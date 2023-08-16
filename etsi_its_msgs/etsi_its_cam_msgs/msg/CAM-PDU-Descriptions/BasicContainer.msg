@@ -9,3 +9,4 @@
 StationType stationType
 
 ReferencePosition referencePosition
+

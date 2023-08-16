@@ -7,7 +7,7 @@
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+  <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -26,7 +26,7 @@
   <!-- Authors do not have to be maintainers, but could be -->
   <!-- Example: -->
   <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
-  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
 
 
   <!-- The *depend tags are used to specify dependencies -->
@@ -50,12 +50,19 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-
-  <exec_depend>etsi_its_cam_conversion</exec_depend>
+  <depend>roscpp</depend>
+  <depend>roslaunch</depend>
+  <depend>std_msgs</depend>
+  <depend>etsi_its_cam_msgs</depend>
+  <depend>bitstring_msgs</depend>
+  <depend>etsi_its_cam_coding</depend>
+  <depend>etsi_its_cam_conversion</depend>
+  <exec_depend>message_runtime</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <metapackage/>
+    <!-- Other tools can request additional information be placed here -->
+
   </export>
 
 </package>

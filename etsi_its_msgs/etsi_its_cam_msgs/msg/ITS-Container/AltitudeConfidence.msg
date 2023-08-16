@@ -19,20 +19,21 @@
 # }
 # ------------------------------------------------------------------------------
 
-int64 ALT_0_0_0_0_1 = 0
-int64 ALT_0_0_0_0_2 = 1
-int64 ALT_0_0_0_0_5 = 2
-int64 ALT_0_0_0_1_0 = 3
-int64 ALT_0_0_0_2_0 = 4
-int64 ALT_0_0_0_5_0 = 5
-int64 ALT_0_0_1_0_0 = 6
-int64 ALT_0_0_2_0_0 = 7
-int64 ALT_0_0_5_0_0 = 8
-int64 ALT_0_1_0_0_0 = 9
-int64 ALT_0_2_0_0_0 = 10
-int64 ALT_0_5_0_0_0 = 11
-int64 ALT_1_0_0_0_0 = 12
-int64 ALT_2_0_0_0_0 = 13
-int64 OUT_OF_RANGE = 14
-int64 UNAVAILABLE = 15
-int64 value
+uint8 value
+uint8 ALT_0_0_0_0_1 = 0
+uint8 ALT_0_0_0_0_2 = 1
+uint8 ALT_0_0_0_0_5 = 2
+uint8 ALT_0_0_0_1_0 = 3
+uint8 ALT_0_0_0_2_0 = 4
+uint8 ALT_0_0_0_5_0 = 5
+uint8 ALT_0_0_1_0_0 = 6
+uint8 ALT_0_0_2_0_0 = 7
+uint8 ALT_0_0_5_0_0 = 8
+uint8 ALT_0_1_0_0_0 = 9
+uint8 ALT_0_2_0_0_0 = 10
+uint8 ALT_0_5_0_0_0 = 11
+uint8 ALT_1_0_0_0_0 = 12
+uint8 ALT_2_0_0_0_0 = 13
+uint8 OUT_OF_RANGE = 14
+uint8 UNAVAILABLE = 15
+

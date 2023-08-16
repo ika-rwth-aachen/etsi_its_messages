@@ -10,5 +10,7 @@ uint8 choice
 
 BasicVehicleContainerHighFrequency basicVehicleContainerHighFrequency
 uint8 CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY = 0
+
 RSUContainerHighFrequency rsuContainerHighFrequency
 uint8 CHOICE_RSU_CONTAINER_HIGH_FREQUENCY = 1
+

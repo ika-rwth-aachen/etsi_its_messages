@@ -1,15 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/LateralAccelerationValue.h>
-#include <etsi_its_cam_msgs/LateralAccelerationValue.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/LateralAccelerationValue.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::LateralAccelerationValue convert_LateralAccelerationValuetoRos(const LateralAccelerationValue_t& _LateralAccelerationValue_in)
-	{
-		etsi_its_cam_msgs::LateralAccelerationValue LateralAccelerationValue_out;
-		convert_toRos(_LateralAccelerationValue_in, LateralAccelerationValue_out.value);
-		return LateralAccelerationValue_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_LateralAccelerationValue(const LateralAccelerationValue_t& in, etsi_its_cam_msgs::LateralAccelerationValue& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_LateralAccelerationValue(const etsi_its_cam_msgs::LateralAccelerationValue& in, LateralAccelerationValue_t& out) {
+    
+  memset(&out, 0, sizeof(LateralAccelerationValue_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

@@ -1,15 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/Longitude.h>
-#include <etsi_its_cam_msgs/Longitude.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/Longitude.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::Longitude convert_LongitudetoRos(const Longitude_t& _Longitude_in)
-	{
-		etsi_its_cam_msgs::Longitude Longitude_out;
-		convert_toRos(_Longitude_in, Longitude_out.value);
-		return Longitude_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_Longitude(const Longitude_t& in, etsi_its_cam_msgs::Longitude& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_Longitude(const etsi_its_cam_msgs::Longitude& in, Longitude_t& out) {
+    
+  memset(&out, 0, sizeof(Longitude_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

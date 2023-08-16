@@ -1,23 +1,22 @@
-#include <SampleNode.h>
+#include <CamGenerator.h>
 
 
-namespace sample_package {
+namespace etsi_its_conversion {
 
 
-SampleNode::SampleNode() : node_handle_(), private_node_handle_("~") {
-  ROS_INFO("SampleNode starting...");
+CamGeneratorNode::CamGeneratorNode() : node_handle_(), private_node_handle_("~") {
+  ROS_INFO("CamGeneratorNode starting...");
 
   // setup publisher and subscriber
-  pub_ = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>("message", 1);
-  sub_ = private_node_handle_.subscribe("message", 1, &SampleNode::messageCallback, this);
+  asn1_pub_ = private_node_handle_.advertise<bitstring_msgs::UInt8ArrayStamped>("/in/asn1/CAM", 1);
 
   // create timer for publishing messages
-  timer_ = node_handle_.createTimer(ros::Duration(1.0), &SampleNode::timerCallback, this);
+  timer_ = node_handle_.createTimer(ros::Duration(1.0), &CamGeneratorNode::generateDummyCAM, this);
 
   ros::spin();
 }
 
-void SampleNode::timerCallback(const ros::TimerEvent& event) {
+void CamGeneratorNode::generateDummyCAM(const ros::TimerEvent& event) {
 
   ROS_INFO("CAM Generator started.");
 
@@ -75,7 +74,7 @@ void SampleNode::timerCallback(const ros::TimerEvent& event) {
   highFreqCont.choice.basicVehicleContainerHighFrequency.curvatureCalculationMode = CurvatureCalculationMode_yawRateUsed;
   highFreqCont.choice.basicVehicleContainerHighFrequency.yawRate.yawRateValue = YawRateValue_straight;
   highFreqCont.choice.basicVehicleContainerHighFrequency.yawRate.yawRateConfidence = YawRateConfidence_degSec_000_01;
-    cam.camParameters.highFrequencyContainer = highFreqCont;
+  cam.camParameters.highFrequencyContainer = highFreqCont;
 
   ROS_INFO("High Freq done.");
 
@@ -85,7 +84,8 @@ void SampleNode::timerCallback(const ros::TimerEvent& event) {
   BIT_STRING_t extLights;
   extLights.size = 1;
   extLights.buf = (uint8_t*)calloc(extLights.size, sizeof(uint8_t));
-  *(extLights.buf) = ExteriorLights_daytimeRunningLightsOn;
+  bool extLights_bits[8] = {false, false, true, false, true, false, true, false};
+  for (int b = 0; b < 8; b++) *extLights.buf |= extLights_bits[b] << b;
   extLights.bits_unused = 0;
 
   lowFreqCont->choice.basicVehicleContainerLowFrequency.exteriorLights = extLights;
@@ -124,15 +124,31 @@ void SampleNode::timerCallback(const ros::TimerEvent& event) {
 
   ROS_INFO("Full Msg done.");
 
-  auto msg = etsi_its_cam_conversion::convert_CAMtoRos(etsiCAM);
+  // ASN.1-Coding ---------------------------------
+  char errbuf[1024];
+  size_t errlen = sizeof(errbuf);
+  int checkRet = asn_check_constraints(&asn_DEF_CAM, &etsiCAM, errbuf, &errlen);
+  if (checkRet)
+  {
+      ROS_ERROR("Error: %s", errbuf);
+      return;
+  }
+  asn_encode_to_new_buffer_result_t res = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, &etsiCAM);
+  if (res.result.encoded == -1)
+  {
+      ROS_ERROR("Err: %s", res.result.failed_type->xml_tag);
+  }
+  ROS_INFO("CAM-Length: %i", (int)res.result.encoded);
 
-  pub_.publish(msg);
-}
+  asn_fprint(stdout, &asn_DEF_CAM, &etsiCAM);
 
+  bitstring_msgs::UInt8ArrayStamped cam_asn1;
+  cam_asn1.header.stamp = ros::Time::now();
+  cam_asn1.header.frame_id = "base_link";
+  cam_asn1.data = std::vector<uint8_t>((char *)res.buffer, (char *)res.buffer + (int)res.result.encoded);
 
-void SampleNode::messageCallback(const etsi_its_cam_msgs::CAM& msg) {
+  asn1_pub_.publish(cam_asn1);
 
-  ROS_INFO("Received message.");
 }
 
 
@@ -141,9 +157,9 @@ void SampleNode::messageCallback(const etsi_its_cam_msgs::CAM& msg) {
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "SampleNode");
+  ros::init(argc, argv, "CamGeneratorNode");
 
-  sample_package::SampleNode node;
+  etsi_its_conversion::CamGeneratorNode node;
 
   return 0;
 }

@@ -8,3 +8,4 @@
 VerticalAccelerationValue verticalAccelerationValue
 
 AccelerationConfidence verticalAccelerationConfidence
+

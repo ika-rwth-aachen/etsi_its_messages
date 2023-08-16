@@ -1,19 +1,29 @@
 #pragma once
 
 #include <etsi_its_cam_coding/LowFrequencyContainer.h>
-#include <etsi_its_cam_msgs/LowFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertBasicVehicleContainerLowFrequency.h>
+#include <etsi_its_cam_msgs/LowFrequencyContainer.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::LowFrequencyContainer convert_LowFrequencyContainertoRos(const LowFrequencyContainer_t& _LowFrequencyContainer_in)
-	{
-		etsi_its_cam_msgs::LowFrequencyContainer LowFrequencyContainer_out;
-		if(_LowFrequencyContainer_in.present == LowFrequencyContainer_PR::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency)
-		{
-			LowFrequencyContainer_out.basicVehicleContainerLowFrequency = convert_BasicVehicleContainerLowFrequencytoRos(_LowFrequencyContainer_in.choice.basicVehicleContainerLowFrequency);
-			LowFrequencyContainer_out.choice = etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
-		}
-		return LowFrequencyContainer_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_LowFrequencyContainer(const LowFrequencyContainer_t& in, etsi_its_cam_msgs::LowFrequencyContainer& out) {
+
+  if (in.present == LowFrequencyContainer_PR::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency) {
+    toRos_BasicVehicleContainerLowFrequency(in.choice.basicVehicleContainerLowFrequency, out.basicVehicleContainerLowFrequency);
+    out.choice = etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
+  }
+}
+
+void toStruct_LowFrequencyContainer(const etsi_its_cam_msgs::LowFrequencyContainer& in, LowFrequencyContainer_t& out) {
+    
+  memset(&out, 0, sizeof(LowFrequencyContainer_t));
+
+  if (in.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
+    toStruct_BasicVehicleContainerLowFrequency(in.basicVehicleContainerLowFrequency, out.choice.basicVehicleContainerLowFrequency);
+    out.present = LowFrequencyContainer_PR::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency;
+  }
+
+}
+
 }

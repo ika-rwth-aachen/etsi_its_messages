@@ -1,15 +1,21 @@
 #pragma once
 
 #include <etsi_its_cam_coding/TimestampIts.h>
-#include <etsi_its_cam_msgs/TimestampIts.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_msgs/TimestampIts.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::TimestampIts convert_TimestampItstoRos(const TimestampIts_t& _TimestampIts_in)
-	{
-		etsi_its_cam_msgs::TimestampIts TimestampIts_out;
-		convert_toRos(_TimestampIts_in, TimestampIts_out.value);
-		return TimestampIts_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_TimestampIts(const TimestampIts_t& in, etsi_its_cam_msgs::TimestampIts& out) {
+
+  toRos_INTEGER(in, out.value);
+}
+
+void toStruct_TimestampIts(const etsi_its_cam_msgs::TimestampIts& in, TimestampIts_t& out) {
+    
+  memset(&out, 0, sizeof(TimestampIts_t));
+  toStruct_INTEGER(in.value, out);
+}
+
 }

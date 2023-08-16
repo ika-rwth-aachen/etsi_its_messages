@@ -11,3 +11,4 @@ SemiAxisLength semiMajorConfidence
 SemiAxisLength semiMinorConfidence
 
 HeadingValue semiMajorOrientation
+

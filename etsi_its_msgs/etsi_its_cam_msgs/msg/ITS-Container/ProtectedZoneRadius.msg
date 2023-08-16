@@ -2,7 +2,8 @@
 # ProtectedZoneRadius ::= INTEGER {oneMeter(1)} (1..255,...)
 # ------------------------------------------------------------------------------
 
-int64 MIN = 1
-int64 MAX = 255
-int64 ONE_METER = 1
-int64 value
+uint8 value
+uint8 MIN = 1
+uint8 MAX = 255
+uint8 ONE_METER = 1
+

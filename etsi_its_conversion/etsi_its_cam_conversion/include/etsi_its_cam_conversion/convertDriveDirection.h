@@ -3,12 +3,18 @@
 #include <etsi_its_cam_coding/DriveDirection.h>
 #include <etsi_its_cam_msgs/DriveDirection.h>
 
-namespace etsi_its_cam_conversion
-{
-	etsi_its_cam_msgs::DriveDirection convert_DriveDirectiontoRos(const DriveDirection_t& _DriveDirection_in)
-	{
-		etsi_its_cam_msgs::DriveDirection DriveDirection_out;
-		DriveDirection_out.value = _DriveDirection_in;
-		return DriveDirection_out;
-	}
+
+namespace etsi_its_cam_conversion {
+
+void toRos_DriveDirection(const DriveDirection_t& in, etsi_its_cam_msgs::DriveDirection& out) {
+
+  out.value = in;
+}
+
+void toStruct_DriveDirection(const etsi_its_cam_msgs::DriveDirection& in, DriveDirection_t& out) {
+    
+  memset(&out, 0, sizeof(DriveDirection_t));
+  out = in.value;
+}
+
 }
