@@ -19,7 +19,9 @@ install(DIRECTORY include/${PROJECT_NAME}/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
-if(TARGET ${PROJECT_NAME}-test)
-    target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+if(CATKIN_ENABLE_TESTING)
+    catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
+    if(TARGET ${PROJECT_NAME}-test)
+        target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+    endif()
 endif()
