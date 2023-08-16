@@ -1,7 +1,7 @@
 #pragma once
 
 // Messages
-#include <etsi_its_cam_msgs/CAM.h>
+#include <etsi_its_cam_msgs/msg/CAM.hpp>
 
 namespace etsi_its_cam_msgs {
 
