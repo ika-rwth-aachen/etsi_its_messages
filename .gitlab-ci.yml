@@ -5,7 +5,7 @@ Code Generation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
-docker-ros:
+ROS1:
   trigger:
     include:
     - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
@@ -13,6 +13,18 @@ docker-ros:
   variables:
     PLATFORM: amd64
     TARGET: dev,run
-    BASE_IMAGE: rwthika/ros:latest
+    BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion start_ConversionNode.launch
+    ENABLE_INDUSTRIAL_CI: 'true'
+
+ROS2:
+  trigger:
+    include:
+    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    PLATFORM: amd64
+    TARGET: dev,run
+    BASE_IMAGE: rwthika/ros2:humble
+    COMMAND: echo "ToDo"
     ENABLE_INDUSTRIAL_CI: 'true'

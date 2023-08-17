@@ -1,305 +1,144 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(etsi_its_cam_msgs)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+find_package(ros_environment REQUIRED QUIET)
+set(ROS_VERSION $ENV{ROS_VERSION})
+set(ROS_DISTRO $ENV{ROS_DISTRO})
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  std_msgs
-)
+# === ROS1 (CATKIN) ============================================================
+if(${ROS_VERSION} EQUAL 1)
 
-## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+    find_package(catkin REQUIRED COMPONENTS
+        message_generation
+        std_msgs
+    )
 
+    ## Generate messages in the 'msg' folder
+    add_message_files(DIRECTORY msg/CAM-PDU-Descriptions)
+    add_message_files(DIRECTORY msg/ITS-Container)
 
-## Uncomment this if the package has a setup.py. This macro ensures
-## modules and global scripts declared therein get installed
-## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
+    generate_messages(
+        DEPENDENCIES
+        std_msgs
+    )
 
-################################################
-## Declare ROS messages, services and actions ##
-################################################
+    catkin_package(
+        CATKIN_DEPENDS
+            message_runtime
+            std_msgs
+    )
 
-## To declare and build messages, services or actions from within this
-## package, follow these steps:
-## * Let MSG_DEP_SET be the set of packages whose message types you use in
-##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
-## * In the file package.xml:
-##   * add a build_depend tag for "message_generation"
-##   * add a build_depend and a exec_depend tag for each package in MSG_DEP_SET
-##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
-##     but can be declared for certainty nonetheless:
-##     * add a exec_depend tag for "message_runtime"
-## * In this file (CMakeLists.txt):
-##   * add "message_generation" and every package in MSG_DEP_SET to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * add "message_runtime" and every package in MSG_DEP_SET to
-##     catkin_package(CATKIN_DEPENDS ...)
-##   * uncomment the add_*_files sections below as needed
-##     and list every .msg/.srv/.action file to be processed
-##   * uncomment the generate_messages entry below
-##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
+# === ROS2 (AMENT) =============================================================
+elseif(${ROS_VERSION} EQUAL 2)
 
-## Generate messages in the 'msg' folder
+    find_package(ament_cmake REQUIRED)
+    find_package(rosidl_default_generators REQUIRED)
+    find_package(std_msgs REQUIRED)
 
-add_message_files(
-  DIRECTORY
-    msg/CAM-PDU-Descriptions
-  FILES
-    BasicContainer.msg
-    BasicVehicleContainerHighFrequency.msg
-    BasicVehicleContainerLowFrequency.msg
-    CAM.msg
-    CamParameters.msg
-    CoopAwareness.msg
-    DangerousGoodsContainer.msg
-    EmergencyContainer.msg
-    GenerationDeltaTime.msg
-    HighFrequencyContainer.msg
-    LowFrequencyContainer.msg
-    PublicTransportContainer.msg
-    RescueContainer.msg
-    RoadWorksContainerBasic.msg
-    RSUContainerHighFrequency.msg
-    SafetyCarContainer.msg
-    SpecialTransportContainer.msg
-    SpecialVehicleContainer.msg
-)
+    set(msg_files
+        # msg/CAM-PDU-Descriptions
+        "msg/CAM-PDU-Descriptions/BasicContainer.msg"
+        "msg/CAM-PDU-Descriptions/BasicVehicleContainerHighFrequency.msg"
+        "msg/CAM-PDU-Descriptions/BasicVehicleContainerLowFrequency.msg"
+        "msg/CAM-PDU-Descriptions/CAM.msg"
+        "msg/CAM-PDU-Descriptions/CamParameters.msg"
+        "msg/CAM-PDU-Descriptions/CoopAwareness.msg"
+        "msg/CAM-PDU-Descriptions/DangerousGoodsContainer.msg"
+        "msg/CAM-PDU-Descriptions/EmergencyContainer.msg"
+        "msg/CAM-PDU-Descriptions/GenerationDeltaTime.msg"
+        "msg/CAM-PDU-Descriptions/HighFrequencyContainer.msg"
+        "msg/CAM-PDU-Descriptions/LowFrequencyContainer.msg"
+        "msg/CAM-PDU-Descriptions/PublicTransportContainer.msg"
+        "msg/CAM-PDU-Descriptions/RescueContainer.msg"
+        "msg/CAM-PDU-Descriptions/RoadWorksContainerBasic.msg"
+        "msg/CAM-PDU-Descriptions/RSUContainerHighFrequency.msg"
+        "msg/CAM-PDU-Descriptions/SafetyCarContainer.msg"
+        "msg/CAM-PDU-Descriptions/SpecialTransportContainer.msg"
+        "msg/CAM-PDU-Descriptions/SpecialVehicleContainer.msg"
+        # msg/ITS-Container
+        "msg/ITS-Container/AccelerationConfidence.msg"
+        "msg/ITS-Container/AccelerationControl.msg"
+        "msg/ITS-Container/AltitudeConfidence.msg"
+        "msg/ITS-Container/Altitude.msg"
+        "msg/ITS-Container/AltitudeValue.msg"
+        "msg/ITS-Container/CauseCode.msg"
+        "msg/ITS-Container/CauseCodeType.msg"
+        "msg/ITS-Container/CenDsrcTollingZoneID.msg"
+        "msg/ITS-Container/CenDsrcTollingZone.msg"
+        "msg/ITS-Container/ClosedLanes.msg"
+        "msg/ITS-Container/CurvatureCalculationMode.msg"
+        "msg/ITS-Container/CurvatureConfidence.msg"
+        "msg/ITS-Container/Curvature.msg"
+        "msg/ITS-Container/CurvatureValue.msg"
+        "msg/ITS-Container/DangerousGoodsBasic.msg"
+        "msg/ITS-Container/DeltaAltitude.msg"
+        "msg/ITS-Container/DeltaLatitude.msg"
+        "msg/ITS-Container/DeltaLongitude.msg"
+        "msg/ITS-Container/DeltaReferencePosition.msg"
+        "msg/ITS-Container/DriveDirection.msg"
+        "msg/ITS-Container/DrivingLaneStatus.msg"
+        "msg/ITS-Container/EmbarkationStatus.msg"
+        "msg/ITS-Container/EmergencyPriority.msg"
+        "msg/ITS-Container/ExteriorLights.msg"
+        "msg/ITS-Container/HardShoulderStatus.msg"
+        "msg/ITS-Container/HeadingConfidence.msg"
+        "msg/ITS-Container/Heading.msg"
+        "msg/ITS-Container/HeadingValue.msg"
+        "msg/ITS-Container/ItsPduHeader.msg"
+        "msg/ITS-Container/LanePosition.msg"
+        "msg/ITS-Container/LateralAcceleration.msg"
+        "msg/ITS-Container/LateralAccelerationValue.msg"
+        "msg/ITS-Container/Latitude.msg"
+        "msg/ITS-Container/LightBarSirenInUse.msg"
+        "msg/ITS-Container/Longitude.msg"
+        "msg/ITS-Container/LongitudinalAcceleration.msg"
+        "msg/ITS-Container/LongitudinalAccelerationValue.msg"
+        "msg/ITS-Container/PathDeltaTime.msg"
+        "msg/ITS-Container/PathHistory.msg"
+        "msg/ITS-Container/PathPoint.msg"
+        "msg/ITS-Container/PerformanceClass.msg"
+        "msg/ITS-Container/PosConfidenceEllipse.msg"
+        "msg/ITS-Container/ProtectedCommunicationZone.msg"
+        "msg/ITS-Container/ProtectedCommunicationZonesRSU.msg"
+        "msg/ITS-Container/ProtectedZoneID.msg"
+        "msg/ITS-Container/ProtectedZoneRadius.msg"
+        "msg/ITS-Container/ProtectedZoneType.msg"
+        "msg/ITS-Container/PtActivationData.msg"
+        "msg/ITS-Container/PtActivation.msg"
+        "msg/ITS-Container/PtActivationType.msg"
+        "msg/ITS-Container/ReferencePosition.msg"
+        "msg/ITS-Container/RoadworksSubCauseCode.msg"
+        "msg/ITS-Container/SemiAxisLength.msg"
+        "msg/ITS-Container/SpecialTransportType.msg"
+        "msg/ITS-Container/SpeedConfidence.msg"
+        "msg/ITS-Container/SpeedLimit.msg"
+        "msg/ITS-Container/Speed.msg"
+        "msg/ITS-Container/SpeedValue.msg"
+        "msg/ITS-Container/StationID.msg"
+        "msg/ITS-Container/StationType.msg"
+        "msg/ITS-Container/SteeringWheelAngleConfidence.msg"
+        "msg/ITS-Container/SteeringWheelAngle.msg"
+        "msg/ITS-Container/SteeringWheelAngleValue.msg"
+        "msg/ITS-Container/SubCauseCodeType.msg"
+        "msg/ITS-Container/TimestampIts.msg"
+        "msg/ITS-Container/TrafficRule.msg"
+        "msg/ITS-Container/VehicleLengthConfidenceIndication.msg"
+        "msg/ITS-Container/VehicleLength.msg"
+        "msg/ITS-Container/VehicleLengthValue.msg"
+        "msg/ITS-Container/VehicleRole.msg"
+        "msg/ITS-Container/VehicleWidth.msg"
+        "msg/ITS-Container/VerticalAcceleration.msg"
+        "msg/ITS-Container/VerticalAccelerationValue.msg"
+        "msg/ITS-Container/YawRateConfidence.msg"
+        "msg/ITS-Container/YawRate.msg"
+        "msg/ITS-Container/YawRateValue.msg"   
+    )
 
-add_message_files(
-  DIRECTORY
-    msg/ITS-Container
-  FILES
-    AccelerationConfidence.msg
-    AccelerationControl.msg
-    AltitudeConfidence.msg
-    Altitude.msg
-    AltitudeValue.msg
-    CauseCode.msg
-    CauseCodeType.msg
-    CenDsrcTollingZoneID.msg
-    CenDsrcTollingZone.msg
-    ClosedLanes.msg
-    CurvatureCalculationMode.msg
-    CurvatureConfidence.msg
-    Curvature.msg
-    CurvatureValue.msg
-    DangerousGoodsBasic.msg
-    DeltaAltitude.msg
-    DeltaLatitude.msg
-    DeltaLongitude.msg
-    DeltaReferencePosition.msg
-    DriveDirection.msg
-    DrivingLaneStatus.msg
-    EmbarkationStatus.msg
-    EmergencyPriority.msg
-    ExteriorLights.msg
-    HardShoulderStatus.msg
-    HeadingConfidence.msg
-    Heading.msg
-    HeadingValue.msg
-    ItsPduHeader.msg
-    LanePosition.msg
-    LateralAcceleration.msg
-    LateralAccelerationValue.msg
-    Latitude.msg
-    LightBarSirenInUse.msg
-    Longitude.msg
-    LongitudinalAcceleration.msg
-    LongitudinalAccelerationValue.msg
-    PathDeltaTime.msg
-    PathHistory.msg
-    PathPoint.msg
-    PerformanceClass.msg
-    PosConfidenceEllipse.msg
-    ProtectedCommunicationZone.msg
-    ProtectedCommunicationZonesRSU.msg
-    ProtectedZoneID.msg
-    ProtectedZoneRadius.msg
-    ProtectedZoneType.msg
-    PtActivationData.msg
-    PtActivation.msg
-    PtActivationType.msg
-    ReferencePosition.msg
-    RoadworksSubCauseCode.msg
-    SemiAxisLength.msg
-    SpecialTransportType.msg
-    SpeedConfidence.msg
-    SpeedLimit.msg
-    Speed.msg
-    SpeedValue.msg
-    StationID.msg
-    StationType.msg
-    SteeringWheelAngleConfidence.msg
-    SteeringWheelAngle.msg
-    SteeringWheelAngleValue.msg
-    SubCauseCodeType.msg
-    TimestampIts.msg
-    TrafficRule.msg
-    VehicleLengthConfidenceIndication.msg
-    VehicleLength.msg
-    VehicleLengthValue.msg
-    VehicleRole.msg
-    VehicleWidth.msg
-    VerticalAcceleration.msg
-    VerticalAccelerationValue.msg
-    YawRateConfidence.msg
-    YawRate.msg
-    YawRateValue.msg
-)
+    rosidl_generate_interfaces(${PROJECT_NAME}
+        ${msg_files}
+        DEPENDENCIES std_msgs
+    )
 
-## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+    ament_package()
 
-## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
-
-## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-)
-
-################################################
-## Declare ROS dynamic reconfigure parameters ##
-################################################
-
-## To declare and build dynamic reconfigure parameters within this
-## package, follow these steps:
-## * In the file package.xml:
-##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
-## * In this file (CMakeLists.txt):
-##   * add "dynamic_reconfigure" to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * uncomment the "generate_dynamic_reconfigure_options" section below
-##     and list every .cfg file to be processed
-
-## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
-
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if your package contains header files
-## LIBRARIES: libraries you create in this project that dependent projects also need
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES etsi_its_msgs
-  CATKIN_DEPENDS message_runtime std_msgs
-#  DEPENDS system_lib
-)
-
-###########
-## Build ##
-###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
-)
-
-## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/etsi_its_msgs.cpp
-# )
-
-## Add cmake target dependencies of the library
-## as an example, code may need to be generated before libraries
-## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/etsi_its_msgs_node.cpp)
-
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
-
-#############
-## Install ##
-#############
-
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-## Mark executable scripts (Python etc.) for installation
-## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-
-## Mark executables for installation
-## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
-# install(TARGETS ${PROJECT_NAME}_node
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-
-## Mark libraries for installation
-## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
-# install(TARGETS ${PROJECT_NAME}
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
-# )
-
-## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
-
-## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
-
-#############
-## Testing ##
-#############
-
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_etsi_its_msgs.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
-
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)
+endif()
