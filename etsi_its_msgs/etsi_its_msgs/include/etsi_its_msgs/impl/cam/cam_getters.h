@@ -5,10 +5,9 @@
 
 #pragma once
 
-
 namespace etsi_its_cam_msgs {
 
-namespace access_functions {
+namespace access {
 
   /**
    * @brief Get the Station ID object
@@ -17,7 +16,7 @@ namespace access_functions {
    * @return stationID value
    */
   inline int getStationID(const CAM& cam){
-    return getStationID(cam.header);
+    return etsi_its_msgs::cdd_access::getStationID(cam.header);
   }
 
   /**
@@ -37,7 +36,7 @@ namespace access_functions {
    * @return Latitude value in degree as decimal number
    */
   inline double getLatitude(const CAM& cam){
-    return getLatitude(cam.cam.camParameters.basicContainer.referencePosition.latitude);
+    return etsi_its_msgs::cdd_access::getLatitude(cam.cam.camParameters.basicContainer.referencePosition.latitude);
   }
 
   /**
@@ -47,7 +46,7 @@ namespace access_functions {
    * @return Longitude value in degree as decimal number
    */
   inline double getLongitude(const CAM& cam){
-    return getLongitude(cam.cam.camParameters.basicContainer.referencePosition.longitude);
+    return etsi_its_msgs::cdd_access::getLongitude(cam.cam.camParameters.basicContainer.referencePosition.longitude);
   }
 
   /**
@@ -57,18 +56,19 @@ namespace access_functions {
    * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getAltitude(const CAM& cam){
-    return getAltitude(cam.cam.camParameters.basicContainer.referencePosition.altitude);
+    return etsi_its_msgs::cdd_access::getAltitude(cam.cam.camParameters.basicContainer.referencePosition.altitude);
   }
 
   /**
    * @brief Get the Heading value of CAM
    * 
+   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West 
+   * 
    * @param cam CAM to get the Heading value from
    * @return Heading value in degree as decimal number
-   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West 
    */
   inline double getHeading(const CAM& cam){
-    return getHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading);
+    return etsi_its_msgs::cdd_access::getHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading);
   }
 
   /**
@@ -78,7 +78,7 @@ namespace access_functions {
    * @return vehicle length value in meter as decimal number
    */
   inline double getVehicleLength(const CAM& cam){
-    return getVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength);
+    return etsi_its_msgs::cdd_access::getVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength);
   }
 
   /**
@@ -88,7 +88,7 @@ namespace access_functions {
    * @return vehicle width value in meter as decimal number
    */
   inline double getVehicleWidth(const CAM& cam){
-    return getVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth);
+    return etsi_its_msgs::cdd_access::getVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth);
   }
 
   /**
@@ -98,7 +98,7 @@ namespace access_functions {
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const CAM& cam){
-    return getSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed);
+    return etsi_its_msgs::cdd_access::getSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed);
   }
 
   /**
@@ -108,7 +108,7 @@ namespace access_functions {
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
   inline double getLongitudinalAcceleration(const CAM& cam){
-    return getLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration);
+    return etsi_its_msgs::cdd_access::getLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration);
   }
 
   /**
@@ -120,7 +120,7 @@ namespace access_functions {
   inline double getLateralAcceleration(const CAM& cam){
     if(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration_isPresent)
     {
-      return getLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration);
+      return etsi_its_msgs::cdd_access::getLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration);
     }
     else
     {
@@ -128,6 +128,6 @@ namespace access_functions {
     }
   }
 
-} // namespace access_functions
+} // namespace access
 
 } // namespace etsi_its_cam_msgs

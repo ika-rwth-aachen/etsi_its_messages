@@ -5,10 +5,9 @@
 
 #pragma once
 
+namespace etsi_its_msgs {
 
-namespace etsi_its_cam_msgs {
-
-namespace access_functions {
+namespace cdd_access {
 
   /**
   * @brief Get the StationID of ItsPduHeader
@@ -53,9 +52,10 @@ namespace access_functions {
   /**
    * @brief Get the Heading value
    * 
+   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West 
+   * 
    * @param heading to get the Heading value from
    * @return Heading value in degree as decimal number
-   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West 
    */
   inline double getHeading(const Heading& heading){
     return ((double)heading.headingValue.value)*1e-1;
@@ -111,6 +111,6 @@ namespace access_functions {
     return ((double)lateralAcceleration.lateralAccelerationValue.value)*1e-1;
   }
 
-} // namespace access_functions
+} // namespace access
 
-} // namespace etsi_its_cam_msgs
+} // namespace etsi_its_msgs

@@ -3,12 +3,14 @@
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
+#include <etsi_its_msgs/impl/cdd/cdd_checks.h>
+
 #pragma once
 
 
-namespace etsi_its_cam_msgs {
+namespace etsi_its_msgs {
 
-namespace access_functions {
+namespace cdd_access {
 
   /**
    * @brief Set the Station Id object
@@ -17,8 +19,8 @@ namespace access_functions {
    * @param id_value 
    */
   inline void setStationId(StationID& station_id, int id_value) {
-    if(id_value>=StationID::MIN && id_value<=StationID::MAX) station_id.value = id_value;
-    else throw std::invalid_argument("StationID value is out of Range ("+std::to_string(StationID::MIN)+"..."+std::to_string(StationID::MAX)+")!");
+    throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
+    station_id.value = id_value;
   }
 
   /**
@@ -31,10 +33,10 @@ namespace access_functions {
    */
   inline void setItsPduHeader(ItsPduHeader& header, int message_id, int station_id, int protocol_version=0) {
     setStationId(header.stationID, station_id);
-    if(message_id>=ItsPduHeader::MESSAGE_I_D_MIN && message_id<=ItsPduHeader::MESSAGE_I_D_MAX) header.messageID = message_id;
-    else throw std::invalid_argument("messageID is out of Range ("+std::to_string(ItsPduHeader::MESSAGE_I_D_MIN)+"..."+std::to_string(ItsPduHeader::MESSAGE_I_D_MAX)+")!");
-    if(protocol_version>=ItsPduHeader::PROTOCOL_VERSION_MIN && protocol_version<=ItsPduHeader::PROTOCOL_VERSION_MAX) header.protocolVersion = protocol_version;
-    else throw std::invalid_argument("ProtocolVersion is out of Range ("+std::to_string(ItsPduHeader::PROTOCOL_VERSION_MIN)+"..."+std::to_string(ItsPduHeader::PROTOCOL_VERSION_MAX)+")!");
+    throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_I_D_MIN, ItsPduHeader::MESSAGE_I_D_MAX, "MessageID");
+    header.messageID = message_id;
+    throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
+    header.protocolVersion = protocol_version;
   }
 
   /**
@@ -44,8 +46,8 @@ namespace access_functions {
    * @param value 
    */
   inline void setStationType(StationType& station_type, int value) {
-    if(value>=StationType::MIN && value<=StationType::MAX) station_type.value = value;
-    else throw std::invalid_argument("StationType value is out of Range ("+std::to_string(StationType::MIN)+"..."+std::to_string(StationType::MAX)+")!");
+    throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
+    station_type.value = value;
   }
 
   /**
@@ -55,9 +57,9 @@ namespace access_functions {
    * @param deg Latitude value in degree as decimal number
    */
   inline void setLatitude(Latitude& latitude, double deg) {
-    int64_t angle_in_10_micro_degree = (int64_t)(deg*1e7);
-    if(angle_in_10_micro_degree>=Latitude::MIN && angle_in_10_micro_degree<=Latitude::MAX) latitude.value = angle_in_10_micro_degree;
-    else throw std::invalid_argument("Latitude value is out of Range ("+std::to_string(Latitude::MIN)+"..."+std::to_string(Latitude::MAX)+")!");
+    int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);
+    throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, "Latitude");
+    latitude.value = angle_in_10_micro_degree;
   }
 
   /**
@@ -68,8 +70,8 @@ namespace access_functions {
    */
   inline void setLongitude(Longitude& longitude, double deg) {
     int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);
-    if(angle_in_10_micro_degree>=Longitude::MIN && angle_in_10_micro_degree<=Longitude::MAX) longitude.value = angle_in_10_micro_degree;
-    else throw std::invalid_argument("Longitude value is out of Range ("+std::to_string(Longitude::MIN)+"..."+std::to_string(Longitude::MAX)+")!");
+    throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, "Longitude");
+    longitude.value = angle_in_10_micro_degree;
   }
 
   /**
@@ -101,16 +103,18 @@ namespace access_functions {
   /**
    * @brief Set the Reference Position object
    * 
+   * Altitude is set to UNAVAILABLE
+   * 
    * @param ref_position object to set
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
-   * Altitude is set to UNAVAILABLE
    */
   inline void setReferencePosition(ReferencePosition& ref_position, double latitude, double longitude)
   {
     setLatitude(ref_position.latitude, latitude);
     setLongitude(ref_position.longitude, longitude);
-    setAltitude(ref_position.altitude, ((double)AltitudeValue::UNAVAILABLE)/1e2);
+    ref_position.altitude.altitudeValue.value  = AltitudeValue::UNAVAILABLE;
+    ref_position.altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
   }
 
   /**
@@ -131,23 +135,25 @@ namespace access_functions {
   /**
    * @brief Set the HeadingValue object
    * 
+   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+   * 
    * @param heading object to set
    * @param value Heading value in degree as decimal number
-   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
    */
   inline void setHeadingValue(HeadingValue& heading, double value) {
     int64_t deg = (int64_t)std::round(value*1e1);
-    if(deg>=HeadingValue::MIN && deg<=HeadingValue::MAX) heading.value = deg;
-    else throw std::invalid_argument("HeadingValue is out of Range ("+std::to_string(HeadingValue::MIN)+"..."+std::to_string(HeadingValue::MAX)+")!");
+    throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+    heading.value = deg;
   }
 
   /**
    * @brief Set the Heading object
    * 
-   * @param heading object to set
-   * @param value Heading value in degree as decimal number
    * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
    * HeadingConfidence is set to UNAVAILABLE
+   * 
+   * @param heading object to set
+   * @param value Heading value in degree as decimal number
    */
   inline void setHeading(Heading& heading, double value) {
     heading.headingConfidence.value = HeadingConfidence::UNAVAILABLE;
@@ -162,16 +168,17 @@ namespace access_functions {
    */
   inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, double value) {
     int64_t length = (int64_t)std::round(value*1e1);
-    if(length>=VehicleLengthValue::MIN && length<=VehicleLengthValue::MAX) vehicle_length.value = length;
-    else throw std::invalid_argument("VehicleLengthValue is out of Range ("+std::to_string(VehicleLengthValue::MIN)+"..."+std::to_string(VehicleLengthValue::MAX)+")!");
+    throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
+    vehicle_length.value = length;
   }
 
   /**
    * @brief Set the VehicleLength object
    * 
+   * VehicleLengthConfidenceIndication is set to UNAVAILABLE
+   * 
    * @param vehicle_length object to set
    * @param value  VehicleLengthValue in meter as decimal number
-   * VehicleLengthConfidenceIndication is set to UNAVAILABLE
    */
   inline void setVehicleLength(VehicleLength& vehicle_length, double value) {
     vehicle_length.vehicleLengthConfidenceIndication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
@@ -186,8 +193,8 @@ namespace access_functions {
    */
   inline void setVehicleWidth(VehicleWidth& vehicle_width, double value) {
     int64_t width = (int64_t)std::round(value*1e1);
-    if(width>=VehicleWidth::MIN && width<=VehicleWidth::MAX) vehicle_width.value = width;
-    else throw std::invalid_argument("VehicleLengthValue is out of Range ("+std::to_string(VehicleWidth::MIN)+"..."+std::to_string(VehicleWidth::MAX)+")!");
+    throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
+    vehicle_width.value = width;
   }
 
   /**
@@ -198,16 +205,17 @@ namespace access_functions {
    */
   inline void setSpeedValue(SpeedValue& speed, double value) {
     int64_t speed_val = (int64_t)std::round(value*1e2);
-    if(speed_val>=SpeedValue::MIN && speed_val<=SpeedValue::MAX) speed.value = speed_val;
-    else throw std::invalid_argument("VehicleLengthValue is out of Range ("+std::to_string(SpeedValue::MIN)+"..."+std::to_string(SpeedValue::MAX)+")!");
+    throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
+    speed.value = speed_val;
   }
 
   /**
    * @brief Set the Speed object
    * 
+   * SpeedConfidence is set to UNAVAILABLE
+   * 
    * @param speed object to set
    * @param value  Speed in in m/s as decimal number
-   * SpeedConfidence is set to UNAVAILABLE
    */
   inline void setSpeed(Speed& speed, double value) {
     speed.speedConfidence.value = SpeedConfidence::UNAVAILABLE;
@@ -230,9 +238,10 @@ namespace access_functions {
   /**
    * @brief Set the LongitudinalAcceleration object
    * 
+   * AccelerationConfidence is set to UNAVAILABLE
+   * 
    * @param accel object to set
    * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
-   * AccelerationConfidence is set to UNAVAILABLE
    */
   inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, double value) {
     accel.longitudinalAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
@@ -255,15 +264,16 @@ namespace access_functions {
   /**
    * @brief Set the LaterallAcceleration object
    * 
+   * AccelerationConfidence is set to UNAVAILABLE
+   * 
    * @param accel object to set
    * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
-   * AccelerationConfidence is set to UNAVAILABLE
    */
   inline void setLateralAcceleration(LateralAcceleration& accel, double value) {
     accel.lateralAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
     setLateralAccelerationValue(accel.lateralAccelerationValue, value);
   }
 
-} // namespace access_functions
+} // namespace cdd_access
 
-} // namespace etsi_its_cam_msgs
+} // namespace etsi_its_msgs

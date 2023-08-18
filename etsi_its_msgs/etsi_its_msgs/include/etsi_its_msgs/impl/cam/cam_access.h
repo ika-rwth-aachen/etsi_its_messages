@@ -5,6 +5,8 @@
 
 #pragma once
 
+using namespace etsi_its_cam_msgs;
+
 #include <etsi_its_msgs/impl/cdd/cdd_access.h>
 
 #include <etsi_its_msgs/impl/cam/cam_getters.h>
