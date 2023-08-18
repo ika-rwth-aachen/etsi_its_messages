@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(etsi_its_cam_msgs)
 
 find_package(ros_environment REQUIRED QUIET)
@@ -139,6 +139,8 @@ elseif(${ROS_VERSION} EQUAL 2)
         DEPENDENCIES std_msgs
     )
 
+    ament_export_dependencies(rosidl_default_runtime)
+    
     ament_package()
 
 endif()

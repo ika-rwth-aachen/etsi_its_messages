@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5)
 project(etsi_its_cam_coding)
 
 find_package(ros_environment REQUIRED QUIET)
@@ -50,7 +50,7 @@ elseif(${ROS_VERSION} EQUAL 2)
     ${SRC_FILES}
   )
 
-  target_include_directories(${PROJECT_NAME} INTERFACE
+  target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
   )

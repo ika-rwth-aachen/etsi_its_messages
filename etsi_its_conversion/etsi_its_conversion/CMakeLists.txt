@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(etsi_its_conversion)
 
 find_package(ros_environment REQUIRED QUIET)

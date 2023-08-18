@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(etsi_its_coding)
 
 find_package(ros_environment REQUIRED QUIET)
@@ -17,5 +17,7 @@ if(${ROS_VERSION} EQUAL 1)
 elseif(${ROS_VERSION} EQUAL 2)
 
     find_package(ament_cmake REQUIRED)
+
+    ament_package()
 
 endif()
