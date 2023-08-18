@@ -13,6 +13,7 @@ ROS1:
   variables:
     PLATFORM: amd64
     TARGET: dev,run
+    IMAGE_TAG: ros1
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion start_ConversionNode.launch
     ENABLE_INDUSTRIAL_CI: 'true'
@@ -25,6 +26,7 @@ ROS2:
   variables:
     PLATFORM: amd64
     TARGET: dev,run
+    IMAGE_TAG: ros2
     BASE_IMAGE: rwthika/ros2:humble
     COMMAND: echo "ToDo"
     ENABLE_INDUSTRIAL_CI: 'true'
