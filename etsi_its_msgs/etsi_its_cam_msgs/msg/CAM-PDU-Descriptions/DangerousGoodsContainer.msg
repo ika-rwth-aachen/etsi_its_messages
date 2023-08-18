@@ -4,5 +4,5 @@
 #  }
 # ------------------------------------------------------------------------------
 
-DangerousGoodsBasic dangerousGoodsBasic
+DangerousGoodsBasic dangerous_goods_basic
 

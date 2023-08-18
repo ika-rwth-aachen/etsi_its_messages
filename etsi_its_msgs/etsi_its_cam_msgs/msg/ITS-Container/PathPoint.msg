@@ -5,8 +5,8 @@
 # }
 # ------------------------------------------------------------------------------
 
-DeltaReferencePosition pathPosition
+DeltaReferencePosition path_position
 
-PathDeltaTime pathDeltaTime
-bool pathDeltaTime_isPresent
+PathDeltaTime path_delta_time
+bool path_delta_time_is_present
 

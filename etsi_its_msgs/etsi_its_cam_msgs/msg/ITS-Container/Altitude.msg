@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-AltitudeValue altitudeValue
+AltitudeValue altitude_value
 
-AltitudeConfidence altitudeConfidence
+AltitudeConfidence altitude_confidence
 

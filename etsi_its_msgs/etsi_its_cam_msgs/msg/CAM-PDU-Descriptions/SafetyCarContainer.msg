@@ -7,14 +7,14 @@
 # }
 # ------------------------------------------------------------------------------
 
-LightBarSirenInUse lightBarSirenInUse
+LightBarSirenInUse light_bar_siren_in_use
 
-CauseCode incidentIndication
-bool incidentIndication_isPresent
+CauseCode incident_indication
+bool incident_indication_is_present
 
-TrafficRule trafficRule
-bool trafficRule_isPresent
+TrafficRule traffic_rule
+bool traffic_rule_is_present
 
-SpeedLimit speedLimit
-bool speedLimit_isPresent
+SpeedLimit speed_limit
+bool speed_limit_is_present
 

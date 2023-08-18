@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-CurvatureValue curvatureValue
+CurvatureValue curvature_value
 
-CurvatureConfidence curvatureConfidence
+CurvatureConfidence curvature_confidence
 

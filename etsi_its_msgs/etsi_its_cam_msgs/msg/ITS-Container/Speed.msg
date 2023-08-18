@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-SpeedValue speedValue
+SpeedValue speed_value
 
-SpeedConfidence speedConfidence
+SpeedConfidence speed_confidence
 

@@ -11,7 +11,7 @@ Latitude latitude
 
 Longitude longitude
 
-PosConfidenceEllipse positionConfidenceEllipse
+PosConfidenceEllipse position_confidence_ellipse
 
 Altitude altitude
 

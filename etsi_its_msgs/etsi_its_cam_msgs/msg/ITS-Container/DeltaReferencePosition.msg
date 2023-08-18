@@ -6,9 +6,9 @@
 # }
 # ------------------------------------------------------------------------------
 
-DeltaLatitude deltaLatitude
+DeltaLatitude delta_latitude
 
-DeltaLongitude deltaLongitude
+DeltaLongitude delta_longitude
 
-DeltaAltitude deltaAltitude
+DeltaAltitude delta_altitude
 

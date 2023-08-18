@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-LongitudinalAccelerationValue longitudinalAccelerationValue
+LongitudinalAccelerationValue longitudinal_acceleration_value
 
-AccelerationConfidence longitudinalAccelerationConfidence
+AccelerationConfidence longitudinal_acceleration_confidence
 

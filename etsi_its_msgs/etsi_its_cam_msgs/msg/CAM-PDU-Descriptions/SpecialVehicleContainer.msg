@@ -13,24 +13,24 @@
 
 uint8 choice
 
-PublicTransportContainer publicTransportContainer
+PublicTransportContainer public_transport_container
 uint8 CHOICE_PUBLIC_TRANSPORT_CONTAINER = 0
 
-SpecialTransportContainer specialTransportContainer
+SpecialTransportContainer special_transport_container
 uint8 CHOICE_SPECIAL_TRANSPORT_CONTAINER = 1
 
-DangerousGoodsContainer dangerousGoodsContainer
+DangerousGoodsContainer dangerous_goods_container
 uint8 CHOICE_DANGEROUS_GOODS_CONTAINER = 2
 
-RoadWorksContainerBasic roadWorksContainerBasic
+RoadWorksContainerBasic road_works_container_basic
 uint8 CHOICE_ROAD_WORKS_CONTAINER_BASIC = 3
 
-RescueContainer rescueContainer
+RescueContainer rescue_container
 uint8 CHOICE_RESCUE_CONTAINER = 4
 
-EmergencyContainer emergencyContainer
+EmergencyContainer emergency_container
 uint8 CHOICE_EMERGENCY_CONTAINER = 5
 
-SafetyCarContainer safetyCarContainer
+SafetyCarContainer safety_car_container
 uint8 CHOICE_SAFETY_CAR_CONTAINER = 6
 

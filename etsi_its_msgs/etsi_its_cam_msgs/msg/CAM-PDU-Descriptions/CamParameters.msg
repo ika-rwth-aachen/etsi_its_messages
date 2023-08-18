@@ -8,13 +8,13 @@
 # }
 # ------------------------------------------------------------------------------
 
-BasicContainer basicContainer
+BasicContainer basic_container
 
-HighFrequencyContainer highFrequencyContainer
+HighFrequencyContainer high_frequency_container
 
-LowFrequencyContainer lowFrequencyContainer
-bool lowFrequencyContainer_isPresent
+LowFrequencyContainer low_frequency_container
+bool low_frequency_container_is_present
 
-SpecialVehicleContainer specialVehicleContainer
-bool specialVehicleContainer_isPresent
+SpecialVehicleContainer special_vehicle_container
+bool special_vehicle_container_is_present
 

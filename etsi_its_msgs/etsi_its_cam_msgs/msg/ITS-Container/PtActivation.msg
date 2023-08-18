@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-PtActivationType ptActivationType
+PtActivationType pt_activation_type
 
-PtActivationData ptActivationData
+PtActivationData pt_activation_data
 
