@@ -1,0 +1,5 @@
+<library path="lib/libetsi_its_conversion">
+    <class name="etsi_its_conversion/Converter" type="etsi_its_conversion::Converter" base_class_type="nodelet::Nodelet">
+        <description>etsi_its_conversion/Converter nodelet</description>
+    </class>
+</library>
