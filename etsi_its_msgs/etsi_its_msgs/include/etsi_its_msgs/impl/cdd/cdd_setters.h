@@ -87,10 +87,11 @@ namespace access_functions {
 
   /**
    * @brief Set the Altitude object
+   *
+   * AltitudeConfidence is set to UNAVAILABLE
    * 
    * @param altitude object to set
    * @param value Altitude value (above the reference ellipsoid surface) in meter as decimal number
-   * AltitudeConfidence is set to UNAVAILABLE
    */
   inline void setAltitude(Altitude& altitude, double value) {
     altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
