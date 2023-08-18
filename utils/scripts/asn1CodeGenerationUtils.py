@@ -32,6 +32,17 @@ def camel2SNAKE(s: str) -> str:
 
     return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
 
+def camel2snake(s: str) -> str:
+    """Converts a camelCase string to snake_case.
+
+    Args:
+        s (str): camelCaseString
+
+    Returns:
+        str: snake_case_string
+    """
+
+    return re.sub("([A-Z0-9])", r"_\1", s).lower().lstrip("_").replace("-", "")
 
 def validRosType(s: str) -> str:
     """Converts a string to make it a valid ROS message type.
@@ -274,7 +285,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         member_context = {
             "type": ros_type,
             "asn1_type": type,
-            "name": validRosField(name),
+            "name": camel2snake(validRosField(name)),
             "constants": [],
             "is_primitive": True,
         }
@@ -448,7 +459,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
     # custom types
     elif type in asn1_types:
 
-        name = asn1["name"] if "name" in asn1 else "value"
+        name = camel2snake(asn1["name"]) if "name" in asn1 else "value"
         context["members"].append({
             "type": validRosType(type),
             "name": validRosField(name)
