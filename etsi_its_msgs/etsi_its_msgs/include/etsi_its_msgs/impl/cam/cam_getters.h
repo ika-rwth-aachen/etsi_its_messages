@@ -5,9 +5,11 @@
 
 #pragma once
 
+namespace cdd = etsi_its_msgs::cdd_access;
 namespace etsi_its_cam_msgs {
 
 namespace access {
+
 
   /**
    * @brief Get the Station ID object
@@ -16,7 +18,7 @@ namespace access {
    * @return stationID value
    */
   inline int getStationID(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getStationID(cam.header);
+    return cdd::getStationID(cam.header);
   }
 
   /**
@@ -36,7 +38,7 @@ namespace access {
    * @return Latitude value in degree as decimal number
    */
   inline double getLatitude(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getLatitude(cam.cam.camParameters.basicContainer.referencePosition.latitude);
+    return cdd::getLatitude(cam.cam.camParameters.basicContainer.referencePosition.latitude);
   }
 
   /**
@@ -46,7 +48,7 @@ namespace access {
    * @return Longitude value in degree as decimal number
    */
   inline double getLongitude(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getLongitude(cam.cam.camParameters.basicContainer.referencePosition.longitude);
+    return cdd::getLongitude(cam.cam.camParameters.basicContainer.referencePosition.longitude);
   }
 
   /**
@@ -56,7 +58,7 @@ namespace access {
    * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getAltitude(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getAltitude(cam.cam.camParameters.basicContainer.referencePosition.altitude);
+    return cdd::getAltitude(cam.cam.camParameters.basicContainer.referencePosition.altitude);
   }
 
   /**
@@ -68,7 +70,7 @@ namespace access {
    * @return Heading value in degree as decimal number
    */
   inline double getHeading(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading);
+    return cdd::getHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading);
   }
 
   /**
@@ -78,7 +80,7 @@ namespace access {
    * @return vehicle length value in meter as decimal number
    */
   inline double getVehicleLength(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength);
+    return cdd::getVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength);
   }
 
   /**
@@ -88,7 +90,7 @@ namespace access {
    * @return vehicle width value in meter as decimal number
    */
   inline double getVehicleWidth(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth);
+    return cdd::getVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth);
   }
 
   /**
@@ -98,7 +100,7 @@ namespace access {
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed);
+    return cdd::getSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed);
   }
 
   /**
@@ -108,7 +110,7 @@ namespace access {
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
   inline double getLongitudinalAcceleration(const CAM& cam){
-    return etsi_its_msgs::cdd_access::getLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration);
+    return cdd::getLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration);
   }
 
   /**
@@ -120,7 +122,7 @@ namespace access {
   inline double getLateralAcceleration(const CAM& cam){
     if(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration_isPresent)
     {
-      return etsi_its_msgs::cdd_access::getLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration);
+      return cdd::getLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration);
     }
     else
     {

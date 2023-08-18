@@ -5,5 +5,6 @@
 
 #pragma once
 
+#include <etsi_its_msgs/impl/cdd/cdd_checks.h>
 #include <etsi_its_msgs/impl/cdd/cdd_getters.h>
 #include <etsi_its_msgs/impl/cdd/cdd_setters.h>

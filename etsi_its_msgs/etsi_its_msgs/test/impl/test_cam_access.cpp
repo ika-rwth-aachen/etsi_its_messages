@@ -61,8 +61,9 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
 
   double lon_accel = randomDouble(-16.0, 16.0);
   double lat_accel = randomDouble(-16.0, 16.0);
-  setAccelerations(cam, lon_accel, lat_accel);
+  setLongitudinalAcceleration(cam, lon_accel);
   EXPECT_NEAR(lon_accel, getLongitudinalAcceleration(cam), 1e-1);
+  setLateralAcceleration(cam, lat_accel);
   EXPECT_NEAR(lat_accel, getLateralAcceleration(cam), 1e-1);
 }
 

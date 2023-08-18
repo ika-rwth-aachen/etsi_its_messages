@@ -5,6 +5,7 @@
 
 #pragma once
 
+namespace cdd = etsi_its_msgs::cdd_access;
 namespace etsi_its_cam_msgs {
 
 namespace access {
@@ -17,7 +18,7 @@ namespace access {
    * @param protocol_version 
    */
   inline void setItsPduHeader(CAM& cam, int station_id, int protocol_version = 0){
-    etsi_its_msgs::cdd_access::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_I_D_CAM, station_id, protocol_version);
+    cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_I_D_CAM, station_id, protocol_version);
   }
 
   /**
@@ -27,7 +28,7 @@ namespace access {
    * @param value StationType value to set
    */
   inline void setStationType(CAM& cam, const int value){
-    etsi_its_msgs::cdd_access::setStationType(cam.cam.camParameters.basicContainer.stationType, value); 
+    cdd::setStationType(cam.cam.camParameters.basicContainer.stationType, value); 
   }
 
   /**
@@ -41,7 +42,7 @@ namespace access {
    */
   inline void setReferencePosition(CAM& cam, double latitude, double longitude)
   {
-    etsi_its_msgs::cdd_access::setReferencePosition(cam.cam.camParameters.basicContainer.referencePosition, latitude, longitude);
+    cdd::setReferencePosition(cam.cam.camParameters.basicContainer.referencePosition, latitude, longitude);
   }
 
   /**
@@ -54,7 +55,7 @@ namespace access {
    */
   inline void setReferencePosition(CAM& cam, double latitude, double longitude, double altitude)
   {
-    etsi_its_msgs::cdd_access::setReferencePosition(cam.cam.camParameters.basicContainer.referencePosition, latitude, longitude, altitude);
+    cdd::setReferencePosition(cam.cam.camParameters.basicContainer.referencePosition, latitude, longitude, altitude);
   }
 
   /**
@@ -67,7 +68,7 @@ namespace access {
    * @param value Heading value in degree as decimal number
    */
   inline void setHeading(CAM& cam, const double heading_val){
-    etsi_its_msgs::cdd_access::setHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading, heading_val);
+    cdd::setHeading(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.heading, heading_val);
   }
 
   /**
@@ -78,8 +79,8 @@ namespace access {
    * @param vehicle_width vehicle width in meter as decimal number
    */
   inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const double vehicle_width){
-    etsi_its_msgs::cdd_access::setVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength, vehicle_length);
-    etsi_its_msgs::cdd_access::setVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth, vehicle_width);
+    cdd::setVehicleLength(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleLength, vehicle_length);
+    cdd::setVehicleWidth(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.vehicleWidth, vehicle_width);
   }
 
   /**
@@ -89,27 +90,28 @@ namespace access {
    * @param speed_val speed value to set in m/s as decimal number
    */
   inline void setSpeed(CAM& cam, const double speed_val){
-    etsi_its_msgs::cdd_access::setSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed, speed_val);
+    cdd::setSpeed(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.speed, speed_val);
   }
 
   /**
-   * @brief Set the lateral and longitudinal accelerations
+   * @brief Set the longitudinal acceleration
    * 
    * @param cam CAM to set the acceleration value s
    * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
+   */
+  inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel){
+    cdd::setLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration, lon_accel);
+  }
+
+  /**
+   * @brief Set the lateral acceleration
+   * 
+   * @param cam CAM to set the acceleration value s
    * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
    */
-  inline void setAccelerations(CAM& cam, const double lon_accel, const double lat_accel){
-    etsi_its_msgs::cdd_access::setLongitudinalAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.longitudinalAcceleration, lon_accel);
-    if(lat_accel!=16.1)
-    {
-      etsi_its_msgs::cdd_access::setLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration, lat_accel);  
+  inline void setLateralAcceleration(CAM& cam, const double lat_accel){
+      cdd::setLateralAcceleration(cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration, lat_accel);  
       cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration_isPresent = true;
-    }
-    else
-    {
-      cam.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency.lateralAcceleration_isPresent = false;
-    }
   }
   
 } // namespace access
