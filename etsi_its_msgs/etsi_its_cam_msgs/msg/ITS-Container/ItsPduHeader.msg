@@ -8,7 +8,7 @@ uint8 protocol_version
 uint8 PROTOCOL_VERSION_MIN = 0
 uint8 PROTOCOL_VERSION_MAX = 255
 
-uint8 message_i_d
+uint8 message_id
 uint8 MESSAGE_I_D_MIN = 0
 uint8 MESSAGE_I_D_MAX = 255
 uint8 MESSAGE_I_D_DENM = 1
@@ -25,5 +25,5 @@ uint8 MESSAGE_I_D_EVCSN = 11
 uint8 MESSAGE_I_D_SAEM = 12
 uint8 MESSAGE_I_D_RTCMEM = 13
 
-StationID station_i_d
+StationID station_id
 

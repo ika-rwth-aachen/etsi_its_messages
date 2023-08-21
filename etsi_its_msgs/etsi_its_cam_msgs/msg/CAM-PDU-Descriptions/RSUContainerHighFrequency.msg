@@ -5,6 +5,6 @@
 # }
 # ------------------------------------------------------------------------------
 
-ProtectedCommunicationZonesRSU protected_communication_zones_r_s_u
-bool protected_communication_zones_r_s_u_is_present
+ProtectedCommunicationZonesRSU protected_communication_zones_rsu
+bool protected_communication_zones_rsu_is_present
 

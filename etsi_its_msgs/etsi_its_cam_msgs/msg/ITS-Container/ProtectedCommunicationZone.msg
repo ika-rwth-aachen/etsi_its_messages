@@ -22,6 +22,6 @@ Longitude protected_zone_longitude
 ProtectedZoneRadius protected_zone_radius
 bool protected_zone_radius_is_present
 
-ProtectedZoneID protected_zone_i_d
-bool protected_zone_i_d_is_present
+ProtectedZoneID protected_zone_id
+bool protected_zone_id_is_present
 
