@@ -18,6 +18,7 @@
 
   <!-- ROS1 -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <depend condition="$ROS_VERSION == 1">nodelet</depend>
   <depend condition="$ROS_VERSION == 1">roscpp</depend>
   <depend condition="$ROS_VERSION == 1">roslaunch</depend>
   <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>

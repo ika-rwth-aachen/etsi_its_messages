@@ -32,11 +32,11 @@ namespace cdd_access {
    * @param protocol_version 
    */
   inline void setItsPduHeader(ItsPduHeader& header, int message_id, int station_id, int protocol_version=0) {
-    setStationId(header.stationID, station_id);
+    setStationId(header.station_i_d, station_id);
     throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_I_D_MIN, ItsPduHeader::MESSAGE_I_D_MAX, "MessageID");
-    header.messageID = message_id;
+    header.message_i_d = message_id;
     throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
-    header.protocolVersion = protocol_version;
+    header.protocol_version = protocol_version;
   }
 
   /**
@@ -96,8 +96,8 @@ namespace cdd_access {
    * @param value Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline void setAltitude(Altitude& altitude, double value) {
-    altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
-    setAltitudeValue(altitude.altitudeValue, value);
+    altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
+    setAltitudeValue(altitude.altitude_value, value);
   }
 
   /**
@@ -113,8 +113,8 @@ namespace cdd_access {
   {
     setLatitude(ref_position.latitude, latitude);
     setLongitude(ref_position.longitude, longitude);
-    ref_position.altitude.altitudeValue.value  = AltitudeValue::UNAVAILABLE;
-    ref_position.altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
+    ref_position.altitude.altitude_value.value  = AltitudeValue::UNAVAILABLE;
+    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
   }
 
   /**
@@ -156,8 +156,8 @@ namespace cdd_access {
    * @param value Heading value in degree as decimal number
    */
   inline void setHeading(Heading& heading, double value) {
-    heading.headingConfidence.value = HeadingConfidence::UNAVAILABLE;
-    setHeadingValue(heading.headingValue, value);
+    heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+    setHeadingValue(heading.heading_value, value);
   }
 
   /**
@@ -181,8 +181,8 @@ namespace cdd_access {
    * @param value  VehicleLengthValue in meter as decimal number
    */
   inline void setVehicleLength(VehicleLength& vehicle_length, double value) {
-    vehicle_length.vehicleLengthConfidenceIndication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
-    setVehicleLengthValue(vehicle_length.vehicleLengthValue, value);
+    vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
+    setVehicleLengthValue(vehicle_length.vehicle_length_value, value);
   }
 
   /**
@@ -218,8 +218,8 @@ namespace cdd_access {
    * @param value  Speed in in m/s as decimal number
    */
   inline void setSpeed(Speed& speed, double value) {
-    speed.speedConfidence.value = SpeedConfidence::UNAVAILABLE;
-    setSpeedValue(speed.speedValue, value);
+    speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;
+    setSpeedValue(speed.speed_value, value);
   }
 
   /**
@@ -244,8 +244,8 @@ namespace cdd_access {
    * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
    */
   inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, double value) {
-    accel.longitudinalAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
-    setLongitudinalAccelerationValue(accel.longitudinalAccelerationValue, value);
+    accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);
   }
 
     /**
@@ -270,8 +270,8 @@ namespace cdd_access {
    * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
    */
   inline void setLateralAcceleration(LateralAcceleration& accel, double value) {
-    accel.lateralAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
-    setLateralAccelerationValue(accel.lateralAccelerationValue, value);
+    accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLateralAccelerationValue(accel.lateral_acceleration_value, value);
   }
 
 } // namespace cdd_access

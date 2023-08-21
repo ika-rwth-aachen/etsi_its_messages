@@ -16,7 +16,7 @@ namespace cdd_access {
   * @return stationID value
   */
   inline int getStationID(const ItsPduHeader& header){
-    return header.stationID.value;
+    return header.station_i_d.value;
   }
 
   /**
@@ -46,7 +46,7 @@ namespace cdd_access {
    * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getAltitude(const Altitude& altitude){
-    return ((double)altitude.altitudeValue.value)*1e-2;
+    return ((double)altitude.altitude_value.value)*1e-2;
   }
 
   /**
@@ -58,7 +58,7 @@ namespace cdd_access {
    * @return Heading value in degree as decimal number
    */
   inline double getHeading(const Heading& heading){
-    return ((double)heading.headingValue.value)*1e-1;
+    return ((double)heading.heading_value.value)*1e-1;
   }
 
   /**
@@ -67,8 +67,8 @@ namespace cdd_access {
    * @param vehicleLength to get the vehicle length value from
    * @return vehicle length value in meter as decimal number
    */
-  inline double getVehicleLength(const VehicleLength& vehicleLength){
-    return ((double)vehicleLength.vehicleLengthValue.value)*1e-1;
+  inline double getVehicleLength(const VehicleLength& vehicle_length){
+    return ((double)vehicle_length.vehicle_length_value.value)*1e-1;
   }
 
   /**
@@ -77,8 +77,8 @@ namespace cdd_access {
    * @param vehicleWidth to get the vehicle width value from
    * @return vehicle width value in meter as decimal number
    */
-  inline double getVehicleWidth(const VehicleWidth& vehicleWidth){
-    return ((double)vehicleWidth.value)*1e-1;
+  inline double getVehicleWidth(const VehicleWidth& vehicle_width){
+    return ((double)vehicle_width.value)*1e-1;
   }
 
   /**
@@ -88,7 +88,7 @@ namespace cdd_access {
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const Speed& speed){
-    return ((double)speed.speedValue.value)*1e-2;
+    return ((double)speed.speed_value.value)*1e-2;
   }
 
   /**
@@ -97,8 +97,8 @@ namespace cdd_access {
    * @param longitudinalAcceleration to get the lateral acceleration from
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
-  inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinalAcceleration){
-    return ((double)longitudinalAcceleration.longitudinalAccelerationValue.value)*1e-1;
+  inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration){
+    return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value)*1e-1;
   }
 
   /**
@@ -107,8 +107,8 @@ namespace cdd_access {
    * @param lateralAcceleration to get the lateral acceleration from
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
-  inline double getLateralAcceleration(const LateralAcceleration& lateralAcceleration){
-    return ((double)lateralAcceleration.lateralAccelerationValue.value)*1e-1;
+  inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration){
+    return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
   }
 
 } // namespace access
