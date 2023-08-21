@@ -24,7 +24,7 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   int station_id = randomInt(StationID::MIN,StationID::MAX);
   int protocol_version = randomInt(ItsPduHeader::PROTOCOL_VERSION_MIN,ItsPduHeader::PROTOCOL_VERSION_MAX);
   setItsPduHeader(cam, station_id, protocol_version);
-  EXPECT_EQ(ItsPduHeader::MESSAGE_I_D_CAM, cam.header.message_i_d);
+  EXPECT_EQ(ItsPduHeader::MESSAGE_I_D_CAM, cam.header.message_id);
   EXPECT_EQ(protocol_version, cam.header.protocol_version);
   EXPECT_EQ(station_id, getStationID(cam));
 
