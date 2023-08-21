@@ -286,6 +286,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
             "type": ros_type,
             "asn1_type": type,
             "name": camel2snake(validRosField(name)),
+            "name_cc": validRosField(name),
             "constants": [],
             "is_primitive": True,
         }
@@ -459,10 +460,12 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
     # custom types
     elif type in asn1_types:
 
-        name = camel2snake(asn1["name"]) if "name" in asn1 else "value"
+        name_cc = asn1["name"] if "name" in asn1 else "value"
+        name = camel2snake(name_cc)
         context["members"].append({
             "type": validRosType(type),
-            "name": validRosField(name)
+            "name": validRosField(name),
+            "name_cc": validRosField(name_cc)
         })
 
     elif type == "NULL":

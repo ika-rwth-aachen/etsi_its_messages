@@ -11,7 +11,7 @@ namespace etsi_its_{{ etsi_type }}_conversion {
 
 void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
 {% for member in members %}
-  toRos_{{ member.type }}(in, out.{{ member.name }});
+  toRos_{{ member.type }}(in, out.{{ member.name_cc }});
 {% endfor -%}
 }
 
