@@ -1,0 +1,5 @@
+repositories:
+  udp_msgs:
+    type: git
+    url: https://gitlab.ika.rwth-aachen.de/fb-fi/definitions/udp_msgs.git
+    version: feature/ros1
