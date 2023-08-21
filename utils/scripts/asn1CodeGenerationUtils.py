@@ -41,8 +41,8 @@ def camel2snake(s: str) -> str:
     Returns:
         str: snake_case_string
     """
-
-    return re.sub("([A-Z0-9])", r"_\1", s).lower().lstrip("_").replace("-", "")
+    s = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', s)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s).lower()
 
 def validRosType(s: str) -> str:
     """Converts a string to make it a valid ROS message type.
@@ -253,6 +253,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         "etsi_type": None,
         "members": [],
         "t_name": t_name,
+        "t_name_snake": camel2snake(t_name),
         "type": noSpace(type),
         "asn1_type": type,
         "is_primitive": False,
