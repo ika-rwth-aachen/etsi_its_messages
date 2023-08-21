@@ -39,8 +39,45 @@ if(${ROS_VERSION} EQUAL 1)
 # === ROS2 (AMENT) =============================================================
 elseif(${ROS_VERSION} EQUAL 2)
 
-    # find_package(ament_cmake REQUIRED)
+    find_package(ament_cmake REQUIRED)
+    find_package(etsi_its_cam_msgs REQUIRED)
 
-    # ament_package()
+    add_library(etsi_its_cam_msgs_access INTERFACE)
+
+    target_include_directories(etsi_its_cam_msgs_access INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+    )
+
+    ament_export_targets(etsi_its_cam_msgs_accessTargets HAS_LIBRARY_TARGET)
+    ament_export_dependencies(etsi_its_cam_msgs)
+
+    install(
+        DIRECTORY include/
+        DESTINATION include
+    )
+
+    install(TARGETS etsi_its_cam_msgs_access
+        EXPORT etsi_its_cam_msgs_accessTargets
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION lib
+        INCLUDES DESTINATION include
+    )
+
+    if(BUILD_TESTING)
+        find_package(ament_cmake_gtest REQUIRED)
+        ament_add_gtest(etsi_its_cam_msgs_access-test test/test_cam_access.ros2.cpp)
+        target_include_directories(etsi_its_cam_msgs_access-test PUBLIC
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+            $<INSTALL_INTERFACE:include>
+        )
+        target_include_directories(etsi_its_cam_msgs_access-test PUBLIC test)
+        ament_target_dependencies(etsi_its_cam_msgs_access-test
+            etsi_its_cam_msgs
+        )
+    endif()
+
+    ament_package()
 
 endif()
