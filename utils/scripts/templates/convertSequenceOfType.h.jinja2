@@ -7,24 +7,35 @@
 {% for member in members -%}
 #include <etsi_its_{{ etsi_type }}_coding/{{ member.type|replace("[]", "") }}.h>
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type|replace("[]", "") }}.h>
+{% endfor -%}
+#ifdef ROS2
+{% for member in members -%}
+#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ member.type|replace("[]", "") }}.hpp>
+{% endfor -%}
+#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ t_name_snake }}.hpp>
+namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
+#else
+{% for member in members -%}
 #include <etsi_its_{{ etsi_type }}_msgs/{{ member.type|replace("[]", "") }}.h>
 {% endfor -%}
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
+namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
+#endif
 
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
+void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
 {% for member in members %}
   for (int i = 0; i < in.list.count; i++) {
-    etsi_its_{{ etsi_type }}_msgs::{{ member.type|replace("[]", "") }} {{ member.name }};
+    {{ etsi_type}}_msgs::{{ member.type|replace("[]", "") }} {{ member.name }};
     toRos_{{ member.type|replace("[]", "") }}(*(in.list.array[i]), {{ member.name }});
     out.array.push_back({{ member.name }});
   }
 {% endfor %}
 }
 
-void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
     
   memset(&out, 0, sizeof({{ t_name }}_t));
 {% for member in members %}

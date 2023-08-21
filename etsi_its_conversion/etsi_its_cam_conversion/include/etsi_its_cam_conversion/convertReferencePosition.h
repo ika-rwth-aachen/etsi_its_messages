@@ -5,12 +5,18 @@
 #include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertPosConfidenceEllipse.h>
 #include <etsi_its_cam_conversion/convertAltitude.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/reference_position.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/ReferencePosition.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ReferencePosition(const ReferencePosition_t& in, etsi_its_cam_msgs::ReferencePosition& out) {
+void toRos_ReferencePosition(const ReferencePosition_t& in, cam_msgs::ReferencePosition& out) {
 
   toRos_Latitude(in.latitude, out.latitude);
   toRos_Longitude(in.longitude, out.longitude);
@@ -18,7 +24,7 @@ void toRos_ReferencePosition(const ReferencePosition_t& in, etsi_its_cam_msgs::R
   toRos_Altitude(in.altitude, out.altitude);
 }
 
-void toStruct_ReferencePosition(const etsi_its_cam_msgs::ReferencePosition& in, ReferencePosition_t& out) {
+void toStruct_ReferencePosition(const cam_msgs::ReferencePosition& in, ReferencePosition_t& out) {
     
   memset(&out, 0, sizeof(ReferencePosition_t));
 

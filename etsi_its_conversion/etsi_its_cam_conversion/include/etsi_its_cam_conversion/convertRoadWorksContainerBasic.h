@@ -4,12 +4,18 @@
 #include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertClosedLanes.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/road_works_container_basic.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/RoadWorksContainerBasic.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, etsi_its_cam_msgs::RoadWorksContainerBasic& out) {
+void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, cam_msgs::RoadWorksContainerBasic& out) {
 
   if (in.roadworksSubCauseCode) {
     toRos_RoadworksSubCauseCode(*in.roadworksSubCauseCode, out.roadworks_sub_cause_code);
@@ -24,7 +30,7 @@ void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, etsi_its
 
 }
 
-void toStruct_RoadWorksContainerBasic(const etsi_its_cam_msgs::RoadWorksContainerBasic& in, RoadWorksContainerBasic_t& out) {
+void toStruct_RoadWorksContainerBasic(const cam_msgs::RoadWorksContainerBasic& in, RoadWorksContainerBasic_t& out) {
     
   memset(&out, 0, sizeof(RoadWorksContainerBasic_t));
 

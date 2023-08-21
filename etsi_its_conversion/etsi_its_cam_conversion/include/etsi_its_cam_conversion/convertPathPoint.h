@@ -3,12 +3,18 @@
 #include <etsi_its_cam_coding/PathPoint.h>
 #include <etsi_its_cam_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_cam_conversion/convertPathDeltaTime.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/path_point.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/PathPoint.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PathPoint(const PathPoint_t& in, etsi_its_cam_msgs::PathPoint& out) {
+void toRos_PathPoint(const PathPoint_t& in, cam_msgs::PathPoint& out) {
 
   toRos_DeltaReferencePosition(in.pathPosition, out.path_position);
   if (in.pathDeltaTime) {
@@ -18,7 +24,7 @@ void toRos_PathPoint(const PathPoint_t& in, etsi_its_cam_msgs::PathPoint& out) {
 
 }
 
-void toStruct_PathPoint(const etsi_its_cam_msgs::PathPoint& in, PathPoint_t& out) {
+void toStruct_PathPoint(const cam_msgs::PathPoint& in, PathPoint_t& out) {
     
   memset(&out, 0, sizeof(PathPoint_t));
 

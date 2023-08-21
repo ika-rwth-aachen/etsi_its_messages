@@ -4,12 +4,18 @@
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertCauseCode.h>
 #include <etsi_its_cam_conversion/convertEmergencyPriority.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/emergency_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/EmergencyContainer.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EmergencyContainer(const EmergencyContainer_t& in, etsi_its_cam_msgs::EmergencyContainer& out) {
+void toRos_EmergencyContainer(const EmergencyContainer_t& in, cam_msgs::EmergencyContainer& out) {
 
   toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.light_bar_siren_in_use);
   if (in.incidentIndication) {
@@ -24,7 +30,7 @@ void toRos_EmergencyContainer(const EmergencyContainer_t& in, etsi_its_cam_msgs:
 
 }
 
-void toStruct_EmergencyContainer(const etsi_its_cam_msgs::EmergencyContainer& in, EmergencyContainer_t& out) {
+void toStruct_EmergencyContainer(const cam_msgs::EmergencyContainer& in, EmergencyContainer_t& out) {
     
   memset(&out, 0, sizeof(EmergencyContainer_t));
 

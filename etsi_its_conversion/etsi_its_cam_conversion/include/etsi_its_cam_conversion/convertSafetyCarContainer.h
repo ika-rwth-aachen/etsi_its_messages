@@ -5,12 +5,18 @@
 #include <etsi_its_cam_conversion/convertCauseCode.h>
 #include <etsi_its_cam_conversion/convertTrafficRule.h>
 #include <etsi_its_cam_conversion/convertSpeedLimit.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/safety_car_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/SafetyCarContainer.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SafetyCarContainer(const SafetyCarContainer_t& in, etsi_its_cam_msgs::SafetyCarContainer& out) {
+void toRos_SafetyCarContainer(const SafetyCarContainer_t& in, cam_msgs::SafetyCarContainer& out) {
 
   toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.light_bar_siren_in_use);
   if (in.incidentIndication) {
@@ -30,7 +36,7 @@ void toRos_SafetyCarContainer(const SafetyCarContainer_t& in, etsi_its_cam_msgs:
 
 }
 
-void toStruct_SafetyCarContainer(const etsi_its_cam_msgs::SafetyCarContainer& in, SafetyCarContainer_t& out) {
+void toStruct_SafetyCarContainer(const cam_msgs::SafetyCarContainer& in, SafetyCarContainer_t& out) {
     
   memset(&out, 0, sizeof(SafetyCarContainer_t));
 

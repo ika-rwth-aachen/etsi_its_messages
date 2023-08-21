@@ -3,18 +3,24 @@
 #include <etsi_its_cam_coding/Speed.h>
 #include <etsi_its_cam_conversion/convertSpeedValue.h>
 #include <etsi_its_cam_conversion/convertSpeedConfidence.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/speed.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/Speed.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Speed(const Speed_t& in, etsi_its_cam_msgs::Speed& out) {
+void toRos_Speed(const Speed_t& in, cam_msgs::Speed& out) {
 
   toRos_SpeedValue(in.speedValue, out.speed_value);
   toRos_SpeedConfidence(in.speedConfidence, out.speed_confidence);
 }
 
-void toStruct_Speed(const etsi_its_cam_msgs::Speed& in, Speed_t& out) {
+void toStruct_Speed(const cam_msgs::Speed& in, Speed_t& out) {
     
   memset(&out, 0, sizeof(Speed_t));
 

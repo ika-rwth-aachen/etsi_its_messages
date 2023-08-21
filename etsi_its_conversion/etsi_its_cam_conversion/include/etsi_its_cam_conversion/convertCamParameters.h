@@ -5,12 +5,18 @@
 #include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertLowFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialVehicleContainer.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/cam_parameters.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/CamParameters.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CamParameters(const CamParameters_t& in, etsi_its_cam_msgs::CamParameters& out) {
+void toRos_CamParameters(const CamParameters_t& in, cam_msgs::CamParameters& out) {
 
   toRos_BasicContainer(in.basicContainer, out.basic_container);
   toRos_HighFrequencyContainer(in.highFrequencyContainer, out.high_frequency_container);
@@ -26,7 +32,7 @@ void toRos_CamParameters(const CamParameters_t& in, etsi_its_cam_msgs::CamParame
 
 }
 
-void toStruct_CamParameters(const etsi_its_cam_msgs::CamParameters& in, CamParameters_t& out) {
+void toStruct_CamParameters(const cam_msgs::CamParameters& in, CamParameters_t& out) {
     
   memset(&out, 0, sizeof(CamParameters_t));
 

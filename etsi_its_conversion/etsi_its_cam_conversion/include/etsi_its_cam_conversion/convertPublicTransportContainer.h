@@ -3,12 +3,18 @@
 #include <etsi_its_cam_coding/PublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
 #include <etsi_its_cam_conversion/convertPtActivation.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/public_transport_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/PublicTransportContainer.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PublicTransportContainer(const PublicTransportContainer_t& in, etsi_its_cam_msgs::PublicTransportContainer& out) {
+void toRos_PublicTransportContainer(const PublicTransportContainer_t& in, cam_msgs::PublicTransportContainer& out) {
 
   toRos_EmbarkationStatus(in.embarkationStatus, out.embarkation_status);
   if (in.ptActivation) {
@@ -18,7 +24,7 @@ void toRos_PublicTransportContainer(const PublicTransportContainer_t& in, etsi_i
 
 }
 
-void toStruct_PublicTransportContainer(const etsi_its_cam_msgs::PublicTransportContainer& in, PublicTransportContainer_t& out) {
+void toStruct_PublicTransportContainer(const cam_msgs::PublicTransportContainer& in, PublicTransportContainer_t& out) {
     
   memset(&out, 0, sizeof(PublicTransportContainer_t));
 

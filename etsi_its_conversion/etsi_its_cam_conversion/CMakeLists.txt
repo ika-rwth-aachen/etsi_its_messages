@@ -38,6 +38,8 @@ if(${ROS_VERSION} EQUAL 1)
 # === ROS2 (AMENT) =============================================================
 elseif(${ROS_VERSION} EQUAL 2)
 
+  add_compile_definitions(ROS2)
+
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_cam_coding REQUIRED)
   find_package(etsi_its_cam_msgs REQUIRED)

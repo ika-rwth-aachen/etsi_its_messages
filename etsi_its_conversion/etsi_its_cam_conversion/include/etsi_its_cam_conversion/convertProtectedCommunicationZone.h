@@ -7,12 +7,18 @@
 #include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneRadius.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneID.h>
+#ifdef ROS2
+#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#else
 #include <etsi_its_cam_msgs/ProtectedCommunicationZone.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ProtectedCommunicationZone(const ProtectedCommunicationZone_t& in, etsi_its_cam_msgs::ProtectedCommunicationZone& out) {
+void toRos_ProtectedCommunicationZone(const ProtectedCommunicationZone_t& in, cam_msgs::ProtectedCommunicationZone& out) {
 
   toRos_ProtectedZoneType(in.protectedZoneType, out.protected_zone_type);
   if (in.expiryTime) {
@@ -28,13 +34,13 @@ void toRos_ProtectedCommunicationZone(const ProtectedCommunicationZone_t& in, et
   }
 
   if (in.protectedZoneID) {
-    toRos_ProtectedZoneID(*in.protectedZoneID, out.protected_zone_i_d);
-    out.protected_zone_i_d_is_present = true;
+    toRos_ProtectedZoneID(*in.protectedZoneID, out.protected_zone_id);
+    out.protected_zone_id_is_present = true;
   }
 
 }
 
-void toStruct_ProtectedCommunicationZone(const etsi_its_cam_msgs::ProtectedCommunicationZone& in, ProtectedCommunicationZone_t& out) {
+void toStruct_ProtectedCommunicationZone(const cam_msgs::ProtectedCommunicationZone& in, ProtectedCommunicationZone_t& out) {
     
   memset(&out, 0, sizeof(ProtectedCommunicationZone_t));
 
@@ -53,10 +59,10 @@ void toStruct_ProtectedCommunicationZone(const etsi_its_cam_msgs::ProtectedCommu
     out.protectedZoneRadius = new ProtectedZoneRadius_t(protected_zone_radius);
   }
 
-  if (in.protected_zone_i_d_is_present) {
-    ProtectedZoneID_t protected_zone_i_d;
-    toStruct_ProtectedZoneID(in.protected_zone_i_d, protected_zone_i_d);
-    out.protectedZoneID = new ProtectedZoneID_t(protected_zone_i_d);
+  if (in.protected_zone_id_is_present) {
+    ProtectedZoneID_t protected_zone_id;
+    toStruct_ProtectedZoneID(in.protected_zone_id, protected_zone_id);
+    out.protectedZoneID = new ProtectedZoneID_t(protected_zone_id);
   }
 
 }
