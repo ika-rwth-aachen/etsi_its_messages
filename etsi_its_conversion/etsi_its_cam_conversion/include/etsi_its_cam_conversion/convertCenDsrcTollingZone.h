@@ -11,10 +11,10 @@ namespace etsi_its_cam_conversion {
 
 void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, etsi_its_cam_msgs::CenDsrcTollingZone& out) {
 
-  toRos_Latitude(in.protected_zone_latitude, out.protected_zone_latitude);
-  toRos_Longitude(in.protected_zone_longitude, out.protected_zone_longitude);
-  if (in.cen_dsrc_tolling_zone_i_d) {
-    toRos_CenDsrcTollingZoneID(*in.cen_dsrc_tolling_zone_i_d, out.cen_dsrc_tolling_zone_i_d);
+  toRos_Latitude(in.protectedZoneLatitude, out.protected_zone_latitude);
+  toRos_Longitude(in.protectedZoneLongitude, out.protected_zone_longitude);
+  if (in.cenDsrcTollingZoneID) {
+    toRos_CenDsrcTollingZoneID(*in.cenDsrcTollingZoneID, out.cen_dsrc_tolling_zone_i_d);
     out.cen_dsrc_tolling_zone_i_d_is_present = true;
   }
 
@@ -24,12 +24,12 @@ void toStruct_CenDsrcTollingZone(const etsi_its_cam_msgs::CenDsrcTollingZone& in
     
   memset(&out, 0, sizeof(CenDsrcTollingZone_t));
 
-  toStruct_Latitude(in.protected_zone_latitude, out.protected_zone_latitude);
-  toStruct_Longitude(in.protected_zone_longitude, out.protected_zone_longitude);
+  toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
+  toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.cen_dsrc_tolling_zone_i_d_is_present) {
     CenDsrcTollingZoneID_t cen_dsrc_tolling_zone_i_d;
     toStruct_CenDsrcTollingZoneID(in.cen_dsrc_tolling_zone_i_d, cen_dsrc_tolling_zone_i_d);
-    out.cen_dsrc_tolling_zone_i_d = new CenDsrcTollingZoneID_t(cen_dsrc_tolling_zone_i_d);
+    out.cenDsrcTollingZoneID = new CenDsrcTollingZoneID_t(cen_dsrc_tolling_zone_i_d);
   }
 
 }

@@ -14,7 +14,7 @@ void toRos_ReferencePosition(const ReferencePosition_t& in, etsi_its_cam_msgs::R
 
   toRos_Latitude(in.latitude, out.latitude);
   toRos_Longitude(in.longitude, out.longitude);
-  toRos_PosConfidenceEllipse(in.position_confidence_ellipse, out.position_confidence_ellipse);
+  toRos_PosConfidenceEllipse(in.positionConfidenceEllipse, out.position_confidence_ellipse);
   toRos_Altitude(in.altitude, out.altitude);
 }
 
@@ -24,7 +24,7 @@ void toStruct_ReferencePosition(const etsi_its_cam_msgs::ReferencePosition& in, 
 
   toStruct_Latitude(in.latitude, out.latitude);
   toStruct_Longitude(in.longitude, out.longitude);
-  toStruct_PosConfidenceEllipse(in.position_confidence_ellipse, out.position_confidence_ellipse);
+  toStruct_PosConfidenceEllipse(in.position_confidence_ellipse, out.positionConfidenceEllipse);
   toStruct_Altitude(in.altitude, out.altitude);
 }
 
