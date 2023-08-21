@@ -9,9 +9,9 @@ namespace etsi_its_cam_conversion {
 
 void toRos_RSUContainerHighFrequency(const RSUContainerHighFrequency_t& in, etsi_its_cam_msgs::RSUContainerHighFrequency& out) {
 
-  if (in.protectedCommunicationZonesRSU) {
-    toRos_ProtectedCommunicationZonesRSU(*in.protectedCommunicationZonesRSU, out.protectedCommunicationZonesRSU);
-    out.protectedCommunicationZonesRSU_isPresent = true;
+  if (in.protected_communication_zones_r_s_u) {
+    toRos_ProtectedCommunicationZonesRSU(*in.protected_communication_zones_r_s_u, out.protected_communication_zones_r_s_u);
+    out.protected_communication_zones_r_s_u_is_present = true;
   }
 
 }
@@ -20,10 +20,10 @@ void toStruct_RSUContainerHighFrequency(const etsi_its_cam_msgs::RSUContainerHig
     
   memset(&out, 0, sizeof(RSUContainerHighFrequency_t));
 
-  if (in.protectedCommunicationZonesRSU_isPresent) {
-    ProtectedCommunicationZonesRSU_t protectedCommunicationZonesRSU;
-    toStruct_ProtectedCommunicationZonesRSU(in.protectedCommunicationZonesRSU, protectedCommunicationZonesRSU);
-    out.protectedCommunicationZonesRSU = new ProtectedCommunicationZonesRSU_t(protectedCommunicationZonesRSU);
+  if (in.protected_communication_zones_r_s_u_is_present) {
+    ProtectedCommunicationZonesRSU_t protected_communication_zones_r_s_u;
+    toStruct_ProtectedCommunicationZonesRSU(in.protected_communication_zones_r_s_u, protected_communication_zones_r_s_u);
+    out.protected_communication_zones_r_s_u = new ProtectedCommunicationZonesRSU_t(protected_communication_zones_r_s_u);
   }
 
 }

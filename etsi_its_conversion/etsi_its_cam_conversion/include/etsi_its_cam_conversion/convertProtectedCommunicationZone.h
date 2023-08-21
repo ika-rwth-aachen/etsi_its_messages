@@ -14,22 +14,22 @@ namespace etsi_its_cam_conversion {
 
 void toRos_ProtectedCommunicationZone(const ProtectedCommunicationZone_t& in, etsi_its_cam_msgs::ProtectedCommunicationZone& out) {
 
-  toRos_ProtectedZoneType(in.protectedZoneType, out.protectedZoneType);
-  if (in.expiryTime) {
-    toRos_TimestampIts(*in.expiryTime, out.expiryTime);
-    out.expiryTime_isPresent = true;
+  toRos_ProtectedZoneType(in.protected_zone_type, out.protected_zone_type);
+  if (in.expiry_time) {
+    toRos_TimestampIts(*in.expiry_time, out.expiry_time);
+    out.expiry_time_is_present = true;
   }
 
-  toRos_Latitude(in.protectedZoneLatitude, out.protectedZoneLatitude);
-  toRos_Longitude(in.protectedZoneLongitude, out.protectedZoneLongitude);
-  if (in.protectedZoneRadius) {
-    toRos_ProtectedZoneRadius(*in.protectedZoneRadius, out.protectedZoneRadius);
-    out.protectedZoneRadius_isPresent = true;
+  toRos_Latitude(in.protected_zone_latitude, out.protected_zone_latitude);
+  toRos_Longitude(in.protected_zone_longitude, out.protected_zone_longitude);
+  if (in.protected_zone_radius) {
+    toRos_ProtectedZoneRadius(*in.protected_zone_radius, out.protected_zone_radius);
+    out.protected_zone_radius_is_present = true;
   }
 
-  if (in.protectedZoneID) {
-    toRos_ProtectedZoneID(*in.protectedZoneID, out.protectedZoneID);
-    out.protectedZoneID_isPresent = true;
+  if (in.protected_zone_i_d) {
+    toRos_ProtectedZoneID(*in.protected_zone_i_d, out.protected_zone_i_d);
+    out.protected_zone_i_d_is_present = true;
   }
 
 }
@@ -38,25 +38,25 @@ void toStruct_ProtectedCommunicationZone(const etsi_its_cam_msgs::ProtectedCommu
     
   memset(&out, 0, sizeof(ProtectedCommunicationZone_t));
 
-  toStruct_ProtectedZoneType(in.protectedZoneType, out.protectedZoneType);
-  if (in.expiryTime_isPresent) {
-    TimestampIts_t expiryTime;
-    toStruct_TimestampIts(in.expiryTime, expiryTime);
-    out.expiryTime = new TimestampIts_t(expiryTime);
+  toStruct_ProtectedZoneType(in.protected_zone_type, out.protected_zone_type);
+  if (in.expiry_time_is_present) {
+    TimestampIts_t expiry_time;
+    toStruct_TimestampIts(in.expiry_time, expiry_time);
+    out.expiry_time = new TimestampIts_t(expiry_time);
   }
 
-  toStruct_Latitude(in.protectedZoneLatitude, out.protectedZoneLatitude);
-  toStruct_Longitude(in.protectedZoneLongitude, out.protectedZoneLongitude);
-  if (in.protectedZoneRadius_isPresent) {
-    ProtectedZoneRadius_t protectedZoneRadius;
-    toStruct_ProtectedZoneRadius(in.protectedZoneRadius, protectedZoneRadius);
-    out.protectedZoneRadius = new ProtectedZoneRadius_t(protectedZoneRadius);
+  toStruct_Latitude(in.protected_zone_latitude, out.protected_zone_latitude);
+  toStruct_Longitude(in.protected_zone_longitude, out.protected_zone_longitude);
+  if (in.protected_zone_radius_is_present) {
+    ProtectedZoneRadius_t protected_zone_radius;
+    toStruct_ProtectedZoneRadius(in.protected_zone_radius, protected_zone_radius);
+    out.protected_zone_radius = new ProtectedZoneRadius_t(protected_zone_radius);
   }
 
-  if (in.protectedZoneID_isPresent) {
-    ProtectedZoneID_t protectedZoneID;
-    toStruct_ProtectedZoneID(in.protectedZoneID, protectedZoneID);
-    out.protectedZoneID = new ProtectedZoneID_t(protectedZoneID);
+  if (in.protected_zone_i_d_is_present) {
+    ProtectedZoneID_t protected_zone_i_d;
+    toStruct_ProtectedZoneID(in.protected_zone_i_d, protected_zone_i_d);
+    out.protected_zone_i_d = new ProtectedZoneID_t(protected_zone_i_d);
   }
 
 }

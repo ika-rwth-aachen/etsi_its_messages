@@ -23,7 +23,7 @@ void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs:
 {%- else %}
     toRos_{{ member.type }}(*in.{{ member.name }}, out.{{ member.name }});
 {%- endif %}
-    out.{{ member.name }}_isPresent = true;
+    out.{{ member.name }}_is_present = true;
   }
 {% else %}
 {%- if member.is_primitive %}
@@ -40,7 +40,7 @@ void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in
   memset(&out, 0, sizeof({{ t_name }}_t));
 {% for member in members -%}
 {% if member.optional %}
-  if (in.{{ member.name }}_isPresent) {
+  if (in.{{ member.name }}_is_present) {
 {%- if member.is_primitive %}
     {{ member.asn1_type }}_t {{ member.name }};
     toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});

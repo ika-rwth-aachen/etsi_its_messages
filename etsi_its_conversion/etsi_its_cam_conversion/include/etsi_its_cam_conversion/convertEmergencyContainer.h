@@ -11,15 +11,15 @@ namespace etsi_its_cam_conversion {
 
 void toRos_EmergencyContainer(const EmergencyContainer_t& in, etsi_its_cam_msgs::EmergencyContainer& out) {
 
-  toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
-  if (in.incidentIndication) {
-    toRos_CauseCode(*in.incidentIndication, out.incidentIndication);
-    out.incidentIndication_isPresent = true;
+  toRos_LightBarSirenInUse(in.light_bar_siren_in_use, out.light_bar_siren_in_use);
+  if (in.incident_indication) {
+    toRos_CauseCode(*in.incident_indication, out.incident_indication);
+    out.incident_indication_is_present = true;
   }
 
-  if (in.emergencyPriority) {
-    toRos_EmergencyPriority(*in.emergencyPriority, out.emergencyPriority);
-    out.emergencyPriority_isPresent = true;
+  if (in.emergency_priority) {
+    toRos_EmergencyPriority(*in.emergency_priority, out.emergency_priority);
+    out.emergency_priority_is_present = true;
   }
 
 }
@@ -28,17 +28,17 @@ void toStruct_EmergencyContainer(const etsi_its_cam_msgs::EmergencyContainer& in
     
   memset(&out, 0, sizeof(EmergencyContainer_t));
 
-  toStruct_LightBarSirenInUse(in.lightBarSirenInUse, out.lightBarSirenInUse);
-  if (in.incidentIndication_isPresent) {
-    CauseCode_t incidentIndication;
-    toStruct_CauseCode(in.incidentIndication, incidentIndication);
-    out.incidentIndication = new CauseCode_t(incidentIndication);
+  toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, out.light_bar_siren_in_use);
+  if (in.incident_indication_is_present) {
+    CauseCode_t incident_indication;
+    toStruct_CauseCode(in.incident_indication, incident_indication);
+    out.incident_indication = new CauseCode_t(incident_indication);
   }
 
-  if (in.emergencyPriority_isPresent) {
-    EmergencyPriority_t emergencyPriority;
-    toStruct_EmergencyPriority(in.emergencyPriority, emergencyPriority);
-    out.emergencyPriority = new EmergencyPriority_t(emergencyPriority);
+  if (in.emergency_priority_is_present) {
+    EmergencyPriority_t emergency_priority;
+    toStruct_EmergencyPriority(in.emergency_priority, emergency_priority);
+    out.emergency_priority = new EmergencyPriority_t(emergency_priority);
   }
 
 }

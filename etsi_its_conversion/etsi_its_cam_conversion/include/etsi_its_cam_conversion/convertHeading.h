@@ -10,16 +10,16 @@ namespace etsi_its_cam_conversion {
 
 void toRos_Heading(const Heading_t& in, etsi_its_cam_msgs::Heading& out) {
 
-  toRos_HeadingValue(in.headingValue, out.headingValue);
-  toRos_HeadingConfidence(in.headingConfidence, out.headingConfidence);
+  toRos_HeadingValue(in.heading_value, out.heading_value);
+  toRos_HeadingConfidence(in.heading_confidence, out.heading_confidence);
 }
 
 void toStruct_Heading(const etsi_its_cam_msgs::Heading& in, Heading_t& out) {
     
   memset(&out, 0, sizeof(Heading_t));
 
-  toStruct_HeadingValue(in.headingValue, out.headingValue);
-  toStruct_HeadingConfidence(in.headingConfidence, out.headingConfidence);
+  toStruct_HeadingValue(in.heading_value, out.heading_value);
+  toStruct_HeadingConfidence(in.heading_confidence, out.heading_confidence);
 }
 
 }

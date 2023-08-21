@@ -10,16 +10,16 @@ namespace etsi_its_cam_conversion {
 
 void toRos_VehicleLength(const VehicleLength_t& in, etsi_its_cam_msgs::VehicleLength& out) {
 
-  toRos_VehicleLengthValue(in.vehicleLengthValue, out.vehicleLengthValue);
-  toRos_VehicleLengthConfidenceIndication(in.vehicleLengthConfidenceIndication, out.vehicleLengthConfidenceIndication);
+  toRos_VehicleLengthValue(in.vehicle_length_value, out.vehicle_length_value);
+  toRos_VehicleLengthConfidenceIndication(in.vehicle_length_confidence_indication, out.vehicle_length_confidence_indication);
 }
 
 void toStruct_VehicleLength(const etsi_its_cam_msgs::VehicleLength& in, VehicleLength_t& out) {
     
   memset(&out, 0, sizeof(VehicleLength_t));
 
-  toStruct_VehicleLengthValue(in.vehicleLengthValue, out.vehicleLengthValue);
-  toStruct_VehicleLengthConfidenceIndication(in.vehicleLengthConfidenceIndication, out.vehicleLengthConfidenceIndication);
+  toStruct_VehicleLengthValue(in.vehicle_length_value, out.vehicle_length_value);
+  toStruct_VehicleLengthConfidenceIndication(in.vehicle_length_confidence_indication, out.vehicle_length_confidence_indication);
 }
 
 }
