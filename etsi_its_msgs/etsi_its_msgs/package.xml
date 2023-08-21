@@ -5,6 +5,7 @@
   <description>ROS Messages for ETSI ITS Messages</description>
 
   <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
 
   <license>TODO</license>
 

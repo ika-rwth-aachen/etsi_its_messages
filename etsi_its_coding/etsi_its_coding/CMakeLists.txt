@@ -17,7 +17,6 @@ if(${ROS_VERSION} EQUAL 1)
 elseif(${ROS_VERSION} EQUAL 2)
 
     find_package(ament_cmake REQUIRED)
-
     ament_package()
 
 endif()

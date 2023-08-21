@@ -4,11 +4,11 @@
   <version>1.0.0</version>
   <description>C++ compatible source code from ASN.1 ETSI ITS CAM generated with asn1c</description>
 
-  <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
 
   <license>TODO</license>
 
-  <author email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>

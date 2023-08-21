@@ -77,9 +77,7 @@ if(${ROS_VERSION} EQUAL 1)
 elseif(${ROS_VERSION} EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
-  find_package(etsi_its_cam_coding REQUIRED)
   find_package(etsi_its_cam_conversion REQUIRED)
-  find_package(etsi_its_cam_msgs REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(std_msgs REQUIRED)
   find_package(udp_msgs REQUIRED)
@@ -95,9 +93,7 @@ elseif(${ROS_VERSION} EQUAL 2)
 
   # ament_target_dependencies(${PROJECT_NAME}_node
   #   ament_cmake
-  #   etsi_its_cam_coding
   #   etsi_its_cam_conversion
-  #   etsi_its_cam_msgs
   #   rclcpp
   #   std_msgs
   #   udp_msgs
@@ -105,9 +101,7 @@ elseif(${ROS_VERSION} EQUAL 2)
 
   # ament_target_dependencies(${PROJECT_NAME}_generator
   #   ament_cmake
-  #   etsi_its_cam_coding
   #   etsi_its_cam_conversion
-  #   etsi_its_cam_msgs
   #   rclcpp
   #   std_msgs
   #   udp_msgs
