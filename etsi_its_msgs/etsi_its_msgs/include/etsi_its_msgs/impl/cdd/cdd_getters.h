@@ -16,7 +16,7 @@ namespace cdd_access {
   * @return stationID value
   */
   inline int getStationID(const ItsPduHeader& header){
-    return header.station_i_d.value;
+    return header.station_id.value;
   }
 
   /**

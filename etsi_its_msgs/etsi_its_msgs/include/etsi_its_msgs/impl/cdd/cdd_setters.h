@@ -32,9 +32,9 @@ namespace cdd_access {
    * @param protocol_version 
    */
   inline void setItsPduHeader(ItsPduHeader& header, int message_id, int station_id, int protocol_version=0) {
-    setStationId(header.station_i_d, station_id);
+    setStationId(header.station_id, station_id);
     throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_I_D_MIN, ItsPduHeader::MESSAGE_I_D_MAX, "MessageID");
-    header.message_i_d = message_id;
+    header.message_id = message_id;
     throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
     header.protocol_version = protocol_version;
   }
