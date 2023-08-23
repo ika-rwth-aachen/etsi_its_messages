@@ -1,13 +1,19 @@
 #include <algorithm>
 #include <arpa/inet.h>
+#include <sstream>
 
+#ifdef ROS2
+#else
 #include <pluginlib/class_list_macros.h>
 #include <ros/console.h>
+#endif
 
-#include "etsi_its_conversion/Converter.h"
+#include "etsi_its_conversion/Converter.hpp"
 
 
+#ifndef ROS2
 PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
+#endif
 
 
 namespace etsi_its_conversion {
@@ -18,9 +24,15 @@ const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicUdp{"udp/out"};
 
+const std::string Converter::kEtsiTypeParam{"etsi_type"};
+const std::string Converter::kEtsiTypeParamDefault{"auto"};
+
 
 bool logLevelIsDebug() {
 
+#ifdef ROS2
+  // TODO
+#else
   std::map<std::string, ros::console::levels::Level> loggers;
   bool ret = ros::console::get_loggers(loggers);
   std::string node_logger = ROSCONSOLE_DEFAULT_NAME;
@@ -32,13 +44,19 @@ bool logLevelIsDebug() {
   if (loggers.count(nodelet_logger) > 0) {
     if (loggers[nodelet_logger] == ros::console::levels::Level::Debug) return true;
   }
+#endif
+
   return false;
 }
 
 
+#ifdef ROS2
+Converter::Converter() {
+#else
 void Converter::onInit() {
 
   private_node_handle_ = this->getMTPrivateNodeHandle();
+#endif
 
   this->loadParameters();
   this->setup();
@@ -47,12 +65,28 @@ void Converter::onInit() {
 
 void Converter::loadParameters() {
 
-  std::vector<std::string> known_etsi_types = {"auto", "cam"};
-  if (!private_node_handle_.param<std::string>("etsi_type", etsi_type_, "auto")) {
-    NODELET_WARN("Parameter '%s' is not set, defaulting to '%s'", "etsi_type", "auto");
+  std::vector<std::string> known_etsi_types = {kEtsiTypeParamDefault, "cam"};
+
+#ifdef ROS2
+  rcl_interfaces::msg::ParameterDescriptor param_desc;
+  std::stringstream ss;
+  ss << "ETSI type to convert, one of ";
+  for (const auto& e : known_etsi_types) ss << e << ", ";
+  param_desc.description = ss.str();
+  this->declare_parameter(kEtsiTypeParam, kEtsiTypeParamDefault, param_desc);
+
+  if (!this->get_parameter(kEtsiTypeParam, etsi_type_)) {
+    RCLCPP_FATAL(this->get_logger(),
+#else
+  if (!private_node_handle_.param<std::string>(kEtsiTypeParam, etsi_type_, kEtsiTypeParamDefault)) {
+    NODELET_WARN(
+#endif
+      "Parameter '%s' is not set, defaulting to '%s'", kEtsiTypeParam.c_str(), kEtsiTypeParamDefault.c_str());
   }
+#endif
+
   if (std::find(known_etsi_types.begin(), known_etsi_types.end(), etsi_type_) == known_etsi_types.end()) {
-    NODELET_WARN("Invalid value for parameter '%s', defaulting to '%s'", "etsi_type", "auto");
+    NODELET_WARN("Invalid value for parameter '%s', defaulting to '%s'", kEtsiTypeParam.c_str(), kEtsiTypeParamDefault.c_str());
   }
 }
 
@@ -60,19 +94,36 @@ void Converter::loadParameters() {
 void Converter::setup() {
 
   // create subscribers and publishers
+#ifdef ROS2
+  publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
+  publishers_["cam"] = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
+  subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, &Converter::rosCallbackCam, this);
+  subscribers_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
+  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_["cam"]->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
+#else
   publisher_udp_ = private_node_handle_.advertise<udp_msgs::UdpPacket>(kOutputTopicUdp, 1);
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
   subscriber_udp_ = private_node_handle_.subscribe(kInputTopicUdp, 1, &Converter::udpCallback, this);
   subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
-  
   NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["cam"].getTopic().c_str());
   NODELET_INFO("Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+#endif
 }
 
 
+#ifdef ROS2
+void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
+#else
 void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
+#endif
 
-  NODELET_DEBUG("Received CAM bitstring");
+#ifdef ROS2
+  RCLCPP_DEBUG(this->get_logger(),
+#else
+  NODELET_DEBUG(
+#endif
+    "Received CAM bitstring");
 
   // decode BTP-Header, if type detection is enabled
   std::string detected_etsi_type = etsi_type_;
@@ -96,7 +147,12 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
     CAM_t* asn1_struct = nullptr;
     asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
     if (ret.code != RC_OK) {
-      NODELET_ERROR("Failed to decode message");
+#ifdef ROS2
+      RCLCPP_ERROR(this->get_logger(),
+#else
+      NODELET_ERROR(
+#endif
+        "Failed to decode message");
       return;
     }
     if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
@@ -107,18 +163,37 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 
     // publish msg
     publishers_["cam"].publish(msg);
-    NODELET_DEBUG("Published CAM");
+#ifdef ROS2
+    RCLCPP_DEBUG(this->get_logger(),
+#else
+    NODELET_DEBUG(
+#endif
+      "Published CAM");
 
   } else {
-    NODELET_ERROR("Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
+#ifdef ROS2
+    RCLCPP_ERROR(this->get_logger(),
+#else
+    NODELET_ERROR(
+#endif
+      "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
   }
 }
 
 
+#ifdef ROS2
+void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg) {
+#else
 void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
+#endif
 
-  NODELET_DEBUG("Received CAM");
+#ifdef ROS2
+  RCLCPP_DEBUG(this->get_logger(),
+#else
+  NODELET_DEBUG(
+#endif
+    "Received CAM");
 
   // convert ROS msg to struct
   CAM_t asn1_struct;
@@ -130,12 +205,22 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   size_t error_length = sizeof(error_buffer);
   int check_ret = asn_check_constraints(&asn_DEF_CAM, &asn1_struct, error_buffer, &error_length);
   if (check_ret != 0) {
-    NODELET_ERROR("Check of struct failed: %s", error_buffer);
+#ifdef ROS2
+    RCLCPP_ERROR(this->get_logger(),
+#else
+    NODELET_ERROR(
+#endif
+      "Check of struct failed: %s", error_buffer);
     return;
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, &asn1_struct);
   if (ret.result.encoded == -1) {
-    NODELET_ERROR("Failed to encode message: %s", ret.result.failed_type->xml_tag);
+#ifdef ROS2
+    RCLCPP_ERROR(this->get_logger(),
+#else
+    NODELET_ERROR(
+#endif
+      "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     return;
   }
 
@@ -154,7 +239,12 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 
   // publish UDP msg
   publisher_udp_.publish(udp_msg);
-  NODELET_DEBUG("Published CAM bitstring");
+#ifdef ROS2
+  RCLCPP_DEBUG(this->get_logger(),
+#else
+  NODELET_DEBUG(
+#endif
+    "Published CAM bitstring");
 }
 
 
