@@ -403,6 +403,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         array_type = asn1['element']['type']
         member_context = {
             "type": f"{array_type}[]",
+            "type_snake": f"{camel2snake(array_type)}[]",
             "name": array_name,
             "constants": []
         }

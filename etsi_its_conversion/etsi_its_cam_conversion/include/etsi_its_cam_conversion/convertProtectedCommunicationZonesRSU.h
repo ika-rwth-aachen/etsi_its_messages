@@ -7,7 +7,7 @@
 #include <etsi_its_cam_coding/ProtectedCommunicationZone.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZone.h>
 #ifdef ROS2
-#include <etsi_its_cam_msgs/msg/ProtectedCommunicationZone.hpp>
+#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
 #include <etsi_its_cam_msgs/msg/protected_communication_zones_rsu.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #else

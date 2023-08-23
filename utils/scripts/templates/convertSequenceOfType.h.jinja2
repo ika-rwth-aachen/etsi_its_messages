@@ -10,7 +10,7 @@
 {% endfor -%}
 #ifdef ROS2
 {% for member in members -%}
-#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ member.type|replace("[]", "") }}.hpp>
+#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ member.type_snake|replace("[]", "") }}.hpp>
 {% endfor -%}
 #include <etsi_its_{{ etsi_type }}_msgs/msg/{{ t_name_snake }}.hpp>
 namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;

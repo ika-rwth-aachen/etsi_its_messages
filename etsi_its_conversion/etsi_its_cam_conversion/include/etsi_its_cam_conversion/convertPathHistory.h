@@ -7,7 +7,7 @@
 #include <etsi_its_cam_coding/PathPoint.h>
 #include <etsi_its_cam_conversion/convertPathPoint.h>
 #ifdef ROS2
-#include <etsi_its_cam_msgs/msg/PathPoint.hpp>
+#include <etsi_its_cam_msgs/msg/path_point.hpp>
 #include <etsi_its_cam_msgs/msg/path_history.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #else
