@@ -78,5 +78,20 @@
       "justMyCode": true
     },
 
+    {
+      "name": "DENM asn1ToConversionHeader",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "args": [
+        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "-t", "denm",
+        "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
   ]
 }
