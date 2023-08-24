@@ -21,6 +21,21 @@
     },
 
     {
+      "name": "DENM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "DENM",
+        "-o", "utils/asn1/reduced/denm",
+        "utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "utils/asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
