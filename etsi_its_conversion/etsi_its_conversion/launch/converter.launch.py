@@ -16,7 +16,7 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package="etsi_its_conversion",
-            executable="etsi_its_conversion",
+            executable="etsi_its_conversion_node",
             name="etsi_its_converter",
             output="screen",
             emulate_tty=True,

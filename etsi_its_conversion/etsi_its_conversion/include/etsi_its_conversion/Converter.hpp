@@ -29,7 +29,7 @@ class Converter : public nodelet::Nodelet {
   public:
 
 #ifndef ROS1
-    Converter();
+    explicit Converter(const rclcpp::NodeOptions& options);
 #else
     virtual void onInit();
 #endif
@@ -41,13 +41,13 @@ class Converter : public nodelet::Nodelet {
     void setup();
 
 #ifndef ROS1
-    void udpCallback(const udp_msgs::msg::UdpPacket::SharedPtr udp_msg);
+    void udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg);
 #else
     void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
 #endif
 
 #ifndef ROS1
-    void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::SharedPtr msg);
+    void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
 #endif

@@ -16,16 +16,14 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_cam_conversion REQUIRED)
   find_package(etsi_its_cam_msgs REQUIRED)
   find_package(rclcpp REQUIRED)
+  find_package(rclcpp_components REQUIRED)
   find_package(udp_msgs REQUIRED)
 
-  add_executable(${PROJECT_NAME} src/Converter.cpp)
+  add_library(${PROJECT_NAME} SHARED src/Converter.cpp)
 
-  ament_target_dependencies(${PROJECT_NAME}
-    etsi_its_cam_coding # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
-    etsi_its_cam_conversion
-    etsi_its_cam_msgs
-    rclcpp
-    udp_msgs
+  rclcpp_components_register_node(${PROJECT_NAME}
+    PLUGIN "etsi_its_conversion::Converter"
+    EXECUTABLE ${PROJECT_NAME}_node
   )
 
   target_include_directories(${PROJECT_NAME} PUBLIC
@@ -33,9 +31,20 @@ if(${ROS_VERSION} EQUAL 2)
     $<INSTALL_INTERFACE:include>)
   target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
 
+  ament_target_dependencies(${PROJECT_NAME}
+    etsi_its_cam_coding # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
+    etsi_its_cam_conversion
+    etsi_its_cam_msgs
+    rclcpp
+    rclcpp_components
+    udp_msgs
+  )
+
   install(
     TARGETS ${PROJECT_NAME}
-    DESTINATION lib/${PROJECT_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
   )
 
   install(

@@ -3,14 +3,16 @@
 #include <sstream>
 
 #ifdef ROS1
-#include <pluginlib/class_list_macros.h>
 #include <ros/console.h>
 #endif
 
 #include "etsi_its_conversion/Converter.hpp"
 
-
-#ifdef ROS1
+#ifndef ROS1
+#include <rclcpp_components/register_node_macro.hpp>
+RCLCPP_COMPONENTS_REGISTER_NODE(etsi_its_conversion::Converter)
+#else
+#include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 #endif
 
@@ -50,7 +52,7 @@ bool logLevelIsDebug() {
 
 
 #ifndef ROS1
-Converter::Converter() : Node("converter") {
+Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", options) {
 #else
 void Converter::onInit() {
 
@@ -116,7 +118,7 @@ void Converter::setup() {
 
 
 #ifndef ROS1
-void Converter::udpCallback(const udp_msgs::msg::UdpPacket::SharedPtr udp_msg) {
+void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
 void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 #endif
@@ -191,7 +193,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 
 
 #ifndef ROS1
-void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::SharedPtr msg) {
+void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg) {
 #else
 void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 #endif
@@ -262,15 +264,3 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 
 
 }  // end of namespace
-
-
-#ifndef ROS1
-int main(int argc, char *argv[]) {
-
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<etsi_its_conversion::Converter>());
-  rclcpp::shutdown();
-
-  return 0;
-}
-#endif
