@@ -94,19 +94,8 @@ elseif(${ROS_VERSION} EQUAL 1)
     src/Converter.cpp
   )
 
-  add_executable(${PROJECT_NAME}_node src/ConverterNode.cpp)
-
-  set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME converter PREFIX "")
-
   target_link_libraries(${PROJECT_NAME}
     ${catkin_LIBRARIES}
-  )
-  target_link_libraries(${PROJECT_NAME}_node
-    ${catkin_LIBRARIES}
-  )
-
-  install(TARGETS ${PROJECT_NAME}_node
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 
   install(TARGETS ${PROJECT_NAME}
