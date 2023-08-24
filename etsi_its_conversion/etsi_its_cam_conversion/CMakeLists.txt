@@ -11,7 +11,7 @@ add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 if(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS
-    etsi_its_cam_coding  
+    etsi_its_cam_coding
     etsi_its_cam_msgs
   )
   find_package(Boost REQUIRED)
@@ -53,16 +53,13 @@ elseif(${ROS_VERSION} EQUAL 2)
   target_include_directories(${PROJECT_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
-    /docker-ros/ws/install/etsi_its_cam_coding/include
-    /docker-ros/ws/install/etsi_its_cam_msgs/include
   )
-  # TODO: fix target_include_directories of dependencies
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
 
   ament_export_dependencies(
     Boost
-    etsi_its_cam_coding 
+    etsi_its_cam_coding
     etsi_its_cam_msgs
   )
 

@@ -77,6 +77,7 @@ elseif(${ROS_VERSION} EQUAL 2)
   add_compile_definitions(ROS2)
 
   find_package(ament_cmake REQUIRED)
+  find_package(etsi_its_cam_coding REQUIRED) # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
   find_package(etsi_its_cam_conversion REQUIRED)
   find_package(etsi_its_cam_msgs REQUIRED)
   find_package(rclcpp REQUIRED)
@@ -85,6 +86,7 @@ elseif(${ROS_VERSION} EQUAL 2)
   add_executable(${PROJECT_NAME} src/Converter.cpp)
 
   ament_target_dependencies(${PROJECT_NAME}
+    etsi_its_cam_coding # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
     etsi_its_cam_conversion
     etsi_its_cam_msgs
     rclcpp
