@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
 
-  ros::init(argc, argv, "etsi_its_converter");
+  ros::init(argc, argv, "etsi_its_conversion");
 
   nodelet::Loader nodelet;
   nodelet::M_string remap(ros::names::getRemappings());

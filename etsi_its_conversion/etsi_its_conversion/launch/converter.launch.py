@@ -17,7 +17,7 @@ def generate_launch_description():
         Node(
             package="etsi_its_conversion",
             executable="etsi_its_conversion_node",
-            name="etsi_its_converter",
+            name="etsi_its_conversion",
             output="screen",
             emulate_tty=True,
             parameters=[config]
