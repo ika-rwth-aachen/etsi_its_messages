@@ -13,6 +13,7 @@
 
   <depend>udp_msgs</depend>
   <depend>etsi_its_cam_conversion</depend>
+  <depend>etsi_its_denm_conversion</depend>
   <depend>ros_environment</depend>
   <depend>std_msgs</depend>
 
