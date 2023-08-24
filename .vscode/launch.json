@@ -50,6 +50,20 @@
     },
 
     {
+      "name": "DENM asn1ToRosMsg",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/asn1ToRosMsg.py",
+      "args": [
+        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
