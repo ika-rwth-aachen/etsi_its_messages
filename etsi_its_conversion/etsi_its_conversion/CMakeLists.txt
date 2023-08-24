@@ -13,7 +13,6 @@ if(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_conversion
-    etsi_its_cam_msgs
     nodelet
     roscpp
     udp_msgs
@@ -24,7 +23,6 @@ if(${ROS_VERSION} EQUAL 1)
     LIBRARIES ${PROJECT_NAME}
     CATKIN_DEPENDS
       etsi_its_cam_conversion
-      etsi_its_cam_msgs
       nodelet
       roscpp
       udp_msgs
