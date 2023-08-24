@@ -19,7 +19,7 @@ void toRos_AccelerationConfidence(const AccelerationConfidence_t& in, cam_msgs::
 }
 
 void toStruct_AccelerationConfidence(const cam_msgs::AccelerationConfidence& in, AccelerationConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(AccelerationConfidence_t));
   toStruct_INTEGER(in.value, out);
 }

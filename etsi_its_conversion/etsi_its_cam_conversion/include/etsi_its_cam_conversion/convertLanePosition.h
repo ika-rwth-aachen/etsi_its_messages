@@ -19,7 +19,7 @@ void toRos_LanePosition(const LanePosition_t& in, cam_msgs::LanePosition& out) {
 }
 
 void toStruct_LanePosition(const cam_msgs::LanePosition& in, LanePosition_t& out) {
-    
+
   memset(&out, 0, sizeof(LanePosition_t));
   toStruct_INTEGER(in.value, out);
 }

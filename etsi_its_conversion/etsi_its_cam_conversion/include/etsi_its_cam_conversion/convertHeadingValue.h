@@ -19,7 +19,7 @@ void toRos_HeadingValue(const HeadingValue_t& in, cam_msgs::HeadingValue& out) {
 }
 
 void toStruct_HeadingValue(const cam_msgs::HeadingValue& in, HeadingValue_t& out) {
-    
+
   memset(&out, 0, sizeof(HeadingValue_t));
   toStruct_INTEGER(in.value, out);
 }

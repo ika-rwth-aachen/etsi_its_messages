@@ -19,7 +19,7 @@ void toRos_PerformanceClass(const PerformanceClass_t& in, cam_msgs::PerformanceC
 }
 
 void toStruct_PerformanceClass(const cam_msgs::PerformanceClass& in, PerformanceClass_t& out) {
-    
+
   memset(&out, 0, sizeof(PerformanceClass_t));
   toStruct_INTEGER(in.value, out);
 }

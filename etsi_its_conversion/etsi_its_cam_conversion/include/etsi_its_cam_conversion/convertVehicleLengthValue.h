@@ -19,7 +19,7 @@ void toRos_VehicleLengthValue(const VehicleLengthValue_t& in, cam_msgs::VehicleL
 }
 
 void toStruct_VehicleLengthValue(const cam_msgs::VehicleLengthValue& in, VehicleLengthValue_t& out) {
-    
+
   memset(&out, 0, sizeof(VehicleLengthValue_t));
   toStruct_INTEGER(in.value, out);
 }

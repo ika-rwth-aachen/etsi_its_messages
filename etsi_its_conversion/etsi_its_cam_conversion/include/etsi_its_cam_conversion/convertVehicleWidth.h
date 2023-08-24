@@ -19,7 +19,7 @@ void toRos_VehicleWidth(const VehicleWidth_t& in, cam_msgs::VehicleWidth& out) {
 }
 
 void toStruct_VehicleWidth(const cam_msgs::VehicleWidth& in, VehicleWidth_t& out) {
-    
+
   memset(&out, 0, sizeof(VehicleWidth_t));
   toStruct_INTEGER(in.value, out);
 }

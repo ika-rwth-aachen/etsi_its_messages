@@ -19,7 +19,7 @@ void toRos_SpeedValue(const SpeedValue_t& in, cam_msgs::SpeedValue& out) {
 }
 
 void toStruct_SpeedValue(const cam_msgs::SpeedValue& in, SpeedValue_t& out) {
-    
+
   memset(&out, 0, sizeof(SpeedValue_t));
   toStruct_INTEGER(in.value, out);
 }

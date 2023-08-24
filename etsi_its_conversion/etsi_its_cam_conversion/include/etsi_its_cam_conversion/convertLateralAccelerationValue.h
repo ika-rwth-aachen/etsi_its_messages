@@ -19,7 +19,7 @@ void toRos_LateralAccelerationValue(const LateralAccelerationValue_t& in, cam_ms
 }
 
 void toStruct_LateralAccelerationValue(const cam_msgs::LateralAccelerationValue& in, LateralAccelerationValue_t& out) {
-    
+
   memset(&out, 0, sizeof(LateralAccelerationValue_t));
   toStruct_INTEGER(in.value, out);
 }

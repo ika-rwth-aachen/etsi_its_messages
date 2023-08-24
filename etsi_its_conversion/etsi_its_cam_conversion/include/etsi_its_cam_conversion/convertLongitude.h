@@ -19,7 +19,7 @@ void toRos_Longitude(const Longitude_t& in, cam_msgs::Longitude& out) {
 }
 
 void toStruct_Longitude(const cam_msgs::Longitude& in, Longitude_t& out) {
-    
+
   memset(&out, 0, sizeof(Longitude_t));
   toStruct_INTEGER(in.value, out);
 }

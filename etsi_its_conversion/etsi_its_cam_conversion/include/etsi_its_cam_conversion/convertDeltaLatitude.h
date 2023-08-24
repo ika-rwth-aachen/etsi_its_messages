@@ -19,7 +19,7 @@ void toRos_DeltaLatitude(const DeltaLatitude_t& in, cam_msgs::DeltaLatitude& out
 }
 
 void toStruct_DeltaLatitude(const cam_msgs::DeltaLatitude& in, DeltaLatitude_t& out) {
-    
+
   memset(&out, 0, sizeof(DeltaLatitude_t));
   toStruct_INTEGER(in.value, out);
 }

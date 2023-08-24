@@ -19,7 +19,7 @@ void toRos_VerticalAccelerationValue(const VerticalAccelerationValue_t& in, cam_
 }
 
 void toStruct_VerticalAccelerationValue(const cam_msgs::VerticalAccelerationValue& in, VerticalAccelerationValue_t& out) {
-    
+
   memset(&out, 0, sizeof(VerticalAccelerationValue_t));
   toStruct_INTEGER(in.value, out);
 }

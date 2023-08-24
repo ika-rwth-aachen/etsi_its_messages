@@ -19,7 +19,7 @@ void toRos_SteeringWheelAngleValue(const SteeringWheelAngleValue_t& in, cam_msgs
 }
 
 void toStruct_SteeringWheelAngleValue(const cam_msgs::SteeringWheelAngleValue& in, SteeringWheelAngleValue_t& out) {
-    
+
   memset(&out, 0, sizeof(SteeringWheelAngleValue_t));
   toStruct_INTEGER(in.value, out);
 }

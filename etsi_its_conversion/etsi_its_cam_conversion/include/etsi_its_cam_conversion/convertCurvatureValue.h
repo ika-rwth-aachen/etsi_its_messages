@@ -19,7 +19,7 @@ void toRos_CurvatureValue(const CurvatureValue_t& in, cam_msgs::CurvatureValue& 
 }
 
 void toStruct_CurvatureValue(const cam_msgs::CurvatureValue& in, CurvatureValue_t& out) {
-    
+
   memset(&out, 0, sizeof(CurvatureValue_t));
   toStruct_INTEGER(in.value, out);
 }

@@ -19,7 +19,7 @@ void toRos_SpeedConfidence(const SpeedConfidence_t& in, cam_msgs::SpeedConfidenc
 }
 
 void toStruct_SpeedConfidence(const cam_msgs::SpeedConfidence& in, SpeedConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(SpeedConfidence_t));
   toStruct_INTEGER(in.value, out);
 }

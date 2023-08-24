@@ -19,7 +19,7 @@ void toRos_CauseCodeType(const CauseCodeType_t& in, cam_msgs::CauseCodeType& out
 }
 
 void toStruct_CauseCodeType(const cam_msgs::CauseCodeType& in, CauseCodeType_t& out) {
-    
+
   memset(&out, 0, sizeof(CauseCodeType_t));
   toStruct_INTEGER(in.value, out);
 }

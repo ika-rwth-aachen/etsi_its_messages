@@ -19,7 +19,7 @@ void toRos_ProtectedZoneRadius(const ProtectedZoneRadius_t& in, cam_msgs::Protec
 }
 
 void toStruct_ProtectedZoneRadius(const cam_msgs::ProtectedZoneRadius& in, ProtectedZoneRadius_t& out) {
-    
+
   memset(&out, 0, sizeof(ProtectedZoneRadius_t));
   toStruct_INTEGER(in.value, out);
 }

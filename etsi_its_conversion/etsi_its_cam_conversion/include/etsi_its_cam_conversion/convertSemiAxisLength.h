@@ -19,7 +19,7 @@ void toRos_SemiAxisLength(const SemiAxisLength_t& in, cam_msgs::SemiAxisLength& 
 }
 
 void toStruct_SemiAxisLength(const cam_msgs::SemiAxisLength& in, SemiAxisLength_t& out) {
-    
+
   memset(&out, 0, sizeof(SemiAxisLength_t));
   toStruct_INTEGER(in.value, out);
 }

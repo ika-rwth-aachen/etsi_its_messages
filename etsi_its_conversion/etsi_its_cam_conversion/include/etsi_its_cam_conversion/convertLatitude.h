@@ -19,7 +19,7 @@ void toRos_Latitude(const Latitude_t& in, cam_msgs::Latitude& out) {
 }
 
 void toStruct_Latitude(const cam_msgs::Latitude& in, Latitude_t& out) {
-    
+
   memset(&out, 0, sizeof(Latitude_t));
   toStruct_INTEGER(in.value, out);
 }

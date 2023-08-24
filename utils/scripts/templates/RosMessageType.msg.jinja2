@@ -12,6 +12,9 @@
 {% if member.optional -%}
 bool {{ member.name }}_is_present
 {% endif -%}
+{% if member.has_bits_unused -%}
+uint8 bits_unused
+{% endif -%}
 {% for const in member.constants -%}
 {{ const.type }} {{ const.name }} = {{ const.value }}
 {% endfor %}

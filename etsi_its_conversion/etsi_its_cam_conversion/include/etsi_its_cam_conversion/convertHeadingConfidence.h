@@ -19,7 +19,7 @@ void toRos_HeadingConfidence(const HeadingConfidence_t& in, cam_msgs::HeadingCon
 }
 
 void toStruct_HeadingConfidence(const cam_msgs::HeadingConfidence& in, HeadingConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(HeadingConfidence_t));
   toStruct_INTEGER(in.value, out);
 }

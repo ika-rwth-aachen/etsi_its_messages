@@ -19,7 +19,7 @@ void toRos_PtActivationType(const PtActivationType_t& in, cam_msgs::PtActivation
 }
 
 void toStruct_PtActivationType(const cam_msgs::PtActivationType& in, PtActivationType_t& out) {
-    
+
   memset(&out, 0, sizeof(PtActivationType_t));
   toStruct_INTEGER(in.value, out);
 }

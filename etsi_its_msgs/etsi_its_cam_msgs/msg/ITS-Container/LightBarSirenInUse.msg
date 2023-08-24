@@ -5,7 +5,9 @@
 # } (SIZE(2))
 # ------------------------------------------------------------------------------
 
-bool[2] value
-uint8 INDEX_LIGHT_BAR_ACTIVATED = 0
-uint8 INDEX_SIREN_ACTIVATED = 1
+uint8[] value
+uint8 bits_unused
+uint8 SIZE_BITS = 2
+uint8 BIT_INDEX_LIGHT_BAR_ACTIVATED = 0
+uint8 BIT_INDEX_SIREN_ACTIVATED = 1
 

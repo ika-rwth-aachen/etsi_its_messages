@@ -19,7 +19,7 @@ void toRos_DeltaLongitude(const DeltaLongitude_t& in, cam_msgs::DeltaLongitude& 
 }
 
 void toStruct_DeltaLongitude(const cam_msgs::DeltaLongitude& in, DeltaLongitude_t& out) {
-    
+
   memset(&out, 0, sizeof(DeltaLongitude_t));
   toStruct_INTEGER(in.value, out);
 }

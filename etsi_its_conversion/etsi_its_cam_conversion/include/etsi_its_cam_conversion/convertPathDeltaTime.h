@@ -19,7 +19,7 @@ void toRos_PathDeltaTime(const PathDeltaTime_t& in, cam_msgs::PathDeltaTime& out
 }
 
 void toStruct_PathDeltaTime(const cam_msgs::PathDeltaTime& in, PathDeltaTime_t& out) {
-    
+
   memset(&out, 0, sizeof(PathDeltaTime_t));
   toStruct_INTEGER(in.value, out);
 }

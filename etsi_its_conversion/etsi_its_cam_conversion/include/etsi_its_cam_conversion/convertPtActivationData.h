@@ -19,7 +19,7 @@ void toRos_PtActivationData(const PtActivationData_t& in, cam_msgs::PtActivation
 }
 
 void toStruct_PtActivationData(const cam_msgs::PtActivationData& in, PtActivationData_t& out) {
-    
+
   memset(&out, 0, sizeof(PtActivationData_t));
   toStruct_OCTET_STRING(in.value, out);
 }

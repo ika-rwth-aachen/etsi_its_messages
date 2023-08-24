@@ -19,7 +19,7 @@ void toRos_SpeedLimit(const SpeedLimit_t& in, cam_msgs::SpeedLimit& out) {
 }
 
 void toStruct_SpeedLimit(const cam_msgs::SpeedLimit& in, SpeedLimit_t& out) {
-    
+
   memset(&out, 0, sizeof(SpeedLimit_t));
   toStruct_INTEGER(in.value, out);
 }

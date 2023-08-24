@@ -19,7 +19,7 @@ void toRos_TimestampIts(const TimestampIts_t& in, cam_msgs::TimestampIts& out) {
 }
 
 void toStruct_TimestampIts(const cam_msgs::TimestampIts& in, TimestampIts_t& out) {
-    
+
   memset(&out, 0, sizeof(TimestampIts_t));
   toStruct_INTEGER(in.value, out);
 }

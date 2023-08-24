@@ -19,7 +19,7 @@ void toRos_ProtectedZoneID(const ProtectedZoneID_t& in, cam_msgs::ProtectedZoneI
 }
 
 void toStruct_ProtectedZoneID(const cam_msgs::ProtectedZoneID& in, ProtectedZoneID_t& out) {
-    
+
   memset(&out, 0, sizeof(ProtectedZoneID_t));
   toStruct_INTEGER(in.value, out);
 }

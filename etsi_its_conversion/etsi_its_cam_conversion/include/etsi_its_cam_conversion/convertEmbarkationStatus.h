@@ -19,7 +19,7 @@ void toRos_EmbarkationStatus(const EmbarkationStatus_t& in, cam_msgs::Embarkatio
 }
 
 void toStruct_EmbarkationStatus(const cam_msgs::EmbarkationStatus& in, EmbarkationStatus_t& out) {
-    
+
   memset(&out, 0, sizeof(EmbarkationStatus_t));
   toStruct_BOOLEAN(in.value, out);
 }

@@ -19,7 +19,7 @@ void toRos_SubCauseCodeType(const SubCauseCodeType_t& in, cam_msgs::SubCauseCode
 }
 
 void toStruct_SubCauseCodeType(const cam_msgs::SubCauseCodeType& in, SubCauseCodeType_t& out) {
-    
+
   memset(&out, 0, sizeof(SubCauseCodeType_t));
   toStruct_INTEGER(in.value, out);
 }

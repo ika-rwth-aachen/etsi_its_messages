@@ -19,7 +19,7 @@ void toRos_LongitudinalAccelerationValue(const LongitudinalAccelerationValue_t& 
 }
 
 void toStruct_LongitudinalAccelerationValue(const cam_msgs::LongitudinalAccelerationValue& in, LongitudinalAccelerationValue_t& out) {
-    
+
   memset(&out, 0, sizeof(LongitudinalAccelerationValue_t));
   toStruct_INTEGER(in.value, out);
 }

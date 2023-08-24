@@ -19,7 +19,7 @@ void toRos_YawRateValue(const YawRateValue_t& in, cam_msgs::YawRateValue& out) {
 }
 
 void toStruct_YawRateValue(const cam_msgs::YawRateValue& in, YawRateValue_t& out) {
-    
+
   memset(&out, 0, sizeof(YawRateValue_t));
   toStruct_INTEGER(in.value, out);
 }

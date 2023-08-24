@@ -19,7 +19,7 @@ void toRos_RoadworksSubCauseCode(const RoadworksSubCauseCode_t& in, cam_msgs::Ro
 }
 
 void toStruct_RoadworksSubCauseCode(const cam_msgs::RoadworksSubCauseCode& in, RoadworksSubCauseCode_t& out) {
-    
+
   memset(&out, 0, sizeof(RoadworksSubCauseCode_t));
   toStruct_INTEGER(in.value, out);
 }

@@ -19,7 +19,7 @@ void toRos_StationID(const StationID_t& in, cam_msgs::StationID& out) {
 }
 
 void toStruct_StationID(const cam_msgs::StationID& in, StationID_t& out) {
-    
+
   memset(&out, 0, sizeof(StationID_t));
   toStruct_INTEGER(in.value, out);
 }

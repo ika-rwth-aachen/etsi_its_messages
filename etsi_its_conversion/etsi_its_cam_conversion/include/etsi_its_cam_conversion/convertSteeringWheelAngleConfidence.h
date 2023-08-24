@@ -19,7 +19,7 @@ void toRos_SteeringWheelAngleConfidence(const SteeringWheelAngleConfidence_t& in
 }
 
 void toStruct_SteeringWheelAngleConfidence(const cam_msgs::SteeringWheelAngleConfidence& in, SteeringWheelAngleConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(SteeringWheelAngleConfidence_t));
   toStruct_INTEGER(in.value, out);
 }

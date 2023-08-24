@@ -19,7 +19,7 @@ void toRos_GenerationDeltaTime(const GenerationDeltaTime_t& in, cam_msgs::Genera
 }
 
 void toStruct_GenerationDeltaTime(const cam_msgs::GenerationDeltaTime& in, GenerationDeltaTime_t& out) {
-    
+
   memset(&out, 0, sizeof(GenerationDeltaTime_t));
   toStruct_INTEGER(in.value, out);
 }
