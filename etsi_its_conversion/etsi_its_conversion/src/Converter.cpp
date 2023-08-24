@@ -20,10 +20,17 @@ PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 namespace etsi_its_conversion {
 
 
+#ifndef ROS1
+const std::string Converter::kInputTopicUdp{"~/udp/in"};
+const std::string Converter::kOutputTopicCam{"~/cam/out"};
+const std::string Converter::kInputTopicCam{"~/cam/in"};
+const std::string Converter::kOutputTopicUdp{"~/udp/out"};
+#else
 const std::string Converter::kInputTopicUdp{"udp/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicUdp{"udp/out"};
+#endif
 
 const std::string Converter::kEtsiTypeParam{"etsi_type"};
 const std::string Converter::kEtsiTypeParamDefault{"auto"};
