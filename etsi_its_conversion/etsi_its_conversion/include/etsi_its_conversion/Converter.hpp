@@ -4,9 +4,8 @@
 #include <string>
 #include <unordered_map>
 
-
 #include <etsi_its_cam_conversion/convertCAM.h>
-#ifdef ROS2
+#ifndef ROS1
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
@@ -21,7 +20,7 @@
 namespace etsi_its_conversion {
 
 
-#ifdef ROS2
+#ifndef ROS1
 class Converter : public rclcpp::Node {
 #else
 class Converter : public nodelet::Nodelet {
@@ -29,7 +28,7 @@ class Converter : public nodelet::Nodelet {
 
   public:
 
-#ifdef ROS2
+#ifndef ROS1
     Converter();
 #else
     virtual void onInit();
@@ -41,13 +40,13 @@ class Converter : public nodelet::Nodelet {
 
     void setup();
 
-#ifdef ROS2
+#ifndef ROS1
     void udpCallback(const udp_msgs::msg::UdpPacket::SharedPtr udp_msg);
 #else
     void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
 #endif
 
-#ifdef ROS2
+#ifndef ROS1
     void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::SharedPtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
@@ -65,7 +64,7 @@ class Converter : public nodelet::Nodelet {
 
     std::string etsi_type_;
 
-#ifdef ROS2
+#ifndef ROS1
     rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
     std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_;
     std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_;

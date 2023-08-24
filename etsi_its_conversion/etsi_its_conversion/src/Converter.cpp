@@ -2,8 +2,7 @@
 #include <arpa/inet.h>
 #include <sstream>
 
-#ifdef ROS2
-#else
+#ifdef ROS1
 #include <pluginlib/class_list_macros.h>
 #include <ros/console.h>
 #endif
@@ -11,7 +10,7 @@
 #include "etsi_its_conversion/Converter.hpp"
 
 
-#ifndef ROS2
+#ifdef ROS1
 PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 #endif
 
@@ -30,7 +29,7 @@ const std::string Converter::kEtsiTypeParamDefault{"auto"};
 
 bool logLevelIsDebug() {
 
-#ifdef ROS2
+#ifndef ROS1
   // TODO
 #else
   std::map<std::string, ros::console::levels::Level> loggers;
@@ -50,7 +49,7 @@ bool logLevelIsDebug() {
 }
 
 
-#ifdef ROS2
+#ifndef ROS1
 Converter::Converter() : Node("converter") {
 #else
 void Converter::onInit() {
@@ -67,7 +66,7 @@ void Converter::loadParameters() {
 
   std::vector<std::string> known_etsi_types = {kEtsiTypeParamDefault, "cam"};
 
-#ifdef ROS2
+#ifndef ROS1
   rcl_interfaces::msg::ParameterDescriptor param_desc;
   std::stringstream ss;
   ss << "ETSI type to convert, one of ";
@@ -85,7 +84,7 @@ void Converter::loadParameters() {
   }
 
   if (std::find(known_etsi_types.begin(), known_etsi_types.end(), etsi_type_) == known_etsi_types.end()) {
-#ifdef ROS2
+#ifndef ROS1
     RCLCPP_WARN(this->get_logger(),
 #else
     NODELET_WARN(
@@ -98,7 +97,7 @@ void Converter::loadParameters() {
 void Converter::setup() {
 
   // create subscribers and publishers
-#ifdef ROS2
+#ifndef ROS1
   publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
   publishers_["cam"] = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
@@ -116,13 +115,13 @@ void Converter::setup() {
 }
 
 
-#ifdef ROS2
+#ifndef ROS1
 void Converter::udpCallback(const udp_msgs::msg::UdpPacket::SharedPtr udp_msg) {
 #else
 void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 #endif
 
-#ifdef ROS2
+#ifndef ROS1
   RCLCPP_DEBUG(this->get_logger(),
 #else
   NODELET_DEBUG(
@@ -151,7 +150,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
     CAM_t* asn1_struct = nullptr;
     asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
     if (ret.code != RC_OK) {
-#ifdef ROS2
+#ifndef ROS1
       RCLCPP_ERROR(this->get_logger(),
 #else
       NODELET_ERROR(
@@ -162,7 +161,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
     if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
 
     // convert struct to ROS msg and publish
-#ifdef ROS2
+#ifndef ROS1
     etsi_its_cam_msgs::msg::CAM msg;
 #else
     etsi_its_cam_msgs::CAM msg;
@@ -170,7 +169,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
     etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
 
     // publish msg
-#ifdef ROS2
+#ifndef ROS1
     publishers_["cam"]->publish(msg);
     RCLCPP_DEBUG(this->get_logger(),
 #else
@@ -180,7 +179,7 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
       "Published CAM");
 
   } else {
-#ifdef ROS2
+#ifndef ROS1
     RCLCPP_ERROR(this->get_logger(),
 #else
     NODELET_ERROR(
@@ -191,13 +190,13 @@ void Converter::udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg) {
 }
 
 
-#ifdef ROS2
+#ifndef ROS1
 void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::SharedPtr msg) {
 #else
 void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 #endif
 
-#ifdef ROS2
+#ifndef ROS1
   RCLCPP_DEBUG(this->get_logger(),
 #else
   NODELET_DEBUG(
@@ -214,7 +213,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   size_t error_length = sizeof(error_buffer);
   int check_ret = asn_check_constraints(&asn_DEF_CAM, &asn1_struct, error_buffer, &error_length);
   if (check_ret != 0) {
-#ifdef ROS2
+#ifndef ROS1
     RCLCPP_ERROR(this->get_logger(),
 #else
     NODELET_ERROR(
@@ -224,7 +223,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, &asn1_struct);
   if (ret.result.encoded == -1) {
-#ifdef ROS2
+#ifndef ROS1
     RCLCPP_ERROR(this->get_logger(),
 #else
     NODELET_ERROR(
@@ -234,7 +233,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   }
 
   // copy bitstring to ROS UDP msg
-#ifdef ROS2
+#ifndef ROS1
   udp_msgs::msg::UdpPacket udp_msg;
 #else
   udp_msgs::UdpPacket udp_msg;
@@ -251,7 +250,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
   udp_msg.data.insert(udp_msg.data.end(), (uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
 
   // publish UDP msg
-#ifdef ROS2
+#ifndef ROS1
   publisher_udp_->publish(udp_msg);
   RCLCPP_DEBUG(this->get_logger(),
 #else
@@ -265,7 +264,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
 }  // end of namespace
 
 
-#ifdef ROS2
+#ifndef ROS1
 int main(int argc, char *argv[]) {
 
   rclcpp::init(argc, argv);

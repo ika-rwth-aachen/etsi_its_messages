@@ -6,8 +6,56 @@ set(ROS_VERSION $ENV{ROS_VERSION})
 set(ROS_DISTRO $ENV{ROS_DISTRO})
 
 
+# === ROS2 (AMENT) =============================================================
+if(${ROS_VERSION} EQUAL 2)
+
+  add_compile_definitions(ROS2)
+
+  find_package(ament_cmake REQUIRED)
+  find_package(etsi_its_cam_coding REQUIRED) # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
+  find_package(etsi_its_cam_conversion REQUIRED)
+  find_package(etsi_its_cam_msgs REQUIRED)
+  find_package(rclcpp REQUIRED)
+  find_package(udp_msgs REQUIRED)
+
+  add_executable(${PROJECT_NAME} src/Converter.cpp)
+
+  ament_target_dependencies(${PROJECT_NAME}
+    etsi_its_cam_coding # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
+    etsi_its_cam_conversion
+    etsi_its_cam_msgs
+    rclcpp
+    udp_msgs
+  )
+
+  target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+  target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
+
+  install(
+    TARGETS ${PROJECT_NAME}
+    DESTINATION lib/${PROJECT_NAME}
+  )
+
+  install(
+    DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+    PATTERN "*ros1*" EXCLUDE
+  )
+
+  install(
+    DIRECTORY config
+    DESTINATION share/${PROJECT_NAME}
+    PATTERN "*ros1*" EXCLUDE
+  )
+
+  ament_package()
+
 # === ROS1 (CATKIN) ============================================================
-if(${ROS_VERSION} EQUAL 1)
+elseif(${ROS_VERSION} EQUAL 1)
+
+  add_compile_definitions(ROS1)
 
   add_compile_options(-std=c++11)
 
@@ -75,51 +123,5 @@ if(${ROS_VERSION} EQUAL 1)
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
     FILES_MATCHING PATTERN "*ros1*"
   )
-
-# === ROS2 (AMENT) =============================================================
-elseif(${ROS_VERSION} EQUAL 2)
-
-  add_compile_definitions(ROS2)
-
-  find_package(ament_cmake REQUIRED)
-  find_package(etsi_its_cam_coding REQUIRED) # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
-  find_package(etsi_its_cam_conversion REQUIRED)
-  find_package(etsi_its_cam_msgs REQUIRED)
-  find_package(rclcpp REQUIRED)
-  find_package(udp_msgs REQUIRED)
-
-  add_executable(${PROJECT_NAME} src/Converter.cpp)
-
-  ament_target_dependencies(${PROJECT_NAME}
-    etsi_its_cam_coding # TODO: should not be needed here as it is a dependency of etsi_its_cam_conversion
-    etsi_its_cam_conversion
-    etsi_its_cam_msgs
-    rclcpp
-    udp_msgs
-  )
-
-  target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
-  target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
-
-  install(
-    TARGETS ${PROJECT_NAME}
-    DESTINATION lib/${PROJECT_NAME}
-  )
-
-  install(
-    DIRECTORY launch
-    DESTINATION share/${PROJECT_NAME}
-    PATTERN "*ros1*" EXCLUDE
-  )
-
-  install(
-    DIRECTORY config
-    DESTINATION share/${PROJECT_NAME}
-    PATTERN "*ros1*" EXCLUDE
-  )
-
-  ament_package()
 
 endif()
