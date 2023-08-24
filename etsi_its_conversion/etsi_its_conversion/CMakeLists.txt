@@ -69,6 +69,13 @@ if(${ROS_VERSION} EQUAL 1)
   install(DIRECTORY
     launch
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    FILES_MATCHING PATTERN "*ros1*"
+  )
+
+  install(DIRECTORY
+    config
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    FILES_MATCHING PATTERN "*ros1*"
   )
 
 # === ROS2 (AMENT) =============================================================
@@ -106,6 +113,13 @@ elseif(${ROS_VERSION} EQUAL 2)
   install(
     DIRECTORY launch
     DESTINATION share/${PROJECT_NAME}
+    PATTERN "*ros1*" EXCLUDE
+  )
+
+  install(
+    DIRECTORY config
+    DESTINATION share/${PROJECT_NAME}
+    PATTERN "*ros1*" EXCLUDE
   )
 
   ament_package()
