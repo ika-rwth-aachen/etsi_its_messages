@@ -4,6 +4,7 @@
  */
 
 #include <etsi_its_msgs/impl/cdd/cdd_checks.h>
+#include <GeographicLib/UTMUPS.hpp>
 
 #pragma once
 
@@ -262,7 +263,7 @@ namespace cdd_access {
   }
 
   /**
-   * @brief Set the LaterallAcceleration object
+   * @brief Set the LateralAcceleration object
    * 
    * AccelerationConfidence is set to UNAVAILABLE
    * 
@@ -272,6 +273,34 @@ namespace cdd_access {
   inline void setLateralAcceleration(LateralAcceleration& accel, double value) {
     accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
     setLateralAccelerationValue(accel.lateral_acceleration_value, value);
+  }
+
+  /**
+   * @brief Set the ReferencePosition from a given UTM-Position
+   * 
+   * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+   * The z-Coordinate is directly used as altitude value
+   * The frame_id of the given utm_position must be set to 'utm'
+   * 
+   * @param[out] reference_position ReferencePosition to set
+   * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
+   * @param[in] zone the UTM zone (zero means UPS) of the given position
+   * @param[in] northp hemisphere (true means north, false means south)
+   */
+  inline void setFromUTMPosition(ReferencePosition& reference_position, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
+  {
+    std::string required_frame = "utm";
+    if(utm_position.header.frame_id!=required_frame)
+    {
+      throw std::invalid_argument("Frame-ID of UTM Position '"+utm_position.header.frame_id+"' does not equal the required frame '"+required_frame+"'!");
+    }
+    double latitude, longitude;
+    try {
+      GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);
+    } catch (GeographicLib::GeographicErr& e) {
+      throw std::invalid_argument(e.what());
+    }
+    setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
   }
 
 } // namespace cdd_access

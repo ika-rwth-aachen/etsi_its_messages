@@ -22,8 +22,10 @@ if(${ROS_VERSION} EQUAL 1)
 
     catkin_package(
         INCLUDE_DIRS include
+        LIBRARIES GeographicLib
         CATKIN_DEPENDS
             etsi_its_cam_msgs
+            geometry_msgs
     )
 
     include_directories(
@@ -31,6 +33,7 @@ if(${ROS_VERSION} EQUAL 1)
         ${catkin_INCLUDE_DIRS}
         ${GeographicLib_INCLUDE_DIRS}
     )
+    message(${GeographicLib_INCLUDE_DIRS})
 
     install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
@@ -40,6 +43,7 @@ if(${ROS_VERSION} EQUAL 1)
         catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
         if(TARGET ${PROJECT_NAME}-test)
             target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+            target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
         endif()
     endif()
 

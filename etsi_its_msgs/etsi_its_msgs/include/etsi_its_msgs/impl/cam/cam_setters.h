@@ -113,6 +113,23 @@ namespace access {
       cdd::setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);  
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
   }
+
+  /**
+   * @brief Set the ReferencePosition of a CAM from a given UTM-Position
+   * 
+   * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+   * The z-Coordinate is directly used as altitude value
+   * The frame_id of the given utm_position must be set to 'utm'
+   * 
+   * @param[out] cam CAM for which to set the ReferencePosition
+   * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
+   * @param[in] zone the UTM zone (zero means UPS) of the given position
+   * @param[in] northp hemisphere (true means north, false means south)
+   */
+  inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
+  {
+    cdd::setFromUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);
+  }
   
 } // namespace access
 

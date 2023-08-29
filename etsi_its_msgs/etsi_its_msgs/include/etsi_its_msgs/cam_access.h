@@ -4,7 +4,7 @@
 #include <etsi_its_cam_msgs/CAM.h>
 #include <geometry_msgs/PointStamped.h>
 
-namespace perception_interfaces {
+namespace etsi_its_cam_msgs {
     namespace gm = geometry_msgs;
 }
 
