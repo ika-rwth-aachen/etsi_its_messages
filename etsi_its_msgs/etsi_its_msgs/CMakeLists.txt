@@ -7,12 +7,18 @@ set(ROS_DISTRO $ENV{ROS_DISTRO})
 add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
 add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 
+# Workaround to find GeographicLib according to https://bugs.launchpad.net/ubuntu/+source/geographiclib/+bug/1805173
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};/usr/share/cmake/geographiclib")
+
 # === ROS1 (CATKIN) ============================================================
 if(${ROS_VERSION} EQUAL 1)
 
     find_package(catkin REQUIRED COMPONENTS
         etsi_its_cam_msgs
+        geometry_msgs
     )
+
+    find_package(GeographicLib REQUIRED)
 
     catkin_package(
         INCLUDE_DIRS include
@@ -23,6 +29,7 @@ if(${ROS_VERSION} EQUAL 1)
     include_directories(
         include
         ${catkin_INCLUDE_DIRS}
+        ${GeographicLib_INCLUDE_DIRS}
     )
 
     install(DIRECTORY include/${PROJECT_NAME}/
@@ -41,16 +48,19 @@ elseif(${ROS_VERSION} EQUAL 2)
 
     find_package(ament_cmake REQUIRED)
     find_package(etsi_its_cam_msgs REQUIRED)
+    find_package(GeographicLib REQUIRED)
+    find_package(geometry_msgs REQUIRED)
 
     add_library(etsi_its_cam_msgs_access INTERFACE)
 
     target_include_directories(etsi_its_cam_msgs_access INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
+        ${GeographicLib_INCLUDE_DIRS}
     )
 
     ament_export_targets(etsi_its_cam_msgs_accessTargets HAS_LIBRARY_TARGET)
-    ament_export_dependencies(etsi_its_cam_msgs)
+    ament_export_dependencies(etsi_its_cam_msgs GeographicLib geometry_msgs)
 
     install(
         DIRECTORY include/
@@ -75,6 +85,8 @@ elseif(${ROS_VERSION} EQUAL 2)
         target_include_directories(etsi_its_cam_msgs_access-test PUBLIC test)
         ament_target_dependencies(etsi_its_cam_msgs_access-test
             etsi_its_cam_msgs
+            GeographicLib
+            geometry_msgs
         )
     endif()
 

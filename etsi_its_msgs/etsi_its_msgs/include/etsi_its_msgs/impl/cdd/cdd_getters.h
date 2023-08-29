@@ -3,6 +3,8 @@
  * @brief Getter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
+#include <GeographicLib/UTMUPS.hpp>
+
 #pragma once
 
 namespace etsi_its_msgs {
@@ -109,6 +111,31 @@ namespace cdd_access {
    */
   inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration){
     return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
+  }
+
+  /**
+   * @brief Get the UTM Position defined by the given ReferencePosition
+   * 
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   * 
+   * @param[in] reference_position ReferencePosition to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const ReferencePosition& reference_position, int& zone, bool& northp){
+    gm::PointStamped utm_point;
+    utm_point.header.frame_id="utm";
+    double latitude = getLatitude(reference_position.latitude);
+    double longitude = getLongitude(reference_position.longitude);
+    utm_point.point.z = getAltitude(reference_position.altitude);
+    try {
+      GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+    } catch (GeographicLib::GeographicErr& e) {
+      throw std::invalid_argument(e.what());
+    }
+    return utm_point;
   }
 
 } // namespace access

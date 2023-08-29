@@ -45,6 +45,18 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(longitude, getLongitude(cam), 1e-7);
   EXPECT_NEAR(altitude, getAltitude(cam), 1e-2);
 
+  // Set specific position to test utm projection
+  double alt = 209.0;
+  setReferencePosition(cam, 50.787467, 6.046498, alt);
+  int zone;
+  bool northp;
+  gm::PointStamped utm = getUTMPosition(cam, zone, northp);
+  EXPECT_NEAR(291827.02, utm.point.x, 1e-1);
+  EXPECT_NEAR(5630349.72, utm.point.y, 1e-1);
+  EXPECT_EQ(alt, utm.point.z);
+  EXPECT_EQ(32, zone);
+  EXPECT_EQ(true, northp);
+
   double heading_val = randomDouble(0.0, 360.0);
   setHeading(cam, heading_val);
   EXPECT_NEAR(heading_val, getHeading(cam), 1e-1);

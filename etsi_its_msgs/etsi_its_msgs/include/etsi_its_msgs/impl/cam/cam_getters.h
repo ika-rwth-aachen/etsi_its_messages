@@ -130,6 +130,21 @@ namespace access {
     }
   }
 
+  /**
+   * @brief Get the UTM Position defined within the BasicContainer of the CAM
+   * 
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   * 
+   * @param[in] cam CAM to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const CAM& cam, int& zone, bool& northp){
+    return cdd::getUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_cam_msgs
