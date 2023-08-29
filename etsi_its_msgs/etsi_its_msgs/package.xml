@@ -18,7 +18,6 @@
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
   <depend>etsi_its_cam_msgs</depend>
-  <depend>GeographicLib</depend>
   <depend>geometry_msgs</depend>
 
   <export>
