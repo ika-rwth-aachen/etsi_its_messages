@@ -139,7 +139,7 @@ elseif(${ROS_VERSION} EQUAL 2)
         DEPENDENCIES std_msgs
     )
 
-    ament_export_dependencies(rosidl_default_runtime)
+    ament_export_dependencies(rosidl_default_runtime std_msgs)
     
     ament_package()
 

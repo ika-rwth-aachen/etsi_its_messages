@@ -21,6 +21,7 @@ if(${ROS_VERSION} EQUAL 1)
     find_package(GeographicLib REQUIRED)
 
     catkin_package(
+        CFG_EXTRAS ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-extras.cmake
         INCLUDE_DIRS include
         LIBRARIES GeographicLib
         CATKIN_DEPENDS
@@ -94,6 +95,8 @@ elseif(${ROS_VERSION} EQUAL 2)
         )
     endif()
 
-    ament_package()
+    ament_package(
+        CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
+    )
 
 endif()
