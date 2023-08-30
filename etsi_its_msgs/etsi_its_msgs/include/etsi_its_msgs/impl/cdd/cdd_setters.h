@@ -25,6 +25,20 @@ namespace cdd_access {
   }
 
   /**
+   * @brief Set the TimestampITS object
+   * 
+   * @param[in] timestamp_its TimestampITS object to set the timestamp
+   * @param[in] unix_nanosecs Unix-Nanoseconds to set the timestamp for
+   * @param[in] n_leap_seconds Number of leap-seconds since 2004. Default: 5 (for 2003)
+   * @param[in] epoch_offset Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00
+   */
+  inline void setTimestampITS(TimestampIts& timestamp_its, const int64_t unix_nanosecs, const uint8_t n_leap_seconds=5, const uint64_t epoch_offset=1072915200) {
+    uint64_t itsTime = unix_nanosecs*1e-6 + n_leap_seconds*1e3 - epoch_offset*1e3;
+    throwIfOutOfRange(itsTime, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+    timestamp_its.value = itsTime;
+  }
+
+  /**
    * @brief Set the Its Pdu Header object
    * 
    * @param header ItsPduHeader to be set 
