@@ -31,7 +31,6 @@ if(${ROS_VERSION} EQUAL 2)
   # find dependencies
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
-  find_package(etsi_its_cam_msgs REQUIRED) # ToDo: This should not be needed since this is an exported dependeny of etsi_its_msgs
   find_package(pluginlib REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rviz_common REQUIRED)
@@ -73,7 +72,6 @@ if(${ROS_VERSION} EQUAL 2)
     PUBLIC
     rclcpp
     etsi_its_msgs
-    etsi_its_cam_msgs  # ToDo: This should not be needed since this is an exported dependeny of etsi_its_msgs
     rviz_common
     rviz_default_plugins
     rviz_rendering
@@ -84,7 +82,6 @@ if(${ROS_VERSION} EQUAL 2)
 
   ament_export_dependencies(
     etsi_its_msgs
-    etsi_its_cam_msgs # ToDo: This should not be needed since this is an exported dependeny of etsi_its_msgs
     rclcpp
     rviz_common
     rviz_default_plugins

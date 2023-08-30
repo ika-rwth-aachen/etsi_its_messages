@@ -62,10 +62,17 @@ elseif(${ROS_VERSION} EQUAL 2)
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
         ${GeographicLib_INCLUDE_DIRS}
+        ${etsi_its_cam_msgs_INCLUDE_DIRS}
+        ${geometry_msgs_INCLUDE_DIRS}
+    )
+
+    target_link_libraries(etsi_its_cam_msgs_access INTERFACE
+        ${GeographicLib_LIBRARIES}
+        ${etsi_its_cam_msgs_LIBRARIES}
+        ${geometry_msgs_LIBRARIES}
     )
 
     ament_export_targets(etsi_its_cam_msgs_accessTargets HAS_LIBRARY_TARGET)
-    ament_export_dependencies(etsi_its_cam_msgs GeographicLib geometry_msgs)
 
     install(
         DIRECTORY include/
