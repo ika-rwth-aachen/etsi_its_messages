@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(etsi_its_msgs)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -Wpedantic")
+
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
 set(ROS_DISTRO $ENV{ROS_DISTRO})
@@ -89,6 +91,8 @@ elseif(${ROS_VERSION} EQUAL 2)
 
     if(BUILD_TESTING)
         find_package(ament_cmake_gtest REQUIRED)
+        
+        # CAM Access
         ament_add_gtest(etsi_its_cam_msgs_access-test test/test_cam_access.ros2.cpp)
         target_include_directories(etsi_its_cam_msgs_access-test PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

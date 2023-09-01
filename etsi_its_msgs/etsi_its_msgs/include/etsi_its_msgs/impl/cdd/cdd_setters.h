@@ -4,6 +4,7 @@
  */
 
 #include <etsi_its_msgs/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs/impl/cdd/cdd_utils.h>
 #include <GeographicLib/UTMUPS.hpp>
 
 #pragma once
@@ -32,10 +33,14 @@ namespace cdd_access {
    * @param[in] n_leap_seconds Number of leap-seconds since 2004. Default: 5 (for 2003)
    * @param[in] epoch_offset Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00
    */
-  inline void setTimestampITS(TimestampIts& timestamp_its, const int64_t unix_nanosecs, const uint8_t n_leap_seconds=5, const uint64_t epoch_offset=1072915200) {
-    uint64_t itsTime = unix_nanosecs*1e-6 + n_leap_seconds*1e3 - epoch_offset*1e3;
-    throwIfOutOfRange(itsTime, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
-    timestamp_its.value = itsTime;
+  inline void setTimestampITS(TimestampIts& timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = 5) {
+    // ToDo
+    // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104167
+    // std::chrono::utc_time utc_now = std::chrono::utc_clock::from_sys(unix_nanosecs*1e-9);
+    // uint64_t itsTime = unix_nanosecs*1e-6 + (getUTCLeapSecondsSince2004(utc_now) - getUnixSecondsSince2004())*1e3;
+    uint64_t t_its = unix_nanosecs*1e-6 + (uint64_t)(n_leap_seconds*1e3) - getUnixSecondsFor2004()*1e3;
+    throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+    timestamp_its.value = t_its;
   }
 
   /**

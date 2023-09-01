@@ -22,6 +22,32 @@ namespace access {
   }
 
   /**
+   * @brief Set the GenerationDeltaTime-Value
+   * 
+   * @param generation_delta_time GenerationDeltaTime to set the GenerationDeltaTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: 5 for 2023)
+   */
+  inline void setGenerationDeltaTime(GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = 5) {
+    TimestampIts t_its;
+    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
+    uint16_t gdt_value = t_its.value%65536;
+    cdd::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
+    generation_delta_time.value=gdt_value;
+  }
+
+  /**
+   * @brief Set the Generation Delta Time object
+   * 
+   * @param cam CAM to set the GenerationDeltaTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: 5 for 2023)
+   */
+  inline void setGenerationDeltaTime(CAM& cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = 5) {
+    setGenerationDeltaTime(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);
+  }
+
+  /**
    * @brief Set the StationType for a CAM
    * 
    * @param cam CAM-Message to set the station_type value 
