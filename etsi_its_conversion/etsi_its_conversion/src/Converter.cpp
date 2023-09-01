@@ -4,6 +4,8 @@
 
 #ifdef ROS1
 #include <ros/console.h>
+#else
+#include <rcutils/logging.h>
 #endif
 
 #include "etsi_its_conversion/Converter.hpp"
@@ -36,7 +38,7 @@ const std::string Converter::kEtsiTypeParam{"etsi_type"};
 const std::string Converter::kEtsiTypeParamDefault{"auto"};
 
 
-bool logLevelIsDebug() {
+bool Converter::logLevelIsDebug() {
 
 #ifdef ROS1
   std::map<std::string, ros::console::levels::Level> loggers;
@@ -51,7 +53,8 @@ bool logLevelIsDebug() {
     if (loggers[nodelet_logger] == ros::console::levels::Level::Debug) return true;
   }
 #else
-  // TODO
+  auto logger_level = rcutils_logging_get_logger_effective_level(this->get_logger().get_name());
+  return (logger_level == RCUTILS_LOG_SEVERITY_DEBUG);
 #endif
 
   return false;

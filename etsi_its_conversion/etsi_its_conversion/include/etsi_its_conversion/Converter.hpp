@@ -40,6 +40,8 @@ class Converter : public rclcpp::Node {
 
     void setup();
 
+    bool logLevelIsDebug();
+
 #ifdef ROS1
     void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
 #else
