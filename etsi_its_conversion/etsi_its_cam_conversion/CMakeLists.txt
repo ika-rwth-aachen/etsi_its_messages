@@ -50,9 +50,13 @@ elseif(${ROS_VERSION} EQUAL 2)
 
   add_library(${PROJECT_NAME} INTERFACE)
 
+  get_target_property(etsi_its_cam_coding_INTERFACE_INCLUDE_DIRECTORIES etsi_its_cam_coding::etsi_its_cam_coding INTERFACE_INCLUDE_DIRECTORIES)
+
   target_include_directories(${PROJECT_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
+    ${etsi_its_cam_coding_INTERFACE_INCLUDE_DIRECTORIES}
+    ${etsi_its_cam_msgs_INCLUDE_DIRS}
   )
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
