@@ -2,12 +2,12 @@
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
 #include <etsi_its_{{ etsi_type }}_conversion/primitives/convert{{ type }}.h>
-#ifdef ROS2
-#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ t_name_snake }}.hpp>
-namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
+#else
+#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ t_name_snake }}.hpp>
+namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 #endif
 
 

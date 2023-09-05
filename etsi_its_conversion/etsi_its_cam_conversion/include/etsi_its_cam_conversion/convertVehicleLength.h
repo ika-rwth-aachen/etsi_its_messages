@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/VehicleLength.h>
 #include <etsi_its_cam_conversion/convertVehicleLengthValue.h>
 #include <etsi_its_cam_conversion/convertVehicleLengthConfidenceIndication.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/vehicle_length.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleLength.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/vehicle_length.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_VehicleLength(const VehicleLength_t& in, cam_msgs::VehicleLength& out
 }
 
 void toStruct_VehicleLength(const cam_msgs::VehicleLength& in, VehicleLength_t& out) {
-    
+
   memset(&out, 0, sizeof(VehicleLength_t));
 
   toStruct_VehicleLengthValue(in.vehicle_length_value, out.vehicleLengthValue);

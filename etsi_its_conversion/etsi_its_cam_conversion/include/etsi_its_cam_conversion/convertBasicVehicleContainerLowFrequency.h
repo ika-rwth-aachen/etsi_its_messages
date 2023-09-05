@@ -4,12 +4,12 @@
 #include <etsi_its_cam_conversion/convertVehicleRole.h>
 #include <etsi_its_cam_conversion/convertExteriorLights.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/basic_vehicle_container_low_frequency.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/basic_vehicle_container_low_frequency.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -23,7 +23,7 @@ void toRos_BasicVehicleContainerLowFrequency(const BasicVehicleContainerLowFrequ
 }
 
 void toStruct_BasicVehicleContainerLowFrequency(const cam_msgs::BasicVehicleContainerLowFrequency& in, BasicVehicleContainerLowFrequency_t& out) {
-    
+
   memset(&out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
 
   toStruct_VehicleRole(in.vehicle_role, out.vehicleRole);

@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/Longitude.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/longitude.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/Longitude.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/longitude.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 

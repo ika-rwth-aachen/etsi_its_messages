@@ -17,12 +17,12 @@
 #include <etsi_its_cam_conversion/convertVerticalAcceleration.h>
 #include <etsi_its_cam_conversion/convertPerformanceClass.h>
 #include <etsi_its_cam_conversion/convertCenDsrcTollingZone.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/basic_vehicle_container_high_frequency.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/BasicVehicleContainerHighFrequency.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/basic_vehicle_container_high_frequency.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -77,7 +77,7 @@ void toRos_BasicVehicleContainerHighFrequency(const BasicVehicleContainerHighFre
 }
 
 void toStruct_BasicVehicleContainerHighFrequency(const cam_msgs::BasicVehicleContainerHighFrequency& in, BasicVehicleContainerHighFrequency_t& out) {
-    
+
   memset(&out, 0, sizeof(BasicVehicleContainerHighFrequency_t));
 
   toStruct_Heading(in.heading, out.heading);

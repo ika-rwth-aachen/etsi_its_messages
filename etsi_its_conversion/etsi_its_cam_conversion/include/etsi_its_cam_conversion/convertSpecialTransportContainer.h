@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/SpecialTransportContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialTransportType.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/special_transport_container.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialTransportContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/special_transport_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_SpecialTransportContainer(const SpecialTransportContainer_t& in, cam_
 }
 
 void toStruct_SpecialTransportContainer(const cam_msgs::SpecialTransportContainer& in, SpecialTransportContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(SpecialTransportContainer_t));
 
   toStruct_SpecialTransportType(in.special_transport_type, out.specialTransportType);

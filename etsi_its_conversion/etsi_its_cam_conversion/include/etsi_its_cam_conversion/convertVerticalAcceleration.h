@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/VerticalAcceleration.h>
 #include <etsi_its_cam_conversion/convertVerticalAccelerationValue.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/vertical_acceleration.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/VerticalAcceleration.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/vertical_acceleration.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_VerticalAcceleration(const VerticalAcceleration_t& in, cam_msgs::Vert
 }
 
 void toStruct_VerticalAcceleration(const cam_msgs::VerticalAcceleration& in, VerticalAcceleration_t& out) {
-    
+
   memset(&out, 0, sizeof(VerticalAcceleration_t));
 
   toStruct_VerticalAccelerationValue(in.vertical_acceleration_value, out.verticalAccelerationValue);

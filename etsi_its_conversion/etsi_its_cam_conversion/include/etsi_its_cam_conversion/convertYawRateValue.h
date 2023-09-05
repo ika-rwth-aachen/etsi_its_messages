@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/YawRateValue.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/yaw_rate_value.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/YawRateValue.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/yaw_rate_value.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 

@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/LongitudinalAcceleration.h>
 #include <etsi_its_cam_conversion/convertLongitudinalAccelerationValue.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/longitudinal_acceleration.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/LongitudinalAcceleration.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/longitudinal_acceleration.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_LongitudinalAcceleration(const LongitudinalAcceleration_t& in, cam_ms
 }
 
 void toStruct_LongitudinalAcceleration(const cam_msgs::LongitudinalAcceleration& in, LongitudinalAcceleration_t& out) {
-    
+
   memset(&out, 0, sizeof(LongitudinalAcceleration_t));
 
   toStruct_LongitudinalAccelerationValue(in.longitudinal_acceleration_value, out.longitudinalAccelerationValue);

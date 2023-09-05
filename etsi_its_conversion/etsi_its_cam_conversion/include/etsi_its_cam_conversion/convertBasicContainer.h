@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/BasicContainer.h>
 #include <etsi_its_cam_conversion/convertStationType.h>
 #include <etsi_its_cam_conversion/convertReferencePosition.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/basic_container.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/BasicContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/basic_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_BasicContainer(const BasicContainer_t& in, cam_msgs::BasicContainer& 
 }
 
 void toStruct_BasicContainer(const cam_msgs::BasicContainer& in, BasicContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(BasicContainer_t));
 
   toStruct_StationType(in.station_type, out.stationType);

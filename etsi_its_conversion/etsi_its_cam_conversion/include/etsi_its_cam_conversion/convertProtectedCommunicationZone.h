@@ -7,12 +7,12 @@
 #include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneRadius.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneID.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/ProtectedCommunicationZone.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -41,7 +41,7 @@ void toRos_ProtectedCommunicationZone(const ProtectedCommunicationZone_t& in, ca
 }
 
 void toStruct_ProtectedCommunicationZone(const cam_msgs::ProtectedCommunicationZone& in, ProtectedCommunicationZone_t& out) {
-    
+
   memset(&out, 0, sizeof(ProtectedCommunicationZone_t));
 
   toStruct_ProtectedZoneType(in.protected_zone_type, out.protectedZoneType);

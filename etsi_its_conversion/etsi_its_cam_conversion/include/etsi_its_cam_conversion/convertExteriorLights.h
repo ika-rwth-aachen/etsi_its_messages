@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/ExteriorLights.h>
 #include <etsi_its_cam_conversion/primitives/convertBIT_STRING.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/exterior_lights.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/ExteriorLights.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/exterior_lights.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 

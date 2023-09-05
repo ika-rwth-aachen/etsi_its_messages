@@ -4,12 +4,12 @@
 #include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/pos_confidence_ellipse.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/PosConfidenceEllipse.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/pos_confidence_ellipse.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -23,7 +23,7 @@ void toRos_PosConfidenceEllipse(const PosConfidenceEllipse_t& in, cam_msgs::PosC
 }
 
 void toStruct_PosConfidenceEllipse(const cam_msgs::PosConfidenceEllipse& in, PosConfidenceEllipse_t& out) {
-    
+
   memset(&out, 0, sizeof(PosConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_confidence, out.semiMajorConfidence);
