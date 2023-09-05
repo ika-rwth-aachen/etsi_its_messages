@@ -3,7 +3,6 @@ project(etsi_its_cam_msgs)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
 
 # === ROS1 (CATKIN) ============================================================
 if(${ROS_VERSION} EQUAL 1)
@@ -131,7 +130,7 @@ elseif(${ROS_VERSION} EQUAL 2)
         "msg/ITS-Container/VerticalAccelerationValue.msg"
         "msg/ITS-Container/YawRateConfidence.msg"
         "msg/ITS-Container/YawRate.msg"
-        "msg/ITS-Container/YawRateValue.msg"   
+        "msg/ITS-Container/YawRateValue.msg"
     )
 
     rosidl_generate_interfaces(${PROJECT_NAME}
@@ -140,7 +139,7 @@ elseif(${ROS_VERSION} EQUAL 2)
     )
 
     ament_export_dependencies(rosidl_default_runtime)
-    
+
     ament_package()
 
 endif()

@@ -3,17 +3,13 @@ project(etsi_its_cam_coding)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
-add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 
 AUX_SOURCE_DIRECTORY(src SRC_FILES)
 
 # === ROS1 (CATKIN) ============================================================
 if(${ROS_VERSION} EQUAL 1)
 
-  find_package(catkin REQUIRED COMPONENTS
-  )
+  find_package(catkin REQUIRED)
 
   catkin_package(
     INCLUDE_DIRS include

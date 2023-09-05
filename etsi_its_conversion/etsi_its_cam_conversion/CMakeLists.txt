@@ -3,12 +3,11 @@ project(etsi_its_cam_conversion)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
-add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 
 # === ROS1 (CATKIN) ============================================================
 if(${ROS_VERSION} EQUAL 1)
+
+  add_compile_definitions(ROS1)
 
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_coding

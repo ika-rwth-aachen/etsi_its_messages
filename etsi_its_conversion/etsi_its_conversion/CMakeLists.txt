@@ -3,8 +3,6 @@ project(etsi_its_conversion)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-
 
 # === ROS2 (AMENT) =============================================================
 if(${ROS_VERSION} EQUAL 2)
