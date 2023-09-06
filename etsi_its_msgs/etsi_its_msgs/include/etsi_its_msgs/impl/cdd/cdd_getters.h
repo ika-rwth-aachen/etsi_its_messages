@@ -111,7 +111,7 @@ namespace cdd_access {
     return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
   }
 
-  inline std::vector<bool> getBitString(const std::vector<uint8>& buffer, const int bits_unused) {
+  inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const int bits_unused) {
     // bit string size
     const int bits_per_byte = 8;
     const int n_bytes = buffer.size();

@@ -3,6 +3,7 @@
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
+#include <cstring>
 #include <etsi_its_msgs/impl/cdd/cdd_checks.h>
 
 #pragma once
@@ -284,8 +285,8 @@ namespace cdd_access {
 
     // init output
     bitstring.bits_unused = n_bits - bits.size();
-    bitstring.value = new uint8_t[n_bytes];
-    std::memset(bitstring.value, 0, n_bytes);
+    bitstring.value = std::vector<uint8_t>(n_bytes);
+    std::memset(&bitstring.value, 0, n_bytes);
 
     // loop over all bytes in reverse order
     for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
