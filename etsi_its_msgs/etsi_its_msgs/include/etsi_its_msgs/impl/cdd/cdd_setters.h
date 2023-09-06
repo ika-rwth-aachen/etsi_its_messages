@@ -274,6 +274,39 @@ namespace cdd_access {
     setLateralAccelerationValue(accel.lateral_acceleration_value, value);
   }
 
+  template <typename T>
+  inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
+    if(bits.size() != T::SIZE_BITS) throw std::invalid_argument("BitString: invalid number of bits");
+    // bit string size
+    const int bits_per_byte = 8;
+    const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
+    const int n_bits = n_bytes * bits_per_byte;
+
+    // init output
+    bitstring.bits_unused = n_bits - bits.size();
+    bitstring.value = new uint8_t[n_bytes];
+    std::memset(bitstring.value, 0, n_bytes);
+
+    // loop over all bytes in reverse order
+    for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
+
+      // loop over bits in a byte
+      for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+
+        // map bit index in byte to bit index in total bitstring
+        int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
+        if (byte_idx == 0 && bit_idx >= n_bits - bitstring.bits_unused) break;
+
+        // set bit in output bitstring appropriately
+        bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
+      }
+    }
+  }
+
+  inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+    setBitString(exterior_lights, bits);
+  }
+
 } // namespace cdd_access
 
 } // namespace etsi_its_msgs
