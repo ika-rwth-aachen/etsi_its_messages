@@ -40,7 +40,13 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   etsi_its_msgs::cdd_access::setTimestampITS(t_its, t_2007, 1);
   EXPECT_EQ(94694401000, t_its.value);
   setGenerationDeltaTime(cam, t_2007, 1);
-  EXPECT_EQ(94694401000%65536, getGenerationDeltaTime(cam));
+  EXPECT_EQ(94694401000%65536, getGenerationDeltaTimeValue(cam));
+  TimestampIts t_its2;
+  uint64_t t_2007_off = t_2007 + 5*1e9;
+  etsi_its_msgs::cdd_access::setTimestampITS(t_its2, t_2007_off, 1);
+  EXPECT_EQ(94694401000, getTimestampITSFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2).value);
+  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2, 1));
+  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_2007_off));
 
   int stationType_val = randomInt(StationType::MIN, StationType::MAX);
   setStationType(cam, stationType_val);

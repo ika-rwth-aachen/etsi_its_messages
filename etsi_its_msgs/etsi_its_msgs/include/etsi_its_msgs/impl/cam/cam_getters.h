@@ -22,13 +22,23 @@ namespace access {
   }
 
   /**
+   * @brief Get the GenerationDeltaTime
+   * 
+   * @param cam CAM to get the GenerationDeltaTime from 
+   * @return GenerationDeltaTime the GenerationDeltaTime
+   */
+  inline GenerationDeltaTime getGenerationDeltaTime(const CAM& cam){
+    return cam.cam.generation_delta_time;
+  }
+
+  /**
    * @brief Get the GenerationDeltaTime-Value
    * 
    * @param cam CAM to get the GenerationDeltaTime-Value from 
    * @return uint16_t the GenerationDeltaTime-Value
    */
-  inline uint16_t getGenerationDeltaTime(const CAM& cam){
-    return cam.cam.generation_delta_time.value;
+  inline uint16_t getGenerationDeltaTimeValue(const CAM& cam){
+    return getGenerationDeltaTime(cam).value;
   }
 
   /**

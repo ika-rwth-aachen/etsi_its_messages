@@ -20,7 +20,7 @@ namespace cdd_access {
    * @param station_id 
    * @param id_value 
    */
-  inline void setStationId(StationID& station_id, int id_value) {
+  inline void setStationId(StationID& station_id, const int& id_value) {
     throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
     station_id.value = id_value;
   }
@@ -33,7 +33,7 @@ namespace cdd_access {
    * @param[in] n_leap_seconds Number of leap-seconds since 2004. Default: 5 (for 2003)
    * @param[in] epoch_offset Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00
    */
-  inline void setTimestampITS(TimestampIts& timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = 5) {
+  inline void setTimestampITS(TimestampIts& timestamp_its, const uint64_t& unix_nanosecs, const uint16_t& n_leap_seconds = 5) {
     // ToDo
     // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104167
     // std::chrono::utc_time utc_now = std::chrono::utc_clock::from_sys(unix_nanosecs*1e-9);
