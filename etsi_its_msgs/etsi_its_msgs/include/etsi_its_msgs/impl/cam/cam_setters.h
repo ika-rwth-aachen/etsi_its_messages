@@ -17,7 +17,7 @@ namespace access {
    * @param station_id
    * @param protocol_version 
    */
-  inline void setItsPduHeader(CAM& cam, int station_id, int protocol_version = 0){
+  inline void setItsPduHeader(CAM& cam, const int& station_id, const int& protocol_version = 0){
     cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_I_D_CAM, station_id, protocol_version);
   }
 
@@ -53,7 +53,7 @@ namespace access {
    * @param cam CAM-Message to set the station_type value 
    * @param value station_type value to set
    */
-  inline void setStationType(CAM& cam, const int value){
+  inline void setStationType(CAM& cam, const int& value){
     cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value); 
   }
 
@@ -66,7 +66,7 @@ namespace access {
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
    */
-  inline void setReferencePosition(CAM& cam, double latitude, double longitude)
+  inline void setReferencePosition(CAM& cam, const double& latitude, const double& longitude)
   {
     cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);
   }
@@ -79,7 +79,7 @@ namespace access {
    * @param longitude Longitude value in degree as decimal number
    * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
-  inline void setReferencePosition(CAM& cam, double latitude, double longitude, double altitude)
+  inline void setReferencePosition(CAM& cam, const double& latitude, const double& longitude, const double& altitude)
   {
     cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);
   }
@@ -93,7 +93,7 @@ namespace access {
    * @param cam CAM to set the ReferencePosition
    * @param value Heading value in degree as decimal number
    */
-  inline void setHeading(CAM& cam, const double heading_val){
+  inline void setHeading(CAM& cam, const double& heading_val){
     cdd::setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading, heading_val);
   }
 
@@ -104,7 +104,7 @@ namespace access {
    * @param vehicle_length vehicle length in meter as decimal number
    * @param vehicle_width vehicle width in meter as decimal number
    */
-  inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const double vehicle_width){
+  inline void setVehicleDimensions(CAM& cam, const double& vehicle_length, const double& vehicle_width){
     cdd::setVehicleLength(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length, vehicle_length);
     cdd::setVehicleWidth(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width, vehicle_width);
   }
@@ -115,7 +115,7 @@ namespace access {
    * @param cam CAM to set the speed value 
    * @param speed_val speed value to set in m/s as decimal number
    */
-  inline void setSpeed(CAM& cam, const double speed_val){
+  inline void setSpeed(CAM& cam, const double& speed_val){
     cdd::setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);
   }
 
@@ -125,7 +125,7 @@ namespace access {
    * @param cam CAM to set the acceleration value s
    * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
    */
-  inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel){
+  inline void setLongitudinalAcceleration(CAM& cam, const double& lon_accel){
     cdd::setLongitudinalAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration, lon_accel);
   }
 
@@ -135,7 +135,7 @@ namespace access {
    * @param cam CAM to set the acceleration value s
    * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
    */
-  inline void setLateralAcceleration(CAM& cam, const double lat_accel){
+  inline void setLateralAcceleration(CAM& cam, const double& lat_accel){
       cdd::setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);  
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
   }

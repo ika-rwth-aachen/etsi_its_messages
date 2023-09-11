@@ -121,7 +121,7 @@ namespace cdd_access {
    * 
    * @param[in] reference_position ReferencePosition to get the UTM Position from
    * @param[out] zone the UTM zone (zero means UPS)
-   * @param[out] northp northp hemisphere (true means north, false means south)
+   * @param[out] northp hemisphere (true means north, false means south)
    * @return gm::PointStamped geometry_msgs::PointStamped of the given position
    */
   inline gm::PointStamped getUTMPosition(const ReferencePosition& reference_position, int& zone, bool& northp){
