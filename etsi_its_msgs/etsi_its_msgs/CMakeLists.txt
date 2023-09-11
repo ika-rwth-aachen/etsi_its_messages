@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(etsi_its_msgs)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -Wpedantic")
-
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
 set(ROS_DISTRO $ENV{ROS_DISTRO})
