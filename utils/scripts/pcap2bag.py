@@ -67,7 +67,7 @@ def main():
         its_payload = hexStringToUint8Array(packet.its_raw.value)
 
         sec, nsec = (int(s) for s in packet.sniff_timestamp.split("."))
-        stamp = Time(sec=sec, nanosec=nsec) # TODO: generationDeltaTime?
+        stamp = Time(sec=sec, nanosec=nsec)
         header = Header(stamp=stamp, frame_id="")
         msg = UdpPacket(header=header, address="", src_port=0, data=None)
         msg.data = np.array([*btp_header, *its_payload], dtype=np.uint8)
