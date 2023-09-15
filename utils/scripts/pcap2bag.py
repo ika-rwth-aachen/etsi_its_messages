@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-from typing import List
+import os
 
 import numpy as np
 import pyshark
@@ -26,18 +26,23 @@ from rosbags.typesys.types import udp_msgs__msg__UdpPacket as UdpPacket
 def parseCli():
 
     parser = argparse.ArgumentParser(
-        description="Extracts 802.11p ETSI ITS messages from a pcap file and stores them as udp_msgs/UdpPacket messages in a ROS bag file.",
+        description="Extracts 802.11p ETSI ITS messages from a pcap file and stores them as 'udp_msgs/msg/UdpPacket' messages in a ROS bag file.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
     parser.add_argument("pcap", type=str, help="pcap file")
+    parser.add_argument("-o", "--output-bag", type=str, default=None, help="output bag directory")
+    parser.add_argument("-t", "--topic", type=str, default="/etsi_its_udp", help="topic name for 'udp_msgs/msg/UdpPacket' messages")
 
     args = parser.parse_args()
+
+    if args.output_bag is None:
+        args.output_bag = os.path.splitext(args.pcap)[0] + "_bag"
 
     return args
 
 
-def hexStringToUint8Array(hex_string: str) -> List[int]:
+def hexStringToUint8Array(hex_string: str) -> np.ndarray:
 
     return np.array(list(bytes.fromhex(hex_string)), dtype=np.uint8)
 
@@ -65,9 +70,9 @@ def main():
         if len(msgs) >= 4000:
             break # TODO: will otherwise crash at incomplete message at the end
 
-    with Writer("pcap_bag") as bag:
+    with Writer(args.output_bag) as bag:
 
-        topic = "/etsi_its_udp"
+        topic = args.topic
         msg_type = UdpPacket.__msgtype__
         connection = bag.add_connection(topic, msg_type)
 
