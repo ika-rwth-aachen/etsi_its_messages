@@ -118,4 +118,8 @@ elseif(${ROS_VERSION} EQUAL 1)
     FILES_MATCHING PATTERN "*ros1*"
   )
 
+  install(FILES nodelet_plugins.xml
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  )
+
 endif()
