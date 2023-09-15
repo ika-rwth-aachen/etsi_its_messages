@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import shutil
 
 import numpy as np
 import pyshark
@@ -32,6 +33,7 @@ def parseCli():
 
     parser.add_argument("pcap", type=str, help="pcap file")
     parser.add_argument("-o", "--output-bag", type=str, default=None, help="output bag directory")
+    parser.add_argument("-f", "--force", action="store_true", default=False, help="overwrite existing output bag")
     parser.add_argument("-t", "--topic", type=str, default="/etsi_its_udp", help="topic name for 'udp_msgs/msg/UdpPacket' messages")
 
     args = parser.parse_args()
@@ -73,6 +75,8 @@ def main():
         msgs.append(msg)
 
     # write ROS messages to bag
+    if os.path.exists(args.output_bag) and args.force:
+        shutil.rmtree(args.output_bag)
     with Writer(args.output_bag) as bag:
 
         topic = args.topic
