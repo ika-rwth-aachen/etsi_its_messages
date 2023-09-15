@@ -49,13 +49,14 @@ elseif(${ROS_VERSION} EQUAL 2)
 
   add_library(${PROJECT_NAME} INTERFACE)
 
-  get_target_property(etsi_its_cam_coding_INTERFACE_INCLUDE_DIRECTORIES etsi_its_cam_coding::etsi_its_cam_coding INTERFACE_INCLUDE_DIRECTORIES)
-
   target_include_directories(${PROJECT_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-    ${etsi_its_cam_coding_INTERFACE_INCLUDE_DIRECTORIES}
-    ${etsi_its_cam_msgs_INCLUDE_DIRS}
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+  )
+
+  target_link_libraries(${PROJECT_NAME} INTERFACE
+    ${etsi_its_cam_coding_TARGETS}
+    ${etsi_its_cam_msgs_TARGETS}
   )
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
@@ -66,17 +67,16 @@ elseif(${ROS_VERSION} EQUAL 2)
     etsi_its_cam_msgs
   )
 
-  install(
-    DIRECTORY include/
-    DESTINATION include
+  install(DIRECTORY include/
+    DESTINATION include/${PROJECT_NAME}
   )
 
   install(TARGETS ${PROJECT_NAME}
-        EXPORT ${PROJECT_NAME}Targets
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib
-        RUNTIME DESTINATION lib
-        INCLUDES DESTINATION include
+    EXPORT ${PROJECT_NAME}Targets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
+    INCLUDES DESTINATION include
   )
 
   ament_package()
