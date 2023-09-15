@@ -130,6 +130,26 @@ namespace access {
     }
   }
 
+  /**
+   * @brief Get Exterior Lights as bool vector
+   * 
+   * @param cam CAM to get the ExteriorLights values from
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getExteriorLights(const CAM& cam){
+    if(cam.cam.cam_parameters.low_frequency_container_is_present) {
+      if(cam.cam.cam_parameters.low_frequency_container.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
+        return cdd::getExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights);
+      }
+      else {
+        throw std::invalid_argument("LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!");
+      }
+    }
+    else {
+      throw std::invalid_argument("LowFrequencyContainer is not present!");
+    }
+  }
+
 } // namespace access
 
 } // namespace etsi_its_cam_msgs

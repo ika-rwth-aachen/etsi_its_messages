@@ -114,6 +114,26 @@ namespace access {
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
   }
   
+  /**
+   * @brief Set the Exterior Lights by using a vector of bools
+   * 
+   * @param cam CAM to set the exterior lights
+   * @param exterior_lights vector of bools to set the exterior lights
+   */
+  inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights){
+    if(cam.cam.cam_parameters.low_frequency_container_is_present) {
+      if(cam.cam.cam_parameters.low_frequency_container.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
+        cdd::setExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights, exterior_lights);
+      }
+      else {
+        throw std::invalid_argument("LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!");
+      }
+    }
+    else {
+      throw std::invalid_argument("LowFrequencyContainer is not present!");
+    }
+  }
+
 } // namespace access
 
 } // namespace etsi_its_cam_msgs
