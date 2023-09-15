@@ -111,6 +111,13 @@ namespace cdd_access {
     return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
   }
 
+  /**
+   * @brief Get a Bit String in form of bool vector
+   * 
+   * @param buffer as uint8_t vector
+   * @param bits_unused number of bits to ignore at the end of the bit string
+   * @return std::vector<bool>
+   */
   inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const int bits_unused) {
     // bit string size
     const int bits_per_byte = 8;
@@ -137,8 +144,64 @@ namespace cdd_access {
     return bits;
   }
 
+  /**
+   * @brief Get Acceleration Control in form of bool vector
+   * 
+   * @param acceleration_control
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control){
+    return getBitString(acceleration_control.value, acceleration_control.bits_unused);
+  }
+
+  /**
+   * @brief Get the Driving Lane Status in form of bool vector
+   * 
+   * @param driving_lane_status 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status){
+    return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+  }
+  
+  /**
+   * @brief Get the Exterior Lights in form of bool vector
+   * 
+   * @param exterior_lights 
+   * @return std::vector<bool> 
+   */
   inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights){
     return getBitString(exterior_lights.value, exterior_lights.bits_unused);
+  }
+
+  /**
+   * @brief Get the Special Transport Type in form of bool vector
+   * 
+   * @param special_transport_type 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
+    return getBitString(special_transport_type.value, special_transport_type.bits_unused);
+  }
+
+  /**
+   * @brief Get the Lightbar Siren In Use in form of bool vector
+   * 
+   * @param light_bar_siren_in_use 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
+    return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
+  }
+
+  /**
+   * @brief Get the Vehicle Role in form of bool vector
+   * 
+   * @param vehicle_role 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
+    return getBitString(emergency_priority.value, emergency_priority.bits_unused);
   }
 
 } // namespace access

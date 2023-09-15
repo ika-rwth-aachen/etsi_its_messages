@@ -275,9 +275,15 @@ namespace cdd_access {
     setLateralAccelerationValue(accel.lateral_acceleration_value, value);
   }
 
+  /**
+   * @brief Set a Bit String by a vector of bools
+   * 
+   * @tparam T
+   * @param bitstring BitString to set
+   * @param bits vector of bools
+   */
   template <typename T>
   inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
-    if(bits.size() != T::SIZE_BITS) throw std::invalid_argument("BitString: invalid number of bits");
     // bit string size
     const int bits_per_byte = 8;
     const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
@@ -303,8 +309,64 @@ namespace cdd_access {
     }
   }
 
+  /**
+   * @brief Set the Acceleration Control by a vector of bools
+   * 
+   * @param acceleration_control 
+   * @param bits 
+   */
+  inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
+    setBitString(acceleration_control, bits);
+  }
+
+  /**
+   * @brief Set the Driving Lane Status by a vector of bools
+   * 
+   * @param driving_lane_status 
+   * @param bits 
+   */
+  inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
+    setBitString(driving_lane_status, bits);
+  }
+  
+  /**
+   * @brief Set the Exterior Lights by a vector of bools
+   * 
+   * @param exterior_lights 
+   * @param bits 
+   */
   inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
     setBitString(exterior_lights, bits);
+  }
+
+  /**
+   * @brief Set the Special Transport Type by a vector of bools
+   * 
+   * @param special_transport_type 
+   * @param bits 
+   */
+  inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
+    setBitString(special_transport_type, bits);
+  }
+
+  /**
+   * @brief Set the Lightbar Siren In Use by a vector of bools
+   * 
+   * @param light_bar_siren_in_use 
+   * @param bits 
+   */
+  inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
+    setBitString(light_bar_siren_in_use, bits);
+  }
+
+  /**
+   * @brief Set the Emergency Priority by a vector of bools
+   * 
+   * @param emergency_priority 
+   * @param bits 
+   */
+  inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
+    setBitString(emergency_priority, bits);
   }
 
 } // namespace cdd_access
