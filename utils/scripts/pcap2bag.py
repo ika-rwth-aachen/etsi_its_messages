@@ -51,10 +51,15 @@ def main():
 
     args = parseCli()
 
-    pcap = pyshark.FileCapture(args.pcap, include_raw=True, use_json=True, keep_packets=False)
+    # parse packets from pcap
+    print(f"Loading packets from {args.pcap} ...", end="", flush=True)
+    pcap = pyshark.FileCapture("rx_r1a.pcap", include_raw=True, use_json=True)
+    pcap.load_packets()
+    print(" done")
 
+    # convert packets to ROS messages
     msgs = []
-    for packet in tqdm(pcap):
+    for packet in tqdm(pcap, total=len(pcap), desc="Converting packets to ROS messages"):
 
         btp_header = hexStringToUint8Array(packet.btpb_raw.value)
         its_payload = hexStringToUint8Array(packet.its_raw.value)
@@ -67,20 +72,16 @@ def main():
 
         msgs.append(msg)
 
-        if len(msgs) >= 4000:
-            break # TODO: will otherwise crash at incomplete message at the end
-
+    # write ROS messages to bag
     with Writer(args.output_bag) as bag:
 
         topic = args.topic
         msg_type = UdpPacket.__msgtype__
         connection = bag.add_connection(topic, msg_type)
 
-        for msg in tqdm(msgs):
+        for msg in tqdm(msgs, desc=f"Writing ROS messages to {args.output_bag}"):
             timestamp = msg.header.stamp.sec * 1e9 + msg.header.stamp.nanosec
             bag.write(connection, timestamp, serialize_cdr(msg, msg_type))
-
-    exit(0)
 
 
 if __name__ == "__main__":
