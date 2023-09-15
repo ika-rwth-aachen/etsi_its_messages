@@ -6,8 +6,38 @@ set(ROS_VERSION $ENV{ROS_VERSION})
 
 AUX_SOURCE_DIRECTORY(src SRC_FILES)
 
+# === ROS2 (AMENT) =============================================================
+if(${ROS_VERSION} EQUAL 2)
+
+  find_package(ament_cmake REQUIRED)
+
+  add_library(${PROJECT_NAME} SHARED
+    ${SRC_FILES}
+  )
+
+  target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  )
+
+  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
+
+  install(DIRECTORY include/
+    DESTINATION include
+  )
+
+  install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
+    INCLUDES DESTINATION include
+  )
+
+  ament_package()
+
 # === ROS1 (CATKIN) ============================================================
-if(${ROS_VERSION} EQUAL 1)
+elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED)
 
@@ -36,36 +66,5 @@ if(${ROS_VERSION} EQUAL 1)
     FILES_MATCHING PATTERN "*.h"
     PATTERN ".svn" EXCLUDE
   )
-
-# === ROS2 (AMENT) =============================================================
-elseif(${ROS_VERSION} EQUAL 2)
-
-  find_package(ament_cmake REQUIRED)
-
-  add_library(${PROJECT_NAME} SHARED
-    ${SRC_FILES}
-  )
-
-  target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
-
-  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
-
-  install(
-    DIRECTORY include/
-    DESTINATION include
-  )
-
-  install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Targets
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION lib
-    INCLUDES DESTINATION include
-  )
-
-  ament_package()
 
 endif()

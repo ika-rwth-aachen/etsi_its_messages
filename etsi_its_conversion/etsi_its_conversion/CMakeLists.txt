@@ -36,21 +36,18 @@ if(${ROS_VERSION} EQUAL 2)
     udp_msgs
   )
 
-  install(
-    TARGETS ${PROJECT_NAME}
+  install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
   )
 
-  install(
-    DIRECTORY launch
+  install(DIRECTORY launch
     DESTINATION share/${PROJECT_NAME}
     PATTERN "*ros1*" EXCLUDE
   )
 
-  install(
-    DIRECTORY config
+  install(DIRECTORY config
     DESTINATION share/${PROJECT_NAME}
     PATTERN "*ros1*" EXCLUDE
   )
@@ -106,14 +103,12 @@ elseif(${ROS_VERSION} EQUAL 1)
     PATTERN ".svn" EXCLUDE
   )
 
-  install(DIRECTORY
-    launch
+  install(DIRECTORY launch
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
     FILES_MATCHING PATTERN "*ros1*"
   )
 
-  install(DIRECTORY
-    config
+  install(DIRECTORY config
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
     FILES_MATCHING PATTERN "*ros1*"
   )
