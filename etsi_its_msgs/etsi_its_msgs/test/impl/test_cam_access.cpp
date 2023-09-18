@@ -65,6 +65,15 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(lon_accel, getLongitudinalAcceleration(cam), 1e-1);
   setLateralAcceleration(cam, lat_accel);
   EXPECT_NEAR(lat_accel, getLateralAcceleration(cam), 1e-1);
+
+  std::vector<bool> exterior_lights(ExteriorLights::SIZE_BITS);
+  for (int i = 0; i < ExteriorLights::SIZE_BITS; i++) {
+    exterior_lights.at(i) = randomInt(0, 1);
+  }
+  cam.cam.cam_parameters.low_frequency_container_is_present = true;
+  cam.cam.cam_parameters.low_frequency_container.choice = LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
+  setExteriorLights(cam, exterior_lights);
+  EXPECT_EQ(exterior_lights, getExteriorLights(cam));
 }
 
 int main(int argc, char *argv[]) {

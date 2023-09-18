@@ -121,6 +121,9 @@ namespace access {
    * @param exterior_lights vector of bools to set the exterior lights
    */
   inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights){
+    if(etsi_its_cam_msgs::ExteriorLights::SIZE_BITS != exterior_lights.size()) {
+      throw std::invalid_argument("Vector has wrong size. (" + std::to_string(exterior_lights.size()) + " != " + std::to_string(etsi_its_cam_msgs::ExteriorLights::SIZE_BITS) + ")");
+    }
     if(cam.cam.cam_parameters.low_frequency_container_is_present) {
       if(cam.cam.cam_parameters.low_frequency_container.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
         cdd::setExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights, exterior_lights);
