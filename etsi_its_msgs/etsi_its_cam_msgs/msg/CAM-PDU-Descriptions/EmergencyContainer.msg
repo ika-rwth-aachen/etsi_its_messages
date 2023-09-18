@@ -6,11 +6,11 @@
 # }
 # ------------------------------------------------------------------------------
 
-LightBarSirenInUse lightBarSirenInUse
+LightBarSirenInUse light_bar_siren_in_use
 
-CauseCode incidentIndication
-bool incidentIndication_isPresent
+CauseCode incident_indication
+bool incident_indication_is_present
 
-EmergencyPriority emergencyPriority
-bool emergencyPriority_isPresent
+EmergencyPriority emergency_priority
+bool emergency_priority_is_present
 

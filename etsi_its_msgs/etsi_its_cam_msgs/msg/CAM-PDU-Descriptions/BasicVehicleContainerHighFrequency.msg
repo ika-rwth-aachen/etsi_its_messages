@@ -23,38 +23,38 @@ Heading heading
 
 Speed speed
 
-DriveDirection driveDirection
+DriveDirection drive_direction
 
-VehicleLength vehicleLength
+VehicleLength vehicle_length
 
-VehicleWidth vehicleWidth
+VehicleWidth vehicle_width
 
-LongitudinalAcceleration longitudinalAcceleration
+LongitudinalAcceleration longitudinal_acceleration
 
 Curvature curvature
 
-CurvatureCalculationMode curvatureCalculationMode
+CurvatureCalculationMode curvature_calculation_mode
 
-YawRate yawRate
+YawRate yaw_rate
 
-AccelerationControl accelerationControl
-bool accelerationControl_isPresent
+AccelerationControl acceleration_control
+bool acceleration_control_is_present
 
-LanePosition lanePosition
-bool lanePosition_isPresent
+LanePosition lane_position
+bool lane_position_is_present
 
-SteeringWheelAngle steeringWheelAngle
-bool steeringWheelAngle_isPresent
+SteeringWheelAngle steering_wheel_angle
+bool steering_wheel_angle_is_present
 
-LateralAcceleration lateralAcceleration
-bool lateralAcceleration_isPresent
+LateralAcceleration lateral_acceleration
+bool lateral_acceleration_is_present
 
-VerticalAcceleration verticalAcceleration
-bool verticalAcceleration_isPresent
+VerticalAcceleration vertical_acceleration
+bool vertical_acceleration_is_present
 
-PerformanceClass performanceClass
-bool performanceClass_isPresent
+PerformanceClass performance_class
+bool performance_class_is_present
 
-CenDsrcTollingZone cenDsrcTollingZone
-bool cenDsrcTollingZone_isPresent
+CenDsrcTollingZone cen_dsrc_tolling_zone
+bool cen_dsrc_tolling_zone_is_present
 

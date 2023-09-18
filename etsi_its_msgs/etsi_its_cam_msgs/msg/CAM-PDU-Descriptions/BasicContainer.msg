@@ -6,7 +6,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-StationType stationType
+StationType station_type
 
-ReferencePosition referencePosition
+ReferencePosition reference_position
 

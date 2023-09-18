@@ -2,18 +2,24 @@
 
 #include <etsi_its_cam_coding/SpeedConfidence.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#ifdef ROS1
 #include <etsi_its_cam_msgs/SpeedConfidence.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/speed_confidence.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpeedConfidence(const SpeedConfidence_t& in, etsi_its_cam_msgs::SpeedConfidence& out) {
+void toRos_SpeedConfidence(const SpeedConfidence_t& in, cam_msgs::SpeedConfidence& out) {
 
   toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedConfidence(const etsi_its_cam_msgs::SpeedConfidence& in, SpeedConfidence_t& out) {
-    
+void toStruct_SpeedConfidence(const cam_msgs::SpeedConfidence& in, SpeedConfidence_t& out) {
+
   memset(&out, 0, sizeof(SpeedConfidence_t));
   toStruct_INTEGER(in.value, out);
 }

@@ -6,9 +6,9 @@
 # }
 # ------------------------------------------------------------------------------
 
-VehicleRole vehicleRole
+VehicleRole vehicle_role
 
-ExteriorLights exteriorLights
+ExteriorLights exterior_lights
 
-PathHistory pathHistory
+PathHistory path_history
 

@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-VerticalAccelerationValue verticalAccelerationValue
+VerticalAccelerationValue vertical_acceleration_value
 
-AccelerationConfidence verticalAccelerationConfidence
+AccelerationConfidence vertical_acceleration_confidence
 

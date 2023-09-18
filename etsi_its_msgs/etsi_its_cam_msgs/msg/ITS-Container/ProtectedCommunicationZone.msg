@@ -10,18 +10,18 @@
 # }
 # ------------------------------------------------------------------------------
 
-ProtectedZoneType protectedZoneType
+ProtectedZoneType protected_zone_type
 
-TimestampIts expiryTime
-bool expiryTime_isPresent
+TimestampIts expiry_time
+bool expiry_time_is_present
 
-Latitude protectedZoneLatitude
+Latitude protected_zone_latitude
 
-Longitude protectedZoneLongitude
+Longitude protected_zone_longitude
 
-ProtectedZoneRadius protectedZoneRadius
-bool protectedZoneRadius_isPresent
+ProtectedZoneRadius protected_zone_radius
+bool protected_zone_radius_is_present
 
-ProtectedZoneID protectedZoneID
-bool protectedZoneID_isPresent
+ProtectedZoneID protected_zone_id
+bool protected_zone_id_is_present
 

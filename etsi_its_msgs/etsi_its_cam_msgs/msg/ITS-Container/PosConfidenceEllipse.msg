@@ -6,9 +6,9 @@
 # }
 # ------------------------------------------------------------------------------
 
-SemiAxisLength semiMajorConfidence
+SemiAxisLength semi_major_confidence
 
-SemiAxisLength semiMinorConfidence
+SemiAxisLength semi_minor_confidence
 
-HeadingValue semiMajorOrientation
+HeadingValue semi_major_orientation
 

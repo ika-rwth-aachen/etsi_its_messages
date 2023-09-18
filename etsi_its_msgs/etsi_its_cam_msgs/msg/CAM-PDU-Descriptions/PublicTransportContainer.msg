@@ -5,8 +5,8 @@
 # }
 # ------------------------------------------------------------------------------
 
-EmbarkationStatus embarkationStatus
+EmbarkationStatus embarkation_status
 
-PtActivation ptActivation
-bool ptActivation_isPresent
+PtActivation pt_activation
+bool pt_activation_is_present
 

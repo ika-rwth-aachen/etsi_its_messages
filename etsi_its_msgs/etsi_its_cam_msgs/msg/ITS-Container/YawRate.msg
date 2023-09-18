@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-YawRateValue yawRateValue
+YawRateValue yaw_rate_value
 
-YawRateConfidence yawRateConfidence
+YawRateConfidence yaw_rate_confidence
 

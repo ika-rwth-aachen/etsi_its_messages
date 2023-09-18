@@ -13,8 +13,8 @@ ASN1_PRIMITIVES_2_ROS = {
     "INTEGER": "long",
     "IA5String": "string",
     "UTF8String": "string",
-    "BIT STRING": "bool[]",
-    "OCTET STRING": "string",
+    "BIT STRING": "uint8[]",
+    "OCTET STRING": "uint8[]",
     "NumericString": "string",
     "VisibleString": "string",
 }
@@ -32,6 +32,17 @@ def camel2SNAKE(s: str) -> str:
 
     return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
 
+def camel2snake(s: str) -> str:
+    """Converts a camelCase string to snake_case.
+
+    Args:
+        s (str): camelCaseString
+
+    Returns:
+        str: snake_case_string
+    """
+    s = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', s)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s).lower()
 
 def validRosType(s: str) -> str:
     """Converts a string to make it a valid ROS message type.
@@ -68,7 +79,7 @@ def noSpace(s: str) -> str:
     Returns:
         str: my_string
     """
-    
+
     return s.replace(" ", "_")
 
 
@@ -78,7 +89,7 @@ def simplestRosIntegerType(min_value: int, max_value: int) -> str:
     Args:
         min_value (int): minimum value
         max_value (int): maximum value
-    
+
     Raises:
         ValueError: if specified range is not supported by any ROS integer type
 
@@ -156,7 +167,7 @@ def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
     for doc, asn1 in asn1_docs.items():
         if asn1_type in asn1["types"]:
             return doc
-    
+
     return None
 
 
@@ -186,7 +197,7 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     """Checks if all type information is known and supported.
-    
+
     This helps to check whether the types of all members of a type are also known.
 
     Args:
@@ -235,13 +246,14 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
     """
 
     type = asn1["type"]
-    
+
     context = {
         "asn1_definition": None,
         "comments": [],
         "etsi_type": None,
         "members": [],
         "t_name": t_name,
+        "t_name_snake": camel2snake(t_name),
         "type": noSpace(type),
         "asn1_type": type,
         "is_primitive": False,
@@ -258,27 +270,28 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         # resolve ROS msg type
         ros_type = ASN1_PRIMITIVES_2_ROS[type]
         name = asn1["name"] if "name" in asn1 else "value"
-        
-        # add fixed array size to BIT STRING boolean arrays
-        if type == "BIT STRING" and "size" in asn1:
-            if not isinstance(asn1["size"][0], tuple):
-                ros_type = f"bool[{asn1['size'][0]}]"
 
         # choose simplest possible integer type
         if "restricted-to" in asn1 and type == "INTEGER":
             min_value = asn1["restricted-to"][0][0]
             max_value = asn1["restricted-to"][0][1]
             ros_type = simplestRosIntegerType(min_value, max_value)
-        
+
         # parse member to jinja context
         member_context = {
             "type": ros_type,
             "asn1_type": type,
-            "name": validRosField(name),
+            "name": camel2snake(validRosField(name)),
+            "name_cc": validRosField(name),
             "constants": [],
             "is_primitive": True,
+            "has_bits_unused": False,
         }
-        
+
+        # add bits_unused field for BIT STRINGs
+        if type == "BIT STRING":
+            member_context["has_bits_unused"] = True
+
         # add constants for limits
         if "restricted-to" in asn1:
             min_value = asn1["restricted-to"][0][0]
@@ -298,27 +311,39 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
                 "name": validRosField(max_constant_name),
                 "value": max_value
             })
-        
+
         # add constants for size limits
-        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
-            min_size = asn1["size"][0][0]
-            max_size = asn1["size"][0][1]
-            ros_type = simplestRosIntegerType(min_size, max_size)
-            min_size_constant_name = "MIN_SIZE"
-            max_size_constant_name = "MAX_SIZE"
-            if "name" in asn1:
-                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
-                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
-            member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(min_size_constant_name),
-                "value": min_size
-            })
-            member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(max_size_constant_name),
-                "value": max_size
-            })
+        if "size" in asn1:
+            if isinstance(asn1["size"][0], tuple):
+                min_size = asn1["size"][0][0]
+                max_size = asn1["size"][0][1]
+                ros_type = simplestRosIntegerType(min_size, max_size)
+                min_size_constant_name = "MIN_SIZE" if type != "BIT STRING" else "MIN_SIZE_BITS"
+                max_size_constant_name = "MAX_SIZE" if type != "BIT STRING" else "MAX_SIZE_BITS"
+                if "name" in asn1:
+                    min_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
+                    max_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+                member_context["constants"].append({
+                    "type": ros_type,
+                    "name": validRosField(min_size_constant_name),
+                    "value": min_size
+                })
+                member_context["constants"].append({
+                    "type": ros_type,
+                    "name": validRosField(max_size_constant_name),
+                    "value": max_size
+                })
+            else:
+                size = asn1["size"][0]
+                ros_type = simplestRosIntegerType(size, size)
+                size_constant_name = "SIZE" if type != "BIT STRING" else "SIZE_BITS"
+                if "name" in asn1:
+                    size_constant_name = f"{camel2SNAKE(asn1['name'])}_{size_constant_name}"
+                member_context["constants"].append({
+                    "type": ros_type,
+                    "name": validRosField(size_constant_name),
+                    "value": size
+                })
 
         # add constants for named numbers
         if "named-numbers" in asn1:
@@ -338,7 +363,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
                 constant_name = f"{camel2SNAKE(k)}"
                 member_context["constants"].append({
                     "type": "uint8",
-                    "name": f"INDEX_{validRosField(constant_name)}",
+                    "name": f"BIT_INDEX_{validRosField(constant_name)}",
                     "value": v
                 })
 
@@ -390,10 +415,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         array_type = asn1['element']['type']
         member_context = {
             "type": f"{array_type}[]",
+            "type_snake": f"{camel2snake(array_type)}[]",
             "name": array_name,
             "constants": []
         }
-        
+
         # add constants for size limits
         if "size" in asn1 and isinstance(asn1["size"][0], tuple):
             min_size = asn1["size"][0][0]
@@ -414,9 +440,9 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
                 "name": validRosField(max_size_constant_name),
                 "value": max_size
             })
-            
+
         context["members"].append(member_context)
-        
+
     # enums
     elif type == "ENUMERATED":
 
@@ -442,22 +468,24 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
                 "name": camel2SNAKE(val[0]),
                 "value": val[1]
             })
-        
+
         context["members"].append(member_context)
 
     # custom types
     elif type in asn1_types:
 
-        name = asn1["name"] if "name" in asn1 else "value"
+        name_cc = asn1["name"] if "name" in asn1 else "value"
+        name = camel2snake(name_cc)
         context["members"].append({
             "type": validRosType(type),
-            "name": validRosField(name)
+            "name": validRosField(name),
+            "name_cc": validRosField(name_cc)
         })
 
     elif type == "NULL":
 
         pass
-        
+
     else:
 
         warnings.warn(f"Cannot handle type '{type}'")

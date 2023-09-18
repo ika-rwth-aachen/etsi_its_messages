@@ -6,24 +6,31 @@
 #include <etsi_its_cam_coding/PathHistory.h>
 #include <etsi_its_cam_coding/PathPoint.h>
 #include <etsi_its_cam_conversion/convertPathPoint.h>
+#ifdef ROS1
 #include <etsi_its_cam_msgs/PathPoint.h>
 #include <etsi_its_cam_msgs/PathHistory.h>
+namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/path_point.hpp>
+#include <etsi_its_cam_msgs/msg/path_history.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+#endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PathHistory(const PathHistory_t& in, etsi_its_cam_msgs::PathHistory& out) {
+void toRos_PathHistory(const PathHistory_t& in, cam_msgs::PathHistory& out) {
 
   for (int i = 0; i < in.list.count; i++) {
-    etsi_its_cam_msgs::PathPoint array;
+    cam_msgs::PathPoint array;
     toRos_PathPoint(*(in.list.array[i]), array);
     out.array.push_back(array);
   }
 
 }
 
-void toStruct_PathHistory(const etsi_its_cam_msgs::PathHistory& in, PathHistory_t& out) {
-    
+void toStruct_PathHistory(const cam_msgs::PathHistory& in, PathHistory_t& out) {
+
   memset(&out, 0, sizeof(PathHistory_t));
 
   for (int i = 0; i < in.array.size(); i++) {

@@ -7,12 +7,12 @@
 # }
 # ------------------------------------------------------------------------------
 
-HardShoulderStatus innerhardShoulderStatus
-bool innerhardShoulderStatus_isPresent
+HardShoulderStatus innerhard_shoulder_status
+bool innerhard_shoulder_status_is_present
 
-HardShoulderStatus outerhardShoulderStatus
-bool outerhardShoulderStatus_isPresent
+HardShoulderStatus outerhard_shoulder_status
+bool outerhard_shoulder_status_is_present
 
-DrivingLaneStatus drivingLaneStatus
-bool drivingLaneStatus_isPresent
+DrivingLaneStatus driving_lane_status
+bool driving_lane_status_is_present
 

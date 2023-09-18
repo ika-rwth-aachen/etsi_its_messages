@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-HeadingValue headingValue
+HeadingValue heading_value
 
-HeadingConfidence headingConfidence
+HeadingConfidence heading_confidence
 

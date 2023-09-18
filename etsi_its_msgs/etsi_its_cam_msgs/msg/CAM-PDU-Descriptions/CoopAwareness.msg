@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-GenerationDeltaTime generationDeltaTime
+GenerationDeltaTime generation_delta_time
 
-CamParameters camParameters
+CamParameters cam_parameters
 

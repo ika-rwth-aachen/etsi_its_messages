@@ -6,11 +6,11 @@
 #  }
 # ------------------------------------------------------------------------------
 
-RoadworksSubCauseCode roadworksSubCauseCode
-bool roadworksSubCauseCode_isPresent
+RoadworksSubCauseCode roadworks_sub_cause_code
+bool roadworks_sub_cause_code_is_present
 
-LightBarSirenInUse lightBarSirenInUse
+LightBarSirenInUse light_bar_siren_in_use
 
-ClosedLanes closedLanes
-bool closedLanes_isPresent
+ClosedLanes closed_lanes
+bool closed_lanes_is_present
 

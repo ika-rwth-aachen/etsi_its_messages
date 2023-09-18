@@ -6,7 +6,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-CauseCodeType causeCode
+CauseCodeType cause_code
 
-SubCauseCodeType subCauseCode
+SubCauseCodeType sub_cause_code
 

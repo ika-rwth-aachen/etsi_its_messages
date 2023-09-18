@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-SpecialTransportType specialTransportType
+SpecialTransportType special_transport_type
 
-LightBarSirenInUse lightBarSirenInUse
+LightBarSirenInUse light_bar_siren_in_use
 

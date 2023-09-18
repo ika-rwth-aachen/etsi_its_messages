@@ -3,6 +3,7 @@
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
+#include <cstring>
 #include <etsi_its_msgs/impl/cdd/cdd_checks.h>
 
 #pragma once
@@ -32,11 +33,11 @@ namespace cdd_access {
    * @param protocol_version 
    */
   inline void setItsPduHeader(ItsPduHeader& header, int message_id, int station_id, int protocol_version=0) {
-    setStationId(header.stationID, station_id);
+    setStationId(header.station_id, station_id);
     throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_I_D_MIN, ItsPduHeader::MESSAGE_I_D_MAX, "MessageID");
-    header.messageID = message_id;
+    header.message_id = message_id;
     throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
-    header.protocolVersion = protocol_version;
+    header.protocol_version = protocol_version;
   }
 
   /**
@@ -96,8 +97,8 @@ namespace cdd_access {
    * @param value Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline void setAltitude(Altitude& altitude, double value) {
-    altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
-    setAltitudeValue(altitude.altitudeValue, value);
+    altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
+    setAltitudeValue(altitude.altitude_value, value);
   }
 
   /**
@@ -113,8 +114,8 @@ namespace cdd_access {
   {
     setLatitude(ref_position.latitude, latitude);
     setLongitude(ref_position.longitude, longitude);
-    ref_position.altitude.altitudeValue.value  = AltitudeValue::UNAVAILABLE;
-    ref_position.altitude.altitudeConfidence.value = AltitudeConfidence::UNAVAILABLE;
+    ref_position.altitude.altitude_value.value  = AltitudeValue::UNAVAILABLE;
+    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
   }
 
   /**
@@ -156,8 +157,8 @@ namespace cdd_access {
    * @param value Heading value in degree as decimal number
    */
   inline void setHeading(Heading& heading, double value) {
-    heading.headingConfidence.value = HeadingConfidence::UNAVAILABLE;
-    setHeadingValue(heading.headingValue, value);
+    heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+    setHeadingValue(heading.heading_value, value);
   }
 
   /**
@@ -181,8 +182,8 @@ namespace cdd_access {
    * @param value  VehicleLengthValue in meter as decimal number
    */
   inline void setVehicleLength(VehicleLength& vehicle_length, double value) {
-    vehicle_length.vehicleLengthConfidenceIndication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
-    setVehicleLengthValue(vehicle_length.vehicleLengthValue, value);
+    vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
+    setVehicleLengthValue(vehicle_length.vehicle_length_value, value);
   }
 
   /**
@@ -218,8 +219,8 @@ namespace cdd_access {
    * @param value  Speed in in m/s as decimal number
    */
   inline void setSpeed(Speed& speed, double value) {
-    speed.speedConfidence.value = SpeedConfidence::UNAVAILABLE;
-    setSpeedValue(speed.speedValue, value);
+    speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;
+    setSpeedValue(speed.speed_value, value);
   }
 
   /**
@@ -244,8 +245,8 @@ namespace cdd_access {
    * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
    */
   inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, double value) {
-    accel.longitudinalAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
-    setLongitudinalAccelerationValue(accel.longitudinalAccelerationValue, value);
+    accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);
   }
 
     /**
@@ -270,8 +271,102 @@ namespace cdd_access {
    * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
    */
   inline void setLateralAcceleration(LateralAcceleration& accel, double value) {
-    accel.lateralAccelerationConfidence.value = AccelerationConfidence::UNAVAILABLE;
-    setLateralAccelerationValue(accel.lateralAccelerationValue, value);
+    accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLateralAccelerationValue(accel.lateral_acceleration_value, value);
+  }
+
+  /**
+   * @brief Set a Bit String by a vector of bools
+   * 
+   * @tparam T
+   * @param bitstring BitString to set
+   * @param bits vector of bools
+   */
+  template <typename T>
+  inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
+    // bit string size
+    const int bits_per_byte = 8;
+    const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
+    const int n_bits = n_bytes * bits_per_byte;
+
+    // init output
+    bitstring.bits_unused = n_bits - bits.size();
+    bitstring.value = std::vector<uint8_t>(n_bytes);
+
+    // loop over all bytes in reverse order
+    for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
+
+      // loop over bits in a byte
+      for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+
+        // map bit index in byte to bit index in total bitstring
+        int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
+        if (byte_idx == 0 && bit_idx >= n_bits - bitstring.bits_unused) break;
+
+        // set bit in output bitstring appropriately
+        bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
+      }
+    }
+  }
+
+  /**
+   * @brief Set the Acceleration Control by a vector of bools
+   * 
+   * @param acceleration_control 
+   * @param bits 
+   */
+  inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
+    setBitString(acceleration_control, bits);
+  }
+
+  /**
+   * @brief Set the Driving Lane Status by a vector of bools
+   * 
+   * @param driving_lane_status 
+   * @param bits 
+   */
+  inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
+    setBitString(driving_lane_status, bits);
+  }
+  
+  /**
+   * @brief Set the Exterior Lights by a vector of bools
+   * 
+   * @param exterior_lights 
+   * @param bits 
+   */
+  inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+    setBitString(exterior_lights, bits);
+  }
+
+  /**
+   * @brief Set the Special Transport Type by a vector of bools
+   * 
+   * @param special_transport_type 
+   * @param bits 
+   */
+  inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
+    setBitString(special_transport_type, bits);
+  }
+
+  /**
+   * @brief Set the Lightbar Siren In Use by a vector of bools
+   * 
+   * @param light_bar_siren_in_use 
+   * @param bits 
+   */
+  inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
+    setBitString(light_bar_siren_in_use, bits);
+  }
+
+  /**
+   * @brief Set the Emergency Priority by a vector of bools
+   * 
+   * @param emergency_priority 
+   * @param bits 
+   */
+  inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
+    setBitString(emergency_priority, bits);
   }
 
 } // namespace cdd_access

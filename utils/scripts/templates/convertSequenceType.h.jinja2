@@ -9,53 +9,59 @@
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
 {% endif -%}
 {% endfor -%}
+#ifdef ROS1
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
+namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
+#else
+#include <etsi_its_{{ etsi_type }}_msgs/msg/{{ t_name_snake }}.hpp>
+namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
+#endif
 
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name }}(const {{ t_name }}_t& in, etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& out) {
+void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
 {% for member in members -%}
 {% if member.optional %}
-  if (in.{{ member.name }}) {
+  if (in.{{ member.name_cc }}) {
 {%- if member.is_primitive %}
-    toRos_{{ member.asn1_type }}(*in.{{ member.name }}, out.{{ member.name }});
+    toRos_{{ member.asn1_type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
-    toRos_{{ member.type }}(*in.{{ member.name }}, out.{{ member.name }});
+    toRos_{{ member.type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- endif %}
-    out.{{ member.name }}_isPresent = true;
+    out.{{ member.name }}_is_present = true;
   }
 {% else %}
 {%- if member.is_primitive %}
-  toRos_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name }});
+  toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
-  toRos_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
+  toRos_{{ member.type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}
 }
 
-void toStruct_{{ t_name }}(const etsi_its_{{ etsi_type }}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
-    
+void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+
   memset(&out, 0, sizeof({{ t_name }}_t));
 {% for member in members -%}
 {% if member.optional %}
-  if (in.{{ member.name }}_isPresent) {
+  if (in.{{ member.name }}_is_present) {
 {%- if member.is_primitive %}
     {{ member.asn1_type }}_t {{ member.name }};
     toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
-    out.{{ member.name }} = new {{ member.asn1_type }}_t({{ member.name }});
+    out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
 {%- else %}
     {{ member.type }}_t {{ member.name }};
     toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
-    out.{{ member.name }} = new {{ member.type }}_t({{ member.name }});
+    out.{{ member.name_cc }} = new {{ member.type }}_t({{ member.name }});
 {%- endif %}
   }
 {% else %}
 {%- if member.is_primitive %}
-  toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name }});
+  toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- else %}
-  toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name }});
+  toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}

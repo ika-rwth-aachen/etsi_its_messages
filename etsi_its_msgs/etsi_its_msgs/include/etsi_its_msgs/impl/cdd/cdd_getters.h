@@ -16,7 +16,7 @@ namespace cdd_access {
   * @return stationID value
   */
   inline int getStationID(const ItsPduHeader& header){
-    return header.stationID.value;
+    return header.station_id.value;
   }
 
   /**
@@ -46,7 +46,7 @@ namespace cdd_access {
    * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getAltitude(const Altitude& altitude){
-    return ((double)altitude.altitudeValue.value)*1e-2;
+    return ((double)altitude.altitude_value.value)*1e-2;
   }
 
   /**
@@ -58,7 +58,7 @@ namespace cdd_access {
    * @return Heading value in degree as decimal number
    */
   inline double getHeading(const Heading& heading){
-    return ((double)heading.headingValue.value)*1e-1;
+    return ((double)heading.heading_value.value)*1e-1;
   }
 
   /**
@@ -67,8 +67,8 @@ namespace cdd_access {
    * @param vehicleLength to get the vehicle length value from
    * @return vehicle length value in meter as decimal number
    */
-  inline double getVehicleLength(const VehicleLength& vehicleLength){
-    return ((double)vehicleLength.vehicleLengthValue.value)*1e-1;
+  inline double getVehicleLength(const VehicleLength& vehicle_length){
+    return ((double)vehicle_length.vehicle_length_value.value)*1e-1;
   }
 
   /**
@@ -77,8 +77,8 @@ namespace cdd_access {
    * @param vehicleWidth to get the vehicle width value from
    * @return vehicle width value in meter as decimal number
    */
-  inline double getVehicleWidth(const VehicleWidth& vehicleWidth){
-    return ((double)vehicleWidth.value)*1e-1;
+  inline double getVehicleWidth(const VehicleWidth& vehicle_width){
+    return ((double)vehicle_width.value)*1e-1;
   }
 
   /**
@@ -88,7 +88,7 @@ namespace cdd_access {
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const Speed& speed){
-    return ((double)speed.speedValue.value)*1e-2;
+    return ((double)speed.speed_value.value)*1e-2;
   }
 
   /**
@@ -97,8 +97,8 @@ namespace cdd_access {
    * @param longitudinalAcceleration to get the lateral acceleration from
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
-  inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinalAcceleration){
-    return ((double)longitudinalAcceleration.longitudinalAccelerationValue.value)*1e-1;
+  inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration){
+    return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value)*1e-1;
   }
 
   /**
@@ -107,8 +107,101 @@ namespace cdd_access {
    * @param lateralAcceleration to get the lateral acceleration from
    * @return lateral acceleration in m/s^2 as decimal number (left is positive)
    */
-  inline double getLateralAcceleration(const LateralAcceleration& lateralAcceleration){
-    return ((double)lateralAcceleration.lateralAccelerationValue.value)*1e-1;
+  inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration){
+    return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
+  }
+
+  /**
+   * @brief Get a Bit String in form of bool vector
+   * 
+   * @param buffer as uint8_t vector
+   * @param bits_unused number of bits to ignore at the end of the bit string
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const int bits_unused) {
+    // bit string size
+    const int bits_per_byte = 8;
+    const int n_bytes = buffer.size();
+    const int n_bits = n_bytes * bits_per_byte;
+    std::vector<bool> bits;
+    bits.resize(n_bits - bits_unused, 0);
+
+    // loop over bytes in reverse order
+    for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
+
+      // loop over bits in a byte
+      for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+
+        // map bit index in byte to bit index in total bitstring
+        int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
+        if (byte_idx == 0 && bit_idx >= n_bits - bits_unused) break;
+
+        // extract bit from bitstring and set output array entry appropriately
+        bool byte_has_true_bit = buffer[byte_idx] & (1 << bit_idx_in_byte);
+        if (byte_has_true_bit) bits[bit_idx] = 1;
+      }
+    }
+    return bits;
+  }
+
+  /**
+   * @brief Get Acceleration Control in form of bool vector
+   * 
+   * @param acceleration_control
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control){
+    return getBitString(acceleration_control.value, acceleration_control.bits_unused);
+  }
+
+  /**
+   * @brief Get the Driving Lane Status in form of bool vector
+   * 
+   * @param driving_lane_status 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status){
+    return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+  }
+  
+  /**
+   * @brief Get the Exterior Lights in form of bool vector
+   * 
+   * @param exterior_lights 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights){
+    return getBitString(exterior_lights.value, exterior_lights.bits_unused);
+  }
+
+  /**
+   * @brief Get the Special Transport Type in form of bool vector
+   * 
+   * @param special_transport_type 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
+    return getBitString(special_transport_type.value, special_transport_type.bits_unused);
+  }
+
+  /**
+   * @brief Get the Lightbar Siren In Use in form of bool vector
+   * 
+   * @param light_bar_siren_in_use 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
+    return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
+  }
+
+  /**
+   * @brief Get the Vehicle Role in form of bool vector
+   * 
+   * @param vehicle_role 
+   * @return std::vector<bool> 
+   */
+  inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
+    return getBitString(emergency_priority.value, emergency_priority.bits_unused);
   }
 
 } // namespace access

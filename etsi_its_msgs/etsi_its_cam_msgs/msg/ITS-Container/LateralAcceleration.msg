@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-LateralAccelerationValue lateralAccelerationValue
+LateralAccelerationValue lateral_acceleration_value
 
-AccelerationConfidence lateralAccelerationConfidence
+AccelerationConfidence lateral_acceleration_confidence
 

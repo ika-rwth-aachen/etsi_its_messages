@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-SteeringWheelAngleValue steeringWheelAngleValue
+SteeringWheelAngleValue steering_wheel_angle_value
 
-SteeringWheelAngleConfidence steeringWheelAngleConfidence
+SteeringWheelAngleConfidence steering_wheel_angle_confidence
 

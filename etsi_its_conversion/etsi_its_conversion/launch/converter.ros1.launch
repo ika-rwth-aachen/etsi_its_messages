@@ -1,0 +1,7 @@
+<launch>
+
+  <node pkg="nodelet" type="nodelet" name="etsi_its_conversion" args="standalone etsi_its_conversion/Converter" output="screen">
+    <rosparam command="load" file="$(find etsi_its_conversion)/config/params.ros1.yml" />
+  </node>
+
+</launch>

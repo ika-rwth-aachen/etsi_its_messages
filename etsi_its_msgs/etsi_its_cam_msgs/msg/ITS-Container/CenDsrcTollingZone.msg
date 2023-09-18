@@ -7,10 +7,10 @@
 # }
 # ------------------------------------------------------------------------------
 
-Latitude protectedZoneLatitude
+Latitude protected_zone_latitude
 
-Longitude protectedZoneLongitude
+Longitude protected_zone_longitude
 
-CenDsrcTollingZoneID cenDsrcTollingZoneID
-bool cenDsrcTollingZoneID_isPresent
+CenDsrcTollingZoneID cen_dsrc_tolling_zone_id
+bool cen_dsrc_tolling_zone_id_is_present
 

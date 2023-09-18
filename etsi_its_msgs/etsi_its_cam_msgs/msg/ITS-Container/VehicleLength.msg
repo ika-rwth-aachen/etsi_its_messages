@@ -5,7 +5,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-VehicleLengthValue vehicleLengthValue
+VehicleLengthValue vehicle_length_value
 
-VehicleLengthConfidenceIndication vehicleLengthConfidenceIndication
+VehicleLengthConfidenceIndication vehicle_length_confidence_indication
 

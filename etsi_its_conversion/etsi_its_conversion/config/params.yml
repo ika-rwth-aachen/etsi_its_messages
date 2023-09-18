@@ -1,1 +1,3 @@
-etsi_type: auto
+etsi_its_conversion:
+  ros__parameters:
+    etsi_type: auto
