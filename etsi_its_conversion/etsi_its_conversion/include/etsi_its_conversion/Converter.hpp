@@ -11,7 +11,7 @@
 #include <ros/ros.h>
 #include <udp_msgs/UdpPacket.h>
 #include <etsi_its_cam_msgs/CAM.h>
-#include <etsi_its_cam_msgs/DENM.h>
+#include <etsi_its_denm_msgs/DENM.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <etsi_its_denm_msgs/msg/denm.hpp>

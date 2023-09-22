@@ -131,8 +131,8 @@ void Converter::setup() {
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
   subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
   subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
-  NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_cam_["cam"].getTopic().c_str());
-  NODELET_INFO("Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_cam_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
 #endif
 }
 
@@ -195,7 +195,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     publishers_["cam"].publish(msg);
     NODELET_DEBUG(
 #else
-    publishers__cam_["cam"]->publish(msg);
+    publishers_cam_["cam"]->publish(msg);
     RCLCPP_DEBUG(this->get_logger(),
 #endif
       "Published CAM");
