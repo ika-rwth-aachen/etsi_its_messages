@@ -34,11 +34,11 @@ def loadJinjaTemplate() -> jinja2.environment.Template:
     Returns:
         jinja2.environment.Template: jinja template
     """
-    
-    template_dir = os.path.join(os.path.dirname(__file__), "templates")
+
+    template_dir = os.path.join(os.path.dirname(__file__), os.pardir, "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
     jinja_template = jinja_env.get_template("RosMessageType.msg.jinja2")
-    
+
     return jinja_template
 
 
@@ -64,10 +64,10 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     # add raw asn1 definition as comment to ROS .msg
     if type_name in asn1_raw:
         jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
-    
+
     # render jinja template with context
     ros_msg = jinja_template.render(jinja_context)
-    
+
     return ros_msg
 
 
@@ -103,16 +103,16 @@ def main():
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
-    
+
     jinja_template = loadJinjaTemplate()
 
     for type_name, asn1_type in asn1_types.items():
-        
+
         ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw, jinja_template)
 
         exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
-        
+
 
 if __name__ == "__main__":
-    
+
     main()

@@ -37,8 +37,8 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     Returns:
         Dict[str, jinja2.environment.Template]: jinja templates
     """
-    
-    template_dir = os.path.join(os.path.dirname(__file__), "templates")
+
+    template_dir = os.path.join(os.path.dirname(__file__), os.pardir, "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
     jinja_templates = {}
     jinja_templates["CHOICE"] = jinja_env.get_template("convertChoiceType.h.jinja2")
@@ -47,7 +47,7 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     jinja_templates["PRIMITIVE"] = jinja_env.get_template("convertPrimitiveType.h.jinja2")
     jinja_templates["SEQUENCE"] = jinja_env.get_template("convertSequenceType.h.jinja2")
     jinja_templates["SEQUENCE OF"] = jinja_env.get_template("convertSequenceOfType.h.jinja2")
-    
+
     return jinja_templates
 
 
@@ -82,10 +82,10 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
 
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
-    
+
     # render jinja template with context
     header = jinja_template.render(jinja_context)
-    
+
     return header
 
 
@@ -119,16 +119,16 @@ def main():
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
-    
+
     jinja_templates = loadJinjaTemplates()
 
     for type_name, asn1_type in asn1_types.items():
-        
+
         header = asn1TypeToConversionHeader(type_name, asn1_type, asn1_types, args.type, jinja_templates)
 
         exportConversionHeader(header, type_name, args.output_dir)
-        
+
 
 if __name__ == "__main__":
-    
+
     main()

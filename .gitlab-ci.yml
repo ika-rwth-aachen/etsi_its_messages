@@ -5,7 +5,7 @@ Code Generation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
-ROS1:
+ROS:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
@@ -18,7 +18,7 @@ ROS1:
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_INDUSTRIAL_CI: 'true'
 
-ROS2:
+ROS 2:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml

@@ -1,7 +1,4 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
 
@@ -9,12 +6,12 @@
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "codegen/scripts/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "CAM",
-        "-o", "utils/asn1/reduced/cam",
-        "utils/asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "utils/asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
+        "-o", "asn1/reduced/cam",
+        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -24,10 +21,10 @@
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToRosMsg.py",
+      "program": "codegen/scripts/asn1ToRosMsg.py",
       "args": [
-        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "asn1/reduced/cam/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -38,10 +35,10 @@
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "program": "codegen/scripts/asn1ToConversionHeader.py",
       "args": [
-        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "asn1/reduced/cam/ITS-Container.asn",
         "-t", "cam",
         "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
       ],
