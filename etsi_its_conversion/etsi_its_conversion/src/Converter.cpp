@@ -318,7 +318,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 
 
 #ifdef ROS1
-void Converter::rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg) {
+void Converter::rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg) {
 #else
 void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg) {
 #endif
