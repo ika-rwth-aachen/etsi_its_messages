@@ -1,20 +1,24 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>etsi_its_conversion</name>
-  <version>0.1.0</version>
-  <description>Bi-directionally converts ROS messages to and from ASN1-encoded ETSI messages</description>
 
-  <maintainer email="lennart.reiher@ika.rwth-aachen.de">Lennart Reiher</maintainer>
+  <name>etsi_its_conversion</name>
+  <version>1.0.0</version>
+  <description>Converts ROS messages to and from ASN.1-encoded ETSI ITS messages</description>
+
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+
+  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
+  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
 
   <license>MIT</license>
 
-  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
-
-  <depend>udp_msgs</depend>
   <depend>etsi_its_cam_conversion</depend>
   <depend>ros_environment</depend>
   <depend>std_msgs</depend>
+  <depend>udp_msgs</depend>
 
   <!-- ROS2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
@@ -25,7 +29,6 @@
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <depend condition="$ROS_VERSION == 1">nodelet</depend>
   <depend condition="$ROS_VERSION == 1">roscpp</depend>
-  <depend condition="$ROS_VERSION == 1">roslaunch</depend>
   <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
 
   <export>
