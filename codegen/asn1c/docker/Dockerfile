@@ -1,3 +1,5 @@
+# docker build -t gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest .
+
 FROM ubuntu:18.04
 
 ARG ASN1C_COMMIT
