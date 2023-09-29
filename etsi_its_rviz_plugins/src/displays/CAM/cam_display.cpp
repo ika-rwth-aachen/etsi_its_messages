@@ -15,6 +15,8 @@
 #include "rviz_common/properties/bool_property.hpp"
 #include "rviz_common/validate_floats.hpp"
 
+#include "rviz_common/properties/parse_color.hpp"
+
 namespace etsi_its_msgs
 {
 namespace displays
@@ -23,48 +25,17 @@ namespace displays
 CAMDisplay::CAMDisplay()
 {
   // General Properties
-  // color_property_ = new rviz_common::properties::ColorProperty(
-  //   "Color", QColor(255, 0, 25),
-  //   "Color to visualize the Ego-Vehicle.", this);
-  // alpha_property_ = new rviz_common::properties::FloatProperty(
-  //   "Alpha", 0.5f,
-  //   "Amount of transparency to apply.", this);
-  // viz_bounding_box_ = new rviz_common::properties::BoolProperty("Bounding box", true, 
-  //   "Visualize the bounding box of the Ego-Vehicle.", this);
-  // viz_direction_ind_ = new rviz_common::properties::BoolProperty("Orientation", true, 
-  //   "Visualize the direction indicator of the Ego-Vehicle.", this);
-  // viz_velocity_ = new rviz_common::properties::BoolProperty("Velocity arrow", true, 
-  //   "Add an arrow visualizing the EgoVehicles's velocity", this);
-  // viz_acceleration_ = new rviz_common::properties::BoolProperty("Acceleration arrow", false, 
-  //   "Add an arrow visualizing the EgoVehicles's acceleration", this);
-  // viz_text_ = new rviz_common::properties::BoolProperty("Text information", false, 
-  //   "Visualize informing text about the Ego-Vehicle.", this);
+  buffer_cams_ = new rviz_common::properties::BoolProperty("Buffer CAM's", true, 
+    "Buffer multiple CAM's with different station ID's.", this);
+  buffer_timeout_ = new rviz_common::properties::FloatProperty(
+    "Buffer Timeout", 0.1f,
+    "Time-Delta until CAM is removed from Buffer.", buffer_cams_);
+  buffer_timeout_->setMin(0);
+  color_property_ = new rviz_common::properties::ColorProperty(
+    "Color", QColor(255, 0, 25),
+    "Color to visualize the CAMs.", this);
 
-  // // Velocity options
-  // velocity_scale_ = new rviz_common::properties::FloatProperty("Velocity scale", 1.0, "Scale the length of the velocity arrows", viz_velocity_);
-  // use_velocity_color_ = new rviz_common::properties::BoolProperty("Use velocity color", true, 
-  //   "Visualize the velocity arrow in the bbox color. If not set, use specific color instead.", viz_velocity_);
-  // velocity_color_property_ = new rviz_common::properties::ColorProperty(
-  //   "Velocity Color", QColor(255, 0, 255),
-  //   "Color to visualize velocity arrow", viz_velocity_);
-
-  // // Acceleration options
-  // acceleration_scale_ = new rviz_common::properties::FloatProperty("Acceleration scale", 10.0, "Scale the length of the acceleration arrows", viz_acceleration_);
-  // use_acceleration_color_ = new rviz_common::properties::BoolProperty("Use acceleration color", true, 
-  //   "Visualize the acceleration arrow in the bbox color. If not set, use specific color instead.", viz_acceleration_);
-  // acceleration_color_property_ = new rviz_common::properties::ColorProperty(
-  //   "Acceleration Color", QColor(255, 0, 0),
-  //   "Color to visualize acceleration arrow", viz_acceleration_);
-
-  // // Text printing options
-  // char_height_ = new rviz_common::properties::FloatProperty("Char height", 4.0,
-  //   "Height of characters, ~ Font size", viz_text_);
-  // print_vel_ = new rviz_common::properties::BoolProperty("Velocity", true, 
-  //   "Print the speed of the Ego-Vehicle within text.", viz_text_);
-
-  // alpha_property_->setMin(0);
-  // alpha_property_->setMax(1);
-
+  
 }
 
 CAMDisplay::~CAMDisplay()
@@ -77,6 +48,9 @@ CAMDisplay::~CAMDisplay()
 void CAMDisplay::onInitialize()
 {
   RTDClass::onInitialize();
+
+  auto nodeAbstraction = context_->getRosNodeAbstraction().lock();
+  rviz_node_ = nodeAbstraction->get_raw_node();
 
   manual_object_ = scene_manager_->createManualObject();
   manual_object_->setDynamic(true);
@@ -105,61 +79,58 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
     return;
   }
 
-  // Ogre::Vector3 position;
-  // Ogre::Quaternion orientation;
-  // if (!context_->getFrameManager()->getTransform(msg->header, position, orientation)) {
-  //   setMissingTransformToFixedFrame(msg->header.frame_id);
-  //   return;
-  // }
-  // setTransformOk();
+  // Check if Station ID is already present
+  int st_id = etsi_its_cam_msgs::access::getStationID(*msg);
+  for(unsigned int i=0; i<cams_.size(); i++)
+  {
+    if(st_id == cams_[i].station_id)
+    {
+      // Replace
+      CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+      cams_[i] = cam;
+      return;
+    }
+  }
 
-  // scene_node_->setPosition(position);
-  // scene_node_->setOrientation(orientation);
+  // Station ID seems not to be part of cams_
+  // Add to vector
+  CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+  cams_.push_back(cam);
 
-  // Set Colors
-  // Ogre::ColourValue color_general = rviz_common::properties::qtToOgre(color_property_->getColor());
-  // Ogre::ColourValue color_text = rviz_common::properties::qtToOgre(color_property_->getColor());
- 
-  // color_general.a = alpha_property_->getFloat();
-  // color_text.a = alpha_property_->getFloat();
+}
 
-  // bool visualize_bounding_box = viz_bounding_box_->getBool();
-  // bool visualize_direction_indicator = viz_direction_ind_->getBool();
-  // bool visualize_velocity = viz_velocity_->getBool();
-  // float velocity_scale;
-  // bool use_velocity_color;
-  // Ogre::ColourValue velocity_color;
-  // if(visualize_velocity)
-  // {
-  //   velocity_scale = velocity_scale_->getFloat();
-  //   use_velocity_color = use_velocity_color_->getBool();
-  //   velocity_color = rviz_common::properties::qtToOgre(velocity_color_property_->getColor());
-  //   velocity_color.a = alpha_property_->getFloat(); 
-  // }
+void CAMDisplay::update(float wall_dt, float ros_dt)
+{
+  // Check for outdated CAMs
+  unsigned int i=0;
+  while(i<cams_.size())
+  {
+    if(cams_[i].getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) cams_.erase(cams_.begin()+i);
+    else i++;
+  }
 
-  // bool visualize_acceleration = viz_acceleration_->getBool();
-  // float acceleration_scale;
-  // bool use_acceleration_color;
-  // Ogre::ColourValue acceleration_color;
-  // if(visualize_acceleration)
-  // {
-  //   acceleration_scale = acceleration_scale_->getFloat();
-  //   use_acceleration_color = use_acceleration_color_->getBool();
-  //   acceleration_color = rviz_common::properties::qtToOgre(acceleration_color_property_->getColor());
-  //   acceleration_color.a = alpha_property_->getFloat(); 
-  // }
+  // Render all valid cams
+  bboxs_.clear();
+  for(unsigned int j=0; j<cams_.size(); j++)
+  {
+    RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Frame ID: " << cams_[j].header.frame_id);
+    RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "X: " << cams_[j].pose.position.x << " Y: " << cams_[j].pose.position.y);
+    auto child_scene_node = scene_node_->createChildSceneNode();
+    // Set position of scene node
+    Ogre::Vector3 position(cams_[j].pose.position.x-cams_[j].length/2.0, cams_[j].pose.position.y, cams_[j].pose.position.z);
+    Ogre::Quaternion orientation(cams_[j].pose.orientation.w, cams_[j].pose.orientation.x, cams_[j].pose.orientation.y, cams_[j].pose.orientation.z);
+    child_scene_node->setPosition(position);
+    child_scene_node->setOrientation(orientation);
 
-  // bool visualize_text = viz_text_->getBool();
-  // float char_height = char_height_->getFloat();
-  // bool print_vel = false;
-  // if(visualize_text) {
-  //   print_vel = print_vel_->getBool();
-  // }
-
-  // manual_object_->clear();
-
-  // Render Bounding Box
-  // ToDo
+    std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
+    Ogre::Vector3 dims;
+    dims.x = cams_[j].length;
+    dims.y = cams_[j].width;
+    dims.z = cams_[j].height;
+    bbox->setScale(dims);
+    Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
+    bbox->setColor(bb_color);
+  }
 }
 
 }  // namespace displays

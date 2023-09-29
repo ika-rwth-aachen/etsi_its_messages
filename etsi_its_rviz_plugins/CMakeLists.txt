@@ -5,6 +5,9 @@ find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
 set(ROS_DISTRO $ENV{ROS_DISTRO})
 
+# Workaround to find GeographicLib according to https://bugs.launchpad.net/ubuntu/+source/geographiclib/+bug/1805173
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};/usr/share/cmake/geographiclib")
+
 # === ROS2 (AMENT) =============================================================
 if(${ROS_VERSION} EQUAL 2)
 
@@ -31,12 +34,16 @@ if(${ROS_VERSION} EQUAL 2)
   # find dependencies
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
+  find_package(GeographicLib REQUIRED)
   find_package(pluginlib REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rviz_common REQUIRED)
   find_package(rviz_default_plugins REQUIRED)
   find_package(rviz_ogre_vendor REQUIRED)
   find_package(rviz_rendering REQUIRED)
+  find_package(tf2 REQUIRED)
+  find_package(tf2_geometry_msgs REQUIRED)
+  find_package(tf2_ros REQUIRED)
 
   set(display_headers_to_moc
     include/etsi_its_msgs/displays/CAM/cam_display.hpp
@@ -72,9 +79,13 @@ if(${ROS_VERSION} EQUAL 2)
     PUBLIC
     rclcpp
     etsi_its_msgs
+    GeographicLib
     rviz_common
     rviz_default_plugins
     rviz_rendering
+    tf2
+    tf2_geometry_msgs
+    tf2_ros
   )
 
   # Export modern CMake targets
@@ -86,6 +97,10 @@ if(${ROS_VERSION} EQUAL 2)
     rviz_common
     rviz_default_plugins
     rviz_ogre_vendor
+    rviz_rendering
+    tf2
+    tf2_geometry_msgs
+    tf2_ros
   )
 
   install(
