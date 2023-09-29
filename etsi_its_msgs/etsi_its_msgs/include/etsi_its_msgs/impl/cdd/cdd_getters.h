@@ -126,12 +126,15 @@ namespace cdd_access {
    */
   inline gm::PointStamped getUTMPosition(const ReferencePosition& reference_position, int& zone, bool& northp){
     gm::PointStamped utm_point;
-    utm_point.header.frame_id="utm";
     double latitude = getLatitude(reference_position.latitude);
     double longitude = getLongitude(reference_position.longitude);
     utm_point.point.z = getAltitude(reference_position.altitude);
     try {
       GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+      std::string hemisphere;
+      if(northp) hemisphere="N";
+      else hemisphere="S";
+      utm_point.header.frame_id="UTM_"+std::to_string(zone)+hemisphere;
     } catch (GeographicLib::GeographicErr& e) {
       throw std::invalid_argument(e.what());
     }

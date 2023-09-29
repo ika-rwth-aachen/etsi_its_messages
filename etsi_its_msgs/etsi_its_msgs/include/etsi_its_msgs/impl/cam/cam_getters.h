@@ -150,7 +150,7 @@ namespace access {
     }
   }
 
-  /*
+  /**
    * @brief Get the UTM Position defined within the BasicContainer of the CAM
    * 
    * The position is transformed into UTM by using GeographicLib::UTMUPS

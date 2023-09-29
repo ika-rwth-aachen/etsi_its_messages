@@ -42,7 +42,7 @@ namespace access {
   }
 
   /**
-   * @brief Get the Unix Nanoseconds From Generation Delta Time object
+   * @brief Get the Unix Nanoseconds from Generation Delta Time object
    * 
    * @param generation_delta_time the GenerationDeltaTime object to get the Unix-Nanoseconds from
    * @param unix_timestamp_estimate estimated unix-time (in Nanoseconds) to calculate the corresponding generation from
