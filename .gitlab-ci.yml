@@ -8,25 +8,26 @@ Code Generation:
 ROS1:
   trigger:
     include:
-    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
     PLATFORM: amd64
     TARGET: dev,run
     IMAGE_TAG: ros1
     BASE_IMAGE: rwthika/ros:noetic
-    COMMAND: roslaunch etsi_its_conversion start_ConversionNode.launch
+    COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_INDUSTRIAL_CI: 'true'
 
 ROS2:
   trigger:
     include:
-    - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
     PLATFORM: amd64
     TARGET: dev,run
     IMAGE_TAG: ros2
     BASE_IMAGE: rwthika/ros2:humble
-    COMMAND: echo "ToDo"
+    COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_PUSH_AS_LATEST: 'true'

@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_cam_coding/AltitudeConfidence.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/altitude_confidence.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/AltitudeConfidence.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/altitude_confidence.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_AltitudeConfidence(const AltitudeConfidence_t& in, cam_msgs::Altitude
 }
 
 void toStruct_AltitudeConfidence(const cam_msgs::AltitudeConfidence& in, AltitudeConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(AltitudeConfidence_t));
   out = in.value;
 }

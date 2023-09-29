@@ -34,6 +34,7 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
     for doc, doc_info in docs.items():
         for oset in doc_info["object-sets"]:
             relevant_types_per_module[doc].add(oset)
+            # TODO
             # we need to find dependencies of the current object-set 'oset' --> parse the file because asn1tools does not support class?
             # Example: Reg-ConnectionManeuverAssist
             # Reg-ConnectionManeuverAssist	REG-EXT-ID-AND-TYPE ::= {
@@ -83,7 +84,7 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
                 dependency_types.append(m["default"])
     if "element" in type_info:
         dependency_types += [type_info["element"]["type"]]
-    
+
     # recursively find dependencies of dependencies
     for dependency_type in dependency_types:
         dependency_docs = [module]
@@ -95,7 +96,7 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
         for doc in docs:
             if doc in rt:
                 relevant_types_per_module[doc] = relevant_types_per_module[doc].union(rt[doc])
-    
+
     return relevant_types_per_module
 
 
@@ -119,7 +120,7 @@ def reduceAsn1Files(files: List[str], relevant_types_per_module: Dict[str, Set[s
 def reduceAsn1File(lines: List[str], relevant_types_per_module: Dict[str, Set[str]]) -> List[str]:
 
     reduced_lines = []
-    
+
     current_module = None
     brace_level = 0
     is_between_begin_end = False
@@ -175,7 +176,7 @@ def reduceAsn1File(lines: List[str], relevant_types_per_module: Dict[str, Set[st
         if line.isspace() or line.startswith("--") or "BEGIN" in line or "END" in line:
             reduced_lines.append(line)
             continue
-        
+
         # start copying until first definition
         if not is_between_begin_end:
             copying = True
@@ -223,5 +224,5 @@ def main():
 
 
 if __name__ == "__main__":
-    
+
     main()

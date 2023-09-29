@@ -4,12 +4,12 @@
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
 #include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
 #include <etsi_its_cam_conversion/convertStationID.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/its_pdu_header.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/ItsPduHeader.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/its_pdu_header.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -23,7 +23,7 @@ void toRos_ItsPduHeader(const ItsPduHeader_t& in, cam_msgs::ItsPduHeader& out) {
 }
 
 void toStruct_ItsPduHeader(const cam_msgs::ItsPduHeader& in, ItsPduHeader_t& out) {
-    
+
   memset(&out, 0, sizeof(ItsPduHeader_t));
 
   toStruct_INTEGER(in.protocol_version, out.protocolVersion);

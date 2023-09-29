@@ -4,12 +4,12 @@
 #include <etsi_its_cam_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_cam_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_cam_conversion/convertDrivingLaneStatus.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/closed_lanes.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/ClosedLanes.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/closed_lanes.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -35,7 +35,7 @@ void toRos_ClosedLanes(const ClosedLanes_t& in, cam_msgs::ClosedLanes& out) {
 }
 
 void toStruct_ClosedLanes(const cam_msgs::ClosedLanes& in, ClosedLanes_t& out) {
-    
+
   memset(&out, 0, sizeof(ClosedLanes_t));
 
   if (in.innerhard_shoulder_status_is_present) {

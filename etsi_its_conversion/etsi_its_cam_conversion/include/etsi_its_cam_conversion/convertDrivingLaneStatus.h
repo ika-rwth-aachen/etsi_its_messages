@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/DrivingLaneStatus.h>
 #include <etsi_its_cam_conversion/primitives/convertBIT_STRING.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/driving_lane_status.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/DrivingLaneStatus.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/driving_lane_status.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 

@@ -6,14 +6,14 @@
 #include <etsi_its_cam_coding/ProtectedCommunicationZonesRSU.h>
 #include <etsi_its_cam_coding/ProtectedCommunicationZone.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZone.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
-#include <etsi_its_cam_msgs/msg/protected_communication_zones_rsu.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/ProtectedCommunicationZone.h>
 #include <etsi_its_cam_msgs/ProtectedCommunicationZonesRSU.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
+#include <etsi_its_cam_msgs/msg/protected_communication_zones_rsu.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_ProtectedCommunicationZonesRSU(const ProtectedCommunicationZonesRSU_t
 }
 
 void toStruct_ProtectedCommunicationZonesRSU(const cam_msgs::ProtectedCommunicationZonesRSU& in, ProtectedCommunicationZonesRSU_t& out) {
-    
+
   memset(&out, 0, sizeof(ProtectedCommunicationZonesRSU_t));
 
   for (int i = 0; i < in.array.size(); i++) {

@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/SpecialTransportType.h>
 #include <etsi_its_cam_conversion/primitives/convertBIT_STRING.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/special_transport_type.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialTransportType.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/special_transport_type.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 

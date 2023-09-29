@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_cam_coding/VehicleRole.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/vehicle_role.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleRole.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/vehicle_role.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_VehicleRole(const VehicleRole_t& in, cam_msgs::VehicleRole& out) {
 }
 
 void toStruct_VehicleRole(const cam_msgs::VehicleRole& in, VehicleRole_t& out) {
-    
+
   memset(&out, 0, sizeof(VehicleRole_t));
   out = in.value;
 }

@@ -3,6 +3,7 @@
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
+#include <cstring>
 #include <etsi_its_msgs/impl/cdd/cdd_checks.h>
 #include <etsi_its_msgs/impl/cdd/cdd_utils.h>
 #include <GeographicLib/UTMUPS.hpp>
@@ -320,6 +321,100 @@ namespace cdd_access {
       throw std::invalid_argument(e.what());
     }
     setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
+  }
+  
+  /**
+   * @brief Set a Bit String by a vector of bools
+   * 
+   * @tparam T
+   * @param bitstring BitString to set
+   * @param bits vector of bools
+   */
+  template <typename T>
+  inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
+    // bit string size
+    const int bits_per_byte = 8;
+    const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
+    const int n_bits = n_bytes * bits_per_byte;
+
+    // init output
+    bitstring.bits_unused = n_bits - bits.size();
+    bitstring.value = std::vector<uint8_t>(n_bytes);
+
+    // loop over all bytes in reverse order
+    for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
+
+      // loop over bits in a byte
+      for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+
+        // map bit index in byte to bit index in total bitstring
+        int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
+        if (byte_idx == 0 && bit_idx >= n_bits - bitstring.bits_unused) break;
+
+        // set bit in output bitstring appropriately
+        bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
+      }
+    }
+  }
+
+  /**
+   * @brief Set the Acceleration Control by a vector of bools
+   * 
+   * @param acceleration_control 
+   * @param bits 
+   */
+  inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
+    setBitString(acceleration_control, bits);
+  }
+
+  /**
+   * @brief Set the Driving Lane Status by a vector of bools
+   * 
+   * @param driving_lane_status 
+   * @param bits 
+   */
+  inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
+    setBitString(driving_lane_status, bits);
+  }
+  
+  /**
+   * @brief Set the Exterior Lights by a vector of bools
+   * 
+   * @param exterior_lights 
+   * @param bits 
+   */
+  inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+    setBitString(exterior_lights, bits);
+  }
+
+  /**
+   * @brief Set the Special Transport Type by a vector of bools
+   * 
+   * @param special_transport_type 
+   * @param bits 
+   */
+  inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
+    setBitString(special_transport_type, bits);
+  }
+
+  /**
+   * @brief Set the Lightbar Siren In Use by a vector of bools
+   * 
+   * @param light_bar_siren_in_use 
+   * @param bits 
+   */
+  inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
+    setBitString(light_bar_siren_in_use, bits);
+  }
+
+  /**
+   * @brief Set the Emergency Priority by a vector of bools
+   * 
+   * @param emergency_priority 
+   * @param bits 
+   */
+  inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
+    setBitString(emergency_priority, bits);
   }
 
 } // namespace cdd_access

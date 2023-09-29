@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_cam_coding/DangerousGoodsBasic.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/dangerous_goods_basic.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/DangerousGoodsBasic.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/dangerous_goods_basic.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_DangerousGoodsBasic(const DangerousGoodsBasic_t& in, cam_msgs::Danger
 }
 
 void toStruct_DangerousGoodsBasic(const cam_msgs::DangerousGoodsBasic& in, DangerousGoodsBasic_t& out) {
-    
+
   memset(&out, 0, sizeof(DangerousGoodsBasic_t));
   out = in.value;
 }

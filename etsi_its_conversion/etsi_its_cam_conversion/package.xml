@@ -10,7 +10,6 @@
 
   <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
 
-  <depend>boost</depend>
   <depend>etsi_its_cam_coding</depend>
   <depend>etsi_its_cam_msgs</depend>
   <depend>ros_environment</depend>

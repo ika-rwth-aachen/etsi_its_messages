@@ -3,12 +3,12 @@
 #include <etsi_its_cam_coding/Curvature.h>
 #include <etsi_its_cam_conversion/convertCurvatureValue.h>
 #include <etsi_its_cam_conversion/convertCurvatureConfidence.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/curvature.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/Curvature.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/curvature.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_Curvature(const Curvature_t& in, cam_msgs::Curvature& out) {
 }
 
 void toStruct_Curvature(const cam_msgs::Curvature& in, Curvature_t& out) {
-    
+
   memset(&out, 0, sizeof(Curvature_t));
 
   toStruct_CurvatureValue(in.curvature_value, out.curvatureValue);

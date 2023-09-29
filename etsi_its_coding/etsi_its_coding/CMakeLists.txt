@@ -3,20 +3,17 @@ project(etsi_its_coding)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
-add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
-
-# === ROS1 (CATKIN) ============================================================
-if(${ROS_VERSION} EQUAL 1)
-
-    find_package(catkin REQUIRED)
-    catkin_metapackage()
 
 # === ROS2 (AMENT) =============================================================
-elseif(${ROS_VERSION} EQUAL 2)
+if(${ROS_VERSION} EQUAL 2)
 
-    find_package(ament_cmake REQUIRED)
-    ament_package()
+  find_package(ament_cmake REQUIRED)
+  ament_package()
+
+# === ROS1 (CATKIN) ============================================================
+elseif(${ROS_VERSION} EQUAL 1)
+
+  find_package(catkin REQUIRED)
+  catkin_metapackage()
 
 endif()

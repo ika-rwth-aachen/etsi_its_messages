@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_cam_coding/CurvatureConfidence.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/curvature_confidence.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/CurvatureConfidence.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/curvature_confidence.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_CurvatureConfidence(const CurvatureConfidence_t& in, cam_msgs::Curvat
 }
 
 void toStruct_CurvatureConfidence(const cam_msgs::CurvatureConfidence& in, CurvatureConfidence_t& out) {
-    
+
   memset(&out, 0, sizeof(CurvatureConfidence_t));
   out = in.value;
 }

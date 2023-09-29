@@ -2,12 +2,12 @@
 
 #include <etsi_its_cam_coding/LowFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertBasicVehicleContainerLowFrequency.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/low_frequency_container.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/LowFrequencyContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/low_frequency_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -22,7 +22,7 @@ void toRos_LowFrequencyContainer(const LowFrequencyContainer_t& in, cam_msgs::Lo
 }
 
 void toStruct_LowFrequencyContainer(const cam_msgs::LowFrequencyContainer& in, LowFrequencyContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(LowFrequencyContainer_t));
 
   if (in.choice == cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {

@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_cam_coding/CurvatureCalculationMode.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/curvature_calculation_mode.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/CurvatureCalculationMode.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/curvature_calculation_mode.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_CurvatureCalculationMode(const CurvatureCalculationMode_t& in, cam_ms
 }
 
 void toStruct_CurvatureCalculationMode(const cam_msgs::CurvatureCalculationMode& in, CurvatureCalculationMode_t& out) {
-    
+
   memset(&out, 0, sizeof(CurvatureCalculationMode_t));
   out = in.value;
 }

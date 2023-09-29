@@ -14,7 +14,7 @@ ASN1_PRIMITIVES_2_ROS = {
     "IA5String": "string",
     "UTF8String": "string",
     "BIT STRING": "uint8[]",
-    "OCTET STRING": "string",
+    "OCTET STRING": "uint8[]",
     "NumericString": "string",
     "VisibleString": "string",
 }

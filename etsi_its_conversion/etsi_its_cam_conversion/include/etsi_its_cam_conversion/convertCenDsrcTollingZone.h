@@ -4,12 +4,12 @@
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertCenDsrcTollingZoneID.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/cen_dsrc_tolling_zone.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/CenDsrcTollingZone.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/cen_dsrc_tolling_zone.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -27,7 +27,7 @@ void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, cam_msgs::CenDsrcT
 }
 
 void toStruct_CenDsrcTollingZone(const cam_msgs::CenDsrcTollingZone& in, CenDsrcTollingZone_t& out) {
-    
+
   memset(&out, 0, sizeof(CenDsrcTollingZone_t));
 
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);

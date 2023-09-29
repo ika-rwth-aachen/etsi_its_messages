@@ -8,12 +8,12 @@
 #include <etsi_its_cam_conversion/convertRescueContainer.h>
 #include <etsi_its_cam_conversion/convertEmergencyContainer.h>
 #include <etsi_its_cam_conversion/convertSafetyCarContainer.h>
-#ifdef ROS2
-#include <etsi_its_cam_msgs/msg/special_vehicle_container.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialVehicleContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;
+#else
+#include <etsi_its_cam_msgs/msg/special_vehicle_container.hpp>
+namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
@@ -58,7 +58,7 @@ void toRos_SpecialVehicleContainer(const SpecialVehicleContainer_t& in, cam_msgs
 }
 
 void toStruct_SpecialVehicleContainer(const cam_msgs::SpecialVehicleContainer& in, SpecialVehicleContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(SpecialVehicleContainer_t));
 
   if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER) {
