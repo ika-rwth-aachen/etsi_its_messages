@@ -36,7 +36,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   install(
       DIRECTORY include/
-      DESTINATION include/${PROJECT_NAME}
+      DESTINATION include
   )
 
   install(TARGETS etsi_its_cam_msgs_access
