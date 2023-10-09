@@ -261,7 +261,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
 
     # extra information / asn1 fields that are not processed as comments
     for k, v in asn1.items():
-        if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values"):
+        if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
             context["comments"].append(f"{k}: {v}")
 
     # primitives
@@ -379,6 +379,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types)
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
+            if "default" in member:
+                member_context["members"][0]["default"] = True
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options

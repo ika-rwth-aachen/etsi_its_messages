@@ -43,12 +43,15 @@ void toRos_ManagementContainer(const ManagementContainer_t& in, denm_msgs::Manag
     out.relevance_traffic_direction_is_present = true;
   }
 
-  // TODO
-  // toRos_ValidityDuration(in.validityDuration, out.validity_duration);
-  // if (in.transmissionInterval) {
-  //   toRos_TransmissionInterval(*in.transmissionInterval, out.transmission_interval);
-  //   out.transmission_interval_is_present = true;
-  // }
+  // TODO: handle default value
+  if (in.validityDuration) {
+    toRos_ValidityDuration(*in.validityDuration, out.validity_duration);
+  }
+
+  if (in.transmissionInterval) {
+    toRos_TransmissionInterval(*in.transmissionInterval, out.transmission_interval);
+    out.transmission_interval_is_present = true;
+  }
 
   toRos_StationType(in.stationType, out.station_type);
 }
@@ -79,13 +82,16 @@ void toStruct_ManagementContainer(const denm_msgs::ManagementContainer& in, Mana
     out.relevanceTrafficDirection = new RelevanceTrafficDirection_t(relevance_traffic_direction);
   }
 
-  // TODO
-  // toStruct_ValidityDuration(in.validity_duration, out.validityDuration);
-  // if (in.transmission_interval_is_present) {
-  //   TransmissionInterval_t transmission_interval;
-  //   toStruct_TransmissionInterval(in.transmission_interval, transmission_interval);
-  //   out.transmissionInterval = new TransmissionInterval_t(transmission_interval);
-  // }
+  // TODO: handle default value
+  ValidityDuration_t validity_duration;
+  toStruct_ValidityDuration(in.validity_duration, validity_duration);
+  out.validityDuration = new ValidityDuration_t(validity_duration);
+
+  if (in.transmission_interval_is_present) {
+    TransmissionInterval_t transmission_interval;
+    toStruct_TransmissionInterval(in.transmission_interval, transmission_interval);
+    out.transmissionInterval = new TransmissionInterval_t(transmission_interval);
+  }
 
   toStruct_StationType(in.station_type, out.stationType);
 }
