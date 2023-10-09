@@ -7,12 +7,12 @@
 #include <etsi_its_denm_conversion/convertNumberOfOccupants.h>
 #include <etsi_its_denm_conversion/convertVehicleIdentification.h>
 #include <etsi_its_denm_conversion/convertEnergyStorageType.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/stationary_vehicle_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/StationaryVehicleContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/stationary_vehicle_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -53,7 +53,7 @@ void toRos_StationaryVehicleContainer(const StationaryVehicleContainer_t& in, de
 }
 
 void toStruct_StationaryVehicleContainer(const denm_msgs::StationaryVehicleContainer& in, StationaryVehicleContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(StationaryVehicleContainer_t));
 
   if (in.stationary_since_is_present) {

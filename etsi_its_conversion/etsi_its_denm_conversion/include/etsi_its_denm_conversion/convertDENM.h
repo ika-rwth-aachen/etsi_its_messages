@@ -3,12 +3,12 @@
 #include <etsi_its_denm_coding/DENM.h>
 #include <etsi_its_denm_conversion/convertItsPduHeader.h>
 #include <etsi_its_denm_conversion/convertDecentralizedEnvironmentalNotificationMessage.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/denm.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/DENM.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/denm.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_DENM(const DENM_t& in, denm_msgs::DENM& out) {
 }
 
 void toStruct_DENM(const denm_msgs::DENM& in, DENM_t& out) {
-    
+
   memset(&out, 0, sizeof(DENM_t));
 
   toStruct_ItsPduHeader(in.header, out.header);

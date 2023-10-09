@@ -5,12 +5,12 @@
 #include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertEventHistory.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/situation_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/SituationContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/situation_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -33,7 +33,7 @@ void toRos_SituationContainer(const SituationContainer_t& in, denm_msgs::Situati
 }
 
 void toStruct_SituationContainer(const denm_msgs::SituationContainer& in, SituationContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(SituationContainer_t));
 
   toStruct_InformationQuality(in.information_quality, out.informationQuality);

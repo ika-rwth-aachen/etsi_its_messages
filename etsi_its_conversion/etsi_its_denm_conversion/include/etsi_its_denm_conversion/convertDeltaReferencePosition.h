@@ -4,12 +4,12 @@
 #include <etsi_its_denm_conversion/convertDeltaLatitude.h>
 #include <etsi_its_denm_conversion/convertDeltaLongitude.h>
 #include <etsi_its_denm_conversion/convertDeltaAltitude.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/delta_reference_position.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/DeltaReferencePosition.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/delta_reference_position.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -23,7 +23,7 @@ void toRos_DeltaReferencePosition(const DeltaReferencePosition_t& in, denm_msgs:
 }
 
 void toStruct_DeltaReferencePosition(const denm_msgs::DeltaReferencePosition& in, DeltaReferencePosition_t& out) {
-    
+
   memset(&out, 0, sizeof(DeltaReferencePosition_t));
 
   toStruct_DeltaLatitude(in.delta_latitude, out.deltaLatitude);

@@ -5,12 +5,12 @@
 #include <etsi_its_denm_conversion/convertHeading.h>
 #include <etsi_its_denm_conversion/convertTraces.h>
 #include <etsi_its_denm_conversion/convertRoadType.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/location_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/LocationContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/location_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -37,7 +37,7 @@ void toRos_LocationContainer(const LocationContainer_t& in, denm_msgs::LocationC
 }
 
 void toStruct_LocationContainer(const denm_msgs::LocationContainer& in, LocationContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(LocationContainer_t));
 
   if (in.event_speed_is_present) {

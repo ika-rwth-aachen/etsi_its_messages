@@ -13,12 +13,12 @@
 #include <etsi_its_denm_conversion/convertPositionOfOccupants.h>
 #include <etsi_its_denm_conversion/convertVehicleMass.h>
 #include <etsi_its_denm_conversion/convertRequestResponseIndication.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/impact_reduction_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/ImpactReductionContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/impact_reduction_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -41,7 +41,7 @@ void toRos_ImpactReductionContainer(const ImpactReductionContainer_t& in, denm_m
 }
 
 void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, ImpactReductionContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(ImpactReductionContainer_t));
 
   toStruct_HeightLonCarr(in.height_lon_carr_left, out.heightLonCarrLeft);

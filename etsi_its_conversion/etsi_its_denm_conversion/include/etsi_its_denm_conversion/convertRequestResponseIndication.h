@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_denm_coding/RequestResponseIndication.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/request_response_indication.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/RequestResponseIndication.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/request_response_indication.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_RequestResponseIndication(const RequestResponseIndication_t& in, denm
 }
 
 void toStruct_RequestResponseIndication(const denm_msgs::RequestResponseIndication& in, RequestResponseIndication_t& out) {
-    
+
   memset(&out, 0, sizeof(RequestResponseIndication_t));
   out = in.value;
 }

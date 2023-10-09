@@ -1,12 +1,12 @@
 #pragma once
 
 #include <etsi_its_denm_coding/RelevanceTrafficDirection.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/relevance_traffic_direction.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/RelevanceTrafficDirection.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/relevance_traffic_direction.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -18,7 +18,7 @@ void toRos_RelevanceTrafficDirection(const RelevanceTrafficDirection_t& in, denm
 }
 
 void toStruct_RelevanceTrafficDirection(const denm_msgs::RelevanceTrafficDirection& in, RelevanceTrafficDirection_t& out) {
-    
+
   memset(&out, 0, sizeof(RelevanceTrafficDirection_t));
   out = in.value;
 }

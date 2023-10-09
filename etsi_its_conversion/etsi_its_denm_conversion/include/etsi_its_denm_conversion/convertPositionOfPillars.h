@@ -6,14 +6,14 @@
 #include <etsi_its_denm_coding/PositionOfPillars.h>
 #include <etsi_its_denm_coding/PosPillar.h>
 #include <etsi_its_denm_conversion/convertPosPillar.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/pos_pillar.hpp>
-#include <etsi_its_denm_msgs/msg/position_of_pillars.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PosPillar.h>
 #include <etsi_its_denm_msgs/PositionOfPillars.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/pos_pillar.hpp>
+#include <etsi_its_denm_msgs/msg/position_of_pillars.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_PositionOfPillars(const PositionOfPillars_t& in, denm_msgs::PositionO
 }
 
 void toStruct_PositionOfPillars(const denm_msgs::PositionOfPillars& in, PositionOfPillars_t& out) {
-    
+
   memset(&out, 0, sizeof(PositionOfPillars_t));
 
   for (int i = 0; i < in.array.size(); i++) {

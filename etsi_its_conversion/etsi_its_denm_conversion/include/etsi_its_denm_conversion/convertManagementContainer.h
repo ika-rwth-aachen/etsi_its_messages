@@ -11,12 +11,12 @@
 #include <etsi_its_denm_conversion/convertValidityDuration.h>
 #include <etsi_its_denm_conversion/convertTransmissionInterval.h>
 #include <etsi_its_denm_conversion/convertStationType.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/management_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/ManagementContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/management_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

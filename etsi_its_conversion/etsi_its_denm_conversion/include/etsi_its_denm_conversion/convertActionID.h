@@ -3,12 +3,12 @@
 #include <etsi_its_denm_coding/ActionID.h>
 #include <etsi_its_denm_conversion/convertStationID.h>
 #include <etsi_its_denm_conversion/convertSequenceNumber.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/action_id.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/ActionID.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/action_id.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -21,7 +21,7 @@ void toRos_ActionID(const ActionID_t& in, denm_msgs::ActionID& out) {
 }
 
 void toStruct_ActionID(const denm_msgs::ActionID& in, ActionID_t& out) {
-    
+
   memset(&out, 0, sizeof(ActionID_t));
 
   toStruct_StationID(in.originating_station_id, out.originatingStationID);

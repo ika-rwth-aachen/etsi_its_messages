@@ -6,14 +6,14 @@
 #include <etsi_its_denm_coding/EventHistory.h>
 #include <etsi_its_denm_coding/EventPoint.h>
 #include <etsi_its_denm_conversion/convertEventPoint.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/event_point.hpp>
-#include <etsi_its_denm_msgs/msg/event_history.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/EventPoint.h>
 #include <etsi_its_denm_msgs/EventHistory.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/event_point.hpp>
+#include <etsi_its_denm_msgs/msg/event_history.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_EventHistory(const EventHistory_t& in, denm_msgs::EventHistory& out) 
 }
 
 void toStruct_EventHistory(const denm_msgs::EventHistory& in, EventHistory_t& out) {
-    
+
   memset(&out, 0, sizeof(EventHistory_t));
 
   for (int i = 0; i < in.array.size(); i++) {

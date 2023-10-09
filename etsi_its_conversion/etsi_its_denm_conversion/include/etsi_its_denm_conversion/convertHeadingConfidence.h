@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/HeadingConfidence.h>
 #include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/heading_confidence.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/HeadingConfidence.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/heading_confidence.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

@@ -7,12 +7,12 @@
 #include <etsi_its_denm_conversion/convertRoadWorksContainerExtended.h>
 #include <etsi_its_denm_conversion/convertPositioningSolutionType.h>
 #include <etsi_its_denm_conversion/convertStationaryVehicleContainer.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/alacarte_container.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/AlacarteContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/alacarte_container.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -53,7 +53,7 @@ void toRos_AlacarteContainer(const AlacarteContainer_t& in, denm_msgs::AlacarteC
 }
 
 void toStruct_AlacarteContainer(const denm_msgs::AlacarteContainer& in, AlacarteContainer_t& out) {
-    
+
   memset(&out, 0, sizeof(AlacarteContainer_t));
 
   if (in.lane_position_is_present) {

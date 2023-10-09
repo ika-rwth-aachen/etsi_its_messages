@@ -10,12 +10,12 @@
 #include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertTrafficRule.h>
 #include <etsi_its_denm_conversion/convertReferenceDenms.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/road_works_container_extended.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/RoadWorksContainerExtended.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/road_works_container_extended.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -71,7 +71,7 @@ void toRos_RoadWorksContainerExtended(const RoadWorksContainerExtended_t& in, de
 }
 
 void toStruct_RoadWorksContainerExtended(const denm_msgs::RoadWorksContainerExtended& in, RoadWorksContainerExtended_t& out) {
-    
+
   memset(&out, 0, sizeof(RoadWorksContainerExtended_t));
 
   if (in.light_bar_siren_in_use_is_present) {

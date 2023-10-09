@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/WheelBaseVehicle.h>
 #include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/wheel_base_vehicle.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/WheelBaseVehicle.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/wheel_base_vehicle.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

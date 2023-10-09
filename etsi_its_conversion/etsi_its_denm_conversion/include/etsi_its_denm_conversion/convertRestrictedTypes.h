@@ -6,14 +6,14 @@
 #include <etsi_its_denm_coding/RestrictedTypes.h>
 #include <etsi_its_denm_coding/StationType.h>
 #include <etsi_its_denm_conversion/convertStationType.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/station_type.hpp>
-#include <etsi_its_denm_msgs/msg/restricted_types.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/StationType.h>
 #include <etsi_its_denm_msgs/RestrictedTypes.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/station_type.hpp>
+#include <etsi_its_denm_msgs/msg/restricted_types.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_RestrictedTypes(const RestrictedTypes_t& in, denm_msgs::RestrictedTyp
 }
 
 void toStruct_RestrictedTypes(const denm_msgs::RestrictedTypes& in, RestrictedTypes_t& out) {
-    
+
   memset(&out, 0, sizeof(RestrictedTypes_t));
 
   for (int i = 0; i < in.array.size(); i++) {

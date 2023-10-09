@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/PositionOfOccupants.h>
 #include <etsi_its_denm_conversion/primitives/convertBIT_STRING.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/position_of_occupants.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PositionOfOccupants.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/position_of_occupants.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

@@ -6,14 +6,14 @@
 #include <etsi_its_denm_coding/PathHistory.h>
 #include <etsi_its_denm_coding/PathPoint.h>
 #include <etsi_its_denm_conversion/convertPathPoint.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/path_point.hpp>
-#include <etsi_its_denm_msgs/msg/path_history.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PathPoint.h>
 #include <etsi_its_denm_msgs/PathHistory.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/path_point.hpp>
+#include <etsi_its_denm_msgs/msg/path_history.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_PathHistory(const PathHistory_t& in, denm_msgs::PathHistory& out) {
 }
 
 void toStruct_PathHistory(const denm_msgs::PathHistory& in, PathHistory_t& out) {
-    
+
   memset(&out, 0, sizeof(PathHistory_t));
 
   for (int i = 0; i < in.array.size(); i++) {

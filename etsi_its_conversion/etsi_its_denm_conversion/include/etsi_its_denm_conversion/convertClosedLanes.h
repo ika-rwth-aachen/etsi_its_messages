@@ -4,12 +4,12 @@
 #include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_denm_conversion/convertDrivingLaneStatus.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/closed_lanes.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/ClosedLanes.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/closed_lanes.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -35,7 +35,7 @@ void toRos_ClosedLanes(const ClosedLanes_t& in, denm_msgs::ClosedLanes& out) {
 }
 
 void toStruct_ClosedLanes(const denm_msgs::ClosedLanes& in, ClosedLanes_t& out) {
-    
+
   memset(&out, 0, sizeof(ClosedLanes_t));
 
   if (in.innerhard_shoulder_status_is_present) {

@@ -4,12 +4,12 @@
 #include <etsi_its_denm_conversion/convertSemiAxisLength.h>
 #include <etsi_its_denm_conversion/convertSemiAxisLength.h>
 #include <etsi_its_denm_conversion/convertHeadingValue.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/pos_confidence_ellipse.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PosConfidenceEllipse.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/pos_confidence_ellipse.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -23,7 +23,7 @@ void toRos_PosConfidenceEllipse(const PosConfidenceEllipse_t& in, denm_msgs::Pos
 }
 
 void toStruct_PosConfidenceEllipse(const denm_msgs::PosConfidenceEllipse& in, PosConfidenceEllipse_t& out) {
-    
+
   memset(&out, 0, sizeof(PosConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_confidence, out.semiMajorConfidence);

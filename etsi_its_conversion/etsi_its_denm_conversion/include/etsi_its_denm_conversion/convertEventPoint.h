@@ -4,12 +4,12 @@
 #include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/event_point.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/EventPoint.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/event_point.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -27,7 +27,7 @@ void toRos_EventPoint(const EventPoint_t& in, denm_msgs::EventPoint& out) {
 }
 
 void toStruct_EventPoint(const denm_msgs::EventPoint& in, EventPoint_t& out) {
-    
+
   memset(&out, 0, sizeof(EventPoint_t));
 
   toStruct_DeltaReferencePosition(in.event_position, out.eventPosition);

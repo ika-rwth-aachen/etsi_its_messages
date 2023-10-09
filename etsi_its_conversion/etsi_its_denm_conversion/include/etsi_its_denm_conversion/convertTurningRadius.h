@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/TurningRadius.h>
 #include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/turning_radius.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/TurningRadius.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/turning_radius.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

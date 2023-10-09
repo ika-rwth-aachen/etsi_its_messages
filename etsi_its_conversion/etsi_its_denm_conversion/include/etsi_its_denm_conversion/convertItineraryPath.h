@@ -6,14 +6,14 @@
 #include <etsi_its_denm_coding/ItineraryPath.h>
 #include <etsi_its_denm_coding/ReferencePosition.h>
 #include <etsi_its_denm_conversion/convertReferencePosition.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/reference_position.hpp>
-#include <etsi_its_denm_msgs/msg/itinerary_path.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/ReferencePosition.h>
 #include <etsi_its_denm_msgs/ItineraryPath.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/reference_position.hpp>
+#include <etsi_its_denm_msgs/msg/itinerary_path.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -30,7 +30,7 @@ void toRos_ItineraryPath(const ItineraryPath_t& in, denm_msgs::ItineraryPath& ou
 }
 
 void toStruct_ItineraryPath(const denm_msgs::ItineraryPath& in, ItineraryPath_t& out) {
-    
+
   memset(&out, 0, sizeof(ItineraryPath_t));
 
   for (int i = 0; i < in.array.size(); i++) {

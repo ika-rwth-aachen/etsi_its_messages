@@ -3,12 +3,12 @@
 #include <etsi_its_denm_coding/VehicleIdentification.h>
 #include <etsi_its_denm_conversion/convertWMInumber.h>
 #include <etsi_its_denm_conversion/convertVDS.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/vehicle_identification.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/VehicleIdentification.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/vehicle_identification.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -29,7 +29,7 @@ void toRos_VehicleIdentification(const VehicleIdentification_t& in, denm_msgs::V
 }
 
 void toStruct_VehicleIdentification(const denm_msgs::VehicleIdentification& in, VehicleIdentification_t& out) {
-    
+
   memset(&out, 0, sizeof(VehicleIdentification_t));
 
   if (in.w_m_inumber_is_present) {

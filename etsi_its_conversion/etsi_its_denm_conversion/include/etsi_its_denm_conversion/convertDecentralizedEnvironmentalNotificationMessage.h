@@ -5,12 +5,12 @@
 #include <etsi_its_denm_conversion/convertSituationContainer.h>
 #include <etsi_its_denm_conversion/convertLocationContainer.h>
 #include <etsi_its_denm_conversion/convertAlacarteContainer.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/decentralized_environmental_notification_message.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/DecentralizedEnvironmentalNotificationMessage.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/decentralized_environmental_notification_message.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -37,7 +37,7 @@ void toRos_DecentralizedEnvironmentalNotificationMessage(const DecentralizedEnvi
 }
 
 void toStruct_DecentralizedEnvironmentalNotificationMessage(const denm_msgs::DecentralizedEnvironmentalNotificationMessage& in, DecentralizedEnvironmentalNotificationMessage_t& out) {
-    
+
   memset(&out, 0, sizeof(DecentralizedEnvironmentalNotificationMessage_t));
 
   toStruct_ManagementContainer(in.management, out.management);

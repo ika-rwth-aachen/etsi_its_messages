@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/PosCentMass.h>
 #include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/pos_cent_mass.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PosCentMass.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/pos_cent_mass.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

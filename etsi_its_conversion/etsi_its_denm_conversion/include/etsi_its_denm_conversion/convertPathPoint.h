@@ -3,12 +3,12 @@
 #include <etsi_its_denm_coding/PathPoint.h>
 #include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/path_point.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/PathPoint.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/path_point.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -25,7 +25,7 @@ void toRos_PathPoint(const PathPoint_t& in, denm_msgs::PathPoint& out) {
 }
 
 void toStruct_PathPoint(const denm_msgs::PathPoint& in, PathPoint_t& out) {
-    
+
   memset(&out, 0, sizeof(PathPoint_t));
 
   toStruct_DeltaReferencePosition(in.path_position, out.pathPosition);

@@ -2,12 +2,12 @@
 
 #include <etsi_its_denm_coding/EnergyStorageType.h>
 #include <etsi_its_denm_conversion/primitives/convertBIT_STRING.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/energy_storage_type.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/EnergyStorageType.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/energy_storage_type.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 

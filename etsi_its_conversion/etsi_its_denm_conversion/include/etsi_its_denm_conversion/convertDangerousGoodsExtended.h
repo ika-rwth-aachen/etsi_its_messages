@@ -9,12 +9,12 @@
 #include <etsi_its_denm_conversion/primitives/convertIA5String.h>
 #include <etsi_its_denm_conversion/convertPhoneNumber.h>
 #include <etsi_its_denm_conversion/primitives/convertUTF8String.h>
-#ifdef ROS2
-#include <etsi_its_denm_msgs/msg/dangerous_goods_extended.hpp>
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-#else
+#ifdef ROS1
 #include <etsi_its_denm_msgs/DangerousGoodsExtended.h>
 namespace denm_msgs = etsi_its_denm_msgs;
+#else
+#include <etsi_its_denm_msgs/msg/dangerous_goods_extended.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
@@ -45,7 +45,7 @@ void toRos_DangerousGoodsExtended(const DangerousGoodsExtended_t& in, denm_msgs:
 }
 
 void toStruct_DangerousGoodsExtended(const denm_msgs::DangerousGoodsExtended& in, DangerousGoodsExtended_t& out) {
-    
+
   memset(&out, 0, sizeof(DangerousGoodsExtended_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_type, out.dangerousGoodsType);
