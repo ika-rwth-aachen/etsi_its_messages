@@ -1,7 +1,8 @@
 #pragma once
 
 #include <etsi_its_denm_coding/SequenceNumber.h>
-#include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_denm_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/SequenceNumber.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -15,13 +16,13 @@ namespace etsi_its_denm_conversion {
 
 void toRos_SequenceNumber(const SequenceNumber_t& in, denm_msgs::SequenceNumber& out) {
 
-  toRos_INTEGER(in, out.value);
+  etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_SequenceNumber(const denm_msgs::SequenceNumber& in, SequenceNumber_t& out) {
 
   memset(&out, 0, sizeof(SequenceNumber_t));
-  toStruct_INTEGER(in.value, out);
+  etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 
 }

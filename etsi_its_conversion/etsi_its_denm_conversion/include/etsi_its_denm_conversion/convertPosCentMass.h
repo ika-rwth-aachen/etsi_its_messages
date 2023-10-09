@@ -1,7 +1,8 @@
 #pragma once
 
 #include <etsi_its_denm_coding/PosCentMass.h>
-#include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_denm_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PosCentMass.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -15,13 +16,13 @@ namespace etsi_its_denm_conversion {
 
 void toRos_PosCentMass(const PosCentMass_t& in, denm_msgs::PosCentMass& out) {
 
-  toRos_INTEGER(in, out.value);
+  etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_PosCentMass(const denm_msgs::PosCentMass& in, PosCentMass_t& out) {
 
   memset(&out, 0, sizeof(PosCentMass_t));
-  toStruct_INTEGER(in.value, out);
+  etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 
 }

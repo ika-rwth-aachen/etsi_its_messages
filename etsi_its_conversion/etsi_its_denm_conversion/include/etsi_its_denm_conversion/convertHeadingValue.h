@@ -1,7 +1,8 @@
 #pragma once
 
 #include <etsi_its_denm_coding/HeadingValue.h>
-#include <etsi_its_denm_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_denm_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/HeadingValue.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -15,13 +16,13 @@ namespace etsi_its_denm_conversion {
 
 void toRos_HeadingValue(const HeadingValue_t& in, denm_msgs::HeadingValue& out) {
 
-  toRos_INTEGER(in, out.value);
+  etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_HeadingValue(const denm_msgs::HeadingValue& in, HeadingValue_t& out) {
 
   memset(&out, 0, sizeof(HeadingValue_t));
-  toStruct_INTEGER(in.value, out);
+  etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 
 }
