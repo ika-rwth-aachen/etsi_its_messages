@@ -3,17 +3,17 @@
 #include <limits>
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/INTEGER.h>
+namespace etsi_its_primitives_conversion {
 
-namespace etsi_its_cam_conversion {
-
-  void toRos_INTEGER(const INTEGER_t& _INTEGER_in, long& INTEGER_out) {
+  template <typename T>
+  void toRos_INTEGER(const T& _INTEGER_in, long& INTEGER_out) {
     int status = asn_INTEGER2long(&_INTEGER_in, &INTEGER_out);
     if (status != 0)
       throw std::range_error("Failed to convert INTEGER_t to long");
   }
 
-  void toRos_INTEGER(const INTEGER_t& _INTEGER_in, unsigned long& INTEGER_out) {
+  template <typename T>
+  void toRos_INTEGER(const T& _INTEGER_in, unsigned long& INTEGER_out) {
     int status = asn_INTEGER2ulong(&_INTEGER_in, &INTEGER_out);
     if (status != 0)
       throw std::range_error("Failed to convert INTEGER_t to unsigned long");
@@ -26,7 +26,8 @@ namespace etsi_its_cam_conversion {
     INTEGER_out = _INTEGER_in;
   }
 
-  void toStruct_INTEGER(const long& _INTEGER_in, INTEGER_t& INTEGER_out) {
+  template <typename T>
+  void toStruct_INTEGER(const long& _INTEGER_in, T& INTEGER_out) {
     int status = asn_long2INTEGER(&INTEGER_out, _INTEGER_in);
     if (status != 0)
       throw std::range_error("Failed to convert long to INTEGER_t");
