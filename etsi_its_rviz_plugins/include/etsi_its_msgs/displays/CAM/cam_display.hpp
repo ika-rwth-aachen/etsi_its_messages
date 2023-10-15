@@ -9,6 +9,7 @@
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 #include "rviz_common/ros_topic_display.hpp"
+#include "rviz_common/validate_floats.hpp"
 #include "rviz_rendering/objects/shape.hpp"
 
 #include <rclcpp/rclcpp.hpp>
@@ -48,7 +49,9 @@ class CAMRenderObject
       header.frame_id = p.header.frame_id;
       uint64_t nanosecs = getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), receive_time.nanoseconds(), n_leap_seconds);
       header.stamp = rclcpp::Time(nanosecs);
-      double heading = (getHeading(cam)-90.0)*M_PI/180.0;
+      // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+      double heading = (90-getHeading(cam))*M_PI/180.0;
+      while(heading<0) heading+=2*M_PI;
       pose.position = p.point;
       tf2::Quaternion orientation;
       orientation.setRPY(0.0, 0.0, heading);
@@ -61,10 +64,31 @@ class CAMRenderObject
     };
     ~CAMRenderObject(){};
 
+    /**
+     * @brief Get the age of a CAMRenderObject
+     * 
+     * @param now reference point in time to calculate the age with
+     * @return age in seconds as double value 
+     */
     double getAge(rclcpp::Time now)
     {
       return (now-header.stamp).seconds();
     };
+
+    /**
+     * @brief This function validates all float variables that are part of a CAMRenderObject
+     * 
+     */
+    bool validateFloats()
+    {
+      bool valid = true;
+      valid = valid && rviz_common::validateFloats(pose);
+      valid = valid && rviz_common::validateFloats(width);
+      valid = valid && rviz_common::validateFloats(length);
+      valid = valid && rviz_common::validateFloats(height);
+      valid = valid && rviz_common::validateFloats(speed);
+      return valid;
+    }
 
     // Public member variablse
     std_msgs::msg::Header header;
@@ -104,6 +128,7 @@ protected:
   // General
   rviz_common::properties::BoolProperty *buffer_cams_;
   rviz_common::properties::FloatProperty *buffer_timeout_;
+  rviz_common::properties::FloatProperty *bb_scale_;
   rviz_common::properties::ColorProperty *color_property_;
 
   std::vector<CAMRenderObject> cams_;

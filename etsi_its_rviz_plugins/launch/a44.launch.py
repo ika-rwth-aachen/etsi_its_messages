@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
@@ -42,4 +42,9 @@ def generate_launch_description():
             #output={'both': 'log'},
             parameters=[{'use_sim_time': use_sim_time}],
             arguments=['-d'+str(rviz_config_path)]),
+
+        ExecuteProcess(
+            cmd=['ros2', 'topic', 'pub', '-r 0.1', '/map_link/navsatfix', 'sensor_msgs/msg/NavSatFix', '{header: {stamp: {sec: 0, nanosec: 0}, frame_id: "map"}, latitude: 51.034631, longitude: 6.482760, altitude: 0.0}'],
+            output='screen',
+        ),
     ])

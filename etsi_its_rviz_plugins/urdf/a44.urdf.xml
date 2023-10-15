@@ -4,8 +4,9 @@
 
   <link name="map"/>
 
+  <!-- Position Lat: 51.034631 Lon: 6.482760-->
   <joint name="utm2map_link" type="fixed">
-    <origin xyz="323465.664 5656661.655 0" />
+    <origin xyz="323509.631 5656691.320 0" />
     <parent link="UTM_32N"/>
     <child link="map"/>
   </joint>

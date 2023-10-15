@@ -13,7 +13,6 @@
 #include "rviz_common/properties/color_property.hpp"
 #include "rviz_common/properties/float_property.hpp"
 #include "rviz_common/properties/bool_property.hpp"
-#include "rviz_common/validate_floats.hpp"
 
 #include "rviz_common/properties/parse_color.hpp"
 
@@ -31,10 +30,13 @@ CAMDisplay::CAMDisplay()
     "Buffer Timeout", 0.1f,
     "Time-Delta until CAM is removed from Buffer.", buffer_cams_);
   buffer_timeout_->setMin(0);
+  bb_scale_ = new rviz_common::properties::FloatProperty(
+    "Bounding Box Scale", 1.0f,
+    "Scaling factor to in/decrease the size of the visualized bounding boxes.", this);
+  bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
-    "Color", QColor(255, 0, 25),
+    "Color", QColor(25, 0, 255),
     "Color to visualize the CAMs.", this);
-
   
 }
 
@@ -63,30 +65,22 @@ void CAMDisplay::reset()
   manual_object_->clear();
 }
 
-bool validateFloats(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
-{
-  bool valid = true;
-  // ToDo
-  return valid;
-}
-
 void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 {
-  if (!validateFloats(msg)) {
-    setStatus(
-      rviz_common::properties::StatusProperty::Error, "Topic",
-      "Message contained invalid floating point values (nans or infs)");
-    return;
-  }
-
-  // Check if Station ID is already present
+  // Check if Station ID is already present in list
   int st_id = etsi_its_cam_msgs::access::getStationID(*msg);
   for(unsigned int i=0; i<cams_.size(); i++)
   {
     if(st_id == cams_[i].station_id)
     {
-      // Replace
+      // Replace existing cam in list
       CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+      if (!cam.validateFloats()) {
+        setStatus(
+          rviz_common::properties::StatusProperty::Error, "Topic",
+          "Message contained invalid floating point values (nans or infs)");
+        return;
+      }
       cams_[i] = cam;
       return;
     }
@@ -95,8 +89,14 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
   // Station ID seems not to be part of cams_
   // Add to vector
   CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+    if (!cam.validateFloats()) {
+    setStatus(
+      rviz_common::properties::StatusProperty::Error, "Topic",
+      "Message contained invalid floating point values (nans or infs)");
+    return;
+  }
   cams_.push_back(cam);
-
+  return;
 }
 
 void CAMDisplay::update(float wall_dt, float ros_dt)
@@ -105,6 +105,8 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
   unsigned int i=0;
   while(i<cams_.size())
   {
+    RCLCPP_DEBUG_STREAM(rviz_node_->get_logger(), "cams_[i].getAge(rviz_node_->now()): " << cams_[i].getAge(rviz_node_->now()));
+    // To-Do: There seems to be something wrong with the age?
     if(cams_[i].getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) cams_.erase(cams_.begin()+i);
     else i++;
   }
@@ -121,22 +123,31 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
     }
     setTransformOk();
 
+    // set pose of scene node
     scene_node_->setPosition(sn_position);
     scene_node_->setOrientation(sn_orientation);
 
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
-    Ogre::Vector3 position(cams_[j].pose.position.x-cams_[j].length/2.0, cams_[j].pose.position.y, cams_[j].pose.position.z);
+    // If the station type of the originating ITS-S is set to one out of the values 3 to 11
+    // the reference point shall be the ground position of the centre of the front side of
+    // the bounding box of the vehicle.
+    // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
+    Ogre::Vector3 position(cams_[j].pose.position.x-cams_[j].length/2.0, cams_[j].pose.position.y, cams_[j].pose.position.z+cams_[j].height/2.0);
     Ogre::Quaternion orientation(cams_[j].pose.orientation.w, cams_[j].pose.orientation.x, cams_[j].pose.orientation.y, cams_[j].pose.orientation.z);
+    // set pose of child scene node of bounding-box
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
-
+    // create boundind-box object
     std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
+    // set the dimensions of bounding box
     Ogre::Vector3 dims;
-    dims.x = cams_[j].length*100;
-    dims.y = cams_[j].width*100;
-    dims.z = cams_[j].height*100;
+    double scale = bb_scale_->getFloat();
+    dims.x = cams_[j].length*scale;
+    dims.y = cams_[j].width*scale;
+    dims.z = cams_[j].height*scale;
     bbox->setScale(dims);
+    // set the color of bounding box
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     bbox->setColor(bb_color);
     bboxs_.push_back(bbox);
