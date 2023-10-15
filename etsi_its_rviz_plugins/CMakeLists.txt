@@ -110,6 +110,21 @@ if(${ROS_VERSION} EQUAL 2)
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
   )
+
+  install(
+    DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+  )
+
+  install(
+    DIRECTORY urdf
+    DESTINATION share/${PROJECT_NAME}
+  )
+
+  install(
+    DIRECTORY config
+    DESTINATION share/${PROJECT_NAME}
+  )
   # RViz Display End
 
   if(BUILD_TESTING)

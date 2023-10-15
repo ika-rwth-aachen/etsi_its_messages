@@ -113,8 +113,17 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
   bboxs_.clear();
   for(unsigned int j=0; j<cams_.size(); j++)
   {
-    RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Frame ID: " << cams_[j].header.frame_id);
-    RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "X: " << cams_[j].pose.position.x << " Y: " << cams_[j].pose.position.y);
+    Ogre::Vector3 sn_position;
+    Ogre::Quaternion sn_orientation;
+    if (!context_->getFrameManager()->getTransform(cams_[j].header, sn_position, sn_orientation)) {
+      setMissingTransformToFixedFrame(cams_[j].header.frame_id);
+      return;
+    }
+    setTransformOk();
+
+    scene_node_->setPosition(sn_position);
+    scene_node_->setOrientation(sn_orientation);
+
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
     Ogre::Vector3 position(cams_[j].pose.position.x-cams_[j].length/2.0, cams_[j].pose.position.y, cams_[j].pose.position.z);
@@ -124,12 +133,13 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
 
     std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
     Ogre::Vector3 dims;
-    dims.x = cams_[j].length;
-    dims.y = cams_[j].width;
-    dims.z = cams_[j].height;
+    dims.x = cams_[j].length*100;
+    dims.y = cams_[j].width*100;
+    dims.z = cams_[j].height*100;
     bbox->setScale(dims);
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     bbox->setColor(bb_color);
+    bboxs_.push_back(bbox);
   }
 }
 
