@@ -10,6 +10,7 @@
 
 #include "rviz_common/ros_topic_display.hpp"
 #include "rviz_common/validate_floats.hpp"
+#include "rviz_rendering/objects/movable_text.hpp"
 #include "rviz_rendering/objects/shape.hpp"
 
 #include <rclcpp/rclcpp.hpp>
@@ -125,14 +126,13 @@ protected:
   rclcpp::Node::SharedPtr rviz_node_;
 
   // Properties
-  // General
-  rviz_common::properties::BoolProperty *buffer_cams_;
-  rviz_common::properties::FloatProperty *buffer_timeout_;
-  rviz_common::properties::FloatProperty *bb_scale_;
-  rviz_common::properties::ColorProperty *color_property_;
+  rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_speed_;
+  rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
+  rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
   std::vector<CAMRenderObject> cams_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
+  std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };
 
 }  // namespace displays
