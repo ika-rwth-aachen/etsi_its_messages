@@ -309,10 +309,10 @@ namespace cdd_access {
    */
   inline void setFromUTMPosition(ReferencePosition& reference_position, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
   {
-    std::string required_frame = "utm";
-    if(utm_position.header.frame_id!=required_frame)
+    std::string required_frame_prefix = "utm_";
+    if(utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0)
     {
-      throw std::invalid_argument("Frame-ID of UTM Position '"+utm_position.header.frame_id+"' does not equal the required frame '"+required_frame+"'!");
+      throw std::invalid_argument("Frame-ID of UTM Position '"+utm_position.header.frame_id+"' does not start with required prefix '"+required_frame_prefix+"'!");
     }
     double latitude, longitude;
     try {

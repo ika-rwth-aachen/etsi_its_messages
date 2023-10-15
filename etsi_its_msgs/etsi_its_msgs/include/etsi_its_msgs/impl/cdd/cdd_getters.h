@@ -134,7 +134,7 @@ namespace cdd_access {
       std::string hemisphere;
       if(northp) hemisphere="N";
       else hemisphere="S";
-      utm_point.header.frame_id="UTM_"+std::to_string(zone)+hemisphere;
+      utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
     } catch (GeographicLib::GeographicErr& e) {
       throw std::invalid_argument(e.what());
     }

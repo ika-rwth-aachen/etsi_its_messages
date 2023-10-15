@@ -1,13 +1,13 @@
 <robot name="accord_a44">
 
-  <link name="UTM_32N"/>
+  <link name="utm_32N"/>
 
   <link name="map"/>
 
   <!-- Position Lat: 51.034631 Lon: 6.482760-->
   <joint name="utm2map_link" type="fixed">
     <origin xyz="323509.631 5656691.320 0" />
-    <parent link="UTM_32N"/>
+    <parent link="utm_32N"/>
     <child link="map"/>
   </joint>
 
