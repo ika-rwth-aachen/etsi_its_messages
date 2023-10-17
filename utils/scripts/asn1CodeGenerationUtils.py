@@ -194,6 +194,29 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
     return asn1_types
 
+def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 type information from multiple ASN1 documents.
+
+    Args:
+        asn1_docs (Dict): type information by document
+
+    Raises:
+        ValueError: if a type is found in multiple documents
+
+    Returns:
+        Dict[str, Dict]: type information by type
+    """
+
+    asn1_values = {}
+    for doc, asn1 in asn1_docs.items():
+        for value in asn1["values"]:
+            if value not in asn1_values:
+                asn1_values[value] = asn1["values"][value]
+            else:
+                raise ValueError(f"Value '{value}' from '{doc}' is a duplicate")
+
+    return asn1_values
+
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     """Checks if all type information is known and supported.
@@ -233,7 +256,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{t_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict]) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
@@ -376,11 +399,16 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
         for member in asn1["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
                 member_context["members"][0]["default"] = True
+                if member["default"] in asn1_values:
+                    defaultValue = asn1_values[member["default"]]["value"]
+                    member_context["members"][0]["default_value"] = defaultValue
+                    if asn1_values[member["default"]]["type"] == 'INTEGER':
+                        member_context["members"][0]["default_type"] = simplestRosIntegerType(defaultValue, defaultValue)
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
@@ -400,7 +428,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict])
             if member is None:
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
-            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types)
+            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
             member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
             member_context["members"][0]["constants"].append({
                 "type": "uint8",
