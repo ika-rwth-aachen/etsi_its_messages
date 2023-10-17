@@ -403,12 +403,17 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
-                member_context["members"][0]["default"] = True
+                member_context["members"][0]["default"] = []
                 if member["default"] in asn1_values:
                     defaultValue = asn1_values[member["default"]]["value"]
-                    member_context["members"][0]["default_value"] = defaultValue
+                    defaultName = camel2SNAKE(member["default"])
                     if asn1_values[member["default"]]["type"] == 'INTEGER':
-                        member_context["members"][0]["default_type"] = simplestRosIntegerType(defaultValue, defaultValue)
+                        defaultType = simplestRosIntegerType(defaultValue, defaultValue)
+                    member_context["members"][0]["default"].append({
+                        "type": defaultType,
+                        "name": defaultName,
+                        "value": defaultValue
+                    })
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
