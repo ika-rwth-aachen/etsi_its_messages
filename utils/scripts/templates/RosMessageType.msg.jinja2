@@ -12,9 +12,9 @@
 {% if member.optional -%}
 bool {{ member.name }}_is_present
 {% endif -%}
-{% for default in member.default -%}
-{{ default.type }} {{ default.name }} = {{ default.value }}
-{% endfor -%}
+{% if member.default -%}
+{{ member.default.type }} {{ member.default.name }} = {{ member.default.value }}
+{% endif -%}
 {% if member.has_bits_unused -%}
 uint8 bits_unused
 {% endif -%}
