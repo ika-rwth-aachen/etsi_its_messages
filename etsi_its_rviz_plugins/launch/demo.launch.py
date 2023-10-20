@@ -36,8 +36,8 @@ def generate_launch_description():
                         },
                         frame_id: "map"
                     },
-                    latitude: 51.034631,
-                    longitude: 6.482760,
+                    latitude: 50.785407,
+                    longitude: 6.043521,
                     altitude: 0.0
                 }'''],
             output='screen',
@@ -56,15 +56,15 @@ def generate_launch_description():
                 child_frame_id: "map",
                 transform: {
                     translation: {
-                        x: 323509.631,
-                        y: 5656691.320,
+                        x: 291608.065,
+                        y: 5630129.104,
                         z: 0 
                     },
                     rotation: {
                         x: 0,
                         y: 0,
-                        z: 0,
-                        w: 1
+                        z: -0.0199953,
+                        w: 0.9998001
                     }
                 }
             }]'''],
