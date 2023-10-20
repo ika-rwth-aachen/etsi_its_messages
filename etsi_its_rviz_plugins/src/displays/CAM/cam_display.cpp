@@ -1,4 +1,4 @@
-#include "etsi_its_msgs/displays/CAM/cam_display.hpp"
+#include "displays/CAM/cam_display.hpp"
 
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>

@@ -29,7 +29,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(tf2_ros REQUIRED)
 
   set(display_headers_to_moc
-    include/etsi_its_msgs/displays/CAM/cam_display.hpp
+    include/displays/CAM/cam_display.hpp
   )
 
   foreach(header "${display_headers_to_moc}")
