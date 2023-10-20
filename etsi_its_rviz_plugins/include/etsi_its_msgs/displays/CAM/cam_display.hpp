@@ -35,8 +35,8 @@ namespace displays
 {
 
 /**
+ * @class CAMRenderObject
  * @brief 
- * 
  */
 class CAMRenderObject
 {
@@ -91,7 +91,7 @@ class CAMRenderObject
       return valid;
     }
 
-    // Public member variablse
+    // Public member variables
     std_msgs::msg::Header header;
     int station_id;
     double width, length, height;
@@ -101,8 +101,8 @@ class CAMRenderObject
 };
 
 /**
- * \class CAMDisplay
- * \brief Displays an etsi_its_cam_msgs::CAM
+ * @class CAMDisplay
+ * @brief Displays an etsi_its_cam_msgs::CAM
  */
 class CAMDisplay : public
   rviz_common::RosTopicDisplay<etsi_its_cam_msgs::msg::CAM>
