@@ -32,7 +32,7 @@ RelevanceTrafficDirection relevance_traffic_direction
 bool relevance_traffic_direction_is_present
 
 ValidityDuration validity_duration
-uint16 DEFAULT_VALIDITY = 600
+uint16 DEFAULT_VALIDITY_DURATION = 600
 
 TransmissionInterval transmission_interval
 bool transmission_interval_is_present

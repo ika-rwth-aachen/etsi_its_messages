@@ -43,7 +43,6 @@ void toRos_ManagementContainer(const ManagementContainer_t& in, denm_msgs::Manag
     out.relevance_traffic_direction_is_present = true;
   }
 
-  // TODO: handle default value
   if (in.validityDuration) {
     toRos_ValidityDuration(*in.validityDuration, out.validity_duration);
   }
@@ -82,7 +81,6 @@ void toStruct_ManagementContainer(const denm_msgs::ManagementContainer& in, Mana
     out.relevanceTrafficDirection = new RelevanceTrafficDirection_t(relevance_traffic_direction);
   }
 
-  // TODO: handle default value
   ValidityDuration_t validity_duration;
   toStruct_ValidityDuration(in.validity_duration, validity_duration);
   out.validityDuration = new ValidityDuration_t(validity_duration);
