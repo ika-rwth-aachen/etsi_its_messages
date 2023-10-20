@@ -58,6 +58,7 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
         type_name (str): type name
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_values (Dict[str, Dict]): value information of all values by name
         etsi_type (str): ETSI message type, e.g., `cam`
         jinja_templates (Dict[str, jinja2.environment.Template]): jinja template
 

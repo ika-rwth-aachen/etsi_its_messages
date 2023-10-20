@@ -195,7 +195,7 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     return asn1_types
 
 def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
-    """Extracts all parsed ASN1 type information from multiple ASN1 documents.
+    """Extracts all parsed ASN1 value information from multiple ASN1 documents.
 
     Args:
         asn1_docs (Dict): type information by document
@@ -204,7 +204,7 @@ def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
         ValueError: if a type is found in multiple documents
 
     Returns:
-        Dict[str, Dict]: type information by type
+        Dict[str, Dict]: value information by name
     """
 
     asn1_values = {}
@@ -263,6 +263,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         t_name (str): type name
         asn1 (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_values (Dict[str, Dict]): value information of all values by name
 
     Returns:
         Dict: jinja context
@@ -405,14 +406,15 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "default" in member:
                 member_context["members"][0]["default"] = []
                 if member["default"] in asn1_values:
-                    defaultValue = asn1_values[member["default"]]["value"]
-                    defaultName = camel2SNAKE(member["default"])
-                    if asn1_values[member["default"]]["type"] == 'INTEGER':
-                        defaultType = simplestRosIntegerType(defaultValue, defaultValue)
+                    asn1_value = asn1_values[member["default"]]
+                    default_value = asn1_value["value"]
+                    default_name = camel2SNAKE(member["default"])
+                    if asn1_value["type"] == 'INTEGER':
+                        default_type = simplestRosIntegerType(default_value, default_value)
                     member_context["members"][0]["default"].append({
-                        "type": defaultType,
-                        "name": defaultName,
-                        "value": defaultValue
+                        "type": default_type,
+                        "name": default_name,
+                        "value": default_value
                     })
             context["members"].extend(member_context["members"])
 

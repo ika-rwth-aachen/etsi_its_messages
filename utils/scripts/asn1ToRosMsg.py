@@ -49,6 +49,7 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
         type_name (str): type name
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_values (Dict[str, Dict]): value information of all values by name
         asn1_raw (Dict[str, str]): raw string definition by type
         jinja_template (jinja2.environment.Template): jinja template
 
