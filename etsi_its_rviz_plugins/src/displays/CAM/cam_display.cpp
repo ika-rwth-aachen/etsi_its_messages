@@ -75,55 +75,41 @@ void CAMDisplay::reset()
 
 void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 {
-  // Check if Station ID is already present in list
-  int st_id = etsi_its_cam_msgs::access::getStationID(*msg);
-  for(unsigned int i=0; i<cams_.size(); i++) {
-    if(st_id == cams_[i].station_id) {
-      // Replace existing cam in list
-      CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
-      if (!cam.validateFloats()) {
+  // Generate CAM render object from message
+  CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+  if (!cam.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
           "Message contained invalid floating point values (nans or infs)");
         return;
-      }
-      cams_[i] = cam;
-      return;
-    }
   }
-
-  // Station ID seems not to be part of cams_
-  // Add to vector
-  CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
-  if (!cam.validateFloats()) {
-    setStatus(
-      rviz_common::properties::StatusProperty::Error, "Topic",
-      "Message contained invalid floating point values (nans or infs)");
-    return;
-  }
-  cams_.push_back(cam);
+  
+  // Check if Station ID is already present in list
+  auto it = cams_.find(cam.getStationID());
+  if (it != cams_.end()) it->second = cam; // Key exists, update the value
+  else cams_.insert(std::make_pair(cam.getStationID(), cam)); 
+  
   return;
 }
 
 void CAMDisplay::update(float wall_dt, float ros_dt)
 {
   // Check for outdated CAMs
-  unsigned int i=0;
-  while(i<cams_.size()) {
-    RCLCPP_DEBUG_STREAM(rviz_node_->get_logger(), "cams_[i].getAge(rviz_node_->now()): " << cams_[i].getAge(rviz_node_->now()));
-    // To-Do: There seems to be something wrong with the age?
-    if(cams_[i].getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) cams_.erase(cams_.begin()+i);
-    else i++;
+  for (auto it = cams_.begin(); it != cams_.end(); ) {
+        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = cams_.erase(it);
+        else ++it;
   }
 
   // Render all valid cams
   bboxs_.clear();
   texts_.clear();
-  for(unsigned int j=0; j<cams_.size(); j++) {
+  for(auto it = cams_.begin(); it != cams_.end(); ) {
+
+    CAMRenderObject cam = it->second;
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
-    if (!context_->getFrameManager()->getTransform(cams_[j].header, sn_position, sn_orientation)) {
-      setMissingTransformToFixedFrame(cams_[j].header.frame_id);
+    if (!context_->getFrameManager()->getTransform(cam.getHeader(), sn_position, sn_orientation)) {
+      setMissingTransformToFixedFrame(cam.getHeader().frame_id);
       return;
     }
     setTransformOk();
@@ -138,8 +124,10 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
     // the reference point shall be the ground position of the centre of the front side of
     // the bounding box of the vehicle.
     // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
-    Ogre::Vector3 position(cams_[j].pose.position.x-cams_[j].length/2.0, cams_[j].pose.position.y, cams_[j].pose.position.z+cams_[j].height/2.0);
-    Ogre::Quaternion orientation(cams_[j].pose.orientation.w, cams_[j].pose.orientation.x, cams_[j].pose.orientation.y, cams_[j].pose.orientation.z);
+    geometry_msgs::msg::Pose pose = cam.getPose();
+    geometry_msgs::msg::Vector3 dimensions = cam.getDimensions();
+    Ogre::Vector3 position(pose.position.x-dimensions.x/2.0, pose.position.y, pose.position.z+dimensions.z/2.0);
+    Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
     // set pose of child scene node of bounding-box
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
@@ -148,9 +136,9 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
     // set the dimensions of bounding box
     Ogre::Vector3 dims;
     double scale = bb_scale_->getFloat();
-    dims.x = cams_[j].length*scale;
-    dims.y = cams_[j].width*scale;
-    dims.z = cams_[j].height*scale;
+    dims.x = dimensions.x*scale;
+    dims.y = dimensions.y*scale;
+    dims.z = dimensions.z*scale;
     bbox->setScale(dims);
     // set the color of bounding box
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
@@ -161,11 +149,11 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
     if(show_meta_->getBool()) {
       std::string text;
       if(show_station_id_->getBool()) {
-        text+="StationID: " + std::to_string(cams_[j].station_id);
+        text+="StationID: " + std::to_string(cam.getStationID());
         text+="\n";
       }
       if(show_speed_->getBool()) {
-        text+="Speed: " + std::to_string((int)(cams_[j].speed*3.6)) + " km/h";
+        text+="Speed: " + std::to_string((int)(cam.getSpeed()*3.6)) + " km/h";
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
