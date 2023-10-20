@@ -1,5 +1,6 @@
 #include "etsi_its_cam_msgs/msg/cam.hpp"
 #include <geometry_msgs/msg/pose.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
 #include <std_msgs/msg/header.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
@@ -23,7 +24,13 @@ class CAMRenderObject
     CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS);
 
     /**
-     * @brief Get the age of a CAMRenderObject
+     * @brief This function validates all float variables that are part of a CAMRenderObject
+     * 
+     */
+    bool validateFloats();
+
+    /**
+     * @brief Get age of CAM-object
      * 
      * @param now reference point in time to calculate the age with
      * @return age in seconds as double value 
@@ -31,16 +38,46 @@ class CAMRenderObject
     double getAge(rclcpp::Time now);
 
     /**
-     * @brief This function validates all float variables that are part of a CAMRenderObject
+     * @brief Get header of CAM-object
      * 
+     * @return std_msgs::msg::Header 
      */
-    bool validateFloats();
+    std_msgs::msg::Header getHeader();
 
-    // Public member variables
+    /**
+     * @brief Get the StationID of CAM-object
+     * 
+     * @return int 
+     */
+    int getStationID();
+
+    /**
+     * @brief Get pose of CAM-object
+     * 
+     * @return geometry_msgs::msg::Pose 
+     */
+    geometry_msgs::msg::Pose getPose();
+
+    /**
+     * @brief Get dimensions of CAM-Object
+     * 
+     * @return geometry_msgs::msg::Vector3 (x equals length, y equals width, z equals height)
+     */
+    geometry_msgs::msg::Vector3 getDimensions();
+
+    /**
+     * @brief Get speed of CAM-object
+     * 
+     * @return double 
+     */
+    double getSpeed();
+
+  private:
+    // member variables
     std_msgs::msg::Header header;
     int station_id;
-    double width, length, height;
     geometry_msgs::msg::Pose pose;
+    geometry_msgs::msg::Vector3 dimensions;
     double speed;
     
 };
