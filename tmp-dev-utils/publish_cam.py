@@ -15,7 +15,7 @@ def publish():
     msg = CAM()
 
     msg.header.protocolVersion = 2
-    msg.header.messageID = msg.header.MESSAGE_I_D_CAM
+    msg.header.messageID = msg.header.MESSAGE_ID_CAM
 
     msg.cam.generationDeltaTime.value = msg.cam.generationDeltaTime.ONE_MILLI_SEC
 
@@ -23,7 +23,7 @@ def publish():
     msg.cam.camParameters.basicContainer.referencePosition.latitude.value = int(msg.cam.camParameters.basicContainer.referencePosition.latitude.ONE_MICRODEGREE_NORTH * 1e6 * 51.215169611787054)
 
     basicVehicleContainerHighFrequency = BasicVehicleContainerHighFrequency()
-    basicVehicleContainerHighFrequency.heading.headingValue.value = basicVehicleContainerHighFrequency.heading.headingValue.WGS_8_4_NORTH
+    basicVehicleContainerHighFrequency.heading.headingValue.value = basicVehicleContainerHighFrequency.heading.headingValue.WGS_84_NORTH
     basicVehicleContainerHighFrequency.heading.headingConfidence.value = basicVehicleContainerHighFrequency.heading.headingConfidence.EQUAL_OR_WITHIN_ONE_DEGREE
     basicVehicleContainerHighFrequency.speed.speedValue.value = basicVehicleContainerHighFrequency.speed.speedValue.ONE_CENTIMETER_PER_SEC
     basicVehicleContainerHighFrequency.speed.speedConfidence.value = basicVehicleContainerHighFrequency.speed.speedConfidence.EQUAL_OR_WITHIN_ONE_CENTIMETER_PER_SEC
