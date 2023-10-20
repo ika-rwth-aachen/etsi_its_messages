@@ -102,11 +102,6 @@ if(${ROS_VERSION} EQUAL 2)
   )
 
   install(
-    DIRECTORY urdf
-    DESTINATION share/${PROJECT_NAME}
-  )
-
-  install(
     DIRECTORY config
     DESTINATION share/${PROJECT_NAME}
   )
