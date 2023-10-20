@@ -30,7 +30,27 @@ def camel2SNAKE(s: str) -> str:
         str: SNAKE_CASE_STRING
     """
 
-    return re.sub("([A-Z0-9])", r"_\1", s).upper().lstrip("_").replace("-", "")
+    # exampleString-WithNumber123 -> example_string-_With_Number123
+    ss = re.sub("([A-Z])", r"_\1", s)
+
+    # example_string-_With_Number123 -> EXAMPLE_STRING_WITH_NUMBER123
+    ss = ss.upper().lstrip("_").replace("-", "_").replace("__", "_")
+
+    # EXAMPLE_STRING_WITH_NUMBER123 -> EXAMPLE_STRING_WITH_NUMBER_123
+    ss = re.sub("([A-Z])([0-9])", r"\1_\2", ss)
+
+    # special cases
+    ss = ss.replace("C_A_M", "CAM")
+    ss = ss.replace("D_E_N_M", "DENM")
+    ss = ss.replace("R_S_U", "RSU")
+    ss = ss.replace("W_M_I", "WMI")
+    ss = ss.replace("V_DS", "VDS")
+    ss = ss.replace("_I_D", "_ID")
+    ss = ss.replace("_U_T_C", "_UTC")
+    ss = ss.replace("G_N_S_S", "GNSS")
+    ss = ss.replace("GNSSPLUS", "GNSS_PLUS")
+
+    return ss
 
 def camel2snake(s: str) -> str:
     """Converts a camelCase string to snake_case.
@@ -41,8 +61,26 @@ def camel2snake(s: str) -> str:
     Returns:
         str: snake_case_string
     """
-    s = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', s)
-    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s).lower()
+
+    # exampleString-WithNumber123 -> example_string-_With_Number123
+    ss = re.sub("([A-Z])", r"_\1", s)
+
+    # example_string-_With_Number123 -> example_string_with_number123
+    ss = ss.lower().lstrip("_").replace("-", "_").replace("__", "_")
+
+    # example_string_with_number123 -> example_string_with_number_123
+    ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
+
+    # special cases
+    ss = ss.replace("c_a_m", "cam")
+    ss = ss.replace("d_e_n_m", "denm")
+    ss = ss.replace("r_s_u", "rsu")
+    ss = ss.replace("w_m_i", "wmi")
+    ss = ss.replace("v_d_s", "vds")
+    ss = ss.replace("_i_d", "_id")
+    ss = ss.replace("_u_t_c", "_utc")
+
+    return ss
 
 def validRosType(s: str) -> str:
     """Converts a string to make it a valid ROS message type.
