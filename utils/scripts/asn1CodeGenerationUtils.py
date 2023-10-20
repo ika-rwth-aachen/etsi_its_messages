@@ -404,7 +404,6 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
-                member_context["members"][0]["default"] = []
                 if member["default"] in asn1_values:
                     asn1_value = asn1_values[member["default"]]
                     default_value = asn1_value["value"]
@@ -413,11 +412,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                         default_type = simplestRosIntegerType(default_value, default_value)
                     else:
                         default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
-                    member_context["members"][0]["default"].append({
+                    member_context["members"][0]["default"] = {
                         "type": default_type,
                         "name": default_name,
                         "value": default_value
-                    })
+                    }
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
