@@ -3,29 +3,12 @@ project(etsi_its_rviz_plugins)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
 
 # Workaround to find GeographicLib according to https://bugs.launchpad.net/ubuntu/+source/geographiclib/+bug/1805173
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};/usr/share/cmake/geographiclib")
 
 # === ROS2 (AMENT) =============================================================
 if(${ROS_VERSION} EQUAL 2)
-
-  if(${ROS_DISTRO} STREQUAL "foxy")
-      add_compile_definitions(ROS_DISTRO_FOXY)
-  endif()
-
-  if(${ROS_DISTRO} STREQUAL "humble")
-      add_compile_definitions(ROS_DISTRO_HUMBLE)
-  endif() 
-  
-  if(${ROS_DISTRO} STREQUAL "iron")
-      add_compile_definitions(ROS_DISTRO_IRON)
-  endif()
-  
-  if(${ROS_DISTRO} STREQUAL "rolling")
-      add_compile_definitions(ROS_DISTRO_ROLLING)
-  endif()
 
   if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
