@@ -2,7 +2,7 @@
 
 #include "etsi_its_cam_msgs/msg/cam.hpp"
 
-#include "etsi_its_rviz_plugins/displays/cam_render_object.hpp"
+#include "displays/CAM/cam_render_object.hpp"
 
 #include "rviz_common/ros_topic_display.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"

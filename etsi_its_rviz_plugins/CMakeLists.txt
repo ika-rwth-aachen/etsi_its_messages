@@ -30,6 +30,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   set(display_headers_to_moc
     include/displays/CAM/cam_display.hpp
+    include/displays/CAM/cam_render_object.hpp
   )
 
   foreach(header "${display_headers_to_moc}")
@@ -38,6 +39,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   set(display_source_files
     src/displays/CAM/cam_display.cpp
+    src/displays/CAM/cam_render_object.cpp
   )
 
   add_library(${PROJECT_NAME} SHARED
