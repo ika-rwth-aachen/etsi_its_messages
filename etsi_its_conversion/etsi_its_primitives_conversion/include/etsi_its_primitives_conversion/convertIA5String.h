@@ -7,11 +7,7 @@ namespace etsi_its_primitives_conversion {
 
   template <typename T>
   void toRos_IA5String(const T& _IA5String_in, std::string& IA5String_out) {
-    std::stringstream ss;
-    for (int i = 0; i < _IA5String_in.size; i++) {
-      ss << _IA5String_in.buf[i];
-    }
-    IA5String_out = ss.str();
+    toRos_OCTET_STRING(_IA5String_in, IA5String_out);
   }
 
   template <typename T>

@@ -12,6 +12,15 @@ namespace etsi_its_primitives_conversion {
   }
 
   template <typename T>
+  void toRos_OCTET_STRING(const T& _OCTET_STRING_in, std::string& OCTET_STRING_out) {
+    std::stringstream ss;
+    for (int i = 0; i < _OCTET_STRING_in.size; i++) {
+      ss << _OCTET_STRING_in.buf[i];
+    }
+    OCTET_STRING_out = ss.str();
+  }
+
+  template <typename T>
   void toStruct_OCTET_STRING(const std::vector<uint8_t>& _OCTET_STRING_in, T& OCTET_STRING_out) {
 
     OCTET_STRING_out.size = _OCTET_STRING_in.size();

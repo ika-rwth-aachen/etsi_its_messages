@@ -7,11 +7,7 @@ namespace etsi_its_primitives_conversion {
 
   template <typename T>
   void toRos_NumericString(const T& _NumericString_in, std::string& NumericString_out) {
-    std::stringstream ss;
-    for (int i = 0; i < _NumericString_in.size; i++) {
-      ss << _NumericString_in.buf[i];
-    }
-    NumericString_out = ss.str();
+    toRos_OCTET_STRING(_NumericString_in, NumericString_out);
   }
 
   template <typename T>
