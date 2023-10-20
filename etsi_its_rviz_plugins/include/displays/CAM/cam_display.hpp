@@ -59,7 +59,7 @@ protected:
   rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
-  std::vector<CAMRenderObject> cams_;
+  std::unordered_map<int, CAMRenderObject> cams_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };
