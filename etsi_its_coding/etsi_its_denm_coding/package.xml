@@ -2,7 +2,7 @@
 <package format="3">
   <name>etsi_its_denm_coding</name>
   <version>1.0.0</version>
-  <description>C++ compatible source code from ASN.1 ETSI ITS CAM generated with asn1c</description>
+  <description>C++ compatible source code from ASN.1 ETSI ITS DENM generated with asn1c</description>
 
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
 

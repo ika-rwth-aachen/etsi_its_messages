@@ -411,6 +411,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                     default_name = f"DEFAULT_{camel2SNAKE(member['name'])}"
                     if asn1_value["type"] == 'INTEGER':
                         default_type = simplestRosIntegerType(default_value, default_value)
+                    else:
+                        default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
                     member_context["members"][0]["default"].append({
                         "type": default_type,
                         "name": default_name,
