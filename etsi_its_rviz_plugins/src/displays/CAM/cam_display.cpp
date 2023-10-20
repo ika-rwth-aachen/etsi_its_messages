@@ -120,19 +120,27 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
 
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
-    // If the station type of the originating ITS-S is set to one out of the values 3 to 11
-    // the reference point shall be the ground position of the centre of the front side of
-    // the bounding box of the vehicle.
-    // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
     geometry_msgs::msg::Pose pose = cam.getPose();
     geometry_msgs::msg::Vector3 dimensions = cam.getDimensions();
-    Ogre::Vector3 position(pose.position.x-dimensions.x/2.0, pose.position.y, pose.position.z+dimensions.z/2.0);
+    Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
+    if(3 <= cam.getStationType() && cam.getStationType() <= 11)
+    {
+      // If the station type of the originating ITS-S is set to one out of the values 3 to 11
+      // the reference point shall be the ground position of the centre of the front side of
+      // the bounding box of the vehicle.
+      // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
+      position.x-=dimensions.x/2.0;
+      position.z+=dimensions.z/2.0;
+    }
+    
     // set pose of child scene node of bounding-box
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
+    
     // create boundind-box object
     std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
+    
     // set the dimensions of bounding box
     Ogre::Vector3 dims;
     double scale = bb_scale_->getFloat();
@@ -160,13 +168,7 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
       double height = dims.z;
       height+=text_render->getBoundingRadius();
       Ogre::Vector3 offs(0.0, 0.0, height);
-      // Maybe there is a bug in rviz_rendering::MovableText::setGlobalTranslation
-      // Currently only the given y-Position is set
-      // https://github.com/ros2/rviz/blob/1ac419472ed06cdd52842a8f964f953a75395245/rviz_rendering/src/rviz_rendering/objects/movable_text.cpp#L520
-      // Shows that the global_translation-vector is mutliplied with Ogre::Vector3::UNIT_Y is this intended?
-      // In the ROS1 implementation the translation-vector is added without any multiplication
-      // See: https://github.com/ros-visualization/rviz/blob/ec7ab1b0183244c05fbd2d0d1b8d8f53d8f42f2b/src/rviz/ogre_helpers/movable_text.cpp#L506
-      // I've opened an Issue here: https://github.com/ros2/rviz/issues/974
+      // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
       text_render->setGlobalTranslation(offs);
       Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
       text_render->setColor(text_color);

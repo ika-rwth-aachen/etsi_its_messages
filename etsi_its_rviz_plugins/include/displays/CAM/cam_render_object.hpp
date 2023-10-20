@@ -52,6 +52,13 @@ class CAMRenderObject
     int getStationID();
 
     /**
+     * @brief Get the StationType of CAM-object
+     * 
+     * @return int 
+     */
+    int getStationType();
+
+    /**
      * @brief Get pose of CAM-object
      * 
      * @return geometry_msgs::msg::Pose 
@@ -76,6 +83,7 @@ class CAMRenderObject
     // member variables
     std_msgs::msg::Header header;
     int station_id;
+    int station_type;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     double speed;

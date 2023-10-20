@@ -16,6 +16,7 @@ namespace displays
     header.stamp = rclcpp::Time(nanosecs);
 
     station_id = etsi_its_cam_msgs::access::getStationID(cam);
+    station_type = etsi_its_cam_msgs::access::getStationType(cam);
     
     double heading = (90-etsi_its_cam_msgs::access::getHeading(cam))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
     while(heading<0) heading+=2*M_PI;
@@ -49,6 +50,10 @@ namespace displays
 
   int CAMRenderObject::getStationID() {
     return station_id;
+  }
+
+  int CAMRenderObject::getStationType() {
+    return station_type;
   }
 
   geometry_msgs::msg::Pose CAMRenderObject::getPose() {

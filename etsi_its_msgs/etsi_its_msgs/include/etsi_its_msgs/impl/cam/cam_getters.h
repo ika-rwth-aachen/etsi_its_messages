@@ -47,7 +47,7 @@ namespace access {
    * @param cam CAM to get the stationType value from
    * @return stationType value
    */
-  inline double getStationType(const CAM& cam){
+  inline uint8_t getStationType(const CAM& cam){
     return cam.cam.cam_parameters.basic_container.station_type.value;
   }
 
