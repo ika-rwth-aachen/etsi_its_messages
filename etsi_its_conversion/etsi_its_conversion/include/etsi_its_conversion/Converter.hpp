@@ -5,13 +5,16 @@
 #include <unordered_map>
 
 #include <etsi_its_cam_conversion/convertCAM.h>
+#include <etsi_its_denm_conversion/convertDENM.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
 #include <udp_msgs/UdpPacket.h>
 #include <etsi_its_cam_msgs/CAM.h>
+#include <etsi_its_denm_msgs/DENM.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
+#include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
@@ -50,16 +53,20 @@ class Converter : public rclcpp::Node {
 
 #ifdef ROS1
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
+    void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
+    void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
 #endif
 
   protected:
 
     static const std::string kInputTopicUdp;
-    static const std::string kOutputTopicCam;
-    static const std::string kInputTopicCam;
     static const std::string kOutputTopicUdp;
+    static const std::string kInputTopicCam;
+    static const std::string kOutputTopicCam;
+    static const std::string kInputTopicDenm;
+    static const std::string kOutputTopicDenm;
 
     static const std::string kEtsiTypeParam;
     static const std::string kEtsiTypeParamDefault;
@@ -74,8 +81,10 @@ class Converter : public rclcpp::Node {
     ros::Publisher publisher_udp_;
 #else
     rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_;
+    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_cam_;
+    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_cam_;
+    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr> publishers_denm_;
+    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
     rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
 #endif
 
