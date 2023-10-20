@@ -25,26 +25,26 @@ CAMDisplay::CAMDisplay()
 {
   // General Properties
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
-    "Buffer Timeout", 0.1f,
-    "Time-Delta until CAM is removed from Buffer.", this);
+    "Timeout", 0.1f,
+    "Time (in s) until objects disappear", this);
   buffer_timeout_->setMin(0);
   bb_scale_ = new rviz_common::properties::FloatProperty(
-    "Bounding Box Scale", 1.0f,
-    "Scaling factor to in/decrease the size of the visualized bounding boxes.", this);
+    "Scale", 1.0f,
+    "Scale of objects", this);
   bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(25, 0, 255),
-    "Color to visualize the CAMs.", this);
-  show_meta_ = new rviz_common::properties::BoolProperty("Show Meta-Information", true, 
-    "Visualizing CAM Meta-Information", this);
+    "Object color", this);
+  show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true, 
+    "Show metadata as text next to objects", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(25, 0, 255),
-    "Color to visualize the CAMs.", show_meta_);
-  char_height_ = new rviz_common::properties::FloatProperty("Char height", 4.0, "Height of characters, ~ Font size", show_meta_);
-  show_station_id_ = new rviz_common::properties::BoolProperty("Show StationID", true, 
-    "Visualizing CAM StationID", show_meta_);
-  show_speed_ = new rviz_common::properties::BoolProperty("Show Speed", true, 
-    "Visualizing CAM Speed", show_meta_);
+    "Text color", show_meta_);
+  char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
+  show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, 
+    "Show StationID", show_meta_);
+  show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, 
+    "Show speed", show_meta_);
   
 }
 

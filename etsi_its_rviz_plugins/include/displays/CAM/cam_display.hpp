@@ -1,15 +1,10 @@
 #pragma once
 
 #include "etsi_its_cam_msgs/msg/cam.hpp"
-#include "geometry_msgs/msg/pose.hpp"
-#include "std_msgs/msg/header.hpp"
-#include <etsi_its_msgs/cam_access.hpp>
 
-#include <tf2/LinearMath/Quaternion.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include "etsi_its_rviz_plugins/displays/cam_render_object.hpp"
 
 #include "rviz_common/ros_topic_display.hpp"
-#include "rviz_common/validate_floats.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
 #include "rviz_rendering/objects/shape.hpp"
 
@@ -33,72 +28,6 @@ namespace etsi_its_msgs
 {
 namespace displays
 {
-
-/**
- * @class CAMRenderObject
- * @brief 
- */
-class CAMRenderObject
-{
-  public:
-    CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=5)
-    {
-      using namespace etsi_its_cam_msgs::access;
-      int zone;
-      bool northp;
-      geometry_msgs::msg::PointStamped p = getUTMPosition(cam, zone, northp);
-      header.frame_id = p.header.frame_id;
-      uint64_t nanosecs = getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), receive_time.nanoseconds(), n_leap_seconds);
-      header.stamp = rclcpp::Time(nanosecs);
-      // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-      double heading = (90-getHeading(cam))*M_PI/180.0;
-      while(heading<0) heading+=2*M_PI;
-      pose.position = p.point;
-      tf2::Quaternion orientation;
-      orientation.setRPY(0.0, 0.0, heading);
-      pose.orientation = tf2::toMsg(orientation);
-      station_id = getStationID(cam);
-      width = getVehicleWidth(cam);
-      length = getVehicleLength(cam);
-      height = 1.6; // To-Do: Make sure, that there is definetly no Height within the CAM?!
-      speed = getSpeed(cam);
-    };
-    ~CAMRenderObject(){};
-
-    /**
-     * @brief Get the age of a CAMRenderObject
-     * 
-     * @param now reference point in time to calculate the age with
-     * @return age in seconds as double value 
-     */
-    double getAge(rclcpp::Time now)
-    {
-      return (now-header.stamp).seconds();
-    };
-
-    /**
-     * @brief This function validates all float variables that are part of a CAMRenderObject
-     * 
-     */
-    bool validateFloats()
-    {
-      bool valid = true;
-      valid = valid && rviz_common::validateFloats(pose);
-      valid = valid && rviz_common::validateFloats(width);
-      valid = valid && rviz_common::validateFloats(length);
-      valid = valid && rviz_common::validateFloats(height);
-      valid = valid && rviz_common::validateFloats(speed);
-      return valid;
-    }
-
-    // Public member variables
-    std_msgs::msg::Header header;
-    int station_id;
-    double width, length, height;
-    geometry_msgs::msg::Pose pose;
-    double speed;
-    
-};
 
 /**
  * @class CAMDisplay
