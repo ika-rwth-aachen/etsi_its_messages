@@ -103,7 +103,7 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
   // Render all valid cams
   bboxs_.clear();
   texts_.clear();
-  for(auto it = cams_.begin(); it != cams_.end(); ) {
+  for(auto it = cams_.begin(); it != cams_.end(); ++it) {
 
     CAMRenderObject cam = it->second;
     Ogre::Vector3 sn_position;
