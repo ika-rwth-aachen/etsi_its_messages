@@ -3,9 +3,6 @@ project(etsi_its_msgs)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
-add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 
 # Workaround to find GeographicLib according to https://bugs.launchpad.net/ubuntu/+source/geographiclib/+bug/1805173
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};/usr/share/cmake/geographiclib")
