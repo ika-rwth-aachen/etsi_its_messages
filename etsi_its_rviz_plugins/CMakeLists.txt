@@ -108,7 +108,6 @@ if(${ROS_VERSION} EQUAL 2)
     DIRECTORY config
     DESTINATION share/${PROJECT_NAME}
   )
-  # RViz Display End
 
   if(BUILD_TESTING)
     #find_package(ament_lint_auto REQUIRED)
