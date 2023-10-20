@@ -43,24 +43,30 @@ class CAMRenderObject
   public:
     CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=5)
     {
+
       using namespace etsi_its_cam_msgs::access;
+
       int zone;
       bool northp;
       geometry_msgs::msg::PointStamped p = getUTMPosition(cam, zone, northp);
       header.frame_id = p.header.frame_id;
+
       uint64_t nanosecs = getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), receive_time.nanoseconds(), n_leap_seconds);
       header.stamp = rclcpp::Time(nanosecs);
-      // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-      double heading = (90-getHeading(cam))*M_PI/180.0;
-      while(heading<0) heading+=2*M_PI;
+
+      station_id = getStationID(cam);
+
       pose.position = p.point;
+      double heading = (90-getHeading(cam))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West****
+      while(heading<0) heading+=2*M_PI;
       tf2::Quaternion orientation;
       orientation.setRPY(0.0, 0.0, heading);
       pose.orientation = tf2::toMsg(orientation);
-      station_id = getStationID(cam);
+
       width = getVehicleWidth(cam);
       length = getVehicleLength(cam);
-      height = 1.6; // To-Do: Make sure, that there is definetly no Height within the CAM?!
+      height = 1.6;
+
       speed = getSpeed(cam);
     };
     ~CAMRenderObject(){};
