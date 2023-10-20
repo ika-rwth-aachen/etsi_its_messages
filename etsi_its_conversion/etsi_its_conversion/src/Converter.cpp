@@ -21,6 +21,12 @@ RCLCPP_COMPONENTS_REGISTER_NODE(etsi_its_conversion::Converter)
 
 namespace etsi_its_conversion {
 
+const int kBtpHeaderDestinationPortCam{2001};
+const int kBtpHeaderDestinationPortDenm{2002};
+const int kBtpHeaderDestinationPortMap{2003};
+const int kBtpHeaderDestinationPortSpat{2004};
+const int kBtpHeaderDestinationPortIvi{2006};
+const int kBtpHeaderDestinationPortCpm{2009};
 
 #ifdef ROS1
 const std::string Converter::kInputTopicUdp{"udp/in"};
@@ -159,12 +165,12 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     offset = 4;
     const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
     uint16_t destination_port = ntohs(btp_header[0]);
-    if (destination_port == 2001) detected_etsi_type = "cam";
-    else if (destination_port == 2002) detected_etsi_type = "denm";
-    else if (destination_port == 2003) detected_etsi_type = "map";
-    else if (destination_port == 2004) detected_etsi_type = "spat";
-    else if (destination_port == 2006) detected_etsi_type = "ivi";
-    else if (destination_port == 2009) detected_etsi_type = "cpm";
+    if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
+    else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
+    else if (destination_port == kBtpHeaderDestinationPortMap) detected_etsi_type = "map";
+    else if (destination_port == kBtpHeaderDestinationPortSpat) detected_etsi_type = "spat";
+    else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
+    else if (destination_port == kBtpHeaderDestinationPortCpm) detected_etsi_type = "cpm";
     else detected_etsi_type = "unknown";
   }
 
@@ -298,7 +304,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #endif
   if (etsi_type_ == "auto") {
     // add BTP-Header, if type detection is enabled
-    uint16_t destination_port = htons(2001);
+    uint16_t destination_port = htons(kBtpHeaderDestinationPortCam);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
@@ -369,7 +375,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #endif
   if (etsi_type_ == "auto") {
     // add BTP-Header, if type detection is enabled
-    uint16_t destination_port = htons(2001);
+    uint16_t destination_port = htons(kBtpHeaderDestinationPortDenm);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
