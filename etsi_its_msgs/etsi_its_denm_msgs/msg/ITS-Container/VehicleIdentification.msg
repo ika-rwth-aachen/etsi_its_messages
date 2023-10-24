@@ -6,8 +6,8 @@
 # }
 # ------------------------------------------------------------------------------
 
-WMInumber wminumber
-bool wminumber_is_present
+WMInumber wm_inumber
+bool wm_inumber_is_present
 
 VDS vds
 bool vds_is_present

@@ -17,8 +17,8 @@ namespace etsi_its_denm_conversion {
 void toRos_VehicleIdentification(const VehicleIdentification_t& in, denm_msgs::VehicleIdentification& out) {
 
   if (in.wMInumber) {
-    toRos_WMInumber(*in.wMInumber, out.wminumber);
-    out.wminumber_is_present = true;
+    toRos_WMInumber(*in.wMInumber, out.wm_inumber);
+    out.wm_inumber_is_present = true;
   }
 
   if (in.vDS) {
@@ -32,10 +32,10 @@ void toStruct_VehicleIdentification(const denm_msgs::VehicleIdentification& in, 
 
   memset(&out, 0, sizeof(VehicleIdentification_t));
 
-  if (in.wminumber_is_present) {
-    WMInumber_t wminumber;
-    toStruct_WMInumber(in.wminumber, wminumber);
-    out.wMInumber = new WMInumber_t(wminumber);
+  if (in.wm_inumber_is_present) {
+    WMInumber_t wm_inumber;
+    toStruct_WMInumber(in.wm_inumber, wm_inumber);
+    out.wMInumber = new WMInumber_t(wm_inumber);
   }
 
   if (in.vds_is_present) {

@@ -7,7 +7,7 @@
 #include <etsi_its_denm_msgs/WMInumber.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
-#include <etsi_its_denm_msgs/msg/wminumber.hpp>
+#include <etsi_its_denm_msgs/msg/wm_inumber.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 

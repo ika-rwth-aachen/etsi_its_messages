@@ -79,6 +79,7 @@ def camel2snake(s: str) -> str:
     ss = ss.replace("v_d_s", "vds")
     ss = ss.replace("_i_d", "_id")
     ss = ss.replace("_u_t_c", "_utc")
+    ss = ss.replace("wmin", "wm_in")
 
     return ss
 
