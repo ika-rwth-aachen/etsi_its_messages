@@ -14,23 +14,23 @@ def publish():
 
     msg = CAM()
 
-    msg.header.protocolVersion = 2
-    msg.header.messageID = msg.header.MESSAGE_ID_CAM
+    msg.header.protocol_version = 2
+    msg.header.message_id = msg.header.MESSAGE_ID_CAM
 
-    msg.cam.generationDeltaTime.value = msg.cam.generationDeltaTime.ONE_MILLI_SEC
+    msg.cam.generation_delta_time.value = msg.cam.generation_delta_time.ONE_MILLI_SEC
 
-    msg.cam.camParameters.basicContainer.stationType.value = msg.cam.camParameters.basicContainer.stationType.PASSENGER_CAR
-    msg.cam.camParameters.basicContainer.referencePosition.latitude.value = int(msg.cam.camParameters.basicContainer.referencePosition.latitude.ONE_MICRODEGREE_NORTH * 1e6 * 51.215169611787054)
+    msg.cam.cam_parameters.basic_container.station_type.value = msg.cam.cam_parameters.basic_container.station_type.PASSENGER_CAR
+    msg.cam.cam_parameters.basic_container.reference_position.latitude.value = int(msg.cam.cam_parameters.basic_container.reference_position.latitude.ONE_MICRODEGREE_NORTH * 1e6 * 51.215169611787054)
 
-    basicVehicleContainerHighFrequency = BasicVehicleContainerHighFrequency()
-    basicVehicleContainerHighFrequency.heading.headingValue.value = basicVehicleContainerHighFrequency.heading.headingValue.WGS_84_NORTH
-    basicVehicleContainerHighFrequency.heading.headingConfidence.value = basicVehicleContainerHighFrequency.heading.headingConfidence.EQUAL_OR_WITHIN_ONE_DEGREE
-    basicVehicleContainerHighFrequency.speed.speedValue.value = basicVehicleContainerHighFrequency.speed.speedValue.ONE_CENTIMETER_PER_SEC
-    basicVehicleContainerHighFrequency.speed.speedConfidence.value = basicVehicleContainerHighFrequency.speed.speedConfidence.EQUAL_OR_WITHIN_ONE_CENTIMETER_PER_SEC
-    basicVehicleContainerHighFrequency.vehicleLength.vehicleLengthValue.value = basicVehicleContainerHighFrequency.vehicleLength.vehicleLengthValue.TEN_CENTIMETERS
-    basicVehicleContainerHighFrequency.vehicleWidth.value = basicVehicleContainerHighFrequency.vehicleWidth.TEN_CENTIMETERS
-    msg.cam.camParameters.highFrequencyContainer.choice = msg.cam.camParameters.highFrequencyContainer.CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY
-    msg.cam.camParameters.highFrequencyContainer.basicVehicleContainerHighFrequency = basicVehicleContainerHighFrequency
+    basic_vehicle_container_high_frequency = BasicVehicleContainerHighFrequency()
+    basic_vehicle_container_high_frequency.heading.heading_value.value = basic_vehicle_container_high_frequency.heading.heading_value.WGS_84_NORTH
+    basic_vehicle_container_high_frequency.heading.heading_confidence.value = basic_vehicle_container_high_frequency.heading.heading_confidence.EQUAL_OR_WITHIN_ONE_DEGREE
+    basic_vehicle_container_high_frequency.speed.speed_value.value = basic_vehicle_container_high_frequency.speed.speed_value.ONE_CENTIMETER_PER_SEC
+    basic_vehicle_container_high_frequency.speed.speed_confidence.value = basic_vehicle_container_high_frequency.speed.speed_confidence.EQUAL_OR_WITHIN_ONE_CENTIMETER_PER_SEC
+    basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.value = basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.TEN_CENTIMETERS
+    basic_vehicle_container_high_frequency.vehicle_width.value = basic_vehicle_container_high_frequency.vehicle_width.TEN_CENTIMETERS
+    msg.cam.cam_parameters.high_frequency_container.choice = msg.cam.cam_parameters.high_frequency_container.CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY
+    msg.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency = basic_vehicle_container_high_frequency
 
     while not rospy.is_shutdown():
         rospy.loginfo(f"Publishing {msg._type}")
