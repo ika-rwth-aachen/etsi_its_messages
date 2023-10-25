@@ -6,7 +6,7 @@ set(ROS_VERSION $ENV{ROS_VERSION})
 
 include(${PROJECT_NAME}-extras.cmake)
 
-# === ROS2 (AMENT) =============================================================
+# === ROS 2 (AMENT) ============================================================
 if(${ROS_VERSION} EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
@@ -61,7 +61,7 @@ if(${ROS_VERSION} EQUAL 2)
     CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )
 
-# === ROS1 (CATKIN) ============================================================
+# === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS

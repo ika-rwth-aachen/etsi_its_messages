@@ -17,15 +17,15 @@
 
   <depend>std_msgs</depend>
 
-  <!-- ROS1 -->
-  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-  <depend condition="$ROS_VERSION == 1">message_generation</depend>
-  <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
-
-  <!-- ROS2 -->
+  <!-- ROS 2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">rosidl_default_generators</buildtool_depend>
   <exec_depend condition="$ROS_VERSION == 2">rosidl_default_runtime</exec_depend>
   <member_of_group condition="$ROS_VERSION == 2">rosidl_interface_packages</member_of_group>
+
+  <!-- ROS -->
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <depend condition="$ROS_VERSION == 1">message_generation</depend>
+  <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
 
   <export>
     <build_type condition="$ROS_VERSION == 1">catkin</build_type>

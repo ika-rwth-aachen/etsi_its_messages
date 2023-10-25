@@ -17,7 +17,7 @@
 
   <depend>ros_environment</depend>
 
-  <!-- ROS2 -->
+  <!-- ROS 2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
   <build_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</build_depend>
   <build_depend condition="$ROS_VERSION == 2">qtbase5-dev</build_depend>

@@ -6,7 +6,7 @@ set(ROS_VERSION $ENV{ROS_VERSION})
 
 AUX_SOURCE_DIRECTORY(src SRC_FILES)
 
-# === ROS2 (AMENT) =============================================================
+# === ROS 2 (AMENT) ============================================================
 if(${ROS_VERSION} EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
@@ -36,7 +36,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   ament_package()
 
-# === ROS1 (CATKIN) ============================================================
+# === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED)

@@ -4,7 +4,7 @@ project(etsi_its_rviz_plugins)
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
 
-# === ROS2 (AMENT) =============================================================
+# === ROS 2 (AMENT) ============================================================
 if(${ROS_VERSION} EQUAL 2)
 
   if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -105,7 +105,7 @@ if(${ROS_VERSION} EQUAL 2)
     CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )
 
-# === ROS1 (CATKIN) ============================================================
+# === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
   # Currently no support for ROS1!

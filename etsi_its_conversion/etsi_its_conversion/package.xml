@@ -21,12 +21,12 @@
   <depend>std_msgs</depend>
   <depend>udp_msgs</depend>
 
-  <!-- ROS2 -->
+  <!-- ROS 2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
   <depend condition="$ROS_VERSION == 2">rclcpp</depend>
   <depend condition="$ROS_VERSION == 2">rclcpp_components</depend>
 
-  <!-- ROS1 -->
+  <!-- ROS -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <depend condition="$ROS_VERSION == 1">nodelet</depend>
   <depend condition="$ROS_VERSION == 1">roscpp</depend>

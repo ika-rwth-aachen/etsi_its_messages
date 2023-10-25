@@ -4,7 +4,7 @@ project(etsi_its_conversion)
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
 
-# === ROS2 (AMENT) =============================================================
+# === ROS 2 (AMENT) ============================================================
 if(${ROS_VERSION} EQUAL 2)
 
   add_compile_definitions(ROS2)
@@ -54,7 +54,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   ament_package()
 
-# === ROS1 (CATKIN) ============================================================
+# === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
   add_compile_definitions(ROS1)
