@@ -10,9 +10,9 @@ if(${ROS_VERSION} EQUAL 2)
   add_compile_definitions(ROS2)
 
   find_package(ament_cmake REQUIRED)
-  find_package(Boost REQUIRED)
   find_package(etsi_its_denm_coding REQUIRED)
   find_package(etsi_its_denm_msgs REQUIRED)
+  find_package(etsi_its_primitives_conversion REQUIRED)
 
   add_library(${PROJECT_NAME} INTERFACE)
 
@@ -24,13 +24,14 @@ if(${ROS_VERSION} EQUAL 2)
   target_link_libraries(${PROJECT_NAME} INTERFACE
     ${etsi_its_denm_coding_TARGETS}
     ${etsi_its_denm_msgs_TARGETS}
+    ${etsi_its_primitives_conversion_TARGETS}
   )
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
   ament_export_dependencies(
-    Boost
     etsi_its_denm_coding
     etsi_its_denm_msgs
+    etsi_its_primitives_conversion
   )
 
   install(DIRECTORY include/
@@ -55,19 +56,17 @@ elseif(${ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_denm_coding
     etsi_its_denm_msgs
+    etsi_its_primitives_conversion
   )
-  find_package(Boost REQUIRED)
 
   catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS etsi_its_denm_coding etsi_its_denm_msgs
-    DEPENDS Boost
+    CATKIN_DEPENDS etsi_its_denm_coding etsi_its_denm_msgs etsi_its_primitives_conversion
   )
 
   include_directories(
     include
     ${catkin_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
   )
 
   install(DIRECTORY include/${PROJECT_NAME}/

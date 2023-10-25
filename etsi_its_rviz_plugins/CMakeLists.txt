@@ -11,7 +11,6 @@ if(${ROS_VERSION} EQUAL 2)
     add_compile_options(-Wall -Wextra -Wpedantic)
   endif()
 
-  # find dependencies
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
   find_package(GeographicLib REQUIRED)
@@ -70,7 +69,6 @@ if(${ROS_VERSION} EQUAL 2)
     tf2_ros
   )
 
-  # Export modern CMake targets
   ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 
   ament_export_dependencies(
@@ -103,18 +101,6 @@ if(${ROS_VERSION} EQUAL 2)
     DESTINATION share/${PROJECT_NAME}
   )
 
-  if(BUILD_TESTING)
-    #find_package(ament_lint_auto REQUIRED)
-    # the following line skips the linter which checks for copyrights
-    # comment the line when a copyright and license is added to all source files
-    #set(ament_cmake_copyright_FOUND TRUE)
-    # the following line skips cpplint (only works in a git repo)
-    # comment the line when this package is in a git repo and when
-    # a copyright and license is added to all source files
-    #set(ament_cmake_cpplint_FOUND TRUE)
-    #ament_lint_auto_find_test_dependencies()
-  endif()
-
   ament_package(
     CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )
@@ -125,7 +111,8 @@ elseif(${ROS_VERSION} EQUAL 1)
   # Currently no support for ROS1!
   # Specify that the directory should be excluded from the install target
   install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-          DESTINATION .
-          EXCLUDE_FROM_ALL)
+    DESTINATION .
+    EXCLUDE_FROM_ALL
+  )
 
 endif()

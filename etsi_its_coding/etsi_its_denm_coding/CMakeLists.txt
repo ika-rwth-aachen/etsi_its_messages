@@ -3,17 +3,43 @@ project(etsi_its_denm_coding)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
-set(ROS_DISTRO $ENV{ROS_DISTRO})
-add_compile_definitions(ROS_VERSION=$ENV{ROS_VERSION})
-add_compile_definitions(ROS_DISTRO=$ENV{ROS_DISTRO})
 
 AUX_SOURCE_DIRECTORY(src SRC_FILES)
 
-# === ROS1 (CATKIN) ============================================================
-if(${ROS_VERSION} EQUAL 1)
+# === ROS2 (AMENT) =============================================================
+if(${ROS_VERSION} EQUAL 2)
 
-  find_package(catkin REQUIRED COMPONENTS
+  find_package(ament_cmake REQUIRED)
+
+  add_library(${PROJECT_NAME} SHARED
+    ${SRC_FILES}
   )
+
+  target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  )
+
+  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
+
+  install(DIRECTORY include/
+    DESTINATION include
+  )
+
+  install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
+    INCLUDES DESTINATION include
+  )
+
+  ament_package()
+
+# === ROS1 (CATKIN) ============================================================
+elseif(${ROS_VERSION} EQUAL 1)
+
+  find_package(catkin REQUIRED)
 
   catkin_package(
     INCLUDE_DIRS include
@@ -40,36 +66,5 @@ if(${ROS_VERSION} EQUAL 1)
     FILES_MATCHING PATTERN "*.h"
     PATTERN ".svn" EXCLUDE
   )
-
-# === ROS2 (AMENT) =============================================================
-elseif(${ROS_VERSION} EQUAL 2)
-
-  find_package(ament_cmake REQUIRED)
-
-  add_library(${PROJECT_NAME} SHARED
-    ${SRC_FILES}
-  )
-
-  target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
-
-  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
-
-  install(
-    DIRECTORY include/
-    DESTINATION include
-  )
-
-  install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Targets
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION lib
-    INCLUDES DESTINATION include
-  )
-
-  ament_package()
 
 endif()

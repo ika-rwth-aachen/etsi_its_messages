@@ -43,7 +43,6 @@ elseif(${ROS_VERSION} EQUAL 1)
 
   catkin_package(
     INCLUDE_DIRS include
-    # CATKIN_DEPENDS
   )
 
   include_directories(

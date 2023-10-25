@@ -17,12 +17,12 @@ if(${ROS_VERSION} EQUAL 2)
   add_library(etsi_its_cam_msgs_access INTERFACE)
 
   target_include_directories(etsi_its_cam_msgs_access INTERFACE
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
   )
 
   target_link_libraries(etsi_its_cam_msgs_access INTERFACE
-    ${etsi_its_cam_msgs_TARGETS}    
+    ${etsi_its_cam_msgs_TARGETS}
     ${GeographicLib_TARGETS}
     ${geometry_msgs_TARGETS}
   )
@@ -31,7 +31,7 @@ if(${ROS_VERSION} EQUAL 2)
   ament_export_dependencies(etsi_its_cam_msgs GeographicLib geometry_msgs)
 
   install(DIRECTORY include/
-      DESTINATION include/${PROJECT_NAME}
+    DESTINATION include/${PROJECT_NAME}
   )
 
   install(TARGETS etsi_its_cam_msgs_access
@@ -44,59 +44,58 @@ if(${ROS_VERSION} EQUAL 2)
 
   if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
-    # CAM Access
     ament_add_gtest(etsi_its_cam_msgs_access-test test/test_cam_access.ros2.cpp)
     target_include_directories(etsi_its_cam_msgs_access-test PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include>
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include>
     )
     target_include_directories(etsi_its_cam_msgs_access-test PUBLIC test)
     ament_target_dependencies(etsi_its_cam_msgs_access-test
-        etsi_its_cam_msgs
-        GeographicLib
-        geometry_msgs
+      etsi_its_cam_msgs
+      GeographicLib
+      geometry_msgs
     )
   endif()
 
   ament_package(
-      CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
+    CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )
 
 # === ROS1 (CATKIN) ============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS
-      etsi_its_cam_msgs
-      geometry_msgs
+    etsi_its_cam_msgs
+    geometry_msgs
   )
 
   find_package(GeographicLib REQUIRED)
 
   catkin_package(
-      CFG_EXTRAS ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-extras.cmake
-      INCLUDE_DIRS include
-      LIBRARIES GeographicLib
-      CATKIN_DEPENDS
-          etsi_its_cam_msgs
-          geometry_msgs
+    CFG_EXTRAS ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-extras.cmake
+    INCLUDE_DIRS include
+    LIBRARIES GeographicLib
+    CATKIN_DEPENDS
+      etsi_its_cam_msgs
+      geometry_msgs
   )
 
   include_directories(
-      include
-      ${catkin_INCLUDE_DIRS}
-      ${GeographicLib_INCLUDE_DIRS}
+    include
+    ${catkin_INCLUDE_DIRS}
+    ${GeographicLib_INCLUDE_DIRS}
   )
 
   install(DIRECTORY include/${PROJECT_NAME}/
-      DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   )
 
   if(CATKIN_ENABLE_TESTING)
-      catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
-      if(TARGET ${PROJECT_NAME}-test)
-          target_include_directories(${PROJECT_NAME}-test PUBLIC test)
-          target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
-      endif()
+    catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
+    if(TARGET ${PROJECT_NAME}-test)
+      target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+      target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
+    endif()
   endif()
 
 endif()
