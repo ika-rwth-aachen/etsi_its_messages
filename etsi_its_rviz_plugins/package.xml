@@ -23,7 +23,6 @@
   <exec_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz_satellite</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz2</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">tf2_ros</exec_depend>
 
   <depend condition="$ROS_VERSION == 2">etsi_its_msgs</depend>
   <depend condition="$ROS_VERSION == 2">pluginlib</depend>
@@ -31,6 +30,9 @@
   <depend condition="$ROS_VERSION == 2">rviz_common</depend>
   <depend condition="$ROS_VERSION == 2">rviz_default_plugins</depend>
   <depend condition="$ROS_VERSION == 2">rviz_rendering</depend>
+  <depend condition="$ROS_VERSION == 2">tf2_geometry_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">tf2_ros</depend>
+  <depend condition="$ROS_VERSION == 2">tf2</depend>
 
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 

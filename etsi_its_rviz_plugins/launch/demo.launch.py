@@ -28,9 +28,9 @@ def generate_launch_description():
             arguments=['-d'+str(rviz_config_path)]),
 
         Node(
-            package='tf2_ros'
-            executable='static_transform_publisher'
-            arguments=["291608.065", "5630129.104", "0.0", "0.0", "0.0", "-0.0399933", "utm_32N", "map"]
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments=["291608.065", "5630129.104", "0.0", "0.0", "0.0", "-0.0399933", "utm_32N", "map"],
         ),
 
         ExecuteProcess(

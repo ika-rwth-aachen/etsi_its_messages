@@ -44,13 +44,18 @@ Visualization Manager:
         Value: /map_link/navsatfix
       Value: true
       Zoom: 16
-    - Buffer CAM's:
-        Buffer Timeout: 0.10000000149011612
-        Value: true
-      Class: etsi_its_msgs/CAMDisplay
+    - Class: etsi_its_msgs/CAMDisplay
       Color: 0; 0; 255
       Enabled: true
+      Metadata:
+        Color: 25; 0; 255
+        Scale: 4
+        Speed: true
+        StationID: true
+        Value: true
       Name: CAMDisplay
+      Scale: 1
+      Timeout: 1
       Topic:
         Depth: 5
         Durability Policy: Volatile
