@@ -10,7 +10,7 @@ stages:
   - Conversion Headers
 
 
-asn1_reduced_cam:
+asn1_reduce_cam:
   stage: ASN1 Reduction
   needs: []
   script:
@@ -22,17 +22,18 @@ asn1_reduced_cam:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
-asn1_reduced_denm:
+asn1_reduce_denm:
   stage: ASN1 Reduction
   needs: []
   script:
     - >
       ./utils/codegen/scripts/reduceAsn1ToTypeDependencies.py
       -t DENM
-      -o utils/asn1/reduced/denm
-      utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
-      utils/asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
+      -o asn1/reduced/denm
+      asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
+      asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
 
 etsi_its_cam_msgs:
   stage: ROS Messages
@@ -51,10 +52,11 @@ etsi_its_denm_msgs:
   script:
     - >
       ./utils/codegen/scripts/asn1ToRosMsg.py
-      utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
-      utils/asn1/reduced/denm/ITS-Container.asn
+      asn1/reduced/denm/DENM-PDU-Descriptions.asn
+      asn1/reduced/denm/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
@@ -74,8 +76,8 @@ etsi_its_denm_conversion:
   script:
     - >
       ./utils/codegen/scripts/asn1ToConversionHeader.py
-      utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
-      utils/asn1/reduced/denm/ITS-Container.asn
+      asn1/reduced/denm/DENM-PDU-Descriptions.asn
+      asn1/reduced/denm/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
