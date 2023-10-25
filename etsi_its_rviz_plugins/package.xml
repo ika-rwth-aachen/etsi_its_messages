@@ -23,6 +23,7 @@
   <exec_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz_satellite</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz2</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">tf2_ros</exec_depend>
 
   <depend condition="$ROS_VERSION == 2">etsi_its_msgs</depend>
   <depend condition="$ROS_VERSION == 2">pluginlib</depend>

@@ -27,6 +27,12 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time}],
             arguments=['-d'+str(rviz_config_path)]),
 
+        Node(
+            package='tf2_ros'
+            executable='static_transform_publisher'
+            arguments=["291608.065", "5630129.104", "0.0", "0.0", "0.0", "-0.0399933", "utm_32N", "map"]
+        ),
+
         ExecuteProcess(
             cmd=['ros2', 'topic', 'pub', '-r 0.1', '/map_link/navsatfix', 'sensor_msgs/msg/NavSatFix', 
                 '''{header:
@@ -40,34 +46,6 @@ def generate_launch_description():
                     longitude: 6.043521,
                     altitude: 0.0
                 }'''],
-            output='screen',
-        ),
-
-        ExecuteProcess(
-            cmd=['ros2', 'topic', 'pub', '-r 0.1', '/tf_static', 'tf2_msgs/msg/TFMessage',
-            '''transforms: [{
-                header: {
-                    stamp: {
-                        sec: 0,
-                        nanosec: 0
-                    },
-                    frame_id: "utm_32N"
-                },
-                child_frame_id: "map",
-                transform: {
-                    translation: {
-                        x: 291608.065,
-                        y: 5630129.104,
-                        z: 0 
-                    },
-                    rotation: {
-                        x: 0,
-                        y: 0,
-                        z: -0.0199953,
-                        w: 0.9998001
-                    }
-                }
-            }]'''],
             output='screen',
         ),
     ])
