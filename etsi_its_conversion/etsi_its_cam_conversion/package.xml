@@ -20,10 +20,7 @@
   <depend>etsi_its_primitives_conversion</depend>
   <depend>ros_environment</depend>
 
-  <!-- ROS1 -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-
-  <!-- ROS2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
   <export>
