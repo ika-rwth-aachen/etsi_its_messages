@@ -42,13 +42,14 @@ def loadJinjaTemplate() -> jinja2.environment.Template:
     return jinja_template
 
 
-def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_raw: Dict[str, str], jinja_template: jinja2.environment.Template) -> str:
+def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_raw: Dict[str, str], jinja_template: jinja2.environment.Template) -> str:
     """Converts parsed ASN1 type information to a ROS message file string.
 
     Args:
         type_name (str): type name
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
+        asn1_values (Dict[str, Dict]): value information of all values by name
         asn1_raw (Dict[str, str]): raw string definition by type
         jinja_template (jinja2.environment.Template): jinja template
 
@@ -57,7 +58,7 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     """
 
     # build jinja context based on asn1 type information
-    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types)
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values)
     if jinja_context is None:
         return None
 
@@ -101,6 +102,7 @@ def main():
     asn1_docs, asn1_raw = parseAsn1Files(args.files)
 
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
+    asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
     
@@ -108,7 +110,7 @@ def main():
 
     for type_name, asn1_type in asn1_types.items():
         
-        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_raw, jinja_template)
+        ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_values, asn1_raw, jinja_template)
 
         exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
         

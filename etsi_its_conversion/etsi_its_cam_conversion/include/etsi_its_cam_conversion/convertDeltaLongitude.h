@@ -1,7 +1,8 @@
 #pragma once
 
 #include <etsi_its_cam_coding/DeltaLongitude.h>
-#include <etsi_its_cam_conversion/primitives/convertINTEGER.h>
+#include <etsi_its_cam_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DeltaLongitude.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -15,13 +16,13 @@ namespace etsi_its_cam_conversion {
 
 void toRos_DeltaLongitude(const DeltaLongitude_t& in, cam_msgs::DeltaLongitude& out) {
 
-  toRos_INTEGER(in, out.value);
+  etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_DeltaLongitude(const cam_msgs::DeltaLongitude& in, DeltaLongitude_t& out) {
 
   memset(&out, 0, sizeof(DeltaLongitude_t));
-  toStruct_INTEGER(in.value, out);
+  etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 
 }

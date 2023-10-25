@@ -21,6 +21,21 @@
     },
 
     {
+      "name": "DENM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "DENM",
+        "-o", "utils/asn1/reduced/denm",
+        "utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "utils/asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
@@ -29,6 +44,20 @@
         "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
         "utils/asn1/reduced/cam/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "DENM asn1ToRosMsg",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/asn1ToRosMsg.py",
+      "args": [
+        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -44,6 +73,21 @@
         "utils/asn1/reduced/cam/ITS-Container.asn",
         "-t", "cam",
         "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "DENM asn1ToConversionHeader",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "args": [
+        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "-t", "denm",
+        "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
       ],
       "console": "integratedTerminal",
       "justMyCode": true

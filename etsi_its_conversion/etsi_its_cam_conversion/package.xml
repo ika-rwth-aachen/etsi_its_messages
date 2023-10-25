@@ -12,6 +12,7 @@
 
   <depend>etsi_its_cam_coding</depend>
   <depend>etsi_its_cam_msgs</depend>
+  <depend>etsi_its_primitives_conversion</depend>
   <depend>ros_environment</depend>
 
   <!-- ROS1 -->

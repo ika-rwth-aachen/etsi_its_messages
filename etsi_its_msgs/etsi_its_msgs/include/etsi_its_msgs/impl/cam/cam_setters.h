@@ -14,13 +14,13 @@ namespace access {
 
   /**
    * @brief Set the ItsPduHeader-object for a CAM
-   * 
+   *
    * @param cam CAM-Message to set the ItsPduHeader
    * @param station_id
-   * @param protocol_version 
+   * @param protocol_version
    */
   inline void setItsPduHeader(CAM& cam, const int station_id, const int protocol_version = 0){
-    cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_I_D_CAM, station_id, protocol_version);
+    cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);
   }
 
   /**
@@ -51,20 +51,20 @@ namespace access {
 
   /**
    * @brief Set the StationType for a CAM
-   * 
-   * @param cam CAM-Message to set the station_type value 
+   *
+   * @param cam CAM-Message to set the station_type value
    * @param value station_type value to set
    */
   inline void setStationType(CAM& cam, const int value){
-    cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value); 
+    cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value);
   }
 
   /**
    * @brief Set the ReferencePosition for a CAM
-   * 
+   *
    * Altitude is set to UNAVAILABLE
-   * 
-   * @param cam CAM to set the ReferencePosition 
+   *
+   * @param cam CAM to set the ReferencePosition
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
    */
@@ -75,7 +75,7 @@ namespace access {
 
   /**
    * @brief Set the ReferencePosition for a CAM
-   * 
+   *
    * @param cam CAM to set the ReferencePosition
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
@@ -88,10 +88,10 @@ namespace access {
 
   /**
    * @brief Set the Heading for a CAM
-   * 
+   *
    * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
    * HeadingConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param cam CAM to set the ReferencePosition
    * @param value Heading value in degree as decimal number
    */
@@ -101,7 +101,7 @@ namespace access {
 
   /**
    * @brief Set the vehicle dimensions
-   * 
+   *
    * @param cam CAM to set the vehicle dimensions
    * @param vehicle_length vehicle length in meter as decimal number
    * @param vehicle_width vehicle width in meter as decimal number
@@ -113,8 +113,8 @@ namespace access {
 
   /**
    * @brief Set the vehicle speed
-   * 
-   * @param cam CAM to set the speed value 
+   *
+   * @param cam CAM to set the speed value
    * @param speed_val speed value to set in m/s as decimal number
    */
   inline void setSpeed(CAM& cam, const double speed_val){
@@ -123,7 +123,7 @@ namespace access {
 
   /**
    * @brief Set the longitudinal acceleration
-   * 
+   *
    * @param cam CAM to set the acceleration value s
    * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
    */
@@ -133,12 +133,12 @@ namespace access {
 
   /**
    * @brief Set the lateral acceleration
-   * 
+   *
    * @param cam CAM to set the acceleration value s
    * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
    */
   inline void setLateralAcceleration(CAM& cam, const double lat_accel){
-      cdd::setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);  
+      cdd::setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
   }
 
@@ -161,7 +161,7 @@ namespace access {
   
   /**
    * @brief Set the Exterior Lights by using a vector of bools
-   * 
+   *
    * @param cam CAM to set the exterior lights
    * @param exterior_lights vector of bools to set the exterior lights
    */

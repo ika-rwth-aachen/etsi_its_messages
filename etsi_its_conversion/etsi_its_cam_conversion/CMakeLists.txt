@@ -12,6 +12,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_cam_coding REQUIRED)
   find_package(etsi_its_cam_msgs REQUIRED)
+  find_package(etsi_its_primitives_conversion REQUIRED)
 
   add_library(${PROJECT_NAME} INTERFACE)
 
@@ -23,12 +24,14 @@ if(${ROS_VERSION} EQUAL 2)
   target_link_libraries(${PROJECT_NAME} INTERFACE
     ${etsi_its_cam_coding_TARGETS}
     ${etsi_its_cam_msgs_TARGETS}
+    ${etsi_its_primitives_conversion_TARGETS}
   )
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
   ament_export_dependencies(
     etsi_its_cam_coding
     etsi_its_cam_msgs
+    etsi_its_primitives_conversion
   )
 
   install(DIRECTORY include/
@@ -53,11 +56,12 @@ elseif(${ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_coding
     etsi_its_cam_msgs
+    etsi_its_primitives_conversion
   )
 
   catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS etsi_its_cam_coding etsi_its_cam_msgs
+    CATKIN_DEPENDS etsi_its_cam_coding etsi_its_cam_msgs etsi_its_primitives_conversion
   )
 
   include_directories(

@@ -17,9 +17,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Station Id object
-   * 
-   * @param station_id 
-   * @param id_value 
+   *
+   * @param station_id
+   * @param id_value
    */
   inline void setStationId(StationID& station_id, const int id_value) {
     throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
@@ -42,15 +42,15 @@ namespace cdd_access {
 
   /**
    * @brief Set the Its Pdu Header object
-   * 
-   * @param header ItsPduHeader to be set 
+   *
+   * @param header ItsPduHeader to be set
    * @param message_id ID of the message
-   * @param station_id 
-   * @param protocol_version 
+   * @param station_id
+   * @param protocol_version
    */
   inline void setItsPduHeader(ItsPduHeader& header, const int message_id, const int station_id, const int protocol_version=0) {
     setStationId(header.station_id, station_id);
-    throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_I_D_MIN, ItsPduHeader::MESSAGE_I_D_MAX, "MessageID");
+    throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
     header.message_id = message_id;
     throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
     header.protocol_version = protocol_version;
@@ -58,9 +58,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Station Type
-   * 
-   * @param station_type 
-   * @param value 
+   *
+   * @param station_type
+   * @param value
    */
   inline void setStationType(StationType& station_type, const int value) {
     throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
@@ -69,7 +69,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the Latitude object
-   * 
+   *
    * @param latitude object to set
    * @param deg Latitude value in degree as decimal number
    */
@@ -81,7 +81,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the Longitude object
-   * 
+   *
    * @param longitude object to set
    * @param deg Longitude value in degree as decimal number
    */
@@ -93,7 +93,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the AltitudeValue object
-   * 
+   *
    * @param altitude object to set
    * @param value AltitudeValue value (above the reference ellipsoid surface) in meter as decimal number
    */
@@ -108,7 +108,7 @@ namespace cdd_access {
    * @brief Set the Altitude object
    *
    * AltitudeConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param altitude object to set
    * @param value Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
@@ -119,9 +119,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Reference Position object
-   * 
+   *
    * Altitude is set to UNAVAILABLE
-   * 
+   *
    * @param ref_position object to set
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
@@ -136,7 +136,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the Reference Position object
-   * 
+   *
    * @param ref_position object to set
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
@@ -151,9 +151,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the HeadingValue object
-   * 
+   *
    * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-   * 
+   *
    * @param heading object to set
    * @param value Heading value in degree as decimal number
    */
@@ -165,10 +165,10 @@ namespace cdd_access {
 
   /**
    * @brief Set the Heading object
-   * 
+   *
    * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
    * HeadingConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param heading object to set
    * @param value Heading value in degree as decimal number
    */
@@ -179,7 +179,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the VehicleLengthValue object
-   * 
+   *
    * @param vehicle_length object to set
    * @param value VehicleLengthValue in meter as decimal number
    */
@@ -191,9 +191,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the VehicleLength object
-   * 
+   *
    * VehicleLengthConfidenceIndication is set to UNAVAILABLE
-   * 
+   *
    * @param vehicle_length object to set
    * @param value  VehicleLengthValue in meter as decimal number
    */
@@ -204,7 +204,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the VehicleWidth object
-   * 
+   *
    * @param vehicle_width object to set
    * @param value VehicleWidth in meter as decimal number
    */
@@ -216,7 +216,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the SpeedValue object
-   * 
+   *
    * @param speed object to set
    * @param value SpeedValue in m/s as decimal number
    */
@@ -228,9 +228,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Speed object
-   * 
+   *
    * SpeedConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param speed object to set
    * @param value  Speed in in m/s as decimal number
    */
@@ -241,7 +241,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the LongitudinalAccelerationValue object
-   * 
+   *
    * @param accel object to set
    * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
    */
@@ -254,9 +254,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the LongitudinalAcceleration object
-   * 
+   *
    * AccelerationConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param accel object to set
    * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
    */
@@ -267,7 +267,7 @@ namespace cdd_access {
 
     /**
    * @brief Set the LateralAccelerationValue object
-   * 
+   *
    * @param accel object to set
    * @param value LateralAccelerationValue in m/s^2 as decimal number (left is positive)
    */
@@ -282,7 +282,7 @@ namespace cdd_access {
    * @brief Set the LateralAcceleration object
    * 
    * AccelerationConfidence is set to UNAVAILABLE
-   * 
+   *
    * @param accel object to set
    * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
    */
@@ -321,7 +321,7 @@ namespace cdd_access {
   
   /**
    * @brief Set a Bit String by a vector of bools
-   * 
+   *
    * @tparam T
    * @param bitstring BitString to set
    * @param bits vector of bools
@@ -355,9 +355,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Acceleration Control by a vector of bools
-   * 
-   * @param acceleration_control 
-   * @param bits 
+   *
+   * @param acceleration_control
+   * @param bits
    */
   inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
     setBitString(acceleration_control, bits);
@@ -365,19 +365,19 @@ namespace cdd_access {
 
   /**
    * @brief Set the Driving Lane Status by a vector of bools
-   * 
-   * @param driving_lane_status 
-   * @param bits 
+   *
+   * @param driving_lane_status
+   * @param bits
    */
   inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
     setBitString(driving_lane_status, bits);
   }
-  
+
   /**
    * @brief Set the Exterior Lights by a vector of bools
-   * 
-   * @param exterior_lights 
-   * @param bits 
+   *
+   * @param exterior_lights
+   * @param bits
    */
   inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
     setBitString(exterior_lights, bits);
@@ -385,9 +385,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Special Transport Type by a vector of bools
-   * 
-   * @param special_transport_type 
-   * @param bits 
+   *
+   * @param special_transport_type
+   * @param bits
    */
   inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
     setBitString(special_transport_type, bits);
@@ -395,9 +395,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Lightbar Siren In Use by a vector of bools
-   * 
-   * @param light_bar_siren_in_use 
-   * @param bits 
+   *
+   * @param light_bar_siren_in_use
+   * @param bits
    */
   inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
     setBitString(light_bar_siren_in_use, bits);
@@ -405,9 +405,9 @@ namespace cdd_access {
 
   /**
    * @brief Set the Emergency Priority by a vector of bools
-   * 
-   * @param emergency_priority 
-   * @param bits 
+   *
+   * @param emergency_priority
+   * @param bits
    */
   inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
     setBitString(emergency_priority, bits);

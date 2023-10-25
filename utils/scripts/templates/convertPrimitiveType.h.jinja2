@@ -1,7 +1,8 @@
 #pragma once
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
-#include <etsi_its_{{ etsi_type }}_conversion/primitives/convert{{ type }}.h>
+#include <etsi_its_{{ etsi_type }}_coding/{{ type }}.h>
+#include <etsi_its_primitives_conversion/convert{{ type }}.h>
 #ifdef ROS1
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
@@ -15,7 +16,7 @@ namespace etsi_its_{{ etsi_type }}_conversion {
 
 void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
 {% for member in members %}
-  toRos_{{ type }}(in, out.{{ member.name }});
+  etsi_its_primitives_conversion::toRos_{{ type }}(in, out.{{ member.name }});
 {%- if member.has_bits_unused %}
   out.bits_unused = in.bits_unused;
 {%- endif %}
@@ -25,7 +26,7 @@ void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name
 void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
 {% for member in members %}
   memset(&out, 0, sizeof({{ t_name }}_t));
-  toStruct_{{ type }}(in.{{ member.name }}, out);
+  etsi_its_primitives_conversion::toStruct_{{ type }}(in.{{ member.name }}, out);
 {%- if member.has_bits_unused %}
   out.bits_unused = in.bits_unused;
 {%- endif %}
