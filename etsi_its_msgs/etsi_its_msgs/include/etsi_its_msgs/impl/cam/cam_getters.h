@@ -22,12 +22,32 @@ namespace access {
   }
 
   /**
+   * @brief Get the GenerationDeltaTime
+   * 
+   * @param cam CAM to get the GenerationDeltaTime from 
+   * @return GenerationDeltaTime the GenerationDeltaTime
+   */
+  inline GenerationDeltaTime getGenerationDeltaTime(const CAM& cam){
+    return cam.cam.generation_delta_time;
+  }
+
+  /**
+   * @brief Get the GenerationDeltaTime-Value
+   * 
+   * @param cam CAM to get the GenerationDeltaTime-Value from 
+   * @return uint16_t the GenerationDeltaTime-Value
+   */
+  inline uint16_t getGenerationDeltaTimeValue(const CAM& cam){
+    return getGenerationDeltaTime(cam).value;
+  }
+
+  /**
    * @brief Get the stationType object
    * 
    * @param cam CAM to get the stationType value from
    * @return stationType value
    */
-  inline double getStationType(const CAM& cam){
+  inline uint8_t getStationType(const CAM& cam){
     return cam.cam.cam_parameters.basic_container.station_type.value;
   }
 
@@ -130,6 +150,21 @@ namespace access {
     }
   }
 
+  /**
+   * @brief Get the UTM Position defined within the BasicContainer of the CAM
+   * 
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   * 
+   * @param[in] cam CAM to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const CAM& cam, int& zone, bool& northp){
+    return cdd::getUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);
+  }
+  
   /**
    * @brief Get Exterior Lights as bool vector
    * 

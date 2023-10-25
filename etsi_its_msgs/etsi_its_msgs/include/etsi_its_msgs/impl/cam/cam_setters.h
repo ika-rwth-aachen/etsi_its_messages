@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <etsi_its_msgs/impl/constants.h>
+
 namespace cdd = etsi_its_msgs::cdd_access;
 namespace etsi_its_cam_msgs {
 
@@ -17,8 +19,34 @@ namespace access {
    * @param station_id
    * @param protocol_version
    */
-  inline void setItsPduHeader(CAM& cam, int station_id, int protocol_version = 0){
+  inline void setItsPduHeader(CAM& cam, const int station_id, const int protocol_version = 0){
     cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);
+  }
+
+  /**
+   * @brief Set the GenerationDeltaTime-Value
+   * 
+   * @param generation_delta_time GenerationDeltaTime to set the GenerationDeltaTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::N_LEAP_SECONDS)
+   */
+  inline void setGenerationDeltaTime(GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::N_LEAP_SECONDS) {
+    TimestampIts t_its;
+    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
+    uint16_t gdt_value = t_its.value%65536;
+    cdd::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
+    generation_delta_time.value=gdt_value;
+  }
+
+  /**
+   * @brief Set the Generation Delta Time object
+   * 
+   * @param cam CAM to set the GenerationDeltaTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
+   */
+  inline void setGenerationDeltaTime(CAM& cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::N_LEAP_SECONDS) {
+    setGenerationDeltaTime(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);
   }
 
   /**
@@ -40,7 +68,7 @@ namespace access {
    * @param latitude Latitude value in degree as decimal number
    * @param longitude Longitude value in degree as decimal number
    */
-  inline void setReferencePosition(CAM& cam, double latitude, double longitude)
+  inline void setReferencePosition(CAM& cam, const double latitude, const double longitude)
   {
     cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);
   }
@@ -53,7 +81,7 @@ namespace access {
    * @param longitude Longitude value in degree as decimal number
    * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
-  inline void setReferencePosition(CAM& cam, double latitude, double longitude, double altitude)
+  inline void setReferencePosition(CAM& cam, const double latitude, const double longitude, const double altitude)
   {
     cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);
   }
@@ -114,6 +142,23 @@ namespace access {
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
   }
 
+  /**
+   * @brief Set the ReferencePosition of a CAM from a given UTM-Position
+   * 
+   * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+   * The z-Coordinate is directly used as altitude value
+   * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
+   * 
+   * @param[out] cam CAM for which to set the ReferencePosition
+   * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
+   * @param[in] zone the UTM zone (zero means UPS) of the given position
+   * @param[in] northp hemisphere (true means north, false means south)
+   */
+  inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
+  {
+    cdd::setFromUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);
+  }
+  
   /**
    * @brief Set the Exterior Lights by using a vector of bools
    *

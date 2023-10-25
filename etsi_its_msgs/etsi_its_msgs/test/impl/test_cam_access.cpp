@@ -1,6 +1,8 @@
 #include <cmath>
 #include <limits>
 #include <random>
+#include <chrono>
+#include <ctime>
 
 #include <gtest/gtest.h>
 
@@ -28,6 +30,24 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_EQ(protocol_version, cam.header.protocol_version);
   EXPECT_EQ(station_id, getStationID(cam));
 
+  // https://www.etsi.org/deliver/etsi_ts/102800_102899/10289402/01.02.01_60/ts_10289402v010201p.pdf
+  // DE_TimestampITS
+  // The value for TimestampIts for 2007-01-01T00:00:00.000Z is
+  // 94694401000 milliseconds, which includes one leap second insertion
+  // since 2004-01-01T00:00:00.000Z.
+  uint64_t t_2007 = ((uint64_t)1167609600)*1e9;
+  TimestampIts t_its;
+  etsi_its_msgs::cdd_access::setTimestampITS(t_its, t_2007, 1);
+  EXPECT_EQ(94694401000, t_its.value);
+  setGenerationDeltaTime(cam, t_2007, 1);
+  EXPECT_EQ(94694401000%65536, getGenerationDeltaTimeValue(cam));
+  TimestampIts t_its2;
+  uint64_t t_2007_off = t_2007 + 5*1e9;
+  etsi_its_msgs::cdd_access::setTimestampITS(t_its2, t_2007_off, 1);
+  EXPECT_EQ(94694401000, getTimestampITSFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2).value);
+  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2, 1));
+  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_2007_off, 1));
+
   int stationType_val = randomInt(StationType::MIN, StationType::MAX);
   setStationType(cam, stationType_val);
   EXPECT_EQ(stationType_val, getStationType(cam));
@@ -41,6 +61,24 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   longitude = randomDouble(-180.0, 180.0);
   double altitude = randomDouble(-1000.0, 8000.0);
   setReferencePosition(cam, latitude, longitude, altitude);
+  EXPECT_NEAR(latitude, getLatitude(cam), 1e-7);
+  EXPECT_NEAR(longitude, getLongitude(cam), 1e-7);
+  EXPECT_NEAR(altitude, getAltitude(cam), 1e-2);
+
+  // Set specific position to test utm projection
+  latitude = 50.787467;
+  longitude = 6.046498;
+  altitude = 209.0;
+  setReferencePosition(cam, latitude, longitude, altitude);
+  int zone;
+  bool northp;
+  gm::PointStamped utm = getUTMPosition(cam, zone, northp);
+  EXPECT_NEAR(291827.02, utm.point.x, 1e-1);
+  EXPECT_NEAR(5630349.72, utm.point.y, 1e-1);
+  EXPECT_EQ(altitude, utm.point.z);
+  EXPECT_EQ(32, zone);
+  EXPECT_EQ(true, northp);
+  setFromUTMPosition(cam, utm, zone, northp);
   EXPECT_NEAR(latitude, getLatitude(cam), 1e-7);
   EXPECT_NEAR(longitude, getLongitude(cam), 1e-7);
   EXPECT_NEAR(altitude, getAltitude(cam), 1e-2);
