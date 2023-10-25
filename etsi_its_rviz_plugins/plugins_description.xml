@@ -1,0 +1,14 @@
+<library path="etsi_its_rviz_plugins">
+
+  <!-- Displays plugins -->
+  <class
+    name="etsi_its_msgs/CAMDisplay"
+    type="etsi_its_msgs::displays::CAMDisplay"
+    base_class_type="rviz_common::Display"
+  >
+    <description>
+      Displays data from a etsi_its_cam_msgs::CAM.
+    </description>
+    <message_type>etsi_its_cam_msgs/msg/CAM</message_type>
+  </class>
+</library>

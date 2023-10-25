@@ -11,3 +11,4 @@ using namespace etsi_its_cam_msgs;
 
 #include <etsi_its_msgs/impl/cam/cam_getters.h>
 #include <etsi_its_msgs/impl/cam/cam_setters.h>
+#include <etsi_its_msgs/impl/cam/cam_utils.h>

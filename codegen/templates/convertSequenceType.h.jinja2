@@ -4,7 +4,7 @@
 {# TODO: will add duplicate includes, e.g., for ClosedLanes -#}
 {% for member in members -%}
 {% if member.is_primitive -%}
-#include <etsi_its_{{ etsi_type }}_conversion/primitives/convert{{ member.asn1_type }}.h>
+#include <etsi_its_primitives_conversion/convert{{ member.asn1_type }}.h>
 {% else -%}
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
 {% endif -%}
@@ -22,18 +22,20 @@ namespace etsi_its_{{ etsi_type }}_conversion {
 
 void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
 {% for member in members -%}
-{% if member.optional %}
+{% if member.optional or member.default %}
   if (in.{{ member.name_cc }}) {
 {%- if member.is_primitive %}
-    toRos_{{ member.asn1_type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
+    etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
     toRos_{{ member.type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- endif %}
+{%- if member.optional %}
     out.{{ member.name }}_is_present = true;
+{%- endif %}
   }
 {% else %}
 {%- if member.is_primitive %}
-  toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
+  etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
   toRos_{{ member.type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- endif -%}
@@ -49,7 +51,7 @@ void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_nam
   if (in.{{ member.name }}_is_present) {
 {%- if member.is_primitive %}
     {{ member.asn1_type }}_t {{ member.name }};
-    toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
+    etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
     out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
 {%- else %}
     {{ member.type }}_t {{ member.name }};
@@ -57,9 +59,19 @@ void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_nam
     out.{{ member.name_cc }} = new {{ member.type }}_t({{ member.name }});
 {%- endif %}
   }
+{% elif member.default %}
+{%- if member.is_primitive %}
+  {{ member.asn1_type }}_t {{ member.name }};
+  etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
+  out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
+{%- else %}
+  {{ member.type }}_t {{ member.name }};
+  toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
+  out.{{ member.name_cc }} = new {{ member.type }}_t({{ member.name }});
+{%- endif %}
 {% else %}
 {%- if member.is_primitive %}
-  toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name_cc }});
+  etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- else %}
   toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- endif -%}

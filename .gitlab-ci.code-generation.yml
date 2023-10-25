@@ -22,6 +22,17 @@ asn1_reduced_cam:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
+asn1_reduced_denm:
+  stage: ASN1 Reduction
+  needs: []
+  script:
+    - >
+      ./utils/scripts/reduceAsn1ToTypeDependencies.py
+      -t DENM
+      -o utils/asn1/reduced/denm
+      utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
+      utils/asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 etsi_its_cam_msgs:
   stage: ROS Messages
@@ -34,6 +45,16 @@ etsi_its_cam_msgs:
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
+etsi_its_denm_msgs:
+  stage: ROS Messages
+  needs: []
+  script:
+    - >
+      ./utils/scripts/asn1ToRosMsg.py
+      utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
+      utils/asn1/reduced/denm/ITS-Container.asn
+      -o etsi_its_msgs/etsi_its_denm_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
@@ -45,4 +66,16 @@ etsi_its_cam_conversion:
       asn1/reduced/cam/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_denm_conversion:
+  stage: Conversion Headers
+  needs: []
+  script:
+    - >
+      ./utils/scripts/asn1ToConversionHeader.py
+      utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
+      utils/asn1/reduced/denm/ITS-Container.asn
+      -t denm
+      -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
