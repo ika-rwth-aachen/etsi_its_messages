@@ -1,7 +1,7 @@
 default:
   image: python:3.9
   before_script:
-    - pip install -r codegen/requirements.txt
+    - pip install -r utils/requirements.txt
 
 
 stages:
@@ -15,7 +15,7 @@ asn1_reduced_cam:
   needs: []
   script:
     - >
-      ./codegen/scripts/reduceAsn1ToTypeDependencies.py
+      ./utils/codegen/scripts/reduceAsn1ToTypeDependencies.py
       -t CAM
       -o asn1/reduced/cam
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
@@ -27,7 +27,7 @@ asn1_reduced_denm:
   needs: []
   script:
     - >
-      ./utils/scripts/reduceAsn1ToTypeDependencies.py
+      ./utils/codegen/scripts/reduceAsn1ToTypeDependencies.py
       -t DENM
       -o utils/asn1/reduced/denm
       utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
@@ -39,7 +39,7 @@ etsi_its_cam_msgs:
   needs: []
   script:
     - >
-      ./codegen/scripts/asn1ToRosMsg.py
+      ./utils/codegen/scripts/asn1ToRosMsg.py
       asn1/reduced/cam/CAM-PDU-Descriptions.asn
       asn1/reduced/cam/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
@@ -50,7 +50,7 @@ etsi_its_denm_msgs:
   needs: []
   script:
     - >
-      ./utils/scripts/asn1ToRosMsg.py
+      ./utils/codegen/scripts/asn1ToRosMsg.py
       utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
       utils/asn1/reduced/denm/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
@@ -61,7 +61,7 @@ etsi_its_cam_conversion:
   needs: []
   script:
     - >
-      ./codegen/scripts/asn1ToConversionHeader.py
+      ./utils/codegen/scripts/asn1ToConversionHeader.py
       asn1/reduced/cam/CAM-PDU-Descriptions.asn
       asn1/reduced/cam/ITS-Container.asn
       -t cam
@@ -73,7 +73,7 @@ etsi_its_denm_conversion:
   needs: []
   script:
     - >
-      ./utils/scripts/asn1ToConversionHeader.py
+      ./utils/codegen/scripts/asn1ToConversionHeader.py
       utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn
       utils/asn1/reduced/denm/ITS-Container.asn
       -t denm

@@ -6,8 +6,8 @@
 # etsi_its_messages/ $
 
 docker run \
-    -v $(pwd)/../../asn1/reduced/cam:/input:ro \
-    -v $(pwd)/../../etsi_its_coding/etsi_its_cam_coding:/output \
+    -v $(pwd)/../../../asn1/reduced/cam:/input:ro \
+    -v $(pwd)/../../../etsi_its_coding/etsi_its_cam_coding:/output \
     -u $(id -u):$(id -g) \
         gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest
 
