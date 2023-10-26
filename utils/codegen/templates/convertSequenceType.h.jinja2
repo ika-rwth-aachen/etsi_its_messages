@@ -1,7 +1,6 @@
 #pragma once
 
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
-{# TODO: will add duplicate includes, e.g., for ClosedLanes -#}
 {% for member in members -%}
 {% if member.is_primitive -%}
 #include <etsi_its_primitives_conversion/convert{{ member.asn1_type }}.h>
