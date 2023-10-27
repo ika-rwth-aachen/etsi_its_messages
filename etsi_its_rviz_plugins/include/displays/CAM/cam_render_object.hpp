@@ -49,7 +49,7 @@ class CAMRenderObject
      * 
      * @return int 
      */
-    int getStationID();
+    uint32_t getStationID();
 
     /**
      * @brief Get the StationType of CAM-object
@@ -82,7 +82,7 @@ class CAMRenderObject
   private:
     // member variables
     std_msgs::msg::Header header;
-    int station_id;
+    uint32_t station_id;
     int station_type;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;

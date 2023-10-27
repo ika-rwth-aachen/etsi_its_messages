@@ -17,7 +17,7 @@ namespace access {
    * @param cam CAM to get the StationID value from
    * @return stationID value
    */
-  inline int getStationID(const CAM& cam){
+  inline uint32_t getStationID(const CAM& cam){
     return cdd::getStationID(cam.header);
   }
 
