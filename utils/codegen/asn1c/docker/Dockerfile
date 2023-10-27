@@ -2,60 +2,52 @@
 
 FROM ubuntu:18.04
 
-ARG ASN1C_COMMIT
-
-USER root
-
-# Install git
+# install essentials
 RUN apt-get update && \
     apt-get install -y \
-    build-essential \
-    git \
-    wget \
-    tar && \
-    rm -rf /var/lib/apt/lists/*
+        build-essential \
+        git \
+        tar \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install ASN1C dependencies
+# install asn1c dependencies
 RUN apt-get update && \
     apt-get install -y \
-    automake-1.15 \
-    libtool \
-    m4 \
-    flex && \
-    rm -rf /var/lib/apt/lists/*
+        automake-1.15 \
+        flex \
+        libtool \
+        m4 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Bison 2.7
+# install Bison 2.7
 WORKDIR /setup
-RUN wget http://ftp.gnu.org/gnu/bison/bison-2.7.tar.gz
-RUN tar -xvzf bison-2.7.tar.gz
+RUN wget http://ftp.gnu.org/gnu/bison/bison-2.7.tar.gz && \
+    tar -xvzf bison-2.7.tar.gz
 WORKDIR /setup/bison-2.7
-RUN PATH=$PATH:/usr/local/m4/bin/
-RUN ./configure --prefix=/usr/local/bison --with-libiconv-prefix=/usr/local/libiconv/
-RUN make && make install
+RUN PATH=$PATH:/usr/local/m4/bin/ && \
+    ./configure --prefix=/usr/local/bison --with-libiconv-prefix=/usr/local/libiconv/ && \
+    make && \
+    make install
 
-# Install asnc1c
+# install asnc1c
 WORKDIR /setup
 RUN git clone https://github.com/vlm/asn1c.git
 WORKDIR /setup/asn1c
-RUN if [ -z ${ASN1C_COMMIT+x} ]; then echo "No specific commit for asn1c defined, utilizing latest commit on default branch!"; \
-    else git checkout ${ASN1C_COMMIT}; fi
-RUN test -f configure || autoreconf -iv
-RUN ./configure
-RUN make
-RUN make install
+ARG ASN1C_COMMIT=9925dbb
+RUN git checkout ${ASN1C_COMMIT} && \
+    test -f configure || autoreconf -iv && \
+    ./configure && \
+    make && \
+    make install
 
-# Clean-Up
+# cleanup
 WORKDIR /
 RUN rm -rf /setup
 
-# Copy Entrypoint
-COPY entrypoint.sh /usr/bin/
-
-WORKDIR /home
+# command
 RUN mkdir input
 RUN mkdir output
-
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-CMD [""]
-
-
+WORKDIR /output
+RUN echo "asn1c \$(find /input -name '*.asn') -fcompound-names -no-gen-example -gen-PER" > /asn1c.sh
+CMD ["/bin/bash", "/asn1c.sh"]
