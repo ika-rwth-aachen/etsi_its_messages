@@ -39,7 +39,7 @@ asn1_reduce_denm:
 etsi_its_cam_coding:
   stage: ASN1C
   needs: []
-  tags: [privileged]
+  tags: [privileged, amd64]
   image: docker:20.10.22
   services: [docker:20.10.22-dind]
   variables:
@@ -60,7 +60,7 @@ etsi_its_cam_coding:
 etsi_its_denm_coding:
   stage: ASN1C
   needs: []
-  tags: [privileged]
+  tags: [privileged, amd64]
   image: docker:20.10.22
   services: [docker:20.10.22-dind]
   variables:
