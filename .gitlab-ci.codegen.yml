@@ -39,6 +39,10 @@ asn1_reduce_denm:
 etsi_its_cam_coding:
   stage: ASN1C
   needs: []
+  services: [docker:20.10.22-dind]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: /certs
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -50,6 +54,10 @@ etsi_its_cam_coding:
 etsi_its_denm_coding:
   stage: ASN1C
   needs: []
+  services: [docker:20.10.22-dind]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: /certs
   script:
     - >
       ./utils/codegen/asn1ToC.py
