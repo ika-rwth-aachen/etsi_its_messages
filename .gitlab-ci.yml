@@ -1,6 +1,6 @@
 Code Generation:
   trigger:
-    include: .gitlab-ci.code-generation.yml
+    include: .gitlab-ci.codegen.yml
     strategy: depend
   variables:
     GIT_SUBMODULE_STRATEGY: recursive

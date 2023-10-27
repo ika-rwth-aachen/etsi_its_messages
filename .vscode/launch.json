@@ -6,7 +6,7 @@
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "CAM",
         "-o", "asn1/reduced/cam",
@@ -21,7 +21,7 @@
       "name": "DENM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "DENM",
         "-o", "asn1/reduced/denm",
@@ -36,7 +36,7 @@
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/asn1ToRosMsg.py",
+      "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
         "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
         "asn1/reduced/cam/ITS-Container.asn",
@@ -50,7 +50,7 @@
       "name": "DENM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/asn1ToRosMsg.py",
+      "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
         "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
         "asn1/reduced/denm/ITS-Container.asn",
@@ -64,7 +64,7 @@
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/asn1ToConversionHeader.py",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
         "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
         "asn1/reduced/cam/ITS-Container.asn",
@@ -79,7 +79,7 @@
       "name": "DENM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
-      "program": "utils/codegen/scripts/asn1ToConversionHeader.py",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
         "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
         "asn1/reduced/denm/ITS-Container.asn",
