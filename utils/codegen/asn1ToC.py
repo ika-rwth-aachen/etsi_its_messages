@@ -5,6 +5,7 @@ import glob
 import os
 import re
 import shutil
+import subprocess
 import tempfile
 
 
@@ -71,7 +72,7 @@ def main():
                 shutil.copy(f, temp_input_dir)
 
             # run asn1c docker container to generate header and source files
-            os.system(f"docker run --rm -u {os.getuid()}:{os.getgid()} -v {temp_input_dir}:/input:ro -v {temp_output_dir}:/output {args.docker_image}")
+            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{temp_input_dir}:/input:ro", "-v", f"{temp_output_dir}:/output", args.docker_image], check=True)
 
             # move generated header and source files to output directories
             for f in glob.glob(os.path.join(temp_output_dir, "*.h")):
