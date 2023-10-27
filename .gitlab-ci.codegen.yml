@@ -6,6 +6,7 @@ default:
 
 stages:
   - ASN1 Reduction
+  - ASN1C
   - ROS Messages
   - Conversion Headers
 
@@ -32,6 +33,29 @@ asn1_reduce_denm:
       -o asn1/reduced/denm
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+
+etsi_its_cam_coding:
+  stage: ASN1C
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/reduced/cam/CAM-PDU-Descriptions.asn
+      asn1/reduced/cam/ITS-Container.asn
+      -o etsi_its_coding/etsi_its_cam_coding
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_denm_coding:
+  stage: ASN1C
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/reduced/denm/DENM-PDU-Descriptions.asn
+      asn1/reduced/denm/ITS-Container.asn
+      -o etsi_its_coding/etsi_its_denm_coding
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
