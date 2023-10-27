@@ -38,7 +38,7 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
         Dict[str, jinja2.environment.Template]: jinja templates
     """
 
-    template_dir = os.path.join(os.path.dirname(__file__), os.pardir, "templates")
+    template_dir = os.path.join(os.path.dirname(__file__), "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
     jinja_templates = {}
     jinja_templates["CHOICE"] = jinja_env.get_template("convertChoiceType.h.jinja2")
