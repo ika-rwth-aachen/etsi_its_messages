@@ -74,8 +74,8 @@ def main():
             else:
                 container_input_dir = os.path.join(args.temp_dir, "input")
                 container_output_dir = os.path.join(args.temp_dir, "output")
-                os.makedirs(container_input_dir, exist_ok=True))
-                os.makedirs(container_output_dir, exist_ok=True))
+                os.makedirs(container_input_dir, exist_ok=True)
+                os.makedirs(container_output_dir, exist_ok=True)
 
             # copy input asn1 files to temporary directory
             for f in args.files:
