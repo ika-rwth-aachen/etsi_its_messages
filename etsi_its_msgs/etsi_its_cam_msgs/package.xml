@@ -3,7 +3,7 @@
 
   <name>etsi_its_cam_msgs</name>
   <version>1.0.0</version>
-  <description>ROS messages for ETSI ITS CAM message</description>
+  <description>ROS messages for ETSI ITS CAM</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>

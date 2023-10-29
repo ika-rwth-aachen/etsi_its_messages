@@ -3,7 +3,7 @@
 
   <name>etsi_its_denm_conversion</name>
   <version>1.0.0</version>
-  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS DENM messages</description>
+  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS DENMs</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>

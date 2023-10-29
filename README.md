@@ -11,7 +11,7 @@
 
 **ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
 
-The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communicaiton in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization.
+The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communicaiton in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
 
 - [Concept](#concept)
 - [Supported ETSI ITS Messages](#supported-etsi-its-messages)
@@ -66,7 +66,7 @@ etsi_its_messages
 
 The `etsi_its_msgs` metapackage includes one dedicated package for each ETSI ITS message type, e.g., `etsi_its_cam_msgs`. These packages define the ROS message equivalents to the ETSI ITS message types, e.g., [`etsi_its_cam_msgs/msg/CAM`](etsi_its_msgs/etsi_its_cam_msgs/msg/CAM-PDU-Descriptions/CAM.msg).
 
-In addition, the `etsi_its_msgs` contains header-only libraries providing helpful access functions for modifying the deeply nested ROS messages. (TODO link to doxygen?)
+In addition, the `etsi_its_msgs` contains header-only libraries providing helpful access functions for modifying the deeply nested ROS messages.
 
 #### Automated Generation
 
@@ -90,7 +90,10 @@ The C/C++ implementation of the message types is auto-generated based on the ASN
 
 ```bash
 # etsi_its_messages$
-TODO
+./utils/codegen/scripts/asn1ToC.py
+  asn1/reduced/cam/CAM-PDU-Descriptions.asn \
+  asn1/reduced/cam/ITS-Container.asn \
+  -o etsi_its_coding/etsi_its_cam_coding
 ```
 
 ### `etsi_its_conversion`
@@ -120,16 +123,16 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
 | Topic | Type | Description |
 | --- | --- | --- |
 | `~/udp/in` | `udp_msgs/msg/UdpPacket` | UDP payload for conversion to ROS |
-| `~/cam/in` | `etsi_its_cam_msgs/msg/CAM` | CAM message for conversion to UDP |
-| `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM message for conversion to UDP |
+| `~/cam/in` | `etsi_its_cam_msgs/msg/CAM` | CAM for conversion to UDP |
+| `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
 
 ##### Published Topics
 
 | Topic | Type | Description |
 | --- | --- | --- |
 | `~/udp/out` | `udp_msgs/msg/UdpPacket` | UDP payload converted from ROS message |
-| `~/cam/out` | `etsi_its_cam_msgs/msg/CAM` | CAM message converted from UDP payload |
-| `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM message converted from UDP payload |
+| `~/cam/out` | `etsi_its_cam_msgs/msg/CAM` | CAM converted from UDP payload |
+| `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
 
 ##### Parameters
 
