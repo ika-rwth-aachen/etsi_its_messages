@@ -55,6 +55,8 @@ etsi_its_cam_coding:
       asn1/reduced/cam/CAM-PDU-Descriptions.asn
       asn1/reduced/cam/ITS-Container.asn
       -o etsi_its_coding/etsi_its_cam_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 etsi_its_denm_coding:
@@ -76,6 +78,8 @@ etsi_its_denm_coding:
       asn1/reduced/denm/DENM-PDU-Descriptions.asn
       asn1/reduced/denm/ITS-Container.asn
       -o etsi_its_coding/etsi_its_denm_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 

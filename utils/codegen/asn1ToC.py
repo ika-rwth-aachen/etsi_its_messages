@@ -22,6 +22,7 @@ def parseCli():
 
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output package directory")
+    parser.add_argument("-td", "--temp-dir", type=str, default=None, help="temporary directory for mounting files to container; uses tempfile by default")
     parser.add_argument("-di", "--docker-image", type=str, default="gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest", help="asn1c Docker image")
 
     args = parser.parse_args()
@@ -67,22 +68,26 @@ def main():
     with tempfile.TemporaryDirectory() as temp_input_dir:
         with tempfile.TemporaryDirectory() as temp_output_dir:
 
-            print(args.files)
-            print(temp_input_dir)
+            if args.temp_dir is None:
+                container_input_dir = temp_input_dir
+                container_output_dir = temp_output_dir
+            else:
+                container_input_dir = os.path.join(args.temp_dir, "input")
+                container_output_dir = os.path.join(args.temp_dir, "output")
+                os.makedirs(container_input_dir, exist_ok=True))
+                os.makedirs(container_output_dir, exist_ok=True))
 
             # copy input asn1 files to temporary directory
             for f in args.files:
-                shutil.copy(f, temp_input_dir)
+                shutil.copy(f, container_input_dir)
             
-            print([f for f in os.listdir(temp_input_dir)])
-
             # run asn1c docker container to generate header and source files
-            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{temp_input_dir}:/input:ro", "-v", f"{temp_output_dir}:/output", args.docker_image], check=True)
+            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image], check=True)
 
             # move generated header and source files to output directories
-            for f in glob.glob(os.path.join(temp_output_dir, "*.h")):
+            for f in glob.glob(os.path.join(container_output_dir, "*.h")):
                 shutil.move(f, os.path.join(output_include_dir, os.path.basename(f)))
-            for f in glob.glob(os.path.join(temp_output_dir, "*.c")):
+            for f in glob.glob(os.path.join(container_output_dir, "*.c")):
                 shutil.move(f, os.path.join(output_source_dir, os.path.basename(f)))
 
     adjustIncludes(output_dir)
