@@ -34,8 +34,8 @@ TODO: ILLUSTRATION
 
 | Status | Acronym | Name | Version | Definition |
 | --- | --- | --- | --- | --- |
-| :white_check_mark: | CAM | Cooperative Awareness Message | TODO | [Link](TODO) |
-| :white_check_mark: | DENM | Decentralized Environmental Notification Message | TODO | [Link](TODO) |
+| :white_check_mark: | CAM | Cooperative Awareness Message | 1.4.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) |
+| :white_check_mark: | DENM | Decentralized Environmental Notification Message | 1.3.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) |
 | :soon: | MAPEM | Map Extended Message | - | - |
 | :soon: | SPATEM | Signal Phase and Timing Extended Message | - | - |
 | :soon: | CPM | Collective Perception Message | - | - |
@@ -159,7 +159,7 @@ The C++ conversion functions are auto-generated based on the ASN.1 definition of
 
 All *etsi_its_messages* packages are released as official ROS / ROS 2 packages and can easily be installed via a package manager.
 
-> [!WARNING]  
+> [!WARNING]
 > The initial release may not have been synced to the package managers yet. In the meantime, please refer to installation from source as shown below.
 
 ```bash
