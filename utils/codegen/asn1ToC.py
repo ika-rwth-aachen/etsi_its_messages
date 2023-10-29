@@ -67,9 +67,14 @@ def main():
     with tempfile.TemporaryDirectory() as temp_input_dir:
         with tempfile.TemporaryDirectory() as temp_output_dir:
 
+            print(args.files)
+            print(temp_input_dir)
+
             # copy input asn1 files to temporary directory
             for f in args.files:
                 shutil.copy(f, temp_input_dir)
+            
+            print([f for f in os.listdir(temp_input_dir)])
 
             # run asn1c docker container to generate header and source files
             subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{temp_input_dir}:/input:ro", "-v", f"{temp_output_dir}:/output", args.docker_image], check=True)
