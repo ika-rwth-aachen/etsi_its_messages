@@ -17,6 +17,8 @@ ROS:
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+    VCS_IMPORT_FILE: '.ros1.repos'
 
 ROS 2:
   trigger:
@@ -31,3 +33,4 @@ ROS 2:
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_PUSH_AS_LATEST: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
