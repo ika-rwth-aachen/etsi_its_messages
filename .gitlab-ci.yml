@@ -19,6 +19,7 @@ ROS:
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
     VCS_IMPORT_FILE: '.ros1.repos'
+    UPSTREAM_WORKSPACE: '.ros1.repos' # define .repos for industrial_ci
 
 ROS 2:
   trigger:
