@@ -48,7 +48,7 @@ namespace displays
     return header;
   }
 
-  int CAMRenderObject::getStationID() {
+  uint32_t CAMRenderObject::getStationID() {
     return station_id;
   }
 
