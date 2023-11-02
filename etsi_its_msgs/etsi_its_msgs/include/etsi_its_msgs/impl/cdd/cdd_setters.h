@@ -21,7 +21,7 @@ namespace cdd_access {
    * @param station_id
    * @param id_value
    */
-  inline void setStationId(StationID& station_id, const int id_value) {
+  inline void setStationId(StationID& station_id, const uint32_t id_value) {
     throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
     station_id.value = id_value;
   }
@@ -48,7 +48,7 @@ namespace cdd_access {
    * @param station_id
    * @param protocol_version
    */
-  inline void setItsPduHeader(ItsPduHeader& header, const int message_id, const int station_id, const int protocol_version=0) {
+  inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0) {
     setStationId(header.station_id, station_id);
     throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
     header.message_id = message_id;
@@ -62,7 +62,7 @@ namespace cdd_access {
    * @param station_type
    * @param value
    */
-  inline void setStationType(StationType& station_type, const int value) {
+  inline void setStationType(StationType& station_type, const uint8_t value) {
     throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
     station_type.value = value;
   }

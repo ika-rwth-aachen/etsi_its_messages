@@ -19,7 +19,7 @@ namespace access {
    * @param station_id
    * @param protocol_version
    */
-  inline void setItsPduHeader(CAM& cam, const int station_id, const int protocol_version = 0){
+  inline void setItsPduHeader(CAM& cam, const uint32_t station_id, const uint8_t protocol_version = 0){
     cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);
   }
 
@@ -55,7 +55,7 @@ namespace access {
    * @param cam CAM-Message to set the station_type value
    * @param value station_type value to set
    */
-  inline void setStationType(CAM& cam, const int value){
+  inline void setStationType(CAM& cam, const uint8_t value){
     cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value);
   }
 
