@@ -1,7 +1,7 @@
 # etsi_its_messages
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/ika-rwth-aachen/etsi_its_messages"/></a>
+  <img src="https://img.shields.io/github/v/release/ika-rwth-aachen/etsi_its_messages"/>
   <img src="https://img.shields.io/github/license/ika-rwth-aachen/etsi_its_messages"/>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
@@ -11,9 +11,9 @@
 
 **ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
 
-The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communicaiton in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
+The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
 > **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.  
 > If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!  
@@ -33,9 +33,7 @@ The *etsi_its_messages* package stack allows to use standardized ETSI ITS messag
 
 ## Concept
 
-TODO
-
-TODO: ILLUSTRATION
+![Framework](assets/framework.png)
 
 
 ## Supported ETSI ITS Messages
@@ -106,7 +104,7 @@ The C/C++ implementation of the message types is auto-generated based on the ASN
 
 ### `etsi_its_conversion`
 
-The `etsi_its_conversion` package provides a C++ ROS nodelet or ROS 2 component node for converting `etsi_its_msgs` ROS messages to and from [PER-encoded](https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference/packed-encoding-rules.html) [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) payloads. This way, ETSI ITS messages cannot only be used within the ROS ecosystem, but may also be received from or sent to outside applications. (TODO: PER-encoding?)
+The `etsi_its_conversion` package provides a C++ ROS nodelet or ROS 2 component node for converting `etsi_its_msgs` ROS messages to and from [UPER-encoded](https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference/packed-encoding-rules.html) [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) payloads. This way, ETSI ITS messages cannot only be used within the ROS ecosystem, but may also be received from or sent to outside applications.
 
 The package depends on one dedicated package for each ETSI ITS message type, e.g., `etsi_its_cam_conversion`. These packages hold header-only libraries with recursive conversion functions for each nested message type.
 
