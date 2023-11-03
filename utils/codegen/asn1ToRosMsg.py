@@ -1,5 +1,29 @@
 #!/usr/bin/env python
 
+# ==============================================================================
+# MIT License
+#
+# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ==============================================================================
+
 import argparse
 import os
 from typing import Dict
@@ -34,11 +58,11 @@ def loadJinjaTemplate() -> jinja2.environment.Template:
     Returns:
         jinja2.environment.Template: jinja template
     """
-    
+
     template_dir = os.path.join(os.path.dirname(__file__), "templates")
     jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), trim_blocks=False)
     jinja_template = jinja_env.get_template("RosMessageType.msg.jinja2")
-    
+
     return jinja_template
 
 
@@ -65,10 +89,10 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     # add raw asn1 definition as comment to ROS .msg
     if type_name in asn1_raw:
         jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
-    
+
     # render jinja template with context
     ros_msg = jinja_template.render(jinja_context)
-    
+
     return ros_msg
 
 
@@ -105,16 +129,16 @@ def main():
     asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
-    
+
     jinja_template = loadJinjaTemplate()
 
     for type_name, asn1_type in asn1_types.items():
-        
+
         ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_values, asn1_raw, jinja_template)
 
         exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
-        
+
 
 if __name__ == "__main__":
-    
+
     main()

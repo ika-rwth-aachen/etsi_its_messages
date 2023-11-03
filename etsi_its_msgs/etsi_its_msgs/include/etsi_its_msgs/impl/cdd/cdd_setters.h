@@ -1,3 +1,27 @@
+/** ============================================================================
+MIT License
+
+Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+============================================================================= */
+
 /**
  * @file
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
@@ -28,7 +52,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the TimestampITS object
-   * 
+   *
    * @param[in] timestamp_its TimestampITS object to set the timestamp
    * @param[in] unix_nanosecs Unix-Nanoseconds to set the timestamp for
    * @param[in] n_leap_seconds Number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
@@ -280,7 +304,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the LateralAcceleration object
-   * 
+   *
    * AccelerationConfidence is set to UNAVAILABLE
    *
    * @param accel object to set
@@ -293,11 +317,11 @@ namespace cdd_access {
 
   /**
    * @brief Set the ReferencePosition from a given UTM-Position
-   * 
+   *
    * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
    * The z-Coordinate is directly used as altitude value
    * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
-   * 
+   *
    * @param[out] reference_position ReferencePosition to set
    * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
    * @param[in] zone the UTM zone (zero means UPS) of the given position
@@ -318,7 +342,7 @@ namespace cdd_access {
     }
     setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
   }
-  
+
   /**
    * @brief Set a Bit String by a vector of bools
    *

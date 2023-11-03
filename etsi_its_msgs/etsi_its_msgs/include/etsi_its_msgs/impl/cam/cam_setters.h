@@ -1,3 +1,27 @@
+/** ============================================================================
+MIT License
+
+Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+============================================================================= */
+
 /**
  * @file
  * @brief Setter functions for etsi_its_cam_msgs CAM
@@ -25,7 +49,7 @@ namespace access {
 
   /**
    * @brief Set the GenerationDeltaTime-Value
-   * 
+   *
    * @param generation_delta_time GenerationDeltaTime to set the GenerationDeltaTime-Value for
    * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
    * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::N_LEAP_SECONDS)
@@ -40,7 +64,7 @@ namespace access {
 
   /**
    * @brief Set the Generation Delta Time object
-   * 
+   *
    * @param cam CAM to set the GenerationDeltaTime-Value for
    * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
    * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
@@ -144,11 +168,11 @@ namespace access {
 
   /**
    * @brief Set the ReferencePosition of a CAM from a given UTM-Position
-   * 
+   *
    * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
    * The z-Coordinate is directly used as altitude value
    * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
-   * 
+   *
    * @param[out] cam CAM for which to set the ReferencePosition
    * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
    * @param[in] zone the UTM zone (zero means UPS) of the given position
@@ -158,7 +182,7 @@ namespace access {
   {
     cdd::setFromUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);
   }
-  
+
   /**
    * @brief Set the Exterior Lights by using a vector of bools
    *

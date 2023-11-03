@@ -1,0 +1,31 @@
+name: docker-ros
+
+on: push
+
+jobs:
+
+  ros:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          image-tag: ros
+          base-image: rwthika/ros:noetic
+          command: roslaunch etsi_its_conversion converter.ros1.launch
+          platform: amd64,arm64
+          target: dev,run
+          enable-recursive-vcs-import: 'false'
+          vcs-import-file: '.ros1.repos'
+
+  ros2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          image-tag: ros2
+          base-image: rwthika/ros2:humble
+          command: ros2 launch etsi_its_conversion converter.launch.py
+          platform: amd64,arm64
+          target: dev,run
+          enable-push-as-latest: 'true'
+          enable-recursive-vcs-import: 'false'

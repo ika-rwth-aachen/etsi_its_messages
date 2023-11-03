@@ -1,5 +1,29 @@
 #!/usr/bin/env python
 
+# ==============================================================================
+# MIT License
+#
+# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ==============================================================================
+
 import argparse
 import os
 from typing import Dict, List, Set
@@ -34,14 +58,6 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
     for doc, doc_info in docs.items():
         for oset in doc_info["object-sets"]:
             relevant_types_per_module[doc].add(oset)
-            # TODO
-            # we need to find dependencies of the current object-set 'oset' --> parse the file because asn1tools does not support class?
-            # Example: Reg-ConnectionManeuverAssist
-            # Reg-ConnectionManeuverAssist	REG-EXT-ID-AND-TYPE ::= {
-	        #   {ConnectionManeuverAssist-addGrpC  IDENTIFIED BY addGrpC},
-	        #   ...
-            # }
-            # In the asn1tools-dict ConnectionManeuverAssist-addGrpC is not a member of Reg-ConnectionManeuverAssist
 
     # find given type
     type_info = None

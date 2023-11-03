@@ -1,7 +1,4 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
 
@@ -9,12 +6,12 @@
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "CAM",
-        "-o", "utils/asn1/reduced/cam",
-        "utils/asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "utils/asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
+        "-o", "asn1/reduced/cam",
+        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -24,12 +21,40 @@
       "name": "DENM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/reduceAsn1ToTypeDependencies.py",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
       "args": [
         "-t", "DENM",
-        "-o", "utils/asn1/reduced/denm",
-        "utils/asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "utils/asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
+        "-o", "asn1/reduced/denm",
+        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "CAM asn1ToC",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToC.py",
+      "args": [
+        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "asn1/reduced/cam/ITS-Container.asn",
+        "-o", "etsi_its_coding/etsi_its_cam_coding"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "DENM asn1ToC",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToC.py",
+      "args": [
+        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "asn1/reduced/denm/ITS-Container.asn",
+        "-o", "etsi_its_coding/etsi_its_denm_coding"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -39,10 +64,10 @@
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToRosMsg.py",
+      "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "asn1/reduced/cam/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -53,10 +78,10 @@
       "name": "DENM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToRosMsg.py",
+      "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "asn1/reduced/denm/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -67,10 +92,10 @@
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "utils/asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/cam/ITS-Container.asn",
+        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
+        "asn1/reduced/cam/ITS-Container.asn",
         "-t", "cam",
         "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
       ],
@@ -82,10 +107,10 @@
       "name": "DENM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
-      "program": "utils/scripts/asn1ToConversionHeader.py",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "utils/asn1/reduced/denm/DENM-PDU-Descriptions.asn",
-        "utils/asn1/reduced/denm/ITS-Container.asn",
+        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
+        "asn1/reduced/denm/ITS-Container.asn",
         "-t", "denm",
         "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
       ],

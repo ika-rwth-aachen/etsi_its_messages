@@ -1,3 +1,27 @@
+/** ============================================================================
+MIT License
+
+Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+============================================================================= */
+
 #include "displays/CAM/cam_display.hpp"
 
 #include <OgreSceneNode.h>
@@ -35,17 +59,17 @@ CAMDisplay::CAMDisplay()
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(25, 0, 255),
     "Object color", this);
-  show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true, 
+  show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
     "Show metadata as text next to objects", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(25, 0, 255),
     "Text color", show_meta_);
   char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
-  show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, 
+  show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true,
     "Show StationID", show_meta_);
-  show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, 
+  show_speed_ = new rviz_common::properties::BoolProperty("Speed", true,
     "Show speed", show_meta_);
-  
+
 }
 
 CAMDisplay::~CAMDisplay()
@@ -83,12 +107,12 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
           "Message contained invalid floating point values (nans or infs)");
         return;
   }
-  
+
   // Check if Station ID is already present in list
   auto it = cams_.find(cam.getStationID());
   if (it != cams_.end()) it->second = cam; // Key exists, update the value
-  else cams_.insert(std::make_pair(cam.getStationID(), cam)); 
-  
+  else cams_.insert(std::make_pair(cam.getStationID(), cam));
+
   return;
 }
 
@@ -133,14 +157,14 @@ void CAMDisplay::update(float wall_dt, float ros_dt)
       position.x-=dimensions.x/2.0;
       position.z+=dimensions.z/2.0;
     }
-    
+
     // set pose of child scene node of bounding-box
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
-    
+
     // create boundind-box object
     std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
-    
+
     // set the dimensions of bounding box
     Ogre::Vector3 dims;
     double scale = bb_scale_->getFloat();
