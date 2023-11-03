@@ -1,6 +1,6 @@
 name: docker-ros
 
-on: push
+on: pull_request
 
 jobs:
 
