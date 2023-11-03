@@ -203,4 +203,4 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 
 ## Acknowledgements
 
-This work is accomplished within the projects 6GEM (FKZ 16KISK036K), AUTOtech.agil (FKZ 01IS22088A), and AIthena (TODO). We acknowledge the financial support for the projects by the Federal Ministry of Education and Research of Germany (BMBF) and TODO.
+This work is accomplished within the projects 6GEM (FKZ 16KISK036K), AUTOtech.agil (FKZ 01IS22088A), and AIthena (101076754). We acknowledge the financial support for the projects by the Federal Ministry of Education and Research of Germany (BMBF) :de:. Moreover this work has received funding from the European Union’s Horizon Europe Research and Innovation Programme :eu: under Grant Agreement No 101076754 - AIthena project.
