@@ -13,6 +13,14 @@
 
 The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communicaiton in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
 
+> [!IMPORTANT]
+> This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
+> **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.  
+> If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!  
+> &nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*  
+> &nbsp;&nbsp; *+49 241 80 23549*  
+> &nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
+
 - [Concept](#concept)
 - [Supported ETSI ITS Messages](#supported-etsi-its-messages)
 - [Packages](#packages)
