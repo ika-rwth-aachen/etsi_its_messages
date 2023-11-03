@@ -27,7 +27,7 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # AccelerationConfidence ::= INTEGER {pointOneMeterPerSecSquared(1), outOfRange(101), unavailable(102)} (0 .. 102)
 # ------------------------------------------------------------------------------
-
+TEST
 uint8 value
 uint8 MIN = 0
 uint8 MAX = 102

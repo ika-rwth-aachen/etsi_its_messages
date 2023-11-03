@@ -4,7 +4,7 @@
  * 	found in "/input/ITS-Container.asn"
  * 	`asn1c -fcompound-names -no-gen-example -gen-PER`
  */
-
+TEST
 #include "etsi_its_cam_coding/AccelerationConfidence.h"
 
 int
