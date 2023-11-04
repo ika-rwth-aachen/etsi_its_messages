@@ -204,3 +204,45 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 ## Acknowledgements
 
 This work is accomplished within the projects 6GEM (FKZ 16KISK036K), AUTOtech.agil (FKZ 01IS22088A), and AIthena (101076754). We acknowledge the financial support for the projects by the Federal Ministry of Education and Research of Germany (BMBF) :de:. Moreover this work has received funding from the European Union’s Horizon Europe Research and Innovation Programme :eu: under Grant Agreement No 101076754 - AIthena project.
+
+## References
+Used software packages in the `etsi_its_messages` repository and their license.
+
+*For full license details please refer to the specific license files of the specific packages.*
+
+*  [asn1c](https://github.com/vlm/asn1c)
+    ```
+    BSD 2-Clause License
+    Copyright (c) 2003-2017  Lev Walkin <vlm@lionet.info> and contributors.
+    All rights reserved.
+    ```
+
+*  [asn1tools](https://github.com/eerimoq/asn1tools)
+    ```
+    MIT License
+    Copyright (c) 2017-2019 Erik Moqvist
+    ```
+
+*  [ETSI ITS ASN1](https://forge.etsi.org/rep/ITS/asn1)
+    ```
+    BSD 3-Clause License
+    Copyright (c) ETSI
+    ``` 
+
+*  [GeographicLib](https://github.com/geographiclib/geographiclib)
+    ```
+    MIT License
+    Copyright (c) 2008-2023, Charles Karney
+    ``` 
+        
+*  [ROS](https://www.ros.org/)
+    ```
+    BSD 3-Clause License
+    All rights reserved.
+    ```
+
+*  [ROS 2](https://www.ros2.org/)
+    ```
+    Apache 2.0 License
+    All rights reserved.
+    ```
