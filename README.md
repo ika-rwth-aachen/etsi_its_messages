@@ -11,7 +11,7 @@
 
 **ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
 
-The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
+The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Message definitions and conversion functions can be generated automatically based on the ASN.1 definition. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
 
 > [!IMPORTANT]  
 > This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
@@ -37,6 +37,9 @@ The *etsi_its_messages* package stack allows to use standardized ETSI ITS messag
 
 ![Framework](assets/framework.png)
 
+The figure above describes the present framework, which can be divided into code generation and runtime application. A given ASN.1 definition can be used to generate both, corresponding C-structures and ROS message definitions, as well as conversion functions to generate appropriate ROS messages out of the C-structures and vice versa.
+
+The core of the runtime application is the etsi_its_conversion-node which converts incoming UDP payload into corresponding ROS messages and vice versa. The ROS equivalents of the ETSI ITS messages can be used in various processing ROS applications or, for example, visualized using the provided RViz plugins.
 
 ## Supported ETSI ITS Messages
 
@@ -87,6 +90,8 @@ The ROS message files are auto-generated based on the ASN.1 definition of the ET
   asn1/reduced/cam/ITS-Container.asn \
   -o etsi_its_msgs/etsi_its_cam_msgs/msg
 ```
+
+(To do: short explanation and motivation of `reduceAsn1ToTypeDependencies.py`)
 
 ### `etsi_its_coding`
 
@@ -201,7 +206,6 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros2
 # ROS
 docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 ```
-
 
 ## Acknowledgements
 
