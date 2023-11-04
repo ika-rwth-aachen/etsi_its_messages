@@ -29,6 +29,8 @@ The *etsi_its_messages* package stack allows to use standardized ETSI ITS messag
   - [`etsi_its_conversion`](#etsi-its-conversion)
 - [Installation](#installation)
   - [docker-ros](#docker-ros)
+- [Acknowledgements](#acknowledgements)
+- [References](#references)
 
 
 ## Concept
