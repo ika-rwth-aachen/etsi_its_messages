@@ -23,16 +23,24 @@ All message definitions and conversion functions are automatically generated bas
 > &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*  
 > &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
 
-- [Concept](#concept)
-- [Supported ETSI ITS Messages](#supported-etsi-its-messages)
-- [Packages](#packages)
-  - [`etsi_its_msgs`](#etsi-its-msgs)
-  - [`etsi_its_coding`](#etsi-its-coding)
-  - [`etsi_its_conversion`](#etsi-its-conversion)
-- [Installation](#installation)
-  - [docker-ros](#docker-ros)
-- [Acknowledgements](#acknowledgements)
-- [Notice](#notice)
+- [etsi\_its\_messages](#etsi_its_messages)
+  - [Concept](#concept)
+  - [Supported ETSI ITS Messages](#supported-etsi-its-messages)
+  - [Packages](#packages)
+    - [`etsi_its_msgs`](#etsi_its_msgs)
+      - [Automated Generation](#automated-generation)
+    - [`etsi_its_coding`](#etsi_its_coding)
+      - [Automated Generation](#automated-generation-1)
+    - [`etsi_its_conversion`](#etsi_its_conversion)
+      - [Usage](#usage)
+        - [Subscribed Topics](#subscribed-topics)
+        - [Published Topics](#published-topics)
+        - [Parameters](#parameters)
+      - [Automated Generation](#automated-generation-2)
+  - [Installation](#installation)
+    - [docker-ros](#docker-ros)
+  - [Acknowledgements](#acknowledgements)
+  - [Notice](#notice)
 
 
 ## Concept
@@ -64,7 +72,7 @@ etsi_its_messages
 ├── etsi_its_coding
 │   ├── etsi_its_coding         # metapackage including all coding packages
 │   ├── etsi_its_cam_coding
-│   └── etsi_its_cam_coding
+│   └── etsi_its_denm_coding
 ├── etsi_its_conversion
 │   ├── etsi_its_conversion     # conversion node depending on all conversion packages
 │   ├── etsi_its_cam_conversion
@@ -213,10 +221,9 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 
 ## Acknowledgements
 
-This work is accomplished within the projects 6GEM (FKZ 16KISK036K) and AUTOtech.agil (FKZ 01IS22088A). We acknowledge the financial support for the projects by the *Federal Ministry of Education and Research of Germany (BMBF)* :de:.
-
-Moreover, this work has received funding from the *European Union’s Horizon Europe Research and Innovation Programme* :eu: under Grant Agreement No 101076754 - AIthena project.
-
+This work is accomplished within the projects AIthena, 6GEM and AUTOtech.*agil*. We acknowledge the financial support for the projects by
+- the *European Union’s Horizon Europe Research and Innovation Programme* :eu: under Grant Agreement No 101076754 for AIthena,
+- and the *Federal Ministry of Education and Research of Germany (BMBF)* :de: for 6GEM (FKZ 16KISK036K) and AUTOtech.*agil* (FKZ 01IS22088A).
 
 ## Notice
 
