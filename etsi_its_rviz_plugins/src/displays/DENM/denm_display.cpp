@@ -33,12 +33,12 @@ DENMDisplay::DENMDisplay()
     "Scale of objects", this);
   bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
-    "Color", QColor(25, 0, 255),
+    "Color", QColor(255, 0, 25),
     "Object color", this);
   show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true, 
     "Show metadata as text next to objects", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
-    "Color", QColor(25, 0, 255),
+    "Color", QColor(255, 0, 25),
     "Text color", show_meta_);
   char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
   show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, 
