@@ -5,10 +5,23 @@ default:
 
 
 stages:
+  - Patching
   - ASN1 Reduction
   - ASN1C
   - ROS Messages
   - Conversion Headers
+
+
+patch:
+  stage: Patching
+  needs: []
+  script:
+    - >
+      ./utils/codegen/patchRawAsn1.py
+      -r asn1/raw
+      -p asn1/patch
+      -o asn1/patched
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
 asn1_reduce_cam:

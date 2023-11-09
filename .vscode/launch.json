@@ -3,6 +3,20 @@
   "configurations": [
 
     {
+      "name": "Patch raw ASN1 files",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/patchRawAsn1.py",
+      "args": [
+        "-r", "asn1/raw",
+        "-p", "asn1/patch",
+        "-o", "asn1/patched"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
@@ -83,10 +97,10 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToC.py",
       "args": [
-        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
-        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
-        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
-        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
+        "asn1/reduced/spatem/ITS-Container.asn",
+        "asn1/reduced/spatem/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_coding/etsi_its_spatem_coding"
       ],
       "console": "integratedTerminal",
