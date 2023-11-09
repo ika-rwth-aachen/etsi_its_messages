@@ -4,4 +4,4 @@ The *etsi_its_messages* package stack allows to use standardized ETSI ITS messag
 
 All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
 
-Please note that this is the Code API Documentation for the handy access functions of the generated ETSI ITS messages. Check out the [GitHub repository](https://github.com/ika-rwth-aachen/etsi_its_messages) for more information on how to install and use this library.
+Please note that this is the Code API Documentation for the handy access functions of the generated ETSI ITS messages. Check out the [GitHub repository](https://github.com/ika-rwth-aachen/etsi_its_messages) for more information on how to install and use this package stack.
