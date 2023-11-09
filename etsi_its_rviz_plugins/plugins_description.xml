@@ -11,4 +11,15 @@
     </description>
     <message_type>etsi_its_cam_msgs/msg/CAM</message_type>
   </class>
+
+  <class
+    name="etsi_its_msgs/DENMDisplay"
+    type="etsi_its_msgs::displays::DENMDisplay"
+    base_class_type="rviz_common::Display"
+  >
+    <description>
+      Displays data from a etsi_its_denm_msgs::DENM.
+    </description>
+    <message_type>etsi_its_denm_msgs/msg/DENM</message_type>
+  </class>
 </library>

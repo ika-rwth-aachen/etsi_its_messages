@@ -24,6 +24,8 @@
   <exec_depend condition="$ROS_VERSION == 2">rviz_satellite</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz2</exec_depend>
 
+  <depend condition="$ROS_VERSION == 2">etsi_its_cam_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_denm_msgs</depend>
   <depend condition="$ROS_VERSION == 2">etsi_its_msgs</depend>
   <depend condition="$ROS_VERSION == 2">pluginlib</depend>
   <depend condition="$ROS_VERSION == 2">rclcpp</depend>
