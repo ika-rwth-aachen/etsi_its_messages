@@ -1,0 +1,131 @@
+name: Code Generation
+
+on: push
+
+jobs:
+  reduce_asn1:
+    name: ASN1 Reduction
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - message: cam
+            script: ./utils/codegen/reduceAsn1ToTypeDependencies.py -t CAM -o asn1/reduced/cam asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
+          - message: denm
+            script: ./utils/codegen/reduceAsn1ToTypeDependencies.py -t DENM -o asn1/reduced/denm asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: pip install -r utils/requirements.txt
+    - name: asn1_reduce_${{ matrix.message }}
+      run: |
+        ${{ matrix.script }}
+        if [[ ! -z "$(git status --porcelain)" ]]; then
+          echo "Code generation script resulted in changes to the repository"
+          exit 1
+        fi
+
+  etsi_its_coding:
+    name: ASN1C
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        include:
+          - message: cam
+            script: ./utils/codegen/asn1ToC.py asn1/reduced/cam/CAM-PDU-Descriptions.asn asn1/reduced/cam/ITS-Container.asn -o etsi_its_coding/etsi_its_cam_coding -td ${{ github.workspace }}/tmp
+          - message: denm
+            script: ./utils/codegen/asn1ToC.py asn1/reduced/denm/DENM-PDU-Descriptions.asn asn1/reduced/denm/ITS-Container.asn -o etsi_its_coding/etsi_its_denm_coding -td ${{ github.workspace }}/tmp
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: pip install -r utils/requirements.txt
+    - name: Login to Docker registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+
+    - name: etsi_its_${{ matrix.message }}_coding
+      run: |
+        ${{ matrix.script }}
+        rm -rf ${{ github.workspace }}/tmp
+        if [[ ! -z "$(git status --porcelain)" ]]; then
+          echo "Code generation script resulted in changes to the repository"
+          exit 1
+        fi
+
+  etsi_its_msgs:
+    name: ROS Messages
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - message: cam
+            script: ./utils/codegen/asn1ToRosMsg.py asn1/reduced/cam/CAM-PDU-Descriptions.asn asn1/reduced/cam/ITS-Container.asn -o etsi_its_msgs/etsi_its_cam_msgs/msg
+          - message: denm
+            script: ./utils/codegen/asn1ToRosMsg.py asn1/reduced/denm/DENM-PDU-Descriptions.asn asn1/reduced/denm/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: pip install -r utils/requirements.txt
+    - name: etsi_its_${{ matrix.message }}_msgs
+      run: |
+        ${{ matrix.script }}
+        if [[ ! -z "$(git status --porcelain)" ]]; then
+          echo "Code generation script resulted in changes to the repository"
+          exit 1
+        fi
+
+  etsi_its_conversion:
+    name: Conversion Headers
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - message: cam
+            script: ./utils/codegen/asn1ToConversionHeader.py asn1/reduced/cam/CAM-PDU-Descriptions.asn asn1/reduced/cam/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+          - message: denm
+            script: ./utils/codegen/asn1ToConversionHeader.py asn1/reduced/denm/DENM-PDU-Descriptions.asn asn1/reduced/denm/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: pip install -r utils/requirements.txt
+      working-directory: ${{ github.workspace }}
+    - name: etsi_its_${{ matrix.message }}_conversion
+      run: |
+        ${{ matrix.script }}
+        if [[ ! -z "$(git status --porcelain)" ]]; then
+          echo "Code generation script resulted in changes to the repository"
+          exit 1
+        fi

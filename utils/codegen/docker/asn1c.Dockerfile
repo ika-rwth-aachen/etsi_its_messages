@@ -1,4 +1,4 @@
-# docker build -t gitlab.ika.rwth-aachen.de:5050/fb-fi/definitions/etsi_its_messages/asn1c:latest .
+# docker build -t ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c .
 
 FROM ubuntu:18.04
 

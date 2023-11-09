@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/github/license/ika-rwth-aachen/etsi_its_messages"/>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
+  <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/ROS-noetic-blueviolet"/>
   <img src="https://img.shields.io/badge/ROS 2-humble|iron|rolling-blueviolet"/>
 </p>
@@ -13,38 +14,57 @@
 
 The *etsi_its_messages* package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).
 
+All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
+
 > [!IMPORTANT]  
 > This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
 > **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.  
 > If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!  
-> &nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*  
-> &nbsp;&nbsp; *+49 241 80 23549*  
-> &nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
+> &nbsp;&nbsp;&nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*  
+> &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*  
+> &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
 
-- [Concept](#concept)
-- [Supported ETSI ITS Messages](#supported-etsi-its-messages)
-- [Packages](#packages)
-  - [`etsi_its_msgs`](#etsi-its-msgs)
-  - [`etsi_its_coding`](#etsi-its-coding)
-  - [`etsi_its_conversion`](#etsi-its-conversion)
-- [Installation](#installation)
-  - [docker-ros](#docker-ros)
+- [etsi\_its\_messages](#etsi_its_messages)
+  - [Concept](#concept)
+  - [Supported ETSI ITS Messages](#supported-etsi-its-messages)
+  - [Packages](#packages)
+    - [`etsi_its_msgs`](#etsi_its_msgs)
+      - [Automated Generation](#automated-generation)
+      - [Access Functions Documentation](#access-functions-documentation)
+    - [`etsi_its_coding`](#etsi_its_coding)
+      - [Automated Generation](#automated-generation-1)
+    - [`etsi_its_conversion`](#etsi_its_conversion)
+      - [Usage](#usage)
+        - [Subscribed Topics](#subscribed-topics)
+        - [Published Topics](#published-topics)
+        - [Parameters](#parameters)
+      - [Automated Generation](#automated-generation-2)
+  - [Installation](#installation)
+    - [docker-ros](#docker-ros)
+  - [Acknowledgements](#acknowledgements)
+  - [Notice](#notice)
 
 
 ## Concept
 
 ![Framework](assets/framework.png)
 
+The core concept of the *etsi_its_messages* is to automatically generate the ROS support code based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages *(CodeGen)*. The ROS support then allows ROS applications to not only natively use corresponding ETSI ITS message types, but to also exchange encoded ETSI ITS message payloads with the world outside of ROS *(Runtime)*.
+
+A given ASN.1 definition is used to generate corresponding C-structures, ROS message definitions, as well as conversion functions between those two formats.
+
+During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payloads into corresponding ROS messages and vice versa. The ROS equivalents of the ETSI ITS messages can be used in any downstream ROS applications or visualized using the provided RViz plugins.
+
 
 ## Supported ETSI ITS Messages
 
-| Status | Acronym | Name | Version | Definition |
-| --- | --- | --- | --- | --- |
-| :white_check_mark: | CAM | Cooperative Awareness Message | 1.4.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) |
-| :white_check_mark: | DENM | Decentralized Environmental Notification Message | 1.3.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) |
-| :soon: | MAPEM | Map Extended Message | - | - |
-| :soon: | SPATEM | Signal Phase and Timing Extended Message | - | - |
-| :soon: | CPM | Collective Perception Message | - | - |
+| Status | Acronym | Name | Version | Definition | Repository |
+| --- | --- | --- | --- | --- | --- |
+| :white_check_mark: | CAM | Cooperative Awareness Message | 1.4.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) | [Link](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2) |
+| :white_check_mark: | DENM | Decentralized Environmental Notification Message | 1.3.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) | [Link](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3) |
+| :soon: | MAPEM | Map Extended Message | - | - | - |
+| :soon: | SPATEM | Signal Phase and Timing Extended Message | - | - | - |
+| :soon: | CPM | Collective Perception Message | - | - | - |
 
 
 ## Packages
@@ -54,7 +74,7 @@ etsi_its_messages
 ├── etsi_its_coding
 │   ├── etsi_its_coding         # metapackage including all coding packages
 │   ├── etsi_its_cam_coding
-│   └── etsi_its_cam_coding
+│   └── etsi_its_denm_coding
 ├── etsi_its_conversion
 │   ├── etsi_its_conversion     # conversion node depending on all conversion packages
 │   ├── etsi_its_cam_conversion
@@ -76,7 +96,7 @@ In addition, the `etsi_its_msgs` contains header-only libraries providing helpfu
 
 #### Automated Generation
 
-The ROS message files are auto-generated based on the ASN.1 definition of the ETSI ITS message standards.
+The ROS message files are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards. Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
 
 ```bash
 # etsi_its_messages$
@@ -86,13 +106,24 @@ The ROS message files are auto-generated based on the ASN.1 definition of the ET
   -o etsi_its_msgs/etsi_its_cam_msgs/msg
 ```
 
+#### Access Functions Documentation
+
+[Click here](https://ika-rwth-aachen.github.io/etsi_its_messages) to be taken to the API documentation for the implemented access functions.
+
+The documentation can be generated by running [Doxygen](https://doxygen.nl/).
+
+```bash
+# etsi_its_messages/doc$
+doxygen
+```
+
 ### `etsi_its_coding`
 
 The `etsi_its_coding` metapackage includes one dedicated package for each ETSI ITS message type, e.g., `etsi_its_cam_coding`. These packages provide C++ libraries containing a `struct` implementation of the ETSI ITS message types including functions for encoding and decoding the structures to binary buffers.
 
 #### Automated Generation
 
-The C/C++ implementation of the message types is auto-generated based on the ASN.1 definition of the ETSI ITS message standards, using the [ASN.1 Compiler asn1c](https://github.com/vlm/asn1c).
+The C/C++ implementation of the message types is auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards, using the [ASN.1 Compiler asn1c](https://github.com/vlm/asn1c). Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
 
 ```bash
 # etsi_its_messages$
@@ -149,7 +180,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
 
 #### Automated Generation
 
-The C++ conversion functions are auto-generated based on the ASN.1 definition of the ETSI ITS message standards.
+The C++ conversion functions are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards. Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
 
 ```bash
 # etsi_its_messages$
@@ -203,4 +234,44 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 
 ## Acknowledgements
 
-This work is accomplished within the projects 6GEM (FKZ 16KISK036K), AUTOtech.agil (FKZ 01IS22088A), and AIthena (101076754). We acknowledge the financial support for the projects by the Federal Ministry of Education and Research of Germany (BMBF) :de:. Moreover this work has received funding from the European Union’s Horizon Europe Research and Innovation Programme :eu: under Grant Agreement No 101076754 - AIthena project.
+This work is accomplished within the projects AIthena, 6GEM and AUTOtech.*agil*. We acknowledge the financial support for the projects by
+- the *European Union’s Horizon Europe Research and Innovation Programme* :eu: under Grant Agreement No 101076754 for AIthena,
+- and the *Federal Ministry of Education and Research of Germany (BMBF)* :de: for 6GEM (FKZ 16KISK036K) and AUTOtech.*agil* (FKZ 01IS22088A).
+
+## Notice
+
+This repository is not endorsed by or otherwise affiliated with [ETSI](https://www.etsi.org).
+
+This repository uses the following software. For full license details, please refer to the specific license files of the respective software.
+
+- [asn1c](https://github.com/vlm/asn1c)
+    ```
+    BSD 2-Clause License
+    Copyright (c) 2003-2017  Lev Walkin <vlm@lionet.info> and contributors.
+    All rights reserved.
+    ```
+- [asn1tools](https://github.com/eerimoq/asn1tools)
+    ```
+    MIT License
+    Copyright (c) 2017-2019 Erik Moqvist
+    ```
+- [ETSI ITS ASN1](https://forge.etsi.org/rep/ITS/asn1)
+    ```
+    BSD 3-Clause License
+    Copyright (c) ETSI
+    ```
+- [GeographicLib](https://github.com/geographiclib/geographiclib)
+    ```
+    MIT License
+    Copyright (c) 2008-2023, Charles Karney
+    ```
+- [ROS](https://www.ros.org/)
+    ```
+    BSD 3-Clause License
+    All rights reserved.
+    ```
+- [ROS 2](https://www.ros2.org/)
+    ```
+    Apache 2.0 License
+    All rights reserved.
+    ```

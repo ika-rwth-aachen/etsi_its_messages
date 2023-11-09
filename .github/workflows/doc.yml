@@ -1,0 +1,23 @@
+name: Documentation
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Run Doxygen
+        uses: mattnotmitt/doxygen-action@v1.1.0
+        with:
+          working-directory: doc
+          doxyfile-path: Doxyfile
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: doc/html
