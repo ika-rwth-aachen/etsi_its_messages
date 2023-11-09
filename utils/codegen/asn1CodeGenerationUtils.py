@@ -197,8 +197,8 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
         raw_def = None
         for line in lines:
             if "::=" in line:
-                if "{" in line:
-                    type = line.split("::=")[0].strip()
+                if line.rstrip().endswith("{"):
+                    type = line.split("::=")[0].split("{")[0].strip()
                     raw_def = ""
                 elif len(line.split("::=")) == 2:
                     type = line.split("::=")[0].strip()
@@ -207,7 +207,7 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     raw_def = None
             if raw_def is not None:
                 raw_def += line
-                if "}" in line:
+                if "}" in line and not ("::=" in line and line.rstrip().endswith("{")):
                     asn1_raw[type] = raw_def
                     raw_def = None
 
@@ -500,12 +500,13 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 continue
             name = f"CHOICE_{camel2SNAKE(member['name'])}"
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
-            member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
-            member_context["members"][0]["constants"].append({
-                "type": "uint8",
-                "name": name,
-                "value": im
-            })
+            if len(member_context["members"]) > 1:
+                member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
+                member_context["members"][0]["constants"].append({
+                    "type": "uint8",
+                    "name": name,
+                    "value": im
+                })
             context["members"].extend(member_context["members"])
 
     # arrays
