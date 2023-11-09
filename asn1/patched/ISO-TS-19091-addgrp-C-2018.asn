@@ -437,7 +437,7 @@ SignalStatusMessage ::= SEQUENCE {
 AdvisorySpeed ::= SEQUENCE {
   type        AdvisorySpeedType,
   speed       SpeedAdvice OPTIONAL,
-  confidence  SpeedConfidence OPTIONAL,
+  confidence  SpeedConfidenceDSRC OPTIONAL,
   distance    ZoneLength OPTIONAL,
   class       RestrictionClassID OPTIONAL,
   regional    SEQUENCE (SIZE(1..4)) OF
@@ -523,7 +523,7 @@ FullPositionVector ::= SEQUENCE {
    long                Longitude,
    lat                 Latitude,
    elevation           Elevation  OPTIONAL,
-   heading             Heading OPTIONAL,
+   heading             HeadingDSRC OPTIONAL,
    speed               TransmissionAndSpeed OPTIONAL,
    posAccuracy         PositionalAccuracy OPTIONAL,
    timeConfidence      TimeConfidence OPTIONAL,
@@ -929,8 +929,8 @@ SignalStatusPackage ::= SEQUENCE {
 }
 
 SpeedandHeadingandThrottleConfidence ::= SEQUENCE {
-   heading   HeadingConfidence,
-   speed     SpeedConfidence,
+   heading   HeadingConfidenceDSRC,
+   speed     SpeedConfidenceDSRC,
    throttle  ThrottleConfidence
    }
 
@@ -1110,7 +1110,7 @@ GNSSstatus ::= BIT STRING {
    networkCorrectionsPresent (7)
    } (SIZE(8))
 
-HeadingConfidence ::= ENUMERATED {
+HeadingConfidenceDSRC ::= ENUMERATED {
    unavailable   (0),
    prec10deg     (1),
    prec05deg     (2),
@@ -1121,7 +1121,7 @@ HeadingConfidence ::= ENUMERATED {
    prec0-0125deg (7)
    }
 
-Heading ::= INTEGER (0..28800)
+HeadingDSRC ::= INTEGER (0..28800)
 
 IntersectionID ::= INTEGER (0..65535)
 
@@ -1458,7 +1458,7 @@ SemiMinorAxisAccuracy ::= INTEGER (0..255)
 
 SpeedAdvice ::= INTEGER (0..500)
 
-SpeedConfidence ::= ENUMERATED {
+SpeedConfidenceDSRC ::= ENUMERATED {
    unavailable (0), -- Not Equipped or unavailable
    prec100ms   (1), -- 100  meters / sec
    prec10ms    (2), -- 10   meters / sec
