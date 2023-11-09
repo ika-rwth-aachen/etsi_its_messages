@@ -29,6 +29,7 @@ All message definitions and conversion functions are automatically generated bas
   - [Packages](#packages)
     - [`etsi_its_msgs`](#etsi_its_msgs)
       - [Automated Generation](#automated-generation)
+      - [Access Functions Documentation](#access-functions-documentation)
     - [`etsi_its_coding`](#etsi_its_coding)
       - [Automated Generation](#automated-generation-1)
     - [`etsi_its_conversion`](#etsi_its_conversion)
