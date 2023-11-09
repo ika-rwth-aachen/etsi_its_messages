@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file impl/cdd/cdd_access.h
- * @brief Main CDD access header implementation
+ * @brief Main CDD access implementation header
  */
 
 #pragma once

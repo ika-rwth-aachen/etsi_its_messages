@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file cam_access.hpp
- * @brief Main object access header to include in ROS 2 projects
+ * @brief Main CAM access header to include in ROS 2 projects
  */
 
 #pragma once

@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file impl/cam/cam_access.h
- * @brief Main CAM access header implementation
+ * @brief Main CAM access implementation header
  */
 
 #pragma once
