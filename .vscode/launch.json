@@ -33,6 +33,23 @@
     },
 
     {
+      "name": "SPATEM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "SPATEM",
+        "-o", "asn1/reduced/spatem",
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToC",
       "type": "python",
       "request": "launch",
@@ -105,6 +122,22 @@
     },
 
     {
+      "name": "SPATEM asn1ToRosMsg",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToRosMsg.py",
+      "args": [
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn",
+        "-o", "etsi_its_msgs/etsi_its_spatem_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
@@ -129,6 +162,23 @@
         "asn1/reduced/denm/ITS-Container.asn",
         "-t", "denm",
         "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "SPATEM asn1ToConversionHeader",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
+      "args": [
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn",
+        "-t", "spatem",
+        "-o", "etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
