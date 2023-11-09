@@ -1110,18 +1110,18 @@ GNSSstatus ::= BIT STRING {
    networkCorrectionsPresent (7)
    } (SIZE(8))
 
-HeadingConfidence ::= ENUMERATED {
-   unavailable   (0),
-   prec10deg     (1),
-   prec05deg     (2),
-   prec01deg     (3),
-   prec0-1deg    (4),
-   prec0-05deg   (5),
-   prec0-01deg   (6),
-   prec0-0125deg (7)
-   }
+-- HeadingConfidence ::= ENUMERATED {
+--    unavailable   (0),
+--    prec10deg     (1),
+--    prec05deg     (2),
+--    prec01deg     (3),
+--    prec0-1deg    (4),
+--    prec0-05deg   (5),
+--    prec0-01deg   (6),
+--    prec0-0125deg (7)
+--    }
 
-Heading ::= INTEGER (0..28800)
+-- Heading ::= INTEGER (0..28800)
 
 IntersectionID ::= INTEGER (0..65535)
 
@@ -1458,16 +1458,16 @@ SemiMinorAxisAccuracy ::= INTEGER (0..255)
 
 SpeedAdvice ::= INTEGER (0..500)
 
-SpeedConfidence ::= ENUMERATED {
-   unavailable (0), -- Not Equipped or unavailable
-   prec100ms   (1), -- 100  meters / sec
-   prec10ms    (2), -- 10   meters / sec
-   prec5ms     (3), -- 5    meters / sec
-   prec1ms     (4), -- 1    meters / sec
-   prec0-1ms   (5), -- 0.1  meters / sec
-   prec0-05ms  (6), -- 0.05 meters / sec
-   prec0-01ms  (7)  -- 0.01 meters / sec
-   }
+-- SpeedConfidence ::= ENUMERATED {
+--    unavailable (0),
+--    prec100ms   (1),
+--    prec10ms    (2),
+--    prec5ms     (3),
+--    prec1ms     (4),
+--    prec0-1ms   (5),
+--    prec0-05ms  (6),
+--    prec0-01ms  (7)
+--    }
 
 TemporaryID ::= OCTET STRING (SIZE(4))
 
