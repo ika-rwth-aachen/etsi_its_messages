@@ -56,8 +56,7 @@
         "-o", "asn1/reduced/spatem",
         "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
         "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
-        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
-        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn"
+        "asn1/patched/ISO-TS-19091-addgrp-C-2018.asn"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
