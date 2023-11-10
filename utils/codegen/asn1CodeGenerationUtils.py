@@ -66,6 +66,9 @@ def camel2SNAKE(s: str) -> str:
     # special cases
     ss = ss.replace("C_A_M", "CAM")
     ss = ss.replace("D_E_N_M", "DENM")
+    ss = ss.replace("S_P_A_T_E_M", "SPATEM")
+    ss = ss.replace("S_P_A_T", "SPAT")
+    ss = ss.replace("D_S_R_C", "DSRC")
     ss = ss.replace("R_S_U", "RSU")
     ss = ss.replace("W_M_I", "WMI")
     ss = ss.replace("V_DS", "VDS")
@@ -98,6 +101,9 @@ def camel2snake(s: str) -> str:
     # special cases
     ss = ss.replace("c_a_m", "cam")
     ss = ss.replace("d_e_n_m", "denm")
+    ss = ss.replace("s_p_a_t_e_m", "spatem")
+    ss = ss.replace("s_p_a_t", "spat")
+    ss = ss.replace("d_s_r_c", "dsrc")
     ss = ss.replace("r_s_u", "rsu")
     ss = ss.replace("w_m_i", "wmi")
     ss = ss.replace("v_d_s", "vds")

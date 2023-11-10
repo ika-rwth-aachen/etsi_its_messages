@@ -28,7 +28,7 @@
 # AdvisorySpeed ::= SEQUENCE {
 #   type        AdvisorySpeedType,
 #   speed       SpeedAdvice OPTIONAL,
-#   confidence  SpeedConfidence OPTIONAL,
+#   confidence  SpeedConfidenceDSRC OPTIONAL,
 #   distance    ZoneLength OPTIONAL,
 #   class       RestrictionClassID OPTIONAL,
 #   regional    SEQUENCE (SIZE(1..4)) OF
@@ -40,7 +40,7 @@ AdvisorySpeedType type
 SpeedAdvice speed
 bool speed_is_present
 
-SpeedConfidence confidence
+SpeedConfidenceDSRC confidence
 bool confidence_is_present
 
 ZoneLength distance
