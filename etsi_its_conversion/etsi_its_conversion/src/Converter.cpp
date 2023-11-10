@@ -47,8 +47,8 @@ namespace etsi_its_conversion {
 
 const int kBtpHeaderDestinationPortCam{2001};
 const int kBtpHeaderDestinationPortDenm{2002};
-const int kBtpHeaderDestinationPortMap{2003};
-const int kBtpHeaderDestinationPortSpat{2004};
+const int kBtpHeaderDestinationPortMapem{2003};
+const int kBtpHeaderDestinationPortSpatem{2004};
 const int kBtpHeaderDestinationPortIvi{2006};
 const int kBtpHeaderDestinationPortCpm{2009};
 
@@ -59,6 +59,8 @@ const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
+const std::string Converter::kInputTopicSpatem{"spatem/in"};
+const std::string Converter::kOutputTopicSpatem{"spatem/out"};
 #else
 const std::string Converter::kInputTopicUdp{"~/udp/in"};
 const std::string Converter::kOutputTopicUdp{"~/udp/out"};
@@ -66,6 +68,8 @@ const std::string Converter::kInputTopicCam{"~/cam/in"};
 const std::string Converter::kOutputTopicCam{"~/cam/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
+const std::string Converter::kInputTopicSpatem{"~/spatem/in"};
+const std::string Converter::kOutputTopicSpatem{"~/spatem/out"};
 #endif
 
 const std::string Converter::kEtsiTypeParam{"etsi_type"};
@@ -110,7 +114,7 @@ Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", opt
 
 void Converter::loadParameters() {
 
-  std::vector<std::string> known_etsi_types = {kEtsiTypeParamDefault, "cam", "denm"};
+  std::vector<std::string> known_etsi_types = {kEtsiTypeParamDefault, "cam", "denm", "spatem"};
 
 #ifdef ROS1
   if (!private_node_handle_.param<std::string>(kEtsiTypeParam, etsi_type_, kEtsiTypeParamDefault)) {
@@ -147,24 +151,32 @@ void Converter::setup() {
   publisher_udp_ = private_node_handle_.advertise<udp_msgs::UdpPacket>(kOutputTopicUdp, 1);
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
   publishers_["denm"] = private_node_handle_.advertise<etsi_its_denm_msgs::DENM>(kOutputTopicDenm, 1);
+  publishers_["spatem"] = private_node_handle_.advertise<etsi_its_spatem_msgs::SPATEM>(kOutputTopicSpatem, 1);
   subscriber_udp_ = private_node_handle_.subscribe(kInputTopicUdp, 1, &Converter::udpCallback, this);
   subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
   subscribers_["denm"] = private_node_handle_.subscribe(kInputTopicDenm, 1, &Converter::rosCallbackDenm, this);
+  subscribers_["spatem"] = private_node_handle_.subscribe(kInputTopicSpatem, 1, &Converter::rosCallbackSpatem, this);
   NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["cam"].getTopic().c_str());
-  NODELET_INFO("Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  NODELET_INFO("Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
   NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["denm"].getTopic().c_str());
-  NODELET_INFO("Converting native ROS DENM messages on '%s' to UDP messages on '%s'", subscribers_["denm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  NODELET_INFO("Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["spatem"].getTopic().c_str());
+  NODELET_INFO("Converting native ROS SPATEMs on '%s' to UDP messages on '%s'", subscribers_["spatem"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
 #else
   publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
   publishers_cam_["cam"] = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
   publishers_denm_["denm"] = this->create_publisher<etsi_its_denm_msgs::msg::DENM>(kOutputTopicDenm, 1);
+  publishers_spatem_["spatem"] = this->create_publisher<etsi_its_spatem_msgs::msg::SPATEM>(kOutputTopicSpatem, 1);
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
   subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
   subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
+  subscribers_spatem_["spatem"] = this->create_subscription<etsi_its_spatem_msgs::msg::SPATEM>(kInputTopicSpatem, 1, std::bind(&Converter::rosCallbackSpatem, this, std::placeholders::_1));
   RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_denm_["denm"]->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting native ROS DENM messages on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_spatem_["spatem"]->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting native ROS SPATEMs on '%s' to UDP messages on '%s'", subscribers_spatem_["spatem"]->get_topic_name(), publisher_udp_->get_topic_name());
 #endif
 }
 
@@ -191,8 +203,8 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     uint16_t destination_port = ntohs(btp_header[0]);
     if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
     else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
-    else if (destination_port == kBtpHeaderDestinationPortMap) detected_etsi_type = "map";
-    else if (destination_port == kBtpHeaderDestinationPortSpat) detected_etsi_type = "spat";
+    else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem";
+    else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem";
     else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
     else if (destination_port == kBtpHeaderDestinationPortCpm) detected_etsi_type = "cpm";
     else detected_etsi_type = "unknown";
@@ -265,6 +277,40 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     RCLCPP_DEBUG(this->get_logger(),
 #endif
       "Published DENM");
+
+  } else if (detected_etsi_type == "spatem") {
+
+    // decode ASN1 bitstring to struct
+    SPATEM_t* asn1_struct = nullptr;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_SPATEM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
+    if (ret.code != RC_OK) {
+#ifdef ROS1
+      NODELET_ERROR(
+#else
+      RCLCPP_ERROR(this->get_logger(),
+#endif
+        "Failed to decode message");
+      return;
+    }
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_SPATEM, asn1_struct);
+
+    // convert struct to ROS msg and publish
+#ifdef ROS1
+    etsi_its_spatem_msgs::SPATEM msg;
+#else
+    etsi_its_spatem_msgs::msg::SPATEM msg;
+#endif
+    etsi_its_spatem_conversion::toRos_SPATEM(*asn1_struct, msg);
+
+    // publish msg
+#ifdef ROS1
+    publishers_["spatem"].publish(msg);
+    NODELET_DEBUG(
+#else
+    publishers_spatem_["spatem"]->publish(msg);
+    RCLCPP_DEBUG(this->get_logger(),
+#endif
+      "Published SPATEM");
 
   } else {
 #ifdef ROS1
@@ -417,6 +463,77 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
   RCLCPP_DEBUG(this->get_logger(),
 #endif
     "Published DENM bitstring");
+}
+
+
+#ifdef ROS1
+void Converter::rosCallbackSpatem(const etsi_its_spatem_msgs::SPATEM::ConstPtr msg) {
+#else
+void Converter::rosCallbackSpatem(const etsi_its_spatem_msgs::msg::SPATEM::UniquePtr msg) {
+#endif
+
+#ifdef ROS1
+  NODELET_DEBUG(
+#else
+  RCLCPP_DEBUG(this->get_logger(),
+#endif
+    "Received SPATEM");
+
+  // convert ROS msg to struct
+  SPATEM_t asn1_struct;
+  etsi_its_spatem_conversion::toStruct_SPATEM(*msg, asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_SPATEM, &asn1_struct);
+
+  // encode struct to ASN1 bitstring
+  char error_buffer[1024];
+  size_t error_length = sizeof(error_buffer);
+  int check_ret = asn_check_constraints(&asn_DEF_SPATEM, &asn1_struct, error_buffer, &error_length);
+  if (check_ret != 0) {
+#ifdef ROS1
+    NODELET_ERROR(
+#else
+    RCLCPP_ERROR(this->get_logger(),
+#endif
+      "Check of struct failed: %s", error_buffer);
+    return;
+  }
+  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_SPATEM, &asn1_struct);
+  if (ret.result.encoded == -1) {
+#ifdef ROS1
+    NODELET_ERROR(
+#else
+    RCLCPP_ERROR(this->get_logger(),
+#endif
+      "Failed to encode message: %s", ret.result.failed_type->xml_tag);
+    return;
+  }
+
+  // copy bitstring to ROS UDP msg
+#ifdef ROS1
+  udp_msgs::UdpPacket udp_msg;
+#else
+  udp_msgs::msg::UdpPacket udp_msg;
+#endif
+  if (etsi_type_ == "auto") {
+    // add BTP-Header, if type detection is enabled
+    uint16_t destination_port = htons(kBtpHeaderDestinationPortSpatem);
+    uint16_t destination_port_info = 0;
+    uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
+    uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
+    udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + 2 * sizeof(uint16_t));
+    delete[] btp_header;
+  }
+  udp_msg.data.insert(udp_msg.data.end(), (uint8_t*)ret.buffer, (uint8_t*)ret.buffer + (int)ret.result.encoded);
+
+  // publish UDP msg
+#ifdef ROS1
+  publisher_udp_.publish(udp_msg);
+  NODELET_DEBUG(
+#else
+  publisher_udp_->publish(udp_msg);
+  RCLCPP_DEBUG(this->get_logger(),
+#endif
+    "Published SPATEM bitstring");
 }
 
 
