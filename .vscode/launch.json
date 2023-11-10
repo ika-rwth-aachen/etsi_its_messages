@@ -98,7 +98,6 @@
       "args": [
         "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
         "asn1/reduced/spatem/ITS-Container.asn",
-        "asn1/reduced/spatem/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
         "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_coding/etsi_its_spatem_coding"
       ],
