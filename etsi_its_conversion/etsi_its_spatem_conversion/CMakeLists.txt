@@ -22,8 +22,8 @@ if(${ROS_VERSION} EQUAL 2)
   )
 
   target_link_libraries(${PROJECT_NAME} INTERFACE
-    ${etsi_its_denm_coding_TARGETS}
-    ${etsi_its_denm_msgs_TARGETS}
+    ${etsi_its_spatem_coding_TARGETS}
+    ${etsi_its_spatem_msgs_TARGETS}
     ${etsi_its_primitives_conversion_TARGETS}
   )
 
@@ -54,14 +54,14 @@ elseif(${ROS_VERSION} EQUAL 1)
   add_compile_definitions(ROS1)
 
   find_package(catkin REQUIRED COMPONENTS
-    etsi_its_denm_coding
-    etsi_its_denm_msgs
+    etsi_its_spatem_coding
+    etsi_its_spatem_msgs
     etsi_its_primitives_conversion
   )
 
   catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS etsi_its_denm_coding etsi_its_denm_msgs etsi_its_primitives_conversion
+    CATKIN_DEPENDS etsi_its_spatem_coding etsi_its_spatem_msgs etsi_its_primitives_conversion
   )
 
   include_directories(

@@ -184,10 +184,9 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
-        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
-        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
-        "asn1/raw/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
+        "asn1/reduced/spatem/ITS-Container.asn",
+        "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
         "-t", "spatem",
         "-o", "etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion"
       ],

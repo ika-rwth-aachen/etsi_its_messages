@@ -31,7 +31,7 @@ SOFTWARE.
 {% if member.is_primitive -%}
 #include <etsi_its_primitives_conversion/convert{{ member.asn1_type }}.h>
 {% else -%}
-#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
+#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type|replace("[]", "") }}.h>
 {% endif -%}
 {% endfor -%}
 #ifdef ROS1
@@ -45,14 +45,18 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
+void toRos_{{ t_name }}(const {{ t_name|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
 {% for member in members -%}
 {% if member.optional or member.default %}
   if (in.{{ member.name_cc }}) {
 {%- if member.is_primitive %}
     etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
-    toRos_{{ member.type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
+{%- if member.type|replace("[]", "") != "RegionalExtension" %}
+    toRos_{{ member.type|replace("[]", "") }}(*in.{{ member.name_cc }}, out.{{ member.name }});
+{%- else %}
+    // TODO: toRos_{{ member.type|replace("[]", "") }}(*in.{{ member.name_cc }}, out.{{ member.name }});
+{%- endif %}
 {%- endif %}
 {%- if member.optional %}
     out.{{ member.name }}_is_present = true;
@@ -62,15 +66,15 @@ void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name
 {%- if member.is_primitive %}
   etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
-  toRos_{{ member.type }}(in.{{ member.name_cc }}, out.{{ member.name }});
+  toRos_{{ member.type|replace("[]", "") }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}
 }
 
-void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& out) {
 
-  memset(&out, 0, sizeof({{ t_name }}_t));
+  memset(&out, 0, sizeof({{ t_name|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
 {% for member in members -%}
 {% if member.optional %}
   if (in.{{ member.name }}_is_present) {
@@ -79,9 +83,14 @@ void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_nam
     etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
     out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
 {%- else %}
-    {{ member.type }}_t {{ member.name }};
-    toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
-    out.{{ member.name_cc }} = new {{ member.type }}_t({{ member.name }});
+    {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t {{ member.name }};
+{%- if member.type|replace("[]", "") != "RegionalExtension" %}
+    toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
+    out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
+{%- else %}
+    // TODO: toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
+    // TODO: out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
+{%- endif %}
 {%- endif %}
   }
 {% elif member.default %}
@@ -90,15 +99,15 @@ void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_nam
   etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
   out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
 {%- else %}
-  {{ member.type }}_t {{ member.name }};
-  toStruct_{{ member.type }}(in.{{ member.name }}, {{ member.name }});
-  out.{{ member.name_cc }} = new {{ member.type }}_t({{ member.name }});
+  {{ member.type|replace("[]", "") }}_t {{ member.name }};
+  toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
+  out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
 {%- endif %}
 {% else %}
 {%- if member.is_primitive %}
   etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- else %}
-  toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.name_cc }});
+  toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}

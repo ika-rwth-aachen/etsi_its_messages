@@ -148,6 +148,26 @@ def validRosField(s: str, is_const: bool = False) -> str:
     return ss
 
 
+def validCField(s: str, is_const: bool = False) -> str:
+    """Converts a string to make it a valid C message field name.
+
+    Args:
+        s (str): e.g., "class"
+
+    Returns:
+        str: e.g., "Class"
+    """
+
+    # avoid C/C++ keywords
+    ss = s.replace("-", "_")
+    if ss == "long":
+        ss = "Long"
+    if ss == "class":
+        ss = "Class"
+
+    return ss
+
+
 def noSpace(s: str) -> str:
     """Replaces any spaces in a string with underscores.
 
@@ -384,7 +404,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             "type": ros_type,
             "asn1_type": type,
             "name": camel2snake(validRosField(name)),
-            "name_cc": validRosField(name),
+            "name_cc": validCField(name),
             "constants": [],
             "is_primitive": True,
             "has_bits_unused": False,
@@ -520,7 +540,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if len(member_context["members"]) > 0:
                 if "name" in asn1:
                     member_context["members"][0]["name"] = validRosField(f"{asn1['name']}_{member_context['members'][0]['name']}")
-                    member_context["members"][0]["name_cc"] = validRosField(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
+                    member_context["members"][0]["name_cc"] = validCField(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
                 member_context["members"][0]["constants"].append({
                     "type": "uint8",
@@ -538,7 +558,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": f"{array_type}[]",
             "type_snake": f"{camel2snake(array_type)}[]",
-            "name": array_name,
+            "name": validRosField(array_name),
+            "name_cc": validCField(array_name),
             "constants": []
         }
 
@@ -601,7 +622,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         context["members"].append({
             "type": validRosType(type),
             "name": validRosField(name),
-            "name_cc": validRosField(name_cc)
+            "name_cc": validCField(name_cc)
         })
 
     elif type == "NULL":
