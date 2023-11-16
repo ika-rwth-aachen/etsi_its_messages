@@ -134,14 +134,19 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
       position.z+=dimensions.z/2.0;
     }
     
-    // set pose of child scene node of bounding-box
+    // set pose of child scene node arrow
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
     
-    // create boundind-box object
-    std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
+    //set size parameters for arrow
+    int shaft_length = 5;
+    int shaft_diameter = 2;
+    int head_length = 2;
+    int head_diameter = 3;
+    // create arrow object
+    std::shared_ptr<rviz_rendering::Arrow> bbox = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     
-    // set the dimensions of bounding box
+    // set the dimensions of arrow
     Ogre::Vector3 dims;
     double scale = bb_scale_->getFloat();
     dims.x = dimensions.x*scale;

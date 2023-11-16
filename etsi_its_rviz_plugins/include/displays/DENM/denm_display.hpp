@@ -7,6 +7,7 @@
 #include "rviz_common/ros_topic_display.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
 #include "rviz_rendering/objects/shape.hpp"
+#include "rviz_rendering/objects/arrow.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -60,7 +61,7 @@ protected:
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
   std::unordered_map<int, DENMRenderObject> cams_;
-  std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
+  std::vector<std::shared_ptr<rviz_rendering::Arrow>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };
 
