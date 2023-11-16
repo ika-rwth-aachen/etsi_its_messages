@@ -63,6 +63,22 @@
     },
 
     {
+      "name": "MAPEM reduceAsn1ToTypeDependencies",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
+      "args": [
+        "-t", "MAPEM",
+        "-o", "asn1/reduced/mapem",
+        "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/patched/ISO-TS-19091-addgrp-C-2018.asn"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToC",
       "type": "python",
       "request": "launch",
@@ -100,6 +116,21 @@
         "asn1/reduced/spatem/ITS-Container.asn",
         "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
         "-o", "etsi_its_coding/etsi_its_spatem_coding"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "MAPEM asn1ToC",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToC.py",
+      "args": [
+        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
+        "asn1/reduced/mapem/ITS-Container.asn",
+        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "-o", "etsi_its_coding/etsi_its_mapem_coding"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -149,6 +180,21 @@
     },
 
     {
+      "name": "MAPEM asn1ToRosMsg",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToRosMsg.py",
+      "args": [
+        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
+        "asn1/reduced/mapem/ITS-Container.asn",
+        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "-o", "etsi_its_msgs/etsi_its_mapem_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToConversionHeader",
       "type": "python",
       "request": "launch",
@@ -189,6 +235,22 @@
         "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
         "-t", "spatem",
         "-o", "etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
+      "name": "MAPEM asn1ToConversionHeader",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToConversionHeader.py",
+      "args": [
+        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
+        "asn1/reduced/mapem/ITS-Container.asn",
+        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "-t", "mapem",
+        "-o", "etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
