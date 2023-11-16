@@ -28,7 +28,7 @@ import argparse
 import os
 from typing import Dict, List, Set
 
-import asn1tools
+from asn1CodeGenerationUtils import *
 
 
 def parseCli():
@@ -46,26 +46,10 @@ def parseCli():
     return args
 
 
-def parseAsn1Files(files: List[str]) -> Dict:
-
-    return asn1tools.parse_files(files)
-
-
-def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None, log: bool = False, indent: int = 0) -> Dict[str, Set[str]]:
+def findTypeDependencies(type: str, docs: Dict, raw_docs: Dict[str, str], docs_to_search: List[str] = None, log: bool = False, indent: int = 0) -> Dict[str, Set[str]]:
 
     relevant_types_per_module = {doc: set() for doc in docs}
-
-    for doc, doc_info in docs.items():
-        for oset in doc_info["object-sets"]:
-            relevant_types_per_module[doc].add(oset)
-            # we need to find dependencies of the current object-set 'oset' --> parse the file because asn1tools does not support class?
-            # Example: Reg-ConnectionManeuverAssist
-            # Reg-ConnectionManeuverAssist	REG-EXT-ID-AND-TYPE ::= {
-            #   {ConnectionManeuverAssist-addGrpC  IDENTIFIED BY addGrpC},
-            #   ...
-            # }
-            # In the asn1tools-dict ConnectionManeuverAssist-addGrpC is not a member of Reg-ConnectionManeuverAssist
-    # TODO: are all object-sets needed in the first place? -> git blame
+    dependency_types = []
 
     # find given type
     type_info = None
@@ -82,7 +66,7 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
             type_info = info["values"][type]
             break
         if type.split(".")[0] in info["object-classes"].keys():
-            type=type.split(".")[0]
+            type = type.split(".")[0]
             type_info = info["object-classes"][type.split(".")[0]]
             break
     if type_info is None:
@@ -93,7 +77,6 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
         print(f"{' ' * indent}{type}")
 
     # get dependency types
-    dependency_types = []
     if "members" in type_info:
         for m in type_info["members"]:
             if m is None:
@@ -109,6 +92,19 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
     if "element" in type_info:
         dependency_types += [type_info["element"]["type"]]
 
+    # add all object-sets to relevant types
+    for doc, doc_info in docs.items():
+        for oset in doc_info["object-sets"]:
+            relevant_types_per_module[doc].add(oset)
+            # get dependency types of object-sets
+            if oset in raw_docs:
+                if "IDENTIFIED BY" in raw_docs[oset]:
+                    oset_dep_type = raw_docs[oset].split("IDENTIFIED BY")[0].split("{")[-1].replace("{", "").replace("}", "").strip()
+                    for import_module in doc_info["imports"]:
+                        if oset_dep_type in doc_info["imports"][import_module]:
+                            dependency_types.append(oset_dep_type)
+                            break
+
     # recursively find dependencies of dependencies
     for dependency_type in dependency_types:
         dependency_docs = [module]
@@ -120,15 +116,6 @@ def findTypeDependencies(type: str, docs: Dict, docs_to_search: List[str] = None
         for doc in docs:
             if doc in rt:
                 relevant_types_per_module[doc] = relevant_types_per_module[doc].union(rt[doc])
-
-    # TODO: hack to include addgrpc modules (see TODO above)
-    relevant_types_per_module["AddGrpC"] = set(docs["AddGrpC"]["types"].keys())
-    if indent == 0:
-        for t in set(docs["AddGrpC"]["types"].keys()):
-            rt = findTypeDependencies(t, docs, docs, log=log, indent=indent+2)
-            for doc in docs:
-                if doc in rt:
-                    relevant_types_per_module[doc] = relevant_types_per_module[doc].union(rt[doc])
 
     return relevant_types_per_module
 
@@ -249,9 +236,9 @@ def main():
 
     args = parseCli()
 
-    docs = parseAsn1Files(args.files)
+    asn1_docs, asn1_raw = parseAsn1Files(args.files)
 
-    relevant_types_per_module = findTypeDependencies(args.type, docs, log=True)
+    relevant_types_per_module = findTypeDependencies(args.type, asn1_docs, asn1_raw, log=True)
 
     reduceAsn1Files(args.files, relevant_types_per_module, args.output_dir)
 

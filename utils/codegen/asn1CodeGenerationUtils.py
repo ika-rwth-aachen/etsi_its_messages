@@ -233,10 +233,10 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
         for line in lines:
             if "::=" in line:
                 if line.rstrip().endswith("{"):
-                    type = line.split("::=")[0].split("{")[0].strip()
+                    type = line.split("::=")[0].split("{")[0].strip().split()[0]
                     raw_def = ""
                 elif len(line.split("::=")) == 2:
-                    type = line.split("::=")[0].strip()
+                    type = line.split("::=")[0].strip().split()[0]
                     raw_def = line
                     asn1_raw[type] = raw_def
                     raw_def = None
