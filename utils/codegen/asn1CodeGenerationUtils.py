@@ -237,9 +237,12 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     raw_def = ""
                 elif len(line.split("::=")) == 2:
                     type = line.split("::=")[0].strip().split()[0]
-                    raw_def = line
-                    asn1_raw[type] = raw_def
-                    raw_def = None
+                    if "}" in line or not ("{" in line or "}" in line):
+                        raw_def = line
+                        asn1_raw[type] = raw_def
+                        raw_def = None
+                    else:
+                        raw_def = ""
             if raw_def is not None:
                 raw_def += line
                 if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
@@ -403,7 +406,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": ros_type,
             "asn1_type": type,
-            "name": camel2snake(validRosField(name)),
+            "name": validRosField(camel2snake(name)),
             "name_cc": validCField(name),
             "constants": [],
             "is_primitive": True,
@@ -421,8 +424,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_constant_name = "MIN"
             max_constant_name = "MAX"
             if "name" in asn1:
-                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_constant_name}"
-                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_constant_name}"
+                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
                 "name": validRosField(min_constant_name, is_const=True),
@@ -443,8 +446,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 min_size_constant_name = "MIN_SIZE" if type != "BIT STRING" else "MIN_SIZE_BITS"
                 max_size_constant_name = "MAX_SIZE" if type != "BIT STRING" else "MAX_SIZE_BITS"
                 if "name" in asn1:
-                    min_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
-                    max_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+                    min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                    max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
                     "name": validRosField(min_size_constant_name, is_const=True),
@@ -460,7 +463,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 ros_type = simplestRosIntegerType(size, size)
                 size_constant_name = "SIZE" if type != "BIT STRING" else "SIZE_BITS"
                 if "name" in asn1:
-                    size_constant_name = f"{camel2SNAKE(asn1['name'])}_{size_constant_name}"
+                    size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
                     "name": validRosField(size_constant_name, is_const=True),
@@ -470,9 +473,9 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         # add constants for named numbers
         if "named-numbers" in asn1:
             for k, v in asn1["named-numbers"].items():
-                constant_name = f"{camel2SNAKE(k)}"
+                constant_name = validRosField(camel2SNAKE(k))
                 if "name" in asn1:
-                    constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
+                    constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
                     "name": validRosField(constant_name, is_const=True),
@@ -482,10 +485,10 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         # add index constants for named bits
         if "named-bits" in asn1:
             for k, v in asn1["named-bits"]:
-                constant_name = f"{camel2SNAKE(k)}"
+                constant_name = camel2SNAKE(k)
                 member_context["constants"].append({
                     "type": "uint8",
-                    "name": f"BIT_INDEX_{validRosField(constant_name, is_const=True)}",
+                    "name": validRosField(f"BIT_INDEX_{constant_name}", is_const=True),
                     "value": v
                 })
 
@@ -505,7 +508,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 if member["default"] in asn1_values:
                     asn1_value = asn1_values[member["default"]]
                     default_value = asn1_value["value"]
-                    default_name = f"DEFAULT_{camel2SNAKE(member['name'])}"
+                    default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
                     if asn1_value["type"] == 'INTEGER':
                         default_type = simplestRosIntegerType(default_value, default_value)
                     else:
@@ -526,25 +529,25 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             name = f"{asn1['name']}_{name}"
         context["members"].append({
             "type": "uint8",
-            "name": validRosField(name)
+            "name": validRosField(camel2snake(name))
         })
 
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1["members"]):
             if member is None:
                 continue
-            name = f"CHOICE_{camel2SNAKE(member['name'])}"
+            name = validRosField(f"CHOICE_{camel2SNAKE(member['name'])}", is_const=True)
             if "name" in asn1:
-                name = f"CHOICE_{asn1['name']}_{camel2SNAKE(member['name'])}"
+                name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
             if len(member_context["members"]) > 0:
                 if "name" in asn1:
-                    member_context["members"][0]["name"] = validRosField(f"{asn1['name']}_{member_context['members'][0]['name']}")
+                    member_context["members"][0]["name"] = validRosField(f"{camel2snake(asn1['name'])}_{camel2snake(member_context['members'][0]['name'])}")
                     member_context["members"][0]["name_cc"] = validCField(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
                 member_context["members"][0]["constants"].append({
                     "type": "uint8",
-                    "name": validRosField(name, is_const=True),
+                    "name": name,
                     "value": im
                 })
             context["members"].extend(member_context["members"])
@@ -558,7 +561,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": f"{array_type}[]",
             "type_snake": f"{camel2snake(array_type)}[]",
-            "name": validRosField(array_name),
+            "name": validRosField(camel2snake(array_name)),
             "name_cc": validCField(array_name),
             "constants": []
         }
@@ -571,8 +574,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
             if "name" in asn1:
-                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
-                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
                 "name": validRosField(min_size_constant_name, is_const=True),
@@ -608,7 +611,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 continue
             member_context["constants"].append({
                 "type": ros_type,
-                "name": camel2SNAKE(val[0]),
+                "name": validRosField(camel2SNAKE(val[0]), is_const=True),
                 "value": val[1]
             })
 
@@ -621,7 +624,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         name = camel2snake(name_cc)
         context["members"].append({
             "type": validRosType(type),
-            "name": validRosField(name),
+            "name": validRosField(camel2snake(name)),
             "name_cc": validCField(name_cc)
         })
 
