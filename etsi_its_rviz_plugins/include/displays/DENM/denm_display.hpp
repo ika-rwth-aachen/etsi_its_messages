@@ -1,6 +1,7 @@
 #pragma once
 
 #include "etsi_its_cam_msgs/msg/cam.hpp"
+#include "etsi_its_denm_msgs/msg/denm.hpp"
 
 #include "displays/DENM/denm_render_object.hpp"
 

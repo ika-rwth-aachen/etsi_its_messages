@@ -153,7 +153,7 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     dims.y = dimensions.y*scale;
     dims.z = dimensions.z*scale;
     bbox->setScale(dims);
-    // set the color of bounding box
+    // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     bbox->setColor(bb_color);
     bboxs_.push_back(bbox);
