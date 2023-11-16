@@ -48,6 +48,32 @@ asn1_reduce_denm:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
+asn1_reduce_spatem:
+  stage: ASN1 Reduction
+  needs: []
+  script:
+    - >
+      ./utils/codegen/reduceAsn1ToTypeDependencies.py
+      -t SPATEM
+      -o asn1/reduced/spatem
+      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/patched/ISO-TS-19091-addgrp-C-2018.asn
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+asn1_reduce_mapem:
+  stage: ASN1 Reduction
+  needs: []
+  script:
+    - >
+      ./utils/codegen/reduceAsn1ToTypeDependencies.py
+      -t MAPEM
+      -o asn1/reduced/mapem
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/patched/ISO-TS-19091-addgrp-C-2018.asn
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
 
 etsi_its_cam_coding:
   stage: ASN1C
@@ -95,6 +121,54 @@ etsi_its_denm_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
+etsi_its_spatem_coding:
+  stage: ASN1C
+  needs: []
+  tags: [privileged, amd64]
+  image: docker:24.0.7-git
+  services: [docker:24.0.7-dind]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: /certs
+  before_script:
+    - apk update
+    - apk add python3
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
+      asn1/reduced/spatem/ITS-Container.asn
+      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      -o etsi_its_coding/etsi_its_spatem_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_mapem_coding:
+  stage: ASN1C
+  needs: []
+  tags: [privileged, amd64]
+  image: docker:24.0.7-git
+  services: [docker:24.0.7-dind]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: /certs
+  before_script:
+    - apk update
+    - apk add python3
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
+      asn1/reduced/mapem/ITS-Container.asn
+      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      -o etsi_its_coding/etsi_its_mapem_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
 
 etsi_its_cam_msgs:
   stage: ROS Messages
@@ -116,6 +190,30 @@ etsi_its_denm_msgs:
       asn1/reduced/denm/DENM-PDU-Descriptions.asn
       asn1/reduced/denm/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_spatem_msgs:
+  stage: ROS Messages
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToRosMsg.py
+      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
+      asn1/reduced/spatem/ITS-Container.asn
+      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      -o etsi_its_msgs/etsi_its_spatem_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_mapem_msgs:
+  stage: ROS Messages
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToRosMsg.py
+      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
+      asn1/reduced/mapem/ITS-Container.asn
+      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      -o etsi_its_msgs/etsi_its_mapem_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
@@ -141,4 +239,30 @@ etsi_its_denm_conversion:
       asn1/reduced/denm/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_spatem_conversion:
+  stage: Conversion Headers
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToConversionHeader.py
+      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
+      asn1/reduced/spatem/ITS-Container.asn
+      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      -t spatem
+      -o etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+
+etsi_its_mapem_conversion:
+  stage: Conversion Headers
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToConversionHeader.py
+      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
+      asn1/reduced/mapem/ITS-Container.asn
+      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      -t mapem
+      -o etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
