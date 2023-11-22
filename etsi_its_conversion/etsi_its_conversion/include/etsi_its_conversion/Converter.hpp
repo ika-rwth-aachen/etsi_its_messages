@@ -31,6 +31,7 @@ SOFTWARE.
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_denm_conversion/convertDENM.h>
 #include <etsi_its_spatem_conversion/convertSPATEM.h>
+#include <etsi_its_mapem_conversion/convertMAPEM.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
@@ -38,10 +39,12 @@ SOFTWARE.
 #include <etsi_its_cam_msgs/CAM.h>
 #include <etsi_its_denm_msgs/DENM.h>
 #include <etsi_its_spatem_msgs/SPATEM.h>
+#include <etsi_its_mapem_msgs/MAPEM.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <etsi_its_spatem_msgs/msg/spatem.hpp>
+#include <etsi_its_mapem_msgs/msg/mapem.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
@@ -82,10 +85,12 @@ class Converter : public rclcpp::Node {
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
     void rosCallbackSpatem(const etsi_its_spatem_msgs::SPATEM::ConstPtr msg);
+    void rosCallbackMapem(const etsi_its_mapem_msgs::MAPEM::ConstPtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
     void rosCallbackSpatem(const etsi_its_spatem_msgs::msg::SPATEM::UniquePtr msg);
+    void rosCallbackMapem(const etsi_its_mapem_msgs::msg::MAPEM::UniquePtr msg);
 #endif
 
   protected:
@@ -98,6 +103,8 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicDenm;
     static const std::string kInputTopicSpatem;
     static const std::string kOutputTopicSpatem;
+    static const std::string kInputTopicMapem;
+    static const std::string kOutputTopicMapem;
 
     static const std::string kEtsiTypeParam;
     static const std::string kEtsiTypeParamDefault;
@@ -118,6 +125,8 @@ class Converter : public rclcpp::Node {
     std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
     std::unordered_map<std::string, rclcpp::Publisher<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr> publishers_spatem_;
     std::unordered_map<std::string, rclcpp::Subscription<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr> subscribers_spatem_;
+    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_mapem_msgs::msg::MAPEM>::SharedPtr> publishers_mapem_;
+    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_mapem_msgs::msg::MAPEM>::SharedPtr> subscribers_mapem_;
     rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
 #endif
 

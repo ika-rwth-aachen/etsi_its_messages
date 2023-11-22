@@ -1,3 +1,5 @@
+- simplify types in converter.cpp
+
 ````cpp
 // convertAdvisorySpeed.h
 
