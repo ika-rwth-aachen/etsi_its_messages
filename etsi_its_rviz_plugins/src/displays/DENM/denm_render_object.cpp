@@ -34,7 +34,14 @@ namespace displays
     cause_code = denm.denm.situation.event_type.cause_code.value;
 
     
-    double heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+    //getHeading
+    double heading; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+    if(denm.denm.location.event_position_heading_is_present){
+      heading = (90-denm.denm.location.event_position_heading.heading_value.value)*M_PI/180.0;
+    }
+    else{
+      heading = 0*M_PI/180.0;
+    }
     while(heading<0) heading+=2*M_PI;
     pose.position = p.point;
     tf2::Quaternion orientation;
@@ -47,7 +54,13 @@ namespace displays
     dimensions.y = 3;
     dimensions.z = 1.6;
 
-    speed = etsi_its_denm_msgs::access::getSpeed(denm);
+    //getSpeed()
+    if(denm.denm.location.event_speed_is_present){
+      speed = denm.denm.location.event_speed.speed_value.value;
+    }
+    else{
+      speed = 0;
+    }
   }
 
   bool DENMRenderObject::validateFloats() {
