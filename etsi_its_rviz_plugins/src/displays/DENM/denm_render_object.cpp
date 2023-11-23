@@ -23,13 +23,13 @@ namespace displays
       throw std::invalid_argument(e.what());
     }
     header.frame_id = p.header.frame_id;
-    
+    /*
     uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_denm_msgs::access::getGenerationDeltaTime(denm), receive_time.nanoseconds(), n_leap_seconds);
-        header.stamp = rclcpp::Time(nanosecs);
-    
+    header.stamp = rclcpp::Time(nanosecs);
+    */
     //getStationID()
     station_id = denm.header.station_id.value;
-    station_type = etsi_its_denm_msgs::access::getStationType(denm);
+    station_type = 5; //station_type = etsi_its_denm_msgs::access::getStationType(denm);
     //getCauseCode()
     cause_code = denm.denm.situation.event_type.cause_code.value;
 
@@ -41,9 +41,11 @@ namespace displays
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
     
-    dimensions.x = etsi_its_denm_msgs::access::getVehicleLength(denm);
-    dimensions.y = etsi_its_denm_msgs::access::getVehicleWidth(denm);
-        dimensions.z = 1.6;
+    //dimensions.x = etsi_its_denm_msgs::access::getVehicleLength(denm);
+    dimensions.x = 2;
+    //dimensions.y = etsi_its_denm_msgs::access::getVehicleWidth(denm);
+    dimensions.y = 3;
+    dimensions.z = 1.6;
 
     speed = etsi_its_denm_msgs::access::getSpeed(denm);
   }
