@@ -86,6 +86,7 @@ class DENMRenderObject
     std_msgs::msg::Header header;
     int station_id;
     int station_type;
+    int cause_code;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     double speed;

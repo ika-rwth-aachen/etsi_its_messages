@@ -30,8 +30,11 @@ namespace displays
     //getStationID()
     station_id = denm.header.station_id.value;
     station_type = etsi_its_denm_msgs::access::getStationType(denm);
+    //getCauseCode()
+    cause_code = denm.denm.situation.event_type.cause_code.value;
+
     
-        double heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+    double heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
     while(heading<0) heading+=2*M_PI;
     pose.position = p.point;
     tf2::Quaternion orientation;
