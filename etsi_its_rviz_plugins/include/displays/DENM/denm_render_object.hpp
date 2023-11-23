@@ -23,7 +23,7 @@ namespace displays
 class DENMRenderObject
 {
   public:
-    DENMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS);
+    DENMRenderObject(etsi_its_denm_msgs::msg::DENM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS);
 
     /**
      * @brief This function validates all float variables that are part of a DENMRenderObject
@@ -32,7 +32,7 @@ class DENMRenderObject
     bool validateFloats();
 
     /**
-     * @brief Get age of CAM-object
+     * @brief Get age of DENM-object
      * 
      * @param now reference point in time to calculate the age with
      * @return age in seconds as double value 
@@ -40,42 +40,42 @@ class DENMRenderObject
     double getAge(rclcpp::Time now);
 
     /**
-     * @brief Get header of CAM-object
+     * @brief Get header of DENM-object
      * 
      * @return std_msgs::msg::Header 
      */
     std_msgs::msg::Header getHeader();
 
     /**
-     * @brief Get the StationID of CAM-object
+     * @brief Get the StationID of DENM-object
      * 
      * @return int 
      */
     int getStationID();
 
     /**
-     * @brief Get the StationType of CAM-object
+     * @brief Get the StationType of DENM-object
      * 
      * @return int 
      */
     int getStationType();
 
     /**
-     * @brief Get pose of CAM-object
+     * @brief Get pose of DENM-object
      * 
      * @return geometry_msgs::msg::Pose 
      */
     geometry_msgs::msg::Pose getPose();
 
     /**
-     * @brief Get dimensions of CAM-Object
+     * @brief Get dimensions of DENM-Object
      * 
      * @return geometry_msgs::msg::Vector3 (x equals length, y equals width, z equals height)
      */
     geometry_msgs::msg::Vector3 getDimensions();
 
     /**
-     * @brief Get speed of CAM-object
+     * @brief Get speed of DENM-object
      * 
      * @return double 
      */

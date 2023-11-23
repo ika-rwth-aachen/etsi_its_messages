@@ -73,9 +73,9 @@ void DENMDisplay::reset()
   manual_object_->clear();
 }
 
-void DENMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
+void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg)
 {
-  // Generate CAM render object from message
+  // Generate DENM render object from message
   DENMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
   if (!cam.validateFloats()) {
         setStatus(

@@ -33,10 +33,10 @@ namespace displays
 
 /**
  * @class DENMDisplay
- * @brief Displays an etsi_its_cam_msgs::CAM
+ * @brief Displays an etsi_its_denm_msgs::DENM
  */
 class DENMDisplay : public
-  rviz_common::RosTopicDisplay<etsi_its_cam_msgs::msg::CAM>
+  rviz_common::RosTopicDisplay<etsi_its_denm_msgs::msg::DENM>
 {
   Q_OBJECT
 
@@ -49,7 +49,7 @@ public:
   void reset() override;
 
 protected:
-  void processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg) override;
+  void processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg) override;
   void update(float wall_dt, float ros_dt) override;
 
   Ogre::ManualObject * manual_object_;
