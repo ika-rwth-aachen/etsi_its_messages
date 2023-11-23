@@ -61,7 +61,7 @@ protected:
   rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
-  std::unordered_map<int, DENMRenderObject> cams_;
+  std::unordered_map<int, DENMRenderObject> denms_;
   std::vector<std::shared_ptr<rviz_rendering::Arrow>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };

@@ -76,8 +76,8 @@ void DENMDisplay::reset()
 void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg)
 {
   // Generate DENM render object from message
-  DENMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
-  if (!cam.validateFloats()) {
+  DENMRenderObject denm(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+  if (!denm.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
           "Message contained invalid floating point values (nans or infs)");
@@ -85,31 +85,31 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
   }
   
   // Check if Station ID is already present in list
-  auto it = cams_.find(cam.getStationID());
-  if (it != cams_.end()) it->second = cam; // Key exists, update the value
-  else cams_.insert(std::make_pair(cam.getStationID(), cam)); 
+  auto it = denms_.find(denm.getStationID());
+  if (it != denms_.end()) it->second = denm; // Key exists, update the value
+  else denms_.insert(std::make_pair(denm.getStationID(), denm)); 
   
   return;
 }
 
 void DENMDisplay::update(float wall_dt, float ros_dt)
 {
-  // Check for outdated CAMs
-  for (auto it = cams_.begin(); it != cams_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = cams_.erase(it);
+  // Check for outdated DENMs
+  for (auto it = denms_.begin(); it != denms_.end(); ) {
+        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = denms_.erase(it);
         else ++it;
   }
 
-  // Render all valid cams
+  // Render all valid denms
   bboxs_.clear();
   texts_.clear();
-  for(auto it = cams_.begin(); it != cams_.end(); ++it) {
+  for(auto it = denms_.begin(); it != denms_.end(); ++it) {
 
-    DENMRenderObject cam = it->second;
+    DENMRenderObject denm = it->second;
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
-    if (!context_->getFrameManager()->getTransform(cam.getHeader(), sn_position, sn_orientation)) {
-      setMissingTransformToFixedFrame(cam.getHeader().frame_id);
+    if (!context_->getFrameManager()->getTransform(denm.getHeader(), sn_position, sn_orientation)) {
+      setMissingTransformToFixedFrame(denm.getHeader().frame_id);
       return;
     }
     setTransformOk();
@@ -120,11 +120,11 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
 
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
-    geometry_msgs::msg::Pose pose = cam.getPose();
-    geometry_msgs::msg::Vector3 dimensions = cam.getDimensions();
+    geometry_msgs::msg::Pose pose = denm.getPose();
+    geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
-    if(3 <= cam.getStationType() && cam.getStationType() <= 11)
+    if(3 <= denm.getStationType() && denm.getStationType() <= 11)
     {
       // If the station type of the originating ITS-S is set to one out of the values 3 to 11
       // the reference point shall be the ground position of the centre of the front side of
@@ -162,11 +162,11 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     if(show_meta_->getBool()) {
       std::string text;
       if(show_station_id_->getBool()) {
-        text+="StationID: " + std::to_string(cam.getStationID());
+        text+="StationID: " + std::to_string(denm.getStationID());
         text+="\n";
       }
       if(show_speed_->getBool()) {
-        text+="Speed: " + std::to_string((int)(cam.getSpeed()*3.6)) + " km/h";
+        text+="Speed: " + std::to_string((int)(denm.getSpeed()*3.6)) + " km/h";
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
