@@ -26,8 +26,9 @@ namespace displays
     
     uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_denm_msgs::access::getGenerationDeltaTime(denm), receive_time.nanoseconds(), n_leap_seconds);
         header.stamp = rclcpp::Time(nanosecs);
-
-    station_id = etsi_its_denm_msgs::access::getStationID(denm);
+    
+    //getStationID()
+    station_id = denm.header.station_id.value;
     station_type = etsi_its_denm_msgs::access::getStationType(denm);
     
         double heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
