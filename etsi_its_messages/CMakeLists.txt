@@ -14,6 +14,6 @@ if(${ROS_VERSION} EQUAL 2)
 elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED)
-  catkin_metapackage()
+  catkin_package()
 
 endif()
