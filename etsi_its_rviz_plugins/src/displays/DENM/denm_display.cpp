@@ -142,7 +142,7 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     
     //set size parameters for arrow
     int shaft_length = 5;
-    int shaft_diameter = 2;
+    int shaft_diameter = 1;
     int head_length = 2;
     int head_diameter = 3;
     // create arrow object

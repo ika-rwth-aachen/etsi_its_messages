@@ -49,14 +49,14 @@ namespace displays
     pose.orientation = tf2::toMsg(orientation);
     
     //dimensions.x = etsi_its_denm_msgs::access::getVehicleLength(denm);
-    dimensions.x = 2;
+    dimensions.x = 1;
     //dimensions.y = etsi_its_denm_msgs::access::getVehicleWidth(denm);
-    dimensions.y = 3;
+    dimensions.y = 1;
     dimensions.z = 1.6;
 
     //getSpeed()
     if(denm.denm.location.event_speed_is_present){
-      speed = denm.denm.location.event_speed.speed_value.value;
+      speed = denm.denm.location.event_speed.speed_value.value * 0.01;
     }
     else{
       speed = 0;
