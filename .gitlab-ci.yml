@@ -11,15 +11,17 @@ ROS:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
-    PLATFORM: amd64
+    PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros1
+    IMAGE_TAG: ros
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
-    ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
     VCS_IMPORT_FILE: '.ros1.repos'
-    UPSTREAM_WORKSPACE: '.ros1.repos' # define .repos for industrial_ci
+    ENABLE_INDUSTRIAL_CI: 'true'
+    # industrial_ci variables
+    PRERELEASE: 'true'
+    UPSTREAM_WORKSPACE: '.ros1.repos'
 
 ROS 2:
   trigger:
@@ -27,11 +29,13 @@ ROS 2:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
-    PLATFORM: amd64
+    PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros2
     BASE_IMAGE: rwthika/ros2:humble
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
-    ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_PUSH_AS_LATEST: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+    ENABLE_INDUSTRIAL_CI: 'true'
+    # industrial_ci variables
+    PRERELEASE: 'true'
