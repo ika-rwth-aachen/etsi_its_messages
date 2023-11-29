@@ -12,7 +12,6 @@ jobs:
           - noetic
           - humble
           - iron
-          - rolling
         ROS_REPO:
           - main
         PRERELEASE:
