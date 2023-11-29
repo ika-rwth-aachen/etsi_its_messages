@@ -17,11 +17,12 @@ ROS:
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
-    VCS_IMPORT_FILE: '.ros1.repos'
+    VCS_IMPORT_FILE: .ros1.repos
     ENABLE_INDUSTRIAL_CI: 'true'
     # industrial_ci variables
     PRERELEASE: 'true'
-    UPSTREAM_WORKSPACE: '.ros1.repos'
+    ROS_DISTRO: noetic # to prevent missing variable ROS_VERSION_EOL during prerelease
+    UPSTREAM_WORKSPACE: .ros1.repos
 
 ROS 2:
   trigger:
@@ -39,3 +40,4 @@ ROS 2:
     ENABLE_INDUSTRIAL_CI: 'true'
     # industrial_ci variables
     PRERELEASE: 'true'
+    ROS_DISTRO: humble # to prevent missing variable ROS_VERSION_EOL during prerelease
