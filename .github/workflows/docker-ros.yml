@@ -16,11 +16,6 @@ jobs:
           command: roslaunch etsi_its_conversion converter.ros1.launch
           enable-recursive-vcs-import: 'false'
           vcs-import-file: .ros1.repos
-          enable-industrial-ci: 'true'
-        env: # industrial_ci variables
-          PRERELEASE: 'true'
-          ROS_DISTRO: noetic # to prevent missing variable ROS_VERSION_EOL during prerelease
-          UPSTREAM_WORKSPACE: .ros1.repos
 
   ros2:
     runs-on: ubuntu-latest
@@ -34,7 +29,3 @@ jobs:
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-push-as-latest: 'true'
           enable-recursive-vcs-import: 'false'
-          enable-industrial-ci: 'true'
-        env: # industrial_ci variables
-          PRERELEASE: 'true'
-          ROS_DISTRO: noetic # to prevent missing variable ROS_VERSION_EOL during prerelease

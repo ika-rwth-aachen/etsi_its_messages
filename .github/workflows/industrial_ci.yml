@@ -1,0 +1,27 @@
+name: industrial_ci
+
+on: push
+
+jobs:
+  industrial_ci:
+    name: ROS ${{ matrix.ROS_DISTRO }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ROS_DISTRO:
+          - noetic
+          - humble
+          - iron
+          - rolling
+        ROS_REPO:
+          - main
+        PRERELEASE:
+          - 'true'
+        include:
+          - ROS_DISTRO: noetic
+            UPSTREAM_WORKSPACE: .ros1.repos
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ros-industrial/industrial_ci@master
+        with:
+          config: ${{ toJSON(matrix) }}
