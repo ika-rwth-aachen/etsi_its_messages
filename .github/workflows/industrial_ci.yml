@@ -7,6 +7,7 @@ jobs:
     name: ROS ${{ matrix.ROS_DISTRO }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         ROS_DISTRO:
           - noetic
