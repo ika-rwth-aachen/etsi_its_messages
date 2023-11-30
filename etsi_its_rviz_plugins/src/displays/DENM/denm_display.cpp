@@ -45,6 +45,7 @@ DENMDisplay::DENMDisplay()
     "Show StationID", show_meta_);
   show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, 
     "Show speed", show_meta_);
+  show_cause_code_ = new rviz_common::properties::BoolProperty("CauseCode", true, "Show CauseCode", show_meta_);
   
 }
 
@@ -125,7 +126,7 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     geometry_msgs::msg::Pose pose = denm.getPose();
     geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
-    Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
+    Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, -pose.orientation.z, pose.orientation.y);
     if(3 <= denm.getStationType() && denm.getStationType() <= 11)
     {
       // If the station type of the originating ITS-S is set to one out of the values 3 to 11
@@ -158,6 +159,7 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     bbox->setColor(bb_color);
+    bbox->setOrientation(orientation);
     bboxs_.push_back(bbox);
 
     // Visualize meta-information as text
@@ -169,6 +171,10 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
       }
       if(show_speed_->getBool()) {
         text+="Speed: " + std::to_string((int)(denm.getSpeed()*3.6)) + " km/h";
+        text+="\n";
+      }
+      if(show_cause_code_->getBool()) {
+        text+="Cause: " + denm.getCauseCode();
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());

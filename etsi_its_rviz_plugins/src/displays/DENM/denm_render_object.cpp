@@ -32,7 +32,32 @@ namespace displays
     station_type = 5; //station_type = etsi_its_denm_msgs::access::getStationType(denm);
     //getCauseCode()
     cause_code = denm.denm.situation.event_type.cause_code.value;
-
+    if(cause_code == 1) cause_code_type = "traffic condition";
+    else if(cause_code == 2) cause_code_type = "accident";
+    else if(cause_code == 3) cause_code_type = "roadworks";
+    else if(cause_code == 5) cause_code_type = "impassibility";
+    else if(cause_code == 6) cause_code_type = "adverse weather condition - adhesion";
+    else if(cause_code == 7) cause_code_type = "aquaplanning";
+    else if(cause_code == 9) cause_code_type = "hazardous location - surface condition";
+    else if(cause_code == 10) cause_code_type = "hazardous location - obstacle on the road";
+    else if(cause_code == 11) cause_code_type = "hazardous location - animal on the road";
+    else if(cause_code == 12) cause_code_type = "human presence on the road";
+    else if(cause_code == 14) cause_code_type = "wrong way driving";
+    else if(cause_code == 15) cause_code_type = "rescue and recovery in progress";
+    else if(cause_code == 17) cause_code_type = "adverse weather condition - extreme weather condition";
+    else if(cause_code == 18) cause_code_type = "adverse weather condition - visibility";
+    else if(cause_code == 19) cause_code_type = "adverse weather condition - precipitation";
+    else if(cause_code == 26) cause_code_type = "slow vehicle";
+    else if(cause_code == 27) cause_code_type = "dangerous end of queue";
+    else if(cause_code == 91) cause_code_type = "vehicle breakdown";
+    else if(cause_code == 92) cause_code_type = "post crash";
+    else if(cause_code == 93) cause_code_type = "human problem";
+    else if(cause_code == 94) cause_code_type = "stationary vehicle";
+    else if(cause_code == 95) cause_code_type = "emergency vehicle approaching";
+    else if(cause_code == 96) cause_code_type = "hazardous location - dangerous curve";
+    else if(cause_code == 97) cause_code_type = "collision risk";
+    else if(cause_code == 98) cause_code_type = "signal violation";
+    else if(cause_code == 99) cause_code_type = "dangerous situation";
     
     //getHeading
     double heading; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -98,6 +123,10 @@ namespace displays
 
   double DENMRenderObject::getSpeed() {
   return speed;
+  }
+
+  std::string DENMRenderObject::getCauseCode(){
+    return cause_code_type;
   }
 
 }  // namespace displays

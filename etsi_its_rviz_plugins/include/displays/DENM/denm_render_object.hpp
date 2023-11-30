@@ -81,12 +81,14 @@ class DENMRenderObject
      */
     double getSpeed();
 
+    std::string getCauseCode();
   private:
     // member variables
     std_msgs::msg::Header header;
     int station_id;
     int station_type;
     int cause_code;
+    std::string cause_code_type;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     double speed;
