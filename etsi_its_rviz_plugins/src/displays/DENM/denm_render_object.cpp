@@ -23,10 +23,17 @@ namespace displays
       throw std::invalid_argument(e.what());
     }
     header.frame_id = p.header.frame_id;
-    /*
-    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_denm_msgs::access::getGenerationDeltaTime(denm), receive_time.nanoseconds(), n_leap_seconds);
+
+    //Ansatz: timestamp estimate = detection time; generation delta time = reference time
+    etsi_its_denm_msgs::msg::TimestampIts t_its;
+    etsi_its_denm_msgs::msg::TimestampIts timestamp_estimate = denm.denm.management.detection_time;
+    Ogre::uint64 generation_delta_time_value = denm.denm.management.reference_time.value - timestamp_estimate.value;
+    t_its.value = std::floor(timestamp_estimate.value/65536)*65536+generation_delta_time_value;
+    cdd::throwIfOutOfRange(t_its.value, etsi_its_denm_msgs::msg::TimestampIts::MIN, etsi_its_denm_msgs::msg::TimestampIts::MAX, "TimestampIts");
+    etsi_its_denm_msgs::msg::TimestampIts time_its = t_its;
+    uint64_t nanosecs = time_its.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;
     header.stamp = rclcpp::Time(nanosecs);
-    */
+    
     //getStationID()
     station_id = denm.header.station_id.value;
     station_type = 5; //station_type = etsi_its_denm_msgs::access::getStationType(denm);

@@ -95,13 +95,13 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
 
 void DENMDisplay::update(float wall_dt, float ros_dt)
 {
-  /*
+  
   // Check for outdated DENMs
   for (auto it = denms_.begin(); it != denms_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = denms_.erase(it);
+        if (it->second.getAge(rviz_node_->now()) * 0.015 > buffer_timeout_->getFloat()) it = denms_.erase(it);
         else ++it;
   }
-  */
+  
 
   // Render all valid denms
   bboxs_.clear();
