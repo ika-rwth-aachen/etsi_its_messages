@@ -127,15 +127,9 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, -pose.orientation.z, pose.orientation.y);
-    if(3 <= denm.getStationType() && denm.getStationType() <= 11)
-    {
-      // If the station type of the originating ITS-S is set to one out of the values 3 to 11
-      // the reference point shall be the ground position of the centre of the front side of
-      // the bounding box of the vehicle.
-      // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
-      position.x-=dimensions.x/2.0;
-      position.z+=dimensions.z/2.0;
-    }
+    
+    position.x-=dimensions.x/2.0;
+    position.z+=dimensions.z/2.0;
     
     // set pose of child scene node arrow
     child_scene_node->setPosition(position);
