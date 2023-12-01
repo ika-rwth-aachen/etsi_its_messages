@@ -180,7 +180,7 @@ void Converter::setup() {
   subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
   subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
   subscribers_spatem_["spatem"] = this->create_subscription<etsi_its_spatem_msgs::msg::SPATEM>(kInputTopicSpatem, 1, std::bind(&Converter::rosCallbackSpatem, this, std::placeholders::_1));
-  subscribers_spatem_["mapem"] = this->create_subscription<etsi_its_mapem_msgs::msg::MAPEM>(kInputTopicMapem, 1, std::bind(&Converter::rosCallbackMapem, this, std::placeholders::_1));
+  subscribers_mapem_["mapem"] = this->create_subscription<etsi_its_mapem_msgs::msg::MAPEM>(kInputTopicMapem, 1, std::bind(&Converter::rosCallbackMapem, this, std::placeholders::_1));
   RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_denm_["denm"]->get_topic_name());
@@ -208,7 +208,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   // decode BTP-Header, if type detection is enabled
   std::string detected_etsi_type = etsi_type_;
-  int offset = 0;
+  int offset = 4;
   if (etsi_type_ == "auto") {
     offset = 4;
     const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
