@@ -208,7 +208,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   // decode BTP-Header, if type detection is enabled
   std::string detected_etsi_type = etsi_type_;
-  int offset = 4;
+  int offset = 0;
   if (etsi_type_ == "auto") {
     offset = 4;
     const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
