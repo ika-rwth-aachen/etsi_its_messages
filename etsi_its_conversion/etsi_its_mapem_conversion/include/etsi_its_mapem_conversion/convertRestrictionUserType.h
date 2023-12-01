@@ -28,7 +28,7 @@ SOFTWARE.
 
 #include <etsi_its_mapem_coding/RestrictionUserType.h>
 #include <etsi_its_mapem_conversion/convertRestrictionAppliesTo.h>
-#include <etsi_its_mapem_conversion/convertRegionalExtension[].h>
+#include <etsi_its_mapem_conversion/convertRegionalExtension.h>
 #ifdef ROS1
 #include <etsi_its_mapem_msgs/RestrictionUserType.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
@@ -48,15 +48,15 @@ void toRos_RestrictionUserType(const RestrictionUserType_t& in, mapem_msgs::Rest
   }
 
   if (in.present == RestrictionUserType_PR::RestrictionUserType_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
-    out.choice = mapem_msgs::RestrictionUserType::MIN_SIZE;
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
+    out.choice = mapem_msgs::RestrictionUserType::REGIONAL_MIN_SIZE;
   }
   if (in.present == RestrictionUserType_PR::RestrictionUserType_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
-    out.choice = mapem_msgs::RestrictionUserType::MAX_SIZE;
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
+    out.choice = mapem_msgs::RestrictionUserType::REGIONAL_MAX_SIZE;
   }
   if (in.present == RestrictionUserType_PR::RestrictionUserType_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
     out.choice = mapem_msgs::RestrictionUserType::CHOICE_REGIONAL;
   }
 }
@@ -70,16 +70,16 @@ void toStruct_RestrictionUserType(const mapem_msgs::RestrictionUserType& in, Res
     out.present = RestrictionUserType_PR::RestrictionUserType_PR_basicType;
   }
 
-  if (in.choice == mapem_msgs::RestrictionUserType::MIN_SIZE) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+  if (in.choice == mapem_msgs::RestrictionUserType::REGIONAL_MIN_SIZE) {
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = RestrictionUserType_PR::RestrictionUserType_PR_regional;
   }
-  if (in.choice == mapem_msgs::RestrictionUserType::MAX_SIZE) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+  if (in.choice == mapem_msgs::RestrictionUserType::REGIONAL_MAX_SIZE) {
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = RestrictionUserType_PR::RestrictionUserType_PR_regional;
   }
   if (in.choice == mapem_msgs::RestrictionUserType::CHOICE_REGIONAL) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = RestrictionUserType_PR::RestrictionUserType_PR_regional;
   }
 

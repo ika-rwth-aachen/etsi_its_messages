@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-Crosswalk.h>
+#include <etsi_its_mapem_msgs/LaneAttributesCrosswalk.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_crosswalk.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-Crosswalk(const LaneAttributes-Crosswalk_t& in, mapem_msgs::LaneAttributes-Crosswalk& out) {
+void toRos_LaneAttributesCrosswalk(const LaneAttributes_Crosswalk_t& in, mapem_msgs::LaneAttributesCrosswalk& out) {
 
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LaneAttributes-Crosswalk(const mapem_msgs::LaneAttributes-Crosswalk& in, LaneAttributes-Crosswalk_t& out) {
+void toStruct_LaneAttributesCrosswalk(const mapem_msgs::LaneAttributesCrosswalk& in, LaneAttributes_Crosswalk_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-Crosswalk_t));
+  memset(&out, 0, sizeof(LaneAttributes_Crosswalk_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

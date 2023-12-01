@@ -35,7 +35,7 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/Position3D.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/position_3_d.hpp>
+#include <etsi_its_mapem_msgs/msg/position3_d.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 

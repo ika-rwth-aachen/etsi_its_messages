@@ -30,24 +30,24 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/Offset-B16.h>
+#include <etsi_its_mapem_msgs/OffsetB16.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/offset_b_16.hpp>
+#include <etsi_its_mapem_msgs/msg/offset_b16.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_Offset-B16(const Offset-B16_t& in, mapem_msgs::Offset-B16& out) {
+void toRos_OffsetB16(const Offset_B16_t& in, mapem_msgs::OffsetB16& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Offset-B16(const mapem_msgs::Offset-B16& in, Offset-B16_t& out) {
+void toStruct_OffsetB16(const mapem_msgs::OffsetB16& in, Offset_B16_t& out) {
 
-  memset(&out, 0, sizeof(Offset-B16_t));
+  memset(&out, 0, sizeof(Offset_B16_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

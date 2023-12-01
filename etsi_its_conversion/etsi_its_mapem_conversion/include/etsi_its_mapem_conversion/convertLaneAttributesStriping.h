@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-Striping.h>
+#include <etsi_its_mapem_msgs/LaneAttributesStriping.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_striping.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-Striping(const LaneAttributes-Striping_t& in, mapem_msgs::LaneAttributes-Striping& out) {
+void toRos_LaneAttributesStriping(const LaneAttributes_Striping_t& in, mapem_msgs::LaneAttributesStriping& out) {
 
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LaneAttributes-Striping(const mapem_msgs::LaneAttributes-Striping& in, LaneAttributes-Striping_t& out) {
+void toStruct_LaneAttributesStriping(const mapem_msgs::LaneAttributesStriping& in, LaneAttributes_Striping_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-Striping_t));
+  memset(&out, 0, sizeof(LaneAttributes_Striping_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

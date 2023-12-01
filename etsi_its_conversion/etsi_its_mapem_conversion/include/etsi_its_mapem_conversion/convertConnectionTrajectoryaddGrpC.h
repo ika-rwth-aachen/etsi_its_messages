@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertNodeSetXY.h>
 #include <etsi_its_mapem_conversion/convertLaneConnectionID.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/ConnectionTrajectory-addGrpC.h>
+#include <etsi_its_mapem_msgs/ConnectionTrajectoryaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/connection_trajectory_add_grp_c.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_ConnectionTrajectory-addGrpC(const ConnectionTrajectory-addGrpC_t& in, mapem_msgs::ConnectionTrajectory-addGrpC& out) {
+void toRos_ConnectionTrajectoryaddGrpC(const ConnectionTrajectory_addGrpC_t& in, mapem_msgs::ConnectionTrajectoryaddGrpC& out) {
 
   toRos_NodeSetXY(in.nodes, out.nodes);
   toRos_LaneConnectionID(in.connectionID, out.connection_id);
 }
 
-void toStruct_ConnectionTrajectory-addGrpC(const mapem_msgs::ConnectionTrajectory-addGrpC& in, ConnectionTrajectory-addGrpC_t& out) {
+void toStruct_ConnectionTrajectoryaddGrpC(const mapem_msgs::ConnectionTrajectoryaddGrpC& in, ConnectionTrajectory_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(ConnectionTrajectory-addGrpC_t));
+  memset(&out, 0, sizeof(ConnectionTrajectory_addGrpC_t));
 
   toStruct_NodeSetXY(in.nodes, out.nodes);
   toStruct_LaneConnectionID(in.connection_id, out.connectionID);

@@ -29,7 +29,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/MovementEvent-addGrpC.h>
 #include <etsi_its_mapem_conversion/convertExceptionalCondition.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/MovementEvent-addGrpC.h>
+#include <etsi_its_mapem_msgs/MovementEventaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/movement_event_add_grp_c.hpp>
@@ -39,7 +39,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_MovementEvent-addGrpC(const MovementEvent-addGrpC_t& in, mapem_msgs::MovementEvent-addGrpC& out) {
+void toRos_MovementEventaddGrpC(const MovementEvent_addGrpC_t& in, mapem_msgs::MovementEventaddGrpC& out) {
 
   if (in.stateChangeReason) {
     toRos_ExceptionalCondition(*in.stateChangeReason, out.state_change_reason);
@@ -48,9 +48,9 @@ void toRos_MovementEvent-addGrpC(const MovementEvent-addGrpC_t& in, mapem_msgs::
 
 }
 
-void toStruct_MovementEvent-addGrpC(const mapem_msgs::MovementEvent-addGrpC& in, MovementEvent-addGrpC_t& out) {
+void toStruct_MovementEventaddGrpC(const mapem_msgs::MovementEventaddGrpC& in, MovementEvent_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(MovementEvent-addGrpC_t));
+  memset(&out, 0, sizeof(MovementEvent_addGrpC_t));
 
   if (in.state_change_reason_is_present) {
     ExceptionalCondition_t state_change_reason;

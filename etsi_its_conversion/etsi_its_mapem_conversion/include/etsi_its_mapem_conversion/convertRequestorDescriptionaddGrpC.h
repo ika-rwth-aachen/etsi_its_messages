@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertFuelType.h>
 #include <etsi_its_mapem_conversion/convertBatteryStatus.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/RequestorDescription-addGrpC.h>
+#include <etsi_its_mapem_msgs/RequestorDescriptionaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/requestor_description_add_grp_c.hpp>
@@ -40,7 +40,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_RequestorDescription-addGrpC(const RequestorDescription-addGrpC_t& in, mapem_msgs::RequestorDescription-addGrpC& out) {
+void toRos_RequestorDescriptionaddGrpC(const RequestorDescription_addGrpC_t& in, mapem_msgs::RequestorDescriptionaddGrpC& out) {
 
   if (in.fuel) {
     toRos_FuelType(*in.fuel, out.fuel);
@@ -54,9 +54,9 @@ void toRos_RequestorDescription-addGrpC(const RequestorDescription-addGrpC_t& in
 
 }
 
-void toStruct_RequestorDescription-addGrpC(const mapem_msgs::RequestorDescription-addGrpC& in, RequestorDescription-addGrpC_t& out) {
+void toStruct_RequestorDescriptionaddGrpC(const mapem_msgs::RequestorDescriptionaddGrpC& in, RequestorDescription_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(RequestorDescription-addGrpC_t));
+  memset(&out, 0, sizeof(RequestorDescription_addGrpC_t));
 
   if (in.fuel_is_present) {
     FuelType_t fuel;

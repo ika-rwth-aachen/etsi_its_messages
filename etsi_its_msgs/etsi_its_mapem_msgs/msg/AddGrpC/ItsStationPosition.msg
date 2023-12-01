@@ -39,8 +39,8 @@ StationID station_id
 LaneID lane_id
 bool lane_id_is_present
 
-NodeOffsetPointXY node_x_y
-bool node_x_y_is_present
+NodeOffsetPointXY node_xy
+bool node_xy_is_present
 
 TimeReference time_reference
 bool time_reference_is_present

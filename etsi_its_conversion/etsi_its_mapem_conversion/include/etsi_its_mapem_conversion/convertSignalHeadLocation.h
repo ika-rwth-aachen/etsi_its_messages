@@ -43,7 +43,7 @@ namespace etsi_its_mapem_conversion {
 
 void toRos_SignalHeadLocation(const SignalHeadLocation_t& in, mapem_msgs::SignalHeadLocation& out) {
 
-  toRos_NodeOffsetPointXY(in.nodeXY, out.node_x_y);
+  toRos_NodeOffsetPointXY(in.nodeXY, out.node_xy);
   toRos_DeltaAltitude(in.nodeZ, out.node_z);
   toRos_SignalGroupID(in.signalGroupID, out.signal_group_id);
 }
@@ -52,7 +52,7 @@ void toStruct_SignalHeadLocation(const mapem_msgs::SignalHeadLocation& in, Signa
 
   memset(&out, 0, sizeof(SignalHeadLocation_t));
 
-  toStruct_NodeOffsetPointXY(in.node_x_y, out.nodeXY);
+  toStruct_NodeOffsetPointXY(in.node_xy, out.nodeXY);
   toStruct_DeltaAltitude(in.node_z, out.nodeZ);
   toStruct_SignalGroupID(in.signal_group_id, out.signalGroupID);
 }

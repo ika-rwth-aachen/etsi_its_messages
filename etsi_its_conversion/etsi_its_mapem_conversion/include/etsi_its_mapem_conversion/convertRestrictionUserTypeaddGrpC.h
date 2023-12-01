@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertEmissionType.h>
 #include <etsi_its_mapem_conversion/convertFuelType.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/RestrictionUserType-addGrpC.h>
+#include <etsi_its_mapem_msgs/RestrictionUserTypeaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/restriction_user_type_add_grp_c.hpp>
@@ -40,7 +40,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_RestrictionUserType-addGrpC(const RestrictionUserType-addGrpC_t& in, mapem_msgs::RestrictionUserType-addGrpC& out) {
+void toRos_RestrictionUserTypeaddGrpC(const RestrictionUserType_addGrpC_t& in, mapem_msgs::RestrictionUserTypeaddGrpC& out) {
 
   if (in.emission) {
     toRos_EmissionType(*in.emission, out.emission);
@@ -54,9 +54,9 @@ void toRos_RestrictionUserType-addGrpC(const RestrictionUserType-addGrpC_t& in, 
 
 }
 
-void toStruct_RestrictionUserType-addGrpC(const mapem_msgs::RestrictionUserType-addGrpC& in, RestrictionUserType-addGrpC_t& out) {
+void toStruct_RestrictionUserTypeaddGrpC(const mapem_msgs::RestrictionUserTypeaddGrpC& in, RestrictionUserType_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(RestrictionUserType-addGrpC_t));
+  memset(&out, 0, sizeof(RestrictionUserType_addGrpC_t));
 
   if (in.emission_is_present) {
     EmissionType_t emission;

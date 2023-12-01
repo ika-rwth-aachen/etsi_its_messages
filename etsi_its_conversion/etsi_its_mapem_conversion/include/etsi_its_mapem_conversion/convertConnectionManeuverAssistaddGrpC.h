@@ -29,7 +29,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/ConnectionManeuverAssist-addGrpC.h>
 #include <etsi_its_mapem_conversion/convertItsStationPositionList.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/ConnectionManeuverAssist-addGrpC.h>
+#include <etsi_its_mapem_msgs/ConnectionManeuverAssistaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/connection_maneuver_assist_add_grp_c.hpp>
@@ -39,7 +39,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_ConnectionManeuverAssist-addGrpC(const ConnectionManeuverAssist-addGrpC_t& in, mapem_msgs::ConnectionManeuverAssist-addGrpC& out) {
+void toRos_ConnectionManeuverAssistaddGrpC(const ConnectionManeuverAssist_addGrpC_t& in, mapem_msgs::ConnectionManeuverAssistaddGrpC& out) {
 
   if (in.itsStationPosition) {
     toRos_ItsStationPositionList(*in.itsStationPosition, out.its_station_position);
@@ -48,9 +48,9 @@ void toRos_ConnectionManeuverAssist-addGrpC(const ConnectionManeuverAssist-addGr
 
 }
 
-void toStruct_ConnectionManeuverAssist-addGrpC(const mapem_msgs::ConnectionManeuverAssist-addGrpC& in, ConnectionManeuverAssist-addGrpC_t& out) {
+void toStruct_ConnectionManeuverAssistaddGrpC(const mapem_msgs::ConnectionManeuverAssistaddGrpC& in, ConnectionManeuverAssist_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(ConnectionManeuverAssist-addGrpC_t));
+  memset(&out, 0, sizeof(ConnectionManeuverAssist_addGrpC_t));
 
   if (in.its_station_position_is_present) {
     ItsStationPositionList_t its_station_position;

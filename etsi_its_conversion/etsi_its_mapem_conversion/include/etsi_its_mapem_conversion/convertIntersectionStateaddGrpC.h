@@ -29,7 +29,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/IntersectionState-addGrpC.h>
 #include <etsi_its_mapem_conversion/convertPrioritizationResponseList.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/IntersectionState-addGrpC.h>
+#include <etsi_its_mapem_msgs/IntersectionStateaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/intersection_state_add_grp_c.hpp>
@@ -39,7 +39,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_IntersectionState-addGrpC(const IntersectionState-addGrpC_t& in, mapem_msgs::IntersectionState-addGrpC& out) {
+void toRos_IntersectionStateaddGrpC(const IntersectionState_addGrpC_t& in, mapem_msgs::IntersectionStateaddGrpC& out) {
 
   if (in.activePrioritizations) {
     toRos_PrioritizationResponseList(*in.activePrioritizations, out.active_prioritizations);
@@ -48,9 +48,9 @@ void toRos_IntersectionState-addGrpC(const IntersectionState-addGrpC_t& in, mape
 
 }
 
-void toStruct_IntersectionState-addGrpC(const mapem_msgs::IntersectionState-addGrpC& in, IntersectionState-addGrpC_t& out) {
+void toStruct_IntersectionStateaddGrpC(const mapem_msgs::IntersectionStateaddGrpC& in, IntersectionState_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(IntersectionState-addGrpC_t));
+  memset(&out, 0, sizeof(IntersectionState_addGrpC_t));
 
   if (in.active_prioritizations_is_present) {
     PrioritizationResponseList_t active_prioritizations;

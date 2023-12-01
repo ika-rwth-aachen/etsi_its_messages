@@ -37,8 +37,8 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/NodeAttributeXYList.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/node_attribute_x_y.hpp>
-#include <etsi_its_mapem_msgs/msg/node_attribute_x_y_list.hpp>
+#include <etsi_its_mapem_msgs/msg/node_attribute_xy.hpp>
+#include <etsi_its_mapem_msgs/msg/node_attribute_xy_list.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 

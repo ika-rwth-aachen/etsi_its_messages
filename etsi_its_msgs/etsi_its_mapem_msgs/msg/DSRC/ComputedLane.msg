@@ -60,8 +60,8 @@ uint8 CHOICE_OFFSET_YAXIS_SMALL = 0
 DrivenLineOffsetLg offset_yaxis_large
 uint8 CHOICE_OFFSET_YAXIS_LARGE = 1
 
-Angle rotate_x_y
-bool rotate_x_y_is_present
+Angle rotate_xy
+bool rotate_xy_is_present
 
 ScaleB12 scale_xaxis
 bool scale_xaxis_is_present

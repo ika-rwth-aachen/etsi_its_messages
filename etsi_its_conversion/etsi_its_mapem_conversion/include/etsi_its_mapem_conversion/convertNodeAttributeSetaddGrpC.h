@@ -31,7 +31,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertNodeLink.h>
 #include <etsi_its_mapem_conversion/convertNode.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/NodeAttributeSet-addGrpC.h>
+#include <etsi_its_mapem_msgs/NodeAttributeSetaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/node_attribute_set_add_grp_c.hpp>
@@ -41,7 +41,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_NodeAttributeSet-addGrpC(const NodeAttributeSet-addGrpC_t& in, mapem_msgs::NodeAttributeSet-addGrpC& out) {
+void toRos_NodeAttributeSetaddGrpC(const NodeAttributeSet_addGrpC_t& in, mapem_msgs::NodeAttributeSetaddGrpC& out) {
 
   if (in.ptvRequest) {
     toRos_PtvRequestType(*in.ptvRequest, out.ptv_request);
@@ -60,9 +60,9 @@ void toRos_NodeAttributeSet-addGrpC(const NodeAttributeSet-addGrpC_t& in, mapem_
 
 }
 
-void toStruct_NodeAttributeSet-addGrpC(const mapem_msgs::NodeAttributeSet-addGrpC& in, NodeAttributeSet-addGrpC_t& out) {
+void toStruct_NodeAttributeSetaddGrpC(const mapem_msgs::NodeAttributeSetaddGrpC& in, NodeAttributeSet_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(NodeAttributeSet-addGrpC_t));
+  memset(&out, 0, sizeof(NodeAttributeSet_addGrpC_t));
 
   if (in.ptv_request_is_present) {
     PtvRequestType_t ptv_request;

@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertDeltaTime.h>
 #include <etsi_its_mapem_conversion/convertRejectedReason.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/SignalStatusPackage-addGrpC.h>
+#include <etsi_its_mapem_msgs/SignalStatusPackageaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/signal_status_package_add_grp_c.hpp>
@@ -40,7 +40,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_SignalStatusPackage-addGrpC(const SignalStatusPackage-addGrpC_t& in, mapem_msgs::SignalStatusPackage-addGrpC& out) {
+void toRos_SignalStatusPackageaddGrpC(const SignalStatusPackage_addGrpC_t& in, mapem_msgs::SignalStatusPackageaddGrpC& out) {
 
   if (in.synchToSchedule) {
     toRos_DeltaTime(*in.synchToSchedule, out.synch_to_schedule);
@@ -54,9 +54,9 @@ void toRos_SignalStatusPackage-addGrpC(const SignalStatusPackage-addGrpC_t& in, 
 
 }
 
-void toStruct_SignalStatusPackage-addGrpC(const mapem_msgs::SignalStatusPackage-addGrpC& in, SignalStatusPackage-addGrpC_t& out) {
+void toStruct_SignalStatusPackageaddGrpC(const mapem_msgs::SignalStatusPackageaddGrpC& in, SignalStatusPackage_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(SignalStatusPackage-addGrpC_t));
+  memset(&out, 0, sizeof(SignalStatusPackage_addGrpC_t));
 
   if (in.synch_to_schedule_is_present) {
     DeltaTime_t synch_to_schedule;

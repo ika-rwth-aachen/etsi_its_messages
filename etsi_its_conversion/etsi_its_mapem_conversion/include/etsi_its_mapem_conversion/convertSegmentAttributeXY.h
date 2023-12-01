@@ -31,7 +31,7 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/SegmentAttributeXY.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/segment_attribute_x_y.hpp>
+#include <etsi_its_mapem_msgs/msg/segment_attribute_xy.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 

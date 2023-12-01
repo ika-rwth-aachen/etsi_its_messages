@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-Bike.h>
+#include <etsi_its_mapem_msgs/LaneAttributesBike.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_bike.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-Bike(const LaneAttributes-Bike_t& in, mapem_msgs::LaneAttributes-Bike& out) {
+void toRos_LaneAttributesBike(const LaneAttributes_Bike_t& in, mapem_msgs::LaneAttributesBike& out) {
 
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LaneAttributes-Bike(const mapem_msgs::LaneAttributes-Bike& in, LaneAttributes-Bike_t& out) {
+void toStruct_LaneAttributesBike(const mapem_msgs::LaneAttributesBike& in, LaneAttributes_Bike_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-Bike_t));
+  memset(&out, 0, sizeof(LaneAttributes_Bike_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertVehicleHeight.h>
 #include <etsi_its_mapem_conversion/convertVehicleMass.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-addGrpC.h>
+#include <etsi_its_mapem_msgs/LaneAttributesaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_add_grp_c.hpp>
@@ -40,7 +40,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-addGrpC(const LaneAttributes-addGrpC_t& in, mapem_msgs::LaneAttributes-addGrpC& out) {
+void toRos_LaneAttributesaddGrpC(const LaneAttributes_addGrpC_t& in, mapem_msgs::LaneAttributesaddGrpC& out) {
 
   if (in.maxVehicleHeight) {
     toRos_VehicleHeight(*in.maxVehicleHeight, out.max_vehicle_height);
@@ -54,9 +54,9 @@ void toRos_LaneAttributes-addGrpC(const LaneAttributes-addGrpC_t& in, mapem_msgs
 
 }
 
-void toStruct_LaneAttributes-addGrpC(const mapem_msgs::LaneAttributes-addGrpC& in, LaneAttributes-addGrpC_t& out) {
+void toStruct_LaneAttributesaddGrpC(const mapem_msgs::LaneAttributesaddGrpC& in, LaneAttributes_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-addGrpC_t));
+  memset(&out, 0, sizeof(LaneAttributes_addGrpC_t));
 
   if (in.max_vehicle_height_is_present) {
     VehicleHeight_t max_vehicle_height;

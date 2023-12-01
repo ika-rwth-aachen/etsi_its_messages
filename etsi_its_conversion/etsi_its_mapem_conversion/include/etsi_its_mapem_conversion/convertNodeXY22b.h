@@ -30,25 +30,25 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertOffsetB11.h>
 #include <etsi_its_mapem_conversion/convertOffsetB11.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/Node-XY-22b.h>
+#include <etsi_its_mapem_msgs/NodeXY22b.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/node_x_y_22b.hpp>
+#include <etsi_its_mapem_msgs/msg/node_xy22b.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_Node-XY-22b(const Node-XY-22b_t& in, mapem_msgs::Node-XY-22b& out) {
+void toRos_NodeXY22b(const Node_XY_22b_t& in, mapem_msgs::NodeXY22b& out) {
 
   toRos_OffsetB11(in.x, out.x);
   toRos_OffsetB11(in.y, out.y);
 }
 
-void toStruct_Node-XY-22b(const mapem_msgs::Node-XY-22b& in, Node-XY-22b_t& out) {
+void toStruct_NodeXY22b(const mapem_msgs::NodeXY22b& in, Node_XY_22b_t& out) {
 
-  memset(&out, 0, sizeof(Node-XY-22b_t));
+  memset(&out, 0, sizeof(Node_XY_22b_t));
 
   toStruct_OffsetB11(in.x, out.x);
   toStruct_OffsetB11(in.y, out.y);

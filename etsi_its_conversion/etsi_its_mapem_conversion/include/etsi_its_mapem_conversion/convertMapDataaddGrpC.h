@@ -29,7 +29,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/MapData-addGrpC.h>
 #include <etsi_its_mapem_conversion/convertSignalHeadLocationList.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/MapData-addGrpC.h>
+#include <etsi_its_mapem_msgs/MapDataaddGrpC.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/map_data_add_grp_c.hpp>
@@ -39,7 +39,7 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_MapData-addGrpC(const MapData-addGrpC_t& in, mapem_msgs::MapData-addGrpC& out) {
+void toRos_MapDataaddGrpC(const MapData_addGrpC_t& in, mapem_msgs::MapDataaddGrpC& out) {
 
   if (in.signalHeadLocations) {
     toRos_SignalHeadLocationList(*in.signalHeadLocations, out.signal_head_locations);
@@ -48,9 +48,9 @@ void toRos_MapData-addGrpC(const MapData-addGrpC_t& in, mapem_msgs::MapData-addG
 
 }
 
-void toStruct_MapData-addGrpC(const mapem_msgs::MapData-addGrpC& in, MapData-addGrpC_t& out) {
+void toStruct_MapDataaddGrpC(const mapem_msgs::MapDataaddGrpC& in, MapData_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(MapData-addGrpC_t));
+  memset(&out, 0, sizeof(MapData_addGrpC_t));
 
   if (in.signal_head_locations_is_present) {
     SignalHeadLocationList_t signal_head_locations;

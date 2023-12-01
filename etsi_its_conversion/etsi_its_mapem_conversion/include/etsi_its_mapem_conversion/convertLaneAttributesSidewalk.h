@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-Sidewalk.h>
+#include <etsi_its_mapem_msgs/LaneAttributesSidewalk.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_sidewalk.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-Sidewalk(const LaneAttributes-Sidewalk_t& in, mapem_msgs::LaneAttributes-Sidewalk& out) {
+void toRos_LaneAttributesSidewalk(const LaneAttributes_Sidewalk_t& in, mapem_msgs::LaneAttributesSidewalk& out) {
 
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LaneAttributes-Sidewalk(const mapem_msgs::LaneAttributes-Sidewalk& in, LaneAttributes-Sidewalk_t& out) {
+void toStruct_LaneAttributesSidewalk(const mapem_msgs::LaneAttributesSidewalk& in, LaneAttributes_Sidewalk_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-Sidewalk_t));
+  memset(&out, 0, sizeof(LaneAttributes_Sidewalk_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

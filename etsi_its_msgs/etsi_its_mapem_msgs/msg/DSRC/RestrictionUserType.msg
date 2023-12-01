@@ -39,7 +39,7 @@ RestrictionAppliesTo basic_type
 uint8 CHOICE_BASIC_TYPE = 0
 
 RegionalExtension[] regional
-uint8 MIN_SIZE = 1
-uint8 MAX_SIZE = 4
+uint8 REGIONAL_MIN_SIZE = 1
+uint8 REGIONAL_MAX_SIZE = 4
 uint8 CHOICE_REGIONAL = 1
 

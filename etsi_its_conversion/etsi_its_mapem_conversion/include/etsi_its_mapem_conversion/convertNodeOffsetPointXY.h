@@ -39,7 +39,7 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/NodeOffsetPointXY.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/node_offset_point_x_y.hpp>
+#include <etsi_its_mapem_msgs/msg/node_offset_point_xy.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 
@@ -49,32 +49,32 @@ namespace etsi_its_mapem_conversion {
 void toRos_NodeOffsetPointXY(const NodeOffsetPointXY_t& in, mapem_msgs::NodeOffsetPointXY& out) {
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY1) {
-    toRos_NodeXY20b(in.choice.node_XY1, out.node_x_y_1);
+    toRos_NodeXY20b(in.choice.node_XY1, out.node_xy_1);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_1;
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY2) {
-    toRos_NodeXY22b(in.choice.node_XY2, out.node_x_y_2);
+    toRos_NodeXY22b(in.choice.node_XY2, out.node_xy_2);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_2;
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY3) {
-    toRos_NodeXY24b(in.choice.node_XY3, out.node_x_y_3);
+    toRos_NodeXY24b(in.choice.node_XY3, out.node_xy_3);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_3;
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY4) {
-    toRos_NodeXY26b(in.choice.node_XY4, out.node_x_y_4);
+    toRos_NodeXY26b(in.choice.node_XY4, out.node_xy_4);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_4;
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY5) {
-    toRos_NodeXY28b(in.choice.node_XY5, out.node_x_y_5);
+    toRos_NodeXY28b(in.choice.node_XY5, out.node_xy_5);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_5;
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY6) {
-    toRos_NodeXY32b(in.choice.node_XY6, out.node_x_y_6);
+    toRos_NodeXY32b(in.choice.node_XY6, out.node_xy_6);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_6;
   }
 
@@ -84,7 +84,7 @@ void toRos_NodeOffsetPointXY(const NodeOffsetPointXY_t& in, mapem_msgs::NodeOffs
   }
 
   if (in.present == NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_regional) {
-    toRos_RegionalExtension(in.choice.regional, out.regional);
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
     out.choice = mapem_msgs::NodeOffsetPointXY::CHOICE_REGIONAL;
   }
 }
@@ -94,32 +94,32 @@ void toStruct_NodeOffsetPointXY(const mapem_msgs::NodeOffsetPointXY& in, NodeOff
   memset(&out, 0, sizeof(NodeOffsetPointXY_t));
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_1) {
-    toStruct_NodeXY20b(in.node_x_y_1, out.choice.node_XY1);
+    toStruct_NodeXY20b(in.node_xy_1, out.choice.node_XY1);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY1;
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_2) {
-    toStruct_NodeXY22b(in.node_x_y_2, out.choice.node_XY2);
+    toStruct_NodeXY22b(in.node_xy_2, out.choice.node_XY2);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY2;
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_3) {
-    toStruct_NodeXY24b(in.node_x_y_3, out.choice.node_XY3);
+    toStruct_NodeXY24b(in.node_xy_3, out.choice.node_XY3);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY3;
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_4) {
-    toStruct_NodeXY26b(in.node_x_y_4, out.choice.node_XY4);
+    toStruct_NodeXY26b(in.node_xy_4, out.choice.node_XY4);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY4;
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_5) {
-    toStruct_NodeXY28b(in.node_x_y_5, out.choice.node_XY5);
+    toStruct_NodeXY28b(in.node_xy_5, out.choice.node_XY5);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY5;
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y_6) {
-    toStruct_NodeXY32b(in.node_x_y_6, out.choice.node_XY6);
+    toStruct_NodeXY32b(in.node_xy_6, out.choice.node_XY6);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_node_XY6;
   }
 
@@ -129,7 +129,7 @@ void toStruct_NodeOffsetPointXY(const mapem_msgs::NodeOffsetPointXY& in, NodeOff
   }
 
   if (in.choice == mapem_msgs::NodeOffsetPointXY::CHOICE_REGIONAL) {
-    toStruct_RegionalExtension(in.regional, out.choice.regional);
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = NodeOffsetPointXY_PR::NodeOffsetPointXY_PR_regional;
   }
 

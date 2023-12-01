@@ -38,7 +38,7 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/NodeAttributeSetXY.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/node_attribute_set_x_y.hpp>
+#include <etsi_its_mapem_msgs/msg/node_attribute_set_xy.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 
@@ -113,15 +113,15 @@ void toStruct_NodeAttributeSetXY(const mapem_msgs::NodeAttributeSetXY& in, NodeA
   }
 
   if (in.d_width_is_present) {
-    OffsetB10_t d_width;
+    Offset_B10_t d_width;
     toStruct_OffsetB10(in.d_width, d_width);
-    out.dWidth = new OffsetB10_t(d_width);
+    out.dWidth = new Offset_B10_t(d_width);
   }
 
   if (in.d_elevation_is_present) {
-    OffsetB10_t d_elevation;
+    Offset_B10_t d_elevation;
     toStruct_OffsetB10(in.d_elevation, d_elevation);
-    out.dElevation = new OffsetB10_t(d_elevation);
+    out.dElevation = new Offset_B10_t(d_elevation);
   }
 
   if (in.regional_is_present) {

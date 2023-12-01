@@ -33,7 +33,7 @@ SOFTWARE.
 #include <etsi_its_mapem_msgs/MAPEM.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/m_a_p_e_m.hpp>
+#include <etsi_its_mapem_msgs/msg/mapem.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 

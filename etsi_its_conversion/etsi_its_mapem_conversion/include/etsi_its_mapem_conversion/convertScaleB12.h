@@ -30,24 +30,24 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/Scale-B12.h>
+#include <etsi_its_mapem_msgs/ScaleB12.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
-#include <etsi_its_mapem_msgs/msg/scale_b_12.hpp>
+#include <etsi_its_mapem_msgs/msg/scale_b12.hpp>
 namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_Scale-B12(const Scale-B12_t& in, mapem_msgs::Scale-B12& out) {
+void toRos_ScaleB12(const Scale_B12_t& in, mapem_msgs::ScaleB12& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Scale-B12(const mapem_msgs::Scale-B12& in, Scale-B12_t& out) {
+void toStruct_ScaleB12(const mapem_msgs::ScaleB12& in, Scale_B12_t& out) {
 
-  memset(&out, 0, sizeof(Scale-B12_t));
+  memset(&out, 0, sizeof(Scale_B12_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

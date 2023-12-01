@@ -33,7 +33,7 @@ SOFTWARE.
 #include <etsi_its_mapem_conversion/convertRoadwayCrownAngle.h>
 #include <etsi_its_mapem_conversion/convertMergeDivergeNodeAngle.h>
 #include <etsi_its_mapem_conversion/convertSpeedLimitList.h>
-#include <etsi_its_mapem_conversion/convertRegionalExtension[].h>
+#include <etsi_its_mapem_conversion/convertRegionalExtension.h>
 #ifdef ROS1
 #include <etsi_its_mapem_msgs/LaneDataAttribute.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
@@ -78,15 +78,15 @@ void toRos_LaneDataAttribute(const LaneDataAttribute_t& in, mapem_msgs::LaneData
   }
 
   if (in.present == LaneDataAttribute_PR::LaneDataAttribute_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
-    out.choice = mapem_msgs::LaneDataAttribute::MIN_SIZE;
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
+    out.choice = mapem_msgs::LaneDataAttribute::REGIONAL_MIN_SIZE;
   }
   if (in.present == LaneDataAttribute_PR::LaneDataAttribute_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
-    out.choice = mapem_msgs::LaneDataAttribute::MAX_SIZE;
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
+    out.choice = mapem_msgs::LaneDataAttribute::REGIONAL_MAX_SIZE;
   }
   if (in.present == LaneDataAttribute_PR::LaneDataAttribute_PR_regional) {
-    toRos_RegionalExtension[](in.choice.regional, out.regional);
+    // TODO: toRos_RegionalExtension(in.choice.regional, out.regional);
     out.choice = mapem_msgs::LaneDataAttribute::CHOICE_REGIONAL;
   }
 }
@@ -125,16 +125,16 @@ void toStruct_LaneDataAttribute(const mapem_msgs::LaneDataAttribute& in, LaneDat
     out.present = LaneDataAttribute_PR::LaneDataAttribute_PR_speedLimits;
   }
 
-  if (in.choice == mapem_msgs::LaneDataAttribute::MIN_SIZE) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+  if (in.choice == mapem_msgs::LaneDataAttribute::REGIONAL_MIN_SIZE) {
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = LaneDataAttribute_PR::LaneDataAttribute_PR_regional;
   }
-  if (in.choice == mapem_msgs::LaneDataAttribute::MAX_SIZE) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+  if (in.choice == mapem_msgs::LaneDataAttribute::REGIONAL_MAX_SIZE) {
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = LaneDataAttribute_PR::LaneDataAttribute_PR_regional;
   }
   if (in.choice == mapem_msgs::LaneDataAttribute::CHOICE_REGIONAL) {
-    toStruct_RegionalExtension[](in.regional, out.choice.regional);
+    // TODO: toStruct_RegionalExtension(in.regional, out.choice.regional);
     out.present = LaneDataAttribute_PR::LaneDataAttribute_PR_regional;
   }
 

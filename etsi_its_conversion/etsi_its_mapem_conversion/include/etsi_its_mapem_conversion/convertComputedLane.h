@@ -28,10 +28,8 @@ SOFTWARE.
 
 #include <etsi_its_mapem_coding/ComputedLane.h>
 #include <etsi_its_mapem_conversion/convertLaneID.h>
-#include <etsi_its_mapem_conversion/convertuint8.h>
 #include <etsi_its_mapem_conversion/convertDrivenLineOffsetSm.h>
 #include <etsi_its_mapem_conversion/convertDrivenLineOffsetLg.h>
-#include <etsi_its_mapem_conversion/convertuint8.h>
 #include <etsi_its_mapem_conversion/convertDrivenLineOffsetSm.h>
 #include <etsi_its_mapem_conversion/convertDrivenLineOffsetLg.h>
 #include <etsi_its_mapem_conversion/convertAngle.h>
@@ -52,15 +50,25 @@ namespace etsi_its_mapem_conversion {
 void toRos_ComputedLane(const ComputedLane_t& in, mapem_msgs::ComputedLane& out) {
 
   toRos_LaneID(in.referenceLaneId, out.reference_lane_id);
-  toRos_uint8(in., out.offset_xaxis_choice);
-  toRos_DrivenLineOffsetSm(in.offsetXaxis_small, out.offset_xaxis_small);
-  toRos_DrivenLineOffsetLg(in.offsetXaxis_large, out.offset_xaxis_large);
-  toRos_uint8(in., out.offset_yaxis_choice);
-  toRos_DrivenLineOffsetSm(in.offsetYaxis_small, out.offset_yaxis_small);
-  toRos_DrivenLineOffsetLg(in.offsetYaxis_large, out.offset_yaxis_large);
+  if (in.offsetXaxis.present == ComputedLane__offsetXaxis_PR::ComputedLane__offsetXaxis_PR_small) {
+    toRos_DrivenLineOffsetSm(in.offsetXaxis.choice.small, out.offset_xaxis_small);
+    out.offset_xaxis_choice = mapem_msgs::ComputedLane::CHOICE_OFFSET_XAXIS_SMALL;
+  }
+  if (in.offsetXaxis.present == ComputedLane__offsetXaxis_PR::ComputedLane__offsetXaxis_PR_large) {
+    toRos_DrivenLineOffsetLg(in.offsetXaxis.choice.large, out.offset_xaxis_large);
+    out.offset_xaxis_choice = mapem_msgs::ComputedLane::CHOICE_OFFSET_XAXIS_LARGE;
+  }
+  if (in.offsetYaxis.present == ComputedLane__offsetYaxis_PR::ComputedLane__offsetYaxis_PR_small) {
+    toRos_DrivenLineOffsetSm(in.offsetYaxis.choice.small, out.offset_yaxis_small);
+    out.offset_yaxis_choice = mapem_msgs::ComputedLane::CHOICE_OFFSET_YAXIS_SMALL;
+  }
+  if (in.offsetYaxis.present == ComputedLane__offsetYaxis_PR::ComputedLane__offsetYaxis_PR_large) {
+    toRos_DrivenLineOffsetLg(in.offsetYaxis.choice.large, out.offset_yaxis_large);
+    out.offset_yaxis_choice = mapem_msgs::ComputedLane::CHOICE_OFFSET_YAXIS_LARGE;
+  }
   if (in.rotateXY) {
-    toRos_Angle(*in.rotateXY, out.rotate_x_y);
-    out.rotate_x_y_is_present = true;
+    toRos_Angle(*in.rotateXY, out.rotate_xy);
+    out.rotate_xy_is_present = true;
   }
 
   if (in.scaleXaxis) {
@@ -85,28 +93,38 @@ void toStruct_ComputedLane(const mapem_msgs::ComputedLane& in, ComputedLane_t& o
   memset(&out, 0, sizeof(ComputedLane_t));
 
   toStruct_LaneID(in.reference_lane_id, out.referenceLaneId);
-  toStruct_uint8(in.offset_xaxis_choice, out.);
-  toStruct_DrivenLineOffsetSm(in.offset_xaxis_small, out.offsetXaxis_small);
-  toStruct_DrivenLineOffsetLg(in.offset_xaxis_large, out.offsetXaxis_large);
-  toStruct_uint8(in.offset_yaxis_choice, out.);
-  toStruct_DrivenLineOffsetSm(in.offset_yaxis_small, out.offsetYaxis_small);
-  toStruct_DrivenLineOffsetLg(in.offset_yaxis_large, out.offsetYaxis_large);
-  if (in.rotate_x_y_is_present) {
-    Angle_t rotate_x_y;
-    toStruct_Angle(in.rotate_x_y, rotate_x_y);
-    out.rotateXY = new Angle_t(rotate_x_y);
+  if (in.offset_xaxis_choice == mapem_msgs::ComputedLane::CHOICE_OFFSET_XAXIS_SMALL) {
+    toStruct_DrivenLineOffsetSm(in.offset_xaxis_small, out.offsetXaxis.choice.small);
+    out.offsetXaxis.present = ComputedLane__offsetXaxis_PR::ComputedLane__offsetXaxis_PR_small;
+  }
+  if (in.offset_xaxis_choice == mapem_msgs::ComputedLane::CHOICE_OFFSET_XAXIS_LARGE) {
+    toStruct_DrivenLineOffsetLg(in.offset_xaxis_large, out.offsetXaxis.choice.large);
+    out.offsetXaxis.present = ComputedLane__offsetXaxis_PR::ComputedLane__offsetXaxis_PR_large;
+  }
+  if (in.offset_yaxis_choice == mapem_msgs::ComputedLane::CHOICE_OFFSET_YAXIS_SMALL) {
+    toStruct_DrivenLineOffsetSm(in.offset_yaxis_small, out.offsetYaxis.choice.small);
+    out.offsetYaxis.present = ComputedLane__offsetYaxis_PR::ComputedLane__offsetYaxis_PR_small;
+  }
+  if (in.offset_yaxis_choice == mapem_msgs::ComputedLane::CHOICE_OFFSET_YAXIS_LARGE) {
+    toStruct_DrivenLineOffsetLg(in.offset_yaxis_large, out.offsetYaxis.choice.large);
+    out.offsetYaxis.present = ComputedLane__offsetYaxis_PR::ComputedLane__offsetYaxis_PR_large;
+  }
+  if (in.rotate_xy_is_present) {
+    Angle_t rotate_xy;
+    toStruct_Angle(in.rotate_xy, rotate_xy);
+    out.rotateXY = new Angle_t(rotate_xy);
   }
 
   if (in.scale_xaxis_is_present) {
-    ScaleB12_t scale_xaxis;
+    Scale_B12_t scale_xaxis;
     toStruct_ScaleB12(in.scale_xaxis, scale_xaxis);
-    out.scaleXaxis = new ScaleB12_t(scale_xaxis);
+    out.scaleXaxis = new Scale_B12_t(scale_xaxis);
   }
 
   if (in.scale_yaxis_is_present) {
-    ScaleB12_t scale_yaxis;
+    Scale_B12_t scale_yaxis;
     toStruct_ScaleB12(in.scale_yaxis, scale_yaxis);
-    out.scaleYaxis = new ScaleB12_t(scale_yaxis);
+    out.scaleYaxis = new Scale_B12_t(scale_yaxis);
   }
 
   if (in.regional_is_present) {

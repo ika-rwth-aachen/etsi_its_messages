@@ -30,7 +30,7 @@ SOFTWARE.
 #include <etsi_its_mapem_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
-#include <etsi_its_mapem_msgs/LaneAttributes-TrackedVehicle.h>
+#include <etsi_its_mapem_msgs/LaneAttributesTrackedVehicle.h>
 namespace mapem_msgs = etsi_its_mapem_msgs;
 #else
 #include <etsi_its_mapem_msgs/msg/lane_attributes_tracked_vehicle.hpp>
@@ -40,15 +40,15 @@ namespace mapem_msgs = etsi_its_mapem_msgs::msg;
 
 namespace etsi_its_mapem_conversion {
 
-void toRos_LaneAttributes-TrackedVehicle(const LaneAttributes-TrackedVehicle_t& in, mapem_msgs::LaneAttributes-TrackedVehicle& out) {
+void toRos_LaneAttributesTrackedVehicle(const LaneAttributes_TrackedVehicle_t& in, mapem_msgs::LaneAttributesTrackedVehicle& out) {
 
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LaneAttributes-TrackedVehicle(const mapem_msgs::LaneAttributes-TrackedVehicle& in, LaneAttributes-TrackedVehicle_t& out) {
+void toStruct_LaneAttributesTrackedVehicle(const mapem_msgs::LaneAttributesTrackedVehicle& in, LaneAttributes_TrackedVehicle_t& out) {
 
-  memset(&out, 0, sizeof(LaneAttributes-TrackedVehicle_t));
+  memset(&out, 0, sizeof(LaneAttributes_TrackedVehicle_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }
