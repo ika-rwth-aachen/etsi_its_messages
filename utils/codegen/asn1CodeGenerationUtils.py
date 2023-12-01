@@ -103,6 +103,8 @@ def camel2snake(s: str) -> str:
     ss = ss.replace("d_e_n_m", "denm")
     ss = ss.replace("s_p_a_t_e_m", "spatem")
     ss = ss.replace("s_p_a_t", "spat")
+    ss = ss.replace("m_a_p_e_m", "mapem")
+    ss = ss.replace("m_a_p", "map")
     ss = ss.replace("d_s_r_c", "dsrc")
     ss = ss.replace("r_s_u", "rsu")
     ss = ss.replace("w_m_i", "wmi")
@@ -110,6 +112,12 @@ def camel2snake(s: str) -> str:
     ss = ss.replace("_i_d", "_id")
     ss = ss.replace("_u_t_c", "_utc")
     ss = ss.replace("wmin", "wm_in")
+    ss = ss.replace("_3_d", "3_d")
+    ss = ss.replace("_b_1", "_b1")
+    ss = ss.replace("_x_y_2", "_xy2")
+    ss = ss.replace("_x_y_3", "_xy3")
+    ss = ss.replace("_x_y", "_xy")
+    ss = ss.replace("_l_lm_d_6", "_l_lm_d6")
 
     return ss
 
@@ -179,6 +187,19 @@ def noSpace(s: str) -> str:
     """
 
     return s.replace(" ", "_")
+
+
+def noDash(s: str) -> str:
+    """Replaces any dashes in a string with nothing.
+
+    Args:
+        s (str): my string
+
+    Returns:
+        str: my_string
+    """
+
+    return s.replace("-", "")
 
 
 def simplestRosIntegerType(min_value: int, max_value: int) -> str:
@@ -378,6 +399,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         "etsi_type": None,
         "members": [],
         "t_name": t_name,
+        "t_name_camel": noDash(t_name),
         "t_name_snake": camel2snake(t_name),
         "type": noSpace(type),
         "asn1_type": type,
@@ -527,27 +549,35 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         name = "choice"
         if "name" in asn1:
             name = f"{asn1['name']}_{name}"
+        name = validRosField(camel2snake(name))
         context["members"].append({
             "type": "uint8",
-            "name": validRosField(camel2snake(name))
+            "name": name,
+            "is_choice_var": True
         })
 
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1["members"]):
             if member is None:
                 continue
-            name = validRosField(f"CHOICE_{camel2SNAKE(member['name'])}", is_const=True)
+            member_name = validRosField(f"CHOICE_{camel2SNAKE(member['name'])}", is_const=True)
             if "name" in asn1:
-                name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
+                member_name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
             if len(member_context["members"]) > 0:
                 if "name" in asn1:
+                    member_context["members"][0]["choice_name"] = validCField(asn1["name"])
+                    member_context["members"][0]["choice_option_name"] = validCField(member_context["members"][0]["name_cc"])
                     member_context["members"][0]["name"] = validRosField(f"{camel2snake(asn1['name'])}_{camel2snake(member_context['members'][0]['name'])}")
                     member_context["members"][0]["name_cc"] = validCField(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
+                member_context["members"][0]["is_choice"] = True
+                member_context["members"][0]["choice_var_name"] = name
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
+                for c_idx, constant in enumerate(member_context["members"][0]["constants"]):
+                    member_context["members"][0]["constants"][c_idx]["name"] = validRosField(f"{member_context['members'][0]['name']}_{constant['name']}", is_const=True)
                 member_context["members"][0]["constants"].append({
                     "type": "uint8",
-                    "name": name,
+                    "name": member_name,
                     "value": im
                 })
             context["members"].extend(member_context["members"])
@@ -559,6 +589,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
         member_context = {
+            "t_name": array_type,
             "type": f"{array_type}[]",
             "type_snake": f"{camel2snake(array_type)}[]",
             "name": validRosField(camel2snake(array_name)),
@@ -623,6 +654,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         name_cc = asn1["name"] if "name" in asn1 else "value"
         name = camel2snake(name_cc)
         context["members"].append({
+            "t_name": type,
             "type": validRosType(type),
             "name": validRosField(camel2snake(name)),
             "name_cc": validCField(name_cc)
