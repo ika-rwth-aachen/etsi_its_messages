@@ -187,7 +187,7 @@ void Converter::setup() {
   RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_spatem_["spatem"]->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting native ROS SPATEMs on '%s' to UDP messages on '%s'", subscribers_spatem_["spatem"]->get_topic_name(), publisher_udp_->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_spatem_["mapem"]->get_topic_name());
+  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_mapem_["mapem"]->get_topic_name());
   RCLCPP_INFO(this->get_logger(), "Converting native ROS MAPEMs on '%s' to UDP messages on '%s'", subscribers_mapem_["mapem"]->get_topic_name(), publisher_udp_->get_topic_name());
 #endif
 }
