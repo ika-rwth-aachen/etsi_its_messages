@@ -54,6 +54,21 @@ namespace etsi_its_conversion {
 
 
 #ifdef ROS1
+using namespace udp_msgs;
+namespace cam_msgs = etsi_its_cam_msgs;
+namespace denm_msgs = etsi_its_denm_msgs;
+namespace spatem_msgs = etsi_its_spatem_msgs;
+namespace mapem_msgs = etsi_its_mapem_msgs;
+#else
+using namespace udp_msgs::msg;
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+namespace denm_msgs = etsi_its_denm_msgs::msg;
+namespace spatem_msgs = etsi_its_spatem_msgs::msg;
+namespace mapem_msgs = etsi_its_mapem_msgs::msg;
+#endif
+
+
+#ifdef ROS1
 class Converter : public nodelet::Nodelet {
 #else
 class Converter : public rclcpp::Node {
@@ -75,22 +90,33 @@ class Converter : public rclcpp::Node {
 
     bool logLevelIsDebug();
 
+    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size);
+
+    template <typename T_ros, typename T_struct>
+    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+
+    template <typename T_struct>
+    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t* buffer, int& size);
+
+    template <typename T_ros, typename T_struct>
+    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+
 #ifdef ROS1
-    void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
+    void udpCallback(const UdpPacket::ConstPtr udp_msg);
 #else
-    void udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg);
+    void udpCallback(const UdpPacket::UniquePtr udp_msg);
 #endif
 
 #ifdef ROS1
-    void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
-    void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
-    void rosCallbackSpatem(const etsi_its_spatem_msgs::SPATEM::ConstPtr msg);
-    void rosCallbackMapem(const etsi_its_mapem_msgs::MAPEM::ConstPtr msg);
+    void rosCallbackCam(const cam_msgs::CAM::ConstPtr msg);
+    void rosCallbackDenm(const denm_msgs::DENM::ConstPtr msg);
+    void rosCallbackSpatem(const spatem_msgs::SPATEM::ConstPtr msg);
+    void rosCallbackMapem(const mapem_msgs::MAPEM::ConstPtr msg);
 #else
-    void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
-    void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
-    void rosCallbackSpatem(const etsi_its_spatem_msgs::msg::SPATEM::UniquePtr msg);
-    void rosCallbackMapem(const etsi_its_mapem_msgs::msg::MAPEM::UniquePtr msg);
+    void rosCallbackCam(const cam_msgs::CAM::UniquePtr msg);
+    void rosCallbackDenm(const denm_msgs::DENM::UniquePtr msg);
+    void rosCallbackSpatem(const spatem_msgs::SPATEM::UniquePtr msg);
+    void rosCallbackMapem(const mapem_msgs::MAPEM::UniquePtr msg);
 #endif
 
   protected:
@@ -113,21 +139,18 @@ class Converter : public rclcpp::Node {
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
-    ros::Subscriber subscriber_udp_;
-    std::unordered_map<std::string, ros::Publisher> publishers_;
-    std::unordered_map<std::string, ros::Subscriber> subscribers_;
-    ros::Publisher publisher_udp_;
+    std::shared_ptr<ros::Subscriber> subscriber_udp_;
+    std::unordered_map<std::string, std::shared_ptr<ros::Publisher>> publishers_;
+    std::unordered_map<std::string, std::shared_ptr<ros::Subscriber>> subscribers_;
+    std::shared_ptr<ros::Publisher> publisher_udp_;
 #else
-    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_cam_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_cam_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr> publishers_denm_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr> publishers_spatem_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr> subscribers_spatem_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_mapem_msgs::msg::MAPEM>::SharedPtr> publishers_mapem_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_mapem_msgs::msg::MAPEM>::SharedPtr> subscribers_mapem_;
-    rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
+    rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
+    std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
+    rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
+    rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Publisher<spatem_msgs::SPATEM>::SharedPtr publisher_spatem_;
+    rclcpp::Publisher<mapem_msgs::MAPEM>::SharedPtr publisher_mapem_;
+    rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 #endif
 
 };
