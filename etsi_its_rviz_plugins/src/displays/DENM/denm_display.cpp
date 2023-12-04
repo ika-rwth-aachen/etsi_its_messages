@@ -98,7 +98,7 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
   
   // Check for outdated DENMs
   for (auto it = denms_.begin(); it != denms_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) * 0.015 > buffer_timeout_->getFloat()) it = denms_.erase(it);
+        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = denms_.erase(it);
         else ++it;
   }
   
@@ -126,20 +126,22 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
     geometry_msgs::msg::Pose pose = denm.getPose();
     geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
-    Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, -pose.orientation.z, pose.orientation.y);
+    Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
     
     position.x-=dimensions.x/2.0;
     position.z+=dimensions.z/2.0;
-    
-    // set pose of child scene node arrow
-    child_scene_node->setPosition(position);
-    child_scene_node->setOrientation(orientation);
-    
+
     //set size parameters for arrow
     int shaft_length = 5;
     int shaft_diameter = 1;
     int head_length = 2;
     int head_diameter = 3;
+    position.z += (shaft_length+head_length);
+    
+    // set pose of child scene node arrow
+    child_scene_node->setPosition(position);
+    child_scene_node->setOrientation(orientation);
+    
     // create arrow object
     std::shared_ptr<rviz_rendering::Arrow> bbox = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     

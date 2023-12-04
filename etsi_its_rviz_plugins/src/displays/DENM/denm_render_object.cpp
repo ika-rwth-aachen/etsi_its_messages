@@ -24,10 +24,10 @@ namespace displays
     }
     header.frame_id = p.header.frame_id;
 
-    //Ansatz: timestamp estimate = detection time; generation delta time = reference time
+    //for getAge()
     etsi_its_denm_msgs::msg::TimestampIts t_its;
     etsi_its_denm_msgs::msg::TimestampIts timestamp_estimate = denm.denm.management.detection_time;
-    Ogre::uint64 generation_delta_time_value = denm.denm.management.reference_time.value - timestamp_estimate.value;
+    Ogre::uint64 generation_delta_time_value = denm.denm.management.reference_time.value - denm.denm.management.detection_time.value;
     t_its.value = std::floor(timestamp_estimate.value/65536)*65536+generation_delta_time_value;
     cdd::throwIfOutOfRange(t_its.value, etsi_its_denm_msgs::msg::TimestampIts::MIN, etsi_its_denm_msgs::msg::TimestampIts::MAX, "TimestampIts");
     etsi_its_denm_msgs::msg::TimestampIts time_its = t_its;
@@ -80,9 +80,7 @@ namespace displays
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
     
-    //dimensions.x = etsi_its_denm_msgs::access::getVehicleLength(denm);
     dimensions.x = 1;
-    //dimensions.y = etsi_its_denm_msgs::access::getVehicleWidth(denm);
     dimensions.y = 1;
     dimensions.z = 1.6;
 
@@ -104,7 +102,7 @@ namespace displays
   }
 
   double DENMRenderObject::getAge(rclcpp::Time now) {
-    return (now-header.stamp).seconds();
+    return (now-header.stamp).seconds()*0.015;
   }
 
   std_msgs::msg::Header DENMRenderObject::getHeader() {
