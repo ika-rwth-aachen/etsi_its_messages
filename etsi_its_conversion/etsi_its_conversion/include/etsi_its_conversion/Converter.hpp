@@ -107,17 +107,13 @@ class Converter : public rclcpp::Node {
     void udpCallback(const UdpPacket::UniquePtr udp_msg);
 #endif
 
+    template <typename T_ros, typename T_struct>
 #ifdef ROS1
-    void rosCallbackCam(const cam_msgs::CAM::ConstPtr msg);
-    void rosCallbackDenm(const denm_msgs::DENM::ConstPtr msg);
-    void rosCallbackSpatem(const spatem_msgs::SPATEM::ConstPtr msg);
-    void rosCallbackMapem(const mapem_msgs::MAPEM::ConstPtr msg);
+    void rosCallback(const typename T_ros::ConstPtr msg,
 #else
-    void rosCallbackCam(const cam_msgs::CAM::UniquePtr msg);
-    void rosCallbackDenm(const denm_msgs::DENM::UniquePtr msg);
-    void rosCallbackSpatem(const spatem_msgs::SPATEM::UniquePtr msg);
-    void rosCallbackMapem(const mapem_msgs::MAPEM::UniquePtr msg);
+    void rosCallback(const typename T_ros::UniquePtr msg,
 #endif
+                     const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
   protected:
 
