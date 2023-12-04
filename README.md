@@ -147,12 +147,12 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 # ROS 2
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_type:=auto
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p has_btp_header:=true -p etsi_types:=[cam,denm,spatem,mapem]
 
 # ROS
 roslaunch etsi_its_conversion converter.ros1.launch
 # or
-rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
+rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[cam,denm,spatem,mapem]
 ```
 
 ##### Subscribed Topics
@@ -175,7 +175,8 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
 
 | Parameter | Type | Description | Options |
 | --- | --- | --- | --- |
-| `etsi_type` | `string` | if set to `auto`, in- and outgoing UDP payloads are expected to include a [4-byte BTP header](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) | `auto`, `cam`, `denm` |
+| `has_btp_header` | `bool` | whether incoming/outgoing UDP messages include a [4-byte BTP header](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
+| `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `denm`, `spatem`, `mapem` |
 
 
 #### Automated Generation

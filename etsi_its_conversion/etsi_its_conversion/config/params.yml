@@ -1,3 +1,8 @@
 etsi_its_conversion:
   ros__parameters:
-    etsi_type: auto
+    has_btp_header: true
+    etsi_types:
+      - cam
+      - denm
+      - spatem
+      - mapem

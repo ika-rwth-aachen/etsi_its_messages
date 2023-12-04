@@ -1,1 +1,6 @@
-etsi_type: auto
+has_btp_header: true
+etsi_types:
+  - cam
+  - denm
+  - spatem
+  - mapem

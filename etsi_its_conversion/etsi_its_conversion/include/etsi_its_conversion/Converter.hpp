@@ -132,10 +132,13 @@ class Converter : public rclcpp::Node {
     static const std::string kInputTopicMapem;
     static const std::string kOutputTopicMapem;
 
-    static const std::string kEtsiTypeParam;
-    static const std::string kEtsiTypeParamDefault;
+    static const std::string kHasBtpHeaderParam;
+    static const bool kHasBtpHeaderParamDefault;
+    static const std::string kEtsiTypesParam;
+    static const std::vector<std::string> kEtsiTypesParamDefault;
 
-    std::string etsi_type_;
+    bool has_btp_header_;
+    std::vector<std::string> etsi_types_;
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
