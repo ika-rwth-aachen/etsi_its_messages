@@ -12,12 +12,9 @@
 
 **ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
 
-<table border="0">
- <tr>
-    <td style="width:35%" align="justify">The <i>etsi_its_messages</i> package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).</td>
-    <td><img src="assets/teaser.gif" align="right"></td>
- </tr>
-</table>
+<img src="assets/teaser.gif" align="right" height=220>
+
+<p align="left">The <i>etsi_its_messages</i> package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).</p>
 
 All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
 
