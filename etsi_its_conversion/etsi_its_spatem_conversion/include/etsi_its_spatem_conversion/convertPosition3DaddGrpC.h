@@ -29,24 +29,24 @@ SOFTWARE.
 #include <etsi_its_spatem_coding/Position3D-addGrpC.h>
 #include <etsi_its_spatem_conversion/convertAltitude.h>
 #ifdef ROS1
-#include <etsi_its_spatem_msgs/Position3D-addGrpC.h>
+#include <etsi_its_spatem_msgs/Position3DaddGrpC.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/position_3_d_add_grp_c.hpp>
+#include <etsi_its_spatem_msgs/msg/position3_d_add_grp_c.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_conversion {
 
-void toRos_Position3D-addGrpC(const Position3D-addGrpC_t& in, spatem_msgs::Position3D-addGrpC& out) {
+void toRos_Position3DaddGrpC(const Position3D_addGrpC_t& in, spatem_msgs::Position3DaddGrpC& out) {
 
   toRos_Altitude(in.altitude, out.altitude);
 }
 
-void toStruct_Position3D-addGrpC(const spatem_msgs::Position3D-addGrpC& in, Position3D-addGrpC_t& out) {
+void toStruct_Position3DaddGrpC(const spatem_msgs::Position3DaddGrpC& in, Position3D_addGrpC_t& out) {
 
-  memset(&out, 0, sizeof(Position3D-addGrpC_t));
+  memset(&out, 0, sizeof(Position3D_addGrpC_t));
 
   toStruct_Altitude(in.altitude, out.altitude);
 }

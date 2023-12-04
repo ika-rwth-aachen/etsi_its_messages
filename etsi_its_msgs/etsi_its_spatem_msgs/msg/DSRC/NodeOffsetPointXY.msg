@@ -38,22 +38,22 @@
 
 uint8 choice
 
-NodeXY20b node_x_y_1
+NodeXY20b node_xy_1
 uint8 CHOICE_NODE_X_Y_1 = 0
 
-NodeXY22b node_x_y_2
+NodeXY22b node_xy_2
 uint8 CHOICE_NODE_X_Y_2 = 1
 
-NodeXY24b node_x_y_3
+NodeXY24b node_xy_3
 uint8 CHOICE_NODE_X_Y_3 = 2
 
-NodeXY26b node_x_y_4
+NodeXY26b node_xy_4
 uint8 CHOICE_NODE_X_Y_4 = 3
 
-NodeXY28b node_x_y_5
+NodeXY28b node_xy_5
 uint8 CHOICE_NODE_X_Y_5 = 4
 
-NodeXY32b node_x_y_6
+NodeXY32b node_xy_6
 uint8 CHOICE_NODE_X_Y_6 = 5
 
 NodeLLmD64b node_lat_lon

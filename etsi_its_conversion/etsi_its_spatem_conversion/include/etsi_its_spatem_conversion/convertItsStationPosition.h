@@ -51,8 +51,8 @@ void toRos_ItsStationPosition(const ItsStationPosition_t& in, spatem_msgs::ItsSt
   }
 
   if (in.nodeXY) {
-    toRos_NodeOffsetPointXY(*in.nodeXY, out.node_x_y);
-    out.node_x_y_is_present = true;
+    toRos_NodeOffsetPointXY(*in.nodeXY, out.node_xy);
+    out.node_xy_is_present = true;
   }
 
   if (in.timeReference) {
@@ -73,10 +73,10 @@ void toStruct_ItsStationPosition(const spatem_msgs::ItsStationPosition& in, ItsS
     out.laneID = new LaneID_t(lane_id);
   }
 
-  if (in.node_x_y_is_present) {
-    NodeOffsetPointXY_t node_x_y;
-    toStruct_NodeOffsetPointXY(in.node_x_y, node_x_y);
-    out.nodeXY = new NodeOffsetPointXY_t(node_x_y);
+  if (in.node_xy_is_present) {
+    NodeOffsetPointXY_t node_xy;
+    toStruct_NodeOffsetPointXY(in.node_xy, node_xy);
+    out.nodeXY = new NodeOffsetPointXY_t(node_xy);
   }
 
   if (in.time_reference_is_present) {

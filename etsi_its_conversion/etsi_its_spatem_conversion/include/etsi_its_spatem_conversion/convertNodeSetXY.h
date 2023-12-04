@@ -37,8 +37,8 @@ SOFTWARE.
 #include <etsi_its_spatem_msgs/NodeSetXY.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/node_x_y.hpp>
-#include <etsi_its_spatem_msgs/msg/node_set_x_y.hpp>
+#include <etsi_its_spatem_msgs/msg/node_xy.hpp>
+#include <etsi_its_spatem_msgs/msg/node_set_xy.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 

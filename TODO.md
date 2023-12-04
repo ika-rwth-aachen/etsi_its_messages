@@ -1,6 +1,3 @@
-- refactor converter.cpp udp2ros callback
-- after changes for MAPEM headers, SPATEM headers look wrong?
-
 ````cpp
 // convertAdvisorySpeed.h
 

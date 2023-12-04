@@ -33,7 +33,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-NodeOffsetPointXY node_x_y
+NodeOffsetPointXY node_xy
 
 DeltaAltitude node_z
 

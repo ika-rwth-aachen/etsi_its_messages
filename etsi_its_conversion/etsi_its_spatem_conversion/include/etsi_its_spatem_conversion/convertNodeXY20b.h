@@ -30,25 +30,25 @@ SOFTWARE.
 #include <etsi_its_spatem_conversion/convertOffsetB10.h>
 #include <etsi_its_spatem_conversion/convertOffsetB10.h>
 #ifdef ROS1
-#include <etsi_its_spatem_msgs/Node-XY-20b.h>
+#include <etsi_its_spatem_msgs/NodeXY20b.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/node_x_y_20b.hpp>
+#include <etsi_its_spatem_msgs/msg/node_xy20b.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_conversion {
 
-void toRos_Node-XY-20b(const Node-XY-20b_t& in, spatem_msgs::Node-XY-20b& out) {
+void toRos_NodeXY20b(const Node_XY_20b_t& in, spatem_msgs::NodeXY20b& out) {
 
   toRos_OffsetB10(in.x, out.x);
   toRos_OffsetB10(in.y, out.y);
 }
 
-void toStruct_Node-XY-20b(const spatem_msgs::Node-XY-20b& in, Node-XY-20b_t& out) {
+void toStruct_NodeXY20b(const spatem_msgs::NodeXY20b& in, Node_XY_20b_t& out) {
 
-  memset(&out, 0, sizeof(Node-XY-20b_t));
+  memset(&out, 0, sizeof(Node_XY_20b_t));
 
   toStruct_OffsetB10(in.x, out.x);
   toStruct_OffsetB10(in.y, out.y);

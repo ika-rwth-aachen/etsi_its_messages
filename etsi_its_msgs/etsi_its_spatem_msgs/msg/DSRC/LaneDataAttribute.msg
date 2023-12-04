@@ -59,7 +59,7 @@ SpeedLimitList speed_limits
 uint8 CHOICE_SPEED_LIMITS = 5
 
 RegionalExtension[] regional
-uint8 MIN_SIZE = 1
-uint8 MAX_SIZE = 4
+uint8 REGIONAL_MIN_SIZE = 1
+uint8 REGIONAL_MAX_SIZE = 4
 uint8 CHOICE_REGIONAL = 6
 

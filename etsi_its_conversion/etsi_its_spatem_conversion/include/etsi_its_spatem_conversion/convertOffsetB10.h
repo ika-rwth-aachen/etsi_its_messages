@@ -30,24 +30,24 @@ SOFTWARE.
 #include <etsi_its_spatem_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_spatem_msgs/Offset-B10.h>
+#include <etsi_its_spatem_msgs/OffsetB10.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/offset_b_10.hpp>
+#include <etsi_its_spatem_msgs/msg/offset_b10.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_conversion {
 
-void toRos_Offset-B10(const Offset-B10_t& in, spatem_msgs::Offset-B10& out) {
+void toRos_OffsetB10(const Offset_B10_t& in, spatem_msgs::OffsetB10& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Offset-B10(const spatem_msgs::Offset-B10& in, Offset-B10_t& out) {
+void toStruct_OffsetB10(const spatem_msgs::OffsetB10& in, Offset_B10_t& out) {
 
-  memset(&out, 0, sizeof(Offset-B10_t));
+  memset(&out, 0, sizeof(Offset_B10_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

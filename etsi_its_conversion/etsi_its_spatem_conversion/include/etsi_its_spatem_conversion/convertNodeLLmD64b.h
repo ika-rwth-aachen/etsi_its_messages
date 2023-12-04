@@ -30,25 +30,25 @@ SOFTWARE.
 #include <etsi_its_spatem_conversion/convertLongitude.h>
 #include <etsi_its_spatem_conversion/convertLatitude.h>
 #ifdef ROS1
-#include <etsi_its_spatem_msgs/Node-LLmD-64b.h>
+#include <etsi_its_spatem_msgs/NodeLLmD64b.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/node_l_lm_d_64b.hpp>
+#include <etsi_its_spatem_msgs/msg/node_l_lm_d64b.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_conversion {
 
-void toRos_Node-LLmD-64b(const Node-LLmD-64b_t& in, spatem_msgs::Node-LLmD-64b& out) {
+void toRos_NodeLLmD64b(const Node_LLmD_64b_t& in, spatem_msgs::NodeLLmD64b& out) {
 
   toRos_Longitude(in.lon, out.lon);
   toRos_Latitude(in.lat, out.lat);
 }
 
-void toStruct_Node-LLmD-64b(const spatem_msgs::Node-LLmD-64b& in, Node-LLmD-64b_t& out) {
+void toStruct_NodeLLmD64b(const spatem_msgs::NodeLLmD64b& in, Node_LLmD_64b_t& out) {
 
-  memset(&out, 0, sizeof(Node-LLmD-64b_t));
+  memset(&out, 0, sizeof(Node_LLmD_64b_t));
 
   toStruct_Longitude(in.lon, out.lon);
   toStruct_Latitude(in.lat, out.lat);

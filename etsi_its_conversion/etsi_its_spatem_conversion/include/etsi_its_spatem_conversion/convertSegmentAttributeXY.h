@@ -31,7 +31,7 @@ SOFTWARE.
 #include <etsi_its_spatem_msgs/SegmentAttributeXY.h>
 namespace spatem_msgs = etsi_its_spatem_msgs;
 #else
-#include <etsi_its_spatem_msgs/msg/segment_attribute_x_y.hpp>
+#include <etsi_its_spatem_msgs/msg/segment_attribute_xy.hpp>
 namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 #endif
 
