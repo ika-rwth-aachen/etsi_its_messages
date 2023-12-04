@@ -234,6 +234,43 @@ void Converter::setup() {
 }
 
 
+template <typename T_struct>
+bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct) {
+
+  asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, type_descriptor, (void **)&asn1_struct, buffer, size);
+  if (ret.code != RC_OK) {
+    ROS_LOG(ERROR, "Failed to decode message");
+    return false;
+  }
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
+
+  return true;
+}
+
+
+template <typename T_ros, typename T_struct>
+T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
+
+  T_ros msg;
+  conversion_fn(asn1_struct, msg);
+
+  return msg;
+}
+
+
+template <typename T_ros, typename T_struct>
+bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) {
+
+  T_struct* asn1_struct = nullptr;
+  bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, asn1_struct);
+  if (!success) return false;
+
+  msg = this->structToRosMessage(*asn1_struct, type_descriptor, conversion_fn);
+
+  return true;
+}
+
+
 template <typename T_ros, typename T_struct>
 T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
@@ -336,18 +373,10 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
   if (detected_etsi_type == "cam") {
 
-    // decode ASN1 bitstring to struct
-    CAM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
-    if (ret.code != RC_OK) {
-      ROS_LOG(ERROR, "Failed to decode message");
-      return;
-    }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_CAM, asn1_struct);
-
-    // convert struct to ROS msg and publish
+    // decode buffer to ROS msg
     cam_msgs::CAM msg;
-    etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[offset], udp_msg->data.size() - offset, &asn_DEF_CAM, std::function<void(const CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
+    if (!success) return;
 
     // publish msg
 #ifdef ROS1
@@ -359,18 +388,10 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "denm") {
 
-    // decode ASN1 bitstring to struct
-    DENM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
-    if (ret.code != RC_OK) {
-      ROS_LOG(ERROR, "Failed to decode message");
-      return;
-    }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_DENM, asn1_struct);
-
-    // convert struct to ROS msg and publish
+    // decode buffer to ROS msg
     denm_msgs::DENM msg;
-    etsi_its_denm_conversion::toRos_DENM(*asn1_struct, msg);
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[offset], udp_msg->data.size() - offset, &asn_DEF_DENM, std::function<void(const DENM_t&, denm_msgs::DENM&)>(etsi_its_denm_conversion::toRos_DENM), msg);
+    if (!success) return;
 
     // publish msg
 #ifdef ROS1
@@ -382,18 +403,10 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "spatem") {
 
-    // decode ASN1 bitstring to struct
-    SPATEM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_SPATEM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
-    if (ret.code != RC_OK) {
-      ROS_LOG(ERROR, "Failed to decode message");
-      return;
-    }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_SPATEM, asn1_struct);
-
-    // convert struct to ROS msg and publish
+    // decode buffer to ROS msg
     spatem_msgs::SPATEM msg;
-    etsi_its_spatem_conversion::toRos_SPATEM(*asn1_struct, msg);
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[offset], udp_msg->data.size() - offset, &asn_DEF_SPATEM, std::function<void(const SPATEM_t&, spatem_msgs::SPATEM&)>(etsi_its_spatem_conversion::toRos_SPATEM), msg);
+    if (!success) return;
 
     // publish msg
 #ifdef ROS1
@@ -405,18 +418,10 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "mapem") {
 
-    // decode ASN1 bitstring to struct
-    MAPEM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_MAPEM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
-    if (ret.code != RC_OK) {
-      ROS_LOG(ERROR, "Failed to decode message");
-      return;
-    }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_MAPEM, asn1_struct);
-
-    // convert struct to ROS msg and publish
+    // decode buffer to ROS msg
     mapem_msgs::MAPEM msg;
-    etsi_its_mapem_conversion::toRos_MAPEM(*asn1_struct, msg);
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[offset], udp_msg->data.size() - offset, &asn_DEF_MAPEM, std::function<void(const MAPEM_t&, mapem_msgs::MAPEM&)>(etsi_its_mapem_conversion::toRos_MAPEM), msg);
+    if (!success) return;
 
     // publish msg
 #ifdef ROS1

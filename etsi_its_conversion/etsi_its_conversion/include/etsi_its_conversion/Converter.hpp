@@ -90,6 +90,15 @@ class Converter : public rclcpp::Node {
 
     bool logLevelIsDebug();
 
+    template <typename T_struct>
+    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
+
+    template <typename T_ros, typename T_struct>
+    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+
+    template <typename T_ros, typename T_struct>
+    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
+
     UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size);
 
     template <typename T_ros, typename T_struct>
