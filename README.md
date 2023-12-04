@@ -18,13 +18,13 @@
 
 All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
 
-> [!IMPORTANT]  
-> This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
-> **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.  
-> If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!  
-> &nbsp;&nbsp;&nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*  
-> &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*  
-> &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
+> [!IMPORTANT]
+> This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).
+> **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.
+> If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!
+> &nbsp;&nbsp;&nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*
+> &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*
+> &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*
 
 - [etsi\_its\_messages](#etsi_its_messages)
   - [Concept](#concept)
@@ -149,12 +149,12 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 # ROS 2
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_type:=auto
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p has_btp_header:=true -p etsi_types:=[cam,denm]
 
 # ROS
 roslaunch etsi_its_conversion converter.ros1.launch
 # or
-rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
+rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[cam,denm]
 ```
 
 ##### Subscribed Topics
@@ -177,7 +177,8 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_type:=auto
 
 | Parameter | Type | Description | Options |
 | --- | --- | --- | --- |
-| `etsi_type` | `string` | if set to `auto`, in- and outgoing UDP payloads are expected to include a [4-byte BTP header](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) | `auto`, `cam`, `denm` |
+| `has_btp_header` | `bool` | whether incoming/outgoing UDP messages include a [4-byte BTP header](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
+| `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `denm` |
 
 
 #### Automated Generation

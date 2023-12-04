@@ -68,8 +68,10 @@ const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
 #endif
 
-const std::string Converter::kEtsiTypeParam{"etsi_type"};
-const std::string Converter::kEtsiTypeParamDefault{"auto"};
+const std::string Converter::kHasBtpHeaderParam{"has_btp_header"};
+const bool Converter::kHasBtpHeaderParamDefault{true};
+const std::string Converter::kEtsiTypesParam{"etsi_types"};
+const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm"};
 
 
 bool Converter::logLevelIsDebug() {
@@ -110,32 +112,59 @@ Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", opt
 
 void Converter::loadParameters() {
 
-  std::vector<std::string> known_etsi_types = {kEtsiTypeParamDefault, "cam", "denm"};
+#ifndef ROS1
+  rcl_interfaces::msg::ParameterDescriptor param_desc;
+#endif
 
+  // load has_btp_header
 #ifdef ROS1
-  if (!private_node_handle_.param<std::string>(kEtsiTypeParam, etsi_type_, kEtsiTypeParamDefault)) {
+  if (!private_node_handle_.param<bool>(kHasBtpHeaderParam, has_btp_header_, kHasBtpHeaderParamDefault)) {
     NODELET_WARN(
 #else
-  rcl_interfaces::msg::ParameterDescriptor param_desc;
-  std::stringstream ss;
-  ss << "ETSI type to convert, one of ";
-  for (const auto& e : known_etsi_types) ss << e << ", ";
-  param_desc.description = ss.str();
-  this->declare_parameter(kEtsiTypeParam, kEtsiTypeParamDefault, param_desc);
-
-  if (!this->get_parameter(kEtsiTypeParam, etsi_type_)) {
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  param_desc.description = "whether incoming/outgoing UDP messages include a 4-byte BTP header";
+  this->declare_parameter(kHasBtpHeaderParam, kHasBtpHeaderParamDefault, param_desc);
+  if (!this->get_parameter(kHasBtpHeaderParam, has_btp_header_)) {
     RCLCPP_WARN(this->get_logger(),
 #endif
-      "Parameter '%s' is not set, defaulting to '%s'", kEtsiTypeParam.c_str(), kEtsiTypeParamDefault.c_str());
+      "Parameter '%s' is not set, defaulting to '%s'", kHasBtpHeaderParam.c_str(), kHasBtpHeaderParamDefault ? "true" : "false");
   }
 
-  if (std::find(known_etsi_types.begin(), known_etsi_types.end(), etsi_type_) == known_etsi_types.end()) {
+  // load etsi_types
+#ifdef ROS1
+  if (!private_node_handle_.param<std::vector<std::string>>(kEtsiTypesParam, etsi_types_, kEtsiTypesParamDefault)) {
+    NODELET_WARN(
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  std::stringstream ss;
+  ss << "list of ETSI types to convert, one of ";
+  for (const auto& e : kEtsiTypesParamDefault) ss << e << ", ";
+  param_desc.description = ss.str();
+  this->declare_parameter(kEtsiTypesParam, kEtsiTypesParamDefault, param_desc);
+  if (!this->get_parameter(kEtsiTypesParam, etsi_types_)) {
+    RCLCPP_WARN(this->get_logger(),
+#endif
+      "Parameter '%s' is not set, defaulting to all", kEtsiTypesParam.c_str());
+  }
+
+  // check etsi_types
+  for (const auto& e : etsi_types_) {
+    if (std::find(kEtsiTypesParamDefault.begin(), kEtsiTypesParamDefault.end(), e) == kEtsiTypesParamDefault.end())
+#ifdef ROS1
+      NODELET_WARN(
+#else
+      RCLCPP_WARN(this->get_logger(),
+#endif
+        "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kEtsiTypesParam.c_str());
+  }
+  if (!has_btp_header_ && etsi_types_.size() > 1) {
 #ifdef ROS1
     NODELET_WARN(
 #else
     RCLCPP_WARN(this->get_logger(),
 #endif
-      "Invalid value for parameter '%s', defaulting to '%s'", kEtsiTypeParam.c_str(), kEtsiTypeParamDefault.c_str());
+      "Parameter '%s' is set to 'false', but multiple 'etsi_types' are configured, dropping all but the first", kHasBtpHeaderParam.c_str());
+    etsi_types_.resize(1);
   }
 }
 
@@ -148,23 +177,31 @@ void Converter::setup() {
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
   publishers_["denm"] = private_node_handle_.advertise<etsi_its_denm_msgs::DENM>(kOutputTopicDenm, 1);
   subscriber_udp_ = private_node_handle_.subscribe(kInputTopicUdp, 1, &Converter::udpCallback, this);
-  subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
-  subscribers_["denm"] = private_node_handle_.subscribe(kInputTopicDenm, 1, &Converter::rosCallbackDenm, this);
-  NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["cam"].getTopic().c_str());
-  NODELET_INFO("Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
-  NODELET_INFO("Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_.getTopic().c_str(), publishers_["denm"].getTopic().c_str());
-  NODELET_INFO("Converting native ROS DENM messages on '%s' to UDP messages on '%s'", subscribers_["denm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
+    subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
+    NODELET_INFO("Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_.getTopic().c_str(), publishers_["cam"].getTopic().c_str());
+    NODELET_INFO("Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  }
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
+    subscribers_["denm"] = private_node_handle_.subscribe(kInputTopicDenm, 1, &Converter::rosCallbackDenm, this);
+    NODELET_INFO("Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_.getTopic().c_str(), publishers_["denm"].getTopic().c_str());
+    NODELET_INFO("Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  }
 #else
   publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
   publishers_cam_["cam"] = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
   publishers_denm_["denm"] = this->create_publisher<etsi_its_denm_msgs::msg::DENM>(kOutputTopicDenm, 1);
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
-  subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
-  subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
-  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM messages on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type '%s' on '%s' to native ROS messages on '%s'", etsi_type_.c_str(), subscriber_udp_->get_topic_name(), publishers_denm_["denm"]->get_topic_name());
-  RCLCPP_INFO(this->get_logger(), "Converting native ROS DENM messages on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
+    subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
+    subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publishers_denm_["denm"]->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
 #endif
 }
 
@@ -182,10 +219,10 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #endif
     "Received bitstring");
 
-  // decode BTP-Header, if type detection is enabled
-  std::string detected_etsi_type = etsi_type_;
+  // decode BTP-Header if enabled
+  std::string detected_etsi_type = etsi_types_[0];
   int offset = 0;
-  if (etsi_type_ == "auto") {
+  if (has_btp_header_) {
     offset = 4;
     const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
     uint16_t destination_port = ntohs(btp_header[0]);
@@ -326,7 +363,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #else
   udp_msgs::msg::UdpPacket udp_msg;
 #endif
-  if (etsi_type_ == "auto") {
+  if (has_btp_header_) {
     // add BTP-Header, if type detection is enabled
     uint16_t destination_port = htons(kBtpHeaderDestinationPortCam);
     uint16_t destination_port_info = 0;
@@ -397,7 +434,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #else
   udp_msgs::msg::UdpPacket udp_msg;
 #endif
-  if (etsi_type_ == "auto") {
+  if (has_btp_header_) {
     // add BTP-Header, if type detection is enabled
     uint16_t destination_port = htons(kBtpHeaderDestinationPortDenm);
     uint16_t destination_port_info = 0;
