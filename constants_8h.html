@@ -75,6 +75,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">constants.h File Reference</div></div>
 </div><!--header-->
@@ -82,35 +83,109 @@ $(function() {
 
 <p>File containing constants that are used in the context of ETIS ITS Messages.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+</div>
 <p><a href="constants_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a985af834e01c1ef58a3c86b5a8e04dcd" id="r_a985af834e01c1ef58a3c86b5a8e04dcd"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#a985af834e01c1ef58a3c86b5a8e04dcd">etsi_its_msgs::getLeapSecondInsertionsSince2004</a> (const uint64_t unix_seconds)</td></tr>
+<tr class="memdesc:a985af834e01c1ef58a3c86b5a8e04dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the leap second insertions since 2004 for given unix seconds.  <br /></td></tr>
+<tr class="separator:a985af834e01c1ef58a3c86b5a8e04dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aa33d972b044b7d7dee14dfabc23fe2a0" id="r_aa33d972b044b7d7dee14dfabc23fe2a0"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#aa33d972b044b7d7dee14dfabc23fe2a0">etsi_its_msgs::N_LEAP_SECONDS</a> = 5</td></tr>
-<tr class="separator:aa33d972b044b7d7dee14dfabc23fe2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe090f2191000bd5d80d9f0bf977e17e" id="r_abe090f2191000bd5d80d9f0bf977e17e"><td class="memItemLeft" align="right" valign="top">const uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#abe090f2191000bd5d80d9f0bf977e17e">etsi_its_msgs::UNIX_SECONDS_2004</a> = 1072915200</td></tr>
 <tr class="separator:abe090f2191000bd5d80d9f0bf977e17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad21a88f0cc0e47918ce94a73f162e4" id="r_abad21a88f0cc0e47918ce94a73f162e4"><td class="memItemLeft" align="right" valign="top">const std::map&lt; uint64_t, uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></td></tr>
+<tr class="memdesc:abad21a88f0cc0e47918ce94a73f162e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion  <br /></td></tr>
+<tr class="separator:abad21a88f0cc0e47918ce94a73f162e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File containing constants that are used in the context of ETIS ITS Messages. </p>
 
 <p class="definition">Definition in file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="aa33d972b044b7d7dee14dfabc23fe2a0" name="aa33d972b044b7d7dee14dfabc23fe2a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa33d972b044b7d7dee14dfabc23fe2a0">&#9670;&#160;</a></span>N_LEAP_SECONDS</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a985af834e01c1ef58a3c86b5a8e04dcd" name="a985af834e01c1ef58a3c86b5a8e04dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985af834e01c1ef58a3c86b5a8e04dcd">&#9670;&#160;</a></span>getLeapSecondInsertionsSince2004()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t etsi_its_msgs::getLeapSecondInsertionsSince2004 </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t&#160;</td>
+          <td class="paramname"><em>unix_seconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the leap second insertions since 2004 for given unix seconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unix_seconds</td><td>the current unix seconds for that the leap second insertions since 2004 shall be provided </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint16_t the number of leap second insertions since 2004 for unix_seconds </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00060">60</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>{</div>
+<div class="line"><span class="lineno">   62</span>    <span class="comment">// Check if the map is empty</span></div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   64</span>    <span class="keyword">auto</span> it = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(unix_seconds); <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   66</span>    --it; <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> it-&gt;second; <span class="comment">// Return the corresponding value</span></div>
+<div class="line"><span class="lineno">   68</span>}</div>
+<div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00045">constants.h:45</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="abad21a88f0cc0e47918ce94a73f162e4" name="abad21a88f0cc0e47918ce94a73f162e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abad21a88f0cc0e47918ce94a73f162e4">&#9670;&#160;</a></span>LEAP_SECOND_INSERTIONS_SINCE_2004</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int etsi_its_msgs::N_LEAP_SECONDS = 5</td>
+          <td class="memname">const std::map&lt;uint64_t, uint16_t&gt; etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    {UNIX_SECONDS_2004, 0},</div>
+<div class="line">    {1136073599, 1}, </div>
+<div class="line">    {1230767999, 2}, </div>
+<div class="line">    {1341100799, 3}, </div>
+<div class="line">    {1435708799, 4}, </div>
+<div class="line">    {1483228799, 5}  </div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00036">36</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00045">45</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                   {</div>
+<div class="line"><span class="lineno">   46</span>    {UNIX_SECONDS_2004, 0},</div>
+<div class="line"><span class="lineno">   47</span>    {1136073599, 1}, <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   48</span>    {1230767999, 2}, <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   49</span>    {1341100799, 3}, <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   50</span>    {1435708799, 4}, <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   51</span>    {1483228799, 5}  <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   52</span>};</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="abe090f2191000bd5d80d9f0bf977e17e" name="abe090f2191000bd5d80d9f0bf977e17e"></a>
@@ -125,7 +200,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00037">37</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00039">39</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
 
 </div>
 </div>

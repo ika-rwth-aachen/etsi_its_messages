@@ -110,12 +110,39 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>etsi_its_msgs {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">const</span> <span class="keywordtype">int</span> N_LEAP_SECONDS = 5; <span class="comment">// 5 lead seconds for 2023</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">const</span> uint64_t UNIX_SECONDS_2004 = 1072915200; <span class="comment">// Unix-Seconds for 2004-01-01T00:00:00.000Z</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span>etsi_its_msgs {</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace etsi_its_msgs</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">const</span> uint64_t UNIX_SECONDS_2004 = 1072915200; <span class="comment">// Unix-Seconds for 2004-01-01T00:00:00.000Z</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">   45</a></span><span class="keyword">const</span> std::map&lt;uint64_t, uint16_t&gt; <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    {UNIX_SECONDS_2004, 0},</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {1136073599, 1}, <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {1230767999, 2}, <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    {1341100799, 3}, <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {1435708799, 4}, <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    {1483228799, 5}  <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="constants_8h.html#a985af834e01c1ef58a3c86b5a8e04dcd">   60</a></span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="constants_8h.html#a985af834e01c1ef58a3c86b5a8e04dcd">getLeapSecondInsertionsSince2004</a>(<span class="keyword">const</span> uint64_t unix_seconds)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="comment">// Check if the map is empty</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">auto</span> it = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(unix_seconds); <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    --it; <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> it-&gt;second; <span class="comment">// Return the corresponding value</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>} <span class="comment">// namespace etsi_its_msgs</span></div>
+<div class="ttc" id="aconstants_8h_html_a985af834e01c1ef58a3c86b5a8e04dcd"><div class="ttname"><a href="constants_8h.html#a985af834e01c1ef58a3c86b5a8e04dcd">etsi_its_msgs::getLeapSecondInsertionsSince2004</a></div><div class="ttdeci">uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds)</div><div class="ttdoc">Get the leap second insertions since 2004 for given unix seconds.</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00060">constants.h:60</a></div></div>
+<div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00045">constants.h:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

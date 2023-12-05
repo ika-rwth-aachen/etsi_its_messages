@@ -94,9 +94,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2bf434826823999927be1ac269485867" id="r_a2bf434826823999927be1ac269485867"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cdd__setters_8h.html#a2bf434826823999927be1ac269485867">etsi_its_msgs::cdd_access::setStationId</a> (StationID &amp;station_id, const uint32_t id_value)</td></tr>
 <tr class="memdesc:a2bf434826823999927be1ac269485867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Station Id object.  <br /></td></tr>
 <tr class="separator:a2bf434826823999927be1ac269485867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9303147d884fe74e8748a388b693c9e" id="r_af9303147d884fe74e8748a388b693c9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cdd__setters_8h.html#af9303147d884fe74e8748a388b693c9e">etsi_its_msgs::cdd_access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS)</td></tr>
-<tr class="memdesc:af9303147d884fe74e8748a388b693c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
-<tr class="separator:af9303147d884fe74e8748a388b693c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c308d85076ed37af54b2b00dbee725" id="r_a08c308d85076ed37af54b2b00dbee725"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cdd__setters_8h.html#a08c308d85076ed37af54b2b00dbee725">etsi_its_msgs::cdd_access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
+<tr class="memdesc:a08c308d85076ed37af54b2b00dbee725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
+<tr class="separator:a08c308d85076ed37af54b2b00dbee725"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeca92ad29bebc087539f06694e6eb0e" id="r_adeca92ad29bebc087539f06694e6eb0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cdd__setters_8h.html#adeca92ad29bebc087539f06694e6eb0e">etsi_its_msgs::cdd_access::setItsPduHeader</a> (ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</td></tr>
 <tr class="memdesc:adeca92ad29bebc087539f06694e6eb0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Its Pdu Header object.  <br /></td></tr>
 <tr class="separator:adeca92ad29bebc087539f06694e6eb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1577,8 +1577,8 @@ template&lt;typename T &gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af9303147d884fe74e8748a388b693c9e" name="af9303147d884fe74e8748a388b693c9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9303147d884fe74e8748a388b693c9e">&#9670;&#160;</a></span>setTimestampITS()</h2>
+<a id="a08c308d85076ed37af54b2b00dbee725" name="a08c308d85076ed37af54b2b00dbee725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c308d85076ed37af54b2b00dbee725">&#9670;&#160;</a></span>setTimestampITS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1602,7 +1602,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint16_t&#160;</td>
-          <td class="paramname"><em>n_leap_seconds</em> = <code>etsi_its_msgs::N_LEAP_SECONDS</code>&#160;</td>
+          <td class="paramname"><em>n_leap_seconds</em> = <code>etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1622,14 +1622,14 @@ template&lt;typename T &gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">timestamp_its</td><td>TimestampITS object to set the timestamp </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">unix_nanosecs</td><td>Unix-Nanoseconds to set the timestamp for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epoch_offset</td><td>Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00 </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cdd__setters_8h_source.html#l00063">63</a> of file <a class="el" href="cdd__setters_8h_source.html">cdd_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                                                                                                      {</div>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                                                                                                                                       {</div>
 <div class="line"><span class="lineno">   64</span>    uint64_t t_its = unix_nanosecs*1e-6 + (uint64_t)(n_leap_seconds*1e3) - etsi_its_msgs::UNIX_SECONDS_2004*1e3;</div>
 <div class="line"><span class="lineno">   65</span>    throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">   66</span>    timestamp_its.value = t_its;</div>
