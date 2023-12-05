@@ -37,13 +37,18 @@ SOFTWARE.
 namespace etsi_its_msgs {
 
 const uint64_t UNIX_SECONDS_2004 = 1072915200; // Unix-Seconds for 2004-01-01T00:00:00.000Z
+
+/**
+ * @brief std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion
+ * 
+ */
 const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004 {
     {UNIX_SECONDS_2004, 0},
-    {1136069999, 1}, // 31.12.2005 23:59:59
-    {1230764399, 2}, // 31.12.2008 23:59:59
-    {1341093599, 3}, // 30.06.2012 23:59:59
-    {1435701599, 4}, // 30.06.2015 23:59:59
-    {1483225199, 5}  // 31.12.2016 23:59:59
+    {1136073599, 1}, // 2005-12-31T23:59:59.000Z
+    {1230767999, 2}, // 2008-12-31T23:59:59.000Z
+    {1341100799, 3}, // 2012-06-30T23:59:59.000Z
+    {1435708799, 4}, // 2015-06-30T23:59:59.000Z
+    {1483228799, 5}  // 2016-12-31T23:59:59.000Z
 };
 
 /**
