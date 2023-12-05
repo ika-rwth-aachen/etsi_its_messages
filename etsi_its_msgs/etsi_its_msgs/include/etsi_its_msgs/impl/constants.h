@@ -54,20 +54,20 @@ const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004 {
 /**
  * @brief Get the leap second insertions since 2004 for given unix seconds
  * 
- * @param unix_seconds
+ * @param unix_seconds the current unix seconds for that the leap second insertions since 2004 shall be provided
  * @return uint16_t the number of leap second insertions since 2004 for unix_seconds
  */
 inline uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds)
 {
     // Check if the map is empty
     if (LEAP_SECOND_INSERTIONS_SINCE_2004.empty()) {
-        std::cerr << "WARN: LEAP_SECOND_INSERTIONS_SINCE_2004 is empty!" << std::endl;
+        std::cerr << "WARNING: LEAP_SECOND_INSERTIONS_SINCE_2004 is empty!" << std::endl;
         return 0;
     }
 
     auto it = LEAP_SECOND_INSERTIONS_SINCE_2004.upper_bound(unix_seconds); // Find the first element greater than givenUnixSecond
     if (it == LEAP_SECOND_INSERTIONS_SINCE_2004.begin()) {
-        std::cerr << "Given unix_second is smaller than all keys in the map!" << std::endl;
+        std::cerr << "WARNING: Given unix_second is smaller than all keys in LEAP_SECOND_INSERTIONS_SINCE_2004!" << std::endl;
         return 0;
     }
     --it; // Move iterator to the element with a key less than or equal to givenUnixSecond
