@@ -51,7 +51,7 @@ if(${ROS_VERSION} EQUAL 2)
     )
     target_include_directories(etsi_its_cam_msgs_access-test PUBLIC test)
     ament_target_dependencies(etsi_its_cam_msgs_access-test
-      etsi_its_cam_msgs
+      etsi_its_msgs
       GeographicLib
       geometry_msgs
     )
