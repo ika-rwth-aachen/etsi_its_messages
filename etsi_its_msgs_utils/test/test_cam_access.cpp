@@ -1,7 +1,7 @@
 
 #include <etsi_its_cam_msgs/CAM.h>
 
-#include <etsi_its_msgs/cam_access.h>
+#include <etsi_its_msgs_utils/cam_access.h>
 
 using namespace etsi_its_cam_msgs;
 using namespace etsi_its_cam_msgs::access;

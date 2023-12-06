@@ -25,20 +25,16 @@ SOFTWARE.
 */
 
 /**
- * @file cam_access.hpp
- * @brief Main CAM access header to include in ROS 2 projects
+ * @file impl/cam/cam_access.h
+ * @brief Main CAM access implementation header
  */
 
 #pragma once
 
-// Messages
-#include <etsi_its_cam_msgs/msg/cam.hpp>
-#include <geometry_msgs/msg/point_stamped.hpp>
+using namespace etsi_its_cam_msgs;
 
-namespace etsi_its_cam_msgs {
-    using namespace msg;
-    namespace gm = geometry_msgs::msg;
-}
+#include <etsi_its_msgs_utils/impl/cdd/cdd_access.h>
 
-// Implementation
-#include <etsi_its_msgs/impl/cam/cam_access.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_getters.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_setters.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_utils.h>
