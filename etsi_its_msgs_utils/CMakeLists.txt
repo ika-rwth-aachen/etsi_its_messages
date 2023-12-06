@@ -65,7 +65,7 @@ if(${ROS_VERSION} EQUAL 2)
 elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS
-    etsi_its_cam_msgs
+    etsi_its_msgs
     geometry_msgs
   )
 
@@ -75,7 +75,7 @@ elseif(${ROS_VERSION} EQUAL 1)
     CFG_EXTRAS ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-extras.cmake
     INCLUDE_DIRS include
     CATKIN_DEPENDS
-      etsi_its_cam_msgs
+      etsi_its_msgs
       geometry_msgs
   )
 
