@@ -111,7 +111,6 @@ elseif(${ROS_VERSION} EQUAL 1)
   )
 
   add_message_files(DIRECTORY msg)
-  add_message_files(DIRECTORY msg)
 
   generate_messages(
     DEPENDENCIES std_msgs
