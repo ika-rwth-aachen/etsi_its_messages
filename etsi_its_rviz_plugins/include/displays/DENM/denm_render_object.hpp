@@ -82,6 +82,7 @@ class DENMRenderObject
     double getSpeed();
 
     std::string getCauseCode();
+    std::string getSubCauseCode();
   private:
     // member variables
     std_msgs::msg::Header header;

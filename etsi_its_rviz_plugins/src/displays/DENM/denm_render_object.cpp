@@ -274,5 +274,9 @@ namespace displays
     return cause_code_type;
   }
 
+  std::string DENMRenderObject::getSubCauseCode(){
+    return sub_cause_code_type;
+  }
+
 }  // namespace displays
 }  // namespace etsi_its_msgs

@@ -46,7 +46,7 @@ DENMDisplay::DENMDisplay()
   show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, 
     "Show speed", show_meta_);
   show_cause_code_ = new rviz_common::properties::BoolProperty("CauseCode", true, "Show CauseCode", show_meta_);
-  
+  show_sub_cause_code_ = new rviz_common::properties::BoolProperty("SubCauseCode", true, "Show SubCauseCode", show_meta_);
 }
 
 DENMDisplay::~DENMDisplay()
@@ -171,6 +171,10 @@ void DENMDisplay::update(float wall_dt, float ros_dt)
       }
       if(show_cause_code_->getBool()) {
         text+="Cause: " + denm.getCauseCode();
+        text+="\n";
+      }
+      if(show_sub_cause_code_->getBool()) {
+        text+="SubCause: " + denm.getSubCauseCode();
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
