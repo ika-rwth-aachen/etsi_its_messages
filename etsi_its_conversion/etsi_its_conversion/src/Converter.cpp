@@ -68,6 +68,8 @@ const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
 #endif
 
+const std::string Converter::kIncomingPayloadOffset{"incoming_payload_offset"};
+const int Converter::kIncomingPayloadOffsetDefault{0};
 const std::string Converter::kHasBtpHeaderParam{"has_btp_header"};
 const bool Converter::kHasBtpHeaderParamDefault{true};
 const std::string Converter::kEtsiTypesParam{"etsi_types"};
@@ -115,6 +117,20 @@ void Converter::loadParameters() {
 #ifndef ROS1
   rcl_interfaces::msg::ParameterDescriptor param_desc;
 #endif
+
+  // load incoming_payload_offset
+#ifdef ROS1
+  if (!private_node_handle_.param<int>(kIncomingPayloadOffset, incoming_payload_offset_, kIncomingPayloadOffsetDefault)) {
+    NODELET_WARN(
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  param_desc.description = "number of bytes until actual message payload starts in incoming UDP message (optionally including BTP header)";
+  this->declare_parameter(kIncomingPayloadOffset, kIncomingPayloadOffsetDefault, param_desc);
+  if (!this->get_parameter(kIncomingPayloadOffset, incoming_payload_offset_)) {
+    RCLCPP_WARN(this->get_logger(),
+#endif
+      "Parameter '%s' is not set, defaulting to '%d'", kIncomingPayloadOffset.c_str(), kIncomingPayloadOffsetDefault);
+  }
 
   // load has_btp_header
 #ifdef ROS1
@@ -221,9 +237,9 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   // decode BTP-Header if enabled
   std::string detected_etsi_type = etsi_types_[0];
-  int offset = 0;
+  int offset = incoming_payload_offset_;
   if (has_btp_header_) {
-    offset = 4;
+    offset += 4;
     const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
     uint16_t destination_port = ntohs(btp_header[0]);
     if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
@@ -234,6 +250,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     else if (destination_port == kBtpHeaderDestinationPortCpm) detected_etsi_type = "cpm";
     else detected_etsi_type = "unknown";
   }
+  offset = std::min(0, std::max(offset, static_cast<int>(udp_msg->data.size())));
 
   if (detected_etsi_type == "cam") {
 

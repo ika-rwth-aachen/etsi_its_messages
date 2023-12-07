@@ -92,11 +92,14 @@ class Converter : public rclcpp::Node {
     static const std::string kInputTopicDenm;
     static const std::string kOutputTopicDenm;
 
+    static const std::string kIncomingPayloadOffset;
+    static const int kIncomingPayloadOffsetDefault;
     static const std::string kHasBtpHeaderParam;
     static const bool kHasBtpHeaderParamDefault;
     static const std::string kEtsiTypesParam;
     static const std::vector<std::string> kEtsiTypesParamDefault;
 
+    int incoming_payload_offset_;
     bool has_btp_header_;
     std::vector<std::string> etsi_types_;
 

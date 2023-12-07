@@ -1,5 +1,6 @@
 etsi_its_conversion:
   ros__parameters:
+    incoming_payload_offset: 0
     has_btp_header: true
     etsi_types:
       - cam

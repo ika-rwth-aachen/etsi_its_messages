@@ -1,3 +1,4 @@
+incoming_payload_offset: 0
 has_btp_header: true
 etsi_types:
   - cam
