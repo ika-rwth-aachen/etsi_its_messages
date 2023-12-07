@@ -91,7 +91,7 @@ elseif(${ROS_VERSION} EQUAL 1)
 
   if(CATKIN_ENABLE_TESTING)
     catkin_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.cpp)
-    if(TARGET ${PROJECT_NAME}-test)
+    if(TARGET ${PROJECT_NAME}-cam_test)
       target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
       target_link_libraries(${PROJECT_NAME}-cam_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
     endif()
