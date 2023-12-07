@@ -81,7 +81,7 @@ const std::string Converter::kOutputTopicMapem{"~/mapem/out"};
 const std::string Converter::kHasBtpHeaderParam{"has_btp_header"};
 const bool Converter::kHasBtpHeaderParamDefault{true};
 const std::string Converter::kEtsiTypesParam{"etsi_types"};
-const std::vector<std::string> Converter::kEtsiTypesParamDefault{{"cam", "denm", "spatem", "mapem"}};
+const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm", "spatem", "mapem"};
 
 
 bool Converter::logLevelIsDebug() {
