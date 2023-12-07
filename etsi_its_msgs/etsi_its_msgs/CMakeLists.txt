@@ -28,6 +28,4 @@ elseif(${ROS_VERSION} EQUAL 1)
       etsi_its_denm_msgs
   )
 
-  catkin_package()
-
 endif()
