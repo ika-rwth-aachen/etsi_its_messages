@@ -116,7 +116,7 @@ STRIP_FROM_PATH        = ../
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = README.md ../etsi_its_msgs/etsi_its_msgs/include
+INPUT                  = README.md ../etsi_its_msgs_utils/include
 # INPUT_ENCODING         = UTF-8
 # FILE_PATTERNS          = *.c \
 #                          *.cc \

@@ -117,7 +117,7 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
   return;
 }
 
-void CAMDisplay::update(float wall_dt, float ros_dt)
+void CAMDisplay::update(float, float)
 {
   // Check for outdated CAMs
   for (auto it = cams_.begin(); it != cams_.end(); ) {
