@@ -23,7 +23,7 @@ namespace displays
 class DENMRenderObject
 {
   public:
-    DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS);
+    DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, rclcpp::Time receive_time, uint16_t n_leap_seconds=5);
 
     /**
      * @brief This function validates all float variables that are part of a DENMRenderObject
