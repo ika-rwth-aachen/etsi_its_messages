@@ -13,6 +13,8 @@ if(${ROS_VERSION} EQUAL 2)
 
   # find dependencies
   find_package(ament_cmake REQUIRED)
+  find_package(etsi_its_cam_msgs REQUIRED)
+  find_package(etsi_its_denm_msgs REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
   find_package(GeographicLib REQUIRED)
   find_package(pluginlib REQUIRED)
@@ -64,6 +66,8 @@ if(${ROS_VERSION} EQUAL 2)
   ament_target_dependencies(${PROJECT_NAME}
     PUBLIC
     rclcpp
+    etsi_its_cam_msgs
+    etsi_its_denm_msgs
     etsi_its_msgs
     GeographicLib
     rviz_common
