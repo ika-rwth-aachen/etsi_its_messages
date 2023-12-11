@@ -77,7 +77,8 @@ void DENMDisplay::reset()
 void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg)
 {
   // Generate DENM render object from message
-  DENMRenderObject denm(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+  rclcpp::Time now = rviz_node_->now();
+  DENMRenderObject denm(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds())); // 5 leap seconds in 2023
   if (!denm.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
