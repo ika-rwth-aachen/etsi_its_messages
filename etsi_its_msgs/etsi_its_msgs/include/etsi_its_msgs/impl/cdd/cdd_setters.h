@@ -1,5 +1,31 @@
+/*
+=============================================================================
+MIT License
+
+Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+=============================================================================
+*/
+
 /**
- * @file
+ * @file impl/cdd/cdd_setters.h
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD)
  */
 
@@ -21,20 +47,20 @@ namespace cdd_access {
    * @param station_id
    * @param id_value
    */
-  inline void setStationId(StationID& station_id, const int id_value) {
+  inline void setStationId(StationID& station_id, const uint32_t id_value) {
     throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
     station_id.value = id_value;
   }
 
   /**
    * @brief Set the TimestampITS object
-   * 
+   *
    * @param[in] timestamp_its TimestampITS object to set the timestamp
    * @param[in] unix_nanosecs Unix-Nanoseconds to set the timestamp for
-   * @param[in] n_leap_seconds Number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
+   * @param[in] n_leap_seconds Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
    * @param[in] epoch_offset Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00
    */
-  inline void setTimestampITS(TimestampIts& timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::N_LEAP_SECONDS) {
+  inline void setTimestampITS(TimestampIts& timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
     uint64_t t_its = unix_nanosecs*1e-6 + (uint64_t)(n_leap_seconds*1e3) - etsi_its_msgs::UNIX_SECONDS_2004*1e3;
     throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
     timestamp_its.value = t_its;
@@ -48,7 +74,7 @@ namespace cdd_access {
    * @param station_id
    * @param protocol_version
    */
-  inline void setItsPduHeader(ItsPduHeader& header, const int message_id, const int station_id, const int protocol_version=0) {
+  inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0) {
     setStationId(header.station_id, station_id);
     throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
     header.message_id = message_id;
@@ -62,7 +88,7 @@ namespace cdd_access {
    * @param station_type
    * @param value
    */
-  inline void setStationType(StationType& station_type, const int value) {
+  inline void setStationType(StationType& station_type, const uint8_t value) {
     throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
     station_type.value = value;
   }
@@ -280,7 +306,7 @@ namespace cdd_access {
 
   /**
    * @brief Set the LateralAcceleration object
-   * 
+   *
    * AccelerationConfidence is set to UNAVAILABLE
    *
    * @param accel object to set
@@ -293,11 +319,11 @@ namespace cdd_access {
 
   /**
    * @brief Set the ReferencePosition from a given UTM-Position
-   * 
+   *
    * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
    * The z-Coordinate is directly used as altitude value
    * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
-   * 
+   *
    * @param[out] reference_position ReferencePosition to set
    * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
    * @param[in] zone the UTM zone (zero means UPS) of the given position
@@ -318,7 +344,7 @@ namespace cdd_access {
     }
     setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
   }
-  
+
   /**
    * @brief Set a Bit String by a vector of bools
    *

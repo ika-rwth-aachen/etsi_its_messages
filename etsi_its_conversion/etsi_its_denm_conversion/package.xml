@@ -1,28 +1,31 @@
 <?xml version="1.0"?>
 <package format="3">
+
   <name>etsi_its_denm_conversion</name>
   <version>1.0.0</version>
-  <description>ETSI ITS DENM Conversion</description>
+  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS DENMs</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
-
-  <license>TODO</license>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
 
   <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
+  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
 
-  <depend>boost</depend>
+  <license>MIT</license>
+
   <depend>etsi_its_denm_coding</depend>
   <depend>etsi_its_denm_msgs</depend>
+  <depend>etsi_its_primitives_conversion</depend>
   <depend>ros_environment</depend>
 
-  <!-- ROS1 -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-
-  <!-- ROS2 -->
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
   <export>
     <build_type condition="$ROS_VERSION == 1">catkin</build_type>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
   </export>
+
 </package>

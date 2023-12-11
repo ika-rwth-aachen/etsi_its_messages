@@ -1,11 +1,11 @@
 Code Generation:
   trigger:
-    include: .gitlab-ci.code-generation.yml
+    include: .gitlab-ci.codegen.yml
     strategy: depend
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
-ROS1:
+ROS:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
@@ -17,8 +17,11 @@ ROS1:
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+    VCS_IMPORT_FILE: '.ros1.repos'
+    UPSTREAM_WORKSPACE: '.ros1.repos' # define .repos for industrial_ci
 
-ROS2:
+ROS 2:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
@@ -31,3 +34,4 @@ ROS2:
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_PUSH_AS_LATEST: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
