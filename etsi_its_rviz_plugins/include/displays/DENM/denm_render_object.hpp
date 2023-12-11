@@ -81,7 +81,18 @@ class DENMRenderObject
      */
     double getSpeed();
 
+    /**
+     * @brief Get the Cause Code object
+     * 
+     * @return std::string 
+     */
     std::string getCauseCode();
+
+    /**
+     * @brief Get the Sub Cause Code object
+     * 
+     * @return std::string 
+     */
     std::string getSubCauseCode();
   private:
     // member variables

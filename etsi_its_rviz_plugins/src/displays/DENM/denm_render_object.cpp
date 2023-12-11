@@ -38,6 +38,7 @@ namespace displays
     station_id = denm.header.station_id.value;
     station_type = 5; //station_type = etsi_its_denm_msgs::access::getStationType(denm);
     //definition of cause codes
+    //DENM-Documentation: https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
     cause_code = denm.denm.situation.event_type.cause_code.value;
     sub_cause_code = denm.denm.situation.event_type.sub_cause_code.value;
     if(cause_code == 1) {
