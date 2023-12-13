@@ -15,7 +15,6 @@ jobs:
           platform: amd64,arm64
           target: dev,run
           enable-recursive-vcs-import: 'false'
-          vcs-import-file: '.ros1.repos'
 
   ros2:
     runs-on: ubuntu-latest
