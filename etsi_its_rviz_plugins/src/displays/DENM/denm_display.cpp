@@ -126,9 +126,6 @@ void DENMDisplay::update(float, float)
     geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
-    
-    position.x-=dimensions.x/2.0;
-    position.z+=dimensions.z/2.0;
 
     //set size parameters for arrow
     int shaft_length = 5;
