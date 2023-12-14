@@ -7,7 +7,6 @@
 
 #include "rviz_common/ros_topic_display.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
-#include "rviz_rendering/objects/shape.hpp"
 #include "rviz_rendering/objects/arrow.hpp"
 
 #include <rclcpp/rclcpp.hpp>
