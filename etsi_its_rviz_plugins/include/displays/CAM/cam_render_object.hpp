@@ -29,7 +29,7 @@ SOFTWARE.
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 #include <tf2/LinearMath/Quaternion.h>
-#include <etsi_its_msgs/cam_access.hpp>
+#include <etsi_its_msgs_utils/cam_access.hpp>
 
 #include "rviz_common/validate_floats.hpp"
 
@@ -45,7 +45,7 @@ namespace displays
 class CAMRenderObject
 {
   public:
-    CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::N_LEAP_SECONDS);
+    CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second);
 
     /**
      * @brief This function validates all float variables that are part of a CAMRenderObject

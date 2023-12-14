@@ -15,15 +15,14 @@
 
   <license>MIT</license>
 
+  <depend>etsi_its_cam_coding</depend>
+  <depend>etsi_its_denm_coding</depend>
+  <depend>ros_environment</depend>
+
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
-  <depend>ros_environment</depend>
-  <depend>etsi_its_cam_coding</depend>
-  <depend>etsi_its_denm_coding</depend>
-
   <export>
-    <metapackage condition="$ROS_VERSION == 1"/>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
   </export>
 

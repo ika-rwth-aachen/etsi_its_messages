@@ -100,7 +100,8 @@ void CAMDisplay::reset()
 void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 {
   // Generate CAM render object from message
-  CAMRenderObject cam(*msg, rviz_node_->now(), 5); // 5 leap seconds in 2023
+  rclcpp::Time now = rviz_node_->now();
+  CAMRenderObject cam(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds()));
   if (!cam.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
@@ -116,7 +117,7 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
   return;
 }
 
-void CAMDisplay::update(float wall_dt, float ros_dt)
+void CAMDisplay::update(float, float)
 {
   // Check for outdated CAMs
   for (auto it = cams_.begin(); it != cams_.end(); ) {

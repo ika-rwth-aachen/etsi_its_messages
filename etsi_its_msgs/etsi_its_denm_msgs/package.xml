@@ -15,6 +15,7 @@
 
   <license>MIT</license>
 
+  <depend>ros_environment</depend>
   <depend>std_msgs</depend>
 
   <!-- ROS 2 -->
