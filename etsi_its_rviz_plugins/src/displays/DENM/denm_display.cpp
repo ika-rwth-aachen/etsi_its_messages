@@ -43,8 +43,6 @@ DENMDisplay::DENMDisplay()
   char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
   show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, 
     "Show StationID", show_meta_);
-  show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, 
-    "Show speed", show_meta_);
   show_cause_code_ = new rviz_common::properties::BoolProperty("CauseCode", true, "Show CauseCode", show_meta_);
   show_sub_cause_code_ = new rviz_common::properties::BoolProperty("SubCauseCode", true, "Show SubCauseCode", show_meta_);
 }
@@ -164,10 +162,6 @@ void DENMDisplay::update(float, float)
       std::string text;
       if(show_station_id_->getBool()) {
         text+="StationID: " + std::to_string(denm.getStationID());
-        text+="\n";
-      }
-      if(show_speed_->getBool()) {
-        text+="Speed: " + std::to_string((int)(denm.getSpeed()*3.6)) + " km/h";
         text+="\n";
       }
       if(show_cause_code_->getBool()) {
