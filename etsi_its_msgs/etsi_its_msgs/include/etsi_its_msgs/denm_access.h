@@ -25,16 +25,19 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cam/cam_access.h
- * @brief Main CAM access implementation header
+ * @file denm_access.h
+ * @brief Main DENM access header to include in ROS 1 projects
  */
 
 #pragma once
 
-using namespace etsi_its_cam_msgs;
+// Messages
+#include <etsi_its_denm_msgs/DENM.h>
+#include <geometry_msgs/PointStamped.h>
 
-#include <etsi_its_msgs/impl/cdd/cdd_access.h>
+namespace etsi_its_denm_msgs {
+    namespace gm = geometry_msgs;
+}
 
-#include <etsi_its_msgs/impl/cam/cam_getters.h>
-#include <etsi_its_msgs/impl/cam/cam_setters.h>
-#include <etsi_its_msgs/impl/cam/cam_utils.h>
+// Implementation
+#include <etsi_its_msgs/impl/denm/denm_access.h>

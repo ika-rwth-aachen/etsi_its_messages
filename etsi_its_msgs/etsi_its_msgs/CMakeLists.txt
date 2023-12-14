@@ -43,21 +43,6 @@ if(${ROS_VERSION} EQUAL 2)
     INCLUDES DESTINATION include
   )
 
-  if(BUILD_TESTING)
-    find_package(ament_cmake_gtest REQUIRED)
-    ament_add_gtest(etsi_its_cam_msgs_access-test test/test_cam_access.ros2.cpp)
-    target_include_directories(etsi_its_cam_msgs_access-test PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include>
-    )
-    target_include_directories(etsi_its_cam_msgs_access-test PUBLIC test)
-    ament_target_dependencies(etsi_its_cam_msgs_access-test
-      etsi_its_cam_msgs
-      GeographicLib
-      geometry_msgs
-    )
-  endif()
-
   ament_package(
     CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )

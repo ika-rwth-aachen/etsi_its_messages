@@ -90,26 +90,6 @@ namespace cdd_access {
   }
 
   /**
-   * @brief Get the Vehicle Length
-   *
-   * @param vehicleLength to get the vehicle length value from
-   * @return vehicle length value in meter as decimal number
-   */
-  inline double getVehicleLength(const VehicleLength& vehicle_length){
-    return ((double)vehicle_length.vehicle_length_value.value)*1e-1;
-  }
-
-  /**
-   * @brief Get the Vehicle Width
-   *
-   * @param vehicleWidth to get the vehicle width value from
-   * @return vehicle width value in meter as decimal number
-   */
-  inline double getVehicleWidth(const VehicleWidth& vehicle_width){
-    return ((double)vehicle_width.value)*1e-1;
-  }
-
-  /**
    * @brief Get the vehicle speed
    *
    * @param speed to get the speed value from
@@ -117,26 +97,6 @@ namespace cdd_access {
    */
   inline double getSpeed(const Speed& speed){
     return ((double)speed.speed_value.value)*1e-2;
-  }
-
-  /**
-   * @brief Get the lateral acceleration
-   *
-   * @param longitudinalAcceleration to get the lateral acceleration from
-   * @return lateral acceleration in m/s^2 as decimal number (left is positive)
-   */
-  inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration){
-    return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value)*1e-1;
-  }
-
-  /**
-   * @brief Get the lateral acceleration
-   *
-   * @param lateralAcceleration to get the lateral acceleration from
-   * @return lateral acceleration in m/s^2 as decimal number (left is positive)
-   */
-  inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration){
-    return ((double)lateral_acceleration.lateral_acceleration_value.value)*1e-1;
   }
 
   /**
@@ -199,17 +159,6 @@ namespace cdd_access {
     }
     return bits;
   }
-
-  /**
-   * @brief Get Acceleration Control in form of bool vector
-   *
-   * @param acceleration_control
-   * @return std::vector<bool>
-   */
-  inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control){
-    return getBitString(acceleration_control.value, acceleration_control.bits_unused);
-  }
-
   /**
    * @brief Get the Driving Lane Status in form of bool vector
    *
@@ -221,26 +170,6 @@ namespace cdd_access {
   }
 
   /**
-   * @brief Get the Exterior Lights in form of bool vector
-   *
-   * @param exterior_lights
-   * @return std::vector<bool>
-   */
-  inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights){
-    return getBitString(exterior_lights.value, exterior_lights.bits_unused);
-  }
-
-  /**
-   * @brief Get the Special Transport Type in form of bool vector
-   *
-   * @param special_transport_type
-   * @return std::vector<bool>
-   */
-  inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
-    return getBitString(special_transport_type.value, special_transport_type.bits_unused);
-  }
-
-  /**
    * @brief Get the Lightbar Siren In Use in form of bool vector
    *
    * @param light_bar_siren_in_use
@@ -249,17 +178,6 @@ namespace cdd_access {
   inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
     return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
   }
-
-  /**
-   * @brief Get the Vehicle Role in form of bool vector
-   *
-   * @param vehicle_role
-   * @return std::vector<bool>
-   */
-  inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
-    return getBitString(emergency_priority.value, emergency_priority.bits_unused);
-  }
-
 } // namespace access
 
 } // namespace etsi_its_msgs

@@ -35,7 +35,7 @@ namespace displays
     header.stamp = rclcpp::Time(nanosecs);
     
     //getStationID()
-    station_id = denm.header.station_id.value;
+    station_id = etsi_its_denm_msgs::access::getStationID(denm);
     station_type = denm.denm.management.station_type.value; //station_type = etsi_its_denm_msgs::access::getStationType(denm);
     //definition of cause codes
     //DENM-Documentation: https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
