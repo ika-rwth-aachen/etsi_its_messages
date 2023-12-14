@@ -26,15 +26,15 @@ DENMDisplay::DENMDisplay()
   // General Properties
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
     "Timeout", 0.1f,
-    "Time (in s) until objects disappear", this);
+    "Time (in s) until visualizations disappear", this);
   buffer_timeout_->setMin(0);
   bb_scale_ = new rviz_common::properties::FloatProperty(
     "Scale", 1.0f,
-    "Scale of objects", this);
+    "Scale of visualization", this);
   bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(255, 0, 25),
-    "Object color", this);
+    "Color", this);
   show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true, 
     "Show metadata as text next to objects", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
@@ -105,7 +105,7 @@ void DENMDisplay::update(float, float)
   
 
   // Render all valid denms
-  bboxs_.clear();
+  arrows_.clear();
   texts_.clear();
   for(auto it = denms_.begin(); it != denms_.end(); ++it) {
 
@@ -144,7 +144,7 @@ void DENMDisplay::update(float, float)
     child_scene_node->setOrientation(orientation);
     
     // create arrow object
-    std::shared_ptr<rviz_rendering::Arrow> bbox = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
+    std::shared_ptr<rviz_rendering::Arrow> arrow = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     
     // set the dimensions of arrow
     Ogre::Vector3 dims;
@@ -152,12 +152,12 @@ void DENMDisplay::update(float, float)
     dims.x = dimensions.x*scale;
     dims.y = dimensions.y*scale;
     dims.z = dimensions.z*scale;
-    bbox->setScale(dims);
+    arrow->setScale(dims);
     // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
-    bbox->setColor(bb_color);
-    bbox->setOrientation(orientation);
-    bboxs_.push_back(bbox);
+    arrow->setColor(bb_color);
+    arrow->setOrientation(orientation);
+    arrows_.push_back(arrow);
 
     // Visualize meta-information as text
     if(show_meta_->getBool()) {
