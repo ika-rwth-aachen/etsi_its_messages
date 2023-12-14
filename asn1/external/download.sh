@@ -45,6 +45,7 @@ if [ ! -f $DIR/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule_
 fi
 if [ ! -f $DIR/ISO14816_AVIAEINumberingAndDataStructures.asn ]; then
   wget -P $DIR https://standards.iso.org/iso/14816/ISO14816%20ASN.1%20repository/ISO14816_AVIAEINumberingAndDataStructures.asn
+  iconv -f ISO-8859-1 -t UTF-8 $DIR/ISO14816_AVIAEINumberingAndDataStructures.asn > $DIR/ISO14816_AVIAEINumberingAndDataStructures.asn
 fi
 if [ ! -f "$DIR/ISO14906(2018)EfcDsrcApplicationv6.asn" ]; then
   wget -P $DIR 'https://standards.iso.org/iso/14906/ed-3/en/ISO14906(2018)EfcDsrcApplicationv6.asn'
