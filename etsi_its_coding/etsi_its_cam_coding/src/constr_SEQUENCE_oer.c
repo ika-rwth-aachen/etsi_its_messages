@@ -3,12 +3,10 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef ASN_DISABLE_OER_SUPPORT
-
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/constr_SEQUENCE.h>
+#include <etsi_its_cam_coding/asn_bit_data.h>
 #include <etsi_its_cam_coding/OPEN_TYPE.h>
-#include <errno.h>
 
 /*
  * This macro "eats" the part of the buffer which is definitely "consumed",
@@ -133,7 +131,7 @@ SEQUENCE_decode_oer(const asn_codec_ctx_t *opt_codec_ctx,
         ASN_DEBUG(
             "Expecting preamble bits %" ASN_PRI_SIZE " for %s (including %d extension bits)",
             preamble_bits, td->name, has_extensions_bit);
-
+        ctx->start = ptr;
         if(preamble_bytes > size) {
             ASN__DECODE_STARVED;
         }
@@ -210,6 +208,7 @@ SEQUENCE_decode_oer(const asn_codec_ctx_t *opt_codec_ctx,
             }
             switch(rval.code) {
             case RC_OK:
+                ctx->left = consumed_myself;
                 ADVANCE(rval.consumed);
                 break;
             case RC_WMORE:
@@ -248,6 +247,7 @@ SEQUENCE_decode_oer(const asn_codec_ctx_t *opt_codec_ctx,
 
         if(!extensions_present) {
             ctx->phase = 10;
+            ctx->left = consumed_myself;
             RETURN(RC_OK);
         }
 
@@ -371,7 +371,7 @@ SEQUENCE_decode_oer(const asn_codec_ctx_t *opt_codec_ctx,
             break;
         }
     }
-
+    ctx->left = consumed_myself;
     RETURN(RC_OK);
 }
 
@@ -453,7 +453,7 @@ SEQUENCE_encode_oer(const asn_TYPE_descriptor_t *td,
      */
     for(edx = 0; edx < td->elements_count; edx++) {
         asn_TYPE_member_t *elm = &td->elements[edx];
-        asn_enc_rval_t er;
+        asn_enc_rval_t er = {0,0,0};
         const void *memb_ptr;
 
         if(IN_EXTENSION_GROUP(specs, edx)) break;
@@ -486,7 +486,7 @@ SEQUENCE_encode_oer(const asn_TYPE_descriptor_t *td,
     }
 
     /*
-     * Before encode extensions, encode extensions additions presense bitmap
+     * Before encode extensions, encode extensions additions presence bitmap
      # X.696 (08/2015) #16.4.
      */
     if(has_extensions) {
@@ -557,5 +557,3 @@ SEQUENCE_encode_oer(const asn_TYPE_descriptor_t *td,
         ASN__ENCODED_OK(er);
     }
 }
-
-#endif  /* ASN_DISABLE_OER_SUPPORT */

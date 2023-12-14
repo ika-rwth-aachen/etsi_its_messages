@@ -5,7 +5,6 @@
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/OPEN_TYPE.h>
 #include <etsi_its_cam_coding/constr_CHOICE.h>
-#include <errno.h>
 
 asn_dec_rval_t
 OPEN_TYPE_oer_get(const asn_codec_ctx_t *opt_codec_ctx,
