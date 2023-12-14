@@ -138,8 +138,10 @@ elseif(${ROS_VERSION} EQUAL 1)
     std_msgs
   )
 
-  add_message_files(DIRECTORY msg/DENM-PDU-Descriptions)
+  add_message_files(DIRECTORY msg/AddGrpC)
+  add_message_files(DIRECTORY msg/DSRC)
   add_message_files(DIRECTORY msg/ITS-Container)
+  add_message_files(DIRECTORY msg/SPATEM-PDU-Descriptions)
 
   generate_messages(
     DEPENDENCIES std_msgs
