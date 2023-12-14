@@ -28,7 +28,7 @@
 # NodeXY ::= SEQUENCE {
 #   delta       NodeOffsetPointXY,
 #   attributes  NodeAttributeSetXY OPTIONAL,
-#   ...
+#   ... 
 # }
 # ------------------------------------------------------------------------------
 

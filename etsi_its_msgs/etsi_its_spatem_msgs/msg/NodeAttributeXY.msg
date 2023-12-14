@@ -26,7 +26,7 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # NodeAttributeXY ::= ENUMERATED {
-#   reserved,
+#   reserved,  
 #   stopLine,
 #   roundedCapStyleA,
 #   roundedCapStyleB,

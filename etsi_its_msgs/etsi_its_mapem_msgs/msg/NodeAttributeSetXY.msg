@@ -32,7 +32,7 @@
 #   data         LaneDataAttributeList OPTIONAL,
 #   dWidth       Offset-B10 OPTIONAL,
 #   dElevation   Offset-B10 OPTIONAL,
-#   regional     SEQUENCE (SIZE(1..4)) OF
+#   regional     SEQUENCE (SIZE(1..4)) OF 
 #                RegionalExtension {{Reg-NodeAttributeSetXY}} OPTIONAL,
 # ------------------------------------------------------------------------------
 

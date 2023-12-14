@@ -26,14 +26,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # LaneDataAttribute ::= CHOICE {
-#    pathEndPointAngle        DeltaAngle,
-#    laneCrownPointCenter     RoadwayCrownAngle,
-#    laneCrownPointLeft       RoadwayCrownAngle,
-#    laneCrownPointRight      RoadwayCrownAngle,
-#    laneAngle                MergeDivergeNodeAngle,
+#    pathEndPointAngle        DeltaAngle,  
+#    laneCrownPointCenter     RoadwayCrownAngle,  
+#    laneCrownPointLeft       RoadwayCrownAngle,  
+#    laneCrownPointRight      RoadwayCrownAngle,  
+#    laneAngle                MergeDivergeNodeAngle,  
 #    speedLimits              SpeedLimitList,
-#    regional  SEQUENCE (SIZE(1..4)) OF
-#              RegionalExtension {{Reg-LaneDataAttribute}},
+#    regional  SEQUENCE (SIZE(1..4)) OF 
+#              RegionalExtension {{Reg-LaneDataAttribute}}, 
 #    ...
 # }
 # ------------------------------------------------------------------------------

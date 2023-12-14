@@ -10,6 +10,7 @@
 #ifndef __EXTENSIONS__
 #define __EXTENSIONS__          /* for Sun */
 #endif
+
 #include "etsi_its_mapem_coding/asn_application.h"	/* Application-visible API */
 
 #ifndef	__NO_ASSERT_H__		/* Include assert.h only for internal use. */
@@ -19,6 +20,15 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+#if !defined(ASN_DISABLE_UPER_SUPPORT)
+#include <etsi_its_mapem_coding/uper_decoder.h>
+#include <etsi_its_mapem_coding/uper_encoder.h>
+#endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) */
+#if !defined(ASN_DISABLE_APER_SUPPORT)
+#include <etsi_its_mapem_coding/aper_decoder.h>
+#include <etsi_its_mapem_coding/aper_encoder.h>
+#endif  /* !defined(ASN_DISABLE_APER_SUPPORT) */
 
 /* Environment version might be used to avoid running with the old library */
 #define	ASN1C_ENVIRONMENT_VERSION	923	/* Compile-time version */
@@ -50,6 +60,9 @@ int get_asn1c_environment_version(void);	/* Run-time version */
 #else	/* !ASN_THREAD_SAFE */
 #undef  ASN_DEBUG_INDENT_ADD
 #undef  asn_debug_indent
+#ifndef ASN_INTERNAL_C
+extern
+#endif
 int asn_debug_indent;
 #define ASN_DEBUG_INDENT_ADD(i) do { asn_debug_indent += i; } while(0)
 #endif	/* ASN_THREAD_SAFE */
@@ -126,7 +139,31 @@ asn__format_to_callback(
 /*
  * Check stack against overflow, if limit is set.
  */
+
+/* Since GCC 13, AddressSanitizer started defaulting to
+* ASAN_OPTIONS="detect_stack_use_after_return=1", which makes this check
+* fail due to apparently jumping stack pointers.
+* Hence, disable this check if building with ASan, as documented in:
+* GCC: https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html
+* Clang: https://clang.llvm.org/docs/AddressSanitizer.html#conditional-compilation-with-has-feature-address-sanitizer
+*/
+#if defined(__SANITIZE_ADDRESS__)
+	#define ASN__SANITIZE_ENABLED 1
+#elif defined(__has_feature)
+#if __has_feature(address_sanitizer)
+	#define ASN__SANITIZE_ENABLED 1
+#endif
+#endif
+
 #define	ASN__DEFAULT_STACK_MAX	(30000)
+
+#if defined(ASN__SANITIZE_ENABLED) || defined(ASN_DISABLE_STACK_OVERFLOW_CHECK)
+static int CC_NOTUSED
+ASN__STACK_OVERFLOW_CHECK(const asn_codec_ctx_t *ctx) {
+   (void)ctx;
+   return 0;
+}
+#else
 static int CC_NOTUSED
 ASN__STACK_OVERFLOW_CHECK(const asn_codec_ctx_t *ctx) {
 	if(ctx && ctx->max_stack_size) {
@@ -144,6 +181,7 @@ ASN__STACK_OVERFLOW_CHECK(const asn_codec_ctx_t *ctx) {
 	}
 	return 0;
 }
+#endif
 
 #ifdef	__cplusplus
 }

@@ -26,7 +26,7 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SegmentAttributeXY ::= ENUMERATED {
-#   reserved                  ,
+#   reserved                  ,  
 #   doNotBlock                ,
 #   whiteLine                 ,
 #   mergingLaneLeft           ,

@@ -26,7 +26,7 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # RegulatorySpeedLimit ::= SEQUENCE {
-#   type        SpeedLimitType,
+#   type        SpeedLimitType, 
 #   speed       Velocity
 # }
 # ------------------------------------------------------------------------------
