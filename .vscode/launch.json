@@ -3,20 +3,6 @@
   "configurations": [
 
     {
-      "name": "Patch raw ASN1 files",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/patchRawAsn1.py",
-      "args": [
-        "-r", "asn1/raw",
-        "-p", "asn1/patch",
-        "-o", "asn1/patched"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
       "name": "CAM reduceAsn1ToTypeDependencies",
       "type": "python",
       "request": "launch",
@@ -41,38 +27,6 @@
         "-o", "asn1/reduced/denm",
         "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
         "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "SPATEM reduceAsn1ToTypeDependencies",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
-      "args": [
-        "-t", "SPATEM",
-        "-o", "asn1/reduced/spatem",
-        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
-        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
-        "asn1/patched/ISO-TS-19091-addgrp-C-2018.asn"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "MAPEM reduceAsn1ToTypeDependencies",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
-      "args": [
-        "-t", "MAPEM",
-        "-o", "asn1/reduced/mapem",
-        "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
-        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
-        "asn1/patched/ISO-TS-19091-addgrp-C-2018.asn"
       ],
       "console": "integratedTerminal",
       "justMyCode": true
@@ -112,9 +66,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToC.py",
       "args": [
-        "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
-        "asn1/reduced/spatem/ITS-Container.asn",
-        "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-o", "etsi_its_coding/etsi_its_spatem_coding"
       ],
       "console": "integratedTerminal",
@@ -127,9 +83,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToC.py",
       "args": [
-        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
-        "asn1/reduced/mapem/ITS-Container.asn",
-        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-o", "etsi_its_coding/etsi_its_mapem_coding"
       ],
       "console": "integratedTerminal",
@@ -170,9 +128,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
-        "asn1/reduced/spatem/ITS-Container.asn",
-        "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-o", "etsi_its_msgs/etsi_its_spatem_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -185,9 +145,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
-        "asn1/reduced/mapem/ITS-Container.asn",
-        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-o", "etsi_its_msgs/etsi_its_mapem_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -230,9 +192,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn",
-        "asn1/reduced/spatem/ITS-Container.asn",
-        "asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-t", "spatem",
         "-o", "etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion"
       ],
@@ -246,9 +210,11 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn",
-        "asn1/reduced/mapem/ITS-Container.asn",
-        "asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn",
+        "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+        "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+        "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+        "asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn",
+        "asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn",
         "-t", "mapem",
         "-o", "etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion"
       ],

@@ -2,26 +2,14 @@ default:
   image: python:3.9
   before_script:
     - pip install -r utils/requirements.txt
+    - ./asn1/external/download.sh
 
 
 stages:
-  - Patching
   - ASN1 Reduction
   - ASN1C
   - ROS Messages
   - Conversion Headers
-
-
-patch:
-  stage: Patching
-  needs: []
-  script:
-    - >
-      ./utils/codegen/patchRawAsn1.py
-      -r asn1/raw
-      -p asn1/patch
-      -o asn1/patched
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
 
 asn1_reduce_cam:
@@ -48,32 +36,6 @@ asn1_reduce_denm:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
-asn1_reduce_spatem:
-  stage: ASN1 Reduction
-  needs: []
-  script:
-    - >
-      ./utils/codegen/reduceAsn1ToTypeDependencies.py
-      -t SPATEM
-      -o asn1/reduced/spatem
-      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
-      asn1/raw/is_ts103301/cdd/ITS-Container.asn
-      asn1/patched/ISO-TS-19091-addgrp-C-2018.asn
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
-
-asn1_reduce_mapem:
-  stage: ASN1 Reduction
-  needs: []
-  script:
-    - >
-      ./utils/codegen/reduceAsn1ToTypeDependencies.py
-      -t MAPEM
-      -o asn1/reduced/mapem
-      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
-      asn1/raw/is_ts103301/cdd/ITS-Container.asn
-      asn1/patched/ISO-TS-19091-addgrp-C-2018.asn
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
-
 
 etsi_its_cam_coding:
   stage: ASN1C
@@ -88,6 +50,7 @@ etsi_its_cam_coding:
     - apk update
     - apk add python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/external/download.sh
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -111,6 +74,7 @@ etsi_its_denm_coding:
     - apk update
     - apk add python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/external/download.sh
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -134,12 +98,15 @@ etsi_its_spatem_coding:
     - apk update
     - apk add python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/external/download.sh
   script:
     - >
       ./utils/codegen/asn1ToC.py
-      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
-      asn1/reduced/spatem/ITS-Container.asn
-      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_coding/etsi_its_spatem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -158,12 +125,15 @@ etsi_its_mapem_coding:
     - apk update
     - apk add python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/external/download.sh
   script:
     - >
       ./utils/codegen/asn1ToC.py
-      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
-      asn1/reduced/mapem/ITS-Container.asn
-      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_coding/etsi_its_mapem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -198,9 +168,11 @@ etsi_its_spatem_msgs:
   script:
     - >
       ./utils/codegen/asn1ToRosMsg.py
-      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
-      asn1/reduced/spatem/ITS-Container.asn
-      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_spatem_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
@@ -210,9 +182,11 @@ etsi_its_mapem_msgs:
   script:
     - >
       ./utils/codegen/asn1ToRosMsg.py
-      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
-      asn1/reduced/mapem/ITS-Container.asn
-      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_mapem_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
 
@@ -247,9 +221,11 @@ etsi_its_spatem_conversion:
   script:
     - >
       ./utils/codegen/asn1ToConversionHeader.py
-      asn1/reduced/spatem/SPATEM-PDU-Descriptions.asn
-      asn1/reduced/spatem/ITS-Container.asn
-      asn1/reduced/spatem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t spatem
       -o etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
@@ -260,9 +236,11 @@ etsi_its_mapem_conversion:
   script:
     - >
       ./utils/codegen/asn1ToConversionHeader.py
-      asn1/reduced/mapem/MAPEM-PDU-Descriptions.asn
-      asn1/reduced/mapem/ITS-Container.asn
-      asn1/reduced/mapem/ISO-TS-19091-addgrp-C-2018.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem
       -o etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
