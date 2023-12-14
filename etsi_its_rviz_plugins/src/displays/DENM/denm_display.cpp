@@ -94,7 +94,7 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
   return;
 }
 
-void DENMDisplay::update(float wall_dt, float ros_dt)
+void DENMDisplay::update(float, float)
 {
   
   // Check for outdated DENMs
