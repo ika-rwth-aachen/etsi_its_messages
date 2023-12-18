@@ -9,19 +9,7 @@ namespace displays
     //getUTMPosition()
     int zone;
     bool northp;
-    geometry_msgs::msg::PointStamped p;
-    double latitude = (denm.denm.management.event_position.latitude.value)*1e-7;
-    double longitude = (denm.denm.management.event_position.longitude.value)*1e-7;
-    p.point.z = (denm.denm.management.event_position.altitude.altitude_value.value)*1e-2;
-    try {
-      GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, p.point.x, p.point.y);
-      std::string hemisphere;
-      if(northp) hemisphere="N";
-      else hemisphere="S";
-      p.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
-    } catch (GeographicLib::GeographicErr& e) {
-      throw std::invalid_argument(e.what());
-    }
+    geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
     header.frame_id = p.header.frame_id;
 
     //for getAge()

@@ -47,6 +47,10 @@ namespace access {
     return cdd::getStationID(denm.header);
   }
 
+  inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp){
+    return cdd::getUTMPosition(denm.denm.management.event_position, zone, northp);
+  }
+
   /**
    * @brief Get the stationType object
    * 
