@@ -286,10 +286,30 @@ namespace access {
   }
 
   /**
+   * @brief Get the Heading object
+   * 
+   * @param denm DENM to get the Heading-Value from
+   * @return getHeading value
+   */
+  inline double getHeading(const DENM& denm){
+    return cdd::getHeading(denm.denm.location.event_position_heading);
+  }
+  
+  /**
+   * @brief Get the IsHeadingPresent object
+   * 
+   * @param denm DENM to get the IsHeadingPresent-Value from
+   * @return IsHeadingPresent-Value (true or false)
+   */
+  inline bool getIsHeadingPresent(const DENM& denm){
+    return denm.denm.location.event_position_heading_is_present;
+  }
+
+  /**
    * @brief Get the GenerationDeltaTime-Value
    * 
-   * @param cam CAM to get the GenerationDeltaTime-Value from 
-   * @return uint16_t the GenerationDeltaTime-Value
+   * @param denm DENM to get the GenerationDeltaTime-Value from 
+   * @return the GenerationDeltaTime-Value
    */
   inline uint16_t getGenerationDeltaTimeValue(const DENM& denm){
 

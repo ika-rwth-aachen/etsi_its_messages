@@ -27,10 +27,9 @@ namespace displays
     cause_code_type = etsi_its_denm_msgs::access::getCauseCodeType(denm);
     sub_cause_code_type = etsi_its_denm_msgs::access::getSubCauseCodeType(denm);
     
-    //getHeading
     double heading; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-    if(denm.denm.location.event_position_heading_is_present){
-      heading = (90-denm.denm.location.event_position_heading.heading_value.value)*M_PI/180.0;
+    if(etsi_its_denm_msgs::access::getIsHeadingPresent(denm)){
+      heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0;
     }
     else{
       heading = 0*M_PI/180.0;
