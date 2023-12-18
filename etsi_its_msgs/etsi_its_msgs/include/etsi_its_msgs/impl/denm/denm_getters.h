@@ -306,6 +306,26 @@ namespace access {
   }
 
   /**
+   * @brief Get the vehicle speed
+   * 
+   * @param cam CAM to get the speed value from
+   * @return speed value in m/s as decimal number
+   */
+  inline double getSpeed(const DENM& denm){
+    return cdd::getSpeed(denm.denm.location.event_speed);
+  }
+
+  /**
+   * @brief Get the IsSpeedPresent object
+   * 
+   * @param denm DENM to get the IsSpeedPresent-Value from
+   * @return IsSpeedPresent-Value (true or false)
+   */
+  inline bool getIsSpeedPresent(const DENM& denm){
+    return denm.denm.location.event_speed_is_present;
+  }
+
+  /**
    * @brief Get the GenerationDeltaTime-Value
    * 
    * @param denm DENM to get the GenerationDeltaTime-Value from 

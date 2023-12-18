@@ -40,13 +40,13 @@ namespace displays
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
     
-    dimensions.x = 1;
-    dimensions.y = 1;
+    dimensions.x = 1; //vehicle length
+    dimensions.y = 1; //vehicle width
     dimensions.z = 1.6;
 
     //getSpeed()
-    if(denm.denm.location.event_speed_is_present){
-      speed = denm.denm.location.event_speed.speed_value.value * 0.01;
+    if(etsi_its_denm_msgs::access::getIsSpeedPresent(denm)){
+      speed = etsi_its_denm_msgs::access::getSpeed(denm);
     }
     else{
       speed = 0;
