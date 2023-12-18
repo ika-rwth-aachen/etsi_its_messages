@@ -6,7 +6,7 @@ namespace displays
 {
 
   DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
-    //getUTMPosition()
+
     int zone;
     bool northp;
     geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
@@ -83,7 +83,6 @@ namespace displays
   }
   
   geometry_msgs::msg::Vector3 DENMRenderObject::getDimensions() {
-
     return dimensions;
   }
 

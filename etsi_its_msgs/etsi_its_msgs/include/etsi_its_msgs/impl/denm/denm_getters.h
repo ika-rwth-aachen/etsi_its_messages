@@ -47,6 +47,14 @@ namespace access {
     return cdd::getStationID(denm.header);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param denm DENM to get the UTM Position from
+   * @param zone the UTM zone (zero means UPS)
+   * @param northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
   inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp){
     return cdd::getUTMPosition(denm.denm.management.event_position, zone, northp);
   }
@@ -275,6 +283,17 @@ namespace access {
       else if(sub_cause_code == 6) sub_cause_code_type = "break warning activated";
       else if(sub_cause_code == 7) sub_cause_code_type = "collision risk warning activated";
       }
+  }
+
+  /**
+   * @brief Get the GenerationDeltaTime-Value
+   * 
+   * @param cam CAM to get the GenerationDeltaTime-Value from 
+   * @return uint16_t the GenerationDeltaTime-Value
+   */
+  inline uint16_t getGenerationDeltaTimeValue(const DENM& denm){
+
+    return denm.denm.management.reference_time.value - denm.denm.management.detection_time.value;
   }
 
 } // namespace access
