@@ -47,6 +47,16 @@ namespace access {
     return cdd::getStationID(denm.header);
   }
 
+  /**
+   * @brief Get the stationType object
+   * 
+   * @param denm DENM to get the stationType value from
+   * @return stationType value
+   */
+  inline uint8_t getStationType(const DENM& denm){
+    return denm.denm.management.station_type.value;
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs

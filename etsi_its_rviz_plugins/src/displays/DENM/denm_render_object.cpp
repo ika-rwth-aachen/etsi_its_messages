@@ -34,9 +34,8 @@ namespace displays
     uint64_t nanosecs = time_its.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;
     header.stamp = rclcpp::Time(nanosecs);
     
-    //getStationID()
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
-    station_type = denm.denm.management.station_type.value; //station_type = etsi_its_denm_msgs::access::getStationType(denm);
+    station_type = etsi_its_denm_msgs::access::getStationType(denm);
     //definition of cause codes
     //DENM-Documentation: https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
     cause_code = denm.denm.situation.event_type.cause_code.value;
