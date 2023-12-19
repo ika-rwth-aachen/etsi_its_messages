@@ -46,7 +46,7 @@ namespace properties
 {
   class ColorProperty;
   class FloatProperty;
-  class TopicProperty;
+  class RosTopicProperty;
 }  // namespace properties
 }  // namespace rviz_common
 
@@ -81,10 +81,10 @@ protected:
   rclcpp::Node::SharedPtr rviz_node_;
 
   // Properties
-  rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_speed_;
-  rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
-  rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
-  rviz_common::properties::TopicProperty *spatem_topic_property_;
+  rviz_common::properties::BoolProperty *show_meta_;
+  rviz_common::properties::FloatProperty *buffer_timeout_;
+  rviz_common::properties::ColorProperty *color_property_;
+  rviz_common::properties::RosTopicProperty *spatem_topic_property_;
 
   std::unordered_map<int, MAPEMRenderObject> mapems_;
   // std::unordered_map<int, SPATEMRenderObject> spatems_;

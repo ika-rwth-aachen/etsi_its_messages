@@ -60,32 +60,9 @@ class MAPEMRenderObject
      */
     double getAge(rclcpp::Time now);
 
-    /**
-     * @brief Get header of MAPEM
-     *
-     * @return std_msgs::msg::Header
-     */
-    std_msgs::msg::Header getHeader();
-
-    /**
-     * @brief Get the IntersectionsID of MAPEM
-     *
-     * @return int
-     */
-    uint32_t getIntersectionID();
-
-    /**
-     * @brief Get ref point of MAPEM
-     *
-     * @return geometry_msgs::msg::Point
-     */
-    geometry_msgs::msg::Point getRefPoint();
-
   private:
     // member variables
     std_msgs::msg::Header header;
-    uint32_t intersection_id;
-    geometry_msgs::msg::Point ref_point;
 
 };
 

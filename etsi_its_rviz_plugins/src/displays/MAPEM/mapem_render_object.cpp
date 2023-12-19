@@ -31,39 +31,22 @@ namespace displays
 
   MAPEMRenderObject::MAPEMRenderObject(etsi_its_mapem_msgs::msg::MAPEM mapem, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
 
-    // TODO
-    // header.frame_id = 
-    // uint64_t nanosecs = etsi_its_mapem_access::getUnixNanoseconds(mapem);
-    // header.stamp = rclcpp::Time(nanosecs);
-
-    intersection_id = 0; // get...
-
-    // ref_point = get...
+    if(mapem.map.time_stamp_is_present)
+    {
+      
+    }
 
   }
 
   bool MAPEMRenderObject::validateFloats() {
     bool valid = true;
-    valid = valid && rviz_common::validateFloats(ref_point);
+    //valid = valid && rviz_common::validateFloats(ref_point);
     return valid;
   }
 
   double MAPEMRenderObject::getAge(rclcpp::Time now) {
     return (now-header.stamp).seconds();
   }
-
-  std_msgs::msg::Header MAPEMRenderObject::getHeader() {
-    return header;
-  }
-
-  uint32_t MAPEMRenderObject::getIntersectionID() {
-    return intersection_id;
-  }
-
-  geometry_msgs::msg::Point MAPEMRenderObject::getRefPoint() {
-    return ref_point;
-  }
-
 
 }  // namespace displays
 }  // namespace etsi_its_msgs
