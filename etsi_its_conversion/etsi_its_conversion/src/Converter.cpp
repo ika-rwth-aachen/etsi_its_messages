@@ -68,10 +68,12 @@ const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
 #endif
 
-const std::string Converter::kIncomingPayloadOffset{"incoming_payload_offset"};
-const int Converter::kIncomingPayloadOffsetDefault{0};
-const std::string Converter::kHasBtpHeaderParam{"has_btp_header"};
-const bool Converter::kHasBtpHeaderParamDefault{true};
+const std::string Converter::kHasBtpDestinationPortParam{"has_btp_destination_port"};
+const bool Converter::kHasBtpDestinationPortParamDefault{true};
+const std::string Converter::kBtpDestinationPortOffsetParam{"btp_destination_port_offset"};
+const int Converter::kBtpDestinationPortOffsetParamDefault{0};
+const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payload_offset"};
+const int Converter::kEtsiMessagePayloadOffsetParamDefault{4};
 const std::string Converter::kEtsiTypesParam{"etsi_types"};
 const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm"};
 
@@ -118,32 +120,46 @@ void Converter::loadParameters() {
   rcl_interfaces::msg::ParameterDescriptor param_desc;
 #endif
 
-  // load incoming_payload_offset
+  // load has_btp_destination_port
 #ifdef ROS1
-  if (!private_node_handle_.param<int>(kIncomingPayloadOffset, incoming_payload_offset_, kIncomingPayloadOffsetDefault)) {
-    NODELET_WARN(
-#else
-  param_desc = rcl_interfaces::msg::ParameterDescriptor();
-  param_desc.description = "number of bytes until actual message payload starts in incoming UDP message (optionally including BTP header)";
-  this->declare_parameter(kIncomingPayloadOffset, kIncomingPayloadOffsetDefault, param_desc);
-  if (!this->get_parameter(kIncomingPayloadOffset, incoming_payload_offset_)) {
-    RCLCPP_WARN(this->get_logger(),
-#endif
-      "Parameter '%s' is not set, defaulting to '%d'", kIncomingPayloadOffset.c_str(), kIncomingPayloadOffsetDefault);
-  }
-
-  // load has_btp_header
-#ifdef ROS1
-  if (!private_node_handle_.param<bool>(kHasBtpHeaderParam, has_btp_header_, kHasBtpHeaderParamDefault)) {
+  if (!private_node_handle_.param<bool>(kHasBtpDestinationPortParam, has_btp_destination_port_, kHasBtpDestinationPortParamDefault)) {
     NODELET_WARN(
 #else
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   param_desc.description = "whether incoming/outgoing UDP messages include a 4-byte BTP header";
-  this->declare_parameter(kHasBtpHeaderParam, kHasBtpHeaderParamDefault, param_desc);
-  if (!this->get_parameter(kHasBtpHeaderParam, has_btp_header_)) {
+  this->declare_parameter(kHasBtpDestinationPortParam, kHasBtpDestinationPortParamDefault, param_desc);
+  if (!this->get_parameter(kHasBtpDestinationPortParam, has_btp_destination_port_)) {
     RCLCPP_WARN(this->get_logger(),
 #endif
-      "Parameter '%s' is not set, defaulting to '%s'", kHasBtpHeaderParam.c_str(), kHasBtpHeaderParamDefault ? "true" : "false");
+      "Parameter '%s' is not set, defaulting to '%s'", kHasBtpDestinationPortParam.c_str(), kHasBtpDestinationPortParamDefault ? "true" : "false");
+  }
+
+  // load btp_destination_port_offset
+#ifdef ROS1
+  if (!private_node_handle_.param<int>(kBtpDestinationPortOffsetParam, btp_destination_port_offset_, kBtpDestinationPortOffsetParamDefault)) {
+    NODELET_WARN(
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  param_desc.description = "number of bytes until actual message payload starts in incoming UDP message (optionally including BTP header)";
+  this->declare_parameter(kBtpDestinationPortOffsetParam, kBtpDestinationPortOffsetParamDefault, param_desc);
+  if (!this->get_parameter(kBtpDestinationPortOffsetParam, btp_destination_port_offset_)) {
+    RCLCPP_WARN(this->get_logger(),
+#endif
+      "Parameter '%s' is not set, defaulting to '%d'", kBtpDestinationPortOffsetParam.c_str(), kBtpDestinationPortOffsetParamDefault);
+  }
+
+  // load etsi_message_payload_offset
+#ifdef ROS1
+  if (!private_node_handle_.param<int>(kEtsiMessagePayloadOffsetParam, etsi_message_payload_offset_, kEtsiMessagePayloadOffsetParamDefault)) {
+    NODELET_WARN(
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  param_desc.description = "number of bytes until actual message payload starts in incoming UDP message (optionally including BTP header)";
+  this->declare_parameter(kEtsiMessagePayloadOffsetParam, kEtsiMessagePayloadOffsetParamDefault, param_desc);
+  if (!this->get_parameter(kEtsiMessagePayloadOffsetParam, etsi_message_payload_offset_)) {
+    RCLCPP_WARN(this->get_logger(),
+#endif
+      "Parameter '%s' is not set, defaulting to '%d'", kEtsiMessagePayloadOffsetParam.c_str(), kEtsiMessagePayloadOffsetParamDefault);
   }
 
   // load etsi_types
@@ -173,13 +189,13 @@ void Converter::loadParameters() {
 #endif
         "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kEtsiTypesParam.c_str());
   }
-  if (!has_btp_header_ && etsi_types_.size() > 1) {
+  if (!has_btp_destination_port_ && etsi_types_.size() > 1) {
 #ifdef ROS1
     NODELET_WARN(
 #else
     RCLCPP_WARN(this->get_logger(),
 #endif
-      "Parameter '%s' is set to 'false', but multiple 'etsi_types' are configured, dropping all but the first", kHasBtpHeaderParam.c_str());
+      "Parameter '%s' is set to 'false', but multiple 'etsi_types' are configured, dropping all but the first", kHasBtpDestinationPortParam.c_str());
     etsi_types_.resize(1);
   }
 }
@@ -235,13 +251,11 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #endif
     "Received bitstring");
 
-  // decode BTP-Header if enabled
+  // auto-detect ETSI message type if BTP destination port is present
   std::string detected_etsi_type = etsi_types_[0];
-  int offset = incoming_payload_offset_;
-  if (has_btp_header_) {
-    offset += 4;
-    const uint16_t* btp_header = reinterpret_cast<const uint16_t*>(&udp_msg->data[0]);
-    uint16_t destination_port = ntohs(btp_header[0]);
+  if (has_btp_destination_port_) {
+    const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
+    uint16_t destination_port = ntohs(*btp_destination_port);
     if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
     else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
     else if (destination_port == kBtpHeaderDestinationPortMap) detected_etsi_type = "map";
@@ -250,13 +264,12 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     else if (destination_port == kBtpHeaderDestinationPortCpm) detected_etsi_type = "cpm";
     else detected_etsi_type = "unknown";
   }
-  offset = std::min(0, std::max(offset, static_cast<int>(udp_msg->data.size())));
 
   if (detected_etsi_type == "cam") {
 
     // decode ASN1 bitstring to struct
     CAM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], udp_msg->data.size() - etsi_message_payload_offset_);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -290,7 +303,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
     // decode ASN1 bitstring to struct
     DENM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[offset], udp_msg->data.size() - offset);
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], udp_msg->data.size() - etsi_message_payload_offset_);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -380,8 +393,8 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #else
   udp_msgs::msg::UdpPacket udp_msg;
 #endif
-  if (has_btp_header_) {
-    // add BTP-Header, if type detection is enabled
+  if (has_btp_destination_port_) {
+    // add BTP destination port and destination port info
     uint16_t destination_port = htons(kBtpHeaderDestinationPortCam);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
@@ -451,7 +464,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #else
   udp_msgs::msg::UdpPacket udp_msg;
 #endif
-  if (has_btp_header_) {
+  if (has_btp_destination_port_) {
     // add BTP-Header, if type detection is enabled
     uint16_t destination_port = htons(kBtpHeaderDestinationPortDenm);
     uint16_t destination_port_info = 0;

@@ -1,5 +1,6 @@
-incoming_payload_offset: 0
-has_btp_header: true
+has_btp_destination_port: true
+btp_destination_port_offset: 0
+etsi_message_payload_offset: 4
 etsi_types:
   - cam
   - denm
