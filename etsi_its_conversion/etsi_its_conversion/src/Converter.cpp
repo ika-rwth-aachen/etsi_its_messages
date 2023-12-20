@@ -265,11 +265,19 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     else detected_etsi_type = "unknown";
   }
 
+  int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
+#ifdef ROS1
+  NODELET_INFO(
+#else
+  RCLCPP_INFO(this->get_logger(),
+#endif
+    "Received ETSI message of type '%s' (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), msg_size, udp_msg->data.size());
+
   if (detected_etsi_type == "cam") {
 
     // decode ASN1 bitstring to struct
     CAM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], udp_msg->data.size() - etsi_message_payload_offset_);
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -292,18 +300,15 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     // publish msg
 #ifdef ROS1
     publishers_["cam"].publish(msg);
-    NODELET_DEBUG(
 #else
     publishers_cam_["cam"]->publish(msg);
-    RCLCPP_DEBUG(this->get_logger(),
 #endif
-      "Published CAM");
 
   } else if (detected_etsi_type == "denm") {
 
     // decode ASN1 bitstring to struct
     DENM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], udp_msg->data.size() - etsi_message_payload_offset_);
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -326,12 +331,9 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     // publish msg
 #ifdef ROS1
     publishers_["denm"].publish(msg);
-    NODELET_DEBUG(
 #else
     publishers_denm_["denm"]->publish(msg);
-    RCLCPP_DEBUG(this->get_logger(),
 #endif
-      "Published DENM");
 
   } else {
 #ifdef ROS1
@@ -342,6 +344,13 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
   }
+
+#ifdef ROS1
+    NODELET_INFO(
+#else
+    RCLCPP_INFO(this->get_logger(),
+#endif
+      "Published ETSI message of type '%s' as ROS message", detected_etsi_type.c_str());
 }
 
 
