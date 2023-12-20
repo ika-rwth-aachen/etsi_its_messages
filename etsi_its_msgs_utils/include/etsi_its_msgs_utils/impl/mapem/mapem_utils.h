@@ -25,28 +25,30 @@ SOFTWARE.
 */
 
 /**
- * @file impl/mapem/mapem_getters.h
- * @brief Getter functions for the ETSI ITS MAPEM
+ * @file impl/mapem/mapem_utils.h
+ * @brief Utility functions for the ETSI ITS MAPEM
  */
+
+#include <etsi_its_msgs_utils/impl/constants.h>
 
 #pragma once
 
 namespace J2735 = etsi_its_msgs::J2735_access;
-
 namespace etsi_its_mapem_msgs {
 
 namespace access {
 
   /**
-   * @brief Get the value of MinuteOfTheYear object from mapem
+   * @brief Get the unix nanoseconds from MinuteOfTheYear object
    * 
-   * @param mapem object to get the MinuteOfTheYear
-   * @return uint32_t the minute of the year
+   * @param moy given MinuteOfTheYear object
+   * @param unix_timestamp_estimate unix timestamp to derive the current year from
+   * @return uint64_t unix timestamp according to the given MinuteOfTheYear
    */
-  inline uint32_t getMinuteOfTheYear(const MAPEM& mapem){
-    return mapem.map.time_stamp.value;
+  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MAPEM& mapem, const uint64_t unix_timestamp_estimate)
+  {
+    return J2735::getUnixNanosecondsFromMinuteOfTheYear(mapem.map.time_stamp, unix_timestamp_estimate);
   }
 
-} // namespace access
-
 } // namespace etsi_its_mapem_msgs
+} // namespace access

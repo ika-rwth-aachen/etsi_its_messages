@@ -25,28 +25,22 @@ SOFTWARE.
 */
 
 /**
- * @file impl/mapem/mapem_getters.h
- * @brief Getter functions for the ETSI ITS MAPEM
+ * @file impl/J2735/j2735_v2x_dict_getters.h
+ * @brief Getter functions for the J2735 V2X Communications Message Set Dictionary
  */
 
 #pragma once
 
-namespace J2735 = etsi_its_msgs::J2735_access;
+namespace etsi_its_msgs {
 
-namespace etsi_its_mapem_msgs {
+namespace J2735_access {
 
-namespace access {
-
-  /**
-   * @brief Get the value of MinuteOfTheYear object from mapem
-   * 
-   * @param mapem object to get the MinuteOfTheYear
-   * @return uint32_t the minute of the year
-   */
-  inline uint32_t getMinuteOfTheYear(const MAPEM& mapem){
-    return mapem.map.time_stamp.value;
+  inline bool setMinuteOfTheYear(MinuteOfTheYear& moy, const uint32_t moy_value) {
+    throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
+    moy.value = moy_value;
+    return true;
   }
 
-} // namespace access
+} // namespace J2735_access
 
-} // namespace etsi_its_mapem_msgs
+} // namespace etsi_its_msgs

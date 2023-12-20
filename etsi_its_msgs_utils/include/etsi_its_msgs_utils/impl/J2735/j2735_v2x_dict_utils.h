@@ -29,7 +29,7 @@ SOFTWARE.
  * @brief Utility functions for the J2735 V2X Communications Message Set Dictionary
  */
 
-#include <chrono>
+#include <ctime>
 
 #include <etsi_its_msgs_utils/impl/constants.h>
 
@@ -41,39 +41,39 @@ namespace etsi_its_msgs {
 namespace J2735_access {
 
   /**
-   * @brief Get the Second Of Year object
+   * @brief Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp
    * 
-   * @param unixSecond 
-   * @return uint64_t 
+   * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
+   * @return uint64_t unix seconds of the beginning of the year
    */
-  uint64_t getSecondOfYear(const uint64_t unixSecond) {
-    using namespace std::chrono;
+  uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
 
     // Get current time as a time_point
-    auto currentTime = system_clock::from_time_t(unixSecond);
+    time_t ts = static_cast<time_t>(unixSecond); // Convert uint64_t to time_t
 
-    // Get current year
-    auto currentYear = year_month_day{year_month_day{currentTime}.year()};
+    struct tm* timeinfo;
+    timeinfo = localtime(&ts);
 
-    // Get the start of the year
-    auto startOfYear = system_clock::time_point(currentYear);
+    // Set the timeinfo to the beginning of the year
+    timeinfo->tm_sec = 0;
+    timeinfo->tm_min = 0;
+    timeinfo->tm_hour = 0;
+    timeinfo->tm_mday = 1;
+    timeinfo->tm_mon = 0;
 
-    // Convert the time_point to Unix timestamp (seconds since epoch)
-    uint64_t startOfTheYearUnixSeconds = duration_cast<seconds>(startOfYear.time_since_epoch()).count();
-
-    return startOfTheYearUnixSeconds;
+    return mktime(timeinfo); // Convert struct tm back to Unix timestamp
   }
 
   /**
-   * @brief Get the Unix Nanoseconds from MinuteOfTheYear object
-   *
-   * @param generation_delta_time the GenerationDeltaTime object to get the Unix-Nanoseconds from
-   * @param unix_timestamp_estimate estimated unix-time (in Nanoseconds) to calculate the corresponding generation from
-   * @return uint64_t the corresponding Unix-Nanoseconds
+   * @brief Get the unix nanoseconds from MinuteOfTheYear object
+   * 
+   * @param moy given MinuteOfTheYear object
+   * @param unix_timestamp_estimate unix timestamp to derive the current year from
+   * @return uint64_t unix timestamp according to the given MinuteOfTheYear
    */
   inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy, const uint64_t unix_timestamp_estimate)
   {
-    return (uint64_t)moy.value + getSecondOfYear(unix_timestamp_estimate);
+    return (uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_timestamp_estimate);
   }
 
 } // namespace etsi_its_msgs

@@ -25,26 +25,24 @@ SOFTWARE.
 */
 
 /**
- * @file impl/mapem/mapem_getters.h
- * @brief Getter functions for the ETSI ITS MAPEM
+ * @file impl/mapem/mapem_setters.h
+ * @brief Setter functions for the ETSI ITS MAPEM
  */
 
 #pragma once
 
 namespace J2735 = etsi_its_msgs::J2735_access;
-
 namespace etsi_its_mapem_msgs {
 
 namespace access {
 
   /**
-   * @brief Get the value of MinuteOfTheYear object from mapem
+   * @brief Set the Minute Of The Year object
    * 
-   * @param mapem object to get the MinuteOfTheYear
-   * @return uint32_t the minute of the year
+   * @param mapem 
    */
-  inline uint32_t getMinuteOfTheYear(const MAPEM& mapem){
-    return mapem.map.time_stamp.value;
+  inline void setMinuteOfTheYear(MAPEM& mapem, const uint32_t moy_value) {
+    mapem.map.time_stamp_is_present = J2735::setMinuteOfTheYear(mapem.map.time_stamp, moy_value);
   }
 
 } // namespace access

@@ -23,6 +23,11 @@ TEST(etsi_its_mapem_msgs, test_set_get_mapem) {
 
   MAPEM mapem;
 
+  unsigned int moy = randomInt(MinuteOfTheYear::MIN,MinuteOfTheYear::MAX);
+  setMinuteOfTheYear(mapem, moy);
+  EXPECT_EQ(moy, getMinuteOfTheYear(mapem));
+  
+  
 }
 
 int main(int argc, char *argv[]) {

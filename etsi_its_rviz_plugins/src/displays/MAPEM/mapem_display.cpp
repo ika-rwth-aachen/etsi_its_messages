@@ -90,20 +90,20 @@ void MAPEMDisplay::reset()
 
 void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg)
 {
-  // Generate CAM render object from message
+  // Generate MAPEM render object from message
   rclcpp::Time now = rviz_node_->now();
-  MAPEMRenderObject mapem(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds()));
-  if (!mapem.validateFloats()) {
-        setStatus(
-          rviz_common::properties::StatusProperty::Error, "Topic",
-          "Message contained invalid floating point values (nans or infs)");
-        return;
-  }
+  // MAPEMRenderObject mapem(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds()));
+  // if (!mapem.validateFloats()) {
+  //       setStatus(
+  //         rviz_common::properties::StatusProperty::Error, "Topic",
+  //         "Message contained invalid floating point values (nans or infs)");
+  //       return;
+  // }
 
-  // Check if Station ID is already present in list
-  auto it = mapems_.find(mapem.getIntersectionID());
-  if (it != mapems_.end()) it->second = mapem; // Key exists, update the value
-  else mapems_.insert(std::make_pair(mapem.getIntersectionID(), mapem));
+  // // Check if Station ID is already present in list
+  // auto it = mapems_.find(mapem.getIntersectionID());
+  // if (it != mapems_.end()) it->second = mapem; // Key exists, update the value
+  // else mapems_.insert(std::make_pair(mapem.getIntersectionID(), mapem));
 
   return;
 }

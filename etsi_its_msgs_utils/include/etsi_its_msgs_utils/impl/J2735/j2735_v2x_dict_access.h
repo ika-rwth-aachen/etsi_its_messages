@@ -33,7 +33,9 @@ SOFTWARE.
 
 #include <cmath>
 
+#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_checks.h>
 #include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_getters.h>
+#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_setters.h>
 #include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_utils.h>
 
 
