@@ -41,10 +41,22 @@ namespace access {
    * @brief Get the value of MinuteOfTheYear object from mapem
    * 
    * @param mapem object to get the MinuteOfTheYear
-   * @return uint32_t the minute of the year
+   * @return MinuteOfTheYear the minute of the year object
    */
-  inline uint32_t getMinuteOfTheYear(const MAPEM& mapem){
-    return mapem.map.time_stamp.value;
+  inline MinuteOfTheYear getMinuteOfTheYear(const MAPEM& mapem) {
+    etsi_its_msgs::throwIfNotIsPresent(mapem.map.time_stamp_is_present, "mapem.map.time_stamp");
+    return mapem.map.time_stamp;
+  }
+
+  /**
+   * @brief Get the value of MinuteOfTheYear value from mapem
+   * 
+   * @param mapem object to get the MinuteOfTheYear value from
+   * @return uint32_t the minute of the year value
+   */
+  inline uint32_t getMinuteOfTheYearValue(const MAPEM& mapem) {
+    MinuteOfTheYear moy = getMinuteOfTheYear(mapem);
+    return moy.value;
   }
 
 } // namespace access

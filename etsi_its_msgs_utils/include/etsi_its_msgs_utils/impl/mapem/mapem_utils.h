@@ -47,7 +47,7 @@ namespace access {
    */
   inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MAPEM& mapem, const uint64_t unix_timestamp_estimate)
   {
-    return J2735::getUnixNanosecondsFromMinuteOfTheYear(mapem.map.time_stamp, unix_timestamp_estimate);
+    return J2735::getUnixNanosecondsFromMinuteOfTheYear(getMinuteOfTheYear(mapem), unix_timestamp_estimate);
   }
 
 } // namespace etsi_its_mapem_msgs
