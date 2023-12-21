@@ -31,11 +31,114 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/checks.h>
+
 namespace etsi_its_msgs {
 
 namespace J2735_access {
 
+  /**
+   * @brief Get the value of MinuteOfTheYear object MapData object
+   * 
+   * @param map object to get the MinuteOfTheYear from
+   * @return MinuteOfTheYear the minute of the year object
+   */
+  inline MinuteOfTheYear getMinuteOfTheYear(const MapData& map) {
+    etsi_its_msgs::throwIfNotIsPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
+    return map.time_stamp;
+  }
 
+  /**
+   * @brief Get the value of MinuteOfTheYear value from MapData object
+   * 
+   * @param map object to get the MinuteOfTheYear value from
+   * @return uint32_t the minute of the year value
+   */
+  inline uint32_t getMinuteOfTheYearValue(const MapData& map) {
+    MinuteOfTheYear moy = getMinuteOfTheYear(map);
+    return moy.value;
+  }
+
+  /**
+   * @brief Get the IntersectionID value
+   * 
+   * @param intsct_id IntersectionID object to get the value from
+   * @return uint16_t the IntersectionID value
+   */
+  inline uint16_t getIntersectionID(const IntersectionID& intsct_id) {
+    return intsct_id.value;
+  }
+
+  /**
+   * @brief Get the IntersectionId of an IntersectionGeometry object
+   * 
+   * @param intsct IntersectionGeometry object
+   * @return uint16_t the IntersectionId value
+   */
+  inline uint16_t getIntersectionID(const IntersectionGeometry& intsct) {
+    return getIntersectionID(intsct.id.id);
+  }
+
+  /**
+   * @brief Get the Latitude value
+   *
+   * @param latitude object to get the Latitude value from
+   * @return Latitude value in degree as decimal number
+   */
+  inline double getLatitude(const Latitude& latitude){
+    return ((double)latitude.value)*1e-7;
+  }
+
+  /**
+   * @brief Get the Longitude value
+   *
+   * @param longitude object to get the Longitude value from
+   * @return Longitude value in degree as decimal number
+   */
+  inline double getLongitude(const Longitude& longitude){
+    return ((double)longitude.value)*1e-7;
+  }
+
+  /**
+   * @brief Get the Elevation value
+   *
+   * @param elevation object to get the Elevation value from
+   * @return Elevation value (above the reference ellipsoid surface) in meter as decimal number
+   */
+  inline double getElevation(const Elevation& elevation){
+    return ((double)elevation.value)*1e-1;
+  }
+
+  /**
+   * @brief Get the Latitude value from a given Position3D object
+   *
+   * @param ref_point Position3D object to get the Latitude value from
+   * @return Latitude value in degree as decimal number
+   */
+  inline double getLatitude(const Position3D& ref_point){
+    return getLatitude(ref_point.lat);
+  }
+
+  /**
+   * @brief Get the Longitude value from a given Position3D object
+   *
+   * @param ref_point Position3D object to get the Longitude value from
+   * @return Longitude value in degree as decimal number
+   */
+  inline double getLongitude(const Position3D& ref_point){
+    return getLongitude(ref_point.lon);
+  }
+
+  /**
+   * @brief Get the Elevation value from a given Position3D object
+   *
+   * @param ref_point Position3D object to get the Elevation value from
+   * @return Elevation value (above the reference ellipsoid surface) in meter as decimal number
+   */
+  inline double getElevation(const Position3D& ref_point){
+    etsi_its_msgs::throwIfNotIsPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
+    return getElevation(ref_point.elevation);
+  }
 
 } // namespace J2735_access
 

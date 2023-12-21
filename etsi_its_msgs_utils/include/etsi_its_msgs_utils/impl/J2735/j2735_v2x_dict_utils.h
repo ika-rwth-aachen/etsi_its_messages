@@ -28,10 +28,10 @@ SOFTWARE.
  * @file impl/J2735/j2735_v2x_dict_utils.h
  * @brief Utility functions for the J2735 V2X Communications Message Set Dictionary
  */
+#pragma once
 
 #include <ctime>
-
-#pragma once
+#include <GeographicLib/UTMUPS.hpp>
 
 namespace J2735 = etsi_its_msgs::J2735_access;
 namespace etsi_its_msgs {
@@ -44,7 +44,7 @@ namespace J2735_access {
    * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
    * @return uint64_t unix seconds of the beginning of the year
    */
-  uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
+  inline uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
 
     // Get current time as a time_point
     time_t ts = static_cast<time_t>(unixSecond); // Convert uint64_t to time_t
@@ -66,12 +66,67 @@ namespace J2735_access {
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
    * 
    * @param moy given MinuteOfTheYear object
-   * @param unix_timestamp_estimate unix timestamp to derive the current year from
-   * @return uint64_t unix timestamp according to the given MinuteOfTheYear
+   * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
+   * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
    */
-  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy, const uint64_t unix_timestamp_estimate)
+  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy, const uint64_t unix_nanoseconds_estimate)
   {
-    return (uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_timestamp_estimate);
+    return ((uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_nanoseconds_estimate*1e-9))*1e9;
+  }
+
+  /**
+   * @brief Get the unix nanoseconds from MapData object
+   * 
+   * @param map given MapData object
+   * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
+   * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
+   */
+  inline uint64_t getUnixNanosecondsFromMapData(const MapData& map, const uint64_t unix_nanoseconds_estimate)
+  {
+    return getUnixNanosecondsFromMinuteOfTheYear(getMinuteOfTheYear(map), unix_nanoseconds_estimate);
+  }
+
+  /**
+   * @brief Get the UTM Position defined by the given Position3D
+   *
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   *
+   * @param[in] reference_position Position3D to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const Position3D& reference_position, int& zone, bool& northp){
+    gm::PointStamped utm_point;
+    double latitude = getLatitude(reference_position.lat);
+    double longitude = getLongitude(reference_position.lon);
+    if(reference_position.elevation_is_present) utm_point.point.z = getElevation(reference_position.elevation);
+    try {
+      GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+      std::string hemisphere;
+      if(northp) hemisphere="N";
+      else hemisphere="S";
+      utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
+    } catch (GeographicLib::GeographicErr& e) {
+      throw std::invalid_argument(e.what());
+    }
+    return utm_point;
+  }
+
+  /**
+   * @brief Get the UTM Position defined by the Position3D in an IntersectionGeometry object
+   *
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   *
+   * @param[in] intsctn IntersectionGeometry to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const IntersectionGeometry& intsctn, int& zone, bool& northp){
+    return getUTMPosition(intsctn.ref_point, zone, northp);
   }
 
 } // namespace etsi_its_msgs

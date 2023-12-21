@@ -42,7 +42,8 @@ namespace access {
    * @param mapem 
    */
   inline void setMinuteOfTheYear(MAPEM& mapem, const uint32_t moy_value) {
-    mapem.map.time_stamp_is_present = J2735::setMinuteOfTheYear(mapem.map.time_stamp, moy_value);
+    J2735::setMinuteOfTheYear(mapem.map, moy_value);
+    mapem.map.time_stamp_is_present = true;
   }
 
 } // namespace access

@@ -41,13 +41,13 @@ namespace access {
   /**
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
    * 
-   * @param moy given MinuteOfTheYear object
-   * @param unix_timestamp_estimate unix timestamp to derive the current year from
-   * @return uint64_t unix timestamp according to the given MinuteOfTheYear
+   * @param mapem given MAPEM object
+   * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
+   * @return uint64_t unix timestamp according to the stored MinuteOfTheYear in nanoseconds
    */
-  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MAPEM& mapem, const uint64_t unix_timestamp_estimate)
+  inline uint64_t getUnixNanoseconds(const MAPEM& mapem, const uint64_t unix_timestamp_estimate)
   {
-    return J2735::getUnixNanosecondsFromMinuteOfTheYear(getMinuteOfTheYear(mapem), unix_timestamp_estimate);
+    return J2735::getUnixNanosecondsFromMapData(mapem.map, unix_timestamp_estimate);
   }
 
 } // namespace etsi_its_mapem_msgs

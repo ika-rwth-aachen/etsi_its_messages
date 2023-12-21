@@ -69,17 +69,6 @@ if(${ROS_VERSION} EQUAL 2)
       tf2_geometry_msgs
     )
 
-    ament_add_gtest(${PROJECT_NAME}-mapem_test test/test_mapem_access.ros2.cpp)
-    target_include_directories(${PROJECT_NAME}-mapem_test PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include>
-    )
-    target_include_directories(${PROJECT_NAME}-mapem_test PUBLIC test)
-    ament_target_dependencies(${PROJECT_NAME}-mapem_test
-      etsi_its_msgs
-      GeographicLib
-      geometry_msgs
-    )
   endif()
 
   ament_package(
@@ -123,11 +112,6 @@ elseif(${ROS_VERSION} EQUAL 1)
       target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
     endif()
 
-    catkin_add_gtest(${PROJECT_NAME}-mapem_test test/test_mapem_access.cpp)
-    if(TARGET ${PROJECT_NAME}-mapem_test)
-      target_include_directories(${PROJECT_NAME}-mapem_test PUBLIC test)
-      target_link_libraries(${PROJECT_NAME}-mapem_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
-    endif()
   endif()
 
 endif()

@@ -44,8 +44,7 @@ namespace access {
    * @return MinuteOfTheYear the minute of the year object
    */
   inline MinuteOfTheYear getMinuteOfTheYear(const MAPEM& mapem) {
-    etsi_its_msgs::throwIfNotIsPresent(mapem.map.time_stamp_is_present, "mapem.map.time_stamp");
-    return mapem.map.time_stamp;
+    return J2735::getMinuteOfTheYear(mapem.map);
   }
 
   /**
@@ -55,8 +54,7 @@ namespace access {
    * @return uint32_t the minute of the year value
    */
   inline uint32_t getMinuteOfTheYearValue(const MAPEM& mapem) {
-    MinuteOfTheYear moy = getMinuteOfTheYear(mapem);
-    return moy.value;
+    return J2735::getMinuteOfTheYearValue(mapem.map);
   }
 
 } // namespace access

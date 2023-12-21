@@ -33,8 +33,10 @@ SOFTWARE.
 
 // Messages
 #include <etsi_its_mapem_msgs/MAPEM.h>
+#include <geometry_msgs/PointStamped.h>
 
 namespace etsi_its_mapem_msgs {
+    namespace gm = geometry_msgs;
 }
 
 // Implementation

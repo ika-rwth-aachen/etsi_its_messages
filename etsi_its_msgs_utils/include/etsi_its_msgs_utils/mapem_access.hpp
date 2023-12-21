@@ -33,9 +33,11 @@ SOFTWARE.
 
 // Messages
 #include <etsi_its_mapem_msgs/msg/mapem.hpp>
+#include <geometry_msgs/msg/point_stamped.hpp>
 
 namespace etsi_its_mapem_msgs {
     using namespace msg;
+    namespace gm = geometry_msgs::msg;
 }
 
 // Implementation
