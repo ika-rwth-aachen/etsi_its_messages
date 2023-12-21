@@ -31,7 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <iostream>
 #include <map>
 
 namespace etsi_its_msgs {

@@ -31,6 +31,7 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_cam_msgs::access {
@@ -84,7 +85,7 @@ inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& acce
     TimestampIts t_its;
     cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
     uint16_t gdt_value = t_its.value%65536;
-    cdd::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
+    etsi_its_msgs::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
     generation_delta_time.value=gdt_value;
   }
 

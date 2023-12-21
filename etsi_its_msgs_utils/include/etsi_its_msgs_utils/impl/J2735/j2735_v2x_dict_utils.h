@@ -31,8 +31,6 @@ SOFTWARE.
 
 #include <ctime>
 
-#include <etsi_its_msgs_utils/impl/constants.h>
-
 #pragma once
 
 namespace J2735 = etsi_its_msgs::J2735_access;

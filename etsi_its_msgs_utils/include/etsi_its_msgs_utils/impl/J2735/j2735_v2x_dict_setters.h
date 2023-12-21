@@ -31,6 +31,8 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/checks.h>
+
 namespace etsi_its_msgs {
 
 namespace J2735_access {
