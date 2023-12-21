@@ -142,12 +142,7 @@ void DENMDisplay::update(float, float)
     std::shared_ptr<rviz_rendering::Arrow> arrow = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     
     // set the dimensions of arrow
-    //Ogre::Vector3 dims;
     double scale = bb_scale_->getFloat();
-    //dims.x = dimensions.x*scale; //
-    //dims.y = dimensions.y*scale; //
-    //dims.z = dimensions.z*scale; //
-    //arrow->setScale(dims);
     // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     arrow->setColor(bb_color);
@@ -170,7 +165,6 @@ void DENMDisplay::update(float, float)
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
-      //double height = dims.z;
       double height = text_render->getBoundingRadius();
       Ogre::Vector3 offs(0.0, 0.0, height);
       // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974

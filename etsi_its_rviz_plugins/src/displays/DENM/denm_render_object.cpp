@@ -45,12 +45,7 @@ namespace displays
     tf2::Quaternion orientation;
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
-    
-    /*
-    dimensions.x = 1; //vehicle length
-    dimensions.y = 1; //vehicle width
-    dimensions.z = 1.6;
-    */
+
     if(etsi_its_denm_msgs::access::getIsSpeedPresent(denm)){
       speed = etsi_its_denm_msgs::access::getSpeed(denm);
     }
@@ -62,7 +57,6 @@ namespace displays
   bool DENMRenderObject::validateFloats() {
     bool valid = true;
     valid = valid && rviz_common::validateFloats(pose);
-    //valid = valid && rviz_common::validateFloats(dimensions);
     valid = valid && rviz_common::validateFloats(speed);
     return valid;
   }
@@ -86,11 +80,6 @@ namespace displays
   geometry_msgs::msg::Pose DENMRenderObject::getPose() {
     return pose;
   }
-  /*
-  geometry_msgs::msg::Vector3 DENMRenderObject::getDimensions() {
-    return dimensions;
-  }
-  */
 
   double DENMRenderObject::getSpeed() {
   return speed;
