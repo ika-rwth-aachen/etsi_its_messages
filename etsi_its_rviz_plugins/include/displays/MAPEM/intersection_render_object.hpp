@@ -22,31 +22,57 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ============================================================================= */
 
-#include "displays/MAPEM/mapem_render_object.hpp"
+#include "etsi_its_mapem_msgs/msg/mapem.hpp"
+#include <std_msgs/msg/header.hpp>
+
+#include <etsi_its_msgs_utils/mapem_access.hpp>
+
+#include <rclcpp/rclcpp.hpp>
+
+#include "rviz_common/validate_floats.hpp"
 
 namespace etsi_its_msgs
 {
 namespace displays
 {
 
-  MAPEMRenderObject::MAPEMRenderObject(etsi_its_mapem_msgs::msg::MAPEM mapem, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
+/**
+ * @class IntersectionRenderObject
+ * @brief
+ */
+class IntersectionRenderObject
+{
+  public:
+    IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time);
 
-    if(mapem.map.time_stamp_is_present)
-    {
-      
-    }
+    /**
+     * @brief This function validates all float variables that are part of a IntersectionRenderObject
+     *
+     */
+    bool validateFloats();
 
-  }
+    /**
+     * @brief Get age of corresponding MAPEM
+     *
+     * @param now reference point in time to calculate the age with
+     * @return age in seconds as double value
+     */
+    double getAge(rclcpp::Time now);
 
-  bool MAPEMRenderObject::validateFloats() {
-    bool valid = true;
-    //valid = valid && rviz_common::validateFloats(ref_point);
-    return valid;
-  }
+    /**
+     * @brief Get the IntersectionID
+     * 
+     * @return unsigned int intersection_id
+     */
+    unsigned int getIntersectionID();
 
-  double MAPEMRenderObject::getAge(rclcpp::Time now) {
-    return (now-header.stamp).seconds();
-  }
+  private:
+    // member variables
+    std_msgs::msg::Header header;
+    unsigned int intersection_id;
+
+
+};
 
 }  // namespace displays
 }  // namespace etsi_its_msgs

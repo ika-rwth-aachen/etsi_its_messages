@@ -22,49 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ============================================================================= */
 
-#include "etsi_its_mapem_msgs/msg/mapem.hpp"
-#include <geometry_msgs/msg/point.hpp>
-#include <std_msgs/msg/header.hpp>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
-
-#include <tf2/LinearMath/Quaternion.h>
-#include <etsi_its_msgs_utils/cam_access.hpp>
-
-#include "rviz_common/validate_floats.hpp"
+#include "displays/MAPEM/intersection_render_object.hpp"
 
 namespace etsi_its_msgs
 {
 namespace displays
 {
 
-/**
- * @class MAPEMRenderObject
- * @brief
- */
-class MAPEMRenderObject
-{
-  public:
-    MAPEMRenderObject(etsi_its_mapem_msgs::msg::MAPEM mapem, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second);
+  IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
 
-    /**
-     * @brief This function validates all float variables that are part of a MAPEMRenderObject
-     *
-     */
-    bool validateFloats();
+    uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
+    header.stamp = rclcpp::Time(nanosecs);
 
-    /**
-     * @brief Get age of MAPEM
-     *
-     * @param now reference point in time to calculate the age with
-     * @return age in seconds as double value
-     */
-    double getAge(rclcpp::Time now);
+    intersection_id = etsi_its_msgs::J2735_access::getIntersectionID(intersection);
+  }
 
-  private:
-    // member variables
-    std_msgs::msg::Header header;
+  bool IntersectionRenderObject::validateFloats() {
+    bool valid = true;
+    //valid = valid && rviz_common::validateFloats(ref_point);
+    return valid;
+  }
 
-};
+  double IntersectionRenderObject::getAge(rclcpp::Time now) {
+    return (now-header.stamp).seconds();
+  }
+
+  unsigned int IntersectionRenderObject::getIntersectionID() {
+    return intersection_id;
+  }
 
 }  // namespace displays
 }  // namespace etsi_its_msgs
