@@ -90,29 +90,37 @@ void MAPEMDisplay::reset()
 
 void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg)
 {
-  // Generate MAPEM render object from message
+  // Process MAPEM message
   rclcpp::Time now = rviz_node_->now();
-  // MAPEMRenderObject mapem(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds()));
-  // if (!mapem.validateFloats()) {
-  //       setStatus(
-  //         rviz_common::properties::StatusProperty::Error, "Topic",
-  //         "Message contained invalid floating point values (nans or infs)");
-  //       return;
-  // }
+  if(!msg->map.time_stamp_is_present) return;
+  etsi_its_mapem_msgs::msg::MinuteOfTheYear moy = msg->map.time_stamp;
 
-  // // Check if Station ID is already present in list
-  // auto it = mapems_.find(mapem.getIntersectionID());
-  // if (it != mapems_.end()) it->second = mapem; // Key exists, update the value
-  // else mapems_.insert(std::make_pair(mapem.getIntersectionID(), mapem));
-
+  // Intersections
+  if(!msg->map.intersections_is_present) return;
+  for(size_t i = 0; i<msg->map.intersections.array.size(); i++)
+  {
+    IntersectionRenderObject intsct(msg->map.intersections.array[i], moy, now);
+    if(!intsct.validateFloats())
+    {
+      setStatus(
+        rviz_common::properties::StatusProperty::Error, "Topic",
+        "Message contained invalid floating point values (nans or infs)");
+      return;
+    }
+    // Check if IntersectionID is already present in list
+    auto it = intersections_.find(intsct.getIntersectionID());
+    if (it != intersections_.end()) it->second = intsct; // Key exists, update the value
+    else intersections_.insert(std::make_pair(intsct.getIntersectionID(), intsct));
+  }
+  
   return;
 }
 
 void MAPEMDisplay::update(float, float)
 {
-  // Check for outdated MAPEMs
-  for (auto it = mapems_.begin(); it != mapems_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = mapems_.erase(it);
+  // Check for outdated intersections
+  for (auto it = intersections_.begin(); it != intersections_.end(); ) {
+        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = intersections_.erase(it);
         else ++it;
   }
 

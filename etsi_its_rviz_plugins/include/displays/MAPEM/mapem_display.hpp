@@ -27,7 +27,7 @@ SOFTWARE.
 #include "etsi_its_mapem_msgs/msg/mapem.hpp"
 #include "etsi_its_spatem_msgs/msg/spatem.hpp"
 
-#include "displays/MAPEM/mapem_render_object.hpp"
+#include "displays/MAPEM/intersection_render_object.hpp"
 
 #include "rviz_common/ros_topic_display.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
@@ -86,7 +86,7 @@ protected:
   rviz_common::properties::ColorProperty *color_property_;
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
 
-  std::unordered_map<int, MAPEMRenderObject> mapems_;
+  std::unordered_map<int, IntersectionRenderObject> intersections_;
   // std::unordered_map<int, SPATEMRenderObject> spatems_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;

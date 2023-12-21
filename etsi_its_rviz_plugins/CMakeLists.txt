@@ -45,7 +45,7 @@ if(${ROS_VERSION} EQUAL 2)
     src/displays/CPM/cpm_display.cpp
     src/displays/CPM/cpm_render_object.cpp
     src/displays/MAPEM/mapem_display.cpp
-    src/displays/MAPEM/mapem_render_object.cpp
+    src/displays/MAPEM/intersection_render_object.cpp
   )
 
   add_library(${PROJECT_NAME} SHARED
