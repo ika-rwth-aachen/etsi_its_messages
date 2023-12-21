@@ -74,14 +74,14 @@ namespace access {
    * @param unix_timestamp_estimate estimated unix-time (in Nanoseconds) to calculate the corresponding generation from
    * @return uint64_t the corresponding Unix-Nanoseconds
    */
-   /*
-  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint16_t generation_delta_time_value, const uint64_t t_its, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint16_t generation_delta_time_value, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
   {
-    /TimestampIts t_its;
-    /cdd::setTimestampITS(t_its, unix_timestamp_estimate, n_leap_seconds);
+    TimestampIts t_its;
+    cdd::setTimestampITS(t_its, unix_timestamp_estimate, n_leap_seconds);
     return getUnixNanosecondsFromGenerationDeltaTime(generation_delta_time_value, t_its, n_leap_seconds);
   }
-  */
+  
+  
 
 } // namespace etsi_its_denm_msgs
 } // namespace access
