@@ -115,7 +115,7 @@ namespace J2735_access {
   }
 
   /**
-   * @brief Get the UTM Position defined by the Position3D in an IntersectionGeometry object
+   * @brief Get the UTM Position of ref_point defined by the Position3D in an IntersectionGeometry object
    *
    * The position is transformed into UTM by using GeographicLib::UTMUPS
    * The altitude value is directly used as z-Coordinate
@@ -125,7 +125,7 @@ namespace J2735_access {
    * @param[out] northp hemisphere (true means north, false means south)
    * @return gm::PointStamped geometry_msgs::PointStamped of the given position
    */
-  inline gm::PointStamped getUTMPosition(const IntersectionGeometry& intsctn, int& zone, bool& northp){
+  inline gm::PointStamped getRefPointUTMPosition(const IntersectionGeometry& intsctn, int& zone, bool& northp){
     return getUTMPosition(intsctn.ref_point, zone, northp);
   }
 

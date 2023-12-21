@@ -28,7 +28,7 @@ TEST(etsi_its_msgs, test_j2735_access) {
   setPosition3D(intsct, latitude, longitude, altitude);
   int zone;
   bool northp;
-  gm::PointStamped utm = getUTMPosition(intsct, zone, northp);
+  gm::PointStamped utm = getRefPointUTMPosition(intsct, zone, northp);
   EXPECT_NEAR(291827.02, utm.point.x, 1e-1);
   EXPECT_NEAR(5630349.72, utm.point.y, 1e-1);
   EXPECT_EQ(altitude, utm.point.z);
