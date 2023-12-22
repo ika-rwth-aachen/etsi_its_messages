@@ -88,7 +88,7 @@ protected:
 
   std::unordered_map<int, IntersectionRenderObject> intersections_;
   // std::unordered_map<int, SPATEMRenderObject> spatems_;
-  std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
+  std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };
 

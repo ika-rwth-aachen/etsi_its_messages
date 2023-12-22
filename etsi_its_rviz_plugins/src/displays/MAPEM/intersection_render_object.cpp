@@ -31,15 +31,21 @@ namespace displays
 
   IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
 
+    intersection_id = etsi_its_msgs::J2735_access::getIntersectionID(intersection);
+
+    int zone;
+    bool northp;
+    ref_point = etsi_its_msgs::J2735_access::getRefPointUTMPosition(intersection, zone, northp);
+
     uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
     header.stamp = rclcpp::Time(nanosecs);
+    header.frame_id = ref_point.header.frame_id;
 
-    intersection_id = etsi_its_msgs::J2735_access::getIntersectionID(intersection);
   }
 
   bool IntersectionRenderObject::validateFloats() {
     bool valid = true;
-    //valid = valid && rviz_common::validateFloats(ref_point);
+    valid = valid && rviz_common::validateFloats(ref_point);
     return valid;
   }
 
@@ -50,6 +56,15 @@ namespace displays
   unsigned int IntersectionRenderObject::getIntersectionID() {
     return intersection_id;
   }
+
+  std_msgs::msg::Header IntersectionRenderObject::getHeader() {
+    return header;
+  }
+
+  geometry_msgs::msg::Point IntersectionRenderObject::getRefPosition() {
+    return ref_point.point;
+  }
+
 
 }  // namespace displays
 }  // namespace etsi_its_msgs

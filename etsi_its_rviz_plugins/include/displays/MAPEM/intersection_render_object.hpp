@@ -66,11 +66,26 @@ class IntersectionRenderObject
      */
     unsigned int getIntersectionID();
 
+    /**
+     * @brief Get the header
+     * 
+     * @return std_msgs::msg::Header 
+     */
+    std_msgs::msg::Header getHeader();
+
+    /**
+     * @brief Get the ref_position object
+     * 
+     * @return geometry_msgs::msg::Point 
+     */
+    geometry_msgs::msg::Point getRefPosition();
+
   private:
     // member variables
     std_msgs::msg::Header header;
     unsigned int intersection_id;
-
+    std::vector<unsigned int> layer_ids;
+    geometry_msgs::msg::PointStamped ref_point;
 
 };
 

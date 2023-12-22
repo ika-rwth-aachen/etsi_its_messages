@@ -52,12 +52,12 @@ MAPEMDisplay::MAPEMDisplay()
   // spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "",
   //     "etsi_its_spatem_msgs::msg::SPATEM", "Topic of corresponding SPATEMs", this);
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
-    "Timeout", 60.0f,
+    "Timeout", 120.0f,
     "Time (in s) until MAP disappears", this);
   buffer_timeout_->setMin(0);
-  // color_property_ = new rviz_common::properties::ColorProperty(
-  //   "Color", QColor(25, 0, 255),
-  //   "Object color", this);
+  color_property_ = new rviz_common::properties::ColorProperty(
+    "Color", QColor(25, 0, 255),
+    "Object color", this);
   // show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
   //   "Show metadata as text next to objects", this);
 
@@ -92,14 +92,12 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPt
 {
   // Process MAPEM message
   rclcpp::Time now = rviz_node_->now();
-  if(!msg->map.time_stamp_is_present) return;
-  etsi_its_mapem_msgs::msg::MinuteOfTheYear moy = msg->map.time_stamp;
-
   // Intersections
   if(!msg->map.intersections_is_present) return;
+  etsi_its_mapem_msgs::msg::MinuteOfTheYear moy = msg->map.time_stamp;
   for(size_t i = 0; i<msg->map.intersections.array.size(); i++)
   {
-    IntersectionRenderObject intsct(msg->map.intersections.array[i], moy, now);
+    IntersectionRenderObject intsct(msg->map.intersections.array[i], msg->map.time_stamp_is_present, moy, now);
     if(!intsct.validateFloats())
     {
       setStatus(
@@ -123,83 +121,71 @@ void MAPEMDisplay::update(float, float)
         if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = intersections_.erase(it);
         else ++it;
   }
-
-  // Render all valid cams
-  bboxs_.clear();
+  // Render all valid intersections
+  intsct_ref_points_.clear();
   texts_.clear();
-  // for(auto it = cams_.begin(); it != cams_.end(); ++it) {
+  for(auto it = intersections_.begin(); it != intersections_.end(); ++it) {
+    IntersectionRenderObject intsctn = it->second;
+    Ogre::Vector3 sn_position;
+    Ogre::Quaternion sn_orientation;
+    if (!context_->getFrameManager()->getTransform(intsctn.getHeader(), sn_position, sn_orientation)) {
+      setMissingTransformToFixedFrame(intsctn.getHeader().frame_id);
+      return;
+    }
+    setTransformOk();
 
-  //   CAMRenderObject cam = it->second;
-  //   Ogre::Vector3 sn_position;
-  //   Ogre::Quaternion sn_orientation;
-  //   if (!context_->getFrameManager()->getTransform(cam.getHeader(), sn_position, sn_orientation)) {
-  //     setMissingTransformToFixedFrame(cam.getHeader().frame_id);
-  //     return;
-  //   }
-  //   setTransformOk();
+    // set pose of scene node
+    scene_node_->setPosition(sn_position);
+    scene_node_->setOrientation(sn_orientation);
 
-  //   // set pose of scene node
-  //   scene_node_->setPosition(sn_position);
-  //   scene_node_->setOrientation(sn_orientation);
+    auto child_scene_node = scene_node_->createChildSceneNode();
+    // Set position of scene node
+    geometry_msgs::msg::Point ref_position = intsctn.getRefPosition();
+    Ogre::Vector3 position(ref_position.x, ref_position.y, ref_position.z);
+    Ogre::Quaternion orientation(1.0, 0.0, 0.0, 0.0);
 
-  //   auto child_scene_node = scene_node_->createChildSceneNode();
-  //   // Set position of scene node
-  //   geometry_msgs::msg::Pose pose = cam.getPose();
-  //   geometry_msgs::msg::Vector3 dimensions = cam.getDimensions();
-  //   Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
-  //   Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
-  //   if(3 <= cam.getStationType() && cam.getStationType() <= 11)
-  //   {
-  //     // If the station type of the originating ITS-S is set to one out of the values 3 to 11
-  //     // the reference point shall be the ground position of the centre of the front side of
-  //     // the bounding box of the vehicle.
-  //     // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
-  //     position.x-=dimensions.x/2.0;
-  //     position.z+=dimensions.z/2.0;
-  //   }
+    // set pose of child scene node of intersection
+    child_scene_node->setPosition(position);
+    child_scene_node->setOrientation(orientation);
 
-  //   // set pose of child scene node of bounding-box
-  //   child_scene_node->setPosition(position);
-  //   child_scene_node->setOrientation(orientation);
+    // create sphere object
+    std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
 
-  //   // create boundind-box object
-  //   std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
+    // set the dimensions of sphere
+    Ogre::Vector3 dims;
+    dims.x = 10.0;
+    dims.y = 10.0;
+    dims.z = 10.0;
+    sphere->setScale(dims);
 
-  //   // set the dimensions of bounding box
-  //   Ogre::Vector3 dims;
-  //   double scale = bb_scale_->getFloat();
-  //   dims.x = dimensions.x*scale;
-  //   dims.y = dimensions.y*scale;
-  //   dims.z = dimensions.z*scale;
-  //   bbox->setScale(dims);
-  //   // set the color of bounding box
-  //   Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
-  //   bbox->setColor(bb_color);
-  //   bboxs_.push_back(bbox);
+    // set the color of sphere
+    Ogre::ColourValue sphere_color = rviz_common::properties::qtToOgre(color_property_->getColor());
+    sphere->setColor(sphere_color);
+    intsct_ref_points_.push_back(sphere);
 
-  //   // Visualize meta-information as text
-  //   if(show_meta_->getBool()) {
-  //     std::string text;
-  //     if(show_station_id_->getBool()) {
-  //       text+="StationID: " + std::to_string(cam.getStationID());
-  //       text+="\n";
-  //     }
-  //     if(show_speed_->getBool()) {
-  //       text+="Speed: " + std::to_string((int)(cam.getSpeed()*3.6)) + " km/h";
-  //     }
-  //     if(!text.size()) return;
-  //     std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
-  //     double height = dims.z;
-  //     height+=text_render->getBoundingRadius();
-  //     Ogre::Vector3 offs(0.0, 0.0, height);
-  //     // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
-  //     text_render->setGlobalTranslation(offs);
-  //     Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
-  //     text_render->setColor(text_color);
-  //     child_scene_node->attachObject(text_render.get());
-  //     texts_.push_back(text_render);
-  //   }
-  // }
+    // Visualize meta-information as text
+    // if(show_meta_->getBool()) {
+    //   std::string text;
+    //   if(show_station_id_->getBool()) {
+    //     text+="StationID: " + std::to_string(cam.getStationID());
+    //     text+="\n";
+    //   }
+    //   if(show_speed_->getBool()) {
+    //     text+="Speed: " + std::to_string((int)(cam.getSpeed()*3.6)) + " km/h";
+    //   }
+    //   if(!text.size()) return;
+    //   std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
+    //   double height = dims.z;
+    //   height+=text_render->getBoundingRadius();
+    //   Ogre::Vector3 offs(0.0, 0.0, height);
+    //   // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
+    //   text_render->setGlobalTranslation(offs);
+    //   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
+    //   text_render->setColor(text_color);
+    //   child_scene_node->attachObject(text_render.get());
+    //   texts_.push_back(text_render);
+    // }
+  }
 }
 
 }  // namespace displays
