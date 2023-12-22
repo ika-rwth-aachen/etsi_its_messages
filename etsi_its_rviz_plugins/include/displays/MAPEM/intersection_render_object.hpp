@@ -43,7 +43,7 @@ namespace displays
 class IntersectionRenderObject
 {
   public:
-    IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time);
+    IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time);
 
     /**
      * @brief This function validates all float variables that are part of a IntersectionRenderObject

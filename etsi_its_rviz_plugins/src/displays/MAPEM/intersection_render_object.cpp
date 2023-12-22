@@ -29,7 +29,7 @@ namespace etsi_its_msgs
 namespace displays
 {
 
-  IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
+  IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
 
     intersection_id = etsi_its_msgs::J2735_access::getIntersectionID(intersection);
 
@@ -37,8 +37,13 @@ namespace displays
     bool northp;
     ref_point = etsi_its_msgs::J2735_access::getRefPointUTMPosition(intersection, zone, northp);
 
-    uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
-    header.stamp = rclcpp::Time(nanosecs);
+    if(timestamp_is_present) {
+      uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
+      header.stamp = rclcpp::Time(nanosecs);
+    }
+    else {
+      header.stamp = receive_time;
+    }
     header.frame_id = ref_point.header.frame_id;
 
   }
