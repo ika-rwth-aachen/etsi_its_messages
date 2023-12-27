@@ -153,9 +153,9 @@ void MAPEMDisplay::update(float, float)
 
     // set the dimensions of sphere
     Ogre::Vector3 dims;
-    dims.x = 10.0;
-    dims.y = 10.0;
-    dims.z = 10.0;
+    dims.x = 1.0;
+    dims.y = 1.0;
+    dims.z = 1.0;
     sphere->setScale(dims);
 
     // set the color of sphere
