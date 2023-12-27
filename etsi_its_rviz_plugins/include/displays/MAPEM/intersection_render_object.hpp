@@ -23,11 +23,14 @@ SOFTWARE.
 ============================================================================= */
 
 #include "etsi_its_mapem_msgs/msg/mapem.hpp"
+#include <geometry_msgs/msg/point.hpp>
 #include <std_msgs/msg/header.hpp>
 
 #include <etsi_its_msgs_utils/mapem_access.hpp>
 
 #include <rclcpp/rclcpp.hpp>
+
+#include <tf2/LinearMath/Quaternion.h>
 
 #include "rviz_common/validate_floats.hpp"
 
@@ -35,6 +38,16 @@ namespace etsi_its_msgs
 {
 namespace displays
 {
+
+enum LaneDirection {ingress, egress, bidirectional, no_travel, unknown_direction};
+enum LaneType {vehicle, crosswalk, bike_lane, sidewalk, median, striping, tracked_vehicle, parking, unknown_type};
+
+typedef struct IntersectionLane {
+  uint8_t lane_id;
+  LaneType type = LaneType::unknown_type;
+  LaneDirection direction = LaneDirection::unknown_direction;
+  std::vector<geometry_msgs::msg::Point> nodes; // relative to ref_point of intersection
+} IntersectionLane;
 
 /**
  * @class IntersectionRenderObject
@@ -80,13 +93,23 @@ class IntersectionRenderObject
      */
     geometry_msgs::msg::Point getRefPosition();
 
+    /**
+     * @brief Return a tf2::Quaternion describing the rotation offset between true-north and grid-north in the UTM zone
+     * 
+     * @return tf2::Quaternion 
+     */
+    tf2::Quaternion getGridConvergenceQuaternion();
+
+    // public member variables
+    std::vector<IntersectionLane> lanes;
+
   private:
     // member variables
     std_msgs::msg::Header header;
     unsigned int intersection_id;
     std::vector<unsigned int> layer_ids;
     geometry_msgs::msg::PointStamped ref_point;
-
+    double grid_convergence_angle;    
 };
 
 }  // namespace displays

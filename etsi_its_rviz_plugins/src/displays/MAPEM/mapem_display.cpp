@@ -58,8 +58,13 @@ MAPEMDisplay::MAPEMDisplay()
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(25, 0, 255),
     "Object color", this);
-  // show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
-  //   "Show metadata as text next to objects", this);
+  show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
+    "Show metadata as text next to MAP reference point", this);
+  text_color_property_ = new rviz_common::properties::ColorProperty(
+    "Color", QColor(255, 255, 255),
+    "Text color", show_meta_);
+  char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
+
 
 }
 
@@ -123,6 +128,7 @@ void MAPEMDisplay::update(float, float)
   }
   // Render all valid intersections
   intsct_ref_points_.clear();
+  lane_lines_.clear();
   texts_.clear();
   for(auto it = intersections_.begin(); it != intersections_.end(); ++it) {
     IntersectionRenderObject intsctn = it->second;
@@ -142,7 +148,8 @@ void MAPEMDisplay::update(float, float)
     // Set position of scene node
     geometry_msgs::msg::Point ref_position = intsctn.getRefPosition();
     Ogre::Vector3 position(ref_position.x, ref_position.y, ref_position.z);
-    Ogre::Quaternion orientation(1.0, 0.0, 0.0, 0.0);
+    tf2::Quaternion rot_offset = intsctn.getGridConvergenceQuaternion();
+    Ogre::Quaternion orientation(rot_offset.w(), rot_offset.x(), rot_offset.y(), rot_offset.z());
 
     // set pose of child scene node of intersection
     child_scene_node->setPosition(position);
@@ -159,32 +166,42 @@ void MAPEMDisplay::update(float, float)
     sphere->setScale(dims);
 
     // set the color of sphere
-    Ogre::ColourValue sphere_color = rviz_common::properties::qtToOgre(color_property_->getColor());
-    sphere->setColor(sphere_color);
+    Ogre::ColourValue color = rviz_common::properties::qtToOgre(color_property_->getColor());
+    sphere->setColor(color);
     intsct_ref_points_.push_back(sphere);
 
+    // visualize the lanes
+    for(size_t i = 0; i<intsctn.lanes.size(); i++)
+    {
+      std::shared_ptr<rviz_rendering::BillboardLine> line = std::make_shared<rviz_rendering::BillboardLine>(scene_manager_, child_scene_node);
+      line->setColor(color.r, color.g, color.b, color.a);
+      line->setLineWidth(1.0);
+      for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++)
+      {
+        Ogre::Vector3 p;
+        p.x = intsctn.lanes[i].nodes[j].x;
+        p.y = intsctn.lanes[i].nodes[j].y;
+        p.z = intsctn.lanes[i].nodes[j].z;
+        line->addPoint(p);
+      }
+      lane_lines_.push_back(line);
+    }
+
     // Visualize meta-information as text
-    // if(show_meta_->getBool()) {
-    //   std::string text;
-    //   if(show_station_id_->getBool()) {
-    //     text+="StationID: " + std::to_string(cam.getStationID());
-    //     text+="\n";
-    //   }
-    //   if(show_speed_->getBool()) {
-    //     text+="Speed: " + std::to_string((int)(cam.getSpeed()*3.6)) + " km/h";
-    //   }
-    //   if(!text.size()) return;
-    //   std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
-    //   double height = dims.z;
-    //   height+=text_render->getBoundingRadius();
-    //   Ogre::Vector3 offs(0.0, 0.0, height);
-    //   // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
-    //   text_render->setGlobalTranslation(offs);
-    //   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
-    //   text_render->setColor(text_color);
-    //   child_scene_node->attachObject(text_render.get());
-    //   texts_.push_back(text_render);
-    // }
+    if(show_meta_->getBool()) {
+      std::string text;
+      text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
+      std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
+      double height = dims.z;
+      height+=text_render->getBoundingRadius();
+      Ogre::Vector3 offs(0.0, 0.0, height);
+      // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
+      text_render->setGlobalTranslation(offs);
+      Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
+      text_render->setColor(text_color);
+      child_scene_node->attachObject(text_render.get());
+      texts_.push_back(text_render);
+    }
   }
 }
 

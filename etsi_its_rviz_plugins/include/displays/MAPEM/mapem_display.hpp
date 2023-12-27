@@ -30,6 +30,7 @@ SOFTWARE.
 #include "displays/MAPEM/intersection_render_object.hpp"
 
 #include "rviz_common/ros_topic_display.hpp"
+#include "rviz_rendering/objects/billboard_line.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
 #include "rviz_rendering/objects/shape.hpp"
 
@@ -82,13 +83,14 @@ protected:
 
   // Properties
   rviz_common::properties::BoolProperty *show_meta_;
-  rviz_common::properties::FloatProperty *buffer_timeout_;
-  rviz_common::properties::ColorProperty *color_property_;
+  rviz_common::properties::FloatProperty *buffer_timeout_, *char_height_;
+  rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
 
   std::unordered_map<int, IntersectionRenderObject> intersections_;
   // std::unordered_map<int, SPATEMRenderObject> spatems_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_;
+  std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };
 
