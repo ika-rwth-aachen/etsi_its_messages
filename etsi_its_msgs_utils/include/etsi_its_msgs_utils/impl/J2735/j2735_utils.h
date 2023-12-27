@@ -114,8 +114,38 @@ namespace J2735_access {
     return utm_point;
   }
 
+    /**
+   * @brief Get the UTM Position defined by the given Position3D along with the grid-convergence angle
+   *
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   *
+   * @param[in] reference_position Position3D to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @param[out] conv_angle grid-convergence angle in degree
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPositionWithConvergenceAngle(const Position3D& reference_position, int& zone, bool& northp, double& conv_angle){
+    gm::PointStamped utm_point;
+    double latitude = getLatitude(reference_position.lat);
+    double longitude = getLongitude(reference_position.lon);
+    if(reference_position.elevation_is_present) utm_point.point.z = getElevation(reference_position.elevation);
+    try {
+      double scale;
+      GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y, conv_angle, scale);
+      std::string hemisphere;
+      if(northp) hemisphere="N";
+      else hemisphere="S";
+      utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
+    } catch (GeographicLib::GeographicErr& e) {
+      throw std::invalid_argument(e.what());
+    }
+    return utm_point;
+  }
+
   /**
-   * @brief Get the UTM Position of ref_point defined by the Position3D in an IntersectionGeometry object
+   * @brief Get the UTM Position of ref_point defined by the Position3D along with the grid-convergence angle in an IntersectionGeometry object
    *
    * The position is transformed into UTM by using GeographicLib::UTMUPS
    * The altitude value is directly used as z-Coordinate
@@ -127,6 +157,22 @@ namespace J2735_access {
    */
   inline gm::PointStamped getRefPointUTMPosition(const IntersectionGeometry& intsctn, int& zone, bool& northp){
     return getUTMPosition(intsctn.ref_point, zone, northp);
+  }
+
+    /**
+   * @brief Get the UTM Position of ref_point defined by the Position3D in an IntersectionGeometry object
+   *
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   *
+   * @param[in] intsctn IntersectionGeometry to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @param[out] conv_angle grid-convergence angle in degree
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getRefPointUTMPositionWithConvergenceAngle(const IntersectionGeometry& intsctn, int& zone, bool& northp, double& conv_angle){
+    return getUTMPositionWithConvergenceAngle(intsctn.ref_point, zone, northp, conv_angle);
   }
 
 } // namespace etsi_its_msgs

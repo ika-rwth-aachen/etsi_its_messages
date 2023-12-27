@@ -32,6 +32,7 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/checks.h>
+#include <etsi_its_msgs_utils/impl/asn1_utils.h>
 
 namespace etsi_its_msgs {
 
@@ -138,6 +139,52 @@ namespace J2735_access {
   inline double getElevation(const Position3D& ref_point){
     etsi_its_msgs::throwIfNotIsPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
     return getElevation(ref_point.elevation);
+  }
+
+  /**
+   * @brief Get the LaneDirection in form of bool vector
+   *
+   * @param lane_direction LaneDirection object to get the bool vector from
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getLaneDirection(const LaneDirection& lane_direction) {
+    return getBitString(lane_direction.value, lane_direction.bits_unused);
+  }
+
+  /**
+   * @brief Get the LaneDirection in form of bool vector from a LaneAttributes object
+   *
+   * @param lane_attributes LaneAttributes object to get the bool vector from
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getLaneDirection(const LaneAttributes& lane_attributes) {
+    return getLaneDirection(lane_attributes.directional_use);
+  }
+
+  /**
+   * @brief Get the LaneDirection in form of bool vector from a GenericLane object
+   *
+   * @param generic_lane GenericLane object to get the bool vector from
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getLaneDirection(const GenericLane& generic_lane) {
+    return getLaneDirection(generic_lane.lane_attributes);
+  }
+
+  /**
+   * @brief Get the Point From NodeXY object
+   * 
+   * @tparam T representing different NodeXY types (NodeXY20b, NodeXY22b...)
+   * @param node_xy the NodeXY object
+   * @return gm::Point geometry_msgs::Point representing the node point (values given in meters)
+   */
+  template <typename T>
+  inline gm::Point getPointFromNodeXY(const T& node_xy)
+  {
+    gm::Point p;
+    p.x = ((double)node_xy.x.value) * 1e-2;
+    p.y = ((double)node_xy.y.value) * 1e-2;
+    return p;
   }
 
 } // namespace J2735_access
