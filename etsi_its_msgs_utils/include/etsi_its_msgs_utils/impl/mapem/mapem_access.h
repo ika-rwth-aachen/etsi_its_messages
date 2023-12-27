@@ -33,7 +33,7 @@ SOFTWARE.
 
 using namespace etsi_its_mapem_msgs;
 
-#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_access.h>
+#include <etsi_its_msgs_utils/impl/J2735/j2735_access.h>
 
 #include <etsi_its_msgs_utils/impl/mapem/mapem_getters.h>
 #include <etsi_its_msgs_utils/impl/mapem/mapem_setters.h>

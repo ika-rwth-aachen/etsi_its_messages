@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 /**
- * @file impl/J2735/j2735_v2x_dict_access.h
+ * @file impl/J2735/j2735_access.h
  * @brief Main J2735 V2X Communications Message Set Dictionary access implementation header
  */
 
@@ -33,8 +33,8 @@ SOFTWARE.
 
 #include <cmath>
 
-#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_getters.h>
-#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_setters.h>
-#include <etsi_its_msgs_utils/impl/J2735/j2735_v2x_dict_utils.h>
+#include <etsi_its_msgs_utils/impl/J2735/j2735_getters.h>
+#include <etsi_its_msgs_utils/impl/J2735/j2735_setters.h>
+#include <etsi_its_msgs_utils/impl/J2735/j2735_utils.h>
 
 

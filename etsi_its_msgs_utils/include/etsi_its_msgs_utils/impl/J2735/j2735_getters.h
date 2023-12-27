@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 /**
- * @file impl/J2735/j2735_v2x_dict_getters.h
+ * @file impl/J2735/j2735_getters.h
  * @brief Getter functions for the J2735 V2X Communications Message Set Dictionary
  */
 

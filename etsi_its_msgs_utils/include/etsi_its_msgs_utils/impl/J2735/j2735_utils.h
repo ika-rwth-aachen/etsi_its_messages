@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 /**
- * @file impl/J2735/j2735_v2x_dict_utils.h
+ * @file impl/J2735/j2735_utils.h
  * @brief Utility functions for the J2735 V2X Communications Message Set Dictionary
  */
 #pragma once
