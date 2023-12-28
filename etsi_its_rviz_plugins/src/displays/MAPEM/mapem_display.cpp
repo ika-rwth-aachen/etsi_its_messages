@@ -56,9 +56,10 @@ MAPEMDisplay::MAPEMDisplay() {
     "Time (in s) until MAP disappears", this);
   mapem_timeout_->setMin(0);
   viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
-    "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()), this);
-  spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "",
-      "etsi_its_spatem_msgs::msg::SPATEM", "Topic of corresponding SPATEMs", viz_spatem_, SLOT(changedSPATEMTopic()));
+    "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
+  spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "etsi_its_conversion/spatem/out",
+      rosidl_generator_traits::data_type<etsi_its_spatem_msgs::msg::SPATEM>(),
+      "Topic of corresponding SPATEMs", viz_spatem_, SLOT(changedSPATEMTopic()));
   spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
     "SPATEM Timeout", 0.1f,
