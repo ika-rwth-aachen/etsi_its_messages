@@ -23,6 +23,7 @@ SOFTWARE.
 ============================================================================= */
 
 #include "etsi_its_mapem_msgs/msg/mapem.hpp"
+#include "etsi_its_spatem_msgs/msg/spatem.hpp"
 #include <geometry_msgs/msg/point.hpp>
 #include <std_msgs/msg/header.hpp>
 
@@ -47,7 +48,14 @@ typedef struct IntersectionLane {
   LaneType type = LaneType::unknown_type;
   LaneDirection direction = LaneDirection::unknown_direction;
   std::vector<geometry_msgs::msg::Point> nodes; // relative to ref_point of intersection
+  std::vector<uint8_t> signal_group_ids;
 } IntersectionLane;
+
+typedef struct IntersectionMovementState {
+  std_msgs::msg::Header header;
+  uint8_t signal_group_id;
+  etsi_its_spatem_msgs::msg::MovementPhaseState phase_state;
+} IntersectionMovementState;
 
 /**
  * @class IntersectionRenderObject
@@ -102,6 +110,7 @@ class IntersectionRenderObject
 
     // public member variables
     std::vector<IntersectionLane> lanes;
+    std::vector<IntersectionMovementState> movement_states;
 
   private:
     // member variables

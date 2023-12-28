@@ -38,6 +38,7 @@ SOFTWARE.
 #include "rviz_common/properties/float_property.hpp"
 #include "rviz_common/properties/bool_property.hpp"
 #include "rviz_common/properties/ros_topic_property.hpp"
+#include "rviz_common/properties/qos_profile_property.hpp"
 
 #include "rviz_common/properties/parse_color.hpp"
 
@@ -48,15 +49,21 @@ namespace displays
 
 const Ogre::ColourValue color_grey(0.5, 0.5, 0.5, 1.0);
 
-MAPEMDisplay::MAPEMDisplay()
-{
+MAPEMDisplay::MAPEMDisplay() {
   // General Properties
-  // spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "",
-  //     "etsi_its_spatem_msgs::msg::SPATEM", "Topic of corresponding SPATEMs", this);
-  buffer_timeout_ = new rviz_common::properties::FloatProperty(
-    "Timeout", 120.0f,
+  mapem_timeout_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Timeout", 120.0f,
     "Time (in s) until MAP disappears", this);
-  buffer_timeout_->setMin(0);
+  mapem_timeout_->setMin(0);
+  viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
+    "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()), this);
+  spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "",
+      "etsi_its_spatem_msgs::msg::SPATEM", "Topic of corresponding SPATEMs", viz_spatem_, SLOT(changedSPATEMTopic()));
+  spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
+  spatem_timeout_ = new rviz_common::properties::FloatProperty(
+    "SPATEM Timeout", 0.1f,
+    "Time (in s) until SPAT disappears", viz_spatem_);
+  spatem_timeout_->setMin(0);
   color_property_ingress_ = new rviz_common::properties::ColorProperty(
     "Ingress Lane Color", QColor(85, 85, 255),
     "Color to visualize Ingress-Lanes", this);
@@ -73,33 +80,74 @@ MAPEMDisplay::MAPEMDisplay()
 
 }
 
-MAPEMDisplay::~MAPEMDisplay()
-{
+MAPEMDisplay::~MAPEMDisplay() {
   if (initialized() ) {
     scene_manager_->destroyManualObject(manual_object_);
   }
 }
 
-void MAPEMDisplay::onInitialize()
-{
+void MAPEMDisplay::onInitialize() {
   RTDClass::onInitialize();
 
   auto nodeAbstraction = context_->getRosNodeAbstraction().lock();
   rviz_node_ = nodeAbstraction->get_raw_node();
+  spatem_topic_property_->initialize(nodeAbstraction);
+  spatem_qos_property_->initialize(
+      [this](rclcpp::QoS profile) {
+        spatem_qos_profile_ = profile;
+        changedSPATEMTopic();
+      });
 
   manual_object_ = scene_manager_->createManualObject();
   manual_object_->setDynamic(true);
   scene_node_->attachObject(manual_object_);
 }
 
-void MAPEMDisplay::reset()
-{
+void MAPEMDisplay::reset() {
   RTDClass::reset();
   manual_object_->clear();
 }
 
-void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg)
-{
+void MAPEMDisplay::changedSPATEMViz() {
+  if(!viz_spatem_->getBool()) spatem_subscriber_.reset();
+  else changedSPATEMTopic();
+}
+
+void MAPEMDisplay::changedSPATEMTopic() {
+  spatem_subscriber_.reset();
+  if(spatem_topic_property_->isEmpty()) {
+    setStatus(
+        rviz_common::properties::StatusProperty::Warn,
+        "SPATEM Topic",
+        QString("Error subscribing: Empty topic name"));
+      return;
+  } 
+
+  std::map<std::string, std::vector<std::string>> published_topics = rviz_node_->get_topic_names_and_types();
+  for (const auto & topic : published_topics) {
+    // Only add topics whose type matches.
+    if(topic.first == spatem_topic_property_->getTopicStd()) {
+      for (const auto & type : topic.second) {
+        RCLCPP_INFO_STREAM(rviz_node_->get_logger(), type);
+        if (type == "etsi_its_spatem_msgs/msg/SPATEM") {
+          spatem_subscriber_ = rviz_node_->create_subscription<etsi_its_spatem_msgs::msg::SPATEM>(spatem_topic_property_->getTopicStd(), spatem_qos_profile_, std::bind(&MAPEMDisplay::SPATEMCallback, this, std::placeholders::_1));
+          setStatus(
+            rviz_common::properties::StatusProperty::Ok, "SPATEM Topic", "OK");
+          return;
+        }
+      }
+    }
+  }
+  setStatus(
+      rviz_common::properties::StatusProperty::Warn, "SPATEM Topic",
+      QString("Error subscribing to ") + QString::fromStdString(spatem_topic_property_->getTopicStd()) + QString(": Message type does not equal etsi_its_spatem_msgs::msg::SPATEM!"));
+}
+
+void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg) {
+  RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Received SPATEM!");
+}
+
+void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg) {
   // Process MAPEM message
   rclcpp::Time now = rviz_node_->now();
   // Intersections
@@ -124,16 +172,16 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPt
   return;
 }
 
-void MAPEMDisplay::update(float, float)
-{
+void MAPEMDisplay::update(float, float) {
   // Check for outdated intersections
   for (auto it = intersections_.begin(); it != intersections_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = intersections_.erase(it);
+        if (it->second.getAge(rviz_node_->now()) > mapem_timeout_->getFloat()) it = intersections_.erase(it);
         else ++it;
   }
   // Render all valid intersections
   intsct_ref_points_.clear();
   lane_lines_.clear();
+  signal_groups_.clear();
   texts_.clear();
   for(auto it = intersections_.begin(); it != intersections_.end(); ++it) {
     IntersectionRenderObject intsctn = it->second;
@@ -184,8 +232,7 @@ void MAPEMDisplay::update(float, float)
       else lane_color = color_grey;
       line->setColor(lane_color.r, lane_color.g, lane_color.b, lane_color.a);
       line->setLineWidth(1.0);
-      for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++)
-      {
+      for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++) {
         Ogre::Vector3 p;
         p.x = intsctn.lanes[i].nodes[j].x;
         p.y = intsctn.lanes[i].nodes[j].y;
@@ -193,6 +240,18 @@ void MAPEMDisplay::update(float, float)
         line->addPoint(p);
       }
       lane_lines_.push_back(line);
+      // Signal Groups
+      if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size()) {// && intsctn.lanes[i].direction == LaneDirection::ingress) {
+        std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
+        sg->setScale(dims);
+        sg->setColor(color_grey);
+        Ogre::Vector3 p;
+        p.x = intsctn.lanes[i].nodes.front().x;
+        p.y = intsctn.lanes[i].nodes.front().y;
+        p.z = intsctn.lanes[i].nodes.front().z;
+        sg->setPosition(p);
+        signal_groups_.push_back(sg);
+      }
     }
 
     // Visualize meta-information as text

@@ -48,6 +48,7 @@ namespace properties
   class ColorProperty;
   class FloatProperty;
   class RosTopicProperty;
+  class QosProfileProperty;
 }  // namespace properties
 }  // namespace rviz_common
 
@@ -73,23 +74,31 @@ public:
 
   void reset() override;
 
+protected Q_SLOTS:
+  void changedSPATEMViz();
+  void changedSPATEMTopic();
+
 protected:
   void processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg) override;
   void update(float wall_dt, float ros_dt) override;
+  void SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg);
 
   Ogre::ManualObject *manual_object_;
 
   rclcpp::Node::SharedPtr rviz_node_;
+  rclcpp::Subscription<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr spatem_subscriber_;
+  rclcpp::QoS spatem_qos_profile_ = rclcpp::QoS(1);
 
   // Properties
-  rviz_common::properties::BoolProperty *show_meta_;
-  rviz_common::properties::FloatProperty *buffer_timeout_, *char_height_;
+  rviz_common::properties::BoolProperty *show_meta_, *viz_spatem_;
+  rviz_common::properties::FloatProperty *mapem_timeout_, *spatem_timeout_, *char_height_;
   rviz_common::properties::ColorProperty *color_property_ingress_, *color_property_egress_, *text_color_property_;
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
+  rviz_common::properties::QosProfileProperty *spatem_qos_property_;
 
   std::unordered_map<int, IntersectionRenderObject> intersections_;
   // std::unordered_map<int, SPATEMRenderObject> spatems_;
-  std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_;
+  std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_, signal_groups_;
   std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };

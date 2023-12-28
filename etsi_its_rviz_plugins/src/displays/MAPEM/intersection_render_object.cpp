@@ -47,8 +47,7 @@ namespace displays
     header.frame_id = ref_point.header.frame_id;
 
     // Parse the lanes
-    for(size_t i=0; i<intersection.lane_set.array.size(); i++)
-    {
+    for(size_t i=0; i<intersection.lane_set.array.size(); i++) {
       etsi_its_mapem_msgs::msg::GenericLane gen_lane = intersection.lane_set.array[i];
       IntersectionLane intsct_lane;
       intsct_lane.lane_id =  gen_lane.lane_id.value;
@@ -70,14 +69,11 @@ namespace displays
       else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_PARKING) intsct_lane.type = LaneType::parking;
       else intsct_lane.type = LaneType::unknown_type;
       // Nodes
-      if(gen_lane.node_list.choice == etsi_its_mapem_msgs::msg::NodeListXY::CHOICE_NODES)
-      {
+      if(gen_lane.node_list.choice == etsi_its_mapem_msgs::msg::NodeListXY::CHOICE_NODES) {
         etsi_its_mapem_msgs::msg::NodeSetXY node_set = gen_lane.node_list.nodes;
-        for(size_t j=0; j<node_set.array.size(); j++)
-        {
+        for(size_t j=0; j<node_set.array.size(); j++) {
           geometry_msgs::msg::Point p;
-          switch (node_set.array[j].delta.choice)
-          {
+          switch (node_set.array[j].delta.choice) {
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_1:
                   p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
                   break;
@@ -106,14 +102,21 @@ namespace displays
                   break;
           }
 
-          if(intsct_lane.nodes.size())
-          {
+          if(intsct_lane.nodes.size()) {
             geometry_msgs::msg::Point p_back = intsct_lane.nodes.back();
             p.x += p_back.x;
             p.y += p_back.y;
             p.z += p_back.z;
           }
           intsct_lane.nodes.push_back(p);
+        }
+      }
+      // Signal Groups
+      if(gen_lane.connects_to_is_present) {
+        for(size_t i=0; i<gen_lane.connects_to.array.size(); i++) {
+          if(gen_lane.connects_to.array[i].signal_group_is_present) {
+            intsct_lane.signal_group_ids.push_back(gen_lane.connects_to.array[i].signal_group.value);
+          }
         }
       }
       // Store lane in vector
