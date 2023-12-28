@@ -46,6 +46,8 @@ namespace etsi_its_msgs
 namespace displays
 {
 
+const Ogre::ColourValue color_grey(0.5, 0.5, 0.5, 1.0);
+
 MAPEMDisplay::MAPEMDisplay()
 {
   // General Properties
@@ -55,13 +57,16 @@ MAPEMDisplay::MAPEMDisplay()
     "Timeout", 120.0f,
     "Time (in s) until MAP disappears", this);
   buffer_timeout_->setMin(0);
-  color_property_ = new rviz_common::properties::ColorProperty(
-    "Color", QColor(25, 0, 255),
-    "Object color", this);
+  color_property_ingress_ = new rviz_common::properties::ColorProperty(
+    "Ingress Lane Color", QColor(85, 85, 255),
+    "Color to visualize Ingress-Lanes", this);
+  color_property_egress_ = new rviz_common::properties::ColorProperty(
+    "Egress Lane Color", QColor(255, 170, 0),
+    "Color to visualize Egress-Lanes", this);
   show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
     "Show metadata as text next to MAP reference point", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
-    "Color", QColor(255, 255, 255),
+    "Text Color", QColor(255, 255, 255),
     "Text color", show_meta_);
   char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
 
@@ -166,15 +171,18 @@ void MAPEMDisplay::update(float, float)
     sphere->setScale(dims);
 
     // set the color of sphere
-    Ogre::ColourValue color = rviz_common::properties::qtToOgre(color_property_->getColor());
-    sphere->setColor(color);
+    sphere->setColor(color_grey);
     intsct_ref_points_.push_back(sphere);
 
     // visualize the lanes
     for(size_t i = 0; i<intsctn.lanes.size(); i++)
     {
       std::shared_ptr<rviz_rendering::BillboardLine> line = std::make_shared<rviz_rendering::BillboardLine>(scene_manager_, child_scene_node);
-      line->setColor(color.r, color.g, color.b, color.a);
+      Ogre::ColourValue lane_color;
+      if(intsctn.lanes[i].direction == LaneDirection::ingress) lane_color = rviz_common::properties::qtToOgre(color_property_ingress_->getColor());
+      else if(intsctn.lanes[i].direction == LaneDirection::egress) lane_color = rviz_common::properties::qtToOgre(color_property_egress_->getColor());
+      else lane_color = color_grey;
+      line->setColor(lane_color.r, lane_color.g, lane_color.b, lane_color.a);
       line->setLineWidth(1.0);
       for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++)
       {

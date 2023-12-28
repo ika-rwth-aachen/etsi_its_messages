@@ -84,7 +84,7 @@ protected:
   // Properties
   rviz_common::properties::BoolProperty *show_meta_;
   rviz_common::properties::FloatProperty *buffer_timeout_, *char_height_;
-  rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
+  rviz_common::properties::ColorProperty *color_property_ingress_, *color_property_egress_, *text_color_property_;
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
 
   std::unordered_map<int, IntersectionRenderObject> intersections_;
