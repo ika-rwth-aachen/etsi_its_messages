@@ -305,7 +305,7 @@ void MAPEMDisplay::update(float, float) {
       }
       lane_lines_.push_back(line);
       // Signal Groups
-      if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size()) {// && intsctn.lanes[i].direction == LaneDirection::ingress) {
+      if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size() && intsctn.lanes[i].direction != LaneDirection::egress) {
         std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
         sg->setScale(dims);
         // Set color according to state
