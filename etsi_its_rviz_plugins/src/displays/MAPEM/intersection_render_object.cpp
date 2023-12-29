@@ -136,6 +136,13 @@ namespace displays
     return (now-header.stamp).seconds();
   }
 
+  void IntersectionRenderObject::removeOutdatedMovemenStates(rclcpp::Time now, double timeout) {
+    for (auto it = movement_states.begin(); it != movement_states.end(); ) {
+      if ((now-it->second.header.stamp).seconds() > timeout) it = movement_states.erase(it);
+      else ++it;
+    }
+  }
+
   unsigned int IntersectionRenderObject::getIntersectionID() {
     return intersection_id;
   }

@@ -79,6 +79,14 @@ class IntersectionRenderObject
     double getAge(rclcpp::Time now);
 
     /**
+     * @brief Remove outdated MovementStates
+     *
+     * @param now reference point in time to calculate the age with
+     * @param timeout age threshold for that MovementStates should be removed
+     */
+    void removeOutdatedMovemenStates(rclcpp::Time now, double timeout);
+
+    /**
      * @brief Get the IntersectionID
      * 
      * @return unsigned int intersection_id

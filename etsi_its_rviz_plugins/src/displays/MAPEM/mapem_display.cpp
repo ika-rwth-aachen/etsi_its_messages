@@ -226,11 +226,15 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPt
 }
 
 void MAPEMDisplay::update(float, float) {
-  // Check for outdated intersections
+  // Check for outdated intersections and movement states
+  rclcpp::Time now = rviz_node_->now();
   for (auto it = intersections_.begin(); it != intersections_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > mapem_timeout_->getFloat()) it = intersections_.erase(it);
-        else ++it;
-  }
+        if (it->second.getAge(now) > mapem_timeout_->getFloat()) it = intersections_.erase(it);
+        else {
+          it->second.removeOutdatedMovemenStates(now, spatem_timeout_->getFloat());
+          ++it;
+        }
+  }  
   // Render all valid intersections
   intsct_ref_points_.clear();
   lane_lines_.clear();
