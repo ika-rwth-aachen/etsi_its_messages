@@ -97,7 +97,6 @@ protected:
   rviz_common::properties::QosProfileProperty *spatem_qos_property_;
 
   std::unordered_map<int, IntersectionRenderObject> intersections_;
-  // std::unordered_map<int, SPATEMRenderObject> spatems_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_, signal_groups_;
   std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;

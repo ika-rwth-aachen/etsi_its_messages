@@ -110,7 +110,7 @@ class IntersectionRenderObject
 
     // public member variables
     std::vector<IntersectionLane> lanes;
-    std::vector<IntersectionMovementState> movement_states;
+    std::unordered_map<int, IntersectionMovementState> movement_states;
 
   private:
     // member variables
