@@ -24,6 +24,8 @@ SOFTWARE.
 
 #include "displays/MAPEM/mapem_display.hpp"
 
+#include <etsi_its_msgs_utils/spatem_access.hpp>
+
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreManualObject.h>
@@ -159,18 +161,33 @@ void MAPEMDisplay::changedSPATEMTopic() {
 }
 
 void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg) {
-
+  rclcpp::Time now = rviz_node_->now();
   // iterate over all IntersectionStates
   for(size_t i = 0; i<msg->spat.intersections.array.size(); i++) {
     unsigned int intersection_id = msg->spat.intersections.array[i].id.id.value;
     // Check if IntersectionID is already present in intersections-list
     auto it = intersections_.find(intersection_id);
     if (it == intersections_.end()) continue; // intersection is not available, continue loop
+    // derive stamp from Intersection State#
+    std_msgs::msg::Header header;
+    if(msg->spat.intersections.array[i].moy_is_present && msg->spat.intersections.array[i].time_stamp_is_present) {
+      uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(msg->spat.intersections.array[i].moy, now.nanoseconds());
+      nanosecs += ((uint64_t )msg->spat.intersections.array[i].time_stamp.value)*1e6;
+      header.stamp = rclcpp::Time(nanosecs);
+    }
+    else {
+      header.stamp = now;
+    }
+    // iterate over all MovemenStates
     for(size_t j=0; j<msg->spat.intersections.array[i].states.array.size(); j++) {
       etsi_its_spatem_msgs::msg::MovementState spat_mvmt_state = msg->spat.intersections.array[i].states.array[j];
       IntersectionMovementState mvmt_state;
       // Fill the IntersectionMovementState
       mvmt_state.signal_group_id = spat_mvmt_state.signal_group.value;
+      mvmt_state.header = header;
+      if(spat_mvmt_state.state_time_speed.array.size()) {
+        mvmt_state.phase_state = spat_mvmt_state.state_time_speed.array[0].event_state;
+      }
       // Check if SignalGroup is already present in IntersectionMovementState of Intersection
       auto mvmnt_it = it->second.movement_states.find(mvmt_state.signal_group_id);
       if (mvmnt_it != it->second.movement_states.end()) mvmnt_it->second = mvmt_state; // SignalGroup exists, update the value
