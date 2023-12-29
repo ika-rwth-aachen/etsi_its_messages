@@ -27,8 +27,6 @@ SOFTWARE.
 #include <geometry_msgs/msg/point.hpp>
 #include <std_msgs/msg/header.hpp>
 
-#include <etsi_its_msgs_utils/mapem_access.hpp>
-
 #include <rclcpp/rclcpp.hpp>
 
 #include <tf2/LinearMath/Quaternion.h>

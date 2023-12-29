@@ -23,6 +23,7 @@ SOFTWARE.
 ============================================================================= */
 
 #include "displays/MAPEM/intersection_render_object.hpp"
+#include <etsi_its_msgs_utils/mapem_access.hpp>
 
 namespace etsi_its_msgs
 {
@@ -31,11 +32,11 @@ namespace displays
 
   IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
 
-    intersection_id = etsi_its_msgs::J2735_access::getIntersectionID(intersection);
+    intersection_id = etsi_its_mapem_msgs::access::getIntersectionID(intersection);
 
     int zone;
     bool northp;
-    ref_point = etsi_its_msgs::J2735_access::getRefPointUTMPositionWithConvergenceAngle(intersection, zone, northp, grid_convergence_angle);
+    ref_point = etsi_its_mapem_msgs::access::getRefPointUTMPositionWithConvergenceAngle(intersection, zone, northp, grid_convergence_angle);
 
     if(timestamp_is_present) {
       uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
@@ -52,7 +53,7 @@ namespace displays
       IntersectionLane intsct_lane;
       intsct_lane.lane_id =  gen_lane.lane_id.value;
       // LaneDirection
-      std::vector<bool> lane_dir = etsi_its_msgs::J2735_access::getLaneDirection(gen_lane);
+      std::vector<bool> lane_dir = etsi_its_mapem_msgs::access::getLaneDirection(gen_lane);
       if(lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::bidirectional;
       else if(!lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::no_travel;
       else if(lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress; 
@@ -75,27 +76,27 @@ namespace displays
           geometry_msgs::msg::Point p;
           switch (node_set.array[j].delta.choice) {
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_1:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
                   break;
 
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_2:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_2);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_2);
                   break;
 
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_3:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_3);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_3);
                   break;                        
                   
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_4:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_4);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_4);
                   break;                        
               
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_5:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_5);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_5);
                   break;                        
                   
               case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_6:
-                  p = etsi_its_msgs::J2735_access::getPointFromNodeXY(node_set.array[j].delta.node_xy_6);
+                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_6);
                   break;
 
               default:
