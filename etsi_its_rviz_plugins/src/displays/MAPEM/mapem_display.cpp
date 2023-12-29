@@ -50,6 +50,9 @@ namespace displays
 {
 
 const Ogre::ColourValue color_grey(0.5, 0.5, 0.5, 1.0);
+const Ogre::ColourValue color_green(0.18, 0.79, 0.21, 1.0);
+const Ogre::ColourValue color_orange(0.9, 0.7, 0.09, 1.0);
+const Ogre::ColourValue color_red(0.8, 0.2, 0.2, 1.0);
 
 MAPEMDisplay::MAPEMDisplay() {
   // General Properties
@@ -218,7 +221,11 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPt
     }
     // Check if IntersectionID is already present in list
     auto it = intersections_.find(intsct.getIntersectionID());
-    if (it != intersections_.end()) it->second = intsct; // Key exists, update the value
+    if (it != intersections_.end()) {
+      // Intersection exists, update the intersection but keep the MovementStates
+      intsct.movement_states = it->second.movement_states;
+      it->second = intsct; 
+    } 
     else intersections_.insert(std::make_pair(intsct.getIntersectionID(), intsct));
   }
   
@@ -301,7 +308,66 @@ void MAPEMDisplay::update(float, float) {
       if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size()) {// && intsctn.lanes[i].direction == LaneDirection::ingress) {
         std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
         sg->setScale(dims);
-        sg->setColor(color_grey);
+        // Set color according to state
+        // Check if SignalGroup is present in IntersectionMovementState of Intersection
+        std::unordered_map<int, IntersectionMovementState>::iterator mvmnt_it;
+        for(size_t j=0; j<intsctn.lanes[i].signal_group_ids.size(); j++) {
+          mvmnt_it = intsctn.movement_states.find(intsctn.lanes[i].signal_group_ids[j]);
+          if (mvmnt_it != intsctn.movement_states.end()) break;
+          // Todo: How to handle when multiple signal_group_ids are present for one lane?
+        }
+        if(mvmnt_it != intsctn.movement_states.end()) {
+          switch (mvmnt_it->second.phase_state.value) {
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::UNAVAILABLE:
+              sg->setColor(color_grey);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::DARK:
+              sg->setColor(color_grey);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
+              sg->setColor(color_red);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
+              sg->setColor(color_red);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
+              sg->setColor(color_orange);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
+              sg->setColor(color_green);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
+              sg->setColor(color_green);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
+              sg->setColor(color_orange);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
+              sg->setColor(color_orange);
+              break;
+
+            case etsi_its_spatem_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
+              sg->setColor(color_orange);
+              break;
+
+            default:
+              sg->setColor(color_grey);
+              break;
+
+          }
+        }
+        else {
+          sg->setColor(color_grey);
+        }
         Ogre::Vector3 p;
         p.x = intsctn.lanes[i].nodes.front().x;
         p.y = intsctn.lanes[i].nodes.front().y;
