@@ -101,6 +101,8 @@ protected:
   std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_, signal_groups_;
   std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
+
+  uint64_t received_spats_=0;
 };
 
 }  // namespace displays

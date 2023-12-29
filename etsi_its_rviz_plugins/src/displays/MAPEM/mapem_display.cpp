@@ -55,12 +55,12 @@ MAPEMDisplay::MAPEMDisplay() {
     "MAPEM Timeout", 120.0f,
     "Time (in s) until MAP disappears", this);
   mapem_timeout_->setMin(0);
+  spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "/etsi_its_conversion/spatem/out",
+      rosidl_generator_traits::data_type<etsi_its_spatem_msgs::msg::SPATEM>(),
+      "Topic of corresponding SPATEMs", this, SLOT(changedSPATEMTopic()));
+  spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
   viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
     "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
-  spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "etsi_its_conversion/spatem/out",
-      rosidl_generator_traits::data_type<etsi_its_spatem_msgs::msg::SPATEM>(),
-      "Topic of corresponding SPATEMs", viz_spatem_, SLOT(changedSPATEMTopic()));
-  spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
     "SPATEM Timeout", 0.1f,
     "Time (in s) until SPAT disappears", viz_spatem_);
@@ -110,12 +110,16 @@ void MAPEMDisplay::reset() {
 }
 
 void MAPEMDisplay::changedSPATEMViz() {
-  if(!viz_spatem_->getBool()) spatem_subscriber_.reset();
+  if(!viz_spatem_->getBool()) {
+    deleteStatus("SPATEM Topic");
+    spatem_subscriber_.reset();
+  } 
   else changedSPATEMTopic();
 }
 
 void MAPEMDisplay::changedSPATEMTopic() {
   spatem_subscriber_.reset();
+  received_spats_=0;
   if(spatem_topic_property_->isEmpty()) {
     setStatus(
         rviz_common::properties::StatusProperty::Warn,
@@ -125,27 +129,39 @@ void MAPEMDisplay::changedSPATEMTopic() {
   } 
 
   std::map<std::string, std::vector<std::string>> published_topics = rviz_node_->get_topic_names_and_types();
+  bool topic_available = false;
+  std::string topic_message_type;
   for (const auto & topic : published_topics) {
     // Only add topics whose type matches.
     if(topic.first == spatem_topic_property_->getTopicStd()) {
+      topic_available = true;
       for (const auto & type : topic.second) {
-        RCLCPP_INFO_STREAM(rviz_node_->get_logger(), type);
+        topic_message_type = type;
         if (type == "etsi_its_spatem_msgs/msg/SPATEM") {
           spatem_subscriber_ = rviz_node_->create_subscription<etsi_its_spatem_msgs::msg::SPATEM>(spatem_topic_property_->getTopicStd(), spatem_qos_profile_, std::bind(&MAPEMDisplay::SPATEMCallback, this, std::placeholders::_1));
-          setStatus(
-            rviz_common::properties::StatusProperty::Ok, "SPATEM Topic", "OK");
           return;
         }
       }
     }
   }
-  setStatus(
+  if(!topic_available) {
+    setStatus(
       rviz_common::properties::StatusProperty::Warn, "SPATEM Topic",
-      QString("Error subscribing to ") + QString::fromStdString(spatem_topic_property_->getTopicStd()) + QString(": Message type does not equal etsi_its_spatem_msgs::msg::SPATEM!"));
+      QString("Error subscribing to ") + QString::fromStdString(spatem_topic_property_->getTopicStd())
+      + QString(": Topic is not available!"));
+  }
+  else {
+    setStatus(
+      rviz_common::properties::StatusProperty::Warn, "SPATEM Topic",
+      QString("Error subscribing to ") + QString::fromStdString(spatem_topic_property_->getTopicStd())
+      + QString(": Message type ") + QString::fromStdString(topic_message_type) + QString::fromStdString(" does not equal etsi_its_spatem_msgs::msg::SPATEM!"));
+  }
 }
 
 void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg) {
-  RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Received SPATEM!");
+  ++received_spats_;
+  setStatus(
+    rviz_common::properties::StatusProperty::Ok, "SPATEM Topic", QString::number(received_spats_) + " messages received");
 }
 
 void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg) {
