@@ -1,5 +1,5 @@
 
-#include <etsi_its_cam_msgs/MAPEM.h>
+#include <etsi_its_mapem_msgs/MAPEM.h>
 
 #include <etsi_its_msgs_utils/mapem_access.h>
 
