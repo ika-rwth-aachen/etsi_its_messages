@@ -71,9 +71,9 @@ const std::string Converter::kOutputTopicDenm{"~/denm/out"};
 const std::string Converter::kHasBtpDestinationPortParam{"has_btp_destination_port"};
 const bool Converter::kHasBtpDestinationPortParamDefault{true};
 const std::string Converter::kBtpDestinationPortOffsetParam{"btp_destination_port_offset"};
-const int Converter::kBtpDestinationPortOffsetParamDefault{0};
+const int Converter::kBtpDestinationPortOffsetParamDefault{8};
 const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payload_offset"};
-const int Converter::kEtsiMessagePayloadOffsetParamDefault{4};
+const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kEtsiTypesParam{"etsi_types"};
 const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm"};
 
