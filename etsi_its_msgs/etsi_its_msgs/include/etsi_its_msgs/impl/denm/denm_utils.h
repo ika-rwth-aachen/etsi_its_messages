@@ -61,7 +61,7 @@ namespace access {
    * @param n_leap_seconds number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
    * @return uint64_t the corresponding Unix-Nanoseconds
    */
-  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint16_t generation_delta_time_value, const TimestampIts& timestamp_estimate, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint16_t generation_delta_time_value, const TimestampIts& timestamp_estimate, const uint16_t n_leap_seconds)
   {
     TimestampIts t_its = getTimestampITSFromGenerationDeltaTime(generation_delta_time_value, timestamp_estimate);
     return t_its.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;
@@ -74,7 +74,7 @@ namespace access {
    * @param unix_timestamp_estimate estimated unix-time (in Nanoseconds) to calculate the corresponding generation from
    * @return uint64_t the corresponding Unix-Nanoseconds
    */
-  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint16_t generation_delta_time_value, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+  inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const uint64_t generation_delta_time_value, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds)
   {
     TimestampIts t_its;
     cdd::setTimestampITS(t_its, unix_timestamp_estimate, n_leap_seconds);

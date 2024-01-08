@@ -163,6 +163,7 @@ void DENMDisplay::update(float, float)
       if(show_sub_cause_code_->getBool()) {
         text+="SubCause: " + denm.getSubCauseCode();
       }
+   
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
       double height = text_render->getBoundingRadius();

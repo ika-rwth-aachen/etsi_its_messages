@@ -46,7 +46,7 @@ namespace access {
    * @param protocol_version
    */
   inline void setItsPduHeader(DENM& denm, const uint32_t station_id, const uint8_t protocol_version = 0){
-    cdd::setItsPduHeader(denm.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);
+    cdd::setItsPduHeader(denm.header, ItsPduHeader::MESSAGE_ID_DENM, station_id, protocol_version);
   }
 
 } // namespace access
