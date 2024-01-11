@@ -43,6 +43,22 @@ if(${ROS_VERSION} EQUAL 2)
     INCLUDES DESTINATION include
   )
 
+  if(BUILD_TESTING)
+    find_package(ament_cmake_gtest REQUIRED)
+    # DENM Access
+    ament_add_gtest(etsi_its_denm_msgs_access-test test/test_denm_access.ros2.cpp)
+    target_include_directories(etsi_its_denm_msgs_access-test PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+    )
+    target_include_directories(etsi_its_denm_msgs_access-test PUBLIC test)
+    ament_target_dependencies(etsi_its_denm_msgs_access-test
+        etsi_its_denm_msgs
+        GeographicLib
+        geometry_msgs
+    )
+  endif()
+
   ament_package(
     CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
   )
@@ -78,7 +94,7 @@ elseif(${ROS_VERSION} EQUAL 1)
   )
 
   if(CATKIN_ENABLE_TESTING)
-    catkin_add_gtest(${PROJECT_NAME}-test test/test_cam_access.cpp)
+    catkin_add_gtest(${PROJECT_NAME}-test test/test_denm_access.cpp)
     if(TARGET ${PROJECT_NAME}-test)
       target_include_directories(${PROJECT_NAME}-test PUBLIC test)
       target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
