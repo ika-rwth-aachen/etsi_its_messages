@@ -29,7 +29,7 @@ if(${ROS_VERSION} EQUAL 2)
   )
 
   ament_export_targets(etsi_its_msgs_accessTargets HAS_LIBRARY_TARGET)
-  ament_export_dependencies(etsi_its_cam_msgs etsi_its_denm_msgs geometry_msgs)
+  ament_export_dependencies(etsi_its_cam_msgs etsi_its_denm_msgs)
 
   install(DIRECTORY include/
     DESTINATION include/${PROJECT_NAME}
@@ -58,9 +58,7 @@ if(${ROS_VERSION} EQUAL 2)
     )
   endif()
 
-  ament_package(
-    CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
-  )
+  ament_package()
 
 # === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
@@ -68,7 +66,6 @@ elseif(${ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_msgs
     etsi_its_denm_msgs
-    geometry_msgs
   )
 
   find_package(GeographicLib REQUIRED)
@@ -79,7 +76,6 @@ elseif(${ROS_VERSION} EQUAL 1)
     CATKIN_DEPENDS
       etsi_its_cam_msgs
       etsi_its_denm_msgs
-      geometry_msgs
   )
 
   include_directories(
