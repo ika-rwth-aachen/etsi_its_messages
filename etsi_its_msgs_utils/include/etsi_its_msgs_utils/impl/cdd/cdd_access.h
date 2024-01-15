@@ -25,19 +25,14 @@ SOFTWARE.
 */
 
 /**
- * @file denm_access.h
- * @brief Main DENM access header to include in ROS 1 projects
+ * @file impl/cdd/cdd_access.h
+ * @brief Main CDD access implementation header
  */
 
 #pragma once
 
-// Messages
-#include <etsi_its_denm_msgs/DENM.h>
-#include <geometry_msgs/PointStamped.h>
+#include <cmath>
 
-namespace etsi_its_denm_msgs {
-    namespace gm = geometry_msgs;
-}
-
-// Implementation
-#include <etsi_its_msgs/impl/denm/denm_access.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_getters.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_setters.h>

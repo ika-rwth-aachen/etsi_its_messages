@@ -30,8 +30,8 @@ SOFTWARE.
  */
 
 #include <cstring>
-#include <etsi_its_msgs/impl/cdd/cdd_checks.h>
-#include <etsi_its_msgs/impl/constants.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
 #include <GeographicLib/UTMUPS.hpp>
 
 #pragma once

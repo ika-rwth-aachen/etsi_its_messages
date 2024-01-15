@@ -1,5 +1,0 @@
-repositories:
-  udp_msgs:
-    type: git
-    url: https://github.com/flynneva/udp_msgs.git
-    version: main

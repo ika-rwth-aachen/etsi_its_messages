@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="3">
 
-  <name>etsi_its_denm_conversion</name>
+  <name>etsi_its_msgs_utils</name>
   <version>2.0.0</version>
-  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS DENMs</description>
+  <description>ROS messages and utility functions for ETSI ITS messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
@@ -15,9 +15,9 @@
 
   <license>MIT</license>
 
-  <depend>etsi_its_denm_coding</depend>
-  <depend>etsi_its_denm_msgs</depend>
-  <depend>etsi_its_primitives_conversion</depend>
+  <depend>etsi_its_msgs</depend>
+  <depend>geographiclib</depend>
+  <depend>geometry_msgs</depend>
   <depend>ros_environment</depend>
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
