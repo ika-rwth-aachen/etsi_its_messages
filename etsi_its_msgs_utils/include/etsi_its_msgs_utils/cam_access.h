@@ -40,4 +40,4 @@ namespace etsi_its_cam_msgs {
 }
 
 // Implementation
-#include <etsi_its_msgs/impl/cam/cam_access.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_access.h>

@@ -96,7 +96,7 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     return ros_msg
 
 
-def exportRosMsg(ros_msg: str, type_name: str, doc_name: str, output_dir: str):
+def exportRosMsg(ros_msg: str, type_name: str, output_dir: str):
     """Exports a ROS message file.
 
     Exports to `output_dir`/`doc_name`/`type_name`.msg.
@@ -109,11 +109,10 @@ def exportRosMsg(ros_msg: str, type_name: str, doc_name: str, output_dir: str):
     """
 
     # create output directory
-    doc_output_dir = os.path.join(output_dir, doc_name)
-    os.makedirs(doc_output_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     # export ROS .msg using jinja template
-    filename = os.path.join(doc_output_dir, f"{validRosType(type_name)}.msg")
+    filename = os.path.join(output_dir, f"{validRosType(type_name)}.msg")
     with open(filename, "w", encoding="utf-8") as file:
         file.write(ros_msg)
     print(filename)
@@ -136,7 +135,7 @@ def main():
 
         ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_values, asn1_raw, jinja_template)
 
-        exportRosMsg(ros_msg, type_name, docForAsn1Type(type_name, asn1_docs), args.output_dir)
+        exportRosMsg(ros_msg, type_name, args.output_dir)
 
 
 if __name__ == "__main__":

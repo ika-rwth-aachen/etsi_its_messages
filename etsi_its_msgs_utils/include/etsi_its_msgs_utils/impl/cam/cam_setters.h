@@ -31,7 +31,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs/impl/constants.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace cdd = etsi_its_msgs::cdd_access;
 namespace etsi_its_cam_msgs {

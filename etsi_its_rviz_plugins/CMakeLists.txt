@@ -15,6 +15,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_cam_msgs REQUIRED)
   find_package(etsi_its_denm_msgs REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
+  find_package(etsi_its_msgs_utils REQUIRED)
   find_package(pluginlib REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rviz_common REQUIRED)
@@ -67,6 +68,7 @@ if(${ROS_VERSION} EQUAL 2)
     etsi_its_cam_msgs
     etsi_its_denm_msgs
     etsi_its_msgs
+    etsi_its_msgs_utils
     rviz_common
     rviz_default_plugins
     rviz_rendering
@@ -79,6 +81,7 @@ if(${ROS_VERSION} EQUAL 2)
 
   ament_export_dependencies(
     etsi_its_msgs
+    etsi_its_msgs_utils
     rclcpp
     rviz_common
     rviz_default_plugins
