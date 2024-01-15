@@ -325,6 +325,16 @@ namespace access {
   inline bool getIsSpeedPresent(const DENM& denm){
     return denm.denm.location.event_speed_is_present;
   }
+
+  /**
+   * @brief Get the Reference Time object
+   * 
+   * @param denm DENM to get the ReferenceTime-Value from
+   * @return TimestampIts 
+   */
+  inline TimestampIts getReferenceTime(const DENM& denm){
+    return denm.denm.management.reference_time;
+  }
 } // namespace access
 
 } // namespace etsi_its_denm_msgs

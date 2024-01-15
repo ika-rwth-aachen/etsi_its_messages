@@ -12,7 +12,7 @@ namespace displays
     geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
     header.frame_id = p.header.frame_id;
   
-    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(denm.denm.management.reference_time, n_leap_seconds);
+    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_denm_msgs::access::getReferenceTime(denm), n_leap_seconds);
     header.stamp = rclcpp::Time(nanosecs);
 
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
