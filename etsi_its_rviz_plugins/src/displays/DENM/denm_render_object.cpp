@@ -11,23 +11,9 @@ namespace displays
     bool northp;
     geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
     header.frame_id = p.header.frame_id;
-
   
-    //for getAge()
-    etsi_its_denm_msgs::msg::TimestampIts t_its;
-    etsi_its_denm_msgs::msg::TimestampIts timestamp_estimate;
-    cdd::setTimestampITS(timestamp_estimate, receive_time.nanoseconds(), n_leap_seconds);
-    Ogre::uint64 generation_delta_time_value = denm.denm.management.reference_time.value - denm.denm.management.detection_time.value;
-    t_its.value = std::floor(timestamp_estimate.value/65536)*65536+generation_delta_time_value;
-    cdd::throwIfOutOfRange(t_its.value, etsi_its_denm_msgs::msg::TimestampIts::MIN, etsi_its_denm_msgs::msg::TimestampIts::MAX, "TimestampIts");
-    uint64_t nanosecs = t_its.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;
+    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(denm.denm.management.reference_time, n_leap_seconds);
     header.stamp = rclcpp::Time(nanosecs);
-
-/*
-    uint64_t generation_delta_time_value = denm.denm.management.reference_time.value - denm.denm.management.detection_time.value;
-    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(generation_delta_time_value, receive_time.nanoseconds(), n_leap_seconds);
-    header.stamp = rclcpp::Time(nanosecs);
-    */
 
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
     station_type = etsi_its_denm_msgs::access::getStationType(denm);
@@ -63,7 +49,7 @@ namespace displays
   }
 
   double DENMRenderObject::getAge(rclcpp::Time now) {
-    return (now-header.stamp).seconds()*0.015;
+    return (now-header.stamp).seconds();
   }
 
   std_msgs::msg::Header DENMRenderObject::getHeader() {

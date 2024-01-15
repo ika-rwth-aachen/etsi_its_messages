@@ -101,7 +101,6 @@ void DENMDisplay::update(float, float)
         else ++it;
   }
   
-
   // Render all valid denms
   arrows_.clear();
   texts_.clear();

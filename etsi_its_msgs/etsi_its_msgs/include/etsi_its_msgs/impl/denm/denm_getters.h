@@ -283,6 +283,7 @@ namespace access {
       else if(sub_cause_code == 6) sub_cause_code_type = "break warning activated";
       else if(sub_cause_code == 7) sub_cause_code_type = "collision risk warning activated";
       }
+      return sub_cause_code_type;
   }
 
   /**
@@ -324,18 +325,6 @@ namespace access {
   inline bool getIsSpeedPresent(const DENM& denm){
     return denm.denm.location.event_speed_is_present;
   }
-
-  /**
-   * @brief Get the GenerationDeltaTime-Value
-   * 
-   * @param denm DENM to get the GenerationDeltaTime-Value from 
-   * @return the GenerationDeltaTime-Value
-   */
-  inline uint16_t getGenerationDeltaTimeValue(const DENM& denm){
-
-    return denm.denm.management.reference_time.value - denm.denm.management.detection_time.value;
-  }
-
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
