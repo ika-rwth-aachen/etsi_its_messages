@@ -10,16 +10,15 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(ament_cmake REQUIRED)
   find_package(rosidl_default_generators REQUIRED)
 
-  # TODO: fix message generation for files with underscore
   set(msg_files
     "msg/AccelerationConfidence.msg"
     "msg/AccelerationControl.msg"
     "msg/AccidentSubCauseCode.msg"
     "msg/ActionID.msg"
-    # "msg/AdverseWeatherCondition_AdhesionSubCauseCode.msg"
-    # "msg/AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode.msg"
-    # "msg/AdverseWeatherCondition_PrecipitationSubCauseCode.msg"
-    # "msg/AdverseWeatherCondition_VisibilitySubCauseCode.msg"
+    "msg/AdverseWeatherConditionAdhesionSubCauseCode.msg"
+    "msg/AdverseWeatherConditionExtremeWeatherConditionSubCauseCode.msg"
+    "msg/AdverseWeatherConditionPrecipitationSubCauseCode.msg"
+    "msg/AdverseWeatherConditionVisibilitySubCauseCode.msg"
     "msg/AltitudeConfidence.msg"
     "msg/Altitude.msg"
     "msg/AltitudeValue.msg"
@@ -61,10 +60,10 @@ if(${ROS_VERSION} EQUAL 2)
     "msg/ExteriorLights.msg"
     "msg/GenerationDeltaTime.msg"
     "msg/HardShoulderStatus.msg"
-    # "msg/HazardousLocation_AnimalOnTheRoadSubCauseCode.msg"
-    # "msg/HazardousLocation_DangerousCurveSubCauseCode.msg"
-    # "msg/HazardousLocation_ObstacleOnTheRoadSubCauseCode.msg"
-    # "msg/HazardousLocation_SurfaceConditionSubCauseCode.msg"
+    "msg/HazardousLocationAnimalOnTheRoadSubCauseCode.msg"
+    "msg/HazardousLocationDangerousCurveSubCauseCode.msg"
+    "msg/HazardousLocationObstacleOnTheRoadSubCauseCode.msg"
+    "msg/HazardousLocationSurfaceConditionSubCauseCode.msg"
     "msg/HeadingConfidence.msg"
     "msg/Heading.msg"
     "msg/HeadingValue.msg"

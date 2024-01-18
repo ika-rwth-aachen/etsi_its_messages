@@ -26,28 +26,28 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HazardousLocation-ObstacleOnTheRoadSubCauseCode.h>
+#include <etsi_its_cam_coding/AdverseWeatherCondition-AdhesionSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_cam_msgs/HazardousLocation-ObstacleOnTheRoadSubCauseCode.h>
+#include <etsi_its_cam_msgs/AdverseWeatherConditionAdhesionSubCauseCode.h>
 namespace cam_msgs = etsi_its_cam_msgs;
 #else
-#include <etsi_its_cam_msgs/msg/hazardous_location_obstacle_on_the_road_sub_cause_code.hpp>
+#include <etsi_its_cam_msgs/msg/adverse_weather_condition_adhesion_sub_cause_code.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HazardousLocation-ObstacleOnTheRoadSubCauseCode(const HazardousLocation-ObstacleOnTheRoadSubCauseCode_t& in, cam_msgs::HazardousLocation-ObstacleOnTheRoadSubCauseCode& out) {
+void toRos_AdverseWeatherConditionAdhesionSubCauseCode(const AdverseWeatherCondition_AdhesionSubCauseCode_t& in, cam_msgs::AdverseWeatherConditionAdhesionSubCauseCode& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocation-ObstacleOnTheRoadSubCauseCode(const cam_msgs::HazardousLocation-ObstacleOnTheRoadSubCauseCode& in, HazardousLocation-ObstacleOnTheRoadSubCauseCode_t& out) {
+void toStruct_AdverseWeatherConditionAdhesionSubCauseCode(const cam_msgs::AdverseWeatherConditionAdhesionSubCauseCode& in, AdverseWeatherCondition_AdhesionSubCauseCode_t& out) {
 
-  memset(&out, 0, sizeof(HazardousLocation-ObstacleOnTheRoadSubCauseCode_t));
+  memset(&out, 0, sizeof(AdverseWeatherCondition_AdhesionSubCauseCode_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

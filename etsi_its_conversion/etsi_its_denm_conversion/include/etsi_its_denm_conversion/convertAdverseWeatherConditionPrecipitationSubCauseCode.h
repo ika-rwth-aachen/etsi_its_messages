@@ -26,28 +26,28 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HazardousLocation-AnimalOnTheRoadSubCauseCode.h>
-#include <etsi_its_cam_coding/INTEGER.h>
+#include <etsi_its_denm_coding/AdverseWeatherCondition-PrecipitationSubCauseCode.h>
+#include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_cam_msgs/HazardousLocation-AnimalOnTheRoadSubCauseCode.h>
-namespace cam_msgs = etsi_its_cam_msgs;
+#include <etsi_its_denm_msgs/AdverseWeatherConditionPrecipitationSubCauseCode.h>
+namespace denm_msgs = etsi_its_denm_msgs;
 #else
-#include <etsi_its_cam_msgs/msg/hazardous_location_animal_on_the_road_sub_cause_code.hpp>
-namespace cam_msgs = etsi_its_cam_msgs::msg;
+#include <etsi_its_denm_msgs/msg/adverse_weather_condition_precipitation_sub_cause_code.hpp>
+namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
-namespace etsi_its_cam_conversion {
+namespace etsi_its_denm_conversion {
 
-void toRos_HazardousLocation-AnimalOnTheRoadSubCauseCode(const HazardousLocation-AnimalOnTheRoadSubCauseCode_t& in, cam_msgs::HazardousLocation-AnimalOnTheRoadSubCauseCode& out) {
+void toRos_AdverseWeatherConditionPrecipitationSubCauseCode(const AdverseWeatherCondition_PrecipitationSubCauseCode_t& in, denm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocation-AnimalOnTheRoadSubCauseCode(const cam_msgs::HazardousLocation-AnimalOnTheRoadSubCauseCode& in, HazardousLocation-AnimalOnTheRoadSubCauseCode_t& out) {
+void toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(const denm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& in, AdverseWeatherCondition_PrecipitationSubCauseCode_t& out) {
 
-  memset(&out, 0, sizeof(HazardousLocation-AnimalOnTheRoadSubCauseCode_t));
+  memset(&out, 0, sizeof(AdverseWeatherCondition_PrecipitationSubCauseCode_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

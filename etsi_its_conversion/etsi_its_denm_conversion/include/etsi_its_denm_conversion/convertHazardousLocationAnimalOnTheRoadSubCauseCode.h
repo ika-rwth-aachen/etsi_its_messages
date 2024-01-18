@@ -26,28 +26,28 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/AdverseWeatherCondition-AdhesionSubCauseCode.h>
+#include <etsi_its_denm_coding/HazardousLocation-AnimalOnTheRoadSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
-#include <etsi_its_denm_msgs/AdverseWeatherCondition-AdhesionSubCauseCode.h>
+#include <etsi_its_denm_msgs/HazardousLocationAnimalOnTheRoadSubCauseCode.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
-#include <etsi_its_denm_msgs/msg/adverse_weather_condition_adhesion_sub_cause_code.hpp>
+#include <etsi_its_denm_msgs/msg/hazardous_location_animal_on_the_road_sub_cause_code.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
 
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AdverseWeatherCondition-AdhesionSubCauseCode(const AdverseWeatherCondition-AdhesionSubCauseCode_t& in, denm_msgs::AdverseWeatherCondition-AdhesionSubCauseCode& out) {
+void toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(const HazardousLocation_AnimalOnTheRoadSubCauseCode_t& in, denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& out) {
 
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherCondition-AdhesionSubCauseCode(const denm_msgs::AdverseWeatherCondition-AdhesionSubCauseCode& in, AdverseWeatherCondition-AdhesionSubCauseCode_t& out) {
+void toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(const denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& in, HazardousLocation_AnimalOnTheRoadSubCauseCode_t& out) {
 
-  memset(&out, 0, sizeof(AdverseWeatherCondition-AdhesionSubCauseCode_t));
+  memset(&out, 0, sizeof(HazardousLocation_AnimalOnTheRoadSubCauseCode_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 
