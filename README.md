@@ -18,13 +18,13 @@
 
 All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
 
-> [!IMPORTANT]  
-> This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).  
-> **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.  
-> If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!  
-> &nbsp;&nbsp;&nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*  
-> &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*  
-> &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
+> [!IMPORTANT]
+> This repository is open-sourced and maintained by the [**Institute for Automotive Engineering (ika) at RWTH Aachen University**](https://www.ika.rwth-aachen.de/).
+> **V2X Communication** is one of many research topics within our [*Vehicle Intelligence & Automated Driving*](https://www.ika.rwth-aachen.de/en/competences/fields-of-research/vehicle-intelligence-automated-driving.html) domain.
+> If you would like to learn more about how we can support your advanced driver assistance and automated driving efforts, feel free to reach out to us!
+> &nbsp;&nbsp;&nbsp;&nbsp; *Timo Woopen - Manager Research Area Vehicle Intelligence & Automated Driving*
+> &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*
+> &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*
 
 - [etsi\_its\_messages](#etsi_its_messages)
   - [Concept](#concept)
@@ -99,13 +99,13 @@ In addition, the `etsi_its_msgs_utils` package contains header-only libraries pr
 
 #### Automated Generation
 
-The ROS message files are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards. Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
+The ROS message files are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards.
 
 ```bash
 # etsi_its_messages$
 ./utils/codegen/scripts/asn1ToRosMsg.py \
-  asn1/reduced/cam/CAM-PDU-Descriptions.asn \
-  asn1/reduced/cam/ITS-Container.asn \
+  asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
+  asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -o etsi_its_msgs/etsi_its_cam_msgs/msg
 ```
 
@@ -126,13 +126,13 @@ The `etsi_its_coding` metapackage includes one dedicated package for each ETSI I
 
 #### Automated Generation
 
-The C/C++ implementation of the message types is auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards, using the [ASN.1 Compiler asn1c](https://github.com/vlm/asn1c). Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
+The C/C++ implementation of the message types is auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards, using the [ASN.1 Compiler asn1c](https://github.com/vlm/asn1c).
 
 ```bash
 # etsi_its_messages$
 ./utils/codegen/scripts/asn1ToC.py
-  asn1/reduced/cam/CAM-PDU-Descriptions.asn \
-  asn1/reduced/cam/ITS-Container.asn \
+  asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
+  asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -o etsi_its_coding/etsi_its_cam_coding
 ```
 
@@ -186,13 +186,13 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 
 #### Automated Generation
 
-The C++ conversion functions are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards. Note that the ASN.1 definitions are preprocessed to only include types relevant for the particular message type.
+The C++ conversion functions are auto-generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the ETSI ITS message standards.
 
 ```bash
 # etsi_its_messages$
 ./utils/codegen/scripts/asn1ToConversionHeader.py
-  asn1/reduced/cam/CAM-PDU-Descriptions.asn \
-  asn1/reduced/cam/ITS-Container.asn \
+  asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
+  asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -t cam \
   -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
 ```

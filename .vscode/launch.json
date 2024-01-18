@@ -3,43 +3,13 @@
   "configurations": [
 
     {
-      "name": "CAM reduceAsn1ToTypeDependencies",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
-      "args": [
-        "-t", "CAM",
-        "-o", "asn1/reduced/cam",
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM reduceAsn1ToTypeDependencies",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/reduceAsn1ToTypeDependencies.py",
-      "args": [
-        "-t", "DENM",
-        "-o", "asn1/reduced/denm",
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
       "name": "CAM asn1ToC",
       "type": "python",
       "request": "launch",
       "program": "utils/codegen/asn1ToC.py",
       "args": [
-        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "asn1/reduced/cam/ITS-Container.asn",
+        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
         "-o", "etsi_its_coding/etsi_its_cam_coding"
       ],
       "console": "integratedTerminal",
@@ -52,8 +22,8 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToC.py",
       "args": [
-        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
-        "asn1/reduced/denm/ITS-Container.asn",
+        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
         "-o", "etsi_its_coding/etsi_its_denm_coding"
       ],
       "console": "integratedTerminal",
@@ -66,8 +36,8 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "asn1/reduced/cam/ITS-Container.asn",
+        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -80,8 +50,8 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToRosMsg.py",
       "args": [
-        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
-        "asn1/reduced/denm/ITS-Container.asn",
+        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
         "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
       ],
       "console": "integratedTerminal",
@@ -94,8 +64,8 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "asn1/reduced/cam/CAM-PDU-Descriptions.asn",
-        "asn1/reduced/cam/ITS-Container.asn",
+        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
         "-t", "cam",
         "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
       ],
@@ -109,8 +79,8 @@
       "request": "launch",
       "program": "utils/codegen/asn1ToConversionHeader.py",
       "args": [
-        "asn1/reduced/denm/DENM-PDU-Descriptions.asn",
-        "asn1/reduced/denm/ITS-Container.asn",
+        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
         "-t", "denm",
         "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
       ],
