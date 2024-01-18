@@ -1,7 +1,7 @@
 
 #include <etsi_its_denm_msgs/DENM.h>
 
-#include <etsi_its_msgs/denm_access.h>
+#include <etsi_its_msgs_utils/denm_access.h>
 
 using namespace etsi_its_denm_msgs;
 using namespace etsi_its_denm_msgs::access;

@@ -29,8 +29,8 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS DENM
  */
 
-#include <etsi_its_msgs/impl/cdd/cdd_checks.h>
-#include <etsi_its_msgs/impl/constants.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
 
 #pragma once
 
@@ -40,7 +40,7 @@ namespace etsi_its_denm_msgs {
 namespace access {
   /**
    * @brief Get the Unix-Nanoseconds from a given ReferenceTime object
-   * 
+   *
    * @param reference_time the ReferenceTime object to get the Unix-Nanoseconds from
    * @param n_leap_seconds number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
    * @return uint64_t the corresponding Unix-Nanoseconds
