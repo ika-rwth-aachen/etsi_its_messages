@@ -44,17 +44,17 @@ if(${ROS_VERSION} EQUAL 2)
 
   if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
-    # ament_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.ros2.cpp)
-    # target_include_directories(${PROJECT_NAME}-cam_test PUBLIC
-    #   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    #   $<INSTALL_INTERFACE:include>
-    # )
-    # target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
-    # ament_target_dependencies(${PROJECT_NAME}-cam_test
-    #   etsi_its_msgs
-    #   GeographicLib
-    #   geometry_msgs
-    # )
+    ament_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.ros2.cpp)
+    target_include_directories(${PROJECT_NAME}-cam_test PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include>
+    )
+    target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
+    ament_target_dependencies(${PROJECT_NAME}-cam_test
+      etsi_its_msgs
+      GeographicLib
+      geometry_msgs
+    )
     ament_add_gtest(${PROJECT_NAME}-denm_test test/test_denm_access.ros2.cpp)
     target_include_directories(${PROJECT_NAME}-denm_test PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

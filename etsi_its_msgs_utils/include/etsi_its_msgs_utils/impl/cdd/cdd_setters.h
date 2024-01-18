@@ -204,6 +204,43 @@ namespace cdd_access {
   }
 
   /**
+   * @brief Set the VehicleLengthValue object
+   *
+   * @param vehicle_length object to set
+   * @param value VehicleLengthValue in meter as decimal number
+   */
+  inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, const double value) {
+    int64_t length = (int64_t)std::round(value*1e1);
+    throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
+    vehicle_length.value = length;
+  }
+
+  /**
+   * @brief Set the VehicleLength object
+   *
+   * VehicleLengthConfidenceIndication is set to UNAVAILABLE
+   *
+   * @param vehicle_length object to set
+   * @param value  VehicleLengthValue in meter as decimal number
+   */
+  inline void setVehicleLength(VehicleLength& vehicle_length, const double value) {
+    vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
+    setVehicleLengthValue(vehicle_length.vehicle_length_value, value);
+  }
+
+  /**
+   * @brief Set the VehicleWidth object
+   *
+   * @param vehicle_width object to set
+   * @param value VehicleWidth in meter as decimal number
+   */
+  inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
+    int64_t width = (int64_t)std::round(value*1e1);
+    throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
+    vehicle_width.value = width;
+  }
+
+  /**
    * @brief Set the SpeedValue object
    *
    * @param speed object to set
@@ -226,6 +263,58 @@ namespace cdd_access {
   inline void setSpeed(Speed& speed, const double value) {
     speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;
     setSpeedValue(speed.speed_value, value);
+  }
+
+  /**
+   * @brief Set the LongitudinalAccelerationValue object
+   *
+   * @param accel object to set
+   * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
+   */
+  inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& accel, const double value) {
+    int64_t accel_val = (int64_t)std::round(value*1e1);
+    if(accel_val>=LongitudinalAccelerationValue::MIN && accel_val<=LongitudinalAccelerationValue::MAX) accel.value = accel_val;
+    else if(accel_val<LongitudinalAccelerationValue::MIN) accel.value = LongitudinalAccelerationValue::MIN;
+    else if(accel_val>LongitudinalAccelerationValue::MAX) accel.value = LongitudinalAccelerationValue::MAX-1;
+  }
+
+  /**
+   * @brief Set the LongitudinalAcceleration object
+   *
+   * AccelerationConfidence is set to UNAVAILABLE
+   *
+   * @param accel object to set
+   * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
+   */
+  inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, const double value) {
+    accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);
+  }
+
+    /**
+   * @brief Set the LateralAccelerationValue object
+   *
+   * @param accel object to set
+   * @param value LateralAccelerationValue in m/s^2 as decimal number (left is positive)
+   */
+  inline void setLateralAccelerationValue(LateralAccelerationValue& accel, const double value) {
+    int64_t accel_val = (int64_t)std::round(value*1e1);
+    if(accel_val>=LateralAccelerationValue::MIN && accel_val<=LateralAccelerationValue::MAX) accel.value = accel_val;
+    else if(accel_val<LateralAccelerationValue::MIN) accel.value = LateralAccelerationValue::MIN;
+    else if(accel_val>LateralAccelerationValue::MAX) accel.value = LateralAccelerationValue::MAX-1;
+  }
+
+  /**
+   * @brief Set the LateralAcceleration object
+   *
+   * AccelerationConfidence is set to UNAVAILABLE
+   *
+   * @param accel object to set
+   * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
+   */
+  inline void setLateralAcceleration(LateralAcceleration& accel, const double value) {
+    accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+    setLateralAccelerationValue(accel.lateral_acceleration_value, value);
   }
 
   /**
@@ -291,6 +380,16 @@ namespace cdd_access {
   }
 
   /**
+   * @brief Set the Acceleration Control by a vector of bools
+   *
+   * @param acceleration_control
+   * @param bits
+   */
+  inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
+    setBitString(acceleration_control, bits);
+  }
+
+  /**
    * @brief Set the Driving Lane Status by a vector of bools
    *
    * @param driving_lane_status
@@ -301,6 +400,26 @@ namespace cdd_access {
   }
 
   /**
+   * @brief Set the Exterior Lights by a vector of bools
+   *
+   * @param exterior_lights
+   * @param bits
+   */
+  inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+    setBitString(exterior_lights, bits);
+  }
+
+  /**
+   * @brief Set the Special Transport Type by a vector of bools
+   *
+   * @param special_transport_type
+   * @param bits
+   */
+  inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
+    setBitString(special_transport_type, bits);
+  }
+
+  /**
    * @brief Set the Lightbar Siren In Use by a vector of bools
    *
    * @param light_bar_siren_in_use
@@ -308,6 +427,16 @@ namespace cdd_access {
    */
   inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
     setBitString(light_bar_siren_in_use, bits);
+  }
+
+  /**
+   * @brief Set the Emergency Priority by a vector of bools
+   *
+   * @param emergency_priority
+   * @param bits
+   */
+  inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
+    setBitString(emergency_priority, bits);
   }
 
 } // namespace cdd_access
