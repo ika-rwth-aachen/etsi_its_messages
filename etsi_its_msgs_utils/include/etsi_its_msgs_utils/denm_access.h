@@ -40,8 +40,4 @@ namespace etsi_its_denm_msgs {
 }
 
 // Implementation
-<<<<<<< HEAD:etsi_its_msgs_utils/include/etsi_its_msgs_utils/denm_access.h
-#include <etsi_its_msgs/impl/denm/denm_access.h>
-=======
-#include <etsi_its_msgs_utils/impl/cam/cam_access.h>
->>>>>>> origin/main:etsi_its_msgs_utils/include/etsi_its_msgs_utils/cam_access.h
+#include <etsi_its_msgs_utils/impl/denm/denm_access.h>
