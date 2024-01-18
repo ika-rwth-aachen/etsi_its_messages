@@ -25,16 +25,16 @@ SOFTWARE.
 */
 
 /**
- * @file impl/denm/denm_access.h
- * @brief Main DENM access implementation header
+ * @file impl/cam/cam_access.h
+ * @brief Main CAM access implementation header
  */
 
 #pragma once
 
-using namespace etsi_its_denm_msgs;
+using namespace etsi_its_cam_msgs;
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_access.h>
 
-#include <etsi_its_msgs_utils/impl/denm/denm_getters.h>
-#include <etsi_its_msgs_utils/impl/denm/denm_setters.h>
-#include <etsi_its_msgs_utils/impl/denm/denm_utils.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_getters.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_setters.h>
+#include <etsi_its_msgs_utils/impl/cam/cam_utils.h>
