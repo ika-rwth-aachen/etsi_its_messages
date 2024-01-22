@@ -68,6 +68,36 @@ namespace access {
   }
 
   /**
+   * @brief Get the Latitude value of DENM
+   * 
+   * @param denm DENM to get the Latitude value from
+   * @return Latitude value in degree as decimal number
+   */
+  inline double getLatitude(const DENM& denm){
+    return cdd::getLatitude(denm.denm.management.event_position.latitude);
+  }
+
+  /**
+   * @brief Get the Longitude value of DENM
+   * 
+   * @param denm DENM to get the Longitude value from
+   * @return Longitude value in degree as decimal number
+   */
+  inline double getLongitude(const DENM& denm){
+    return cdd::getLongitude(denm.denm.management.event_position.longitude);
+  }
+
+  /**
+   * @brief Get the Altitude value of DENM
+   * 
+   * @param denm DENM to get the Altitude value from
+   * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
+   */
+  inline double getAltitude(const DENM& denm){
+    return cdd::getAltitude(denm.denm.management.event_position.altitude);
+  }
+
+  /**
    * @brief Get the Heading object
    * 
    * @param denm DENM to get the Heading-Value from
