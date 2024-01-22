@@ -48,15 +48,13 @@ namespace access {
   }
 
   /**
-   * @brief 
+   * @brief Get the Reference Time object
    * 
-   * @param denm DENM to get the UTM Position from
-   * @param zone the UTM zone (zero means UPS)
-   * @param northp hemisphere (true means north, false means south)
-   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   * @param denm DENM to get the ReferenceTime-Value from
+   * @return TimestampIts 
    */
-  inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp){
-    return cdd::getUTMPosition(denm.denm.management.event_position, zone, northp);
+  inline TimestampIts getReferenceTime(const DENM& denm){
+    return denm.denm.management.reference_time;
   }
 
   /**
@@ -67,6 +65,58 @@ namespace access {
    */
   inline uint8_t getStationType(const DENM& denm){
     return denm.denm.management.station_type.value;
+  }
+
+  /**
+   * @brief Get the Heading object
+   * 
+   * @param denm DENM to get the Heading-Value from
+   * @return getHeading value
+   */
+  inline double getHeading(const DENM& denm){
+    return cdd::getHeading(denm.denm.location.event_position_heading);
+  }
+  
+  /**
+   * @brief Get the IsHeadingPresent object
+   * 
+   * @param denm DENM to get the IsHeadingPresent-Value from
+   * @return IsHeadingPresent-Value (true or false)
+   */
+  inline bool getIsHeadingPresent(const DENM& denm){
+    return denm.denm.location.event_position_heading_is_present;
+  }
+
+  /**
+   * @brief Get the vehicle speed
+   * 
+   * @param cam CAM to get the speed value from
+   * @return speed value in m/s as decimal number
+   */
+  inline double getSpeed(const DENM& denm){
+    return cdd::getSpeed(denm.denm.location.event_speed);
+  }
+
+  /**
+   * @brief Get the IsSpeedPresent object
+   * 
+   * @param denm DENM to get the IsSpeedPresent-Value from
+   * @return IsSpeedPresent-Value (true or false)
+   */
+  inline bool getIsSpeedPresent(const DENM& denm){
+    return denm.denm.location.event_speed_is_present;
+  }
+
+  /**
+   * @brief 
+   * 
+   * @param denm DENM to get the UTM Position from
+   * @param zone the UTM zone (zero means UPS)
+   * @param northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp){
+    return cdd::getUTMPosition(denm.denm.management.event_position, zone, northp);
   }
 
   /**
@@ -287,55 +337,6 @@ namespace access {
       return sub_cause_code_type;
   }
 
-  /**
-   * @brief Get the Heading object
-   * 
-   * @param denm DENM to get the Heading-Value from
-   * @return getHeading value
-   */
-  inline double getHeading(const DENM& denm){
-    return cdd::getHeading(denm.denm.location.event_position_heading);
-  }
-  
-  /**
-   * @brief Get the IsHeadingPresent object
-   * 
-   * @param denm DENM to get the IsHeadingPresent-Value from
-   * @return IsHeadingPresent-Value (true or false)
-   */
-  inline bool getIsHeadingPresent(const DENM& denm){
-    return denm.denm.location.event_position_heading_is_present;
-  }
-
-  /**
-   * @brief Get the vehicle speed
-   * 
-   * @param cam CAM to get the speed value from
-   * @return speed value in m/s as decimal number
-   */
-  inline double getSpeed(const DENM& denm){
-    return cdd::getSpeed(denm.denm.location.event_speed);
-  }
-
-  /**
-   * @brief Get the IsSpeedPresent object
-   * 
-   * @param denm DENM to get the IsSpeedPresent-Value from
-   * @return IsSpeedPresent-Value (true or false)
-   */
-  inline bool getIsSpeedPresent(const DENM& denm){
-    return denm.denm.location.event_speed_is_present;
-  }
-
-  /**
-   * @brief Get the Reference Time object
-   * 
-   * @param denm DENM to get the ReferenceTime-Value from
-   * @return TimestampIts 
-   */
-  inline TimestampIts getReferenceTime(const DENM& denm){
-    return denm.denm.management.reference_time;
-  }
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
