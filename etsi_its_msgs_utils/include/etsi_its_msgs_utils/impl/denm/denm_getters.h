@@ -114,7 +114,12 @@ namespace access {
    * @return getHeading value
    */
   inline double getHeading(const DENM& denm){
-    return cdd::getHeading(denm.denm.location.event_position_heading);
+    if(denm.denm.location_is_present){
+      return cdd::getHeading(denm.denm.location.event_position_heading);
+    }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
   
   /**
@@ -124,7 +129,12 @@ namespace access {
    * @return IsHeadingPresent-Value (true or false)
    */
   inline bool getIsHeadingPresent(const DENM& denm){
-    return denm.denm.location.event_position_heading_is_present;
+    if(denm.denm.location_is_present){
+      return denm.denm.location.event_position_heading_is_present;
+    }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
   /**
@@ -134,7 +144,12 @@ namespace access {
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const DENM& denm){
-    return cdd::getSpeed(denm.denm.location.event_speed);
+    if(denm.denm.location_is_present){
+      return cdd::getSpeed(denm.denm.location.event_speed);
+    }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
   /**
@@ -144,7 +159,12 @@ namespace access {
    * @return IsSpeedPresent-Value (true or false)
    */
   inline bool getIsSpeedPresent(const DENM& denm){
-    return denm.denm.location.event_speed_is_present;
+    if(denm.denm.location_is_present){
+      return denm.denm.location.event_speed_is_present;
+    }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
   /**

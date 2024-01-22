@@ -107,7 +107,12 @@ namespace access {
    * @param presence_of_heading IsHeadingPresent-Value (true or false)
    */
   inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading){
-    denm.denm.location.event_position_heading_is_present = presence_of_heading;
+    if(denm.denm.location_is_present){
+      denm.denm.location.event_position_heading_is_present = presence_of_heading;
+      }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
     /**
@@ -120,8 +125,13 @@ namespace access {
    * @param value Heading value in degree as decimal number
    */
   inline void setHeading(DENM& denm, const double heading_val){
-    cdd::setHeading(denm.denm.location.event_position_heading, heading_val);
-    setIsHeadingPresent(denm, true);
+    if(denm.denm.location_is_present){
+      cdd::setHeading(denm.denm.location.event_position_heading, heading_val);
+      setIsHeadingPresent(denm, true);
+      }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
   /**
@@ -131,7 +141,12 @@ namespace access {
    * @param presence_of_heading IsSpeedPresent-Value (true or false)
    */
   inline void setIsSpeedPresent(DENM& denm, bool presence_of_speed){
-    denm.denm.location.event_position_heading_is_present = presence_of_speed;
+    if(denm.denm.location_is_present){
+      denm.denm.location.event_position_heading_is_present = presence_of_speed;
+      }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
     /**
@@ -141,8 +156,13 @@ namespace access {
    * @param speed_val speed value to set in m/s as decimal number
    */
   inline void setSpeed(DENM& denm, const double speed_val){
-    cdd::setSpeed(denm.denm.location.event_speed, speed_val);
-    setIsSpeedPresent(denm, true);
+    if(denm.denm.location_is_present){
+      cdd::setSpeed(denm.denm.location.event_speed, speed_val);
+      setIsSpeedPresent(denm, true);
+      }
+    else{
+      throw std::invalid_argument("LocationContainer is not present!");
+    }
   }
 
    /**
