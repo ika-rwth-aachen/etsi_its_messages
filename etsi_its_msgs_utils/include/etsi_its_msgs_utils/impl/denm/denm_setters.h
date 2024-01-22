@@ -49,6 +49,20 @@ namespace access {
     cdd::setItsPduHeader(denm.header, ItsPduHeader::MESSAGE_ID_DENM, station_id, protocol_version);
   }
 
+  /**
+   * @brief Set the ReferenceTime-value
+   * 
+   * @param denm DENM to set the ReferenceTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the ReferenceTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
+   */
+  inline void setReferenceTime(DENM& denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second){
+    TimestampIts t_its;
+    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
+    cdd::throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+    denm.denm.management.reference_time = t_its;
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
