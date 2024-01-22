@@ -48,8 +48,21 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   int stationType_val = randomInt(StationType::MIN, StationType::MAX);
   setStationType(denm, stationType_val);
   EXPECT_EQ(stationType_val, getStationType(denm));
-}
 
+  double latitude = randomDouble(-90.0, 90.0);
+  double longitude = randomDouble(-180.0, 180.0);
+  setReferencePosition(denm, latitude, longitude);
+  EXPECT_NEAR(latitude, getLatitude(denm), 1e-7);
+  EXPECT_NEAR(longitude, getLongitude(denm), 1e-7);
+  latitude = randomDouble(-90.0, 90.0);
+  longitude = randomDouble(-180.0, 180.0);
+  double altitude = randomDouble(-1000.0, 8000.0);
+  setReferencePosition(denm, latitude, longitude, altitude);
+  EXPECT_NEAR(latitude, getLatitude(denm), 1e-7);
+  EXPECT_NEAR(longitude, getLongitude(denm), 1e-7);
+  EXPECT_NEAR(altitude, getAltitude(denm), 1e-2);
+}
+  
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
