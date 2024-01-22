@@ -44,6 +44,10 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   EXPECT_EQ(94694401000, getReferenceTimeValue(denm));
   uint64_t t_2007_off = t_2007 + 5*1e9;
   EXPECT_EQ(t_2007, getUnixNanosecondsFromReferenceTime(getReferenceTime(denm), 1));
+
+  int stationType_val = randomInt(StationType::MIN, StationType::MAX);
+  setStationType(denm, stationType_val);
+  EXPECT_EQ(stationType_val, getStationType(denm));
 }
 
 int main(int argc, char *argv[]) {
