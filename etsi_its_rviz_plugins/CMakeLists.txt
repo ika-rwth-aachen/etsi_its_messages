@@ -12,7 +12,6 @@ if(${ROS_VERSION} EQUAL 2)
   endif()
 
   find_package(ament_cmake REQUIRED)
-  find_package(etsi_its_denm_msgs REQUIRED)
   find_package(etsi_its_msgs REQUIRED)
   find_package(etsi_its_msgs_utils REQUIRED)
   find_package(pluginlib REQUIRED)
@@ -26,6 +25,8 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(tf2_ros REQUIRED)
 
   set(display_headers_to_moc
+    include/displays/CAM/cam_display.hpp
+    include/displays/CAM/cam_render_object.hpp
     include/displays/DENM/denm_display.hpp
     include/displays/DENM/denm_render_object.hpp
   )
@@ -35,6 +36,8 @@ if(${ROS_VERSION} EQUAL 2)
   endforeach()
 
   set(display_source_files
+    src/displays/CAM/cam_display.cpp
+    src/displays/CAM/cam_render_object.cpp
     src/displays/DENM/denm_display.cpp
     src/displays/DENM/denm_render_object.cpp
   )
@@ -60,7 +63,6 @@ if(${ROS_VERSION} EQUAL 2)
   ament_target_dependencies(${PROJECT_NAME}
     PUBLIC
     rclcpp
-    etsi_its_denm_msgs
     etsi_its_msgs
     etsi_its_msgs_utils
     rviz_common

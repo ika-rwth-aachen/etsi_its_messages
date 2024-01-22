@@ -35,12 +35,6 @@ using namespace etsi_its_denm_msgs;
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_access.h>
 
-<<<<<<< HEAD:etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/denm/denm_access.h
-#include <etsi_its_msgs/impl/denm/denm_getters.h>
-#include <etsi_its_msgs/impl/denm/denm_setters.h>
-#include <etsi_its_msgs/impl/denm/denm_utils.h>
-=======
-#include <etsi_its_msgs_utils/impl/cam/cam_getters.h>
-#include <etsi_its_msgs_utils/impl/cam/cam_setters.h>
-#include <etsi_its_msgs_utils/impl/cam/cam_utils.h>
->>>>>>> origin/main:etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cam/cam_access.h
+#include <etsi_its_msgs_utils/impl/denm/denm_getters.h>
+#include <etsi_its_msgs_utils/impl/denm/denm_setters.h>
+#include <etsi_its_msgs_utils/impl/denm/denm_utils.h>

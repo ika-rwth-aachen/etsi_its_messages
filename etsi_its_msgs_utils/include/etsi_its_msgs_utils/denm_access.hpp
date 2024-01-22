@@ -35,14 +35,20 @@ SOFTWARE.
 #include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <geometry_msgs/msg/point_stamped.hpp>
 
+// Messages not in denm.hpp, but needed to compile cdd::access
+#include <etsi_its_denm_msgs/msg/acceleration_control.hpp>
+#include <etsi_its_denm_msgs/msg/emergency_priority.hpp>
+#include <etsi_its_denm_msgs/msg/exterior_lights.hpp>
+#include <etsi_its_denm_msgs/msg/lateral_acceleration.hpp>
+#include <etsi_its_denm_msgs/msg/longitudinal_acceleration.hpp>
+#include <etsi_its_denm_msgs/msg/special_transport_type.hpp>
+#include <etsi_its_denm_msgs/msg/vehicle_length.hpp>
+#include <etsi_its_denm_msgs/msg/vehicle_width.hpp>
+
 namespace etsi_its_denm_msgs {
     using namespace msg;
     namespace gm = geometry_msgs::msg;
 }
 
 // Implementation
-<<<<<<< HEAD:etsi_its_msgs_utils/include/etsi_its_msgs_utils/denm_access.hpp
-#include <etsi_its_msgs/impl/denm/denm_access.h>
-=======
-#include <etsi_its_msgs_utils/impl/cam/cam_access.h>
->>>>>>> origin/main:etsi_its_msgs_utils/include/etsi_its_msgs_utils/cam_access.hpp
+#include <etsi_its_msgs_utils/impl/denm/denm_access.h>
