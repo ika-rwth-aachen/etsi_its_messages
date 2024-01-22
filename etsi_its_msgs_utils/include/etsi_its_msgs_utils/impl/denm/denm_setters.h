@@ -145,6 +145,23 @@ namespace access {
     setIsSpeedPresent(denm, true);
   }
 
+   /**
+   * @brief Set the ReferencePosition of a DENM from a given UTM-Position
+   * 
+   * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+   * The z-Coordinate is directly used as altitude value
+   * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
+   * 
+   * @param[out] denm DENM for which to set the ReferencePosition
+   * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
+   * @param[in] zone the UTM zone (zero means UPS) of the given position
+   * @param[in] northp hemisphere (true means north, false means south)
+   */
+  inline void setFromUTMPosition(DENM& denm, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
+  {
+    cdd::setFromUTMPosition(denm.denm.management.event_position, utm_position, zone, northp);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
