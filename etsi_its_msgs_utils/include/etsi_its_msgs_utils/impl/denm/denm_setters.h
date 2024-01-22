@@ -73,6 +73,32 @@ namespace access {
     cdd::setStationType(denm.denm.management.station_type, value);
   }
 
+  /**
+   * @brief Set the ReferencePosition for a DENM
+   *
+   * Altitude is set to UNAVAILABLE
+   *
+   * @param denm DENM to set the ReferencePosition
+   * @param latitude Latitude value in degree as decimal number
+   * @param longitude Longitude value in degree as decimal number
+   */
+  inline void setReferencePosition(DENM& denm, const double latitude, const double longitude)
+  {
+    cdd::setReferencePosition(denm.denm.management.event_position, latitude, longitude);
+  }
+
+  /**
+   * @brief Set the ReferencePosition for a DENM
+   *
+   * @param denm DENM to set the ReferencePosition
+   * @param latitude Latitude value in degree as decimal number
+   * @param longitude Longitude value in degree as decimal number
+   * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
+   */
+  inline void setReferencePosition(DENM& denm, const double latitude, const double longitude, const double altitude)
+  {
+    cdd::setReferencePosition(denm.denm.management.event_position, latitude, longitude, altitude);
+  }
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
