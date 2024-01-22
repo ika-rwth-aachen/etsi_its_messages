@@ -75,7 +75,7 @@ namespace access {
    * @param denm DENM to get the causeCode value from
    * @return causeCode value
    */
-  inline int getCauseCode(const DENM& denm){
+  inline uint8_t getCauseCode(const DENM& denm){
     return denm.denm.situation.event_type.cause_code.value;
   }
 
@@ -85,7 +85,7 @@ namespace access {
    * @param denm DENM to get the subCauseCode value from
    * @return subCauseCode value
    */
-  inline int getSubCauseCode(const DENM& denm){
+  inline uint8_t getSubCauseCode(const DENM& denm){
     return denm.denm.situation.event_type.sub_cause_code.value;
   }
 
