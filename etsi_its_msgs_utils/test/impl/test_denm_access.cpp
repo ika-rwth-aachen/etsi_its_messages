@@ -40,16 +40,10 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   etsi_its_msgs::cdd_access::setTimestampITS(t_its, t_2007, 1);
   EXPECT_EQ(94694401000, t_its.value);
   
-  /*
-  setGenerationDeltaTime(cam, t_2007, 1);
-  EXPECT_EQ(94694401000%65536, getGenerationDeltaTimeValue(cam));
-  TimestampIts t_its2;
+  setReferenceTime(denm, t_2007, 1);
+  EXPECT_EQ(94694401000, getReferenceTimeValue(denm));
   uint64_t t_2007_off = t_2007 + 5*1e9;
-  etsi_its_msgs::cdd_access::setTimestampITS(t_its2, t_2007_off, 1);
-  EXPECT_EQ(94694401000, getTimestampITSFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2).value);
-  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_its2, 1));
-  EXPECT_EQ(t_2007, getUnixNanosecondsFromGenerationDeltaTime(getGenerationDeltaTime(cam), t_2007_off, 1));
-  */
+  EXPECT_EQ(t_2007, getUnixNanosecondsFromReferenceTime(getReferenceTime(denm), 1));
 }
 
 int main(int argc, char *argv[]) {
