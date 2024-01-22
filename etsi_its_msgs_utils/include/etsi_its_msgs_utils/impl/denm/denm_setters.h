@@ -124,6 +124,27 @@ namespace access {
     setIsHeadingPresent(denm, true);
   }
 
+  /**
+   * @brief Set the IsSpeedPresent object for DENM
+   * 
+   * @param denm DENM to set IsSpeedPresent
+   * @param presence_of_heading IsSpeedPresent-Value (true or false)
+   */
+  inline void setIsSpeedPresent(DENM& denm, bool presence_of_speed){
+    denm.denm.location.event_position_heading_is_present = presence_of_speed;
+  }
+
+    /**
+   * @brief Set the vehicle speed
+   *
+   * @param denm DENM to set the speed value
+   * @param speed_val speed value to set in m/s as decimal number
+   */
+  inline void setSpeed(DENM& denm, const double speed_val){
+    cdd::setSpeed(denm.denm.location.event_speed, speed_val);
+    setIsSpeedPresent(denm, true);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
