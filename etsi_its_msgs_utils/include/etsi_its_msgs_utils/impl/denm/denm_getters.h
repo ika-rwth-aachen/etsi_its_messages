@@ -58,6 +58,16 @@ namespace access {
   }
 
   /**
+   * @brief Get the ReferenceTime-Value
+   * 
+   * @param denm DENM to get the ReferenceTime-Value from 
+   * @return uint64_t the ReferenceTime-Value
+   */
+  inline uint64_t getReferenceTimeValue(const DENM& denm){
+    return getReferenceTime(denm).value;
+  }
+
+  /**
    * @brief Get the stationType object
    * 
    * @param denm DENM to get the stationType value from
