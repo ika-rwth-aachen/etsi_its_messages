@@ -277,9 +277,9 @@ namespace access {
       if(sub_cause_code == 0) sub_cause_code_type = "unavailable";
       else if(sub_cause_code == 1) sub_cause_code_type = "emergency electronic break lights";
       else if(sub_cause_code == 2) sub_cause_code_type = "pre-crash system activated";
-      else if(sub_cause_code == 3) sub_cause_code_type = "ESP(electronic stability program) activated";
-      else if(sub_cause_code == 4) sub_cause_code_type = "ABS(anti-lock breaking system) activated";
-      else if(sub_cause_code == 5) sub_cause_code_type = "AEB(automatic emergency breaking) activated";
+      else if(sub_cause_code == 3) sub_cause_code_type = "ESP (electronic stability program) activated";
+      else if(sub_cause_code == 4) sub_cause_code_type = "ABS (anti-lock breaking system) activated";
+      else if(sub_cause_code == 5) sub_cause_code_type = "AEB (automatic emergency breaking) activated";
       else if(sub_cause_code == 6) sub_cause_code_type = "break warning activated";
       else if(sub_cause_code == 7) sub_cause_code_type = "collision risk warning activated";
       }
