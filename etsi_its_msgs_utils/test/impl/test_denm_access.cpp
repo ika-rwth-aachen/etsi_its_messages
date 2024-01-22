@@ -61,6 +61,24 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   EXPECT_NEAR(latitude, getLatitude(denm), 1e-7);
   EXPECT_NEAR(longitude, getLongitude(denm), 1e-7);
   EXPECT_NEAR(altitude, getAltitude(denm), 1e-2);
+
+  // Set specific position to test utm projection
+  latitude = 50.787467;
+  longitude = 6.046498;
+  altitude = 209.0;
+  setReferencePosition(denm, latitude, longitude, altitude);
+  int zone;
+  bool northp;
+  gm::PointStamped utm = getUTMPosition(denm, zone, northp);
+  EXPECT_NEAR(291827.02, utm.point.x, 1e-1);
+  EXPECT_NEAR(5630349.72, utm.point.y, 1e-1);
+  EXPECT_EQ(altitude, utm.point.z);
+  EXPECT_EQ(32, zone);
+  EXPECT_EQ(true, northp);
+  setFromUTMPosition(denm, utm, zone, northp);
+  EXPECT_NEAR(latitude, getLatitude(denm), 1e-7);
+  EXPECT_NEAR(longitude, getLongitude(denm), 1e-7);
+  EXPECT_NEAR(altitude, getAltitude(denm), 1e-2);
 }
   
 int main(int argc, char *argv[]) {
