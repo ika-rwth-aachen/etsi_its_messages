@@ -63,6 +63,16 @@ namespace access {
     denm.denm.management.reference_time = t_its;
   }
 
+  /**
+   * @brief Set the StationType for a DENM
+   *
+   * @param denm DENM-Message to set the station_type value
+   * @param value station_type value to set
+   */
+  inline void setStationType(DENM& denm, const int value){
+    cdd::setStationType(denm.denm.management.station_type, value);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
