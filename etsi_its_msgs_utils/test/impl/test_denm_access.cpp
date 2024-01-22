@@ -83,6 +83,10 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   double heading_val = randomDouble(0.0, 360.0);
   setHeading(denm, heading_val);
   EXPECT_NEAR(heading_val, getHeading(denm), 1e-1);
+
+  double speed_val = randomDouble(0.0, 163.82);
+  setSpeed(denm, speed_val);
+  EXPECT_NEAR(speed_val, getSpeed(denm), 1e-2);
 }
   
 int main(int argc, char *argv[]) {
