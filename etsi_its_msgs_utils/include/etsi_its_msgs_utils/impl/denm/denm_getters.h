@@ -91,6 +91,8 @@ namespace access {
 
   /**
    * @brief Get the Cause Code Type object
+   *
+   * https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
    * 
    * @param denm DENM to get the causeCodeType value from
    * @return causeCodeType value
@@ -129,11 +131,10 @@ namespace access {
     return cause_code_type;
   }
 
-  //definition of cause codes and sub cause codes
-  //DENM-Documentation: https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
-
   /**
    * @brief Get the Sub Cause Code Type object
+   *
+   * https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.02.01_30/en_30263703v010201v.pdf
    * 
    * @param denm DENM to get the subCauseCodeType value from
    * @return causeCodeType value 
