@@ -79,6 +79,10 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   EXPECT_NEAR(latitude, getLatitude(denm), 1e-7);
   EXPECT_NEAR(longitude, getLongitude(denm), 1e-7);
   EXPECT_NEAR(altitude, getAltitude(denm), 1e-2);
+
+  double heading_val = randomDouble(0.0, 360.0);
+  setHeading(denm, heading_val);
+  EXPECT_NEAR(heading_val, getHeading(denm), 1e-1);
 }
   
 int main(int argc, char *argv[]) {
