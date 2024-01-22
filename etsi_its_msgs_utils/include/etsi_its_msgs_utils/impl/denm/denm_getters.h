@@ -97,7 +97,7 @@ namespace access {
    */
   inline std::string getCauseCodeType(const DENM& denm){
     int cause_code = getCauseCode(denm);
-    std::string cause_code_type;
+    std::string cause_code_type = "undefined";
 
     if(cause_code == 1) cause_code_type = "traffic condition";
     else if(cause_code == 2) cause_code_type = "accident";
@@ -141,7 +141,7 @@ namespace access {
   inline std::string getSubCauseCodeType(const DENM& denm){
     int cause_code = getCauseCode(denm);
     int sub_cause_code = getSubCauseCode(denm);
-    std::string sub_cause_code_type;
+    std::string sub_cause_code_type = "undefined";
     if(cause_code == 1) {
       if(sub_cause_code == 0) sub_cause_code_type = "unavailable";
       else if(sub_cause_code == 1) sub_cause_code_type = "not defined";
