@@ -6,7 +6,7 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-
+    latitude = LaunchConfiguration('latitude', default='50.785407')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
     rviz_config = 'config/demo.rviz'
@@ -19,6 +19,12 @@ def generate_launch_description():
             'use_sim_time',
             default_value='true',
             description='Use simulation clock if true'),
+
+        DeclareLaunchArgument(
+            'latitude',
+            default_value='0.0',
+            description='set value for latitude'),
+
 
         Node(
             package='rviz2',
