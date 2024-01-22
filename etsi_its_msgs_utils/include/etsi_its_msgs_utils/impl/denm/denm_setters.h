@@ -99,6 +99,31 @@ namespace access {
   {
     cdd::setReferencePosition(denm.denm.management.event_position, latitude, longitude, altitude);
   }
+
+  /**
+   * @brief Set the IsHeadingPresent object for DENM
+   * 
+   * @param denm DENM to set IsHeadingPresent
+   * @param presence_of_heading IsHeadingPresent-Value (true or false)
+   */
+  inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading){
+    denm.denm.location.event_position_heading_is_present = presence_of_heading;
+  }
+
+    /**
+   * @brief Set the Heading for a DENM
+   *
+   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+   * HeadingConfidence is set to UNAVAILABLE
+   *
+   * @param denm DENM to set the ReferencePosition
+   * @param value Heading value in degree as decimal number
+   */
+  inline void setHeading(DENM& denm, const double heading_val){
+    cdd::setHeading(denm.denm.location.event_position_heading, heading_val);
+    setIsHeadingPresent(denm, true);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_denm_msgs
