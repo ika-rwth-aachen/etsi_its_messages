@@ -16,7 +16,6 @@ namespace displays
     header.stamp = rclcpp::Time(nanosecs);
 
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
-    station_type = etsi_its_denm_msgs::access::getStationType(denm);
     cause_code_type = etsi_its_denm_msgs::access::getCauseCodeType(denm);
     sub_cause_code_type = etsi_its_denm_msgs::access::getSubCauseCodeType(denm);
     
@@ -58,10 +57,6 @@ namespace displays
 
   int DENMRenderObject::getStationID() {
     return station_id;
-  }
-  
-  int DENMRenderObject::getStationType() {
-    return station_type;
   }
 
   geometry_msgs::msg::Pose DENMRenderObject::getPose() {

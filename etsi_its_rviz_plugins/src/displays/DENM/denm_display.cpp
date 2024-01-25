@@ -122,7 +122,6 @@ void DENMDisplay::update(float, float)
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
     geometry_msgs::msg::Pose pose = denm.getPose();
-    //geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
 
