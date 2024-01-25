@@ -115,7 +115,12 @@ namespace access {
    */
   inline double getHeading(const DENM& denm){
     if(denm.denm.location_is_present){
-      return cdd::getHeading(denm.denm.location.event_position_heading);
+      if(denm.denm.location.event_position_heading_is_present){
+        return cdd::getHeading(denm.denm.location.event_position_heading);
+      }
+      else{
+        throw std::invalid_argument("Heading is not present!");
+      }
     }
     else{
       throw std::invalid_argument("LocationContainer is not present!");
@@ -145,7 +150,12 @@ namespace access {
    */
   inline double getSpeed(const DENM& denm){
     if(denm.denm.location_is_present){
-      return cdd::getSpeed(denm.denm.location.event_speed);
+      if(denm.denm.location.event_speed_is_present){
+        return cdd::getSpeed(denm.denm.location.event_speed);
+      }
+      else{
+        throw std::invalid_argument("Speed is not present!");
+      }
     }
     else{
       throw std::invalid_argument("LocationContainer is not present!");
