@@ -34,7 +34,7 @@ import numpy as np
 
 ASN1_PRIMITIVES_2_ROS = {
     "BOOLEAN": "bool",
-    "INTEGER": "long",
+    "INTEGER": "int64",
     "IA5String": "string",
     "UTF8String": "string",
     "BIT STRING": "uint8[]",
@@ -66,6 +66,9 @@ def camel2SNAKE(s: str) -> str:
     # special cases
     ss = ss.replace("C_A_M", "CAM")
     ss = ss.replace("D_E_N_M", "DENM")
+    ss = ss.replace("S_P_A_T_E_M", "SPATEM")
+    ss = ss.replace("S_P_A_T", "SPAT")
+    ss = ss.replace("D_S_R_C", "DSRC")
     ss = ss.replace("R_S_U", "RSU")
     ss = ss.replace("W_M_I", "WMI")
     ss = ss.replace("V_DS", "VDS")
@@ -98,12 +101,23 @@ def camel2snake(s: str) -> str:
     # special cases
     ss = ss.replace("c_a_m", "cam")
     ss = ss.replace("d_e_n_m", "denm")
+    ss = ss.replace("s_p_a_t_e_m", "spatem")
+    ss = ss.replace("s_p_a_t", "spat")
+    ss = ss.replace("m_a_p_e_m", "mapem")
+    ss = ss.replace("m_a_p", "map")
+    ss = ss.replace("d_s_r_c", "dsrc")
     ss = ss.replace("r_s_u", "rsu")
     ss = ss.replace("w_m_i", "wmi")
     ss = ss.replace("v_d_s", "vds")
     ss = ss.replace("_i_d", "_id")
     ss = ss.replace("_u_t_c", "_utc")
     ss = ss.replace("wmin", "wm_in")
+    ss = ss.replace("_3_d", "3_d")
+    ss = ss.replace("_b_1", "_b1")
+    ss = ss.replace("_x_y_2", "_xy2")
+    ss = ss.replace("_x_y_3", "_xy3")
+    ss = ss.replace("_x_y", "_xy")
+    ss = ss.replace("_l_lm_d_6", "_l_lm_d6")
 
     return ss
 
@@ -117,20 +131,49 @@ def validRosType(s: str) -> str:
         str: A_Message_Type
     """
 
-    return s.replace("-", "_")
+    return s.replace("-", "")
 
 
-def validRosField(s: str) -> str:
+def validRosField(s: str, is_const: bool = False) -> str:
     """Converts a string to make it a valid ROS message field name.
 
     Args:
         s (str): Not-A-Ros-Message-Field
+        is_const (bool): whether the field is a constant
 
     Returns:
-        str: A_Ros_Message_Field
+        str: a_ros_message_field or A_ROS_MESSAGE_CONSTANT
     """
 
-    return s.replace("-", "_")
+    ss = s.upper() if is_const else s.lower()
+
+    # avoid C/C++ keywords
+    if ss == "long":
+        ss = "lon"
+    if ss == "class":
+        ss = "cls"
+
+    return ss
+
+
+def validCField(s: str, is_const: bool = False) -> str:
+    """Converts a string to make it a valid C message field name.
+
+    Args:
+        s (str): e.g., "class"
+
+    Returns:
+        str: e.g., "Class"
+    """
+
+    # avoid C/C++ keywords
+    ss = s.replace("-", "_")
+    if ss == "long":
+        ss = "Long"
+    if ss == "class":
+        ss = "Class"
+
+    return ss
 
 
 def noSpace(s: str) -> str:
@@ -144,6 +187,19 @@ def noSpace(s: str) -> str:
     """
 
     return s.replace(" ", "_")
+
+
+def noDash(s: str) -> str:
+    """Replaces any dashes in a string with nothing.
+
+    Args:
+        s (str): my string
+
+    Returns:
+        str: my_string
+    """
+
+    return s.replace("-", "")
 
 
 def simplestRosIntegerType(min_value: int, max_value: int) -> str:
@@ -197,17 +253,20 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
         raw_def = None
         for line in lines:
             if "::=" in line:
-                if "{" in line:
-                    type = line.split("::=")[0].strip()
+                if line.rstrip().endswith("{"):
+                    type = line.split("::=")[0].split("{")[0].strip().split()[0]
                     raw_def = ""
                 elif len(line.split("::=")) == 2:
-                    type = line.split("::=")[0].strip()
-                    raw_def = line
-                    asn1_raw[type] = raw_def
-                    raw_def = None
+                    type = line.split("::=")[0].strip().split()[0]
+                    if "}" in line or not ("{" in line or "}" in line):
+                        raw_def = line
+                        asn1_raw[type] = raw_def
+                        raw_def = None
+                    else:
+                        raw_def = ""
             if raw_def is not None:
                 raw_def += line
-                if "}" in line:
+                if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
                     asn1_raw[type] = raw_def
                     raw_def = None
 
@@ -340,6 +399,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         "etsi_type": None,
         "members": [],
         "t_name": t_name,
+        "t_name_camel": noDash(t_name),
         "t_name_snake": camel2snake(t_name),
         "type": noSpace(type),
         "asn1_type": type,
@@ -368,8 +428,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": ros_type,
             "asn1_type": type,
-            "name": camel2snake(validRosField(name)),
-            "name_cc": validRosField(name),
+            "name": validRosField(camel2snake(name)),
+            "name_cc": validCField(name),
             "constants": [],
             "is_primitive": True,
             "has_bits_unused": False,
@@ -386,16 +446,16 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_constant_name = "MIN"
             max_constant_name = "MAX"
             if "name" in asn1:
-                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_constant_name}"
-                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_constant_name}"
+                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
-                "name": validRosField(min_constant_name),
+                "name": validRosField(min_constant_name, is_const=True),
                 "value": min_value
             })
             member_context["constants"].append({
                 "type": ros_type,
-                "name": validRosField(max_constant_name),
+                "name": validRosField(max_constant_name, is_const=True),
                 "value": max_value
             })
 
@@ -408,16 +468,16 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 min_size_constant_name = "MIN_SIZE" if type != "BIT STRING" else "MIN_SIZE_BITS"
                 max_size_constant_name = "MAX_SIZE" if type != "BIT STRING" else "MAX_SIZE_BITS"
                 if "name" in asn1:
-                    min_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
-                    max_size_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+                    min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                    max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
-                    "name": validRosField(min_size_constant_name),
+                    "name": validRosField(min_size_constant_name, is_const=True),
                     "value": min_size
                 })
                 member_context["constants"].append({
                     "type": ros_type,
-                    "name": validRosField(max_size_constant_name),
+                    "name": validRosField(max_size_constant_name, is_const=True),
                     "value": max_size
                 })
             else:
@@ -425,32 +485,32 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 ros_type = simplestRosIntegerType(size, size)
                 size_constant_name = "SIZE" if type != "BIT STRING" else "SIZE_BITS"
                 if "name" in asn1:
-                    size_constant_name = f"{camel2SNAKE(asn1['name'])}_{size_constant_name}"
+                    size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
-                    "name": validRosField(size_constant_name),
+                    "name": validRosField(size_constant_name, is_const=True),
                     "value": size
                 })
 
         # add constants for named numbers
         if "named-numbers" in asn1:
             for k, v in asn1["named-numbers"].items():
-                constant_name = f"{camel2SNAKE(k)}"
+                constant_name = validRosField(camel2SNAKE(k))
                 if "name" in asn1:
-                    constant_name = f"{camel2SNAKE(asn1['name'])}_{constant_name}"
+                    constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{constant_name}", is_const=True)
                 member_context["constants"].append({
                     "type": ros_type,
-                    "name": validRosField(constant_name),
+                    "name": validRosField(constant_name, is_const=True),
                     "value": v
                 })
 
         # add index constants for named bits
         if "named-bits" in asn1:
             for k, v in asn1["named-bits"]:
-                constant_name = f"{camel2SNAKE(k)}"
+                constant_name = camel2SNAKE(k)
                 member_context["constants"].append({
                     "type": "uint8",
-                    "name": f"BIT_INDEX_{validRosField(constant_name)}",
+                    "name": validRosField(f"BIT_INDEX_{constant_name}", is_const=True),
                     "value": v
                 })
 
@@ -470,7 +530,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 if member["default"] in asn1_values:
                     asn1_value = asn1_values[member["default"]]
                     default_value = asn1_value["value"]
-                    default_name = f"DEFAULT_{camel2SNAKE(member['name'])}"
+                    default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
                     if asn1_value["type"] == 'INTEGER':
                         default_type = simplestRosIntegerType(default_value, default_value)
                     else:
@@ -489,23 +549,37 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         name = "choice"
         if "name" in asn1:
             name = f"{asn1['name']}_{name}"
+        name = validRosField(camel2snake(name))
         context["members"].append({
             "type": "uint8",
             "name": name,
+            "is_choice_var": True
         })
 
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1["members"]):
             if member is None:
                 continue
-            name = f"CHOICE_{camel2SNAKE(member['name'])}"
+            member_name = validRosField(f"CHOICE_{camel2SNAKE(member['name'])}", is_const=True)
+            if "name" in asn1:
+                member_name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
-            member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
-            member_context["members"][0]["constants"].append({
-                "type": "uint8",
-                "name": name,
-                "value": im
-            })
+            if len(member_context["members"]) > 0:
+                if "name" in asn1:
+                    member_context["members"][0]["choice_name"] = validCField(asn1["name"])
+                    member_context["members"][0]["choice_option_name"] = validCField(member_context["members"][0]["name_cc"])
+                    member_context["members"][0]["name"] = validRosField(f"{camel2snake(asn1['name'])}_{camel2snake(member_context['members'][0]['name'])}")
+                    member_context["members"][0]["name_cc"] = validCField(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
+                member_context["members"][0]["is_choice"] = True
+                member_context["members"][0]["choice_var_name"] = name
+                member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
+                for c_idx, constant in enumerate(member_context["members"][0]["constants"]):
+                    member_context["members"][0]["constants"][c_idx]["name"] = validRosField(f"{member_context['members'][0]['name']}_{constant['name']}", is_const=True)
+                member_context["members"][0]["constants"].append({
+                    "type": "uint8",
+                    "name": member_name,
+                    "value": im
+                })
             context["members"].extend(member_context["members"])
 
     # arrays
@@ -515,9 +589,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
         member_context = {
+            "t_name": array_type,
             "type": f"{array_type}[]",
             "type_snake": f"{camel2snake(array_type)}[]",
-            "name": array_name,
+            "name": validRosField(camel2snake(array_name)),
+            "name_cc": validCField(array_name),
             "constants": []
         }
 
@@ -529,16 +605,16 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
             if "name" in asn1:
-                min_constant_name = f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}"
-                max_constant_name = f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}"
+                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
-                "name": validRosField(min_size_constant_name),
+                "name": validRosField(min_size_constant_name, is_const=True),
                 "value": min_size
             })
             member_context["constants"].append({
                 "type": ros_type,
-                "name": validRosField(max_size_constant_name),
+                "name": validRosField(max_size_constant_name, is_const=True),
                 "value": max_size
             })
 
@@ -566,7 +642,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 continue
             member_context["constants"].append({
                 "type": ros_type,
-                "name": camel2SNAKE(val[0]),
+                "name": validRosField(camel2SNAKE(val[0]), is_const=True),
                 "value": val[1]
             })
 
@@ -578,9 +654,10 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         name_cc = asn1["name"] if "name" in asn1 else "value"
         name = camel2snake(name_cc)
         context["members"].append({
+            "t_name": type,
             "type": validRosType(type),
-            "name": validRosField(name),
-            "name_cc": validRosField(name_cc)
+            "name": validRosField(camel2snake(name)),
+            "name_cc": validCField(name_cc)
         })
 
     elif type == "NULL":

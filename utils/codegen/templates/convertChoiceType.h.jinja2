@@ -29,7 +29,7 @@ SOFTWARE.
 #include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
 {% for member in members -%}
 {%- if member.name != "choice" -%}
-#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
+#include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type|replace("[]", "") }}.h>
 {% endif %}
 {%- endfor -%}
 #ifdef ROS1
@@ -48,7 +48,11 @@ void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name
 {%- if member.name != "choice" -%}
 {% for const in member.constants %}
   if (in.present == {{ t_name }}_PR::{{ t_name }}_PR_{{ member.name_cc }}) {
-    toRos_{{ member.type }}(in.choice.{{ member.name_cc }}, out.{{ member.name }});
+{%- if member.type|replace("[]", "") != "RegionalExtension" %}
+    toRos_{{ member.type|replace("[]", "") }}(in.choice.{{ member.name_cc }}, out.{{ member.name }});
+{%- else %}
+    // TODO: toRos_{{ member.type|replace("[]", "") }}(in.choice.{{ member.name_cc }}, out.{{ member.name }});
+{%- endif %}
     out.choice = {{ etsi_type}}_msgs::{{ t_name }}::{{ const.name }};
   }
 {%- endfor %}
@@ -63,7 +67,11 @@ void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_nam
 {%- if member.name != "choice" -%}
 {% for const in member.constants %}
   if (in.choice == {{ etsi_type}}_msgs::{{ t_name }}::{{ const.name }}) {
-    toStruct_{{ member.type }}(in.{{ member.name }}, out.choice.{{ member.name_cc }});
+{%- if member.type|replace("[]", "") != "RegionalExtension" %}
+    toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, out.choice.{{ member.name_cc }});
+{%- else %}
+    // TODO: toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, out.choice.{{ member.name_cc }});
+{%- endif %}
     out.present = {{ t_name }}_PR::{{ t_name }}_PR_{{ member.name_cc }};
   }
 {%- endfor %}
