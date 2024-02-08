@@ -142,7 +142,7 @@ namespace access {
    */
   inline void setIsSpeedPresent(DENM& denm, bool presence_of_speed){
     if(denm.denm.location_is_present){
-      denm.denm.location.event_position_heading_is_present = presence_of_speed;
+      denm.denm.location.event_speed_is_present = presence_of_speed;
       }
     else{
       throw std::invalid_argument("LocationContainer is not present!");

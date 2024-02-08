@@ -145,7 +145,7 @@ namespace access {
   /**
    * @brief Get the vehicle speed
    * 
-   * @param cam CAM to get the speed value from
+   * @param denm DENM to get the speed value from
    * @return speed value in m/s as decimal number
    */
   inline double getSpeed(const DENM& denm){
