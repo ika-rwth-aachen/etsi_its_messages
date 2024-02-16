@@ -15,10 +15,10 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y \
         automake \
+        bison \
         flex \
         libtool \
         m4 \
-        bison \
     && rm -rf /var/lib/apt/lists/*
 
 # install asnc1c
