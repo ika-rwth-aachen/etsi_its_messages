@@ -31,7 +31,7 @@ etsi_its_cam_coding:
       -o etsi_its_coding/etsi_its_cam_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && echo $(git diff); exit 1; fi
 
 etsi_its_denm_coding:
   stage: asn1c
@@ -54,7 +54,7 @@ etsi_its_denm_coding:
       -o etsi_its_coding/etsi_its_denm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && echo $(git diff); exit 1; fi
 
 
 etsi_its_cam_msgs:
