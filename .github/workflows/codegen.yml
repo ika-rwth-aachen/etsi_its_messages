@@ -40,6 +40,7 @@ jobs:
         rm -rf ${{ github.workspace }}/tmp
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"
+          git diff
           exit 1
         fi
 
@@ -71,6 +72,7 @@ jobs:
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"
+          git diff
           exit 1
         fi
 
@@ -103,5 +105,6 @@ jobs:
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"
+          git diff
           exit 1
         fi
