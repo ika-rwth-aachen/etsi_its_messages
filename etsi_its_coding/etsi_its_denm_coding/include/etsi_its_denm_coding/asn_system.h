@@ -27,12 +27,15 @@
 #include <limits.h>	/* For LONG_MAX */
 #include <stdarg.h>	/* For va_start */
 #include <stddef.h>	/* for offsetof and ptrdiff_t */
+#include <inttypes.h>	/* for PRIdMAX */
 
 #ifdef	_WIN32
 
 #include <malloc.h>
+#ifndef __MINGW32__
 #define	 snprintf	_snprintf
 #define	 vsnprintf	_vsnprintf
+#endif
 
 /* To avoid linking with ws2_32.lib, here's the definition of ntohl() */
 #define sys_ntohl(l)	((((l) << 24)  & 0xff000000)	\
@@ -42,7 +45,9 @@
 
 #ifdef _MSC_VER			/* MSVS.Net */
 #ifndef __cplusplus
+#ifndef inline
 #define inline __inline
+#endif
 #endif
 #ifndef	ASSUMESTDTYPES	/* Standard types have been defined elsewhere */
 #define	ssize_t		SSIZE_T
@@ -60,10 +65,13 @@ typedef	unsigned int	uint32_t;
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <float.h>
+#ifndef isnan
 #define isnan _isnan
+#endif
 #define finite _finite
 #define copysign _copysign
 #define	ilogb	_logb
+#define random rand
 #else	/* !_MSC_VER */
 #include <stdint.h>
 #endif	/* _MSC_VER */
@@ -75,7 +83,9 @@ typedef	unsigned int	uint32_t;
 #else	/* !defined(__vxworks) */
 
 #include <inttypes.h>	/* C99 specifies this file */
+#ifdef HAVE_NETINET_IN_H
 #include <netinet/in.h> /* for ntohl() */
+#endif
 #define	sys_ntohl(foo)	ntohl(foo)
 #endif	/* defined(__vxworks) */
 
@@ -86,10 +96,24 @@ typedef	unsigned int	uint32_t;
 #else
 #define CC_ATTRIBUTE(attr)
 #endif
-#define CC_PRINTFLIKE(fmt, var)     CC_ATTRIBUTE(format(printf, fmt, var))
+#if defined(__GNUC__) && ((__GNUC__ == 4 && __GNUC_MINOR__>= 4) || __GNUC__ > 4)
+#define CC_PRINTFLIKE(fmt, var) CC_ATTRIBUTE(format(gnu_printf, fmt, var))
+#elif defined(__GNUC__)
+#if defined(ANDROID)
+#define CC_PRINTFLIKE(fmt, var) CC_ATTRIBUTE(__format__(__printf__, fmt, var))
+#else
+#define CC_PRINTFLIKE(fmt, var) CC_ATTRIBUTE(format(printf, fmt, var))
+#endif
+#else
+#define CC_PRINTFLIKE(fmt, var)
+#endif
 #define	CC_NOTUSED                  CC_ATTRIBUTE(unused)
 #ifndef CC_ATTR_NO_SANITIZE
+#if	__GNUC__ < 8
+#define CC_ATTR_NO_SANITIZE(what)
+#else
 #define CC_ATTR_NO_SANITIZE(what)   CC_ATTRIBUTE(no_sanitize(what))
+#endif
 #endif
 
 /* Figure out if thread safety is requested */
@@ -136,8 +160,13 @@ typedef	unsigned int	uint32_t;
 #define ASN_PRIuMAX PRIuMAX
 #define ASN_PRIdMAX PRIdMAX
 #else
+#if _MSC_VER >= 1800
+#define ASN_PRI_SIZE "zu"
+#define ASN_PRI_SSIZE "zd"
+#else
 #define ASN_PRI_SIZE "lu"
 #define ASN_PRI_SSIZE "ld"
+#endif
 #if LLONG_MAX > LONG_MAX
 #define ASN_PRIuMAX "llu"
 #define ASN_PRIdMAX "lld"

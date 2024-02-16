@@ -31,7 +31,7 @@ etsi_its_cam_coding:
       -o etsi_its_coding/etsi_its_cam_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_coding:
   stage: asn1c
@@ -54,7 +54,7 @@ etsi_its_denm_coding:
       -o etsi_its_coding/etsi_its_denm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 
 etsi_its_cam_msgs:
@@ -66,7 +66,7 @@ etsi_its_cam_msgs:
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_msgs:
   stage: ROS Messages
@@ -77,7 +77,7 @@ etsi_its_denm_msgs:
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 
 etsi_its_cam_conversion:
@@ -90,7 +90,7 @@ etsi_its_cam_conversion:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
@@ -102,4 +102,4 @@ etsi_its_denm_conversion:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
