@@ -37,10 +37,28 @@ namespace etsi_its_primitives_conversion {
   }
 
   template <typename T>
+  void toRos_INTEGER(const T& _INTEGER_in, long long& INTEGER_out) {
+    long out;
+    int status = asn_INTEGER2long(&_INTEGER_in, &out);
+    if (status != 0)
+      throw std::range_error("Failed to convert INTEGER_t to long");
+    INTEGER_out = static_cast<long long>(out);
+  }
+
+  template <typename T>
   void toRos_INTEGER(const T& _INTEGER_in, unsigned long& INTEGER_out) {
     int status = asn_INTEGER2ulong(&_INTEGER_in, &INTEGER_out);
     if (status != 0)
       throw std::range_error("Failed to convert INTEGER_t to unsigned long");
+  }
+
+  template <typename T>
+  void toRos_INTEGER(const T& _INTEGER_in, unsigned long long& INTEGER_out) {
+    unsigned long out;
+    int status = asn_INTEGER2ulong(&_INTEGER_in, &out);
+    if (status != 0)
+      throw std::range_error("Failed to convert INTEGER_t to unsigned long");
+    INTEGER_out = static_cast<unsigned long long>(out);
   }
 
   template <typename T>
@@ -57,12 +75,27 @@ namespace etsi_its_primitives_conversion {
       throw std::range_error("Failed to convert long to INTEGER_t");
   }
 
+  template <typename T>
+  void toStruct_INTEGER(const long long& _INTEGER_in, T& INTEGER_out) {
+    const long in = static_cast<long>(_INTEGER_in);
+    int status = asn_long2INTEGER(&INTEGER_out, in);
+    if (status != 0)
+      throw std::range_error("Failed to convert long to INTEGER_t");
+  }
+
   void toStruct_INTEGER(const long& _INTEGER_in, long& INTEGER_out) {
+    INTEGER_out = _INTEGER_in;
+  }
+
+  void toStruct_INTEGER(const long long& _INTEGER_in, long long& INTEGER_out) {
     INTEGER_out = _INTEGER_in;
   }
   
   void toStruct_INTEGER(const long& _INTEGER_in, unsigned long& INTEGER_out) {
-    if (std::numeric_limits<unsigned long>::max() < _INTEGER_in) throw std::range_error("Failed to convert long to smaller unsigned long");
-    INTEGER_out = _INTEGER_in;
+    INTEGER_out = static_cast<unsigned long>(_INTEGER_in);
+  }
+
+  void toStruct_INTEGER(const long long& _INTEGER_in, unsigned long long& INTEGER_out) {
+    INTEGER_out = static_cast<unsigned long long>(_INTEGER_in);
   }
 }
