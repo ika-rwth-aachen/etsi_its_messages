@@ -113,11 +113,8 @@ if(${ROS_VERSION} EQUAL 2)
 # === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
-  # Currently no support for ROS1!
-  # Specify that the directory should be excluded from the install target
-  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DESTINATION .
-    EXCLUDE_FROM_ALL
-  )
+  find_package(catkin REQUIRED)
+
+  catkin_package()
 
 endif()
