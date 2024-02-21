@@ -67,7 +67,7 @@ namespace etsi_its_primitives_conversion {
   }
 
   void toStruct_INTEGER(const int64_t& _INTEGER_in, unsigned long& INTEGER_out) {
-    if (_INTEGER_IN < 0)
+    if (_INTEGER_in < 0)
       throw std::range_error("Failed to convert int64_t to unsigned long");
     INTEGER_out = static_cast<unsigned long>(_INTEGER_in);
   }
