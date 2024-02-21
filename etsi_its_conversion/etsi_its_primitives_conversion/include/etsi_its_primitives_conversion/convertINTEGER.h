@@ -34,7 +34,7 @@ namespace etsi_its_primitives_conversion {
     long out;
     int status = asn_INTEGER2long(&_INTEGER_in, &out);
     if (status != 0)
-      throw std::range_error("Failed to convert INTEGER_t to long");
+      throw std::range_error("Failed to convert INTEGER_t to int64_t");
     INTEGER_out = static_cast<int64_t>(out);
   }
 
@@ -43,14 +43,14 @@ namespace etsi_its_primitives_conversion {
     unsigned long out;
     int status = asn_INTEGER2ulong(&_INTEGER_in, &out);
     if (status != 0)
-      throw std::range_error("Failed to convert INTEGER_t to unsigned long");
+      throw std::range_error("Failed to convert INTEGER_t to uint64_t");
     INTEGER_out = static_cast<uint64_t>(out);
   }
 
   template <typename T>
-  void toRos_INTEGER(const int64_t& _INTEGER_in, T& INTEGER_out) {
+  void toRos_INTEGER(const long& _INTEGER_in, T& INTEGER_out) {
     if (std::numeric_limits<T>::max() < _INTEGER_in)
-      throw std::range_error("Failed to convert int64_t (" + std::to_string(_INTEGER_in) + ") to smaller integer type (max: " + std::to_string(std::numeric_limits<T>::max()) + ")");
+      throw std::range_error("Failed to convert long (" + std::to_string(_INTEGER_in) + ") to smaller integer type (max: " + std::to_string(std::numeric_limits<T>::max()) + ")");
     INTEGER_out = static_cast<T>(_INTEGER_in);
   }
 
@@ -59,14 +59,16 @@ namespace etsi_its_primitives_conversion {
     const long in = static_cast<long>(_INTEGER_in);
     int status = asn_long2INTEGER(&INTEGER_out, in);
     if (status != 0)
-      throw std::range_error("Failed to convert long to INTEGER_t");
+      throw std::range_error("Failed to convert int64_t to INTEGER_t");
   }
 
-  void toStruct_INTEGER(const int64_t& _INTEGER_in, int64_t& INTEGER_out) {
+  void toStruct_INTEGER(const int64_t& _INTEGER_in, long& INTEGER_out) {
     INTEGER_out = _INTEGER_in;
   }
 
-  void toStruct_INTEGER(const int64_t& _INTEGER_in, uint64_t& INTEGER_out) {
-    INTEGER_out = static_cast<uint64_t>(_INTEGER_in);
+  void toStruct_INTEGER(const int64_t& _INTEGER_in, unsigned long& INTEGER_out) {
+    if (_INTEGER_IN < 0)
+      throw std::range_error("Failed to convert int64_t to unsigned long");
+    INTEGER_out = static_cast<unsigned long>(_INTEGER_in);
   }
 }
