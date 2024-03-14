@@ -60,7 +60,7 @@ etsi_its_denm_coding:
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_spatem_coding:
-  stage: ASN1C
+  stage: asn1c
   needs: []
   tags: [privileged, amd64]
   image: docker:24.0.7-git
@@ -84,10 +84,10 @@ etsi_its_spatem_coding:
       -o etsi_its_coding/etsi_its_spatem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_coding:
-  stage: ASN1C
+  stage: asn1c
   needs: []
   tags: [privileged, amd64]
   image: docker:24.0.7-git
@@ -111,7 +111,7 @@ etsi_its_mapem_coding:
       -o etsi_its_coding/etsi_its_mapem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 
 etsi_its_cam_msgs:
@@ -148,7 +148,7 @@ etsi_its_spatem_msgs:
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
       asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_spatem_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_msgs:
   stage: ROS Messages
@@ -162,7 +162,7 @@ etsi_its_mapem_msgs:
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
       asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_mapem_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 
 etsi_its_cam_conversion:
