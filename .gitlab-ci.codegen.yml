@@ -22,7 +22,7 @@ etsi_its_cam_coding:
     DOCKER_TLS_CERTDIR: /certs
   before_script:
     - apk update
-    - apk add python3
+    - apk add bash python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
   script:
