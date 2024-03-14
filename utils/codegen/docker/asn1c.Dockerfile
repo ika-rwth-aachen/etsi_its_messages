@@ -15,6 +15,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y \
         automake \
+        bison \
         flex \
         libtool \
         m4 \

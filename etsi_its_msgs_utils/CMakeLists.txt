@@ -22,7 +22,7 @@ if(${ROS_VERSION} EQUAL 2)
   )
 
   target_link_libraries(${PROJECT_NAME} INTERFACE
-    ${etsi_its_cam_msgs_TARGETS}
+    ${etsi_its_msgs_TARGETS}
     ${GeographicLib_LIBRARIES}
     ${geometry_msgs_TARGETS}
   )
@@ -51,6 +51,17 @@ if(${ROS_VERSION} EQUAL 2)
     )
     target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
     ament_target_dependencies(${PROJECT_NAME}-cam_test
+      etsi_its_msgs
+      GeographicLib
+      geometry_msgs
+    )
+    ament_add_gtest(${PROJECT_NAME}-denm_test test/test_denm_access.ros2.cpp)
+    target_include_directories(${PROJECT_NAME}-denm_test PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+    )
+    target_include_directories(${PROJECT_NAME}-denm_test PUBLIC test)
+    ament_target_dependencies(${PROJECT_NAME}-denm_test
       etsi_its_msgs
       GeographicLib
       geometry_msgs
@@ -91,9 +102,14 @@ elseif(${ROS_VERSION} EQUAL 1)
 
   if(CATKIN_ENABLE_TESTING)
     catkin_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.cpp)
+    catkin_add_gtest(${PROJECT_NAME}-denm_test test/test_denm_access.cpp)
     if(TARGET ${PROJECT_NAME}-cam_test)
       target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
       target_link_libraries(${PROJECT_NAME}-cam_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
+    endif()
+    if(TARGET ${PROJECT_NAME}-denm_test)
+      target_include_directories(${PROJECT_NAME}-denm_test PUBLIC test)
+      target_link_libraries(${PROJECT_NAME}-denm_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
     endif()
   endif()
 

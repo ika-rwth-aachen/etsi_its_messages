@@ -1,4 +1,6 @@
-has_btp_header: true
+has_btp_destination_port: true
+btp_destination_port_offset: 8  # default for Cohda Wireless MK-5 exampleETSI application
+etsi_message_payload_offset: 78 # default for Cohda Wireless MK-5 exampleETSI application
 etsi_types:
   - cam
   - denm

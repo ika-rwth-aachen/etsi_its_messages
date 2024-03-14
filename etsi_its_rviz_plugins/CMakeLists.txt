@@ -27,6 +27,8 @@ if(${ROS_VERSION} EQUAL 2)
   set(display_headers_to_moc
     include/displays/CAM/cam_display.hpp
     include/displays/CAM/cam_render_object.hpp
+    include/displays/DENM/denm_display.hpp
+    include/displays/DENM/denm_render_object.hpp
   )
 
   foreach(header "${display_headers_to_moc}")
@@ -36,6 +38,8 @@ if(${ROS_VERSION} EQUAL 2)
   set(display_source_files
     src/displays/CAM/cam_display.cpp
     src/displays/CAM/cam_render_object.cpp
+    src/displays/DENM/denm_display.cpp
+    src/displays/DENM/denm_render_object.cpp
   )
 
   add_library(${PROJECT_NAME} SHARED
@@ -109,11 +113,8 @@ if(${ROS_VERSION} EQUAL 2)
 # === ROS (CATKIN) =============================================================
 elseif(${ROS_VERSION} EQUAL 1)
 
-  # Currently no support for ROS1!
-  # Specify that the directory should be excluded from the install target
-  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DESTINATION .
-    EXCLUDE_FROM_ALL
-  )
+  find_package(catkin REQUIRED)
+
+  catkin_package()
 
 endif()

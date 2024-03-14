@@ -6,39 +6,13 @@ default:
 
 
 stages:
-  - ASN1 Reduction
-  - ASN1C
+  - asn1c
   - ROS Messages
   - Conversion Headers
 
 
-asn1_reduce_cam:
-  stage: ASN1 Reduction
-  needs: []
-  script:
-    - >
-      ./utils/codegen/reduceAsn1ToTypeDependencies.py
-      -t CAM
-      -o asn1/reduced/cam
-      asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
-      asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
-
-asn1_reduce_denm:
-  stage: ASN1 Reduction
-  needs: []
-  script:
-    - >
-      ./utils/codegen/reduceAsn1ToTypeDependencies.py
-      -t DENM
-      -o asn1/reduced/denm
-      asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
-      asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
-
-
 etsi_its_cam_coding:
-  stage: ASN1C
+  stage: asn1c
   needs: []
   tags: [privileged, amd64]
   image: docker:24.0.7-git
@@ -54,15 +28,15 @@ etsi_its_cam_coding:
   script:
     - >
       ./utils/codegen/asn1ToC.py
-      asn1/reduced/cam/CAM-PDU-Descriptions.asn
-      asn1/reduced/cam/ITS-Container.asn
+      asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
+      asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_coding/etsi_its_cam_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_coding:
-  stage: ASN1C
+  stage: asn1c
   needs: []
   tags: [privileged, amd64]
   image: docker:24.0.7-git
@@ -78,12 +52,12 @@ etsi_its_denm_coding:
   script:
     - >
       ./utils/codegen/asn1ToC.py
-      asn1/reduced/denm/DENM-PDU-Descriptions.asn
-      asn1/reduced/denm/ITS-Container.asn
+      asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
+      asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_coding/etsi_its_denm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_spatem_coding:
   stage: ASN1C
@@ -146,10 +120,10 @@ etsi_its_cam_msgs:
   script:
     - >
       ./utils/codegen/asn1ToRosMsg.py
-      asn1/reduced/cam/CAM-PDU-Descriptions.asn
-      asn1/reduced/cam/ITS-Container.asn
+      asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
+      asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_msgs:
   stage: ROS Messages
@@ -157,10 +131,10 @@ etsi_its_denm_msgs:
   script:
     - >
       ./utils/codegen/asn1ToRosMsg.py
-      asn1/reduced/denm/DENM-PDU-Descriptions.asn
-      asn1/reduced/denm/ITS-Container.asn
+      asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
+      asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_spatem_msgs:
   stage: ROS Messages
@@ -197,11 +171,11 @@ etsi_its_cam_conversion:
   script:
     - >
       ./utils/codegen/asn1ToConversionHeader.py
-      asn1/reduced/cam/CAM-PDU-Descriptions.asn
-      asn1/reduced/cam/ITS-Container.asn
+      asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
+      asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
@@ -209,11 +183,11 @@ etsi_its_denm_conversion:
   script:
     - >
       ./utils/codegen/asn1ToConversionHeader.py
-      asn1/reduced/denm/DENM-PDU-Descriptions.asn
-      asn1/reduced/denm/ITS-Container.asn
+      asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
+      asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_spatem_conversion:
   stage: Conversion Headers
@@ -228,7 +202,7 @@ etsi_its_spatem_conversion:
       asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t spatem
       -o etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_conversion:
   stage: Conversion Headers
@@ -243,4 +217,4 @@ etsi_its_mapem_conversion:
       asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem
       -o etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository"; exit 1; fi
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi

@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_rviz_plugins</name>
-  <version>1.0.0</version>
+  <version>2.0.1</version>
   <description>RViz plugin for ROS 2 messages based on ETSI ITS messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
@@ -40,7 +40,11 @@
   <exec_depend condition="$ROS_VERSION == 2">rviz_satellite</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rviz2</exec_depend>
 
+  <!-- ROS -->
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+
   <export>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
   </export>
 
