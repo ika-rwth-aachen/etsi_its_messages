@@ -26,25 +26,16 @@ All message definitions and conversion functions are automatically generated bas
 > &nbsp;&nbsp;&nbsp;&nbsp; *+49 241 80 23549*  
 > &nbsp;&nbsp;&nbsp;&nbsp; *timo.woopen@ika.rwth-aachen.de*  
 
-- [etsi\_its\_messages](#etsi_its_messages)
-  - [Concept](#concept)
-  - [Supported ETSI ITS Messages](#supported-etsi-its-messages)
-  - [Packages](#packages)
-    - [`etsi_its_msgs`](#etsi_its_msgs)
-      - [Automated Generation](#automated-generation)
-      - [Access Functions Documentation](#access-functions-documentation)
-    - [`etsi_its_coding`](#etsi_its_coding)
-      - [Automated Generation](#automated-generation-1)
-    - [`etsi_its_conversion`](#etsi_its_conversion)
-      - [Usage](#usage)
-        - [Subscribed Topics](#subscribed-topics)
-        - [Published Topics](#published-topics)
-        - [Parameters](#parameters)
-      - [Automated Generation](#automated-generation-2)
-  - [Installation](#installation)
-    - [docker-ros](#docker-ros)
-  - [Acknowledgements](#acknowledgements)
-  - [Notice](#notice)
+- [Concept](#concept)
+- [Supported ETSI ITS Messages](#supported-etsi-its-messages)
+- [Packages](#packages)
+  - [`etsi_its_msgs`](#etsi_its_msgs)
+  - [`etsi_its_coding`](#etsi_its_coding)
+  - [`etsi_its_conversion`](#etsi_its_conversion)
+- [Installation](#installation)
+- [V2AIX Dataset / Citation](#v2aix-dataset--citation)
+- [Acknowledgements](#acknowledgements)
+- [Notice](#notice)
 
 
 ## Concept
@@ -238,11 +229,26 @@ docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
 ```
 
 
+## V2AIX Dataset / Citation
+
+The *etsi_its_messages* package stack was created and used in order to record the [V2AIX Dataset](https://v2aix.ika.rwth-aachen.de). Please consider citing our paper if you are also using the package stack in your own research.
+
+> **V2AIX: A Multi-Modal Real-World Dataset of ETSI ITS V2X Messages in Public Road Traffic**  
+> *([arXiv](https://arxiv.org/abs/2005.04078), [ResearchGate](https://www.researchgate.net/publication/378971373_V2AIX_A_Multi-Modal_Real-World_Dataset_of_ETSI_ITS_V2X_Messages_in_Public_Road_Traffic))*  
+>
+> [Guido Küppers](https://github.com/gkueppers), [Jean-Pierre Busch](https://github.com/jpbusch) and [Lennart Reiher](https://github.com/lreiher), [Lutz Eckstein](https://www.ika.rwth-aachen.de/en/institute/management/univ-prof-dr-ing-lutz-eckstein.html)  
+> [Institute for Automotive Engineering (ika), RWTH Aachen University](https://www.ika.rwth-aachen.de/en/)
+>
+> <sup>*Abstract* – Connectivity is a main driver for the ongoing megatrend of automated mobility: future Cooperative Intelligent Transport Systems (C-ITS) will connect road vehicles, traffic signals, roadside infrastructure, and even vulnerable road users, sharing data and compute for safer, more efficient, and more comfortable mobility. In terms of communication technology for realizing such vehicle-to-everything (V2X) communication, the WLAN-based peer-to-peer approach (IEEE 802.11p, ITS-G5 in Europe) competes with C-V2X based on cellular technologies (4G and beyond). Irrespective of the underlying communication standard, common message interfaces are crucial for a common understanding between vehicles, especially from different manufacturers. Targeting this issue, the European Telecommunications Standards Institute (ETSI) has been standardizing V2X message formats such as the Cooperative Awareness Message (CAM). In this work, we present V2AIX, a multi-modal real-world dataset of ETSI ITS messages gathered in public road traffic, the first of its kind. Collected in measurement drives and with stationary infrastructure, we have recorded more than 230 000 V2X messages from more than 1800 vehicles and roadside units in public road traffic. Alongside a first analysis of the dataset, we present a way of integrating ETSI ITS V2X messages into the Robot Operating System (ROS). This enables researchers to not only thoroughly analyze real-world V2X data, but to also study and implement standardized V2X messages in ROS-based automated driving applications. The full dataset is publicly available for noncommercial use at https://v2aix.ika.rwth-aachen.de.</sup>
+
+
+
 ## Acknowledgements
 
 This work is accomplished within the projects AIthena, 6GEM and AUTOtech.*agil*. We acknowledge the financial support for the projects by
 - the *European Union’s Horizon Europe Research and Innovation Programme* :eu: under Grant Agreement No 101076754 for AIthena,
 - and the *Federal Ministry of Education and Research of Germany (BMBF)* :de: for 6GEM (FKZ 16KISK036K) and AUTOtech.*agil* (FKZ 01IS22088A).
+
 
 ## Notice
 
