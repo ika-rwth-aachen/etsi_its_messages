@@ -94,7 +94,7 @@ The ROS message files are auto-generated based on the [ASN.1 definitions](https:
 
 ```bash
 # etsi_its_messages$
-./utils/codegen/scripts/asn1ToRosMsg.py \
+./utils/codegen/asn1ToRosMsg.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -o etsi_its_msgs/etsi_its_cam_msgs/msg
@@ -121,7 +121,7 @@ The C/C++ implementation of the message types is auto-generated based on the [AS
 
 ```bash
 # etsi_its_messages$
-./utils/codegen/scripts/asn1ToC.py
+./utils/codegen/asn1ToC.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -o etsi_its_coding/etsi_its_cam_coding
@@ -181,7 +181,7 @@ The C++ conversion functions are auto-generated based on the [ASN.1 definitions]
 
 ```bash
 # etsi_its_messages$
-./utils/codegen/scripts/asn1ToConversionHeader.py
+./utils/codegen/asn1ToConversionHeader.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -t cam \
