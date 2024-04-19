@@ -11,3 +11,7 @@ for (int i = 0; i < in.regional->list.count; i++) {
     out.regional.push_back(array);
 }
 ```
+
+---
+
+ISO14816_AVIAEINumberingAndDataStructures.asn is downloaded empty and was therefore removed from spatem/mapem generation; did it contain something at some point?
