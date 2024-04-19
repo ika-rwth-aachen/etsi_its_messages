@@ -80,7 +80,6 @@ etsi_its_spatem_coding:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_coding/etsi_its_spatem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -107,7 +106,6 @@ etsi_its_mapem_coding:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_coding/etsi_its_mapem_coding
       -td /builds/$CI_PROJECT_PATH/tmp
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -146,7 +144,6 @@ etsi_its_spatem_msgs:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_spatem_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
@@ -160,7 +157,6 @@ etsi_its_mapem_msgs:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_mapem_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
@@ -199,7 +195,6 @@ etsi_its_spatem_conversion:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t spatem
       -o etsi_its_conversion/etsi_its_spatem_conversion/include/etsi_its_spatem_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -214,7 +209,6 @@ etsi_its_mapem_conversion:
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/external/ISO-TS-19091-addgrp-C-2018-patched.asn
-      asn1/external/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem
       -o etsi_its_conversion/etsi_its_mapem_conversion/include/etsi_its_mapem_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
