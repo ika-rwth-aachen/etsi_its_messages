@@ -1,3 +1,5 @@
+# TODO: add spatem/mapem to github ci
+
 default:
   image: python:3.9
   before_script:
@@ -26,6 +28,7 @@ etsi_its_cam_coding:
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
   script:
+    - rm -rf etsi_its_coding/etsi_its_cam_coding/include etsi_its_coding/etsi_its_cam_coding/src
     - >
       ./utils/codegen/asn1ToC.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
@@ -50,6 +53,7 @@ etsi_its_denm_coding:
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
   script:
+    - rm -rf etsi_its_coding/etsi_its_denm_coding/include etsi_its_coding/etsi_its_denm_coding/src
     - >
       ./utils/codegen/asn1ToC.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
@@ -74,6 +78,7 @@ etsi_its_spatem_coding:
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
   script:
+    - rm -rf etsi_its_coding/etsi_its_spatem_coding/include etsi_its_coding/etsi_its_spatem_coding/src
     - >
       ./utils/codegen/asn1ToC.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
@@ -100,6 +105,7 @@ etsi_its_mapem_coding:
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
   script:
+    - rm -rf etsi_its_coding/etsi_its_mapem_coding/include etsi_its_coding/etsi_its_mapem_coding/src
     - >
       ./utils/codegen/asn1ToC.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
@@ -116,6 +122,7 @@ etsi_its_cam_msgs:
   stage: ROS Messages
   needs: []
   script:
+    - rm -rf etsi_its_msgs/etsi_its_cam_msgs/msg
     - >
       ./utils/codegen/asn1ToRosMsg.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
@@ -127,6 +134,7 @@ etsi_its_denm_msgs:
   stage: ROS Messages
   needs: []
   script:
+    - rm -rf etsi_its_msgs/etsi_its_denm_msgs/msg
     - >
       ./utils/codegen/asn1ToRosMsg.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
@@ -138,6 +146,7 @@ etsi_its_spatem_msgs:
   stage: ROS Messages
   needs: []
   script:
+    - rm -rf etsi_its_msgs/etsi_its_spatem_msgs/msg
     - >
       ./utils/codegen/asn1ToRosMsg.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
@@ -151,6 +160,7 @@ etsi_its_mapem_msgs:
   stage: ROS Messages
   needs: []
   script:
+    - rm -rf etsi_its_msgs/etsi_its_mapem_msgs/msg
     - >
       ./utils/codegen/asn1ToRosMsg.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
@@ -165,6 +175,7 @@ etsi_its_cam_conversion:
   stage: Conversion Headers
   needs: []
   script:
+    - etsi_its_conversion/etsi_its_cam_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
@@ -177,6 +188,7 @@ etsi_its_denm_conversion:
   stage: Conversion Headers
   needs: []
   script:
+    - etsi_its_conversion/etsi_its_denm_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
@@ -189,6 +201,7 @@ etsi_its_spatem_conversion:
   stage: Conversion Headers
   needs: []
   script:
+    - etsi_its_conversion/etsi_its_spatem_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
@@ -203,6 +216,7 @@ etsi_its_mapem_conversion:
   stage: Conversion Headers
   needs: []
   script:
+    - etsi_its_conversion/etsi_its_mapem_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
