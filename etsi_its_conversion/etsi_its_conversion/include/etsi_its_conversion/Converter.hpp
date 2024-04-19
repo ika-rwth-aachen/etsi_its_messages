@@ -1,3 +1,5 @@
+// TODO: check which features got added to conversion node on main and whether they are still in this refactored version
+
 /** ============================================================================
 MIT License
 
@@ -137,18 +139,12 @@ class Converter : public rclcpp::Node {
     static const std::string kInputTopicMapem;
     static const std::string kOutputTopicMapem;
 
-    static const std::string kHasBtpDestinationPortParam;
-    static const bool kHasBtpDestinationPortParamDefault;
-    static const std::string kBtpDestinationPortOffsetParam;
-    static const int kBtpDestinationPortOffsetParamDefault;
-    static const std::string kEtsiMessagePayloadOffsetParam;
-    static const int kEtsiMessagePayloadOffsetParamDefault;
+    static const std::string kHasBtpHeaderParam;
+    static const bool kHasBtpHeaderParamDefault;
     static const std::string kEtsiTypesParam;
     static const std::vector<std::string> kEtsiTypesParamDefault;
 
-    bool has_btp_destination_port_;
-    int btp_destination_port_offset_;
-    int etsi_message_payload_offset_;
+    bool has_btp_header_;
     std::vector<std::string> etsi_types_;
 
 #ifdef ROS1
