@@ -38,13 +38,13 @@ namespace spatem_msgs = etsi_its_spatem_msgs::msg;
 
 namespace etsi_its_spatem_conversion {
 
-void toRos_RegionalExtension(const RegionalExtension_364P0_t& in, spatem_msgs::RegionalExtension& out) {
+void toRos_RegionalExtension(const RegionalExtension_t& in, spatem_msgs::RegionalExtension& out) {
 
 }
 
-void toStruct_RegionalExtension(const spatem_msgs::RegionalExtension& in, RegionalExtension_364P0_t& out) {
+void toStruct_RegionalExtension(const spatem_msgs::RegionalExtension& in, RegionalExtension_t& out) {
 
-  memset(&out, 0, sizeof(RegionalExtension_364P0_t));
+  memset(&out, 0, sizeof(RegionalExtension_t));
 
 }
 

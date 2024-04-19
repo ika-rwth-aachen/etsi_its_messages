@@ -125,9 +125,9 @@ void toStruct_NodeAttributeSetXY(const spatem_msgs::NodeAttributeSetXY& in, Node
   }
 
   if (in.regional_is_present) {
-    RegionalExtension_364P0_t regional;
+    RegionalExtension_t regional;
     // TODO: toStruct_RegionalExtension(in.regional, regional);
-    // TODO: out.regional = new RegionalExtension_364P0_t(regional);
+    // TODO: out.regional = new RegionalExtension_t(regional);
   }
 
 }

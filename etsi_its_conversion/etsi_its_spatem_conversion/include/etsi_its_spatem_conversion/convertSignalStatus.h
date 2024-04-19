@@ -62,9 +62,9 @@ void toStruct_SignalStatus(const spatem_msgs::SignalStatus& in, SignalStatus_t& 
   toStruct_IntersectionReferenceID(in.id, out.id);
   toStruct_SignalStatusPackageList(in.sig_status, out.sigStatus);
   if (in.regional_is_present) {
-    RegionalExtension_364P0_t regional;
+    RegionalExtension_t regional;
     // TODO: toStruct_RegionalExtension(in.regional, regional);
-    // TODO: out.regional = new RegionalExtension_364P0_t(regional);
+    // TODO: out.regional = new RegionalExtension_t(regional);
   }
 
 }

@@ -101,9 +101,9 @@ void toStruct_RoadSegment(const mapem_msgs::RoadSegment& in, RoadSegment_t& out)
 
   toStruct_RoadLaneSetList(in.road_lane_set, out.roadLaneSet);
   if (in.regional_is_present) {
-    RegionalExtension_364P0_t regional;
+    RegionalExtension_t regional;
     // TODO: toStruct_RegionalExtension(in.regional, regional);
-    // TODO: out.regional = new RegionalExtension_364P0_t(regional);
+    // TODO: out.regional = new RegionalExtension_t(regional);
   }
 
 }

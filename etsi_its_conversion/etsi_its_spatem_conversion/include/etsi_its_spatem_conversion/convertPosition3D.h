@@ -71,9 +71,9 @@ void toStruct_Position3D(const spatem_msgs::Position3D& in, Position3D_t& out) {
   }
 
   if (in.regional_is_present) {
-    RegionalExtension_364P0_t regional;
+    RegionalExtension_t regional;
     // TODO: toStruct_RegionalExtension(in.regional, regional);
-    // TODO: out.regional = new RegionalExtension_364P0_t(regional);
+    // TODO: out.regional = new RegionalExtension_t(regional);
   }
 
 }
