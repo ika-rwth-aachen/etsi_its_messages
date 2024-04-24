@@ -54,6 +54,10 @@ namespace etsi_its_primitives_conversion {
     INTEGER_out = static_cast<T>(_INTEGER_in);
   }
 
+  void toRos_INTEGER(const long& _INTEGER_in, int64_t& INTEGER_out) {
+    INTEGER_out = _INTEGER_in;
+  }
+
   template <typename T>
   void toStruct_INTEGER(const int64_t& _INTEGER_in, T& INTEGER_out) {
     const long in = static_cast<long>(_INTEGER_in);
