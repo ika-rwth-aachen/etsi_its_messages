@@ -1,4 +1,4 @@
-# TODO: add spatem/mapem to github ci
+# TODO: add spatem/mapem and other changes to github ci
 
 default:
   image: python:3.9
@@ -175,7 +175,7 @@ etsi_its_cam_conversion:
   stage: Conversion Headers
   needs: []
   script:
-    - etsi_its_conversion/etsi_its_cam_conversion/include
+    - rm -rf etsi_its_conversion/etsi_its_cam_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
@@ -188,7 +188,7 @@ etsi_its_denm_conversion:
   stage: Conversion Headers
   needs: []
   script:
-    - etsi_its_conversion/etsi_its_denm_conversion/include
+    - rm -rf etsi_its_conversion/etsi_its_denm_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
@@ -201,7 +201,7 @@ etsi_its_spatem_conversion:
   stage: Conversion Headers
   needs: []
   script:
-    - etsi_its_conversion/etsi_its_spatem_conversion/include
+    - rm -rf etsi_its_conversion/etsi_its_spatem_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
@@ -216,7 +216,7 @@ etsi_its_mapem_conversion:
   stage: Conversion Headers
   needs: []
   script:
-    - etsi_its_conversion/etsi_its_mapem_conversion/include
+    - rm -rf etsi_its_conversion/etsi_its_mapem_conversion/include
     - >
       ./utils/codegen/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
