@@ -81,9 +81,9 @@ pub fn format_constraints(
         per_constraints.is_extensible(),
     );
     let range_prefix = if per_constraints.is_size_constraint() {
-        "LENGTH"
+        "LENGTH_"
     } else {
-        "VALUE"
+        ""
     };
     // handle default size constraints
     if per_constraints.is_size_constraint()
@@ -101,40 +101,47 @@ pub fn format_constraints(
         ) {
             (Some(min), Some(max), true) if min == max => {
                 format!(
-                    "{range_type} {range_prefix}_MIN = {min}\n\
-                     {range_type} {range_prefix}_MAX = {max}"
+                    "{range_type} {range_prefix}MIN = {min}\n\
+                     {range_type} {range_prefix}MAX = {max}"
                 )
             }
             (Some(min), Some(max), true) => {
                 format!(
-                    "{range_type} {range_prefix}_MIN = {min}\n\
-                     {range_type} {range_prefix}_MAX = {max}"
+                    "{range_type} {range_prefix}MIN = {min}\n\
+                     {range_type} {range_prefix}MAX = {max}"
                 )
             }
             (Some(min), Some(max), false) if min == max => {
-                format!("{range_type} {range_prefix} = {min}")
+                format!("{range_type} {range_prefix} = {min}", range_prefix = range_prefix.replace("_",""))
             }
             (Some(min), Some(max), false) => {
                 format!(
-                    "{range_type} {range_prefix}_MIN = {min}\n\
-                     {range_type} {range_prefix}_MAX = {max}"
+                    "{range_type} {range_prefix}MIN = {min}\n\
+                     {range_type} {range_prefix}MAX = {max}"
                 )
             }
             (Some(min), None, true) => {
-                format!("{range_type} {range_prefix}_MIN = {min}")
+                format!("{range_type} {range_prefix}MIN = {min}")
             }
             (Some(min), None, false) => {
-                format!("{range_type} {range_prefix}_MIN = {min}")
+                format!("{range_type} {range_prefix}MIN = {min}")
             }
             (None, Some(max), true) => {
-                format!("{range_type} {range_prefix}_MAX = {max}")
+                format!("{range_type} {range_prefix}MAX = {max}")
             }
             (None, Some(max), false) => {
-                format!("{range_type} {range_prefix}_MAX = {max}")
+                format!("{range_type} {range_prefix}MAX = {max}")
             }
             _ => "".into(),
         },
     )
+}
+
+pub fn get_distinguished_values(ty: &ASN1Type) -> Option<Vec<DistinguishedValue>> {
+    match ty {
+        ASN1Type::Integer(i) => i.distinguished_values.clone(),
+        _ => None,
+    }
 }
 
 pub fn format_distinguished_values(dvalues: &Option<Vec<DistinguishedValue>>) -> String {
@@ -243,16 +250,20 @@ fn format_sequence_member(
     let (mut all_constraints, mut formatted_type_name) =
         constraints_and_type_name(&member.ty, &member.name, parent_name)?;
     all_constraints.append(&mut member.constraints.clone());
+    let distinguished_values = format_distinguished_values(&get_distinguished_values(&member.ty))
+        .replace("{prefix}", &(to_ros_const_case(name).to_string() + &"_"))
+        .replace("{type}", &formatted_type_name);
     let name = to_ros_snake_case(name);
     if (member.is_optional && member.default_value.is_none())
         || member.name.starts_with("ext_group_")
     {
         formatted_type_name = format!(
             "bool {name}_is_present\n\
-                                      {formatted_type_name}"
+             {formatted_type_name}"
         )
     }
-    Ok(format!("{formatted_type_name} {name}\n"))
+    Ok(format!("{formatted_type_name} {name}\n\
+                {distinguished_values}\n"))
 }
 
 pub fn format_choice_options(
