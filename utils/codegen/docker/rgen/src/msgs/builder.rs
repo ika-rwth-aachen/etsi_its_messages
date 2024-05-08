@@ -173,7 +173,8 @@ pub fn generate_bit_string(tld: ToplevelTypeDefinition) -> Result<String, Genera
             &format_comments(&tld.comments)?,
             &tld.name,
             &format_constraints(true, &bitstr.constraints)?
-                .replace("{prefix}", ""),
+                .replace("{prefix}", "")
+                .replace("LENGTH =", "SIZE_BITS ="),
             &format_distinguished_values(&bitstr.distinguished_values),
         ))
     } else {
