@@ -101,36 +101,36 @@ pub fn format_constraints(
         ) {
             (Some(min), Some(max), true) if min == max => {
                 format!(
-                    "{range_type} {range_prefix}MIN = {min}\n\
-                     {range_type} {range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
+                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
                 )
             }
             (Some(min), Some(max), true) => {
                 format!(
-                    "{range_type} {range_prefix}MIN = {min}\n\
-                     {range_type} {range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
+                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
                 )
             }
             (Some(min), Some(max), false) if min == max => {
-                format!("{range_type} {range_prefix} = {min}", range_prefix = range_prefix.replace("_",""))
+                format!("{range_type} {{prefix}}{range_prefix} = {min}", range_prefix = range_prefix.replace("_",""))
             }
             (Some(min), Some(max), false) => {
                 format!(
-                    "{range_type} {range_prefix}MIN = {min}\n\
-                     {range_type} {range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
+                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
                 )
             }
             (Some(min), None, true) => {
-                format!("{range_type} {range_prefix}MIN = {min}")
+                format!("{range_type} {{prefix}}{range_prefix}MIN = {min}")
             }
             (Some(min), None, false) => {
-                format!("{range_type} {range_prefix}MIN = {min}")
+                format!("{range_type} {{prefix}}{range_prefix}MIN = {min}")
             }
             (None, Some(max), true) => {
-                format!("{range_type} {range_prefix}MAX = {max}")
+                format!("{range_type} {{prefix}}{range_prefix}MAX = {max}")
             }
             (None, Some(max), false) => {
-                format!("{range_type} {range_prefix}MAX = {max}")
+                format!("{range_type} {{prefix}}{range_prefix}MAX = {max}")
             }
             _ => "".into(),
         },
@@ -250,6 +250,8 @@ fn format_sequence_member(
     let (mut all_constraints, mut formatted_type_name) =
         constraints_and_type_name(&member.ty, &member.name, parent_name)?;
     all_constraints.append(&mut member.constraints.clone());
+    let formatted_constraints = format_constraints(false, &all_constraints)?
+        .replace("{prefix}", &(to_ros_const_case(name).to_string() + &"_"));
     let distinguished_values = format_distinguished_values(&get_distinguished_values(&member.ty))
         .replace("{prefix}", &(to_ros_const_case(name).to_string() + &"_"))
         .replace("{type}", &formatted_type_name);
@@ -263,6 +265,7 @@ fn format_sequence_member(
         )
     }
     Ok(format!("{formatted_type_name} {name}\n\
+                {formatted_constraints}\n\
                 {distinguished_values}\n"))
 }
 

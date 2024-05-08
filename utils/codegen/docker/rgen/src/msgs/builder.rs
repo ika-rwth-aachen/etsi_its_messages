@@ -22,8 +22,8 @@ impl Backend for Msgs {
                         s.len().gt(&0).then(|| {
                             acc.0.push(format!(
                                 "<typedef>\n\
-                                                {s}\n\
-                                                </typedef>"
+                                 {s}\n\
+                                 </typedef>"
                             ))
                         });
                         acc
@@ -153,7 +153,8 @@ pub fn generate_integer(tld: ToplevelTypeDefinition) -> Result<String, Generator
         Ok(integer_template(
             &format_comments(&tld.comments)?,
             &to_ros_title_case(&tld.name),
-            &format_constraints(true, &int.constraints)?,
+            &format_constraints(true, &int.constraints)?
+                .replace("{prefix}", ""),
             int.int_type().to_str(),
             &format_distinguished_values(&int.distinguished_values),
         ))
@@ -171,7 +172,8 @@ pub fn generate_bit_string(tld: ToplevelTypeDefinition) -> Result<String, Genera
         Ok(bit_string_template(
             &format_comments(&tld.comments)?,
             &tld.name,
-            &format_constraints(true, &bitstr.constraints)?,
+            &format_constraints(true, &bitstr.constraints)?
+                .replace("{prefix}", ""),
             &format_distinguished_values(&bitstr.distinguished_values),
         ))
     } else {
@@ -549,7 +551,8 @@ pub fn generate_sequence_or_set_of(tld: ToplevelTypeDefinition) -> Result<String
         ASN1Type::ElsewhereDeclaredType(d) => d.identifier.clone(),
         _ => format!("Anonymous{}", &tld.name),
     };
-    let constraints = format_constraints(true, &seq_or_set_of.constraints)?;
+    let constraints = format_constraints(true, &seq_or_set_of.constraints)?
+                .replace("{prefix}", "");
     Ok(sequence_or_set_of_template(
         is_set_of,
         &format_comments(&tld.comments)?,
