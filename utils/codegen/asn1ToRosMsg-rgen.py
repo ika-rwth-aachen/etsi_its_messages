@@ -46,7 +46,6 @@ def parseCli():
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
     parser.add_argument("-td", "--temp-dir", type=str, default=None, help="temporary directory for mounting files to container; uses tempfile by default")
-    parser.add_argument("-m", "--message", type=str, required=True, help="message name")
     parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:rgen", help="rgen Docker image")
 
     args = parser.parse_args()
@@ -78,7 +77,7 @@ def main():
                 shutil.copy(f, container_input_dir)
 
             # run asn1c docker container to generate header and source files
-            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image, 'msgs', args.message], check=True)
+            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image, 'msgs', ""], check=True)
 
             # move generated header and source files to output directories
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):

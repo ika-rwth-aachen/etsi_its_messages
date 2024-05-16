@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 use clap::Parser;
 use regex::Regex;
 
@@ -8,9 +6,6 @@ use ros_backend::msgs::Msgs;
 
 #[derive(Parser, Debug)]
 struct Cli {
-    /// Main PDU name
-    #[clap(short, long)]
-    pdu: String,
     #[clap(short, long)]
     /// Output directory
     out: std::path::PathBuf,
