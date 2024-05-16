@@ -69,7 +69,7 @@ pub fn conversion_template(
         .collect::<Vec<String>>()
         .join("\n");
     let ros1_includes = format!(
-        "#include <etsi_its_{pdu}_msgs/{ros_fn}.hpp>",
+        "#include <etsi_its_{pdu}_msgs/{ros_fn}.h>",
         pdu = pdu,
         ros_fn = to_ros_title_case(name)
     );
