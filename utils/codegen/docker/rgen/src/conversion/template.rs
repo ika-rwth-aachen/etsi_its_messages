@@ -1,4 +1,4 @@
-use crate::common::{to_ros_const_case, to_ros_snake_case, to_ros_title_case};
+use crate::common::{to_ros_const_case, to_ros_snake_case, to_ros_title_case, to_c_title_case};
 use crate::conversion::utils::{InnerTypes, NameType, NamedSeqMember};
 use crate::conversion::ConversionOptions;
 
@@ -11,7 +11,7 @@ const CONVERSION_TEMPLATE: &str = r#"//// {asn1_type} {name}
 
 #include <stdexcept>
 
-#include <etsi_its_{pdu}_coding/{c_type}.h>
+#include <etsi_its_{pdu}_coding/{c_filename}.h>
 {c_includes}
 #ifdef ROS1
 {ros1_includes}
@@ -85,9 +85,10 @@ pub fn conversion_template(
         .replace("{ros1_includes}", &ros1_includes)
         .replace("{ros2_includes}", &ros2_includes)
         .replace("{asn1_type}", asn1_type)
-        .replace("{name}", name)
-        .replace("{c_type}", name)
-        .replace("{type}", name)
+        .replace("{name}", &to_ros_title_case(name))
+        .replace("{c_type}", &to_c_title_case(name))
+        .replace("{c_filename}", name)
+        .replace("{type}", &to_ros_title_case(name))
         .replace("{ros_type}", &to_ros_title_case(name))
         .replace("{pdu}", pdu)
         .replace("{to_ros_members}", &to_ros_members)

@@ -58,3 +58,12 @@ pub fn to_ros_title_case(input: &str) -> String {
         input.to_string()
     }
 }
+
+pub fn to_c_title_case(input: &str) -> String {
+    let input = input.replace('-', "_");
+    match input.as_str() {
+        "long" => "Long".to_string(),
+        "class" => "Class".to_string(),
+        _ => input
+    }
+}

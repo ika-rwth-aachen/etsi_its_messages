@@ -2,7 +2,7 @@ use std::error::Error;
 
 use rasn_compiler::prelude::{ir::*, *};
 
-use crate::common::{to_ros_const_case, to_ros_title_case, IntegerTypeExt};
+use crate::common::{to_ros_const_case, IntegerTypeExt};
 use crate::conversion::{generate, Conversion, ConversionOptions};
 use crate::conversion::{template::*, utils::*};
 
@@ -194,7 +194,7 @@ pub fn generate_integer(
         Ok(integer_template(
             &options,
             &format_comments(&tld.comments)?,
-            &to_ros_title_case(&tld.name),
+            &tld.name,
         ))
     } else {
         Err(GeneratorError::new(
