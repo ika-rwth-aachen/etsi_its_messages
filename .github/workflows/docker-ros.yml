@@ -53,7 +53,7 @@ jobs:
           platform: amd64,arm64
           target: dev,run
           image-tag: ros2-jazzy
-          base-image: ghcr.io/sloretz/ros:jazzy-ros-base
+          base-image: ubuntu:24.04
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-industrial-ci: 'true'
           enable-push-as-latest: 'true'
