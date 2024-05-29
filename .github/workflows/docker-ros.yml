@@ -28,7 +28,6 @@ jobs:
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-industrial-ci: 'true'
-          enable-push-as-latest: 'true'
           enable-recursive-vcs-import: 'false'
   
   ros2-iron:
@@ -42,7 +41,6 @@ jobs:
           base-image: rwthika/ros2:iron
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-industrial-ci: 'true'
-          enable-push-as-latest: 'true'
           enable-recursive-vcs-import: 'false'
 
   ros2-jazzy:
