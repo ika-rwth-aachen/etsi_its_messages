@@ -5,13 +5,13 @@ Code Generation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
-ROS:
+ros-noetic:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
-    PLATFORM: amd64
+    PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros1
     BASE_IMAGE: rwthika/ros:noetic
@@ -19,16 +19,45 @@ ROS:
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
 
-ROS 2:
+ros2-humble:
   trigger:
     include:
       - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
-    PLATFORM: amd64
+    PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros2
     BASE_IMAGE: rwthika/ros2:humble
+    COMMAND: ros2 launch etsi_its_conversion converter.launch.py
+    ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+
+ros2-iron:
+  trigger:
+    include:
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    PLATFORM: amd64,arm64
+    TARGET: dev,run
+    IMAGE_TAG: ros2-iron
+    BASE_IMAGE: rwthika/ros2:iron
+    COMMAND: ros2 launch etsi_its_conversion converter.launch.py
+    ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+
+ros2-jazzy:
+  trigger:
+    include:
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    PLATFORM: amd64,arm64
+    TARGET: dev,run
+    IMAGE_TAG: ros2-jazzy
+    BASE_IMAGE: ubuntu:24.04
+    ROS_DISTRO: jazzy
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_PUSH_AS_LATEST: 'true'
