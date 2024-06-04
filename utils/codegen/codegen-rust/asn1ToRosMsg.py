@@ -59,7 +59,7 @@ def main():
     # create output directory
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # create temporary directories for running asn1c in docker container
+    # create temporary directories for running rgen in docker container
     with tempfile.TemporaryDirectory() as temp_input_dir:
         with tempfile.TemporaryDirectory() as temp_output_dir:
 
@@ -76,10 +76,10 @@ def main():
             for f in args.files:
                 shutil.copy(f, container_input_dir)
 
-            # run asn1c docker container to generate header and source files
+            # run rgen docker container to generate .msg files
             subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image, 'msgs', ""], check=True)
 
-            # move generated header and source files to output directories
+            # move generated ROS .msg files to output directories
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):
                 shutil.move(f, os.path.join(args.output_dir, os.path.basename(f)))
 

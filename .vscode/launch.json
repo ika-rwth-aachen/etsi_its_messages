@@ -124,7 +124,7 @@
       "args": [
         "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
         "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-t", "cam",
+        "-m", "cam",
         "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
       ],
       "console": "integratedTerminal",
@@ -139,7 +139,7 @@
       "args": [
         "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
         "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-t", "denm",
+        "-m", "denm",
         "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
       ],
       "console": "integratedTerminal",
