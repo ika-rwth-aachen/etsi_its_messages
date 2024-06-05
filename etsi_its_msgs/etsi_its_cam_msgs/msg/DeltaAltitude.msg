@@ -28,10 +28,9 @@
 ## INTEGER DeltaAltitude
 
 int16 value
-
 int16 MIN = -12700
 int16 MAX = 12800
-
 int16 ONE_CENTIMETER_UP = 1
 int16 ONE_CENTIMETER_DOWN = -1
 int16 UNAVAILABLE = 12800
+

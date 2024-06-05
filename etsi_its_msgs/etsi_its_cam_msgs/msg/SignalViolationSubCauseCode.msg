@@ -28,11 +28,10 @@
 ## INTEGER SignalViolationSubCauseCode
 
 uint8 value
-
 uint8 MIN = 0
 uint8 MAX = 255
-
 uint8 UNAVAILABLE = 0
 uint8 STOP_SIGN_VIOLATION = 1
 uint8 TRAFFIC_LIGHT_VIOLATION = 2
 uint8 TURNING_REGULATION_VIOLATION = 3
+

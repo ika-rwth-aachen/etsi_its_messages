@@ -219,23 +219,12 @@ pub fn format_sequence_or_set_members(
     sequence_or_set: &SequenceOrSet,
     parent_name: &String,
 ) -> Result<String, GeneratorError> {
-    let first_extension_index = sequence_or_set.extensible;
     sequence_or_set
         .members
         .iter()
-        .enumerate()
-        .try_fold("".to_string(), |mut acc, (i, m)| {
-            let extension_annotation = if i >= first_extension_index.unwrap_or(usize::MAX)
-                && m.name.starts_with("ext_group_")
-            {
-                "extension_addition_group".into()
-            } else if i >= first_extension_index.unwrap_or(usize::MAX) {
-                "quote!(extension_addition)".into()
-            } else {
-                "".into()
-            };
-            format_sequence_member(m, parent_name, extension_annotation).map(|declaration| {
-                acc.push_str(&format!("{declaration}"));
+        .try_fold("".to_string(), |mut acc, m| {
+            format_sequence_member(m, parent_name).map(|declaration| {
+                acc.push_str(&format!("{declaration}\n\n"));
                 acc
             })
         })
@@ -244,7 +233,6 @@ pub fn format_sequence_or_set_members(
 fn format_sequence_member(
     member: &SequenceOrSetMember,
     parent_name: &String,
-    _extension_annotation: String,
 ) -> Result<String, GeneratorError> {
     let name = &member.name;
     let (mut all_constraints, mut formatted_type_name) =
@@ -260,61 +248,61 @@ fn format_sequence_member(
         || member.name.starts_with("ext_group_")
     {
         formatted_type_name = format!(
-            "bool {name}_is_present\n\
-             {formatted_type_name}"
+            "{formatted_type_name} {name}\n\
+             bool {name}_is_present"
         )
+    } else {
+        formatted_type_name = format!("{formatted_type_name} {name}")
     }
-    Ok(format!("{formatted_type_name} {name}\n\
-                {formatted_constraints}\n\
-                {distinguished_values}\n"))
+
+    Ok(
+        vec![
+            formatted_type_name, 
+            formatted_constraints, 
+            distinguished_values
+        ]
+        .into_iter()
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>()
+        .join("\n")
+    )
 }
 
 pub fn format_choice_options(
     choice: &Choice,
     parent_name: &String,
 ) -> Result<String, GeneratorError> {
-    let first_extension_index = choice.extensible;
     let options = choice
         .options
         .iter()
         .enumerate()
         .map(|(i, o)| {
-            let extension_annotation = if i >= first_extension_index.unwrap_or(usize::MAX)
-                && o.name.starts_with("ext_group_")
-            {
-                "quote!(extension_addition_group)".into()
-            } else if i >= first_extension_index.unwrap_or(usize::MAX) {
-                "quote!(extension_addition)".into()
-            } else {
-                "".into()
-            };
-            let name = o.name.clone();
-            format_choice_option(name, o, parent_name, i, extension_annotation)
+            format_choice_option(o, parent_name, i)
         })
         .collect::<Result<Vec<_>, _>>()?;
     let folded_options = options.iter().fold(
-        ("".to_string(), "".to_string()),
-        |mut acc, (declaration, valset)| {
-            acc.0.push_str(&format!("{declaration}\n"));
-            acc.1.push_str(&format!("{valset}\n"));
+        "".to_string(),
+        |mut acc, option| {
+            acc.push_str(&format!("{option}\n\n"));
             acc
         },
     );
-    Ok(format!("{}\n{}", folded_options.0, folded_options.1))
+    Ok(folded_options)
 }
 
 fn format_choice_option(
-    name: String,
     member: &ChoiceOption,
     parent_name: &String,
     index: usize,
-    _extension_annotation: String,
-) -> Result<(String, String), GeneratorError> {
+) -> Result<String, GeneratorError> {
     let (_, formatted_type_name) =
         constraints_and_type_name(&member.ty, &member.name, parent_name)?;
-    let choice_type = format!("{formatted_type_name} {}", to_ros_snake_case(&name));
-    let choice_selector = format!("uint8 CHOICE_{} = {index}", to_ros_const_case(&name));
-    Ok((choice_type, choice_selector))
+    let option = format!("{formatted_type_name} {}\n\
+                          uint8 CHOICE_{} = {index}",
+                          to_ros_snake_case(&member.name),
+                          to_ros_const_case(&member.name)
+    );
+    Ok(option)
 }
 
 fn constraints_and_type_name(

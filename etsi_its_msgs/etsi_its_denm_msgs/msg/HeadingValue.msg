@@ -28,12 +28,11 @@
 ## INTEGER HeadingValue
 
 uint16 value
-
 uint16 MIN = 0
 uint16 MAX = 3601
-
-uint16 WGS84_NORTH = 0
-uint16 WGS84_EAST = 900
-uint16 WGS84_SOUTH = 1800
-uint16 WGS84_WEST = 2700
+uint16 WGS_84_NORTH = 0
+uint16 WGS_84_EAST = 900
+uint16 WGS_84_SOUTH = 1800
+uint16 WGS_84_WEST = 2700
 uint16 UNAVAILABLE = 3601
+

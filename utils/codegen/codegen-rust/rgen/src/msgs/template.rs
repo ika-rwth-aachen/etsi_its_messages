@@ -72,9 +72,9 @@ pub fn integer_template(
     licensed!(&format!(
         "## INTEGER {name}\n\
         {comments}\n\
-        {integer_type} value\n\n\
-        {constraints}\n\n\
-        {typed_dvalues}"
+        {integer_type} value\n\
+        {constraints}\n\
+        {typed_dvalues}\n"
     ))
 }
 
@@ -95,8 +95,8 @@ pub fn bit_string_template(comments: &str, name: &str, constraints: &str, dvalue
         {comments}\n\
         uint8[] value\n\
         uint8 bits_unused\n\
-        {constraints}\n\n\
-        {typed_dvalues}"
+        {constraints}\n\
+        {typed_dvalues}\n"
     ))
 }
 
@@ -198,16 +198,21 @@ pub fn sequence_or_set_template(
     default_methods: &str,
     class_fields: &str,
 ) -> String {
-    licensed!(&format!(
-        "## SEQUENCE {name} {extensible}\n\
-        {comments}\n\
-        {members}\n\
-        {}\n\
-        {annotations}\n\
-        {default_methods}\n\
-        {class_fields}",
-        nested_members.join("\n")
-    ))
+    licensed!(
+        &vec![
+            &format!("## SEQUENCE {name} {extensible}"),
+            comments,
+            members,
+            &nested_members.join("\n"),
+            annotations,
+            default_methods,
+            class_fields
+        ]
+        .into_iter()
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>()
+        .join("\n")
+    )
 }
 
 pub fn sequence_or_set_of_template(
@@ -254,13 +259,18 @@ pub fn choice_template(
     nested_options: Vec<String>,
     annotations: &str,
 ) -> String {
-    licensed!(&format!(
-        "## CHOICE {name} {extensible}\n\
-        {comments}\n\
-        uint8 choice\n\n\
-        {options}\n\
-        {}\n\
-        {annotations}",
-        nested_options.join("\n")
-    ))
+    licensed!(
+        &vec![
+            &format!("## CHOICE {name} {extensible}"),
+            comments,
+            "uint8 choice\n",
+            options,
+            &nested_options.join("\n"),
+            annotations
+        ]
+        .into_iter()
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>()
+        .join("\n")
+    )
 }

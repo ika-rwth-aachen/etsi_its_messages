@@ -27,8 +27,9 @@ pub fn to_ros_snake_case(input: &str) -> String {
     while let Some(c) = peekable.next() {
         if c.is_lowercase() || c.is_numeric() {
             lowercase.push(c);
-            /* underscore before uppercase following a lowercase, aBx -> a_bx */
-            if c != '_' && peekable.peek().map_or(false, |next| next.is_uppercase()) {
+            /* underscore before uppercase following a lowercase, aBx -> a_bx 
+             * underscore before numeric following a lowercase, r09 -> r_09 */
+            if c != '_' && peekable.peek().map_or(false, |next| next.is_uppercase() || !c.is_numeric() && next.is_numeric()) {
                 lowercase.push('_');
             }
         } else {

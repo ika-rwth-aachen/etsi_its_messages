@@ -28,13 +28,12 @@
 ## INTEGER StationaryVehicleSubCauseCode
 
 uint8 value
-
 uint8 MIN = 0
 uint8 MAX = 255
-
 uint8 UNAVAILABLE = 0
 uint8 HUMAN_PROBLEM = 1
 uint8 VEHICLE_BREAKDOWN = 2
 uint8 POST_CRASH = 3
 uint8 PUBLIC_TRANSPORT_STOP = 4
 uint8 CARRYING_DANGEROUS_GOODS = 5
+

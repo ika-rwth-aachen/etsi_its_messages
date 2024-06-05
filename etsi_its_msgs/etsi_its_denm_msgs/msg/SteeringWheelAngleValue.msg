@@ -28,11 +28,10 @@
 ## INTEGER SteeringWheelAngleValue
 
 int16 value
-
 int16 MIN = -511
 int16 MAX = 512
-
 int16 STRAIGHT = 0
 int16 ONE_POINT_FIVE_DEGREES_TO_RIGHT = -1
 int16 ONE_POINT_FIVE_DEGREES_TO_LEFT = 1
 int16 UNAVAILABLE = 512
+

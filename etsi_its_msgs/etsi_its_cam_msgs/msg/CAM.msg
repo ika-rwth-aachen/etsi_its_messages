@@ -30,11 +30,5 @@
 
 ItsPduHeader header
 
-
 CoopAwareness cam
-
-
-
-
-
 

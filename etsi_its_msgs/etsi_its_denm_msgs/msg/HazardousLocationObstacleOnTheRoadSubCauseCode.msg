@@ -28,10 +28,8 @@
 ## INTEGER HazardousLocationObstacleOnTheRoadSubCauseCode
 
 uint8 value
-
 uint8 MIN = 0
 uint8 MAX = 255
-
 uint8 UNAVAILABLE = 0
 uint8 SHED_LOAD = 1
 uint8 PARTS_OF_VEHICLES = 2
@@ -40,3 +38,4 @@ uint8 BIG_OBJECTS = 4
 uint8 FALLEN_TREES = 5
 uint8 HUB_CAPS = 6
 uint8 WAITING_VEHICLES = 7
+

@@ -28,10 +28,8 @@
 ## INTEGER VehicleBreakdownSubCauseCode
 
 uint8 value
-
 uint8 MIN = 0
 uint8 MAX = 255
-
 uint8 UNAVAILABLE = 0
 uint8 LACK_OF_FUEL = 1
 uint8 LACK_OF_BATTERY_POWER = 2
@@ -42,3 +40,4 @@ uint8 BRAKING_SYSTEM_PROBLEM = 6
 uint8 STEERING_PROBLEM = 7
 uint8 TYRE_PUNCTURE = 8
 uint8 TYRE_PRESSURE_PROBLEM = 9
+

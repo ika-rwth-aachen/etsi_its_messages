@@ -30,8 +30,8 @@
 uint8[] value
 uint8 bits_unused
 uint8 SIZE_BITS = 4
-
 uint8 BIT_INDEX_HEAVY_LOAD = 0
 uint8 BIT_INDEX_EXCESS_WIDTH = 1
 uint8 BIT_INDEX_EXCESS_LENGTH = 2
 uint8 BIT_INDEX_EXCESS_HEIGHT = 3
+

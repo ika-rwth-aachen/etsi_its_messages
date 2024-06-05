@@ -28,10 +28,8 @@
 ## INTEGER SlowVehicleSubCauseCode
 
 uint8 value
-
 uint8 MIN = 0
 uint8 MAX = 255
-
 uint8 UNAVAILABLE = 0
 uint8 MAINTENANCE_VEHICLE = 1
 uint8 VEHICLES_SLOWING_TO_LOOK_AT_ACCIDENT = 2
@@ -41,3 +39,4 @@ uint8 CONVOY = 5
 uint8 SNOWPLOUGH = 6
 uint8 DEICING = 7
 uint8 SALTING_VEHICLES = 8
+
