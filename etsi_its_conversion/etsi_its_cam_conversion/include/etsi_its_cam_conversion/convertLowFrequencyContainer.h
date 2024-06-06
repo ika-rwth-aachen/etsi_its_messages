@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/LowFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertBasicVehicleContainerLowFrequency.h>
 #ifdef ROS1

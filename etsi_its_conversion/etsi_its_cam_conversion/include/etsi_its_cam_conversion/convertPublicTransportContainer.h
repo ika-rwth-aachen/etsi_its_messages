@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/PublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
 #include <etsi_its_cam_conversion/convertPtActivation.h>

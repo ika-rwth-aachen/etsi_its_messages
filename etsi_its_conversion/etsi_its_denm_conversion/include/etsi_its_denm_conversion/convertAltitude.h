@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/Altitude.h>
 #include <etsi_its_denm_conversion/convertAltitudeValue.h>
 #include <etsi_its_denm_conversion/convertAltitudeConfidence.h>

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/VDS.h>
 #include <etsi_its_cam_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>

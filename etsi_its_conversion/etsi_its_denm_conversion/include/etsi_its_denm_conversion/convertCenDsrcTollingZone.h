@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/CenDsrcTollingZone.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertLongitude.h>

@@ -28,5 +28,5 @@
 ## SEQUENCE-OF Traces
 
 PathHistory[] array
-uint8 LENGTH_MIN = 1
-uint8 LENGTH_MAX = 7
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 7

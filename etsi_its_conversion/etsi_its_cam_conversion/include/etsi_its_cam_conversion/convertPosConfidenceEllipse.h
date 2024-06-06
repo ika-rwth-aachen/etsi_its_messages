@@ -30,10 +30,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/PosConfidenceEllipse.h>
-#include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
 #ifdef ROS1

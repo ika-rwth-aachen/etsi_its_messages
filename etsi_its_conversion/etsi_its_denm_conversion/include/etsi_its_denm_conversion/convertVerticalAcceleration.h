@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/VerticalAcceleration.h>
-#include <etsi_its_denm_conversion/convertVerticalAccelerationValue.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_denm_conversion/convertVerticalAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/VerticalAcceleration.h>
 namespace denm_msgs = etsi_its_denm_msgs;

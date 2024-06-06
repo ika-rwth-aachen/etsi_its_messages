@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/SpecialTransportContainer.h>
-#include <etsi_its_cam_conversion/convertSpecialTransportType.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
+#include <etsi_its_cam_conversion/convertSpecialTransportType.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialTransportContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;

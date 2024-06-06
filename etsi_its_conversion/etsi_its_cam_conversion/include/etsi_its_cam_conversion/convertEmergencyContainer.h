@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/EmergencyContainer.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertCauseCode.h>

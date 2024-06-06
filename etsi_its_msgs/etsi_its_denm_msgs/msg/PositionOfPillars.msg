@@ -28,5 +28,5 @@
 ## SEQUENCE-OF PositionOfPillars
 
 PosPillar[] array
-int64 LENGTH_MIN = 1
-int64 LENGTH_MAX = 3
+int64 MIN_SIZE = 1
+int64 MAX_SIZE = 3

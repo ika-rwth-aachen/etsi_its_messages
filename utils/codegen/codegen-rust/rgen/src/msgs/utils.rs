@@ -80,8 +80,8 @@ pub fn format_constraints(
         per_constraints.max::<i128>(),
         per_constraints.is_extensible(),
     );
-    let range_prefix = if per_constraints.is_size_constraint() {
-        "LENGTH_"
+    let range_suffix = if per_constraints.is_size_constraint() {
+        "_SIZE"
     } else {
         ""
     };
@@ -101,36 +101,36 @@ pub fn format_constraints(
         ) {
             (Some(min), Some(max), true) if min == max => {
                 format!(
-                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
-                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}MIN{range_suffix} = {min}\n\
+                     {range_type} {{prefix}}MAX{range_suffix} = {max}"
                 )
             }
             (Some(min), Some(max), true) => {
                 format!(
-                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
-                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}MIN{range_suffix} = {min}\n\
+                     {range_type} {{prefix}}MAX{range_suffix} = {max}"
                 )
             }
             (Some(min), Some(max), false) if min == max => {
-                format!("{range_type} {{prefix}}{range_prefix} = {min}", range_prefix = range_prefix.replace("_",""))
+                format!("{range_type} {{prefix}}{range_suffix} = {min}", range_suffix = range_suffix.replace("_",""))
             }
             (Some(min), Some(max), false) => {
                 format!(
-                    "{range_type} {{prefix}}{range_prefix}MIN = {min}\n\
-                     {range_type} {{prefix}}{range_prefix}MAX = {max}"
+                    "{range_type} {{prefix}}MIN{range_suffix} = {min}\n\
+                     {range_type} {{prefix}}MAX{range_suffix} = {max}"
                 )
             }
             (Some(min), None, true) => {
-                format!("{range_type} {{prefix}}{range_prefix}MIN = {min}")
+                format!("{range_type} {{prefix}}MIN{range_suffix} = {min}")
             }
             (Some(min), None, false) => {
-                format!("{range_type} {{prefix}}{range_prefix}MIN = {min}")
+                format!("{range_type} {{prefix}}MIN{range_suffix} = {min}")
             }
             (None, Some(max), true) => {
-                format!("{range_type} {{prefix}}{range_prefix}MAX = {max}")
+                format!("{range_type} {{prefix}}MAX{range_suffix} = {max}")
             }
             (None, Some(max), false) => {
-                format!("{range_type} {{prefix}}{range_prefix}MAX = {max}")
+                format!("{range_type} {{prefix}}MAX{range_suffix} = {max}")
             }
             _ => "".into(),
         },
@@ -147,13 +147,17 @@ pub fn get_distinguished_values(ty: &ASN1Type) -> Option<Vec<DistinguishedValue>
 pub fn format_distinguished_values(dvalues: &Option<Vec<DistinguishedValue>>) -> String {
     let mut result = String::from("");
     if let Some(dvalues) = dvalues {
-        dvalues.iter().for_each(|dvalue| {
-            result.push_str(&format!(
-                "{{type}} {{prefix}}{} = {}\n",
-                to_ros_const_case(&dvalue.name),
-                dvalue.value
-            ));
-        });
+        result = dvalues
+            .iter()
+            .map(|dvalue| {
+                format!(
+                    "{{type}} {{prefix}}{} = {}",
+                    to_ros_const_case(&dvalue.name),
+                    dvalue.value
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
     }
     result
 }

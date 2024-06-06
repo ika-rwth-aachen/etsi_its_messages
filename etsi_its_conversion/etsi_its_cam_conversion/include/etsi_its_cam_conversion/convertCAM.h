@@ -31,8 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/CAM.h>
 #include <etsi_its_cam_conversion/convertItsPduHeader.h>
 #include <etsi_its_cam_conversion/convertCoopAwareness.h>

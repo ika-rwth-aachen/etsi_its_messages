@@ -43,4 +43,3 @@ uint8 TRAILER = 9
 uint8 SPECIAL_VEHICLES = 10
 uint8 TRAM = 11
 uint8 ROAD_SIDE_UNIT = 15
-

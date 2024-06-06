@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/ProtectedCommunicationZonesRSU.h>
-#include <etsi_its_cam_conversion/convertProtectedCommunicationZonesRSU.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZone.h>
+#include <etsi_its_cam_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ProtectedCommunicationZonesRSU.h>
 namespace cam_msgs = etsi_its_cam_msgs;

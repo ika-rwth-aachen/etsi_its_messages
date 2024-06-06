@@ -28,5 +28,5 @@
 ## SEQUENCE-OF ItineraryPath
 
 ReferencePosition[] array
-uint8 LENGTH_MIN = 1
-uint8 LENGTH_MAX = 40
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 40

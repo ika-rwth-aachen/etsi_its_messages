@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/RelevanceDistance.h>
 
 #ifdef ROS1

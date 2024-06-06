@@ -30,11 +30,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/SituationContainer.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
-#include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertEventHistory.h>
 #ifdef ROS1

@@ -2,7 +2,7 @@ use crate::common::{to_ros_const_case, to_ros_snake_case, to_ros_title_case, to_
 use crate::conversion::utils::{InnerTypes, NameType, NamedSeqMember};
 use crate::conversion::ConversionOptions;
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 const CONVERSION_TEMPLATE: &str = 
 r#"/** ============================================================================
@@ -36,9 +36,7 @@ SOFTWARE.
 {comments}
 
 #pragma once
-
-#include <stdexcept>
-
+{extra-includes}
 #include <etsi_its_{pdu}_coding/{c_filename}.h>
 {c_includes}
 #ifdef ROS1
@@ -68,6 +66,7 @@ pub fn conversion_template(
     comments: &str,
     pdu: &str,
     includes: &Vec<NameType>,
+    extra_includes: &Vec<&str>,
     name: &str,
     asn1_type: &str,
     to_ros_members: &str,
@@ -94,6 +93,8 @@ pub fn conversion_template(
                     )
             }
         })
+        .collect::<HashSet<String>>()
+        .into_iter()
         .collect::<Vec<String>>()
         .join("\n");
     let ros1_includes = format!(
@@ -107,8 +108,16 @@ pub fn conversion_template(
         ros_fn = to_ros_snake_case(name)
     );
 
+    let extra_includes = extra_includes
+        .iter()
+        .fold(
+            String::from(if extra_includes.len() > 0 { "\n" } else { "" }), 
+            |acc, inc| acc + &format!("#include <{inc}>\n")
+        );
+
     CONVERSION_TEMPLATE
         .replace("{comments}", comments)
+        .replace("{extra-includes}", &extra_includes)
         .replace("{c_includes}", &c_includes)
         .replace("{ros1_includes}", &ros1_includes)
         .replace("{ros2_includes}", &ros2_includes)
@@ -138,6 +147,7 @@ pub fn typealias_template(
             is_primitive: false,
             inner_types: None,
         }],
+        &vec![],
         name,
         "TYPEALIAS",
         &format!("toRos_{alias}(in, out.value);"),
@@ -168,6 +178,7 @@ pub fn integer_template(options: &ConversionOptions, comments: &str, name: &str)
             is_primitive: true,
             inner_types: None,
         }],
+        &vec![],
         name,
         "INTEGER",
         "etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);",
@@ -193,6 +204,7 @@ pub fn bit_string_template(options: &ConversionOptions, comments: &str, name: &s
             is_primitive: true,
             inner_types: None,
         }],
+        &vec![],
         name,
         "BIT-STRING",
         "etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);\n  \
@@ -212,6 +224,7 @@ pub fn octet_string_template(options: &ConversionOptions, comments: &str, name: 
             is_primitive: true,
             inner_types: None,
         }],
+        &vec![],
         name,
         "OCTET-STRING",
         "etsi_its_primitives_conversion::toRos_OCTET_STRING(in, out.value);",
@@ -234,6 +247,7 @@ pub fn char_string_template(
             is_primitive: true,
             inner_types: None,
         }],
+        &vec![],
         name,
         string_type,
         &format!("etsi_its_primitives_conversion::toRos_{string_type}(in, out.value);"),
@@ -251,6 +265,7 @@ pub fn boolean_template(options: &ConversionOptions, comments: &str, name: &str)
             is_primitive: true,
             inner_types: None,
         }],
+        &vec![],
         name,
         "BOOLEAN",
         "etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);",
@@ -292,6 +307,7 @@ pub fn enumerated_template(options: &ConversionOptions, comments: &str, name: &s
     conversion_template(
         comments,
         &options.main_pdu,
+        &vec![],
         &vec![],
         name,
         "ENUMERATED",
@@ -525,6 +541,7 @@ pub fn sequence_or_set_template(
         comments,
         &options.main_pdu,
         &includes,
+        &vec![],
         name,
         "SEQUENCE",
         &to_ros_members,
@@ -575,6 +592,7 @@ pub fn sequence_or_set_of_template(
                 inner_types: None,
             },
         ],
+        &vec!["stdexcept"],
         name,
         "SEQUENCE-OF",
         &to_ros_loop,
@@ -666,6 +684,7 @@ pub fn choice_template(
         comments,
         &options.main_pdu,
         &members,
+        &vec![],
         name,
         "CHOICE",
         &to_ros_members,

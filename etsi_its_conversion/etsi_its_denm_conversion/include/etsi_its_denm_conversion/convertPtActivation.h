@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/PtActivation.h>
-#include <etsi_its_denm_conversion/convertPtActivationType.h>
 #include <etsi_its_denm_conversion/convertPtActivationData.h>
+#include <etsi_its_denm_conversion/convertPtActivationType.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PtActivation.h>
 namespace denm_msgs = etsi_its_denm_msgs;

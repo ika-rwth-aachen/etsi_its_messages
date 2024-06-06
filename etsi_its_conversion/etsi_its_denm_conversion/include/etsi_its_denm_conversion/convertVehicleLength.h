@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/VehicleLength.h>
 #include <etsi_its_denm_conversion/convertVehicleLengthValue.h>
 #include <etsi_its_denm_conversion/convertVehicleLengthConfidenceIndication.h>

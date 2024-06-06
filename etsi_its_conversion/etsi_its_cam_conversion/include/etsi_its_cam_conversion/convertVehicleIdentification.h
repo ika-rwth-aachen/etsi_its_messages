@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/VehicleIdentification.h>
 #include <etsi_its_cam_conversion/convertWMInumber.h>
 #include <etsi_its_cam_conversion/convertVDS.h>

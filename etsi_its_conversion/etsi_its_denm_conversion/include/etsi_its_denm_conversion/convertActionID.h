@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/ActionID.h>
 #include <etsi_its_denm_conversion/convertStationID.h>
 #include <etsi_its_denm_conversion/convertSequenceNumber.h>

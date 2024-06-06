@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/Curvature.h>
 #include <etsi_its_denm_conversion/convertCurvatureValue.h>
 #include <etsi_its_denm_conversion/convertCurvatureConfidence.h>

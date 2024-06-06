@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/PtActivation.h>
 #include <etsi_its_cam_conversion/convertPtActivationType.h>
 #include <etsi_its_cam_conversion/convertPtActivationData.h>

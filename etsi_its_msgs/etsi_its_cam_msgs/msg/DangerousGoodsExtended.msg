@@ -40,14 +40,14 @@ bool limited_quantity
 
 string emergency_action_code
 bool emergency_action_code_is_present
-uint8 EMERGENCY_ACTION_CODE_LENGTH_MIN = 1
-uint8 EMERGENCY_ACTION_CODE_LENGTH_MAX = 24
+uint8 EMERGENCY_ACTION_CODE_MIN_SIZE = 1
+uint8 EMERGENCY_ACTION_CODE_MAX_SIZE = 24
 
 PhoneNumber phone_number
 bool phone_number_is_present
 
 string company_name
 bool company_name_is_present
-uint8 COMPANY_NAME_LENGTH_MIN = 1
-uint8 COMPANY_NAME_LENGTH_MAX = 24
+uint8 COMPANY_NAME_MIN_SIZE = 1
+uint8 COMPANY_NAME_MAX_SIZE = 24
 

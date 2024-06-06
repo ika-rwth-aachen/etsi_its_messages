@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/ItineraryPath.h>
-#include <etsi_its_denm_conversion/convertItineraryPath.h>
 #include <etsi_its_denm_conversion/convertReferencePosition.h>
+#include <etsi_its_denm_conversion/convertItineraryPath.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ItineraryPath.h>
 namespace denm_msgs = etsi_its_denm_msgs;

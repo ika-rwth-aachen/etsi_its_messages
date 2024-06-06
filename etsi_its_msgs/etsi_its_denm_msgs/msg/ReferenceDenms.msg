@@ -28,5 +28,5 @@
 ## SEQUENCE-OF ReferenceDenms
 
 ActionID[] array
-int64 LENGTH_MIN = 1
-int64 LENGTH_MAX = 8
+int64 MIN_SIZE = 1
+int64 MAX_SIZE = 8

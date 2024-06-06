@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/PathPoint.h>
-#include <etsi_its_cam_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_cam_conversion/convertPathDeltaTime.h>
+#include <etsi_its_cam_conversion/convertDeltaReferencePosition.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PathPoint.h>
 namespace cam_msgs = etsi_its_cam_msgs;

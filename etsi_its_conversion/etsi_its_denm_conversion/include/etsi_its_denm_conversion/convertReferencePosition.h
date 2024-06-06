@@ -30,13 +30,11 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/ReferencePosition.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
-#include <etsi_its_denm_conversion/convertLongitude.h>
-#include <etsi_its_denm_conversion/convertPosConfidenceEllipse.h>
 #include <etsi_its_denm_conversion/convertAltitude.h>
+#include <etsi_its_denm_conversion/convertPosConfidenceEllipse.h>
+#include <etsi_its_denm_conversion/convertLongitude.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ReferencePosition.h>
 namespace denm_msgs = etsi_its_denm_msgs;

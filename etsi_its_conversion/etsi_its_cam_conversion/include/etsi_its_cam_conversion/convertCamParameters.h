@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/CamParameters.h>
 #include <etsi_its_cam_conversion/convertBasicContainer.h>
 #include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>

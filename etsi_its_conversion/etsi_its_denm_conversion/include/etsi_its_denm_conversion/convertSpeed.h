@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/Speed.h>
 #include <etsi_its_denm_conversion/convertSpeedValue.h>
 #include <etsi_its_denm_conversion/convertSpeedConfidence.h>

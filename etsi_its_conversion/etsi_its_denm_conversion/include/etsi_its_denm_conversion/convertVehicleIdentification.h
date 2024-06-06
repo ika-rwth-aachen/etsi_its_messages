@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/VehicleIdentification.h>
-#include <etsi_its_denm_conversion/convertWMInumber.h>
 #include <etsi_its_denm_conversion/convertVDS.h>
+#include <etsi_its_denm_conversion/convertWMInumber.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/VehicleIdentification.h>
 namespace denm_msgs = etsi_its_denm_msgs;

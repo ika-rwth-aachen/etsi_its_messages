@@ -227,7 +227,7 @@ pub fn sequence_or_set_of_template(
         "## SEQUENCE-OF {name}\n\
         {comments}\n\
         {member_type}[] array\n\
-        {constraints}"
+        {constraints}\n"
     ))
 }
 

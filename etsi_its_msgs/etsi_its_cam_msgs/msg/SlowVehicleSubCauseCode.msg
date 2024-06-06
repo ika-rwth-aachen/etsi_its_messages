@@ -39,4 +39,3 @@ uint8 CONVOY = 5
 uint8 SNOWPLOUGH = 6
 uint8 DEICING = 7
 uint8 SALTING_VEHICLES = 8
-

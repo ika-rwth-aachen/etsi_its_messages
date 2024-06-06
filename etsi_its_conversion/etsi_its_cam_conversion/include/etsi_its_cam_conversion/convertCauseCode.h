@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/CauseCode.h>
-#include <etsi_its_cam_conversion/convertCauseCodeType.h>
 #include <etsi_its_cam_conversion/convertSubCauseCodeType.h>
+#include <etsi_its_cam_conversion/convertCauseCodeType.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CauseCode.h>
 namespace cam_msgs = etsi_its_cam_msgs;

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/CenDsrcTollingZoneID.h>
 #include <etsi_its_denm_conversion/convertProtectedZoneID.h>
 #ifdef ROS1

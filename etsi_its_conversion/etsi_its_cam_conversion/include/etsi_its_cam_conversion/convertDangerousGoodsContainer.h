@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/DangerousGoodsContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
 #ifdef ROS1

@@ -38,4 +38,3 @@ uint8 BIG_OBJECTS = 4
 uint8 FALLEN_TREES = 5
 uint8 HUB_CAPS = 6
 uint8 WAITING_VEHICLES = 7
-

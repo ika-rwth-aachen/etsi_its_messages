@@ -30,11 +30,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/ItsPduHeader.h>
-#include <etsi_its_cam_coding/INTEGER.h>
-#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cam_conversion/convertStationID.h>

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/PtActivationData.h>
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 #include <etsi_its_primitives_conversion/convertOCTET_STRING.h>

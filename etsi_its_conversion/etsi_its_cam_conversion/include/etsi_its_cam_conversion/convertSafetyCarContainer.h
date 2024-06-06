@@ -30,13 +30,11 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/SafetyCarContainer.h>
-#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
-#include <etsi_its_cam_conversion/convertCauseCode.h>
 #include <etsi_its_cam_conversion/convertTrafficRule.h>
 #include <etsi_its_cam_conversion/convertSpeedLimit.h>
+#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
+#include <etsi_its_cam_conversion/convertCauseCode.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SafetyCarContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;

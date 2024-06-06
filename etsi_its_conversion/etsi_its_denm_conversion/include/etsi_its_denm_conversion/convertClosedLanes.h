@@ -30,10 +30,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/ClosedLanes.h>
-#include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_denm_conversion/convertDrivingLaneStatus.h>
 #ifdef ROS1

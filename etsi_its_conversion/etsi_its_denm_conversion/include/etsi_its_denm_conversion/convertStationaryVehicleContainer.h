@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/StationaryVehicleContainer.h>
 #include <etsi_its_denm_conversion/convertStationarySince.h>
 #include <etsi_its_denm_conversion/convertCauseCode.h>

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/CauseCode.h>
 #include <etsi_its_denm_conversion/convertCauseCodeType.h>
 #include <etsi_its_denm_conversion/convertSubCauseCodeType.h>

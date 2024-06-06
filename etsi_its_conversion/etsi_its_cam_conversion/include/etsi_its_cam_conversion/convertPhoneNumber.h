@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/PhoneNumber.h>
 #include <etsi_its_cam_coding/NumericString.h>
 #include <etsi_its_primitives_conversion/convertNumericString.h>

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/BasicContainer.h>
 #include <etsi_its_cam_conversion/convertStationType.h>
 #include <etsi_its_cam_conversion/convertReferencePosition.h>

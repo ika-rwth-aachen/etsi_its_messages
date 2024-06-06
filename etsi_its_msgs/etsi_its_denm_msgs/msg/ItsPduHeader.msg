@@ -47,6 +47,5 @@ uint8 MESSAGE_ID_EVCSN = 11
 uint8 MESSAGE_ID_SAEM = 12
 uint8 MESSAGE_ID_RTCMEM = 13
 
-
 StationID station_id
 

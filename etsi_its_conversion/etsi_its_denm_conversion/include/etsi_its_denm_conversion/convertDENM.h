@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/DENM.h>
 #include <etsi_its_denm_conversion/convertItsPduHeader.h>
 #include <etsi_its_denm_conversion/convertDecentralizedEnvironmentalNotificationMessage.h>

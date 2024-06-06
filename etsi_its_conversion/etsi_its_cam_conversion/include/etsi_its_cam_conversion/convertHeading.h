@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/Heading.h>
-#include <etsi_its_cam_conversion/convertHeadingValue.h>
 #include <etsi_its_cam_conversion/convertHeadingConfidence.h>
+#include <etsi_its_cam_conversion/convertHeadingValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/Heading.h>
 namespace cam_msgs = etsi_its_cam_msgs;

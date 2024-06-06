@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/OpeningDaysHours.h>
 #include <etsi_its_denm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>

@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_cam_coding/RoadWorksContainerBasic.h>
 #include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>

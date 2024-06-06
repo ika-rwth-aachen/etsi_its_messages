@@ -30,11 +30,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/PathPoint.h>
-#include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
+#include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PathPoint.h>
 namespace denm_msgs = etsi_its_denm_msgs;

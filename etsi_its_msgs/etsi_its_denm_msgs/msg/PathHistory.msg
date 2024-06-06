@@ -28,5 +28,5 @@
 ## SEQUENCE-OF PathHistory
 
 PathPoint[] array
-uint8 LENGTH_MIN = 0
-uint8 LENGTH_MAX = 40
+uint8 MIN_SIZE = 0
+uint8 MAX_SIZE = 40

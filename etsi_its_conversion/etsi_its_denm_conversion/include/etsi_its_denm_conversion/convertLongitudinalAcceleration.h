@@ -30,8 +30,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <stdexcept>
-
 #include <etsi_its_denm_coding/LongitudinalAcceleration.h>
 #include <etsi_its_denm_conversion/convertLongitudinalAccelerationValue.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>

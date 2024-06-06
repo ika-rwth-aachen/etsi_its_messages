@@ -28,5 +28,5 @@
 ## SEQUENCE-OF DigitalMap
 
 ReferencePosition[] array
-uint16 LENGTH_MIN = 1
-uint16 LENGTH_MAX = 256
+uint16 MIN_SIZE = 1
+uint16 MAX_SIZE = 256
