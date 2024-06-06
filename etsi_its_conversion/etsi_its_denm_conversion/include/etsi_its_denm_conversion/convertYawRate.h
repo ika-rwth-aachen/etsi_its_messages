@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/YawRate.h>
-#include <etsi_its_denm_conversion/convertYawRateValue.h>
 #include <etsi_its_denm_conversion/convertYawRateConfidence.h>
+#include <etsi_its_denm_conversion/convertYawRateValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/YawRate.h>
 namespace denm_msgs = etsi_its_denm_msgs;

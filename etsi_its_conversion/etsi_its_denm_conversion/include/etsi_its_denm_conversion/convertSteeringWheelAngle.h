@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/SteeringWheelAngle.h>
-#include <etsi_its_denm_conversion/convertSteeringWheelAngleConfidence.h>
 #include <etsi_its_denm_conversion/convertSteeringWheelAngleValue.h>
+#include <etsi_its_denm_conversion/convertSteeringWheelAngleConfidence.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/SteeringWheelAngle.h>
 namespace denm_msgs = etsi_its_denm_msgs;

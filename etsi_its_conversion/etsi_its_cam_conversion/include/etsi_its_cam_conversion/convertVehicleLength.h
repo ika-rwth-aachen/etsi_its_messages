@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/VehicleLength.h>
-#include <etsi_its_cam_conversion/convertVehicleLengthConfidenceIndication.h>
 #include <etsi_its_cam_conversion/convertVehicleLengthValue.h>
+#include <etsi_its_cam_conversion/convertVehicleLengthConfidenceIndication.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleLength.h>
 namespace cam_msgs = etsi_its_cam_msgs;

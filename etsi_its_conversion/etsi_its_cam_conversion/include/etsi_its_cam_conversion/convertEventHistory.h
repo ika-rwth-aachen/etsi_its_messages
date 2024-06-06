@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/EventHistory.h>
-#include <etsi_its_cam_conversion/convertEventHistory.h>
 #include <etsi_its_cam_conversion/convertEventPoint.h>
+#include <etsi_its_cam_conversion/convertEventHistory.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/EventHistory.h>
 namespace cam_msgs = etsi_its_cam_msgs;

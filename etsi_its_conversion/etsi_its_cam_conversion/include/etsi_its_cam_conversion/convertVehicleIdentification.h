@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/VehicleIdentification.h>
-#include <etsi_its_cam_conversion/convertWMInumber.h>
 #include <etsi_its_cam_conversion/convertVDS.h>
+#include <etsi_its_cam_conversion/convertWMInumber.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleIdentification.h>
 namespace cam_msgs = etsi_its_cam_msgs;

@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/PosConfidenceEllipse.h>
-#include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
+#include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PosConfidenceEllipse.h>
 namespace cam_msgs = etsi_its_cam_msgs;

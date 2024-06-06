@@ -31,11 +31,11 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/ProtectedCommunicationZone.h>
-#include <etsi_its_cam_conversion/convertProtectedZoneRadius.h>
-#include <etsi_its_cam_conversion/convertLongitude.h>
-#include <etsi_its_cam_conversion/convertProtectedZoneID.h>
-#include <etsi_its_cam_conversion/convertProtectedZoneType.h>
 #include <etsi_its_cam_conversion/convertTimestampIts.h>
+#include <etsi_its_cam_conversion/convertProtectedZoneType.h>
+#include <etsi_its_cam_conversion/convertLongitude.h>
+#include <etsi_its_cam_conversion/convertProtectedZoneRadius.h>
+#include <etsi_its_cam_conversion/convertProtectedZoneID.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ProtectedCommunicationZone.h>

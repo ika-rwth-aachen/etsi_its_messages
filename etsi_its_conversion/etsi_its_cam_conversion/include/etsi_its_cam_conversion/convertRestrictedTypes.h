@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/RestrictedTypes.h>
-#include <etsi_its_cam_conversion/convertStationType.h>
 #include <etsi_its_cam_conversion/convertRestrictedTypes.h>
+#include <etsi_its_cam_conversion/convertStationType.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RestrictedTypes.h>
 namespace cam_msgs = etsi_its_cam_msgs;

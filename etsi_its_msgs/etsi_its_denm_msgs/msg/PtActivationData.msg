@@ -1,3 +1,5 @@
-## OCTET-STRING PtActivationData
+# --- ASN.1 Definition ---------------------------------------------------------
+# PtActivationData ::= OCTET STRING (SIZE(1..20))
+# ------------------------------------------------------------------------------
 
 uint8[] value

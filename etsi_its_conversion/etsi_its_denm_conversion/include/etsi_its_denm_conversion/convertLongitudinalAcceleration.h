@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/LongitudinalAcceleration.h>
-#include <etsi_its_denm_conversion/convertLongitudinalAccelerationValue.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_denm_conversion/convertLongitudinalAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/LongitudinalAcceleration.h>
 namespace denm_msgs = etsi_its_denm_msgs;

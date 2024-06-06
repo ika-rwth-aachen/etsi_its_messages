@@ -32,9 +32,9 @@ SOFTWARE.
 
 #include <etsi_its_denm_coding/LocationContainer.h>
 #include <etsi_its_denm_conversion/convertHeading.h>
+#include <etsi_its_denm_conversion/convertSpeed.h>
 #include <etsi_its_denm_conversion/convertTraces.h>
 #include <etsi_its_denm_conversion/convertRoadType.h>
-#include <etsi_its_denm_conversion/convertSpeed.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/LocationContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;

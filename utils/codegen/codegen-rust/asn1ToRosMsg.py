@@ -31,6 +31,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from typing import Dict, List
 
 def parseCli():
     """Parses script's CLI arguments.
@@ -51,6 +52,45 @@ def parseCli():
     args = parser.parse_args()
 
     return args
+
+def asn1Definitions(files: List[str]) -> Dict[str, str]:
+    """Parses ASN1 files, extracts raw string definitions by type.
+
+    Args:
+        files (List[str]): filepaths
+
+    Returns:
+        Dict[str, str]]: raw string definition by type
+    """
+
+    asn1_raw = {}
+    for file in files:
+        with open(file) as f:
+            lines = f.readlines()
+        raw_def = None
+        for line in lines:
+            if "::=" in line:
+                if line.rstrip().endswith("{"):
+                    type = line.split("::=")[0].split("{")[0].strip().split()[0]
+                    raw_def = ""
+                elif len(line.split("::=")) == 2:
+                    type = line.split("::=")[0].strip().split()[0]
+                    if "}" in line or not ("{" in line or "}" in line):
+                        raw_def = line
+                        ros_type = type.replace("-", "")
+                        asn1_raw[ros_type] = raw_def
+                        raw_def = None
+                    else:
+                        raw_def = ""
+            if raw_def is not None:
+                raw_def += line
+                if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
+                    ros_type = type.replace("-", "")
+                    asn1_raw[ros_type] = raw_def
+                    raw_def = None
+
+    return asn1_raw
+
 
 def main():
 
@@ -78,6 +118,20 @@ def main():
 
             # run rgen docker container to generate .msg files
             subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image, 'msgs', ""], check=True)
+
+            # edit generated ROS .msg files to add ASN.1 raw definitions
+            asn1_raw = asn1Definitions(args.files)
+            for f in glob.glob(os.path.join(container_output_dir, "*.msg")):
+                with open(f, "r") as file:
+                    msg = file.read()
+                for type, raw_def in asn1_raw.items():
+                    # add #'s to the beginning of the raw ASN.1 definition
+                    commented_def = "# --- ASN.1 Definition ---------------------------------------------------------\n" +\
+                                     "\n".join(["# " + line for line in raw_def.split('\n')][:-1]) + '\n' +\
+                                    "# ------------------------------------------------------------------------------"
+                    msg = re.sub(r"^##\s([\w-]+)\s" + type + r"\b", commented_def, msg, flags=re.MULTILINE)
+                with open(f, "w") as file:
+                    file.write(msg)
 
             # move generated ROS .msg files to output directories
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):

@@ -31,10 +31,10 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/ReferencePosition.h>
-#include <etsi_its_cam_conversion/convertLongitude.h>
-#include <etsi_its_cam_conversion/convertPosConfidenceEllipse.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #include <etsi_its_cam_conversion/convertAltitude.h>
+#include <etsi_its_cam_conversion/convertPosConfidenceEllipse.h>
+#include <etsi_its_cam_conversion/convertLongitude.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ReferencePosition.h>
 namespace cam_msgs = etsi_its_cam_msgs;

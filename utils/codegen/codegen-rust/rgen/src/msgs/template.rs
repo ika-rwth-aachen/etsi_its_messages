@@ -165,12 +165,12 @@ pub fn oid_template(_comments: &str, _name: &str, _annotations: &str) -> String 
 pub fn enumerated_template(
     comments: &str,
     name: &str,
-    extensible: &str,
+    _extensible: &str,
     enum_members: &str,
     annotations: &str,
 ) -> String {
     licensed!(&format!(
-        "## ENUMERATED {name} {extensible}\n\
+        "## ENUMERATED {name}\n\
         {comments}\n\
         uint8 value\n\
         {enum_members}\n\
@@ -191,7 +191,7 @@ pub fn _sequence_or_set_value_template(
 pub fn sequence_or_set_template(
     comments: &str,
     name: &str,
-    extensible: &str,
+    _extensible: &str,
     members: &str,
     nested_members: Vec<String>,
     annotations: &str,
@@ -200,7 +200,7 @@ pub fn sequence_or_set_template(
 ) -> String {
     licensed!(
         &vec![
-            &format!("## SEQUENCE {name} {extensible}"),
+            &format!("## SEQUENCE {name}"),
             comments,
             members,
             &nested_members.join("\n"),
@@ -254,14 +254,14 @@ pub fn const_choice_value_template(
 pub fn choice_template(
     comments: &str,
     name: &str,
-    extensible: &str,
+    _extensible: &str,
     options: &str,
     nested_options: Vec<String>,
     annotations: &str,
 ) -> String {
     licensed!(
         &vec![
-            &format!("## CHOICE {name} {extensible}"),
+            &format!("## CHOICE {name}"),
             comments,
             "uint8 choice\n",
             options,

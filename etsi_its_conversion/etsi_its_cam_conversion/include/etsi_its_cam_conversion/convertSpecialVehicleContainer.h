@@ -31,12 +31,12 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/SpecialVehicleContainer.h>
-#include <etsi_its_cam_conversion/convertRescueContainer.h>
 #include <etsi_its_cam_conversion/convertRoadWorksContainerBasic.h>
-#include <etsi_its_cam_conversion/convertPublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmergencyContainer.h>
-#include <etsi_its_cam_conversion/convertSpecialTransportContainer.h>
+#include <etsi_its_cam_conversion/convertPublicTransportContainer.h>
+#include <etsi_its_cam_conversion/convertRescueContainer.h>
 #include <etsi_its_cam_conversion/convertSafetyCarContainer.h>
+#include <etsi_its_cam_conversion/convertSpecialTransportContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsContainer.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialVehicleContainer.h>

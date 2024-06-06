@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/Traces.h>
-#include <etsi_its_denm_conversion/convertPathHistory.h>
 #include <etsi_its_denm_conversion/convertTraces.h>
+#include <etsi_its_denm_conversion/convertPathHistory.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Traces.h>
 namespace denm_msgs = etsi_its_denm_msgs;

@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/YawRate.h>
-#include <etsi_its_cam_conversion/convertYawRateConfidence.h>
 #include <etsi_its_cam_conversion/convertYawRateValue.h>
+#include <etsi_its_cam_conversion/convertYawRateConfidence.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/YawRate.h>
 namespace cam_msgs = etsi_its_cam_msgs;
