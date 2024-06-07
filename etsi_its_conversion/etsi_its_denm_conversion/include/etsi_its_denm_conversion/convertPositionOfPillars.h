@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/PositionOfPillars.h>
-#include <etsi_its_denm_conversion/convertPosPillar.h>
 #include <etsi_its_denm_conversion/convertPositionOfPillars.h>
+#include <etsi_its_denm_conversion/convertPosPillar.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PositionOfPillars.h>
 namespace denm_msgs = etsi_its_denm_msgs;

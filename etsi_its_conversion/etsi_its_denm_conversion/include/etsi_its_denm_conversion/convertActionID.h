@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/ActionID.h>
-#include <etsi_its_denm_conversion/convertSequenceNumber.h>
 #include <etsi_its_denm_conversion/convertStationID.h>
+#include <etsi_its_denm_conversion/convertSequenceNumber.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ActionID.h>
 namespace denm_msgs = etsi_its_denm_msgs;

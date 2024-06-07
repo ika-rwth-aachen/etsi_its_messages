@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/BasicContainer.h>
-#include <etsi_its_cam_conversion/convertStationType.h>
 #include <etsi_its_cam_conversion/convertReferencePosition.h>
+#include <etsi_its_cam_conversion/convertStationType.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/BasicContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;

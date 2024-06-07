@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/CamParameters.h>
-#include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertLowFrequencyContainer.h>
+#include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialVehicleContainer.h>
 #include <etsi_its_cam_conversion/convertBasicContainer.h>
 #ifdef ROS1

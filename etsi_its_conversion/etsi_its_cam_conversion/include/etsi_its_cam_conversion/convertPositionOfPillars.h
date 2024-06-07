@@ -33,8 +33,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/PositionOfPillars.h>
-#include <etsi_its_cam_conversion/convertPosPillar.h>
 #include <etsi_its_cam_conversion/convertPositionOfPillars.h>
+#include <etsi_its_cam_conversion/convertPosPillar.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PositionOfPillars.h>
 namespace cam_msgs = etsi_its_cam_msgs;

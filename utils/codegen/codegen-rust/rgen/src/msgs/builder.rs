@@ -187,11 +187,12 @@ pub fn generate_bit_string(tld: ToplevelTypeDefinition) -> Result<String, Genera
 }
 
 pub fn generate_octet_string(tld: ToplevelTypeDefinition) -> Result<String, GeneratorError> {
-    if let ASN1Type::OctetString(ref _oct_str) = tld.ty {
+    if let ASN1Type::OctetString(ref oct_str) = tld.ty {
         Ok(octet_string_template(
             &format_comments(&tld.comments)?,
             &tld.name,
-            "",
+            &format_constraints(false, &oct_str.constraints)?
+                .replace("{prefix}", ""),
         ))
     } else {
         Err(GeneratorError::new(
@@ -208,7 +209,8 @@ pub fn generate_character_string(tld: ToplevelTypeDefinition) -> Result<String, 
             &format_comments(&tld.comments)?,
             &tld.name,
             &string_type(&char_str.ty)?,
-            "",
+            &format_constraints(false, &char_str.constraints)?
+                .replace("{prefix}", ""),
         ))
     } else {
         Err(GeneratorError::new(

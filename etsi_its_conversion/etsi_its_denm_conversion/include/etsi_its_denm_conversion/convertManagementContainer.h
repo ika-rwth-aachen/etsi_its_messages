@@ -31,15 +31,15 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/ManagementContainer.h>
-#include <etsi_its_denm_conversion/convertRelevanceDistance.h>
+#include <etsi_its_denm_conversion/convertValidityDuration.h>
 #include <etsi_its_denm_conversion/convertTransmissionInterval.h>
 #include <etsi_its_denm_conversion/convertTermination.h>
+#include <etsi_its_denm_conversion/convertRelevanceDistance.h>
 #include <etsi_its_denm_conversion/convertStationType.h>
-#include <etsi_its_denm_conversion/convertReferencePosition.h>
-#include <etsi_its_denm_conversion/convertActionID.h>
 #include <etsi_its_denm_conversion/convertTimestampIts.h>
+#include <etsi_its_denm_conversion/convertReferencePosition.h>
 #include <etsi_its_denm_conversion/convertRelevanceTrafficDirection.h>
-#include <etsi_its_denm_conversion/convertValidityDuration.h>
+#include <etsi_its_denm_conversion/convertActionID.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ManagementContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;

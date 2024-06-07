@@ -31,11 +31,11 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/AlacarteContainer.h>
-#include <etsi_its_denm_conversion/convertPositioningSolutionType.h>
-#include <etsi_its_denm_conversion/convertTemperature.h>
 #include <etsi_its_denm_conversion/convertImpactReductionContainer.h>
-#include <etsi_its_denm_conversion/convertRoadWorksContainerExtended.h>
+#include <etsi_its_denm_conversion/convertTemperature.h>
+#include <etsi_its_denm_conversion/convertPositioningSolutionType.h>
 #include <etsi_its_denm_conversion/convertStationaryVehicleContainer.h>
+#include <etsi_its_denm_conversion/convertRoadWorksContainerExtended.h>
 #include <etsi_its_denm_conversion/convertLanePosition.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/AlacarteContainer.h>

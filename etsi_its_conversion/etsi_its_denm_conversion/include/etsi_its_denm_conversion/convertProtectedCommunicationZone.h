@@ -31,11 +31,11 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/ProtectedCommunicationZone.h>
-#include <etsi_its_denm_conversion/convertProtectedZoneType.h>
-#include <etsi_its_denm_conversion/convertProtectedZoneID.h>
-#include <etsi_its_denm_conversion/convertLongitude.h>
 #include <etsi_its_denm_conversion/convertTimestampIts.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
+#include <etsi_its_denm_conversion/convertLongitude.h>
+#include <etsi_its_denm_conversion/convertProtectedZoneType.h>
+#include <etsi_its_denm_conversion/convertProtectedZoneID.h>
 #include <etsi_its_denm_conversion/convertProtectedZoneRadius.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ProtectedCommunicationZone.h>

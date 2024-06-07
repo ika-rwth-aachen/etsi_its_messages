@@ -32,8 +32,8 @@ SOFTWARE.
 
 #include <etsi_its_denm_coding/SituationContainer.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
-#include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertEventHistory.h>
+#include <etsi_its_denm_conversion/convertCauseCode.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/SituationContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;

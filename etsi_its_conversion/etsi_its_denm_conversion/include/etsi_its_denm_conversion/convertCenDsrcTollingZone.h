@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/CenDsrcTollingZone.h>
-#include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertLongitude.h>
+#include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertCenDsrcTollingZoneID.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/CenDsrcTollingZone.h>

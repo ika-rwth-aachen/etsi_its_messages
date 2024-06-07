@@ -31,12 +31,12 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/StationaryVehicleContainer.h>
-#include <etsi_its_denm_conversion/convertVehicleIdentification.h>
-#include <etsi_its_denm_conversion/convertStationarySince.h>
-#include <etsi_its_denm_conversion/convertEnergyStorageType.h>
-#include <etsi_its_denm_conversion/convertDangerousGoodsExtended.h>
-#include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertNumberOfOccupants.h>
+#include <etsi_its_denm_conversion/convertVehicleIdentification.h>
+#include <etsi_its_denm_conversion/convertDangerousGoodsExtended.h>
+#include <etsi_its_denm_conversion/convertEnergyStorageType.h>
+#include <etsi_its_denm_conversion/convertStationarySince.h>
+#include <etsi_its_denm_conversion/convertCauseCode.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/StationaryVehicleContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;

@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/DecentralizedEnvironmentalNotificationMessage.h>
-#include <etsi_its_denm_conversion/convertManagementContainer.h>
 #include <etsi_its_denm_conversion/convertLocationContainer.h>
+#include <etsi_its_denm_conversion/convertManagementContainer.h>
 #include <etsi_its_denm_conversion/convertSituationContainer.h>
 #include <etsi_its_denm_conversion/convertAlacarteContainer.h>
 #ifdef ROS1

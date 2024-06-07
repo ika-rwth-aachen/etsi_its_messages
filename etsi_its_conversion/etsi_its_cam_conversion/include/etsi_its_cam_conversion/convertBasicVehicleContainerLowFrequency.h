@@ -31,9 +31,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/BasicVehicleContainerLowFrequency.h>
-#include <etsi_its_cam_conversion/convertVehicleRole.h>
 #include <etsi_its_cam_conversion/convertExteriorLights.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
+#include <etsi_its_cam_conversion/convertVehicleRole.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
 namespace cam_msgs = etsi_its_cam_msgs;

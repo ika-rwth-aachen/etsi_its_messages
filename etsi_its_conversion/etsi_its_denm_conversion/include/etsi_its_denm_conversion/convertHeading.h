@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Heading.h>
-#include <etsi_its_denm_conversion/convertHeadingValue.h>
 #include <etsi_its_denm_conversion/convertHeadingConfidence.h>
+#include <etsi_its_denm_conversion/convertHeadingValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Heading.h>
 namespace denm_msgs = etsi_its_denm_msgs;

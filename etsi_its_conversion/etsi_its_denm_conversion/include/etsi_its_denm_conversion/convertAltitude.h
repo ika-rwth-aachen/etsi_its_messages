@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Altitude.h>
-#include <etsi_its_denm_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_denm_conversion/convertAltitudeValue.h>
+#include <etsi_its_denm_conversion/convertAltitudeConfidence.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Altitude.h>
 namespace denm_msgs = etsi_its_denm_msgs;

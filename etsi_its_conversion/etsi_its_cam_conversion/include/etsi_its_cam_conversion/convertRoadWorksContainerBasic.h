@@ -31,8 +31,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/RoadWorksContainerBasic.h>
-#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
+#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertClosedLanes.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RoadWorksContainerBasic.h>

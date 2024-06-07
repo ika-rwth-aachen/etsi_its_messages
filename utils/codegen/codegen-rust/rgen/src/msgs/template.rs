@@ -100,12 +100,12 @@ pub fn bit_string_template(comments: &str, name: &str, constraints: &str, dvalue
     ))
 }
 
-pub fn octet_string_template(comments: &str, name: &str, annotations: &str) -> String {
+pub fn octet_string_template(comments: &str, name: &str, constraints: &str) -> String {
     format!(
         "## OCTET-STRING {name}\n\
         {comments}\n\
         uint8[] value\n\
-        {annotations}"
+        {constraints}\n"
     )
 }
 
@@ -113,22 +113,22 @@ pub fn char_string_template(
     comments: &str,
     name: &str,
     string_type: &str,
-    annotations: &str,
+    constraints: &str,
 ) -> String {
     licensed!(&format!(
         "## {string_type} {name}\n\
         {comments}\n\
         string value\n\
-        {annotations}"
+        {constraints}\n"
     ))
 }
 
-pub fn boolean_template(comments: &str, name: &str, annotations: &str) -> String {
+pub fn boolean_template(comments: &str, name: &str, constraints: &str) -> String {
     licensed!(&format!(
         "## BOOLEAN {name}\n\
         {comments}\n\
         bool value\n\
-        {annotations}"
+        {constraints}\n"
     ))
 }
 
