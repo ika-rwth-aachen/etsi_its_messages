@@ -112,10 +112,10 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 
   CAMRenderObject cam(*msg, now, getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds())));
   if (!cam.validateFloats()) {
-        setStatus(
-          rviz_common::properties::StatusProperty::Error, "Topic",
-          "Message contained invalid floating point values (nans or infs)");
-        return;
+    setStatus(
+      rviz_common::properties::StatusProperty::Error, "Topic",
+      "Message contained invalid floating point values (nans or infs)");
+    return;
   }
 
   // Check if Station ID is already present in list
@@ -130,14 +130,14 @@ void CAMDisplay::update(float, float)
 {
   // Check for outdated CAMs
   for (auto it = cams_.begin(); it != cams_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat())
-        {
-          it = cams_.erase(it);
-        }
-        else
-        {
-          ++it;
-        }
+    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat())
+    {
+      it = cams_.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
   }
 
   // Render all valid cams
