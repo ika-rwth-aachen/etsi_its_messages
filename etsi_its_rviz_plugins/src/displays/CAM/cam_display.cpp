@@ -100,9 +100,17 @@ void CAMDisplay::reset()
 void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 {
   // Generate CAM render object from message
-  static rclcpp::Clock clock;
-  rclcpp::Time now = clock.now(); // Always use the current time for the render object, no sim time
-  CAMRenderObject cam(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds()));
+  rclcpp::Time now = rviz_node_->now();
+  uint64_t nanosecs = now.nanoseconds();
+  if (nanosecs == 0)
+  {
+    setStatus(
+          rviz_common::properties::StatusProperty::Warn, "Topic",
+          "Message received before clock got a valid time");
+    return;
+  }
+
+  CAMRenderObject cam(*msg, now, getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds())));
   if (!cam.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
@@ -120,12 +128,10 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
 
 void CAMDisplay::update(float, float)
 {
-  //RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Updating CAM display after " << wall_dt << " seconds, " << ros_dt << "seconds in ROS.");
   // Check for outdated CAMs
   for (auto it = cams_.begin(); it != cams_.end(); ) {
         if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat())
         {
-          //RCLCPP_INFO_STREAM(rviz_node_->get_logger(), "Removing CAM with StationID " << it->first << " from display, age: " << it->second.getAge(rviz_node_->now()) << ".");
           it = cams_.erase(it);
         }
         else
