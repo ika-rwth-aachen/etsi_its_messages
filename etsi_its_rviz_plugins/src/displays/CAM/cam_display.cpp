@@ -32,6 +32,7 @@ SOFTWARE.
 #include <OgreTechnique.h>
 
 #include "rviz_common/display_context.hpp"
+#include "rviz_common/transformation/transformation_manager.hpp"
 #include "rviz_common/frame_manager_iface.hpp"
 #include "rviz_common/logging.hpp"
 #include "rviz_common/properties/color_property.hpp"
@@ -130,12 +131,10 @@ void CAMDisplay::update(float, float)
 {
   // Check for outdated CAMs
   for (auto it = cams_.begin(); it != cams_.end(); ) {
-    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat())
-    {
+    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) {
       it = cams_.erase(it);
     }
-    else
-    {
+    else {
       ++it;
     }
   }
@@ -149,21 +148,44 @@ void CAMDisplay::update(float, float)
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
     if (!context_->getFrameManager()->getTransform(cam.getHeader(), sn_position, sn_orientation)) {
+      // Check if transform exists
       setMissingTransformToFixedFrame(cam.getHeader().frame_id);
       return;
     }
+    // We don't want to use the transform in sn_position and sn_orientation though, because they are only in float precision.
+    // So we get the transfrom manually from tf2:
+    std::string fixed_frame = fixed_frame_.toStdString();
+    geometry_msgs::msg::PoseStamped pose_origin;
+    pose_origin.header = cam.getHeader();
+    pose_origin.pose.position.x = 0;
+    pose_origin.pose.position.y = 0;
+    pose_origin.pose.position.z = 0;
+    pose_origin.pose.orientation.w = 1;
+    pose_origin.pose.orientation.x = 0;
+    pose_origin.pose.orientation.y = 0;
+    pose_origin.pose.orientation.z = 0;
+    geometry_msgs::msg::PoseStamped pose_fixed_frame = context_->getTransformationManager()->getCurrentTransformer()->transform(pose_origin, fixed_frame);
+    geometry_msgs::msg::TransformStamped transform_to_fixed_frame;
+    transform_to_fixed_frame.header = pose_fixed_frame.header;
+    transform_to_fixed_frame.transform.translation.x = pose_fixed_frame.pose.position.x;
+    transform_to_fixed_frame.transform.translation.y = pose_fixed_frame.pose.position.y;
+    transform_to_fixed_frame.transform.translation.z = pose_fixed_frame.pose.position.z;
+    transform_to_fixed_frame.transform.rotation = pose_fixed_frame.pose.orientation;
+
     setTransformOk();
 
-    // set pose of scene node
-    scene_node_->setPosition(sn_position);
-    scene_node_->setOrientation(sn_orientation);
+    // set pose of scene node to origin (=fixed frame)!
+    scene_node_->setPosition(Ogre::Vector3{0.0f, 0.0f, 0.0f});
+    scene_node_->setOrientation(Ogre::Quaternion{1.0f, 0.0f, 0.0f, 0.0f});
 
     auto child_scene_node = scene_node_->createChildSceneNode();
-    // Set position of scene node
+    // Set position of scene node to the position relative to the fixed frame
     geometry_msgs::msg::Pose pose = cam.getPose();
     geometry_msgs::msg::Vector3 dimensions = cam.getDimensions();
+    tf2::doTransform(pose, pose, transform_to_fixed_frame);
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
+
     if(3 <= cam.getStationType() && cam.getStationType() <= 11)
     {
       // If the station type of the originating ITS-S is set to one out of the values 3 to 11
