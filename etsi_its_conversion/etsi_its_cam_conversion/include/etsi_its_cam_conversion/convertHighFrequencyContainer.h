@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/HighFrequencyContainer.h>
-#include <etsi_its_cam_conversion/convertRSUContainerHighFrequency.h>
 #include <etsi_its_cam_conversion/convertBasicVehicleContainerHighFrequency.h>
+#include <etsi_its_cam_conversion/convertRSUContainerHighFrequency.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/HighFrequencyContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;

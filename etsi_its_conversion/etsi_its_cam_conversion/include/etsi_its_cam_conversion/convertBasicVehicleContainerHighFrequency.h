@@ -28,22 +28,22 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/BasicVehicleContainerHighFrequency.h>
-#include <etsi_its_cam_conversion/convertCurvature.h>
-#include <etsi_its_cam_conversion/convertCurvatureCalculationMode.h>
-#include <etsi_its_cam_conversion/convertAccelerationControl.h>
-#include <etsi_its_cam_conversion/convertYawRate.h>
-#include <etsi_its_cam_conversion/convertSpeed.h>
 #include <etsi_its_cam_conversion/convertVehicleLength.h>
-#include <etsi_its_cam_conversion/convertLanePosition.h>
-#include <etsi_its_cam_conversion/convertHeading.h>
-#include <etsi_its_cam_conversion/convertDriveDirection.h>
-#include <etsi_its_cam_conversion/convertLongitudinalAcceleration.h>
-#include <etsi_its_cam_conversion/convertSteeringWheelAngle.h>
-#include <etsi_its_cam_conversion/convertCenDsrcTollingZone.h>
-#include <etsi_its_cam_conversion/convertLateralAcceleration.h>
 #include <etsi_its_cam_conversion/convertVehicleWidth.h>
-#include <etsi_its_cam_conversion/convertVerticalAcceleration.h>
+#include <etsi_its_cam_conversion/convertLanePosition.h>
+#include <etsi_its_cam_conversion/convertSpeed.h>
+#include <etsi_its_cam_conversion/convertCenDsrcTollingZone.h>
+#include <etsi_its_cam_conversion/convertSteeringWheelAngle.h>
+#include <etsi_its_cam_conversion/convertHeading.h>
 #include <etsi_its_cam_conversion/convertPerformanceClass.h>
+#include <etsi_its_cam_conversion/convertLongitudinalAcceleration.h>
+#include <etsi_its_cam_conversion/convertCurvatureCalculationMode.h>
+#include <etsi_its_cam_conversion/convertLateralAcceleration.h>
+#include <etsi_its_cam_conversion/convertCurvature.h>
+#include <etsi_its_cam_conversion/convertAccelerationControl.h>
+#include <etsi_its_cam_conversion/convertVerticalAcceleration.h>
+#include <etsi_its_cam_conversion/convertYawRate.h>
+#include <etsi_its_cam_conversion/convertDriveDirection.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/BasicVehicleContainerHighFrequency.h>
 namespace cam_msgs = etsi_its_cam_msgs;

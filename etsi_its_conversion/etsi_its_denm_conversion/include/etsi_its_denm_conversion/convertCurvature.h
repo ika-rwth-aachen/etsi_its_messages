@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Curvature.h>
-#include <etsi_its_denm_conversion/convertCurvatureValue.h>
 #include <etsi_its_denm_conversion/convertCurvatureConfidence.h>
+#include <etsi_its_denm_conversion/convertCurvatureValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Curvature.h>
 namespace denm_msgs = etsi_its_denm_msgs;

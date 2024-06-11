@@ -28,10 +28,10 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/CamParameters.h>
-#include <etsi_its_cam_conversion/convertSpecialVehicleContainer.h>
 #include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>
-#include <etsi_its_cam_conversion/convertLowFrequencyContainer.h>
+#include <etsi_its_cam_conversion/convertSpecialVehicleContainer.h>
 #include <etsi_its_cam_conversion/convertBasicContainer.h>
+#include <etsi_its_cam_conversion/convertLowFrequencyContainer.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CamParameters.h>
 namespace cam_msgs = etsi_its_cam_msgs;

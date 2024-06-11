@@ -247,14 +247,6 @@ macro_rules! call_template {
     };
 }
 
-macro_rules! assignment {
-    ($unformatted:expr, $inner:expr) => {{
-        let _ty = ($unformatted);
-        let _inner = $inner;
-        "quote!(#ty(#inner))".into()
-    }};
-}
-
 pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorError> {
     let ty = tld.associated_type.as_str();
     match &tld.value {
@@ -266,21 +258,11 @@ pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorE
                 "quote!(())".into()
             )
         }
-        ASN1Value::Null => call_template!(
-            primitive_value_template,
-            tld,
-            &tld.associated_type,
-            assignment!(&tld.associated_type, "byte null 0".to_string())
-        ),
+        ASN1Value::Null => todo!(),
         ASN1Value::Boolean(b) if ty == BOOLEAN => {
             call_template!(primitive_value_template, tld, "bool", &b.to_string())
         }
-        ASN1Value::Boolean(b) => call_template!(
-            primitive_value_template,
-            tld,
-            &tld.associated_type,
-            assignment!(&tld.associated_type, b.to_string())
-        ),
+        ASN1Value::Boolean(_) => todo!(),
         ASN1Value::LinkedIntValue { .. } => generate_integer_value(tld),
         ASN1Value::BitString(_) if ty == BIT_STRING => todo!(),
         ASN1Value::OctetString(_) if ty == OCTET_STRING => todo!(),
@@ -313,31 +295,8 @@ pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorE
         } => call_template!(enum_value_template, tld, enumerated, enumerable),
         ASN1Value::Time(_) if ty == GENERALIZED_TIME => todo!(),
         ASN1Value::Time(_) if ty == UTC_TIME => todo!(),
-        ASN1Value::LinkedStructLikeValue(s) => {
-            let _members = s
-                .iter()
-                .map(|(_, _, val)| value_to_tokens(val.value(), None))
-                .collect::<Result<Vec<String>, _>>()?;
-            todo!()
-        }
-        ASN1Value::LinkedNestedValue { supertypes, value } => {
-            let parent = supertypes.last().map(|s| (s));
-            if value.is_const_type() {
-                call_template!(
-                    primitive_value_template,
-                    tld,
-                    &tld.associated_type,
-                    assignment!(&tld.associated_type, value_to_tokens(&tld.value, parent)?)
-                )
-            } else {
-                call_template!(
-                    lazy_static_value_template,
-                    tld,
-                    &tld.associated_type,
-                    assignment!(&tld.associated_type, value_to_tokens(&tld.value, parent)?)
-                )
-            }
-        }
+        ASN1Value::LinkedStructLikeValue(_) => todo!(),
+        ASN1Value::LinkedNestedValue { .. } => todo!(),
         ASN1Value::ObjectIdentifier(_) if ty == OBJECT_IDENTIFIER => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == NUMERIC_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == VISIBLE_STRING => todo!(),
@@ -346,32 +305,15 @@ pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorE
         ASN1Value::LinkedCharStringValue(_, _) if ty == BMP_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == PRINTABLE_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == GENERAL_STRING => todo!(),
-        ASN1Value::LinkedArrayLikeValue(s) if ty.contains(SEQUENCE_OF) => {
-            let _item_type = format_sequence_or_set_of_item_type(
-                ty.replace(SEQUENCE_OF, "").trim().to_string(),
-                s.first().map(|i| &**i),
-            );
-            todo!()
-        }
-        ASN1Value::LinkedArrayLikeValue(s) if ty.contains(SET_OF) => {
-            let _item_type = format_sequence_or_set_of_item_type(
-                ty.replace(SET_OF, "").trim().to_string(),
-                s.first().map(|i| &**i),
-            );
-            todo!()
-        }
+        ASN1Value::LinkedArrayLikeValue(_) if ty.contains(SEQUENCE_OF) => todo!(),
+        ASN1Value::LinkedArrayLikeValue(_) if ty.contains(SET_OF) => todo!(),
         ASN1Value::BitString(_)
         | ASN1Value::Time(_)
         | ASN1Value::LinkedCharStringValue(_, _)
         | ASN1Value::ObjectIdentifier(_)
         | ASN1Value::LinkedArrayLikeValue(_)
         | ASN1Value::ElsewhereDeclaredValue { .. }
-        | ASN1Value::OctetString(_) => call_template!(
-            lazy_static_value_template,
-            tld,
-            &tld.associated_type.to_string(),
-            assignment!(&tld.associated_type, value_to_tokens(&tld.value, None)?)
-        ),
+        | ASN1Value::OctetString(_) => todo!(),
         _ => Ok("".to_string()),
     }
 }
@@ -450,14 +392,9 @@ pub fn generate_null(tld: ToplevelTypeDefinition) -> Result<String, GeneratorErr
 
 pub fn generate_enumerated(tld: ToplevelTypeDefinition) -> Result<String, GeneratorError> {
     if let ASN1Type::Enumerated(ref enumerated) = tld.ty {
-        let extensible = enumerated
-            .extensible
-            .map(|_| ".extensible".into())
-            .unwrap_or_default();
         Ok(enumerated_template(
             &format_comments(&tld.comments)?,
             &tld.name,
-            extensible,
             &format_enum_members(enumerated),
             "",
         ))
@@ -473,14 +410,9 @@ pub fn generate_enumerated(tld: ToplevelTypeDefinition) -> Result<String, Genera
 pub fn generate_choice(tld: ToplevelTypeDefinition) -> Result<String, GeneratorError> {
     if let ASN1Type::Choice(ref choice) = tld.ty {
         let inner_options = format_nested_choice_options(choice, &tld.name)?;
-        let extensible = choice
-            .extensible
-            .map(|_| ".extensible".into())
-            .unwrap_or_default();
         Ok(choice_template(
             &format_comments(&tld.comments)?,
             &tld.name,
-            extensible,
             &format_choice_options(choice, &tld.name)?,
             inner_options,
             "",
@@ -497,15 +429,10 @@ pub fn generate_choice(tld: ToplevelTypeDefinition) -> Result<String, GeneratorE
 pub fn generate_sequence_or_set(tld: ToplevelTypeDefinition) -> Result<String, GeneratorError> {
     match tld.ty {
         ASN1Type::Sequence(ref seq) | ASN1Type::Set(ref seq) => {
-            let extensible = seq
-                .extensible
-                .map(|_| ".extensible".into())
-                .unwrap_or_default();
             let declaration = format_sequence_or_set_members(seq, &tld.name)?;
             Ok(sequence_or_set_template(
                 &format_comments(&tld.comments)?,
                 &tld.name,
-                extensible,
                 &declaration,
                 format_nested_sequence_members(seq, &tld.name)?,
                 "",
@@ -653,7 +580,7 @@ pub fn generate_information_object_set(
                     } => {
                         let _tokenized_value =
                             value_to_tokens(id, Some(&class_unique_id_type_name))?;
-                        "quote!(*#tokenized_value)".into()
+                        todo!()
                     }
                     ASN1Value::LinkedNestedValue { value, .. }
                         if matches![
@@ -666,7 +593,7 @@ pub fn generate_information_object_set(
                     {
                         let _tokenized_value =
                             value_to_tokens(value, Some(&class_unique_id_type_name))?;
-                        "quote!(*#tokenized_value)".into()
+                        todo!()
                     }
                     ASN1Value::LinkedNestedValue { value, .. }
                         if matches![&**value, ASN1Value::LinkedElsewhereDefinedValue { .. }] =>

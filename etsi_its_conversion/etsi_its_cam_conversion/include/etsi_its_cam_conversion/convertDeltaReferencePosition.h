@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/DeltaReferencePosition.h>
-#include <etsi_its_cam_conversion/convertDeltaLongitude.h>
 #include <etsi_its_cam_conversion/convertDeltaAltitude.h>
+#include <etsi_its_cam_conversion/convertDeltaLongitude.h>
 #include <etsi_its_cam_conversion/convertDeltaLatitude.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DeltaReferencePosition.h>

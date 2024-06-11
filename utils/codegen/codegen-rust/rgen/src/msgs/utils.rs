@@ -1,9 +1,7 @@
 use crate::common::{to_ros_const_case, to_ros_snake_case, to_ros_title_case, IntegerTypeExt};
 use rasn_compiler::intermediate::{
     constraints::Constraint,
-    encoding_rules::per_visible::{
-        per_visible_range_constraints, CharsetSubset, PerVisibleAlphabetConstraints,
-    },
+    encoding_rules::per_visible::per_visible_range_constraints,
     information_object::{InformationObjectClass, InformationObjectField},
     types::{Choice, ChoiceOption, Enumerated, SequenceOrSet, SequenceOrSetMember},
     ASN1Type, ASN1Value, CharacterStringType, IntegerType, ToplevelDefinition,
@@ -160,40 +158,6 @@ pub fn format_distinguished_values(dvalues: &Option<Vec<DistinguishedValue>>) ->
             .join("\n");
     }
     result
-}
-
-pub fn _format_alphabet_annotations(
-    string_type: CharacterStringType,
-    constraints: &Vec<Constraint>,
-) -> Result<String, GeneratorError> {
-    if constraints.is_empty() {
-        return Ok("".into());
-    }
-    let mut permitted_alphabet = PerVisibleAlphabetConstraints::default_for(string_type);
-    for c in constraints {
-        if let Some(mut p) = PerVisibleAlphabetConstraints::try_new(c, string_type)? {
-            permitted_alphabet += &mut p
-        }
-    }
-    permitted_alphabet.finalize();
-    let alphabet_unicode = permitted_alphabet
-        .charset_subsets()
-        .iter()
-        .map(|subset| match subset {
-            CharsetSubset::Single(c) => format!("{}", c.escape_unicode()),
-            CharsetSubset::Range { from, to } => format!(
-                "{}..{}",
-                from.map_or(String::from(""), |c| format!("{}", c.escape_unicode())),
-                to.map_or(String::from(""), |c| format!("{}", c.escape_unicode()))
-            ),
-        })
-        .collect::<Vec<String>>()
-        .join(", ");
-    Ok(if alphabet_unicode.is_empty() {
-        "".into()
-    } else {
-        "from(#alphabet_unicode)".into()
-    })
 }
 
 pub fn format_enum_members(enumerated: &Enumerated) -> String {
@@ -462,9 +426,7 @@ pub fn type_to_tokens(ty: &ASN1Type) -> Result<String, GeneratorError> {
         ASN1Type::GeneralizedTime(_) => Ok("GeneralizedTime".into()),
         ASN1Type::UTCTime(_) => Ok("UtcTime".into()),
         ASN1Type::EmbeddedPdv | ASN1Type::External => Ok("Any".into()),
-        ASN1Type::ChoiceSelectionType(c) => {
-            let _choice = &c.choice_name;
-            let _option = &c.selected_option;
+        ASN1Type::ChoiceSelectionType(_) => {
             todo!()
         }
     }
@@ -656,7 +618,7 @@ pub fn format_nested_choice_options(
         .collect::<Result<Vec<_>, _>>()
 }
 
-pub fn format_sequence_or_set_of_item_type(
+pub fn _format_sequence_or_set_of_item_type(
     type_name: String,
     first_item: Option<&ASN1Value>,
 ) -> String {
@@ -741,47 +703,5 @@ pub fn resolve_standard_syntax(
             details: "Could not find class key!".into(),
             kind: GeneratorErrorType::MissingClassKey,
         }),
-    }
-}
-
-trait ASN1ValueExt {
-    fn is_const_type(&self) -> bool;
-}
-
-impl ASN1ValueExt for ASN1Value {
-    fn is_const_type(&self) -> bool {
-        match self {
-            ASN1Value::Null | ASN1Value::Boolean(_) | ASN1Value::EnumeratedValue { .. } => true,
-            ASN1Value::Choice { inner_value, .. } => inner_value.is_const_type(),
-            ASN1Value::LinkedIntValue { integer_type, .. } => {
-                integer_type != &IntegerType::Unbounded
-            }
-            ASN1Value::LinkedNestedValue { value, .. } => value.is_const_type(),
-            ASN1Value::LinkedElsewhereDefinedValue { can_be_const, .. } => *can_be_const,
-            _ => false,
-        }
-    }
-}
-
-impl ASN1ValueExt for ASN1Type {
-    fn is_const_type(&self) -> bool {
-        match self {
-            ASN1Type::Null | ASN1Type::Enumerated(_) | ASN1Type::Boolean(_) => true,
-            ASN1Type::Integer(i) => {
-                i.constraints.iter().fold(IntegerType::Unbounded, |acc, c| {
-                    acc.max_restrictive(c.integer_constraints())
-                }) != IntegerType::Unbounded
-            }
-            ASN1Type::Choice(c) => c
-                .options
-                .iter()
-                .fold(true, |acc, opt| opt.ty.is_const_type() && acc),
-            ASN1Type::Set(s) | ASN1Type::Sequence(s) => s
-                .members
-                .iter()
-                .fold(true, |acc, m| m.ty.is_const_type() && acc),
-            ASN1Type::SetOf(s) | ASN1Type::SequenceOf(s) => s.element_type.is_const_type(),
-            _ => false,
-        }
     }
 }

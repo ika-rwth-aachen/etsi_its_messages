@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/PublicTransportContainer.h>
-#include <etsi_its_cam_conversion/convertPtActivation.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
+#include <etsi_its_cam_conversion/convertPtActivation.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PublicTransportContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;

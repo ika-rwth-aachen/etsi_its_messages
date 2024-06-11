@@ -163,7 +163,6 @@ pub fn oid_template(_comments: &str, _name: &str, _annotations: &str) -> String 
 pub fn enumerated_template(
     comments: &str,
     name: &str,
-    _extensible: &str,
     enum_members: &str,
     annotations: &str,
 ) -> String {
@@ -189,7 +188,6 @@ pub fn _sequence_or_set_value_template(
 pub fn sequence_or_set_template(
     comments: &str,
     name: &str,
-    _extensible: &str,
     members: &str,
     nested_members: Vec<String>,
     annotations: &str,
@@ -252,7 +250,6 @@ pub fn const_choice_value_template(
 pub fn choice_template(
     comments: &str,
     name: &str,
-    _extensible: &str,
     options: &str,
     nested_options: Vec<String>,
     annotations: &str,

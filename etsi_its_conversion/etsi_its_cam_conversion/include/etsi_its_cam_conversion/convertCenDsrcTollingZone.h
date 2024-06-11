@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/CenDsrcTollingZone.h>
-#include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
+#include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertCenDsrcTollingZoneID.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CenDsrcTollingZone.h>

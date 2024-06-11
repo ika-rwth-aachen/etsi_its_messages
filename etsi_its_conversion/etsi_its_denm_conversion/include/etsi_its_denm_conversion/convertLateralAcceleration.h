@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/LateralAcceleration.h>
-#include <etsi_its_denm_conversion/convertLateralAccelerationValue.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_denm_conversion/convertLateralAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/LateralAcceleration.h>
 namespace denm_msgs = etsi_its_denm_msgs;

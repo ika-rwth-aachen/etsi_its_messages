@@ -50,7 +50,7 @@ fn generate(
                 ASN1Type::ElsewhereDeclaredType(_) => generate_typealias(&options, t),
                 ASN1Type::Choice(_) => generate_choice(&options, t),
                 ASN1Type::OctetString(_) => generate_octet_string(&options, t),
-                ASN1Type::Time(_) => unimplemented!("rasn does not support TIME types yet!"),
+                ASN1Type::Time(_) => unimplemented!("TIME types are currently unsupported!"),
                 ASN1Type::Real(_) => Err(GeneratorError {
                     kind: GeneratorErrorType::NotYetInplemented,
                     details: "Real types are currently unsupported!".into(),

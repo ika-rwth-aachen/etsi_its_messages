@@ -30,8 +30,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/PathHistory.h>
-#include <etsi_its_denm_conversion/convertPathHistory.h>
 #include <etsi_its_denm_conversion/convertPathPoint.h>
+#include <etsi_its_denm_conversion/convertPathHistory.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PathHistory.h>
 namespace denm_msgs = etsi_its_denm_msgs;

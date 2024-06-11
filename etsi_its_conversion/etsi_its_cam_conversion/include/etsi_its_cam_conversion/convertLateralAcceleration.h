@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/LateralAcceleration.h>
-#include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cam_conversion/convertLateralAccelerationValue.h>
+#include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/LateralAcceleration.h>
 namespace cam_msgs = etsi_its_cam_msgs;

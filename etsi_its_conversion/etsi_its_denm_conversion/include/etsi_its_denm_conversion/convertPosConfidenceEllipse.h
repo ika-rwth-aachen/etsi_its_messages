@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/PosConfidenceEllipse.h>
-#include <etsi_its_denm_conversion/convertHeadingValue.h>
 #include <etsi_its_denm_conversion/convertSemiAxisLength.h>
+#include <etsi_its_denm_conversion/convertHeadingValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PosConfidenceEllipse.h>
 namespace denm_msgs = etsi_its_denm_msgs;

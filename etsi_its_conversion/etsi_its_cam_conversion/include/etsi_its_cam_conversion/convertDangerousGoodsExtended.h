@@ -28,9 +28,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/DangerousGoodsExtended.h>
+#include <etsi_its_cam_conversion/convertPhoneNumber.h>
 #include <etsi_its_cam_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
-#include <etsi_its_cam_conversion/convertPhoneNumber.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>

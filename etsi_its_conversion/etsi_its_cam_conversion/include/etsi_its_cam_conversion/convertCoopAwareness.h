@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/CoopAwareness.h>
-#include <etsi_its_cam_conversion/convertGenerationDeltaTime.h>
 #include <etsi_its_cam_conversion/convertCamParameters.h>
+#include <etsi_its_cam_conversion/convertGenerationDeltaTime.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CoopAwareness.h>
 namespace cam_msgs = etsi_its_cam_msgs;

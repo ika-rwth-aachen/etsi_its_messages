@@ -292,40 +292,15 @@ macro_rules! call_template {
     };
 }
 
-macro_rules! assignment {
-    ($unformatted:expr, $inner:expr) => {{
-        let _ty = ($unformatted);
-        let _inner = $inner;
-        "quote!(#ty(#inner))".into()
-    }};
-}
-
 pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorError> {
     let ty = tld.associated_type.as_str();
     match &tld.value {
-        ASN1Value::Null if ty == NULL => {
-            call_template!(
-                primitive_value_template,
-                tld,
-                "quote!(())".into(),
-                "quote!(())".into()
-            )
-        }
-        ASN1Value::Null => call_template!(
-            primitive_value_template,
-            tld,
-            &tld.associated_type,
-            assignment!(&tld.associated_type, "byte null 0".to_string())
-        ),
+        ASN1Value::Null if ty == NULL => todo!(),
+        ASN1Value::Null => todo!(),
         ASN1Value::Boolean(b) if ty == BOOLEAN => {
             call_template!(primitive_value_template, tld, "bool", &b.to_string())
         }
-        ASN1Value::Boolean(b) => call_template!(
-            primitive_value_template,
-            tld,
-            &tld.associated_type,
-            assignment!(&tld.associated_type, b.to_string())
-        ),
+        ASN1Value::Boolean(_) => todo!(),
         ASN1Value::LinkedIntValue { .. } => generate_integer_value(tld),
         ASN1Value::BitString(_) if ty == BIT_STRING => todo!(),
         ASN1Value::OctetString(_) if ty == OCTET_STRING => todo!(),
@@ -365,24 +340,7 @@ pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorE
                 .collect::<Result<Vec<String>, _>>()?;
             todo!()
         }
-        ASN1Value::LinkedNestedValue { supertypes, value } => {
-            let parent = supertypes.last().map(|s| (s));
-            if value.is_const_type() {
-                call_template!(
-                    primitive_value_template,
-                    tld,
-                    &tld.associated_type,
-                    assignment!(&tld.associated_type, value_to_tokens(&tld.value, parent)?)
-                )
-            } else {
-                call_template!(
-                    lazy_static_value_template,
-                    tld,
-                    &tld.associated_type,
-                    assignment!(&tld.associated_type, value_to_tokens(&tld.value, parent)?)
-                )
-            }
-        }
+        ASN1Value::LinkedNestedValue { .. } => todo!(),
         ASN1Value::ObjectIdentifier(_) if ty == OBJECT_IDENTIFIER => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == NUMERIC_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == VISIBLE_STRING => todo!(),
@@ -391,32 +349,15 @@ pub fn generate_value(tld: ToplevelValueDefinition) -> Result<String, GeneratorE
         ASN1Value::LinkedCharStringValue(_, _) if ty == BMP_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == PRINTABLE_STRING => todo!(),
         ASN1Value::LinkedCharStringValue(_, _) if ty == GENERAL_STRING => todo!(),
-        ASN1Value::LinkedArrayLikeValue(s) if ty.contains(SEQUENCE_OF) => {
-            let _item_type = format_sequence_or_set_of_item_type(
-                ty.replace(SEQUENCE_OF, "").trim().to_string(),
-                s.first().map(|i| &**i),
-            );
-            todo!()
-        }
-        ASN1Value::LinkedArrayLikeValue(s) if ty.contains(SET_OF) => {
-            let _item_type = format_sequence_or_set_of_item_type(
-                ty.replace(SET_OF, "").trim().to_string(),
-                s.first().map(|i| &**i),
-            );
-            todo!()
-        }
+        ASN1Value::LinkedArrayLikeValue(_) if ty.contains(SEQUENCE_OF) => todo!(),
+        ASN1Value::LinkedArrayLikeValue(_) if ty.contains(SET_OF) => todo!(),
         ASN1Value::BitString(_)
         | ASN1Value::Time(_)
         | ASN1Value::LinkedCharStringValue(_, _)
         | ASN1Value::ObjectIdentifier(_)
         | ASN1Value::LinkedArrayLikeValue(_)
         | ASN1Value::ElsewhereDeclaredValue { .. }
-        | ASN1Value::OctetString(_) => call_template!(
-            lazy_static_value_template,
-            tld,
-            &tld.associated_type.to_string(),
-            assignment!(&tld.associated_type, value_to_tokens(&tld.value, None)?)
-        ),
+        | ASN1Value::OctetString(_) => todo!(),
         _ => Ok("".to_string()),
     }
 }

@@ -336,7 +336,7 @@ pub fn value_to_tokens(
     }
 }
 
-pub fn format_sequence_or_set_of_item_type(
+pub fn _format_sequence_or_set_of_item_type(
     type_name: String,
     first_item: Option<&ASN1Value>,
 ) -> String {
@@ -364,47 +364,5 @@ pub fn format_sequence_or_set_of_item_type(
         name if name == PRINTABLE_STRING => "PrintableString".into(),
         name if name == GENERAL_STRING => "GeneralString".into(),
         name => name,
-    }
-}
-
-trait ASN1ValueExt {
-    fn is_const_type(&self) -> bool;
-}
-
-impl ASN1ValueExt for ASN1Value {
-    fn is_const_type(&self) -> bool {
-        match self {
-            ASN1Value::Null | ASN1Value::Boolean(_) | ASN1Value::EnumeratedValue { .. } => true,
-            ASN1Value::Choice { inner_value, .. } => inner_value.is_const_type(),
-            ASN1Value::LinkedIntValue { integer_type, .. } => {
-                integer_type != &IntegerType::Unbounded
-            }
-            ASN1Value::LinkedNestedValue { value, .. } => value.is_const_type(),
-            ASN1Value::LinkedElsewhereDefinedValue { can_be_const, .. } => *can_be_const,
-            _ => false,
-        }
-    }
-}
-
-impl ASN1ValueExt for ASN1Type {
-    fn is_const_type(&self) -> bool {
-        match self {
-            ASN1Type::Null | ASN1Type::Enumerated(_) | ASN1Type::Boolean(_) => true,
-            ASN1Type::Integer(i) => {
-                i.constraints.iter().fold(IntegerType::Unbounded, |acc, c| {
-                    acc.max_restrictive(c.integer_constraints())
-                }) != IntegerType::Unbounded
-            }
-            ASN1Type::Choice(c) => c
-                .options
-                .iter()
-                .fold(true, |acc, opt| opt.ty.is_const_type() && acc),
-            ASN1Type::Set(s) | ASN1Type::Sequence(s) => s
-                .members
-                .iter()
-                .fold(true, |acc, m| m.ty.is_const_type() && acc),
-            ASN1Type::SetOf(s) | ASN1Type::SequenceOf(s) => s.element_type.is_const_type(),
-            _ => false,
-        }
     }
 }
