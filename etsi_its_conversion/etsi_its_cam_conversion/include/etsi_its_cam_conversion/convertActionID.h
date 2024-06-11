@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/ActionID.h>
-#include <etsi_its_cam_conversion/convertStationID.h>
 #include <etsi_its_cam_conversion/convertSequenceNumber.h>
+#include <etsi_its_cam_conversion/convertStationID.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ActionID.h>
 namespace cam_msgs = etsi_its_cam_msgs;

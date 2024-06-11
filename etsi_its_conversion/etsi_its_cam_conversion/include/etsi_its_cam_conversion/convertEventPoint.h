@@ -28,9 +28,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/EventPoint.h>
-#include <etsi_its_cam_conversion/convertPathDeltaTime.h>
-#include <etsi_its_cam_conversion/convertInformationQuality.h>
 #include <etsi_its_cam_conversion/convertDeltaReferencePosition.h>
+#include <etsi_its_cam_conversion/convertInformationQuality.h>
+#include <etsi_its_cam_conversion/convertPathDeltaTime.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/EventPoint.h>
 namespace cam_msgs = etsi_its_cam_msgs;

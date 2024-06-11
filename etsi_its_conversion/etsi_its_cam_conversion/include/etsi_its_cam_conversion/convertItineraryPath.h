@@ -30,8 +30,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/ItineraryPath.h>
-#include <etsi_its_cam_conversion/convertReferencePosition.h>
 #include <etsi_its_cam_conversion/convertItineraryPath.h>
+#include <etsi_its_cam_conversion/convertReferencePosition.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ItineraryPath.h>
 namespace cam_msgs = etsi_its_cam_msgs;

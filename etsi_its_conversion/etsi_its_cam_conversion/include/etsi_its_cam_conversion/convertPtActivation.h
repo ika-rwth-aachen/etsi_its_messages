@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/PtActivation.h>
-#include <etsi_its_cam_conversion/convertPtActivationType.h>
 #include <etsi_its_cam_conversion/convertPtActivationData.h>
+#include <etsi_its_cam_conversion/convertPtActivationType.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PtActivation.h>
 namespace cam_msgs = etsi_its_cam_msgs;

@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/Curvature.h>
-#include <etsi_its_cam_conversion/convertCurvatureValue.h>
 #include <etsi_its_cam_conversion/convertCurvatureConfidence.h>
+#include <etsi_its_cam_conversion/convertCurvatureValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/Curvature.h>
 namespace cam_msgs = etsi_its_cam_msgs;

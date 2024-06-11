@@ -28,9 +28,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/RoadWorksContainerBasic.h>
-#include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
-#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertClosedLanes.h>
+#include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
+#include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RoadWorksContainerBasic.h>
 namespace cam_msgs = etsi_its_cam_msgs;

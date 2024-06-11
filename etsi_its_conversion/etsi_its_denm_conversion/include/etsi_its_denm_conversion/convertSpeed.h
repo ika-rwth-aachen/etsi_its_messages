@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Speed.h>
-#include <etsi_its_denm_conversion/convertSpeedValue.h>
 #include <etsi_its_denm_conversion/convertSpeedConfidence.h>
+#include <etsi_its_denm_conversion/convertSpeedValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Speed.h>
 namespace denm_msgs = etsi_its_denm_msgs;

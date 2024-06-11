@@ -30,8 +30,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/ProtectedCommunicationZonesRSU.h>
-#include <etsi_its_denm_conversion/convertProtectedCommunicationZonesRSU.h>
 #include <etsi_its_denm_conversion/convertProtectedCommunicationZone.h>
+#include <etsi_its_denm_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ProtectedCommunicationZonesRSU.h>
 namespace denm_msgs = etsi_its_denm_msgs;

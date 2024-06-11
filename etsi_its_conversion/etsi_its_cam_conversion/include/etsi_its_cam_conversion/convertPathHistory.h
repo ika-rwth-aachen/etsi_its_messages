@@ -30,8 +30,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_cam_coding/PathHistory.h>
-#include <etsi_its_cam_conversion/convertPathPoint.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
+#include <etsi_its_cam_conversion/convertPathPoint.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/PathHistory.h>
 namespace cam_msgs = etsi_its_cam_msgs;

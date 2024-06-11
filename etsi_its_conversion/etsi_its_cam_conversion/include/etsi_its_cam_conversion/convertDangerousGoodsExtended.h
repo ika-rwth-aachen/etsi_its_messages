@@ -28,16 +28,16 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/DangerousGoodsExtended.h>
-#include <etsi_its_cam_conversion/convertPhoneNumber.h>
-#include <etsi_its_cam_coding/UTF8String.h>
-#include <etsi_its_primitives_conversion/convertUTF8String.h>
-#include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
-#include <etsi_its_cam_coding/INTEGER.h>
-#include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cam_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #include <etsi_its_cam_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
+#include <etsi_its_cam_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
+#include <etsi_its_cam_coding/UTF8String.h>
+#include <etsi_its_primitives_conversion/convertUTF8String.h>
+#include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
+#include <etsi_its_cam_conversion/convertPhoneNumber.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DangerousGoodsExtended.h>
 namespace cam_msgs = etsi_its_cam_msgs;

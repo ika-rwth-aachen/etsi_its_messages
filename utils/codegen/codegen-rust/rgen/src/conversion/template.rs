@@ -69,7 +69,7 @@ pub fn conversion_template(
     to_ros_members: &str,
     to_c_members: &str,
 ) -> String {
-    let c_includes = includes
+    let mut c_includes_lines = includes
         .iter()
         .map(|member| {
             if !member.is_primitive {
@@ -92,8 +92,9 @@ pub fn conversion_template(
         })
         .collect::<HashSet<String>>()
         .into_iter()
-        .collect::<Vec<String>>()
-        .join("\n");
+        .collect::<Vec<String>>();
+    c_includes_lines.sort();
+    let c_includes = c_includes_lines.join("\n");
     let ros1_includes = format!(
         "#include <etsi_its_{pdu}_msgs/{ros_fn}.h>",
         pdu = pdu,

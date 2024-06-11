@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/ClosedLanes.h>
-#include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #include <etsi_its_denm_conversion/convertDrivingLaneStatus.h>
+#include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ClosedLanes.h>
 namespace denm_msgs = etsi_its_denm_msgs;

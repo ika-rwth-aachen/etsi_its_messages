@@ -29,8 +29,8 @@ SOFTWARE.
 
 #include <etsi_its_cam_coding/DeltaReferencePosition.h>
 #include <etsi_its_cam_conversion/convertDeltaAltitude.h>
-#include <etsi_its_cam_conversion/convertDeltaLongitude.h>
 #include <etsi_its_cam_conversion/convertDeltaLatitude.h>
+#include <etsi_its_cam_conversion/convertDeltaLongitude.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DeltaReferencePosition.h>
 namespace cam_msgs = etsi_its_cam_msgs;

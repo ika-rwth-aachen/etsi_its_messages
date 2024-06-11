@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/VehicleLength.h>
-#include <etsi_its_denm_conversion/convertVehicleLengthValue.h>
 #include <etsi_its_denm_conversion/convertVehicleLengthConfidenceIndication.h>
+#include <etsi_its_denm_conversion/convertVehicleLengthValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/VehicleLength.h>
 namespace denm_msgs = etsi_its_denm_msgs;

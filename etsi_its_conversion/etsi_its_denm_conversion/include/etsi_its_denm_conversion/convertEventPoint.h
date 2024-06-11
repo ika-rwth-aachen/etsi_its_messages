@@ -28,9 +28,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/EventPoint.h>
+#include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
-#include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/EventPoint.h>
 namespace denm_msgs = etsi_its_denm_msgs;

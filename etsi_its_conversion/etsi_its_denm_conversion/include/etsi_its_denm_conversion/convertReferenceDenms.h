@@ -30,8 +30,8 @@ SOFTWARE.
 #include <stdexcept>
 
 #include <etsi_its_denm_coding/ReferenceDenms.h>
-#include <etsi_its_denm_conversion/convertReferenceDenms.h>
 #include <etsi_its_denm_conversion/convertActionID.h>
+#include <etsi_its_denm_conversion/convertReferenceDenms.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ReferenceDenms.h>
 namespace denm_msgs = etsi_its_denm_msgs;

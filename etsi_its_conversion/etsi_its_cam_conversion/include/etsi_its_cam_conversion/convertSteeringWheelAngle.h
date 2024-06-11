@@ -28,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/SteeringWheelAngle.h>
-#include <etsi_its_cam_conversion/convertSteeringWheelAngleValue.h>
 #include <etsi_its_cam_conversion/convertSteeringWheelAngleConfidence.h>
+#include <etsi_its_cam_conversion/convertSteeringWheelAngleValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SteeringWheelAngle.h>
 namespace cam_msgs = etsi_its_cam_msgs;
