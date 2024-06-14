@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,12 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_VehicleWidth(const VehicleWidth_t& in, denm_msgs::VehicleWidth& out) {
+
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_VehicleWidth(const denm_msgs::VehicleWidth& in, VehicleWidth_t& out) {
-  memset(&out, 0, sizeof(VehicleWidth_t));
 
+  memset(&out, 0, sizeof(VehicleWidth_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -40,3 +39,4 @@ uint8 BIG_OBJECTS = 4
 uint8 FALLEN_TREES = 5
 uint8 HUB_CAPS = 6
 uint8 WAITING_VEHICLES = 7
+

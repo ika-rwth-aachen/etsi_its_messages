@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +27,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/VehicleLength.h>
-#include <etsi_its_cam_conversion/convertVehicleLengthConfidenceIndication.h>
 #include <etsi_its_cam_conversion/convertVehicleLengthValue.h>
+#include <etsi_its_cam_conversion/convertVehicleLengthConfidenceIndication.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleLength.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -42,11 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_VehicleLength(const VehicleLength_t& in, cam_msgs::VehicleLength& out) {
+
   toRos_VehicleLengthValue(in.vehicleLengthValue, out.vehicle_length_value);
   toRos_VehicleLengthConfidenceIndication(in.vehicleLengthConfidenceIndication, out.vehicle_length_confidence_indication);
 }
 
 void toStruct_VehicleLength(const cam_msgs::VehicleLength& in, VehicleLength_t& out) {
+
   memset(&out, 0, sizeof(VehicleLength_t));
 
   toStruct_VehicleLengthValue(in.vehicle_length_value, out.vehicleLengthValue);

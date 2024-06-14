@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,3 +36,4 @@ int8 OFF_THE_ROAD = -1
 int8 HARD_SHOULDER = 0
 int8 OUTERMOST_DRIVING_LANE = 1
 int8 SECOND_LANE_FROM_OUTSIDE = 2
+

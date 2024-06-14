@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,15 +28,17 @@ SOFTWARE.
 
 #include <etsi_its_denm_coding/ImpactReductionContainer.h>
 #include <etsi_its_denm_conversion/convertHeightLonCarr.h>
-#include <etsi_its_denm_conversion/convertPosCentMass.h>
-#include <etsi_its_denm_conversion/convertPosFrontAx.h>
+#include <etsi_its_denm_conversion/convertHeightLonCarr.h>
 #include <etsi_its_denm_conversion/convertPosLonCarr.h>
-#include <etsi_its_denm_conversion/convertPositionOfOccupants.h>
+#include <etsi_its_denm_conversion/convertPosLonCarr.h>
 #include <etsi_its_denm_conversion/convertPositionOfPillars.h>
-#include <etsi_its_denm_conversion/convertRequestResponseIndication.h>
-#include <etsi_its_denm_conversion/convertTurningRadius.h>
-#include <etsi_its_denm_conversion/convertVehicleMass.h>
+#include <etsi_its_denm_conversion/convertPosCentMass.h>
 #include <etsi_its_denm_conversion/convertWheelBaseVehicle.h>
+#include <etsi_its_denm_conversion/convertTurningRadius.h>
+#include <etsi_its_denm_conversion/convertPosFrontAx.h>
+#include <etsi_its_denm_conversion/convertPositionOfOccupants.h>
+#include <etsi_its_denm_conversion/convertVehicleMass.h>
+#include <etsi_its_denm_conversion/convertRequestResponseIndication.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ImpactReductionContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -50,6 +51,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_ImpactReductionContainer(const ImpactReductionContainer_t& in, denm_msgs::ImpactReductionContainer& out) {
+
   toRos_HeightLonCarr(in.heightLonCarrLeft, out.height_lon_carr_left);
   toRos_HeightLonCarr(in.heightLonCarrRight, out.height_lon_carr_right);
   toRos_PosLonCarr(in.posLonCarrLeft, out.pos_lon_carr_left);
@@ -65,6 +67,7 @@ void toRos_ImpactReductionContainer(const ImpactReductionContainer_t& in, denm_m
 }
 
 void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, ImpactReductionContainer_t& out) {
+
   memset(&out, 0, sizeof(ImpactReductionContainer_t));
 
   toStruct_HeightLonCarr(in.height_lon_carr_left, out.heightLonCarrLeft);

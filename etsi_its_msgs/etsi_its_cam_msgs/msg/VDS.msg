@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,3 +30,4 @@
 
 string value
 uint8 SIZE = 6
+
