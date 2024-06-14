@@ -205,7 +205,7 @@ Note that an alternative Rust-based code generation is currently being tested, w
 ./utils/codegen/codegen-rust/asn1ToConversionHeader.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
-  -m cam \
+  -t cam \
   -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
 ```
 
