@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,7 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/RelevanceTrafficDirection.h>
+
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RelevanceTrafficDirection.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -39,13 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_RelevanceTrafficDirection(const RelevanceTrafficDirection_t& in, cam_msgs::RelevanceTrafficDirection& out) {
-
   out.value = in;
 }
 
 void toStruct_RelevanceTrafficDirection(const cam_msgs::RelevanceTrafficDirection& in, RelevanceTrafficDirection_t& out) {
-
   memset(&out, 0, sizeof(RelevanceTrafficDirection_t));
+
   out = in.value;
 }
 

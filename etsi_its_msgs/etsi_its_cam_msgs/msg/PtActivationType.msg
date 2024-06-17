@@ -2,6 +2,7 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -34,4 +35,3 @@ uint8 MAX = 255
 uint8 UNDEFINED_CODING_TYPE = 0
 uint8 R_09_16_CODING_TYPE = 1
 uint8 VDV_50149_CODING_TYPE = 2
-

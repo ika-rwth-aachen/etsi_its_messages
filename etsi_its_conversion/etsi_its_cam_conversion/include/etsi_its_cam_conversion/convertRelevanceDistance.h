@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,7 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/RelevanceDistance.h>
+
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RelevanceDistance.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -39,13 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_RelevanceDistance(const RelevanceDistance_t& in, cam_msgs::RelevanceDistance& out) {
-
   out.value = in;
 }
 
 void toStruct_RelevanceDistance(const cam_msgs::RelevanceDistance& in, RelevanceDistance_t& out) {
-
   memset(&out, 0, sizeof(RelevanceDistance_t));
+
   out = in.value;
 }
 

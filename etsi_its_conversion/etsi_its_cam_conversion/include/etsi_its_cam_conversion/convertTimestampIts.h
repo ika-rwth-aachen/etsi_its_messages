@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,13 +42,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_TimestampIts(const TimestampIts_t& in, cam_msgs::TimestampIts& out) {
-
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
 void toStruct_TimestampIts(const cam_msgs::TimestampIts& in, TimestampIts_t& out) {
-
   memset(&out, 0, sizeof(TimestampIts_t));
+
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

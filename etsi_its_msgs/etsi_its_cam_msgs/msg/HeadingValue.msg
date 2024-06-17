@@ -2,6 +2,7 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,4 +37,3 @@ uint16 WGS_84_EAST = 900
 uint16 WGS_84_SOUTH = 1800
 uint16 WGS_84_WEST = 2700
 uint16 UNAVAILABLE = 3601
-

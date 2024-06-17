@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,16 +29,13 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cam_coding/Traces.h>
-#include <etsi_its_cam_coding/PathHistory.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
+#include <etsi_its_cam_conversion/convertTraces.h>
 #ifdef ROS1
-#include <etsi_its_cam_msgs/PathHistory.h>
 #include <etsi_its_cam_msgs/Traces.h>
 namespace cam_msgs = etsi_its_cam_msgs;
 #else
-#include <etsi_its_cam_msgs/msg/path_history.hpp>
 #include <etsi_its_cam_msgs/msg/traces.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
@@ -46,27 +44,21 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_Traces(const Traces_t& in, cam_msgs::Traces& out) {
-
-  for (int i = 0; i < in.list.count; i++) {
-    cam_msgs::PathHistory array;
-    toRos_PathHistory(*(in.list.array[i]), array);
-    out.array.push_back(array);
+  for (int i = 0; i < in.list.count; ++i) {
+    cam_msgs::PathHistory el;
+    toRos_PathHistory(*(in.list.array[i]), el);
+    out.array.push_back(el);
   }
-
 }
 
 void toStruct_Traces(const cam_msgs::Traces& in, Traces_t& out) {
-
   memset(&out, 0, sizeof(Traces_t));
 
-  for (int i = 0; i < in.array.size(); i++) {
-    PathHistory_t array;
-    toStruct_PathHistory(in.array[i], array);
-    PathHistory_t* array_ptr = new PathHistory_t(array);
-    int status = asn_sequence_add(&out, array_ptr);
-    if (status != 0) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+  for (int i = 0; i < in.array.size(); ++i) {
+    PathHistory_t* el = (PathHistory_t*) calloc(1, sizeof(PathHistory_t));
+    toStruct_PathHistory(in.array[i], *el);
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
-
 }
 
 }

@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +28,10 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/ReferencePosition.h>
+#include <etsi_its_cam_conversion/convertAltitude.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #include <etsi_its_cam_conversion/convertLongitude.h>
 #include <etsi_its_cam_conversion/convertPosConfidenceEllipse.h>
-#include <etsi_its_cam_conversion/convertAltitude.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ReferencePosition.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -43,7 +44,6 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_ReferencePosition(const ReferencePosition_t& in, cam_msgs::ReferencePosition& out) {
-
   toRos_Latitude(in.latitude, out.latitude);
   toRos_Longitude(in.longitude, out.longitude);
   toRos_PosConfidenceEllipse(in.positionConfidenceEllipse, out.position_confidence_ellipse);
@@ -51,7 +51,6 @@ void toRos_ReferencePosition(const ReferencePosition_t& in, cam_msgs::ReferenceP
 }
 
 void toStruct_ReferencePosition(const cam_msgs::ReferencePosition& in, ReferencePosition_t& out) {
-
   memset(&out, 0, sizeof(ReferencePosition_t));
 
   toStruct_Latitude(in.latitude, out.latitude);
