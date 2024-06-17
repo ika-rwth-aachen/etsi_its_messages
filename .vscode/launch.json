@@ -117,6 +117,24 @@
     },
 
     {
+      "name": "CPM asn1ToRosMsg (rgen)",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+      "args": [
+        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+        "-o", "etsi_its_msgs/etsi_its_cpm_msgs/msg"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToConversionHeader (rgen)",
       "type": "python",
       "request": "launch",
@@ -146,5 +164,23 @@
       "justMyCode": true
     },
 
+    {
+      "name": "CPM asn1ToConversionHeader (rgen)",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+      "args": [
+        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+        "-t", "cpm",
+        "-o", "etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
   ]
 }
