@@ -31,6 +31,24 @@
     },
 
     {
+      "name": "CPM asn1ToC",
+      "type": "python",
+      "request": "launch",
+      "program": "utils/codegen/asn1ToC.py",
+      "args": [
+        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+        "-o", "etsi_its_coding/etsi_its_cpm_coding"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+
+    {
       "name": "CAM asn1ToRosMsg",
       "type": "python",
       "request": "launch",
