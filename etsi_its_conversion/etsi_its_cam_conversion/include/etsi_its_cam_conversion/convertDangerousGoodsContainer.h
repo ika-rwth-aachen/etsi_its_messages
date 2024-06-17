@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,10 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_DangerousGoodsContainer(const DangerousGoodsContainer_t& in, cam_msgs::DangerousGoodsContainer& out) {
+
   toRos_DangerousGoodsBasic(in.dangerousGoodsBasic, out.dangerous_goods_basic);
 }
 
 void toStruct_DangerousGoodsContainer(const cam_msgs::DangerousGoodsContainer& in, DangerousGoodsContainer_t& out) {
+
   memset(&out, 0, sizeof(DangerousGoodsContainer_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_basic, out.dangerousGoodsBasic);

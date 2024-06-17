@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +27,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Heading.h>
-#include <etsi_its_denm_conversion/convertHeadingConfidence.h>
 #include <etsi_its_denm_conversion/convertHeadingValue.h>
+#include <etsi_its_denm_conversion/convertHeadingConfidence.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Heading.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -42,11 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_Heading(const Heading_t& in, denm_msgs::Heading& out) {
+
   toRos_HeadingValue(in.headingValue, out.heading_value);
   toRos_HeadingConfidence(in.headingConfidence, out.heading_confidence);
 }
 
 void toStruct_Heading(const denm_msgs::Heading& in, Heading_t& out) {
+
   memset(&out, 0, sizeof(Heading_t));
 
   toStruct_HeadingValue(in.heading_value, out.headingValue);

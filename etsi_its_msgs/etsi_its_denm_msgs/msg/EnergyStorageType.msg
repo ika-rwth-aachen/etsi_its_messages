@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -39,3 +38,4 @@ uint8 BIT_INDEX_COMPRESSED_NATURAL_GAS = 3
 uint8 BIT_INDEX_DIESEL = 4
 uint8 BIT_INDEX_GASOLINE = 5
 uint8 BIT_INDEX_AMMONIA = 6
+

@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +27,6 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/Termination.h>
-
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Termination.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -41,12 +39,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_Termination(const Termination_t& in, denm_msgs::Termination& out) {
+
   out.value = in;
 }
 
 void toStruct_Termination(const denm_msgs::Termination& in, Termination_t& out) {
-  memset(&out, 0, sizeof(Termination_t));
 
+  memset(&out, 0, sizeof(Termination_t));
   out = in.value;
 }
 

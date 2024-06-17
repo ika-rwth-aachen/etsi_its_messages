@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -34,3 +33,4 @@ uint8 bits_unused
 uint8 SIZE_BITS = 2
 uint8 BIT_INDEX_REQUEST_FOR_RIGHT_OF_WAY = 0
 uint8 BIT_INDEX_REQUEST_FOR_FREE_CROSSING_AT_A_TRAFFIC_LIGHT = 1
+

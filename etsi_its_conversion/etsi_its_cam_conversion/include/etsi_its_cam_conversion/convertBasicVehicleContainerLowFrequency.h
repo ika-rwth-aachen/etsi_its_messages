@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +27,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_cam_coding/BasicVehicleContainerLowFrequency.h>
+#include <etsi_its_cam_conversion/convertVehicleRole.h>
 #include <etsi_its_cam_conversion/convertExteriorLights.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
-#include <etsi_its_cam_conversion/convertVehicleRole.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -43,12 +42,14 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace etsi_its_cam_conversion {
 
 void toRos_BasicVehicleContainerLowFrequency(const BasicVehicleContainerLowFrequency_t& in, cam_msgs::BasicVehicleContainerLowFrequency& out) {
+
   toRos_VehicleRole(in.vehicleRole, out.vehicle_role);
   toRos_ExteriorLights(in.exteriorLights, out.exterior_lights);
   toRos_PathHistory(in.pathHistory, out.path_history);
 }
 
 void toStruct_BasicVehicleContainerLowFrequency(const cam_msgs::BasicVehicleContainerLowFrequency& in, BasicVehicleContainerLowFrequency_t& out) {
+
   memset(&out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
 
   toStruct_VehicleRole(in.vehicle_role, out.vehicleRole);
