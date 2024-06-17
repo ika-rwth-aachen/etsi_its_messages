@@ -2,6 +2,7 @@
 # MIT License
 #
 # Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -71,4 +72,3 @@ uint8 BIT_INDEX_ROW_4_RIGHT_OCCUPIED = 16
 uint8 BIT_INDEX_ROW_4_MID_OCCUPIED = 17
 uint8 BIT_INDEX_ROW_4_NOT_DETECTABLE = 18
 uint8 BIT_INDEX_ROW_4_NOT_PRESENT = 19
-

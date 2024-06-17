@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/DENM.h>
-#include <etsi_its_denm_conversion/convertItsPduHeader.h>
 #include <etsi_its_denm_conversion/convertDecentralizedEnvironmentalNotificationMessage.h>
+#include <etsi_its_denm_conversion/convertItsPduHeader.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/DENM.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -41,13 +42,11 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_DENM(const DENM_t& in, denm_msgs::DENM& out) {
-
   toRos_ItsPduHeader(in.header, out.header);
   toRos_DecentralizedEnvironmentalNotificationMessage(in.denm, out.denm);
 }
 
 void toStruct_DENM(const denm_msgs::DENM& in, DENM_t& out) {
-
   memset(&out, 0, sizeof(DENM_t));
 
   toStruct_ItsPduHeader(in.header, out.header);

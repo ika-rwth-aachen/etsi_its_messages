@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/YawRate.h>
-#include <etsi_its_denm_conversion/convertYawRateValue.h>
 #include <etsi_its_denm_conversion/convertYawRateConfidence.h>
+#include <etsi_its_denm_conversion/convertYawRateValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/YawRate.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -41,13 +42,11 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_YawRate(const YawRate_t& in, denm_msgs::YawRate& out) {
-
   toRos_YawRateValue(in.yawRateValue, out.yaw_rate_value);
   toRos_YawRateConfidence(in.yawRateConfidence, out.yaw_rate_confidence);
 }
 
 void toStruct_YawRate(const denm_msgs::YawRate& in, YawRate_t& out) {
-
   memset(&out, 0, sizeof(YawRate_t));
 
   toStruct_YawRateValue(in.yaw_rate_value, out.yawRateValue);

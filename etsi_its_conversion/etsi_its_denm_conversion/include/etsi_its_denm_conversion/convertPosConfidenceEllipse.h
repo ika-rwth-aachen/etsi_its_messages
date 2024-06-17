@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +28,8 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_denm_coding/PosConfidenceEllipse.h>
-#include <etsi_its_denm_conversion/convertSemiAxisLength.h>
-#include <etsi_its_denm_conversion/convertSemiAxisLength.h>
 #include <etsi_its_denm_conversion/convertHeadingValue.h>
+#include <etsi_its_denm_conversion/convertSemiAxisLength.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PosConfidenceEllipse.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -42,14 +42,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace etsi_its_denm_conversion {
 
 void toRos_PosConfidenceEllipse(const PosConfidenceEllipse_t& in, denm_msgs::PosConfidenceEllipse& out) {
-
   toRos_SemiAxisLength(in.semiMajorConfidence, out.semi_major_confidence);
   toRos_SemiAxisLength(in.semiMinorConfidence, out.semi_minor_confidence);
   toRos_HeadingValue(in.semiMajorOrientation, out.semi_major_orientation);
 }
 
 void toStruct_PosConfidenceEllipse(const denm_msgs::PosConfidenceEllipse& in, PosConfidenceEllipse_t& out) {
-
   memset(&out, 0, sizeof(PosConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_confidence, out.semiMajorConfidence);
