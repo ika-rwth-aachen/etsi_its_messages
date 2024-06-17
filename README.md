@@ -92,7 +92,17 @@ The ROS message files are auto-generated based on the [ASN.1 definitions](https:
 
 ```bash
 # etsi_its_messages$
-./utils/codegen/asn1ToRosMsg.py \
+./utils/codegen/codegen-py/asn1ToRosMsg.py \
+  asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
+  asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
+  -o etsi_its_msgs/etsi_its_cam_msgs/msg
+```
+
+Note that an alternative Rust-based code generation is currently being tested, which might offer better support for more complex message types such as SPATEM/MAPEM or CPM.
+
+```bash
+# etsi_its_messages$
+./utils/codegen/codegen-rust/asn1ToRosMsg.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -o etsi_its_msgs/etsi_its_cam_msgs/msg
@@ -179,7 +189,18 @@ The C++ conversion functions are auto-generated based on the [ASN.1 definitions]
 
 ```bash
 # etsi_its_messages$
-./utils/codegen/asn1ToConversionHeader.py \
+./utils/codegen/codegen-py/asn1ToConversionHeader.py \
+  asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
+  asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
+  -t cam \
+  -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+```
+
+Note that an alternative Rust-based code generation is currently being tested, which might offer better support for more complex message types such as SPATEM/MAPEM or CPM.
+
+```bash
+# etsi_its_messages$
+./utils/codegen/codegen-rust/asn1ToConversionHeader.py \
   asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn \
   asn1/raw/cam_en302637_2/cdd/ITS-Container.asn \
   -t cam \
@@ -190,9 +211,6 @@ The C++ conversion functions are auto-generated based on the [ASN.1 definitions]
 ## Installation
 
 All *etsi_its_messages* packages are released as official ROS / ROS 2 packages and can easily be installed via a package manager.
-
-> [!WARNING]
-> The initial release may not have been synced to the package managers yet. In the meantime, please refer to installation from source as shown below.
 
 ```bash
 sudo apt update

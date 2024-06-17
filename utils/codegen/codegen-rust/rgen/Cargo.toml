@@ -1,0 +1,21 @@
+[package]
+name = "ros-backend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "ros_backend"
+path = "src/lib.rs"
+
+[[bin]]
+name = "asn1-to-ros-msgs"
+path = "src/msgs/bin.rs"   
+
+[[bin]]
+name = "asn1-to-ros-conversion-headers"
+path = "src/conversion/bin.rs"   
+
+[dependencies]
+rasn-compiler = "0.1.4"
+regex = "1.10.4"
+clap = { version = "4.5.4", features = ["derive"] }

@@ -52,9 +52,9 @@ jobs:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_cam_msgs/msg
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_cam_msgs/msg
           - message: denm
-            script: ./utils/codegen/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg
 
     steps:
     - name: Checkout code
@@ -84,9 +84,9 @@ jobs:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
           - message: denm
-            script: ./utils/codegen/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
 
     steps:
     - name: Checkout code
