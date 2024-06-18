@@ -21,7 +21,8 @@ etsi_its_cam_coding:
     DOCKER_TLS_CERTDIR: /certs
   before_script:
     - apk update
-    - apk add python3
+    - apk add py3-pip python3-dev gcc musl-dev
+    - python3 -m pip install -r utils/requirements.txt --break-system-packages
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
   script:
     - >
@@ -44,7 +45,8 @@ etsi_its_denm_coding:
     DOCKER_TLS_CERTDIR: /certs
   before_script:
     - apk update
-    - apk add python3
+    - apk add py3-pip python3-dev gcc musl-dev
+    - python3 -m pip install -r utils/requirements.txt --break-system-packages
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
   script:
     - >

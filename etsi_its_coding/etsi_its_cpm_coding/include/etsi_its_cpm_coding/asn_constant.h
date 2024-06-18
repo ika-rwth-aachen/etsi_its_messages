@@ -209,8 +209,6 @@ extern "C" {
 #define max_val_StationaryVehicleSubCauseCode (255)
 #define min_val_StationId (0)
 #define max_val_StationId (4294967295)
-#define min_val_StationID (0)
-#define max_val_StationID (4294967295)
 #define min_val_StationType (0)
 #define max_val_StationType (255)
 #define min_val_SteeringWheelAngleConfidence (1)
