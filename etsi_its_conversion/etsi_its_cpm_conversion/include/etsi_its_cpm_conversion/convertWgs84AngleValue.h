@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/Wgs84AngleValue.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/wgs_84_angle_value.hpp>
+#include <etsi_its_cpm_msgs/msg/wgs84_angle_value.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

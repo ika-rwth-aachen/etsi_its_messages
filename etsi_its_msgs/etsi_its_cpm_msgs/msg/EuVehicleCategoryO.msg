@@ -37,8 +37,8 @@
 # 
 
 uint8 value
-uint8 O_1 = 0
-uint8 O_2 = 1
-uint8 O_3 = 2
-uint8 O_4 = 3
+uint8 O1 = 0
+uint8 O2 = 1
+uint8 O3 = 2
+uint8 O4 = 3
 

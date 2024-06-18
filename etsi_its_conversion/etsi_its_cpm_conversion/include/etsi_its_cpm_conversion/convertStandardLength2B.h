@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/StandardLength2B.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/standard_length_2_b.hpp>
+#include <etsi_its_cpm_msgs/msg/standard_length2_b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

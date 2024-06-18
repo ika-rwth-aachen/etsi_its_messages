@@ -49,7 +49,7 @@
 
 uint8 value
 uint8 ANY = 0
-uint8 ITSG_5_CLASS = 1
-uint8 LTEV_2X_CLASS = 2
-uint8 NRV_2X_CLASS = 3
+uint8 ITSG5_CLASS = 1
+uint8 LTEV2X_CLASS = 2
+uint8 NRV2X_CLASS = 3
 

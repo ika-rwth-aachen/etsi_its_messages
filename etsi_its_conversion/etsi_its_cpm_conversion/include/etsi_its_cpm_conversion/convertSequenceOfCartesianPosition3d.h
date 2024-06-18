@@ -36,7 +36,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/SequenceOfCartesianPosition3d.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/sequence_of_cartesian_position_3d.hpp>
+#include <etsi_its_cpm_msgs/msg/sequence_of_cartesian_position3d.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

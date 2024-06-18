@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/Ext3.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/ext_3.hpp>
+#include <etsi_its_cpm_msgs/msg/ext3.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

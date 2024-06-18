@@ -37,7 +37,7 @@
 # 
 
 uint8 value
-uint8 M_1 = 0
-uint8 M_2 = 1
-uint8 M_3 = 2
+uint8 M1 = 0
+uint8 M2 = 1
+uint8 M3 = 2
 

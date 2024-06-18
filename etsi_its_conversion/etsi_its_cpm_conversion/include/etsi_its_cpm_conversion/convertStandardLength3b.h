@@ -33,7 +33,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/StandardLength3b.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/standard_length_3b.hpp>
+#include <etsi_its_cpm_msgs/msg/standard_length3b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/OrdinalNumber3b.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/ordinal_number_3b.hpp>
+#include <etsi_its_cpm_msgs/msg/ordinal_number3b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

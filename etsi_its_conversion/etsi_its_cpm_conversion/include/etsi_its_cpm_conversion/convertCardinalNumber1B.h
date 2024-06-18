@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/CardinalNumber1B.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/cardinal_number_1_b.hpp>
+#include <etsi_its_cpm_msgs/msg/cardinal_number1_b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

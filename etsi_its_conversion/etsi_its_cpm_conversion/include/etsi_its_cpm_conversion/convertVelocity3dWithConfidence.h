@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/Velocity3dWithConfidence.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/velocity_3d_with_confidence.hpp>
+#include <etsi_its_cpm_msgs/msg/velocity3d_with_confidence.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

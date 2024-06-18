@@ -168,390 +168,390 @@
 
 uint8 choice
 
-SubCauseCodeType reserved_0
-uint8 CHOICE_RESERVED_0 = 0
+SubCauseCodeType reserved0
+uint8 CHOICE_RESERVED0 = 0
 
-TrafficConditionSubCauseCode traffic_condition_1
-uint8 CHOICE_TRAFFIC_CONDITION_1 = 1
+TrafficConditionSubCauseCode traffic_condition1
+uint8 CHOICE_TRAFFIC_CONDITION1 = 1
 
-AccidentSubCauseCode accident_2
-uint8 CHOICE_ACCIDENT_2 = 2
+AccidentSubCauseCode accident2
+uint8 CHOICE_ACCIDENT2 = 2
 
-RoadworksSubCauseCode roadworks_3
-uint8 CHOICE_ROADWORKS_3 = 3
+RoadworksSubCauseCode roadworks3
+uint8 CHOICE_ROADWORKS3 = 3
 
-SubCauseCodeType reserved_4
-uint8 CHOICE_RESERVED_4 = 4
+SubCauseCodeType reserved4
+uint8 CHOICE_RESERVED4 = 4
 
-SubCauseCodeType impassability_5
-uint8 CHOICE_IMPASSABILITY_5 = 5
+SubCauseCodeType impassability5
+uint8 CHOICE_IMPASSABILITY5 = 5
 
-AdverseWeatherConditionAdhesionSubCauseCode adverse_weather_condition_adhesion_6
-uint8 CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION_6 = 6
+AdverseWeatherConditionAdhesionSubCauseCode adverse_weather_condition_adhesion6
+uint8 CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION6 = 6
 
-SubCauseCodeType aquaplaning_7
-uint8 CHOICE_AQUAPLANING_7 = 7
+SubCauseCodeType aquaplaning7
+uint8 CHOICE_AQUAPLANING7 = 7
 
-SubCauseCodeType reserved_8
-uint8 CHOICE_RESERVED_8 = 8
+SubCauseCodeType reserved8
+uint8 CHOICE_RESERVED8 = 8
 
-HazardousLocationSurfaceConditionSubCauseCode hazardous_location_surface_condition_9
-uint8 CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION_9 = 9
+HazardousLocationSurfaceConditionSubCauseCode hazardous_location_surface_condition9
+uint8 CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION9 = 9
 
-HazardousLocationObstacleOnTheRoadSubCauseCode hazardous_location_obstacle_on_the_road_10
-uint8 CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD_10 = 10
+HazardousLocationObstacleOnTheRoadSubCauseCode hazardous_location_obstacle_on_the_road10
+uint8 CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD10 = 10
 
-HazardousLocationAnimalOnTheRoadSubCauseCode hazardous_location_animal_on_the_road_11
-uint8 CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD_11 = 11
+HazardousLocationAnimalOnTheRoadSubCauseCode hazardous_location_animal_on_the_road11
+uint8 CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD11 = 11
 
-HumanPresenceOnTheRoadSubCauseCode human_presence_on_the_road_12
-uint8 CHOICE_HUMAN_PRESENCE_ON_THE_ROAD_12 = 12
+HumanPresenceOnTheRoadSubCauseCode human_presence_on_the_road12
+uint8 CHOICE_HUMAN_PRESENCE_ON_THE_ROAD12 = 12
 
-SubCauseCodeType reserved_13
-uint8 CHOICE_RESERVED_13 = 13
+SubCauseCodeType reserved13
+uint8 CHOICE_RESERVED13 = 13
 
-WrongWayDrivingSubCauseCode wrong_way_driving_14
-uint8 CHOICE_WRONG_WAY_DRIVING_14 = 14
+WrongWayDrivingSubCauseCode wrong_way_driving14
+uint8 CHOICE_WRONG_WAY_DRIVING14 = 14
 
-RescueAndRecoveryWorkInProgressSubCauseCode rescue_and_recovery_work_in_progress_15
-uint8 CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS_15 = 15
+RescueAndRecoveryWorkInProgressSubCauseCode rescue_and_recovery_work_in_progress15
+uint8 CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS15 = 15
 
-SubCauseCodeType reserved_16
-uint8 CHOICE_RESERVED_16 = 16
+SubCauseCodeType reserved16
+uint8 CHOICE_RESERVED16 = 16
 
-AdverseWeatherConditionExtremeWeatherConditionSubCauseCode adverse_weather_condition_extreme_weather_condition_17
-uint8 CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION_17 = 17
+AdverseWeatherConditionExtremeWeatherConditionSubCauseCode adverse_weather_condition_extreme_weather_condition17
+uint8 CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION17 = 17
 
-AdverseWeatherConditionVisibilitySubCauseCode adverse_weather_condition_visibility_18
-uint8 CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY_18 = 18
+AdverseWeatherConditionVisibilitySubCauseCode adverse_weather_condition_visibility18
+uint8 CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY18 = 18
 
-AdverseWeatherConditionPrecipitationSubCauseCode adverse_weather_condition_precipitation_19
-uint8 CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION_19 = 19
+AdverseWeatherConditionPrecipitationSubCauseCode adverse_weather_condition_precipitation19
+uint8 CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION19 = 19
 
-SubCauseCodeType violence_20
-uint8 CHOICE_VIOLENCE_20 = 20
+SubCauseCodeType violence20
+uint8 CHOICE_VIOLENCE20 = 20
 
-SubCauseCodeType reserved_21
-uint8 CHOICE_RESERVED_21 = 21
+SubCauseCodeType reserved21
+uint8 CHOICE_RESERVED21 = 21
 
-SubCauseCodeType reserved_22
-uint8 CHOICE_RESERVED_22 = 22
+SubCauseCodeType reserved22
+uint8 CHOICE_RESERVED22 = 22
 
-SubCauseCodeType reserved_23
-uint8 CHOICE_RESERVED_23 = 23
+SubCauseCodeType reserved23
+uint8 CHOICE_RESERVED23 = 23
 
-SubCauseCodeType reserved_24
-uint8 CHOICE_RESERVED_24 = 24
+SubCauseCodeType reserved24
+uint8 CHOICE_RESERVED24 = 24
 
-SubCauseCodeType reserved_25
-uint8 CHOICE_RESERVED_25 = 25
+SubCauseCodeType reserved25
+uint8 CHOICE_RESERVED25 = 25
 
-SlowVehicleSubCauseCode slow_vehicle_26
-uint8 CHOICE_SLOW_VEHICLE_26 = 26
+SlowVehicleSubCauseCode slow_vehicle26
+uint8 CHOICE_SLOW_VEHICLE26 = 26
 
-DangerousEndOfQueueSubCauseCode dangerous_end_of_queue_27
-uint8 CHOICE_DANGEROUS_END_OF_QUEUE_27 = 27
+DangerousEndOfQueueSubCauseCode dangerous_end_of_queue27
+uint8 CHOICE_DANGEROUS_END_OF_QUEUE27 = 27
 
-SubCauseCodeType reserved_28
-uint8 CHOICE_RESERVED_28 = 28
+SubCauseCodeType reserved28
+uint8 CHOICE_RESERVED28 = 28
 
-SubCauseCodeType reserved_29
-uint8 CHOICE_RESERVED_29 = 29
+SubCauseCodeType reserved29
+uint8 CHOICE_RESERVED29 = 29
 
-SubCauseCodeType reserved_30
-uint8 CHOICE_RESERVED_30 = 30
+SubCauseCodeType reserved30
+uint8 CHOICE_RESERVED30 = 30
 
-SubCauseCodeType reserved_31
-uint8 CHOICE_RESERVED_31 = 31
+SubCauseCodeType reserved31
+uint8 CHOICE_RESERVED31 = 31
 
-SubCauseCodeType reserved_32
-uint8 CHOICE_RESERVED_32 = 32
+SubCauseCodeType reserved32
+uint8 CHOICE_RESERVED32 = 32
 
-SubCauseCodeType reserved_33
-uint8 CHOICE_RESERVED_33 = 33
+SubCauseCodeType reserved33
+uint8 CHOICE_RESERVED33 = 33
 
-SubCauseCodeType reserved_34
-uint8 CHOICE_RESERVED_34 = 34
+SubCauseCodeType reserved34
+uint8 CHOICE_RESERVED34 = 34
 
-SubCauseCodeType reserved_35
-uint8 CHOICE_RESERVED_35 = 35
+SubCauseCodeType reserved35
+uint8 CHOICE_RESERVED35 = 35
 
-SubCauseCodeType reserved_36
-uint8 CHOICE_RESERVED_36 = 36
+SubCauseCodeType reserved36
+uint8 CHOICE_RESERVED36 = 36
 
-SubCauseCodeType reserved_37
-uint8 CHOICE_RESERVED_37 = 37
+SubCauseCodeType reserved37
+uint8 CHOICE_RESERVED37 = 37
 
-SubCauseCodeType reserved_38
-uint8 CHOICE_RESERVED_38 = 38
+SubCauseCodeType reserved38
+uint8 CHOICE_RESERVED38 = 38
 
-SubCauseCodeType reserved_39
-uint8 CHOICE_RESERVED_39 = 39
+SubCauseCodeType reserved39
+uint8 CHOICE_RESERVED39 = 39
 
-SubCauseCodeType reserved_40
-uint8 CHOICE_RESERVED_40 = 40
+SubCauseCodeType reserved40
+uint8 CHOICE_RESERVED40 = 40
 
-SubCauseCodeType reserved_41
-uint8 CHOICE_RESERVED_41 = 41
+SubCauseCodeType reserved41
+uint8 CHOICE_RESERVED41 = 41
 
-SubCauseCodeType reserved_42
-uint8 CHOICE_RESERVED_42 = 42
+SubCauseCodeType reserved42
+uint8 CHOICE_RESERVED42 = 42
 
-SubCauseCodeType reserved_43
-uint8 CHOICE_RESERVED_43 = 43
+SubCauseCodeType reserved43
+uint8 CHOICE_RESERVED43 = 43
 
-SubCauseCodeType reserved_44
-uint8 CHOICE_RESERVED_44 = 44
+SubCauseCodeType reserved44
+uint8 CHOICE_RESERVED44 = 44
 
-SubCauseCodeType reserved_45
-uint8 CHOICE_RESERVED_45 = 45
+SubCauseCodeType reserved45
+uint8 CHOICE_RESERVED45 = 45
 
-SubCauseCodeType reserved_46
-uint8 CHOICE_RESERVED_46 = 46
+SubCauseCodeType reserved46
+uint8 CHOICE_RESERVED46 = 46
 
-SubCauseCodeType reserved_47
-uint8 CHOICE_RESERVED_47 = 47
+SubCauseCodeType reserved47
+uint8 CHOICE_RESERVED47 = 47
 
-SubCauseCodeType reserved_48
-uint8 CHOICE_RESERVED_48 = 48
+SubCauseCodeType reserved48
+uint8 CHOICE_RESERVED48 = 48
 
-SubCauseCodeType reserved_49
-uint8 CHOICE_RESERVED_49 = 49
+SubCauseCodeType reserved49
+uint8 CHOICE_RESERVED49 = 49
 
-SubCauseCodeType reserved_50
-uint8 CHOICE_RESERVED_50 = 50
+SubCauseCodeType reserved50
+uint8 CHOICE_RESERVED50 = 50
 
-SubCauseCodeType reserved_51
-uint8 CHOICE_RESERVED_51 = 51
+SubCauseCodeType reserved51
+uint8 CHOICE_RESERVED51 = 51
 
-SubCauseCodeType reserved_52
-uint8 CHOICE_RESERVED_52 = 52
+SubCauseCodeType reserved52
+uint8 CHOICE_RESERVED52 = 52
 
-SubCauseCodeType reserved_53
-uint8 CHOICE_RESERVED_53 = 53
+SubCauseCodeType reserved53
+uint8 CHOICE_RESERVED53 = 53
 
-SubCauseCodeType reserved_54
-uint8 CHOICE_RESERVED_54 = 54
+SubCauseCodeType reserved54
+uint8 CHOICE_RESERVED54 = 54
 
-SubCauseCodeType reserved_55
-uint8 CHOICE_RESERVED_55 = 55
+SubCauseCodeType reserved55
+uint8 CHOICE_RESERVED55 = 55
 
-SubCauseCodeType reserved_56
-uint8 CHOICE_RESERVED_56 = 56
+SubCauseCodeType reserved56
+uint8 CHOICE_RESERVED56 = 56
 
-SubCauseCodeType reserved_57
-uint8 CHOICE_RESERVED_57 = 57
+SubCauseCodeType reserved57
+uint8 CHOICE_RESERVED57 = 57
 
-SubCauseCodeType reserved_58
-uint8 CHOICE_RESERVED_58 = 58
+SubCauseCodeType reserved58
+uint8 CHOICE_RESERVED58 = 58
 
-SubCauseCodeType reserved_59
-uint8 CHOICE_RESERVED_59 = 59
+SubCauseCodeType reserved59
+uint8 CHOICE_RESERVED59 = 59
 
-SubCauseCodeType reserved_60
-uint8 CHOICE_RESERVED_60 = 60
+SubCauseCodeType reserved60
+uint8 CHOICE_RESERVED60 = 60
 
-SubCauseCodeType reserved_61
-uint8 CHOICE_RESERVED_61 = 61
+SubCauseCodeType reserved61
+uint8 CHOICE_RESERVED61 = 61
 
-SubCauseCodeType reserved_62
-uint8 CHOICE_RESERVED_62 = 62
+SubCauseCodeType reserved62
+uint8 CHOICE_RESERVED62 = 62
 
-SubCauseCodeType reserved_63
-uint8 CHOICE_RESERVED_63 = 63
+SubCauseCodeType reserved63
+uint8 CHOICE_RESERVED63 = 63
 
-SubCauseCodeType reserved_64
-uint8 CHOICE_RESERVED_64 = 64
+SubCauseCodeType reserved64
+uint8 CHOICE_RESERVED64 = 64
 
-SubCauseCodeType reserved_65
-uint8 CHOICE_RESERVED_65 = 65
+SubCauseCodeType reserved65
+uint8 CHOICE_RESERVED65 = 65
 
-SubCauseCodeType reserved_66
-uint8 CHOICE_RESERVED_66 = 66
+SubCauseCodeType reserved66
+uint8 CHOICE_RESERVED66 = 66
 
-SubCauseCodeType reserved_67
-uint8 CHOICE_RESERVED_67 = 67
+SubCauseCodeType reserved67
+uint8 CHOICE_RESERVED67 = 67
 
-SubCauseCodeType reserved_68
-uint8 CHOICE_RESERVED_68 = 68
+SubCauseCodeType reserved68
+uint8 CHOICE_RESERVED68 = 68
 
-SubCauseCodeType reserved_69
-uint8 CHOICE_RESERVED_69 = 69
+SubCauseCodeType reserved69
+uint8 CHOICE_RESERVED69 = 69
 
-SubCauseCodeType reserved_70
-uint8 CHOICE_RESERVED_70 = 70
+SubCauseCodeType reserved70
+uint8 CHOICE_RESERVED70 = 70
 
-SubCauseCodeType reserved_71
-uint8 CHOICE_RESERVED_71 = 71
+SubCauseCodeType reserved71
+uint8 CHOICE_RESERVED71 = 71
 
-SubCauseCodeType reserved_72
-uint8 CHOICE_RESERVED_72 = 72
+SubCauseCodeType reserved72
+uint8 CHOICE_RESERVED72 = 72
 
-SubCauseCodeType reserved_73
-uint8 CHOICE_RESERVED_73 = 73
+SubCauseCodeType reserved73
+uint8 CHOICE_RESERVED73 = 73
 
-SubCauseCodeType reserved_74
-uint8 CHOICE_RESERVED_74 = 74
+SubCauseCodeType reserved74
+uint8 CHOICE_RESERVED74 = 74
 
-SubCauseCodeType reserved_75
-uint8 CHOICE_RESERVED_75 = 75
+SubCauseCodeType reserved75
+uint8 CHOICE_RESERVED75 = 75
 
-SubCauseCodeType reserved_76
-uint8 CHOICE_RESERVED_76 = 76
+SubCauseCodeType reserved76
+uint8 CHOICE_RESERVED76 = 76
 
-SubCauseCodeType reserved_77
-uint8 CHOICE_RESERVED_77 = 77
+SubCauseCodeType reserved77
+uint8 CHOICE_RESERVED77 = 77
 
-SubCauseCodeType reserved_78
-uint8 CHOICE_RESERVED_78 = 78
+SubCauseCodeType reserved78
+uint8 CHOICE_RESERVED78 = 78
 
-SubCauseCodeType reserved_79
-uint8 CHOICE_RESERVED_79 = 79
+SubCauseCodeType reserved79
+uint8 CHOICE_RESERVED79 = 79
 
-SubCauseCodeType reserved_80
-uint8 CHOICE_RESERVED_80 = 80
+SubCauseCodeType reserved80
+uint8 CHOICE_RESERVED80 = 80
 
-SubCauseCodeType reserved_81
-uint8 CHOICE_RESERVED_81 = 81
+SubCauseCodeType reserved81
+uint8 CHOICE_RESERVED81 = 81
 
-SubCauseCodeType reserved_82
-uint8 CHOICE_RESERVED_82 = 82
+SubCauseCodeType reserved82
+uint8 CHOICE_RESERVED82 = 82
 
-SubCauseCodeType reserved_83
-uint8 CHOICE_RESERVED_83 = 83
+SubCauseCodeType reserved83
+uint8 CHOICE_RESERVED83 = 83
 
-SubCauseCodeType reserved_84
-uint8 CHOICE_RESERVED_84 = 84
+SubCauseCodeType reserved84
+uint8 CHOICE_RESERVED84 = 84
 
-SubCauseCodeType reserved_85
-uint8 CHOICE_RESERVED_85 = 85
+SubCauseCodeType reserved85
+uint8 CHOICE_RESERVED85 = 85
 
-SubCauseCodeType reserved_86
-uint8 CHOICE_RESERVED_86 = 86
+SubCauseCodeType reserved86
+uint8 CHOICE_RESERVED86 = 86
 
-SubCauseCodeType reserved_87
-uint8 CHOICE_RESERVED_87 = 87
+SubCauseCodeType reserved87
+uint8 CHOICE_RESERVED87 = 87
 
-SubCauseCodeType reserved_88
-uint8 CHOICE_RESERVED_88 = 88
+SubCauseCodeType reserved88
+uint8 CHOICE_RESERVED88 = 88
 
-SubCauseCodeType reserved_89
-uint8 CHOICE_RESERVED_89 = 89
+SubCauseCodeType reserved89
+uint8 CHOICE_RESERVED89 = 89
 
-SubCauseCodeType reserved_90
-uint8 CHOICE_RESERVED_90 = 90
+SubCauseCodeType reserved90
+uint8 CHOICE_RESERVED90 = 90
 
-VehicleBreakdownSubCauseCode vehicle_breakdown_91
-uint8 CHOICE_VEHICLE_BREAKDOWN_91 = 91
+VehicleBreakdownSubCauseCode vehicle_breakdown91
+uint8 CHOICE_VEHICLE_BREAKDOWN91 = 91
 
-PostCrashSubCauseCode post_crash_92
-uint8 CHOICE_POST_CRASH_92 = 92
+PostCrashSubCauseCode post_crash92
+uint8 CHOICE_POST_CRASH92 = 92
 
-HumanProblemSubCauseCode human_problem_93
-uint8 CHOICE_HUMAN_PROBLEM_93 = 93
+HumanProblemSubCauseCode human_problem93
+uint8 CHOICE_HUMAN_PROBLEM93 = 93
 
-StationaryVehicleSubCauseCode stationary_vehicle_94
-uint8 CHOICE_STATIONARY_VEHICLE_94 = 94
+StationaryVehicleSubCauseCode stationary_vehicle94
+uint8 CHOICE_STATIONARY_VEHICLE94 = 94
 
-EmergencyVehicleApproachingSubCauseCode emergency_vehicle_approaching_95
-uint8 CHOICE_EMERGENCY_VEHICLE_APPROACHING_95 = 95
+EmergencyVehicleApproachingSubCauseCode emergency_vehicle_approaching95
+uint8 CHOICE_EMERGENCY_VEHICLE_APPROACHING95 = 95
 
-HazardousLocationDangerousCurveSubCauseCode hazardous_location_dangerous_curve_96
-uint8 CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE_96 = 96
+HazardousLocationDangerousCurveSubCauseCode hazardous_location_dangerous_curve96
+uint8 CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE96 = 96
 
-CollisionRiskSubCauseCode collision_risk_97
-uint8 CHOICE_COLLISION_RISK_97 = 97
+CollisionRiskSubCauseCode collision_risk97
+uint8 CHOICE_COLLISION_RISK97 = 97
 
-SignalViolationSubCauseCode signal_violation_98
-uint8 CHOICE_SIGNAL_VIOLATION_98 = 98
+SignalViolationSubCauseCode signal_violation98
+uint8 CHOICE_SIGNAL_VIOLATION98 = 98
 
-DangerousSituationSubCauseCode dangerous_situation_99
-uint8 CHOICE_DANGEROUS_SITUATION_99 = 99
+DangerousSituationSubCauseCode dangerous_situation99
+uint8 CHOICE_DANGEROUS_SITUATION99 = 99
 
-RailwayLevelCrossingSubCauseCode railway_level_crossing_100
-uint8 CHOICE_RAILWAY_LEVEL_CROSSING_100 = 100
+RailwayLevelCrossingSubCauseCode railway_level_crossing100
+uint8 CHOICE_RAILWAY_LEVEL_CROSSING100 = 100
 
-SubCauseCodeType reserved_101
-uint8 CHOICE_RESERVED_101 = 101
+SubCauseCodeType reserved101
+uint8 CHOICE_RESERVED101 = 101
 
-SubCauseCodeType reserved_102
-uint8 CHOICE_RESERVED_102 = 102
+SubCauseCodeType reserved102
+uint8 CHOICE_RESERVED102 = 102
 
-SubCauseCodeType reserved_103
-uint8 CHOICE_RESERVED_103 = 103
+SubCauseCodeType reserved103
+uint8 CHOICE_RESERVED103 = 103
 
-SubCauseCodeType reserved_104
-uint8 CHOICE_RESERVED_104 = 104
+SubCauseCodeType reserved104
+uint8 CHOICE_RESERVED104 = 104
 
-SubCauseCodeType reserved_105
-uint8 CHOICE_RESERVED_105 = 105
+SubCauseCodeType reserved105
+uint8 CHOICE_RESERVED105 = 105
 
-SubCauseCodeType reserved_106
-uint8 CHOICE_RESERVED_106 = 106
+SubCauseCodeType reserved106
+uint8 CHOICE_RESERVED106 = 106
 
-SubCauseCodeType reserved_107
-uint8 CHOICE_RESERVED_107 = 107
+SubCauseCodeType reserved107
+uint8 CHOICE_RESERVED107 = 107
 
-SubCauseCodeType reserved_108
-uint8 CHOICE_RESERVED_108 = 108
+SubCauseCodeType reserved108
+uint8 CHOICE_RESERVED108 = 108
 
-SubCauseCodeType reserved_109
-uint8 CHOICE_RESERVED_109 = 109
+SubCauseCodeType reserved109
+uint8 CHOICE_RESERVED109 = 109
 
-SubCauseCodeType reserved_110
-uint8 CHOICE_RESERVED_110 = 110
+SubCauseCodeType reserved110
+uint8 CHOICE_RESERVED110 = 110
 
-SubCauseCodeType reserved_111
-uint8 CHOICE_RESERVED_111 = 111
+SubCauseCodeType reserved111
+uint8 CHOICE_RESERVED111 = 111
 
-SubCauseCodeType reserved_112
-uint8 CHOICE_RESERVED_112 = 112
+SubCauseCodeType reserved112
+uint8 CHOICE_RESERVED112 = 112
 
-SubCauseCodeType reserved_113
-uint8 CHOICE_RESERVED_113 = 113
+SubCauseCodeType reserved113
+uint8 CHOICE_RESERVED113 = 113
 
-SubCauseCodeType reserved_114
-uint8 CHOICE_RESERVED_114 = 114
+SubCauseCodeType reserved114
+uint8 CHOICE_RESERVED114 = 114
 
-SubCauseCodeType reserved_115
-uint8 CHOICE_RESERVED_115 = 115
+SubCauseCodeType reserved115
+uint8 CHOICE_RESERVED115 = 115
 
-SubCauseCodeType reserved_116
-uint8 CHOICE_RESERVED_116 = 116
+SubCauseCodeType reserved116
+uint8 CHOICE_RESERVED116 = 116
 
-SubCauseCodeType reserved_117
-uint8 CHOICE_RESERVED_117 = 117
+SubCauseCodeType reserved117
+uint8 CHOICE_RESERVED117 = 117
 
-SubCauseCodeType reserved_118
-uint8 CHOICE_RESERVED_118 = 118
+SubCauseCodeType reserved118
+uint8 CHOICE_RESERVED118 = 118
 
-SubCauseCodeType reserved_119
-uint8 CHOICE_RESERVED_119 = 119
+SubCauseCodeType reserved119
+uint8 CHOICE_RESERVED119 = 119
 
-SubCauseCodeType reserved_120
-uint8 CHOICE_RESERVED_120 = 120
+SubCauseCodeType reserved120
+uint8 CHOICE_RESERVED120 = 120
 
-SubCauseCodeType reserved_121
-uint8 CHOICE_RESERVED_121 = 121
+SubCauseCodeType reserved121
+uint8 CHOICE_RESERVED121 = 121
 
-SubCauseCodeType reserved_122
-uint8 CHOICE_RESERVED_122 = 122
+SubCauseCodeType reserved122
+uint8 CHOICE_RESERVED122 = 122
 
-SubCauseCodeType reserved_123
-uint8 CHOICE_RESERVED_123 = 123
+SubCauseCodeType reserved123
+uint8 CHOICE_RESERVED123 = 123
 
-SubCauseCodeType reserved_124
-uint8 CHOICE_RESERVED_124 = 124
+SubCauseCodeType reserved124
+uint8 CHOICE_RESERVED124 = 124
 
-SubCauseCodeType reserved_125
-uint8 CHOICE_RESERVED_125 = 125
+SubCauseCodeType reserved125
+uint8 CHOICE_RESERVED125 = 125
 
-SubCauseCodeType reserved_126
-uint8 CHOICE_RESERVED_126 = 126
+SubCauseCodeType reserved126
+uint8 CHOICE_RESERVED126 = 126
 
-SubCauseCodeType reserved_127
-uint8 CHOICE_RESERVED_127 = 127
+SubCauseCodeType reserved127
+uint8 CHOICE_RESERVED127 = 127
 
-SubCauseCodeType reserved_128
-uint8 CHOICE_RESERVED_128 = 128
+SubCauseCodeType reserved128
+uint8 CHOICE_RESERVED128 = 128
 

@@ -33,7 +33,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/CartesianPosition3dWithConfidence.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/cartesian_position_3d_with_confidence.hpp>
+#include <etsi_its_cpm_msgs/msg/cartesian_position3d_with_confidence.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

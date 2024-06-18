@@ -68,520 +68,520 @@ namespace etsi_its_cpm_conversion {
 void toRos_CauseCodeChoice(const CauseCodeChoice_t& in, cpm_msgs::CauseCodeChoice& out) {
   switch (in.present) {
   case CauseCodeChoice_PR_reserved0:
-    toRos_SubCauseCodeType(in.choice.reserved0, out.reserved_0);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_0;
+    toRos_SubCauseCodeType(in.choice.reserved0, out.reserved0);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED0;
     break;
   case CauseCodeChoice_PR_trafficCondition1:
-    toRos_TrafficConditionSubCauseCode(in.choice.trafficCondition1, out.traffic_condition_1);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_TRAFFIC_CONDITION_1;
+    toRos_TrafficConditionSubCauseCode(in.choice.trafficCondition1, out.traffic_condition1);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_TRAFFIC_CONDITION1;
     break;
   case CauseCodeChoice_PR_accident2:
-    toRos_AccidentSubCauseCode(in.choice.accident2, out.accident_2);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ACCIDENT_2;
+    toRos_AccidentSubCauseCode(in.choice.accident2, out.accident2);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ACCIDENT2;
     break;
   case CauseCodeChoice_PR_roadworks3:
-    toRos_RoadworksSubCauseCode(in.choice.roadworks3, out.roadworks_3);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ROADWORKS_3;
+    toRos_RoadworksSubCauseCode(in.choice.roadworks3, out.roadworks3);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ROADWORKS3;
     break;
   case CauseCodeChoice_PR_reserved4:
-    toRos_SubCauseCodeType(in.choice.reserved4, out.reserved_4);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_4;
+    toRos_SubCauseCodeType(in.choice.reserved4, out.reserved4);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED4;
     break;
   case CauseCodeChoice_PR_impassability5:
-    toRos_SubCauseCodeType(in.choice.impassability5, out.impassability_5);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_IMPASSABILITY_5;
+    toRos_SubCauseCodeType(in.choice.impassability5, out.impassability5);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_IMPASSABILITY5;
     break;
   case CauseCodeChoice_PR_adverseWeatherCondition-Adhesion6:
-    toRos_AdverseWeatherConditionAdhesionSubCauseCode(in.choice.adverseWeatherCondition-Adhesion6, out.adverse_weather_condition_adhesion_6);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION_6;
+    toRos_AdverseWeatherConditionAdhesionSubCauseCode(in.choice.adverseWeatherCondition-Adhesion6, out.adverse_weather_condition_adhesion6);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION6;
     break;
   case CauseCodeChoice_PR_aquaplaning7:
-    toRos_SubCauseCodeType(in.choice.aquaplaning7, out.aquaplaning_7);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_AQUAPLANING_7;
+    toRos_SubCauseCodeType(in.choice.aquaplaning7, out.aquaplaning7);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_AQUAPLANING7;
     break;
   case CauseCodeChoice_PR_reserved8:
-    toRos_SubCauseCodeType(in.choice.reserved8, out.reserved_8);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_8;
+    toRos_SubCauseCodeType(in.choice.reserved8, out.reserved8);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED8;
     break;
   case CauseCodeChoice_PR_hazardousLocation-SurfaceCondition9:
-    toRos_HazardousLocationSurfaceConditionSubCauseCode(in.choice.hazardousLocation-SurfaceCondition9, out.hazardous_location_surface_condition_9);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION_9;
+    toRos_HazardousLocationSurfaceConditionSubCauseCode(in.choice.hazardousLocation-SurfaceCondition9, out.hazardous_location_surface_condition9);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION9;
     break;
   case CauseCodeChoice_PR_hazardousLocation-ObstacleOnTheRoad10:
-    toRos_HazardousLocationObstacleOnTheRoadSubCauseCode(in.choice.hazardousLocation-ObstacleOnTheRoad10, out.hazardous_location_obstacle_on_the_road_10);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD_10;
+    toRos_HazardousLocationObstacleOnTheRoadSubCauseCode(in.choice.hazardousLocation-ObstacleOnTheRoad10, out.hazardous_location_obstacle_on_the_road10);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD10;
     break;
   case CauseCodeChoice_PR_hazardousLocation-AnimalOnTheRoad11:
-    toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(in.choice.hazardousLocation-AnimalOnTheRoad11, out.hazardous_location_animal_on_the_road_11);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD_11;
+    toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(in.choice.hazardousLocation-AnimalOnTheRoad11, out.hazardous_location_animal_on_the_road11);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD11;
     break;
   case CauseCodeChoice_PR_humanPresenceOnTheRoad12:
-    toRos_HumanPresenceOnTheRoadSubCauseCode(in.choice.humanPresenceOnTheRoad12, out.human_presence_on_the_road_12);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PRESENCE_ON_THE_ROAD_12;
+    toRos_HumanPresenceOnTheRoadSubCauseCode(in.choice.humanPresenceOnTheRoad12, out.human_presence_on_the_road12);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PRESENCE_ON_THE_ROAD12;
     break;
   case CauseCodeChoice_PR_reserved13:
-    toRos_SubCauseCodeType(in.choice.reserved13, out.reserved_13);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_13;
+    toRos_SubCauseCodeType(in.choice.reserved13, out.reserved13);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED13;
     break;
   case CauseCodeChoice_PR_wrongWayDriving14:
-    toRos_WrongWayDrivingSubCauseCode(in.choice.wrongWayDriving14, out.wrong_way_driving_14);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_WRONG_WAY_DRIVING_14;
+    toRos_WrongWayDrivingSubCauseCode(in.choice.wrongWayDriving14, out.wrong_way_driving14);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_WRONG_WAY_DRIVING14;
     break;
   case CauseCodeChoice_PR_rescueAndRecoveryWorkInProgress15:
-    toRos_RescueAndRecoveryWorkInProgressSubCauseCode(in.choice.rescueAndRecoveryWorkInProgress15, out.rescue_and_recovery_work_in_progress_15);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS_15;
+    toRos_RescueAndRecoveryWorkInProgressSubCauseCode(in.choice.rescueAndRecoveryWorkInProgress15, out.rescue_and_recovery_work_in_progress15);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS15;
     break;
   case CauseCodeChoice_PR_reserved16:
-    toRos_SubCauseCodeType(in.choice.reserved16, out.reserved_16);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_16;
+    toRos_SubCauseCodeType(in.choice.reserved16, out.reserved16);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED16;
     break;
   case CauseCodeChoice_PR_adverseWeatherCondition-ExtremeWeatherCondition17:
-    toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.choice.adverseWeatherCondition-ExtremeWeatherCondition17, out.adverse_weather_condition_extreme_weather_condition_17);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION_17;
+    toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.choice.adverseWeatherCondition-ExtremeWeatherCondition17, out.adverse_weather_condition_extreme_weather_condition17);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION17;
     break;
   case CauseCodeChoice_PR_adverseWeatherCondition-Visibility18:
-    toRos_AdverseWeatherConditionVisibilitySubCauseCode(in.choice.adverseWeatherCondition-Visibility18, out.adverse_weather_condition_visibility_18);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY_18;
+    toRos_AdverseWeatherConditionVisibilitySubCauseCode(in.choice.adverseWeatherCondition-Visibility18, out.adverse_weather_condition_visibility18);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY18;
     break;
   case CauseCodeChoice_PR_adverseWeatherCondition-Precipitation19:
-    toRos_AdverseWeatherConditionPrecipitationSubCauseCode(in.choice.adverseWeatherCondition-Precipitation19, out.adverse_weather_condition_precipitation_19);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION_19;
+    toRos_AdverseWeatherConditionPrecipitationSubCauseCode(in.choice.adverseWeatherCondition-Precipitation19, out.adverse_weather_condition_precipitation19);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION19;
     break;
   case CauseCodeChoice_PR_violence20:
-    toRos_SubCauseCodeType(in.choice.violence20, out.violence_20);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_VIOLENCE_20;
+    toRos_SubCauseCodeType(in.choice.violence20, out.violence20);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_VIOLENCE20;
     break;
   case CauseCodeChoice_PR_reserved21:
-    toRos_SubCauseCodeType(in.choice.reserved21, out.reserved_21);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_21;
+    toRos_SubCauseCodeType(in.choice.reserved21, out.reserved21);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED21;
     break;
   case CauseCodeChoice_PR_reserved22:
-    toRos_SubCauseCodeType(in.choice.reserved22, out.reserved_22);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_22;
+    toRos_SubCauseCodeType(in.choice.reserved22, out.reserved22);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED22;
     break;
   case CauseCodeChoice_PR_reserved23:
-    toRos_SubCauseCodeType(in.choice.reserved23, out.reserved_23);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_23;
+    toRos_SubCauseCodeType(in.choice.reserved23, out.reserved23);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED23;
     break;
   case CauseCodeChoice_PR_reserved24:
-    toRos_SubCauseCodeType(in.choice.reserved24, out.reserved_24);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_24;
+    toRos_SubCauseCodeType(in.choice.reserved24, out.reserved24);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED24;
     break;
   case CauseCodeChoice_PR_reserved25:
-    toRos_SubCauseCodeType(in.choice.reserved25, out.reserved_25);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_25;
+    toRos_SubCauseCodeType(in.choice.reserved25, out.reserved25);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED25;
     break;
   case CauseCodeChoice_PR_slowVehicle26:
-    toRos_SlowVehicleSubCauseCode(in.choice.slowVehicle26, out.slow_vehicle_26);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_SLOW_VEHICLE_26;
+    toRos_SlowVehicleSubCauseCode(in.choice.slowVehicle26, out.slow_vehicle26);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_SLOW_VEHICLE26;
     break;
   case CauseCodeChoice_PR_dangerousEndOfQueue27:
-    toRos_DangerousEndOfQueueSubCauseCode(in.choice.dangerousEndOfQueue27, out.dangerous_end_of_queue_27);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_END_OF_QUEUE_27;
+    toRos_DangerousEndOfQueueSubCauseCode(in.choice.dangerousEndOfQueue27, out.dangerous_end_of_queue27);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_END_OF_QUEUE27;
     break;
   case CauseCodeChoice_PR_reserved28:
-    toRos_SubCauseCodeType(in.choice.reserved28, out.reserved_28);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_28;
+    toRos_SubCauseCodeType(in.choice.reserved28, out.reserved28);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED28;
     break;
   case CauseCodeChoice_PR_reserved29:
-    toRos_SubCauseCodeType(in.choice.reserved29, out.reserved_29);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_29;
+    toRos_SubCauseCodeType(in.choice.reserved29, out.reserved29);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED29;
     break;
   case CauseCodeChoice_PR_reserved30:
-    toRos_SubCauseCodeType(in.choice.reserved30, out.reserved_30);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_30;
+    toRos_SubCauseCodeType(in.choice.reserved30, out.reserved30);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED30;
     break;
   case CauseCodeChoice_PR_reserved31:
-    toRos_SubCauseCodeType(in.choice.reserved31, out.reserved_31);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_31;
+    toRos_SubCauseCodeType(in.choice.reserved31, out.reserved31);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED31;
     break;
   case CauseCodeChoice_PR_reserved32:
-    toRos_SubCauseCodeType(in.choice.reserved32, out.reserved_32);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_32;
+    toRos_SubCauseCodeType(in.choice.reserved32, out.reserved32);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED32;
     break;
   case CauseCodeChoice_PR_reserved33:
-    toRos_SubCauseCodeType(in.choice.reserved33, out.reserved_33);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_33;
+    toRos_SubCauseCodeType(in.choice.reserved33, out.reserved33);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED33;
     break;
   case CauseCodeChoice_PR_reserved34:
-    toRos_SubCauseCodeType(in.choice.reserved34, out.reserved_34);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_34;
+    toRos_SubCauseCodeType(in.choice.reserved34, out.reserved34);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED34;
     break;
   case CauseCodeChoice_PR_reserved35:
-    toRos_SubCauseCodeType(in.choice.reserved35, out.reserved_35);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_35;
+    toRos_SubCauseCodeType(in.choice.reserved35, out.reserved35);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED35;
     break;
   case CauseCodeChoice_PR_reserved36:
-    toRos_SubCauseCodeType(in.choice.reserved36, out.reserved_36);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_36;
+    toRos_SubCauseCodeType(in.choice.reserved36, out.reserved36);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED36;
     break;
   case CauseCodeChoice_PR_reserved37:
-    toRos_SubCauseCodeType(in.choice.reserved37, out.reserved_37);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_37;
+    toRos_SubCauseCodeType(in.choice.reserved37, out.reserved37);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED37;
     break;
   case CauseCodeChoice_PR_reserved38:
-    toRos_SubCauseCodeType(in.choice.reserved38, out.reserved_38);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_38;
+    toRos_SubCauseCodeType(in.choice.reserved38, out.reserved38);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED38;
     break;
   case CauseCodeChoice_PR_reserved39:
-    toRos_SubCauseCodeType(in.choice.reserved39, out.reserved_39);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_39;
+    toRos_SubCauseCodeType(in.choice.reserved39, out.reserved39);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED39;
     break;
   case CauseCodeChoice_PR_reserved40:
-    toRos_SubCauseCodeType(in.choice.reserved40, out.reserved_40);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_40;
+    toRos_SubCauseCodeType(in.choice.reserved40, out.reserved40);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED40;
     break;
   case CauseCodeChoice_PR_reserved41:
-    toRos_SubCauseCodeType(in.choice.reserved41, out.reserved_41);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_41;
+    toRos_SubCauseCodeType(in.choice.reserved41, out.reserved41);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED41;
     break;
   case CauseCodeChoice_PR_reserved42:
-    toRos_SubCauseCodeType(in.choice.reserved42, out.reserved_42);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_42;
+    toRos_SubCauseCodeType(in.choice.reserved42, out.reserved42);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED42;
     break;
   case CauseCodeChoice_PR_reserved43:
-    toRos_SubCauseCodeType(in.choice.reserved43, out.reserved_43);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_43;
+    toRos_SubCauseCodeType(in.choice.reserved43, out.reserved43);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED43;
     break;
   case CauseCodeChoice_PR_reserved44:
-    toRos_SubCauseCodeType(in.choice.reserved44, out.reserved_44);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_44;
+    toRos_SubCauseCodeType(in.choice.reserved44, out.reserved44);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED44;
     break;
   case CauseCodeChoice_PR_reserved45:
-    toRos_SubCauseCodeType(in.choice.reserved45, out.reserved_45);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_45;
+    toRos_SubCauseCodeType(in.choice.reserved45, out.reserved45);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED45;
     break;
   case CauseCodeChoice_PR_reserved46:
-    toRos_SubCauseCodeType(in.choice.reserved46, out.reserved_46);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_46;
+    toRos_SubCauseCodeType(in.choice.reserved46, out.reserved46);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED46;
     break;
   case CauseCodeChoice_PR_reserved47:
-    toRos_SubCauseCodeType(in.choice.reserved47, out.reserved_47);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_47;
+    toRos_SubCauseCodeType(in.choice.reserved47, out.reserved47);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED47;
     break;
   case CauseCodeChoice_PR_reserved48:
-    toRos_SubCauseCodeType(in.choice.reserved48, out.reserved_48);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_48;
+    toRos_SubCauseCodeType(in.choice.reserved48, out.reserved48);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED48;
     break;
   case CauseCodeChoice_PR_reserved49:
-    toRos_SubCauseCodeType(in.choice.reserved49, out.reserved_49);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_49;
+    toRos_SubCauseCodeType(in.choice.reserved49, out.reserved49);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED49;
     break;
   case CauseCodeChoice_PR_reserved50:
-    toRos_SubCauseCodeType(in.choice.reserved50, out.reserved_50);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_50;
+    toRos_SubCauseCodeType(in.choice.reserved50, out.reserved50);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED50;
     break;
   case CauseCodeChoice_PR_reserved51:
-    toRos_SubCauseCodeType(in.choice.reserved51, out.reserved_51);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_51;
+    toRos_SubCauseCodeType(in.choice.reserved51, out.reserved51);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED51;
     break;
   case CauseCodeChoice_PR_reserved52:
-    toRos_SubCauseCodeType(in.choice.reserved52, out.reserved_52);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_52;
+    toRos_SubCauseCodeType(in.choice.reserved52, out.reserved52);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED52;
     break;
   case CauseCodeChoice_PR_reserved53:
-    toRos_SubCauseCodeType(in.choice.reserved53, out.reserved_53);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_53;
+    toRos_SubCauseCodeType(in.choice.reserved53, out.reserved53);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED53;
     break;
   case CauseCodeChoice_PR_reserved54:
-    toRos_SubCauseCodeType(in.choice.reserved54, out.reserved_54);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_54;
+    toRos_SubCauseCodeType(in.choice.reserved54, out.reserved54);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED54;
     break;
   case CauseCodeChoice_PR_reserved55:
-    toRos_SubCauseCodeType(in.choice.reserved55, out.reserved_55);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_55;
+    toRos_SubCauseCodeType(in.choice.reserved55, out.reserved55);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED55;
     break;
   case CauseCodeChoice_PR_reserved56:
-    toRos_SubCauseCodeType(in.choice.reserved56, out.reserved_56);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_56;
+    toRos_SubCauseCodeType(in.choice.reserved56, out.reserved56);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED56;
     break;
   case CauseCodeChoice_PR_reserved57:
-    toRos_SubCauseCodeType(in.choice.reserved57, out.reserved_57);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_57;
+    toRos_SubCauseCodeType(in.choice.reserved57, out.reserved57);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED57;
     break;
   case CauseCodeChoice_PR_reserved58:
-    toRos_SubCauseCodeType(in.choice.reserved58, out.reserved_58);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_58;
+    toRos_SubCauseCodeType(in.choice.reserved58, out.reserved58);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED58;
     break;
   case CauseCodeChoice_PR_reserved59:
-    toRos_SubCauseCodeType(in.choice.reserved59, out.reserved_59);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_59;
+    toRos_SubCauseCodeType(in.choice.reserved59, out.reserved59);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED59;
     break;
   case CauseCodeChoice_PR_reserved60:
-    toRos_SubCauseCodeType(in.choice.reserved60, out.reserved_60);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_60;
+    toRos_SubCauseCodeType(in.choice.reserved60, out.reserved60);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED60;
     break;
   case CauseCodeChoice_PR_reserved61:
-    toRos_SubCauseCodeType(in.choice.reserved61, out.reserved_61);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_61;
+    toRos_SubCauseCodeType(in.choice.reserved61, out.reserved61);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED61;
     break;
   case CauseCodeChoice_PR_reserved62:
-    toRos_SubCauseCodeType(in.choice.reserved62, out.reserved_62);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_62;
+    toRos_SubCauseCodeType(in.choice.reserved62, out.reserved62);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED62;
     break;
   case CauseCodeChoice_PR_reserved63:
-    toRos_SubCauseCodeType(in.choice.reserved63, out.reserved_63);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_63;
+    toRos_SubCauseCodeType(in.choice.reserved63, out.reserved63);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED63;
     break;
   case CauseCodeChoice_PR_reserved64:
-    toRos_SubCauseCodeType(in.choice.reserved64, out.reserved_64);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_64;
+    toRos_SubCauseCodeType(in.choice.reserved64, out.reserved64);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED64;
     break;
   case CauseCodeChoice_PR_reserved65:
-    toRos_SubCauseCodeType(in.choice.reserved65, out.reserved_65);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_65;
+    toRos_SubCauseCodeType(in.choice.reserved65, out.reserved65);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED65;
     break;
   case CauseCodeChoice_PR_reserved66:
-    toRos_SubCauseCodeType(in.choice.reserved66, out.reserved_66);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_66;
+    toRos_SubCauseCodeType(in.choice.reserved66, out.reserved66);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED66;
     break;
   case CauseCodeChoice_PR_reserved67:
-    toRos_SubCauseCodeType(in.choice.reserved67, out.reserved_67);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_67;
+    toRos_SubCauseCodeType(in.choice.reserved67, out.reserved67);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED67;
     break;
   case CauseCodeChoice_PR_reserved68:
-    toRos_SubCauseCodeType(in.choice.reserved68, out.reserved_68);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_68;
+    toRos_SubCauseCodeType(in.choice.reserved68, out.reserved68);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED68;
     break;
   case CauseCodeChoice_PR_reserved69:
-    toRos_SubCauseCodeType(in.choice.reserved69, out.reserved_69);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_69;
+    toRos_SubCauseCodeType(in.choice.reserved69, out.reserved69);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED69;
     break;
   case CauseCodeChoice_PR_reserved70:
-    toRos_SubCauseCodeType(in.choice.reserved70, out.reserved_70);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_70;
+    toRos_SubCauseCodeType(in.choice.reserved70, out.reserved70);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED70;
     break;
   case CauseCodeChoice_PR_reserved71:
-    toRos_SubCauseCodeType(in.choice.reserved71, out.reserved_71);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_71;
+    toRos_SubCauseCodeType(in.choice.reserved71, out.reserved71);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED71;
     break;
   case CauseCodeChoice_PR_reserved72:
-    toRos_SubCauseCodeType(in.choice.reserved72, out.reserved_72);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_72;
+    toRos_SubCauseCodeType(in.choice.reserved72, out.reserved72);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED72;
     break;
   case CauseCodeChoice_PR_reserved73:
-    toRos_SubCauseCodeType(in.choice.reserved73, out.reserved_73);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_73;
+    toRos_SubCauseCodeType(in.choice.reserved73, out.reserved73);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED73;
     break;
   case CauseCodeChoice_PR_reserved74:
-    toRos_SubCauseCodeType(in.choice.reserved74, out.reserved_74);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_74;
+    toRos_SubCauseCodeType(in.choice.reserved74, out.reserved74);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED74;
     break;
   case CauseCodeChoice_PR_reserved75:
-    toRos_SubCauseCodeType(in.choice.reserved75, out.reserved_75);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_75;
+    toRos_SubCauseCodeType(in.choice.reserved75, out.reserved75);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED75;
     break;
   case CauseCodeChoice_PR_reserved76:
-    toRos_SubCauseCodeType(in.choice.reserved76, out.reserved_76);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_76;
+    toRos_SubCauseCodeType(in.choice.reserved76, out.reserved76);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED76;
     break;
   case CauseCodeChoice_PR_reserved77:
-    toRos_SubCauseCodeType(in.choice.reserved77, out.reserved_77);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_77;
+    toRos_SubCauseCodeType(in.choice.reserved77, out.reserved77);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED77;
     break;
   case CauseCodeChoice_PR_reserved78:
-    toRos_SubCauseCodeType(in.choice.reserved78, out.reserved_78);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_78;
+    toRos_SubCauseCodeType(in.choice.reserved78, out.reserved78);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED78;
     break;
   case CauseCodeChoice_PR_reserved79:
-    toRos_SubCauseCodeType(in.choice.reserved79, out.reserved_79);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_79;
+    toRos_SubCauseCodeType(in.choice.reserved79, out.reserved79);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED79;
     break;
   case CauseCodeChoice_PR_reserved80:
-    toRos_SubCauseCodeType(in.choice.reserved80, out.reserved_80);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_80;
+    toRos_SubCauseCodeType(in.choice.reserved80, out.reserved80);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED80;
     break;
   case CauseCodeChoice_PR_reserved81:
-    toRos_SubCauseCodeType(in.choice.reserved81, out.reserved_81);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_81;
+    toRos_SubCauseCodeType(in.choice.reserved81, out.reserved81);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED81;
     break;
   case CauseCodeChoice_PR_reserved82:
-    toRos_SubCauseCodeType(in.choice.reserved82, out.reserved_82);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_82;
+    toRos_SubCauseCodeType(in.choice.reserved82, out.reserved82);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED82;
     break;
   case CauseCodeChoice_PR_reserved83:
-    toRos_SubCauseCodeType(in.choice.reserved83, out.reserved_83);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_83;
+    toRos_SubCauseCodeType(in.choice.reserved83, out.reserved83);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED83;
     break;
   case CauseCodeChoice_PR_reserved84:
-    toRos_SubCauseCodeType(in.choice.reserved84, out.reserved_84);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_84;
+    toRos_SubCauseCodeType(in.choice.reserved84, out.reserved84);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED84;
     break;
   case CauseCodeChoice_PR_reserved85:
-    toRos_SubCauseCodeType(in.choice.reserved85, out.reserved_85);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_85;
+    toRos_SubCauseCodeType(in.choice.reserved85, out.reserved85);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED85;
     break;
   case CauseCodeChoice_PR_reserved86:
-    toRos_SubCauseCodeType(in.choice.reserved86, out.reserved_86);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_86;
+    toRos_SubCauseCodeType(in.choice.reserved86, out.reserved86);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED86;
     break;
   case CauseCodeChoice_PR_reserved87:
-    toRos_SubCauseCodeType(in.choice.reserved87, out.reserved_87);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_87;
+    toRos_SubCauseCodeType(in.choice.reserved87, out.reserved87);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED87;
     break;
   case CauseCodeChoice_PR_reserved88:
-    toRos_SubCauseCodeType(in.choice.reserved88, out.reserved_88);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_88;
+    toRos_SubCauseCodeType(in.choice.reserved88, out.reserved88);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED88;
     break;
   case CauseCodeChoice_PR_reserved89:
-    toRos_SubCauseCodeType(in.choice.reserved89, out.reserved_89);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_89;
+    toRos_SubCauseCodeType(in.choice.reserved89, out.reserved89);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED89;
     break;
   case CauseCodeChoice_PR_reserved90:
-    toRos_SubCauseCodeType(in.choice.reserved90, out.reserved_90);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_90;
+    toRos_SubCauseCodeType(in.choice.reserved90, out.reserved90);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED90;
     break;
   case CauseCodeChoice_PR_vehicleBreakdown91:
-    toRos_VehicleBreakdownSubCauseCode(in.choice.vehicleBreakdown91, out.vehicle_breakdown_91);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_VEHICLE_BREAKDOWN_91;
+    toRos_VehicleBreakdownSubCauseCode(in.choice.vehicleBreakdown91, out.vehicle_breakdown91);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_VEHICLE_BREAKDOWN91;
     break;
   case CauseCodeChoice_PR_postCrash92:
-    toRos_PostCrashSubCauseCode(in.choice.postCrash92, out.post_crash_92);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_POST_CRASH_92;
+    toRos_PostCrashSubCauseCode(in.choice.postCrash92, out.post_crash92);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_POST_CRASH92;
     break;
   case CauseCodeChoice_PR_humanProblem93:
-    toRos_HumanProblemSubCauseCode(in.choice.humanProblem93, out.human_problem_93);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PROBLEM_93;
+    toRos_HumanProblemSubCauseCode(in.choice.humanProblem93, out.human_problem93);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PROBLEM93;
     break;
   case CauseCodeChoice_PR_stationaryVehicle94:
-    toRos_StationaryVehicleSubCauseCode(in.choice.stationaryVehicle94, out.stationary_vehicle_94);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_STATIONARY_VEHICLE_94;
+    toRos_StationaryVehicleSubCauseCode(in.choice.stationaryVehicle94, out.stationary_vehicle94);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_STATIONARY_VEHICLE94;
     break;
   case CauseCodeChoice_PR_emergencyVehicleApproaching95:
-    toRos_EmergencyVehicleApproachingSubCauseCode(in.choice.emergencyVehicleApproaching95, out.emergency_vehicle_approaching_95);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_EMERGENCY_VEHICLE_APPROACHING_95;
+    toRos_EmergencyVehicleApproachingSubCauseCode(in.choice.emergencyVehicleApproaching95, out.emergency_vehicle_approaching95);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_EMERGENCY_VEHICLE_APPROACHING95;
     break;
   case CauseCodeChoice_PR_hazardousLocation-DangerousCurve96:
-    toRos_HazardousLocationDangerousCurveSubCauseCode(in.choice.hazardousLocation-DangerousCurve96, out.hazardous_location_dangerous_curve_96);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE_96;
+    toRos_HazardousLocationDangerousCurveSubCauseCode(in.choice.hazardousLocation-DangerousCurve96, out.hazardous_location_dangerous_curve96);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE96;
     break;
   case CauseCodeChoice_PR_collisionRisk97:
-    toRos_CollisionRiskSubCauseCode(in.choice.collisionRisk97, out.collision_risk_97);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_COLLISION_RISK_97;
+    toRos_CollisionRiskSubCauseCode(in.choice.collisionRisk97, out.collision_risk97);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_COLLISION_RISK97;
     break;
   case CauseCodeChoice_PR_signalViolation98:
-    toRos_SignalViolationSubCauseCode(in.choice.signalViolation98, out.signal_violation_98);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_SIGNAL_VIOLATION_98;
+    toRos_SignalViolationSubCauseCode(in.choice.signalViolation98, out.signal_violation98);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_SIGNAL_VIOLATION98;
     break;
   case CauseCodeChoice_PR_dangerousSituation99:
-    toRos_DangerousSituationSubCauseCode(in.choice.dangerousSituation99, out.dangerous_situation_99);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_SITUATION_99;
+    toRos_DangerousSituationSubCauseCode(in.choice.dangerousSituation99, out.dangerous_situation99);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_SITUATION99;
     break;
   case CauseCodeChoice_PR_railwayLevelCrossing100:
-    toRos_RailwayLevelCrossingSubCauseCode(in.choice.railwayLevelCrossing100, out.railway_level_crossing_100);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RAILWAY_LEVEL_CROSSING_100;
+    toRos_RailwayLevelCrossingSubCauseCode(in.choice.railwayLevelCrossing100, out.railway_level_crossing100);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RAILWAY_LEVEL_CROSSING100;
     break;
   case CauseCodeChoice_PR_reserved101:
-    toRos_SubCauseCodeType(in.choice.reserved101, out.reserved_101);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_101;
+    toRos_SubCauseCodeType(in.choice.reserved101, out.reserved101);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED101;
     break;
   case CauseCodeChoice_PR_reserved102:
-    toRos_SubCauseCodeType(in.choice.reserved102, out.reserved_102);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_102;
+    toRos_SubCauseCodeType(in.choice.reserved102, out.reserved102);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED102;
     break;
   case CauseCodeChoice_PR_reserved103:
-    toRos_SubCauseCodeType(in.choice.reserved103, out.reserved_103);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_103;
+    toRos_SubCauseCodeType(in.choice.reserved103, out.reserved103);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED103;
     break;
   case CauseCodeChoice_PR_reserved104:
-    toRos_SubCauseCodeType(in.choice.reserved104, out.reserved_104);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_104;
+    toRos_SubCauseCodeType(in.choice.reserved104, out.reserved104);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED104;
     break;
   case CauseCodeChoice_PR_reserved105:
-    toRos_SubCauseCodeType(in.choice.reserved105, out.reserved_105);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_105;
+    toRos_SubCauseCodeType(in.choice.reserved105, out.reserved105);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED105;
     break;
   case CauseCodeChoice_PR_reserved106:
-    toRos_SubCauseCodeType(in.choice.reserved106, out.reserved_106);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_106;
+    toRos_SubCauseCodeType(in.choice.reserved106, out.reserved106);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED106;
     break;
   case CauseCodeChoice_PR_reserved107:
-    toRos_SubCauseCodeType(in.choice.reserved107, out.reserved_107);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_107;
+    toRos_SubCauseCodeType(in.choice.reserved107, out.reserved107);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED107;
     break;
   case CauseCodeChoice_PR_reserved108:
-    toRos_SubCauseCodeType(in.choice.reserved108, out.reserved_108);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_108;
+    toRos_SubCauseCodeType(in.choice.reserved108, out.reserved108);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED108;
     break;
   case CauseCodeChoice_PR_reserved109:
-    toRos_SubCauseCodeType(in.choice.reserved109, out.reserved_109);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_109;
+    toRos_SubCauseCodeType(in.choice.reserved109, out.reserved109);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED109;
     break;
   case CauseCodeChoice_PR_reserved110:
-    toRos_SubCauseCodeType(in.choice.reserved110, out.reserved_110);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_110;
+    toRos_SubCauseCodeType(in.choice.reserved110, out.reserved110);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED110;
     break;
   case CauseCodeChoice_PR_reserved111:
-    toRos_SubCauseCodeType(in.choice.reserved111, out.reserved_111);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_111;
+    toRos_SubCauseCodeType(in.choice.reserved111, out.reserved111);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED111;
     break;
   case CauseCodeChoice_PR_reserved112:
-    toRos_SubCauseCodeType(in.choice.reserved112, out.reserved_112);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_112;
+    toRos_SubCauseCodeType(in.choice.reserved112, out.reserved112);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED112;
     break;
   case CauseCodeChoice_PR_reserved113:
-    toRos_SubCauseCodeType(in.choice.reserved113, out.reserved_113);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_113;
+    toRos_SubCauseCodeType(in.choice.reserved113, out.reserved113);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED113;
     break;
   case CauseCodeChoice_PR_reserved114:
-    toRos_SubCauseCodeType(in.choice.reserved114, out.reserved_114);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_114;
+    toRos_SubCauseCodeType(in.choice.reserved114, out.reserved114);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED114;
     break;
   case CauseCodeChoice_PR_reserved115:
-    toRos_SubCauseCodeType(in.choice.reserved115, out.reserved_115);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_115;
+    toRos_SubCauseCodeType(in.choice.reserved115, out.reserved115);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED115;
     break;
   case CauseCodeChoice_PR_reserved116:
-    toRos_SubCauseCodeType(in.choice.reserved116, out.reserved_116);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_116;
+    toRos_SubCauseCodeType(in.choice.reserved116, out.reserved116);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED116;
     break;
   case CauseCodeChoice_PR_reserved117:
-    toRos_SubCauseCodeType(in.choice.reserved117, out.reserved_117);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_117;
+    toRos_SubCauseCodeType(in.choice.reserved117, out.reserved117);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED117;
     break;
   case CauseCodeChoice_PR_reserved118:
-    toRos_SubCauseCodeType(in.choice.reserved118, out.reserved_118);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_118;
+    toRos_SubCauseCodeType(in.choice.reserved118, out.reserved118);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED118;
     break;
   case CauseCodeChoice_PR_reserved119:
-    toRos_SubCauseCodeType(in.choice.reserved119, out.reserved_119);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_119;
+    toRos_SubCauseCodeType(in.choice.reserved119, out.reserved119);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED119;
     break;
   case CauseCodeChoice_PR_reserved120:
-    toRos_SubCauseCodeType(in.choice.reserved120, out.reserved_120);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_120;
+    toRos_SubCauseCodeType(in.choice.reserved120, out.reserved120);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED120;
     break;
   case CauseCodeChoice_PR_reserved121:
-    toRos_SubCauseCodeType(in.choice.reserved121, out.reserved_121);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_121;
+    toRos_SubCauseCodeType(in.choice.reserved121, out.reserved121);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED121;
     break;
   case CauseCodeChoice_PR_reserved122:
-    toRos_SubCauseCodeType(in.choice.reserved122, out.reserved_122);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_122;
+    toRos_SubCauseCodeType(in.choice.reserved122, out.reserved122);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED122;
     break;
   case CauseCodeChoice_PR_reserved123:
-    toRos_SubCauseCodeType(in.choice.reserved123, out.reserved_123);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_123;
+    toRos_SubCauseCodeType(in.choice.reserved123, out.reserved123);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED123;
     break;
   case CauseCodeChoice_PR_reserved124:
-    toRos_SubCauseCodeType(in.choice.reserved124, out.reserved_124);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_124;
+    toRos_SubCauseCodeType(in.choice.reserved124, out.reserved124);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED124;
     break;
   case CauseCodeChoice_PR_reserved125:
-    toRos_SubCauseCodeType(in.choice.reserved125, out.reserved_125);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_125;
+    toRos_SubCauseCodeType(in.choice.reserved125, out.reserved125);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED125;
     break;
   case CauseCodeChoice_PR_reserved126:
-    toRos_SubCauseCodeType(in.choice.reserved126, out.reserved_126);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_126;
+    toRos_SubCauseCodeType(in.choice.reserved126, out.reserved126);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED126;
     break;
   case CauseCodeChoice_PR_reserved127:
-    toRos_SubCauseCodeType(in.choice.reserved127, out.reserved_127);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_127;
+    toRos_SubCauseCodeType(in.choice.reserved127, out.reserved127);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED127;
     break;
   case CauseCodeChoice_PR_reserved128:
-    toRos_SubCauseCodeType(in.choice.reserved128, out.reserved_128);
-    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_128;
+    toRos_SubCauseCodeType(in.choice.reserved128, out.reserved128);
+    out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED128;
     break;
   default: break;
   }
@@ -591,520 +591,520 @@ void toStruct_CauseCodeChoice(const cpm_msgs::CauseCodeChoice& in, CauseCodeChoi
   memset(&out, 0, sizeof(CauseCodeChoice_t));
 
   switch (in.choice) {
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_0:
-    toStruct_SubCauseCodeType(in.reserved_0, out.choice.reserved0);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED0:
+    toStruct_SubCauseCodeType(in.reserved0, out.choice.reserved0);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved0;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_TRAFFIC_CONDITION_1:
-    toStruct_TrafficConditionSubCauseCode(in.traffic_condition_1, out.choice.trafficCondition1);
+  case cpm_msgs::CauseCodeChoice::CHOICE_TRAFFIC_CONDITION1:
+    toStruct_TrafficConditionSubCauseCode(in.traffic_condition1, out.choice.trafficCondition1);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_trafficCondition1;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ACCIDENT_2:
-    toStruct_AccidentSubCauseCode(in.accident_2, out.choice.accident2);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ACCIDENT2:
+    toStruct_AccidentSubCauseCode(in.accident2, out.choice.accident2);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_accident2;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ROADWORKS_3:
-    toStruct_RoadworksSubCauseCode(in.roadworks_3, out.choice.roadworks3);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ROADWORKS3:
+    toStruct_RoadworksSubCauseCode(in.roadworks3, out.choice.roadworks3);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_roadworks3;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_4:
-    toStruct_SubCauseCodeType(in.reserved_4, out.choice.reserved4);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED4:
+    toStruct_SubCauseCodeType(in.reserved4, out.choice.reserved4);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved4;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_IMPASSABILITY_5:
-    toStruct_SubCauseCodeType(in.impassability_5, out.choice.impassability5);
+  case cpm_msgs::CauseCodeChoice::CHOICE_IMPASSABILITY5:
+    toStruct_SubCauseCodeType(in.impassability5, out.choice.impassability5);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_impassability5;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION_6:
-    toStruct_AdverseWeatherConditionAdhesionSubCauseCode(in.adverse_weather_condition_adhesion_6, out.choice.adverseWeatherCondition-Adhesion6);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION6:
+    toStruct_AdverseWeatherConditionAdhesionSubCauseCode(in.adverse_weather_condition_adhesion6, out.choice.adverseWeatherCondition-Adhesion6);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_adverseWeatherCondition-Adhesion6;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_AQUAPLANING_7:
-    toStruct_SubCauseCodeType(in.aquaplaning_7, out.choice.aquaplaning7);
+  case cpm_msgs::CauseCodeChoice::CHOICE_AQUAPLANING7:
+    toStruct_SubCauseCodeType(in.aquaplaning7, out.choice.aquaplaning7);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_aquaplaning7;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_8:
-    toStruct_SubCauseCodeType(in.reserved_8, out.choice.reserved8);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED8:
+    toStruct_SubCauseCodeType(in.reserved8, out.choice.reserved8);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved8;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION_9:
-    toStruct_HazardousLocationSurfaceConditionSubCauseCode(in.hazardous_location_surface_condition_9, out.choice.hazardousLocation-SurfaceCondition9);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION9:
+    toStruct_HazardousLocationSurfaceConditionSubCauseCode(in.hazardous_location_surface_condition9, out.choice.hazardousLocation-SurfaceCondition9);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_hazardousLocation-SurfaceCondition9;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD_10:
-    toStruct_HazardousLocationObstacleOnTheRoadSubCauseCode(in.hazardous_location_obstacle_on_the_road_10, out.choice.hazardousLocation-ObstacleOnTheRoad10);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD10:
+    toStruct_HazardousLocationObstacleOnTheRoadSubCauseCode(in.hazardous_location_obstacle_on_the_road10, out.choice.hazardousLocation-ObstacleOnTheRoad10);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_hazardousLocation-ObstacleOnTheRoad10;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD_11:
-    toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(in.hazardous_location_animal_on_the_road_11, out.choice.hazardousLocation-AnimalOnTheRoad11);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD11:
+    toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(in.hazardous_location_animal_on_the_road11, out.choice.hazardousLocation-AnimalOnTheRoad11);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_hazardousLocation-AnimalOnTheRoad11;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PRESENCE_ON_THE_ROAD_12:
-    toStruct_HumanPresenceOnTheRoadSubCauseCode(in.human_presence_on_the_road_12, out.choice.humanPresenceOnTheRoad12);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PRESENCE_ON_THE_ROAD12:
+    toStruct_HumanPresenceOnTheRoadSubCauseCode(in.human_presence_on_the_road12, out.choice.humanPresenceOnTheRoad12);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_humanPresenceOnTheRoad12;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_13:
-    toStruct_SubCauseCodeType(in.reserved_13, out.choice.reserved13);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED13:
+    toStruct_SubCauseCodeType(in.reserved13, out.choice.reserved13);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved13;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_WRONG_WAY_DRIVING_14:
-    toStruct_WrongWayDrivingSubCauseCode(in.wrong_way_driving_14, out.choice.wrongWayDriving14);
+  case cpm_msgs::CauseCodeChoice::CHOICE_WRONG_WAY_DRIVING14:
+    toStruct_WrongWayDrivingSubCauseCode(in.wrong_way_driving14, out.choice.wrongWayDriving14);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_wrongWayDriving14;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS_15:
-    toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(in.rescue_and_recovery_work_in_progress_15, out.choice.rescueAndRecoveryWorkInProgress15);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESCUE_AND_RECOVERY_WORK_IN_PROGRESS15:
+    toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(in.rescue_and_recovery_work_in_progress15, out.choice.rescueAndRecoveryWorkInProgress15);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_rescueAndRecoveryWorkInProgress15;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_16:
-    toStruct_SubCauseCodeType(in.reserved_16, out.choice.reserved16);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED16:
+    toStruct_SubCauseCodeType(in.reserved16, out.choice.reserved16);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved16;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION_17:
-    toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.adverse_weather_condition_extreme_weather_condition_17, out.choice.adverseWeatherCondition-ExtremeWeatherCondition17);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION17:
+    toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.adverse_weather_condition_extreme_weather_condition17, out.choice.adverseWeatherCondition-ExtremeWeatherCondition17);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_adverseWeatherCondition-ExtremeWeatherCondition17;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY_18:
-    toStruct_AdverseWeatherConditionVisibilitySubCauseCode(in.adverse_weather_condition_visibility_18, out.choice.adverseWeatherCondition-Visibility18);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY18:
+    toStruct_AdverseWeatherConditionVisibilitySubCauseCode(in.adverse_weather_condition_visibility18, out.choice.adverseWeatherCondition-Visibility18);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_adverseWeatherCondition-Visibility18;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION_19:
-    toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(in.adverse_weather_condition_precipitation_19, out.choice.adverseWeatherCondition-Precipitation19);
+  case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION19:
+    toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(in.adverse_weather_condition_precipitation19, out.choice.adverseWeatherCondition-Precipitation19);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_adverseWeatherCondition-Precipitation19;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_VIOLENCE_20:
-    toStruct_SubCauseCodeType(in.violence_20, out.choice.violence20);
+  case cpm_msgs::CauseCodeChoice::CHOICE_VIOLENCE20:
+    toStruct_SubCauseCodeType(in.violence20, out.choice.violence20);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_violence20;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_21:
-    toStruct_SubCauseCodeType(in.reserved_21, out.choice.reserved21);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED21:
+    toStruct_SubCauseCodeType(in.reserved21, out.choice.reserved21);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved21;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_22:
-    toStruct_SubCauseCodeType(in.reserved_22, out.choice.reserved22);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED22:
+    toStruct_SubCauseCodeType(in.reserved22, out.choice.reserved22);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved22;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_23:
-    toStruct_SubCauseCodeType(in.reserved_23, out.choice.reserved23);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED23:
+    toStruct_SubCauseCodeType(in.reserved23, out.choice.reserved23);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved23;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_24:
-    toStruct_SubCauseCodeType(in.reserved_24, out.choice.reserved24);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED24:
+    toStruct_SubCauseCodeType(in.reserved24, out.choice.reserved24);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved24;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_25:
-    toStruct_SubCauseCodeType(in.reserved_25, out.choice.reserved25);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED25:
+    toStruct_SubCauseCodeType(in.reserved25, out.choice.reserved25);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved25;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_SLOW_VEHICLE_26:
-    toStruct_SlowVehicleSubCauseCode(in.slow_vehicle_26, out.choice.slowVehicle26);
+  case cpm_msgs::CauseCodeChoice::CHOICE_SLOW_VEHICLE26:
+    toStruct_SlowVehicleSubCauseCode(in.slow_vehicle26, out.choice.slowVehicle26);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_slowVehicle26;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_END_OF_QUEUE_27:
-    toStruct_DangerousEndOfQueueSubCauseCode(in.dangerous_end_of_queue_27, out.choice.dangerousEndOfQueue27);
+  case cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_END_OF_QUEUE27:
+    toStruct_DangerousEndOfQueueSubCauseCode(in.dangerous_end_of_queue27, out.choice.dangerousEndOfQueue27);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_dangerousEndOfQueue27;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_28:
-    toStruct_SubCauseCodeType(in.reserved_28, out.choice.reserved28);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED28:
+    toStruct_SubCauseCodeType(in.reserved28, out.choice.reserved28);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved28;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_29:
-    toStruct_SubCauseCodeType(in.reserved_29, out.choice.reserved29);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED29:
+    toStruct_SubCauseCodeType(in.reserved29, out.choice.reserved29);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved29;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_30:
-    toStruct_SubCauseCodeType(in.reserved_30, out.choice.reserved30);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED30:
+    toStruct_SubCauseCodeType(in.reserved30, out.choice.reserved30);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved30;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_31:
-    toStruct_SubCauseCodeType(in.reserved_31, out.choice.reserved31);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED31:
+    toStruct_SubCauseCodeType(in.reserved31, out.choice.reserved31);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved31;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_32:
-    toStruct_SubCauseCodeType(in.reserved_32, out.choice.reserved32);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED32:
+    toStruct_SubCauseCodeType(in.reserved32, out.choice.reserved32);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved32;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_33:
-    toStruct_SubCauseCodeType(in.reserved_33, out.choice.reserved33);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED33:
+    toStruct_SubCauseCodeType(in.reserved33, out.choice.reserved33);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved33;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_34:
-    toStruct_SubCauseCodeType(in.reserved_34, out.choice.reserved34);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED34:
+    toStruct_SubCauseCodeType(in.reserved34, out.choice.reserved34);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved34;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_35:
-    toStruct_SubCauseCodeType(in.reserved_35, out.choice.reserved35);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED35:
+    toStruct_SubCauseCodeType(in.reserved35, out.choice.reserved35);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved35;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_36:
-    toStruct_SubCauseCodeType(in.reserved_36, out.choice.reserved36);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED36:
+    toStruct_SubCauseCodeType(in.reserved36, out.choice.reserved36);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved36;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_37:
-    toStruct_SubCauseCodeType(in.reserved_37, out.choice.reserved37);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED37:
+    toStruct_SubCauseCodeType(in.reserved37, out.choice.reserved37);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved37;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_38:
-    toStruct_SubCauseCodeType(in.reserved_38, out.choice.reserved38);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED38:
+    toStruct_SubCauseCodeType(in.reserved38, out.choice.reserved38);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved38;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_39:
-    toStruct_SubCauseCodeType(in.reserved_39, out.choice.reserved39);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED39:
+    toStruct_SubCauseCodeType(in.reserved39, out.choice.reserved39);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved39;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_40:
-    toStruct_SubCauseCodeType(in.reserved_40, out.choice.reserved40);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED40:
+    toStruct_SubCauseCodeType(in.reserved40, out.choice.reserved40);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved40;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_41:
-    toStruct_SubCauseCodeType(in.reserved_41, out.choice.reserved41);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED41:
+    toStruct_SubCauseCodeType(in.reserved41, out.choice.reserved41);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved41;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_42:
-    toStruct_SubCauseCodeType(in.reserved_42, out.choice.reserved42);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED42:
+    toStruct_SubCauseCodeType(in.reserved42, out.choice.reserved42);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved42;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_43:
-    toStruct_SubCauseCodeType(in.reserved_43, out.choice.reserved43);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED43:
+    toStruct_SubCauseCodeType(in.reserved43, out.choice.reserved43);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved43;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_44:
-    toStruct_SubCauseCodeType(in.reserved_44, out.choice.reserved44);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED44:
+    toStruct_SubCauseCodeType(in.reserved44, out.choice.reserved44);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved44;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_45:
-    toStruct_SubCauseCodeType(in.reserved_45, out.choice.reserved45);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED45:
+    toStruct_SubCauseCodeType(in.reserved45, out.choice.reserved45);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved45;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_46:
-    toStruct_SubCauseCodeType(in.reserved_46, out.choice.reserved46);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED46:
+    toStruct_SubCauseCodeType(in.reserved46, out.choice.reserved46);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved46;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_47:
-    toStruct_SubCauseCodeType(in.reserved_47, out.choice.reserved47);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED47:
+    toStruct_SubCauseCodeType(in.reserved47, out.choice.reserved47);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved47;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_48:
-    toStruct_SubCauseCodeType(in.reserved_48, out.choice.reserved48);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED48:
+    toStruct_SubCauseCodeType(in.reserved48, out.choice.reserved48);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved48;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_49:
-    toStruct_SubCauseCodeType(in.reserved_49, out.choice.reserved49);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED49:
+    toStruct_SubCauseCodeType(in.reserved49, out.choice.reserved49);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved49;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_50:
-    toStruct_SubCauseCodeType(in.reserved_50, out.choice.reserved50);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED50:
+    toStruct_SubCauseCodeType(in.reserved50, out.choice.reserved50);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved50;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_51:
-    toStruct_SubCauseCodeType(in.reserved_51, out.choice.reserved51);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED51:
+    toStruct_SubCauseCodeType(in.reserved51, out.choice.reserved51);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved51;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_52:
-    toStruct_SubCauseCodeType(in.reserved_52, out.choice.reserved52);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED52:
+    toStruct_SubCauseCodeType(in.reserved52, out.choice.reserved52);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved52;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_53:
-    toStruct_SubCauseCodeType(in.reserved_53, out.choice.reserved53);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED53:
+    toStruct_SubCauseCodeType(in.reserved53, out.choice.reserved53);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved53;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_54:
-    toStruct_SubCauseCodeType(in.reserved_54, out.choice.reserved54);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED54:
+    toStruct_SubCauseCodeType(in.reserved54, out.choice.reserved54);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved54;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_55:
-    toStruct_SubCauseCodeType(in.reserved_55, out.choice.reserved55);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED55:
+    toStruct_SubCauseCodeType(in.reserved55, out.choice.reserved55);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved55;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_56:
-    toStruct_SubCauseCodeType(in.reserved_56, out.choice.reserved56);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED56:
+    toStruct_SubCauseCodeType(in.reserved56, out.choice.reserved56);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved56;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_57:
-    toStruct_SubCauseCodeType(in.reserved_57, out.choice.reserved57);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED57:
+    toStruct_SubCauseCodeType(in.reserved57, out.choice.reserved57);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved57;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_58:
-    toStruct_SubCauseCodeType(in.reserved_58, out.choice.reserved58);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED58:
+    toStruct_SubCauseCodeType(in.reserved58, out.choice.reserved58);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved58;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_59:
-    toStruct_SubCauseCodeType(in.reserved_59, out.choice.reserved59);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED59:
+    toStruct_SubCauseCodeType(in.reserved59, out.choice.reserved59);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved59;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_60:
-    toStruct_SubCauseCodeType(in.reserved_60, out.choice.reserved60);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED60:
+    toStruct_SubCauseCodeType(in.reserved60, out.choice.reserved60);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved60;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_61:
-    toStruct_SubCauseCodeType(in.reserved_61, out.choice.reserved61);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED61:
+    toStruct_SubCauseCodeType(in.reserved61, out.choice.reserved61);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved61;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_62:
-    toStruct_SubCauseCodeType(in.reserved_62, out.choice.reserved62);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED62:
+    toStruct_SubCauseCodeType(in.reserved62, out.choice.reserved62);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved62;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_63:
-    toStruct_SubCauseCodeType(in.reserved_63, out.choice.reserved63);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED63:
+    toStruct_SubCauseCodeType(in.reserved63, out.choice.reserved63);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved63;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_64:
-    toStruct_SubCauseCodeType(in.reserved_64, out.choice.reserved64);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED64:
+    toStruct_SubCauseCodeType(in.reserved64, out.choice.reserved64);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved64;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_65:
-    toStruct_SubCauseCodeType(in.reserved_65, out.choice.reserved65);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED65:
+    toStruct_SubCauseCodeType(in.reserved65, out.choice.reserved65);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved65;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_66:
-    toStruct_SubCauseCodeType(in.reserved_66, out.choice.reserved66);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED66:
+    toStruct_SubCauseCodeType(in.reserved66, out.choice.reserved66);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved66;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_67:
-    toStruct_SubCauseCodeType(in.reserved_67, out.choice.reserved67);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED67:
+    toStruct_SubCauseCodeType(in.reserved67, out.choice.reserved67);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved67;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_68:
-    toStruct_SubCauseCodeType(in.reserved_68, out.choice.reserved68);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED68:
+    toStruct_SubCauseCodeType(in.reserved68, out.choice.reserved68);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved68;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_69:
-    toStruct_SubCauseCodeType(in.reserved_69, out.choice.reserved69);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED69:
+    toStruct_SubCauseCodeType(in.reserved69, out.choice.reserved69);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved69;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_70:
-    toStruct_SubCauseCodeType(in.reserved_70, out.choice.reserved70);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED70:
+    toStruct_SubCauseCodeType(in.reserved70, out.choice.reserved70);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved70;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_71:
-    toStruct_SubCauseCodeType(in.reserved_71, out.choice.reserved71);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED71:
+    toStruct_SubCauseCodeType(in.reserved71, out.choice.reserved71);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved71;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_72:
-    toStruct_SubCauseCodeType(in.reserved_72, out.choice.reserved72);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED72:
+    toStruct_SubCauseCodeType(in.reserved72, out.choice.reserved72);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved72;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_73:
-    toStruct_SubCauseCodeType(in.reserved_73, out.choice.reserved73);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED73:
+    toStruct_SubCauseCodeType(in.reserved73, out.choice.reserved73);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved73;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_74:
-    toStruct_SubCauseCodeType(in.reserved_74, out.choice.reserved74);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED74:
+    toStruct_SubCauseCodeType(in.reserved74, out.choice.reserved74);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved74;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_75:
-    toStruct_SubCauseCodeType(in.reserved_75, out.choice.reserved75);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED75:
+    toStruct_SubCauseCodeType(in.reserved75, out.choice.reserved75);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved75;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_76:
-    toStruct_SubCauseCodeType(in.reserved_76, out.choice.reserved76);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED76:
+    toStruct_SubCauseCodeType(in.reserved76, out.choice.reserved76);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved76;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_77:
-    toStruct_SubCauseCodeType(in.reserved_77, out.choice.reserved77);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED77:
+    toStruct_SubCauseCodeType(in.reserved77, out.choice.reserved77);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved77;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_78:
-    toStruct_SubCauseCodeType(in.reserved_78, out.choice.reserved78);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED78:
+    toStruct_SubCauseCodeType(in.reserved78, out.choice.reserved78);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved78;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_79:
-    toStruct_SubCauseCodeType(in.reserved_79, out.choice.reserved79);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED79:
+    toStruct_SubCauseCodeType(in.reserved79, out.choice.reserved79);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved79;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_80:
-    toStruct_SubCauseCodeType(in.reserved_80, out.choice.reserved80);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED80:
+    toStruct_SubCauseCodeType(in.reserved80, out.choice.reserved80);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved80;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_81:
-    toStruct_SubCauseCodeType(in.reserved_81, out.choice.reserved81);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED81:
+    toStruct_SubCauseCodeType(in.reserved81, out.choice.reserved81);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved81;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_82:
-    toStruct_SubCauseCodeType(in.reserved_82, out.choice.reserved82);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED82:
+    toStruct_SubCauseCodeType(in.reserved82, out.choice.reserved82);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved82;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_83:
-    toStruct_SubCauseCodeType(in.reserved_83, out.choice.reserved83);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED83:
+    toStruct_SubCauseCodeType(in.reserved83, out.choice.reserved83);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved83;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_84:
-    toStruct_SubCauseCodeType(in.reserved_84, out.choice.reserved84);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED84:
+    toStruct_SubCauseCodeType(in.reserved84, out.choice.reserved84);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved84;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_85:
-    toStruct_SubCauseCodeType(in.reserved_85, out.choice.reserved85);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED85:
+    toStruct_SubCauseCodeType(in.reserved85, out.choice.reserved85);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved85;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_86:
-    toStruct_SubCauseCodeType(in.reserved_86, out.choice.reserved86);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED86:
+    toStruct_SubCauseCodeType(in.reserved86, out.choice.reserved86);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved86;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_87:
-    toStruct_SubCauseCodeType(in.reserved_87, out.choice.reserved87);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED87:
+    toStruct_SubCauseCodeType(in.reserved87, out.choice.reserved87);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved87;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_88:
-    toStruct_SubCauseCodeType(in.reserved_88, out.choice.reserved88);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED88:
+    toStruct_SubCauseCodeType(in.reserved88, out.choice.reserved88);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved88;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_89:
-    toStruct_SubCauseCodeType(in.reserved_89, out.choice.reserved89);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED89:
+    toStruct_SubCauseCodeType(in.reserved89, out.choice.reserved89);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved89;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_90:
-    toStruct_SubCauseCodeType(in.reserved_90, out.choice.reserved90);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED90:
+    toStruct_SubCauseCodeType(in.reserved90, out.choice.reserved90);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved90;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_VEHICLE_BREAKDOWN_91:
-    toStruct_VehicleBreakdownSubCauseCode(in.vehicle_breakdown_91, out.choice.vehicleBreakdown91);
+  case cpm_msgs::CauseCodeChoice::CHOICE_VEHICLE_BREAKDOWN91:
+    toStruct_VehicleBreakdownSubCauseCode(in.vehicle_breakdown91, out.choice.vehicleBreakdown91);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_vehicleBreakdown91;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_POST_CRASH_92:
-    toStruct_PostCrashSubCauseCode(in.post_crash_92, out.choice.postCrash92);
+  case cpm_msgs::CauseCodeChoice::CHOICE_POST_CRASH92:
+    toStruct_PostCrashSubCauseCode(in.post_crash92, out.choice.postCrash92);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_postCrash92;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PROBLEM_93:
-    toStruct_HumanProblemSubCauseCode(in.human_problem_93, out.choice.humanProblem93);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PROBLEM93:
+    toStruct_HumanProblemSubCauseCode(in.human_problem93, out.choice.humanProblem93);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_humanProblem93;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_STATIONARY_VEHICLE_94:
-    toStruct_StationaryVehicleSubCauseCode(in.stationary_vehicle_94, out.choice.stationaryVehicle94);
+  case cpm_msgs::CauseCodeChoice::CHOICE_STATIONARY_VEHICLE94:
+    toStruct_StationaryVehicleSubCauseCode(in.stationary_vehicle94, out.choice.stationaryVehicle94);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_stationaryVehicle94;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_EMERGENCY_VEHICLE_APPROACHING_95:
-    toStruct_EmergencyVehicleApproachingSubCauseCode(in.emergency_vehicle_approaching_95, out.choice.emergencyVehicleApproaching95);
+  case cpm_msgs::CauseCodeChoice::CHOICE_EMERGENCY_VEHICLE_APPROACHING95:
+    toStruct_EmergencyVehicleApproachingSubCauseCode(in.emergency_vehicle_approaching95, out.choice.emergencyVehicleApproaching95);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_emergencyVehicleApproaching95;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE_96:
-    toStruct_HazardousLocationDangerousCurveSubCauseCode(in.hazardous_location_dangerous_curve_96, out.choice.hazardousLocation-DangerousCurve96);
+  case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE96:
+    toStruct_HazardousLocationDangerousCurveSubCauseCode(in.hazardous_location_dangerous_curve96, out.choice.hazardousLocation-DangerousCurve96);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_hazardousLocation-DangerousCurve96;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_COLLISION_RISK_97:
-    toStruct_CollisionRiskSubCauseCode(in.collision_risk_97, out.choice.collisionRisk97);
+  case cpm_msgs::CauseCodeChoice::CHOICE_COLLISION_RISK97:
+    toStruct_CollisionRiskSubCauseCode(in.collision_risk97, out.choice.collisionRisk97);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_collisionRisk97;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_SIGNAL_VIOLATION_98:
-    toStruct_SignalViolationSubCauseCode(in.signal_violation_98, out.choice.signalViolation98);
+  case cpm_msgs::CauseCodeChoice::CHOICE_SIGNAL_VIOLATION98:
+    toStruct_SignalViolationSubCauseCode(in.signal_violation98, out.choice.signalViolation98);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_signalViolation98;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_SITUATION_99:
-    toStruct_DangerousSituationSubCauseCode(in.dangerous_situation_99, out.choice.dangerousSituation99);
+  case cpm_msgs::CauseCodeChoice::CHOICE_DANGEROUS_SITUATION99:
+    toStruct_DangerousSituationSubCauseCode(in.dangerous_situation99, out.choice.dangerousSituation99);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_dangerousSituation99;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RAILWAY_LEVEL_CROSSING_100:
-    toStruct_RailwayLevelCrossingSubCauseCode(in.railway_level_crossing_100, out.choice.railwayLevelCrossing100);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RAILWAY_LEVEL_CROSSING100:
+    toStruct_RailwayLevelCrossingSubCauseCode(in.railway_level_crossing100, out.choice.railwayLevelCrossing100);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_railwayLevelCrossing100;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_101:
-    toStruct_SubCauseCodeType(in.reserved_101, out.choice.reserved101);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED101:
+    toStruct_SubCauseCodeType(in.reserved101, out.choice.reserved101);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved101;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_102:
-    toStruct_SubCauseCodeType(in.reserved_102, out.choice.reserved102);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED102:
+    toStruct_SubCauseCodeType(in.reserved102, out.choice.reserved102);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved102;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_103:
-    toStruct_SubCauseCodeType(in.reserved_103, out.choice.reserved103);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED103:
+    toStruct_SubCauseCodeType(in.reserved103, out.choice.reserved103);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved103;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_104:
-    toStruct_SubCauseCodeType(in.reserved_104, out.choice.reserved104);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED104:
+    toStruct_SubCauseCodeType(in.reserved104, out.choice.reserved104);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved104;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_105:
-    toStruct_SubCauseCodeType(in.reserved_105, out.choice.reserved105);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED105:
+    toStruct_SubCauseCodeType(in.reserved105, out.choice.reserved105);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved105;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_106:
-    toStruct_SubCauseCodeType(in.reserved_106, out.choice.reserved106);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED106:
+    toStruct_SubCauseCodeType(in.reserved106, out.choice.reserved106);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved106;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_107:
-    toStruct_SubCauseCodeType(in.reserved_107, out.choice.reserved107);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED107:
+    toStruct_SubCauseCodeType(in.reserved107, out.choice.reserved107);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved107;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_108:
-    toStruct_SubCauseCodeType(in.reserved_108, out.choice.reserved108);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED108:
+    toStruct_SubCauseCodeType(in.reserved108, out.choice.reserved108);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved108;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_109:
-    toStruct_SubCauseCodeType(in.reserved_109, out.choice.reserved109);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED109:
+    toStruct_SubCauseCodeType(in.reserved109, out.choice.reserved109);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved109;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_110:
-    toStruct_SubCauseCodeType(in.reserved_110, out.choice.reserved110);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED110:
+    toStruct_SubCauseCodeType(in.reserved110, out.choice.reserved110);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved110;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_111:
-    toStruct_SubCauseCodeType(in.reserved_111, out.choice.reserved111);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED111:
+    toStruct_SubCauseCodeType(in.reserved111, out.choice.reserved111);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved111;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_112:
-    toStruct_SubCauseCodeType(in.reserved_112, out.choice.reserved112);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED112:
+    toStruct_SubCauseCodeType(in.reserved112, out.choice.reserved112);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved112;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_113:
-    toStruct_SubCauseCodeType(in.reserved_113, out.choice.reserved113);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED113:
+    toStruct_SubCauseCodeType(in.reserved113, out.choice.reserved113);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved113;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_114:
-    toStruct_SubCauseCodeType(in.reserved_114, out.choice.reserved114);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED114:
+    toStruct_SubCauseCodeType(in.reserved114, out.choice.reserved114);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved114;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_115:
-    toStruct_SubCauseCodeType(in.reserved_115, out.choice.reserved115);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED115:
+    toStruct_SubCauseCodeType(in.reserved115, out.choice.reserved115);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved115;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_116:
-    toStruct_SubCauseCodeType(in.reserved_116, out.choice.reserved116);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED116:
+    toStruct_SubCauseCodeType(in.reserved116, out.choice.reserved116);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved116;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_117:
-    toStruct_SubCauseCodeType(in.reserved_117, out.choice.reserved117);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED117:
+    toStruct_SubCauseCodeType(in.reserved117, out.choice.reserved117);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved117;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_118:
-    toStruct_SubCauseCodeType(in.reserved_118, out.choice.reserved118);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED118:
+    toStruct_SubCauseCodeType(in.reserved118, out.choice.reserved118);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved118;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_119:
-    toStruct_SubCauseCodeType(in.reserved_119, out.choice.reserved119);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED119:
+    toStruct_SubCauseCodeType(in.reserved119, out.choice.reserved119);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved119;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_120:
-    toStruct_SubCauseCodeType(in.reserved_120, out.choice.reserved120);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED120:
+    toStruct_SubCauseCodeType(in.reserved120, out.choice.reserved120);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved120;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_121:
-    toStruct_SubCauseCodeType(in.reserved_121, out.choice.reserved121);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED121:
+    toStruct_SubCauseCodeType(in.reserved121, out.choice.reserved121);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved121;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_122:
-    toStruct_SubCauseCodeType(in.reserved_122, out.choice.reserved122);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED122:
+    toStruct_SubCauseCodeType(in.reserved122, out.choice.reserved122);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved122;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_123:
-    toStruct_SubCauseCodeType(in.reserved_123, out.choice.reserved123);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED123:
+    toStruct_SubCauseCodeType(in.reserved123, out.choice.reserved123);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved123;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_124:
-    toStruct_SubCauseCodeType(in.reserved_124, out.choice.reserved124);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED124:
+    toStruct_SubCauseCodeType(in.reserved124, out.choice.reserved124);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved124;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_125:
-    toStruct_SubCauseCodeType(in.reserved_125, out.choice.reserved125);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED125:
+    toStruct_SubCauseCodeType(in.reserved125, out.choice.reserved125);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved125;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_126:
-    toStruct_SubCauseCodeType(in.reserved_126, out.choice.reserved126);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED126:
+    toStruct_SubCauseCodeType(in.reserved126, out.choice.reserved126);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved126;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_127:
-    toStruct_SubCauseCodeType(in.reserved_127, out.choice.reserved127);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED127:
+    toStruct_SubCauseCodeType(in.reserved127, out.choice.reserved127);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved127;
     break;
-  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED_128:
-    toStruct_SubCauseCodeType(in.reserved_128, out.choice.reserved128);
+  case cpm_msgs::CauseCodeChoice::CHOICE_RESERVED128:
+    toStruct_SubCauseCodeType(in.reserved128, out.choice.reserved128);
     out.present = CauseCodeChoice_PR::CauseCodeChoice_PR_reserved128;
     break;
   default: break;

@@ -37,11 +37,11 @@
 # 
 
 uint8 value
-uint8 L_1 = 0
-uint8 L_2 = 1
-uint8 L_3 = 2
-uint8 L_4 = 3
-uint8 L_5 = 4
-uint8 L_6 = 5
-uint8 L_7 = 6
+uint8 L1 = 0
+uint8 L2 = 1
+uint8 L3 = 2
+uint8 L4 = 3
+uint8 L5 = 4
+uint8 L6 = 5
+uint8 L7 = 6
 

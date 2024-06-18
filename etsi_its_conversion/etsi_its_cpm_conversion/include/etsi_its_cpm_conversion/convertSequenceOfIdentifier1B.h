@@ -36,7 +36,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/SequenceOfIdentifier1B.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/sequence_of_identifier_1_b.hpp>
+#include <etsi_its_cpm_msgs/msg/sequence_of_identifier1_b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/Iso3833VehicleType.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/iso_3833_vehicle_type.hpp>
+#include <etsi_its_cpm_msgs/msg/iso3833_vehicle_type.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 

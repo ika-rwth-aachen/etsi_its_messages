@@ -34,7 +34,7 @@ SOFTWARE.
 #include <etsi_its_cpm_msgs/Identifier2B.h>
 namespace cpm_msgs = etsi_its_cpm_msgs;
 #else
-#include <etsi_its_cpm_msgs/msg/identifier_2_b.hpp>
+#include <etsi_its_cpm_msgs/msg/identifier2_b.hpp>
 namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 #endif
 
