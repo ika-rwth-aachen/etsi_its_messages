@@ -45,6 +45,22 @@ etsi_its_denm_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_cpm_coding:
+  stage: asn1c
+  needs: []
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -o etsi_its_coding/etsi_its_cpm_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_msgs:
   stage: ROS Messages
@@ -68,6 +84,20 @@ etsi_its_denm_msgs:
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_cpm_msgs:
+  stage: ROS Messages
+  needs: []
+  script:
+    - >
+      ./utils/codegen/codegen-rust/asn1ToRosMsg.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -o etsi_its_msgs/etsi_its_cpm_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
@@ -91,4 +121,20 @@ etsi_its_denm_conversion:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_cpm_conversion:
+  stage: Conversion Headers
+  needs: []
+  script:
+    - >
+      ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -t cpm
+      -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
