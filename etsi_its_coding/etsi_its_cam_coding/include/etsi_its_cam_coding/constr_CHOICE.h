@@ -1,13 +1,14 @@
+#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_CONSTR_CHOICE_H_
-#define	_CONSTR_CHOICE_H_
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -114,6 +115,7 @@ int CHOICE_variant_set_presence(const asn_TYPE_descriptor_t *td,
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _CONSTR_CHOICE_H_ */
+

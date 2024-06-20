@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -349,3 +352,7 @@ INTEGER_encode_xer(const asn_TYPE_descriptor_t *td, const void *sptr,
 
     ASN__ENCODED_OK(er);
 }
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -381,3 +384,7 @@ OCTET_STRING_per_put_characters(asn_per_outp_t *po, const uint8_t *buf,
     return 0;
 }
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
+
+#ifdef __cplusplus
+}
+#endif

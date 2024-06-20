@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -26,3 +29,7 @@ uper_sot_suck(const asn_codec_ctx_t *ctx, const asn_TYPE_descriptor_t *td,
 
 	return rv;
 }
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -89,3 +92,7 @@ asn_TYPE_descriptor_t asn_DEF_ObjectDescriptor = {
     0, 0,  /* No members */
     0  /* No specifics */
 };
+
+#ifdef __cplusplus
+}
+#endif

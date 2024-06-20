@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2004, 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -106,3 +109,7 @@ NativeEnumerated__compar_value2enum(const void *ap, const void *bp) {
     return 1;
 }
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
+
+#ifdef __cplusplus
+}
+#endif

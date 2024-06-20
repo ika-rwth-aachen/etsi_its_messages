@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -61,3 +64,7 @@ asn_TYPE_operation_t asn_OP_OPEN_TYPE = {
 #endif  /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
     0  /* Use generic outmost tag fetcher */
 };
+
+#ifdef __cplusplus
+}
+#endif

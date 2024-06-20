@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -120,3 +123,7 @@ oer_serialize_length(size_t length, asn_app_consume_bytes_f *cb,
     return sp - scratch;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

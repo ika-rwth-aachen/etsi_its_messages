@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -171,3 +174,7 @@ OPEN_TYPE_aper_unknown_type_discard_bytes (asn_per_data_t *pd) {
      return rv;
 #undef ASN_DUMMY_BYTES
 }
+
+#ifdef __cplusplus
+}
+#endif

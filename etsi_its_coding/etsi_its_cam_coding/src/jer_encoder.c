@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -67,3 +70,7 @@ jer_fprint(FILE *stream, const asn_TYPE_descriptor_t *td, const void *sptr) {
 	return fflush(stream);
 }
 
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	ASN_CODECS_PRIM_H
-#define	ASN_CODECS_PRIM_H
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -51,6 +52,7 @@ asn_dec_rval_t xer_decode_primitive(
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* ASN_CODECS_PRIM_H */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -369,3 +372,7 @@ SET_OF_compare(const asn_TYPE_descriptor_t *td, const void *aptr,
 
 	return 0;
 }
+
+#ifdef __cplusplus
+}
+#endif

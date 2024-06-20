@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/constraints.h>
 
@@ -92,3 +95,7 @@ asn_check_constraints(const asn_TYPE_descriptor_t *type_descriptor,
     return ret;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -78,3 +81,7 @@ void ASN_DEBUG_f(const char *fmt, ...) {
 	fprintf(stderr, "\n");
 	va_end(ap);
 }
+
+#ifdef __cplusplus
+}
+#endif

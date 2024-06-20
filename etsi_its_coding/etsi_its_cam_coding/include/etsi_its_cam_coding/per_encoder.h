@@ -1,14 +1,15 @@
+#pragma once
 /*-
  * Copyright (c) 2006-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_PER_ENCODER_H_
-#define	_PER_ENCODER_H_
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/per_support.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -33,6 +34,7 @@ int encode_dyn_cb(const void *buffer, size_t size, void *key);
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _PER_ENCODER_H_ */
+

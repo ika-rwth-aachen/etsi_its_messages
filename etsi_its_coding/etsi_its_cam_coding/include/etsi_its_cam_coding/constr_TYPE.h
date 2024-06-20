@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -8,13 +9,13 @@
  * This structure even contains pointer to these encoding and decoding routines
  * for each defined ASN.1 type.
  */
-#ifndef	_CONSTR_TYPE_H_
-#define	_CONSTR_TYPE_H_
+
 
 #include <etsi_its_cam_coding/ber_tlv_length.h>
 #include <etsi_its_cam_coding/ber_tlv_tag.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -291,6 +292,7 @@ int asn_fprint(FILE *stream, /* Destination stream descriptor */
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _CONSTR_TYPE_H_ */
+

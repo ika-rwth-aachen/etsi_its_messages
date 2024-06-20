@@ -1,3 +1,4 @@
+#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -9,13 +10,13 @@
  * will do).
  * This type may be used when integer range is limited by subtype constraints.
  */
-#ifndef	_NativeInteger_H_
-#define	_NativeInteger_H_
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -66,6 +67,7 @@ asn_random_fill_f NativeInteger_random_fill;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _NativeInteger_H_ */
+

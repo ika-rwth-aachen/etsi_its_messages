@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -235,3 +238,7 @@ xer_equivalent(const struct asn_TYPE_descriptor_s *td, const void *struct1,
 	return XEQ_SUCCESS;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

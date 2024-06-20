@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -309,3 +312,7 @@ per_long_range_unrebase(unsigned long inp, intmax_t lb, intmax_t ub, long *outp)
     *outp = tmp;
     return rc;
 }
+
+#ifdef __cplusplus
+}
+#endif

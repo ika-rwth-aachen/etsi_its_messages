@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_CONSTR_SEQUENCE_H_
-#define	_CONSTR_SEQUENCE_H_
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -90,6 +91,7 @@ extern asn_TYPE_operation_t asn_OP_SEQUENCE;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _CONSTR_SEQUENCE_H_ */
+

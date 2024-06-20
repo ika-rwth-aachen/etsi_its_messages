@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -353,3 +356,7 @@ SET_OF_encode_der(const asn_TYPE_descriptor_t *td, const void *sptr,
         ASN__ENCODE_FAILED;
     }
 }
+
+#ifdef __cplusplus
+}
+#endif

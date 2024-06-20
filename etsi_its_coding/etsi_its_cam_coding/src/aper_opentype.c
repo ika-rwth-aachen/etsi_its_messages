@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -147,3 +150,7 @@ aper_open_type_skip(const asn_codec_ctx_t *ctx, asn_per_data_t *pd) {
 	else
 		return 0;
 }
+
+#ifdef __cplusplus
+}
+#endif

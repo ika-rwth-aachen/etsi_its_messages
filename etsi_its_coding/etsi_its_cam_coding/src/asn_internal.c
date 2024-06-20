@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 #define ASN_INTERNAL_C
 #include <etsi_its_cam_coding/asn_internal.h>
 
@@ -47,3 +50,7 @@ asn__format_to_callback(int (*cb)(const void *, size_t, void *key), void *key,
     return wrote;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

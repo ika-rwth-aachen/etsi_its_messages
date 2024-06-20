@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -139,3 +142,7 @@ oer_open_type_put(const asn_TYPE_descriptor_t *td,
     return len_len + er.encoded;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

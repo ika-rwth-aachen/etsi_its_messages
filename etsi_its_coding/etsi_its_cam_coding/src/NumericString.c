@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2006 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -155,3 +158,7 @@ NumericString_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
 
 	return 0;
 }
+
+#ifdef __cplusplus
+}
+#endif

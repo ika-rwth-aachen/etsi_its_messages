@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef ASN_TYPE_ANY_H
-#define ASN_TYPE_ANY_H
+
 
 #include <etsi_its_denm_coding/OCTET_STRING.h>	/* Implemented via OCTET STRING type */
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -79,6 +80,7 @@ int ANY_to_type_aper(ANY_t *, asn_TYPE_descriptor_t *td, void **struct_ptr);
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* ASN_TYPE_ANY_H */
+

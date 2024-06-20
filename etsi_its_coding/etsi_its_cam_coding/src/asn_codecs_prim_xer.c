@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -182,3 +185,7 @@ xer_decode_primitive(const asn_codec_ctx_t *opt_codec_ctx,
     }
     return rc;
 }
+
+#ifdef __cplusplus
+}
+#endif

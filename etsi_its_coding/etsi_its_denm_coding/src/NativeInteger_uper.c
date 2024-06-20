@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -68,3 +71,7 @@ NativeInteger_encode_uper(const asn_TYPE_descriptor_t *td,
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_INTEGER, &tmpint);
     return er;
 }
+
+#ifdef __cplusplus
+}
+#endif

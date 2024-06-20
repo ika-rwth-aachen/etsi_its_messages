@@ -64,6 +64,8 @@ def adjustIncludes(parent_path: str):
     source_files = [f for f in source_files if os.path.isfile(f)]
     headers = [os.path.basename(f) for f in header_files]
 
+    namespace = parent_path.split("/")[-1]
+
     for file in [*header_files, *source_files]:
         print(file)
         with open(file, "r") as f:
@@ -73,6 +75,20 @@ def adjustIncludes(parent_path: str):
                     contents = re.sub(r'(^#include\s+")({}")'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
                 if re.search(r'^#include\s+<{}>'.format(header), contents, re.MULTILINE):
                     contents = re.sub(r'(^#include\s+<)({}>)'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
+            if file in header_files:
+                contents = "#pragma once\n" + contents
+                contents = re.sub(r'^#ifndef.*\n#define.*$', '', contents, count=1, flags=re.MULTILINE)
+                endifs = re.findall(r'^#endif.*$', contents, flags=re.MULTILINE)
+                # contents = re.sub(r'^#endif.*_H.*$', '', contents, count=1, flags=re.MULTILINE)
+                if len(endifs) > 0:
+                    contents = re.sub(r'^.*{}.*$'.format(re.escape(endifs[-1])), '', contents, count=1, flags=re.MULTILINE)
+                if "#ifdef __cplusplus\nextern \"C\" {" in contents:
+                    contents = contents.replace("#ifdef __cplusplus\nextern \"C\" {", f"#ifdef __cplusplus\nnamespace {namespace} {{\nextern \"C\" {{")
+                if  "#ifdef __cplusplus\n}" in contents:
+                    contents = contents.replace("#ifdef __cplusplus\n}", "#ifdef __cplusplus\n}\n}")
+            if file in source_files:
+                contents = f"#ifdef __cplusplus\nnamespace {namespace} {{\n#endif\n" + contents
+                contents = contents + f"\n#ifdef __cplusplus\n}}\n#endif\n"
         with open(file, "w") as f:
             f.write(contents)
 

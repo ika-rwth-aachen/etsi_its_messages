@@ -1,9 +1,9 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	ASN_SET_OF_H
-#define	ASN_SET_OF_H
+
 
 #ifdef __cplusplus
 #define A_SET_OF(type)                   \
@@ -24,6 +24,7 @@
 #endif
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -67,6 +68,7 @@ typedef A_SET_OF(void) asn_anonymous_set_;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* ASN_SET_OF_H */
+

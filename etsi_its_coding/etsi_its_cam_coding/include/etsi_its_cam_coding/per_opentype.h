@@ -1,13 +1,14 @@
+#pragma once
 /*
  * Copyright (c) 2007-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_PER_OPENTYPE_H_
-#define	_PER_OPENTYPE_H_
+
 
 #include <etsi_its_cam_coding/asn_internal.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -19,6 +20,7 @@ asn_dec_rval_t uper_sot_suck(
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _PER_OPENTYPE_H_ */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*-
  * Copyright (c) 2004, 2005, 2006 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -150,3 +153,7 @@ NativeInteger_compare(const asn_TYPE_descriptor_t *td, const void *aptr, const v
         return 1;
     }
 }
+
+#ifdef __cplusplus
+}
+#endif

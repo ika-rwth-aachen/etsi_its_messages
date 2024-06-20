@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2003 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -89,3 +92,7 @@ asn_TYPE_descriptor_t asn_DEF_GraphicString = {
     0, 0,  /* No members */
     0  /* No specifics */
 };
+
+#ifdef __cplusplus
+}
+#endif

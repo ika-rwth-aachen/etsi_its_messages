@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_DER_ENCODER_H_
-#define	_DER_ENCODER_H_
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -63,6 +64,7 @@ ssize_t der_write_tags(const struct asn_TYPE_descriptor_s *type_descriptor,
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _DER_ENCODER_H_ */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -166,3 +169,7 @@ der_tlv_length_serialize(ber_tlv_len_t len, void *bufp, size_t size) {
 	return required_size + 1;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

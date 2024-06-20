@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -370,3 +373,7 @@ per_skip_bits(asn_per_data_t *pd, int skip_nbits) {
 	}
 	return hasNonZeroBits;
 }
+
+#ifdef __cplusplus
+}
+#endif

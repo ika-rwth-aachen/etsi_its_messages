@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2003, 2004 X/IO Labs, xiolabs.com.
  * Copyright (c) 2003, 2004, 2005 Lev Walkin <vlm@lionet.info>.
@@ -225,3 +228,7 @@ finish:
 	return chunk_start - (const char *)xmlbuf;
 }
 
+
+#ifdef __cplusplus
+}
+#endif

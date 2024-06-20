@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*-
  * Copyright (c) 2003, 2004, 2006 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -222,3 +225,7 @@ UTF8String_to_wcs(const UTF8String_t *st, uint32_t *dst, size_t dstlen) {
 	}
 }
 
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_GraphicString_H_
-#define	_GraphicString_H_
+
 
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -51,6 +52,7 @@ extern asn_TYPE_operation_t asn_OP_GraphicString;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _GraphicString_H_ */
+

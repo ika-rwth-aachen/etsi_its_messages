@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -5,8 +6,7 @@
 /*
  * Declarations internally useful for the ASN.1 support code.
  */
-#ifndef	ASN_INTERNAL_H
-#define	ASN_INTERNAL_H
+
 #ifndef __EXTENSIONS__
 #define __EXTENSIONS__          /* for Sun */
 #endif
@@ -187,4 +187,4 @@ ASN__STACK_OVERFLOW_CHECK(const asn_codec_ctx_t *ctx) {
 }
 #endif
 
-#endif	/* ASN_INTERNAL_H */
+

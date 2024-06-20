@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2003-2019 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -736,3 +739,7 @@ INTEGER_compare(const asn_TYPE_descriptor_t *td, const void *aptr,
     }
 
 }
+
+#ifdef __cplusplus
+}
+#endif

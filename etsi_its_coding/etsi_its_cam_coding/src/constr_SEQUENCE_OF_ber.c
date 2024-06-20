@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -86,3 +89,7 @@ SEQUENCE_OF_encode_der(const asn_TYPE_descriptor_t *td, const void *ptr,
 
     return erval;
 }
+
+#ifdef __cplusplus
+}
+#endif

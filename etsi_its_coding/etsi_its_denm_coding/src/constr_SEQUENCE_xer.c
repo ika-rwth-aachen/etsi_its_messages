@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -346,3 +349,7 @@ cb_failed:
     if(tmp_def_val) ASN_STRUCT_FREE(*tmp_def_val_td, tmp_def_val);
     ASN__ENCODE_FAILED;
 }
+
+#ifdef __cplusplus
+}
+#endif

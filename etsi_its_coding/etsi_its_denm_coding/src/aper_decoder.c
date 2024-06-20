@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 #include <etsi_its_denm_coding/asn_application.h>
 #include <etsi_its_denm_coding/asn_internal.h>
 #include <etsi_its_denm_coding/aper_decoder.h>
@@ -89,3 +92,7 @@ aper_decode(const asn_codec_ctx_t *opt_codec_ctx,
 	}
 	return rval;
 }
+
+#ifdef __cplusplus
+}
+#endif

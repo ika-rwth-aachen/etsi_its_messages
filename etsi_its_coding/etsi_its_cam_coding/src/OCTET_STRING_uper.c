@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -317,3 +320,7 @@ OCTET_STRING_encode_uper(const asn_TYPE_descriptor_t *td,
 
     ASN__ENCODED_OK(er);
 }
+
+#ifdef __cplusplus
+}
+#endif

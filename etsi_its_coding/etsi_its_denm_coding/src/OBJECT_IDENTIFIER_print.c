@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -28,3 +31,7 @@ OBJECT_IDENTIFIER_print(const asn_TYPE_descriptor_t *td, const void *sptr,
 
     return (cb(" }", 2, app_key) < 0) ? -1 : 0;
 }
+
+#ifdef __cplusplus
+}
+#endif

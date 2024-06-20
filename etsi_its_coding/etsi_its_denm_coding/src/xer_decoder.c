@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -367,3 +370,7 @@ xer_skip_unknown(xer_check_tag_e tcv, ber_tlv_len_t *depth) {
 		return -1;
 	}
 }
+
+#ifdef __cplusplus
+}
+#endif

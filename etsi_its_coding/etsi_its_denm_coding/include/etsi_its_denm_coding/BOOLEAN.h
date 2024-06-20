@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_BOOLEAN_H_
-#define	_BOOLEAN_H_
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -65,6 +66,7 @@ asn_random_fill_f BOOLEAN_random_fill;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _BOOLEAN_H_ */
+

@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_IA5String_H_
-#define	_IA5String_H_
+
 
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -54,6 +55,7 @@ asn_constr_check_f IA5String_constraint;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _IA5String_H_ */
+

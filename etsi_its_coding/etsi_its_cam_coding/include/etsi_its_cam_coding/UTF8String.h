@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_UTF8String_H_
-#define	_UTF8String_H_
+
 
 #include <etsi_its_cam_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -79,6 +80,7 @@ size_t UTF8String_to_wcs(const UTF8String_t *st, uint32_t *dst, size_t dstlen);
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _UTF8String_H_ */
+

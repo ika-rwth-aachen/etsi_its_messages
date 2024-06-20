@@ -1,14 +1,15 @@
+#pragma once
 /*
  * Copyright (c) 2003, 2004 X/IO Labs, xiolabs.com.
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_XER_SUPPORT_H_
-#define	_XER_SUPPORT_H_
+
 
 #include <etsi_its_cam_coding/asn_system.h>		/* Platform-specific types */
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -50,6 +51,7 @@ ssize_t pxml_parse(int *_stateContext, const void *_buf, size_t _size,
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _XER_SUPPORT_H_ */
+

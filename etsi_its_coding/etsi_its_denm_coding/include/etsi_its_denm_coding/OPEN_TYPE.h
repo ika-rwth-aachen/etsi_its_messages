@@ -1,14 +1,15 @@
+#pragma once
 /*-
  * Copyright (c) 2017-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef ASN_OPEN_TYPE_H
-#define ASN_OPEN_TYPE_H
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 ///////////#include <per_support.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -112,6 +113,7 @@ extern asn_TYPE_operation_t asn_OP_OPEN_TYPE;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* ASN_OPEN_TYPE_H */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -331,3 +334,7 @@ asn_put_aligned_flush(asn_bit_outp_t *po) {
     }
 }
 
+
+#ifdef __cplusplus
+}
+#endif

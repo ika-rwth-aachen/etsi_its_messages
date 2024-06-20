@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -89,3 +92,7 @@ OPEN_TYPE_oer_get(const asn_codec_ctx_t *opt_codec_ctx,
     }
     return rv;
 }
+
+#ifdef __cplusplus
+}
+#endif

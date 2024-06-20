@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_BIT_STRING_H_
-#define	_BIT_STRING_H_
+
 
 #include <etsi_its_cam_coding/OCTET_STRING.h>	/* Some help from OCTET STRING */
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -70,6 +71,7 @@ const BIT_STRING_t *BIT_STRING__compactify(const BIT_STRING_t *st, BIT_STRING_t 
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _BIT_STRING_H_ */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -58,3 +61,7 @@ CHOICE_random_fill(const asn_TYPE_descriptor_t *td, void **sptr,
 
     return res;
 }
+
+#ifdef __cplusplus
+}
+#endif

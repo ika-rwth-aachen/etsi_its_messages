@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -114,3 +117,7 @@ ANY_to_type(ANY_t *st, asn_TYPE_descriptor_t *td, void **struct_ptr) {
         return -1;
     }
 }
+
+#ifdef __cplusplus
+}
+#endif

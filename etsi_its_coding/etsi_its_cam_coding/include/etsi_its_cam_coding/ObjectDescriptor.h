@@ -1,13 +1,14 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_ObjectDescriptor_H_
-#define	_ObjectDescriptor_H_
+
 
 #include <etsi_its_cam_coding/GraphicString.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -49,6 +50,7 @@ extern asn_TYPE_operation_t asn_OP_ObjectDescriptor;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _ObjectDescriptor_H_ */
+

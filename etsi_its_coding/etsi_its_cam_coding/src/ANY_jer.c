@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -15,3 +18,7 @@ ANY_encode_jer(const asn_TYPE_descriptor_t *td, const void *sptr, int ilevel,
   /* Dump as binary */
   return OCTET_STRING_encode_jer(td, sptr, ilevel, flags, cb, app_key);
 }
+
+#ifdef __cplusplus
+}
+#endif

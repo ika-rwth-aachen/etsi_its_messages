@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -20,3 +23,7 @@ ANY_encode_xer(const asn_TYPE_descriptor_t *td, const void *sptr, int ilevel,
     /* Dump as binary */
     return OCTET_STRING_encode_xer(td, sptr, ilevel, flags, cb, app_key);
 }
+
+#ifdef __cplusplus
+}
+#endif

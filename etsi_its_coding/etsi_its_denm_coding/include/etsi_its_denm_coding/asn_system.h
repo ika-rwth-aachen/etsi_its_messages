@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -5,8 +6,7 @@
 /*
  * Miscellaneous system-dependent types.
  */
-#ifndef	ASN_SYSTEM_H
-#define	ASN_SYSTEM_H
+
 
 #ifdef	HAVE_CONFIG_H
 #include "config.h"
@@ -176,4 +176,4 @@ typedef	unsigned int	uint32_t;
 #endif
 #endif
 
-#endif	/* ASN_SYSTEM_H */
+

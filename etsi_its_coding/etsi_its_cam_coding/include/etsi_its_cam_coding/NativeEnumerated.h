@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -9,12 +10,12 @@
  * will do).
  * This type may be used when integer range is limited by subtype constraints.
  */
-#ifndef	_NativeEnumerated_H_
-#define	_NativeEnumerated_H_
+
 
 #include <etsi_its_cam_coding/NativeInteger.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -71,6 +72,7 @@ int NativeEnumerated__compar_value2enum(
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _NativeEnumerated_H_ */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -625,3 +628,7 @@ OCTET_STRING_decode_xer_utf8(const asn_codec_ctx_t *opt_codec_ctx,
                                     OCTET_STRING__handle_control_chars,
                                     OCTET_STRING__convert_entrefs);
 }
+
+#ifdef __cplusplus
+}
+#endif

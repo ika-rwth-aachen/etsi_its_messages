@@ -1,14 +1,15 @@
+#pragma once
 /*-
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	_PER_DECODER_H_
-#define	_PER_DECODER_H_
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/per_support.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -25,6 +26,7 @@ typedef asn_dec_rval_t(per_type_decoder_f)(
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* _PER_DECODER_H_ */
+

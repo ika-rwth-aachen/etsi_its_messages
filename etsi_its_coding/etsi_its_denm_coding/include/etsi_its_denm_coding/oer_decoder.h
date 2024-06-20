@@ -1,14 +1,15 @@
+#pragma once
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	OER_DECODER_H
-#define	OER_DECODER_H
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 #include <etsi_its_denm_coding/oer_support.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -67,6 +68,7 @@ oer_type_decoder_f oer_decode_primitive;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* OER_DECODER_H */
+

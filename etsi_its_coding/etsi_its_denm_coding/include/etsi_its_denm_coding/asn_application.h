@@ -1,3 +1,4 @@
+#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -5,14 +6,14 @@
 /*
  * Application-level ASN.1 callbacks.
  */
-#ifndef	ASN_APPLICATION_H
-#define	ASN_APPLICATION_H
+
 
 #include "etsi_its_denm_coding/asn_system.h"		/* for platform-dependent types */
 #include "etsi_its_denm_coding/asn_codecs.h"		/* for ASN.1 codecs specifics */
 #include "etsi_its_denm_coding/asn_config.h"
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -166,8 +167,9 @@ typedef void (asn_app_constraint_failed_f)(void *application_specific_key,
 
 #ifdef __cplusplus
 }
+}
 #endif
 
 #include "etsi_its_denm_coding/constr_TYPE.h"	/* for asn_TYPE_descriptor_t */
 
-#endif	/* ASN_APPLICATION_H */
+

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_cam_coding {
+#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -64,3 +67,7 @@ asn_random_between(intmax_t lb, intmax_t rb) {
         return lb + (intmax_t)(value % (range + 1));
     }
 }
+
+#ifdef __cplusplus
+}
+#endif

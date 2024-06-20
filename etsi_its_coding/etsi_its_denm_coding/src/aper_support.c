@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+namespace etsi_its_denm_coding {
+#endif
 /*
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -237,3 +240,7 @@ aper_put_nsnnwn(asn_per_outp_t *po, int range, int number) {
 */
 	return per_put_few_bits(po, number, 8 * bytes);
 }
+
+#ifdef __cplusplus
+}
+#endif

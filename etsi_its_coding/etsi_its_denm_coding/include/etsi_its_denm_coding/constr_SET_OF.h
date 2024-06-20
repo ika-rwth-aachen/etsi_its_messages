@@ -1,14 +1,15 @@
+#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	CONSTR_SET_OF_H
-#define	CONSTR_SET_OF_H
+
 
 #include <etsi_its_denm_coding/asn_application.h>
 #include <etsi_its_denm_coding/asn_SET_OF.h>
 
 #ifdef __cplusplus
+namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -97,6 +98,7 @@ void SET_OF__encode_sorted_free(
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* CONSTR_SET_OF_H */
+

@@ -1,13 +1,14 @@
+#pragma once
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#ifndef	OER_ENCODER_H
-#define	OER_ENCODER_H
+
 
 #include <etsi_its_cam_coding/asn_application.h>
 
 #ifdef __cplusplus
+namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -65,6 +66,7 @@ oer_type_encoder_f oer_encode_primitive;
 
 #ifdef __cplusplus
 }
+}
 #endif
 
-#endif	/* OER_ENCODER_H */
+
