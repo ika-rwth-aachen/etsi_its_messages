@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Longitude(const Longitude_t& in, cam_msgs::Longitude& out) {
+void toRos_Longitude(const etsi_its_cam_coding::Longitude_t& in, cam_msgs::Longitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Longitude(const cam_msgs::Longitude& in, Longitude_t& out) {
-  memset(&out, 0, sizeof(Longitude_t));
+void toStruct_Longitude(const cam_msgs::Longitude& in, etsi_its_cam_coding::Longitude_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::Longitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DeltaLongitude(const DeltaLongitude_t& in, denm_msgs::DeltaLongitude& out) {
+void toRos_DeltaLongitude(const etsi_its_denm_coding::DeltaLongitude_t& in, denm_msgs::DeltaLongitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaLongitude(const denm_msgs::DeltaLongitude& in, DeltaLongitude_t& out) {
-  memset(&out, 0, sizeof(DeltaLongitude_t));
+void toStruct_DeltaLongitude(const denm_msgs::DeltaLongitude& in, etsi_its_denm_coding::DeltaLongitude_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::DeltaLongitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

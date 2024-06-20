@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PositioningSolutionType(const PositioningSolutionType_t& in, cam_msgs::PositioningSolutionType& out) {
+void toRos_PositioningSolutionType(const etsi_its_cam_coding::PositioningSolutionType_t& in, cam_msgs::PositioningSolutionType& out) {
   out.value = in;
 }
 
-void toStruct_PositioningSolutionType(const cam_msgs::PositioningSolutionType& in, PositioningSolutionType_t& out) {
-  memset(&out, 0, sizeof(PositioningSolutionType_t));
+void toStruct_PositioningSolutionType(const cam_msgs::PositioningSolutionType& in, etsi_its_cam_coding::PositioningSolutionType_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::PositioningSolutionType_t));
 
   out = in.value;
 }

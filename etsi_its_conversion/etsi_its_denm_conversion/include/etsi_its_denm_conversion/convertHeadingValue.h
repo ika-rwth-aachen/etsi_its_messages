@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HeadingValue(const HeadingValue_t& in, denm_msgs::HeadingValue& out) {
+void toRos_HeadingValue(const etsi_its_denm_coding::HeadingValue_t& in, denm_msgs::HeadingValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeadingValue(const denm_msgs::HeadingValue& in, HeadingValue_t& out) {
-  memset(&out, 0, sizeof(HeadingValue_t));
+void toStruct_HeadingValue(const denm_msgs::HeadingValue& in, etsi_its_denm_coding::HeadingValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::HeadingValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

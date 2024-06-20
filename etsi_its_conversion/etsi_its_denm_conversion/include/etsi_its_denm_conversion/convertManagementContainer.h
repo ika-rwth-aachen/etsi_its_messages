@@ -48,7 +48,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ManagementContainer(const ManagementContainer_t& in, denm_msgs::ManagementContainer& out) {
+void toRos_ManagementContainer(const etsi_its_denm_coding::ManagementContainer_t& in, denm_msgs::ManagementContainer& out) {
   toRos_ActionID(in.actionID, out.action_id);
   toRos_TimestampIts(in.detectionTime, out.detection_time);
   toRos_TimestampIts(in.referenceTime, out.reference_time);
@@ -75,29 +75,29 @@ void toRos_ManagementContainer(const ManagementContainer_t& in, denm_msgs::Manag
   toRos_StationType(in.stationType, out.station_type);
 }
 
-void toStruct_ManagementContainer(const denm_msgs::ManagementContainer& in, ManagementContainer_t& out) {
-  memset(&out, 0, sizeof(ManagementContainer_t));
+void toStruct_ManagementContainer(const denm_msgs::ManagementContainer& in, etsi_its_denm_coding::ManagementContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ManagementContainer_t));
 
   toStruct_ActionID(in.action_id, out.actionID);
   toStruct_TimestampIts(in.detection_time, out.detectionTime);
   toStruct_TimestampIts(in.reference_time, out.referenceTime);
   if (in.termination_is_present) {
-    out.termination = (Termination_t*) calloc(1, sizeof(Termination_t));
+    out.termination = (etsi_its_denm_coding::Termination_t*) calloc(1, sizeof(etsi_its_denm_coding::Termination_t));
     toStruct_Termination(in.termination, *out.termination);
   }
   toStruct_ReferencePosition(in.event_position, out.eventPosition);
   if (in.relevance_distance_is_present) {
-    out.relevanceDistance = (RelevanceDistance_t*) calloc(1, sizeof(RelevanceDistance_t));
+    out.relevanceDistance = (etsi_its_denm_coding::RelevanceDistance_t*) calloc(1, sizeof(etsi_its_denm_coding::RelevanceDistance_t));
     toStruct_RelevanceDistance(in.relevance_distance, *out.relevanceDistance);
   }
   if (in.relevance_traffic_direction_is_present) {
-    out.relevanceTrafficDirection = (RelevanceTrafficDirection_t*) calloc(1, sizeof(RelevanceTrafficDirection_t));
+    out.relevanceTrafficDirection = (etsi_its_denm_coding::RelevanceTrafficDirection_t*) calloc(1, sizeof(etsi_its_denm_coding::RelevanceTrafficDirection_t));
     toStruct_RelevanceTrafficDirection(in.relevance_traffic_direction, *out.relevanceTrafficDirection);
   }
-  out.validityDuration = (ValidityDuration_t*) calloc(1, sizeof(ValidityDuration_t));
+  out.validityDuration = (etsi_its_denm_coding::ValidityDuration_t*) calloc(1, sizeof(etsi_its_denm_coding::ValidityDuration_t));
   toStruct_ValidityDuration(in.validity_duration, *out.validityDuration);
   if (in.transmission_interval_is_present) {
-    out.transmissionInterval = (TransmissionInterval_t*) calloc(1, sizeof(TransmissionInterval_t));
+    out.transmissionInterval = (etsi_its_denm_coding::TransmissionInterval_t*) calloc(1, sizeof(etsi_its_denm_coding::TransmissionInterval_t));
     toStruct_TransmissionInterval(in.transmission_interval, *out.transmissionInterval);
   }
   toStruct_StationType(in.station_type, out.stationType);

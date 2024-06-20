@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AltitudeValue(const AltitudeValue_t& in, denm_msgs::AltitudeValue& out) {
+void toRos_AltitudeValue(const etsi_its_denm_coding::AltitudeValue_t& in, denm_msgs::AltitudeValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AltitudeValue(const denm_msgs::AltitudeValue& in, AltitudeValue_t& out) {
-  memset(&out, 0, sizeof(AltitudeValue_t));
+void toStruct_AltitudeValue(const denm_msgs::AltitudeValue& in, etsi_its_denm_coding::AltitudeValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::AltitudeValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

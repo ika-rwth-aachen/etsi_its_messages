@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CenDsrcTollingZoneID(const CenDsrcTollingZoneID_t& in, denm_msgs::CenDsrcTollingZoneID& out) {
+void toRos_CenDsrcTollingZoneID(const etsi_its_denm_coding::CenDsrcTollingZoneID_t& in, denm_msgs::CenDsrcTollingZoneID& out) {
   toRos_ProtectedZoneID(in, out.value);
 }
 
-void toStruct_CenDsrcTollingZoneID(const denm_msgs::CenDsrcTollingZoneID& in, CenDsrcTollingZoneID_t& out) {
-  memset(&out, 0, sizeof(CenDsrcTollingZoneID_t));
+void toStruct_CenDsrcTollingZoneID(const denm_msgs::CenDsrcTollingZoneID& in, etsi_its_denm_coding::CenDsrcTollingZoneID_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::CenDsrcTollingZoneID_t));
 
   toStruct_ProtectedZoneID(in.value, out);
 }

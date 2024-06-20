@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_TrafficRule(const TrafficRule_t& in, denm_msgs::TrafficRule& out) {
+void toRos_TrafficRule(const etsi_its_denm_coding::TrafficRule_t& in, denm_msgs::TrafficRule& out) {
   out.value = in;
 }
 
-void toStruct_TrafficRule(const denm_msgs::TrafficRule& in, TrafficRule_t& out) {
-  memset(&out, 0, sizeof(TrafficRule_t));
+void toStruct_TrafficRule(const denm_msgs::TrafficRule& in, etsi_its_denm_coding::TrafficRule_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::TrafficRule_t));
 
   out = in.value;
 }

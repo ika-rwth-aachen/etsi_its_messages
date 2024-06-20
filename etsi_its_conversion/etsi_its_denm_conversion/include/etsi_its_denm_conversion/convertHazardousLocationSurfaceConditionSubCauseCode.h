@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HazardousLocationSurfaceConditionSubCauseCode(const HazardousLocation_SurfaceConditionSubCauseCode_t& in, denm_msgs::HazardousLocationSurfaceConditionSubCauseCode& out) {
+void toRos_HazardousLocationSurfaceConditionSubCauseCode(const etsi_its_denm_coding::HazardousLocation_SurfaceConditionSubCauseCode_t& in, denm_msgs::HazardousLocationSurfaceConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocationSurfaceConditionSubCauseCode(const denm_msgs::HazardousLocationSurfaceConditionSubCauseCode& in, HazardousLocation_SurfaceConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(HazardousLocation_SurfaceConditionSubCauseCode_t));
+void toStruct_HazardousLocationSurfaceConditionSubCauseCode(const denm_msgs::HazardousLocationSurfaceConditionSubCauseCode& in, etsi_its_denm_coding::HazardousLocation_SurfaceConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::HazardousLocation_SurfaceConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

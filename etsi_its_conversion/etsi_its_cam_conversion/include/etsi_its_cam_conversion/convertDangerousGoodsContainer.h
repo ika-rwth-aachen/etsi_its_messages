@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DangerousGoodsContainer(const DangerousGoodsContainer_t& in, cam_msgs::DangerousGoodsContainer& out) {
+void toRos_DangerousGoodsContainer(const etsi_its_cam_coding::DangerousGoodsContainer_t& in, cam_msgs::DangerousGoodsContainer& out) {
   toRos_DangerousGoodsBasic(in.dangerousGoodsBasic, out.dangerous_goods_basic);
 }
 
-void toStruct_DangerousGoodsContainer(const cam_msgs::DangerousGoodsContainer& in, DangerousGoodsContainer_t& out) {
-  memset(&out, 0, sizeof(DangerousGoodsContainer_t));
+void toStruct_DangerousGoodsContainer(const cam_msgs::DangerousGoodsContainer& in, etsi_its_cam_coding::DangerousGoodsContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::DangerousGoodsContainer_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_basic, out.dangerousGoodsBasic);
 }

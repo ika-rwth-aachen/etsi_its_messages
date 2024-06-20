@@ -42,7 +42,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, cam_msgs::RoadWorksContainerBasic& out) {
+void toRos_RoadWorksContainerBasic(const etsi_its_cam_coding::RoadWorksContainerBasic_t& in, cam_msgs::RoadWorksContainerBasic& out) {
   if (in.roadworksSubCauseCode) {
     toRos_RoadworksSubCauseCode(*in.roadworksSubCauseCode, out.roadworks_sub_cause_code);
     out.roadworks_sub_cause_code_is_present = true;
@@ -54,16 +54,16 @@ void toRos_RoadWorksContainerBasic(const RoadWorksContainerBasic_t& in, cam_msgs
   }
 }
 
-void toStruct_RoadWorksContainerBasic(const cam_msgs::RoadWorksContainerBasic& in, RoadWorksContainerBasic_t& out) {
-  memset(&out, 0, sizeof(RoadWorksContainerBasic_t));
+void toStruct_RoadWorksContainerBasic(const cam_msgs::RoadWorksContainerBasic& in, etsi_its_cam_coding::RoadWorksContainerBasic_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::RoadWorksContainerBasic_t));
 
   if (in.roadworks_sub_cause_code_is_present) {
-    out.roadworksSubCauseCode = (RoadworksSubCauseCode_t*) calloc(1, sizeof(RoadworksSubCauseCode_t));
+    out.roadworksSubCauseCode = (etsi_its_cam_coding::RoadworksSubCauseCode_t*) calloc(1, sizeof(etsi_its_cam_coding::RoadworksSubCauseCode_t));
     toStruct_RoadworksSubCauseCode(in.roadworks_sub_cause_code, *out.roadworksSubCauseCode);
   }
   toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, out.lightBarSirenInUse);
   if (in.closed_lanes_is_present) {
-    out.closedLanes = (ClosedLanes_t*) calloc(1, sizeof(ClosedLanes_t));
+    out.closedLanes = (etsi_its_cam_coding::ClosedLanes_t*) calloc(1, sizeof(etsi_its_cam_coding::ClosedLanes_t));
     toStruct_ClosedLanes(in.closed_lanes, *out.closedLanes);
   }
 }

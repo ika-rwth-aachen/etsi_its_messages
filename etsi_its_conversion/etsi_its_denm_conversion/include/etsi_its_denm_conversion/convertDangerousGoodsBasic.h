@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DangerousGoodsBasic(const DangerousGoodsBasic_t& in, denm_msgs::DangerousGoodsBasic& out) {
+void toRos_DangerousGoodsBasic(const etsi_its_denm_coding::DangerousGoodsBasic_t& in, denm_msgs::DangerousGoodsBasic& out) {
   out.value = in;
 }
 
-void toStruct_DangerousGoodsBasic(const denm_msgs::DangerousGoodsBasic& in, DangerousGoodsBasic_t& out) {
-  memset(&out, 0, sizeof(DangerousGoodsBasic_t));
+void toStruct_DangerousGoodsBasic(const denm_msgs::DangerousGoodsBasic& in, etsi_its_denm_coding::DangerousGoodsBasic_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::DangerousGoodsBasic_t));
 
   out = in.value;
 }

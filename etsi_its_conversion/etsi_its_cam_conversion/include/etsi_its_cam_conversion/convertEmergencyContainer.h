@@ -42,7 +42,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EmergencyContainer(const EmergencyContainer_t& in, cam_msgs::EmergencyContainer& out) {
+void toRos_EmergencyContainer(const etsi_its_cam_coding::EmergencyContainer_t& in, cam_msgs::EmergencyContainer& out) {
   toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.light_bar_siren_in_use);
   if (in.incidentIndication) {
     toRos_CauseCode(*in.incidentIndication, out.incident_indication);
@@ -54,16 +54,16 @@ void toRos_EmergencyContainer(const EmergencyContainer_t& in, cam_msgs::Emergenc
   }
 }
 
-void toStruct_EmergencyContainer(const cam_msgs::EmergencyContainer& in, EmergencyContainer_t& out) {
-  memset(&out, 0, sizeof(EmergencyContainer_t));
+void toStruct_EmergencyContainer(const cam_msgs::EmergencyContainer& in, etsi_its_cam_coding::EmergencyContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::EmergencyContainer_t));
 
   toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, out.lightBarSirenInUse);
   if (in.incident_indication_is_present) {
-    out.incidentIndication = (CauseCode_t*) calloc(1, sizeof(CauseCode_t));
+    out.incidentIndication = (etsi_its_cam_coding::CauseCode_t*) calloc(1, sizeof(etsi_its_cam_coding::CauseCode_t));
     toStruct_CauseCode(in.incident_indication, *out.incidentIndication);
   }
   if (in.emergency_priority_is_present) {
-    out.emergencyPriority = (EmergencyPriority_t*) calloc(1, sizeof(EmergencyPriority_t));
+    out.emergencyPriority = (etsi_its_cam_coding::EmergencyPriority_t*) calloc(1, sizeof(etsi_its_cam_coding::EmergencyPriority_t));
     toStruct_EmergencyPriority(in.emergency_priority, *out.emergencyPriority);
   }
 }

@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_TimestampIts(const TimestampIts_t& in, cam_msgs::TimestampIts& out) {
+void toRos_TimestampIts(const etsi_its_cam_coding::TimestampIts_t& in, cam_msgs::TimestampIts& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TimestampIts(const cam_msgs::TimestampIts& in, TimestampIts_t& out) {
-  memset(&out, 0, sizeof(TimestampIts_t));
+void toStruct_TimestampIts(const cam_msgs::TimestampIts& in, etsi_its_cam_coding::TimestampIts_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::TimestampIts_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

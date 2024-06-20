@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PosLonCarr(const PosLonCarr_t& in, cam_msgs::PosLonCarr& out) {
+void toRos_PosLonCarr(const etsi_its_cam_coding::PosLonCarr_t& in, cam_msgs::PosLonCarr& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PosLonCarr(const cam_msgs::PosLonCarr& in, PosLonCarr_t& out) {
-  memset(&out, 0, sizeof(PosLonCarr_t));
+void toStruct_PosLonCarr(const cam_msgs::PosLonCarr& in, etsi_its_cam_coding::PosLonCarr_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::PosLonCarr_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

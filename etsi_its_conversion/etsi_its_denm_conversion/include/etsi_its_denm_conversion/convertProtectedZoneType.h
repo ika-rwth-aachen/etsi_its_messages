@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ProtectedZoneType(const ProtectedZoneType_t& in, denm_msgs::ProtectedZoneType& out) {
+void toRos_ProtectedZoneType(const etsi_its_denm_coding::ProtectedZoneType_t& in, denm_msgs::ProtectedZoneType& out) {
   out.value = in;
 }
 
-void toStruct_ProtectedZoneType(const denm_msgs::ProtectedZoneType& in, ProtectedZoneType_t& out) {
-  memset(&out, 0, sizeof(ProtectedZoneType_t));
+void toStruct_ProtectedZoneType(const denm_msgs::ProtectedZoneType& in, etsi_its_denm_coding::ProtectedZoneType_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ProtectedZoneType_t));
 
   out = in.value;
 }

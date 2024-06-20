@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ValidityDuration(const ValidityDuration_t& in, denm_msgs::ValidityDuration& out) {
+void toRos_ValidityDuration(const etsi_its_denm_coding::ValidityDuration_t& in, denm_msgs::ValidityDuration& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ValidityDuration(const denm_msgs::ValidityDuration& in, ValidityDuration_t& out) {
-  memset(&out, 0, sizeof(ValidityDuration_t));
+void toStruct_ValidityDuration(const denm_msgs::ValidityDuration& in, etsi_its_denm_coding::ValidityDuration_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ValidityDuration_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

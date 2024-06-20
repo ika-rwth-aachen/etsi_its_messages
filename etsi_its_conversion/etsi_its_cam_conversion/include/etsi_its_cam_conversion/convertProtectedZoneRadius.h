@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ProtectedZoneRadius(const ProtectedZoneRadius_t& in, cam_msgs::ProtectedZoneRadius& out) {
+void toRos_ProtectedZoneRadius(const etsi_its_cam_coding::ProtectedZoneRadius_t& in, cam_msgs::ProtectedZoneRadius& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ProtectedZoneRadius(const cam_msgs::ProtectedZoneRadius& in, ProtectedZoneRadius_t& out) {
-  memset(&out, 0, sizeof(ProtectedZoneRadius_t));
+void toStruct_ProtectedZoneRadius(const cam_msgs::ProtectedZoneRadius& in, etsi_its_cam_coding::ProtectedZoneRadius_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::ProtectedZoneRadius_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

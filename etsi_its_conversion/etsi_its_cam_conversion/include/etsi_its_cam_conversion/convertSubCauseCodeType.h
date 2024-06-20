@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SubCauseCodeType(const SubCauseCodeType_t& in, cam_msgs::SubCauseCodeType& out) {
+void toRos_SubCauseCodeType(const etsi_its_cam_coding::SubCauseCodeType_t& in, cam_msgs::SubCauseCodeType& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SubCauseCodeType(const cam_msgs::SubCauseCodeType& in, SubCauseCodeType_t& out) {
-  memset(&out, 0, sizeof(SubCauseCodeType_t));
+void toStruct_SubCauseCodeType(const cam_msgs::SubCauseCodeType& in, etsi_its_cam_coding::SubCauseCodeType_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::SubCauseCodeType_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

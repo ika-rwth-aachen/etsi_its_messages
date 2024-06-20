@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CollisionRiskSubCauseCode(const CollisionRiskSubCauseCode_t& in, cam_msgs::CollisionRiskSubCauseCode& out) {
+void toRos_CollisionRiskSubCauseCode(const etsi_its_cam_coding::CollisionRiskSubCauseCode_t& in, cam_msgs::CollisionRiskSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CollisionRiskSubCauseCode(const cam_msgs::CollisionRiskSubCauseCode& in, CollisionRiskSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(CollisionRiskSubCauseCode_t));
+void toStruct_CollisionRiskSubCauseCode(const cam_msgs::CollisionRiskSubCauseCode& in, etsi_its_cam_coding::CollisionRiskSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::CollisionRiskSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LateralAcceleration(const LateralAcceleration_t& in, denm_msgs::LateralAcceleration& out) {
+void toRos_LateralAcceleration(const etsi_its_denm_coding::LateralAcceleration_t& in, denm_msgs::LateralAcceleration& out) {
   toRos_LateralAccelerationValue(in.lateralAccelerationValue, out.lateral_acceleration_value);
   toRos_AccelerationConfidence(in.lateralAccelerationConfidence, out.lateral_acceleration_confidence);
 }
 
-void toStruct_LateralAcceleration(const denm_msgs::LateralAcceleration& in, LateralAcceleration_t& out) {
-  memset(&out, 0, sizeof(LateralAcceleration_t));
+void toStruct_LateralAcceleration(const denm_msgs::LateralAcceleration& in, etsi_its_denm_coding::LateralAcceleration_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::LateralAcceleration_t));
 
   toStruct_LateralAccelerationValue(in.lateral_acceleration_value, out.lateralAccelerationValue);
   toStruct_AccelerationConfidence(in.lateral_acceleration_confidence, out.lateralAccelerationConfidence);

@@ -49,7 +49,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ImpactReductionContainer(const ImpactReductionContainer_t& in, denm_msgs::ImpactReductionContainer& out) {
+void toRos_ImpactReductionContainer(const etsi_its_denm_coding::ImpactReductionContainer_t& in, denm_msgs::ImpactReductionContainer& out) {
   toRos_HeightLonCarr(in.heightLonCarrLeft, out.height_lon_carr_left);
   toRos_HeightLonCarr(in.heightLonCarrRight, out.height_lon_carr_right);
   toRos_PosLonCarr(in.posLonCarrLeft, out.pos_lon_carr_left);
@@ -64,8 +64,8 @@ void toRos_ImpactReductionContainer(const ImpactReductionContainer_t& in, denm_m
   toRos_RequestResponseIndication(in.requestResponseIndication, out.request_response_indication);
 }
 
-void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, ImpactReductionContainer_t& out) {
-  memset(&out, 0, sizeof(ImpactReductionContainer_t));
+void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, etsi_its_denm_coding::ImpactReductionContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ImpactReductionContainer_t));
 
   toStruct_HeightLonCarr(in.height_lon_carr_left, out.heightLonCarrLeft);
   toStruct_HeightLonCarr(in.height_lon_carr_right, out.heightLonCarrRight);

@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_YawRate(const YawRate_t& in, denm_msgs::YawRate& out) {
+void toRos_YawRate(const etsi_its_denm_coding::YawRate_t& in, denm_msgs::YawRate& out) {
   toRos_YawRateValue(in.yawRateValue, out.yaw_rate_value);
   toRos_YawRateConfidence(in.yawRateConfidence, out.yaw_rate_confidence);
 }
 
-void toStruct_YawRate(const denm_msgs::YawRate& in, YawRate_t& out) {
-  memset(&out, 0, sizeof(YawRate_t));
+void toStruct_YawRate(const denm_msgs::YawRate& in, etsi_its_denm_coding::YawRate_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::YawRate_t));
 
   toStruct_YawRateValue(in.yaw_rate_value, out.yawRateValue);
   toStruct_YawRateConfidence(in.yaw_rate_confidence, out.yawRateConfidence);

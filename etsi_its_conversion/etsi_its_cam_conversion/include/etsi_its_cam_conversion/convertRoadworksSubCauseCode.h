@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RoadworksSubCauseCode(const RoadworksSubCauseCode_t& in, cam_msgs::RoadworksSubCauseCode& out) {
+void toRos_RoadworksSubCauseCode(const etsi_its_cam_coding::RoadworksSubCauseCode_t& in, cam_msgs::RoadworksSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RoadworksSubCauseCode(const cam_msgs::RoadworksSubCauseCode& in, RoadworksSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(RoadworksSubCauseCode_t));
+void toStruct_RoadworksSubCauseCode(const cam_msgs::RoadworksSubCauseCode& in, etsi_its_cam_coding::RoadworksSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::RoadworksSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

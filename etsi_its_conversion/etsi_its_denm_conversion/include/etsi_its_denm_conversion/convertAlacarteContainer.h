@@ -45,7 +45,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AlacarteContainer(const AlacarteContainer_t& in, denm_msgs::AlacarteContainer& out) {
+void toRos_AlacarteContainer(const etsi_its_denm_coding::AlacarteContainer_t& in, denm_msgs::AlacarteContainer& out) {
   if (in.lanePosition) {
     toRos_LanePosition(*in.lanePosition, out.lane_position);
     out.lane_position_is_present = true;
@@ -72,31 +72,31 @@ void toRos_AlacarteContainer(const AlacarteContainer_t& in, denm_msgs::AlacarteC
   }
 }
 
-void toStruct_AlacarteContainer(const denm_msgs::AlacarteContainer& in, AlacarteContainer_t& out) {
-  memset(&out, 0, sizeof(AlacarteContainer_t));
+void toStruct_AlacarteContainer(const denm_msgs::AlacarteContainer& in, etsi_its_denm_coding::AlacarteContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::AlacarteContainer_t));
 
   if (in.lane_position_is_present) {
-    out.lanePosition = (LanePosition_t*) calloc(1, sizeof(LanePosition_t));
+    out.lanePosition = (etsi_its_denm_coding::LanePosition_t*) calloc(1, sizeof(etsi_its_denm_coding::LanePosition_t));
     toStruct_LanePosition(in.lane_position, *out.lanePosition);
   }
   if (in.impact_reduction_is_present) {
-    out.impactReduction = (ImpactReductionContainer_t*) calloc(1, sizeof(ImpactReductionContainer_t));
+    out.impactReduction = (etsi_its_denm_coding::ImpactReductionContainer_t*) calloc(1, sizeof(etsi_its_denm_coding::ImpactReductionContainer_t));
     toStruct_ImpactReductionContainer(in.impact_reduction, *out.impactReduction);
   }
   if (in.external_temperature_is_present) {
-    out.externalTemperature = (Temperature_t*) calloc(1, sizeof(Temperature_t));
+    out.externalTemperature = (etsi_its_denm_coding::Temperature_t*) calloc(1, sizeof(etsi_its_denm_coding::Temperature_t));
     toStruct_Temperature(in.external_temperature, *out.externalTemperature);
   }
   if (in.road_works_is_present) {
-    out.roadWorks = (RoadWorksContainerExtended_t*) calloc(1, sizeof(RoadWorksContainerExtended_t));
+    out.roadWorks = (etsi_its_denm_coding::RoadWorksContainerExtended_t*) calloc(1, sizeof(etsi_its_denm_coding::RoadWorksContainerExtended_t));
     toStruct_RoadWorksContainerExtended(in.road_works, *out.roadWorks);
   }
   if (in.positioning_solution_is_present) {
-    out.positioningSolution = (PositioningSolutionType_t*) calloc(1, sizeof(PositioningSolutionType_t));
+    out.positioningSolution = (etsi_its_denm_coding::PositioningSolutionType_t*) calloc(1, sizeof(etsi_its_denm_coding::PositioningSolutionType_t));
     toStruct_PositioningSolutionType(in.positioning_solution, *out.positioningSolution);
   }
   if (in.stationary_vehicle_is_present) {
-    out.stationaryVehicle = (StationaryVehicleContainer_t*) calloc(1, sizeof(StationaryVehicleContainer_t));
+    out.stationaryVehicle = (etsi_its_denm_coding::StationaryVehicleContainer_t*) calloc(1, sizeof(etsi_its_denm_coding::StationaryVehicleContainer_t));
     toStruct_StationaryVehicleContainer(in.stationary_vehicle, *out.stationaryVehicle);
   }
 }

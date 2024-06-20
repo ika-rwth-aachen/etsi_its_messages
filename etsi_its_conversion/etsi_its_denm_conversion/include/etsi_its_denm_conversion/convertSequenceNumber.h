@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SequenceNumber(const SequenceNumber_t& in, denm_msgs::SequenceNumber& out) {
+void toRos_SequenceNumber(const etsi_its_denm_coding::SequenceNumber_t& in, denm_msgs::SequenceNumber& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SequenceNumber(const denm_msgs::SequenceNumber& in, SequenceNumber_t& out) {
-  memset(&out, 0, sizeof(SequenceNumber_t));
+void toStruct_SequenceNumber(const denm_msgs::SequenceNumber& in, etsi_its_denm_coding::SequenceNumber_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::SequenceNumber_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

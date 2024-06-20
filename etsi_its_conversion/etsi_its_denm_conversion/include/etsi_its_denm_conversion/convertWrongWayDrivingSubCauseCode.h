@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_WrongWayDrivingSubCauseCode(const WrongWayDrivingSubCauseCode_t& in, denm_msgs::WrongWayDrivingSubCauseCode& out) {
+void toRos_WrongWayDrivingSubCauseCode(const etsi_its_denm_coding::WrongWayDrivingSubCauseCode_t& in, denm_msgs::WrongWayDrivingSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_WrongWayDrivingSubCauseCode(const denm_msgs::WrongWayDrivingSubCauseCode& in, WrongWayDrivingSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(WrongWayDrivingSubCauseCode_t));
+void toStruct_WrongWayDrivingSubCauseCode(const denm_msgs::WrongWayDrivingSubCauseCode& in, etsi_its_denm_coding::WrongWayDrivingSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::WrongWayDrivingSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SlowVehicleSubCauseCode(const SlowVehicleSubCauseCode_t& in, cam_msgs::SlowVehicleSubCauseCode& out) {
+void toRos_SlowVehicleSubCauseCode(const etsi_its_cam_coding::SlowVehicleSubCauseCode_t& in, cam_msgs::SlowVehicleSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SlowVehicleSubCauseCode(const cam_msgs::SlowVehicleSubCauseCode& in, SlowVehicleSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(SlowVehicleSubCauseCode_t));
+void toStruct_SlowVehicleSubCauseCode(const cam_msgs::SlowVehicleSubCauseCode& in, etsi_its_cam_coding::SlowVehicleSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::SlowVehicleSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

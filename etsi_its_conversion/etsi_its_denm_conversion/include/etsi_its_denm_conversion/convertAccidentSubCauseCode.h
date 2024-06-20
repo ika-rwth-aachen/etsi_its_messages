@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AccidentSubCauseCode(const AccidentSubCauseCode_t& in, denm_msgs::AccidentSubCauseCode& out) {
+void toRos_AccidentSubCauseCode(const etsi_its_denm_coding::AccidentSubCauseCode_t& in, denm_msgs::AccidentSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AccidentSubCauseCode(const denm_msgs::AccidentSubCauseCode& in, AccidentSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(AccidentSubCauseCode_t));
+void toStruct_AccidentSubCauseCode(const denm_msgs::AccidentSubCauseCode& in, etsi_its_denm_coding::AccidentSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::AccidentSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

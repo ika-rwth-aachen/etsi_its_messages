@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CurvatureConfidence(const CurvatureConfidence_t& in, denm_msgs::CurvatureConfidence& out) {
+void toRos_CurvatureConfidence(const etsi_its_denm_coding::CurvatureConfidence_t& in, denm_msgs::CurvatureConfidence& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureConfidence(const denm_msgs::CurvatureConfidence& in, CurvatureConfidence_t& out) {
-  memset(&out, 0, sizeof(CurvatureConfidence_t));
+void toStruct_CurvatureConfidence(const denm_msgs::CurvatureConfidence& in, etsi_its_denm_coding::CurvatureConfidence_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::CurvatureConfidence_t));
 
   out = in.value;
 }

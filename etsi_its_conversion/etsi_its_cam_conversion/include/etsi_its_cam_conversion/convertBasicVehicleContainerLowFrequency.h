@@ -42,14 +42,14 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_BasicVehicleContainerLowFrequency(const BasicVehicleContainerLowFrequency_t& in, cam_msgs::BasicVehicleContainerLowFrequency& out) {
+void toRos_BasicVehicleContainerLowFrequency(const etsi_its_cam_coding::BasicVehicleContainerLowFrequency_t& in, cam_msgs::BasicVehicleContainerLowFrequency& out) {
   toRos_VehicleRole(in.vehicleRole, out.vehicle_role);
   toRos_ExteriorLights(in.exteriorLights, out.exterior_lights);
   toRos_PathHistory(in.pathHistory, out.path_history);
 }
 
-void toStruct_BasicVehicleContainerLowFrequency(const cam_msgs::BasicVehicleContainerLowFrequency& in, BasicVehicleContainerLowFrequency_t& out) {
-  memset(&out, 0, sizeof(BasicVehicleContainerLowFrequency_t));
+void toStruct_BasicVehicleContainerLowFrequency(const cam_msgs::BasicVehicleContainerLowFrequency& in, etsi_its_cam_coding::BasicVehicleContainerLowFrequency_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::BasicVehicleContainerLowFrequency_t));
 
   toStruct_VehicleRole(in.vehicle_role, out.vehicleRole);
   toStruct_ExteriorLights(in.exterior_lights, out.exteriorLights);

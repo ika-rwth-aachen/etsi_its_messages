@@ -40,7 +40,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_LowFrequencyContainer(const LowFrequencyContainer_t& in, cam_msgs::LowFrequencyContainer& out) {
+void toRos_LowFrequencyContainer(const etsi_its_cam_coding::LowFrequencyContainer_t& in, cam_msgs::LowFrequencyContainer& out) {
   switch (in.present) {
   case LowFrequencyContainer_PR_basicVehicleContainerLowFrequency:
     toRos_BasicVehicleContainerLowFrequency(in.choice.basicVehicleContainerLowFrequency, out.basic_vehicle_container_low_frequency);
@@ -50,8 +50,8 @@ void toRos_LowFrequencyContainer(const LowFrequencyContainer_t& in, cam_msgs::Lo
   }
 }
 
-void toStruct_LowFrequencyContainer(const cam_msgs::LowFrequencyContainer& in, LowFrequencyContainer_t& out) {
-  memset(&out, 0, sizeof(LowFrequencyContainer_t));
+void toStruct_LowFrequencyContainer(const cam_msgs::LowFrequencyContainer& in, etsi_its_cam_coding::LowFrequencyContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::LowFrequencyContainer_t));
 
   switch (in.choice) {
   case cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY:

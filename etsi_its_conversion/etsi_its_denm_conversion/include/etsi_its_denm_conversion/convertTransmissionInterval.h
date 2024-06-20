@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_TransmissionInterval(const TransmissionInterval_t& in, denm_msgs::TransmissionInterval& out) {
+void toRos_TransmissionInterval(const etsi_its_denm_coding::TransmissionInterval_t& in, denm_msgs::TransmissionInterval& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TransmissionInterval(const denm_msgs::TransmissionInterval& in, TransmissionInterval_t& out) {
-  memset(&out, 0, sizeof(TransmissionInterval_t));
+void toStruct_TransmissionInterval(const denm_msgs::TransmissionInterval& in, etsi_its_denm_coding::TransmissionInterval_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::TransmissionInterval_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

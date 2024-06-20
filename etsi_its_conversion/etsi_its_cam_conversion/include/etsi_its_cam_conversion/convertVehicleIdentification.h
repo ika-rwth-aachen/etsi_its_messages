@@ -41,7 +41,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleIdentification(const VehicleIdentification_t& in, cam_msgs::VehicleIdentification& out) {
+void toRos_VehicleIdentification(const etsi_its_cam_coding::VehicleIdentification_t& in, cam_msgs::VehicleIdentification& out) {
   if (in.wMInumber) {
     toRos_WMInumber(*in.wMInumber, out.w_m_inumber);
     out.w_m_inumber_is_present = true;
@@ -52,15 +52,15 @@ void toRos_VehicleIdentification(const VehicleIdentification_t& in, cam_msgs::Ve
   }
 }
 
-void toStruct_VehicleIdentification(const cam_msgs::VehicleIdentification& in, VehicleIdentification_t& out) {
-  memset(&out, 0, sizeof(VehicleIdentification_t));
+void toStruct_VehicleIdentification(const cam_msgs::VehicleIdentification& in, etsi_its_cam_coding::VehicleIdentification_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::VehicleIdentification_t));
 
   if (in.w_m_inumber_is_present) {
-    out.wMInumber = (WMInumber_t*) calloc(1, sizeof(WMInumber_t));
+    out.wMInumber = (etsi_its_cam_coding::WMInumber_t*) calloc(1, sizeof(etsi_its_cam_coding::WMInumber_t));
     toStruct_WMInumber(in.w_m_inumber, *out.wMInumber);
   }
   if (in.v_ds_is_present) {
-    out.vDS = (VDS_t*) calloc(1, sizeof(VDS_t));
+    out.vDS = (etsi_its_cam_coding::VDS_t*) calloc(1, sizeof(etsi_its_cam_coding::VDS_t));
     toStruct_VDS(in.v_ds, *out.vDS);
   }
 }

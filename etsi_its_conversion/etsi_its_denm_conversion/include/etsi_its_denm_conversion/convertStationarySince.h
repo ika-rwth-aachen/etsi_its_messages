@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_StationarySince(const StationarySince_t& in, denm_msgs::StationarySince& out) {
+void toRos_StationarySince(const etsi_its_denm_coding::StationarySince_t& in, denm_msgs::StationarySince& out) {
   out.value = in;
 }
 
-void toStruct_StationarySince(const denm_msgs::StationarySince& in, StationarySince_t& out) {
-  memset(&out, 0, sizeof(StationarySince_t));
+void toStruct_StationarySince(const denm_msgs::StationarySince& in, etsi_its_denm_coding::StationarySince_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::StationarySince_t));
 
   out = in.value;
 }

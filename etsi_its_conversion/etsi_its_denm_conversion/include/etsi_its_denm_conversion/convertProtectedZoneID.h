@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ProtectedZoneID(const ProtectedZoneID_t& in, denm_msgs::ProtectedZoneID& out) {
+void toRos_ProtectedZoneID(const etsi_its_denm_coding::ProtectedZoneID_t& in, denm_msgs::ProtectedZoneID& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ProtectedZoneID(const denm_msgs::ProtectedZoneID& in, ProtectedZoneID_t& out) {
-  memset(&out, 0, sizeof(ProtectedZoneID_t));
+void toStruct_ProtectedZoneID(const denm_msgs::ProtectedZoneID& in, etsi_its_denm_coding::ProtectedZoneID_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ProtectedZoneID_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

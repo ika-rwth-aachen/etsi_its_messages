@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleMass(const VehicleMass_t& in, cam_msgs::VehicleMass& out) {
+void toRos_VehicleMass(const etsi_its_cam_coding::VehicleMass_t& in, cam_msgs::VehicleMass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleMass(const cam_msgs::VehicleMass& in, VehicleMass_t& out) {
-  memset(&out, 0, sizeof(VehicleMass_t));
+void toStruct_VehicleMass(const cam_msgs::VehicleMass& in, etsi_its_cam_coding::VehicleMass_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::VehicleMass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

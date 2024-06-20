@@ -41,14 +41,14 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PosConfidenceEllipse(const PosConfidenceEllipse_t& in, denm_msgs::PosConfidenceEllipse& out) {
+void toRos_PosConfidenceEllipse(const etsi_its_denm_coding::PosConfidenceEllipse_t& in, denm_msgs::PosConfidenceEllipse& out) {
   toRos_SemiAxisLength(in.semiMajorConfidence, out.semi_major_confidence);
   toRos_SemiAxisLength(in.semiMinorConfidence, out.semi_minor_confidence);
   toRos_HeadingValue(in.semiMajorOrientation, out.semi_major_orientation);
 }
 
-void toStruct_PosConfidenceEllipse(const denm_msgs::PosConfidenceEllipse& in, PosConfidenceEllipse_t& out) {
-  memset(&out, 0, sizeof(PosConfidenceEllipse_t));
+void toStruct_PosConfidenceEllipse(const denm_msgs::PosConfidenceEllipse& in, etsi_its_denm_coding::PosConfidenceEllipse_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::PosConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_confidence, out.semiMajorConfidence);
   toStruct_SemiAxisLength(in.semi_minor_confidence, out.semiMinorConfidence);

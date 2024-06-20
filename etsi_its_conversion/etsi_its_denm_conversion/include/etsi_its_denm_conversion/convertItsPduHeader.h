@@ -42,14 +42,14 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ItsPduHeader(const ItsPduHeader_t& in, denm_msgs::ItsPduHeader& out) {
+void toRos_ItsPduHeader(const etsi_its_denm_coding::ItsPduHeader_t& in, denm_msgs::ItsPduHeader& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in.protocolVersion, out.protocol_version);
   etsi_its_primitives_conversion::toRos_INTEGER(in.messageID, out.message_id);
   toRos_StationID(in.stationID, out.station_id);
 }
 
-void toStruct_ItsPduHeader(const denm_msgs::ItsPduHeader& in, ItsPduHeader_t& out) {
-  memset(&out, 0, sizeof(ItsPduHeader_t));
+void toStruct_ItsPduHeader(const denm_msgs::ItsPduHeader& in, etsi_its_denm_coding::ItsPduHeader_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ItsPduHeader_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.protocol_version, out.protocolVersion);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.message_id, out.messageID);

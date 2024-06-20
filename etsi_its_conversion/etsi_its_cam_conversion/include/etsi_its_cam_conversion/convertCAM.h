@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CAM(const CAM_t& in, cam_msgs::CAM& out) {
+void toRos_CAM(const etsi_its_cam_coding::CAM_t& in, cam_msgs::CAM& out) {
   toRos_ItsPduHeader(in.header, out.header);
   toRos_CoopAwareness(in.cam, out.cam);
 }
 
-void toStruct_CAM(const cam_msgs::CAM& in, CAM_t& out) {
-  memset(&out, 0, sizeof(CAM_t));
+void toStruct_CAM(const cam_msgs::CAM& in, etsi_its_cam_coding::CAM_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::CAM_t));
 
   toStruct_ItsPduHeader(in.header, out.header);
   toStruct_CoopAwareness(in.cam, out.cam);

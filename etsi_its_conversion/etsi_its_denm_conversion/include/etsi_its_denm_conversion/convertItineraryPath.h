@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ItineraryPath(const ItineraryPath_t& in, denm_msgs::ItineraryPath& out) {
+void toRos_ItineraryPath(const etsi_its_denm_coding::ItineraryPath_t& in, denm_msgs::ItineraryPath& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::ReferencePosition el;
     toRos_ReferencePosition(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_ItineraryPath(const ItineraryPath_t& in, denm_msgs::ItineraryPath& ou
   }
 }
 
-void toStruct_ItineraryPath(const denm_msgs::ItineraryPath& in, ItineraryPath_t& out) {
-  memset(&out, 0, sizeof(ItineraryPath_t));
+void toStruct_ItineraryPath(const denm_msgs::ItineraryPath& in, etsi_its_denm_coding::ItineraryPath_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::ItineraryPath_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ReferencePosition_t* el = (ReferencePosition_t*) calloc(1, sizeof(ReferencePosition_t));
+    etsi_its_denm_coding::ReferencePosition_t* el = (etsi_its_denm_coding::ReferencePosition_t*) calloc(1, sizeof(etsi_its_denm_coding::ReferencePosition_t));
     toStruct_ReferencePosition(in.array[i], *el);
-    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

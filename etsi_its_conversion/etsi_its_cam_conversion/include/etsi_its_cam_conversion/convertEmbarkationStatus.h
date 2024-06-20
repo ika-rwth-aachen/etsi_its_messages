@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EmbarkationStatus(const EmbarkationStatus_t& in, cam_msgs::EmbarkationStatus& out) {
+void toRos_EmbarkationStatus(const etsi_its_cam_coding::EmbarkationStatus_t& in, cam_msgs::EmbarkationStatus& out) {
   etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);
 }
 
-void toStruct_EmbarkationStatus(const cam_msgs::EmbarkationStatus& in, EmbarkationStatus_t& out) {
-  memset(&out, 0, sizeof(EmbarkationStatus_t));
+void toStruct_EmbarkationStatus(const cam_msgs::EmbarkationStatus& in, etsi_its_cam_coding::EmbarkationStatus_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::EmbarkationStatus_t));
 
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.value, out);
 }

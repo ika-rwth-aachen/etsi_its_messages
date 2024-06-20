@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
+void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(RescueAndRecoveryWorkInProgressSubCauseCode_t));
+void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

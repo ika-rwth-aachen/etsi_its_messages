@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VehicleRole(const VehicleRole_t& in, denm_msgs::VehicleRole& out) {
+void toRos_VehicleRole(const etsi_its_denm_coding::VehicleRole_t& in, denm_msgs::VehicleRole& out) {
   out.value = in;
 }
 
-void toStruct_VehicleRole(const denm_msgs::VehicleRole& in, VehicleRole_t& out) {
-  memset(&out, 0, sizeof(VehicleRole_t));
+void toStruct_VehicleRole(const denm_msgs::VehicleRole& in, etsi_its_denm_coding::VehicleRole_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::VehicleRole_t));
 
   out = in.value;
 }

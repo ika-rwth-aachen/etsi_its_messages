@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_TrafficConditionSubCauseCode(const TrafficConditionSubCauseCode_t& in, denm_msgs::TrafficConditionSubCauseCode& out) {
+void toRos_TrafficConditionSubCauseCode(const etsi_its_denm_coding::TrafficConditionSubCauseCode_t& in, denm_msgs::TrafficConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TrafficConditionSubCauseCode(const denm_msgs::TrafficConditionSubCauseCode& in, TrafficConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(TrafficConditionSubCauseCode_t));
+void toStruct_TrafficConditionSubCauseCode(const denm_msgs::TrafficConditionSubCauseCode& in, etsi_its_denm_coding::TrafficConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::TrafficConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

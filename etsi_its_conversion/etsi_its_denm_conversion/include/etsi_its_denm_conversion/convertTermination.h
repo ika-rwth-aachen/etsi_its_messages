@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_Termination(const Termination_t& in, denm_msgs::Termination& out) {
+void toRos_Termination(const etsi_its_denm_coding::Termination_t& in, denm_msgs::Termination& out) {
   out.value = in;
 }
 
-void toStruct_Termination(const denm_msgs::Termination& in, Termination_t& out) {
-  memset(&out, 0, sizeof(Termination_t));
+void toStruct_Termination(const denm_msgs::Termination& in, etsi_its_denm_coding::Termination_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::Termination_t));
 
   out = in.value;
 }

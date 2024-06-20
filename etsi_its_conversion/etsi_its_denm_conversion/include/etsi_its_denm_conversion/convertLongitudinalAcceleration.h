@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LongitudinalAcceleration(const LongitudinalAcceleration_t& in, denm_msgs::LongitudinalAcceleration& out) {
+void toRos_LongitudinalAcceleration(const etsi_its_denm_coding::LongitudinalAcceleration_t& in, denm_msgs::LongitudinalAcceleration& out) {
   toRos_LongitudinalAccelerationValue(in.longitudinalAccelerationValue, out.longitudinal_acceleration_value);
   toRos_AccelerationConfidence(in.longitudinalAccelerationConfidence, out.longitudinal_acceleration_confidence);
 }
 
-void toStruct_LongitudinalAcceleration(const denm_msgs::LongitudinalAcceleration& in, LongitudinalAcceleration_t& out) {
-  memset(&out, 0, sizeof(LongitudinalAcceleration_t));
+void toStruct_LongitudinalAcceleration(const denm_msgs::LongitudinalAcceleration& in, etsi_its_denm_coding::LongitudinalAcceleration_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::LongitudinalAcceleration_t));
 
   toStruct_LongitudinalAccelerationValue(in.longitudinal_acceleration_value, out.longitudinalAccelerationValue);
   toStruct_AccelerationConfidence(in.longitudinal_acceleration_confidence, out.longitudinalAccelerationConfidence);

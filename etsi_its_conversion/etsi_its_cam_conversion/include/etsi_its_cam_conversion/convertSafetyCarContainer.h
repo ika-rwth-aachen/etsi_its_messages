@@ -43,7 +43,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SafetyCarContainer(const SafetyCarContainer_t& in, cam_msgs::SafetyCarContainer& out) {
+void toRos_SafetyCarContainer(const etsi_its_cam_coding::SafetyCarContainer_t& in, cam_msgs::SafetyCarContainer& out) {
   toRos_LightBarSirenInUse(in.lightBarSirenInUse, out.light_bar_siren_in_use);
   if (in.incidentIndication) {
     toRos_CauseCode(*in.incidentIndication, out.incident_indication);
@@ -59,20 +59,20 @@ void toRos_SafetyCarContainer(const SafetyCarContainer_t& in, cam_msgs::SafetyCa
   }
 }
 
-void toStruct_SafetyCarContainer(const cam_msgs::SafetyCarContainer& in, SafetyCarContainer_t& out) {
-  memset(&out, 0, sizeof(SafetyCarContainer_t));
+void toStruct_SafetyCarContainer(const cam_msgs::SafetyCarContainer& in, etsi_its_cam_coding::SafetyCarContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::SafetyCarContainer_t));
 
   toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, out.lightBarSirenInUse);
   if (in.incident_indication_is_present) {
-    out.incidentIndication = (CauseCode_t*) calloc(1, sizeof(CauseCode_t));
+    out.incidentIndication = (etsi_its_cam_coding::CauseCode_t*) calloc(1, sizeof(etsi_its_cam_coding::CauseCode_t));
     toStruct_CauseCode(in.incident_indication, *out.incidentIndication);
   }
   if (in.traffic_rule_is_present) {
-    out.trafficRule = (TrafficRule_t*) calloc(1, sizeof(TrafficRule_t));
+    out.trafficRule = (etsi_its_cam_coding::TrafficRule_t*) calloc(1, sizeof(etsi_its_cam_coding::TrafficRule_t));
     toStruct_TrafficRule(in.traffic_rule, *out.trafficRule);
   }
   if (in.speed_limit_is_present) {
-    out.speedLimit = (SpeedLimit_t*) calloc(1, sizeof(SpeedLimit_t));
+    out.speedLimit = (etsi_its_cam_coding::SpeedLimit_t*) calloc(1, sizeof(etsi_its_cam_coding::SpeedLimit_t));
     toStruct_SpeedLimit(in.speed_limit, *out.speedLimit);
   }
 }

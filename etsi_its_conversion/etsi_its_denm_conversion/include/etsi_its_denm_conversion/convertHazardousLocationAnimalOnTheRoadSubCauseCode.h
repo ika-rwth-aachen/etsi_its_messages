@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(const HazardousLocation_AnimalOnTheRoadSubCauseCode_t& in, denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& out) {
+void toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(const etsi_its_denm_coding::HazardousLocation_AnimalOnTheRoadSubCauseCode_t& in, denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(const denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& in, HazardousLocation_AnimalOnTheRoadSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(HazardousLocation_AnimalOnTheRoadSubCauseCode_t));
+void toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(const denm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& in, etsi_its_denm_coding::HazardousLocation_AnimalOnTheRoadSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::HazardousLocation_AnimalOnTheRoadSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

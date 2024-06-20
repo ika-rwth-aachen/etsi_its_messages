@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DENM(const DENM_t& in, denm_msgs::DENM& out) {
+void toRos_DENM(const etsi_its_denm_coding::DENM_t& in, denm_msgs::DENM& out) {
   toRos_ItsPduHeader(in.header, out.header);
   toRos_DecentralizedEnvironmentalNotificationMessage(in.denm, out.denm);
 }
 
-void toStruct_DENM(const denm_msgs::DENM& in, DENM_t& out) {
-  memset(&out, 0, sizeof(DENM_t));
+void toStruct_DENM(const denm_msgs::DENM& in, etsi_its_denm_coding::DENM_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::DENM_t));
 
   toStruct_ItsPduHeader(in.header, out.header);
   toStruct_DecentralizedEnvironmentalNotificationMessage(in.denm, out.denm);

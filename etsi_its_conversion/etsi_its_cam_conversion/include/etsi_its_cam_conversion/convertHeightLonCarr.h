@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HeightLonCarr(const HeightLonCarr_t& in, cam_msgs::HeightLonCarr& out) {
+void toRos_HeightLonCarr(const etsi_its_cam_coding::HeightLonCarr_t& in, cam_msgs::HeightLonCarr& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeightLonCarr(const cam_msgs::HeightLonCarr& in, HeightLonCarr_t& out) {
-  memset(&out, 0, sizeof(HeightLonCarr_t));
+void toStruct_HeightLonCarr(const cam_msgs::HeightLonCarr& in, etsi_its_cam_coding::HeightLonCarr_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::HeightLonCarr_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

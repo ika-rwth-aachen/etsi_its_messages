@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ExteriorLights(const ExteriorLights_t& in, cam_msgs::ExteriorLights& out) {
+void toRos_ExteriorLights(const etsi_its_cam_coding::ExteriorLights_t& in, cam_msgs::ExteriorLights& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_ExteriorLights(const cam_msgs::ExteriorLights& in, ExteriorLights_t& out) {
-  memset(&out, 0, sizeof(ExteriorLights_t));
+void toStruct_ExteriorLights(const cam_msgs::ExteriorLights& in, etsi_its_cam_coding::ExteriorLights_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::ExteriorLights_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

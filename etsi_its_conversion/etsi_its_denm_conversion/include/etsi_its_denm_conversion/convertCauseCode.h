@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CauseCode(const CauseCode_t& in, denm_msgs::CauseCode& out) {
+void toRos_CauseCode(const etsi_its_denm_coding::CauseCode_t& in, denm_msgs::CauseCode& out) {
   toRos_CauseCodeType(in.causeCode, out.cause_code);
   toRos_SubCauseCodeType(in.subCauseCode, out.sub_cause_code);
 }
 
-void toStruct_CauseCode(const denm_msgs::CauseCode& in, CauseCode_t& out) {
-  memset(&out, 0, sizeof(CauseCode_t));
+void toStruct_CauseCode(const denm_msgs::CauseCode& in, etsi_its_denm_coding::CauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::CauseCode_t));
 
   toStruct_CauseCodeType(in.cause_code, out.causeCode);
   toStruct_SubCauseCodeType(in.sub_cause_code, out.subCauseCode);

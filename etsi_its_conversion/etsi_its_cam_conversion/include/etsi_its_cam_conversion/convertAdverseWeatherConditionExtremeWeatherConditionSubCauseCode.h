@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& in, cam_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& out) {
+void toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const etsi_its_cam_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& in, cam_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const cam_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& in, AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t));
+void toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const cam_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& in, etsi_its_cam_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

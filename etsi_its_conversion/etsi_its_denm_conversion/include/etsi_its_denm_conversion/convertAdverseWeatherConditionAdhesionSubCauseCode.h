@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AdverseWeatherConditionAdhesionSubCauseCode(const AdverseWeatherCondition_AdhesionSubCauseCode_t& in, denm_msgs::AdverseWeatherConditionAdhesionSubCauseCode& out) {
+void toRos_AdverseWeatherConditionAdhesionSubCauseCode(const etsi_its_denm_coding::AdverseWeatherCondition_AdhesionSubCauseCode_t& in, denm_msgs::AdverseWeatherConditionAdhesionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherConditionAdhesionSubCauseCode(const denm_msgs::AdverseWeatherConditionAdhesionSubCauseCode& in, AdverseWeatherCondition_AdhesionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(AdverseWeatherCondition_AdhesionSubCauseCode_t));
+void toStruct_AdverseWeatherConditionAdhesionSubCauseCode(const denm_msgs::AdverseWeatherConditionAdhesionSubCauseCode& in, etsi_its_denm_coding::AdverseWeatherCondition_AdhesionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::AdverseWeatherCondition_AdhesionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

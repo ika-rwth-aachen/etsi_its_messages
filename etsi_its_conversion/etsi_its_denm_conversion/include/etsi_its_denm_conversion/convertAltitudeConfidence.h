@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AltitudeConfidence(const AltitudeConfidence_t& in, denm_msgs::AltitudeConfidence& out) {
+void toRos_AltitudeConfidence(const etsi_its_denm_coding::AltitudeConfidence_t& in, denm_msgs::AltitudeConfidence& out) {
   out.value = in;
 }
 
-void toStruct_AltitudeConfidence(const denm_msgs::AltitudeConfidence& in, AltitudeConfidence_t& out) {
-  memset(&out, 0, sizeof(AltitudeConfidence_t));
+void toStruct_AltitudeConfidence(const denm_msgs::AltitudeConfidence& in, etsi_its_denm_coding::AltitudeConfidence_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::AltitudeConfidence_t));
 
   out = in.value;
 }

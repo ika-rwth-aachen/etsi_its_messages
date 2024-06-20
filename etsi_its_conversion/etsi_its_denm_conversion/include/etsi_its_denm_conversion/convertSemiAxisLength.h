@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SemiAxisLength(const SemiAxisLength_t& in, denm_msgs::SemiAxisLength& out) {
+void toRos_SemiAxisLength(const etsi_its_denm_coding::SemiAxisLength_t& in, denm_msgs::SemiAxisLength& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SemiAxisLength(const denm_msgs::SemiAxisLength& in, SemiAxisLength_t& out) {
-  memset(&out, 0, sizeof(SemiAxisLength_t));
+void toStruct_SemiAxisLength(const denm_msgs::SemiAxisLength& in, etsi_its_denm_coding::SemiAxisLength_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::SemiAxisLength_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

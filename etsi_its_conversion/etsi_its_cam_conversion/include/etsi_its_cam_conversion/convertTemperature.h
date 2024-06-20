@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Temperature(const Temperature_t& in, cam_msgs::Temperature& out) {
+void toRos_Temperature(const etsi_its_cam_coding::Temperature_t& in, cam_msgs::Temperature& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Temperature(const cam_msgs::Temperature& in, Temperature_t& out) {
-  memset(&out, 0, sizeof(Temperature_t));
+void toStruct_Temperature(const cam_msgs::Temperature& in, etsi_its_cam_coding::Temperature_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::Temperature_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

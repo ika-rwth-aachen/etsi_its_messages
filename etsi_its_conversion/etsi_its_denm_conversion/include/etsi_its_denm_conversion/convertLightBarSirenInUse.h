@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LightBarSirenInUse(const LightBarSirenInUse_t& in, denm_msgs::LightBarSirenInUse& out) {
+void toRos_LightBarSirenInUse(const etsi_its_denm_coding::LightBarSirenInUse_t& in, denm_msgs::LightBarSirenInUse& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LightBarSirenInUse(const denm_msgs::LightBarSirenInUse& in, LightBarSirenInUse_t& out) {
-  memset(&out, 0, sizeof(LightBarSirenInUse_t));
+void toStruct_LightBarSirenInUse(const denm_msgs::LightBarSirenInUse& in, etsi_its_denm_coding::LightBarSirenInUse_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::LightBarSirenInUse_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

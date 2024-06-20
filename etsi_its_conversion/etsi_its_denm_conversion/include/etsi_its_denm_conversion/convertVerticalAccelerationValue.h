@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VerticalAccelerationValue(const VerticalAccelerationValue_t& in, denm_msgs::VerticalAccelerationValue& out) {
+void toRos_VerticalAccelerationValue(const etsi_its_denm_coding::VerticalAccelerationValue_t& in, denm_msgs::VerticalAccelerationValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VerticalAccelerationValue(const denm_msgs::VerticalAccelerationValue& in, VerticalAccelerationValue_t& out) {
-  memset(&out, 0, sizeof(VerticalAccelerationValue_t));
+void toStruct_VerticalAccelerationValue(const denm_msgs::VerticalAccelerationValue& in, etsi_its_denm_coding::VerticalAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::VerticalAccelerationValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

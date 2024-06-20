@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SpeedValue(const SpeedValue_t& in, denm_msgs::SpeedValue& out) {
+void toRos_SpeedValue(const etsi_its_denm_coding::SpeedValue_t& in, denm_msgs::SpeedValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedValue(const denm_msgs::SpeedValue& in, SpeedValue_t& out) {
-  memset(&out, 0, sizeof(SpeedValue_t));
+void toStruct_SpeedValue(const denm_msgs::SpeedValue& in, etsi_its_denm_coding::SpeedValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::SpeedValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

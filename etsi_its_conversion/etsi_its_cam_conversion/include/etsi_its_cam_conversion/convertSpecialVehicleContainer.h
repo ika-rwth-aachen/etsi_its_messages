@@ -46,7 +46,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpecialVehicleContainer(const SpecialVehicleContainer_t& in, cam_msgs::SpecialVehicleContainer& out) {
+void toRos_SpecialVehicleContainer(const etsi_its_cam_coding::SpecialVehicleContainer_t& in, cam_msgs::SpecialVehicleContainer& out) {
   switch (in.present) {
   case SpecialVehicleContainer_PR_publicTransportContainer:
     toRos_PublicTransportContainer(in.choice.publicTransportContainer, out.public_transport_container);
@@ -80,8 +80,8 @@ void toRos_SpecialVehicleContainer(const SpecialVehicleContainer_t& in, cam_msgs
   }
 }
 
-void toStruct_SpecialVehicleContainer(const cam_msgs::SpecialVehicleContainer& in, SpecialVehicleContainer_t& out) {
-  memset(&out, 0, sizeof(SpecialVehicleContainer_t));
+void toStruct_SpecialVehicleContainer(const cam_msgs::SpecialVehicleContainer& in, etsi_its_cam_coding::SpecialVehicleContainer_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::SpecialVehicleContainer_t));
 
   switch (in.choice) {
   case cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER:

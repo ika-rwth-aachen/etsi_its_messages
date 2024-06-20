@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleRole(const VehicleRole_t& in, cam_msgs::VehicleRole& out) {
+void toRos_VehicleRole(const etsi_its_cam_coding::VehicleRole_t& in, cam_msgs::VehicleRole& out) {
   out.value = in;
 }
 
-void toStruct_VehicleRole(const cam_msgs::VehicleRole& in, VehicleRole_t& out) {
-  memset(&out, 0, sizeof(VehicleRole_t));
+void toStruct_VehicleRole(const cam_msgs::VehicleRole& in, etsi_its_cam_coding::VehicleRole_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::VehicleRole_t));
 
   out = in.value;
 }

@@ -48,7 +48,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RoadWorksContainerExtended(const RoadWorksContainerExtended_t& in, denm_msgs::RoadWorksContainerExtended& out) {
+void toRos_RoadWorksContainerExtended(const etsi_its_denm_coding::RoadWorksContainerExtended_t& in, denm_msgs::RoadWorksContainerExtended& out) {
   if (in.lightBarSirenInUse) {
     toRos_LightBarSirenInUse(*in.lightBarSirenInUse, out.light_bar_siren_in_use);
     out.light_bar_siren_in_use_is_present = true;
@@ -87,43 +87,43 @@ void toRos_RoadWorksContainerExtended(const RoadWorksContainerExtended_t& in, de
   }
 }
 
-void toStruct_RoadWorksContainerExtended(const denm_msgs::RoadWorksContainerExtended& in, RoadWorksContainerExtended_t& out) {
-  memset(&out, 0, sizeof(RoadWorksContainerExtended_t));
+void toStruct_RoadWorksContainerExtended(const denm_msgs::RoadWorksContainerExtended& in, etsi_its_denm_coding::RoadWorksContainerExtended_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::RoadWorksContainerExtended_t));
 
   if (in.light_bar_siren_in_use_is_present) {
-    out.lightBarSirenInUse = (LightBarSirenInUse_t*) calloc(1, sizeof(LightBarSirenInUse_t));
+    out.lightBarSirenInUse = (etsi_its_denm_coding::LightBarSirenInUse_t*) calloc(1, sizeof(etsi_its_denm_coding::LightBarSirenInUse_t));
     toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, *out.lightBarSirenInUse);
   }
   if (in.closed_lanes_is_present) {
-    out.closedLanes = (ClosedLanes_t*) calloc(1, sizeof(ClosedLanes_t));
+    out.closedLanes = (etsi_its_denm_coding::ClosedLanes_t*) calloc(1, sizeof(etsi_its_denm_coding::ClosedLanes_t));
     toStruct_ClosedLanes(in.closed_lanes, *out.closedLanes);
   }
   if (in.restriction_is_present) {
-    out.restriction = (RestrictedTypes_t*) calloc(1, sizeof(RestrictedTypes_t));
+    out.restriction = (etsi_its_denm_coding::RestrictedTypes_t*) calloc(1, sizeof(etsi_its_denm_coding::RestrictedTypes_t));
     toStruct_RestrictedTypes(in.restriction, *out.restriction);
   }
   if (in.speed_limit_is_present) {
-    out.speedLimit = (SpeedLimit_t*) calloc(1, sizeof(SpeedLimit_t));
+    out.speedLimit = (etsi_its_denm_coding::SpeedLimit_t*) calloc(1, sizeof(etsi_its_denm_coding::SpeedLimit_t));
     toStruct_SpeedLimit(in.speed_limit, *out.speedLimit);
   }
   if (in.incident_indication_is_present) {
-    out.incidentIndication = (CauseCode_t*) calloc(1, sizeof(CauseCode_t));
+    out.incidentIndication = (etsi_its_denm_coding::CauseCode_t*) calloc(1, sizeof(etsi_its_denm_coding::CauseCode_t));
     toStruct_CauseCode(in.incident_indication, *out.incidentIndication);
   }
   if (in.recommended_path_is_present) {
-    out.recommendedPath = (ItineraryPath_t*) calloc(1, sizeof(ItineraryPath_t));
+    out.recommendedPath = (etsi_its_denm_coding::ItineraryPath_t*) calloc(1, sizeof(etsi_its_denm_coding::ItineraryPath_t));
     toStruct_ItineraryPath(in.recommended_path, *out.recommendedPath);
   }
   if (in.starting_point_speed_limit_is_present) {
-    out.startingPointSpeedLimit = (DeltaReferencePosition_t*) calloc(1, sizeof(DeltaReferencePosition_t));
+    out.startingPointSpeedLimit = (etsi_its_denm_coding::DeltaReferencePosition_t*) calloc(1, sizeof(etsi_its_denm_coding::DeltaReferencePosition_t));
     toStruct_DeltaReferencePosition(in.starting_point_speed_limit, *out.startingPointSpeedLimit);
   }
   if (in.traffic_flow_rule_is_present) {
-    out.trafficFlowRule = (TrafficRule_t*) calloc(1, sizeof(TrafficRule_t));
+    out.trafficFlowRule = (etsi_its_denm_coding::TrafficRule_t*) calloc(1, sizeof(etsi_its_denm_coding::TrafficRule_t));
     toStruct_TrafficRule(in.traffic_flow_rule, *out.trafficFlowRule);
   }
   if (in.reference_denms_is_present) {
-    out.referenceDenms = (ReferenceDenms_t*) calloc(1, sizeof(ReferenceDenms_t));
+    out.referenceDenms = (etsi_its_denm_coding::ReferenceDenms_t*) calloc(1, sizeof(etsi_its_denm_coding::ReferenceDenms_t));
     toStruct_ReferenceDenms(in.reference_denms, *out.referenceDenms);
   }
 }

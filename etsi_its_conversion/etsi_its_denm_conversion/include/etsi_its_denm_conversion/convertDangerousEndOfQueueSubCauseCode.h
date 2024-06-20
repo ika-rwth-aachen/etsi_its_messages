@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DangerousEndOfQueueSubCauseCode(const DangerousEndOfQueueSubCauseCode_t& in, denm_msgs::DangerousEndOfQueueSubCauseCode& out) {
+void toRos_DangerousEndOfQueueSubCauseCode(const etsi_its_denm_coding::DangerousEndOfQueueSubCauseCode_t& in, denm_msgs::DangerousEndOfQueueSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DangerousEndOfQueueSubCauseCode(const denm_msgs::DangerousEndOfQueueSubCauseCode& in, DangerousEndOfQueueSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(DangerousEndOfQueueSubCauseCode_t));
+void toStruct_DangerousEndOfQueueSubCauseCode(const denm_msgs::DangerousEndOfQueueSubCauseCode& in, etsi_its_denm_coding::DangerousEndOfQueueSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::DangerousEndOfQueueSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

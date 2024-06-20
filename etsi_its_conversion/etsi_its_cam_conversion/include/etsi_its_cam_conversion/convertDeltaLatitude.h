@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DeltaLatitude(const DeltaLatitude_t& in, cam_msgs::DeltaLatitude& out) {
+void toRos_DeltaLatitude(const etsi_its_cam_coding::DeltaLatitude_t& in, cam_msgs::DeltaLatitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaLatitude(const cam_msgs::DeltaLatitude& in, DeltaLatitude_t& out) {
-  memset(&out, 0, sizeof(DeltaLatitude_t));
+void toStruct_DeltaLatitude(const cam_msgs::DeltaLatitude& in, etsi_its_cam_coding::DeltaLatitude_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::DeltaLatitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PosFrontAx(const PosFrontAx_t& in, denm_msgs::PosFrontAx& out) {
+void toRos_PosFrontAx(const etsi_its_denm_coding::PosFrontAx_t& in, denm_msgs::PosFrontAx& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PosFrontAx(const denm_msgs::PosFrontAx& in, PosFrontAx_t& out) {
-  memset(&out, 0, sizeof(PosFrontAx_t));
+void toStruct_PosFrontAx(const denm_msgs::PosFrontAx& in, etsi_its_denm_coding::PosFrontAx_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::PosFrontAx_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

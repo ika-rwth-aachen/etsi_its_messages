@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_WheelBaseVehicle(const WheelBaseVehicle_t& in, denm_msgs::WheelBaseVehicle& out) {
+void toRos_WheelBaseVehicle(const etsi_its_denm_coding::WheelBaseVehicle_t& in, denm_msgs::WheelBaseVehicle& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_WheelBaseVehicle(const denm_msgs::WheelBaseVehicle& in, WheelBaseVehicle_t& out) {
-  memset(&out, 0, sizeof(WheelBaseVehicle_t));
+void toStruct_WheelBaseVehicle(const denm_msgs::WheelBaseVehicle& in, etsi_its_denm_coding::WheelBaseVehicle_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::WheelBaseVehicle_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CurvatureValue(const CurvatureValue_t& in, cam_msgs::CurvatureValue& out) {
+void toRos_CurvatureValue(const etsi_its_cam_coding::CurvatureValue_t& in, cam_msgs::CurvatureValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CurvatureValue(const cam_msgs::CurvatureValue& in, CurvatureValue_t& out) {
-  memset(&out, 0, sizeof(CurvatureValue_t));
+void toStruct_CurvatureValue(const cam_msgs::CurvatureValue& in, etsi_its_cam_coding::CurvatureValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::CurvatureValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

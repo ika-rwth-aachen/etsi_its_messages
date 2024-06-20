@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpeedConfidence(const SpeedConfidence_t& in, cam_msgs::SpeedConfidence& out) {
+void toRos_SpeedConfidence(const etsi_its_cam_coding::SpeedConfidence_t& in, cam_msgs::SpeedConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedConfidence(const cam_msgs::SpeedConfidence& in, SpeedConfidence_t& out) {
-  memset(&out, 0, sizeof(SpeedConfidence_t));
+void toStruct_SpeedConfidence(const cam_msgs::SpeedConfidence& in, etsi_its_cam_coding::SpeedConfidence_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::SpeedConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

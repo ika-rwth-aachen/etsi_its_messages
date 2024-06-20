@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HumanProblemSubCauseCode(const HumanProblemSubCauseCode_t& in, denm_msgs::HumanProblemSubCauseCode& out) {
+void toRos_HumanProblemSubCauseCode(const etsi_its_denm_coding::HumanProblemSubCauseCode_t& in, denm_msgs::HumanProblemSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HumanProblemSubCauseCode(const denm_msgs::HumanProblemSubCauseCode& in, HumanProblemSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(HumanProblemSubCauseCode_t));
+void toStruct_HumanProblemSubCauseCode(const denm_msgs::HumanProblemSubCauseCode& in, etsi_its_denm_coding::HumanProblemSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::HumanProblemSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

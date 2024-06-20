@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_WrongWayDrivingSubCauseCode(const WrongWayDrivingSubCauseCode_t& in, cam_msgs::WrongWayDrivingSubCauseCode& out) {
+void toRos_WrongWayDrivingSubCauseCode(const etsi_its_cam_coding::WrongWayDrivingSubCauseCode_t& in, cam_msgs::WrongWayDrivingSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_WrongWayDrivingSubCauseCode(const cam_msgs::WrongWayDrivingSubCauseCode& in, WrongWayDrivingSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(WrongWayDrivingSubCauseCode_t));
+void toStruct_WrongWayDrivingSubCauseCode(const cam_msgs::WrongWayDrivingSubCauseCode& in, etsi_its_cam_coding::WrongWayDrivingSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::WrongWayDrivingSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

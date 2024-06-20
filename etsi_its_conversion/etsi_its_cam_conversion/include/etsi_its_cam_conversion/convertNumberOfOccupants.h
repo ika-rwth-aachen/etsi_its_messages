@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_NumberOfOccupants(const NumberOfOccupants_t& in, cam_msgs::NumberOfOccupants& out) {
+void toRos_NumberOfOccupants(const etsi_its_cam_coding::NumberOfOccupants_t& in, cam_msgs::NumberOfOccupants& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_NumberOfOccupants(const cam_msgs::NumberOfOccupants& in, NumberOfOccupants_t& out) {
-  memset(&out, 0, sizeof(NumberOfOccupants_t));
+void toStruct_NumberOfOccupants(const cam_msgs::NumberOfOccupants& in, etsi_its_cam_coding::NumberOfOccupants_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::NumberOfOccupants_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

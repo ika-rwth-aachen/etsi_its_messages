@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VerticalAccelerationValue(const VerticalAccelerationValue_t& in, cam_msgs::VerticalAccelerationValue& out) {
+void toRos_VerticalAccelerationValue(const etsi_its_cam_coding::VerticalAccelerationValue_t& in, cam_msgs::VerticalAccelerationValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VerticalAccelerationValue(const cam_msgs::VerticalAccelerationValue& in, VerticalAccelerationValue_t& out) {
-  memset(&out, 0, sizeof(VerticalAccelerationValue_t));
+void toStruct_VerticalAccelerationValue(const cam_msgs::VerticalAccelerationValue& in, etsi_its_cam_coding::VerticalAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::VerticalAccelerationValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

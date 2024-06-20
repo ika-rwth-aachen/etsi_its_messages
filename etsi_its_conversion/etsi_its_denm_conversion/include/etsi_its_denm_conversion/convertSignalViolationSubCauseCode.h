@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SignalViolationSubCauseCode(const SignalViolationSubCauseCode_t& in, denm_msgs::SignalViolationSubCauseCode& out) {
+void toRos_SignalViolationSubCauseCode(const etsi_its_denm_coding::SignalViolationSubCauseCode_t& in, denm_msgs::SignalViolationSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SignalViolationSubCauseCode(const denm_msgs::SignalViolationSubCauseCode& in, SignalViolationSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(SignalViolationSubCauseCode_t));
+void toStruct_SignalViolationSubCauseCode(const denm_msgs::SignalViolationSubCauseCode& in, etsi_its_denm_coding::SignalViolationSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::SignalViolationSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

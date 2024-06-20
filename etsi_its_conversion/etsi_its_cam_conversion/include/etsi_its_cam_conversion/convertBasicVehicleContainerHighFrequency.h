@@ -55,7 +55,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_BasicVehicleContainerHighFrequency(const BasicVehicleContainerHighFrequency_t& in, cam_msgs::BasicVehicleContainerHighFrequency& out) {
+void toRos_BasicVehicleContainerHighFrequency(const etsi_its_cam_coding::BasicVehicleContainerHighFrequency_t& in, cam_msgs::BasicVehicleContainerHighFrequency& out) {
   toRos_Heading(in.heading, out.heading);
   toRos_Speed(in.speed, out.speed);
   toRos_DriveDirection(in.driveDirection, out.drive_direction);
@@ -95,8 +95,8 @@ void toRos_BasicVehicleContainerHighFrequency(const BasicVehicleContainerHighFre
   }
 }
 
-void toStruct_BasicVehicleContainerHighFrequency(const cam_msgs::BasicVehicleContainerHighFrequency& in, BasicVehicleContainerHighFrequency_t& out) {
-  memset(&out, 0, sizeof(BasicVehicleContainerHighFrequency_t));
+void toStruct_BasicVehicleContainerHighFrequency(const cam_msgs::BasicVehicleContainerHighFrequency& in, etsi_its_cam_coding::BasicVehicleContainerHighFrequency_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::BasicVehicleContainerHighFrequency_t));
 
   toStruct_Heading(in.heading, out.heading);
   toStruct_Speed(in.speed, out.speed);
@@ -108,31 +108,31 @@ void toStruct_BasicVehicleContainerHighFrequency(const cam_msgs::BasicVehicleCon
   toStruct_CurvatureCalculationMode(in.curvature_calculation_mode, out.curvatureCalculationMode);
   toStruct_YawRate(in.yaw_rate, out.yawRate);
   if (in.acceleration_control_is_present) {
-    out.accelerationControl = (AccelerationControl_t*) calloc(1, sizeof(AccelerationControl_t));
+    out.accelerationControl = (etsi_its_cam_coding::AccelerationControl_t*) calloc(1, sizeof(etsi_its_cam_coding::AccelerationControl_t));
     toStruct_AccelerationControl(in.acceleration_control, *out.accelerationControl);
   }
   if (in.lane_position_is_present) {
-    out.lanePosition = (LanePosition_t*) calloc(1, sizeof(LanePosition_t));
+    out.lanePosition = (etsi_its_cam_coding::LanePosition_t*) calloc(1, sizeof(etsi_its_cam_coding::LanePosition_t));
     toStruct_LanePosition(in.lane_position, *out.lanePosition);
   }
   if (in.steering_wheel_angle_is_present) {
-    out.steeringWheelAngle = (SteeringWheelAngle_t*) calloc(1, sizeof(SteeringWheelAngle_t));
+    out.steeringWheelAngle = (etsi_its_cam_coding::SteeringWheelAngle_t*) calloc(1, sizeof(etsi_its_cam_coding::SteeringWheelAngle_t));
     toStruct_SteeringWheelAngle(in.steering_wheel_angle, *out.steeringWheelAngle);
   }
   if (in.lateral_acceleration_is_present) {
-    out.lateralAcceleration = (LateralAcceleration_t*) calloc(1, sizeof(LateralAcceleration_t));
+    out.lateralAcceleration = (etsi_its_cam_coding::LateralAcceleration_t*) calloc(1, sizeof(etsi_its_cam_coding::LateralAcceleration_t));
     toStruct_LateralAcceleration(in.lateral_acceleration, *out.lateralAcceleration);
   }
   if (in.vertical_acceleration_is_present) {
-    out.verticalAcceleration = (VerticalAcceleration_t*) calloc(1, sizeof(VerticalAcceleration_t));
+    out.verticalAcceleration = (etsi_its_cam_coding::VerticalAcceleration_t*) calloc(1, sizeof(etsi_its_cam_coding::VerticalAcceleration_t));
     toStruct_VerticalAcceleration(in.vertical_acceleration, *out.verticalAcceleration);
   }
   if (in.performance_class_is_present) {
-    out.performanceClass = (PerformanceClass_t*) calloc(1, sizeof(PerformanceClass_t));
+    out.performanceClass = (etsi_its_cam_coding::PerformanceClass_t*) calloc(1, sizeof(etsi_its_cam_coding::PerformanceClass_t));
     toStruct_PerformanceClass(in.performance_class, *out.performanceClass);
   }
   if (in.cen_dsrc_tolling_zone_is_present) {
-    out.cenDsrcTollingZone = (CenDsrcTollingZone_t*) calloc(1, sizeof(CenDsrcTollingZone_t));
+    out.cenDsrcTollingZone = (etsi_its_cam_coding::CenDsrcTollingZone_t*) calloc(1, sizeof(etsi_its_cam_coding::CenDsrcTollingZone_t));
     toStruct_CenDsrcTollingZone(in.cen_dsrc_tolling_zone, *out.cenDsrcTollingZone);
   }
 }

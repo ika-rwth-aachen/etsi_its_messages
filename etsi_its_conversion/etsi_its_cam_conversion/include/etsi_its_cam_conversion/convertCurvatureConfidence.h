@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CurvatureConfidence(const CurvatureConfidence_t& in, cam_msgs::CurvatureConfidence& out) {
+void toRos_CurvatureConfidence(const etsi_its_cam_coding::CurvatureConfidence_t& in, cam_msgs::CurvatureConfidence& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureConfidence(const cam_msgs::CurvatureConfidence& in, CurvatureConfidence_t& out) {
-  memset(&out, 0, sizeof(CurvatureConfidence_t));
+void toStruct_CurvatureConfidence(const cam_msgs::CurvatureConfidence& in, etsi_its_cam_coding::CurvatureConfidence_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::CurvatureConfidence_t));
 
   out = in.value;
 }

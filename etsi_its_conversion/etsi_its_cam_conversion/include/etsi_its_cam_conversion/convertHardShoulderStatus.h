@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HardShoulderStatus(const HardShoulderStatus_t& in, cam_msgs::HardShoulderStatus& out) {
+void toRos_HardShoulderStatus(const etsi_its_cam_coding::HardShoulderStatus_t& in, cam_msgs::HardShoulderStatus& out) {
   out.value = in;
 }
 
-void toStruct_HardShoulderStatus(const cam_msgs::HardShoulderStatus& in, HardShoulderStatus_t& out) {
-  memset(&out, 0, sizeof(HardShoulderStatus_t));
+void toStruct_HardShoulderStatus(const cam_msgs::HardShoulderStatus& in, etsi_its_cam_coding::HardShoulderStatus_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::HardShoulderStatus_t));
 
   out = in.value;
 }

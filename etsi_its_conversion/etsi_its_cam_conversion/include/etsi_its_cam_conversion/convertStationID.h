@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_StationID(const StationID_t& in, cam_msgs::StationID& out) {
+void toRos_StationID(const etsi_its_cam_coding::StationID_t& in, cam_msgs::StationID& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_StationID(const cam_msgs::StationID& in, StationID_t& out) {
-  memset(&out, 0, sizeof(StationID_t));
+void toStruct_StationID(const cam_msgs::StationID& in, etsi_its_cam_coding::StationID_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::StationID_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

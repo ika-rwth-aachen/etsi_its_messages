@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PerformanceClass(const PerformanceClass_t& in, denm_msgs::PerformanceClass& out) {
+void toRos_PerformanceClass(const etsi_its_denm_coding::PerformanceClass_t& in, denm_msgs::PerformanceClass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PerformanceClass(const denm_msgs::PerformanceClass& in, PerformanceClass_t& out) {
-  memset(&out, 0, sizeof(PerformanceClass_t));
+void toStruct_PerformanceClass(const denm_msgs::PerformanceClass& in, etsi_its_denm_coding::PerformanceClass_t& out) {
+  memset(&out, 0, sizeof(etsi_its_denm_coding::PerformanceClass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

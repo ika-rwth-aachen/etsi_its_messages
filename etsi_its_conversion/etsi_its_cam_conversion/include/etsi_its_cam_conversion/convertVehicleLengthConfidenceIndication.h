@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleLengthConfidenceIndication(const VehicleLengthConfidenceIndication_t& in, cam_msgs::VehicleLengthConfidenceIndication& out) {
+void toRos_VehicleLengthConfidenceIndication(const etsi_its_cam_coding::VehicleLengthConfidenceIndication_t& in, cam_msgs::VehicleLengthConfidenceIndication& out) {
   out.value = in;
 }
 
-void toStruct_VehicleLengthConfidenceIndication(const cam_msgs::VehicleLengthConfidenceIndication& in, VehicleLengthConfidenceIndication_t& out) {
-  memset(&out, 0, sizeof(VehicleLengthConfidenceIndication_t));
+void toStruct_VehicleLengthConfidenceIndication(const cam_msgs::VehicleLengthConfidenceIndication& in, etsi_its_cam_coding::VehicleLengthConfidenceIndication_t& out) {
+  memset(&out, 0, sizeof(etsi_its_cam_coding::VehicleLengthConfidenceIndication_t));
 
   out = in.value;
 }
