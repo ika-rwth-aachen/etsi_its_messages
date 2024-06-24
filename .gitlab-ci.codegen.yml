@@ -12,16 +12,48 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: /certs
   GIT_SUBMODULE_STRATEGY: recursive
+  _ASN1_CI_IMAGE: ${CI_REGISTRY_IMAGE}/asn1c:${CI_COMMIT_REF_SLUG}_ci
+  _ASN1_IMAGE_LATEST: ${CI_REGISTRY_IMAGE}/asn1c:latest
+  _RGEN_CI_IMAGE: ${CI_REGISTRY_IMAGE}/rgen:${CI_COMMIT_REF_SLUG}_ci
+  _RGEN_IMAGE_LATEST: ${CI_REGISTRY_IMAGE}/rgen:latest
 
 stages:
+  - Build Docker Images
   - asn1c
   - ROS Messages
   - Conversion Headers
 
+asn1c-docker:
+  stage: Build Docker Images
+  before_script:
+    - cd utils/codegen/docker
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+  script:
+    - docker build -t ${_ASN1_CI_IMAGE} -f asn1c.Dockerfile .
+    - docker push ${_ASN1_CI_IMAGE}
+    - |-
+      if [[ "${CI_COMMIT_REF_SLUG}" == "${CI_DEFAULT_BRANCH}" ]]; then
+        docker tag ${_ASN1_CI_IMAGE} ${_ASN1_IMAGE_LATEST}
+        docker push ${_ASN1_IMAGE_LATEST}
+      fi
+
+rgen-docker:
+  stage: Build Docker Images
+  before_script:
+    - cd utils/codegen/codegen-rust/docker 
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+  script:
+    - docker build -t ${_RGEN_CI_IMAGE} -f rgen.Dockerfile ..
+    - docker push ${_RGEN_CI_IMAGE}
+    - |-
+      if [[ "${CI_COMMIT_REF_SLUG}" == "${CI_DEFAULT_BRANCH}" ]]; then
+        docker tag ${_RGEN_CI_IMAGE} ${_RGEN_IMAGE_LATEST}
+        docker push ${_RGEN_IMAGE_LATEST}
+      fi
 
 etsi_its_cam_coding:
   stage: asn1c
-  needs: []
+  needs: ["asn1c-docker"]
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -29,12 +61,13 @@ etsi_its_cam_coding:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_coding/etsi_its_cam_coding
       -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_coding:
   stage: asn1c
-  needs: []
+  needs: ["asn1c-docker"]
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -42,12 +75,13 @@ etsi_its_denm_coding:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_coding/etsi_its_denm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cpm_coding:
   stage: asn1c
-  needs: []
+  needs: ["asn1c-docker"]
   script:
     - >
       ./utils/codegen/asn1ToC.py
@@ -59,34 +93,37 @@ etsi_its_cpm_coding:
       asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_coding/etsi_its_cpm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_msgs:
   stage: ROS Messages
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToRosMsg.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_msgs:
   stage: ROS Messages
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToRosMsg.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cpm_msgs:
   stage: ROS Messages
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToRosMsg.py
@@ -97,11 +134,12 @@ etsi_its_cpm_msgs:
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
       asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_cpm_msgs/msg
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
@@ -109,11 +147,12 @@ etsi_its_cam_conversion:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
@@ -121,11 +160,12 @@ etsi_its_denm_conversion:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cpm_conversion:
   stage: Conversion Headers
-  needs: []
+  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
@@ -137,4 +177,5 @@ etsi_its_cpm_conversion:
       asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -t cpm
       -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion
+      -di ${_RGEN_CI_IMAGE}
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
