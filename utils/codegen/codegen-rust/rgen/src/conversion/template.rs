@@ -632,7 +632,7 @@ pub fn choice_template(
             .map(|member| {
                 if !member.is_primitive {
                     format!(
-                        "  case {parent}_PR_{c_member}:\n    \
+                        "  case etsi_its_{pdu}_coding::{parent}_PR_{c_member}:\n    \
                          toRos_{ty}(in.choice.{c_member}, out.{r_member});\n    \
                          out.choice = {pdu}_msgs::{parent}::CHOICE_{r_ch_member};",
                         parent = &name,
@@ -661,7 +661,7 @@ pub fn choice_template(
                     format!(
                         "  case {pdu}_msgs::{parent}::CHOICE_{r_ch_member}:\n    \
                          toStruct_{ty}(in.{r_member}, out.choice.{c_member});\n    \
-                         out.present = {parent}_PR::{parent}_PR_{c_member};",
+                         out.present = etsi_its_{pdu}_coding::{parent}_PR::{parent}_PR_{c_member};",
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,

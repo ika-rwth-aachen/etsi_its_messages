@@ -42,7 +42,7 @@ namespace etsi_its_cam_conversion {
 
 void toRos_LowFrequencyContainer(const etsi_its_cam_coding::LowFrequencyContainer_t& in, cam_msgs::LowFrequencyContainer& out) {
   switch (in.present) {
-  case LowFrequencyContainer_PR_basicVehicleContainerLowFrequency:
+  case etsi_its_cam_coding::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency:
     toRos_BasicVehicleContainerLowFrequency(in.choice.basicVehicleContainerLowFrequency, out.basic_vehicle_container_low_frequency);
     out.choice = cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
     break;
@@ -56,7 +56,7 @@ void toStruct_LowFrequencyContainer(const cam_msgs::LowFrequencyContainer& in, e
   switch (in.choice) {
   case cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY:
     toStruct_BasicVehicleContainerLowFrequency(in.basic_vehicle_container_low_frequency, out.choice.basicVehicleContainerLowFrequency);
-    out.present = LowFrequencyContainer_PR::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency;
+    out.present = etsi_its_cam_coding::LowFrequencyContainer_PR::LowFrequencyContainer_PR_basicVehicleContainerLowFrequency;
     break;
   default: break;
   }
