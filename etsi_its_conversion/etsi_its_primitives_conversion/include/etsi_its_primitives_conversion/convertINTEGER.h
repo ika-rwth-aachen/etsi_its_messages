@@ -32,7 +32,7 @@ namespace etsi_its_primitives_conversion {
   template <typename T>
   void toRos_INTEGER(const T& _INTEGER_in, int64_t& INTEGER_out) {
     long out;
-    int status = etsi_its_cam_coding::asn_INTEGER2long(&_INTEGER_in, &out);
+    int status = asn_INTEGER2long(&_INTEGER_in, &out);
     if (status != 0)
       throw std::range_error("Failed to convert INTEGER_t to int64_t");
     INTEGER_out = static_cast<int64_t>(out);
@@ -41,7 +41,7 @@ namespace etsi_its_primitives_conversion {
   template <typename T>
   void toRos_INTEGER(const T& _INTEGER_in, uint64_t& INTEGER_out) {
     unsigned long out;
-    int status = etsi_its_cam_coding::asn_INTEGER2ulong(&_INTEGER_in, &out);
+    int status = asn_INTEGER2ulong(&_INTEGER_in, &out);
     if (status != 0)
       throw std::range_error("Failed to convert INTEGER_t to uint64_t");
     INTEGER_out = static_cast<uint64_t>(out);
@@ -61,7 +61,7 @@ namespace etsi_its_primitives_conversion {
   template <typename T>
   void toStruct_INTEGER(const int64_t& _INTEGER_in, T& INTEGER_out) {
     const long in = static_cast<long>(_INTEGER_in);
-    int status = etsi_its_cam_coding::asn_long2INTEGER(&INTEGER_out, in);
+    int status = asn_long2INTEGER(&INTEGER_out, in);
     if (status != 0)
       throw std::range_error("Failed to convert int64_t to INTEGER_t");
   }

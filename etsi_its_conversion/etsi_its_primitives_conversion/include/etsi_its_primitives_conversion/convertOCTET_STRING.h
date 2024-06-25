@@ -56,7 +56,7 @@ namespace etsi_its_primitives_conversion {
   template <typename T>
   void toStruct_OCTET_STRING(const std::string& _OCTET_STRING_in, T& OCTET_STRING_out) {
 
-    etsi_its_cam_coding::OCTET_STRING_t* octet_string = etsi_its_cam_coding::OCTET_STRING_new_fromBuf(&etsi_its_cam_coding::asn_DEF_OCTET_STRING, _OCTET_STRING_in.c_str(), _OCTET_STRING_in.size());
+    OCTET_STRING_t* octet_string = OCTET_STRING_new_fromBuf(&asn_DEF_OCTET_STRING, _OCTET_STRING_in.c_str(), _OCTET_STRING_in.size());
     OCTET_STRING_out = *octet_string;
   }
 

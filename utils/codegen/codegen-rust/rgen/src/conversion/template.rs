@@ -34,7 +34,7 @@ SOFTWARE.
 
 #pragma once
 {extra-includes}
-#include <etsi_its_{pdu}_coding/{c_filename}.h>
+#include <etsi_its_{pdu}_coding/{pdu}_{c_filename}.h>
 {c_includes}
 #ifdef ROS1
 {ros1_includes}
@@ -47,12 +47,12 @@ namespace {pdu}_msgs = etsi_its_{pdu}_msgs::msg;
 
 namespace etsi_its_{pdu}_conversion {
 
-void toRos_{type}(const etsi_its_{pdu}_coding::{c_type}_t& in, {pdu}_msgs::{ros_type}& out) {
+void toRos_{type}(const {pdu}_{c_type}_t& in, {pdu}_msgs::{ros_type}& out) {
   {to_ros_members}
 }
 
-void toStruct_{type}(const {pdu}_msgs::{ros_type}& in, etsi_its_{pdu}_coding::{c_type}_t& out) {
-  memset(&out, 0, sizeof(etsi_its_{pdu}_coding::{c_type}_t));
+void toStruct_{type}(const {pdu}_msgs::{ros_type}& in, {pdu}_{c_type}_t& out) {
+  memset(&out, 0, sizeof({pdu}_{c_type}_t));
 
   {to_c_members}
 }
@@ -494,7 +494,7 @@ pub fn sequence_or_set_template(
             if !member.has_default {
                 format!(
                     "if (in.{r_member}_is_present) {{\n    \
-                         out.{c_member} = (etsi_its_{pdu}_coding::{ty}_t*) calloc(1, sizeof(etsi_its_{pdu}_coding::{ty}_t));\n    \
+                         out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
                          {conversion}\n  \
                          }}",
                     ty = member.name_type.ty,
@@ -505,7 +505,7 @@ pub fn sequence_or_set_template(
                 )
             } else {
                 format!(
-                    "out.{c_member} = (etsi_its_{pdu}_coding::{ty}_t*) calloc(1, sizeof(etsi_its_{pdu}_coding::{ty}_t));\n  \
+                    "out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n  \
                      {conversion}",
                     ty = member.name_type.ty,
                     c_member = member.name_type.name,
@@ -568,9 +568,9 @@ pub fn sequence_or_set_of_template(
 
     let to_c_loop =
         format!("for (int i = 0; i < in.array.size(); ++i) {{\n    \
-                 etsi_its_{pdu}_coding::{ty}_t* el = (etsi_its_{pdu}_coding::{ty}_t*) calloc(1, sizeof(etsi_its_{pdu}_coding::{ty}_t));\n    \
+                 {pdu}_{ty}_t* el = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
                  toStruct_{ty}(in.array[i], *el);\n    \
-                 if (etsi_its_{pdu}_coding::asn_sequence_add(&out, el)) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");\n  \
+                 if (asn_sequence_add(&out, el)) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");\n  \
                  }}", 
                 ty = member_type,
                 pdu = &options.main_pdu);
@@ -632,7 +632,7 @@ pub fn choice_template(
             .map(|member| {
                 if !member.is_primitive {
                     format!(
-                        "  case etsi_its_{pdu}_coding::{parent}_PR_{c_member}:\n    \
+                        "  case {pdu}_{parent}_PR_{c_member}:\n    \
                          toRos_{ty}(in.choice.{c_member}, out.{r_member});\n    \
                          out.choice = {pdu}_msgs::{parent}::CHOICE_{r_ch_member};",
                         parent = &name,
@@ -661,7 +661,7 @@ pub fn choice_template(
                     format!(
                         "  case {pdu}_msgs::{parent}::CHOICE_{r_ch_member}:\n    \
                          toStruct_{ty}(in.{r_member}, out.choice.{c_member});\n    \
-                         out.present = etsi_its_{pdu}_coding::{parent}_PR::{parent}_PR_{c_member};",
+                         out.present = {pdu}_{parent}_PR::{pdu}_{parent}_PR_{c_member};",
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,

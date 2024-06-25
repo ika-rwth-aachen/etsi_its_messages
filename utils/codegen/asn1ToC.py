@@ -47,7 +47,8 @@ def parseCli():
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output package directory")
     parser.add_argument("-td", "--temp-dir", type=str, default=None, help="temporary directory for mounting files to container; uses tempfile by default")
-    parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c", help="asn1c Docker image")
+    parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
+    parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c-mouse", help="asn1c Docker image")
 
     args = parser.parse_args()
 
@@ -64,8 +65,6 @@ def adjustIncludes(parent_path: str):
     source_files = [f for f in source_files if os.path.isfile(f)]
     headers = [os.path.basename(f) for f in header_files]
 
-    namespace = parent_path.split("/")[-1]
-
     for file in [*header_files, *source_files]:
         print(file)
         with open(file, "r") as f:
@@ -75,20 +74,6 @@ def adjustIncludes(parent_path: str):
                     contents = re.sub(r'(^#include\s+")({}")'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
                 if re.search(r'^#include\s+<{}>'.format(header), contents, re.MULTILINE):
                     contents = re.sub(r'(^#include\s+<)({}>)'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
-            if file in header_files:
-                contents = "#pragma once\n" + contents
-                contents = re.sub(r'^#ifndef.*\n#define.*$', '', contents, count=1, flags=re.MULTILINE)
-                endifs = re.findall(r'^#endif.*$', contents, flags=re.MULTILINE)
-                # contents = re.sub(r'^#endif.*_H.*$', '', contents, count=1, flags=re.MULTILINE)
-                if len(endifs) > 0:
-                    contents = re.sub(r'^.*{}.*$'.format(re.escape(endifs[-1])), '', contents, count=1, flags=re.MULTILINE)
-                if "#ifdef __cplusplus\nextern \"C\" {" in contents:
-                    contents = contents.replace("#ifdef __cplusplus\nextern \"C\" {", f"#ifdef __cplusplus\nnamespace {namespace} {{\nextern \"C\" {{")
-                if  "#ifdef __cplusplus\n}" in contents:
-                    contents = contents.replace("#ifdef __cplusplus\n}", "#ifdef __cplusplus\n}\n}")
-            if file in source_files:
-                contents = f"#ifdef __cplusplus\nnamespace {namespace} {{\n#endif\n" + contents
-                contents = contents + f"\n#ifdef __cplusplus\n}}\n#endif\n"
         with open(file, "w") as f:
             f.write(contents)
 
@@ -124,7 +109,12 @@ def main():
                 shutil.copy(f, container_input_dir)
 
             # run asn1c docker container to generate header and source files
-            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", args.docker_image], check=True)
+            asn1c_cmd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "asn1c.sh")
+            with open(asn1c_cmd_file, "w") as f:
+                f.write(f"asn1c $(find /input -name '*.asn') -fcompound-names -fprefix={args.type}_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER")
+
+            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", "-v", f"{asn1c_cmd_file}:/asn1c.sh", args.docker_image], check=True)
+            
 
             # move generated header and source files to output directories
             for f in glob.glob(os.path.join(container_output_dir, "*.h")):

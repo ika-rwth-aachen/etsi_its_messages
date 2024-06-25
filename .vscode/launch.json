@@ -10,6 +10,7 @@
       "args": [
         "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
         "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
+        "-t", "cam",
         "-o", "etsi_its_coding/etsi_its_cam_coding"
       ],
       "console": "integratedTerminal",
@@ -24,6 +25,7 @@
       "args": [
         "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
         "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+        "-t", "denm",
         "-o", "etsi_its_coding/etsi_its_denm_coding"
       ],
       "console": "integratedTerminal",
@@ -42,6 +44,7 @@
         "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
         "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
         "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+        "-t", "cpm",
         "-o", "etsi_its_coding/etsi_its_cpm_coding"
       ],
       "console": "integratedTerminal",
