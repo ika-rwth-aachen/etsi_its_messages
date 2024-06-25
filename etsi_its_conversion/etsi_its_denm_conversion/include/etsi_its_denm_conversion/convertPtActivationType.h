@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PtActivationType.h>
+#include <etsi_its_denm_coding/denm_PtActivationType.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PtActivationType(const etsi_its_denm_coding::PtActivationType_t& in, denm_msgs::PtActivationType& out) {
+void toRos_PtActivationType(const denm_PtActivationType_t& in, denm_msgs::PtActivationType& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PtActivationType(const denm_msgs::PtActivationType& in, etsi_its_denm_coding::PtActivationType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PtActivationType_t));
+void toStruct_PtActivationType(const denm_msgs::PtActivationType& in, denm_PtActivationType_t& out) {
+  memset(&out, 0, sizeof(denm_PtActivationType_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

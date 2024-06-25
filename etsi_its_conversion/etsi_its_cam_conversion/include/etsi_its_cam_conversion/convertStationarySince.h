@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/StationarySince.h>
+#include <etsi_its_cam_coding/cam_StationarySince.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/StationarySince.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_StationarySince(const etsi_its_cam_coding::StationarySince_t& in, cam_msgs::StationarySince& out) {
+void toRos_StationarySince(const cam_StationarySince_t& in, cam_msgs::StationarySince& out) {
   out.value = in;
 }
 
-void toStruct_StationarySince(const cam_msgs::StationarySince& in, etsi_its_cam_coding::StationarySince_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::StationarySince_t));
+void toStruct_StationarySince(const cam_msgs::StationarySince& in, cam_StationarySince_t& out) {
+  memset(&out, 0, sizeof(cam_StationarySince_t));
 
   out = in.value;
 }

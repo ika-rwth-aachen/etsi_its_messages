@@ -1,15 +1,14 @@
-#pragma once
 /*
  * Run-time support for Information Object Classes.
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	ASN_IOC_H
+#define	ASN_IOC_H
 
 #include <etsi_its_denm_coding/asn_system.h>		/* Platform-specific types */
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -47,7 +46,6 @@ typedef struct asn_ioc_cell_s {
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* ASN_IOC_H */

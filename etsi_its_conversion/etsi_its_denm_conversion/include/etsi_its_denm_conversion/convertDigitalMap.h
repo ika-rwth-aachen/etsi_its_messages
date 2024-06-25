@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/DigitalMap.h>
+#include <etsi_its_denm_coding/denm_DigitalMap.h>
 #include <etsi_its_denm_conversion/convertDigitalMap.h>
 #include <etsi_its_denm_conversion/convertReferencePosition.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DigitalMap(const etsi_its_denm_coding::DigitalMap_t& in, denm_msgs::DigitalMap& out) {
+void toRos_DigitalMap(const denm_DigitalMap_t& in, denm_msgs::DigitalMap& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::ReferencePosition el;
     toRos_ReferencePosition(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_DigitalMap(const etsi_its_denm_coding::DigitalMap_t& in, denm_msgs::D
   }
 }
 
-void toStruct_DigitalMap(const denm_msgs::DigitalMap& in, etsi_its_denm_coding::DigitalMap_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::DigitalMap_t));
+void toStruct_DigitalMap(const denm_msgs::DigitalMap& in, denm_DigitalMap_t& out) {
+  memset(&out, 0, sizeof(denm_DigitalMap_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::ReferencePosition_t* el = (etsi_its_denm_coding::ReferencePosition_t*) calloc(1, sizeof(etsi_its_denm_coding::ReferencePosition_t));
+    denm_ReferencePosition_t* el = (denm_ReferencePosition_t*) calloc(1, sizeof(denm_ReferencePosition_t));
     toStruct_ReferencePosition(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PhoneNumber.h>
+#include <etsi_its_denm_coding/denm_PhoneNumber.h>
 #include <etsi_its_denm_coding/NumericString.h>
 #include <etsi_its_primitives_conversion/convertNumericString.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PhoneNumber(const etsi_its_denm_coding::PhoneNumber_t& in, denm_msgs::PhoneNumber& out) {
+void toRos_PhoneNumber(const denm_PhoneNumber_t& in, denm_msgs::PhoneNumber& out) {
   etsi_its_primitives_conversion::toRos_NumericString(in, out.value);
 }
 
-void toStruct_PhoneNumber(const denm_msgs::PhoneNumber& in, etsi_its_denm_coding::PhoneNumber_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PhoneNumber_t));
+void toStruct_PhoneNumber(const denm_msgs::PhoneNumber& in, denm_PhoneNumber_t& out) {
+  memset(&out, 0, sizeof(denm_PhoneNumber_t));
 
   etsi_its_primitives_conversion::toStruct_NumericString(in.value, out);
 }

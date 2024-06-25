@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PathPoint.h>
+#include <etsi_its_denm_coding/denm_PathPoint.h>
 #include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PathPoint(const etsi_its_denm_coding::PathPoint_t& in, denm_msgs::PathPoint& out) {
+void toRos_PathPoint(const denm_PathPoint_t& in, denm_msgs::PathPoint& out) {
   toRos_DeltaReferencePosition(in.pathPosition, out.path_position);
   if (in.pathDeltaTime) {
     toRos_PathDeltaTime(*in.pathDeltaTime, out.path_delta_time);
@@ -49,12 +49,12 @@ void toRos_PathPoint(const etsi_its_denm_coding::PathPoint_t& in, denm_msgs::Pat
   }
 }
 
-void toStruct_PathPoint(const denm_msgs::PathPoint& in, etsi_its_denm_coding::PathPoint_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PathPoint_t));
+void toStruct_PathPoint(const denm_msgs::PathPoint& in, denm_PathPoint_t& out) {
+  memset(&out, 0, sizeof(denm_PathPoint_t));
 
   toStruct_DeltaReferencePosition(in.path_position, out.pathPosition);
   if (in.path_delta_time_is_present) {
-    out.pathDeltaTime = (etsi_its_denm_coding::PathDeltaTime_t*) calloc(1, sizeof(etsi_its_denm_coding::PathDeltaTime_t));
+    out.pathDeltaTime = (denm_PathDeltaTime_t*) calloc(1, sizeof(denm_PathDeltaTime_t));
     toStruct_PathDeltaTime(in.path_delta_time, *out.pathDeltaTime);
   }
 }

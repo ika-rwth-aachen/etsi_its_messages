@@ -1,16 +1,15 @@
-#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_OBJECT_IDENTIFIER_H_
+#define	_OBJECT_IDENTIFIER_H_
 
 #include <etsi_its_denm_coding/asn_application.h>
 #include <etsi_its_denm_coding/asn_codecs_prim.h>
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -33,6 +32,7 @@ asn_struct_print_f OBJECT_IDENTIFIER_print;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define OBJECT_IDENTIFIER_compare OCTET_STRING_compare
+#define OBJECT_IDENTIFIER_copy    OCTET_STRING_copy
 
 asn_constr_check_f OBJECT_IDENTIFIER_constraint;
 
@@ -47,6 +47,7 @@ xer_type_encoder_f OBJECT_IDENTIFIER_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f OBJECT_IDENTIFIER_decode_jer;
 jer_type_encoder_f OBJECT_IDENTIFIER_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -180,7 +181,6 @@ ssize_t OBJECT_IDENTIFIER_set_single_arc(uint8_t *arcbuf, size_t arcbuf_len,
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _OBJECT_IDENTIFIER_H_ */

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CenDsrcTollingZone.h>
+#include <etsi_its_denm_coding/denm_CenDsrcTollingZone.h>
 #include <etsi_its_denm_conversion/convertCenDsrcTollingZoneID.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertLongitude.h>
@@ -42,7 +42,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CenDsrcTollingZone(const etsi_its_denm_coding::CenDsrcTollingZone_t& in, denm_msgs::CenDsrcTollingZone& out) {
+void toRos_CenDsrcTollingZone(const denm_CenDsrcTollingZone_t& in, denm_msgs::CenDsrcTollingZone& out) {
   toRos_Latitude(in.protectedZoneLatitude, out.protected_zone_latitude);
   toRos_Longitude(in.protectedZoneLongitude, out.protected_zone_longitude);
   if (in.cenDsrcTollingZoneID) {
@@ -51,13 +51,13 @@ void toRos_CenDsrcTollingZone(const etsi_its_denm_coding::CenDsrcTollingZone_t& 
   }
 }
 
-void toStruct_CenDsrcTollingZone(const denm_msgs::CenDsrcTollingZone& in, etsi_its_denm_coding::CenDsrcTollingZone_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::CenDsrcTollingZone_t));
+void toStruct_CenDsrcTollingZone(const denm_msgs::CenDsrcTollingZone& in, denm_CenDsrcTollingZone_t& out) {
+  memset(&out, 0, sizeof(denm_CenDsrcTollingZone_t));
 
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
   toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.cen_dsrc_tolling_zone_id_is_present) {
-    out.cenDsrcTollingZoneID = (etsi_its_denm_coding::CenDsrcTollingZoneID_t*) calloc(1, sizeof(etsi_its_denm_coding::CenDsrcTollingZoneID_t));
+    out.cenDsrcTollingZoneID = (denm_CenDsrcTollingZoneID_t*) calloc(1, sizeof(denm_CenDsrcTollingZoneID_t));
     toStruct_CenDsrcTollingZoneID(in.cen_dsrc_tolling_zone_id, *out.cenDsrcTollingZoneID);
   }
 }

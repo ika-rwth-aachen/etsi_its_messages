@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RelevanceDistance.h>
+#include <etsi_its_cam_coding/cam_RelevanceDistance.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RelevanceDistance.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RelevanceDistance(const etsi_its_cam_coding::RelevanceDistance_t& in, cam_msgs::RelevanceDistance& out) {
+void toRos_RelevanceDistance(const cam_RelevanceDistance_t& in, cam_msgs::RelevanceDistance& out) {
   out.value = in;
 }
 
-void toStruct_RelevanceDistance(const cam_msgs::RelevanceDistance& in, etsi_its_cam_coding::RelevanceDistance_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RelevanceDistance_t));
+void toStruct_RelevanceDistance(const cam_msgs::RelevanceDistance& in, cam_RelevanceDistance_t& out) {
+  memset(&out, 0, sizeof(cam_RelevanceDistance_t));
 
   out = in.value;
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/EventHistory.h>
+#include <etsi_its_denm_coding/denm_EventHistory.h>
 #include <etsi_its_denm_conversion/convertEventHistory.h>
 #include <etsi_its_denm_conversion/convertEventPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_EventHistory(const etsi_its_denm_coding::EventHistory_t& in, denm_msgs::EventHistory& out) {
+void toRos_EventHistory(const denm_EventHistory_t& in, denm_msgs::EventHistory& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::EventPoint el;
     toRos_EventPoint(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_EventHistory(const etsi_its_denm_coding::EventHistory_t& in, denm_msg
   }
 }
 
-void toStruct_EventHistory(const denm_msgs::EventHistory& in, etsi_its_denm_coding::EventHistory_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::EventHistory_t));
+void toStruct_EventHistory(const denm_msgs::EventHistory& in, denm_EventHistory_t& out) {
+  memset(&out, 0, sizeof(denm_EventHistory_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::EventPoint_t* el = (etsi_its_denm_coding::EventPoint_t*) calloc(1, sizeof(etsi_its_denm_coding::EventPoint_t));
+    denm_EventPoint_t* el = (denm_EventPoint_t*) calloc(1, sizeof(denm_EventPoint_t));
     toStruct_EventPoint(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

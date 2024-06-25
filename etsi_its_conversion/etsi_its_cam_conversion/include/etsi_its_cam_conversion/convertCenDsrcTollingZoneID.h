@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/CenDsrcTollingZoneID.h>
+#include <etsi_its_cam_coding/cam_CenDsrcTollingZoneID.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneID.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CenDsrcTollingZoneID.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CenDsrcTollingZoneID(const etsi_its_cam_coding::CenDsrcTollingZoneID_t& in, cam_msgs::CenDsrcTollingZoneID& out) {
+void toRos_CenDsrcTollingZoneID(const cam_CenDsrcTollingZoneID_t& in, cam_msgs::CenDsrcTollingZoneID& out) {
   toRos_ProtectedZoneID(in, out.value);
 }
 
-void toStruct_CenDsrcTollingZoneID(const cam_msgs::CenDsrcTollingZoneID& in, etsi_its_cam_coding::CenDsrcTollingZoneID_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::CenDsrcTollingZoneID_t));
+void toStruct_CenDsrcTollingZoneID(const cam_msgs::CenDsrcTollingZoneID& in, cam_CenDsrcTollingZoneID_t& out) {
+  memset(&out, 0, sizeof(cam_CenDsrcTollingZoneID_t));
 
   toStruct_ProtectedZoneID(in.value, out);
 }

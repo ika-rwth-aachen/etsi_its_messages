@@ -1,12 +1,11 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_BER_TLV_TAG_H_
+#define	_BER_TLV_TAG_H_
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -56,7 +55,6 @@ size_t ber_tlv_tag_serialize(ber_tlv_tag_t tag, void *bufptr, size_t size);
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _BER_TLV_TAG_H_ */

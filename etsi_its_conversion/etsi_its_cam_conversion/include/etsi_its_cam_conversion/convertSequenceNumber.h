@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SequenceNumber.h>
+#include <etsi_its_cam_coding/cam_SequenceNumber.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SequenceNumber(const etsi_its_cam_coding::SequenceNumber_t& in, cam_msgs::SequenceNumber& out) {
+void toRos_SequenceNumber(const cam_SequenceNumber_t& in, cam_msgs::SequenceNumber& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SequenceNumber(const cam_msgs::SequenceNumber& in, etsi_its_cam_coding::SequenceNumber_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::SequenceNumber_t));
+void toStruct_SequenceNumber(const cam_msgs::SequenceNumber& in, cam_SequenceNumber_t& out) {
+  memset(&out, 0, sizeof(cam_SequenceNumber_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

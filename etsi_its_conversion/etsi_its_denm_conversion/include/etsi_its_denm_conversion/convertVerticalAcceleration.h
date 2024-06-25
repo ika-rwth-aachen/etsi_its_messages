@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VerticalAcceleration.h>
+#include <etsi_its_denm_coding/denm_VerticalAcceleration.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_denm_conversion/convertVerticalAccelerationValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VerticalAcceleration(const etsi_its_denm_coding::VerticalAcceleration_t& in, denm_msgs::VerticalAcceleration& out) {
+void toRos_VerticalAcceleration(const denm_VerticalAcceleration_t& in, denm_msgs::VerticalAcceleration& out) {
   toRos_VerticalAccelerationValue(in.verticalAccelerationValue, out.vertical_acceleration_value);
   toRos_AccelerationConfidence(in.verticalAccelerationConfidence, out.vertical_acceleration_confidence);
 }
 
-void toStruct_VerticalAcceleration(const denm_msgs::VerticalAcceleration& in, etsi_its_denm_coding::VerticalAcceleration_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::VerticalAcceleration_t));
+void toStruct_VerticalAcceleration(const denm_msgs::VerticalAcceleration& in, denm_VerticalAcceleration_t& out) {
+  memset(&out, 0, sizeof(denm_VerticalAcceleration_t));
 
   toStruct_VerticalAccelerationValue(in.vertical_acceleration_value, out.verticalAccelerationValue);
   toStruct_AccelerationConfidence(in.vertical_acceleration_confidence, out.verticalAccelerationConfidence);

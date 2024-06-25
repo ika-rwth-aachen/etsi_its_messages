@@ -1,15 +1,14 @@
-#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	ASN1_CONSTRAINTS_VALIDATOR_H
+#define	ASN1_CONSTRAINTS_VALIDATOR_H
 
 #include <etsi_its_cam_coding/asn_system.h>		/* Platform-dependent types */
 #include <etsi_its_cam_coding/asn_application.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -59,7 +58,6 @@ asn_constr_check_f asn_generic_unknown_constraint; /* Not fully supported */
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* ASN1_CONSTRAINTS_VALIDATOR_H */

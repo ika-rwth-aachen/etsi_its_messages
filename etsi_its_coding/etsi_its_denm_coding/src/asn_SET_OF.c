@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_denm_coding {
-#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -89,7 +86,3 @@ asn_set_empty(void *asn_set_of_x) {
 
 }
 
-
-#ifdef __cplusplus
-}
-#endif

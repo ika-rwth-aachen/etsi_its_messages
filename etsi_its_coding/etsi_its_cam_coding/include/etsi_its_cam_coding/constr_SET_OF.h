@@ -1,15 +1,14 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	CONSTR_SET_OF_H
+#define	CONSTR_SET_OF_H
 
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/asn_SET_OF.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -34,6 +33,7 @@ asn_struct_print_f SET_OF_print;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f SET_OF_compare;
+asn_struct_copy_f    SET_OF_copy;
 
 asn_constr_check_f SET_OF_constraint;
 
@@ -48,6 +48,7 @@ xer_type_encoder_f SET_OF_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f SET_OF_decode_jer;
 jer_type_encoder_f SET_OF_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -98,7 +99,6 @@ void SET_OF__encode_sorted_free(
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* CONSTR_SET_OF_H */

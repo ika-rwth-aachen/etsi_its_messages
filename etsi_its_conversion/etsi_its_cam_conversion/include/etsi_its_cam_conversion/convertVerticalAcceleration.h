@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/VerticalAcceleration.h>
+#include <etsi_its_cam_coding/cam_VerticalAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cam_conversion/convertVerticalAccelerationValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VerticalAcceleration(const etsi_its_cam_coding::VerticalAcceleration_t& in, cam_msgs::VerticalAcceleration& out) {
+void toRos_VerticalAcceleration(const cam_VerticalAcceleration_t& in, cam_msgs::VerticalAcceleration& out) {
   toRos_VerticalAccelerationValue(in.verticalAccelerationValue, out.vertical_acceleration_value);
   toRos_AccelerationConfidence(in.verticalAccelerationConfidence, out.vertical_acceleration_confidence);
 }
 
-void toStruct_VerticalAcceleration(const cam_msgs::VerticalAcceleration& in, etsi_its_cam_coding::VerticalAcceleration_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::VerticalAcceleration_t));
+void toStruct_VerticalAcceleration(const cam_msgs::VerticalAcceleration& in, cam_VerticalAcceleration_t& out) {
+  memset(&out, 0, sizeof(cam_VerticalAcceleration_t));
 
   toStruct_VerticalAccelerationValue(in.vertical_acceleration_value, out.verticalAccelerationValue);
   toStruct_AccelerationConfidence(in.vertical_acceleration_confidence, out.verticalAccelerationConfidence);

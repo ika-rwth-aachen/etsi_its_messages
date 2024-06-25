@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/HardShoulderStatus.h>
+#include <etsi_its_denm_coding/denm_HardShoulderStatus.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/HardShoulderStatus.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HardShoulderStatus(const etsi_its_denm_coding::HardShoulderStatus_t& in, denm_msgs::HardShoulderStatus& out) {
+void toRos_HardShoulderStatus(const denm_HardShoulderStatus_t& in, denm_msgs::HardShoulderStatus& out) {
   out.value = in;
 }
 
-void toStruct_HardShoulderStatus(const denm_msgs::HardShoulderStatus& in, etsi_its_denm_coding::HardShoulderStatus_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::HardShoulderStatus_t));
+void toStruct_HardShoulderStatus(const denm_msgs::HardShoulderStatus& in, denm_HardShoulderStatus_t& out) {
+  memset(&out, 0, sizeof(denm_HardShoulderStatus_t));
 
   out = in.value;
 }

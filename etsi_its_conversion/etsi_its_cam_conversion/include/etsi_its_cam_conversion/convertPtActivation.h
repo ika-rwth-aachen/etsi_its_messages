@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PtActivation.h>
+#include <etsi_its_cam_coding/cam_PtActivation.h>
 #include <etsi_its_cam_conversion/convertPtActivationData.h>
 #include <etsi_its_cam_conversion/convertPtActivationType.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PtActivation(const etsi_its_cam_coding::PtActivation_t& in, cam_msgs::PtActivation& out) {
+void toRos_PtActivation(const cam_PtActivation_t& in, cam_msgs::PtActivation& out) {
   toRos_PtActivationType(in.ptActivationType, out.pt_activation_type);
   toRos_PtActivationData(in.ptActivationData, out.pt_activation_data);
 }
 
-void toStruct_PtActivation(const cam_msgs::PtActivation& in, etsi_its_cam_coding::PtActivation_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::PtActivation_t));
+void toStruct_PtActivation(const cam_msgs::PtActivation& in, cam_PtActivation_t& out) {
+  memset(&out, 0, sizeof(cam_PtActivation_t));
 
   toStruct_PtActivationType(in.pt_activation_type, out.ptActivationType);
   toStruct_PtActivationData(in.pt_activation_data, out.ptActivationData);

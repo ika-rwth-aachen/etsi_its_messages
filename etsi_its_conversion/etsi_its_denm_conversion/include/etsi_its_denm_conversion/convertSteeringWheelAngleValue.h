@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SteeringWheelAngleValue.h>
+#include <etsi_its_denm_coding/denm_SteeringWheelAngleValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SteeringWheelAngleValue(const etsi_its_denm_coding::SteeringWheelAngleValue_t& in, denm_msgs::SteeringWheelAngleValue& out) {
+void toRos_SteeringWheelAngleValue(const denm_SteeringWheelAngleValue_t& in, denm_msgs::SteeringWheelAngleValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SteeringWheelAngleValue(const denm_msgs::SteeringWheelAngleValue& in, etsi_its_denm_coding::SteeringWheelAngleValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SteeringWheelAngleValue_t));
+void toStruct_SteeringWheelAngleValue(const denm_msgs::SteeringWheelAngleValue& in, denm_SteeringWheelAngleValue_t& out) {
+  memset(&out, 0, sizeof(denm_SteeringWheelAngleValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

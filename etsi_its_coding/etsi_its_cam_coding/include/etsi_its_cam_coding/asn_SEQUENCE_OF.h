@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	ASN_SEQUENCE_OF_H
+#define	ASN_SEQUENCE_OF_H
 
 #include <etsi_its_cam_coding/asn_SET_OF.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -48,7 +47,6 @@ typedef A_SEQUENCE_OF(void) asn_anonymous_sequence_;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* ASN_SEQUENCE_OF_H */

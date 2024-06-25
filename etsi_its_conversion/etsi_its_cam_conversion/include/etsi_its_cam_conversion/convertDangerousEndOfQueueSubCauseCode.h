@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/DangerousEndOfQueueSubCauseCode.h>
+#include <etsi_its_cam_coding/cam_DangerousEndOfQueueSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DangerousEndOfQueueSubCauseCode(const etsi_its_cam_coding::DangerousEndOfQueueSubCauseCode_t& in, cam_msgs::DangerousEndOfQueueSubCauseCode& out) {
+void toRos_DangerousEndOfQueueSubCauseCode(const cam_DangerousEndOfQueueSubCauseCode_t& in, cam_msgs::DangerousEndOfQueueSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DangerousEndOfQueueSubCauseCode(const cam_msgs::DangerousEndOfQueueSubCauseCode& in, etsi_its_cam_coding::DangerousEndOfQueueSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::DangerousEndOfQueueSubCauseCode_t));
+void toStruct_DangerousEndOfQueueSubCauseCode(const cam_msgs::DangerousEndOfQueueSubCauseCode& in, cam_DangerousEndOfQueueSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_DangerousEndOfQueueSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

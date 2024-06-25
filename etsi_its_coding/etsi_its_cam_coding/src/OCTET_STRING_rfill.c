@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -210,7 +207,3 @@ OCTET_STRING_random_length_constrained(
 
     return rnd_len;
 }
-
-#ifdef __cplusplus
-}
-#endif

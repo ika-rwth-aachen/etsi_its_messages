@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PublicTransportContainer.h>
+#include <etsi_its_cam_coding/cam_PublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
 #include <etsi_its_cam_conversion/convertPtActivation.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PublicTransportContainer(const etsi_its_cam_coding::PublicTransportContainer_t& in, cam_msgs::PublicTransportContainer& out) {
+void toRos_PublicTransportContainer(const cam_PublicTransportContainer_t& in, cam_msgs::PublicTransportContainer& out) {
   toRos_EmbarkationStatus(in.embarkationStatus, out.embarkation_status);
   if (in.ptActivation) {
     toRos_PtActivation(*in.ptActivation, out.pt_activation);
@@ -49,12 +49,12 @@ void toRos_PublicTransportContainer(const etsi_its_cam_coding::PublicTransportCo
   }
 }
 
-void toStruct_PublicTransportContainer(const cam_msgs::PublicTransportContainer& in, etsi_its_cam_coding::PublicTransportContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::PublicTransportContainer_t));
+void toStruct_PublicTransportContainer(const cam_msgs::PublicTransportContainer& in, cam_PublicTransportContainer_t& out) {
+  memset(&out, 0, sizeof(cam_PublicTransportContainer_t));
 
   toStruct_EmbarkationStatus(in.embarkation_status, out.embarkationStatus);
   if (in.pt_activation_is_present) {
-    out.ptActivation = (etsi_its_cam_coding::PtActivation_t*) calloc(1, sizeof(etsi_its_cam_coding::PtActivation_t));
+    out.ptActivation = (cam_PtActivation_t*) calloc(1, sizeof(cam_PtActivation_t));
     toStruct_PtActivation(in.pt_activation, *out.ptActivation);
   }
 }

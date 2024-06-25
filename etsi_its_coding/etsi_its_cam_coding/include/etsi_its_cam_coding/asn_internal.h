@@ -1,4 +1,3 @@
-#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -6,7 +5,8 @@
 /*
  * Declarations internally useful for the ASN.1 support code.
  */
-
+#ifndef	ASN_INTERNAL_H
+#define	ASN_INTERNAL_H
 #ifndef __EXTENSIONS__
 #define __EXTENSIONS__          /* for Sun */
 #endif
@@ -60,9 +60,6 @@ int get_asn1c_environment_version(void);	/* Run-time version */
 #else	/* !ASN_THREAD_SAFE */
 #undef  ASN_DEBUG_INDENT_ADD
 #undef  asn_debug_indent
-#ifndef ASN_INTERNAL_C
-extern
-#endif
 int asn_debug_indent;
 #define ASN_DEBUG_INDENT_ADD(i) do { asn_debug_indent += i; } while(0)
 #endif	/* ASN_THREAD_SAFE */
@@ -187,4 +184,4 @@ ASN__STACK_OVERFLOW_CHECK(const asn_codec_ctx_t *ctx) {
 }
 #endif
 
-
+#endif	/* ASN_INTERNAL_H */

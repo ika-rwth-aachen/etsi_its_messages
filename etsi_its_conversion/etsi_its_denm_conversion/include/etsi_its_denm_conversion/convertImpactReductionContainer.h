@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/ImpactReductionContainer.h>
+#include <etsi_its_denm_coding/denm_ImpactReductionContainer.h>
 #include <etsi_its_denm_conversion/convertHeightLonCarr.h>
 #include <etsi_its_denm_conversion/convertPosCentMass.h>
 #include <etsi_its_denm_conversion/convertPosFrontAx.h>
@@ -49,7 +49,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ImpactReductionContainer(const etsi_its_denm_coding::ImpactReductionContainer_t& in, denm_msgs::ImpactReductionContainer& out) {
+void toRos_ImpactReductionContainer(const denm_ImpactReductionContainer_t& in, denm_msgs::ImpactReductionContainer& out) {
   toRos_HeightLonCarr(in.heightLonCarrLeft, out.height_lon_carr_left);
   toRos_HeightLonCarr(in.heightLonCarrRight, out.height_lon_carr_right);
   toRos_PosLonCarr(in.posLonCarrLeft, out.pos_lon_carr_left);
@@ -64,8 +64,8 @@ void toRos_ImpactReductionContainer(const etsi_its_denm_coding::ImpactReductionC
   toRos_RequestResponseIndication(in.requestResponseIndication, out.request_response_indication);
 }
 
-void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, etsi_its_denm_coding::ImpactReductionContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::ImpactReductionContainer_t));
+void toStruct_ImpactReductionContainer(const denm_msgs::ImpactReductionContainer& in, denm_ImpactReductionContainer_t& out) {
+  memset(&out, 0, sizeof(denm_ImpactReductionContainer_t));
 
   toStruct_HeightLonCarr(in.height_lon_carr_left, out.heightLonCarrLeft);
   toStruct_HeightLonCarr(in.height_lon_carr_right, out.heightLonCarrRight);

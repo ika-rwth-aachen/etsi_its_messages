@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SpeedValue.h>
+#include <etsi_its_denm_coding/denm_SpeedValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SpeedValue(const etsi_its_denm_coding::SpeedValue_t& in, denm_msgs::SpeedValue& out) {
+void toRos_SpeedValue(const denm_SpeedValue_t& in, denm_msgs::SpeedValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedValue(const denm_msgs::SpeedValue& in, etsi_its_denm_coding::SpeedValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SpeedValue_t));
+void toStruct_SpeedValue(const denm_msgs::SpeedValue& in, denm_SpeedValue_t& out) {
+  memset(&out, 0, sizeof(denm_SpeedValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

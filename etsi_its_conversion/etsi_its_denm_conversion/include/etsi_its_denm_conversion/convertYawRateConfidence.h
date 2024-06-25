@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/YawRateConfidence.h>
+#include <etsi_its_denm_coding/denm_YawRateConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/YawRateConfidence.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_YawRateConfidence(const etsi_its_denm_coding::YawRateConfidence_t& in, denm_msgs::YawRateConfidence& out) {
+void toRos_YawRateConfidence(const denm_YawRateConfidence_t& in, denm_msgs::YawRateConfidence& out) {
   out.value = in;
 }
 
-void toStruct_YawRateConfidence(const denm_msgs::YawRateConfidence& in, etsi_its_denm_coding::YawRateConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::YawRateConfidence_t));
+void toStruct_YawRateConfidence(const denm_msgs::YawRateConfidence& in, denm_YawRateConfidence_t& out) {
+  memset(&out, 0, sizeof(denm_YawRateConfidence_t));
 
   out = in.value;
 }

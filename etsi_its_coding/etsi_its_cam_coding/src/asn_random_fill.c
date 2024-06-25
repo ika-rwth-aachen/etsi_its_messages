@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -9,6 +6,7 @@ namespace etsi_its_cam_coding {
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/asn_random_fill.h>
 #include <etsi_its_cam_coding/constr_TYPE.h>
+#include <stdlib.h>
 
 int
 asn_random_fill(const struct asn_TYPE_descriptor_s *td, void **struct_ptr,
@@ -67,7 +65,3 @@ asn_random_between(intmax_t lb, intmax_t rb) {
         return lb + (intmax_t)(value % (range + 1));
     }
 }
-
-#ifdef __cplusplus
-}
-#endif

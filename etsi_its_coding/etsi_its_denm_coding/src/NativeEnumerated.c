@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_denm_coding {
-#endif
 /*-
  * Copyright (c) 2004, 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -29,6 +26,7 @@ asn_TYPE_operation_t asn_OP_NativeEnumerated = {
     0,
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     NativeInteger_compare,
+    NativeInteger_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     NativeInteger_decode_ber,
     NativeInteger_encode_der,
@@ -44,8 +42,10 @@ asn_TYPE_operation_t asn_OP_NativeEnumerated = {
     0,
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    NativeEnumerated_decode_jer,
     NativeEnumerated_encode_jer,
 #else
+    0,
     0,
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -91,6 +91,9 @@ asn_TYPE_descriptor_t asn_DEF_NativeEnumerated = {
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
         0,
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+        0,
+#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
         asn_generic_no_constraint
     },
     0, 0,  /* No members */
@@ -109,7 +112,3 @@ NativeEnumerated__compar_value2enum(const void *ap, const void *bp) {
     return 1;
 }
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
-
-#ifdef __cplusplus
-}
-#endif

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/ProtectedCommunicationZone.h>
+#include <etsi_its_denm_coding/denm_ProtectedCommunicationZone.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertLongitude.h>
 #include <etsi_its_denm_conversion/convertProtectedZoneID.h>
@@ -45,7 +45,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ProtectedCommunicationZone(const etsi_its_denm_coding::ProtectedCommunicationZone_t& in, denm_msgs::ProtectedCommunicationZone& out) {
+void toRos_ProtectedCommunicationZone(const denm_ProtectedCommunicationZone_t& in, denm_msgs::ProtectedCommunicationZone& out) {
   toRos_ProtectedZoneType(in.protectedZoneType, out.protected_zone_type);
   if (in.expiryTime) {
     toRos_TimestampIts(*in.expiryTime, out.expiry_time);
@@ -63,22 +63,22 @@ void toRos_ProtectedCommunicationZone(const etsi_its_denm_coding::ProtectedCommu
   }
 }
 
-void toStruct_ProtectedCommunicationZone(const denm_msgs::ProtectedCommunicationZone& in, etsi_its_denm_coding::ProtectedCommunicationZone_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::ProtectedCommunicationZone_t));
+void toStruct_ProtectedCommunicationZone(const denm_msgs::ProtectedCommunicationZone& in, denm_ProtectedCommunicationZone_t& out) {
+  memset(&out, 0, sizeof(denm_ProtectedCommunicationZone_t));
 
   toStruct_ProtectedZoneType(in.protected_zone_type, out.protectedZoneType);
   if (in.expiry_time_is_present) {
-    out.expiryTime = (etsi_its_denm_coding::TimestampIts_t*) calloc(1, sizeof(etsi_its_denm_coding::TimestampIts_t));
+    out.expiryTime = (denm_TimestampIts_t*) calloc(1, sizeof(denm_TimestampIts_t));
     toStruct_TimestampIts(in.expiry_time, *out.expiryTime);
   }
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
   toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.protected_zone_radius_is_present) {
-    out.protectedZoneRadius = (etsi_its_denm_coding::ProtectedZoneRadius_t*) calloc(1, sizeof(etsi_its_denm_coding::ProtectedZoneRadius_t));
+    out.protectedZoneRadius = (denm_ProtectedZoneRadius_t*) calloc(1, sizeof(denm_ProtectedZoneRadius_t));
     toStruct_ProtectedZoneRadius(in.protected_zone_radius, *out.protectedZoneRadius);
   }
   if (in.protected_zone_id_is_present) {
-    out.protectedZoneID = (etsi_its_denm_coding::ProtectedZoneID_t*) calloc(1, sizeof(etsi_its_denm_coding::ProtectedZoneID_t));
+    out.protectedZoneID = (denm_ProtectedZoneID_t*) calloc(1, sizeof(denm_ProtectedZoneID_t));
     toStruct_ProtectedZoneID(in.protected_zone_id, *out.protectedZoneID);
   }
 }

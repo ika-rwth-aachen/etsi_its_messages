@@ -1,14 +1,13 @@
-#pragma once
 /*
  * Copyright (c) 2007-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_UPER_OPENTYPE_H_
+#define	_UPER_OPENTYPE_H_
 
 #include <etsi_its_denm_coding/per_opentype.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -30,7 +29,6 @@ int uper_open_type_put(const asn_TYPE_descriptor_t *td,
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _UPER_OPENTYPE_H_ */

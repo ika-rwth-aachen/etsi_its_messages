@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HumanProblemSubCauseCode.h>
+#include <etsi_its_cam_coding/cam_HumanProblemSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HumanProblemSubCauseCode(const etsi_its_cam_coding::HumanProblemSubCauseCode_t& in, cam_msgs::HumanProblemSubCauseCode& out) {
+void toRos_HumanProblemSubCauseCode(const cam_HumanProblemSubCauseCode_t& in, cam_msgs::HumanProblemSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HumanProblemSubCauseCode(const cam_msgs::HumanProblemSubCauseCode& in, etsi_its_cam_coding::HumanProblemSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::HumanProblemSubCauseCode_t));
+void toStruct_HumanProblemSubCauseCode(const cam_msgs::HumanProblemSubCauseCode& in, cam_HumanProblemSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_HumanProblemSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

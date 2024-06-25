@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/ReferenceDenms.h>
+#include <etsi_its_denm_coding/denm_ReferenceDenms.h>
 #include <etsi_its_denm_conversion/convertActionID.h>
 #include <etsi_its_denm_conversion/convertReferenceDenms.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ReferenceDenms(const etsi_its_denm_coding::ReferenceDenms_t& in, denm_msgs::ReferenceDenms& out) {
+void toRos_ReferenceDenms(const denm_ReferenceDenms_t& in, denm_msgs::ReferenceDenms& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::ActionID el;
     toRos_ActionID(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_ReferenceDenms(const etsi_its_denm_coding::ReferenceDenms_t& in, denm
   }
 }
 
-void toStruct_ReferenceDenms(const denm_msgs::ReferenceDenms& in, etsi_its_denm_coding::ReferenceDenms_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::ReferenceDenms_t));
+void toStruct_ReferenceDenms(const denm_msgs::ReferenceDenms& in, denm_ReferenceDenms_t& out) {
+  memset(&out, 0, sizeof(denm_ReferenceDenms_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::ActionID_t* el = (etsi_its_denm_coding::ActionID_t*) calloc(1, sizeof(etsi_its_denm_coding::ActionID_t));
+    denm_ActionID_t* el = (denm_ActionID_t*) calloc(1, sizeof(denm_ActionID_t));
     toStruct_ActionID(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

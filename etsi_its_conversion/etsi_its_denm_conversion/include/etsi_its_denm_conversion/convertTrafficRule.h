@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/TrafficRule.h>
+#include <etsi_its_denm_coding/denm_TrafficRule.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/TrafficRule.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_TrafficRule(const etsi_its_denm_coding::TrafficRule_t& in, denm_msgs::TrafficRule& out) {
+void toRos_TrafficRule(const denm_TrafficRule_t& in, denm_msgs::TrafficRule& out) {
   out.value = in;
 }
 
-void toStruct_TrafficRule(const denm_msgs::TrafficRule& in, etsi_its_denm_coding::TrafficRule_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::TrafficRule_t));
+void toStruct_TrafficRule(const denm_msgs::TrafficRule& in, denm_TrafficRule_t& out) {
+  memset(&out, 0, sizeof(denm_TrafficRule_t));
 
   out = in.value;
 }

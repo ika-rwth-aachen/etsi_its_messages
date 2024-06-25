@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/DangerousGoodsExtended.h>
+#include <etsi_its_cam_coding/cam_DangerousGoodsExtended.h>
 #include <etsi_its_cam_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #include <etsi_its_cam_coding/IA5String.h>
@@ -49,7 +49,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DangerousGoodsExtended(const etsi_its_cam_coding::DangerousGoodsExtended_t& in, cam_msgs::DangerousGoodsExtended& out) {
+void toRos_DangerousGoodsExtended(const cam_DangerousGoodsExtended_t& in, cam_msgs::DangerousGoodsExtended& out) {
   toRos_DangerousGoodsBasic(in.dangerousGoodsType, out.dangerous_goods_type);
   etsi_its_primitives_conversion::toRos_INTEGER(in.unNumber, out.un_number);
   etsi_its_primitives_conversion::toRos_BOOLEAN(in.elevatedTemperature, out.elevated_temperature);
@@ -69,8 +69,8 @@ void toRos_DangerousGoodsExtended(const etsi_its_cam_coding::DangerousGoodsExten
   }
 }
 
-void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in, etsi_its_cam_coding::DangerousGoodsExtended_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::DangerousGoodsExtended_t));
+void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in, cam_DangerousGoodsExtended_t& out) {
+  memset(&out, 0, sizeof(cam_DangerousGoodsExtended_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_type, out.dangerousGoodsType);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.un_number, out.unNumber);
@@ -78,15 +78,15 @@ void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in,
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.tunnels_restricted, out.tunnelsRestricted);
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.limited_quantity, out.limitedQuantity);
   if (in.emergency_action_code_is_present) {
-    out.emergencyActionCode = (etsi_its_cam_coding::IA5String_t*) calloc(1, sizeof(etsi_its_cam_coding::IA5String_t));
+    out.emergencyActionCode = (cam_IA5String_t*) calloc(1, sizeof(cam_IA5String_t));
     etsi_its_primitives_conversion::toStruct_IA5String(in.emergency_action_code, *out.emergencyActionCode);
   }
   if (in.phone_number_is_present) {
-    out.phoneNumber = (etsi_its_cam_coding::PhoneNumber_t*) calloc(1, sizeof(etsi_its_cam_coding::PhoneNumber_t));
+    out.phoneNumber = (cam_PhoneNumber_t*) calloc(1, sizeof(cam_PhoneNumber_t));
     toStruct_PhoneNumber(in.phone_number, *out.phoneNumber);
   }
   if (in.company_name_is_present) {
-    out.companyName = (etsi_its_cam_coding::UTF8String_t*) calloc(1, sizeof(etsi_its_cam_coding::UTF8String_t));
+    out.companyName = (cam_UTF8String_t*) calloc(1, sizeof(cam_UTF8String_t));
     etsi_its_primitives_conversion::toStruct_UTF8String(in.company_name, *out.companyName);
   }
 }

@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -36,7 +33,7 @@ SEQUENCE_OF_encode_uper(const asn_TYPE_descriptor_t *td,
     if(ct) {
         int not_in_root =
             (list->count < ct->lower_bound || list->count > ct->upper_bound);
-        ASN_DEBUG("lb %ld ub %ld %s", ct->lower_bound, ct->upper_bound,
+        ASN_DEBUG("lb %"ASN_PRIdMAX" ub %"ASN_PRIdMAX" %s", ct->lower_bound, ct->upper_bound,
                   ct->flags & APC_EXTENSIBLE ? "ext" : "fix");
         if(ct->flags & APC_EXTENSIBLE) {
             /* Declare whether size is in extension root */
@@ -93,7 +90,3 @@ SEQUENCE_OF_encode_uper(const asn_TYPE_descriptor_t *td,
 
 	ASN__ENCODED_OK(er);
 }
-
-#ifdef __cplusplus
-}
-#endif

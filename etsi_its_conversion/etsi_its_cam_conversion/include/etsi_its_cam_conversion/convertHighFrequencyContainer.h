@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HighFrequencyContainer.h>
+#include <etsi_its_cam_coding/cam_HighFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertBasicVehicleContainerHighFrequency.h>
 #include <etsi_its_cam_conversion/convertRSUContainerHighFrequency.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HighFrequencyContainer(const etsi_its_cam_coding::HighFrequencyContainer_t& in, cam_msgs::HighFrequencyContainer& out) {
+void toRos_HighFrequencyContainer(const cam_HighFrequencyContainer_t& in, cam_msgs::HighFrequencyContainer& out) {
   switch (in.present) {
-  case etsi_its_cam_coding::HighFrequencyContainer_PR_basicVehicleContainerHighFrequency:
+  case cam_HighFrequencyContainer_PR_basicVehicleContainerHighFrequency:
     toRos_BasicVehicleContainerHighFrequency(in.choice.basicVehicleContainerHighFrequency, out.basic_vehicle_container_high_frequency);
     out.choice = cam_msgs::HighFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY;
     break;
-  case etsi_its_cam_coding::HighFrequencyContainer_PR_rsuContainerHighFrequency:
+  case cam_HighFrequencyContainer_PR_rsuContainerHighFrequency:
     toRos_RSUContainerHighFrequency(in.choice.rsuContainerHighFrequency, out.rsu_container_high_frequency);
     out.choice = cam_msgs::HighFrequencyContainer::CHOICE_RSU_CONTAINER_HIGH_FREQUENCY;
     break;
@@ -55,17 +55,17 @@ void toRos_HighFrequencyContainer(const etsi_its_cam_coding::HighFrequencyContai
   }
 }
 
-void toStruct_HighFrequencyContainer(const cam_msgs::HighFrequencyContainer& in, etsi_its_cam_coding::HighFrequencyContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::HighFrequencyContainer_t));
+void toStruct_HighFrequencyContainer(const cam_msgs::HighFrequencyContainer& in, cam_HighFrequencyContainer_t& out) {
+  memset(&out, 0, sizeof(cam_HighFrequencyContainer_t));
 
   switch (in.choice) {
   case cam_msgs::HighFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY:
     toStruct_BasicVehicleContainerHighFrequency(in.basic_vehicle_container_high_frequency, out.choice.basicVehicleContainerHighFrequency);
-    out.present = etsi_its_cam_coding::HighFrequencyContainer_PR::HighFrequencyContainer_PR_basicVehicleContainerHighFrequency;
+    out.present = cam_HighFrequencyContainer_PR::cam_HighFrequencyContainer_PR_basicVehicleContainerHighFrequency;
     break;
   case cam_msgs::HighFrequencyContainer::CHOICE_RSU_CONTAINER_HIGH_FREQUENCY:
     toStruct_RSUContainerHighFrequency(in.rsu_container_high_frequency, out.choice.rsuContainerHighFrequency);
-    out.present = etsi_its_cam_coding::HighFrequencyContainer_PR::HighFrequencyContainer_PR_rsuContainerHighFrequency;
+    out.present = cam_HighFrequencyContainer_PR::cam_HighFrequencyContainer_PR_rsuContainerHighFrequency;
     break;
   default: break;
   }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/HumanPresenceOnTheRoadSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_HumanPresenceOnTheRoadSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HumanPresenceOnTheRoadSubCauseCode(const etsi_its_denm_coding::HumanPresenceOnTheRoadSubCauseCode_t& in, denm_msgs::HumanPresenceOnTheRoadSubCauseCode& out) {
+void toRos_HumanPresenceOnTheRoadSubCauseCode(const denm_HumanPresenceOnTheRoadSubCauseCode_t& in, denm_msgs::HumanPresenceOnTheRoadSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HumanPresenceOnTheRoadSubCauseCode(const denm_msgs::HumanPresenceOnTheRoadSubCauseCode& in, etsi_its_denm_coding::HumanPresenceOnTheRoadSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::HumanPresenceOnTheRoadSubCauseCode_t));
+void toStruct_HumanPresenceOnTheRoadSubCauseCode(const denm_msgs::HumanPresenceOnTheRoadSubCauseCode& in, denm_HumanPresenceOnTheRoadSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_HumanPresenceOnTheRoadSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

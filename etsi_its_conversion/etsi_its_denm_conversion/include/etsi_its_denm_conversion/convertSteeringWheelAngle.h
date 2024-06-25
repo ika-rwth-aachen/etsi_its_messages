@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SteeringWheelAngle.h>
+#include <etsi_its_denm_coding/denm_SteeringWheelAngle.h>
 #include <etsi_its_denm_conversion/convertSteeringWheelAngleConfidence.h>
 #include <etsi_its_denm_conversion/convertSteeringWheelAngleValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SteeringWheelAngle(const etsi_its_denm_coding::SteeringWheelAngle_t& in, denm_msgs::SteeringWheelAngle& out) {
+void toRos_SteeringWheelAngle(const denm_SteeringWheelAngle_t& in, denm_msgs::SteeringWheelAngle& out) {
   toRos_SteeringWheelAngleValue(in.steeringWheelAngleValue, out.steering_wheel_angle_value);
   toRos_SteeringWheelAngleConfidence(in.steeringWheelAngleConfidence, out.steering_wheel_angle_confidence);
 }
 
-void toStruct_SteeringWheelAngle(const denm_msgs::SteeringWheelAngle& in, etsi_its_denm_coding::SteeringWheelAngle_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SteeringWheelAngle_t));
+void toStruct_SteeringWheelAngle(const denm_msgs::SteeringWheelAngle& in, denm_SteeringWheelAngle_t& out) {
+  memset(&out, 0, sizeof(denm_SteeringWheelAngle_t));
 
   toStruct_SteeringWheelAngleValue(in.steering_wheel_angle_value, out.steeringWheelAngleValue);
   toStruct_SteeringWheelAngleConfidence(in.steering_wheel_angle_confidence, out.steeringWheelAngleConfidence);

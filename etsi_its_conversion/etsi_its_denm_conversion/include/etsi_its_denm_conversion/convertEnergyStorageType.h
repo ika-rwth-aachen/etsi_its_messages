@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/EnergyStorageType.h>
+#include <etsi_its_denm_coding/denm_EnergyStorageType.h>
 #include <etsi_its_denm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_EnergyStorageType(const etsi_its_denm_coding::EnergyStorageType_t& in, denm_msgs::EnergyStorageType& out) {
+void toRos_EnergyStorageType(const denm_EnergyStorageType_t& in, denm_msgs::EnergyStorageType& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_EnergyStorageType(const denm_msgs::EnergyStorageType& in, etsi_its_denm_coding::EnergyStorageType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::EnergyStorageType_t));
+void toStruct_EnergyStorageType(const denm_msgs::EnergyStorageType& in, denm_EnergyStorageType_t& out) {
+  memset(&out, 0, sizeof(denm_EnergyStorageType_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

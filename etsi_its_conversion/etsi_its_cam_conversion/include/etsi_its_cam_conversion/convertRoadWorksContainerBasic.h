@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RoadWorksContainerBasic.h>
+#include <etsi_its_cam_coding/cam_RoadWorksContainerBasic.h>
 #include <etsi_its_cam_conversion/convertClosedLanes.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertRoadworksSubCauseCode.h>
@@ -42,7 +42,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RoadWorksContainerBasic(const etsi_its_cam_coding::RoadWorksContainerBasic_t& in, cam_msgs::RoadWorksContainerBasic& out) {
+void toRos_RoadWorksContainerBasic(const cam_RoadWorksContainerBasic_t& in, cam_msgs::RoadWorksContainerBasic& out) {
   if (in.roadworksSubCauseCode) {
     toRos_RoadworksSubCauseCode(*in.roadworksSubCauseCode, out.roadworks_sub_cause_code);
     out.roadworks_sub_cause_code_is_present = true;
@@ -54,16 +54,16 @@ void toRos_RoadWorksContainerBasic(const etsi_its_cam_coding::RoadWorksContainer
   }
 }
 
-void toStruct_RoadWorksContainerBasic(const cam_msgs::RoadWorksContainerBasic& in, etsi_its_cam_coding::RoadWorksContainerBasic_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RoadWorksContainerBasic_t));
+void toStruct_RoadWorksContainerBasic(const cam_msgs::RoadWorksContainerBasic& in, cam_RoadWorksContainerBasic_t& out) {
+  memset(&out, 0, sizeof(cam_RoadWorksContainerBasic_t));
 
   if (in.roadworks_sub_cause_code_is_present) {
-    out.roadworksSubCauseCode = (etsi_its_cam_coding::RoadworksSubCauseCode_t*) calloc(1, sizeof(etsi_its_cam_coding::RoadworksSubCauseCode_t));
+    out.roadworksSubCauseCode = (cam_RoadworksSubCauseCode_t*) calloc(1, sizeof(cam_RoadworksSubCauseCode_t));
     toStruct_RoadworksSubCauseCode(in.roadworks_sub_cause_code, *out.roadworksSubCauseCode);
   }
   toStruct_LightBarSirenInUse(in.light_bar_siren_in_use, out.lightBarSirenInUse);
   if (in.closed_lanes_is_present) {
-    out.closedLanes = (etsi_its_cam_coding::ClosedLanes_t*) calloc(1, sizeof(etsi_its_cam_coding::ClosedLanes_t));
+    out.closedLanes = (cam_ClosedLanes_t*) calloc(1, sizeof(cam_ClosedLanes_t));
     toStruct_ClosedLanes(in.closed_lanes, *out.closedLanes);
   }
 }

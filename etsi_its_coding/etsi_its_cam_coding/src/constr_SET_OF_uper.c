@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -50,7 +47,7 @@ SET_OF_decode_uper(const asn_codec_ctx_t *opt_codec_ctx,
     if(ct && ct->effective_bits >= 0) {
         /* X.691, #19.5: No length determinant */
         nelems = per_get_few_bits(pd, ct->effective_bits);
-        ASN_DEBUG("Preparing to fetch %ld+%ld elements from %s",
+        ASN_DEBUG("Preparing to fetch %ld+%"ASN_PRIdMAX" elements from %s",
                   (long)nelems, ct->lower_bound, td->name);
         if(nelems < 0)  ASN__DECODE_STARVED;
         nelems += ct->lower_bound;
@@ -133,7 +130,7 @@ SET_OF_encode_uper(const asn_TYPE_descriptor_t *td,
     if(ct) {
         int not_in_root =
             (list->count < ct->lower_bound || list->count > ct->upper_bound);
-        ASN_DEBUG("lb %ld ub %ld %s", ct->lower_bound, ct->upper_bound,
+        ASN_DEBUG("lb %"ASN_PRIdMAX" ub %"ASN_PRIdMAX" %s", ct->lower_bound, ct->upper_bound,
                   ct->flags & APC_EXTENSIBLE ? "ext" : "fix");
         if(ct->flags & APC_EXTENSIBLE) {
             /* Declare whether size is in extension root */
@@ -202,7 +199,3 @@ SET_OF_encode_uper(const asn_TYPE_descriptor_t *td,
         ASN__ENCODE_FAILED;
     }
 }
-
-#ifdef __cplusplus
-}
-#endif

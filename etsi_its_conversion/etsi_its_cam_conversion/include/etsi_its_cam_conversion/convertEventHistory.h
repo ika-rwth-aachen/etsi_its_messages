@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/EventHistory.h>
+#include <etsi_its_cam_coding/cam_EventHistory.h>
 #include <etsi_its_cam_conversion/convertEventHistory.h>
 #include <etsi_its_cam_conversion/convertEventPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EventHistory(const etsi_its_cam_coding::EventHistory_t& in, cam_msgs::EventHistory& out) {
+void toRos_EventHistory(const cam_EventHistory_t& in, cam_msgs::EventHistory& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cam_msgs::EventPoint el;
     toRos_EventPoint(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_EventHistory(const etsi_its_cam_coding::EventHistory_t& in, cam_msgs:
   }
 }
 
-void toStruct_EventHistory(const cam_msgs::EventHistory& in, etsi_its_cam_coding::EventHistory_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::EventHistory_t));
+void toStruct_EventHistory(const cam_msgs::EventHistory& in, cam_EventHistory_t& out) {
+  memset(&out, 0, sizeof(cam_EventHistory_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_cam_coding::EventPoint_t* el = (etsi_its_cam_coding::EventPoint_t*) calloc(1, sizeof(etsi_its_cam_coding::EventPoint_t));
+    cam_EventPoint_t* el = (cam_EventPoint_t*) calloc(1, sizeof(cam_EventPoint_t));
     toStruct_EventPoint(in.array[i], *el);
-    if (etsi_its_cam_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

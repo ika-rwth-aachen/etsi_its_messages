@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/HeadingConfidence.h>
+#include <etsi_its_denm_coding/denm_HeadingConfidence.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HeadingConfidence(const etsi_its_denm_coding::HeadingConfidence_t& in, denm_msgs::HeadingConfidence& out) {
+void toRos_HeadingConfidence(const denm_HeadingConfidence_t& in, denm_msgs::HeadingConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeadingConfidence(const denm_msgs::HeadingConfidence& in, etsi_its_denm_coding::HeadingConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::HeadingConfidence_t));
+void toStruct_HeadingConfidence(const denm_msgs::HeadingConfidence& in, denm_HeadingConfidence_t& out) {
+  memset(&out, 0, sizeof(denm_HeadingConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

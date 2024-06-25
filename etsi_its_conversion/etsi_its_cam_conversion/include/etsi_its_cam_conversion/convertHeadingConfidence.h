@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HeadingConfidence.h>
+#include <etsi_its_cam_coding/cam_HeadingConfidence.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HeadingConfidence(const etsi_its_cam_coding::HeadingConfidence_t& in, cam_msgs::HeadingConfidence& out) {
+void toRos_HeadingConfidence(const cam_HeadingConfidence_t& in, cam_msgs::HeadingConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeadingConfidence(const cam_msgs::HeadingConfidence& in, etsi_its_cam_coding::HeadingConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::HeadingConfidence_t));
+void toStruct_HeadingConfidence(const cam_msgs::HeadingConfidence& in, cam_HeadingConfidence_t& out) {
+  memset(&out, 0, sizeof(cam_HeadingConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

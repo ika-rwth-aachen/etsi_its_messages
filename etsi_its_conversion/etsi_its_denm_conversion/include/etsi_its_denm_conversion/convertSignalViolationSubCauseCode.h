@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SignalViolationSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_SignalViolationSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SignalViolationSubCauseCode(const etsi_its_denm_coding::SignalViolationSubCauseCode_t& in, denm_msgs::SignalViolationSubCauseCode& out) {
+void toRos_SignalViolationSubCauseCode(const denm_SignalViolationSubCauseCode_t& in, denm_msgs::SignalViolationSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SignalViolationSubCauseCode(const denm_msgs::SignalViolationSubCauseCode& in, etsi_its_denm_coding::SignalViolationSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SignalViolationSubCauseCode_t));
+void toStruct_SignalViolationSubCauseCode(const denm_msgs::SignalViolationSubCauseCode& in, denm_SignalViolationSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_SignalViolationSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

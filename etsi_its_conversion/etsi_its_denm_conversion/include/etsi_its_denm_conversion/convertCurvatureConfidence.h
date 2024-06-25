@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CurvatureConfidence.h>
+#include <etsi_its_denm_coding/denm_CurvatureConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/CurvatureConfidence.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CurvatureConfidence(const etsi_its_denm_coding::CurvatureConfidence_t& in, denm_msgs::CurvatureConfidence& out) {
+void toRos_CurvatureConfidence(const denm_CurvatureConfidence_t& in, denm_msgs::CurvatureConfidence& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureConfidence(const denm_msgs::CurvatureConfidence& in, etsi_its_denm_coding::CurvatureConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::CurvatureConfidence_t));
+void toStruct_CurvatureConfidence(const denm_msgs::CurvatureConfidence& in, denm_CurvatureConfidence_t& out) {
+  memset(&out, 0, sizeof(denm_CurvatureConfidence_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/RoadworksSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_RoadworksSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RoadworksSubCauseCode(const etsi_its_denm_coding::RoadworksSubCauseCode_t& in, denm_msgs::RoadworksSubCauseCode& out) {
+void toRos_RoadworksSubCauseCode(const denm_RoadworksSubCauseCode_t& in, denm_msgs::RoadworksSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RoadworksSubCauseCode(const denm_msgs::RoadworksSubCauseCode& in, etsi_its_denm_coding::RoadworksSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RoadworksSubCauseCode_t));
+void toStruct_RoadworksSubCauseCode(const denm_msgs::RoadworksSubCauseCode& in, denm_RoadworksSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_RoadworksSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

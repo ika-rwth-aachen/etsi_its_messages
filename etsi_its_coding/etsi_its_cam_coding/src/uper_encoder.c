@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/uper_encoder.h>
@@ -128,7 +125,3 @@ _uper_encode_flush_outp(asn_per_outp_t *po) {
 
 	return po->output(po->tmpspace, buf - po->tmpspace, po->op_key);
 }
-
-#ifdef __cplusplus
-}
-#endif

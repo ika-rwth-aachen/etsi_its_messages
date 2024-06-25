@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/NumberOfOccupants.h>
+#include <etsi_its_denm_coding/denm_NumberOfOccupants.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_NumberOfOccupants(const etsi_its_denm_coding::NumberOfOccupants_t& in, denm_msgs::NumberOfOccupants& out) {
+void toRos_NumberOfOccupants(const denm_NumberOfOccupants_t& in, denm_msgs::NumberOfOccupants& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_NumberOfOccupants(const denm_msgs::NumberOfOccupants& in, etsi_its_denm_coding::NumberOfOccupants_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::NumberOfOccupants_t));
+void toStruct_NumberOfOccupants(const denm_msgs::NumberOfOccupants& in, denm_NumberOfOccupants_t& out) {
+  memset(&out, 0, sizeof(denm_NumberOfOccupants_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

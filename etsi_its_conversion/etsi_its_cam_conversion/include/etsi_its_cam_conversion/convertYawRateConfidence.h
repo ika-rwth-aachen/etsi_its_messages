@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/YawRateConfidence.h>
+#include <etsi_its_cam_coding/cam_YawRateConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/YawRateConfidence.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_YawRateConfidence(const etsi_its_cam_coding::YawRateConfidence_t& in, cam_msgs::YawRateConfidence& out) {
+void toRos_YawRateConfidence(const cam_YawRateConfidence_t& in, cam_msgs::YawRateConfidence& out) {
   out.value = in;
 }
 
-void toStruct_YawRateConfidence(const cam_msgs::YawRateConfidence& in, etsi_its_cam_coding::YawRateConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::YawRateConfidence_t));
+void toStruct_YawRateConfidence(const cam_msgs::YawRateConfidence& in, cam_YawRateConfidence_t& out) {
+  memset(&out, 0, sizeof(cam_YawRateConfidence_t));
 
   out = in.value;
 }

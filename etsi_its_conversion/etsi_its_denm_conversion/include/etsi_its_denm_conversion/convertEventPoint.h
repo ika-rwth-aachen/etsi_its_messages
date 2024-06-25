@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/EventPoint.h>
+#include <etsi_its_denm_coding/denm_EventPoint.h>
 #include <etsi_its_denm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
 #include <etsi_its_denm_conversion/convertPathDeltaTime.h>
@@ -42,7 +42,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_EventPoint(const etsi_its_denm_coding::EventPoint_t& in, denm_msgs::EventPoint& out) {
+void toRos_EventPoint(const denm_EventPoint_t& in, denm_msgs::EventPoint& out) {
   toRos_DeltaReferencePosition(in.eventPosition, out.event_position);
   if (in.eventDeltaTime) {
     toRos_PathDeltaTime(*in.eventDeltaTime, out.event_delta_time);
@@ -51,12 +51,12 @@ void toRos_EventPoint(const etsi_its_denm_coding::EventPoint_t& in, denm_msgs::E
   toRos_InformationQuality(in.informationQuality, out.information_quality);
 }
 
-void toStruct_EventPoint(const denm_msgs::EventPoint& in, etsi_its_denm_coding::EventPoint_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::EventPoint_t));
+void toStruct_EventPoint(const denm_msgs::EventPoint& in, denm_EventPoint_t& out) {
+  memset(&out, 0, sizeof(denm_EventPoint_t));
 
   toStruct_DeltaReferencePosition(in.event_position, out.eventPosition);
   if (in.event_delta_time_is_present) {
-    out.eventDeltaTime = (etsi_its_denm_coding::PathDeltaTime_t*) calloc(1, sizeof(etsi_its_denm_coding::PathDeltaTime_t));
+    out.eventDeltaTime = (denm_PathDeltaTime_t*) calloc(1, sizeof(denm_PathDeltaTime_t));
     toStruct_PathDeltaTime(in.event_delta_time, *out.eventDeltaTime);
   }
   toStruct_InformationQuality(in.information_quality, out.informationQuality);

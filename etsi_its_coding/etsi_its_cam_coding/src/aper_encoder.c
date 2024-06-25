@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 #include <etsi_its_cam_coding/asn_application.h>
 #include <etsi_its_cam_coding/asn_internal.h>
 #include <etsi_its_cam_coding/aper_encoder.h>
@@ -130,7 +127,3 @@ aper_encode(const asn_TYPE_descriptor_t *td,
 
 	return er;
 }
-
-#ifdef __cplusplus
-}
-#endif

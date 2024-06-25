@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/Longitude.h>
+#include <etsi_its_cam_coding/cam_Longitude.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Longitude(const etsi_its_cam_coding::Longitude_t& in, cam_msgs::Longitude& out) {
+void toRos_Longitude(const cam_Longitude_t& in, cam_msgs::Longitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Longitude(const cam_msgs::Longitude& in, etsi_its_cam_coding::Longitude_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::Longitude_t));
+void toStruct_Longitude(const cam_msgs::Longitude& in, cam_Longitude_t& out) {
+  memset(&out, 0, sizeof(cam_Longitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

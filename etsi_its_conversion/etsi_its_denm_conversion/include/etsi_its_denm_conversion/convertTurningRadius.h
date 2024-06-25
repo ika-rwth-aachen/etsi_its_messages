@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/TurningRadius.h>
+#include <etsi_its_denm_coding/denm_TurningRadius.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_TurningRadius(const etsi_its_denm_coding::TurningRadius_t& in, denm_msgs::TurningRadius& out) {
+void toRos_TurningRadius(const denm_TurningRadius_t& in, denm_msgs::TurningRadius& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TurningRadius(const denm_msgs::TurningRadius& in, etsi_its_denm_coding::TurningRadius_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::TurningRadius_t));
+void toStruct_TurningRadius(const denm_msgs::TurningRadius& in, denm_TurningRadius_t& out) {
+  memset(&out, 0, sizeof(denm_TurningRadius_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

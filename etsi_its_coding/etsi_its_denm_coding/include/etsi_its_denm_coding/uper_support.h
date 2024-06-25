@@ -1,15 +1,14 @@
-#pragma once
 /*
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_UPER_SUPPORT_H_
+#define	_UPER_SUPPORT_H_
 
 #include <etsi_its_denm_coding/asn_system.h>		/* Platform-specific types */
 #include <etsi_its_denm_coding/per_support.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -73,7 +72,6 @@ int uper_put_nsnnwn(asn_per_outp_t *po, int n);
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _UPER_SUPPORT_H_ */

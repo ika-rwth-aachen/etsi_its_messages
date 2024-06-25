@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/LongitudinalAccelerationValue.h>
+#include <etsi_its_cam_coding/cam_LongitudinalAccelerationValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_LongitudinalAccelerationValue(const etsi_its_cam_coding::LongitudinalAccelerationValue_t& in, cam_msgs::LongitudinalAccelerationValue& out) {
+void toRos_LongitudinalAccelerationValue(const cam_LongitudinalAccelerationValue_t& in, cam_msgs::LongitudinalAccelerationValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_LongitudinalAccelerationValue(const cam_msgs::LongitudinalAccelerationValue& in, etsi_its_cam_coding::LongitudinalAccelerationValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::LongitudinalAccelerationValue_t));
+void toStruct_LongitudinalAccelerationValue(const cam_msgs::LongitudinalAccelerationValue& in, cam_LongitudinalAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(cam_LongitudinalAccelerationValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

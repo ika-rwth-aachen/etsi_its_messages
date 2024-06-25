@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const etsi_its_denm_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& in, denm_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& out) {
+void toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const denm_AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& in, denm_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const denm_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& in, etsi_its_denm_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t));
+void toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(const denm_msgs::AdverseWeatherConditionExtremeWeatherConditionSubCauseCode& in, denm_AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

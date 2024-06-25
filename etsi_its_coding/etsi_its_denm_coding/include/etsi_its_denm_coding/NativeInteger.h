@@ -1,4 +1,3 @@
-#pragma once
 /*-
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -10,13 +9,13 @@
  * will do).
  * This type may be used when integer range is limited by subtype constraints.
  */
-
+#ifndef	_NativeInteger_H_
+#define	_NativeInteger_H_
 
 #include <etsi_its_denm_coding/asn_application.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -30,6 +29,7 @@ asn_struct_print_f NativeInteger_print;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f NativeInteger_compare;
+asn_struct_copy_f    NativeInteger_copy;
 
 #define NativeInteger_constraint asn_generic_no_constraint
 
@@ -44,6 +44,7 @@ xer_type_encoder_f NativeInteger_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f NativeInteger_decode_jer;
 jer_type_encoder_f NativeInteger_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -67,7 +68,6 @@ asn_random_fill_f NativeInteger_random_fill;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _NativeInteger_H_ */

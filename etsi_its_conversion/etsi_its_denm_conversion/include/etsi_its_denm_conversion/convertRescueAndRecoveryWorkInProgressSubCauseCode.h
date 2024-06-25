@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/RescueAndRecoveryWorkInProgressSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_RescueAndRecoveryWorkInProgressSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const etsi_its_denm_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& in, denm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
+void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const denm_RescueAndRecoveryWorkInProgressSubCauseCode_t& in, denm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const denm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, etsi_its_denm_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t));
+void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const denm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, denm_RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_RescueAndRecoveryWorkInProgressSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

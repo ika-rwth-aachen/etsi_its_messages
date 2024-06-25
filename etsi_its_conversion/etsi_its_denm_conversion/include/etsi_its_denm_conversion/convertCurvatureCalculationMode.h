@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CurvatureCalculationMode.h>
+#include <etsi_its_denm_coding/denm_CurvatureCalculationMode.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/CurvatureCalculationMode.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CurvatureCalculationMode(const etsi_its_denm_coding::CurvatureCalculationMode_t& in, denm_msgs::CurvatureCalculationMode& out) {
+void toRos_CurvatureCalculationMode(const denm_CurvatureCalculationMode_t& in, denm_msgs::CurvatureCalculationMode& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureCalculationMode(const denm_msgs::CurvatureCalculationMode& in, etsi_its_denm_coding::CurvatureCalculationMode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::CurvatureCalculationMode_t));
+void toStruct_CurvatureCalculationMode(const denm_msgs::CurvatureCalculationMode& in, denm_CurvatureCalculationMode_t& out) {
+  memset(&out, 0, sizeof(denm_CurvatureCalculationMode_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/DangerousGoodsContainer.h>
+#include <etsi_its_cam_coding/cam_DangerousGoodsContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DangerousGoodsContainer.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DangerousGoodsContainer(const etsi_its_cam_coding::DangerousGoodsContainer_t& in, cam_msgs::DangerousGoodsContainer& out) {
+void toRos_DangerousGoodsContainer(const cam_DangerousGoodsContainer_t& in, cam_msgs::DangerousGoodsContainer& out) {
   toRos_DangerousGoodsBasic(in.dangerousGoodsBasic, out.dangerous_goods_basic);
 }
 
-void toStruct_DangerousGoodsContainer(const cam_msgs::DangerousGoodsContainer& in, etsi_its_cam_coding::DangerousGoodsContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::DangerousGoodsContainer_t));
+void toStruct_DangerousGoodsContainer(const cam_msgs::DangerousGoodsContainer& in, cam_DangerousGoodsContainer_t& out) {
+  memset(&out, 0, sizeof(cam_DangerousGoodsContainer_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_basic, out.dangerousGoodsBasic);
 }

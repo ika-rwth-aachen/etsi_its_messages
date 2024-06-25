@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/HeightLonCarr.h>
+#include <etsi_its_denm_coding/denm_HeightLonCarr.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HeightLonCarr(const etsi_its_denm_coding::HeightLonCarr_t& in, denm_msgs::HeightLonCarr& out) {
+void toRos_HeightLonCarr(const denm_HeightLonCarr_t& in, denm_msgs::HeightLonCarr& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeightLonCarr(const denm_msgs::HeightLonCarr& in, etsi_its_denm_coding::HeightLonCarr_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::HeightLonCarr_t));
+void toStruct_HeightLonCarr(const denm_msgs::HeightLonCarr& in, denm_HeightLonCarr_t& out) {
+  memset(&out, 0, sizeof(denm_HeightLonCarr_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

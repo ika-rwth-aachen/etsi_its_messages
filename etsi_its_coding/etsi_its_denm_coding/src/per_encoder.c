@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_denm_coding {
-#endif
 #include <etsi_its_denm_coding/asn_internal.h>
 #include <etsi_its_denm_coding/per_encoder.h>
 
@@ -36,7 +33,3 @@ encode_dyn_cb(const void *buffer, size_t size, void *key) {
     arg->length += size;
     return 0;
 }
-
-#ifdef __cplusplus
-}
-#endif

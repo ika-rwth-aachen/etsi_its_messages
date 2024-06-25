@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_CONSTR_SEQUENCE_H_
+#define	_CONSTR_SEQUENCE_H_
 
 #include <etsi_its_denm_coding/asn_application.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -52,6 +51,7 @@ asn_struct_print_f SEQUENCE_print;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f SEQUENCE_compare;
+asn_struct_copy_f SEQUENCE_copy;
 
 asn_constr_check_f SEQUENCE_constraint;
 
@@ -66,6 +66,7 @@ xer_type_encoder_f SEQUENCE_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f SEQUENCE_decode_jer;
 jer_type_encoder_f SEQUENCE_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -91,7 +92,6 @@ extern asn_TYPE_operation_t asn_OP_SEQUENCE;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _CONSTR_SEQUENCE_H_ */

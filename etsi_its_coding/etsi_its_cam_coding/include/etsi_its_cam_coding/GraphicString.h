@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_GraphicString_H_
+#define	_GraphicString_H_
 
 #include <etsi_its_cam_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -24,6 +23,7 @@ extern asn_TYPE_operation_t asn_OP_GraphicString;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define GraphicString_compare OCTET_STRING_compare
+#define GraphicString_copy    OCTET_STRING_copy
 
 #define GraphicString_constraint asn_generic_unknown_constraint
 
@@ -38,6 +38,7 @@ extern asn_TYPE_operation_t asn_OP_GraphicString;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+#define GraphicString_decode_jer OCTET_STRING_decode_jer
 #define GraphicString_encode_jer OCTET_STRING_encode_jer
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -52,7 +53,6 @@ extern asn_TYPE_operation_t asn_OP_GraphicString;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _GraphicString_H_ */

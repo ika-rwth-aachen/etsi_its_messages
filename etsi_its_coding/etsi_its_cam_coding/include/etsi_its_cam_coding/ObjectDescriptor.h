@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_ObjectDescriptor_H_
+#define	_ObjectDescriptor_H_
 
 #include <etsi_its_cam_coding/GraphicString.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -36,6 +35,7 @@ extern asn_TYPE_operation_t asn_OP_ObjectDescriptor;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+#define ObjectDescriptor_decode_jer OCTET_STRING_decode_jer_utf8
 #define ObjectDescriptor_encode_jer OCTET_STRING_encode_jer_utf8
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -50,7 +50,6 @@ extern asn_TYPE_operation_t asn_OP_ObjectDescriptor;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _ObjectDescriptor_H_ */

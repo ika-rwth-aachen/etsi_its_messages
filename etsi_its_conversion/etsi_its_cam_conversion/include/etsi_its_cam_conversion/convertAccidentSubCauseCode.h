@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/AccidentSubCauseCode.h>
+#include <etsi_its_cam_coding/cam_AccidentSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_AccidentSubCauseCode(const etsi_its_cam_coding::AccidentSubCauseCode_t& in, cam_msgs::AccidentSubCauseCode& out) {
+void toRos_AccidentSubCauseCode(const cam_AccidentSubCauseCode_t& in, cam_msgs::AccidentSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AccidentSubCauseCode(const cam_msgs::AccidentSubCauseCode& in, etsi_its_cam_coding::AccidentSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::AccidentSubCauseCode_t));
+void toStruct_AccidentSubCauseCode(const cam_msgs::AccidentSubCauseCode& in, cam_AccidentSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_AccidentSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

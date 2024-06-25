@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -75,7 +72,3 @@ SEQUENCE_random_fill(const asn_TYPE_descriptor_t *td, void **sptr,
 
     return result_ok;
 }
-
-#ifdef __cplusplus
-}
-#endif

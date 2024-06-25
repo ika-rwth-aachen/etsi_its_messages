@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/AltitudeValue.h>
+#include <etsi_its_denm_coding/denm_AltitudeValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AltitudeValue(const etsi_its_denm_coding::AltitudeValue_t& in, denm_msgs::AltitudeValue& out) {
+void toRos_AltitudeValue(const denm_AltitudeValue_t& in, denm_msgs::AltitudeValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AltitudeValue(const denm_msgs::AltitudeValue& in, etsi_its_denm_coding::AltitudeValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::AltitudeValue_t));
+void toStruct_AltitudeValue(const denm_msgs::AltitudeValue& in, denm_AltitudeValue_t& out) {
+  memset(&out, 0, sizeof(denm_AltitudeValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

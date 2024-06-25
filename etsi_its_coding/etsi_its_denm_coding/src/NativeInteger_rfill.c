@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_denm_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -66,8 +63,10 @@ NativeInteger_random_fill(const asn_TYPE_descriptor_t *td, void **sptr,
                 0, sizeof(variants) / sizeof(variants[0]) - 1)];
         }
 
-        if(!constraints) constraints = &td->encoding_constraints;
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
+        if(!constraints || !constraints->per_constraints) 
+            constraints = &td->encoding_constraints;
+      
         const asn_per_constraints_t *ct;
 
         ct = constraints ? constraints->per_constraints : 0;
@@ -77,6 +76,8 @@ NativeInteger_random_fill(const asn_TYPE_descriptor_t *td, void **sptr,
                                            ct->value.upper_bound);
             }
         }
+#else
+      if(!constraints) constraints = &td->encoding_constraints;
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
     }
 
@@ -84,7 +85,3 @@ NativeInteger_random_fill(const asn_TYPE_descriptor_t *td, void **sptr,
     *st = value;
     return result_ok;
 }
-
-#ifdef __cplusplus
-}
-#endif

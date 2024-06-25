@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/PathHistory.h>
+#include <etsi_its_denm_coding/denm_PathHistory.h>
 #include <etsi_its_denm_conversion/convertPathHistory.h>
 #include <etsi_its_denm_conversion/convertPathPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PathHistory(const etsi_its_denm_coding::PathHistory_t& in, denm_msgs::PathHistory& out) {
+void toRos_PathHistory(const denm_PathHistory_t& in, denm_msgs::PathHistory& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::PathPoint el;
     toRos_PathPoint(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_PathHistory(const etsi_its_denm_coding::PathHistory_t& in, denm_msgs:
   }
 }
 
-void toStruct_PathHistory(const denm_msgs::PathHistory& in, etsi_its_denm_coding::PathHistory_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PathHistory_t));
+void toStruct_PathHistory(const denm_msgs::PathHistory& in, denm_PathHistory_t& out) {
+  memset(&out, 0, sizeof(denm_PathHistory_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::PathPoint_t* el = (etsi_its_denm_coding::PathPoint_t*) calloc(1, sizeof(etsi_its_denm_coding::PathPoint_t));
+    denm_PathPoint_t* el = (denm_PathPoint_t*) calloc(1, sizeof(denm_PathPoint_t));
     toStruct_PathPoint(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

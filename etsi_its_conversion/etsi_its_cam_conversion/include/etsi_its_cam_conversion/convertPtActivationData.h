@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PtActivationData.h>
+#include <etsi_its_cam_coding/cam_PtActivationData.h>
 #include <etsi_its_cam_coding/OCTET_STRING.h>
 #include <etsi_its_primitives_conversion/convertOCTET_STRING.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PtActivationData(const etsi_its_cam_coding::PtActivationData_t& in, cam_msgs::PtActivationData& out) {
+void toRos_PtActivationData(const cam_PtActivationData_t& in, cam_msgs::PtActivationData& out) {
   etsi_its_primitives_conversion::toRos_OCTET_STRING(in, out.value);
 }
 
-void toStruct_PtActivationData(const cam_msgs::PtActivationData& in, etsi_its_cam_coding::PtActivationData_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::PtActivationData_t));
+void toStruct_PtActivationData(const cam_msgs::PtActivationData& in, cam_PtActivationData_t& out) {
+  memset(&out, 0, sizeof(cam_PtActivationData_t));
 
   etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.value, out);
 }

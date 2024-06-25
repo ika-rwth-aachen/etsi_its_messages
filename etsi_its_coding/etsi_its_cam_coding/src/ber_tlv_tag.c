@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -145,7 +142,3 @@ ber_tlv_tag_serialize(ber_tlv_tag_t tag, void *bufp, size_t size) {
 	return required_size + 1;
 }
 
-
-#ifdef __cplusplus
-}
-#endif

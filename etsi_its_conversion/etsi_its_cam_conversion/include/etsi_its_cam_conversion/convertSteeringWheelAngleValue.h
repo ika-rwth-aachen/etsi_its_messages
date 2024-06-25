@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SteeringWheelAngleValue.h>
+#include <etsi_its_cam_coding/cam_SteeringWheelAngleValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SteeringWheelAngleValue(const etsi_its_cam_coding::SteeringWheelAngleValue_t& in, cam_msgs::SteeringWheelAngleValue& out) {
+void toRos_SteeringWheelAngleValue(const cam_SteeringWheelAngleValue_t& in, cam_msgs::SteeringWheelAngleValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SteeringWheelAngleValue(const cam_msgs::SteeringWheelAngleValue& in, etsi_its_cam_coding::SteeringWheelAngleValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::SteeringWheelAngleValue_t));
+void toStruct_SteeringWheelAngleValue(const cam_msgs::SteeringWheelAngleValue& in, cam_SteeringWheelAngleValue_t& out) {
+  memset(&out, 0, sizeof(cam_SteeringWheelAngleValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

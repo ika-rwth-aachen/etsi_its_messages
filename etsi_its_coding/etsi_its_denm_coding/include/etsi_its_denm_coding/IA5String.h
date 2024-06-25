@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_IA5String_H_
+#define	_IA5String_H_
 
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
-namespace etsi_its_denm_coding {
 extern "C" {
 #endif
 
@@ -27,6 +26,7 @@ extern asn_TYPE_operation_t asn_OP_IA5String;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define IA5String_compare OCTET_STRING_compare
+#define IA5String_copy    OCTET_STRING_copy
 
 asn_constr_check_f IA5String_constraint;
 
@@ -41,6 +41,7 @@ asn_constr_check_f IA5String_constraint;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+#define IA5String_decode_jer OCTET_STRING_decode_jer_utf8
 #define IA5String_encode_jer OCTET_STRING_encode_jer_utf8
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -55,7 +56,6 @@ asn_constr_check_f IA5String_constraint;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _IA5String_H_ */

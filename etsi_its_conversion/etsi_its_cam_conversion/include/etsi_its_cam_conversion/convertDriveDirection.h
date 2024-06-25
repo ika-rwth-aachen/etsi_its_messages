@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/DriveDirection.h>
+#include <etsi_its_cam_coding/cam_DriveDirection.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DriveDirection.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DriveDirection(const etsi_its_cam_coding::DriveDirection_t& in, cam_msgs::DriveDirection& out) {
+void toRos_DriveDirection(const cam_DriveDirection_t& in, cam_msgs::DriveDirection& out) {
   out.value = in;
 }
 
-void toStruct_DriveDirection(const cam_msgs::DriveDirection& in, etsi_its_cam_coding::DriveDirection_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::DriveDirection_t));
+void toStruct_DriveDirection(const cam_msgs::DriveDirection& in, cam_DriveDirection_t& out) {
+  memset(&out, 0, sizeof(cam_DriveDirection_t));
 
   out = in.value;
 }

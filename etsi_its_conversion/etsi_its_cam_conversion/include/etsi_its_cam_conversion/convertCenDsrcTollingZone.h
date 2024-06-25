@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/CenDsrcTollingZone.h>
+#include <etsi_its_cam_coding/cam_CenDsrcTollingZone.h>
 #include <etsi_its_cam_conversion/convertCenDsrcTollingZoneID.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #include <etsi_its_cam_conversion/convertLongitude.h>
@@ -42,7 +42,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CenDsrcTollingZone(const etsi_its_cam_coding::CenDsrcTollingZone_t& in, cam_msgs::CenDsrcTollingZone& out) {
+void toRos_CenDsrcTollingZone(const cam_CenDsrcTollingZone_t& in, cam_msgs::CenDsrcTollingZone& out) {
   toRos_Latitude(in.protectedZoneLatitude, out.protected_zone_latitude);
   toRos_Longitude(in.protectedZoneLongitude, out.protected_zone_longitude);
   if (in.cenDsrcTollingZoneID) {
@@ -51,13 +51,13 @@ void toRos_CenDsrcTollingZone(const etsi_its_cam_coding::CenDsrcTollingZone_t& i
   }
 }
 
-void toStruct_CenDsrcTollingZone(const cam_msgs::CenDsrcTollingZone& in, etsi_its_cam_coding::CenDsrcTollingZone_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::CenDsrcTollingZone_t));
+void toStruct_CenDsrcTollingZone(const cam_msgs::CenDsrcTollingZone& in, cam_CenDsrcTollingZone_t& out) {
+  memset(&out, 0, sizeof(cam_CenDsrcTollingZone_t));
 
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
   toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.cen_dsrc_tolling_zone_id_is_present) {
-    out.cenDsrcTollingZoneID = (etsi_its_cam_coding::CenDsrcTollingZoneID_t*) calloc(1, sizeof(etsi_its_cam_coding::CenDsrcTollingZoneID_t));
+    out.cenDsrcTollingZoneID = (cam_CenDsrcTollingZoneID_t*) calloc(1, sizeof(cam_CenDsrcTollingZoneID_t));
     toStruct_CenDsrcTollingZoneID(in.cen_dsrc_tolling_zone_id, *out.cenDsrcTollingZoneID);
   }
 }

@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*-
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -12,7 +9,7 @@ namespace etsi_its_cam_coding {
 /*
  * Version of the ASN.1 infrastructure shipped with compiler.
  */
-int get_asn1c_environment_version() { return ASN1C_ENVIRONMENT_VERSION; }
+int get_asn1c_environment_version(void) { return ASN1C_ENVIRONMENT_VERSION; }
 
 static asn_app_consume_bytes_f _print2fp;
 
@@ -57,6 +54,26 @@ asn_fprint(FILE *stream, const asn_TYPE_descriptor_t *td,
     return fflush(stream);
 }
 
+/*
+ * Copy a structuture.
+ */
+int
+asn_copy(const asn_TYPE_descriptor_t *td,
+         void **struct_dst, const void *struct_src) {
+
+    if(!td || !struct_dst || !struct_src) {
+        errno = EINVAL;
+        return -1;
+    }
+
+    if(!td->op) {
+        errno = ENOSYS;
+        return -1;
+    }
+    
+    return td->op->copy_struct(td, struct_dst, struct_src);
+}
+
 /* Dump the data into the specified stdio stream */
 static int
 _print2fp(const void *buffer, size_t size, void *app_key) {
@@ -81,7 +98,3 @@ void ASN_DEBUG_f(const char *fmt, ...) {
 	fprintf(stderr, "\n");
 	va_end(ap);
 }
-
-#ifdef __cplusplus
-}
-#endif

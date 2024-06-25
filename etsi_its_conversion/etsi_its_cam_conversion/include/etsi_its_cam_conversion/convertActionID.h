@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/ActionID.h>
+#include <etsi_its_cam_coding/cam_ActionID.h>
 #include <etsi_its_cam_conversion/convertSequenceNumber.h>
 #include <etsi_its_cam_conversion/convertStationID.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ActionID(const etsi_its_cam_coding::ActionID_t& in, cam_msgs::ActionID& out) {
+void toRos_ActionID(const cam_ActionID_t& in, cam_msgs::ActionID& out) {
   toRos_StationID(in.originatingStationID, out.originating_station_id);
   toRos_SequenceNumber(in.sequenceNumber, out.sequence_number);
 }
 
-void toStruct_ActionID(const cam_msgs::ActionID& in, etsi_its_cam_coding::ActionID_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::ActionID_t));
+void toStruct_ActionID(const cam_msgs::ActionID& in, cam_ActionID_t& out) {
+  memset(&out, 0, sizeof(cam_ActionID_t));
 
   toStruct_StationID(in.originating_station_id, out.originatingStationID);
   toStruct_SequenceNumber(in.sequence_number, out.sequenceNumber);

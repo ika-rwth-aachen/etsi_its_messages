@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/DigitalMap.h>
+#include <etsi_its_cam_coding/cam_DigitalMap.h>
 #include <etsi_its_cam_conversion/convertDigitalMap.h>
 #include <etsi_its_cam_conversion/convertReferencePosition.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DigitalMap(const etsi_its_cam_coding::DigitalMap_t& in, cam_msgs::DigitalMap& out) {
+void toRos_DigitalMap(const cam_DigitalMap_t& in, cam_msgs::DigitalMap& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cam_msgs::ReferencePosition el;
     toRos_ReferencePosition(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_DigitalMap(const etsi_its_cam_coding::DigitalMap_t& in, cam_msgs::Dig
   }
 }
 
-void toStruct_DigitalMap(const cam_msgs::DigitalMap& in, etsi_its_cam_coding::DigitalMap_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::DigitalMap_t));
+void toStruct_DigitalMap(const cam_msgs::DigitalMap& in, cam_DigitalMap_t& out) {
+  memset(&out, 0, sizeof(cam_DigitalMap_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_cam_coding::ReferencePosition_t* el = (etsi_its_cam_coding::ReferencePosition_t*) calloc(1, sizeof(etsi_its_cam_coding::ReferencePosition_t));
+    cam_ReferencePosition_t* el = (cam_ReferencePosition_t*) calloc(1, sizeof(cam_ReferencePosition_t));
     toStruct_ReferencePosition(in.array[i], *el);
-    if (etsi_its_cam_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/OpeningDaysHours.h>
+#include <etsi_its_denm_coding/denm_OpeningDaysHours.h>
 #include <etsi_its_denm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_OpeningDaysHours(const etsi_its_denm_coding::OpeningDaysHours_t& in, denm_msgs::OpeningDaysHours& out) {
+void toRos_OpeningDaysHours(const denm_OpeningDaysHours_t& in, denm_msgs::OpeningDaysHours& out) {
   etsi_its_primitives_conversion::toRos_UTF8String(in, out.value);
 }
 
-void toStruct_OpeningDaysHours(const denm_msgs::OpeningDaysHours& in, etsi_its_denm_coding::OpeningDaysHours_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::OpeningDaysHours_t));
+void toStruct_OpeningDaysHours(const denm_msgs::OpeningDaysHours& in, denm_OpeningDaysHours_t& out) {
+  memset(&out, 0, sizeof(denm_OpeningDaysHours_t));
 
   etsi_its_primitives_conversion::toStruct_UTF8String(in.value, out);
 }

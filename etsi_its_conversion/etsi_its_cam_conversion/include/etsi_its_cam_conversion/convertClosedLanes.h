@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/ClosedLanes.h>
+#include <etsi_its_cam_coding/cam_ClosedLanes.h>
 #include <etsi_its_cam_conversion/convertDrivingLaneStatus.h>
 #include <etsi_its_cam_conversion/convertHardShoulderStatus.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ClosedLanes(const etsi_its_cam_coding::ClosedLanes_t& in, cam_msgs::ClosedLanes& out) {
+void toRos_ClosedLanes(const cam_ClosedLanes_t& in, cam_msgs::ClosedLanes& out) {
   if (in.innerhardShoulderStatus) {
     toRos_HardShoulderStatus(*in.innerhardShoulderStatus, out.innerhard_shoulder_status);
     out.innerhard_shoulder_status_is_present = true;
@@ -56,19 +56,19 @@ void toRos_ClosedLanes(const etsi_its_cam_coding::ClosedLanes_t& in, cam_msgs::C
   }
 }
 
-void toStruct_ClosedLanes(const cam_msgs::ClosedLanes& in, etsi_its_cam_coding::ClosedLanes_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::ClosedLanes_t));
+void toStruct_ClosedLanes(const cam_msgs::ClosedLanes& in, cam_ClosedLanes_t& out) {
+  memset(&out, 0, sizeof(cam_ClosedLanes_t));
 
   if (in.innerhard_shoulder_status_is_present) {
-    out.innerhardShoulderStatus = (etsi_its_cam_coding::HardShoulderStatus_t*) calloc(1, sizeof(etsi_its_cam_coding::HardShoulderStatus_t));
+    out.innerhardShoulderStatus = (cam_HardShoulderStatus_t*) calloc(1, sizeof(cam_HardShoulderStatus_t));
     toStruct_HardShoulderStatus(in.innerhard_shoulder_status, *out.innerhardShoulderStatus);
   }
   if (in.outerhard_shoulder_status_is_present) {
-    out.outerhardShoulderStatus = (etsi_its_cam_coding::HardShoulderStatus_t*) calloc(1, sizeof(etsi_its_cam_coding::HardShoulderStatus_t));
+    out.outerhardShoulderStatus = (cam_HardShoulderStatus_t*) calloc(1, sizeof(cam_HardShoulderStatus_t));
     toStruct_HardShoulderStatus(in.outerhard_shoulder_status, *out.outerhardShoulderStatus);
   }
   if (in.driving_lane_status_is_present) {
-    out.drivingLaneStatus = (etsi_its_cam_coding::DrivingLaneStatus_t*) calloc(1, sizeof(etsi_its_cam_coding::DrivingLaneStatus_t));
+    out.drivingLaneStatus = (cam_DrivingLaneStatus_t*) calloc(1, sizeof(cam_DrivingLaneStatus_t));
     toStruct_DrivingLaneStatus(in.driving_lane_status, *out.drivingLaneStatus);
   }
 }

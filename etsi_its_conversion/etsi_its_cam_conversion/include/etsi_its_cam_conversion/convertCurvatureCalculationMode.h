@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/CurvatureCalculationMode.h>
+#include <etsi_its_cam_coding/cam_CurvatureCalculationMode.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CurvatureCalculationMode.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_CurvatureCalculationMode(const etsi_its_cam_coding::CurvatureCalculationMode_t& in, cam_msgs::CurvatureCalculationMode& out) {
+void toRos_CurvatureCalculationMode(const cam_CurvatureCalculationMode_t& in, cam_msgs::CurvatureCalculationMode& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureCalculationMode(const cam_msgs::CurvatureCalculationMode& in, etsi_its_cam_coding::CurvatureCalculationMode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::CurvatureCalculationMode_t));
+void toStruct_CurvatureCalculationMode(const cam_msgs::CurvatureCalculationMode& in, cam_CurvatureCalculationMode_t& out) {
+  memset(&out, 0, sizeof(cam_CurvatureCalculationMode_t));
 
   out = in.value;
 }

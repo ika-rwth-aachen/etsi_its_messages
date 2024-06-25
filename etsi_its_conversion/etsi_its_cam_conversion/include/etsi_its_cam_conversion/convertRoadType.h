@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RoadType.h>
+#include <etsi_its_cam_coding/cam_RoadType.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RoadType.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RoadType(const etsi_its_cam_coding::RoadType_t& in, cam_msgs::RoadType& out) {
+void toRos_RoadType(const cam_RoadType_t& in, cam_msgs::RoadType& out) {
   out.value = in;
 }
 
-void toStruct_RoadType(const cam_msgs::RoadType& in, etsi_its_cam_coding::RoadType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RoadType_t));
+void toStruct_RoadType(const cam_msgs::RoadType& in, cam_RoadType_t& out) {
+  memset(&out, 0, sizeof(cam_RoadType_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SituationContainer.h>
+#include <etsi_its_denm_coding/denm_SituationContainer.h>
 #include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertEventHistory.h>
 #include <etsi_its_denm_conversion/convertInformationQuality.h>
@@ -42,7 +42,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SituationContainer(const etsi_its_denm_coding::SituationContainer_t& in, denm_msgs::SituationContainer& out) {
+void toRos_SituationContainer(const denm_SituationContainer_t& in, denm_msgs::SituationContainer& out) {
   toRos_InformationQuality(in.informationQuality, out.information_quality);
   toRos_CauseCode(in.eventType, out.event_type);
   if (in.linkedCause) {
@@ -55,17 +55,17 @@ void toRos_SituationContainer(const etsi_its_denm_coding::SituationContainer_t& 
   }
 }
 
-void toStruct_SituationContainer(const denm_msgs::SituationContainer& in, etsi_its_denm_coding::SituationContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SituationContainer_t));
+void toStruct_SituationContainer(const denm_msgs::SituationContainer& in, denm_SituationContainer_t& out) {
+  memset(&out, 0, sizeof(denm_SituationContainer_t));
 
   toStruct_InformationQuality(in.information_quality, out.informationQuality);
   toStruct_CauseCode(in.event_type, out.eventType);
   if (in.linked_cause_is_present) {
-    out.linkedCause = (etsi_its_denm_coding::CauseCode_t*) calloc(1, sizeof(etsi_its_denm_coding::CauseCode_t));
+    out.linkedCause = (denm_CauseCode_t*) calloc(1, sizeof(denm_CauseCode_t));
     toStruct_CauseCode(in.linked_cause, *out.linkedCause);
   }
   if (in.event_history_is_present) {
-    out.eventHistory = (etsi_its_denm_coding::EventHistory_t*) calloc(1, sizeof(etsi_its_denm_coding::EventHistory_t));
+    out.eventHistory = (denm_EventHistory_t*) calloc(1, sizeof(denm_EventHistory_t));
     toStruct_EventHistory(in.event_history, *out.eventHistory);
   }
 }

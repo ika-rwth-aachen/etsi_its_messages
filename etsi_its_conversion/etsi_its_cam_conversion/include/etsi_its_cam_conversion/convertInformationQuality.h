@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/InformationQuality.h>
+#include <etsi_its_cam_coding/cam_InformationQuality.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_InformationQuality(const etsi_its_cam_coding::InformationQuality_t& in, cam_msgs::InformationQuality& out) {
+void toRos_InformationQuality(const cam_InformationQuality_t& in, cam_msgs::InformationQuality& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_InformationQuality(const cam_msgs::InformationQuality& in, etsi_its_cam_coding::InformationQuality_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::InformationQuality_t));
+void toStruct_InformationQuality(const cam_msgs::InformationQuality& in, cam_InformationQuality_t& out) {
+  memset(&out, 0, sizeof(cam_InformationQuality_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

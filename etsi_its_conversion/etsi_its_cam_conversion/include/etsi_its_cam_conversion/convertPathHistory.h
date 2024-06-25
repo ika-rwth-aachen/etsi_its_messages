@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/PathHistory.h>
+#include <etsi_its_cam_coding/cam_PathHistory.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
 #include <etsi_its_cam_conversion/convertPathPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PathHistory(const etsi_its_cam_coding::PathHistory_t& in, cam_msgs::PathHistory& out) {
+void toRos_PathHistory(const cam_PathHistory_t& in, cam_msgs::PathHistory& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cam_msgs::PathPoint el;
     toRos_PathPoint(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_PathHistory(const etsi_its_cam_coding::PathHistory_t& in, cam_msgs::P
   }
 }
 
-void toStruct_PathHistory(const cam_msgs::PathHistory& in, etsi_its_cam_coding::PathHistory_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::PathHistory_t));
+void toStruct_PathHistory(const cam_msgs::PathHistory& in, cam_PathHistory_t& out) {
+  memset(&out, 0, sizeof(cam_PathHistory_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_cam_coding::PathPoint_t* el = (etsi_its_cam_coding::PathPoint_t*) calloc(1, sizeof(etsi_its_cam_coding::PathPoint_t));
+    cam_PathPoint_t* el = (cam_PathPoint_t*) calloc(1, sizeof(cam_PathPoint_t));
     toStruct_PathPoint(in.array[i], *el);
-    if (etsi_its_cam_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/RoadType.h>
+#include <etsi_its_denm_coding/denm_RoadType.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/RoadType.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RoadType(const etsi_its_denm_coding::RoadType_t& in, denm_msgs::RoadType& out) {
+void toRos_RoadType(const denm_RoadType_t& in, denm_msgs::RoadType& out) {
   out.value = in;
 }
 
-void toStruct_RoadType(const denm_msgs::RoadType& in, etsi_its_denm_coding::RoadType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RoadType_t));
+void toStruct_RoadType(const denm_msgs::RoadType& in, denm_RoadType_t& out) {
+  memset(&out, 0, sizeof(denm_RoadType_t));
 
   out = in.value;
 }

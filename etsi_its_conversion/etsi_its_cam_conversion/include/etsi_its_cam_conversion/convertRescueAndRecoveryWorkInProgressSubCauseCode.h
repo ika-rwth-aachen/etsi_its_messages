@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RescueAndRecoveryWorkInProgressSubCauseCode.h>
+#include <etsi_its_cam_coding/cam_RescueAndRecoveryWorkInProgressSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
+void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const cam_RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RescueAndRecoveryWorkInProgressSubCauseCode_t));
+void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cam_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, cam_RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_RescueAndRecoveryWorkInProgressSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

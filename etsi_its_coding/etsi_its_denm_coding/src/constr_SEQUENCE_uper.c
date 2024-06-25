@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_denm_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -430,7 +427,3 @@ SEQUENCE_encode_uper(const asn_TYPE_descriptor_t *td,
 
     ASN__ENCODED_OK(er);
 }
-
-#ifdef __cplusplus
-}
-#endif

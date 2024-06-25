@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/SteeringWheelAngleConfidence.h>
+#include <etsi_its_denm_coding/denm_SteeringWheelAngleConfidence.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_SteeringWheelAngleConfidence(const etsi_its_denm_coding::SteeringWheelAngleConfidence_t& in, denm_msgs::SteeringWheelAngleConfidence& out) {
+void toRos_SteeringWheelAngleConfidence(const denm_SteeringWheelAngleConfidence_t& in, denm_msgs::SteeringWheelAngleConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SteeringWheelAngleConfidence(const denm_msgs::SteeringWheelAngleConfidence& in, etsi_its_denm_coding::SteeringWheelAngleConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::SteeringWheelAngleConfidence_t));
+void toStruct_SteeringWheelAngleConfidence(const denm_msgs::SteeringWheelAngleConfidence& in, denm_SteeringWheelAngleConfidence_t& out) {
+  memset(&out, 0, sizeof(denm_SteeringWheelAngleConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

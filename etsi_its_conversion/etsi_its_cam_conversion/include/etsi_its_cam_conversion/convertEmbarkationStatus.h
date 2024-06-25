@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/EmbarkationStatus.h>
+#include <etsi_its_cam_coding/cam_EmbarkationStatus.h>
 #include <etsi_its_cam_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EmbarkationStatus(const etsi_its_cam_coding::EmbarkationStatus_t& in, cam_msgs::EmbarkationStatus& out) {
+void toRos_EmbarkationStatus(const cam_EmbarkationStatus_t& in, cam_msgs::EmbarkationStatus& out) {
   etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);
 }
 
-void toStruct_EmbarkationStatus(const cam_msgs::EmbarkationStatus& in, etsi_its_cam_coding::EmbarkationStatus_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::EmbarkationStatus_t));
+void toStruct_EmbarkationStatus(const cam_msgs::EmbarkationStatus& in, cam_EmbarkationStatus_t& out) {
+  memset(&out, 0, sizeof(cam_EmbarkationStatus_t));
 
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.value, out);
 }

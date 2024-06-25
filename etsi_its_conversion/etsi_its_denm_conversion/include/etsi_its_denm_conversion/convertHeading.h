@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/Heading.h>
+#include <etsi_its_denm_coding/denm_Heading.h>
 #include <etsi_its_denm_conversion/convertHeadingConfidence.h>
 #include <etsi_its_denm_conversion/convertHeadingValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_Heading(const etsi_its_denm_coding::Heading_t& in, denm_msgs::Heading& out) {
+void toRos_Heading(const denm_Heading_t& in, denm_msgs::Heading& out) {
   toRos_HeadingValue(in.headingValue, out.heading_value);
   toRos_HeadingConfidence(in.headingConfidence, out.heading_confidence);
 }
 
-void toStruct_Heading(const denm_msgs::Heading& in, etsi_its_denm_coding::Heading_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::Heading_t));
+void toStruct_Heading(const denm_msgs::Heading& in, denm_Heading_t& out) {
+  memset(&out, 0, sizeof(denm_Heading_t));
 
   toStruct_HeadingValue(in.heading_value, out.headingValue);
   toStruct_HeadingConfidence(in.heading_confidence, out.headingConfidence);

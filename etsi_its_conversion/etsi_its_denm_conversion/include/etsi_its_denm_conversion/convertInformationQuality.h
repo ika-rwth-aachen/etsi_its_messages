@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/InformationQuality.h>
+#include <etsi_its_denm_coding/denm_InformationQuality.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_InformationQuality(const etsi_its_denm_coding::InformationQuality_t& in, denm_msgs::InformationQuality& out) {
+void toRos_InformationQuality(const denm_InformationQuality_t& in, denm_msgs::InformationQuality& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_InformationQuality(const denm_msgs::InformationQuality& in, etsi_its_denm_coding::InformationQuality_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::InformationQuality_t));
+void toStruct_InformationQuality(const denm_msgs::InformationQuality& in, denm_InformationQuality_t& out) {
+  memset(&out, 0, sizeof(denm_InformationQuality_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

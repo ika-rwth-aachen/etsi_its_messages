@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cam_coding/RestrictedTypes.h>
+#include <etsi_its_cam_coding/cam_RestrictedTypes.h>
 #include <etsi_its_cam_conversion/convertRestrictedTypes.h>
 #include <etsi_its_cam_conversion/convertStationType.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RestrictedTypes(const etsi_its_cam_coding::RestrictedTypes_t& in, cam_msgs::RestrictedTypes& out) {
+void toRos_RestrictedTypes(const cam_RestrictedTypes_t& in, cam_msgs::RestrictedTypes& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cam_msgs::StationType el;
     toRos_StationType(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_RestrictedTypes(const etsi_its_cam_coding::RestrictedTypes_t& in, cam
   }
 }
 
-void toStruct_RestrictedTypes(const cam_msgs::RestrictedTypes& in, etsi_its_cam_coding::RestrictedTypes_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RestrictedTypes_t));
+void toStruct_RestrictedTypes(const cam_msgs::RestrictedTypes& in, cam_RestrictedTypes_t& out) {
+  memset(&out, 0, sizeof(cam_RestrictedTypes_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_cam_coding::StationType_t* el = (etsi_its_cam_coding::StationType_t*) calloc(1, sizeof(etsi_its_cam_coding::StationType_t));
+    cam_StationType_t* el = (cam_StationType_t*) calloc(1, sizeof(cam_StationType_t));
     toStruct_StationType(in.array[i], *el);
-    if (etsi_its_cam_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

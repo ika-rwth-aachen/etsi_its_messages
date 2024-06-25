@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/DecentralizedEnvironmentalNotificationMessage.h>
+#include <etsi_its_denm_coding/denm_DecentralizedEnvironmentalNotificationMessage.h>
 #include <etsi_its_denm_conversion/convertAlacarteContainer.h>
 #include <etsi_its_denm_conversion/convertLocationContainer.h>
 #include <etsi_its_denm_conversion/convertManagementContainer.h>
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DecentralizedEnvironmentalNotificationMessage(const etsi_its_denm_coding::DecentralizedEnvironmentalNotificationMessage_t& in, denm_msgs::DecentralizedEnvironmentalNotificationMessage& out) {
+void toRos_DecentralizedEnvironmentalNotificationMessage(const denm_DecentralizedEnvironmentalNotificationMessage_t& in, denm_msgs::DecentralizedEnvironmentalNotificationMessage& out) {
   toRos_ManagementContainer(in.management, out.management);
   if (in.situation) {
     toRos_SituationContainer(*in.situation, out.situation);
@@ -59,20 +59,20 @@ void toRos_DecentralizedEnvironmentalNotificationMessage(const etsi_its_denm_cod
   }
 }
 
-void toStruct_DecentralizedEnvironmentalNotificationMessage(const denm_msgs::DecentralizedEnvironmentalNotificationMessage& in, etsi_its_denm_coding::DecentralizedEnvironmentalNotificationMessage_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::DecentralizedEnvironmentalNotificationMessage_t));
+void toStruct_DecentralizedEnvironmentalNotificationMessage(const denm_msgs::DecentralizedEnvironmentalNotificationMessage& in, denm_DecentralizedEnvironmentalNotificationMessage_t& out) {
+  memset(&out, 0, sizeof(denm_DecentralizedEnvironmentalNotificationMessage_t));
 
   toStruct_ManagementContainer(in.management, out.management);
   if (in.situation_is_present) {
-    out.situation = (etsi_its_denm_coding::SituationContainer_t*) calloc(1, sizeof(etsi_its_denm_coding::SituationContainer_t));
+    out.situation = (denm_SituationContainer_t*) calloc(1, sizeof(denm_SituationContainer_t));
     toStruct_SituationContainer(in.situation, *out.situation);
   }
   if (in.location_is_present) {
-    out.location = (etsi_its_denm_coding::LocationContainer_t*) calloc(1, sizeof(etsi_its_denm_coding::LocationContainer_t));
+    out.location = (denm_LocationContainer_t*) calloc(1, sizeof(denm_LocationContainer_t));
     toStruct_LocationContainer(in.location, *out.location);
   }
   if (in.alacarte_is_present) {
-    out.alacarte = (etsi_its_denm_coding::AlacarteContainer_t*) calloc(1, sizeof(etsi_its_denm_coding::AlacarteContainer_t));
+    out.alacarte = (denm_AlacarteContainer_t*) calloc(1, sizeof(denm_AlacarteContainer_t));
     toStruct_AlacarteContainer(in.alacarte, *out.alacarte);
   }
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CollisionRiskSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_CollisionRiskSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CollisionRiskSubCauseCode(const etsi_its_denm_coding::CollisionRiskSubCauseCode_t& in, denm_msgs::CollisionRiskSubCauseCode& out) {
+void toRos_CollisionRiskSubCauseCode(const denm_CollisionRiskSubCauseCode_t& in, denm_msgs::CollisionRiskSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CollisionRiskSubCauseCode(const denm_msgs::CollisionRiskSubCauseCode& in, etsi_its_denm_coding::CollisionRiskSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::CollisionRiskSubCauseCode_t));
+void toStruct_CollisionRiskSubCauseCode(const denm_msgs::CollisionRiskSubCauseCode& in, denm_CollisionRiskSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_CollisionRiskSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

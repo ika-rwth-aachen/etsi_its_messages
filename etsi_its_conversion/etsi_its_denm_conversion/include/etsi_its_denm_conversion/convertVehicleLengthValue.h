@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VehicleLengthValue.h>
+#include <etsi_its_denm_coding/denm_VehicleLengthValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VehicleLengthValue(const etsi_its_denm_coding::VehicleLengthValue_t& in, denm_msgs::VehicleLengthValue& out) {
+void toRos_VehicleLengthValue(const denm_VehicleLengthValue_t& in, denm_msgs::VehicleLengthValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleLengthValue(const denm_msgs::VehicleLengthValue& in, etsi_its_denm_coding::VehicleLengthValue_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::VehicleLengthValue_t));
+void toStruct_VehicleLengthValue(const denm_msgs::VehicleLengthValue& in, denm_VehicleLengthValue_t& out) {
+  memset(&out, 0, sizeof(denm_VehicleLengthValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

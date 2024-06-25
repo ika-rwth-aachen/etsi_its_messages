@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VehicleLengthConfidenceIndication.h>
+#include <etsi_its_denm_coding/denm_VehicleLengthConfidenceIndication.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/VehicleLengthConfidenceIndication.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VehicleLengthConfidenceIndication(const etsi_its_denm_coding::VehicleLengthConfidenceIndication_t& in, denm_msgs::VehicleLengthConfidenceIndication& out) {
+void toRos_VehicleLengthConfidenceIndication(const denm_VehicleLengthConfidenceIndication_t& in, denm_msgs::VehicleLengthConfidenceIndication& out) {
   out.value = in;
 }
 
-void toStruct_VehicleLengthConfidenceIndication(const denm_msgs::VehicleLengthConfidenceIndication& in, etsi_its_denm_coding::VehicleLengthConfidenceIndication_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::VehicleLengthConfidenceIndication_t));
+void toStruct_VehicleLengthConfidenceIndication(const denm_msgs::VehicleLengthConfidenceIndication& in, denm_VehicleLengthConfidenceIndication_t& out) {
+  memset(&out, 0, sizeof(denm_VehicleLengthConfidenceIndication_t));
 
   out = in.value;
 }

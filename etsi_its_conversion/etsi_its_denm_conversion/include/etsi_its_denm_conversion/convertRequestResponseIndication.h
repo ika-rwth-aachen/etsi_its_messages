@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/RequestResponseIndication.h>
+#include <etsi_its_denm_coding/denm_RequestResponseIndication.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/RequestResponseIndication.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RequestResponseIndication(const etsi_its_denm_coding::RequestResponseIndication_t& in, denm_msgs::RequestResponseIndication& out) {
+void toRos_RequestResponseIndication(const denm_RequestResponseIndication_t& in, denm_msgs::RequestResponseIndication& out) {
   out.value = in;
 }
 
-void toStruct_RequestResponseIndication(const denm_msgs::RequestResponseIndication& in, etsi_its_denm_coding::RequestResponseIndication_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RequestResponseIndication_t));
+void toStruct_RequestResponseIndication(const denm_msgs::RequestResponseIndication& in, denm_RequestResponseIndication_t& out) {
+  memset(&out, 0, sizeof(denm_RequestResponseIndication_t));
 
   out = in.value;
 }

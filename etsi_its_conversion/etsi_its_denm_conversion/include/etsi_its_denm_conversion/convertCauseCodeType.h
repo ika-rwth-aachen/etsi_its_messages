@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CauseCodeType.h>
+#include <etsi_its_denm_coding/denm_CauseCodeType.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CauseCodeType(const etsi_its_denm_coding::CauseCodeType_t& in, denm_msgs::CauseCodeType& out) {
+void toRos_CauseCodeType(const denm_CauseCodeType_t& in, denm_msgs::CauseCodeType& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CauseCodeType(const denm_msgs::CauseCodeType& in, etsi_its_denm_coding::CauseCodeType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::CauseCodeType_t));
+void toStruct_CauseCodeType(const denm_msgs::CauseCodeType& in, denm_CauseCodeType_t& out) {
+  memset(&out, 0, sizeof(denm_CauseCodeType_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

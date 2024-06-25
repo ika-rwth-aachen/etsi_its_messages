@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -232,6 +229,9 @@ asn_encode_internal(const asn_codec_ctx_t *opt_codec_ctx,
 #if !defined(ASN_DISABLE_XER_SUPPORT)
     enum xer_encoder_flags_e xer_flags = XER_F_CANONICAL;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+    enum jer_encoder_flags_e jer_flags = JER_F;
+#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
     (void)opt_codec_ctx; /* Parameters are not checked on encode yet. */
 
@@ -435,9 +435,15 @@ asn_encode_internal(const asn_codec_ctx_t *opt_codec_ctx,
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    case ATS_JER_MINIFIED:
+        /* Currently JER_F and JER_F_MINIFIED have opposite purposes
+        *  so we just flip the flag. */
+        jer_flags &= ~JER_F;
+        jer_flags |= JER_F_MINIFIED;
+        /* Fall through. */
     case ATS_JER:
         if(td->op->jer_encoder) {
-            er = jer_encode(td, sptr, callback, callback_key);
+            er = jer_encode(td, sptr, jer_flags, callback, callback_key);
             if(er.encoded == -1) {
                 if(er.failed_type && er.failed_type->op->jer_encoder) {
                     errno = EBADF;   /* Structure has incorrect form. */
@@ -536,10 +542,15 @@ asn_decode(const asn_codec_ctx_t *opt_codec_ctx,
         errno = ENOENT;
         ASN__DECODE_FAILED;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
+
+    case ATS_JER:
+    case ATS_JER_MINIFIED:
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+        return jer_decode(opt_codec_ctx, td, sptr, buffer, size);
+#else
+        errno = ENOENT;
+        ASN__DECODE_FAILED;
+#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
     }
 }
 
-
-#ifdef __cplusplus
-}
-#endif

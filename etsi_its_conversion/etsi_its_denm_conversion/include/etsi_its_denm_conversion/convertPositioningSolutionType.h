@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PositioningSolutionType.h>
+#include <etsi_its_denm_coding/denm_PositioningSolutionType.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PositioningSolutionType.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PositioningSolutionType(const etsi_its_denm_coding::PositioningSolutionType_t& in, denm_msgs::PositioningSolutionType& out) {
+void toRos_PositioningSolutionType(const denm_PositioningSolutionType_t& in, denm_msgs::PositioningSolutionType& out) {
   out.value = in;
 }
 
-void toStruct_PositioningSolutionType(const denm_msgs::PositioningSolutionType& in, etsi_its_denm_coding::PositioningSolutionType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PositioningSolutionType_t));
+void toStruct_PositioningSolutionType(const denm_msgs::PositioningSolutionType& in, denm_PositioningSolutionType_t& out) {
+  memset(&out, 0, sizeof(denm_PositioningSolutionType_t));
 
   out = in.value;
 }

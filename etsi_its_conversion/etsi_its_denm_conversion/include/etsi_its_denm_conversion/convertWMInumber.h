@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/WMInumber.h>
+#include <etsi_its_denm_coding/denm_WMInumber.h>
 #include <etsi_its_denm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_WMInumber(const etsi_its_denm_coding::WMInumber_t& in, denm_msgs::WMInumber& out) {
+void toRos_WMInumber(const denm_WMInumber_t& in, denm_msgs::WMInumber& out) {
   etsi_its_primitives_conversion::toRos_IA5String(in, out.value);
 }
 
-void toStruct_WMInumber(const denm_msgs::WMInumber& in, etsi_its_denm_coding::WMInumber_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::WMInumber_t));
+void toStruct_WMInumber(const denm_msgs::WMInumber& in, denm_WMInumber_t& out) {
+  memset(&out, 0, sizeof(denm_WMInumber_t));
 
   etsi_its_primitives_conversion::toStruct_IA5String(in.value, out);
 }

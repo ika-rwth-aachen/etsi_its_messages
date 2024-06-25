@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/ReferencePosition.h>
+#include <etsi_its_cam_coding/cam_ReferencePosition.h>
 #include <etsi_its_cam_conversion/convertAltitude.h>
 #include <etsi_its_cam_conversion/convertLatitude.h>
 #include <etsi_its_cam_conversion/convertLongitude.h>
@@ -43,15 +43,15 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ReferencePosition(const etsi_its_cam_coding::ReferencePosition_t& in, cam_msgs::ReferencePosition& out) {
+void toRos_ReferencePosition(const cam_ReferencePosition_t& in, cam_msgs::ReferencePosition& out) {
   toRos_Latitude(in.latitude, out.latitude);
   toRos_Longitude(in.longitude, out.longitude);
   toRos_PosConfidenceEllipse(in.positionConfidenceEllipse, out.position_confidence_ellipse);
   toRos_Altitude(in.altitude, out.altitude);
 }
 
-void toStruct_ReferencePosition(const cam_msgs::ReferencePosition& in, etsi_its_cam_coding::ReferencePosition_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::ReferencePosition_t));
+void toStruct_ReferencePosition(const cam_msgs::ReferencePosition& in, cam_ReferencePosition_t& out) {
+  memset(&out, 0, sizeof(cam_ReferencePosition_t));
 
   toStruct_Latitude(in.latitude, out.latitude);
   toStruct_Longitude(in.longitude, out.longitude);

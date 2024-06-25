@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/PositionOfPillars.h>
+#include <etsi_its_denm_coding/denm_PositionOfPillars.h>
 #include <etsi_its_denm_conversion/convertPosPillar.h>
 #include <etsi_its_denm_conversion/convertPositionOfPillars.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PositionOfPillars(const etsi_its_denm_coding::PositionOfPillars_t& in, denm_msgs::PositionOfPillars& out) {
+void toRos_PositionOfPillars(const denm_PositionOfPillars_t& in, denm_msgs::PositionOfPillars& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::PosPillar el;
     toRos_PosPillar(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_PositionOfPillars(const etsi_its_denm_coding::PositionOfPillars_t& in
   }
 }
 
-void toStruct_PositionOfPillars(const denm_msgs::PositionOfPillars& in, etsi_its_denm_coding::PositionOfPillars_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PositionOfPillars_t));
+void toStruct_PositionOfPillars(const denm_msgs::PositionOfPillars& in, denm_PositionOfPillars_t& out) {
+  memset(&out, 0, sizeof(denm_PositionOfPillars_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::PosPillar_t* el = (etsi_its_denm_coding::PosPillar_t*) calloc(1, sizeof(etsi_its_denm_coding::PosPillar_t));
+    denm_PosPillar_t* el = (denm_PosPillar_t*) calloc(1, sizeof(denm_PosPillar_t));
     toStruct_PosPillar(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/ProtectedCommunicationZonesRSU.h>
+#include <etsi_its_denm_coding/denm_ProtectedCommunicationZonesRSU.h>
 #include <etsi_its_denm_conversion/convertProtectedCommunicationZone.h>
 #include <etsi_its_denm_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ProtectedCommunicationZonesRSU(const etsi_its_denm_coding::ProtectedCommunicationZonesRSU_t& in, denm_msgs::ProtectedCommunicationZonesRSU& out) {
+void toRos_ProtectedCommunicationZonesRSU(const denm_ProtectedCommunicationZonesRSU_t& in, denm_msgs::ProtectedCommunicationZonesRSU& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::ProtectedCommunicationZone el;
     toRos_ProtectedCommunicationZone(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_ProtectedCommunicationZonesRSU(const etsi_its_denm_coding::ProtectedC
   }
 }
 
-void toStruct_ProtectedCommunicationZonesRSU(const denm_msgs::ProtectedCommunicationZonesRSU& in, etsi_its_denm_coding::ProtectedCommunicationZonesRSU_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::ProtectedCommunicationZonesRSU_t));
+void toStruct_ProtectedCommunicationZonesRSU(const denm_msgs::ProtectedCommunicationZonesRSU& in, denm_ProtectedCommunicationZonesRSU_t& out) {
+  memset(&out, 0, sizeof(denm_ProtectedCommunicationZonesRSU_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::ProtectedCommunicationZone_t* el = (etsi_its_denm_coding::ProtectedCommunicationZone_t*) calloc(1, sizeof(etsi_its_denm_coding::ProtectedCommunicationZone_t));
+    denm_ProtectedCommunicationZone_t* el = (denm_ProtectedCommunicationZone_t*) calloc(1, sizeof(denm_ProtectedCommunicationZone_t));
     toStruct_ProtectedCommunicationZone(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

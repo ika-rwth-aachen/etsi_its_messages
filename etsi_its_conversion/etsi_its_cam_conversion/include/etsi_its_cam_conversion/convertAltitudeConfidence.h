@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/AltitudeConfidence.h>
+#include <etsi_its_cam_coding/cam_AltitudeConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/AltitudeConfidence.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_AltitudeConfidence(const etsi_its_cam_coding::AltitudeConfidence_t& in, cam_msgs::AltitudeConfidence& out) {
+void toRos_AltitudeConfidence(const cam_AltitudeConfidence_t& in, cam_msgs::AltitudeConfidence& out) {
   out.value = in;
 }
 
-void toStruct_AltitudeConfidence(const cam_msgs::AltitudeConfidence& in, etsi_its_cam_coding::AltitudeConfidence_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::AltitudeConfidence_t));
+void toStruct_AltitudeConfidence(const cam_msgs::AltitudeConfidence& in, cam_AltitudeConfidence_t& out) {
+  memset(&out, 0, sizeof(cam_AltitudeConfidence_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VehicleWidth.h>
+#include <etsi_its_denm_coding/denm_VehicleWidth.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VehicleWidth(const etsi_its_denm_coding::VehicleWidth_t& in, denm_msgs::VehicleWidth& out) {
+void toRos_VehicleWidth(const denm_VehicleWidth_t& in, denm_msgs::VehicleWidth& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleWidth(const denm_msgs::VehicleWidth& in, etsi_its_denm_coding::VehicleWidth_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::VehicleWidth_t));
+void toStruct_VehicleWidth(const denm_msgs::VehicleWidth& in, denm_VehicleWidth_t& out) {
+  memset(&out, 0, sizeof(denm_VehicleWidth_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

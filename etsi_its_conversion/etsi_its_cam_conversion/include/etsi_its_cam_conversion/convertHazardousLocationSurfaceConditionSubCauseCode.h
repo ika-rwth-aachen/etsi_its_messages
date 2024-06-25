@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/HazardousLocation-SurfaceConditionSubCauseCode.h>
+#include <etsi_its_cam_coding/cam_HazardousLocation-SurfaceConditionSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_HazardousLocationSurfaceConditionSubCauseCode(const etsi_its_cam_coding::HazardousLocation_SurfaceConditionSubCauseCode_t& in, cam_msgs::HazardousLocationSurfaceConditionSubCauseCode& out) {
+void toRos_HazardousLocationSurfaceConditionSubCauseCode(const cam_HazardousLocation_SurfaceConditionSubCauseCode_t& in, cam_msgs::HazardousLocationSurfaceConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocationSurfaceConditionSubCauseCode(const cam_msgs::HazardousLocationSurfaceConditionSubCauseCode& in, etsi_its_cam_coding::HazardousLocation_SurfaceConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::HazardousLocation_SurfaceConditionSubCauseCode_t));
+void toStruct_HazardousLocationSurfaceConditionSubCauseCode(const cam_msgs::HazardousLocationSurfaceConditionSubCauseCode& in, cam_HazardousLocation_SurfaceConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_HazardousLocation_SurfaceConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

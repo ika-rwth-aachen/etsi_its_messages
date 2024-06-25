@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/StationaryVehicleContainer.h>
+#include <etsi_its_denm_coding/denm_StationaryVehicleContainer.h>
 #include <etsi_its_denm_conversion/convertCauseCode.h>
 #include <etsi_its_denm_conversion/convertDangerousGoodsExtended.h>
 #include <etsi_its_denm_conversion/convertEnergyStorageType.h>
@@ -45,7 +45,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_StationaryVehicleContainer(const etsi_its_denm_coding::StationaryVehicleContainer_t& in, denm_msgs::StationaryVehicleContainer& out) {
+void toRos_StationaryVehicleContainer(const denm_StationaryVehicleContainer_t& in, denm_msgs::StationaryVehicleContainer& out) {
   if (in.stationarySince) {
     toRos_StationarySince(*in.stationarySince, out.stationary_since);
     out.stationary_since_is_present = true;
@@ -72,31 +72,31 @@ void toRos_StationaryVehicleContainer(const etsi_its_denm_coding::StationaryVehi
   }
 }
 
-void toStruct_StationaryVehicleContainer(const denm_msgs::StationaryVehicleContainer& in, etsi_its_denm_coding::StationaryVehicleContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::StationaryVehicleContainer_t));
+void toStruct_StationaryVehicleContainer(const denm_msgs::StationaryVehicleContainer& in, denm_StationaryVehicleContainer_t& out) {
+  memset(&out, 0, sizeof(denm_StationaryVehicleContainer_t));
 
   if (in.stationary_since_is_present) {
-    out.stationarySince = (etsi_its_denm_coding::StationarySince_t*) calloc(1, sizeof(etsi_its_denm_coding::StationarySince_t));
+    out.stationarySince = (denm_StationarySince_t*) calloc(1, sizeof(denm_StationarySince_t));
     toStruct_StationarySince(in.stationary_since, *out.stationarySince);
   }
   if (in.stationary_cause_is_present) {
-    out.stationaryCause = (etsi_its_denm_coding::CauseCode_t*) calloc(1, sizeof(etsi_its_denm_coding::CauseCode_t));
+    out.stationaryCause = (denm_CauseCode_t*) calloc(1, sizeof(denm_CauseCode_t));
     toStruct_CauseCode(in.stationary_cause, *out.stationaryCause);
   }
   if (in.carrying_dangerous_goods_is_present) {
-    out.carryingDangerousGoods = (etsi_its_denm_coding::DangerousGoodsExtended_t*) calloc(1, sizeof(etsi_its_denm_coding::DangerousGoodsExtended_t));
+    out.carryingDangerousGoods = (denm_DangerousGoodsExtended_t*) calloc(1, sizeof(denm_DangerousGoodsExtended_t));
     toStruct_DangerousGoodsExtended(in.carrying_dangerous_goods, *out.carryingDangerousGoods);
   }
   if (in.number_of_occupants_is_present) {
-    out.numberOfOccupants = (etsi_its_denm_coding::NumberOfOccupants_t*) calloc(1, sizeof(etsi_its_denm_coding::NumberOfOccupants_t));
+    out.numberOfOccupants = (denm_NumberOfOccupants_t*) calloc(1, sizeof(denm_NumberOfOccupants_t));
     toStruct_NumberOfOccupants(in.number_of_occupants, *out.numberOfOccupants);
   }
   if (in.vehicle_identification_is_present) {
-    out.vehicleIdentification = (etsi_its_denm_coding::VehicleIdentification_t*) calloc(1, sizeof(etsi_its_denm_coding::VehicleIdentification_t));
+    out.vehicleIdentification = (denm_VehicleIdentification_t*) calloc(1, sizeof(denm_VehicleIdentification_t));
     toStruct_VehicleIdentification(in.vehicle_identification, *out.vehicleIdentification);
   }
   if (in.energy_storage_type_is_present) {
-    out.energyStorageType = (etsi_its_denm_coding::EnergyStorageType_t*) calloc(1, sizeof(etsi_its_denm_coding::EnergyStorageType_t));
+    out.energyStorageType = (denm_EnergyStorageType_t*) calloc(1, sizeof(denm_EnergyStorageType_t));
     toStruct_EnergyStorageType(in.energy_storage_type, *out.energyStorageType);
   }
 }

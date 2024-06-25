@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/AdverseWeatherCondition-VisibilitySubCauseCode.h>
+#include <etsi_its_cam_coding/cam_AdverseWeatherCondition-VisibilitySubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_AdverseWeatherConditionVisibilitySubCauseCode(const etsi_its_cam_coding::AdverseWeatherCondition_VisibilitySubCauseCode_t& in, cam_msgs::AdverseWeatherConditionVisibilitySubCauseCode& out) {
+void toRos_AdverseWeatherConditionVisibilitySubCauseCode(const cam_AdverseWeatherCondition_VisibilitySubCauseCode_t& in, cam_msgs::AdverseWeatherConditionVisibilitySubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherConditionVisibilitySubCauseCode(const cam_msgs::AdverseWeatherConditionVisibilitySubCauseCode& in, etsi_its_cam_coding::AdverseWeatherCondition_VisibilitySubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::AdverseWeatherCondition_VisibilitySubCauseCode_t));
+void toStruct_AdverseWeatherConditionVisibilitySubCauseCode(const cam_msgs::AdverseWeatherConditionVisibilitySubCauseCode& in, cam_AdverseWeatherCondition_VisibilitySubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cam_AdverseWeatherCondition_VisibilitySubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

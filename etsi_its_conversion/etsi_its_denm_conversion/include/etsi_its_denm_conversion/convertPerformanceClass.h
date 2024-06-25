@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PerformanceClass.h>
+#include <etsi_its_denm_coding/denm_PerformanceClass.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PerformanceClass(const etsi_its_denm_coding::PerformanceClass_t& in, denm_msgs::PerformanceClass& out) {
+void toRos_PerformanceClass(const denm_PerformanceClass_t& in, denm_msgs::PerformanceClass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PerformanceClass(const denm_msgs::PerformanceClass& in, etsi_its_denm_coding::PerformanceClass_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PerformanceClass_t));
+void toStruct_PerformanceClass(const denm_msgs::PerformanceClass& in, denm_PerformanceClass_t& out) {
+  memset(&out, 0, sizeof(denm_PerformanceClass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/RestrictedTypes.h>
+#include <etsi_its_denm_coding/denm_RestrictedTypes.h>
 #include <etsi_its_denm_conversion/convertRestrictedTypes.h>
 #include <etsi_its_denm_conversion/convertStationType.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RestrictedTypes(const etsi_its_denm_coding::RestrictedTypes_t& in, denm_msgs::RestrictedTypes& out) {
+void toRos_RestrictedTypes(const denm_RestrictedTypes_t& in, denm_msgs::RestrictedTypes& out) {
   for (int i = 0; i < in.list.count; ++i) {
     denm_msgs::StationType el;
     toRos_StationType(*(in.list.array[i]), el);
@@ -51,13 +51,13 @@ void toRos_RestrictedTypes(const etsi_its_denm_coding::RestrictedTypes_t& in, de
   }
 }
 
-void toStruct_RestrictedTypes(const denm_msgs::RestrictedTypes& in, etsi_its_denm_coding::RestrictedTypes_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RestrictedTypes_t));
+void toStruct_RestrictedTypes(const denm_msgs::RestrictedTypes& in, denm_RestrictedTypes_t& out) {
+  memset(&out, 0, sizeof(denm_RestrictedTypes_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    etsi_its_denm_coding::StationType_t* el = (etsi_its_denm_coding::StationType_t*) calloc(1, sizeof(etsi_its_denm_coding::StationType_t));
+    denm_StationType_t* el = (denm_StationType_t*) calloc(1, sizeof(denm_StationType_t));
     toStruct_StationType(in.array[i], *el);
-    if (etsi_its_denm_coding::asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
 }
 

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/VehicleWidth.h>
+#include <etsi_its_cam_coding/cam_VehicleWidth.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleWidth(const etsi_its_cam_coding::VehicleWidth_t& in, cam_msgs::VehicleWidth& out) {
+void toRos_VehicleWidth(const cam_VehicleWidth_t& in, cam_msgs::VehicleWidth& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleWidth(const cam_msgs::VehicleWidth& in, etsi_its_cam_coding::VehicleWidth_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::VehicleWidth_t));
+void toStruct_VehicleWidth(const cam_msgs::VehicleWidth& in, cam_VehicleWidth_t& out) {
+  memset(&out, 0, sizeof(cam_VehicleWidth_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

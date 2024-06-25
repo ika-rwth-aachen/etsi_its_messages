@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RelevanceTrafficDirection.h>
+#include <etsi_its_cam_coding/cam_RelevanceTrafficDirection.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RelevanceTrafficDirection.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RelevanceTrafficDirection(const etsi_its_cam_coding::RelevanceTrafficDirection_t& in, cam_msgs::RelevanceTrafficDirection& out) {
+void toRos_RelevanceTrafficDirection(const cam_RelevanceTrafficDirection_t& in, cam_msgs::RelevanceTrafficDirection& out) {
   out.value = in;
 }
 
-void toStruct_RelevanceTrafficDirection(const cam_msgs::RelevanceTrafficDirection& in, etsi_its_cam_coding::RelevanceTrafficDirection_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RelevanceTrafficDirection_t));
+void toStruct_RelevanceTrafficDirection(const cam_msgs::RelevanceTrafficDirection& in, cam_RelevanceTrafficDirection_t& out) {
+  memset(&out, 0, sizeof(cam_RelevanceTrafficDirection_t));
 
   out = in.value;
 }

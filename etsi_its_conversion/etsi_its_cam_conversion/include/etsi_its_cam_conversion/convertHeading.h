@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/Heading.h>
+#include <etsi_its_cam_coding/cam_Heading.h>
 #include <etsi_its_cam_conversion/convertHeadingConfidence.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Heading(const etsi_its_cam_coding::Heading_t& in, cam_msgs::Heading& out) {
+void toRos_Heading(const cam_Heading_t& in, cam_msgs::Heading& out) {
   toRos_HeadingValue(in.headingValue, out.heading_value);
   toRos_HeadingConfidence(in.headingConfidence, out.heading_confidence);
 }
 
-void toStruct_Heading(const cam_msgs::Heading& in, etsi_its_cam_coding::Heading_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::Heading_t));
+void toStruct_Heading(const cam_msgs::Heading& in, cam_Heading_t& out) {
+  memset(&out, 0, sizeof(cam_Heading_t));
 
   toStruct_HeadingValue(in.heading_value, out.headingValue);
   toStruct_HeadingConfidence(in.heading_confidence, out.headingConfidence);

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/RelevanceDistance.h>
+#include <etsi_its_denm_coding/denm_RelevanceDistance.h>
 
 #ifdef ROS1
 #include <etsi_its_denm_msgs/RelevanceDistance.h>
@@ -40,12 +40,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_RelevanceDistance(const etsi_its_denm_coding::RelevanceDistance_t& in, denm_msgs::RelevanceDistance& out) {
+void toRos_RelevanceDistance(const denm_RelevanceDistance_t& in, denm_msgs::RelevanceDistance& out) {
   out.value = in;
 }
 
-void toStruct_RelevanceDistance(const denm_msgs::RelevanceDistance& in, etsi_its_denm_coding::RelevanceDistance_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::RelevanceDistance_t));
+void toStruct_RelevanceDistance(const denm_msgs::RelevanceDistance& in, denm_RelevanceDistance_t& out) {
+  memset(&out, 0, sizeof(denm_RelevanceDistance_t));
 
   out = in.value;
 }

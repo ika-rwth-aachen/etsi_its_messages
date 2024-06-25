@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RequestResponseIndication.h>
+#include <etsi_its_cam_coding/cam_RequestResponseIndication.h>
 
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RequestResponseIndication.h>
@@ -40,12 +40,12 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RequestResponseIndication(const etsi_its_cam_coding::RequestResponseIndication_t& in, cam_msgs::RequestResponseIndication& out) {
+void toRos_RequestResponseIndication(const cam_RequestResponseIndication_t& in, cam_msgs::RequestResponseIndication& out) {
   out.value = in;
 }
 
-void toStruct_RequestResponseIndication(const cam_msgs::RequestResponseIndication& in, etsi_its_cam_coding::RequestResponseIndication_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::RequestResponseIndication_t));
+void toStruct_RequestResponseIndication(const cam_msgs::RequestResponseIndication& in, cam_RequestResponseIndication_t& out) {
+  memset(&out, 0, sizeof(cam_RequestResponseIndication_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VehicleIdentification.h>
+#include <etsi_its_denm_coding/denm_VehicleIdentification.h>
 #include <etsi_its_denm_conversion/convertVDS.h>
 #include <etsi_its_denm_conversion/convertWMInumber.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VehicleIdentification(const etsi_its_denm_coding::VehicleIdentification_t& in, denm_msgs::VehicleIdentification& out) {
+void toRos_VehicleIdentification(const denm_VehicleIdentification_t& in, denm_msgs::VehicleIdentification& out) {
   if (in.wMInumber) {
     toRos_WMInumber(*in.wMInumber, out.w_m_inumber);
     out.w_m_inumber_is_present = true;
@@ -52,15 +52,15 @@ void toRos_VehicleIdentification(const etsi_its_denm_coding::VehicleIdentificati
   }
 }
 
-void toStruct_VehicleIdentification(const denm_msgs::VehicleIdentification& in, etsi_its_denm_coding::VehicleIdentification_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::VehicleIdentification_t));
+void toStruct_VehicleIdentification(const denm_msgs::VehicleIdentification& in, denm_VehicleIdentification_t& out) {
+  memset(&out, 0, sizeof(denm_VehicleIdentification_t));
 
   if (in.w_m_inumber_is_present) {
-    out.wMInumber = (etsi_its_denm_coding::WMInumber_t*) calloc(1, sizeof(etsi_its_denm_coding::WMInumber_t));
+    out.wMInumber = (denm_WMInumber_t*) calloc(1, sizeof(denm_WMInumber_t));
     toStruct_WMInumber(in.w_m_inumber, *out.wMInumber);
   }
   if (in.v_ds_is_present) {
-    out.vDS = (etsi_its_denm_coding::VDS_t*) calloc(1, sizeof(etsi_its_denm_coding::VDS_t));
+    out.vDS = (denm_VDS_t*) calloc(1, sizeof(denm_VDS_t));
     toStruct_VDS(in.v_ds, *out.vDS);
   }
 }

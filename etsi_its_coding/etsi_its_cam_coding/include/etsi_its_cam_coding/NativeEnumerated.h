@@ -1,4 +1,3 @@
-#pragma once
 /*
  * Copyright (c) 2004-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
@@ -10,12 +9,13 @@
  * will do).
  * This type may be used when integer range is limited by subtype constraints.
  */
-
+#ifndef	_NativeEnumerated_H_
+#define	_NativeEnumerated_H_
 
 #include <etsi_its_cam_coding/NativeInteger.h>
+#include <etsi_its_cam_coding/ENUMERATED.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -29,6 +29,7 @@ extern asn_TYPE_operation_t asn_OP_NativeEnumerated;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define NativeEnumerated_compare NativeInteger_compare
+#define NativeEnumerated_copy    NativeInteger_copy
 
 #define NativeEnumerated_constraint asn_generic_no_constraint
 
@@ -43,6 +44,7 @@ xer_type_encoder_f NativeEnumerated_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f NativeEnumerated_decode_jer;
 jer_type_encoder_f NativeEnumerated_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -72,7 +74,6 @@ int NativeEnumerated__compar_value2enum(
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _NativeEnumerated_H_ */

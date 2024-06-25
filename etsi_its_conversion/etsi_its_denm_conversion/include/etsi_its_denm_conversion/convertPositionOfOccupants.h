@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PositionOfOccupants.h>
+#include <etsi_its_denm_coding/denm_PositionOfOccupants.h>
 #include <etsi_its_denm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PositionOfOccupants(const etsi_its_denm_coding::PositionOfOccupants_t& in, denm_msgs::PositionOfOccupants& out) {
+void toRos_PositionOfOccupants(const denm_PositionOfOccupants_t& in, denm_msgs::PositionOfOccupants& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_PositionOfOccupants(const denm_msgs::PositionOfOccupants& in, etsi_its_denm_coding::PositionOfOccupants_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PositionOfOccupants_t));
+void toStruct_PositionOfOccupants(const denm_msgs::PositionOfOccupants& in, denm_PositionOfOccupants_t& out) {
+  memset(&out, 0, sizeof(denm_PositionOfOccupants_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

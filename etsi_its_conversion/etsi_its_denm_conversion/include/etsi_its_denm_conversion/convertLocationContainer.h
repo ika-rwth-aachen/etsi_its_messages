@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/LocationContainer.h>
+#include <etsi_its_denm_coding/denm_LocationContainer.h>
 #include <etsi_its_denm_conversion/convertHeading.h>
 #include <etsi_its_denm_conversion/convertRoadType.h>
 #include <etsi_its_denm_conversion/convertSpeed.h>
@@ -43,7 +43,7 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LocationContainer(const etsi_its_denm_coding::LocationContainer_t& in, denm_msgs::LocationContainer& out) {
+void toRos_LocationContainer(const denm_LocationContainer_t& in, denm_msgs::LocationContainer& out) {
   if (in.eventSpeed) {
     toRos_Speed(*in.eventSpeed, out.event_speed);
     out.event_speed_is_present = true;
@@ -59,20 +59,20 @@ void toRos_LocationContainer(const etsi_its_denm_coding::LocationContainer_t& in
   }
 }
 
-void toStruct_LocationContainer(const denm_msgs::LocationContainer& in, etsi_its_denm_coding::LocationContainer_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::LocationContainer_t));
+void toStruct_LocationContainer(const denm_msgs::LocationContainer& in, denm_LocationContainer_t& out) {
+  memset(&out, 0, sizeof(denm_LocationContainer_t));
 
   if (in.event_speed_is_present) {
-    out.eventSpeed = (etsi_its_denm_coding::Speed_t*) calloc(1, sizeof(etsi_its_denm_coding::Speed_t));
+    out.eventSpeed = (denm_Speed_t*) calloc(1, sizeof(denm_Speed_t));
     toStruct_Speed(in.event_speed, *out.eventSpeed);
   }
   if (in.event_position_heading_is_present) {
-    out.eventPositionHeading = (etsi_its_denm_coding::Heading_t*) calloc(1, sizeof(etsi_its_denm_coding::Heading_t));
+    out.eventPositionHeading = (denm_Heading_t*) calloc(1, sizeof(denm_Heading_t));
     toStruct_Heading(in.event_position_heading, *out.eventPositionHeading);
   }
   toStruct_Traces(in.traces, out.traces);
   if (in.road_type_is_present) {
-    out.roadType = (etsi_its_denm_coding::RoadType_t*) calloc(1, sizeof(etsi_its_denm_coding::RoadType_t));
+    out.roadType = (denm_RoadType_t*) calloc(1, sizeof(denm_RoadType_t));
     toStruct_RoadType(in.road_type, *out.roadType);
   }
 }

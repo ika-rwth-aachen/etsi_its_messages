@@ -1,14 +1,13 @@
-#pragma once
 /*-
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_NumericString_H_
+#define	_NumericString_H_
 
 #include <etsi_its_cam_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -24,6 +23,7 @@ extern asn_TYPE_operation_t asn_OP_NumericString;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define NumericString_compare OCTET_STRING_compare
+#define NumericString_copy    OCTET_STRING_copy
 
 asn_constr_check_f NumericString_constraint;
 
@@ -38,6 +38,7 @@ asn_constr_check_f NumericString_constraint;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+#define NumericString_decode_jer OCTET_STRING_decode_jer_utf8
 #define NumericString_encode_jer OCTET_STRING_encode_jer_utf8
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -61,7 +62,6 @@ asn_constr_check_f NumericString_constraint;
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _NumericString_H_ */

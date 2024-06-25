@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/ValidityDuration.h>
+#include <etsi_its_denm_coding/denm_ValidityDuration.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ValidityDuration(const etsi_its_denm_coding::ValidityDuration_t& in, denm_msgs::ValidityDuration& out) {
+void toRos_ValidityDuration(const denm_ValidityDuration_t& in, denm_msgs::ValidityDuration& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ValidityDuration(const denm_msgs::ValidityDuration& in, etsi_its_denm_coding::ValidityDuration_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::ValidityDuration_t));
+void toStruct_ValidityDuration(const denm_msgs::ValidityDuration& in, denm_ValidityDuration_t& out) {
+  memset(&out, 0, sizeof(denm_ValidityDuration_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

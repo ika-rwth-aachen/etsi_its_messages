@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PosConfidenceEllipse.h>
+#include <etsi_its_cam_coding/cam_PosConfidenceEllipse.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
 #include <etsi_its_cam_conversion/convertSemiAxisLength.h>
 #ifdef ROS1
@@ -41,14 +41,14 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PosConfidenceEllipse(const etsi_its_cam_coding::PosConfidenceEllipse_t& in, cam_msgs::PosConfidenceEllipse& out) {
+void toRos_PosConfidenceEllipse(const cam_PosConfidenceEllipse_t& in, cam_msgs::PosConfidenceEllipse& out) {
   toRos_SemiAxisLength(in.semiMajorConfidence, out.semi_major_confidence);
   toRos_SemiAxisLength(in.semiMinorConfidence, out.semi_minor_confidence);
   toRos_HeadingValue(in.semiMajorOrientation, out.semi_major_orientation);
 }
 
-void toStruct_PosConfidenceEllipse(const cam_msgs::PosConfidenceEllipse& in, etsi_its_cam_coding::PosConfidenceEllipse_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::PosConfidenceEllipse_t));
+void toStruct_PosConfidenceEllipse(const cam_msgs::PosConfidenceEllipse& in, cam_PosConfidenceEllipse_t& out) {
+  memset(&out, 0, sizeof(cam_PosConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_confidence, out.semiMajorConfidence);
   toStruct_SemiAxisLength(in.semi_minor_confidence, out.semiMinorConfidence);

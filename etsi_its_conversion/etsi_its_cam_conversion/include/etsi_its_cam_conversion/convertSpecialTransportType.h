@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SpecialTransportType.h>
+#include <etsi_its_cam_coding/cam_SpecialTransportType.h>
 #include <etsi_its_cam_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpecialTransportType(const etsi_its_cam_coding::SpecialTransportType_t& in, cam_msgs::SpecialTransportType& out) {
+void toRos_SpecialTransportType(const cam_SpecialTransportType_t& in, cam_msgs::SpecialTransportType& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_SpecialTransportType(const cam_msgs::SpecialTransportType& in, etsi_its_cam_coding::SpecialTransportType_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::SpecialTransportType_t));
+void toStruct_SpecialTransportType(const cam_msgs::SpecialTransportType& in, cam_SpecialTransportType_t& out) {
+  memset(&out, 0, sizeof(cam_SpecialTransportType_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

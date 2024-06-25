@@ -1,6 +1,3 @@
-#ifdef __cplusplus
-namespace etsi_its_cam_coding {
-#endif
 /*
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>.
  * All rights reserved.
@@ -70,7 +67,3 @@ BIT_STRING_print(const asn_TYPE_descriptor_t *td, const void *sptr, int ilevel,
 
     return 0;
 }
-
-#ifdef __cplusplus
-}
-#endif

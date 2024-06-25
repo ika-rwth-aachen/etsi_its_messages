@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/AccelerationControl.h>
+#include <etsi_its_cam_coding/cam_AccelerationControl.h>
 #include <etsi_its_cam_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_AccelerationControl(const etsi_its_cam_coding::AccelerationControl_t& in, cam_msgs::AccelerationControl& out) {
+void toRos_AccelerationControl(const cam_AccelerationControl_t& in, cam_msgs::AccelerationControl& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_AccelerationControl(const cam_msgs::AccelerationControl& in, etsi_its_cam_coding::AccelerationControl_t& out) {
-  memset(&out, 0, sizeof(etsi_its_cam_coding::AccelerationControl_t));
+void toStruct_AccelerationControl(const cam_msgs::AccelerationControl& in, cam_AccelerationControl_t& out) {
+  memset(&out, 0, sizeof(cam_AccelerationControl_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

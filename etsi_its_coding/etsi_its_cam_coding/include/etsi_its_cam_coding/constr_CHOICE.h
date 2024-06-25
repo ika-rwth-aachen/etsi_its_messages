@@ -1,14 +1,13 @@
-#pragma once
 /*
  * Copyright (c) 2003-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-
+#ifndef	_CONSTR_CHOICE_H_
+#define	_CONSTR_CHOICE_H_
 
 #include <etsi_its_cam_coding/asn_application.h>
 
 #ifdef __cplusplus
-namespace etsi_its_cam_coding {
 extern "C" {
 #endif
 
@@ -47,6 +46,7 @@ asn_struct_print_f CHOICE_print;
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f CHOICE_compare;
+asn_struct_copy_f    CHOICE_copy;
 
 asn_constr_check_f CHOICE_constraint;
 
@@ -61,6 +61,7 @@ xer_type_encoder_f CHOICE_encode_xer;
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f CHOICE_decode_jer;
 jer_type_encoder_f CHOICE_encode_jer;
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -115,7 +116,6 @@ int CHOICE_variant_set_presence(const asn_TYPE_descriptor_t *td,
 
 #ifdef __cplusplus
 }
-}
 #endif
 
-
+#endif	/* _CONSTR_CHOICE_H_ */

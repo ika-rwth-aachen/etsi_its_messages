@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PostCrashSubCauseCode.h>
+#include <etsi_its_denm_coding/denm_PostCrashSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PostCrashSubCauseCode(const etsi_its_denm_coding::PostCrashSubCauseCode_t& in, denm_msgs::PostCrashSubCauseCode& out) {
+void toRos_PostCrashSubCauseCode(const denm_PostCrashSubCauseCode_t& in, denm_msgs::PostCrashSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PostCrashSubCauseCode(const denm_msgs::PostCrashSubCauseCode& in, etsi_its_denm_coding::PostCrashSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(etsi_its_denm_coding::PostCrashSubCauseCode_t));
+void toStruct_PostCrashSubCauseCode(const denm_msgs::PostCrashSubCauseCode& in, denm_PostCrashSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(denm_PostCrashSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
