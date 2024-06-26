@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrajectoryInterceptionConfidence.h>
+#include <etsi_its_cpm_coding/cpm_TrajectoryInterceptionConfidence.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrajectoryInterceptionConfidence(const TrajectoryInterceptionConfidence_t& in, cpm_msgs::TrajectoryInterceptionConfidence& out) {
+void toRos_TrajectoryInterceptionConfidence(const cpm_TrajectoryInterceptionConfidence_t& in, cpm_msgs::TrajectoryInterceptionConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TrajectoryInterceptionConfidence(const cpm_msgs::TrajectoryInterceptionConfidence& in, TrajectoryInterceptionConfidence_t& out) {
-  memset(&out, 0, sizeof(TrajectoryInterceptionConfidence_t));
+void toStruct_TrajectoryInterceptionConfidence(const cpm_msgs::TrajectoryInterceptionConfidence& in, cpm_TrajectoryInterceptionConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_TrajectoryInterceptionConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

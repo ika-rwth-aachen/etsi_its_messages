@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/BogiesCount.h>
+#include <etsi_its_cpm_coding/cpm_BogiesCount.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_BogiesCount(const BogiesCount_t& in, cpm_msgs::BogiesCount& out) {
+void toRos_BogiesCount(const cpm_BogiesCount_t& in, cpm_msgs::BogiesCount& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_BogiesCount(const cpm_msgs::BogiesCount& in, BogiesCount_t& out) {
-  memset(&out, 0, sizeof(BogiesCount_t));
+void toStruct_BogiesCount(const cpm_msgs::BogiesCount& in, cpm_BogiesCount_t& out) {
+  memset(&out, 0, sizeof(cpm_BogiesCount_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

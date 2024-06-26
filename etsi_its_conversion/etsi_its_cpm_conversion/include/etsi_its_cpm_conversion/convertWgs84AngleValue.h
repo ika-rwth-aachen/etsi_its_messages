@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Wgs84AngleValue.h>
+#include <etsi_its_cpm_coding/cpm_Wgs84AngleValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Wgs84AngleValue(const Wgs84AngleValue_t& in, cpm_msgs::Wgs84AngleValue& out) {
+void toRos_Wgs84AngleValue(const cpm_Wgs84AngleValue_t& in, cpm_msgs::Wgs84AngleValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Wgs84AngleValue(const cpm_msgs::Wgs84AngleValue& in, Wgs84AngleValue_t& out) {
-  memset(&out, 0, sizeof(Wgs84AngleValue_t));
+void toStruct_Wgs84AngleValue(const cpm_msgs::Wgs84AngleValue& in, cpm_Wgs84AngleValue_t& out) {
+  memset(&out, 0, sizeof(cpm_Wgs84AngleValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

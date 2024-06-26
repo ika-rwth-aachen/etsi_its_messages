@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ClusterLeaveInfo.h>
+#include <etsi_its_cpm_coding/cpm_ClusterLeaveInfo.h>
 #include <etsi_its_cpm_conversion/convertClusterLeaveReason.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ClusterLeaveInfo(const ClusterLeaveInfo_t& in, cpm_msgs::ClusterLeaveInfo& out) {
+void toRos_ClusterLeaveInfo(const cpm_ClusterLeaveInfo_t& in, cpm_msgs::ClusterLeaveInfo& out) {
   toRos_Identifier1B(in.clusterId, out.cluster_id);
   toRos_ClusterLeaveReason(in.clusterLeaveReason, out.cluster_leave_reason);
 }
 
-void toStruct_ClusterLeaveInfo(const cpm_msgs::ClusterLeaveInfo& in, ClusterLeaveInfo_t& out) {
-  memset(&out, 0, sizeof(ClusterLeaveInfo_t));
+void toStruct_ClusterLeaveInfo(const cpm_msgs::ClusterLeaveInfo& in, cpm_ClusterLeaveInfo_t& out) {
+  memset(&out, 0, sizeof(cpm_ClusterLeaveInfo_t));
 
   toStruct_Identifier1B(in.cluster_id, out.clusterId);
   toStruct_ClusterLeaveReason(in.cluster_leave_reason, out.clusterLeaveReason);

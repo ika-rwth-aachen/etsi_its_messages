@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/OrdinalNumber3b.h>
+#include <etsi_its_cpm_coding/cpm_OrdinalNumber3b.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_OrdinalNumber3b(const OrdinalNumber3b_t& in, cpm_msgs::OrdinalNumber3b& out) {
+void toRos_OrdinalNumber3b(const cpm_OrdinalNumber3b_t& in, cpm_msgs::OrdinalNumber3b& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_OrdinalNumber3b(const cpm_msgs::OrdinalNumber3b& in, OrdinalNumber3b_t& out) {
-  memset(&out, 0, sizeof(OrdinalNumber3b_t));
+void toStruct_OrdinalNumber3b(const cpm_msgs::OrdinalNumber3b& in, cpm_OrdinalNumber3b_t& out) {
+  memset(&out, 0, sizeof(cpm_OrdinalNumber3b_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

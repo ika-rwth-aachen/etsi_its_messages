@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianAngle.h>
+#include <etsi_its_cpm_coding/cpm_CartesianAngle.h>
 #include <etsi_its_cpm_conversion/convertAngleConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngleValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianAngle(const CartesianAngle_t& in, cpm_msgs::CartesianAngle& out) {
+void toRos_CartesianAngle(const cpm_CartesianAngle_t& in, cpm_msgs::CartesianAngle& out) {
   toRos_CartesianAngleValue(in.value, out.value);
   toRos_AngleConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_CartesianAngle(const cpm_msgs::CartesianAngle& in, CartesianAngle_t& out) {
-  memset(&out, 0, sizeof(CartesianAngle_t));
+void toStruct_CartesianAngle(const cpm_msgs::CartesianAngle& in, cpm_CartesianAngle_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianAngle_t));
 
   toStruct_CartesianAngleValue(in.value, out.value);
   toStruct_AngleConfidence(in.confidence, out.confidence);

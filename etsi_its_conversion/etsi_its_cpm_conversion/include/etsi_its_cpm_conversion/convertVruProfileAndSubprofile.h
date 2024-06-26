@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruProfileAndSubprofile.h>
+#include <etsi_its_cpm_coding/cpm_VruProfileAndSubprofile.h>
 #include <etsi_its_cpm_conversion/convertVruSubProfileAnimal.h>
 #include <etsi_its_cpm_conversion/convertVruSubProfileBicyclist.h>
 #include <etsi_its_cpm_conversion/convertVruSubProfileMotorcyclist.h>
@@ -43,21 +43,21 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruProfileAndSubprofile(const VruProfileAndSubprofile_t& in, cpm_msgs::VruProfileAndSubprofile& out) {
+void toRos_VruProfileAndSubprofile(const cpm_VruProfileAndSubprofile_t& in, cpm_msgs::VruProfileAndSubprofile& out) {
   switch (in.present) {
-  case VruProfileAndSubprofile_PR_pedestrian:
+  case cpm_VruProfileAndSubprofile_PR_pedestrian:
     toRos_VruSubProfilePedestrian(in.choice.pedestrian, out.pedestrian);
     out.choice = cpm_msgs::VruProfileAndSubprofile::CHOICE_PEDESTRIAN;
     break;
-  case VruProfileAndSubprofile_PR_bicyclistAndLightVruVehicle:
+  case cpm_VruProfileAndSubprofile_PR_bicyclistAndLightVruVehicle:
     toRos_VruSubProfileBicyclist(in.choice.bicyclistAndLightVruVehicle, out.bicyclist_and_light_vru_vehicle);
     out.choice = cpm_msgs::VruProfileAndSubprofile::CHOICE_BICYCLIST_AND_LIGHT_VRU_VEHICLE;
     break;
-  case VruProfileAndSubprofile_PR_motorcyclist:
+  case cpm_VruProfileAndSubprofile_PR_motorcyclist:
     toRos_VruSubProfileMotorcyclist(in.choice.motorcyclist, out.motorcyclist);
     out.choice = cpm_msgs::VruProfileAndSubprofile::CHOICE_MOTORCYCLIST;
     break;
-  case VruProfileAndSubprofile_PR_animal:
+  case cpm_VruProfileAndSubprofile_PR_animal:
     toRos_VruSubProfileAnimal(in.choice.animal, out.animal);
     out.choice = cpm_msgs::VruProfileAndSubprofile::CHOICE_ANIMAL;
     break;
@@ -65,25 +65,25 @@ void toRos_VruProfileAndSubprofile(const VruProfileAndSubprofile_t& in, cpm_msgs
   }
 }
 
-void toStruct_VruProfileAndSubprofile(const cpm_msgs::VruProfileAndSubprofile& in, VruProfileAndSubprofile_t& out) {
-  memset(&out, 0, sizeof(VruProfileAndSubprofile_t));
+void toStruct_VruProfileAndSubprofile(const cpm_msgs::VruProfileAndSubprofile& in, cpm_VruProfileAndSubprofile_t& out) {
+  memset(&out, 0, sizeof(cpm_VruProfileAndSubprofile_t));
 
   switch (in.choice) {
   case cpm_msgs::VruProfileAndSubprofile::CHOICE_PEDESTRIAN:
     toStruct_VruSubProfilePedestrian(in.pedestrian, out.choice.pedestrian);
-    out.present = VruProfileAndSubprofile_PR::VruProfileAndSubprofile_PR_pedestrian;
+    out.present = cpm_VruProfileAndSubprofile_PR::cpm_VruProfileAndSubprofile_PR_pedestrian;
     break;
   case cpm_msgs::VruProfileAndSubprofile::CHOICE_BICYCLIST_AND_LIGHT_VRU_VEHICLE:
     toStruct_VruSubProfileBicyclist(in.bicyclist_and_light_vru_vehicle, out.choice.bicyclistAndLightVruVehicle);
-    out.present = VruProfileAndSubprofile_PR::VruProfileAndSubprofile_PR_bicyclistAndLightVruVehicle;
+    out.present = cpm_VruProfileAndSubprofile_PR::cpm_VruProfileAndSubprofile_PR_bicyclistAndLightVruVehicle;
     break;
   case cpm_msgs::VruProfileAndSubprofile::CHOICE_MOTORCYCLIST:
     toStruct_VruSubProfileMotorcyclist(in.motorcyclist, out.choice.motorcyclist);
-    out.present = VruProfileAndSubprofile_PR::VruProfileAndSubprofile_PR_motorcyclist;
+    out.present = cpm_VruProfileAndSubprofile_PR::cpm_VruProfileAndSubprofile_PR_motorcyclist;
     break;
   case cpm_msgs::VruProfileAndSubprofile::CHOICE_ANIMAL:
     toStruct_VruSubProfileAnimal(in.animal, out.choice.animal);
-    out.present = VruProfileAndSubprofile_PR::VruProfileAndSubprofile_PR_animal;
+    out.present = cpm_VruProfileAndSubprofile_PR::cpm_VruProfileAndSubprofile_PR_animal;
     break;
   default: break;
   }

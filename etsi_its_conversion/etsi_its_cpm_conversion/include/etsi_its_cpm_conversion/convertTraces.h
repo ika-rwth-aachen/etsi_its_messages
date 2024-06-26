@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/Traces.h>
+#include <etsi_its_cpm_coding/cpm_Traces.h>
 #include <etsi_its_cpm_conversion/convertPath.h>
 #include <etsi_its_cpm_conversion/convertTraces.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Traces(const Traces_t& in, cpm_msgs::Traces& out) {
+void toRos_Traces(const cpm_Traces_t& in, cpm_msgs::Traces& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::Path el;
     toRos_Path(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_Traces(const Traces_t& in, cpm_msgs::Traces& out) {
   }
 }
 
-void toStruct_Traces(const cpm_msgs::Traces& in, Traces_t& out) {
-  memset(&out, 0, sizeof(Traces_t));
+void toStruct_Traces(const cpm_msgs::Traces& in, cpm_Traces_t& out) {
+  memset(&out, 0, sizeof(cpm_Traces_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    Path_t* el = (Path_t*) calloc(1, sizeof(Path_t));
+    cpm_Path_t* el = (cpm_Path_t*) calloc(1, sizeof(cpm_Path_t));
     toStruct_Path(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

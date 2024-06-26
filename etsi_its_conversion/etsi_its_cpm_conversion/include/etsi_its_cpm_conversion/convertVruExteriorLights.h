@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruExteriorLights.h>
+#include <etsi_its_cpm_coding/cpm_VruExteriorLights.h>
 #include <etsi_its_cpm_conversion/convertExteriorLights.h>
 #include <etsi_its_cpm_conversion/convertVruSpecificExteriorLights.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruExteriorLights(const VruExteriorLights_t& in, cpm_msgs::VruExteriorLights& out) {
+void toRos_VruExteriorLights(const cpm_VruExteriorLights_t& in, cpm_msgs::VruExteriorLights& out) {
   toRos_ExteriorLights(in.vehicular, out.vehicular);
   toRos_VruSpecificExteriorLights(in.vruSpecific, out.vru_specific);
 }
 
-void toStruct_VruExteriorLights(const cpm_msgs::VruExteriorLights& in, VruExteriorLights_t& out) {
-  memset(&out, 0, sizeof(VruExteriorLights_t));
+void toStruct_VruExteriorLights(const cpm_msgs::VruExteriorLights& in, cpm_VruExteriorLights_t& out) {
+  memset(&out, 0, sizeof(cpm_VruExteriorLights_t));
 
   toStruct_ExteriorLights(in.vehicular, out.vehicular);
   toStruct_VruSpecificExteriorLights(in.vru_specific, out.vruSpecific);

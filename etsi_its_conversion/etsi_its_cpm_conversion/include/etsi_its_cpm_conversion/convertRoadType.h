@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RoadType.h>
+#include <etsi_its_cpm_coding/cpm_RoadType.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/RoadType.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RoadType(const RoadType_t& in, cpm_msgs::RoadType& out) {
+void toRos_RoadType(const cpm_RoadType_t& in, cpm_msgs::RoadType& out) {
   out.value = in;
 }
 
-void toStruct_RoadType(const cpm_msgs::RoadType& in, RoadType_t& out) {
-  memset(&out, 0, sizeof(RoadType_t));
+void toStruct_RoadType(const cpm_msgs::RoadType& in, cpm_RoadType_t& out) {
+  memset(&out, 0, sizeof(cpm_RoadType_t));
 
   out = in.value;
 }

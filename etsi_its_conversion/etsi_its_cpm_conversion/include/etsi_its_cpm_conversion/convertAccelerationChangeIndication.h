@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationChangeIndication.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationChangeIndication.h>
 #include <etsi_its_cpm_conversion/convertAccelerationChange.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeTenthOfSecond.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationChangeIndication(const AccelerationChangeIndication_t& in, cpm_msgs::AccelerationChangeIndication& out) {
+void toRos_AccelerationChangeIndication(const cpm_AccelerationChangeIndication_t& in, cpm_msgs::AccelerationChangeIndication& out) {
   toRos_AccelerationChange(in.accelOrDecel, out.accel_or_decel);
   toRos_DeltaTimeTenthOfSecond(in.actionDeltaTime, out.action_delta_time);
 }
 
-void toStruct_AccelerationChangeIndication(const cpm_msgs::AccelerationChangeIndication& in, AccelerationChangeIndication_t& out) {
-  memset(&out, 0, sizeof(AccelerationChangeIndication_t));
+void toStruct_AccelerationChangeIndication(const cpm_msgs::AccelerationChangeIndication& in, cpm_AccelerationChangeIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationChangeIndication_t));
 
   toStruct_AccelerationChange(in.accel_or_decel, out.accelOrDecel);
   toStruct_DeltaTimeTenthOfSecond(in.action_delta_time, out.actionDeltaTime);

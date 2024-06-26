@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CurvatureCalculationMode.h>
+#include <etsi_its_cpm_coding/cpm_CurvatureCalculationMode.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CurvatureCalculationMode.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CurvatureCalculationMode(const CurvatureCalculationMode_t& in, cpm_msgs::CurvatureCalculationMode& out) {
+void toRos_CurvatureCalculationMode(const cpm_CurvatureCalculationMode_t& in, cpm_msgs::CurvatureCalculationMode& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureCalculationMode(const cpm_msgs::CurvatureCalculationMode& in, CurvatureCalculationMode_t& out) {
-  memset(&out, 0, sizeof(CurvatureCalculationMode_t));
+void toStruct_CurvatureCalculationMode(const cpm_msgs::CurvatureCalculationMode& in, cpm_CurvatureCalculationMode_t& out) {
+  memset(&out, 0, sizeof(cpm_CurvatureCalculationMode_t));
 
   out = in.value;
 }

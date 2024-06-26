@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SpecialTransportType.h>
+#include <etsi_its_cpm_coding/cpm_SpecialTransportType.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SpecialTransportType(const SpecialTransportType_t& in, cpm_msgs::SpecialTransportType& out) {
+void toRos_SpecialTransportType(const cpm_SpecialTransportType_t& in, cpm_msgs::SpecialTransportType& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_SpecialTransportType(const cpm_msgs::SpecialTransportType& in, SpecialTransportType_t& out) {
-  memset(&out, 0, sizeof(SpecialTransportType_t));
+void toStruct_SpecialTransportType(const cpm_msgs::SpecialTransportType& in, cpm_SpecialTransportType_t& out) {
+  memset(&out, 0, sizeof(cpm_SpecialTransportType_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianPosition3d.h>
+#include <etsi_its_cpm_coding/cpm_CartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertCartesianCoordinate.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CartesianPosition3d.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianPosition3d(const CartesianPosition3d_t& in, cpm_msgs::CartesianPosition3d& out) {
+void toRos_CartesianPosition3d(const cpm_CartesianPosition3d_t& in, cpm_msgs::CartesianPosition3d& out) {
   toRos_CartesianCoordinate(in.xCoordinate, out.x_coordinate);
   toRos_CartesianCoordinate(in.yCoordinate, out.y_coordinate);
   if (in.zCoordinate) {
@@ -49,13 +49,13 @@ void toRos_CartesianPosition3d(const CartesianPosition3d_t& in, cpm_msgs::Cartes
   }
 }
 
-void toStruct_CartesianPosition3d(const cpm_msgs::CartesianPosition3d& in, CartesianPosition3d_t& out) {
-  memset(&out, 0, sizeof(CartesianPosition3d_t));
+void toStruct_CartesianPosition3d(const cpm_msgs::CartesianPosition3d& in, cpm_CartesianPosition3d_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianPosition3d_t));
 
   toStruct_CartesianCoordinate(in.x_coordinate, out.xCoordinate);
   toStruct_CartesianCoordinate(in.y_coordinate, out.yCoordinate);
   if (in.z_coordinate_is_present) {
-    out.zCoordinate = (CartesianCoordinate_t*) calloc(1, sizeof(CartesianCoordinate_t));
+    out.zCoordinate = (cpm_CartesianCoordinate_t*) calloc(1, sizeof(cpm_CartesianCoordinate_t));
     toStruct_CartesianCoordinate(in.z_coordinate, *out.zCoordinate);
   }
 }

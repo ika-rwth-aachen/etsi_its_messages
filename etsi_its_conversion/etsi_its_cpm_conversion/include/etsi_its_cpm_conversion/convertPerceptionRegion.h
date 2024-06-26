@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PerceptionRegion.h>
+#include <etsi_its_cpm_coding/cpm_PerceptionRegion.h>
 #include <etsi_its_cpm_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #include <etsi_its_cpm_conversion/convertCardinalNumber1B.h>
@@ -47,7 +47,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerceptionRegion(const PerceptionRegion_t& in, cpm_msgs::PerceptionRegion& out) {
+void toRos_PerceptionRegion(const cpm_PerceptionRegion_t& in, cpm_msgs::PerceptionRegion& out) {
   toRos_DeltaTimeMilliSecondSigned(in.measurementDeltaTime, out.measurement_delta_time);
   toRos_ConfidenceLevel(in.perceptionRegionConfidence, out.perception_region_confidence);
   toRos_Shape(in.perceptionRegionShape, out.perception_region_shape);
@@ -66,23 +66,23 @@ void toRos_PerceptionRegion(const PerceptionRegion_t& in, cpm_msgs::PerceptionRe
   }
 }
 
-void toStruct_PerceptionRegion(const cpm_msgs::PerceptionRegion& in, PerceptionRegion_t& out) {
-  memset(&out, 0, sizeof(PerceptionRegion_t));
+void toStruct_PerceptionRegion(const cpm_msgs::PerceptionRegion& in, cpm_PerceptionRegion_t& out) {
+  memset(&out, 0, sizeof(cpm_PerceptionRegion_t));
 
   toStruct_DeltaTimeMilliSecondSigned(in.measurement_delta_time, out.measurementDeltaTime);
   toStruct_ConfidenceLevel(in.perception_region_confidence, out.perceptionRegionConfidence);
   toStruct_Shape(in.perception_region_shape, out.perceptionRegionShape);
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.shadowing_applies, out.shadowingApplies);
   if (in.sensor_id_list_is_present) {
-    out.sensorIdList = (SequenceOfIdentifier1B_t*) calloc(1, sizeof(SequenceOfIdentifier1B_t));
+    out.sensorIdList = (cpm_SequenceOfIdentifier1B_t*) calloc(1, sizeof(cpm_SequenceOfIdentifier1B_t));
     toStruct_SequenceOfIdentifier1B(in.sensor_id_list, *out.sensorIdList);
   }
   if (in.number_of_perceived_objects_is_present) {
-    out.numberOfPerceivedObjects = (CardinalNumber1B_t*) calloc(1, sizeof(CardinalNumber1B_t));
+    out.numberOfPerceivedObjects = (cpm_CardinalNumber1B_t*) calloc(1, sizeof(cpm_CardinalNumber1B_t));
     toStruct_CardinalNumber1B(in.number_of_perceived_objects, *out.numberOfPerceivedObjects);
   }
   if (in.perceived_object_ids_is_present) {
-    out.perceivedObjectIds = (PerceivedObjectIds_t*) calloc(1, sizeof(PerceivedObjectIds_t));
+    out.perceivedObjectIds = (cpm_PerceivedObjectIds_t*) calloc(1, sizeof(cpm_PerceivedObjectIds_t));
     toStruct_PerceivedObjectIds(in.perceived_object_ids, *out.perceivedObjectIds);
   }
 }

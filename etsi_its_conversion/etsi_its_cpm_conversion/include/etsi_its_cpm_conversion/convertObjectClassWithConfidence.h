@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ObjectClassWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_ObjectClassWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertConfidenceLevel.h>
 #include <etsi_its_cpm_conversion/convertObjectClass.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectClassWithConfidence(const ObjectClassWithConfidence_t& in, cpm_msgs::ObjectClassWithConfidence& out) {
+void toRos_ObjectClassWithConfidence(const cpm_ObjectClassWithConfidence_t& in, cpm_msgs::ObjectClassWithConfidence& out) {
   toRos_ObjectClass(in.objectClass, out.object_class);
   toRos_ConfidenceLevel(in.confidence, out.confidence);
 }
 
-void toStruct_ObjectClassWithConfidence(const cpm_msgs::ObjectClassWithConfidence& in, ObjectClassWithConfidence_t& out) {
-  memset(&out, 0, sizeof(ObjectClassWithConfidence_t));
+void toStruct_ObjectClassWithConfidence(const cpm_msgs::ObjectClassWithConfidence& in, cpm_ObjectClassWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectClassWithConfidence_t));
 
   toStruct_ObjectClass(in.object_class, out.objectClass);
   toStruct_ConfidenceLevel(in.confidence, out.confidence);

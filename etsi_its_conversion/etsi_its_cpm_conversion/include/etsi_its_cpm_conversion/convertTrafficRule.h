@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrafficRule.h>
+#include <etsi_its_cpm_coding/cpm_TrafficRule.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/TrafficRule.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrafficRule(const TrafficRule_t& in, cpm_msgs::TrafficRule& out) {
+void toRos_TrafficRule(const cpm_TrafficRule_t& in, cpm_msgs::TrafficRule& out) {
   out.value = in;
 }
 
-void toStruct_TrafficRule(const cpm_msgs::TrafficRule& in, TrafficRule_t& out) {
-  memset(&out, 0, sizeof(TrafficRule_t));
+void toStruct_TrafficRule(const cpm_msgs::TrafficRule& in, cpm_TrafficRule_t& out) {
+  memset(&out, 0, sizeof(cpm_TrafficRule_t));
 
   out = in.value;
 }

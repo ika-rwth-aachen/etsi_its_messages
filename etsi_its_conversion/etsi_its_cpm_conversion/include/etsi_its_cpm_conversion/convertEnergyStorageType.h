@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EnergyStorageType.h>
+#include <etsi_its_cpm_coding/cpm_EnergyStorageType.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EnergyStorageType(const EnergyStorageType_t& in, cpm_msgs::EnergyStorageType& out) {
+void toRos_EnergyStorageType(const cpm_EnergyStorageType_t& in, cpm_msgs::EnergyStorageType& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_EnergyStorageType(const cpm_msgs::EnergyStorageType& in, EnergyStorageType_t& out) {
-  memset(&out, 0, sizeof(EnergyStorageType_t));
+void toStruct_EnergyStorageType(const cpm_msgs::EnergyStorageType& in, cpm_EnergyStorageType_t& out) {
+  memset(&out, 0, sizeof(cpm_EnergyStorageType_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

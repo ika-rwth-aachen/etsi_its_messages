@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PositionOfOccupants.h>
+#include <etsi_its_cpm_coding/cpm_PositionOfOccupants.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PositionOfOccupants(const PositionOfOccupants_t& in, cpm_msgs::PositionOfOccupants& out) {
+void toRos_PositionOfOccupants(const cpm_PositionOfOccupants_t& in, cpm_msgs::PositionOfOccupants& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_PositionOfOccupants(const cpm_msgs::PositionOfOccupants& in, PositionOfOccupants_t& out) {
-  memset(&out, 0, sizeof(PositionOfOccupants_t));
+void toStruct_PositionOfOccupants(const cpm_msgs::PositionOfOccupants& in, cpm_PositionOfOccupants_t& out) {
+  memset(&out, 0, sizeof(cpm_PositionOfOccupants_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

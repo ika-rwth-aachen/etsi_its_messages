@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationCartesian.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationCartesian.h>
 #include <etsi_its_cpm_conversion/convertAccelerationComponent.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/AccelerationCartesian.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationCartesian(const AccelerationCartesian_t& in, cpm_msgs::AccelerationCartesian& out) {
+void toRos_AccelerationCartesian(const cpm_AccelerationCartesian_t& in, cpm_msgs::AccelerationCartesian& out) {
   toRos_AccelerationComponent(in.xAcceleration, out.x_acceleration);
   toRos_AccelerationComponent(in.yAcceleration, out.y_acceleration);
   if (in.zAcceleration) {
@@ -49,13 +49,13 @@ void toRos_AccelerationCartesian(const AccelerationCartesian_t& in, cpm_msgs::Ac
   }
 }
 
-void toStruct_AccelerationCartesian(const cpm_msgs::AccelerationCartesian& in, AccelerationCartesian_t& out) {
-  memset(&out, 0, sizeof(AccelerationCartesian_t));
+void toStruct_AccelerationCartesian(const cpm_msgs::AccelerationCartesian& in, cpm_AccelerationCartesian_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationCartesian_t));
 
   toStruct_AccelerationComponent(in.x_acceleration, out.xAcceleration);
   toStruct_AccelerationComponent(in.y_acceleration, out.yAcceleration);
   if (in.z_acceleration_is_present) {
-    out.zAcceleration = (AccelerationComponent_t*) calloc(1, sizeof(AccelerationComponent_t));
+    out.zAcceleration = (cpm_AccelerationComponent_t*) calloc(1, sizeof(cpm_AccelerationComponent_t));
     toStruct_AccelerationComponent(in.z_acceleration, *out.zAcceleration);
   }
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LateralAccelerationValue.h>
+#include <etsi_its_cpm_coding/cpm_LateralAccelerationValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LateralAccelerationValue(const LateralAccelerationValue_t& in, cpm_msgs::LateralAccelerationValue& out) {
+void toRos_LateralAccelerationValue(const cpm_LateralAccelerationValue_t& in, cpm_msgs::LateralAccelerationValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_LateralAccelerationValue(const cpm_msgs::LateralAccelerationValue& in, LateralAccelerationValue_t& out) {
-  memset(&out, 0, sizeof(LateralAccelerationValue_t));
+void toStruct_LateralAccelerationValue(const cpm_msgs::LateralAccelerationValue& in, cpm_LateralAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(cpm_LateralAccelerationValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

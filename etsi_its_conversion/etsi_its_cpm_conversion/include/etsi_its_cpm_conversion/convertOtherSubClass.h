@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/OtherSubClass.h>
+#include <etsi_its_cpm_coding/cpm_OtherSubClass.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_OtherSubClass(const OtherSubClass_t& in, cpm_msgs::OtherSubClass& out) {
+void toRos_OtherSubClass(const cpm_OtherSubClass_t& in, cpm_msgs::OtherSubClass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_OtherSubClass(const cpm_msgs::OtherSubClass& in, OtherSubClass_t& out) {
-  memset(&out, 0, sizeof(OtherSubClass_t));
+void toStruct_OtherSubClass(const cpm_msgs::OtherSubClass& in, cpm_OtherSubClass_t& out) {
+  memset(&out, 0, sizeof(cpm_OtherSubClass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

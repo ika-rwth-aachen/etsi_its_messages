@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AltitudeValue.h>
+#include <etsi_its_cpm_coding/cpm_AltitudeValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AltitudeValue(const AltitudeValue_t& in, cpm_msgs::AltitudeValue& out) {
+void toRos_AltitudeValue(const cpm_AltitudeValue_t& in, cpm_msgs::AltitudeValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AltitudeValue(const cpm_msgs::AltitudeValue& in, AltitudeValue_t& out) {
-  memset(&out, 0, sizeof(AltitudeValue_t));
+void toStruct_AltitudeValue(const cpm_msgs::AltitudeValue& in, cpm_AltitudeValue_t& out) {
+  memset(&out, 0, sizeof(cpm_AltitudeValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

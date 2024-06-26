@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SteeringWheelAngle.h>
+#include <etsi_its_cpm_coding/cpm_SteeringWheelAngle.h>
 #include <etsi_its_cpm_conversion/convertSteeringWheelAngleConfidence.h>
 #include <etsi_its_cpm_conversion/convertSteeringWheelAngleValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SteeringWheelAngle(const SteeringWheelAngle_t& in, cpm_msgs::SteeringWheelAngle& out) {
+void toRos_SteeringWheelAngle(const cpm_SteeringWheelAngle_t& in, cpm_msgs::SteeringWheelAngle& out) {
   toRos_SteeringWheelAngleValue(in.steeringWheelAngleValue, out.steering_wheel_angle_value);
   toRos_SteeringWheelAngleConfidence(in.steeringWheelAngleConfidence, out.steering_wheel_angle_confidence);
 }
 
-void toStruct_SteeringWheelAngle(const cpm_msgs::SteeringWheelAngle& in, SteeringWheelAngle_t& out) {
-  memset(&out, 0, sizeof(SteeringWheelAngle_t));
+void toStruct_SteeringWheelAngle(const cpm_msgs::SteeringWheelAngle& in, cpm_SteeringWheelAngle_t& out) {
+  memset(&out, 0, sizeof(cpm_SteeringWheelAngle_t));
 
   toStruct_SteeringWheelAngleValue(in.steering_wheel_angle_value, out.steeringWheelAngleValue);
   toStruct_SteeringWheelAngleConfidence(in.steering_wheel_angle_confidence, out.steeringWheelAngleConfidence);

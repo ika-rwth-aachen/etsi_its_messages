@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ProtectedZoneId.h>
+#include <etsi_its_cpm_coding/cpm_ProtectedZoneId.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ProtectedZoneId(const ProtectedZoneId_t& in, cpm_msgs::ProtectedZoneId& out) {
+void toRos_ProtectedZoneId(const cpm_ProtectedZoneId_t& in, cpm_msgs::ProtectedZoneId& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ProtectedZoneId(const cpm_msgs::ProtectedZoneId& in, ProtectedZoneId_t& out) {
-  memset(&out, 0, sizeof(ProtectedZoneId_t));
+void toStruct_ProtectedZoneId(const cpm_msgs::ProtectedZoneId& in, cpm_ProtectedZoneId_t& out) {
+  memset(&out, 0, sizeof(cpm_ProtectedZoneId_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

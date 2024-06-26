@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/RadialShapesList.h>
+#include <etsi_its_cpm_coding/cpm_RadialShapesList.h>
 #include <etsi_its_cpm_conversion/convertRadialShapeDetails.h>
 #include <etsi_its_cpm_conversion/convertRadialShapesList.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RadialShapesList(const RadialShapesList_t& in, cpm_msgs::RadialShapesList& out) {
+void toRos_RadialShapesList(const cpm_RadialShapesList_t& in, cpm_msgs::RadialShapesList& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::RadialShapeDetails el;
     toRos_RadialShapeDetails(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_RadialShapesList(const RadialShapesList_t& in, cpm_msgs::RadialShapes
   }
 }
 
-void toStruct_RadialShapesList(const cpm_msgs::RadialShapesList& in, RadialShapesList_t& out) {
-  memset(&out, 0, sizeof(RadialShapesList_t));
+void toStruct_RadialShapesList(const cpm_msgs::RadialShapesList& in, cpm_RadialShapesList_t& out) {
+  memset(&out, 0, sizeof(cpm_RadialShapesList_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    RadialShapeDetails_t* el = (RadialShapeDetails_t*) calloc(1, sizeof(RadialShapeDetails_t));
+    cpm_RadialShapeDetails_t* el = (cpm_RadialShapeDetails_t*) calloc(1, sizeof(cpm_RadialShapeDetails_t));
     toStruct_RadialShapeDetails(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

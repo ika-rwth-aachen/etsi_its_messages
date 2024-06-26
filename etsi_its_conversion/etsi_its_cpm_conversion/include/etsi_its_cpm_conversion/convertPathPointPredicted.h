@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PathPointPredicted.h>
+#include <etsi_its_cpm_coding/cpm_PathPointPredicted.h>
 #include <etsi_its_cpm_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_cpm_conversion/convertDeltaAltitude.h>
 #include <etsi_its_cpm_conversion/convertDeltaLatitude.h>
@@ -45,7 +45,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PathPointPredicted(const PathPointPredicted_t& in, cpm_msgs::PathPointPredicted& out) {
+void toRos_PathPointPredicted(const cpm_PathPointPredicted_t& in, cpm_msgs::PathPointPredicted& out) {
   toRos_DeltaLatitude(in.deltaLatitude, out.delta_latitude);
   toRos_DeltaLongitude(in.deltaLongitude, out.delta_longitude);
   if (in.horizontalPositionConfidence) {
@@ -61,18 +61,18 @@ void toRos_PathPointPredicted(const PathPointPredicted_t& in, cpm_msgs::PathPoin
   toRos_DeltaTimeTenthOfSecond(in.pathDeltaTime, out.path_delta_time);
 }
 
-void toStruct_PathPointPredicted(const cpm_msgs::PathPointPredicted& in, PathPointPredicted_t& out) {
-  memset(&out, 0, sizeof(PathPointPredicted_t));
+void toStruct_PathPointPredicted(const cpm_msgs::PathPointPredicted& in, cpm_PathPointPredicted_t& out) {
+  memset(&out, 0, sizeof(cpm_PathPointPredicted_t));
 
   toStruct_DeltaLatitude(in.delta_latitude, out.deltaLatitude);
   toStruct_DeltaLongitude(in.delta_longitude, out.deltaLongitude);
   if (in.horizontal_position_confidence_is_present) {
-    out.horizontalPositionConfidence = (PosConfidenceEllipse_t*) calloc(1, sizeof(PosConfidenceEllipse_t));
+    out.horizontalPositionConfidence = (cpm_PosConfidenceEllipse_t*) calloc(1, sizeof(cpm_PosConfidenceEllipse_t));
     toStruct_PosConfidenceEllipse(in.horizontal_position_confidence, *out.horizontalPositionConfidence);
   }
-  out.deltaAltitude = (DeltaAltitude_t*) calloc(1, sizeof(DeltaAltitude_t));
+  out.deltaAltitude = (cpm_DeltaAltitude_t*) calloc(1, sizeof(cpm_DeltaAltitude_t));
   toStruct_DeltaAltitude(in.delta_altitude, *out.deltaAltitude);
-  out.altitudeConfidence = (AltitudeConfidence_t*) calloc(1, sizeof(AltitudeConfidence_t));
+  out.altitudeConfidence = (cpm_AltitudeConfidence_t*) calloc(1, sizeof(cpm_AltitudeConfidence_t));
   toStruct_AltitudeConfidence(in.altitude_confidence, *out.altitudeConfidence);
   toStruct_DeltaTimeTenthOfSecond(in.path_delta_time, out.pathDeltaTime);
 }

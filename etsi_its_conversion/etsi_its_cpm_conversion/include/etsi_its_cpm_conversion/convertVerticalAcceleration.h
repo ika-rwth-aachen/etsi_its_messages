@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VerticalAcceleration.h>
+#include <etsi_its_cpm_coding/cpm_VerticalAcceleration.h>
 #include <etsi_its_cpm_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cpm_conversion/convertVerticalAccelerationValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VerticalAcceleration(const VerticalAcceleration_t& in, cpm_msgs::VerticalAcceleration& out) {
+void toRos_VerticalAcceleration(const cpm_VerticalAcceleration_t& in, cpm_msgs::VerticalAcceleration& out) {
   toRos_VerticalAccelerationValue(in.verticalAccelerationValue, out.vertical_acceleration_value);
   toRos_AccelerationConfidence(in.verticalAccelerationConfidence, out.vertical_acceleration_confidence);
 }
 
-void toStruct_VerticalAcceleration(const cpm_msgs::VerticalAcceleration& in, VerticalAcceleration_t& out) {
-  memset(&out, 0, sizeof(VerticalAcceleration_t));
+void toStruct_VerticalAcceleration(const cpm_msgs::VerticalAcceleration& in, cpm_VerticalAcceleration_t& out) {
+  memset(&out, 0, sizeof(cpm_VerticalAcceleration_t));
 
   toStruct_VerticalAccelerationValue(in.vertical_acceleration_value, out.verticalAccelerationValue);
   toStruct_AccelerationConfidence(in.vertical_acceleration_confidence, out.verticalAccelerationConfidence);

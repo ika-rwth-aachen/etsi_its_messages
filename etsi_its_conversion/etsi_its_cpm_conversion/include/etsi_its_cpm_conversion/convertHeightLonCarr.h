@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HeightLonCarr.h>
+#include <etsi_its_cpm_coding/cpm_HeightLonCarr.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HeightLonCarr(const HeightLonCarr_t& in, cpm_msgs::HeightLonCarr& out) {
+void toRos_HeightLonCarr(const cpm_HeightLonCarr_t& in, cpm_msgs::HeightLonCarr& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeightLonCarr(const cpm_msgs::HeightLonCarr& in, HeightLonCarr_t& out) {
-  memset(&out, 0, sizeof(HeightLonCarr_t));
+void toStruct_HeightLonCarr(const cpm_msgs::HeightLonCarr& in, cpm_HeightLonCarr_t& out) {
+  memset(&out, 0, sizeof(cpm_HeightLonCarr_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

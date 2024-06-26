@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PtActivationData.h>
+#include <etsi_its_cpm_coding/cpm_PtActivationData.h>
 #include <etsi_its_cpm_coding/OCTET_STRING.h>
 #include <etsi_its_primitives_conversion/convertOCTET_STRING.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PtActivationData(const PtActivationData_t& in, cpm_msgs::PtActivationData& out) {
+void toRos_PtActivationData(const cpm_PtActivationData_t& in, cpm_msgs::PtActivationData& out) {
   etsi_its_primitives_conversion::toRos_OCTET_STRING(in, out.value);
 }
 
-void toStruct_PtActivationData(const cpm_msgs::PtActivationData& in, PtActivationData_t& out) {
-  memset(&out, 0, sizeof(PtActivationData_t));
+void toStruct_PtActivationData(const cpm_msgs::PtActivationData& in, cpm_PtActivationData_t& out) {
+  memset(&out, 0, sizeof(cpm_PtActivationData_t));
 
   etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.value, out);
 }

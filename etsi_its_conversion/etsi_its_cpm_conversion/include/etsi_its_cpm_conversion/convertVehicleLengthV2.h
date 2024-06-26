@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleLengthV2.h>
+#include <etsi_its_cpm_coding/cpm_VehicleLengthV2.h>
 #include <etsi_its_cpm_conversion/convertTrailerPresenceInformation.h>
 #include <etsi_its_cpm_conversion/convertVehicleLengthValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleLengthV2(const VehicleLengthV2_t& in, cpm_msgs::VehicleLengthV2& out) {
+void toRos_VehicleLengthV2(const cpm_VehicleLengthV2_t& in, cpm_msgs::VehicleLengthV2& out) {
   toRos_VehicleLengthValue(in.vehicleLengthValue, out.vehicle_length_value);
   toRos_TrailerPresenceInformation(in.trailerPresenceInformation, out.trailer_presence_information);
 }
 
-void toStruct_VehicleLengthV2(const cpm_msgs::VehicleLengthV2& in, VehicleLengthV2_t& out) {
-  memset(&out, 0, sizeof(VehicleLengthV2_t));
+void toStruct_VehicleLengthV2(const cpm_msgs::VehicleLengthV2& in, cpm_VehicleLengthV2_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleLengthV2_t));
 
   toStruct_VehicleLengthValue(in.vehicle_length_value, out.vehicleLengthValue);
   toStruct_TrailerPresenceInformation(in.trailer_presence_information, out.trailerPresenceInformation);

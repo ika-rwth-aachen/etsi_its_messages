@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CollectivePerceptionMessage.h>
+#include <etsi_its_cpm_coding/cpm_CollectivePerceptionMessage.h>
 #include <etsi_its_cpm_conversion/convertCpmPayload.h>
 #include <etsi_its_cpm_conversion/convertItsPduHeader.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CollectivePerceptionMessage(const CollectivePerceptionMessage_t& in, cpm_msgs::CollectivePerceptionMessage& out) {
+void toRos_CollectivePerceptionMessage(const cpm_CollectivePerceptionMessage_t& in, cpm_msgs::CollectivePerceptionMessage& out) {
   toRos_ItsPduHeader(in.header, out.header);
   toRos_CpmPayload(in.payload, out.payload);
 }
 
-void toStruct_CollectivePerceptionMessage(const cpm_msgs::CollectivePerceptionMessage& in, CollectivePerceptionMessage_t& out) {
-  memset(&out, 0, sizeof(CollectivePerceptionMessage_t));
+void toStruct_CollectivePerceptionMessage(const cpm_msgs::CollectivePerceptionMessage& in, cpm_CollectivePerceptionMessage_t& out) {
+  memset(&out, 0, sizeof(cpm_CollectivePerceptionMessage_t));
 
   toStruct_ItsPduHeader(in.header, out.header);
   toStruct_CpmPayload(in.payload, out.payload);

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/BarometricPressure.h>
+#include <etsi_its_cpm_coding/cpm_BarometricPressure.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_BarometricPressure(const BarometricPressure_t& in, cpm_msgs::BarometricPressure& out) {
+void toRos_BarometricPressure(const cpm_BarometricPressure_t& in, cpm_msgs::BarometricPressure& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_BarometricPressure(const cpm_msgs::BarometricPressure& in, BarometricPressure_t& out) {
-  memset(&out, 0, sizeof(BarometricPressure_t));
+void toStruct_BarometricPressure(const cpm_msgs::BarometricPressure& in, cpm_BarometricPressure_t& out) {
+  memset(&out, 0, sizeof(cpm_BarometricPressure_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

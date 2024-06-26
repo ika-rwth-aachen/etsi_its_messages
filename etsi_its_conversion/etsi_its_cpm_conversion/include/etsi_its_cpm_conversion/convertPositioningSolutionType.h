@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PositioningSolutionType.h>
+#include <etsi_its_cpm_coding/cpm_PositioningSolutionType.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/PositioningSolutionType.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PositioningSolutionType(const PositioningSolutionType_t& in, cpm_msgs::PositioningSolutionType& out) {
+void toRos_PositioningSolutionType(const cpm_PositioningSolutionType_t& in, cpm_msgs::PositioningSolutionType& out) {
   out.value = in;
 }
 
-void toStruct_PositioningSolutionType(const cpm_msgs::PositioningSolutionType& in, PositioningSolutionType_t& out) {
-  memset(&out, 0, sizeof(PositioningSolutionType_t));
+void toStruct_PositioningSolutionType(const cpm_msgs::PositioningSolutionType& in, cpm_PositioningSolutionType_t& out) {
+  memset(&out, 0, sizeof(cpm_PositioningSolutionType_t));
 
   out = in.value;
 }

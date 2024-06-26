@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ClusterBreakupInfo.h>
+#include <etsi_its_cpm_coding/cpm_ClusterBreakupInfo.h>
 #include <etsi_its_cpm_conversion/convertClusterBreakupReason.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeQuarterSecond.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ClusterBreakupInfo(const ClusterBreakupInfo_t& in, cpm_msgs::ClusterBreakupInfo& out) {
+void toRos_ClusterBreakupInfo(const cpm_ClusterBreakupInfo_t& in, cpm_msgs::ClusterBreakupInfo& out) {
   toRos_ClusterBreakupReason(in.clusterBreakupReason, out.cluster_breakup_reason);
   toRos_DeltaTimeQuarterSecond(in.breakupTime, out.breakup_time);
 }
 
-void toStruct_ClusterBreakupInfo(const cpm_msgs::ClusterBreakupInfo& in, ClusterBreakupInfo_t& out) {
-  memset(&out, 0, sizeof(ClusterBreakupInfo_t));
+void toStruct_ClusterBreakupInfo(const cpm_msgs::ClusterBreakupInfo& in, cpm_ClusterBreakupInfo_t& out) {
+  memset(&out, 0, sizeof(cpm_ClusterBreakupInfo_t));
 
   toStruct_ClusterBreakupReason(in.cluster_breakup_reason, out.clusterBreakupReason);
   toStruct_DeltaTimeQuarterSecond(in.breakup_time, out.breakupTime);

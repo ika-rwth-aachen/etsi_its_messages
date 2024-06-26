@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TurningRadius.h>
+#include <etsi_its_cpm_coding/cpm_TurningRadius.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TurningRadius(const TurningRadius_t& in, cpm_msgs::TurningRadius& out) {
+void toRos_TurningRadius(const cpm_TurningRadius_t& in, cpm_msgs::TurningRadius& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TurningRadius(const cpm_msgs::TurningRadius& in, TurningRadius_t& out) {
-  memset(&out, 0, sizeof(TurningRadius_t));
+void toStruct_TurningRadius(const cpm_msgs::TurningRadius& in, cpm_TurningRadius_t& out) {
+  memset(&out, 0, sizeof(cpm_TurningRadius_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CurvatureConfidence.h>
+#include <etsi_its_cpm_coding/cpm_CurvatureConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CurvatureConfidence.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CurvatureConfidence(const CurvatureConfidence_t& in, cpm_msgs::CurvatureConfidence& out) {
+void toRos_CurvatureConfidence(const cpm_CurvatureConfidence_t& in, cpm_msgs::CurvatureConfidence& out) {
   out.value = in;
 }
 
-void toStruct_CurvatureConfidence(const cpm_msgs::CurvatureConfidence& in, CurvatureConfidence_t& out) {
-  memset(&out, 0, sizeof(CurvatureConfidence_t));
+void toStruct_CurvatureConfidence(const cpm_msgs::CurvatureConfidence& in, cpm_CurvatureConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_CurvatureConfidence_t));
 
   out = in.value;
 }

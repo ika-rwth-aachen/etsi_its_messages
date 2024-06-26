@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/PerceptionRegionContainer.h>
+#include <etsi_its_cpm_coding/cpm_PerceptionRegionContainer.h>
 #include <etsi_its_cpm_conversion/convertPerceptionRegion.h>
 #include <etsi_its_cpm_conversion/convertPerceptionRegionContainer.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerceptionRegionContainer(const PerceptionRegionContainer_t& in, cpm_msgs::PerceptionRegionContainer& out) {
+void toRos_PerceptionRegionContainer(const cpm_PerceptionRegionContainer_t& in, cpm_msgs::PerceptionRegionContainer& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::PerceptionRegion el;
     toRos_PerceptionRegion(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_PerceptionRegionContainer(const PerceptionRegionContainer_t& in, cpm_
   }
 }
 
-void toStruct_PerceptionRegionContainer(const cpm_msgs::PerceptionRegionContainer& in, PerceptionRegionContainer_t& out) {
-  memset(&out, 0, sizeof(PerceptionRegionContainer_t));
+void toStruct_PerceptionRegionContainer(const cpm_msgs::PerceptionRegionContainer& in, cpm_PerceptionRegionContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_PerceptionRegionContainer_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    PerceptionRegion_t* el = (PerceptionRegion_t*) calloc(1, sizeof(PerceptionRegion_t));
+    cpm_PerceptionRegion_t* el = (cpm_PerceptionRegion_t*) calloc(1, sizeof(cpm_PerceptionRegion_t));
     toStruct_PerceptionRegion(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

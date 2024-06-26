@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InterferenceManagementChannel.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementChannel.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,14 +41,14 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementChannel(const InterferenceManagementChannel_t& in, cpm_msgs::InterferenceManagementChannel& out) {
+void toRos_InterferenceManagementChannel(const cpm_InterferenceManagementChannel_t& in, cpm_msgs::InterferenceManagementChannel& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in.centreFrequency, out.centre_frequency);
   etsi_its_primitives_conversion::toRos_INTEGER(in.channelWidth, out.channel_width);
   etsi_its_primitives_conversion::toRos_INTEGER(in.exponent, out.exponent);
 }
 
-void toStruct_InterferenceManagementChannel(const cpm_msgs::InterferenceManagementChannel& in, InterferenceManagementChannel_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementChannel_t));
+void toStruct_InterferenceManagementChannel(const cpm_msgs::InterferenceManagementChannel& in, cpm_InterferenceManagementChannel_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementChannel_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.centre_frequency, out.centreFrequency);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.channel_width, out.channelWidth);

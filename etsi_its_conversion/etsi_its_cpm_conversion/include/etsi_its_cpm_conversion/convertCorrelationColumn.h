@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/CorrelationColumn.h>
+#include <etsi_its_cpm_coding/cpm_CorrelationColumn.h>
 #include <etsi_its_cpm_conversion/convertCorrelationCellValue.h>
 #include <etsi_its_cpm_conversion/convertCorrelationColumn.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CorrelationColumn(const CorrelationColumn_t& in, cpm_msgs::CorrelationColumn& out) {
+void toRos_CorrelationColumn(const cpm_CorrelationColumn_t& in, cpm_msgs::CorrelationColumn& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::CorrelationCellValue el;
     toRos_CorrelationCellValue(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_CorrelationColumn(const CorrelationColumn_t& in, cpm_msgs::Correlatio
   }
 }
 
-void toStruct_CorrelationColumn(const cpm_msgs::CorrelationColumn& in, CorrelationColumn_t& out) {
-  memset(&out, 0, sizeof(CorrelationColumn_t));
+void toStruct_CorrelationColumn(const cpm_msgs::CorrelationColumn& in, cpm_CorrelationColumn_t& out) {
+  memset(&out, 0, sizeof(cpm_CorrelationColumn_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    CorrelationCellValue_t* el = (CorrelationCellValue_t*) calloc(1, sizeof(CorrelationCellValue_t));
+    cpm_CorrelationCellValue_t* el = (cpm_CorrelationCellValue_t*) calloc(1, sizeof(cpm_CorrelationCellValue_t));
     toStruct_CorrelationCellValue(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

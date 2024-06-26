@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DeltaReferencePosition.h>
+#include <etsi_its_cpm_coding/cpm_DeltaReferencePosition.h>
 #include <etsi_its_cpm_conversion/convertDeltaAltitude.h>
 #include <etsi_its_cpm_conversion/convertDeltaLatitude.h>
 #include <etsi_its_cpm_conversion/convertDeltaLongitude.h>
@@ -42,14 +42,14 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DeltaReferencePosition(const DeltaReferencePosition_t& in, cpm_msgs::DeltaReferencePosition& out) {
+void toRos_DeltaReferencePosition(const cpm_DeltaReferencePosition_t& in, cpm_msgs::DeltaReferencePosition& out) {
   toRos_DeltaLatitude(in.deltaLatitude, out.delta_latitude);
   toRos_DeltaLongitude(in.deltaLongitude, out.delta_longitude);
   toRos_DeltaAltitude(in.deltaAltitude, out.delta_altitude);
 }
 
-void toStruct_DeltaReferencePosition(const cpm_msgs::DeltaReferencePosition& in, DeltaReferencePosition_t& out) {
-  memset(&out, 0, sizeof(DeltaReferencePosition_t));
+void toStruct_DeltaReferencePosition(const cpm_msgs::DeltaReferencePosition& in, cpm_DeltaReferencePosition_t& out) {
+  memset(&out, 0, sizeof(cpm_DeltaReferencePosition_t));
 
   toStruct_DeltaLatitude(in.delta_latitude, out.deltaLatitude);
   toStruct_DeltaLongitude(in.delta_longitude, out.deltaLongitude);

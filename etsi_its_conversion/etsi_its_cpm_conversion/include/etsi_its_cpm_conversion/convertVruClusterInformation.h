@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruClusterInformation.h>
+#include <etsi_its_cpm_coding/cpm_VruClusterInformation.h>
 #include <etsi_its_cpm_conversion/convertCardinalNumber1B.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertShape.h>
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruClusterInformation(const VruClusterInformation_t& in, cpm_msgs::VruClusterInformation& out) {
+void toRos_VruClusterInformation(const cpm_VruClusterInformation_t& in, cpm_msgs::VruClusterInformation& out) {
   if (in.clusterId) {
     toRos_Identifier1B(*in.clusterId, out.cluster_id);
     out.cluster_id_is_present = true;
@@ -59,20 +59,20 @@ void toRos_VruClusterInformation(const VruClusterInformation_t& in, cpm_msgs::Vr
   }
 }
 
-void toStruct_VruClusterInformation(const cpm_msgs::VruClusterInformation& in, VruClusterInformation_t& out) {
-  memset(&out, 0, sizeof(VruClusterInformation_t));
+void toStruct_VruClusterInformation(const cpm_msgs::VruClusterInformation& in, cpm_VruClusterInformation_t& out) {
+  memset(&out, 0, sizeof(cpm_VruClusterInformation_t));
 
   if (in.cluster_id_is_present) {
-    out.clusterId = (Identifier1B_t*) calloc(1, sizeof(Identifier1B_t));
+    out.clusterId = (cpm_Identifier1B_t*) calloc(1, sizeof(cpm_Identifier1B_t));
     toStruct_Identifier1B(in.cluster_id, *out.clusterId);
   }
   if (in.cluster_bounding_box_shape_is_present) {
-    out.clusterBoundingBoxShape = (Shape_t*) calloc(1, sizeof(Shape_t));
+    out.clusterBoundingBoxShape = (cpm_Shape_t*) calloc(1, sizeof(cpm_Shape_t));
     toStruct_Shape(in.cluster_bounding_box_shape, *out.clusterBoundingBoxShape);
   }
   toStruct_CardinalNumber1B(in.cluster_cardinality_size, out.clusterCardinalitySize);
   if (in.cluster_profiles_is_present) {
-    out.clusterProfiles = (VruClusterProfiles_t*) calloc(1, sizeof(VruClusterProfiles_t));
+    out.clusterProfiles = (cpm_VruClusterProfiles_t*) calloc(1, sizeof(cpm_VruClusterProfiles_t));
     toStruct_VruClusterProfiles(in.cluster_profiles, *out.clusterProfiles);
   }
 }

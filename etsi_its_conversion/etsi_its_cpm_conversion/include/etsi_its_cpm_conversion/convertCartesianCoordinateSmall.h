@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianCoordinateSmall.h>
+#include <etsi_its_cpm_coding/cpm_CartesianCoordinateSmall.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianCoordinateSmall(const CartesianCoordinateSmall_t& in, cpm_msgs::CartesianCoordinateSmall& out) {
+void toRos_CartesianCoordinateSmall(const cpm_CartesianCoordinateSmall_t& in, cpm_msgs::CartesianCoordinateSmall& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CartesianCoordinateSmall(const cpm_msgs::CartesianCoordinateSmall& in, CartesianCoordinateSmall_t& out) {
-  memset(&out, 0, sizeof(CartesianCoordinateSmall_t));
+void toStruct_CartesianCoordinateSmall(const cpm_msgs::CartesianCoordinateSmall& in, cpm_CartesianCoordinateSmall_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianCoordinateSmall_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

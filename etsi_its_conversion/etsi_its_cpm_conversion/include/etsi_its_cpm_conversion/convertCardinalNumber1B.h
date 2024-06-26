@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CardinalNumber1B.h>
+#include <etsi_its_cpm_coding/cpm_CardinalNumber1B.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CardinalNumber1B(const CardinalNumber1B_t& in, cpm_msgs::CardinalNumber1B& out) {
+void toRos_CardinalNumber1B(const cpm_CardinalNumber1B_t& in, cpm_msgs::CardinalNumber1B& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CardinalNumber1B(const cpm_msgs::CardinalNumber1B& in, CardinalNumber1B_t& out) {
-  memset(&out, 0, sizeof(CardinalNumber1B_t));
+void toStruct_CardinalNumber1B(const cpm_msgs::CardinalNumber1B& in, cpm_CardinalNumber1B_t& out) {
+  memset(&out, 0, sizeof(cpm_CardinalNumber1B_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

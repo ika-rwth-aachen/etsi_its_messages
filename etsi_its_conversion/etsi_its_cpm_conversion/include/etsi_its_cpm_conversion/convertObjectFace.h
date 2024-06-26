@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ObjectFace.h>
+#include <etsi_its_cpm_coding/cpm_ObjectFace.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/ObjectFace.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectFace(const ObjectFace_t& in, cpm_msgs::ObjectFace& out) {
+void toRos_ObjectFace(const cpm_ObjectFace_t& in, cpm_msgs::ObjectFace& out) {
   out.value = in;
 }
 
-void toStruct_ObjectFace(const cpm_msgs::ObjectFace& in, ObjectFace_t& out) {
-  memset(&out, 0, sizeof(ObjectFace_t));
+void toStruct_ObjectFace(const cpm_msgs::ObjectFace& in, cpm_ObjectFace_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectFace_t));
 
   out = in.value;
 }

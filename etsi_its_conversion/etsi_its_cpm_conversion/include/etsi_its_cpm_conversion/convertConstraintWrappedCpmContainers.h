@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ConstraintWrappedCpmContainers.h>
+#include <etsi_its_cpm_coding/cpm_ConstraintWrappedCpmContainers.h>
 #include <etsi_its_cpm_conversion/convertWrappedCpmContainers.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/ConstraintWrappedCpmContainers.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ConstraintWrappedCpmContainers(const ConstraintWrappedCpmContainers_t& in, cpm_msgs::ConstraintWrappedCpmContainers& out) {
+void toRos_ConstraintWrappedCpmContainers(const cpm_ConstraintWrappedCpmContainers_t& in, cpm_msgs::ConstraintWrappedCpmContainers& out) {
   toRos_WrappedCpmContainers(in, out.value);
 }
 
-void toStruct_ConstraintWrappedCpmContainers(const cpm_msgs::ConstraintWrappedCpmContainers& in, ConstraintWrappedCpmContainers_t& out) {
-  memset(&out, 0, sizeof(ConstraintWrappedCpmContainers_t));
+void toStruct_ConstraintWrappedCpmContainers(const cpm_msgs::ConstraintWrappedCpmContainers& in, cpm_ConstraintWrappedCpmContainers_t& out) {
+  memset(&out, 0, sizeof(cpm_ConstraintWrappedCpmContainers_t));
 
   toStruct_WrappedCpmContainers(in.value, out);
 }

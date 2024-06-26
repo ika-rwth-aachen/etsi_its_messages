@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/SequenceOfTrajectoryInterceptionIndication.h>
+#include <etsi_its_cpm_coding/cpm_SequenceOfTrajectoryInterceptionIndication.h>
 #include <etsi_its_cpm_conversion/convertSequenceOfTrajectoryInterceptionIndication.h>
 #include <etsi_its_cpm_conversion/convertTrajectoryInterceptionIndication.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SequenceOfTrajectoryInterceptionIndication(const SequenceOfTrajectoryInterceptionIndication_t& in, cpm_msgs::SequenceOfTrajectoryInterceptionIndication& out) {
+void toRos_SequenceOfTrajectoryInterceptionIndication(const cpm_SequenceOfTrajectoryInterceptionIndication_t& in, cpm_msgs::SequenceOfTrajectoryInterceptionIndication& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::TrajectoryInterceptionIndication el;
     toRos_TrajectoryInterceptionIndication(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_SequenceOfTrajectoryInterceptionIndication(const SequenceOfTrajectory
   }
 }
 
-void toStruct_SequenceOfTrajectoryInterceptionIndication(const cpm_msgs::SequenceOfTrajectoryInterceptionIndication& in, SequenceOfTrajectoryInterceptionIndication_t& out) {
-  memset(&out, 0, sizeof(SequenceOfTrajectoryInterceptionIndication_t));
+void toStruct_SequenceOfTrajectoryInterceptionIndication(const cpm_msgs::SequenceOfTrajectoryInterceptionIndication& in, cpm_SequenceOfTrajectoryInterceptionIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_SequenceOfTrajectoryInterceptionIndication_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    TrajectoryInterceptionIndication_t* el = (TrajectoryInterceptionIndication_t*) calloc(1, sizeof(TrajectoryInterceptionIndication_t));
+    cpm_TrajectoryInterceptionIndication_t* el = (cpm_TrajectoryInterceptionIndication_t*) calloc(1, sizeof(cpm_TrajectoryInterceptionIndication_t));
     toStruct_TrajectoryInterceptionIndication(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

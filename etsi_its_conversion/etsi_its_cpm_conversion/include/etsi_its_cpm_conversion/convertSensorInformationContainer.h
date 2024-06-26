@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/SensorInformationContainer.h>
+#include <etsi_its_cpm_coding/cpm_SensorInformationContainer.h>
 #include <etsi_its_cpm_conversion/convertSensorInformation.h>
 #include <etsi_its_cpm_conversion/convertSensorInformationContainer.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SensorInformationContainer(const SensorInformationContainer_t& in, cpm_msgs::SensorInformationContainer& out) {
+void toRos_SensorInformationContainer(const cpm_SensorInformationContainer_t& in, cpm_msgs::SensorInformationContainer& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::SensorInformation el;
     toRos_SensorInformation(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_SensorInformationContainer(const SensorInformationContainer_t& in, cp
   }
 }
 
-void toStruct_SensorInformationContainer(const cpm_msgs::SensorInformationContainer& in, SensorInformationContainer_t& out) {
-  memset(&out, 0, sizeof(SensorInformationContainer_t));
+void toStruct_SensorInformationContainer(const cpm_msgs::SensorInformationContainer& in, cpm_SensorInformationContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_SensorInformationContainer_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    SensorInformation_t* el = (SensorInformation_t*) calloc(1, sizeof(SensorInformation_t));
+    cpm_SensorInformation_t* el = (cpm_SensorInformation_t*) calloc(1, sizeof(cpm_SensorInformation_t));
     toStruct_SensorInformation(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

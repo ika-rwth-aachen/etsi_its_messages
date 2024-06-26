@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/IntersectionReferenceId.h>
+#include <etsi_its_cpm_coding/cpm_IntersectionReferenceId.h>
 #include <etsi_its_cpm_conversion/convertIdentifier2B.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/IntersectionReferenceId.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_IntersectionReferenceId(const IntersectionReferenceId_t& in, cpm_msgs::IntersectionReferenceId& out) {
+void toRos_IntersectionReferenceId(const cpm_IntersectionReferenceId_t& in, cpm_msgs::IntersectionReferenceId& out) {
   if (in.region) {
     toRos_Identifier2B(*in.region, out.region);
     out.region_is_present = true;
@@ -48,11 +48,11 @@ void toRos_IntersectionReferenceId(const IntersectionReferenceId_t& in, cpm_msgs
   toRos_Identifier2B(in.id, out.id);
 }
 
-void toStruct_IntersectionReferenceId(const cpm_msgs::IntersectionReferenceId& in, IntersectionReferenceId_t& out) {
-  memset(&out, 0, sizeof(IntersectionReferenceId_t));
+void toStruct_IntersectionReferenceId(const cpm_msgs::IntersectionReferenceId& in, cpm_IntersectionReferenceId_t& out) {
+  memset(&out, 0, sizeof(cpm_IntersectionReferenceId_t));
 
   if (in.region_is_present) {
-    out.region = (Identifier2B_t*) calloc(1, sizeof(Identifier2B_t));
+    out.region = (cpm_Identifier2B_t*) calloc(1, sizeof(cpm_Identifier2B_t));
     toStruct_Identifier2B(in.region, *out.region);
   }
   toStruct_Identifier2B(in.id, out.id);

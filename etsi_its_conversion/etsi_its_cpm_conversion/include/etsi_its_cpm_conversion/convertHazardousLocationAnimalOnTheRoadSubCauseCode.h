@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HazardousLocation-AnimalOnTheRoadSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_HazardousLocation-AnimalOnTheRoadSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(const HazardousLocation_AnimalOnTheRoadSubCauseCode_t& in, cpm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& out) {
+void toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(const cpm_HazardousLocation_AnimalOnTheRoadSubCauseCode_t& in, cpm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(const cpm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& in, HazardousLocation_AnimalOnTheRoadSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(HazardousLocation_AnimalOnTheRoadSubCauseCode_t));
+void toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(const cpm_msgs::HazardousLocationAnimalOnTheRoadSubCauseCode& in, cpm_HazardousLocation_AnimalOnTheRoadSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_HazardousLocation_AnimalOnTheRoadSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

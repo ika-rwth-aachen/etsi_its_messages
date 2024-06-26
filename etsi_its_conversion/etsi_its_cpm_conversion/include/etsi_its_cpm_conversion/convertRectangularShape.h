@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RectangularShape.h>
+#include <etsi_its_cpm_coding/cpm_RectangularShape.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertStandardLength12b.h>
 #include <etsi_its_cpm_conversion/convertWgs84AngleValue.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RectangularShape(const RectangularShape_t& in, cpm_msgs::RectangularShape& out) {
+void toRos_RectangularShape(const cpm_RectangularShape_t& in, cpm_msgs::RectangularShape& out) {
   if (in.centerPoint) {
     toRos_CartesianPosition3d(*in.centerPoint, out.center_point);
     out.center_point_is_present = true;
@@ -59,21 +59,21 @@ void toRos_RectangularShape(const RectangularShape_t& in, cpm_msgs::RectangularS
   }
 }
 
-void toStruct_RectangularShape(const cpm_msgs::RectangularShape& in, RectangularShape_t& out) {
-  memset(&out, 0, sizeof(RectangularShape_t));
+void toStruct_RectangularShape(const cpm_msgs::RectangularShape& in, cpm_RectangularShape_t& out) {
+  memset(&out, 0, sizeof(cpm_RectangularShape_t));
 
   if (in.center_point_is_present) {
-    out.centerPoint = (CartesianPosition3d_t*) calloc(1, sizeof(CartesianPosition3d_t));
+    out.centerPoint = (cpm_CartesianPosition3d_t*) calloc(1, sizeof(cpm_CartesianPosition3d_t));
     toStruct_CartesianPosition3d(in.center_point, *out.centerPoint);
   }
   toStruct_StandardLength12b(in.semi_length, out.semiLength);
   toStruct_StandardLength12b(in.semi_breadth, out.semiBreadth);
   if (in.orientation_is_present) {
-    out.orientation = (Wgs84AngleValue_t*) calloc(1, sizeof(Wgs84AngleValue_t));
+    out.orientation = (cpm_Wgs84AngleValue_t*) calloc(1, sizeof(cpm_Wgs84AngleValue_t));
     toStruct_Wgs84AngleValue(in.orientation, *out.orientation);
   }
   if (in.height_is_present) {
-    out.height = (StandardLength12b_t*) calloc(1, sizeof(StandardLength12b_t));
+    out.height = (cpm_StandardLength12b_t*) calloc(1, sizeof(cpm_StandardLength12b_t));
     toStruct_StandardLength12b(in.height, *out.height);
   }
 }

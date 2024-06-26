@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/StandardLength1B.h>
+#include <etsi_its_cpm_coding/cpm_StandardLength1B.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_StandardLength1B(const StandardLength1B_t& in, cpm_msgs::StandardLength1B& out) {
+void toRos_StandardLength1B(const cpm_StandardLength1B_t& in, cpm_msgs::StandardLength1B& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_StandardLength1B(const cpm_msgs::StandardLength1B& in, StandardLength1B_t& out) {
-  memset(&out, 0, sizeof(StandardLength1B_t));
+void toStruct_StandardLength1B(const cpm_msgs::StandardLength1B& in, cpm_StandardLength1B_t& out) {
+  memset(&out, 0, sizeof(cpm_StandardLength1B_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

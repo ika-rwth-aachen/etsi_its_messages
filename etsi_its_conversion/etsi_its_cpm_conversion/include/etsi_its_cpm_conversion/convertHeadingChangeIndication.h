@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HeadingChangeIndication.h>
+#include <etsi_its_cpm_coding/cpm_HeadingChangeIndication.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_cpm_conversion/convertTurningDirection.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HeadingChangeIndication(const HeadingChangeIndication_t& in, cpm_msgs::HeadingChangeIndication& out) {
+void toRos_HeadingChangeIndication(const cpm_HeadingChangeIndication_t& in, cpm_msgs::HeadingChangeIndication& out) {
   toRos_TurningDirection(in.direction, out.direction);
   toRos_DeltaTimeTenthOfSecond(in.actionDeltaTime, out.action_delta_time);
 }
 
-void toStruct_HeadingChangeIndication(const cpm_msgs::HeadingChangeIndication& in, HeadingChangeIndication_t& out) {
-  memset(&out, 0, sizeof(HeadingChangeIndication_t));
+void toStruct_HeadingChangeIndication(const cpm_msgs::HeadingChangeIndication& in, cpm_HeadingChangeIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_HeadingChangeIndication_t));
 
   toStruct_TurningDirection(in.direction, out.direction);
   toStruct_DeltaTimeTenthOfSecond(in.action_delta_time, out.actionDeltaTime);

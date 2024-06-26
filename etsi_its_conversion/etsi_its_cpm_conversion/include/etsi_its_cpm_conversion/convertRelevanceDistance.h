@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RelevanceDistance.h>
+#include <etsi_its_cpm_coding/cpm_RelevanceDistance.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/RelevanceDistance.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RelevanceDistance(const RelevanceDistance_t& in, cpm_msgs::RelevanceDistance& out) {
+void toRos_RelevanceDistance(const cpm_RelevanceDistance_t& in, cpm_msgs::RelevanceDistance& out) {
   out.value = in;
 }
 
-void toStruct_RelevanceDistance(const cpm_msgs::RelevanceDistance& in, RelevanceDistance_t& out) {
-  memset(&out, 0, sizeof(RelevanceDistance_t));
+void toStruct_RelevanceDistance(const cpm_msgs::RelevanceDistance& in, cpm_RelevanceDistance_t& out) {
+  memset(&out, 0, sizeof(cpm_RelevanceDistance_t));
 
   out = in.value;
 }

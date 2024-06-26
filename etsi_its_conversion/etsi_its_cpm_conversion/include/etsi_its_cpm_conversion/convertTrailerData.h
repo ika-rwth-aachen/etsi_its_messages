@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrailerData.h>
+#include <etsi_its_cpm_coding/cpm_TrailerData.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngle.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertStandardLength1B.h>
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrailerData(const TrailerData_t& in, cpm_msgs::TrailerData& out) {
+void toRos_TrailerData(const cpm_TrailerData_t& in, cpm_msgs::TrailerData& out) {
   toRos_Identifier1B(in.refPointId, out.ref_point_id);
   toRos_StandardLength1B(in.hitchPointOffset, out.hitch_point_offset);
   if (in.frontOverhang) {
@@ -61,21 +61,21 @@ void toRos_TrailerData(const TrailerData_t& in, cpm_msgs::TrailerData& out) {
   toRos_CartesianAngle(in.hitchAngle, out.hitch_angle);
 }
 
-void toStruct_TrailerData(const cpm_msgs::TrailerData& in, TrailerData_t& out) {
-  memset(&out, 0, sizeof(TrailerData_t));
+void toStruct_TrailerData(const cpm_msgs::TrailerData& in, cpm_TrailerData_t& out) {
+  memset(&out, 0, sizeof(cpm_TrailerData_t));
 
   toStruct_Identifier1B(in.ref_point_id, out.refPointId);
   toStruct_StandardLength1B(in.hitch_point_offset, out.hitchPointOffset);
   if (in.front_overhang_is_present) {
-    out.frontOverhang = (StandardLength1B_t*) calloc(1, sizeof(StandardLength1B_t));
+    out.frontOverhang = (cpm_StandardLength1B_t*) calloc(1, sizeof(cpm_StandardLength1B_t));
     toStruct_StandardLength1B(in.front_overhang, *out.frontOverhang);
   }
   if (in.rear_overhang_is_present) {
-    out.rearOverhang = (StandardLength1B_t*) calloc(1, sizeof(StandardLength1B_t));
+    out.rearOverhang = (cpm_StandardLength1B_t*) calloc(1, sizeof(cpm_StandardLength1B_t));
     toStruct_StandardLength1B(in.rear_overhang, *out.rearOverhang);
   }
   if (in.trailer_width_is_present) {
-    out.trailerWidth = (VehicleWidth_t*) calloc(1, sizeof(VehicleWidth_t));
+    out.trailerWidth = (cpm_VehicleWidth_t*) calloc(1, sizeof(cpm_VehicleWidth_t));
     toStruct_VehicleWidth(in.trailer_width, *out.trailerWidth);
   }
   toStruct_CartesianAngle(in.hitch_angle, out.hitchAngle);

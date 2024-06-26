@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LowerTriangularPositiveSemidefiniteMatrix.h>
+#include <etsi_its_cpm_coding/cpm_LowerTriangularPositiveSemidefiniteMatrix.h>
 #include <etsi_its_cpm_conversion/convertLowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #include <etsi_its_cpm_conversion/convertMatrixIncludedComponents.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LowerTriangularPositiveSemidefiniteMatrix(const LowerTriangularPositiveSemidefiniteMatrix_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrix& out) {
+void toRos_LowerTriangularPositiveSemidefiniteMatrix(const cpm_LowerTriangularPositiveSemidefiniteMatrix_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrix& out) {
   toRos_MatrixIncludedComponents(in.componentsIncludedIntheMatrix, out.components_included_inthe_matrix);
   toRos_LowerTriangularPositiveSemidefiniteMatrixColumns(in.matrix, out.matrix);
 }
 
-void toStruct_LowerTriangularPositiveSemidefiniteMatrix(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrix& in, LowerTriangularPositiveSemidefiniteMatrix_t& out) {
-  memset(&out, 0, sizeof(LowerTriangularPositiveSemidefiniteMatrix_t));
+void toStruct_LowerTriangularPositiveSemidefiniteMatrix(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrix& in, cpm_LowerTriangularPositiveSemidefiniteMatrix_t& out) {
+  memset(&out, 0, sizeof(cpm_LowerTriangularPositiveSemidefiniteMatrix_t));
 
   toStruct_MatrixIncludedComponents(in.components_included_inthe_matrix, out.componentsIncludedIntheMatrix);
   toStruct_LowerTriangularPositiveSemidefiniteMatrixColumns(in.matrix, out.matrix);

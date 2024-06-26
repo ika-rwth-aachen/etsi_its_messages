@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AirHumidity.h>
+#include <etsi_its_cpm_coding/cpm_AirHumidity.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AirHumidity(const AirHumidity_t& in, cpm_msgs::AirHumidity& out) {
+void toRos_AirHumidity(const cpm_AirHumidity_t& in, cpm_msgs::AirHumidity& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AirHumidity(const cpm_msgs::AirHumidity& in, AirHumidity_t& out) {
-  memset(&out, 0, sizeof(AirHumidity_t));
+void toStruct_AirHumidity(const cpm_msgs::AirHumidity& in, cpm_AirHumidity_t& out) {
+  memset(&out, 0, sizeof(cpm_AirHumidity_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

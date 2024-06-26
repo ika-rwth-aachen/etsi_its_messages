@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CauseCodeV2.h>
+#include <etsi_its_cpm_coding/cpm_CauseCodeV2.h>
 #include <etsi_its_cpm_conversion/convertCauseCodeChoice.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CauseCodeV2.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CauseCodeV2(const CauseCodeV2_t& in, cpm_msgs::CauseCodeV2& out) {
+void toRos_CauseCodeV2(const cpm_CauseCodeV2_t& in, cpm_msgs::CauseCodeV2& out) {
   toRos_CauseCodeChoice(in.ccAndScc, out.cc_and_scc);
 }
 
-void toStruct_CauseCodeV2(const cpm_msgs::CauseCodeV2& in, CauseCodeV2_t& out) {
-  memset(&out, 0, sizeof(CauseCodeV2_t));
+void toStruct_CauseCodeV2(const cpm_msgs::CauseCodeV2& in, cpm_CauseCodeV2_t& out) {
+  memset(&out, 0, sizeof(cpm_CauseCodeV2_t));
 
   toStruct_CauseCodeChoice(in.cc_and_scc, out.ccAndScc);
 }

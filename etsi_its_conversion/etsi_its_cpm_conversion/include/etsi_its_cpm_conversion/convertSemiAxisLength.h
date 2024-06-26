@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SemiAxisLength.h>
+#include <etsi_its_cpm_coding/cpm_SemiAxisLength.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SemiAxisLength(const SemiAxisLength_t& in, cpm_msgs::SemiAxisLength& out) {
+void toRos_SemiAxisLength(const cpm_SemiAxisLength_t& in, cpm_msgs::SemiAxisLength& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SemiAxisLength(const cpm_msgs::SemiAxisLength& in, SemiAxisLength_t& out) {
-  memset(&out, 0, sizeof(SemiAxisLength_t));
+void toStruct_SemiAxisLength(const cpm_msgs::SemiAxisLength& in, cpm_SemiAxisLength_t& out) {
+  memset(&out, 0, sizeof(cpm_SemiAxisLength_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

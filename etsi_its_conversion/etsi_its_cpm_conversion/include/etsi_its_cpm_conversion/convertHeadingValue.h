@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HeadingValue.h>
+#include <etsi_its_cpm_coding/cpm_HeadingValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HeadingValue(const HeadingValue_t& in, cpm_msgs::HeadingValue& out) {
+void toRos_HeadingValue(const cpm_HeadingValue_t& in, cpm_msgs::HeadingValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeadingValue(const cpm_msgs::HeadingValue& in, HeadingValue_t& out) {
-  memset(&out, 0, sizeof(HeadingValue_t));
+void toStruct_HeadingValue(const cpm_msgs::HeadingValue& in, cpm_HeadingValue_t& out) {
+  memset(&out, 0, sizeof(cpm_HeadingValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

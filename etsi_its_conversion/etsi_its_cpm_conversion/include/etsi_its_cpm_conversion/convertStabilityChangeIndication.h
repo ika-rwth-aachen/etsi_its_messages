@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/StabilityChangeIndication.h>
+#include <etsi_its_cpm_coding/cpm_StabilityChangeIndication.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_cpm_conversion/convertStabilityLossProbability.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_StabilityChangeIndication(const StabilityChangeIndication_t& in, cpm_msgs::StabilityChangeIndication& out) {
+void toRos_StabilityChangeIndication(const cpm_StabilityChangeIndication_t& in, cpm_msgs::StabilityChangeIndication& out) {
   toRos_StabilityLossProbability(in.lossProbability, out.loss_probability);
   toRos_DeltaTimeTenthOfSecond(in.actionDeltaTime, out.action_delta_time);
 }
 
-void toStruct_StabilityChangeIndication(const cpm_msgs::StabilityChangeIndication& in, StabilityChangeIndication_t& out) {
-  memset(&out, 0, sizeof(StabilityChangeIndication_t));
+void toStruct_StabilityChangeIndication(const cpm_msgs::StabilityChangeIndication& in, cpm_StabilityChangeIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_StabilityChangeIndication_t));
 
   toStruct_StabilityLossProbability(in.loss_probability, out.lossProbability);
   toStruct_DeltaTimeTenthOfSecond(in.action_delta_time, out.actionDeltaTime);

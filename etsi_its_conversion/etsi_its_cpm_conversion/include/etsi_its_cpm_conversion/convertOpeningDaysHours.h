@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/OpeningDaysHours.h>
+#include <etsi_its_cpm_coding/cpm_OpeningDaysHours.h>
 #include <etsi_its_cpm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_OpeningDaysHours(const OpeningDaysHours_t& in, cpm_msgs::OpeningDaysHours& out) {
+void toRos_OpeningDaysHours(const cpm_OpeningDaysHours_t& in, cpm_msgs::OpeningDaysHours& out) {
   etsi_its_primitives_conversion::toRos_UTF8String(in, out.value);
 }
 
-void toStruct_OpeningDaysHours(const cpm_msgs::OpeningDaysHours& in, OpeningDaysHours_t& out) {
-  memset(&out, 0, sizeof(OpeningDaysHours_t));
+void toStruct_OpeningDaysHours(const cpm_msgs::OpeningDaysHours& in, cpm_OpeningDaysHours_t& out) {
+  memset(&out, 0, sizeof(cpm_OpeningDaysHours_t));
 
   etsi_its_primitives_conversion::toStruct_UTF8String(in.value, out);
 }

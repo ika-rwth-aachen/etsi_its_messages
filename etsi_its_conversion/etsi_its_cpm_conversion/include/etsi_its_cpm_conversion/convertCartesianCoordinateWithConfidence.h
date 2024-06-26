@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianCoordinateWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_CartesianCoordinateWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianCoordinateLarge.h>
 #include <etsi_its_cpm_conversion/convertCoordinateConfidence.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianCoordinateWithConfidence(const CartesianCoordinateWithConfidence_t& in, cpm_msgs::CartesianCoordinateWithConfidence& out) {
+void toRos_CartesianCoordinateWithConfidence(const cpm_CartesianCoordinateWithConfidence_t& in, cpm_msgs::CartesianCoordinateWithConfidence& out) {
   toRos_CartesianCoordinateLarge(in.value, out.value);
   toRos_CoordinateConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_CartesianCoordinateWithConfidence(const cpm_msgs::CartesianCoordinateWithConfidence& in, CartesianCoordinateWithConfidence_t& out) {
-  memset(&out, 0, sizeof(CartesianCoordinateWithConfidence_t));
+void toStruct_CartesianCoordinateWithConfidence(const cpm_msgs::CartesianCoordinateWithConfidence& in, cpm_CartesianCoordinateWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianCoordinateWithConfidence_t));
 
   toStruct_CartesianCoordinateLarge(in.value, out.value);
   toStruct_CoordinateConfidence(in.confidence, out.confidence);

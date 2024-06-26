@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LongitudinalAcceleration.h>
+#include <etsi_its_cpm_coding/cpm_LongitudinalAcceleration.h>
 #include <etsi_its_cpm_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cpm_conversion/convertLongitudinalAccelerationValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LongitudinalAcceleration(const LongitudinalAcceleration_t& in, cpm_msgs::LongitudinalAcceleration& out) {
+void toRos_LongitudinalAcceleration(const cpm_LongitudinalAcceleration_t& in, cpm_msgs::LongitudinalAcceleration& out) {
   toRos_LongitudinalAccelerationValue(in.longitudinalAccelerationValue, out.longitudinal_acceleration_value);
   toRos_AccelerationConfidence(in.longitudinalAccelerationConfidence, out.longitudinal_acceleration_confidence);
 }
 
-void toStruct_LongitudinalAcceleration(const cpm_msgs::LongitudinalAcceleration& in, LongitudinalAcceleration_t& out) {
-  memset(&out, 0, sizeof(LongitudinalAcceleration_t));
+void toStruct_LongitudinalAcceleration(const cpm_msgs::LongitudinalAcceleration& in, cpm_LongitudinalAcceleration_t& out) {
+  memset(&out, 0, sizeof(cpm_LongitudinalAcceleration_t));
 
   toStruct_LongitudinalAccelerationValue(in.longitudinal_acceleration_value, out.longitudinalAccelerationValue);
   toStruct_AccelerationConfidence(in.longitudinal_acceleration_confidence, out.longitudinalAccelerationConfidence);

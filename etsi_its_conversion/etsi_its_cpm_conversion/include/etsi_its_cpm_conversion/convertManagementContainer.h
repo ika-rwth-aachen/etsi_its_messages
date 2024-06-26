@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ManagementContainer.h>
+#include <etsi_its_cpm_coding/cpm_ManagementContainer.h>
 #include <etsi_its_cpm_conversion/convertMessageRateRange.h>
 #include <etsi_its_cpm_conversion/convertMessageSegmentationInfo.h>
 #include <etsi_its_cpm_conversion/convertReferencePosition.h>
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ManagementContainer(const ManagementContainer_t& in, cpm_msgs::ManagementContainer& out) {
+void toRos_ManagementContainer(const cpm_ManagementContainer_t& in, cpm_msgs::ManagementContainer& out) {
   toRos_TimestampIts(in.referenceTime, out.reference_time);
   toRos_ReferencePosition(in.referencePosition, out.reference_position);
   if (in.segmentationInfo) {
@@ -56,17 +56,17 @@ void toRos_ManagementContainer(const ManagementContainer_t& in, cpm_msgs::Manage
   }
 }
 
-void toStruct_ManagementContainer(const cpm_msgs::ManagementContainer& in, ManagementContainer_t& out) {
-  memset(&out, 0, sizeof(ManagementContainer_t));
+void toStruct_ManagementContainer(const cpm_msgs::ManagementContainer& in, cpm_ManagementContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_ManagementContainer_t));
 
   toStruct_TimestampIts(in.reference_time, out.referenceTime);
   toStruct_ReferencePosition(in.reference_position, out.referencePosition);
   if (in.segmentation_info_is_present) {
-    out.segmentationInfo = (MessageSegmentationInfo_t*) calloc(1, sizeof(MessageSegmentationInfo_t));
+    out.segmentationInfo = (cpm_MessageSegmentationInfo_t*) calloc(1, sizeof(cpm_MessageSegmentationInfo_t));
     toStruct_MessageSegmentationInfo(in.segmentation_info, *out.segmentationInfo);
   }
   if (in.message_rate_range_is_present) {
-    out.messageRateRange = (MessageRateRange_t*) calloc(1, sizeof(MessageRateRange_t));
+    out.messageRateRange = (cpm_MessageRateRange_t*) calloc(1, sizeof(cpm_MessageRateRange_t));
     toStruct_MessageRateRange(in.message_rate_range, *out.messageRateRange);
   }
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PosLonCarr.h>
+#include <etsi_its_cpm_coding/cpm_PosLonCarr.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PosLonCarr(const PosLonCarr_t& in, cpm_msgs::PosLonCarr& out) {
+void toRos_PosLonCarr(const cpm_PosLonCarr_t& in, cpm_msgs::PosLonCarr& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PosLonCarr(const cpm_msgs::PosLonCarr& in, PosLonCarr_t& out) {
-  memset(&out, 0, sizeof(PosLonCarr_t));
+void toStruct_PosLonCarr(const cpm_msgs::PosLonCarr& in, cpm_PosLonCarr_t& out) {
+  memset(&out, 0, sizeof(cpm_PosLonCarr_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

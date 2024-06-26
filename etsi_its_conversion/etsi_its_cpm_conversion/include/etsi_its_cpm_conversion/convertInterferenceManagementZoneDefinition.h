@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InterferenceManagementZoneDefinition.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementZoneDefinition.h>
 #include <etsi_its_cpm_conversion/convertLatitude.h>
 #include <etsi_its_cpm_conversion/convertLongitude.h>
 #include <etsi_its_cpm_conversion/convertProtectedZoneId.h>
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementZoneDefinition(const InterferenceManagementZoneDefinition_t& in, cpm_msgs::InterferenceManagementZoneDefinition& out) {
+void toRos_InterferenceManagementZoneDefinition(const cpm_InterferenceManagementZoneDefinition_t& in, cpm_msgs::InterferenceManagementZoneDefinition& out) {
   toRos_Latitude(in.interferenceManagementZoneLatitude, out.interference_management_zone_latitude);
   toRos_Longitude(in.interferenceManagementZoneLongitude, out.interference_management_zone_longitude);
   if (in.interferenceManagementZoneId) {
@@ -56,17 +56,17 @@ void toRos_InterferenceManagementZoneDefinition(const InterferenceManagementZone
   }
 }
 
-void toStruct_InterferenceManagementZoneDefinition(const cpm_msgs::InterferenceManagementZoneDefinition& in, InterferenceManagementZoneDefinition_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementZoneDefinition_t));
+void toStruct_InterferenceManagementZoneDefinition(const cpm_msgs::InterferenceManagementZoneDefinition& in, cpm_InterferenceManagementZoneDefinition_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementZoneDefinition_t));
 
   toStruct_Latitude(in.interference_management_zone_latitude, out.interferenceManagementZoneLatitude);
   toStruct_Longitude(in.interference_management_zone_longitude, out.interferenceManagementZoneLongitude);
   if (in.interference_management_zone_id_is_present) {
-    out.interferenceManagementZoneId = (ProtectedZoneId_t*) calloc(1, sizeof(ProtectedZoneId_t));
+    out.interferenceManagementZoneId = (cpm_ProtectedZoneId_t*) calloc(1, sizeof(cpm_ProtectedZoneId_t));
     toStruct_ProtectedZoneId(in.interference_management_zone_id, *out.interferenceManagementZoneId);
   }
   if (in.interference_management_zone_shape_is_present) {
-    out.interferenceManagementZoneShape = (Shape_t*) calloc(1, sizeof(Shape_t));
+    out.interferenceManagementZoneShape = (cpm_Shape_t*) calloc(1, sizeof(cpm_Shape_t));
     toStruct_Shape(in.interference_management_zone_shape, *out.interferenceManagementZoneShape);
   }
 }

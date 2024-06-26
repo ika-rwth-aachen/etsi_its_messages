@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HeadingConfidence.h>
+#include <etsi_its_cpm_coding/cpm_HeadingConfidence.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HeadingConfidence(const HeadingConfidence_t& in, cpm_msgs::HeadingConfidence& out) {
+void toRos_HeadingConfidence(const cpm_HeadingConfidence_t& in, cpm_msgs::HeadingConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HeadingConfidence(const cpm_msgs::HeadingConfidence& in, HeadingConfidence_t& out) {
-  memset(&out, 0, sizeof(HeadingConfidence_t));
+void toStruct_HeadingConfidence(const cpm_msgs::HeadingConfidence& in, cpm_HeadingConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_HeadingConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

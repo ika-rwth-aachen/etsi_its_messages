@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VelocityComponent.h>
+#include <etsi_its_cpm_coding/cpm_VelocityComponent.h>
 #include <etsi_its_cpm_conversion/convertSpeedConfidence.h>
 #include <etsi_its_cpm_conversion/convertVelocityComponentValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VelocityComponent(const VelocityComponent_t& in, cpm_msgs::VelocityComponent& out) {
+void toRos_VelocityComponent(const cpm_VelocityComponent_t& in, cpm_msgs::VelocityComponent& out) {
   toRos_VelocityComponentValue(in.value, out.value);
   toRos_SpeedConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_VelocityComponent(const cpm_msgs::VelocityComponent& in, VelocityComponent_t& out) {
-  memset(&out, 0, sizeof(VelocityComponent_t));
+void toStruct_VelocityComponent(const cpm_msgs::VelocityComponent& in, cpm_VelocityComponent_t& out) {
+  memset(&out, 0, sizeof(cpm_VelocityComponent_t));
 
   toStruct_VelocityComponentValue(in.value, out.value);
   toStruct_SpeedConfidence(in.confidence, out.confidence);

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/RestrictedTypes.h>
+#include <etsi_its_cpm_coding/cpm_RestrictedTypes.h>
 #include <etsi_its_cpm_conversion/convertRestrictedTypes.h>
 #include <etsi_its_cpm_conversion/convertStationType.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RestrictedTypes(const RestrictedTypes_t& in, cpm_msgs::RestrictedTypes& out) {
+void toRos_RestrictedTypes(const cpm_RestrictedTypes_t& in, cpm_msgs::RestrictedTypes& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::StationType el;
     toRos_StationType(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_RestrictedTypes(const RestrictedTypes_t& in, cpm_msgs::RestrictedType
   }
 }
 
-void toStruct_RestrictedTypes(const cpm_msgs::RestrictedTypes& in, RestrictedTypes_t& out) {
-  memset(&out, 0, sizeof(RestrictedTypes_t));
+void toStruct_RestrictedTypes(const cpm_msgs::RestrictedTypes& in, cpm_RestrictedTypes_t& out) {
+  memset(&out, 0, sizeof(cpm_RestrictedTypes_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    StationType_t* el = (StationType_t*) calloc(1, sizeof(StationType_t));
+    cpm_StationType_t* el = (cpm_StationType_t*) calloc(1, sizeof(cpm_StationType_t));
     toStruct_StationType(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

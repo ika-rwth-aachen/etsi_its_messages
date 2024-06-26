@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EmergencyVehicleApproachingSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_EmergencyVehicleApproachingSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EmergencyVehicleApproachingSubCauseCode(const EmergencyVehicleApproachingSubCauseCode_t& in, cpm_msgs::EmergencyVehicleApproachingSubCauseCode& out) {
+void toRos_EmergencyVehicleApproachingSubCauseCode(const cpm_EmergencyVehicleApproachingSubCauseCode_t& in, cpm_msgs::EmergencyVehicleApproachingSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_EmergencyVehicleApproachingSubCauseCode(const cpm_msgs::EmergencyVehicleApproachingSubCauseCode& in, EmergencyVehicleApproachingSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(EmergencyVehicleApproachingSubCauseCode_t));
+void toStruct_EmergencyVehicleApproachingSubCauseCode(const cpm_msgs::EmergencyVehicleApproachingSubCauseCode& in, cpm_EmergencyVehicleApproachingSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_EmergencyVehicleApproachingSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationMagnitudeValue.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationMagnitudeValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationMagnitudeValue(const AccelerationMagnitudeValue_t& in, cpm_msgs::AccelerationMagnitudeValue& out) {
+void toRos_AccelerationMagnitudeValue(const cpm_AccelerationMagnitudeValue_t& in, cpm_msgs::AccelerationMagnitudeValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AccelerationMagnitudeValue(const cpm_msgs::AccelerationMagnitudeValue& in, AccelerationMagnitudeValue_t& out) {
-  memset(&out, 0, sizeof(AccelerationMagnitudeValue_t));
+void toStruct_AccelerationMagnitudeValue(const cpm_msgs::AccelerationMagnitudeValue& in, cpm_AccelerationMagnitudeValue_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationMagnitudeValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

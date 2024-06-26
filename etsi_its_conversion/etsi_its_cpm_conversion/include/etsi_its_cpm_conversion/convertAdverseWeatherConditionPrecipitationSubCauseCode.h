@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AdverseWeatherCondition-PrecipitationSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_AdverseWeatherCondition-PrecipitationSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AdverseWeatherConditionPrecipitationSubCauseCode(const AdverseWeatherCondition_PrecipitationSubCauseCode_t& in, cpm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& out) {
+void toRos_AdverseWeatherConditionPrecipitationSubCauseCode(const cpm_AdverseWeatherCondition_PrecipitationSubCauseCode_t& in, cpm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(const cpm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& in, AdverseWeatherCondition_PrecipitationSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(AdverseWeatherCondition_PrecipitationSubCauseCode_t));
+void toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(const cpm_msgs::AdverseWeatherConditionPrecipitationSubCauseCode& in, cpm_AdverseWeatherCondition_PrecipitationSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_AdverseWeatherCondition_PrecipitationSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleHeight.h>
+#include <etsi_its_cpm_coding/cpm_VehicleHeight.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleHeight(const VehicleHeight_t& in, cpm_msgs::VehicleHeight& out) {
+void toRos_VehicleHeight(const cpm_VehicleHeight_t& in, cpm_msgs::VehicleHeight& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleHeight(const cpm_msgs::VehicleHeight& in, VehicleHeight_t& out) {
-  memset(&out, 0, sizeof(VehicleHeight_t));
+void toStruct_VehicleHeight(const cpm_msgs::VehicleHeight& in, cpm_VehicleHeight_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleHeight_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

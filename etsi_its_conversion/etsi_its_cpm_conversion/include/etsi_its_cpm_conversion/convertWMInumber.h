@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/WMInumber.h>
+#include <etsi_its_cpm_coding/cpm_WMInumber.h>
 #include <etsi_its_cpm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_WMInumber(const WMInumber_t& in, cpm_msgs::WMInumber& out) {
+void toRos_WMInumber(const cpm_WMInumber_t& in, cpm_msgs::WMInumber& out) {
   etsi_its_primitives_conversion::toRos_IA5String(in, out.value);
 }
 
-void toStruct_WMInumber(const cpm_msgs::WMInumber& in, WMInumber_t& out) {
-  memset(&out, 0, sizeof(WMInumber_t));
+void toStruct_WMInumber(const cpm_msgs::WMInumber& in, cpm_WMInumber_t& out) {
+  memset(&out, 0, sizeof(cpm_WMInumber_t));
 
   etsi_its_primitives_conversion::toStruct_IA5String(in.value, out);
 }

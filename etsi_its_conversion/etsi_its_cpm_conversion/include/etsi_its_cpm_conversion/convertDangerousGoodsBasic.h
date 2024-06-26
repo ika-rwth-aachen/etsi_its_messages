@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DangerousGoodsBasic.h>
+#include <etsi_its_cpm_coding/cpm_DangerousGoodsBasic.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/DangerousGoodsBasic.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DangerousGoodsBasic(const DangerousGoodsBasic_t& in, cpm_msgs::DangerousGoodsBasic& out) {
+void toRos_DangerousGoodsBasic(const cpm_DangerousGoodsBasic_t& in, cpm_msgs::DangerousGoodsBasic& out) {
   out.value = in;
 }
 
-void toStruct_DangerousGoodsBasic(const cpm_msgs::DangerousGoodsBasic& in, DangerousGoodsBasic_t& out) {
-  memset(&out, 0, sizeof(DangerousGoodsBasic_t));
+void toStruct_DangerousGoodsBasic(const cpm_msgs::DangerousGoodsBasic& in, cpm_DangerousGoodsBasic_t& out) {
+  memset(&out, 0, sizeof(cpm_DangerousGoodsBasic_t));
 
   out = in.value;
 }

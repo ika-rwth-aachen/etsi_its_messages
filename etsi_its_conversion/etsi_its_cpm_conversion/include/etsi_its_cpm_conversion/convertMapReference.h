@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MapReference.h>
+#include <etsi_its_cpm_coding/cpm_MapReference.h>
 #include <etsi_its_cpm_conversion/convertIntersectionReferenceId.h>
 #include <etsi_its_cpm_conversion/convertRoadSegmentReferenceId.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MapReference(const MapReference_t& in, cpm_msgs::MapReference& out) {
+void toRos_MapReference(const cpm_MapReference_t& in, cpm_msgs::MapReference& out) {
   switch (in.present) {
-  case MapReference_PR_roadsegment:
+  case cpm_MapReference_PR_roadsegment:
     toRos_RoadSegmentReferenceId(in.choice.roadsegment, out.roadsegment);
     out.choice = cpm_msgs::MapReference::CHOICE_ROADSEGMENT;
     break;
-  case MapReference_PR_intersection:
+  case cpm_MapReference_PR_intersection:
     toRos_IntersectionReferenceId(in.choice.intersection, out.intersection);
     out.choice = cpm_msgs::MapReference::CHOICE_INTERSECTION;
     break;
@@ -55,17 +55,17 @@ void toRos_MapReference(const MapReference_t& in, cpm_msgs::MapReference& out) {
   }
 }
 
-void toStruct_MapReference(const cpm_msgs::MapReference& in, MapReference_t& out) {
-  memset(&out, 0, sizeof(MapReference_t));
+void toStruct_MapReference(const cpm_msgs::MapReference& in, cpm_MapReference_t& out) {
+  memset(&out, 0, sizeof(cpm_MapReference_t));
 
   switch (in.choice) {
   case cpm_msgs::MapReference::CHOICE_ROADSEGMENT:
     toStruct_RoadSegmentReferenceId(in.roadsegment, out.choice.roadsegment);
-    out.present = MapReference_PR::MapReference_PR_roadsegment;
+    out.present = cpm_MapReference_PR::cpm_MapReference_PR_roadsegment;
     break;
   case cpm_msgs::MapReference::CHOICE_INTERSECTION:
     toStruct_IntersectionReferenceId(in.intersection, out.choice.intersection);
-    out.present = MapReference_PR::MapReference_PR_intersection;
+    out.present = cpm_MapReference_PR::cpm_MapReference_PR_intersection;
     break;
   default: break;
   }

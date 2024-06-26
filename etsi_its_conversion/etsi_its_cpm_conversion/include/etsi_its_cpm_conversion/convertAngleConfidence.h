@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AngleConfidence.h>
+#include <etsi_its_cpm_coding/cpm_AngleConfidence.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AngleConfidence(const AngleConfidence_t& in, cpm_msgs::AngleConfidence& out) {
+void toRos_AngleConfidence(const cpm_AngleConfidence_t& in, cpm_msgs::AngleConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AngleConfidence(const cpm_msgs::AngleConfidence& in, AngleConfidence_t& out) {
-  memset(&out, 0, sizeof(AngleConfidence_t));
+void toStruct_AngleConfidence(const cpm_msgs::AngleConfidence& in, cpm_AngleConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_AngleConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

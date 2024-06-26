@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Ext1.h>
+#include <etsi_its_cpm_coding/cpm_Ext1.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cpm_conversion/convertExt2.h>
@@ -42,11 +42,11 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Ext1(const Ext1_t& in, cpm_msgs::Ext1& out) {
+void toRos_Ext1(const cpm_Ext1_t& in, cpm_msgs::Ext1& out) {
   switch (in.present) {
 etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
     break;
-  case Ext1_PR_extension:
+  case cpm_Ext1_PR_extension:
     toRos_Ext2(in.choice.extension, out.extension);
     out.choice = cpm_msgs::Ext1::CHOICE_EXTENSION;
     break;
@@ -54,15 +54,15 @@ etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
   }
 }
 
-void toStruct_Ext1(const cpm_msgs::Ext1& in, Ext1_t& out) {
-  memset(&out, 0, sizeof(Ext1_t));
+void toStruct_Ext1(const cpm_msgs::Ext1& in, cpm_Ext1_t& out) {
+  memset(&out, 0, sizeof(cpm_Ext1_t));
 
   switch (in.choice) {
 etsi_its_primitives_conversion::toStruct_INTEGER(in, out.value);
     break;
   case cpm_msgs::Ext1::CHOICE_EXTENSION:
     toStruct_Ext2(in.extension, out.choice.extension);
-    out.present = Ext1_PR::Ext1_PR_extension;
+    out.present = cpm_Ext1_PR::cpm_Ext1_PR_extension;
     break;
   default: break;
   }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Longitude.h>
+#include <etsi_its_cpm_coding/cpm_Longitude.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Longitude(const Longitude_t& in, cpm_msgs::Longitude& out) {
+void toRos_Longitude(const cpm_Longitude_t& in, cpm_msgs::Longitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Longitude(const cpm_msgs::Longitude& in, Longitude_t& out) {
-  memset(&out, 0, sizeof(Longitude_t));
+void toStruct_Longitude(const cpm_msgs::Longitude& in, cpm_Longitude_t& out) {
+  memset(&out, 0, sizeof(cpm_Longitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

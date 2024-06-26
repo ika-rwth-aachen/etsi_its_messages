@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/NumberOfOccupants.h>
+#include <etsi_its_cpm_coding/cpm_NumberOfOccupants.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_NumberOfOccupants(const NumberOfOccupants_t& in, cpm_msgs::NumberOfOccupants& out) {
+void toRos_NumberOfOccupants(const cpm_NumberOfOccupants_t& in, cpm_msgs::NumberOfOccupants& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_NumberOfOccupants(const cpm_msgs::NumberOfOccupants& in, NumberOfOccupants_t& out) {
-  memset(&out, 0, sizeof(NumberOfOccupants_t));
+void toStruct_NumberOfOccupants(const cpm_msgs::NumberOfOccupants& in, cpm_NumberOfOccupants_t& out) {
+  memset(&out, 0, sizeof(cpm_NumberOfOccupants_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

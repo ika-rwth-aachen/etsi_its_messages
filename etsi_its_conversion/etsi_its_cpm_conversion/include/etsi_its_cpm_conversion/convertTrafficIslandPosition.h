@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrafficIslandPosition.h>
+#include <etsi_its_cpm_coding/cpm_TrafficIslandPosition.h>
 #include <etsi_its_cpm_conversion/convertLanePositionAndType.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/TrafficIslandPosition.h>
@@ -40,13 +40,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrafficIslandPosition(const TrafficIslandPosition_t& in, cpm_msgs::TrafficIslandPosition& out) {
+void toRos_TrafficIslandPosition(const cpm_TrafficIslandPosition_t& in, cpm_msgs::TrafficIslandPosition& out) {
   toRos_LanePositionAndType(in.oneSide, out.one_side);
   toRos_LanePositionAndType(in.otherSide, out.other_side);
 }
 
-void toStruct_TrafficIslandPosition(const cpm_msgs::TrafficIslandPosition& in, TrafficIslandPosition_t& out) {
-  memset(&out, 0, sizeof(TrafficIslandPosition_t));
+void toStruct_TrafficIslandPosition(const cpm_msgs::TrafficIslandPosition& in, cpm_TrafficIslandPosition_t& out) {
+  memset(&out, 0, sizeof(cpm_TrafficIslandPosition_t));
 
   toStruct_LanePositionAndType(in.one_side, out.oneSide);
   toStruct_LanePositionAndType(in.other_side, out.otherSide);

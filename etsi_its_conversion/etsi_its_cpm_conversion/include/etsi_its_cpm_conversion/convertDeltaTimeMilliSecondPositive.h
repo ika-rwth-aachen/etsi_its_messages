@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DeltaTimeMilliSecondPositive.h>
+#include <etsi_its_cpm_coding/cpm_DeltaTimeMilliSecondPositive.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DeltaTimeMilliSecondPositive(const DeltaTimeMilliSecondPositive_t& in, cpm_msgs::DeltaTimeMilliSecondPositive& out) {
+void toRos_DeltaTimeMilliSecondPositive(const cpm_DeltaTimeMilliSecondPositive_t& in, cpm_msgs::DeltaTimeMilliSecondPositive& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaTimeMilliSecondPositive(const cpm_msgs::DeltaTimeMilliSecondPositive& in, DeltaTimeMilliSecondPositive_t& out) {
-  memset(&out, 0, sizeof(DeltaTimeMilliSecondPositive_t));
+void toStruct_DeltaTimeMilliSecondPositive(const cpm_msgs::DeltaTimeMilliSecondPositive& in, cpm_DeltaTimeMilliSecondPositive_t& out) {
+  memset(&out, 0, sizeof(cpm_DeltaTimeMilliSecondPositive_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

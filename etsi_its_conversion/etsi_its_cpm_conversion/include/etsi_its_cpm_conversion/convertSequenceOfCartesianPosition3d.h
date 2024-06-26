@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/SequenceOfCartesianPosition3d.h>
+#include <etsi_its_cpm_coding/cpm_SequenceOfCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertSequenceOfCartesianPosition3d.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SequenceOfCartesianPosition3d(const SequenceOfCartesianPosition3d_t& in, cpm_msgs::SequenceOfCartesianPosition3d& out) {
+void toRos_SequenceOfCartesianPosition3d(const cpm_SequenceOfCartesianPosition3d_t& in, cpm_msgs::SequenceOfCartesianPosition3d& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::CartesianPosition3d el;
     toRos_CartesianPosition3d(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_SequenceOfCartesianPosition3d(const SequenceOfCartesianPosition3d_t& 
   }
 }
 
-void toStruct_SequenceOfCartesianPosition3d(const cpm_msgs::SequenceOfCartesianPosition3d& in, SequenceOfCartesianPosition3d_t& out) {
-  memset(&out, 0, sizeof(SequenceOfCartesianPosition3d_t));
+void toStruct_SequenceOfCartesianPosition3d(const cpm_msgs::SequenceOfCartesianPosition3d& in, cpm_SequenceOfCartesianPosition3d_t& out) {
+  memset(&out, 0, sizeof(cpm_SequenceOfCartesianPosition3d_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    CartesianPosition3d_t* el = (CartesianPosition3d_t*) calloc(1, sizeof(CartesianPosition3d_t));
+    cpm_CartesianPosition3d_t* el = (cpm_CartesianPosition3d_t*) calloc(1, sizeof(cpm_CartesianPosition3d_t));
     toStruct_CartesianPosition3d(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

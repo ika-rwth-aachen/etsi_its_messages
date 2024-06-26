@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DeltaTimeQuarterSecond.h>
+#include <etsi_its_cpm_coding/cpm_DeltaTimeQuarterSecond.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DeltaTimeQuarterSecond(const DeltaTimeQuarterSecond_t& in, cpm_msgs::DeltaTimeQuarterSecond& out) {
+void toRos_DeltaTimeQuarterSecond(const cpm_DeltaTimeQuarterSecond_t& in, cpm_msgs::DeltaTimeQuarterSecond& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaTimeQuarterSecond(const cpm_msgs::DeltaTimeQuarterSecond& in, DeltaTimeQuarterSecond_t& out) {
-  memset(&out, 0, sizeof(DeltaTimeQuarterSecond_t));
+void toStruct_DeltaTimeQuarterSecond(const cpm_msgs::DeltaTimeQuarterSecond& in, cpm_DeltaTimeQuarterSecond_t& out) {
+  memset(&out, 0, sizeof(cpm_DeltaTimeQuarterSecond_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

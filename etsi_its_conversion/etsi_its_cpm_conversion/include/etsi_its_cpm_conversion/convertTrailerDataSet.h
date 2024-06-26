@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/TrailerDataSet.h>
+#include <etsi_its_cpm_coding/cpm_TrailerDataSet.h>
 #include <etsi_its_cpm_conversion/convertTrailerData.h>
 #include <etsi_its_cpm_conversion/convertTrailerDataSet.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrailerDataSet(const TrailerDataSet_t& in, cpm_msgs::TrailerDataSet& out) {
+void toRos_TrailerDataSet(const cpm_TrailerDataSet_t& in, cpm_msgs::TrailerDataSet& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::TrailerData el;
     toRos_TrailerData(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_TrailerDataSet(const TrailerDataSet_t& in, cpm_msgs::TrailerDataSet& 
   }
 }
 
-void toStruct_TrailerDataSet(const cpm_msgs::TrailerDataSet& in, TrailerDataSet_t& out) {
-  memset(&out, 0, sizeof(TrailerDataSet_t));
+void toStruct_TrailerDataSet(const cpm_msgs::TrailerDataSet& in, cpm_TrailerDataSet_t& out) {
+  memset(&out, 0, sizeof(cpm_TrailerDataSet_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    TrailerData_t* el = (TrailerData_t*) calloc(1, sizeof(TrailerData_t));
+    cpm_TrailerData_t* el = (cpm_TrailerData_t*) calloc(1, sizeof(cpm_TrailerData_t));
     toStruct_TrailerData(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

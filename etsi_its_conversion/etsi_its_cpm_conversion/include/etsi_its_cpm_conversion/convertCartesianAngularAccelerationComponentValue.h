@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianAngularAccelerationComponentValue.h>
+#include <etsi_its_cpm_coding/cpm_CartesianAngularAccelerationComponentValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianAngularAccelerationComponentValue(const CartesianAngularAccelerationComponentValue_t& in, cpm_msgs::CartesianAngularAccelerationComponentValue& out) {
+void toRos_CartesianAngularAccelerationComponentValue(const cpm_CartesianAngularAccelerationComponentValue_t& in, cpm_msgs::CartesianAngularAccelerationComponentValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CartesianAngularAccelerationComponentValue(const cpm_msgs::CartesianAngularAccelerationComponentValue& in, CartesianAngularAccelerationComponentValue_t& out) {
-  memset(&out, 0, sizeof(CartesianAngularAccelerationComponentValue_t));
+void toStruct_CartesianAngularAccelerationComponentValue(const cpm_msgs::CartesianAngularAccelerationComponentValue& in, cpm_CartesianAngularAccelerationComponentValue_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianAngularAccelerationComponentValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

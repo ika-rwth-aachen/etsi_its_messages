@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PerceivedObjectContainer.h>
+#include <etsi_its_cpm_coding/cpm_PerceivedObjectContainer.h>
 #include <etsi_its_cpm_conversion/convertCardinalNumber1B.h>
 #include <etsi_its_cpm_conversion/convertPerceivedObjects.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerceivedObjectContainer(const PerceivedObjectContainer_t& in, cpm_msgs::PerceivedObjectContainer& out) {
+void toRos_PerceivedObjectContainer(const cpm_PerceivedObjectContainer_t& in, cpm_msgs::PerceivedObjectContainer& out) {
   toRos_CardinalNumber1B(in.numberOfPerceivedObjects, out.number_of_perceived_objects);
   toRos_PerceivedObjects(in.perceivedObjects, out.perceived_objects);
 }
 
-void toStruct_PerceivedObjectContainer(const cpm_msgs::PerceivedObjectContainer& in, PerceivedObjectContainer_t& out) {
-  memset(&out, 0, sizeof(PerceivedObjectContainer_t));
+void toStruct_PerceivedObjectContainer(const cpm_msgs::PerceivedObjectContainer& in, cpm_PerceivedObjectContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_PerceivedObjectContainer_t));
 
   toStruct_CardinalNumber1B(in.number_of_perceived_objects, out.numberOfPerceivedObjects);
   toStruct_PerceivedObjects(in.perceived_objects, out.perceivedObjects);

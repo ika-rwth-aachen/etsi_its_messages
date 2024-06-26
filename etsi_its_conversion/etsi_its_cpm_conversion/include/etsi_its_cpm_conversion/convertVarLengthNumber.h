@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VarLengthNumber.h>
+#include <etsi_its_cpm_coding/cpm_VarLengthNumber.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cpm_conversion/convertExt1.h>
@@ -42,11 +42,11 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VarLengthNumber(const VarLengthNumber_t& in, cpm_msgs::VarLengthNumber& out) {
+void toRos_VarLengthNumber(const cpm_VarLengthNumber_t& in, cpm_msgs::VarLengthNumber& out) {
   switch (in.present) {
 etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
     break;
-  case VarLengthNumber_PR_extension:
+  case cpm_VarLengthNumber_PR_extension:
     toRos_Ext1(in.choice.extension, out.extension);
     out.choice = cpm_msgs::VarLengthNumber::CHOICE_EXTENSION;
     break;
@@ -54,15 +54,15 @@ etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
   }
 }
 
-void toStruct_VarLengthNumber(const cpm_msgs::VarLengthNumber& in, VarLengthNumber_t& out) {
-  memset(&out, 0, sizeof(VarLengthNumber_t));
+void toStruct_VarLengthNumber(const cpm_msgs::VarLengthNumber& in, cpm_VarLengthNumber_t& out) {
+  memset(&out, 0, sizeof(cpm_VarLengthNumber_t));
 
   switch (in.choice) {
 etsi_its_primitives_conversion::toStruct_INTEGER(in, out.value);
     break;
   case cpm_msgs::VarLengthNumber::CHOICE_EXTENSION:
     toStruct_Ext1(in.extension, out.choice.extension);
-    out.present = VarLengthNumber_PR::VarLengthNumber_PR_extension;
+    out.present = cpm_VarLengthNumber_PR::cpm_VarLengthNumber_PR_extension;
     break;
   default: break;
   }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianPosition3dWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_CartesianPosition3dWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianCoordinateWithConfidence.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CartesianPosition3dWithConfidence.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianPosition3dWithConfidence(const CartesianPosition3dWithConfidence_t& in, cpm_msgs::CartesianPosition3dWithConfidence& out) {
+void toRos_CartesianPosition3dWithConfidence(const cpm_CartesianPosition3dWithConfidence_t& in, cpm_msgs::CartesianPosition3dWithConfidence& out) {
   toRos_CartesianCoordinateWithConfidence(in.xCoordinate, out.x_coordinate);
   toRos_CartesianCoordinateWithConfidence(in.yCoordinate, out.y_coordinate);
   if (in.zCoordinate) {
@@ -49,13 +49,13 @@ void toRos_CartesianPosition3dWithConfidence(const CartesianPosition3dWithConfid
   }
 }
 
-void toStruct_CartesianPosition3dWithConfidence(const cpm_msgs::CartesianPosition3dWithConfidence& in, CartesianPosition3dWithConfidence_t& out) {
-  memset(&out, 0, sizeof(CartesianPosition3dWithConfidence_t));
+void toStruct_CartesianPosition3dWithConfidence(const cpm_msgs::CartesianPosition3dWithConfidence& in, cpm_CartesianPosition3dWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianPosition3dWithConfidence_t));
 
   toStruct_CartesianCoordinateWithConfidence(in.x_coordinate, out.xCoordinate);
   toStruct_CartesianCoordinateWithConfidence(in.y_coordinate, out.yCoordinate);
   if (in.z_coordinate_is_present) {
-    out.zCoordinate = (CartesianCoordinateWithConfidence_t*) calloc(1, sizeof(CartesianCoordinateWithConfidence_t));
+    out.zCoordinate = (cpm_CartesianCoordinateWithConfidence_t*) calloc(1, sizeof(cpm_CartesianCoordinateWithConfidence_t));
     toStruct_CartesianCoordinateWithConfidence(in.z_coordinate, *out.zCoordinate);
   }
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruSizeClass.h>
+#include <etsi_its_cpm_coding/cpm_VruSizeClass.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruSizeClass.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruSizeClass(const VruSizeClass_t& in, cpm_msgs::VruSizeClass& out) {
+void toRos_VruSizeClass(const cpm_VruSizeClass_t& in, cpm_msgs::VruSizeClass& out) {
   out.value = in;
 }
 
-void toStruct_VruSizeClass(const cpm_msgs::VruSizeClass& in, VruSizeClass_t& out) {
-  memset(&out, 0, sizeof(VruSizeClass_t));
+void toStruct_VruSizeClass(const cpm_msgs::VruSizeClass& in, cpm_VruSizeClass_t& out) {
+  memset(&out, 0, sizeof(cpm_VruSizeClass_t));
 
   out = in.value;
 }

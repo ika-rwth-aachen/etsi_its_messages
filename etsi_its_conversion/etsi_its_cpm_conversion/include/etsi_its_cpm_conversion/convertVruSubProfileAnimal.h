@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruSubProfileAnimal.h>
+#include <etsi_its_cpm_coding/cpm_VruSubProfileAnimal.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruSubProfileAnimal.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruSubProfileAnimal(const VruSubProfileAnimal_t& in, cpm_msgs::VruSubProfileAnimal& out) {
+void toRos_VruSubProfileAnimal(const cpm_VruSubProfileAnimal_t& in, cpm_msgs::VruSubProfileAnimal& out) {
   out.value = in;
 }
 
-void toStruct_VruSubProfileAnimal(const cpm_msgs::VruSubProfileAnimal& in, VruSubProfileAnimal_t& out) {
-  memset(&out, 0, sizeof(VruSubProfileAnimal_t));
+void toStruct_VruSubProfileAnimal(const cpm_msgs::VruSubProfileAnimal& in, cpm_VruSubProfileAnimal_t& out) {
+  memset(&out, 0, sizeof(cpm_VruSubProfileAnimal_t));
 
   out = in.value;
 }

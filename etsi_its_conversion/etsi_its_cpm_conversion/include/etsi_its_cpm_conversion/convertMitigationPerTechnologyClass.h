@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MitigationPerTechnologyClass.h>
+#include <etsi_its_cpm_coding/cpm_MitigationPerTechnologyClass.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cpm_conversion/convertAccessTechnologyClass.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MitigationPerTechnologyClass(const MitigationPerTechnologyClass_t& in, cpm_msgs::MitigationPerTechnologyClass& out) {
+void toRos_MitigationPerTechnologyClass(const cpm_MitigationPerTechnologyClass_t& in, cpm_msgs::MitigationPerTechnologyClass& out) {
   toRos_AccessTechnologyClass(in.accessTechnologyClass, out.access_technology_class);
   if (in.lowDutyCycle) {
     etsi_its_primitives_conversion::toRos_INTEGER(*in.lowDutyCycle, out.low_duty_cycle);
@@ -62,8 +62,8 @@ void toRos_MitigationPerTechnologyClass(const MitigationPerTechnologyClass_t& in
   }
 }
 
-void toStruct_MitigationPerTechnologyClass(const cpm_msgs::MitigationPerTechnologyClass& in, MitigationPerTechnologyClass_t& out) {
-  memset(&out, 0, sizeof(MitigationPerTechnologyClass_t));
+void toStruct_MitigationPerTechnologyClass(const cpm_msgs::MitigationPerTechnologyClass& in, cpm_MitigationPerTechnologyClass_t& out) {
+  memset(&out, 0, sizeof(cpm_MitigationPerTechnologyClass_t));
 
   toStruct_AccessTechnologyClass(in.access_technology_class, out.accessTechnologyClass);
   if (in.low_duty_cycle_is_present) {

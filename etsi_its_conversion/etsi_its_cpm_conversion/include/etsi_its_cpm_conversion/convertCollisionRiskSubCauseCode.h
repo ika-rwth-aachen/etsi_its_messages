@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CollisionRiskSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_CollisionRiskSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CollisionRiskSubCauseCode(const CollisionRiskSubCauseCode_t& in, cpm_msgs::CollisionRiskSubCauseCode& out) {
+void toRos_CollisionRiskSubCauseCode(const cpm_CollisionRiskSubCauseCode_t& in, cpm_msgs::CollisionRiskSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CollisionRiskSubCauseCode(const cpm_msgs::CollisionRiskSubCauseCode& in, CollisionRiskSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(CollisionRiskSubCauseCode_t));
+void toStruct_CollisionRiskSubCauseCode(const cpm_msgs::CollisionRiskSubCauseCode& in, cpm_CollisionRiskSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_CollisionRiskSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

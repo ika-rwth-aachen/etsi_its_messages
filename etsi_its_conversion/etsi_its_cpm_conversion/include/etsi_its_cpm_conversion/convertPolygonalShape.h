@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PolygonalShape.h>
+#include <etsi_its_cpm_coding/cpm_PolygonalShape.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertSequenceOfCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertStandardLength12b.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PolygonalShape(const PolygonalShape_t& in, cpm_msgs::PolygonalShape& out) {
+void toRos_PolygonalShape(const cpm_PolygonalShape_t& in, cpm_msgs::PolygonalShape& out) {
   if (in.shapeReferencePoint) {
     toRos_CartesianPosition3d(*in.shapeReferencePoint, out.shape_reference_point);
     out.shape_reference_point_is_present = true;
@@ -54,16 +54,16 @@ void toRos_PolygonalShape(const PolygonalShape_t& in, cpm_msgs::PolygonalShape& 
   }
 }
 
-void toStruct_PolygonalShape(const cpm_msgs::PolygonalShape& in, PolygonalShape_t& out) {
-  memset(&out, 0, sizeof(PolygonalShape_t));
+void toStruct_PolygonalShape(const cpm_msgs::PolygonalShape& in, cpm_PolygonalShape_t& out) {
+  memset(&out, 0, sizeof(cpm_PolygonalShape_t));
 
   if (in.shape_reference_point_is_present) {
-    out.shapeReferencePoint = (CartesianPosition3d_t*) calloc(1, sizeof(CartesianPosition3d_t));
+    out.shapeReferencePoint = (cpm_CartesianPosition3d_t*) calloc(1, sizeof(cpm_CartesianPosition3d_t));
     toStruct_CartesianPosition3d(in.shape_reference_point, *out.shapeReferencePoint);
   }
   toStruct_SequenceOfCartesianPosition3d(in.polygon, out.polygon);
   if (in.height_is_present) {
-    out.height = (StandardLength12b_t*) calloc(1, sizeof(StandardLength12b_t));
+    out.height = (cpm_StandardLength12b_t*) calloc(1, sizeof(cpm_StandardLength12b_t));
     toStruct_StandardLength12b(in.height, *out.height);
   }
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/StationarySince.h>
+#include <etsi_its_cpm_coding/cpm_StationarySince.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/StationarySince.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_StationarySince(const StationarySince_t& in, cpm_msgs::StationarySince& out) {
+void toRos_StationarySince(const cpm_StationarySince_t& in, cpm_msgs::StationarySince& out) {
   out.value = in;
 }
 
-void toStruct_StationarySince(const cpm_msgs::StationarySince& in, StationarySince_t& out) {
-  memset(&out, 0, sizeof(StationarySince_t));
+void toStruct_StationarySince(const cpm_msgs::StationarySince& in, cpm_StationarySince_t& out) {
+  memset(&out, 0, sizeof(cpm_StationarySince_t));
 
   out = in.value;
 }

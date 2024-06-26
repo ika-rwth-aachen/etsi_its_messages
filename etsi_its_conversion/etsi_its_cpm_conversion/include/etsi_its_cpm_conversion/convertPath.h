@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/Path.h>
+#include <etsi_its_cpm_coding/cpm_Path.h>
 #include <etsi_its_cpm_conversion/convertPath.h>
 #include <etsi_its_cpm_conversion/convertPathPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Path(const Path_t& in, cpm_msgs::Path& out) {
+void toRos_Path(const cpm_Path_t& in, cpm_msgs::Path& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::PathPoint el;
     toRos_PathPoint(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_Path(const Path_t& in, cpm_msgs::Path& out) {
   }
 }
 
-void toStruct_Path(const cpm_msgs::Path& in, Path_t& out) {
-  memset(&out, 0, sizeof(Path_t));
+void toStruct_Path(const cpm_msgs::Path& in, cpm_Path_t& out) {
+  memset(&out, 0, sizeof(cpm_Path_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    PathPoint_t* el = (PathPoint_t*) calloc(1, sizeof(PathPoint_t));
+    cpm_PathPoint_t* el = (cpm_PathPoint_t*) calloc(1, sizeof(cpm_PathPoint_t));
     toStruct_PathPoint(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

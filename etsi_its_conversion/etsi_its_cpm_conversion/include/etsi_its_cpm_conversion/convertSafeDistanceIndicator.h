@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SafeDistanceIndicator.h>
+#include <etsi_its_cpm_coding/cpm_SafeDistanceIndicator.h>
 #include <etsi_its_cpm_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SafeDistanceIndicator(const SafeDistanceIndicator_t& in, cpm_msgs::SafeDistanceIndicator& out) {
+void toRos_SafeDistanceIndicator(const cpm_SafeDistanceIndicator_t& in, cpm_msgs::SafeDistanceIndicator& out) {
   etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);
 }
 
-void toStruct_SafeDistanceIndicator(const cpm_msgs::SafeDistanceIndicator& in, SafeDistanceIndicator_t& out) {
-  memset(&out, 0, sizeof(SafeDistanceIndicator_t));
+void toStruct_SafeDistanceIndicator(const cpm_msgs::SafeDistanceIndicator& in, cpm_SafeDistanceIndicator_t& out) {
+  memset(&out, 0, sizeof(cpm_SafeDistanceIndicator_t));
 
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.value, out);
 }

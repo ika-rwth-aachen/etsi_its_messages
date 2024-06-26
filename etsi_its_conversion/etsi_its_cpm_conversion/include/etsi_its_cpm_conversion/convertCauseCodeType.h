@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CauseCodeType.h>
+#include <etsi_its_cpm_coding/cpm_CauseCodeType.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CauseCodeType(const CauseCodeType_t& in, cpm_msgs::CauseCodeType& out) {
+void toRos_CauseCodeType(const cpm_CauseCodeType_t& in, cpm_msgs::CauseCodeType& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CauseCodeType(const cpm_msgs::CauseCodeType& in, CauseCodeType_t& out) {
-  memset(&out, 0, sizeof(CauseCodeType_t));
+void toStruct_CauseCodeType(const cpm_msgs::CauseCodeType& in, cpm_CauseCodeType_t& out) {
+  memset(&out, 0, sizeof(cpm_CauseCodeType_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

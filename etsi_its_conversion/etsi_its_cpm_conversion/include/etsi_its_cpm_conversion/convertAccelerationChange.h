@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationChange.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationChange.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/AccelerationChange.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationChange(const AccelerationChange_t& in, cpm_msgs::AccelerationChange& out) {
+void toRos_AccelerationChange(const cpm_AccelerationChange_t& in, cpm_msgs::AccelerationChange& out) {
   out.value = in;
 }
 
-void toStruct_AccelerationChange(const cpm_msgs::AccelerationChange& in, AccelerationChange_t& out) {
-  memset(&out, 0, sizeof(AccelerationChange_t));
+void toStruct_AccelerationChange(const cpm_msgs::AccelerationChange& in, cpm_AccelerationChange_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationChange_t));
 
   out = in.value;
 }

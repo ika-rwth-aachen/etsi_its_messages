@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LightBarSirenInUse.h>
+#include <etsi_its_cpm_coding/cpm_LightBarSirenInUse.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LightBarSirenInUse(const LightBarSirenInUse_t& in, cpm_msgs::LightBarSirenInUse& out) {
+void toRos_LightBarSirenInUse(const cpm_LightBarSirenInUse_t& in, cpm_msgs::LightBarSirenInUse& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LightBarSirenInUse(const cpm_msgs::LightBarSirenInUse& in, LightBarSirenInUse_t& out) {
-  memset(&out, 0, sizeof(LightBarSirenInUse_t));
+void toStruct_LightBarSirenInUse(const cpm_msgs::LightBarSirenInUse& in, cpm_LightBarSirenInUse_t& out) {
+  memset(&out, 0, sizeof(cpm_LightBarSirenInUse_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

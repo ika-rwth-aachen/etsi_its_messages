@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruSubProfileBicyclist.h>
+#include <etsi_its_cpm_coding/cpm_VruSubProfileBicyclist.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruSubProfileBicyclist.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruSubProfileBicyclist(const VruSubProfileBicyclist_t& in, cpm_msgs::VruSubProfileBicyclist& out) {
+void toRos_VruSubProfileBicyclist(const cpm_VruSubProfileBicyclist_t& in, cpm_msgs::VruSubProfileBicyclist& out) {
   out.value = in;
 }
 
-void toStruct_VruSubProfileBicyclist(const cpm_msgs::VruSubProfileBicyclist& in, VruSubProfileBicyclist_t& out) {
-  memset(&out, 0, sizeof(VruSubProfileBicyclist_t));
+void toStruct_VruSubProfileBicyclist(const cpm_msgs::VruSubProfileBicyclist& in, cpm_VruSubProfileBicyclist_t& out) {
+  memset(&out, 0, sizeof(cpm_VruSubProfileBicyclist_t));
 
   out = in.value;
 }

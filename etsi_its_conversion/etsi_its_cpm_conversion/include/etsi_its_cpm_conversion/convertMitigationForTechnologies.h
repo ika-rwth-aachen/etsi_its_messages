@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/MitigationForTechnologies.h>
+#include <etsi_its_cpm_coding/cpm_MitigationForTechnologies.h>
 #include <etsi_its_cpm_conversion/convertMitigationForTechnologies.h>
 #include <etsi_its_cpm_conversion/convertMitigationPerTechnologyClass.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MitigationForTechnologies(const MitigationForTechnologies_t& in, cpm_msgs::MitigationForTechnologies& out) {
+void toRos_MitigationForTechnologies(const cpm_MitigationForTechnologies_t& in, cpm_msgs::MitigationForTechnologies& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::MitigationPerTechnologyClass el;
     toRos_MitigationPerTechnologyClass(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_MitigationForTechnologies(const MitigationForTechnologies_t& in, cpm_
   }
 }
 
-void toStruct_MitigationForTechnologies(const cpm_msgs::MitigationForTechnologies& in, MitigationForTechnologies_t& out) {
-  memset(&out, 0, sizeof(MitigationForTechnologies_t));
+void toStruct_MitigationForTechnologies(const cpm_msgs::MitigationForTechnologies& in, cpm_MitigationForTechnologies_t& out) {
+  memset(&out, 0, sizeof(cpm_MitigationForTechnologies_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    MitigationPerTechnologyClass_t* el = (MitigationPerTechnologyClass_t*) calloc(1, sizeof(MitigationPerTechnologyClass_t));
+    cpm_MitigationPerTechnologyClass_t* el = (cpm_MitigationPerTechnologyClass_t*) calloc(1, sizeof(cpm_MitigationPerTechnologyClass_t));
     toStruct_MitigationPerTechnologyClass(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CenDsrcTollingZone.h>
+#include <etsi_its_cpm_coding/cpm_CenDsrcTollingZone.h>
 #include <etsi_its_cpm_conversion/convertLatitude.h>
 #include <etsi_its_cpm_conversion/convertLongitude.h>
 #include <etsi_its_cpm_conversion/convertProtectedZoneId.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, cpm_msgs::CenDsrcTollingZone& out) {
+void toRos_CenDsrcTollingZone(const cpm_CenDsrcTollingZone_t& in, cpm_msgs::CenDsrcTollingZone& out) {
   toRos_Latitude(in.protectedZoneLatitude, out.protected_zone_latitude);
   toRos_Longitude(in.protectedZoneLongitude, out.protected_zone_longitude);
   if (in.cenDsrcTollingZoneId) {
@@ -51,13 +51,13 @@ void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, cpm_msgs::CenDsrcT
   }
 }
 
-void toStruct_CenDsrcTollingZone(const cpm_msgs::CenDsrcTollingZone& in, CenDsrcTollingZone_t& out) {
-  memset(&out, 0, sizeof(CenDsrcTollingZone_t));
+void toStruct_CenDsrcTollingZone(const cpm_msgs::CenDsrcTollingZone& in, cpm_CenDsrcTollingZone_t& out) {
+  memset(&out, 0, sizeof(cpm_CenDsrcTollingZone_t));
 
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
   toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.cen_dsrc_tolling_zone_id_is_present) {
-    out.cenDsrcTollingZoneId = (ProtectedZoneId_t*) calloc(1, sizeof(ProtectedZoneId_t));
+    out.cenDsrcTollingZoneId = (cpm_ProtectedZoneId_t*) calloc(1, sizeof(cpm_ProtectedZoneId_t));
     toStruct_ProtectedZoneId(in.cen_dsrc_tolling_zone_id, *out.cenDsrcTollingZoneId);
   }
 }

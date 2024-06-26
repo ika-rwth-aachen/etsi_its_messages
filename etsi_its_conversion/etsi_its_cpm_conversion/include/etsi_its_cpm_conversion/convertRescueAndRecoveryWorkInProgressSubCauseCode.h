@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RescueAndRecoveryWorkInProgressSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_RescueAndRecoveryWorkInProgressSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cpm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
+void toRos_RescueAndRecoveryWorkInProgressSubCauseCode(const cpm_RescueAndRecoveryWorkInProgressSubCauseCode_t& in, cpm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cpm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(RescueAndRecoveryWorkInProgressSubCauseCode_t));
+void toStruct_RescueAndRecoveryWorkInProgressSubCauseCode(const cpm_msgs::RescueAndRecoveryWorkInProgressSubCauseCode& in, cpm_RescueAndRecoveryWorkInProgressSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_RescueAndRecoveryWorkInProgressSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

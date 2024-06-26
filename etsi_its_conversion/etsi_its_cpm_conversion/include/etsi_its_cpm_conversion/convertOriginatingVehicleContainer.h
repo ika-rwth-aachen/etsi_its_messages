@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/OriginatingVehicleContainer.h>
+#include <etsi_its_cpm_coding/cpm_OriginatingVehicleContainer.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngle.h>
 #include <etsi_its_cpm_conversion/convertTrailerDataSet.h>
 #include <etsi_its_cpm_conversion/convertWgs84Angle.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_OriginatingVehicleContainer(const OriginatingVehicleContainer_t& in, cpm_msgs::OriginatingVehicleContainer& out) {
+void toRos_OriginatingVehicleContainer(const cpm_OriginatingVehicleContainer_t& in, cpm_msgs::OriginatingVehicleContainer& out) {
   toRos_Wgs84Angle(in.orientationAngle, out.orientation_angle);
   if (in.pitchAngle) {
     toRos_CartesianAngle(*in.pitchAngle, out.pitch_angle);
@@ -58,20 +58,20 @@ void toRos_OriginatingVehicleContainer(const OriginatingVehicleContainer_t& in, 
   }
 }
 
-void toStruct_OriginatingVehicleContainer(const cpm_msgs::OriginatingVehicleContainer& in, OriginatingVehicleContainer_t& out) {
-  memset(&out, 0, sizeof(OriginatingVehicleContainer_t));
+void toStruct_OriginatingVehicleContainer(const cpm_msgs::OriginatingVehicleContainer& in, cpm_OriginatingVehicleContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_OriginatingVehicleContainer_t));
 
   toStruct_Wgs84Angle(in.orientation_angle, out.orientationAngle);
   if (in.pitch_angle_is_present) {
-    out.pitchAngle = (CartesianAngle_t*) calloc(1, sizeof(CartesianAngle_t));
+    out.pitchAngle = (cpm_CartesianAngle_t*) calloc(1, sizeof(cpm_CartesianAngle_t));
     toStruct_CartesianAngle(in.pitch_angle, *out.pitchAngle);
   }
   if (in.roll_angle_is_present) {
-    out.rollAngle = (CartesianAngle_t*) calloc(1, sizeof(CartesianAngle_t));
+    out.rollAngle = (cpm_CartesianAngle_t*) calloc(1, sizeof(cpm_CartesianAngle_t));
     toStruct_CartesianAngle(in.roll_angle, *out.rollAngle);
   }
   if (in.trailer_data_set_is_present) {
-    out.trailerDataSet = (TrailerDataSet_t*) calloc(1, sizeof(TrailerDataSet_t));
+    out.trailerDataSet = (cpm_TrailerDataSet_t*) calloc(1, sizeof(cpm_TrailerDataSet_t));
     toStruct_TrailerDataSet(in.trailer_data_set, *out.trailerDataSet);
   }
 }

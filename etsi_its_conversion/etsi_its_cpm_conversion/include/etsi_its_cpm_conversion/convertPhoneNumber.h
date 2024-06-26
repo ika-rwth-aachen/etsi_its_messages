@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PhoneNumber.h>
+#include <etsi_its_cpm_coding/cpm_PhoneNumber.h>
 #include <etsi_its_cpm_coding/NumericString.h>
 #include <etsi_its_primitives_conversion/convertNumericString.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PhoneNumber(const PhoneNumber_t& in, cpm_msgs::PhoneNumber& out) {
+void toRos_PhoneNumber(const cpm_PhoneNumber_t& in, cpm_msgs::PhoneNumber& out) {
   etsi_its_primitives_conversion::toRos_NumericString(in, out.value);
 }
 
-void toStruct_PhoneNumber(const cpm_msgs::PhoneNumber& in, PhoneNumber_t& out) {
-  memset(&out, 0, sizeof(PhoneNumber_t));
+void toStruct_PhoneNumber(const cpm_msgs::PhoneNumber& in, cpm_PhoneNumber_t& out) {
+  memset(&out, 0, sizeof(cpm_PhoneNumber_t));
 
   etsi_its_primitives_conversion::toStruct_NumericString(in.value, out);
 }

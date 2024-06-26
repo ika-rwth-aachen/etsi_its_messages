@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AngularSpeedConfidence.h>
+#include <etsi_its_cpm_coding/cpm_AngularSpeedConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/AngularSpeedConfidence.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AngularSpeedConfidence(const AngularSpeedConfidence_t& in, cpm_msgs::AngularSpeedConfidence& out) {
+void toRos_AngularSpeedConfidence(const cpm_AngularSpeedConfidence_t& in, cpm_msgs::AngularSpeedConfidence& out) {
   out.value = in;
 }
 
-void toStruct_AngularSpeedConfidence(const cpm_msgs::AngularSpeedConfidence& in, AngularSpeedConfidence_t& out) {
-  memset(&out, 0, sizeof(AngularSpeedConfidence_t));
+void toStruct_AngularSpeedConfidence(const cpm_msgs::AngularSpeedConfidence& in, cpm_AngularSpeedConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_AngularSpeedConfidence_t));
 
   out = in.value;
 }

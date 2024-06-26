@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruEnvironment.h>
+#include <etsi_its_cpm_coding/cpm_VruEnvironment.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruEnvironment.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruEnvironment(const VruEnvironment_t& in, cpm_msgs::VruEnvironment& out) {
+void toRos_VruEnvironment(const cpm_VruEnvironment_t& in, cpm_msgs::VruEnvironment& out) {
   out.value = in;
 }
 
-void toStruct_VruEnvironment(const cpm_msgs::VruEnvironment& in, VruEnvironment_t& out) {
-  memset(&out, 0, sizeof(VruEnvironment_t));
+void toStruct_VruEnvironment(const cpm_msgs::VruEnvironment& in, cpm_VruEnvironment_t& out) {
+  memset(&out, 0, sizeof(cpm_VruEnvironment_t));
 
   out = in.value;
 }

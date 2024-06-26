@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MessageRateHz.h>
+#include <etsi_its_cpm_coding/cpm_MessageRateHz.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MessageRateHz(const MessageRateHz_t& in, cpm_msgs::MessageRateHz& out) {
+void toRos_MessageRateHz(const cpm_MessageRateHz_t& in, cpm_msgs::MessageRateHz& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in.mantissa, out.mantissa);
   etsi_its_primitives_conversion::toRos_INTEGER(in.exponent, out.exponent);
 }
 
-void toStruct_MessageRateHz(const cpm_msgs::MessageRateHz& in, MessageRateHz_t& out) {
-  memset(&out, 0, sizeof(MessageRateHz_t));
+void toStruct_MessageRateHz(const cpm_msgs::MessageRateHz& in, cpm_MessageRateHz_t& out) {
+  memset(&out, 0, sizeof(cpm_MessageRateHz_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.mantissa, out.mantissa);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.exponent, out.exponent);

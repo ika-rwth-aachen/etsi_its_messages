@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Shape.h>
+#include <etsi_its_cpm_coding/cpm_Shape.h>
 #include <etsi_its_cpm_conversion/convertCircularShape.h>
 #include <etsi_its_cpm_conversion/convertEllipticalShape.h>
 #include <etsi_its_cpm_conversion/convertPolygonalShape.h>
@@ -45,29 +45,29 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Shape(const Shape_t& in, cpm_msgs::Shape& out) {
+void toRos_Shape(const cpm_Shape_t& in, cpm_msgs::Shape& out) {
   switch (in.present) {
-  case Shape_PR_rectangular:
+  case cpm_Shape_PR_rectangular:
     toRos_RectangularShape(in.choice.rectangular, out.rectangular);
     out.choice = cpm_msgs::Shape::CHOICE_RECTANGULAR;
     break;
-  case Shape_PR_circular:
+  case cpm_Shape_PR_circular:
     toRos_CircularShape(in.choice.circular, out.circular);
     out.choice = cpm_msgs::Shape::CHOICE_CIRCULAR;
     break;
-  case Shape_PR_polygonal:
+  case cpm_Shape_PR_polygonal:
     toRos_PolygonalShape(in.choice.polygonal, out.polygonal);
     out.choice = cpm_msgs::Shape::CHOICE_POLYGONAL;
     break;
-  case Shape_PR_elliptical:
+  case cpm_Shape_PR_elliptical:
     toRos_EllipticalShape(in.choice.elliptical, out.elliptical);
     out.choice = cpm_msgs::Shape::CHOICE_ELLIPTICAL;
     break;
-  case Shape_PR_radial:
+  case cpm_Shape_PR_radial:
     toRos_RadialShape(in.choice.radial, out.radial);
     out.choice = cpm_msgs::Shape::CHOICE_RADIAL;
     break;
-  case Shape_PR_radialShapes:
+  case cpm_Shape_PR_radialShapes:
     toRos_RadialShapes(in.choice.radialShapes, out.radial_shapes);
     out.choice = cpm_msgs::Shape::CHOICE_RADIAL_SHAPES;
     break;
@@ -75,33 +75,33 @@ void toRos_Shape(const Shape_t& in, cpm_msgs::Shape& out) {
   }
 }
 
-void toStruct_Shape(const cpm_msgs::Shape& in, Shape_t& out) {
-  memset(&out, 0, sizeof(Shape_t));
+void toStruct_Shape(const cpm_msgs::Shape& in, cpm_Shape_t& out) {
+  memset(&out, 0, sizeof(cpm_Shape_t));
 
   switch (in.choice) {
   case cpm_msgs::Shape::CHOICE_RECTANGULAR:
     toStruct_RectangularShape(in.rectangular, out.choice.rectangular);
-    out.present = Shape_PR::Shape_PR_rectangular;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_rectangular;
     break;
   case cpm_msgs::Shape::CHOICE_CIRCULAR:
     toStruct_CircularShape(in.circular, out.choice.circular);
-    out.present = Shape_PR::Shape_PR_circular;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_circular;
     break;
   case cpm_msgs::Shape::CHOICE_POLYGONAL:
     toStruct_PolygonalShape(in.polygonal, out.choice.polygonal);
-    out.present = Shape_PR::Shape_PR_polygonal;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_polygonal;
     break;
   case cpm_msgs::Shape::CHOICE_ELLIPTICAL:
     toStruct_EllipticalShape(in.elliptical, out.choice.elliptical);
-    out.present = Shape_PR::Shape_PR_elliptical;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_elliptical;
     break;
   case cpm_msgs::Shape::CHOICE_RADIAL:
     toStruct_RadialShape(in.radial, out.choice.radial);
-    out.present = Shape_PR::Shape_PR_radial;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_radial;
     break;
   case cpm_msgs::Shape::CHOICE_RADIAL_SHAPES:
     toStruct_RadialShapes(in.radial_shapes, out.choice.radialShapes);
-    out.present = Shape_PR::Shape_PR_radialShapes;
+    out.present = cpm_Shape_PR::cpm_Shape_PR_radialShapes;
     break;
   default: break;
   }

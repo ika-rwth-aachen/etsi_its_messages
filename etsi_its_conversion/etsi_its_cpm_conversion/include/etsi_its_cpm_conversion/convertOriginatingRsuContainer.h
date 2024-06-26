@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/OriginatingRsuContainer.h>
+#include <etsi_its_cpm_coding/cpm_OriginatingRsuContainer.h>
 #include <etsi_its_cpm_conversion/convertMapReference.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/OriginatingRsuContainer.h>
@@ -40,18 +40,18 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_OriginatingRsuContainer(const OriginatingRsuContainer_t& in, cpm_msgs::OriginatingRsuContainer& out) {
+void toRos_OriginatingRsuContainer(const cpm_OriginatingRsuContainer_t& in, cpm_msgs::OriginatingRsuContainer& out) {
   if (in.mapReference) {
     toRos_MapReference(*in.mapReference, out.map_reference);
     out.map_reference_is_present = true;
   }
 }
 
-void toStruct_OriginatingRsuContainer(const cpm_msgs::OriginatingRsuContainer& in, OriginatingRsuContainer_t& out) {
-  memset(&out, 0, sizeof(OriginatingRsuContainer_t));
+void toStruct_OriginatingRsuContainer(const cpm_msgs::OriginatingRsuContainer& in, cpm_OriginatingRsuContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_OriginatingRsuContainer_t));
 
   if (in.map_reference_is_present) {
-    out.mapReference = (MapReference_t*) calloc(1, sizeof(MapReference_t));
+    out.mapReference = (cpm_MapReference_t*) calloc(1, sizeof(cpm_MapReference_t));
     toStruct_MapReference(in.map_reference, *out.mapReference);
   }
 }

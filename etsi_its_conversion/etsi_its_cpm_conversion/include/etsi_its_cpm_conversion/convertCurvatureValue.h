@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CurvatureValue.h>
+#include <etsi_its_cpm_coding/cpm_CurvatureValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CurvatureValue(const CurvatureValue_t& in, cpm_msgs::CurvatureValue& out) {
+void toRos_CurvatureValue(const cpm_CurvatureValue_t& in, cpm_msgs::CurvatureValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CurvatureValue(const cpm_msgs::CurvatureValue& in, CurvatureValue_t& out) {
-  memset(&out, 0, sizeof(CurvatureValue_t));
+void toStruct_CurvatureValue(const cpm_msgs::CurvatureValue& in, cpm_CurvatureValue_t& out) {
+  memset(&out, 0, sizeof(cpm_CurvatureValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

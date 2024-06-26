@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/WrongWayDrivingSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_WrongWayDrivingSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_WrongWayDrivingSubCauseCode(const WrongWayDrivingSubCauseCode_t& in, cpm_msgs::WrongWayDrivingSubCauseCode& out) {
+void toRos_WrongWayDrivingSubCauseCode(const cpm_WrongWayDrivingSubCauseCode_t& in, cpm_msgs::WrongWayDrivingSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_WrongWayDrivingSubCauseCode(const cpm_msgs::WrongWayDrivingSubCauseCode& in, WrongWayDrivingSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(WrongWayDrivingSubCauseCode_t));
+void toStruct_WrongWayDrivingSubCauseCode(const cpm_msgs::WrongWayDrivingSubCauseCode& in, cpm_WrongWayDrivingSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_WrongWayDrivingSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

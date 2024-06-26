@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TimestampIts.h>
+#include <etsi_its_cpm_coding/cpm_TimestampIts.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TimestampIts(const TimestampIts_t& in, cpm_msgs::TimestampIts& out) {
+void toRos_TimestampIts(const cpm_TimestampIts_t& in, cpm_msgs::TimestampIts& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TimestampIts(const cpm_msgs::TimestampIts& in, TimestampIts_t& out) {
-  memset(&out, 0, sizeof(TimestampIts_t));
+void toStruct_TimestampIts(const cpm_msgs::TimestampIts& in, cpm_TimestampIts_t& out) {
+  memset(&out, 0, sizeof(cpm_TimestampIts_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

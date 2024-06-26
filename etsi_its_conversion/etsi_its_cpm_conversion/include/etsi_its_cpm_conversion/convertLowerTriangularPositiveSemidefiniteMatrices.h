@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/LowerTriangularPositiveSemidefiniteMatrices.h>
+#include <etsi_its_cpm_coding/cpm_LowerTriangularPositiveSemidefiniteMatrices.h>
 #include <etsi_its_cpm_conversion/convertLowerTriangularPositiveSemidefiniteMatrices.h>
 #include <etsi_its_cpm_conversion/convertLowerTriangularPositiveSemidefiniteMatrix.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LowerTriangularPositiveSemidefiniteMatrices(const LowerTriangularPositiveSemidefiniteMatrices_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrices& out) {
+void toRos_LowerTriangularPositiveSemidefiniteMatrices(const cpm_LowerTriangularPositiveSemidefiniteMatrices_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrices& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::LowerTriangularPositiveSemidefiniteMatrix el;
     toRos_LowerTriangularPositiveSemidefiniteMatrix(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_LowerTriangularPositiveSemidefiniteMatrices(const LowerTriangularPosi
   }
 }
 
-void toStruct_LowerTriangularPositiveSemidefiniteMatrices(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrices& in, LowerTriangularPositiveSemidefiniteMatrices_t& out) {
-  memset(&out, 0, sizeof(LowerTriangularPositiveSemidefiniteMatrices_t));
+void toStruct_LowerTriangularPositiveSemidefiniteMatrices(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrices& in, cpm_LowerTriangularPositiveSemidefiniteMatrices_t& out) {
+  memset(&out, 0, sizeof(cpm_LowerTriangularPositiveSemidefiniteMatrices_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    LowerTriangularPositiveSemidefiniteMatrix_t* el = (LowerTriangularPositiveSemidefiniteMatrix_t*) calloc(1, sizeof(LowerTriangularPositiveSemidefiniteMatrix_t));
+    cpm_LowerTriangularPositiveSemidefiniteMatrix_t* el = (cpm_LowerTriangularPositiveSemidefiniteMatrix_t*) calloc(1, sizeof(cpm_LowerTriangularPositiveSemidefiniteMatrix_t));
     toStruct_LowerTriangularPositiveSemidefiniteMatrix(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

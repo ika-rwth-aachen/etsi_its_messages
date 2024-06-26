@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VelocityPolarWithZ.h>
+#include <etsi_its_cpm_coding/cpm_VelocityPolarWithZ.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngle.h>
 #include <etsi_its_cpm_conversion/convertSpeed.h>
 #include <etsi_its_cpm_conversion/convertVelocityComponent.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VelocityPolarWithZ(const VelocityPolarWithZ_t& in, cpm_msgs::VelocityPolarWithZ& out) {
+void toRos_VelocityPolarWithZ(const cpm_VelocityPolarWithZ_t& in, cpm_msgs::VelocityPolarWithZ& out) {
   toRos_Speed(in.velocityMagnitude, out.velocity_magnitude);
   toRos_CartesianAngle(in.velocityDirection, out.velocity_direction);
   if (in.zVelocity) {
@@ -51,13 +51,13 @@ void toRos_VelocityPolarWithZ(const VelocityPolarWithZ_t& in, cpm_msgs::Velocity
   }
 }
 
-void toStruct_VelocityPolarWithZ(const cpm_msgs::VelocityPolarWithZ& in, VelocityPolarWithZ_t& out) {
-  memset(&out, 0, sizeof(VelocityPolarWithZ_t));
+void toStruct_VelocityPolarWithZ(const cpm_msgs::VelocityPolarWithZ& in, cpm_VelocityPolarWithZ_t& out) {
+  memset(&out, 0, sizeof(cpm_VelocityPolarWithZ_t));
 
   toStruct_Speed(in.velocity_magnitude, out.velocityMagnitude);
   toStruct_CartesianAngle(in.velocity_direction, out.velocityDirection);
   if (in.z_velocity_is_present) {
-    out.zVelocity = (VelocityComponent_t*) calloc(1, sizeof(VelocityComponent_t));
+    out.zVelocity = (cpm_VelocityComponent_t*) calloc(1, sizeof(cpm_VelocityComponent_t));
     toStruct_VelocityComponent(in.z_velocity, *out.zVelocity);
   }
 }

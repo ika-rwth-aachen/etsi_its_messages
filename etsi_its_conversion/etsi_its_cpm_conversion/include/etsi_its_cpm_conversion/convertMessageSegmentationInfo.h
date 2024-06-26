@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MessageSegmentationInfo.h>
+#include <etsi_its_cpm_coding/cpm_MessageSegmentationInfo.h>
 #include <etsi_its_cpm_conversion/convertCardinalNumber3b.h>
 #include <etsi_its_cpm_conversion/convertOrdinalNumber3b.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MessageSegmentationInfo(const MessageSegmentationInfo_t& in, cpm_msgs::MessageSegmentationInfo& out) {
+void toRos_MessageSegmentationInfo(const cpm_MessageSegmentationInfo_t& in, cpm_msgs::MessageSegmentationInfo& out) {
   toRos_CardinalNumber3b(in.totalMsgNo, out.total_msg_no);
   toRos_OrdinalNumber3b(in.thisMsgNo, out.this_msg_no);
 }
 
-void toStruct_MessageSegmentationInfo(const cpm_msgs::MessageSegmentationInfo& in, MessageSegmentationInfo_t& out) {
-  memset(&out, 0, sizeof(MessageSegmentationInfo_t));
+void toStruct_MessageSegmentationInfo(const cpm_msgs::MessageSegmentationInfo& in, cpm_MessageSegmentationInfo_t& out) {
+  memset(&out, 0, sizeof(cpm_MessageSegmentationInfo_t));
 
   toStruct_CardinalNumber3b(in.total_msg_no, out.totalMsgNo);
   toStruct_OrdinalNumber3b(in.this_msg_no, out.thisMsgNo);

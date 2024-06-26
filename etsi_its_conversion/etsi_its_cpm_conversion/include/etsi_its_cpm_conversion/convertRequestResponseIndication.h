@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RequestResponseIndication.h>
+#include <etsi_its_cpm_coding/cpm_RequestResponseIndication.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/RequestResponseIndication.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RequestResponseIndication(const RequestResponseIndication_t& in, cpm_msgs::RequestResponseIndication& out) {
+void toRos_RequestResponseIndication(const cpm_RequestResponseIndication_t& in, cpm_msgs::RequestResponseIndication& out) {
   out.value = in;
 }
 
-void toStruct_RequestResponseIndication(const cpm_msgs::RequestResponseIndication& in, RequestResponseIndication_t& out) {
-  memset(&out, 0, sizeof(RequestResponseIndication_t));
+void toStruct_RequestResponseIndication(const cpm_msgs::RequestResponseIndication& in, cpm_RequestResponseIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_RequestResponseIndication_t));
 
   out = in.value;
 }

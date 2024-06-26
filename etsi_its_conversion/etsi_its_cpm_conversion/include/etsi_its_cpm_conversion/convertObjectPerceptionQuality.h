@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ObjectPerceptionQuality.h>
+#include <etsi_its_cpm_coding/cpm_ObjectPerceptionQuality.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectPerceptionQuality(const ObjectPerceptionQuality_t& in, cpm_msgs::ObjectPerceptionQuality& out) {
+void toRos_ObjectPerceptionQuality(const cpm_ObjectPerceptionQuality_t& in, cpm_msgs::ObjectPerceptionQuality& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ObjectPerceptionQuality(const cpm_msgs::ObjectPerceptionQuality& in, ObjectPerceptionQuality_t& out) {
-  memset(&out, 0, sizeof(ObjectPerceptionQuality_t));
+void toStruct_ObjectPerceptionQuality(const cpm_msgs::ObjectPerceptionQuality& in, cpm_ObjectPerceptionQuality_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectPerceptionQuality_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

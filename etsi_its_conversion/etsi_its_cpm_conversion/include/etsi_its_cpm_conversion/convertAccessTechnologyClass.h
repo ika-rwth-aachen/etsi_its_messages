@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccessTechnologyClass.h>
+#include <etsi_its_cpm_coding/cpm_AccessTechnologyClass.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/AccessTechnologyClass.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccessTechnologyClass(const AccessTechnologyClass_t& in, cpm_msgs::AccessTechnologyClass& out) {
+void toRos_AccessTechnologyClass(const cpm_AccessTechnologyClass_t& in, cpm_msgs::AccessTechnologyClass& out) {
   out.value = in;
 }
 
-void toStruct_AccessTechnologyClass(const cpm_msgs::AccessTechnologyClass& in, AccessTechnologyClass_t& out) {
-  memset(&out, 0, sizeof(AccessTechnologyClass_t));
+void toStruct_AccessTechnologyClass(const cpm_msgs::AccessTechnologyClass& in, cpm_AccessTechnologyClass_t& out) {
+  memset(&out, 0, sizeof(cpm_AccessTechnologyClass_t));
 
   out = in.value;
 }

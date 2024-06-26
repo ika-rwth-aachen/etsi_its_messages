@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HardShoulderStatus.h>
+#include <etsi_its_cpm_coding/cpm_HardShoulderStatus.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/HardShoulderStatus.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HardShoulderStatus(const HardShoulderStatus_t& in, cpm_msgs::HardShoulderStatus& out) {
+void toRos_HardShoulderStatus(const cpm_HardShoulderStatus_t& in, cpm_msgs::HardShoulderStatus& out) {
   out.value = in;
 }
 
-void toStruct_HardShoulderStatus(const cpm_msgs::HardShoulderStatus& in, HardShoulderStatus_t& out) {
-  memset(&out, 0, sizeof(HardShoulderStatus_t));
+void toStruct_HardShoulderStatus(const cpm_msgs::HardShoulderStatus& in, cpm_HardShoulderStatus_t& out) {
+  memset(&out, 0, sizeof(cpm_HardShoulderStatus_t));
 
   out = in.value;
 }

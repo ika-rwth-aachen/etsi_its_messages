@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ReferencePositionWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_ReferencePositionWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertAltitude.h>
 #include <etsi_its_cpm_conversion/convertLatitude.h>
 #include <etsi_its_cpm_conversion/convertLongitude.h>
@@ -43,15 +43,15 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ReferencePositionWithConfidence(const ReferencePositionWithConfidence_t& in, cpm_msgs::ReferencePositionWithConfidence& out) {
+void toRos_ReferencePositionWithConfidence(const cpm_ReferencePositionWithConfidence_t& in, cpm_msgs::ReferencePositionWithConfidence& out) {
   toRos_Latitude(in.latitude, out.latitude);
   toRos_Longitude(in.longitude, out.longitude);
   toRos_PositionConfidenceEllipse(in.positionConfidenceEllipse, out.position_confidence_ellipse);
   toRos_Altitude(in.altitude, out.altitude);
 }
 
-void toStruct_ReferencePositionWithConfidence(const cpm_msgs::ReferencePositionWithConfidence& in, ReferencePositionWithConfidence_t& out) {
-  memset(&out, 0, sizeof(ReferencePositionWithConfidence_t));
+void toStruct_ReferencePositionWithConfidence(const cpm_msgs::ReferencePositionWithConfidence& in, cpm_ReferencePositionWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_ReferencePositionWithConfidence_t));
 
   toStruct_Latitude(in.latitude, out.latitude);
   toStruct_Longitude(in.longitude, out.longitude);

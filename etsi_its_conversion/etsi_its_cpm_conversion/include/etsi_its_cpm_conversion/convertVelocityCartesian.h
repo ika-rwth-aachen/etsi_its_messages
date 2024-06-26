@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VelocityCartesian.h>
+#include <etsi_its_cpm_coding/cpm_VelocityCartesian.h>
 #include <etsi_its_cpm_conversion/convertVelocityComponent.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VelocityCartesian.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VelocityCartesian(const VelocityCartesian_t& in, cpm_msgs::VelocityCartesian& out) {
+void toRos_VelocityCartesian(const cpm_VelocityCartesian_t& in, cpm_msgs::VelocityCartesian& out) {
   toRos_VelocityComponent(in.xVelocity, out.x_velocity);
   toRos_VelocityComponent(in.yVelocity, out.y_velocity);
   if (in.zVelocity) {
@@ -49,13 +49,13 @@ void toRos_VelocityCartesian(const VelocityCartesian_t& in, cpm_msgs::VelocityCa
   }
 }
 
-void toStruct_VelocityCartesian(const cpm_msgs::VelocityCartesian& in, VelocityCartesian_t& out) {
-  memset(&out, 0, sizeof(VelocityCartesian_t));
+void toStruct_VelocityCartesian(const cpm_msgs::VelocityCartesian& in, cpm_VelocityCartesian_t& out) {
+  memset(&out, 0, sizeof(cpm_VelocityCartesian_t));
 
   toStruct_VelocityComponent(in.x_velocity, out.xVelocity);
   toStruct_VelocityComponent(in.y_velocity, out.yVelocity);
   if (in.z_velocity_is_present) {
-    out.zVelocity = (VelocityComponent_t*) calloc(1, sizeof(VelocityComponent_t));
+    out.zVelocity = (cpm_VelocityComponent_t*) calloc(1, sizeof(cpm_VelocityComponent_t));
     toStruct_VelocityComponent(in.z_velocity, *out.zVelocity);
   }
 }

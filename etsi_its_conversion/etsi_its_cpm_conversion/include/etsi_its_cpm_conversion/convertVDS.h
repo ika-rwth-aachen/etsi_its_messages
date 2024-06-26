@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VDS.h>
+#include <etsi_its_cpm_coding/cpm_VDS.h>
 #include <etsi_its_cpm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VDS(const VDS_t& in, cpm_msgs::VDS& out) {
+void toRos_VDS(const cpm_VDS_t& in, cpm_msgs::VDS& out) {
   etsi_its_primitives_conversion::toRos_IA5String(in, out.value);
 }
 
-void toStruct_VDS(const cpm_msgs::VDS& in, VDS_t& out) {
-  memset(&out, 0, sizeof(VDS_t));
+void toStruct_VDS(const cpm_msgs::VDS& in, cpm_VDS_t& out) {
+  memset(&out, 0, sizeof(cpm_VDS_t));
 
   etsi_its_primitives_conversion::toStruct_IA5String(in.value, out);
 }

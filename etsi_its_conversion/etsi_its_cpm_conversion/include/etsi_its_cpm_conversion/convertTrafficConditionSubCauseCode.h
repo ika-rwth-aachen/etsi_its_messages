@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrafficConditionSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_TrafficConditionSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrafficConditionSubCauseCode(const TrafficConditionSubCauseCode_t& in, cpm_msgs::TrafficConditionSubCauseCode& out) {
+void toRos_TrafficConditionSubCauseCode(const cpm_TrafficConditionSubCauseCode_t& in, cpm_msgs::TrafficConditionSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TrafficConditionSubCauseCode(const cpm_msgs::TrafficConditionSubCauseCode& in, TrafficConditionSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(TrafficConditionSubCauseCode_t));
+void toStruct_TrafficConditionSubCauseCode(const cpm_msgs::TrafficConditionSubCauseCode& in, cpm_TrafficConditionSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_TrafficConditionSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

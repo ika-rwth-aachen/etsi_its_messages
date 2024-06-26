@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/DigitalMap.h>
+#include <etsi_its_cpm_coding/cpm_DigitalMap.h>
 #include <etsi_its_cpm_conversion/convertDigitalMap.h>
 #include <etsi_its_cpm_conversion/convertReferencePosition.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DigitalMap(const DigitalMap_t& in, cpm_msgs::DigitalMap& out) {
+void toRos_DigitalMap(const cpm_DigitalMap_t& in, cpm_msgs::DigitalMap& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::ReferencePosition el;
     toRos_ReferencePosition(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_DigitalMap(const DigitalMap_t& in, cpm_msgs::DigitalMap& out) {
   }
 }
 
-void toStruct_DigitalMap(const cpm_msgs::DigitalMap& in, DigitalMap_t& out) {
-  memset(&out, 0, sizeof(DigitalMap_t));
+void toStruct_DigitalMap(const cpm_msgs::DigitalMap& in, cpm_DigitalMap_t& out) {
+  memset(&out, 0, sizeof(cpm_DigitalMap_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ReferencePosition_t* el = (ReferencePosition_t*) calloc(1, sizeof(ReferencePosition_t));
+    cpm_ReferencePosition_t* el = (cpm_ReferencePosition_t*) calloc(1, sizeof(cpm_ReferencePosition_t));
     toStruct_ReferencePosition(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

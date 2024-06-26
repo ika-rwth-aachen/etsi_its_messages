@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CpmPayload.h>
+#include <etsi_its_cpm_coding/cpm_CpmPayload.h>
 #include <etsi_its_cpm_conversion/convertConstraintWrappedCpmContainers.h>
 #include <etsi_its_cpm_conversion/convertManagementContainer.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CpmPayload(const CpmPayload_t& in, cpm_msgs::CpmPayload& out) {
+void toRos_CpmPayload(const cpm_CpmPayload_t& in, cpm_msgs::CpmPayload& out) {
   toRos_ManagementContainer(in.managementContainer, out.management_container);
   toRos_ConstraintWrappedCpmContainers(in.cpmContainers, out.cpm_containers);
 }
 
-void toStruct_CpmPayload(const cpm_msgs::CpmPayload& in, CpmPayload_t& out) {
-  memset(&out, 0, sizeof(CpmPayload_t));
+void toStruct_CpmPayload(const cpm_msgs::CpmPayload& in, cpm_CpmPayload_t& out) {
+  memset(&out, 0, sizeof(cpm_CpmPayload_t));
 
   toStruct_ManagementContainer(in.management_container, out.managementContainer);
   toStruct_ConstraintWrappedCpmContainers(in.cpm_containers, out.cpmContainers);

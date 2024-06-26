@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ProtectedZoneType.h>
+#include <etsi_its_cpm_coding/cpm_ProtectedZoneType.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/ProtectedZoneType.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ProtectedZoneType(const ProtectedZoneType_t& in, cpm_msgs::ProtectedZoneType& out) {
+void toRos_ProtectedZoneType(const cpm_ProtectedZoneType_t& in, cpm_msgs::ProtectedZoneType& out) {
   out.value = in;
 }
 
-void toStruct_ProtectedZoneType(const cpm_msgs::ProtectedZoneType& in, ProtectedZoneType_t& out) {
-  memset(&out, 0, sizeof(ProtectedZoneType_t));
+void toStruct_ProtectedZoneType(const cpm_msgs::ProtectedZoneType& in, cpm_ProtectedZoneType_t& out) {
+  memset(&out, 0, sizeof(cpm_ProtectedZoneType_t));
 
   out = in.value;
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/WrappedCpmContainers.h>
+#include <etsi_its_cpm_coding/cpm_WrappedCpmContainers.h>
 #include <etsi_its_cpm_conversion/convertWrappedCpmContainer.h>
 #include <etsi_its_cpm_conversion/convertWrappedCpmContainers.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_WrappedCpmContainers(const WrappedCpmContainers_t& in, cpm_msgs::WrappedCpmContainers& out) {
+void toRos_WrappedCpmContainers(const cpm_WrappedCpmContainers_t& in, cpm_msgs::WrappedCpmContainers& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::WrappedCpmContainer el;
     toRos_WrappedCpmContainer(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_WrappedCpmContainers(const WrappedCpmContainers_t& in, cpm_msgs::Wrap
   }
 }
 
-void toStruct_WrappedCpmContainers(const cpm_msgs::WrappedCpmContainers& in, WrappedCpmContainers_t& out) {
-  memset(&out, 0, sizeof(WrappedCpmContainers_t));
+void toStruct_WrappedCpmContainers(const cpm_msgs::WrappedCpmContainers& in, cpm_WrappedCpmContainers_t& out) {
+  memset(&out, 0, sizeof(cpm_WrappedCpmContainers_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    WrappedCpmContainer_t* el = (WrappedCpmContainer_t*) calloc(1, sizeof(WrappedCpmContainer_t));
+    cpm_WrappedCpmContainer_t* el = (cpm_WrappedCpmContainer_t*) calloc(1, sizeof(cpm_WrappedCpmContainer_t));
     toStruct_WrappedCpmContainer(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

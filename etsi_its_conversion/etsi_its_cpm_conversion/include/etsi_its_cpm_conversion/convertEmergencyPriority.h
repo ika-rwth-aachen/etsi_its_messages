@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EmergencyPriority.h>
+#include <etsi_its_cpm_coding/cpm_EmergencyPriority.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EmergencyPriority(const EmergencyPriority_t& in, cpm_msgs::EmergencyPriority& out) {
+void toRos_EmergencyPriority(const cpm_EmergencyPriority_t& in, cpm_msgs::EmergencyPriority& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_EmergencyPriority(const cpm_msgs::EmergencyPriority& in, EmergencyPriority_t& out) {
-  memset(&out, 0, sizeof(EmergencyPriority_t));
+void toStruct_EmergencyPriority(const cpm_msgs::EmergencyPriority& in, cpm_EmergencyPriority_t& out) {
+  memset(&out, 0, sizeof(cpm_EmergencyPriority_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

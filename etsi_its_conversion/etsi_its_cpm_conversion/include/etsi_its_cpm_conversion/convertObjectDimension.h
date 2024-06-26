@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ObjectDimension.h>
+#include <etsi_its_cpm_coding/cpm_ObjectDimension.h>
 #include <etsi_its_cpm_conversion/convertObjectDimensionConfidence.h>
 #include <etsi_its_cpm_conversion/convertObjectDimensionValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectDimension(const ObjectDimension_t& in, cpm_msgs::ObjectDimension& out) {
+void toRos_ObjectDimension(const cpm_ObjectDimension_t& in, cpm_msgs::ObjectDimension& out) {
   toRos_ObjectDimensionValue(in.value, out.value);
   toRos_ObjectDimensionConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_ObjectDimension(const cpm_msgs::ObjectDimension& in, ObjectDimension_t& out) {
-  memset(&out, 0, sizeof(ObjectDimension_t));
+void toStruct_ObjectDimension(const cpm_msgs::ObjectDimension& in, cpm_ObjectDimension_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectDimension_t));
 
   toStruct_ObjectDimensionValue(in.value, out.value);
   toStruct_ObjectDimensionConfidence(in.confidence, out.confidence);

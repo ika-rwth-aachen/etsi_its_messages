@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/PathPredicted.h>
+#include <etsi_its_cpm_coding/cpm_PathPredicted.h>
 #include <etsi_its_cpm_conversion/convertPathPointPredicted.h>
 #include <etsi_its_cpm_conversion/convertPathPredicted.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PathPredicted(const PathPredicted_t& in, cpm_msgs::PathPredicted& out) {
+void toRos_PathPredicted(const cpm_PathPredicted_t& in, cpm_msgs::PathPredicted& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::PathPointPredicted el;
     toRos_PathPointPredicted(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_PathPredicted(const PathPredicted_t& in, cpm_msgs::PathPredicted& out
   }
 }
 
-void toStruct_PathPredicted(const cpm_msgs::PathPredicted& in, PathPredicted_t& out) {
-  memset(&out, 0, sizeof(PathPredicted_t));
+void toStruct_PathPredicted(const cpm_msgs::PathPredicted& in, cpm_PathPredicted_t& out) {
+  memset(&out, 0, sizeof(cpm_PathPredicted_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    PathPointPredicted_t* el = (PathPointPredicted_t*) calloc(1, sizeof(PathPointPredicted_t));
+    cpm_PathPointPredicted_t* el = (cpm_PathPointPredicted_t*) calloc(1, sizeof(cpm_PathPointPredicted_t));
     toStruct_PathPointPredicted(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

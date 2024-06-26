@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationComponent.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationComponent.h>
 #include <etsi_its_cpm_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cpm_conversion/convertAccelerationValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationComponent(const AccelerationComponent_t& in, cpm_msgs::AccelerationComponent& out) {
+void toRos_AccelerationComponent(const cpm_AccelerationComponent_t& in, cpm_msgs::AccelerationComponent& out) {
   toRos_AccelerationValue(in.value, out.value);
   toRos_AccelerationConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_AccelerationComponent(const cpm_msgs::AccelerationComponent& in, AccelerationComponent_t& out) {
-  memset(&out, 0, sizeof(AccelerationComponent_t));
+void toStruct_AccelerationComponent(const cpm_msgs::AccelerationComponent& in, cpm_AccelerationComponent_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationComponent_t));
 
   toStruct_AccelerationValue(in.value, out.value);
   toStruct_AccelerationConfidence(in.confidence, out.confidence);

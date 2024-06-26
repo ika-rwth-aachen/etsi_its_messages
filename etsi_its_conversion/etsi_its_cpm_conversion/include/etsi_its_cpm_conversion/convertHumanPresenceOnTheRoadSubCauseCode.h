@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/HumanPresenceOnTheRoadSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_HumanPresenceOnTheRoadSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_HumanPresenceOnTheRoadSubCauseCode(const HumanPresenceOnTheRoadSubCauseCode_t& in, cpm_msgs::HumanPresenceOnTheRoadSubCauseCode& out) {
+void toRos_HumanPresenceOnTheRoadSubCauseCode(const cpm_HumanPresenceOnTheRoadSubCauseCode_t& in, cpm_msgs::HumanPresenceOnTheRoadSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_HumanPresenceOnTheRoadSubCauseCode(const cpm_msgs::HumanPresenceOnTheRoadSubCauseCode& in, HumanPresenceOnTheRoadSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(HumanPresenceOnTheRoadSubCauseCode_t));
+void toStruct_HumanPresenceOnTheRoadSubCauseCode(const cpm_msgs::HumanPresenceOnTheRoadSubCauseCode& in, cpm_HumanPresenceOnTheRoadSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_HumanPresenceOnTheRoadSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VelocityComponentValue.h>
+#include <etsi_its_cpm_coding/cpm_VelocityComponentValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VelocityComponentValue(const VelocityComponentValue_t& in, cpm_msgs::VelocityComponentValue& out) {
+void toRos_VelocityComponentValue(const cpm_VelocityComponentValue_t& in, cpm_msgs::VelocityComponentValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VelocityComponentValue(const cpm_msgs::VelocityComponentValue& in, VelocityComponentValue_t& out) {
-  memset(&out, 0, sizeof(VelocityComponentValue_t));
+void toStruct_VelocityComponentValue(const cpm_msgs::VelocityComponentValue& in, cpm_VelocityComponentValue_t& out) {
+  memset(&out, 0, sizeof(cpm_VelocityComponentValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

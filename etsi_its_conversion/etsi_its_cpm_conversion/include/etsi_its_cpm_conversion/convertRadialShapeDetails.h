@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RadialShapeDetails.h>
+#include <etsi_its_cpm_coding/cpm_RadialShapeDetails.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngleValue.h>
 #include <etsi_its_cpm_conversion/convertStandardLength12b.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RadialShapeDetails(const RadialShapeDetails_t& in, cpm_msgs::RadialShapeDetails& out) {
+void toRos_RadialShapeDetails(const cpm_RadialShapeDetails_t& in, cpm_msgs::RadialShapeDetails& out) {
   toRos_StandardLength12b(in.range, out.range);
   toRos_CartesianAngleValue(in.horizontalOpeningAngleStart, out.horizontal_opening_angle_start);
   toRos_CartesianAngleValue(in.horizontalOpeningAngleEnd, out.horizontal_opening_angle_end);
@@ -55,18 +55,18 @@ void toRos_RadialShapeDetails(const RadialShapeDetails_t& in, cpm_msgs::RadialSh
   }
 }
 
-void toStruct_RadialShapeDetails(const cpm_msgs::RadialShapeDetails& in, RadialShapeDetails_t& out) {
-  memset(&out, 0, sizeof(RadialShapeDetails_t));
+void toStruct_RadialShapeDetails(const cpm_msgs::RadialShapeDetails& in, cpm_RadialShapeDetails_t& out) {
+  memset(&out, 0, sizeof(cpm_RadialShapeDetails_t));
 
   toStruct_StandardLength12b(in.range, out.range);
   toStruct_CartesianAngleValue(in.horizontal_opening_angle_start, out.horizontalOpeningAngleStart);
   toStruct_CartesianAngleValue(in.horizontal_opening_angle_end, out.horizontalOpeningAngleEnd);
   if (in.vertical_opening_angle_start_is_present) {
-    out.verticalOpeningAngleStart = (CartesianAngleValue_t*) calloc(1, sizeof(CartesianAngleValue_t));
+    out.verticalOpeningAngleStart = (cpm_CartesianAngleValue_t*) calloc(1, sizeof(cpm_CartesianAngleValue_t));
     toStruct_CartesianAngleValue(in.vertical_opening_angle_start, *out.verticalOpeningAngleStart);
   }
   if (in.vertical_opening_angle_end_is_present) {
-    out.verticalOpeningAngleEnd = (CartesianAngleValue_t*) calloc(1, sizeof(CartesianAngleValue_t));
+    out.verticalOpeningAngleEnd = (cpm_CartesianAngleValue_t*) calloc(1, sizeof(cpm_CartesianAngleValue_t));
     toStruct_CartesianAngleValue(in.vertical_opening_angle_end, *out.verticalOpeningAngleEnd);
   }
 }

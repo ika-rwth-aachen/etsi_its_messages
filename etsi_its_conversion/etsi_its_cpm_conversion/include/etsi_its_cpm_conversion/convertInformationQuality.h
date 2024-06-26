@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InformationQuality.h>
+#include <etsi_its_cpm_coding/cpm_InformationQuality.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InformationQuality(const InformationQuality_t& in, cpm_msgs::InformationQuality& out) {
+void toRos_InformationQuality(const cpm_InformationQuality_t& in, cpm_msgs::InformationQuality& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_InformationQuality(const cpm_msgs::InformationQuality& in, InformationQuality_t& out) {
-  memset(&out, 0, sizeof(InformationQuality_t));
+void toStruct_InformationQuality(const cpm_msgs::InformationQuality& in, cpm_InformationQuality_t& out) {
+  memset(&out, 0, sizeof(cpm_InformationQuality_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

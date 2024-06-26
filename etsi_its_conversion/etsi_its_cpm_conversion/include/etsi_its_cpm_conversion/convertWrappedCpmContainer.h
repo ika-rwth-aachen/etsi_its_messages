@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/WrappedCpmContainer.h>
+#include <etsi_its_cpm_coding/cpm_WrappedCpmContainer.h>
 #include <etsi_its_cpm_conversion/convertCpmContainerId.h>
 #include <etsi_its_cpm_conversion/convertOriginatingRsuContainer.h>
 #include <etsi_its_cpm_conversion/convertOriginatingVehicleContainer.h>
@@ -45,56 +45,56 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_WrappedCpmContainer(const WrappedCpmContainer_t& in, cpm_msgs::WrappedCpmContainer& out) {
+void toRos_WrappedCpmContainer(const cpm_WrappedCpmContainer_t& in, cpm_msgs::WrappedCpmContainer& out) {
   toRos_CpmContainerId(in.containerId, out.container_id);
   switch (in.containerData.present) {
-  case WrappedCpmContainer__containerData_PR_OriginatingVehicleContainer:
+  case cpm_WrappedCpmContainer__containerData_PR_OriginatingVehicleContainer:
     toRos_OriginatingVehicleContainer(in.containerData.choice.OriginatingVehicleContainer, out.container_data.originating_vehicle_container);
     out.container_data.choice.value = cpm_msgs::CpmContainerId::ORIGINATING_VEHICLE_CONTAINER;
     break;
-  case WrappedCpmContainer__containerData_PR_OriginatingRsuContainer:
+  case cpm_WrappedCpmContainer__containerData_PR_OriginatingRsuContainer:
     toRos_OriginatingRsuContainer(in.containerData.choice.OriginatingRsuContainer, out.container_data.originating_rsu_container);
     out.container_data.choice.value = cpm_msgs::CpmContainerId::ORIGINATING_RSU_CONTAINER;
     break;
-  case WrappedCpmContainer__containerData_PR_SensorInformationContainer:
+  case cpm_WrappedCpmContainer__containerData_PR_SensorInformationContainer:
     toRos_SensorInformationContainer(in.containerData.choice.SensorInformationContainer, out.container_data.sensor_information_container);
     out.container_data.choice.value = cpm_msgs::CpmContainerId::SENSOR_INFORMATION_CONTAINER;
     break;
-  case WrappedCpmContainer__containerData_PR_PerceptionRegionContainer:
+  case cpm_WrappedCpmContainer__containerData_PR_PerceptionRegionContainer:
     toRos_PerceptionRegionContainer(in.containerData.choice.PerceptionRegionContainer, out.container_data.perception_region_container);
     out.container_data.choice.value = cpm_msgs::CpmContainerId::PERCEPTION_REGION_CONTAINER;
     break;
-  case WrappedCpmContainer__containerData_PR_PerceivedObjectContainer:
+  case cpm_WrappedCpmContainer__containerData_PR_PerceivedObjectContainer:
     toRos_PerceivedObjectContainer(in.containerData.choice.PerceivedObjectContainer, out.container_data.perceived_object_container);
     out.container_data.choice.value = cpm_msgs::CpmContainerId::PERCEIVED_OBJECT_CONTAINER;
     break;
   }
 }
 
-void toStruct_WrappedCpmContainer(const cpm_msgs::WrappedCpmContainer& in, WrappedCpmContainer_t& out) {
-  memset(&out, 0, sizeof(WrappedCpmContainer_t));
+void toStruct_WrappedCpmContainer(const cpm_msgs::WrappedCpmContainer& in, cpm_WrappedCpmContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_WrappedCpmContainer_t));
 
   toStruct_CpmContainerId(in.container_id, out.containerId);
   switch (in.container_data.choice.value) {
   case cpm_msgs::CpmContainerId::ORIGINATING_VEHICLE_CONTAINER:
     toStruct_OriginatingVehicleContainer(in.container_data.originating_vehicle_container, out.containerData.choice.OriginatingVehicleContainer);
-    out.containerData.present = WrappedCpmContainer__containerData_PR::WrappedCpmContainer__containerData_PR_OriginatingVehicleContainer;
+    out.containerData.present = cpm_WrappedCpmContainer__containerData_PR::cpm_WrappedCpmContainer__containerData_PR_OriginatingVehicleContainer;
     break;
   case cpm_msgs::CpmContainerId::ORIGINATING_RSU_CONTAINER:
     toStruct_OriginatingRsuContainer(in.container_data.originating_rsu_container, out.containerData.choice.OriginatingRsuContainer);
-    out.containerData.present = WrappedCpmContainer__containerData_PR::WrappedCpmContainer__containerData_PR_OriginatingRsuContainer;
+    out.containerData.present = cpm_WrappedCpmContainer__containerData_PR::cpm_WrappedCpmContainer__containerData_PR_OriginatingRsuContainer;
     break;
   case cpm_msgs::CpmContainerId::SENSOR_INFORMATION_CONTAINER:
     toStruct_SensorInformationContainer(in.container_data.sensor_information_container, out.containerData.choice.SensorInformationContainer);
-    out.containerData.present = WrappedCpmContainer__containerData_PR::WrappedCpmContainer__containerData_PR_SensorInformationContainer;
+    out.containerData.present = cpm_WrappedCpmContainer__containerData_PR::cpm_WrappedCpmContainer__containerData_PR_SensorInformationContainer;
     break;
   case cpm_msgs::CpmContainerId::PERCEPTION_REGION_CONTAINER:
     toStruct_PerceptionRegionContainer(in.container_data.perception_region_container, out.containerData.choice.PerceptionRegionContainer);
-    out.containerData.present = WrappedCpmContainer__containerData_PR::WrappedCpmContainer__containerData_PR_PerceptionRegionContainer;
+    out.containerData.present = cpm_WrappedCpmContainer__containerData_PR::cpm_WrappedCpmContainer__containerData_PR_PerceptionRegionContainer;
     break;
   case cpm_msgs::CpmContainerId::PERCEIVED_OBJECT_CONTAINER:
     toStruct_PerceivedObjectContainer(in.container_data.perceived_object_container, out.containerData.choice.PerceivedObjectContainer);
-    out.containerData.present = WrappedCpmContainer__containerData_PR::WrappedCpmContainer__containerData_PR_PerceivedObjectContainer;
+    out.containerData.present = cpm_WrappedCpmContainer__containerData_PR::cpm_WrappedCpmContainer__containerData_PR_PerceivedObjectContainer;
     break;
   }
 }

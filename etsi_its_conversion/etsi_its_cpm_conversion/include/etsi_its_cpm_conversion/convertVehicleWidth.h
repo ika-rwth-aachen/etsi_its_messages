@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleWidth.h>
+#include <etsi_its_cpm_coding/cpm_VehicleWidth.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleWidth(const VehicleWidth_t& in, cpm_msgs::VehicleWidth& out) {
+void toRos_VehicleWidth(const cpm_VehicleWidth_t& in, cpm_msgs::VehicleWidth& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleWidth(const cpm_msgs::VehicleWidth& in, VehicleWidth_t& out) {
-  memset(&out, 0, sizeof(VehicleWidth_t));
+void toStruct_VehicleWidth(const cpm_msgs::VehicleWidth& in, cpm_VehicleWidth_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleWidth_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EuVehicleCategoryN.h>
+#include <etsi_its_cpm_coding/cpm_EuVehicleCategoryN.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/EuVehicleCategoryN.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EuVehicleCategoryN(const EuVehicleCategoryN_t& in, cpm_msgs::EuVehicleCategoryN& out) {
+void toRos_EuVehicleCategoryN(const cpm_EuVehicleCategoryN_t& in, cpm_msgs::EuVehicleCategoryN& out) {
   out.value = in;
 }
 
-void toStruct_EuVehicleCategoryN(const cpm_msgs::EuVehicleCategoryN& in, EuVehicleCategoryN_t& out) {
-  memset(&out, 0, sizeof(EuVehicleCategoryN_t));
+void toStruct_EuVehicleCategoryN(const cpm_msgs::EuVehicleCategoryN& in, cpm_EuVehicleCategoryN_t& out) {
+  memset(&out, 0, sizeof(cpm_EuVehicleCategoryN_t));
 
   out = in.value;
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/ItineraryPath.h>
+#include <etsi_its_cpm_coding/cpm_ItineraryPath.h>
 #include <etsi_its_cpm_conversion/convertItineraryPath.h>
 #include <etsi_its_cpm_conversion/convertReferencePosition.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ItineraryPath(const ItineraryPath_t& in, cpm_msgs::ItineraryPath& out) {
+void toRos_ItineraryPath(const cpm_ItineraryPath_t& in, cpm_msgs::ItineraryPath& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::ReferencePosition el;
     toRos_ReferencePosition(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_ItineraryPath(const ItineraryPath_t& in, cpm_msgs::ItineraryPath& out
   }
 }
 
-void toStruct_ItineraryPath(const cpm_msgs::ItineraryPath& in, ItineraryPath_t& out) {
-  memset(&out, 0, sizeof(ItineraryPath_t));
+void toStruct_ItineraryPath(const cpm_msgs::ItineraryPath& in, cpm_ItineraryPath_t& out) {
+  memset(&out, 0, sizeof(cpm_ItineraryPath_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ReferencePosition_t* el = (ReferencePosition_t*) calloc(1, sizeof(ReferencePosition_t));
+    cpm_ReferencePosition_t* el = (cpm_ReferencePosition_t*) calloc(1, sizeof(cpm_ReferencePosition_t));
     toStruct_ReferencePosition(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

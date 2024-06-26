@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TurningDirection.h>
+#include <etsi_its_cpm_coding/cpm_TurningDirection.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/TurningDirection.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TurningDirection(const TurningDirection_t& in, cpm_msgs::TurningDirection& out) {
+void toRos_TurningDirection(const cpm_TurningDirection_t& in, cpm_msgs::TurningDirection& out) {
   out.value = in;
 }
 
-void toStruct_TurningDirection(const cpm_msgs::TurningDirection& in, TurningDirection_t& out) {
-  memset(&out, 0, sizeof(TurningDirection_t));
+void toStruct_TurningDirection(const cpm_msgs::TurningDirection& in, cpm_TurningDirection_t& out) {
+  memset(&out, 0, sizeof(cpm_TurningDirection_t));
 
   out = in.value;
 }

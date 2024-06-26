@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/ProtectedCommunicationZonesRSU.h>
+#include <etsi_its_cpm_coding/cpm_ProtectedCommunicationZonesRSU.h>
 #include <etsi_its_cpm_conversion/convertProtectedCommunicationZone.h>
 #include <etsi_its_cpm_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ProtectedCommunicationZonesRSU(const ProtectedCommunicationZonesRSU_t& in, cpm_msgs::ProtectedCommunicationZonesRSU& out) {
+void toRos_ProtectedCommunicationZonesRSU(const cpm_ProtectedCommunicationZonesRSU_t& in, cpm_msgs::ProtectedCommunicationZonesRSU& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::ProtectedCommunicationZone el;
     toRos_ProtectedCommunicationZone(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_ProtectedCommunicationZonesRSU(const ProtectedCommunicationZonesRSU_t
   }
 }
 
-void toStruct_ProtectedCommunicationZonesRSU(const cpm_msgs::ProtectedCommunicationZonesRSU& in, ProtectedCommunicationZonesRSU_t& out) {
-  memset(&out, 0, sizeof(ProtectedCommunicationZonesRSU_t));
+void toStruct_ProtectedCommunicationZonesRSU(const cpm_msgs::ProtectedCommunicationZonesRSU& in, cpm_ProtectedCommunicationZonesRSU_t& out) {
+  memset(&out, 0, sizeof(cpm_ProtectedCommunicationZonesRSU_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ProtectedCommunicationZone_t* el = (ProtectedCommunicationZone_t*) calloc(1, sizeof(ProtectedCommunicationZone_t));
+    cpm_ProtectedCommunicationZone_t* el = (cpm_ProtectedCommunicationZone_t*) calloc(1, sizeof(cpm_ProtectedCommunicationZone_t));
     toStruct_ProtectedCommunicationZone(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

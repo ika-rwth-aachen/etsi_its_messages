@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ActionId.h>
+#include <etsi_its_cpm_coding/cpm_ActionId.h>
 #include <etsi_its_cpm_conversion/convertSequenceNumber.h>
 #include <etsi_its_cpm_conversion/convertStationId.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ActionId(const ActionId_t& in, cpm_msgs::ActionId& out) {
+void toRos_ActionId(const cpm_ActionId_t& in, cpm_msgs::ActionId& out) {
   toRos_StationId(in.originatingStationId, out.originating_station_id);
   toRos_SequenceNumber(in.sequenceNumber, out.sequence_number);
 }
 
-void toStruct_ActionId(const cpm_msgs::ActionId& in, ActionId_t& out) {
-  memset(&out, 0, sizeof(ActionId_t));
+void toStruct_ActionId(const cpm_msgs::ActionId& in, cpm_ActionId_t& out) {
+  memset(&out, 0, sizeof(cpm_ActionId_t));
 
   toStruct_StationId(in.originating_station_id, out.originatingStationId);
   toStruct_SequenceNumber(in.sequence_number, out.sequenceNumber);

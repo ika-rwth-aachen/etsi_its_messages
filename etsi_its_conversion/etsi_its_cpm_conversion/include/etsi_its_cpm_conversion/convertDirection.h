@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Direction.h>
+#include <etsi_its_cpm_coding/cpm_Direction.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Direction(const Direction_t& in, cpm_msgs::Direction& out) {
+void toRos_Direction(const cpm_Direction_t& in, cpm_msgs::Direction& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Direction(const cpm_msgs::Direction& in, Direction_t& out) {
-  memset(&out, 0, sizeof(Direction_t));
+void toStruct_Direction(const cpm_msgs::Direction& in, cpm_Direction_t& out) {
+  memset(&out, 0, sizeof(cpm_Direction_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SafeDistanceIndication.h>
+#include <etsi_its_cpm_coding/cpm_SafeDistanceIndication.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_cpm_conversion/convertSafeDistanceIndicator.h>
 #include <etsi_its_cpm_conversion/convertStationId.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SafeDistanceIndication(const SafeDistanceIndication_t& in, cpm_msgs::SafeDistanceIndication& out) {
+void toRos_SafeDistanceIndication(const cpm_SafeDistanceIndication_t& in, cpm_msgs::SafeDistanceIndication& out) {
   if (in.subjectStation) {
     toRos_StationId(*in.subjectStation, out.subject_station);
     out.subject_station_is_present = true;
@@ -54,16 +54,16 @@ void toRos_SafeDistanceIndication(const SafeDistanceIndication_t& in, cpm_msgs::
   }
 }
 
-void toStruct_SafeDistanceIndication(const cpm_msgs::SafeDistanceIndication& in, SafeDistanceIndication_t& out) {
-  memset(&out, 0, sizeof(SafeDistanceIndication_t));
+void toStruct_SafeDistanceIndication(const cpm_msgs::SafeDistanceIndication& in, cpm_SafeDistanceIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_SafeDistanceIndication_t));
 
   if (in.subject_station_is_present) {
-    out.subjectStation = (StationId_t*) calloc(1, sizeof(StationId_t));
+    out.subjectStation = (cpm_StationId_t*) calloc(1, sizeof(cpm_StationId_t));
     toStruct_StationId(in.subject_station, *out.subjectStation);
   }
   toStruct_SafeDistanceIndicator(in.safe_distance_indicator, out.safeDistanceIndicator);
   if (in.time_to_collision_is_present) {
-    out.timeToCollision = (DeltaTimeTenthOfSecond_t*) calloc(1, sizeof(DeltaTimeTenthOfSecond_t));
+    out.timeToCollision = (cpm_DeltaTimeTenthOfSecond_t*) calloc(1, sizeof(cpm_DeltaTimeTenthOfSecond_t));
     toStruct_DeltaTimeTenthOfSecond(in.time_to_collision, *out.timeToCollision);
   }
 }

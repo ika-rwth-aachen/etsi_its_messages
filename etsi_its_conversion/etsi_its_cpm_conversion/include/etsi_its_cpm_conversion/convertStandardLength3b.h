@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/StandardLength3b.h>
+#include <etsi_its_cpm_coding/cpm_StandardLength3b.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/StandardLength3b.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_StandardLength3b(const StandardLength3b_t& in, cpm_msgs::StandardLength3b& out) {
+void toRos_StandardLength3b(const cpm_StandardLength3b_t& in, cpm_msgs::StandardLength3b& out) {
   out.value = in;
 }
 
-void toStruct_StandardLength3b(const cpm_msgs::StandardLength3b& in, StandardLength3b_t& out) {
-  memset(&out, 0, sizeof(StandardLength3b_t));
+void toStruct_StandardLength3b(const cpm_msgs::StandardLength3b& in, cpm_StandardLength3b_t& out) {
+  memset(&out, 0, sizeof(cpm_StandardLength3b_t));
 
   out = in.value;
 }

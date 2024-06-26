@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ObjectClass.h>
+#include <etsi_its_cpm_coding/cpm_ObjectClass.h>
 #include <etsi_its_cpm_conversion/convertOtherSubClass.h>
 #include <etsi_its_cpm_conversion/convertTrafficParticipantType.h>
 #include <etsi_its_cpm_conversion/convertVruClusterInformation.h>
@@ -43,21 +43,21 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectClass(const ObjectClass_t& in, cpm_msgs::ObjectClass& out) {
+void toRos_ObjectClass(const cpm_ObjectClass_t& in, cpm_msgs::ObjectClass& out) {
   switch (in.present) {
-  case ObjectClass_PR_vehicleSubClass:
+  case cpm_ObjectClass_PR_vehicleSubClass:
     toRos_TrafficParticipantType(in.choice.vehicleSubClass, out.vehicle_sub_class);
     out.choice = cpm_msgs::ObjectClass::CHOICE_VEHICLE_SUB_CLASS;
     break;
-  case ObjectClass_PR_vruSubClass:
+  case cpm_ObjectClass_PR_vruSubClass:
     toRos_VruProfileAndSubprofile(in.choice.vruSubClass, out.vru_sub_class);
     out.choice = cpm_msgs::ObjectClass::CHOICE_VRU_SUB_CLASS;
     break;
-  case ObjectClass_PR_groupSubClass:
+  case cpm_ObjectClass_PR_groupSubClass:
     toRos_VruClusterInformation(in.choice.groupSubClass, out.group_sub_class);
     out.choice = cpm_msgs::ObjectClass::CHOICE_GROUP_SUB_CLASS;
     break;
-  case ObjectClass_PR_otherSubClass:
+  case cpm_ObjectClass_PR_otherSubClass:
     toRos_OtherSubClass(in.choice.otherSubClass, out.other_sub_class);
     out.choice = cpm_msgs::ObjectClass::CHOICE_OTHER_SUB_CLASS;
     break;
@@ -65,25 +65,25 @@ void toRos_ObjectClass(const ObjectClass_t& in, cpm_msgs::ObjectClass& out) {
   }
 }
 
-void toStruct_ObjectClass(const cpm_msgs::ObjectClass& in, ObjectClass_t& out) {
-  memset(&out, 0, sizeof(ObjectClass_t));
+void toStruct_ObjectClass(const cpm_msgs::ObjectClass& in, cpm_ObjectClass_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectClass_t));
 
   switch (in.choice) {
   case cpm_msgs::ObjectClass::CHOICE_VEHICLE_SUB_CLASS:
     toStruct_TrafficParticipantType(in.vehicle_sub_class, out.choice.vehicleSubClass);
-    out.present = ObjectClass_PR::ObjectClass_PR_vehicleSubClass;
+    out.present = cpm_ObjectClass_PR::cpm_ObjectClass_PR_vehicleSubClass;
     break;
   case cpm_msgs::ObjectClass::CHOICE_VRU_SUB_CLASS:
     toStruct_VruProfileAndSubprofile(in.vru_sub_class, out.choice.vruSubClass);
-    out.present = ObjectClass_PR::ObjectClass_PR_vruSubClass;
+    out.present = cpm_ObjectClass_PR::cpm_ObjectClass_PR_vruSubClass;
     break;
   case cpm_msgs::ObjectClass::CHOICE_GROUP_SUB_CLASS:
     toStruct_VruClusterInformation(in.group_sub_class, out.choice.groupSubClass);
-    out.present = ObjectClass_PR::ObjectClass_PR_groupSubClass;
+    out.present = cpm_ObjectClass_PR::cpm_ObjectClass_PR_groupSubClass;
     break;
   case cpm_msgs::ObjectClass::CHOICE_OTHER_SUB_CLASS:
     toStruct_OtherSubClass(in.other_sub_class, out.choice.otherSubClass);
-    out.present = ObjectClass_PR::ObjectClass_PR_otherSubClass;
+    out.present = cpm_ObjectClass_PR::cpm_ObjectClass_PR_otherSubClass;
     break;
   default: break;
   }

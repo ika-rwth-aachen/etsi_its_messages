@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleMass.h>
+#include <etsi_its_cpm_coding/cpm_VehicleMass.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleMass(const VehicleMass_t& in, cpm_msgs::VehicleMass& out) {
+void toRos_VehicleMass(const cpm_VehicleMass_t& in, cpm_msgs::VehicleMass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_VehicleMass(const cpm_msgs::VehicleMass& in, VehicleMass_t& out) {
-  memset(&out, 0, sizeof(VehicleMass_t));
+void toStruct_VehicleMass(const cpm_msgs::VehicleMass& in, cpm_VehicleMass_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleMass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

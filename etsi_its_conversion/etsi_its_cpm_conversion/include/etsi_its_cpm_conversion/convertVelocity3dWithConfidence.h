@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Velocity3dWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_Velocity3dWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertVelocityCartesian.h>
 #include <etsi_its_cpm_conversion/convertVelocityPolarWithZ.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Velocity3dWithConfidence(const Velocity3dWithConfidence_t& in, cpm_msgs::Velocity3dWithConfidence& out) {
+void toRos_Velocity3dWithConfidence(const cpm_Velocity3dWithConfidence_t& in, cpm_msgs::Velocity3dWithConfidence& out) {
   switch (in.present) {
-  case Velocity3dWithConfidence_PR_polarVelocity:
+  case cpm_Velocity3dWithConfidence_PR_polarVelocity:
     toRos_VelocityPolarWithZ(in.choice.polarVelocity, out.polar_velocity);
     out.choice = cpm_msgs::Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY;
     break;
-  case Velocity3dWithConfidence_PR_cartesianVelocity:
+  case cpm_Velocity3dWithConfidence_PR_cartesianVelocity:
     toRos_VelocityCartesian(in.choice.cartesianVelocity, out.cartesian_velocity);
     out.choice = cpm_msgs::Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY;
     break;
@@ -55,17 +55,17 @@ void toRos_Velocity3dWithConfidence(const Velocity3dWithConfidence_t& in, cpm_ms
   }
 }
 
-void toStruct_Velocity3dWithConfidence(const cpm_msgs::Velocity3dWithConfidence& in, Velocity3dWithConfidence_t& out) {
-  memset(&out, 0, sizeof(Velocity3dWithConfidence_t));
+void toStruct_Velocity3dWithConfidence(const cpm_msgs::Velocity3dWithConfidence& in, cpm_Velocity3dWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_Velocity3dWithConfidence_t));
 
   switch (in.choice) {
   case cpm_msgs::Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY:
     toStruct_VelocityPolarWithZ(in.polar_velocity, out.choice.polarVelocity);
-    out.present = Velocity3dWithConfidence_PR::Velocity3dWithConfidence_PR_polarVelocity;
+    out.present = cpm_Velocity3dWithConfidence_PR::cpm_Velocity3dWithConfidence_PR_polarVelocity;
     break;
   case cpm_msgs::Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY:
     toStruct_VelocityCartesian(in.cartesian_velocity, out.choice.cartesianVelocity);
-    out.present = Velocity3dWithConfidence_PR::Velocity3dWithConfidence_PR_cartesianVelocity;
+    out.present = cpm_Velocity3dWithConfidence_PR::cpm_Velocity3dWithConfidence_PR_cartesianVelocity;
     break;
   default: break;
   }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/YawRateConfidence.h>
+#include <etsi_its_cpm_coding/cpm_YawRateConfidence.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/YawRateConfidence.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_YawRateConfidence(const YawRateConfidence_t& in, cpm_msgs::YawRateConfidence& out) {
+void toRos_YawRateConfidence(const cpm_YawRateConfidence_t& in, cpm_msgs::YawRateConfidence& out) {
   out.value = in;
 }
 
-void toStruct_YawRateConfidence(const cpm_msgs::YawRateConfidence& in, YawRateConfidence_t& out) {
-  memset(&out, 0, sizeof(YawRateConfidence_t));
+void toStruct_YawRateConfidence(const cpm_msgs::YawRateConfidence& in, cpm_YawRateConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_YawRateConfidence_t));
 
   out = in.value;
 }

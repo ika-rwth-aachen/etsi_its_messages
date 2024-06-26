@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EuVehicleCategoryCode.h>
+#include <etsi_its_cpm_coding/cpm_EuVehicleCategoryCode.h>
 #include <etsi_its_cpm_coding/byte.h>
 #include <etsi_its_primitives_conversion/convertbyte.h>
 #include <etsi_its_cpm_conversion/convertEuVehicleCategoryL.h>
@@ -45,21 +45,21 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EuVehicleCategoryCode(const EuVehicleCategoryCode_t& in, cpm_msgs::EuVehicleCategoryCode& out) {
+void toRos_EuVehicleCategoryCode(const cpm_EuVehicleCategoryCode_t& in, cpm_msgs::EuVehicleCategoryCode& out) {
   switch (in.present) {
-  case EuVehicleCategoryCode_PR_euVehicleCategoryL:
+  case cpm_EuVehicleCategoryCode_PR_euVehicleCategoryL:
     toRos_EuVehicleCategoryL(in.choice.euVehicleCategoryL, out.eu_vehicle_category_l);
     out.choice = cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_L;
     break;
-  case EuVehicleCategoryCode_PR_euVehicleCategoryM:
+  case cpm_EuVehicleCategoryCode_PR_euVehicleCategoryM:
     toRos_EuVehicleCategoryM(in.choice.euVehicleCategoryM, out.eu_vehicle_category_m);
     out.choice = cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_M;
     break;
-  case EuVehicleCategoryCode_PR_euVehicleCategoryN:
+  case cpm_EuVehicleCategoryCode_PR_euVehicleCategoryN:
     toRos_EuVehicleCategoryN(in.choice.euVehicleCategoryN, out.eu_vehicle_category_n);
     out.choice = cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_N;
     break;
-  case EuVehicleCategoryCode_PR_euVehicleCategoryO:
+  case cpm_EuVehicleCategoryCode_PR_euVehicleCategoryO:
     toRos_EuVehicleCategoryO(in.choice.euVehicleCategoryO, out.eu_vehicle_category_o);
     out.choice = cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_O;
     break;
@@ -71,25 +71,25 @@ etsi_its_primitives_conversion::toRos_byte(in, out.value);
   }
 }
 
-void toStruct_EuVehicleCategoryCode(const cpm_msgs::EuVehicleCategoryCode& in, EuVehicleCategoryCode_t& out) {
-  memset(&out, 0, sizeof(EuVehicleCategoryCode_t));
+void toStruct_EuVehicleCategoryCode(const cpm_msgs::EuVehicleCategoryCode& in, cpm_EuVehicleCategoryCode_t& out) {
+  memset(&out, 0, sizeof(cpm_EuVehicleCategoryCode_t));
 
   switch (in.choice) {
   case cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_L:
     toStruct_EuVehicleCategoryL(in.eu_vehicle_category_l, out.choice.euVehicleCategoryL);
-    out.present = EuVehicleCategoryCode_PR::EuVehicleCategoryCode_PR_euVehicleCategoryL;
+    out.present = cpm_EuVehicleCategoryCode_PR::cpm_EuVehicleCategoryCode_PR_euVehicleCategoryL;
     break;
   case cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_M:
     toStruct_EuVehicleCategoryM(in.eu_vehicle_category_m, out.choice.euVehicleCategoryM);
-    out.present = EuVehicleCategoryCode_PR::EuVehicleCategoryCode_PR_euVehicleCategoryM;
+    out.present = cpm_EuVehicleCategoryCode_PR::cpm_EuVehicleCategoryCode_PR_euVehicleCategoryM;
     break;
   case cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_N:
     toStruct_EuVehicleCategoryN(in.eu_vehicle_category_n, out.choice.euVehicleCategoryN);
-    out.present = EuVehicleCategoryCode_PR::EuVehicleCategoryCode_PR_euVehicleCategoryN;
+    out.present = cpm_EuVehicleCategoryCode_PR::cpm_EuVehicleCategoryCode_PR_euVehicleCategoryN;
     break;
   case cpm_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_O:
     toStruct_EuVehicleCategoryO(in.eu_vehicle_category_o, out.choice.euVehicleCategoryO);
-    out.present = EuVehicleCategoryCode_PR::EuVehicleCategoryCode_PR_euVehicleCategoryO;
+    out.present = cpm_EuVehicleCategoryCode_PR::cpm_EuVehicleCategoryCode_PR_euVehicleCategoryO;
     break;
 etsi_its_primitives_conversion::toStruct_byte(in, out.value);
     break;

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ClusterJoinInfo.h>
+#include <etsi_its_cpm_coding/cpm_ClusterJoinInfo.h>
 #include <etsi_its_cpm_conversion/convertDeltaTimeQuarterSecond.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ClusterJoinInfo(const ClusterJoinInfo_t& in, cpm_msgs::ClusterJoinInfo& out) {
+void toRos_ClusterJoinInfo(const cpm_ClusterJoinInfo_t& in, cpm_msgs::ClusterJoinInfo& out) {
   toRos_Identifier1B(in.clusterId, out.cluster_id);
   toRos_DeltaTimeQuarterSecond(in.joinTime, out.join_time);
 }
 
-void toStruct_ClusterJoinInfo(const cpm_msgs::ClusterJoinInfo& in, ClusterJoinInfo_t& out) {
-  memset(&out, 0, sizeof(ClusterJoinInfo_t));
+void toStruct_ClusterJoinInfo(const cpm_msgs::ClusterJoinInfo& in, cpm_ClusterJoinInfo_t& out) {
+  memset(&out, 0, sizeof(cpm_ClusterJoinInfo_t));
 
   toStruct_Identifier1B(in.cluster_id, out.clusterId);
   toStruct_DeltaTimeQuarterSecond(in.join_time, out.joinTime);

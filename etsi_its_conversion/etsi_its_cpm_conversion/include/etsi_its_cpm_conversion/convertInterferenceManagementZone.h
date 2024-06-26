@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InterferenceManagementZone.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementZone.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementInfo.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementZoneDefinition.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementZone(const InterferenceManagementZone_t& in, cpm_msgs::InterferenceManagementZone& out) {
+void toRos_InterferenceManagementZone(const cpm_InterferenceManagementZone_t& in, cpm_msgs::InterferenceManagementZone& out) {
   toRos_InterferenceManagementZoneDefinition(in.zoneDefinition, out.zone_definition);
   toRos_InterferenceManagementInfo(in.managementInfo, out.management_info);
 }
 
-void toStruct_InterferenceManagementZone(const cpm_msgs::InterferenceManagementZone& in, InterferenceManagementZone_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementZone_t));
+void toStruct_InterferenceManagementZone(const cpm_msgs::InterferenceManagementZone& in, cpm_InterferenceManagementZone_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementZone_t));
 
   toStruct_InterferenceManagementZoneDefinition(in.zone_definition, out.zoneDefinition);
   toStruct_InterferenceManagementInfo(in.management_info, out.managementInfo);

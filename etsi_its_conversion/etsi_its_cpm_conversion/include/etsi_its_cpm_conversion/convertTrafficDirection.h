@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrafficDirection.h>
+#include <etsi_its_cpm_coding/cpm_TrafficDirection.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/TrafficDirection.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrafficDirection(const TrafficDirection_t& in, cpm_msgs::TrafficDirection& out) {
+void toRos_TrafficDirection(const cpm_TrafficDirection_t& in, cpm_msgs::TrafficDirection& out) {
   out.value = in;
 }
 
-void toStruct_TrafficDirection(const cpm_msgs::TrafficDirection& in, TrafficDirection_t& out) {
-  memset(&out, 0, sizeof(TrafficDirection_t));
+void toStruct_TrafficDirection(const cpm_msgs::TrafficDirection& in, cpm_TrafficDirection_t& out) {
+  memset(&out, 0, sizeof(cpm_TrafficDirection_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Altitude.h>
+#include <etsi_its_cpm_coding/cpm_Altitude.h>
 #include <etsi_its_cpm_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_cpm_conversion/convertAltitudeValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Altitude(const Altitude_t& in, cpm_msgs::Altitude& out) {
+void toRos_Altitude(const cpm_Altitude_t& in, cpm_msgs::Altitude& out) {
   toRos_AltitudeValue(in.altitudeValue, out.altitude_value);
   toRos_AltitudeConfidence(in.altitudeConfidence, out.altitude_confidence);
 }
 
-void toStruct_Altitude(const cpm_msgs::Altitude& in, Altitude_t& out) {
-  memset(&out, 0, sizeof(Altitude_t));
+void toStruct_Altitude(const cpm_msgs::Altitude& in, cpm_Altitude_t& out) {
+  memset(&out, 0, sizeof(cpm_Altitude_t));
 
   toStruct_AltitudeValue(in.altitude_value, out.altitudeValue);
   toStruct_AltitudeConfidence(in.altitude_confidence, out.altitudeConfidence);

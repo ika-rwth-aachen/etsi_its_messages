@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Curvature.h>
+#include <etsi_its_cpm_coding/cpm_Curvature.h>
 #include <etsi_its_cpm_conversion/convertCurvatureConfidence.h>
 #include <etsi_its_cpm_conversion/convertCurvatureValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Curvature(const Curvature_t& in, cpm_msgs::Curvature& out) {
+void toRos_Curvature(const cpm_Curvature_t& in, cpm_msgs::Curvature& out) {
   toRos_CurvatureValue(in.curvatureValue, out.curvature_value);
   toRos_CurvatureConfidence(in.curvatureConfidence, out.curvature_confidence);
 }
 
-void toStruct_Curvature(const cpm_msgs::Curvature& in, Curvature_t& out) {
-  memset(&out, 0, sizeof(Curvature_t));
+void toStruct_Curvature(const cpm_msgs::Curvature& in, cpm_Curvature_t& out) {
+  memset(&out, 0, sizeof(cpm_Curvature_t));
 
   toStruct_CurvatureValue(in.curvature_value, out.curvatureValue);
   toStruct_CurvatureConfidence(in.curvature_confidence, out.curvatureConfidence);

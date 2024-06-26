@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LongitudinalLanePosition.h>
+#include <etsi_its_cpm_coding/cpm_LongitudinalLanePosition.h>
 #include <etsi_its_cpm_conversion/convertLongitudinalLanePositionConfidence.h>
 #include <etsi_its_cpm_conversion/convertLongitudinalLanePositionValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LongitudinalLanePosition(const LongitudinalLanePosition_t& in, cpm_msgs::LongitudinalLanePosition& out) {
+void toRos_LongitudinalLanePosition(const cpm_LongitudinalLanePosition_t& in, cpm_msgs::LongitudinalLanePosition& out) {
   toRos_LongitudinalLanePositionValue(in.longitudinalLanePositionValue, out.longitudinal_lane_position_value);
   toRos_LongitudinalLanePositionConfidence(in.longitudinalLanePositionConfidence, out.longitudinal_lane_position_confidence);
 }
 
-void toStruct_LongitudinalLanePosition(const cpm_msgs::LongitudinalLanePosition& in, LongitudinalLanePosition_t& out) {
-  memset(&out, 0, sizeof(LongitudinalLanePosition_t));
+void toStruct_LongitudinalLanePosition(const cpm_msgs::LongitudinalLanePosition& in, cpm_LongitudinalLanePosition_t& out) {
+  memset(&out, 0, sizeof(cpm_LongitudinalLanePosition_t));
 
   toStruct_LongitudinalLanePositionValue(in.longitudinal_lane_position_value, out.longitudinalLanePositionValue);
   toStruct_LongitudinalLanePositionConfidence(in.longitudinal_lane_position_confidence, out.longitudinalLanePositionConfidence);

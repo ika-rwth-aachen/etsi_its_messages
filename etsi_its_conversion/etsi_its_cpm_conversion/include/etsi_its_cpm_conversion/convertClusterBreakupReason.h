@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ClusterBreakupReason.h>
+#include <etsi_its_cpm_coding/cpm_ClusterBreakupReason.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/ClusterBreakupReason.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ClusterBreakupReason(const ClusterBreakupReason_t& in, cpm_msgs::ClusterBreakupReason& out) {
+void toRos_ClusterBreakupReason(const cpm_ClusterBreakupReason_t& in, cpm_msgs::ClusterBreakupReason& out) {
   out.value = in;
 }
 
-void toStruct_ClusterBreakupReason(const cpm_msgs::ClusterBreakupReason& in, ClusterBreakupReason_t& out) {
-  memset(&out, 0, sizeof(ClusterBreakupReason_t));
+void toStruct_ClusterBreakupReason(const cpm_msgs::ClusterBreakupReason& in, cpm_ClusterBreakupReason_t& out) {
+  memset(&out, 0, sizeof(cpm_ClusterBreakupReason_t));
 
   out = in.value;
 }

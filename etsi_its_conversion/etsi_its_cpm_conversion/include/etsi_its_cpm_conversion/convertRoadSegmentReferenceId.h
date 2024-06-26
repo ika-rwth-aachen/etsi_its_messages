@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RoadSegmentReferenceId.h>
+#include <etsi_its_cpm_coding/cpm_RoadSegmentReferenceId.h>
 #include <etsi_its_cpm_conversion/convertIdentifier2B.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/RoadSegmentReferenceId.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RoadSegmentReferenceId(const RoadSegmentReferenceId_t& in, cpm_msgs::RoadSegmentReferenceId& out) {
+void toRos_RoadSegmentReferenceId(const cpm_RoadSegmentReferenceId_t& in, cpm_msgs::RoadSegmentReferenceId& out) {
   if (in.region) {
     toRos_Identifier2B(*in.region, out.region);
     out.region_is_present = true;
@@ -48,11 +48,11 @@ void toRos_RoadSegmentReferenceId(const RoadSegmentReferenceId_t& in, cpm_msgs::
   toRos_Identifier2B(in.id, out.id);
 }
 
-void toStruct_RoadSegmentReferenceId(const cpm_msgs::RoadSegmentReferenceId& in, RoadSegmentReferenceId_t& out) {
-  memset(&out, 0, sizeof(RoadSegmentReferenceId_t));
+void toStruct_RoadSegmentReferenceId(const cpm_msgs::RoadSegmentReferenceId& in, cpm_RoadSegmentReferenceId_t& out) {
+  memset(&out, 0, sizeof(cpm_RoadSegmentReferenceId_t));
 
   if (in.region_is_present) {
-    out.region = (Identifier2B_t*) calloc(1, sizeof(Identifier2B_t));
+    out.region = (cpm_Identifier2B_t*) calloc(1, sizeof(cpm_Identifier2B_t));
     toStruct_Identifier2B(in.region, *out.region);
   }
   toStruct_Identifier2B(in.id, out.id);

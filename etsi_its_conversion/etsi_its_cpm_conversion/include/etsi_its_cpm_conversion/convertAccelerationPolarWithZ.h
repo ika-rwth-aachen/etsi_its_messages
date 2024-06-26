@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationPolarWithZ.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationPolarWithZ.h>
 #include <etsi_its_cpm_conversion/convertAccelerationComponent.h>
 #include <etsi_its_cpm_conversion/convertAccelerationMagnitude.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngle.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationPolarWithZ(const AccelerationPolarWithZ_t& in, cpm_msgs::AccelerationPolarWithZ& out) {
+void toRos_AccelerationPolarWithZ(const cpm_AccelerationPolarWithZ_t& in, cpm_msgs::AccelerationPolarWithZ& out) {
   toRos_AccelerationMagnitude(in.accelerationMagnitude, out.acceleration_magnitude);
   toRos_CartesianAngle(in.accelerationDirection, out.acceleration_direction);
   if (in.zAcceleration) {
@@ -51,13 +51,13 @@ void toRos_AccelerationPolarWithZ(const AccelerationPolarWithZ_t& in, cpm_msgs::
   }
 }
 
-void toStruct_AccelerationPolarWithZ(const cpm_msgs::AccelerationPolarWithZ& in, AccelerationPolarWithZ_t& out) {
-  memset(&out, 0, sizeof(AccelerationPolarWithZ_t));
+void toStruct_AccelerationPolarWithZ(const cpm_msgs::AccelerationPolarWithZ& in, cpm_AccelerationPolarWithZ_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationPolarWithZ_t));
 
   toStruct_AccelerationMagnitude(in.acceleration_magnitude, out.accelerationMagnitude);
   toStruct_CartesianAngle(in.acceleration_direction, out.accelerationDirection);
   if (in.z_acceleration_is_present) {
-    out.zAcceleration = (AccelerationComponent_t*) calloc(1, sizeof(AccelerationComponent_t));
+    out.zAcceleration = (cpm_AccelerationComponent_t*) calloc(1, sizeof(cpm_AccelerationComponent_t));
     toStruct_AccelerationComponent(in.z_acceleration, *out.zAcceleration);
   }
 }

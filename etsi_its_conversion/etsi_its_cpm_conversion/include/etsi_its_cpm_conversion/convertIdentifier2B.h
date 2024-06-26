@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Identifier2B.h>
+#include <etsi_its_cpm_coding/cpm_Identifier2B.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Identifier2B(const Identifier2B_t& in, cpm_msgs::Identifier2B& out) {
+void toRos_Identifier2B(const cpm_Identifier2B_t& in, cpm_msgs::Identifier2B& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Identifier2B(const cpm_msgs::Identifier2B& in, Identifier2B_t& out) {
-  memset(&out, 0, sizeof(Identifier2B_t));
+void toStruct_Identifier2B(const cpm_msgs::Identifier2B& in, cpm_Identifier2B_t& out) {
+  memset(&out, 0, sizeof(cpm_Identifier2B_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleLengthConfidenceIndication.h>
+#include <etsi_its_cpm_coding/cpm_VehicleLengthConfidenceIndication.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VehicleLengthConfidenceIndication.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleLengthConfidenceIndication(const VehicleLengthConfidenceIndication_t& in, cpm_msgs::VehicleLengthConfidenceIndication& out) {
+void toRos_VehicleLengthConfidenceIndication(const cpm_VehicleLengthConfidenceIndication_t& in, cpm_msgs::VehicleLengthConfidenceIndication& out) {
   out.value = in;
 }
 
-void toStruct_VehicleLengthConfidenceIndication(const cpm_msgs::VehicleLengthConfidenceIndication& in, VehicleLengthConfidenceIndication_t& out) {
-  memset(&out, 0, sizeof(VehicleLengthConfidenceIndication_t));
+void toStruct_VehicleLengthConfidenceIndication(const cpm_msgs::VehicleLengthConfidenceIndication& in, cpm_VehicleLengthConfidenceIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleLengthConfidenceIndication_t));
 
   out = in.value;
 }

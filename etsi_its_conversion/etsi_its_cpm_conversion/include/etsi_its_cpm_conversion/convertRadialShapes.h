@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/RadialShapes.h>
+#include <etsi_its_cpm_coding/cpm_RadialShapes.h>
 #include <etsi_its_cpm_conversion/convertCartesianCoordinateSmall.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertRadialShapesList.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_RadialShapes(const RadialShapes_t& in, cpm_msgs::RadialShapes& out) {
+void toRos_RadialShapes(const cpm_RadialShapes_t& in, cpm_msgs::RadialShapes& out) {
   toRos_Identifier1B(in.refPointId, out.ref_point_id);
   toRos_CartesianCoordinateSmall(in.xCoordinate, out.x_coordinate);
   toRos_CartesianCoordinateSmall(in.yCoordinate, out.y_coordinate);
@@ -53,14 +53,14 @@ void toRos_RadialShapes(const RadialShapes_t& in, cpm_msgs::RadialShapes& out) {
   toRos_RadialShapesList(in.radialShapesList, out.radial_shapes_list);
 }
 
-void toStruct_RadialShapes(const cpm_msgs::RadialShapes& in, RadialShapes_t& out) {
-  memset(&out, 0, sizeof(RadialShapes_t));
+void toStruct_RadialShapes(const cpm_msgs::RadialShapes& in, cpm_RadialShapes_t& out) {
+  memset(&out, 0, sizeof(cpm_RadialShapes_t));
 
   toStruct_Identifier1B(in.ref_point_id, out.refPointId);
   toStruct_CartesianCoordinateSmall(in.x_coordinate, out.xCoordinate);
   toStruct_CartesianCoordinateSmall(in.y_coordinate, out.yCoordinate);
   if (in.z_coordinate_is_present) {
-    out.zCoordinate = (CartesianCoordinateSmall_t*) calloc(1, sizeof(CartesianCoordinateSmall_t));
+    out.zCoordinate = (cpm_CartesianCoordinateSmall_t*) calloc(1, sizeof(cpm_CartesianCoordinateSmall_t));
     toStruct_CartesianCoordinateSmall(in.z_coordinate, *out.zCoordinate);
   }
   toStruct_RadialShapesList(in.radial_shapes_list, out.radialShapesList);

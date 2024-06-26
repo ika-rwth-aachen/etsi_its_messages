@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruDeviceUsage.h>
+#include <etsi_its_cpm_coding/cpm_VruDeviceUsage.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruDeviceUsage.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruDeviceUsage(const VruDeviceUsage_t& in, cpm_msgs::VruDeviceUsage& out) {
+void toRos_VruDeviceUsage(const cpm_VruDeviceUsage_t& in, cpm_msgs::VruDeviceUsage& out) {
   out.value = in;
 }
 
-void toStruct_VruDeviceUsage(const cpm_msgs::VruDeviceUsage& in, VruDeviceUsage_t& out) {
-  memset(&out, 0, sizeof(VruDeviceUsage_t));
+void toStruct_VruDeviceUsage(const cpm_msgs::VruDeviceUsage& in, cpm_VruDeviceUsage_t& out) {
+  memset(&out, 0, sizeof(cpm_VruDeviceUsage_t));
 
   out = in.value;
 }

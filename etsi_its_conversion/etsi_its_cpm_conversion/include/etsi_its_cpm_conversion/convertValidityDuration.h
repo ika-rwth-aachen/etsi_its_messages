@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ValidityDuration.h>
+#include <etsi_its_cpm_coding/cpm_ValidityDuration.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ValidityDuration(const ValidityDuration_t& in, cpm_msgs::ValidityDuration& out) {
+void toRos_ValidityDuration(const cpm_ValidityDuration_t& in, cpm_msgs::ValidityDuration& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_ValidityDuration(const cpm_msgs::ValidityDuration& in, ValidityDuration_t& out) {
-  memset(&out, 0, sizeof(ValidityDuration_t));
+void toStruct_ValidityDuration(const cpm_msgs::ValidityDuration& in, cpm_ValidityDuration_t& out) {
+  memset(&out, 0, sizeof(cpm_ValidityDuration_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

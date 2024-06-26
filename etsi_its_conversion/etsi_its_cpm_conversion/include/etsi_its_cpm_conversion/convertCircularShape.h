@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CircularShape.h>
+#include <etsi_its_cpm_coding/cpm_CircularShape.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertStandardLength12b.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CircularShape(const CircularShape_t& in, cpm_msgs::CircularShape& out) {
+void toRos_CircularShape(const cpm_CircularShape_t& in, cpm_msgs::CircularShape& out) {
   if (in.shapeReferencePoint) {
     toRos_CartesianPosition3d(*in.shapeReferencePoint, out.shape_reference_point);
     out.shape_reference_point_is_present = true;
@@ -53,16 +53,16 @@ void toRos_CircularShape(const CircularShape_t& in, cpm_msgs::CircularShape& out
   }
 }
 
-void toStruct_CircularShape(const cpm_msgs::CircularShape& in, CircularShape_t& out) {
-  memset(&out, 0, sizeof(CircularShape_t));
+void toStruct_CircularShape(const cpm_msgs::CircularShape& in, cpm_CircularShape_t& out) {
+  memset(&out, 0, sizeof(cpm_CircularShape_t));
 
   if (in.shape_reference_point_is_present) {
-    out.shapeReferencePoint = (CartesianPosition3d_t*) calloc(1, sizeof(CartesianPosition3d_t));
+    out.shapeReferencePoint = (cpm_CartesianPosition3d_t*) calloc(1, sizeof(cpm_CartesianPosition3d_t));
     toStruct_CartesianPosition3d(in.shape_reference_point, *out.shapeReferencePoint);
   }
   toStruct_StandardLength12b(in.radius, out.radius);
   if (in.height_is_present) {
-    out.height = (StandardLength12b_t*) calloc(1, sizeof(StandardLength12b_t));
+    out.height = (cpm_StandardLength12b_t*) calloc(1, sizeof(cpm_StandardLength12b_t));
     toStruct_StandardLength12b(in.height, *out.height);
   }
 }

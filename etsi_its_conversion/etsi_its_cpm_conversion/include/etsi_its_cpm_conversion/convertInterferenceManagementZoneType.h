@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InterferenceManagementZoneType.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementZoneType.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/InterferenceManagementZoneType.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementZoneType(const InterferenceManagementZoneType_t& in, cpm_msgs::InterferenceManagementZoneType& out) {
+void toRos_InterferenceManagementZoneType(const cpm_InterferenceManagementZoneType_t& in, cpm_msgs::InterferenceManagementZoneType& out) {
   out.value = in;
 }
 
-void toStruct_InterferenceManagementZoneType(const cpm_msgs::InterferenceManagementZoneType& in, InterferenceManagementZoneType_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementZoneType_t));
+void toStruct_InterferenceManagementZoneType(const cpm_msgs::InterferenceManagementZoneType& in, cpm_InterferenceManagementZoneType_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementZoneType_t));
 
   out = in.value;
 }

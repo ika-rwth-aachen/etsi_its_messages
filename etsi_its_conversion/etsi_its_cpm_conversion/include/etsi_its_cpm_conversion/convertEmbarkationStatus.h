@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EmbarkationStatus.h>
+#include <etsi_its_cpm_coding/cpm_EmbarkationStatus.h>
 #include <etsi_its_cpm_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EmbarkationStatus(const EmbarkationStatus_t& in, cpm_msgs::EmbarkationStatus& out) {
+void toRos_EmbarkationStatus(const cpm_EmbarkationStatus_t& in, cpm_msgs::EmbarkationStatus& out) {
   etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);
 }
 
-void toStruct_EmbarkationStatus(const cpm_msgs::EmbarkationStatus& in, EmbarkationStatus_t& out) {
-  memset(&out, 0, sizeof(EmbarkationStatus_t));
+void toStruct_EmbarkationStatus(const cpm_msgs::EmbarkationStatus& in, cpm_EmbarkationStatus_t& out) {
+  memset(&out, 0, sizeof(cpm_EmbarkationStatus_t));
 
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.value, out);
 }

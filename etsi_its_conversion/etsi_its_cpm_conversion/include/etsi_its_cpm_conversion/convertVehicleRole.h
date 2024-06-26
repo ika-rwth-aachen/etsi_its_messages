@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleRole.h>
+#include <etsi_its_cpm_coding/cpm_VehicleRole.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VehicleRole.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleRole(const VehicleRole_t& in, cpm_msgs::VehicleRole& out) {
+void toRos_VehicleRole(const cpm_VehicleRole_t& in, cpm_msgs::VehicleRole& out) {
   out.value = in;
 }
 
-void toStruct_VehicleRole(const cpm_msgs::VehicleRole& in, VehicleRole_t& out) {
-  memset(&out, 0, sizeof(VehicleRole_t));
+void toStruct_VehicleRole(const cpm_msgs::VehicleRole& in, cpm_VehicleRole_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleRole_t));
 
   out = in.value;
 }

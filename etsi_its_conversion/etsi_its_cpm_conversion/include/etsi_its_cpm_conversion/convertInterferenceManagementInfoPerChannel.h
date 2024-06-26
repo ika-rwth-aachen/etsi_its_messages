@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/InterferenceManagementInfoPerChannel.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementInfoPerChannel.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementChannel.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementZoneType.h>
 #include <etsi_its_cpm_conversion/convertMitigationForTechnologies.h>
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementInfoPerChannel(const InterferenceManagementInfoPerChannel_t& in, cpm_msgs::InterferenceManagementInfoPerChannel& out) {
+void toRos_InterferenceManagementInfoPerChannel(const cpm_InterferenceManagementInfoPerChannel_t& in, cpm_msgs::InterferenceManagementInfoPerChannel& out) {
   toRos_InterferenceManagementChannel(in.interferenceManagementChannel, out.interference_management_channel);
   toRos_InterferenceManagementZoneType(in.interferenceManagementZoneType, out.interference_management_zone_type);
   if (in.interferenceManagementMitigationType) {
@@ -56,17 +56,17 @@ void toRos_InterferenceManagementInfoPerChannel(const InterferenceManagementInfo
   }
 }
 
-void toStruct_InterferenceManagementInfoPerChannel(const cpm_msgs::InterferenceManagementInfoPerChannel& in, InterferenceManagementInfoPerChannel_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementInfoPerChannel_t));
+void toStruct_InterferenceManagementInfoPerChannel(const cpm_msgs::InterferenceManagementInfoPerChannel& in, cpm_InterferenceManagementInfoPerChannel_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementInfoPerChannel_t));
 
   toStruct_InterferenceManagementChannel(in.interference_management_channel, out.interferenceManagementChannel);
   toStruct_InterferenceManagementZoneType(in.interference_management_zone_type, out.interferenceManagementZoneType);
   if (in.interference_management_mitigation_type_is_present) {
-    out.interferenceManagementMitigationType = (MitigationForTechnologies_t*) calloc(1, sizeof(MitigationForTechnologies_t));
+    out.interferenceManagementMitigationType = (cpm_MitigationForTechnologies_t*) calloc(1, sizeof(cpm_MitigationForTechnologies_t));
     toStruct_MitigationForTechnologies(in.interference_management_mitigation_type, *out.interferenceManagementMitigationType);
   }
   if (in.expiry_time_is_present) {
-    out.expiryTime = (TimestampIts_t*) calloc(1, sizeof(TimestampIts_t));
+    out.expiryTime = (cpm_TimestampIts_t*) calloc(1, sizeof(cpm_TimestampIts_t));
     toStruct_TimestampIts(in.expiry_time, *out.expiryTime);
   }
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/SequenceOfIdentifier1B.h>
+#include <etsi_its_cpm_coding/cpm_SequenceOfIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertSequenceOfIdentifier1B.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SequenceOfIdentifier1B(const SequenceOfIdentifier1B_t& in, cpm_msgs::SequenceOfIdentifier1B& out) {
+void toRos_SequenceOfIdentifier1B(const cpm_SequenceOfIdentifier1B_t& in, cpm_msgs::SequenceOfIdentifier1B& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::Identifier1B el;
     toRos_Identifier1B(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_SequenceOfIdentifier1B(const SequenceOfIdentifier1B_t& in, cpm_msgs::
   }
 }
 
-void toStruct_SequenceOfIdentifier1B(const cpm_msgs::SequenceOfIdentifier1B& in, SequenceOfIdentifier1B_t& out) {
-  memset(&out, 0, sizeof(SequenceOfIdentifier1B_t));
+void toStruct_SequenceOfIdentifier1B(const cpm_msgs::SequenceOfIdentifier1B& in, cpm_SequenceOfIdentifier1B_t& out) {
+  memset(&out, 0, sizeof(cpm_SequenceOfIdentifier1B_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    Identifier1B_t* el = (Identifier1B_t*) calloc(1, sizeof(Identifier1B_t));
+    cpm_Identifier1B_t* el = (cpm_Identifier1B_t*) calloc(1, sizeof(cpm_Identifier1B_t));
     toStruct_Identifier1B(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

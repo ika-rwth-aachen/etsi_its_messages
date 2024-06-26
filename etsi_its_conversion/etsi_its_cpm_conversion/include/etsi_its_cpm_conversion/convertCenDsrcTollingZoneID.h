@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CenDsrcTollingZoneID.h>
+#include <etsi_its_cpm_coding/cpm_CenDsrcTollingZoneID.h>
 #include <etsi_its_cpm_conversion/convertProtectedZoneId.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/CenDsrcTollingZoneID.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CenDsrcTollingZoneID(const CenDsrcTollingZoneID_t& in, cpm_msgs::CenDsrcTollingZoneID& out) {
+void toRos_CenDsrcTollingZoneID(const cpm_CenDsrcTollingZoneID_t& in, cpm_msgs::CenDsrcTollingZoneID& out) {
   toRos_ProtectedZoneId(in, out.value);
 }
 
-void toStruct_CenDsrcTollingZoneID(const cpm_msgs::CenDsrcTollingZoneID& in, CenDsrcTollingZoneID_t& out) {
-  memset(&out, 0, sizeof(CenDsrcTollingZoneID_t));
+void toStruct_CenDsrcTollingZoneID(const cpm_msgs::CenDsrcTollingZoneID& in, cpm_CenDsrcTollingZoneID_t& out) {
+  memset(&out, 0, sizeof(cpm_CenDsrcTollingZoneID_t));
 
   toStruct_ProtectedZoneId(in.value, out);
 }

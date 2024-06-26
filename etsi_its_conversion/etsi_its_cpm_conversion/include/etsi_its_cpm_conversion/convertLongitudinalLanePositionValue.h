@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LongitudinalLanePositionValue.h>
+#include <etsi_its_cpm_coding/cpm_LongitudinalLanePositionValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LongitudinalLanePositionValue(const LongitudinalLanePositionValue_t& in, cpm_msgs::LongitudinalLanePositionValue& out) {
+void toRos_LongitudinalLanePositionValue(const cpm_LongitudinalLanePositionValue_t& in, cpm_msgs::LongitudinalLanePositionValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_LongitudinalLanePositionValue(const cpm_msgs::LongitudinalLanePositionValue& in, LongitudinalLanePositionValue_t& out) {
-  memset(&out, 0, sizeof(LongitudinalLanePositionValue_t));
+void toStruct_LongitudinalLanePositionValue(const cpm_msgs::LongitudinalLanePositionValue& in, cpm_LongitudinalLanePositionValue_t& out) {
+  memset(&out, 0, sizeof(cpm_LongitudinalLanePositionValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EulerAnglesWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_EulerAnglesWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngle.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/EulerAnglesWithConfidence.h>
@@ -40,7 +40,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EulerAnglesWithConfidence(const EulerAnglesWithConfidence_t& in, cpm_msgs::EulerAnglesWithConfidence& out) {
+void toRos_EulerAnglesWithConfidence(const cpm_EulerAnglesWithConfidence_t& in, cpm_msgs::EulerAnglesWithConfidence& out) {
   toRos_CartesianAngle(in.zAngle, out.z_angle);
   if (in.yAngle) {
     toRos_CartesianAngle(*in.yAngle, out.y_angle);
@@ -52,16 +52,16 @@ void toRos_EulerAnglesWithConfidence(const EulerAnglesWithConfidence_t& in, cpm_
   }
 }
 
-void toStruct_EulerAnglesWithConfidence(const cpm_msgs::EulerAnglesWithConfidence& in, EulerAnglesWithConfidence_t& out) {
-  memset(&out, 0, sizeof(EulerAnglesWithConfidence_t));
+void toStruct_EulerAnglesWithConfidence(const cpm_msgs::EulerAnglesWithConfidence& in, cpm_EulerAnglesWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_EulerAnglesWithConfidence_t));
 
   toStruct_CartesianAngle(in.z_angle, out.zAngle);
   if (in.y_angle_is_present) {
-    out.yAngle = (CartesianAngle_t*) calloc(1, sizeof(CartesianAngle_t));
+    out.yAngle = (cpm_CartesianAngle_t*) calloc(1, sizeof(cpm_CartesianAngle_t));
     toStruct_CartesianAngle(in.y_angle, *out.yAngle);
   }
   if (in.x_angle_is_present) {
-    out.xAngle = (CartesianAngle_t*) calloc(1, sizeof(CartesianAngle_t));
+    out.xAngle = (cpm_CartesianAngle_t*) calloc(1, sizeof(cpm_CartesianAngle_t));
     toStruct_CartesianAngle(in.x_angle, *out.xAngle);
   }
 }

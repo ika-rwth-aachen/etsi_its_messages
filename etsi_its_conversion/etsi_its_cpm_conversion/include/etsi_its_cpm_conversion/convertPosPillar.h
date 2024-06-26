@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PosPillar.h>
+#include <etsi_its_cpm_coding/cpm_PosPillar.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PosPillar(const PosPillar_t& in, cpm_msgs::PosPillar& out) {
+void toRos_PosPillar(const cpm_PosPillar_t& in, cpm_msgs::PosPillar& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PosPillar(const cpm_msgs::PosPillar& in, PosPillar_t& out) {
-  memset(&out, 0, sizeof(PosPillar_t));
+void toStruct_PosPillar(const cpm_msgs::PosPillar& in, cpm_PosPillar_t& out) {
+  memset(&out, 0, sizeof(cpm_PosPillar_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

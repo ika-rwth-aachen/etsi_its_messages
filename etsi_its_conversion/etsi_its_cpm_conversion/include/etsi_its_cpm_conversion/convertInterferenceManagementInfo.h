@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/InterferenceManagementInfo.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementInfo.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementInfo.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementInfoPerChannel.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementInfo(const InterferenceManagementInfo_t& in, cpm_msgs::InterferenceManagementInfo& out) {
+void toRos_InterferenceManagementInfo(const cpm_InterferenceManagementInfo_t& in, cpm_msgs::InterferenceManagementInfo& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::InterferenceManagementInfoPerChannel el;
     toRos_InterferenceManagementInfoPerChannel(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_InterferenceManagementInfo(const InterferenceManagementInfo_t& in, cp
   }
 }
 
-void toStruct_InterferenceManagementInfo(const cpm_msgs::InterferenceManagementInfo& in, InterferenceManagementInfo_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementInfo_t));
+void toStruct_InterferenceManagementInfo(const cpm_msgs::InterferenceManagementInfo& in, cpm_InterferenceManagementInfo_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementInfo_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    InterferenceManagementInfoPerChannel_t* el = (InterferenceManagementInfoPerChannel_t*) calloc(1, sizeof(InterferenceManagementInfoPerChannel_t));
+    cpm_InterferenceManagementInfoPerChannel_t* el = (cpm_InterferenceManagementInfoPerChannel_t*) calloc(1, sizeof(cpm_InterferenceManagementInfoPerChannel_t));
     toStruct_InterferenceManagementInfoPerChannel(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

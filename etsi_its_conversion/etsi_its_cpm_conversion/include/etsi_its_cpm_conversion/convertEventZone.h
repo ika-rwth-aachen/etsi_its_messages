@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EventZone.h>
+#include <etsi_its_cpm_coding/cpm_EventZone.h>
 #include <etsi_its_cpm_conversion/convertEventHistory.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/EventZone.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EventZone(const EventZone_t& in, cpm_msgs::EventZone& out) {
+void toRos_EventZone(const cpm_EventZone_t& in, cpm_msgs::EventZone& out) {
   toRos_EventHistory(in, out.value);
 }
 
-void toStruct_EventZone(const cpm_msgs::EventZone& in, EventZone_t& out) {
-  memset(&out, 0, sizeof(EventZone_t));
+void toStruct_EventZone(const cpm_msgs::EventZone& in, cpm_EventZone_t& out) {
+  memset(&out, 0, sizeof(cpm_EventZone_t));
 
   toStruct_EventHistory(in.value, out);
 }

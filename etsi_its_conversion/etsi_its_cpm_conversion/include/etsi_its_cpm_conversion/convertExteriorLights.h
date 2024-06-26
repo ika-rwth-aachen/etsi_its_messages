@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ExteriorLights.h>
+#include <etsi_its_cpm_coding/cpm_ExteriorLights.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ExteriorLights(const ExteriorLights_t& in, cpm_msgs::ExteriorLights& out) {
+void toRos_ExteriorLights(const cpm_ExteriorLights_t& in, cpm_msgs::ExteriorLights& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_ExteriorLights(const cpm_msgs::ExteriorLights& in, ExteriorLights_t& out) {
-  memset(&out, 0, sizeof(ExteriorLights_t));
+void toStruct_ExteriorLights(const cpm_msgs::ExteriorLights& in, cpm_ExteriorLights_t& out) {
+  memset(&out, 0, sizeof(cpm_ExteriorLights_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

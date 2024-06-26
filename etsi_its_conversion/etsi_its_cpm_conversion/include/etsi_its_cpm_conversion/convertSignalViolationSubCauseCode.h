@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SignalViolationSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_SignalViolationSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SignalViolationSubCauseCode(const SignalViolationSubCauseCode_t& in, cpm_msgs::SignalViolationSubCauseCode& out) {
+void toRos_SignalViolationSubCauseCode(const cpm_SignalViolationSubCauseCode_t& in, cpm_msgs::SignalViolationSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SignalViolationSubCauseCode(const cpm_msgs::SignalViolationSubCauseCode& in, SignalViolationSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(SignalViolationSubCauseCode_t));
+void toStruct_SignalViolationSubCauseCode(const cpm_msgs::SignalViolationSubCauseCode& in, cpm_SignalViolationSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_SignalViolationSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

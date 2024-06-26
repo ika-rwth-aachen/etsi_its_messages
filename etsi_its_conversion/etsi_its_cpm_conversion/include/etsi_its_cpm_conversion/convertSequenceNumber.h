@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SequenceNumber.h>
+#include <etsi_its_cpm_coding/cpm_SequenceNumber.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SequenceNumber(const SequenceNumber_t& in, cpm_msgs::SequenceNumber& out) {
+void toRos_SequenceNumber(const cpm_SequenceNumber_t& in, cpm_msgs::SequenceNumber& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SequenceNumber(const cpm_msgs::SequenceNumber& in, SequenceNumber_t& out) {
-  memset(&out, 0, sizeof(SequenceNumber_t));
+void toStruct_SequenceNumber(const cpm_msgs::SequenceNumber& in, cpm_SequenceNumber_t& out) {
+  memset(&out, 0, sizeof(cpm_SequenceNumber_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/PerceivedObjects.h>
+#include <etsi_its_cpm_coding/cpm_PerceivedObjects.h>
 #include <etsi_its_cpm_conversion/convertPerceivedObject.h>
 #include <etsi_its_cpm_conversion/convertPerceivedObjects.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerceivedObjects(const PerceivedObjects_t& in, cpm_msgs::PerceivedObjects& out) {
+void toRos_PerceivedObjects(const cpm_PerceivedObjects_t& in, cpm_msgs::PerceivedObjects& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::PerceivedObject el;
     toRos_PerceivedObject(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_PerceivedObjects(const PerceivedObjects_t& in, cpm_msgs::PerceivedObj
   }
 }
 
-void toStruct_PerceivedObjects(const cpm_msgs::PerceivedObjects& in, PerceivedObjects_t& out) {
-  memset(&out, 0, sizeof(PerceivedObjects_t));
+void toStruct_PerceivedObjects(const cpm_msgs::PerceivedObjects& in, cpm_PerceivedObjects_t& out) {
+  memset(&out, 0, sizeof(cpm_PerceivedObjects_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    PerceivedObject_t* el = (PerceivedObject_t*) calloc(1, sizeof(PerceivedObject_t));
+    cpm_PerceivedObject_t* el = (cpm_PerceivedObject_t*) calloc(1, sizeof(cpm_PerceivedObject_t));
     toStruct_PerceivedObject(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

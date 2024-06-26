@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DriveDirection.h>
+#include <etsi_its_cpm_coding/cpm_DriveDirection.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/DriveDirection.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DriveDirection(const DriveDirection_t& in, cpm_msgs::DriveDirection& out) {
+void toRos_DriveDirection(const cpm_DriveDirection_t& in, cpm_msgs::DriveDirection& out) {
   out.value = in;
 }
 
-void toStruct_DriveDirection(const cpm_msgs::DriveDirection& in, DriveDirection_t& out) {
-  memset(&out, 0, sizeof(DriveDirection_t));
+void toStruct_DriveDirection(const cpm_msgs::DriveDirection& in, cpm_DriveDirection_t& out) {
+  memset(&out, 0, sizeof(cpm_DriveDirection_t));
 
   out = in.value;
 }

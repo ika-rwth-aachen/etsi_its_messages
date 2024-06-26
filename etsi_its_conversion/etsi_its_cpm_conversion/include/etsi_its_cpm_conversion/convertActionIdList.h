@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/ActionIdList.h>
+#include <etsi_its_cpm_coding/cpm_ActionIdList.h>
 #include <etsi_its_cpm_conversion/convertActionId.h>
 #include <etsi_its_cpm_conversion/convertActionIdList.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ActionIdList(const ActionIdList_t& in, cpm_msgs::ActionIdList& out) {
+void toRos_ActionIdList(const cpm_ActionIdList_t& in, cpm_msgs::ActionIdList& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::ActionId el;
     toRos_ActionId(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_ActionIdList(const ActionIdList_t& in, cpm_msgs::ActionIdList& out) {
   }
 }
 
-void toStruct_ActionIdList(const cpm_msgs::ActionIdList& in, ActionIdList_t& out) {
-  memset(&out, 0, sizeof(ActionIdList_t));
+void toStruct_ActionIdList(const cpm_msgs::ActionIdList& in, cpm_ActionIdList_t& out) {
+  memset(&out, 0, sizeof(cpm_ActionIdList_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ActionId_t* el = (ActionId_t*) calloc(1, sizeof(ActionId_t));
+    cpm_ActionId_t* el = (cpm_ActionId_t*) calloc(1, sizeof(cpm_ActionId_t));
     toStruct_ActionId(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

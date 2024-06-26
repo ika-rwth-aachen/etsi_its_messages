@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/YawRateValue.h>
+#include <etsi_its_cpm_coding/cpm_YawRateValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_YawRateValue(const YawRateValue_t& in, cpm_msgs::YawRateValue& out) {
+void toRos_YawRateValue(const cpm_YawRateValue_t& in, cpm_msgs::YawRateValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_YawRateValue(const cpm_msgs::YawRateValue& in, YawRateValue_t& out) {
-  memset(&out, 0, sizeof(YawRateValue_t));
+void toStruct_YawRateValue(const cpm_msgs::YawRateValue& in, cpm_YawRateValue_t& out) {
+  memset(&out, 0, sizeof(cpm_YawRateValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

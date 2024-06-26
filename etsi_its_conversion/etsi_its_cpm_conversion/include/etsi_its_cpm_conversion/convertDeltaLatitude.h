@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/DeltaLatitude.h>
+#include <etsi_its_cpm_coding/cpm_DeltaLatitude.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_DeltaLatitude(const DeltaLatitude_t& in, cpm_msgs::DeltaLatitude& out) {
+void toRos_DeltaLatitude(const cpm_DeltaLatitude_t& in, cpm_msgs::DeltaLatitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaLatitude(const cpm_msgs::DeltaLatitude& in, DeltaLatitude_t& out) {
-  memset(&out, 0, sizeof(DeltaLatitude_t));
+void toStruct_DeltaLatitude(const cpm_msgs::DeltaLatitude& in, cpm_DeltaLatitude_t& out) {
+  memset(&out, 0, sizeof(cpm_DeltaLatitude_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

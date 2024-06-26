@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Iso3833VehicleType.h>
+#include <etsi_its_cpm_coding/cpm_Iso3833VehicleType.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Iso3833VehicleType(const Iso3833VehicleType_t& in, cpm_msgs::Iso3833VehicleType& out) {
+void toRos_Iso3833VehicleType(const cpm_Iso3833VehicleType_t& in, cpm_msgs::Iso3833VehicleType& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Iso3833VehicleType(const cpm_msgs::Iso3833VehicleType& in, Iso3833VehicleType_t& out) {
-  memset(&out, 0, sizeof(Iso3833VehicleType_t));
+void toStruct_Iso3833VehicleType(const cpm_msgs::Iso3833VehicleType& in, cpm_Iso3833VehicleType_t& out) {
+  memset(&out, 0, sizeof(cpm_Iso3833VehicleType_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

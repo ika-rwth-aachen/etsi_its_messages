@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationMagnitude.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationMagnitude.h>
 #include <etsi_its_cpm_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cpm_conversion/convertAccelerationMagnitudeValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationMagnitude(const AccelerationMagnitude_t& in, cpm_msgs::AccelerationMagnitude& out) {
+void toRos_AccelerationMagnitude(const cpm_AccelerationMagnitude_t& in, cpm_msgs::AccelerationMagnitude& out) {
   toRos_AccelerationMagnitudeValue(in.accelerationMagnitudeValue, out.acceleration_magnitude_value);
   toRos_AccelerationConfidence(in.accelerationConfidence, out.acceleration_confidence);
 }
 
-void toStruct_AccelerationMagnitude(const cpm_msgs::AccelerationMagnitude& in, AccelerationMagnitude_t& out) {
-  memset(&out, 0, sizeof(AccelerationMagnitude_t));
+void toStruct_AccelerationMagnitude(const cpm_msgs::AccelerationMagnitude& in, cpm_AccelerationMagnitude_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationMagnitude_t));
 
   toStruct_AccelerationMagnitudeValue(in.acceleration_magnitude_value, out.accelerationMagnitudeValue);
   toStruct_AccelerationConfidence(in.acceleration_confidence, out.accelerationConfidence);

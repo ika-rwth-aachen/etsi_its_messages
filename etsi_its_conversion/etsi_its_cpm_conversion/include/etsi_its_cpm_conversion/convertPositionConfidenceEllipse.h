@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PositionConfidenceEllipse.h>
+#include <etsi_its_cpm_coding/cpm_PositionConfidenceEllipse.h>
 #include <etsi_its_cpm_conversion/convertSemiAxisLength.h>
 #include <etsi_its_cpm_conversion/convertWgs84AngleValue.h>
 #ifdef ROS1
@@ -41,14 +41,14 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PositionConfidenceEllipse(const PositionConfidenceEllipse_t& in, cpm_msgs::PositionConfidenceEllipse& out) {
+void toRos_PositionConfidenceEllipse(const cpm_PositionConfidenceEllipse_t& in, cpm_msgs::PositionConfidenceEllipse& out) {
   toRos_SemiAxisLength(in.semiMajorAxisLength, out.semi_major_axis_length);
   toRos_SemiAxisLength(in.semiMinorAxisLength, out.semi_minor_axis_length);
   toRos_Wgs84AngleValue(in.semiMajorAxisOrientation, out.semi_major_axis_orientation);
 }
 
-void toStruct_PositionConfidenceEllipse(const cpm_msgs::PositionConfidenceEllipse& in, PositionConfidenceEllipse_t& out) {
-  memset(&out, 0, sizeof(PositionConfidenceEllipse_t));
+void toStruct_PositionConfidenceEllipse(const cpm_msgs::PositionConfidenceEllipse& in, cpm_PositionConfidenceEllipse_t& out) {
+  memset(&out, 0, sizeof(cpm_PositionConfidenceEllipse_t));
 
   toStruct_SemiAxisLength(in.semi_major_axis_length, out.semiMajorAxisLength);
   toStruct_SemiAxisLength(in.semi_minor_axis_length, out.semiMinorAxisLength);

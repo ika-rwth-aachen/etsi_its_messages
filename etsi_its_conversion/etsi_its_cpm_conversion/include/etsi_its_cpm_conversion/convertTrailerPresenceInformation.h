@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrailerPresenceInformation.h>
+#include <etsi_its_cpm_coding/cpm_TrailerPresenceInformation.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/TrailerPresenceInformation.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrailerPresenceInformation(const TrailerPresenceInformation_t& in, cpm_msgs::TrailerPresenceInformation& out) {
+void toRos_TrailerPresenceInformation(const cpm_TrailerPresenceInformation_t& in, cpm_msgs::TrailerPresenceInformation& out) {
   out.value = in;
 }
 
-void toStruct_TrailerPresenceInformation(const cpm_msgs::TrailerPresenceInformation& in, TrailerPresenceInformation_t& out) {
-  memset(&out, 0, sizeof(TrailerPresenceInformation_t));
+void toStruct_TrailerPresenceInformation(const cpm_msgs::TrailerPresenceInformation& in, cpm_TrailerPresenceInformation_t& out) {
+  memset(&out, 0, sizeof(cpm_TrailerPresenceInformation_t));
 
   out = in.value;
 }

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SlowVehicleSubCauseCode.h>
+#include <etsi_its_cpm_coding/cpm_SlowVehicleSubCauseCode.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SlowVehicleSubCauseCode(const SlowVehicleSubCauseCode_t& in, cpm_msgs::SlowVehicleSubCauseCode& out) {
+void toRos_SlowVehicleSubCauseCode(const cpm_SlowVehicleSubCauseCode_t& in, cpm_msgs::SlowVehicleSubCauseCode& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SlowVehicleSubCauseCode(const cpm_msgs::SlowVehicleSubCauseCode& in, SlowVehicleSubCauseCode_t& out) {
-  memset(&out, 0, sizeof(SlowVehicleSubCauseCode_t));
+void toStruct_SlowVehicleSubCauseCode(const cpm_msgs::SlowVehicleSubCauseCode& in, cpm_SlowVehicleSubCauseCode_t& out) {
+  memset(&out, 0, sizeof(cpm_SlowVehicleSubCauseCode_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

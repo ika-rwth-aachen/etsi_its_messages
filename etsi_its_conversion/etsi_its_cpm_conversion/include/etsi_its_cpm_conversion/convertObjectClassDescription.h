@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/ObjectClassDescription.h>
+#include <etsi_its_cpm_coding/cpm_ObjectClassDescription.h>
 #include <etsi_its_cpm_conversion/convertObjectClassDescription.h>
 #include <etsi_its_cpm_conversion/convertObjectClassWithConfidence.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ObjectClassDescription(const ObjectClassDescription_t& in, cpm_msgs::ObjectClassDescription& out) {
+void toRos_ObjectClassDescription(const cpm_ObjectClassDescription_t& in, cpm_msgs::ObjectClassDescription& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::ObjectClassWithConfidence el;
     toRos_ObjectClassWithConfidence(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_ObjectClassDescription(const ObjectClassDescription_t& in, cpm_msgs::
   }
 }
 
-void toStruct_ObjectClassDescription(const cpm_msgs::ObjectClassDescription& in, ObjectClassDescription_t& out) {
-  memset(&out, 0, sizeof(ObjectClassDescription_t));
+void toStruct_ObjectClassDescription(const cpm_msgs::ObjectClassDescription& in, cpm_ObjectClassDescription_t& out) {
+  memset(&out, 0, sizeof(cpm_ObjectClassDescription_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    ObjectClassWithConfidence_t* el = (ObjectClassWithConfidence_t*) calloc(1, sizeof(ObjectClassWithConfidence_t));
+    cpm_ObjectClassWithConfidence_t* el = (cpm_ObjectClassWithConfidence_t*) calloc(1, sizeof(cpm_ObjectClassWithConfidence_t));
     toStruct_ObjectClassWithConfidence(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

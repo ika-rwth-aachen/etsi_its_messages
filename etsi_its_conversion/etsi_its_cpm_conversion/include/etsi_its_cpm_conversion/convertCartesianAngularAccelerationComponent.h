@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CartesianAngularAccelerationComponent.h>
+#include <etsi_its_cpm_coding/cpm_CartesianAngularAccelerationComponent.h>
 #include <etsi_its_cpm_conversion/convertAngularAccelerationConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngularAccelerationComponentValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CartesianAngularAccelerationComponent(const CartesianAngularAccelerationComponent_t& in, cpm_msgs::CartesianAngularAccelerationComponent& out) {
+void toRos_CartesianAngularAccelerationComponent(const cpm_CartesianAngularAccelerationComponent_t& in, cpm_msgs::CartesianAngularAccelerationComponent& out) {
   toRos_CartesianAngularAccelerationComponentValue(in.value, out.value);
   toRos_AngularAccelerationConfidence(in.confidence, out.confidence);
 }
 
-void toStruct_CartesianAngularAccelerationComponent(const cpm_msgs::CartesianAngularAccelerationComponent& in, CartesianAngularAccelerationComponent_t& out) {
-  memset(&out, 0, sizeof(CartesianAngularAccelerationComponent_t));
+void toStruct_CartesianAngularAccelerationComponent(const cpm_msgs::CartesianAngularAccelerationComponent& in, cpm_CartesianAngularAccelerationComponent_t& out) {
+  memset(&out, 0, sizeof(cpm_CartesianAngularAccelerationComponent_t));
 
   toStruct_CartesianAngularAccelerationComponentValue(in.value, out.value);
   toStruct_AngularAccelerationConfidence(in.confidence, out.confidence);

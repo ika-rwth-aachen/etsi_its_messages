@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/GeneralizedLanePosition.h>
+#include <etsi_its_cpm_coding/cpm_GeneralizedLanePosition.h>
 #include <etsi_its_cpm_conversion/convertLanePosition.h>
 #include <etsi_its_cpm_conversion/convertLanePositionAndType.h>
 #include <etsi_its_cpm_conversion/convertMapPosition.h>
@@ -43,21 +43,21 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_GeneralizedLanePosition(const GeneralizedLanePosition_t& in, cpm_msgs::GeneralizedLanePosition& out) {
+void toRos_GeneralizedLanePosition(const cpm_GeneralizedLanePosition_t& in, cpm_msgs::GeneralizedLanePosition& out) {
   switch (in.present) {
-  case GeneralizedLanePosition_PR_trafficLanePosition:
+  case cpm_GeneralizedLanePosition_PR_trafficLanePosition:
     toRos_LanePosition(in.choice.trafficLanePosition, out.traffic_lane_position);
     out.choice = cpm_msgs::GeneralizedLanePosition::CHOICE_TRAFFIC_LANE_POSITION;
     break;
-  case GeneralizedLanePosition_PR_nonTrafficLanePosition:
+  case cpm_GeneralizedLanePosition_PR_nonTrafficLanePosition:
     toRos_LanePositionAndType(in.choice.nonTrafficLanePosition, out.non_traffic_lane_position);
     out.choice = cpm_msgs::GeneralizedLanePosition::CHOICE_NON_TRAFFIC_LANE_POSITION;
     break;
-  case GeneralizedLanePosition_PR_trafficIslandPosition:
+  case cpm_GeneralizedLanePosition_PR_trafficIslandPosition:
     toRos_TrafficIslandPosition(in.choice.trafficIslandPosition, out.traffic_island_position);
     out.choice = cpm_msgs::GeneralizedLanePosition::CHOICE_TRAFFIC_ISLAND_POSITION;
     break;
-  case GeneralizedLanePosition_PR_mapPosition:
+  case cpm_GeneralizedLanePosition_PR_mapPosition:
     toRos_MapPosition(in.choice.mapPosition, out.map_position);
     out.choice = cpm_msgs::GeneralizedLanePosition::CHOICE_MAP_POSITION;
     break;
@@ -65,25 +65,25 @@ void toRos_GeneralizedLanePosition(const GeneralizedLanePosition_t& in, cpm_msgs
   }
 }
 
-void toStruct_GeneralizedLanePosition(const cpm_msgs::GeneralizedLanePosition& in, GeneralizedLanePosition_t& out) {
-  memset(&out, 0, sizeof(GeneralizedLanePosition_t));
+void toStruct_GeneralizedLanePosition(const cpm_msgs::GeneralizedLanePosition& in, cpm_GeneralizedLanePosition_t& out) {
+  memset(&out, 0, sizeof(cpm_GeneralizedLanePosition_t));
 
   switch (in.choice) {
   case cpm_msgs::GeneralizedLanePosition::CHOICE_TRAFFIC_LANE_POSITION:
     toStruct_LanePosition(in.traffic_lane_position, out.choice.trafficLanePosition);
-    out.present = GeneralizedLanePosition_PR::GeneralizedLanePosition_PR_trafficLanePosition;
+    out.present = cpm_GeneralizedLanePosition_PR::cpm_GeneralizedLanePosition_PR_trafficLanePosition;
     break;
   case cpm_msgs::GeneralizedLanePosition::CHOICE_NON_TRAFFIC_LANE_POSITION:
     toStruct_LanePositionAndType(in.non_traffic_lane_position, out.choice.nonTrafficLanePosition);
-    out.present = GeneralizedLanePosition_PR::GeneralizedLanePosition_PR_nonTrafficLanePosition;
+    out.present = cpm_GeneralizedLanePosition_PR::cpm_GeneralizedLanePosition_PR_nonTrafficLanePosition;
     break;
   case cpm_msgs::GeneralizedLanePosition::CHOICE_TRAFFIC_ISLAND_POSITION:
     toStruct_TrafficIslandPosition(in.traffic_island_position, out.choice.trafficIslandPosition);
-    out.present = GeneralizedLanePosition_PR::GeneralizedLanePosition_PR_trafficIslandPosition;
+    out.present = cpm_GeneralizedLanePosition_PR::cpm_GeneralizedLanePosition_PR_trafficIslandPosition;
     break;
   case cpm_msgs::GeneralizedLanePosition::CHOICE_MAP_POSITION:
     toStruct_MapPosition(in.map_position, out.choice.mapPosition);
-    out.present = GeneralizedLanePosition_PR::GeneralizedLanePosition_PR_mapPosition;
+    out.present = cpm_GeneralizedLanePosition_PR::cpm_GeneralizedLanePosition_PR_mapPosition;
     break;
   default: break;
   }

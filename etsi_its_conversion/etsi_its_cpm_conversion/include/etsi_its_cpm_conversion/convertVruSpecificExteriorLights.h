@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruSpecificExteriorLights.h>
+#include <etsi_its_cpm_coding/cpm_VruSpecificExteriorLights.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruSpecificExteriorLights(const VruSpecificExteriorLights_t& in, cpm_msgs::VruSpecificExteriorLights& out) {
+void toRos_VruSpecificExteriorLights(const cpm_VruSpecificExteriorLights_t& in, cpm_msgs::VruSpecificExteriorLights& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_VruSpecificExteriorLights(const cpm_msgs::VruSpecificExteriorLights& in, VruSpecificExteriorLights_t& out) {
-  memset(&out, 0, sizeof(VruSpecificExteriorLights_t));
+void toStruct_VruSpecificExteriorLights(const cpm_msgs::VruSpecificExteriorLights& in, cpm_VruSpecificExteriorLights_t& out) {
+  memset(&out, 0, sizeof(cpm_VruSpecificExteriorLights_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

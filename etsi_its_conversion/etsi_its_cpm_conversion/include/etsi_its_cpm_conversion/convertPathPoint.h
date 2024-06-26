@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PathPoint.h>
+#include <etsi_its_cpm_coding/cpm_PathPoint.h>
 #include <etsi_its_cpm_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_cpm_conversion/convertPathDeltaTime.h>
 #ifdef ROS1
@@ -41,7 +41,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PathPoint(const PathPoint_t& in, cpm_msgs::PathPoint& out) {
+void toRos_PathPoint(const cpm_PathPoint_t& in, cpm_msgs::PathPoint& out) {
   toRos_DeltaReferencePosition(in.pathPosition, out.path_position);
   if (in.pathDeltaTime) {
     toRos_PathDeltaTime(*in.pathDeltaTime, out.path_delta_time);
@@ -49,12 +49,12 @@ void toRos_PathPoint(const PathPoint_t& in, cpm_msgs::PathPoint& out) {
   }
 }
 
-void toStruct_PathPoint(const cpm_msgs::PathPoint& in, PathPoint_t& out) {
-  memset(&out, 0, sizeof(PathPoint_t));
+void toStruct_PathPoint(const cpm_msgs::PathPoint& in, cpm_PathPoint_t& out) {
+  memset(&out, 0, sizeof(cpm_PathPoint_t));
 
   toStruct_DeltaReferencePosition(in.path_position, out.pathPosition);
   if (in.path_delta_time_is_present) {
-    out.pathDeltaTime = (PathDeltaTime_t*) calloc(1, sizeof(PathDeltaTime_t));
+    out.pathDeltaTime = (cpm_PathDeltaTime_t*) calloc(1, sizeof(cpm_PathDeltaTime_t));
     toStruct_PathDeltaTime(in.path_delta_time, *out.pathDeltaTime);
   }
 }

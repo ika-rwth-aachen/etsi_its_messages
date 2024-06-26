@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MapPosition.h>
+#include <etsi_its_cpm_coding/cpm_MapPosition.h>
 #include <etsi_its_cpm_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_conversion/convertLongitudinalLanePosition.h>
 #include <etsi_its_cpm_conversion/convertMapReference.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MapPosition(const MapPosition_t& in, cpm_msgs::MapPosition& out) {
+void toRos_MapPosition(const cpm_MapPosition_t& in, cpm_msgs::MapPosition& out) {
   if (in.mapReference) {
     toRos_MapReference(*in.mapReference, out.map_reference);
     out.map_reference_is_present = true;
@@ -61,23 +61,23 @@ void toRos_MapPosition(const MapPosition_t& in, cpm_msgs::MapPosition& out) {
   }
 }
 
-void toStruct_MapPosition(const cpm_msgs::MapPosition& in, MapPosition_t& out) {
-  memset(&out, 0, sizeof(MapPosition_t));
+void toStruct_MapPosition(const cpm_msgs::MapPosition& in, cpm_MapPosition_t& out) {
+  memset(&out, 0, sizeof(cpm_MapPosition_t));
 
   if (in.map_reference_is_present) {
-    out.mapReference = (MapReference_t*) calloc(1, sizeof(MapReference_t));
+    out.mapReference = (cpm_MapReference_t*) calloc(1, sizeof(cpm_MapReference_t));
     toStruct_MapReference(in.map_reference, *out.mapReference);
   }
   if (in.lane_id_is_present) {
-    out.laneId = (Identifier1B_t*) calloc(1, sizeof(Identifier1B_t));
+    out.laneId = (cpm_Identifier1B_t*) calloc(1, sizeof(cpm_Identifier1B_t));
     toStruct_Identifier1B(in.lane_id, *out.laneId);
   }
   if (in.connection_id_is_present) {
-    out.connectionId = (Identifier1B_t*) calloc(1, sizeof(Identifier1B_t));
+    out.connectionId = (cpm_Identifier1B_t*) calloc(1, sizeof(cpm_Identifier1B_t));
     toStruct_Identifier1B(in.connection_id, *out.connectionId);
   }
   if (in.longitudinal_lane_position_is_present) {
-    out.longitudinalLanePosition = (LongitudinalLanePosition_t*) calloc(1, sizeof(LongitudinalLanePosition_t));
+    out.longitudinalLanePosition = (cpm_LongitudinalLanePosition_t*) calloc(1, sizeof(cpm_LongitudinalLanePosition_t));
     toStruct_LongitudinalLanePosition(in.longitudinal_lane_position, *out.longitudinalLanePosition);
   }
 }

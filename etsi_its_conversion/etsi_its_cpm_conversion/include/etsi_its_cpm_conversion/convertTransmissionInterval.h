@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TransmissionInterval.h>
+#include <etsi_its_cpm_coding/cpm_TransmissionInterval.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TransmissionInterval(const TransmissionInterval_t& in, cpm_msgs::TransmissionInterval& out) {
+void toRos_TransmissionInterval(const cpm_TransmissionInterval_t& in, cpm_msgs::TransmissionInterval& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_TransmissionInterval(const cpm_msgs::TransmissionInterval& in, TransmissionInterval_t& out) {
-  memset(&out, 0, sizeof(TransmissionInterval_t));
+void toStruct_TransmissionInterval(const cpm_msgs::TransmissionInterval& in, cpm_TransmissionInterval_t& out) {
+  memset(&out, 0, sizeof(cpm_TransmissionInterval_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/InterferenceManagementZones.h>
+#include <etsi_its_cpm_coding/cpm_InterferenceManagementZones.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementZone.h>
 #include <etsi_its_cpm_conversion/convertInterferenceManagementZones.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_InterferenceManagementZones(const InterferenceManagementZones_t& in, cpm_msgs::InterferenceManagementZones& out) {
+void toRos_InterferenceManagementZones(const cpm_InterferenceManagementZones_t& in, cpm_msgs::InterferenceManagementZones& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::InterferenceManagementZone el;
     toRos_InterferenceManagementZone(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_InterferenceManagementZones(const InterferenceManagementZones_t& in, 
   }
 }
 
-void toStruct_InterferenceManagementZones(const cpm_msgs::InterferenceManagementZones& in, InterferenceManagementZones_t& out) {
-  memset(&out, 0, sizeof(InterferenceManagementZones_t));
+void toStruct_InterferenceManagementZones(const cpm_msgs::InterferenceManagementZones& in, cpm_InterferenceManagementZones_t& out) {
+  memset(&out, 0, sizeof(cpm_InterferenceManagementZones_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    InterferenceManagementZone_t* el = (InterferenceManagementZone_t*) calloc(1, sizeof(InterferenceManagementZone_t));
+    cpm_InterferenceManagementZone_t* el = (cpm_InterferenceManagementZone_t*) calloc(1, sizeof(cpm_InterferenceManagementZone_t));
     toStruct_InterferenceManagementZone(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

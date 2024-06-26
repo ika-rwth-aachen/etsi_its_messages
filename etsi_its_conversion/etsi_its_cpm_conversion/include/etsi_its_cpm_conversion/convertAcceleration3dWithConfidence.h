@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Acceleration3dWithConfidence.h>
+#include <etsi_its_cpm_coding/cpm_Acceleration3dWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertAccelerationCartesian.h>
 #include <etsi_its_cpm_conversion/convertAccelerationPolarWithZ.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Acceleration3dWithConfidence(const Acceleration3dWithConfidence_t& in, cpm_msgs::Acceleration3dWithConfidence& out) {
+void toRos_Acceleration3dWithConfidence(const cpm_Acceleration3dWithConfidence_t& in, cpm_msgs::Acceleration3dWithConfidence& out) {
   switch (in.present) {
-  case Acceleration3dWithConfidence_PR_polarAcceleration:
+  case cpm_Acceleration3dWithConfidence_PR_polarAcceleration:
     toRos_AccelerationPolarWithZ(in.choice.polarAcceleration, out.polar_acceleration);
     out.choice = cpm_msgs::Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION;
     break;
-  case Acceleration3dWithConfidence_PR_cartesianAcceleration:
+  case cpm_Acceleration3dWithConfidence_PR_cartesianAcceleration:
     toRos_AccelerationCartesian(in.choice.cartesianAcceleration, out.cartesian_acceleration);
     out.choice = cpm_msgs::Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION;
     break;
@@ -55,17 +55,17 @@ void toRos_Acceleration3dWithConfidence(const Acceleration3dWithConfidence_t& in
   }
 }
 
-void toStruct_Acceleration3dWithConfidence(const cpm_msgs::Acceleration3dWithConfidence& in, Acceleration3dWithConfidence_t& out) {
-  memset(&out, 0, sizeof(Acceleration3dWithConfidence_t));
+void toStruct_Acceleration3dWithConfidence(const cpm_msgs::Acceleration3dWithConfidence& in, cpm_Acceleration3dWithConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_Acceleration3dWithConfidence_t));
 
   switch (in.choice) {
   case cpm_msgs::Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION:
     toStruct_AccelerationPolarWithZ(in.polar_acceleration, out.choice.polarAcceleration);
-    out.present = Acceleration3dWithConfidence_PR::Acceleration3dWithConfidence_PR_polarAcceleration;
+    out.present = cpm_Acceleration3dWithConfidence_PR::cpm_Acceleration3dWithConfidence_PR_polarAcceleration;
     break;
   case cpm_msgs::Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION:
     toStruct_AccelerationCartesian(in.cartesian_acceleration, out.choice.cartesianAcceleration);
-    out.present = Acceleration3dWithConfidence_PR::Acceleration3dWithConfidence_PR_cartesianAcceleration;
+    out.present = cpm_Acceleration3dWithConfidence_PR::cpm_Acceleration3dWithConfidence_PR_cartesianAcceleration;
     break;
   default: break;
   }

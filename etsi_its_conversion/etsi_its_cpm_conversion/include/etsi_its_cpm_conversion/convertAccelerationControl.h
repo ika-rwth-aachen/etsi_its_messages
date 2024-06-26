@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationControl.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationControl.h>
 #include <etsi_its_cpm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationControl(const AccelerationControl_t& in, cpm_msgs::AccelerationControl& out) {
+void toRos_AccelerationControl(const cpm_AccelerationControl_t& in, cpm_msgs::AccelerationControl& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_AccelerationControl(const cpm_msgs::AccelerationControl& in, AccelerationControl_t& out) {
-  memset(&out, 0, sizeof(AccelerationControl_t));
+void toStruct_AccelerationControl(const cpm_msgs::AccelerationControl& in, cpm_AccelerationControl_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationControl_t));
 
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;

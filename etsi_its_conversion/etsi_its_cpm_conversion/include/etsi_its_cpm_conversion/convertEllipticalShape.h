@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/EllipticalShape.h>
+#include <etsi_its_cpm_coding/cpm_EllipticalShape.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_conversion/convertStandardLength12b.h>
 #include <etsi_its_cpm_conversion/convertWgs84AngleValue.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EllipticalShape(const EllipticalShape_t& in, cpm_msgs::EllipticalShape& out) {
+void toRos_EllipticalShape(const cpm_EllipticalShape_t& in, cpm_msgs::EllipticalShape& out) {
   if (in.shapeReferencePoint) {
     toRos_CartesianPosition3d(*in.shapeReferencePoint, out.shape_reference_point);
     out.shape_reference_point_is_present = true;
@@ -59,21 +59,21 @@ void toRos_EllipticalShape(const EllipticalShape_t& in, cpm_msgs::EllipticalShap
   }
 }
 
-void toStruct_EllipticalShape(const cpm_msgs::EllipticalShape& in, EllipticalShape_t& out) {
-  memset(&out, 0, sizeof(EllipticalShape_t));
+void toStruct_EllipticalShape(const cpm_msgs::EllipticalShape& in, cpm_EllipticalShape_t& out) {
+  memset(&out, 0, sizeof(cpm_EllipticalShape_t));
 
   if (in.shape_reference_point_is_present) {
-    out.shapeReferencePoint = (CartesianPosition3d_t*) calloc(1, sizeof(CartesianPosition3d_t));
+    out.shapeReferencePoint = (cpm_CartesianPosition3d_t*) calloc(1, sizeof(cpm_CartesianPosition3d_t));
     toStruct_CartesianPosition3d(in.shape_reference_point, *out.shapeReferencePoint);
   }
   toStruct_StandardLength12b(in.semi_major_axis_length, out.semiMajorAxisLength);
   toStruct_StandardLength12b(in.semi_minor_axis_length, out.semiMinorAxisLength);
   if (in.orientation_is_present) {
-    out.orientation = (Wgs84AngleValue_t*) calloc(1, sizeof(Wgs84AngleValue_t));
+    out.orientation = (cpm_Wgs84AngleValue_t*) calloc(1, sizeof(cpm_Wgs84AngleValue_t));
     toStruct_Wgs84AngleValue(in.orientation, *out.orientation);
   }
   if (in.height_is_present) {
-    out.height = (StandardLength12b_t*) calloc(1, sizeof(StandardLength12b_t));
+    out.height = (cpm_StandardLength12b_t*) calloc(1, sizeof(cpm_StandardLength12b_t));
     toStruct_StandardLength12b(in.height, *out.height);
   }
 }

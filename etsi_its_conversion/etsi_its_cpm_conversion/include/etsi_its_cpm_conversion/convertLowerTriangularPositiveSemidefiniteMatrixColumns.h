@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/LowerTriangularPositiveSemidefiniteMatrixColumns.h>
+#include <etsi_its_cpm_coding/cpm_LowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #include <etsi_its_cpm_conversion/convertCorrelationColumn.h>
 #include <etsi_its_cpm_conversion/convertLowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LowerTriangularPositiveSemidefiniteMatrixColumns(const LowerTriangularPositiveSemidefiniteMatrixColumns_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrixColumns& out) {
+void toRos_LowerTriangularPositiveSemidefiniteMatrixColumns(const cpm_LowerTriangularPositiveSemidefiniteMatrixColumns_t& in, cpm_msgs::LowerTriangularPositiveSemidefiniteMatrixColumns& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::CorrelationColumn el;
     toRos_CorrelationColumn(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_LowerTriangularPositiveSemidefiniteMatrixColumns(const LowerTriangula
   }
 }
 
-void toStruct_LowerTriangularPositiveSemidefiniteMatrixColumns(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrixColumns& in, LowerTriangularPositiveSemidefiniteMatrixColumns_t& out) {
-  memset(&out, 0, sizeof(LowerTriangularPositiveSemidefiniteMatrixColumns_t));
+void toStruct_LowerTriangularPositiveSemidefiniteMatrixColumns(const cpm_msgs::LowerTriangularPositiveSemidefiniteMatrixColumns& in, cpm_LowerTriangularPositiveSemidefiniteMatrixColumns_t& out) {
+  memset(&out, 0, sizeof(cpm_LowerTriangularPositiveSemidefiniteMatrixColumns_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    CorrelationColumn_t* el = (CorrelationColumn_t*) calloc(1, sizeof(CorrelationColumn_t));
+    cpm_CorrelationColumn_t* el = (cpm_CorrelationColumn_t*) calloc(1, sizeof(cpm_CorrelationColumn_t));
     toStruct_CorrelationColumn(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

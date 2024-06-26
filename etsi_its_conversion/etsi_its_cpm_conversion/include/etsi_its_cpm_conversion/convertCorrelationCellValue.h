@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/CorrelationCellValue.h>
+#include <etsi_its_cpm_coding/cpm_CorrelationCellValue.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_CorrelationCellValue(const CorrelationCellValue_t& in, cpm_msgs::CorrelationCellValue& out) {
+void toRos_CorrelationCellValue(const cpm_CorrelationCellValue_t& in, cpm_msgs::CorrelationCellValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_CorrelationCellValue(const cpm_msgs::CorrelationCellValue& in, CorrelationCellValue_t& out) {
-  memset(&out, 0, sizeof(CorrelationCellValue_t));
+void toStruct_CorrelationCellValue(const cpm_msgs::CorrelationCellValue& in, cpm_CorrelationCellValue_t& out) {
+  memset(&out, 0, sizeof(cpm_CorrelationCellValue_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

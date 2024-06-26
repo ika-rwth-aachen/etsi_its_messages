@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Ext3.h>
+#include <etsi_its_cpm_coding/cpm_Ext3.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Ext3(const Ext3_t& in, cpm_msgs::Ext3& out) {
+void toRos_Ext3(const cpm_Ext3_t& in, cpm_msgs::Ext3& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Ext3(const cpm_msgs::Ext3& in, Ext3_t& out) {
-  memset(&out, 0, sizeof(Ext3_t));
+void toStruct_Ext3(const cpm_msgs::Ext3& in, cpm_Ext3_t& out) {
+  memset(&out, 0, sizeof(cpm_Ext3_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

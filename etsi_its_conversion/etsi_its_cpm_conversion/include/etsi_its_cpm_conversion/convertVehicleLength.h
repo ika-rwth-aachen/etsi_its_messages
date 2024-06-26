@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VehicleLength.h>
+#include <etsi_its_cpm_coding/cpm_VehicleLength.h>
 #include <etsi_its_cpm_conversion/convertVehicleLengthConfidenceIndication.h>
 #include <etsi_its_cpm_conversion/convertVehicleLengthValue.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VehicleLength(const VehicleLength_t& in, cpm_msgs::VehicleLength& out) {
+void toRos_VehicleLength(const cpm_VehicleLength_t& in, cpm_msgs::VehicleLength& out) {
   toRos_VehicleLengthValue(in.vehicleLengthValue, out.vehicle_length_value);
   toRos_VehicleLengthConfidenceIndication(in.vehicleLengthConfidenceIndication, out.vehicle_length_confidence_indication);
 }
 
-void toStruct_VehicleLength(const cpm_msgs::VehicleLength& in, VehicleLength_t& out) {
-  memset(&out, 0, sizeof(VehicleLength_t));
+void toStruct_VehicleLength(const cpm_msgs::VehicleLength& in, cpm_VehicleLength_t& out) {
+  memset(&out, 0, sizeof(cpm_VehicleLength_t));
 
   toStruct_VehicleLengthValue(in.vehicle_length_value, out.vehicleLengthValue);
   toStruct_VehicleLengthConfidenceIndication(in.vehicle_length_confidence_indication, out.vehicleLengthConfidenceIndication);

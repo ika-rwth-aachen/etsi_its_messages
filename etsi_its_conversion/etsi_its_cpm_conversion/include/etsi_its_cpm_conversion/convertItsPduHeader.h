@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/ItsPduHeader.h>
+#include <etsi_its_cpm_coding/cpm_ItsPduHeader.h>
 #include <etsi_its_cpm_conversion/convertMessageId.h>
 #include <etsi_its_cpm_conversion/convertOrdinalNumber1B.h>
 #include <etsi_its_cpm_conversion/convertStationId.h>
@@ -42,14 +42,14 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_ItsPduHeader(const ItsPduHeader_t& in, cpm_msgs::ItsPduHeader& out) {
+void toRos_ItsPduHeader(const cpm_ItsPduHeader_t& in, cpm_msgs::ItsPduHeader& out) {
   toRos_OrdinalNumber1B(in.protocolVersion, out.protocol_version);
   toRos_MessageId(in.messageId, out.message_id);
   toRos_StationId(in.stationId, out.station_id);
 }
 
-void toStruct_ItsPduHeader(const cpm_msgs::ItsPduHeader& in, ItsPduHeader_t& out) {
-  memset(&out, 0, sizeof(ItsPduHeader_t));
+void toStruct_ItsPduHeader(const cpm_msgs::ItsPduHeader& in, cpm_ItsPduHeader_t& out) {
+  memset(&out, 0, sizeof(cpm_ItsPduHeader_t));
 
   toStruct_OrdinalNumber1B(in.protocol_version, out.protocolVersion);
   toStruct_MessageId(in.message_id, out.messageId);

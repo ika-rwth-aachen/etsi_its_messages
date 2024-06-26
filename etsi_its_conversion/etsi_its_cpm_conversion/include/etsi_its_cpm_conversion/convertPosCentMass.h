@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PosCentMass.h>
+#include <etsi_its_cpm_coding/cpm_PosCentMass.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PosCentMass(const PosCentMass_t& in, cpm_msgs::PosCentMass& out) {
+void toRos_PosCentMass(const cpm_PosCentMass_t& in, cpm_msgs::PosCentMass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PosCentMass(const cpm_msgs::PosCentMass& in, PosCentMass_t& out) {
-  memset(&out, 0, sizeof(PosCentMass_t));
+void toStruct_PosCentMass(const cpm_msgs::PosCentMass& in, cpm_PosCentMass_t& out) {
+  memset(&out, 0, sizeof(cpm_PosCentMass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

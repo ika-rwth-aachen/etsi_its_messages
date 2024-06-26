@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/MessageRateRange.h>
+#include <etsi_its_cpm_coding/cpm_MessageRateRange.h>
 #include <etsi_its_cpm_conversion/convertMessageRateHz.h>
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/MessageRateRange.h>
@@ -40,13 +40,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_MessageRateRange(const MessageRateRange_t& in, cpm_msgs::MessageRateRange& out) {
+void toRos_MessageRateRange(const cpm_MessageRateRange_t& in, cpm_msgs::MessageRateRange& out) {
   toRos_MessageRateHz(in.messageRateMin, out.message_rate_min);
   toRos_MessageRateHz(in.messageRateMax, out.message_rate_max);
 }
 
-void toStruct_MessageRateRange(const cpm_msgs::MessageRateRange& in, MessageRateRange_t& out) {
-  memset(&out, 0, sizeof(MessageRateRange_t));
+void toStruct_MessageRateRange(const cpm_msgs::MessageRateRange& in, cpm_MessageRateRange_t& out) {
+  memset(&out, 0, sizeof(cpm_MessageRateRange_t));
 
   toStruct_MessageRateHz(in.message_rate_min, out.messageRateMin);
   toStruct_MessageRateHz(in.message_rate_max, out.messageRateMax);

@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/BasicContainer.h>
+#include <etsi_its_cpm_coding/cpm_BasicContainer.h>
 #include <etsi_its_cpm_conversion/convertReferencePositionWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertTrafficParticipantType.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_BasicContainer(const BasicContainer_t& in, cpm_msgs::BasicContainer& out) {
+void toRos_BasicContainer(const cpm_BasicContainer_t& in, cpm_msgs::BasicContainer& out) {
   toRos_TrafficParticipantType(in.stationType, out.station_type);
   toRos_ReferencePositionWithConfidence(in.referencePosition, out.reference_position);
 }
 
-void toStruct_BasicContainer(const cpm_msgs::BasicContainer& in, BasicContainer_t& out) {
-  memset(&out, 0, sizeof(BasicContainer_t));
+void toStruct_BasicContainer(const cpm_msgs::BasicContainer& in, cpm_BasicContainer_t& out) {
+  memset(&out, 0, sizeof(cpm_BasicContainer_t));
 
   toStruct_TrafficParticipantType(in.station_type, out.stationType);
   toStruct_ReferencePositionWithConfidence(in.reference_position, out.referencePosition);

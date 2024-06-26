@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/Temperature.h>
+#include <etsi_its_cpm_coding/cpm_Temperature.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_Temperature(const Temperature_t& in, cpm_msgs::Temperature& out) {
+void toRos_Temperature(const cpm_Temperature_t& in, cpm_msgs::Temperature& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Temperature(const cpm_msgs::Temperature& in, Temperature_t& out) {
-  memset(&out, 0, sizeof(Temperature_t));
+void toStruct_Temperature(const cpm_msgs::Temperature& in, cpm_Temperature_t& out) {
+  memset(&out, 0, sizeof(cpm_Temperature_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

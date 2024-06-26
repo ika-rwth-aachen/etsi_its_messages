@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/SequenceOfSafeDistanceIndication.h>
+#include <etsi_its_cpm_coding/cpm_SequenceOfSafeDistanceIndication.h>
 #include <etsi_its_cpm_conversion/convertSafeDistanceIndication.h>
 #include <etsi_its_cpm_conversion/convertSequenceOfSafeDistanceIndication.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SequenceOfSafeDistanceIndication(const SequenceOfSafeDistanceIndication_t& in, cpm_msgs::SequenceOfSafeDistanceIndication& out) {
+void toRos_SequenceOfSafeDistanceIndication(const cpm_SequenceOfSafeDistanceIndication_t& in, cpm_msgs::SequenceOfSafeDistanceIndication& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::SafeDistanceIndication el;
     toRos_SafeDistanceIndication(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_SequenceOfSafeDistanceIndication(const SequenceOfSafeDistanceIndicati
   }
 }
 
-void toStruct_SequenceOfSafeDistanceIndication(const cpm_msgs::SequenceOfSafeDistanceIndication& in, SequenceOfSafeDistanceIndication_t& out) {
-  memset(&out, 0, sizeof(SequenceOfSafeDistanceIndication_t));
+void toStruct_SequenceOfSafeDistanceIndication(const cpm_msgs::SequenceOfSafeDistanceIndication& in, cpm_SequenceOfSafeDistanceIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_SequenceOfSafeDistanceIndication_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    SafeDistanceIndication_t* el = (SafeDistanceIndication_t*) calloc(1, sizeof(SafeDistanceIndication_t));
+    cpm_SafeDistanceIndication_t* el = (cpm_SafeDistanceIndication_t*) calloc(1, sizeof(cpm_SafeDistanceIndication_t));
     toStruct_SafeDistanceIndication(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

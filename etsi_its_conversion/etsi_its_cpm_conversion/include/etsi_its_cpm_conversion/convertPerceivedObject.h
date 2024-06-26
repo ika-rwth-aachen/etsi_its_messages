@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PerceivedObject.h>
+#include <etsi_its_cpm_coding/cpm_PerceivedObject.h>
 #include <etsi_its_cpm_conversion/convertAcceleration3dWithConfidence.h>
 #include <etsi_its_cpm_conversion/convertCartesianAngularVelocityComponent.h>
 #include <etsi_its_cpm_conversion/convertCartesianPosition3dWithConfidence.h>
@@ -52,7 +52,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerceivedObject(const PerceivedObject_t& in, cpm_msgs::PerceivedObject& out) {
+void toRos_PerceivedObject(const cpm_PerceivedObject_t& in, cpm_msgs::PerceivedObject& out) {
   if (in.objectId) {
     toRos_Identifier2B(*in.objectId, out.object_id);
     out.object_id_is_present = true;
@@ -113,65 +113,65 @@ void toRos_PerceivedObject(const PerceivedObject_t& in, cpm_msgs::PerceivedObjec
   }
 }
 
-void toStruct_PerceivedObject(const cpm_msgs::PerceivedObject& in, PerceivedObject_t& out) {
-  memset(&out, 0, sizeof(PerceivedObject_t));
+void toStruct_PerceivedObject(const cpm_msgs::PerceivedObject& in, cpm_PerceivedObject_t& out) {
+  memset(&out, 0, sizeof(cpm_PerceivedObject_t));
 
   if (in.object_id_is_present) {
-    out.objectId = (Identifier2B_t*) calloc(1, sizeof(Identifier2B_t));
+    out.objectId = (cpm_Identifier2B_t*) calloc(1, sizeof(cpm_Identifier2B_t));
     toStruct_Identifier2B(in.object_id, *out.objectId);
   }
   toStruct_DeltaTimeMilliSecondSigned(in.measurement_delta_time, out.measurementDeltaTime);
   toStruct_CartesianPosition3dWithConfidence(in.position, out.position);
   if (in.velocity_is_present) {
-    out.velocity = (Velocity3dWithConfidence_t*) calloc(1, sizeof(Velocity3dWithConfidence_t));
+    out.velocity = (cpm_Velocity3dWithConfidence_t*) calloc(1, sizeof(cpm_Velocity3dWithConfidence_t));
     toStruct_Velocity3dWithConfidence(in.velocity, *out.velocity);
   }
   if (in.acceleration_is_present) {
-    out.acceleration = (Acceleration3dWithConfidence_t*) calloc(1, sizeof(Acceleration3dWithConfidence_t));
+    out.acceleration = (cpm_Acceleration3dWithConfidence_t*) calloc(1, sizeof(cpm_Acceleration3dWithConfidence_t));
     toStruct_Acceleration3dWithConfidence(in.acceleration, *out.acceleration);
   }
   if (in.angles_is_present) {
-    out.angles = (EulerAnglesWithConfidence_t*) calloc(1, sizeof(EulerAnglesWithConfidence_t));
+    out.angles = (cpm_EulerAnglesWithConfidence_t*) calloc(1, sizeof(cpm_EulerAnglesWithConfidence_t));
     toStruct_EulerAnglesWithConfidence(in.angles, *out.angles);
   }
   if (in.z_angular_velocity_is_present) {
-    out.zAngularVelocity = (CartesianAngularVelocityComponent_t*) calloc(1, sizeof(CartesianAngularVelocityComponent_t));
+    out.zAngularVelocity = (cpm_CartesianAngularVelocityComponent_t*) calloc(1, sizeof(cpm_CartesianAngularVelocityComponent_t));
     toStruct_CartesianAngularVelocityComponent(in.z_angular_velocity, *out.zAngularVelocity);
   }
   if (in.lower_triangular_correlation_matrices_is_present) {
-    out.lowerTriangularCorrelationMatrices = (LowerTriangularPositiveSemidefiniteMatrices_t*) calloc(1, sizeof(LowerTriangularPositiveSemidefiniteMatrices_t));
+    out.lowerTriangularCorrelationMatrices = (cpm_LowerTriangularPositiveSemidefiniteMatrices_t*) calloc(1, sizeof(cpm_LowerTriangularPositiveSemidefiniteMatrices_t));
     toStruct_LowerTriangularPositiveSemidefiniteMatrices(in.lower_triangular_correlation_matrices, *out.lowerTriangularCorrelationMatrices);
   }
   if (in.object_dimension_z_is_present) {
-    out.objectDimensionZ = (ObjectDimension_t*) calloc(1, sizeof(ObjectDimension_t));
+    out.objectDimensionZ = (cpm_ObjectDimension_t*) calloc(1, sizeof(cpm_ObjectDimension_t));
     toStruct_ObjectDimension(in.object_dimension_z, *out.objectDimensionZ);
   }
   if (in.object_dimension_y_is_present) {
-    out.objectDimensionY = (ObjectDimension_t*) calloc(1, sizeof(ObjectDimension_t));
+    out.objectDimensionY = (cpm_ObjectDimension_t*) calloc(1, sizeof(cpm_ObjectDimension_t));
     toStruct_ObjectDimension(in.object_dimension_y, *out.objectDimensionY);
   }
   if (in.object_dimension_x_is_present) {
-    out.objectDimensionX = (ObjectDimension_t*) calloc(1, sizeof(ObjectDimension_t));
+    out.objectDimensionX = (cpm_ObjectDimension_t*) calloc(1, sizeof(cpm_ObjectDimension_t));
     toStruct_ObjectDimension(in.object_dimension_x, *out.objectDimensionX);
   }
   if (in.object_age_is_present) {
-    out.objectAge = (DeltaTimeMilliSecondSigned_t*) calloc(1, sizeof(DeltaTimeMilliSecondSigned_t));
+    out.objectAge = (cpm_DeltaTimeMilliSecondSigned_t*) calloc(1, sizeof(cpm_DeltaTimeMilliSecondSigned_t));
     toStruct_DeltaTimeMilliSecondSigned(in.object_age, *out.objectAge);
   }
   if (in.object_perception_quality_is_present) {
-    out.objectPerceptionQuality = (ObjectPerceptionQuality_t*) calloc(1, sizeof(ObjectPerceptionQuality_t));
+    out.objectPerceptionQuality = (cpm_ObjectPerceptionQuality_t*) calloc(1, sizeof(cpm_ObjectPerceptionQuality_t));
     toStruct_ObjectPerceptionQuality(in.object_perception_quality, *out.objectPerceptionQuality);
   }
   if (in.sensor_id_list_is_present) {
-    out.sensorIdList = (SequenceOfIdentifier1B_t*) calloc(1, sizeof(SequenceOfIdentifier1B_t));
+    out.sensorIdList = (cpm_SequenceOfIdentifier1B_t*) calloc(1, sizeof(cpm_SequenceOfIdentifier1B_t));
     toStruct_SequenceOfIdentifier1B(in.sensor_id_list, *out.sensorIdList);
   }
   if (in.classification_is_present) {
-    out.classification = (ObjectClassDescription_t*) calloc(1, sizeof(ObjectClassDescription_t));
+    out.classification = (cpm_ObjectClassDescription_t*) calloc(1, sizeof(cpm_ObjectClassDescription_t));
     toStruct_ObjectClassDescription(in.classification, *out.classification);
   }
   if (in.map_position_is_present) {
-    out.mapPosition = (MapPosition_t*) calloc(1, sizeof(MapPosition_t));
+    out.mapPosition = (cpm_MapPosition_t*) calloc(1, sizeof(cpm_MapPosition_t));
     toStruct_MapPosition(in.map_position, *out.mapPosition);
   }
 }

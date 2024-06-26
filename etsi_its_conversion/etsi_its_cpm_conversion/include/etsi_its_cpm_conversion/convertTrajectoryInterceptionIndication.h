@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/TrajectoryInterceptionIndication.h>
+#include <etsi_its_cpm_coding/cpm_TrajectoryInterceptionIndication.h>
 #include <etsi_its_cpm_conversion/convertStationId.h>
 #include <etsi_its_cpm_conversion/convertTrajectoryInterceptionConfidence.h>
 #include <etsi_its_cpm_conversion/convertTrajectoryInterceptionProbability.h>
@@ -42,7 +42,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_TrajectoryInterceptionIndication(const TrajectoryInterceptionIndication_t& in, cpm_msgs::TrajectoryInterceptionIndication& out) {
+void toRos_TrajectoryInterceptionIndication(const cpm_TrajectoryInterceptionIndication_t& in, cpm_msgs::TrajectoryInterceptionIndication& out) {
   if (in.subjectStation) {
     toRos_StationId(*in.subjectStation, out.subject_station);
     out.subject_station_is_present = true;
@@ -54,16 +54,16 @@ void toRos_TrajectoryInterceptionIndication(const TrajectoryInterceptionIndicati
   }
 }
 
-void toStruct_TrajectoryInterceptionIndication(const cpm_msgs::TrajectoryInterceptionIndication& in, TrajectoryInterceptionIndication_t& out) {
-  memset(&out, 0, sizeof(TrajectoryInterceptionIndication_t));
+void toStruct_TrajectoryInterceptionIndication(const cpm_msgs::TrajectoryInterceptionIndication& in, cpm_TrajectoryInterceptionIndication_t& out) {
+  memset(&out, 0, sizeof(cpm_TrajectoryInterceptionIndication_t));
 
   if (in.subject_station_is_present) {
-    out.subjectStation = (StationId_t*) calloc(1, sizeof(StationId_t));
+    out.subjectStation = (cpm_StationId_t*) calloc(1, sizeof(cpm_StationId_t));
     toStruct_StationId(in.subject_station, *out.subjectStation);
   }
   toStruct_TrajectoryInterceptionProbability(in.trajectory_interception_probability, out.trajectoryInterceptionProbability);
   if (in.trajectory_interception_confidence_is_present) {
-    out.trajectoryInterceptionConfidence = (TrajectoryInterceptionConfidence_t*) calloc(1, sizeof(TrajectoryInterceptionConfidence_t));
+    out.trajectoryInterceptionConfidence = (cpm_TrajectoryInterceptionConfidence_t*) calloc(1, sizeof(cpm_TrajectoryInterceptionConfidence_t));
     toStruct_TrajectoryInterceptionConfidence(in.trajectory_interception_confidence, *out.trajectoryInterceptionConfidence);
   }
 }

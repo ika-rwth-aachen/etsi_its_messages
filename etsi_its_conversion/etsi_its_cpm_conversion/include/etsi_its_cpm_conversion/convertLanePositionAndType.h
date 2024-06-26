@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/LanePositionAndType.h>
+#include <etsi_its_cpm_coding/cpm_LanePositionAndType.h>
 #include <etsi_its_cpm_conversion/convertLanePosition.h>
 #include <etsi_its_cpm_conversion/convertLaneType.h>
 #ifdef ROS1
@@ -41,13 +41,13 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_LanePositionAndType(const LanePositionAndType_t& in, cpm_msgs::LanePositionAndType& out) {
+void toRos_LanePositionAndType(const cpm_LanePositionAndType_t& in, cpm_msgs::LanePositionAndType& out) {
   toRos_LanePosition(in.transversalPosition, out.transversal_position);
   toRos_LaneType(in.laneType, out.lane_type);
 }
 
-void toStruct_LanePositionAndType(const cpm_msgs::LanePositionAndType& in, LanePositionAndType_t& out) {
-  memset(&out, 0, sizeof(LanePositionAndType_t));
+void toStruct_LanePositionAndType(const cpm_msgs::LanePositionAndType& in, cpm_LanePositionAndType_t& out) {
+  memset(&out, 0, sizeof(cpm_LanePositionAndType_t));
 
   toStruct_LanePosition(in.transversal_position, out.transversalPosition);
   toStruct_LaneType(in.lane_type, out.laneType);

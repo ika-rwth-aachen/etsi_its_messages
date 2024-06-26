@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/SpeedConfidence.h>
+#include <etsi_its_cpm_coding/cpm_SpeedConfidence.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_SpeedConfidence(const SpeedConfidence_t& in, cpm_msgs::SpeedConfidence& out) {
+void toRos_SpeedConfidence(const cpm_SpeedConfidence_t& in, cpm_msgs::SpeedConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedConfidence(const cpm_msgs::SpeedConfidence& in, SpeedConfidence_t& out) {
-  memset(&out, 0, sizeof(SpeedConfidence_t));
+void toStruct_SpeedConfidence(const cpm_msgs::SpeedConfidence& in, cpm_SpeedConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_SpeedConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

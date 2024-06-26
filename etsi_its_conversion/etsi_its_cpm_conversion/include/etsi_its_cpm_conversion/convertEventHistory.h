@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_cpm_coding/EventHistory.h>
+#include <etsi_its_cpm_coding/cpm_EventHistory.h>
 #include <etsi_its_cpm_conversion/convertEventHistory.h>
 #include <etsi_its_cpm_conversion/convertEventPoint.h>
 #ifdef ROS1
@@ -43,7 +43,7 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_EventHistory(const EventHistory_t& in, cpm_msgs::EventHistory& out) {
+void toRos_EventHistory(const cpm_EventHistory_t& in, cpm_msgs::EventHistory& out) {
   for (int i = 0; i < in.list.count; ++i) {
     cpm_msgs::EventPoint el;
     toRos_EventPoint(*(in.list.array[i]), el);
@@ -51,11 +51,11 @@ void toRos_EventHistory(const EventHistory_t& in, cpm_msgs::EventHistory& out) {
   }
 }
 
-void toStruct_EventHistory(const cpm_msgs::EventHistory& in, EventHistory_t& out) {
-  memset(&out, 0, sizeof(EventHistory_t));
+void toStruct_EventHistory(const cpm_msgs::EventHistory& in, cpm_EventHistory_t& out) {
+  memset(&out, 0, sizeof(cpm_EventHistory_t));
 
   for (int i = 0; i < in.array.size(); ++i) {
-    EventPoint_t* el = (EventPoint_t*) calloc(1, sizeof(EventPoint_t));
+    cpm_EventPoint_t* el = (cpm_EventPoint_t*) calloc(1, sizeof(cpm_EventPoint_t));
     toStruct_EventPoint(in.array[i], *el);
     if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }

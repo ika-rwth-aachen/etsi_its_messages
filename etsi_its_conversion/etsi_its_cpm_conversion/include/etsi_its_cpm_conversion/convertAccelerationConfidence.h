@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/AccelerationConfidence.h>
+#include <etsi_its_cpm_coding/cpm_AccelerationConfidence.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_AccelerationConfidence(const AccelerationConfidence_t& in, cpm_msgs::AccelerationConfidence& out) {
+void toRos_AccelerationConfidence(const cpm_AccelerationConfidence_t& in, cpm_msgs::AccelerationConfidence& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_AccelerationConfidence(const cpm_msgs::AccelerationConfidence& in, AccelerationConfidence_t& out) {
-  memset(&out, 0, sizeof(AccelerationConfidence_t));
+void toStruct_AccelerationConfidence(const cpm_msgs::AccelerationConfidence& in, cpm_AccelerationConfidence_t& out) {
+  memset(&out, 0, sizeof(cpm_AccelerationConfidence_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

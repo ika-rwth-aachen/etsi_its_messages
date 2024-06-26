@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/PerformanceClass.h>
+#include <etsi_its_cpm_coding/cpm_PerformanceClass.h>
 #include <etsi_its_cpm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -41,12 +41,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_PerformanceClass(const PerformanceClass_t& in, cpm_msgs::PerformanceClass& out) {
+void toRos_PerformanceClass(const cpm_PerformanceClass_t& in, cpm_msgs::PerformanceClass& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_PerformanceClass(const cpm_msgs::PerformanceClass& in, PerformanceClass_t& out) {
-  memset(&out, 0, sizeof(PerformanceClass_t));
+void toStruct_PerformanceClass(const cpm_msgs::PerformanceClass& in, cpm_PerformanceClass_t& out) {
+  memset(&out, 0, sizeof(cpm_PerformanceClass_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }

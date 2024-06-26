@@ -27,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cpm_coding/VruMovementControl.h>
+#include <etsi_its_cpm_coding/cpm_VruMovementControl.h>
 
 #ifdef ROS1
 #include <etsi_its_cpm_msgs/VruMovementControl.h>
@@ -40,12 +40,12 @@ namespace cpm_msgs = etsi_its_cpm_msgs::msg;
 
 namespace etsi_its_cpm_conversion {
 
-void toRos_VruMovementControl(const VruMovementControl_t& in, cpm_msgs::VruMovementControl& out) {
+void toRos_VruMovementControl(const cpm_VruMovementControl_t& in, cpm_msgs::VruMovementControl& out) {
   out.value = in;
 }
 
-void toStruct_VruMovementControl(const cpm_msgs::VruMovementControl& in, VruMovementControl_t& out) {
-  memset(&out, 0, sizeof(VruMovementControl_t));
+void toStruct_VruMovementControl(const cpm_msgs::VruMovementControl& in, cpm_VruMovementControl_t& out) {
+  memset(&out, 0, sizeof(cpm_VruMovementControl_t));
 
   out = in.value;
 }
