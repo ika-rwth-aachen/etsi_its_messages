@@ -276,9 +276,9 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
   if (detected_etsi_type == "cam") {
 
     // decode ASN1 bitstring to struct
-    etsi_its_cam_coding::CAM_t* asn1_struct = nullptr;
-    etsi_its_cam_coding::asn_dec_rval_t ret = etsi_its_cam_coding::asn_decode(0, etsi_its_cam_coding::ATS_UNALIGNED_BASIC_PER, &etsi_its_cam_coding::asn_DEF_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
-    if (ret.code != etsi_its_cam_coding::RC_OK) {
+    cam_CAM_t* asn1_struct = nullptr;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cam_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
 #else
@@ -287,7 +287,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
         "Failed to decode message");
       return;
     }
-    if (logLevelIsDebug()) etsi_its_cam_coding::asn_fprint(stdout, &etsi_its_cam_coding::asn_DEF_CAM, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cam_CAM, asn1_struct);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -306,10 +306,10 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "denm") {
 
-    // decode ASN1 bitstring to struct
-    etsi_its_denm_coding::DENM_t* asn1_struct = nullptr;
-    etsi_its_denm_coding::asn_dec_rval_t ret = etsi_its_denm_coding::asn_decode(0, etsi_its_denm_coding::ATS_UNALIGNED_BASIC_PER, &etsi_its_denm_coding::asn_DEF_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
-    if (ret.code != etsi_its_denm_coding::RC_OK) {
+    // decode ASN1 bitstring to ^struct
+    denm_DENM_t* asn1_struct = nullptr;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
 #else
@@ -318,7 +318,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
         "Failed to decode message");
       return;
     }
-    if (logLevelIsDebug()) etsi_its_denm_coding::asn_fprint(stdout, &etsi_its_denm_coding::asn_DEF_DENM, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_denm_DENM, asn1_struct);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -368,14 +368,14 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
     "Received CAM");
 
   // convert ROS msg to struct
-  etsi_its_cam_coding::CAM_t asn1_struct;
+  cam_CAM_t asn1_struct;
   etsi_its_cam_conversion::toStruct_CAM(*msg, asn1_struct);
-  if (logLevelIsDebug()) etsi_its_cam_coding::asn_fprint(stdout, &etsi_its_cam_coding::asn_DEF_CAM, &asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cam_CAM, &asn1_struct);
 
   // encode struct to ASN1 bitstring
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
-  int check_ret = etsi_its_cam_coding::asn_check_constraints(&etsi_its_cam_coding::asn_DEF_CAM, &asn1_struct, error_buffer, &error_length);
+  int check_ret = asn_check_constraints(&asn_DEF_cam_CAM, &asn1_struct, error_buffer, &error_length);
   if (check_ret != 0) {
 #ifdef ROS1
     NODELET_ERROR(
@@ -385,7 +385,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
       "Check of struct failed: %s", error_buffer);
     return;
   }
-  etsi_its_cam_coding::asn_encode_to_new_buffer_result_t ret = etsi_its_cam_coding::asn_encode_to_new_buffer(0, etsi_its_cam_coding::ATS_UNALIGNED_BASIC_PER, &etsi_its_cam_coding::asn_DEF_CAM, &asn1_struct);
+  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cam_CAM, &asn1_struct);
   if (ret.result.encoded == -1) {
 #ifdef ROS1
     NODELET_ERROR(
@@ -439,14 +439,14 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
     "Received DENM");
 
   // convert ROS msg to struct
-  etsi_its_denm_coding::DENM_t asn1_struct;
+  denm_DENM_t asn1_struct;
   etsi_its_denm_conversion::toStruct_DENM(*msg, asn1_struct);
-  if (logLevelIsDebug()) etsi_its_denm_coding::asn_fprint(stdout, &etsi_its_denm_coding::asn_DEF_DENM, &asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_denm_DENM, &asn1_struct);
 
   // encode struct to ASN1 bitstring
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
-  int check_ret = etsi_its_denm_coding::asn_check_constraints(&etsi_its_denm_coding::asn_DEF_DENM, &asn1_struct, error_buffer, &error_length);
+  int check_ret = asn_check_constraints(&asn_DEF_denm_DENM, &asn1_struct, error_buffer, &error_length);
   if (check_ret != 0) {
 #ifdef ROS1
     NODELET_ERROR(
@@ -456,7 +456,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
       "Check of struct failed: %s", error_buffer);
     return;
   }
-  etsi_its_denm_coding::asn_encode_to_new_buffer_result_t ret = etsi_its_denm_coding::asn_encode_to_new_buffer(0, etsi_its_denm_coding::ATS_UNALIGNED_BASIC_PER, &etsi_its_denm_coding::asn_DEF_DENM, &asn1_struct);
+  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, &asn1_struct);
   if (ret.result.encoded == -1) {
 #ifdef ROS1
     NODELET_ERROR(
