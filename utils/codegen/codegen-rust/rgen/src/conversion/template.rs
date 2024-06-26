@@ -354,7 +354,7 @@ pub fn sequence_or_set_template(
             let cases = match inner {
                 InnerTypes::Choice(c) => {
                     c.options.iter().map(|im| {
-                        format!("  case {name}__{c_field_name}_PR_{ty}:\n    \
+                        format!("  case {pdu}_{name}__{c_field_name}_PR_{ty}:\n    \
                                  toRos_{ty}(in.{c_field_name}.choice.{c_member}, out.{r_field_name}.{r_member});\n    \
                                  out.{r_field_name}.choice.value = {pdu}_msgs::{linked_with}::{r_const_member};\n    \
                                  break;", 
@@ -441,7 +441,7 @@ pub fn sequence_or_set_template(
                     c.options.iter().map(|im| {
                         format!("  case {pdu}_msgs::{linked_with}::{r_const_member}:\n    \
                                  toStruct_{ty}(in.{r_field_name}.{r_member}, out.{c_field_name}.choice.{c_member});\n    \
-                                 out.{c_field_name}.present = {name}__{c_field_name}_PR::{name}__{c_field_name}_PR_{c_member};\n    \
+                                 out.{c_field_name}.present = {pdu}_{name}__{c_field_name}_PR::{pdu}_{name}__{c_field_name}_PR_{c_member};\n    \
                                  break;", 
                             pdu = &options.main_pdu,
                             linked_with = links.get(&c.linked_with).unwrap().name_type.ty,
