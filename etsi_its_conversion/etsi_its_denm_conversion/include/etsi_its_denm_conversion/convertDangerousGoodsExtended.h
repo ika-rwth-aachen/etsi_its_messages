@@ -78,7 +78,7 @@ void toStruct_DangerousGoodsExtended(const denm_msgs::DangerousGoodsExtended& in
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.tunnels_restricted, out.tunnelsRestricted);
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.limited_quantity, out.limitedQuantity);
   if (in.emergency_action_code_is_present) {
-    out.emergencyActionCode = (denm_IA5String_t*) calloc(1, sizeof(denm_IA5String_t));
+    out.emergencyActionCode = (IA5String_t*) calloc(1, sizeof(IA5String_t));
     etsi_its_primitives_conversion::toStruct_IA5String(in.emergency_action_code, *out.emergencyActionCode);
   }
   if (in.phone_number_is_present) {
@@ -86,7 +86,7 @@ void toStruct_DangerousGoodsExtended(const denm_msgs::DangerousGoodsExtended& in
     toStruct_PhoneNumber(in.phone_number, *out.phoneNumber);
   }
   if (in.company_name_is_present) {
-    out.companyName = (denm_UTF8String_t*) calloc(1, sizeof(denm_UTF8String_t));
+    out.companyName = (UTF8String_t*) calloc(1, sizeof(UTF8String_t));
     etsi_its_primitives_conversion::toStruct_UTF8String(in.company_name, *out.companyName);
   }
 }

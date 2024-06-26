@@ -492,6 +492,7 @@ pub fn sequence_or_set_template(
     let to_c_fmt_member = |member: &NamedSeqMember| -> String {
         if member.is_optional {
             if !member.has_default {
+                if !member.name_type.is_primitive {
                 format!(
                     "if (in.{r_member}_is_present) {{\n    \
                          out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
@@ -504,6 +505,19 @@ pub fn sequence_or_set_template(
                     pdu = &options.main_pdu
                 )
             } else {
+                    format!(
+                        "if (in.{r_member}_is_present) {{\n    \
+                            out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n    \
+                            {conversion}\n  \
+                            }}",
+                        ty = member.name_type.ty,
+                        c_member = member.name_type.name,
+                        conversion = to_c_conversion_call(&member),
+                        r_member = to_ros_snake_case(&member.name_type.name),
+                    )
+                }
+            } else {
+                if !member.name_type.is_primitive {
                 format!(
                     "out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n  \
                      {conversion}",
@@ -512,6 +526,15 @@ pub fn sequence_or_set_template(
                     conversion = to_c_conversion_call(&member),
                     pdu = &options.main_pdu
                 )
+                } else {
+                    format!(
+                        "out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n  \
+                         {conversion}",
+                        ty = member.name_type.ty,
+                        c_member = member.name_type.name,
+                        conversion = to_c_conversion_call(&member),
+                    )
+                }
             }
         } else {
             to_c_conversion_call(&member)
