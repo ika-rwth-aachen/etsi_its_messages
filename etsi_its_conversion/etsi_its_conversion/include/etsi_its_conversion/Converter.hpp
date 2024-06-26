@@ -30,6 +30,7 @@ SOFTWARE.
 
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_denm_conversion/convertDENM.h>
+#include <etsi_its_cpm_conversion/convertCollectivePerceptionMessage.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
