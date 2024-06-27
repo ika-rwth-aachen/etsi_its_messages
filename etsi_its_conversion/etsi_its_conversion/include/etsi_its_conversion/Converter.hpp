@@ -79,9 +79,11 @@ class Converter : public rclcpp::Node {
 #ifdef ROS1
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
+    void rosCallbackCpm(const etsi_its_cpm_msgs::CollectivePerceptionMessage::ConstPtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
+    void rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptionMessage::UniquePtr msg);
 #endif
 
   protected:
@@ -92,6 +94,8 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicCam;
     static const std::string kInputTopicDenm;
     static const std::string kOutputTopicDenm;
+    static const std::string kInputTopicCpm;
+    static const std::string kOutputTopicCpm;
 
     static const std::string kHasBtpDestinationPortParam;
     static const bool kHasBtpDestinationPortParamDefault;
@@ -119,6 +123,8 @@ class Converter : public rclcpp::Node {
     std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_cam_;
     std::unordered_map<std::string, rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr> publishers_denm_;
     std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
+    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr> subscribers_cpm_;
+    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr> publishers_cpm_;
     rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
 #endif
 
