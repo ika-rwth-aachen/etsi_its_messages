@@ -17,4 +17,4 @@ jobs:
           git_user: Jean-Pierre Busch
           git_email: jean-pierre.busch@ika.rwth-aachen.de
           release_repository_push_url: https://github.com/${{ github.repository }}-release.git
-          open_pr: true
+          open_pr: false

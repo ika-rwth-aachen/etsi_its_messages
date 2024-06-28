@@ -1,4 +1,4 @@
-# docker build -t ghcr.io/ika-rwth-aachen/etsi_its_messages:rgen -f rgen.Dockerfile .
+# docker build -t ghcr.io/ika-rwth-aachen/etsi_its_messages:rgen -f rgen.Dockerfile ..
 
 FROM ubuntu:22.04
 
