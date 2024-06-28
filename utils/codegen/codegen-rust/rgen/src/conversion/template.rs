@@ -661,7 +661,7 @@ pub fn choice_template(
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,
-                        c_member = member.name,
+                        c_member = member.name.replace('-', "_"),
                         r_member = to_ros_snake_case(&member.name),
                         r_ch_member = to_ros_const_case(&member.name)
                     )
@@ -688,7 +688,7 @@ pub fn choice_template(
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,
-                        c_member = member.name,
+                        c_member = member.name.replace('-', "_"),
                         r_member = to_ros_snake_case(&member.name),
                         r_ch_member = to_ros_const_case(&member.name)
                     )

@@ -91,8 +91,8 @@ void toRos_CauseCodeChoice(const cpm_CauseCodeChoice_t& in, cpm_msgs::CauseCodeC
     toRos_SubCauseCodeType(in.choice.impassability5, out.impassability5);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_IMPASSABILITY5;
     break;
-  case cpm_CauseCodeChoice_PR_adverseWeatherCondition-Adhesion6:
-    toRos_AdverseWeatherConditionAdhesionSubCauseCode(in.choice.adverseWeatherCondition-Adhesion6, out.adverse_weather_condition_adhesion6);
+  case cpm_CauseCodeChoice_PR_adverseWeatherCondition_Adhesion6:
+    toRos_AdverseWeatherConditionAdhesionSubCauseCode(in.choice.adverseWeatherCondition_Adhesion6, out.adverse_weather_condition_adhesion6);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION6;
     break;
   case cpm_CauseCodeChoice_PR_aquaplaning7:
@@ -103,16 +103,16 @@ void toRos_CauseCodeChoice(const cpm_CauseCodeChoice_t& in, cpm_msgs::CauseCodeC
     toRos_SubCauseCodeType(in.choice.reserved8, out.reserved8);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED8;
     break;
-  case cpm_CauseCodeChoice_PR_hazardousLocation-SurfaceCondition9:
-    toRos_HazardousLocationSurfaceConditionSubCauseCode(in.choice.hazardousLocation-SurfaceCondition9, out.hazardous_location_surface_condition9);
+  case cpm_CauseCodeChoice_PR_hazardousLocation_SurfaceCondition9:
+    toRos_HazardousLocationSurfaceConditionSubCauseCode(in.choice.hazardousLocation_SurfaceCondition9, out.hazardous_location_surface_condition9);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION9;
     break;
-  case cpm_CauseCodeChoice_PR_hazardousLocation-ObstacleOnTheRoad10:
-    toRos_HazardousLocationObstacleOnTheRoadSubCauseCode(in.choice.hazardousLocation-ObstacleOnTheRoad10, out.hazardous_location_obstacle_on_the_road10);
+  case cpm_CauseCodeChoice_PR_hazardousLocation_ObstacleOnTheRoad10:
+    toRos_HazardousLocationObstacleOnTheRoadSubCauseCode(in.choice.hazardousLocation_ObstacleOnTheRoad10, out.hazardous_location_obstacle_on_the_road10);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD10;
     break;
-  case cpm_CauseCodeChoice_PR_hazardousLocation-AnimalOnTheRoad11:
-    toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(in.choice.hazardousLocation-AnimalOnTheRoad11, out.hazardous_location_animal_on_the_road11);
+  case cpm_CauseCodeChoice_PR_hazardousLocation_AnimalOnTheRoad11:
+    toRos_HazardousLocationAnimalOnTheRoadSubCauseCode(in.choice.hazardousLocation_AnimalOnTheRoad11, out.hazardous_location_animal_on_the_road11);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD11;
     break;
   case cpm_CauseCodeChoice_PR_humanPresenceOnTheRoad12:
@@ -135,16 +135,16 @@ void toRos_CauseCodeChoice(const cpm_CauseCodeChoice_t& in, cpm_msgs::CauseCodeC
     toRos_SubCauseCodeType(in.choice.reserved16, out.reserved16);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_RESERVED16;
     break;
-  case cpm_CauseCodeChoice_PR_adverseWeatherCondition-ExtremeWeatherCondition17:
-    toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.choice.adverseWeatherCondition-ExtremeWeatherCondition17, out.adverse_weather_condition_extreme_weather_condition17);
+  case cpm_CauseCodeChoice_PR_adverseWeatherCondition_ExtremeWeatherCondition17:
+    toRos_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.choice.adverseWeatherCondition_ExtremeWeatherCondition17, out.adverse_weather_condition_extreme_weather_condition17);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION17;
     break;
-  case cpm_CauseCodeChoice_PR_adverseWeatherCondition-Visibility18:
-    toRos_AdverseWeatherConditionVisibilitySubCauseCode(in.choice.adverseWeatherCondition-Visibility18, out.adverse_weather_condition_visibility18);
+  case cpm_CauseCodeChoice_PR_adverseWeatherCondition_Visibility18:
+    toRos_AdverseWeatherConditionVisibilitySubCauseCode(in.choice.adverseWeatherCondition_Visibility18, out.adverse_weather_condition_visibility18);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY18;
     break;
-  case cpm_CauseCodeChoice_PR_adverseWeatherCondition-Precipitation19:
-    toRos_AdverseWeatherConditionPrecipitationSubCauseCode(in.choice.adverseWeatherCondition-Precipitation19, out.adverse_weather_condition_precipitation19);
+  case cpm_CauseCodeChoice_PR_adverseWeatherCondition_Precipitation19:
+    toRos_AdverseWeatherConditionPrecipitationSubCauseCode(in.choice.adverseWeatherCondition_Precipitation19, out.adverse_weather_condition_precipitation19);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION19;
     break;
   case cpm_CauseCodeChoice_PR_violence20:
@@ -451,8 +451,8 @@ void toRos_CauseCodeChoice(const cpm_CauseCodeChoice_t& in, cpm_msgs::CauseCodeC
     toRos_EmergencyVehicleApproachingSubCauseCode(in.choice.emergencyVehicleApproaching95, out.emergency_vehicle_approaching95);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_EMERGENCY_VEHICLE_APPROACHING95;
     break;
-  case cpm_CauseCodeChoice_PR_hazardousLocation-DangerousCurve96:
-    toRos_HazardousLocationDangerousCurveSubCauseCode(in.choice.hazardousLocation-DangerousCurve96, out.hazardous_location_dangerous_curve96);
+  case cpm_CauseCodeChoice_PR_hazardousLocation_DangerousCurve96:
+    toRos_HazardousLocationDangerousCurveSubCauseCode(in.choice.hazardousLocation_DangerousCurve96, out.hazardous_location_dangerous_curve96);
     out.choice = cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE96;
     break;
   case cpm_CauseCodeChoice_PR_collisionRisk97:
@@ -616,8 +616,8 @@ void toStruct_CauseCodeChoice(const cpm_msgs::CauseCodeChoice& in, cpm_CauseCode
     out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_impassability5;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_ADHESION6:
-    toStruct_AdverseWeatherConditionAdhesionSubCauseCode(in.adverse_weather_condition_adhesion6, out.choice.adverseWeatherCondition-Adhesion6);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition-Adhesion6;
+    toStruct_AdverseWeatherConditionAdhesionSubCauseCode(in.adverse_weather_condition_adhesion6, out.choice.adverseWeatherCondition_Adhesion6);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition_Adhesion6;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_AQUAPLANING7:
     toStruct_SubCauseCodeType(in.aquaplaning7, out.choice.aquaplaning7);
@@ -628,16 +628,16 @@ void toStruct_CauseCodeChoice(const cpm_msgs::CauseCodeChoice& in, cpm_CauseCode
     out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_reserved8;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_SURFACE_CONDITION9:
-    toStruct_HazardousLocationSurfaceConditionSubCauseCode(in.hazardous_location_surface_condition9, out.choice.hazardousLocation-SurfaceCondition9);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation-SurfaceCondition9;
+    toStruct_HazardousLocationSurfaceConditionSubCauseCode(in.hazardous_location_surface_condition9, out.choice.hazardousLocation_SurfaceCondition9);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation_SurfaceCondition9;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD10:
-    toStruct_HazardousLocationObstacleOnTheRoadSubCauseCode(in.hazardous_location_obstacle_on_the_road10, out.choice.hazardousLocation-ObstacleOnTheRoad10);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation-ObstacleOnTheRoad10;
+    toStruct_HazardousLocationObstacleOnTheRoadSubCauseCode(in.hazardous_location_obstacle_on_the_road10, out.choice.hazardousLocation_ObstacleOnTheRoad10);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation_ObstacleOnTheRoad10;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD11:
-    toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(in.hazardous_location_animal_on_the_road11, out.choice.hazardousLocation-AnimalOnTheRoad11);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation-AnimalOnTheRoad11;
+    toStruct_HazardousLocationAnimalOnTheRoadSubCauseCode(in.hazardous_location_animal_on_the_road11, out.choice.hazardousLocation_AnimalOnTheRoad11);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation_AnimalOnTheRoad11;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_HUMAN_PRESENCE_ON_THE_ROAD12:
     toStruct_HumanPresenceOnTheRoadSubCauseCode(in.human_presence_on_the_road12, out.choice.humanPresenceOnTheRoad12);
@@ -660,16 +660,16 @@ void toStruct_CauseCodeChoice(const cpm_msgs::CauseCodeChoice& in, cpm_CauseCode
     out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_reserved16;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION17:
-    toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.adverse_weather_condition_extreme_weather_condition17, out.choice.adverseWeatherCondition-ExtremeWeatherCondition17);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition-ExtremeWeatherCondition17;
+    toStruct_AdverseWeatherConditionExtremeWeatherConditionSubCauseCode(in.adverse_weather_condition_extreme_weather_condition17, out.choice.adverseWeatherCondition_ExtremeWeatherCondition17);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition_ExtremeWeatherCondition17;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_VISIBILITY18:
-    toStruct_AdverseWeatherConditionVisibilitySubCauseCode(in.adverse_weather_condition_visibility18, out.choice.adverseWeatherCondition-Visibility18);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition-Visibility18;
+    toStruct_AdverseWeatherConditionVisibilitySubCauseCode(in.adverse_weather_condition_visibility18, out.choice.adverseWeatherCondition_Visibility18);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition_Visibility18;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_ADVERSE_WEATHER_CONDITION_PRECIPITATION19:
-    toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(in.adverse_weather_condition_precipitation19, out.choice.adverseWeatherCondition-Precipitation19);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition-Precipitation19;
+    toStruct_AdverseWeatherConditionPrecipitationSubCauseCode(in.adverse_weather_condition_precipitation19, out.choice.adverseWeatherCondition_Precipitation19);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_adverseWeatherCondition_Precipitation19;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_VIOLENCE20:
     toStruct_SubCauseCodeType(in.violence20, out.choice.violence20);
@@ -976,8 +976,8 @@ void toStruct_CauseCodeChoice(const cpm_msgs::CauseCodeChoice& in, cpm_CauseCode
     out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_emergencyVehicleApproaching95;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_HAZARDOUS_LOCATION_DANGEROUS_CURVE96:
-    toStruct_HazardousLocationDangerousCurveSubCauseCode(in.hazardous_location_dangerous_curve96, out.choice.hazardousLocation-DangerousCurve96);
-    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation-DangerousCurve96;
+    toStruct_HazardousLocationDangerousCurveSubCauseCode(in.hazardous_location_dangerous_curve96, out.choice.hazardousLocation_DangerousCurve96);
+    out.present = cpm_CauseCodeChoice_PR::cpm_CauseCodeChoice_PR_hazardousLocation_DangerousCurve96;
     break;
   case cpm_msgs::CauseCodeChoice::CHOICE_COLLISION_RISK97:
     toStruct_CollisionRiskSubCauseCode(in.collision_risk97, out.choice.collisionRisk97);
