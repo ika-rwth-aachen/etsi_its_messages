@@ -48,7 +48,7 @@ def parseCli():
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output package directory")
     parser.add_argument("-td", "--temp-dir", type=str, default=None, help="temporary directory for mounting files to container; uses tempfile by default")
     parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
-    parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c-mouse", help="asn1c Docker image")
+    parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c", help="asn1c Docker image")
 
     args = parser.parse_args()
 

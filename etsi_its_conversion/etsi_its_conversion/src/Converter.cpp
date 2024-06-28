@@ -231,24 +231,24 @@ void Converter::setup() {
   }
 #else
   publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
-  publishers_cam_["cam"] = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
-  publishers_denm_["denm"] = this->create_publisher<etsi_its_denm_msgs::msg::DENM>(kOutputTopicDenm, 1);
-  publishers_cpm_["cpm"] = this->create_publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kOutputTopicCpm, 1);
+  publisher_cam_ = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
+  publisher_denm_ = this->create_publisher<etsi_its_denm_msgs::msg::DENM>(kOutputTopicDenm, 1);
+  publisher_cpm_ = this->create_publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kOutputTopicCpm, 1);
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
-    subscribers_cam_["cam"] = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publishers_cam_["cam"]->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_cam_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
+    subscriber_cam_ = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscriber_cam_->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
-    subscribers_denm_["denm"] = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publishers_denm_["denm"]->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_denm_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+    subscriber_denm_ = this->create_subscription<etsi_its_denm_msgs::msg::DENM>(kInputTopicDenm, 1, std::bind(&Converter::rosCallbackDenm, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscriber_denm_->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm") != etsi_types_.end()) {
-    subscribers_cpm_["cpm"] = this->create_subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kInputTopicCpm, 1, std::bind(&Converter::rosCallbackCpm, this, std::placeholders::_1));
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publishers_cpm_["cpm"]->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscribers_cpm_["cpm"]->get_topic_name(), publisher_udp_->get_topic_name());
+    subscriber_cpm_ = this->create_subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kInputTopicCpm, 1, std::bind(&Converter::rosCallbackCpm, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscriber_cpm_->get_topic_name(), publisher_udp_->get_topic_name());
   }
 #endif
 }
@@ -317,7 +317,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #ifdef ROS1
     publishers_["cam"].publish(msg);
 #else
-    publishers_cam_["cam"]->publish(msg);
+    publisher_cam_->publish(msg);
 #endif
 
   } else if (detected_etsi_type == "denm") {
@@ -348,7 +348,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #ifdef ROS1
     publishers_["denm"].publish(msg);
 #else
-    publishers_denm_["denm"]->publish(msg);
+    publisher_denm_->publish(msg);
 #endif
 
   } else if (detected_etsi_type == "cpm") {
@@ -379,7 +379,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #ifdef ROS1
     publishers_["cpm"].publish(msg);
 #else
-    publishers_cpm_["cpm"]->publish(msg);
+    publisher_cpm_->publish(msg);
 #endif
 
   } else {

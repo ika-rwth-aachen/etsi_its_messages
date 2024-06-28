@@ -37,9 +37,11 @@ SOFTWARE.
 #include <udp_msgs/UdpPacket.h>
 #include <etsi_its_cam_msgs/CAM.h>
 #include <etsi_its_denm_msgs/DENM.h>
+#include <etsi_its_cpm_msgs/CollectivePerceptionMessage.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <etsi_its_denm_msgs/msg/denm.hpp>
+#include <etsi_its_cpm_msgs/msg/collective_perception_message.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
@@ -113,19 +115,19 @@ class Converter : public rclcpp::Node {
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
+    ros::Publisher publisher_udp_;
     ros::Subscriber subscriber_udp_;
     std::unordered_map<std::string, ros::Publisher> publishers_;
     std::unordered_map<std::string, ros::Subscriber> subscribers_;
-    ros::Publisher publisher_udp_;
 #else
-    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_cam_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_cam_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr> publishers_denm_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr> subscribers_cpm_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr> publishers_cpm_;
     rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
+    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
+    rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr publisher_cam_;
+    rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr subscriber_cam_;
+    rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr subscriber_denm_;
+    rclcpp::Subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr subscriber_cpm_;
+    rclcpp::Publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr publisher_cpm_;
 #endif
 
 };
