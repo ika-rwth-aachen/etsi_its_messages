@@ -39,10 +39,10 @@ generator=\$1\n\
 pdu=\$2\n\
 case \$generator in\n\
     'msgs')\n\
-        asn1-to-ros-msgs -o . \$(find /input -name '*.asn')\n\
+        asn1-to-ros-msgs -o . \$(find /input -name '*.asn' | sort)\n\
         ;;\n\
     'conversion-headers')\n\
-        asn1-to-ros-conversion-headers -o . -p \$pdu \$(find /input -name '*.asn')\n\
+        asn1-to-ros-conversion-headers -o . -p \$pdu \$(find /input -name '*.asn' | sort)\n\
         ;;\n\
     *)\n\
         echo 'Unknown generator \$generator'\n\

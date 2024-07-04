@@ -9,6 +9,7 @@
 extern "C" {
 #endif
 
+#define denm_defaultValidity (600)
 #define min_val_denm_StationID (0)
 #define max_val_denm_StationID (4294967295)
 #define min_val_denm_Longitude (-1800000000)
@@ -147,7 +148,6 @@ extern "C" {
 #define max_val_denm_SequenceNumber (65535)
 #define min_val_denm_ProtectedZoneID (0)
 #define max_val_denm_ProtectedZoneID (134217727)
-#define denm_defaultValidity (600)
 
 
 #ifdef __cplusplus

@@ -111,7 +111,7 @@ def main():
             # run asn1c docker container to generate header and source files
             asn1c_cmd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "asn1c.sh")
             with open(asn1c_cmd_file, "w") as f:
-                f.write(f"asn1c $(find /input -name '*.asn') -fcompound-names -fprefix={args.type}_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER")
+                f.write(f"asn1c $(find /input -name '*.asn' | sort) -fcompound-names -fprefix={args.type}_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER")
 
             subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", "-v", f"{asn1c_cmd_file}:/asn1c.sh", args.docker_image], check=True)
             os.remove(asn1c_cmd_file)
