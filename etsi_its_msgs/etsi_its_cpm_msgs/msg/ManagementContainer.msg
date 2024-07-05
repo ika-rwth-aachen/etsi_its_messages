@@ -1,7 +1,7 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 # Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
