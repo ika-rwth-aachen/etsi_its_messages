@@ -50,12 +50,14 @@ ros2-iron:
 ros2-jazzy:
   trigger:
     include:
-      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/jazzy/.gitlab-ci/docker-ros.yml
     strategy: depend
   variables:
+    DOCKER_ROS_GIT_REF: jazzy
     PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros2-jazzy
+    # TODO: switch to rwthika/ros2:jazzy, once available
     BASE_IMAGE: ubuntu:24.04
     ROS_DISTRO: jazzy
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
