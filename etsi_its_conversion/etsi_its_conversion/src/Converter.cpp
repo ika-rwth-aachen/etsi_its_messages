@@ -322,7 +322,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "denm") {
 
-    // decode ASN1 bitstring to ^struct
+    // decode ASN1 bitstring to struct
     denm_DENM_t* asn1_struct = nullptr;
     asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
@@ -353,7 +353,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 
   } else if (detected_etsi_type == "cpm") {
 
-    // decode ASN1 bitstring to ^struct
+    // decode ASN1 bitstring to struct
     cpm_CollectivePerceptionMessage_t* asn1_struct = nullptr;
     asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
