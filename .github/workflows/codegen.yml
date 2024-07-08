@@ -49,7 +49,7 @@ jobs:
           - message: denm
             script: ./utils/codegen/asn1ToC.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_coding/etsi_its_denm_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
           - message: cpm
-            script: ./utils/codegen/asn1ToC.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm -o etsi_its_coding/etsi_its_cpm_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
+            script: ./utils/codegen/asn1ToC.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm -o etsi_its_coding/etsi_its_cpm_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -69,6 +69,7 @@ jobs:
 
     - name: etsi_its_${{ matrix.message }}_coding
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         rm -rf ${{ github.workspace }}/tmp
         if [[ ! -z "$(git status --porcelain)" ]]; then
@@ -90,7 +91,7 @@ jobs:
           - message: denm
             script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
           - message: cpm
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -o etsi_its_msgs/etsi_its_cpm_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
+            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -o etsi_its_msgs/etsi_its_cpm_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -103,6 +104,7 @@ jobs:
         python-version: 3.9
     - name: etsi_its_${{ matrix.message }}_msgs
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"
@@ -123,7 +125,7 @@ jobs:
           - message: denm
             script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
           - message: cpm
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
+            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -136,6 +138,7 @@ jobs:
         python-version: 3.9
     - name: etsi_its_${{ matrix.message }}_conversion
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"

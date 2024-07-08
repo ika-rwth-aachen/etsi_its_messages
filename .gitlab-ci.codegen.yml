@@ -4,8 +4,9 @@ default:
   services: [docker:24.0.7-dind]
   before_script:
     - apk update
-    - apk add python3
+    - apk add bash python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/patches/patch.sh
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -91,7 +92,7 @@ etsi_its_cpm_coding:
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -t cpm
       -o etsi_its_coding/etsi_its_cpm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
@@ -138,7 +139,7 @@ etsi_its_cpm_msgs:
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_cpm_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
@@ -186,7 +187,7 @@ etsi_its_cpm_conversion:
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -t cpm
       -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
