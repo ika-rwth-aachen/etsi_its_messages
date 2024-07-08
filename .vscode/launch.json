@@ -4,7 +4,7 @@
         {
             "name": "CAM (coding)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
             "args": [
@@ -21,7 +21,7 @@
         {
             "name": "CAM (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
             "args": [
@@ -36,7 +36,7 @@
         {
             "name": "CAM (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
             "args": [
@@ -53,7 +53,7 @@
         {
             "name": "DENM (coding)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
             "args": [
@@ -70,7 +70,7 @@
         {
             "name": "DENM (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
             "args": [
@@ -85,7 +85,7 @@
         {
             "name": "DENM (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
             "args": [
@@ -102,7 +102,7 @@
         {
             "name": "CPM (coding)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
             "args": [
@@ -123,7 +123,7 @@
         {
             "name": "CPM (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
             "args": [
@@ -142,7 +142,7 @@
         {
             "name": "CPM (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
             "args": [
