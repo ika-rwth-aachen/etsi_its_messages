@@ -2,9 +2,9 @@
  * Copyright (c) 2005-2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_system.h>
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/aper_support.h>
+#include <etsi_its_cpm_ts_coding/asn_system.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/aper_support.h>
 
 int32_t
 aper_get_align(asn_per_data_t *pd) {

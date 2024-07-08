@@ -2,8 +2,8 @@
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/asn_codecs_prim.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/asn_codecs_prim.h>
 
 void
 ASN__PRIMITIVE_TYPE_free(const asn_TYPE_descriptor_t *td, void *sptr,

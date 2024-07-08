@@ -11,7 +11,7 @@
 #define __EXTENSIONS__          /* for Sun */
 #endif
 
-#include "etsi_its_cpm_coding/asn_application.h"	/* Application-visible API */
+#include "etsi_its_cpm_ts_coding/asn_application.h"	/* Application-visible API */
 
 #ifndef	__NO_ASSERT_H__		/* Include assert.h only for internal use. */
 #include <assert.h>		/* for assert() macro */
@@ -22,12 +22,12 @@ extern "C" {
 #endif
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
-#include <etsi_its_cpm_coding/uper_decoder.h>
-#include <etsi_its_cpm_coding/uper_encoder.h>
+#include <etsi_its_cpm_ts_coding/uper_decoder.h>
+#include <etsi_its_cpm_ts_coding/uper_encoder.h>
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) */
 #if !defined(ASN_DISABLE_APER_SUPPORT)
-#include <etsi_its_cpm_coding/aper_decoder.h>
-#include <etsi_its_cpm_coding/aper_encoder.h>
+#include <etsi_its_cpm_ts_coding/aper_decoder.h>
+#include <etsi_its_cpm_ts_coding/aper_encoder.h>
 #endif  /* !defined(ASN_DISABLE_APER_SUPPORT) */
 
 /* Environment version might be used to avoid running with the old library */

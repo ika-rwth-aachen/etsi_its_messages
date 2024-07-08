@@ -2,10 +2,10 @@
  * Copyright (c) 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/uper_encoder.h>
-#include <etsi_its_cpm_coding/uper_support.h>
-#include <etsi_its_cpm_coding/uper_opentype.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/uper_encoder.h>
+#include <etsi_its_cpm_ts_coding/uper_support.h>
+#include <etsi_its_cpm_ts_coding/uper_opentype.h>
 
 typedef struct uper_ugot_key {
 	asn_per_data_t oldpd;	/* Old per data source */

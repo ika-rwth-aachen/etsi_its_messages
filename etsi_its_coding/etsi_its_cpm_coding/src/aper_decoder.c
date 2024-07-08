@@ -1,6 +1,6 @@
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/aper_decoder.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/aper_decoder.h>
 
 asn_dec_rval_t
 aper_decode_complete(const asn_codec_ctx_t *opt_codec_ctx,

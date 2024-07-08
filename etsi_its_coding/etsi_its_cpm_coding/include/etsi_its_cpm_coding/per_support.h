@@ -5,8 +5,8 @@
 #ifndef	_PER_SUPPORT_H_
 #define	_PER_SUPPORT_H_
 
-#include <etsi_its_cpm_coding/asn_system.h>		/* Platform-specific types */
-#include <etsi_its_cpm_coding/asn_bit_data.h>
+#include <etsi_its_cpm_ts_coding/asn_system.h>		/* Platform-specific types */
+#include <etsi_its_cpm_ts_coding/asn_bit_data.h>
 
 #ifdef __cplusplus
 extern "C" {

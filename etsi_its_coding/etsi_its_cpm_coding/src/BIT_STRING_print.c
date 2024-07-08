@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/BIT_STRING.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/BIT_STRING.h>
 
 /*
  * BIT STRING specific contents printer.

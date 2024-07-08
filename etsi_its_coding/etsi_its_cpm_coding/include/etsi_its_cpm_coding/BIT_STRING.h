@@ -5,7 +5,7 @@
 #ifndef	_BIT_STRING_H_
 #define	_BIT_STRING_H_
 
-#include <etsi_its_cpm_coding/OCTET_STRING.h>	/* Some help from OCTET STRING */
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>	/* Some help from OCTET STRING */
 
 #ifdef __cplusplus
 extern "C" {

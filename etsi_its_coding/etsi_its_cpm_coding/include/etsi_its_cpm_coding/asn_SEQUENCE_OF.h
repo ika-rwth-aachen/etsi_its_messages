@@ -5,7 +5,7 @@
 #ifndef	ASN_SEQUENCE_OF_H
 #define	ASN_SEQUENCE_OF_H
 
-#include <etsi_its_cpm_coding/asn_SET_OF.h>
+#include <etsi_its_cpm_ts_coding/asn_SET_OF.h>
 
 #ifdef __cplusplus
 extern "C" {

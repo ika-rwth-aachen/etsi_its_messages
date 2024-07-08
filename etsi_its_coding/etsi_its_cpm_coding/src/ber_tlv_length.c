@@ -2,9 +2,9 @@
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/ber_tlv_length.h>
-#include <etsi_its_cpm_coding/ber_tlv_tag.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/ber_tlv_length.h>
+#include <etsi_its_cpm_ts_coding/ber_tlv_tag.h>
 
 ssize_t
 ber_fetch_length(int _is_constructed, const void *bufptr, size_t size,

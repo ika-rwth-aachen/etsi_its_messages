@@ -5,7 +5,7 @@
 #ifndef	_ENUMERATED_H_
 #define	_ENUMERATED_H_
 
-#include <etsi_its_cpm_coding/INTEGER.h>
+#include <etsi_its_cpm_ts_coding/INTEGER.h>
 
 #ifdef __cplusplus
 extern "C" {

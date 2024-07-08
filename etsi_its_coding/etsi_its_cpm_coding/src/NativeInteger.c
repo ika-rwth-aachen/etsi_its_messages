@@ -10,8 +10,8 @@
  * implementation deals with the standard (machine-specific) representation
  * of them instead of using the platform-independent buffer.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/NativeInteger.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/NativeInteger.h>
 
 /*
  * NativeInteger basic type description.

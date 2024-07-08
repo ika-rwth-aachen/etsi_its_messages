@@ -1,6 +1,6 @@
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/uper_decoder.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/uper_decoder.h>
 
 /*
  * Decode a "Production of a complete encoding", X.691#10.1.

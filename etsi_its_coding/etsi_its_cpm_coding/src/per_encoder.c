@@ -1,5 +1,5 @@
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/per_encoder.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/per_encoder.h>
 
 int
 ignore_output(const void *data, size_t size, void *app_key) {

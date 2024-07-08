@@ -5,8 +5,8 @@
 #ifndef	_APER_SUPPORT_H_
 #define	_APER_SUPPORT_H_
 
-#include <etsi_its_cpm_coding/asn_system.h>		/* Platform-specific types */
-#include <etsi_its_cpm_coding/per_support.h>
+#include <etsi_its_cpm_ts_coding/asn_system.h>		/* Platform-specific types */
+#include <etsi_its_cpm_ts_coding/per_support.h>
 
 #ifdef __cplusplus
 extern "C" {

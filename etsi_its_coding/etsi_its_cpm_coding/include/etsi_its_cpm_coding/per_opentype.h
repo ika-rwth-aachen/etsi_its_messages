@@ -5,7 +5,7 @@
 #ifndef	_PER_OPENTYPE_H_
 #define	_PER_OPENTYPE_H_
 
-#include <etsi_its_cpm_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
 
 #ifdef __cplusplus
 extern "C" {

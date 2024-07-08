@@ -5,7 +5,7 @@
 #ifndef	_BOOLEAN_H_
 #define	_BOOLEAN_H_
 
-#include <etsi_its_cpm_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {

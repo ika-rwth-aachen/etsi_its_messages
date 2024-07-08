@@ -5,7 +5,7 @@
 #ifndef	ASN_BIT_DATA
 #define	ASN_BIT_DATA
 
-#include <etsi_its_cpm_coding/asn_system.h>		/* Platform-specific types */
+#include <etsi_its_cpm_ts_coding/asn_system.h>		/* Platform-specific types */
 
 #ifdef __cplusplus
 extern "C" {

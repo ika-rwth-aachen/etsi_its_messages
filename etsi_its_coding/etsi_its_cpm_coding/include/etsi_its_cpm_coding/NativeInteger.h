@@ -12,8 +12,8 @@
 #ifndef	_NativeInteger_H_
 #define	_NativeInteger_H_
 
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/INTEGER.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/INTEGER.h>
 
 #ifdef __cplusplus
 extern "C" {

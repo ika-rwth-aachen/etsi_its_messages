@@ -11,8 +11,8 @@
 #ifndef	_CONSTR_TYPE_H_
 #define	_CONSTR_TYPE_H_
 
-#include <etsi_its_cpm_coding/ber_tlv_length.h>
-#include <etsi_its_cpm_coding/ber_tlv_tag.h>
+#include <etsi_its_cpm_ts_coding/ber_tlv_length.h>
+#include <etsi_its_cpm_ts_coding/ber_tlv_tag.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,17 +59,17 @@ typedef void (jer_type_encoder_f)(void);
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-#include <etsi_its_cpm_coding/per_decoder.h>  /* Packet Encoding Rules decoder */
-#include <etsi_its_cpm_coding/per_encoder.h>  /* Packet Encoding Rules encoder */
+#include <etsi_its_cpm_ts_coding/per_decoder.h>  /* Packet Encoding Rules decoder */
+#include <etsi_its_cpm_ts_coding/per_encoder.h>  /* Packet Encoding Rules encoder */
 #else
 typedef void (per_type_decoder_f)(void);
 typedef void (per_type_encoder_f)(void);
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
 
-#include <etsi_its_cpm_coding/constraints.h>  /* Subtype constraints support */
+#include <etsi_its_cpm_ts_coding/constraints.h>  /* Subtype constraints support */
 
 #if !defined(ASN_DISABLE_RFILL_SUPPORT)
-#include <etsi_its_cpm_coding/asn_random_fill.h>  /* Random structures support */
+#include <etsi_its_cpm_ts_coding/asn_random_fill.h>  /* Random structures support */
 #else
 typedef void (asn_random_fill_f)(void);
 #endif  /* !defined(ASN_DISABLE_RFILL_SUPPORT) */

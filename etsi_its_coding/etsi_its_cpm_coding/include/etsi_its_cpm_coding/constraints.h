@@ -5,8 +5,8 @@
 #ifndef	ASN1_CONSTRAINTS_VALIDATOR_H
 #define	ASN1_CONSTRAINTS_VALIDATOR_H
 
-#include <etsi_its_cpm_coding/asn_system.h>		/* Platform-dependent types */
-#include <etsi_its_cpm_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_system.h>		/* Platform-dependent types */
+#include <etsi_its_cpm_ts_coding/asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {

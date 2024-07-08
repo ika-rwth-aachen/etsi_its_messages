@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/constr_SET_OF.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/constr_SET_OF.h>
 
 asn_dec_rval_t
 SET_OF_decode_uper(const asn_codec_ctx_t *opt_codec_ctx,

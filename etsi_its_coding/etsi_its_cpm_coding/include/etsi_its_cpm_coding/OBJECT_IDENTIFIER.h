@@ -5,9 +5,9 @@
 #ifndef	_OBJECT_IDENTIFIER_H_
 #define	_OBJECT_IDENTIFIER_H_
 
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/asn_codecs_prim.h>
-#include <etsi_its_cpm_coding/OCTET_STRING.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_codecs_prim.h>
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
 extern "C" {

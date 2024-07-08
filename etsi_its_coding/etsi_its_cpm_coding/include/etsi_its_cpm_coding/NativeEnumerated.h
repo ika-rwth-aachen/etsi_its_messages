@@ -12,8 +12,8 @@
 #ifndef	_NativeEnumerated_H_
 #define	_NativeEnumerated_H_
 
-#include <etsi_its_cpm_coding/NativeInteger.h>
-#include <etsi_its_cpm_coding/ENUMERATED.h>
+#include <etsi_its_cpm_ts_coding/NativeInteger.h>
+#include <etsi_its_cpm_ts_coding/ENUMERATED.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -6,7 +6,7 @@
 #ifndef	ASN_IOC_H
 #define	ASN_IOC_H
 
-#include <etsi_its_cpm_coding/asn_system.h>		/* Platform-specific types */
+#include <etsi_its_cpm_ts_coding/asn_system.h>		/* Platform-specific types */
 
 #ifdef __cplusplus
 extern "C" {

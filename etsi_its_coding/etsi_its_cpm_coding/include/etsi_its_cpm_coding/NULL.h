@@ -5,7 +5,7 @@
 #ifndef	ASN_TYPE_NULL_H
 #define	ASN_TYPE_NULL_H
 
-#include <etsi_its_cpm_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {

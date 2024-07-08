@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/BOOLEAN.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/BOOLEAN.h>
 
 int
 BOOLEAN_print(const asn_TYPE_descriptor_t *td, const void *sptr, int ilevel,

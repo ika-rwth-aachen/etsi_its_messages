@@ -5,7 +5,7 @@
 #ifndef	_UTF8String_H_
 #define	_UTF8String_H_
 
-#include <etsi_its_cpm_coding/OCTET_STRING.h>
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
 extern "C" {

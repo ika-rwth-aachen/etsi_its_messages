@@ -3,10 +3,10 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/OPEN_TYPE.h>
-#include <etsi_its_cpm_coding/constr_CHOICE.h>
-#include <etsi_its_cpm_coding/aper_opentype.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/OPEN_TYPE.h>
+#include <etsi_its_cpm_ts_coding/constr_CHOICE.h>
+#include <etsi_its_cpm_ts_coding/aper_opentype.h>
 
 asn_dec_rval_t
 OPEN_TYPE_aper_get(const asn_codec_ctx_t *opt_codec_ctx,

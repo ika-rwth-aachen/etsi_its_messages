@@ -5,7 +5,7 @@
 #ifndef	_UPER_OPENTYPE_H_
 #define	_UPER_OPENTYPE_H_
 
-#include <etsi_its_cpm_coding/per_opentype.h>
+#include <etsi_its_cpm_ts_coding/per_opentype.h>
 
 #ifdef __cplusplus
 extern "C" {

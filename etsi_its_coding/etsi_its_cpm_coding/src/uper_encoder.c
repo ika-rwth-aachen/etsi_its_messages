@@ -1,6 +1,6 @@
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/uper_encoder.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/uper_encoder.h>
 
 static int _uper_encode_flush_outp(asn_per_outp_t *po);
 

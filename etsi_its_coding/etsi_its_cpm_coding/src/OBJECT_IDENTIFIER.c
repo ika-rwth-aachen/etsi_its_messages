@@ -2,10 +2,10 @@
  * Copyright (c) 2003, 2004 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/INTEGER.h>
-#include <etsi_its_cpm_coding/OBJECT_IDENTIFIER.h>
-#include <etsi_its_cpm_coding/asn_codecs_prim.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/INTEGER.h>
+#include <etsi_its_cpm_ts_coding/OBJECT_IDENTIFIER.h>
+#include <etsi_its_cpm_ts_coding/asn_codecs_prim.h>
 #include <limits.h>	/* for CHAR_BIT */
 #include <errno.h>
 #include <inttypes.h>

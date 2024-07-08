@@ -5,7 +5,7 @@
 #ifndef	_NumericString_H_
 #define	_NumericString_H_
 
-#include <etsi_its_cpm_coding/OCTET_STRING.h>
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>
 
 #ifdef __cplusplus
 extern "C" {

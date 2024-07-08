@@ -5,8 +5,8 @@
 #ifndef	_CONSTR_SEQUENCE_OF_H_
 #define	_CONSTR_SEQUENCE_OF_H_
 
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/constr_SET_OF.h>		/* Implemented using SET OF */
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/constr_SET_OF.h>		/* Implemented using SET OF */
 
 #ifdef __cplusplus
 extern "C" {

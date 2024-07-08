@@ -5,7 +5,7 @@
 #ifndef	_ObjectDescriptor_H_
 #define	_ObjectDescriptor_H_
 
-#include <etsi_its_cpm_coding/GraphicString.h>
+#include <etsi_its_cpm_ts_coding/GraphicString.h>
 
 #ifdef __cplusplus
 extern "C" {

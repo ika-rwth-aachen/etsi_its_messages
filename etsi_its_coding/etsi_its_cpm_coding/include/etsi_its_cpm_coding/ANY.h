@@ -5,7 +5,7 @@
 #ifndef ASN_TYPE_ANY_H
 #define ASN_TYPE_ANY_H
 
-#include <etsi_its_cpm_coding/OCTET_STRING.h>	/* Implemented via OCTET STRING type */
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>	/* Implemented via OCTET STRING type */
 
 #ifdef __cplusplus
 extern "C" {

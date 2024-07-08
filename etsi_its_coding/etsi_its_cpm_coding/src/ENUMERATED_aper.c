@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/ENUMERATED.h>
-#include <etsi_its_cpm_coding/NativeEnumerated.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/ENUMERATED.h>
+#include <etsi_its_cpm_ts_coding/NativeEnumerated.h>
 
 asn_dec_rval_t
 ENUMERATED_decode_aper(const asn_codec_ctx_t *opt_codec_ctx,

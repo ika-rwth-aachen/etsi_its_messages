@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/OCTET_STRING.h>
-#include <etsi_its_cpm_coding/BIT_STRING.h>  /* for .bits_unused member */
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/OCTET_STRING.h>
+#include <etsi_its_cpm_ts_coding/BIT_STRING.h>  /* for .bits_unused member */
 
 #undef RETURN
 #define RETURN(_code) do {\

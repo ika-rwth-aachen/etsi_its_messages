@@ -1,6 +1,6 @@
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/aper_encoder.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/aper_encoder.h>
 
 /*
  * Argument type and callback necessary for aper_encode_to_buffer().

@@ -8,9 +8,9 @@
 #ifndef	ASN_APPLICATION_H
 #define	ASN_APPLICATION_H
 
-#include "etsi_its_cpm_coding/asn_system.h"		/* for platform-dependent types */
-#include "etsi_its_cpm_coding/asn_codecs.h"		/* for ASN.1 codecs specifics */
-#include "etsi_its_cpm_coding/asn_config.h"
+#include "etsi_its_cpm_ts_coding/asn_system.h"		/* for platform-dependent types */
+#include "etsi_its_cpm_ts_coding/asn_codecs.h"		/* for ASN.1 codecs specifics */
+#include "etsi_its_cpm_ts_coding/asn_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -174,6 +174,6 @@ typedef void (asn_app_constraint_failed_f)(void *application_specific_key,
 }
 #endif
 
-#include "etsi_its_cpm_coding/constr_TYPE.h"	/* for asn_TYPE_descriptor_t */
+#include "etsi_its_cpm_ts_coding/constr_TYPE.h"	/* for asn_TYPE_descriptor_t */
 
 #endif	/* ASN_APPLICATION_H */

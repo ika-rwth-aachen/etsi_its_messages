@@ -5,7 +5,7 @@
 #ifndef ASN_OPEN_TYPE_H
 #define ASN_OPEN_TYPE_H
 
-#include <etsi_its_cpm_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
 ///////////#include <per_support.h>
 
 #ifdef __cplusplus

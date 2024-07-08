@@ -2,10 +2,10 @@
  * Copyright (c) 2007 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/aper_encoder.h>
-#include <etsi_its_cpm_coding/aper_support.h>
-#include <etsi_its_cpm_coding/aper_opentype.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/aper_encoder.h>
+#include <etsi_its_cpm_ts_coding/aper_support.h>
+#include <etsi_its_cpm_ts_coding/aper_opentype.h>
 
 static asn_dec_rval_t
 aper_open_type_get_simple(const asn_codec_ctx_t *ctx,

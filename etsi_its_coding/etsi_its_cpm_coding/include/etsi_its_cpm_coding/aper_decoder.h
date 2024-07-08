@@ -5,8 +5,8 @@
 #ifndef	_APER_DECODER_H_
 #define	_APER_DECODER_H_
 
-#include <etsi_its_cpm_coding/asn_application.h>
-#include <etsi_its_cpm_coding/aper_support.h>
+#include <etsi_its_cpm_ts_coding/asn_application.h>
+#include <etsi_its_cpm_ts_coding/aper_support.h>
 
 #ifdef __cplusplus
 extern "C" {

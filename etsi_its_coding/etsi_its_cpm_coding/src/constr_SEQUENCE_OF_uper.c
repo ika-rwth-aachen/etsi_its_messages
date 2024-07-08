@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <etsi_its_cpm_coding/asn_internal.h>
-#include <etsi_its_cpm_coding/constr_SEQUENCE_OF.h>
-#include <etsi_its_cpm_coding/asn_SEQUENCE_OF.h>
+#include <etsi_its_cpm_ts_coding/asn_internal.h>
+#include <etsi_its_cpm_ts_coding/constr_SEQUENCE_OF.h>
+#include <etsi_its_cpm_ts_coding/asn_SEQUENCE_OF.h>
 
 asn_enc_rval_t
 SEQUENCE_OF_encode_uper(const asn_TYPE_descriptor_t *td,
