@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/RSUContainerHighFrequency.h>
+#include <etsi_its_cam_coding/cam_RSUContainerHighFrequency.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/RSUContainerHighFrequency.h>
@@ -39,25 +40,20 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_RSUContainerHighFrequency(const RSUContainerHighFrequency_t& in, cam_msgs::RSUContainerHighFrequency& out) {
-
+void toRos_RSUContainerHighFrequency(const cam_RSUContainerHighFrequency_t& in, cam_msgs::RSUContainerHighFrequency& out) {
   if (in.protectedCommunicationZonesRSU) {
     toRos_ProtectedCommunicationZonesRSU(*in.protectedCommunicationZonesRSU, out.protected_communication_zones_rsu);
     out.protected_communication_zones_rsu_is_present = true;
   }
-
 }
 
-void toStruct_RSUContainerHighFrequency(const cam_msgs::RSUContainerHighFrequency& in, RSUContainerHighFrequency_t& out) {
-
-  memset(&out, 0, sizeof(RSUContainerHighFrequency_t));
+void toStruct_RSUContainerHighFrequency(const cam_msgs::RSUContainerHighFrequency& in, cam_RSUContainerHighFrequency_t& out) {
+  memset(&out, 0, sizeof(cam_RSUContainerHighFrequency_t));
 
   if (in.protected_communication_zones_rsu_is_present) {
-    ProtectedCommunicationZonesRSU_t protected_communication_zones_rsu;
-    toStruct_ProtectedCommunicationZonesRSU(in.protected_communication_zones_rsu, protected_communication_zones_rsu);
-    out.protectedCommunicationZonesRSU = new ProtectedCommunicationZonesRSU_t(protected_communication_zones_rsu);
+    out.protectedCommunicationZonesRSU = (cam_ProtectedCommunicationZonesRSU_t*) calloc(1, sizeof(cam_ProtectedCommunicationZonesRSU_t));
+    toStruct_ProtectedCommunicationZonesRSU(in.protected_communication_zones_rsu, *out.protectedCommunicationZonesRSU);
   }
-
 }
 
 }

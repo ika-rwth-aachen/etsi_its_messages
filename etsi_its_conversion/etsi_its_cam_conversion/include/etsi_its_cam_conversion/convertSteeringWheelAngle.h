@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SteeringWheelAngle.h>
-#include <etsi_its_cam_conversion/convertSteeringWheelAngleValue.h>
+#include <etsi_its_cam_coding/cam_SteeringWheelAngle.h>
 #include <etsi_its_cam_conversion/convertSteeringWheelAngleConfidence.h>
+#include <etsi_its_cam_conversion/convertSteeringWheelAngleValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SteeringWheelAngle.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -40,15 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SteeringWheelAngle(const SteeringWheelAngle_t& in, cam_msgs::SteeringWheelAngle& out) {
-
+void toRos_SteeringWheelAngle(const cam_SteeringWheelAngle_t& in, cam_msgs::SteeringWheelAngle& out) {
   toRos_SteeringWheelAngleValue(in.steeringWheelAngleValue, out.steering_wheel_angle_value);
   toRos_SteeringWheelAngleConfidence(in.steeringWheelAngleConfidence, out.steering_wheel_angle_confidence);
 }
 
-void toStruct_SteeringWheelAngle(const cam_msgs::SteeringWheelAngle& in, SteeringWheelAngle_t& out) {
-
-  memset(&out, 0, sizeof(SteeringWheelAngle_t));
+void toStruct_SteeringWheelAngle(const cam_msgs::SteeringWheelAngle& in, cam_SteeringWheelAngle_t& out) {
+  memset(&out, 0, sizeof(cam_SteeringWheelAngle_t));
 
   toStruct_SteeringWheelAngleValue(in.steering_wheel_angle_value, out.steeringWheelAngleValue);
   toStruct_SteeringWheelAngleConfidence(in.steering_wheel_angle_confidence, out.steeringWheelAngleConfidence);

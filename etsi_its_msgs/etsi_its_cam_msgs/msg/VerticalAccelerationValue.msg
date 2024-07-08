@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -34,4 +35,3 @@ int16 MAX = 161
 int16 POINT_ONE_METER_PER_SEC_SQUARED_UP = 1
 int16 POINT_ONE_METER_PER_SEC_SQUARED_DOWN = -1
 int16 UNAVAILABLE = 161
-

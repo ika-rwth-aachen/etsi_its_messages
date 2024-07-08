@@ -6,6 +6,7 @@
 #include <etsi_its_denm_coding/asn_internal.h>
 #include <etsi_its_denm_coding/asn_random_fill.h>
 #include <etsi_its_denm_coding/constr_TYPE.h>
+#include <stdlib.h>
 
 int
 asn_random_fill(const struct asn_TYPE_descriptor_s *td, void **struct_ptr,

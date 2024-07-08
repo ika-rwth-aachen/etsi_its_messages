@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/LightBarSirenInUse.h>
+#include <etsi_its_denm_coding/denm_LightBarSirenInUse.h>
 #include <etsi_its_denm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -40,15 +41,14 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LightBarSirenInUse(const LightBarSirenInUse_t& in, denm_msgs::LightBarSirenInUse& out) {
-
+void toRos_LightBarSirenInUse(const denm_LightBarSirenInUse_t& in, denm_msgs::LightBarSirenInUse& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_LightBarSirenInUse(const denm_msgs::LightBarSirenInUse& in, LightBarSirenInUse_t& out) {
+void toStruct_LightBarSirenInUse(const denm_msgs::LightBarSirenInUse& in, denm_LightBarSirenInUse_t& out) {
+  memset(&out, 0, sizeof(denm_LightBarSirenInUse_t));
 
-  memset(&out, 0, sizeof(LightBarSirenInUse_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

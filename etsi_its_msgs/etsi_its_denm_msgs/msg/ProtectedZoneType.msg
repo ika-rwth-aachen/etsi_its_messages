@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,5 +31,6 @@
 
 uint8 value
 uint8 PERMANENT_CEN_DSRC_TOLLING = 0
+# .extended
 uint8 TEMPORARY_CEN_DSRC_TOLLING = 1
 

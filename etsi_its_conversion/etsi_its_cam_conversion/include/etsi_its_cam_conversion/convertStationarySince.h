@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/StationarySince.h>
+#include <etsi_its_cam_coding/cam_StationarySince.h>
+
 #ifdef ROS1
 #include <etsi_its_cam_msgs/StationarySince.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -38,14 +40,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_StationarySince(const StationarySince_t& in, cam_msgs::StationarySince& out) {
-
+void toRos_StationarySince(const cam_StationarySince_t& in, cam_msgs::StationarySince& out) {
   out.value = in;
 }
 
-void toStruct_StationarySince(const cam_msgs::StationarySince& in, StationarySince_t& out) {
+void toStruct_StationarySince(const cam_msgs::StationarySince& in, cam_StationarySince_t& out) {
+  memset(&out, 0, sizeof(cam_StationarySince_t));
 
-  memset(&out, 0, sizeof(StationarySince_t));
   out = in.value;
 }
 

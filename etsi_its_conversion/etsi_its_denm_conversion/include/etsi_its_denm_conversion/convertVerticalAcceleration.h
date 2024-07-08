@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/VerticalAcceleration.h>
-#include <etsi_its_denm_conversion/convertVerticalAccelerationValue.h>
+#include <etsi_its_denm_coding/denm_VerticalAcceleration.h>
 #include <etsi_its_denm_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_denm_conversion/convertVerticalAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/VerticalAcceleration.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -40,15 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_VerticalAcceleration(const VerticalAcceleration_t& in, denm_msgs::VerticalAcceleration& out) {
-
+void toRos_VerticalAcceleration(const denm_VerticalAcceleration_t& in, denm_msgs::VerticalAcceleration& out) {
   toRos_VerticalAccelerationValue(in.verticalAccelerationValue, out.vertical_acceleration_value);
   toRos_AccelerationConfidence(in.verticalAccelerationConfidence, out.vertical_acceleration_confidence);
 }
 
-void toStruct_VerticalAcceleration(const denm_msgs::VerticalAcceleration& in, VerticalAcceleration_t& out) {
-
-  memset(&out, 0, sizeof(VerticalAcceleration_t));
+void toStruct_VerticalAcceleration(const denm_msgs::VerticalAcceleration& in, denm_VerticalAcceleration_t& out) {
+  memset(&out, 0, sizeof(denm_VerticalAcceleration_t));
 
   toStruct_VerticalAccelerationValue(in.vertical_acceleration_value, out.verticalAccelerationValue);
   toStruct_AccelerationConfidence(in.vertical_acceleration_confidence, out.verticalAccelerationConfidence);

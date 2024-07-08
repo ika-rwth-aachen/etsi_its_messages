@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,16 +29,13 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/asn_SEQUENCE_OF.h>
-#include <etsi_its_denm_coding/EventHistory.h>
-#include <etsi_its_denm_coding/EventPoint.h>
+#include <etsi_its_denm_coding/denm_EventHistory.h>
+#include <etsi_its_denm_conversion/convertEventHistory.h>
 #include <etsi_its_denm_conversion/convertEventPoint.h>
 #ifdef ROS1
-#include <etsi_its_denm_msgs/EventPoint.h>
 #include <etsi_its_denm_msgs/EventHistory.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
-#include <etsi_its_denm_msgs/msg/event_point.hpp>
 #include <etsi_its_denm_msgs/msg/event_history.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
@@ -45,28 +43,22 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_EventHistory(const EventHistory_t& in, denm_msgs::EventHistory& out) {
-
-  for (int i = 0; i < in.list.count; i++) {
-    denm_msgs::EventPoint array;
-    toRos_EventPoint(*(in.list.array[i]), array);
-    out.array.push_back(array);
+void toRos_EventHistory(const denm_EventHistory_t& in, denm_msgs::EventHistory& out) {
+  for (int i = 0; i < in.list.count; ++i) {
+    denm_msgs::EventPoint el;
+    toRos_EventPoint(*(in.list.array[i]), el);
+    out.array.push_back(el);
   }
-
 }
 
-void toStruct_EventHistory(const denm_msgs::EventHistory& in, EventHistory_t& out) {
+void toStruct_EventHistory(const denm_msgs::EventHistory& in, denm_EventHistory_t& out) {
+  memset(&out, 0, sizeof(denm_EventHistory_t));
 
-  memset(&out, 0, sizeof(EventHistory_t));
-
-  for (int i = 0; i < in.array.size(); i++) {
-    EventPoint_t array;
-    toStruct_EventPoint(in.array[i], array);
-    EventPoint_t* array_ptr = new EventPoint_t(array);
-    int status = asn_sequence_add(&out, array_ptr);
-    if (status != 0) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+  for (int i = 0; i < in.array.size(); ++i) {
+    denm_EventPoint_t* el = (denm_EventPoint_t*) calloc(1, sizeof(denm_EventPoint_t));
+    toStruct_EventPoint(in.array[i], *el);
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
-
 }
 
 }

@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +32,6 @@
 int8 value
 int8 MIN = -60
 int8 MAX = 67
-int8 EQUAL_OR_SMALLER_THAN_MINUS_60_DEG = -60
+int8 EQUAL_OR_SMALLER_THAN_MINUS60_DEG = -60
 int8 ONE_DEGREE_CELSIUS = 1
-int8 EQUAL_OR_GREATER_THAN_67_DEG = 67
-
+int8 EQUAL_OR_GREATER_THAN67_DEG = 67

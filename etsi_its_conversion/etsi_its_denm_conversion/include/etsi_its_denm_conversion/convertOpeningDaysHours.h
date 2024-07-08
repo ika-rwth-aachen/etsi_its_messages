@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/OpeningDaysHours.h>
+#include <etsi_its_denm_coding/denm_OpeningDaysHours.h>
 #include <etsi_its_denm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_OpeningDaysHours(const OpeningDaysHours_t& in, denm_msgs::OpeningDaysHours& out) {
-
+void toRos_OpeningDaysHours(const denm_OpeningDaysHours_t& in, denm_msgs::OpeningDaysHours& out) {
   etsi_its_primitives_conversion::toRos_UTF8String(in, out.value);
 }
 
-void toStruct_OpeningDaysHours(const denm_msgs::OpeningDaysHours& in, OpeningDaysHours_t& out) {
+void toStruct_OpeningDaysHours(const denm_msgs::OpeningDaysHours& in, denm_OpeningDaysHours_t& out) {
+  memset(&out, 0, sizeof(denm_OpeningDaysHours_t));
 
-  memset(&out, 0, sizeof(OpeningDaysHours_t));
   etsi_its_primitives_conversion::toStruct_UTF8String(in.value, out);
 }
 

@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/WMInumber.h>
+#include <etsi_its_cam_coding/cam_WMInumber.h>
 #include <etsi_its_cam_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_WMInumber(const WMInumber_t& in, cam_msgs::WMInumber& out) {
-
+void toRos_WMInumber(const cam_WMInumber_t& in, cam_msgs::WMInumber& out) {
   etsi_its_primitives_conversion::toRos_IA5String(in, out.value);
 }
 
-void toStruct_WMInumber(const cam_msgs::WMInumber& in, WMInumber_t& out) {
+void toStruct_WMInumber(const cam_msgs::WMInumber& in, cam_WMInumber_t& out) {
+  memset(&out, 0, sizeof(cam_WMInumber_t));
 
-  memset(&out, 0, sizeof(WMInumber_t));
   etsi_its_primitives_conversion::toStruct_IA5String(in.value, out);
 }
 

@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/YawRateConfidence.h>
+#include <etsi_its_cam_coding/cam_YawRateConfidence.h>
+
 #ifdef ROS1
 #include <etsi_its_cam_msgs/YawRateConfidence.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -38,14 +40,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_YawRateConfidence(const YawRateConfidence_t& in, cam_msgs::YawRateConfidence& out) {
-
+void toRos_YawRateConfidence(const cam_YawRateConfidence_t& in, cam_msgs::YawRateConfidence& out) {
   out.value = in;
 }
 
-void toStruct_YawRateConfidence(const cam_msgs::YawRateConfidence& in, YawRateConfidence_t& out) {
+void toStruct_YawRateConfidence(const cam_msgs::YawRateConfidence& in, cam_YawRateConfidence_t& out) {
+  memset(&out, 0, sizeof(cam_YawRateConfidence_t));
 
-  memset(&out, 0, sizeof(YawRateConfidence_t));
   out = in.value;
 }
 

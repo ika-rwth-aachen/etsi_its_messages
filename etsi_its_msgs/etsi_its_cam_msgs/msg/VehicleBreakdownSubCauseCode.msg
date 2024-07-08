@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,4 +42,3 @@ uint8 BRAKING_SYSTEM_PROBLEM = 6
 uint8 STEERING_PROBLEM = 7
 uint8 TYRE_PUNCTURE = 8
 uint8 TYRE_PRESSURE_PROBLEM = 9
-

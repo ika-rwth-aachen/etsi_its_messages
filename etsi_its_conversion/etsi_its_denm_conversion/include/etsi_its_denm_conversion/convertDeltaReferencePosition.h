@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +27,10 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/DeltaReferencePosition.h>
+#include <etsi_its_denm_coding/denm_DeltaReferencePosition.h>
+#include <etsi_its_denm_conversion/convertDeltaAltitude.h>
 #include <etsi_its_denm_conversion/convertDeltaLatitude.h>
 #include <etsi_its_denm_conversion/convertDeltaLongitude.h>
-#include <etsi_its_denm_conversion/convertDeltaAltitude.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/DeltaReferencePosition.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -41,16 +42,14 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DeltaReferencePosition(const DeltaReferencePosition_t& in, denm_msgs::DeltaReferencePosition& out) {
-
+void toRos_DeltaReferencePosition(const denm_DeltaReferencePosition_t& in, denm_msgs::DeltaReferencePosition& out) {
   toRos_DeltaLatitude(in.deltaLatitude, out.delta_latitude);
   toRos_DeltaLongitude(in.deltaLongitude, out.delta_longitude);
   toRos_DeltaAltitude(in.deltaAltitude, out.delta_altitude);
 }
 
-void toStruct_DeltaReferencePosition(const denm_msgs::DeltaReferencePosition& in, DeltaReferencePosition_t& out) {
-
-  memset(&out, 0, sizeof(DeltaReferencePosition_t));
+void toStruct_DeltaReferencePosition(const denm_msgs::DeltaReferencePosition& in, denm_DeltaReferencePosition_t& out) {
+  memset(&out, 0, sizeof(denm_DeltaReferencePosition_t));
 
   toStruct_DeltaLatitude(in.delta_latitude, out.deltaLatitude);
   toStruct_DeltaLongitude(in.delta_longitude, out.deltaLongitude);

@@ -1,6 +1,0 @@
-asn1tools~=0.166.0
-Jinja2~=3.1.2
-numpy~=1.23.3
-pyshark~=0.6 # requires tshark installation
-rosbags~=0.9.16
-tqdm~=4.66.1

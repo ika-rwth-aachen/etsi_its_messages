@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/LongitudinalAcceleration.h>
-#include <etsi_its_cam_conversion/convertLongitudinalAccelerationValue.h>
+#include <etsi_its_cam_coding/cam_LongitudinalAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_cam_conversion/convertLongitudinalAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/LongitudinalAcceleration.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -40,15 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_LongitudinalAcceleration(const LongitudinalAcceleration_t& in, cam_msgs::LongitudinalAcceleration& out) {
-
+void toRos_LongitudinalAcceleration(const cam_LongitudinalAcceleration_t& in, cam_msgs::LongitudinalAcceleration& out) {
   toRos_LongitudinalAccelerationValue(in.longitudinalAccelerationValue, out.longitudinal_acceleration_value);
   toRos_AccelerationConfidence(in.longitudinalAccelerationConfidence, out.longitudinal_acceleration_confidence);
 }
 
-void toStruct_LongitudinalAcceleration(const cam_msgs::LongitudinalAcceleration& in, LongitudinalAcceleration_t& out) {
-
-  memset(&out, 0, sizeof(LongitudinalAcceleration_t));
+void toStruct_LongitudinalAcceleration(const cam_msgs::LongitudinalAcceleration& in, cam_LongitudinalAcceleration_t& out) {
+  memset(&out, 0, sizeof(cam_LongitudinalAcceleration_t));
 
   toStruct_LongitudinalAccelerationValue(in.longitudinal_acceleration_value, out.longitudinalAccelerationValue);
   toStruct_AccelerationConfidence(in.longitudinal_acceleration_confidence, out.longitudinalAccelerationConfidence);

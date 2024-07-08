@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -48,4 +49,3 @@ uint8 BIT_INDEX_DAYTIME_RUNNING_LIGHTS_ON = 4
 uint8 BIT_INDEX_REVERSE_LIGHT_ON = 5
 uint8 BIT_INDEX_FOG_LIGHT_ON = 6
 uint8 BIT_INDEX_PARKING_LIGHTS_ON = 7
-

@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,15 +30,18 @@ SOFTWARE.
 
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_denm_conversion/convertDENM.h>
+#include <etsi_its_cpm_conversion/convertCollectivePerceptionMessage.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
 #include <udp_msgs/UdpPacket.h>
 #include <etsi_its_cam_msgs/CAM.h>
 #include <etsi_its_denm_msgs/DENM.h>
+#include <etsi_its_cpm_msgs/CollectivePerceptionMessage.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <etsi_its_denm_msgs/msg/denm.hpp>
+#include <etsi_its_cpm_msgs/msg/collective_perception_message.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
@@ -78,9 +81,11 @@ class Converter : public rclcpp::Node {
 #ifdef ROS1
     void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
+    void rosCallbackCpm(const etsi_its_cpm_msgs::CollectivePerceptionMessage::ConstPtr msg);
 #else
     void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
     void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
+    void rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptionMessage::UniquePtr msg);
 #endif
 
   protected:
@@ -91,6 +96,8 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicCam;
     static const std::string kInputTopicDenm;
     static const std::string kOutputTopicDenm;
+    static const std::string kInputTopicCpm;
+    static const std::string kOutputTopicCpm;
 
     static const std::string kHasBtpDestinationPortParam;
     static const bool kHasBtpDestinationPortParamDefault;
@@ -108,17 +115,19 @@ class Converter : public rclcpp::Node {
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
+    ros::Publisher publisher_udp_;
     ros::Subscriber subscriber_udp_;
     std::unordered_map<std::string, ros::Publisher> publishers_;
     std::unordered_map<std::string, ros::Subscriber> subscribers_;
-    ros::Publisher publisher_udp_;
 #else
-    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr> publishers_cam_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr> subscribers_cam_;
-    std::unordered_map<std::string, rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr> publishers_denm_;
-    std::unordered_map<std::string, rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr> subscribers_denm_;
     rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
+    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
+    rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr publisher_cam_;
+    rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr subscriber_cam_;
+    rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr subscriber_denm_;
+    rclcpp::Subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr subscriber_cpm_;
+    rclcpp::Publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>::SharedPtr publisher_cpm_;
 #endif
 
 };

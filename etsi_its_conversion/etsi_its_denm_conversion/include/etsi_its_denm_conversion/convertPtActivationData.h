@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PtActivationData.h>
+#include <etsi_its_denm_coding/denm_PtActivationData.h>
 #include <etsi_its_denm_coding/OCTET_STRING.h>
 #include <etsi_its_primitives_conversion/convertOCTET_STRING.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PtActivationData(const PtActivationData_t& in, denm_msgs::PtActivationData& out) {
-
+void toRos_PtActivationData(const denm_PtActivationData_t& in, denm_msgs::PtActivationData& out) {
   etsi_its_primitives_conversion::toRos_OCTET_STRING(in, out.value);
 }
 
-void toStruct_PtActivationData(const denm_msgs::PtActivationData& in, PtActivationData_t& out) {
+void toStruct_PtActivationData(const denm_msgs::PtActivationData& in, denm_PtActivationData_t& out) {
+  memset(&out, 0, sizeof(denm_PtActivationData_t));
 
-  memset(&out, 0, sizeof(PtActivationData_t));
   etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.value, out);
 }
 

@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/LateralAccelerationValue.h>
+#include <etsi_its_cam_coding/cam_LateralAccelerationValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_LateralAccelerationValue(const LateralAccelerationValue_t& in, cam_msgs::LateralAccelerationValue& out) {
-
+void toRos_LateralAccelerationValue(const cam_LateralAccelerationValue_t& in, cam_msgs::LateralAccelerationValue& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_LateralAccelerationValue(const cam_msgs::LateralAccelerationValue& in, LateralAccelerationValue_t& out) {
+void toStruct_LateralAccelerationValue(const cam_msgs::LateralAccelerationValue& in, cam_LateralAccelerationValue_t& out) {
+  memset(&out, 0, sizeof(cam_LateralAccelerationValue_t));
 
-  memset(&out, 0, sizeof(LateralAccelerationValue_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

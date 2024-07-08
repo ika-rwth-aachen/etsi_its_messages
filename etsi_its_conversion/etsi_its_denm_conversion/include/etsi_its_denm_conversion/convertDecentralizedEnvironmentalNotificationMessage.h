@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +27,11 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/DecentralizedEnvironmentalNotificationMessage.h>
+#include <etsi_its_denm_coding/denm_DecentralizedEnvironmentalNotificationMessage.h>
+#include <etsi_its_denm_conversion/convertAlacarteContainer.h>
+#include <etsi_its_denm_conversion/convertLocationContainer.h>
 #include <etsi_its_denm_conversion/convertManagementContainer.h>
 #include <etsi_its_denm_conversion/convertSituationContainer.h>
-#include <etsi_its_denm_conversion/convertLocationContainer.h>
-#include <etsi_its_denm_conversion/convertAlacarteContainer.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/DecentralizedEnvironmentalNotificationMessage.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -42,49 +43,38 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DecentralizedEnvironmentalNotificationMessage(const DecentralizedEnvironmentalNotificationMessage_t& in, denm_msgs::DecentralizedEnvironmentalNotificationMessage& out) {
-
+void toRos_DecentralizedEnvironmentalNotificationMessage(const denm_DecentralizedEnvironmentalNotificationMessage_t& in, denm_msgs::DecentralizedEnvironmentalNotificationMessage& out) {
   toRos_ManagementContainer(in.management, out.management);
   if (in.situation) {
     toRos_SituationContainer(*in.situation, out.situation);
     out.situation_is_present = true;
   }
-
   if (in.location) {
     toRos_LocationContainer(*in.location, out.location);
     out.location_is_present = true;
   }
-
   if (in.alacarte) {
     toRos_AlacarteContainer(*in.alacarte, out.alacarte);
     out.alacarte_is_present = true;
   }
-
 }
 
-void toStruct_DecentralizedEnvironmentalNotificationMessage(const denm_msgs::DecentralizedEnvironmentalNotificationMessage& in, DecentralizedEnvironmentalNotificationMessage_t& out) {
-
-  memset(&out, 0, sizeof(DecentralizedEnvironmentalNotificationMessage_t));
+void toStruct_DecentralizedEnvironmentalNotificationMessage(const denm_msgs::DecentralizedEnvironmentalNotificationMessage& in, denm_DecentralizedEnvironmentalNotificationMessage_t& out) {
+  memset(&out, 0, sizeof(denm_DecentralizedEnvironmentalNotificationMessage_t));
 
   toStruct_ManagementContainer(in.management, out.management);
   if (in.situation_is_present) {
-    SituationContainer_t situation;
-    toStruct_SituationContainer(in.situation, situation);
-    out.situation = new SituationContainer_t(situation);
+    out.situation = (denm_SituationContainer_t*) calloc(1, sizeof(denm_SituationContainer_t));
+    toStruct_SituationContainer(in.situation, *out.situation);
   }
-
   if (in.location_is_present) {
-    LocationContainer_t location;
-    toStruct_LocationContainer(in.location, location);
-    out.location = new LocationContainer_t(location);
+    out.location = (denm_LocationContainer_t*) calloc(1, sizeof(denm_LocationContainer_t));
+    toStruct_LocationContainer(in.location, *out.location);
   }
-
   if (in.alacarte_is_present) {
-    AlacarteContainer_t alacarte;
-    toStruct_AlacarteContainer(in.alacarte, alacarte);
-    out.alacarte = new AlacarteContainer_t(alacarte);
+    out.alacarte = (denm_AlacarteContainer_t*) calloc(1, sizeof(denm_AlacarteContainer_t));
+    toStruct_AlacarteContainer(in.alacarte, *out.alacarte);
   }
-
 }
 
 }

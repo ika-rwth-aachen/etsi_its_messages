@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/Speed.h>
-#include <etsi_its_denm_conversion/convertSpeedValue.h>
+#include <etsi_its_denm_coding/denm_Speed.h>
 #include <etsi_its_denm_conversion/convertSpeedConfidence.h>
+#include <etsi_its_denm_conversion/convertSpeedValue.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/Speed.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -40,15 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_Speed(const Speed_t& in, denm_msgs::Speed& out) {
-
+void toRos_Speed(const denm_Speed_t& in, denm_msgs::Speed& out) {
   toRos_SpeedValue(in.speedValue, out.speed_value);
   toRos_SpeedConfidence(in.speedConfidence, out.speed_confidence);
 }
 
-void toStruct_Speed(const denm_msgs::Speed& in, Speed_t& out) {
-
-  memset(&out, 0, sizeof(Speed_t));
+void toStruct_Speed(const denm_msgs::Speed& in, denm_Speed_t& out) {
+  memset(&out, 0, sizeof(denm_Speed_t));
 
   toStruct_SpeedValue(in.speed_value, out.speedValue);
   toStruct_SpeedConfidence(in.speed_confidence, out.speedConfidence);

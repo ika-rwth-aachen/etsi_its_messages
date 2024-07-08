@@ -56,6 +56,7 @@ ros2-jazzy:
     PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros2-jazzy
+    # TODO: switch to rwthika/ros2:jazzy, once available
     BASE_IMAGE: ubuntu:24.04
     ROS_DISTRO: jazzy
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py

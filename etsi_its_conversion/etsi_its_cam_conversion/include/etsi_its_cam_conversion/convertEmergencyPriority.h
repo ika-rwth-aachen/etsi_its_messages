@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/EmergencyPriority.h>
+#include <etsi_its_cam_coding/cam_EmergencyPriority.h>
 #include <etsi_its_cam_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
 #ifdef ROS1
@@ -40,15 +41,14 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_EmergencyPriority(const EmergencyPriority_t& in, cam_msgs::EmergencyPriority& out) {
-
+void toRos_EmergencyPriority(const cam_EmergencyPriority_t& in, cam_msgs::EmergencyPriority& out) {
   etsi_its_primitives_conversion::toRos_BIT_STRING(in, out.value);
   out.bits_unused = in.bits_unused;
 }
 
-void toStruct_EmergencyPriority(const cam_msgs::EmergencyPriority& in, EmergencyPriority_t& out) {
+void toStruct_EmergencyPriority(const cam_msgs::EmergencyPriority& in, cam_EmergencyPriority_t& out) {
+  memset(&out, 0, sizeof(cam_EmergencyPriority_t));
 
-  memset(&out, 0, sizeof(EmergencyPriority_t));
   etsi_its_primitives_conversion::toStruct_BIT_STRING(in.value, out);
   out.bits_unused = in.bits_unused;
 }

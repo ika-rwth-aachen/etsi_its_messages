@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +30,8 @@
 # ------------------------------------------------------------------------------
 
 uint8 value
-uint8 LESS_THAN_1_MINUTE = 0
-uint8 LESS_THAN_2_MINUTES = 1
-uint8 LESS_THAN_15_MINUTES = 2
-uint8 EQUAL_OR_GREATER_15_MINUTES = 3
+uint8 LESS_THAN1_MINUTE = 0
+uint8 LESS_THAN2_MINUTES = 1
+uint8 LESS_THAN15_MINUTES = 2
+uint8 EQUAL_OR_GREATER15_MINUTES = 3
 

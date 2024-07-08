@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PtActivation.h>
-#include <etsi_its_denm_conversion/convertPtActivationType.h>
+#include <etsi_its_denm_coding/denm_PtActivation.h>
 #include <etsi_its_denm_conversion/convertPtActivationData.h>
+#include <etsi_its_denm_conversion/convertPtActivationType.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PtActivation.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -40,15 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PtActivation(const PtActivation_t& in, denm_msgs::PtActivation& out) {
-
+void toRos_PtActivation(const denm_PtActivation_t& in, denm_msgs::PtActivation& out) {
   toRos_PtActivationType(in.ptActivationType, out.pt_activation_type);
   toRos_PtActivationData(in.ptActivationData, out.pt_activation_data);
 }
 
-void toStruct_PtActivation(const denm_msgs::PtActivation& in, PtActivation_t& out) {
-
-  memset(&out, 0, sizeof(PtActivation_t));
+void toStruct_PtActivation(const denm_msgs::PtActivation& in, denm_PtActivation_t& out) {
+  memset(&out, 0, sizeof(denm_PtActivation_t));
 
   toStruct_PtActivationType(in.pt_activation_type, out.ptActivationType);
   toStruct_PtActivationData(in.pt_activation_data, out.ptActivationData);

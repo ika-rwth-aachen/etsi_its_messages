@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/PositioningSolutionType.h>
+#include <etsi_its_denm_coding/denm_PositioningSolutionType.h>
+
 #ifdef ROS1
 #include <etsi_its_denm_msgs/PositioningSolutionType.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -38,14 +40,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_PositioningSolutionType(const PositioningSolutionType_t& in, denm_msgs::PositioningSolutionType& out) {
-
+void toRos_PositioningSolutionType(const denm_PositioningSolutionType_t& in, denm_msgs::PositioningSolutionType& out) {
   out.value = in;
 }
 
-void toStruct_PositioningSolutionType(const denm_msgs::PositioningSolutionType& in, PositioningSolutionType_t& out) {
+void toStruct_PositioningSolutionType(const denm_msgs::PositioningSolutionType& in, denm_PositioningSolutionType_t& out) {
+  memset(&out, 0, sizeof(denm_PositioningSolutionType_t));
 
-  memset(&out, 0, sizeof(PositioningSolutionType_t));
   out = in.value;
 }
 

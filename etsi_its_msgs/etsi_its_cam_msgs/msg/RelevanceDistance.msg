@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +30,12 @@
 # ------------------------------------------------------------------------------
 
 uint8 value
-uint8 LESS_THAN_50M = 0
-uint8 LESS_THAN_100M = 1
-uint8 LESS_THAN_200M = 2
-uint8 LESS_THAN_500M = 3
-uint8 LESS_THAN_1000M = 4
-uint8 LESS_THAN_5KM = 5
-uint8 LESS_THAN_10KM = 6
-uint8 OVER_10KM = 7
+uint8 LESS_THAN50M = 0
+uint8 LESS_THAN100M = 1
+uint8 LESS_THAN200M = 2
+uint8 LESS_THAN500M = 3
+uint8 LESS_THAN1000M = 4
+uint8 LESS_THAN5KM = 5
+uint8 LESS_THAN10KM = 6
+uint8 OVER10KM = 7
 

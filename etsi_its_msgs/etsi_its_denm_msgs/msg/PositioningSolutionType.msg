@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +33,7 @@ uint8 value
 uint8 NO_POSITIONING_SOLUTION = 0
 uint8 S_GNSS = 1
 uint8 D_GNSS = 2
-uint8 S_GNSS_PLUS_D_R = 3
-uint8 D_GNSS_PLUS_D_R = 4
+uint8 S_GNS_SPLUS_DR = 3
+uint8 D_GNS_SPLUS_DR = 4
 uint8 D_R = 5
 

@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -39,4 +40,3 @@ uint8 ABS_ENGAGED = 4
 uint8 AEB_ENGAGED = 5
 uint8 BRAKE_WARNING_ENGAGED = 6
 uint8 COLLISION_RISK_WARNING_ENGAGED = 7
-

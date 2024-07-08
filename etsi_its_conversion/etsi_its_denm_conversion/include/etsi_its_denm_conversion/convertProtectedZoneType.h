@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/ProtectedZoneType.h>
+#include <etsi_its_denm_coding/denm_ProtectedZoneType.h>
+
 #ifdef ROS1
 #include <etsi_its_denm_msgs/ProtectedZoneType.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -38,14 +40,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ProtectedZoneType(const ProtectedZoneType_t& in, denm_msgs::ProtectedZoneType& out) {
-
+void toRos_ProtectedZoneType(const denm_ProtectedZoneType_t& in, denm_msgs::ProtectedZoneType& out) {
   out.value = in;
 }
 
-void toStruct_ProtectedZoneType(const denm_msgs::ProtectedZoneType& in, ProtectedZoneType_t& out) {
+void toStruct_ProtectedZoneType(const denm_msgs::ProtectedZoneType& in, denm_ProtectedZoneType_t& out) {
+  memset(&out, 0, sizeof(denm_ProtectedZoneType_t));
 
-  memset(&out, 0, sizeof(ProtectedZoneType_t));
   out = in.value;
 }
 

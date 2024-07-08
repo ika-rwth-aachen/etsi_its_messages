@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,4 +36,3 @@ uint8 UNAVAILABLE = 0
 uint8 STOP_SIGN_VIOLATION = 1
 uint8 TRAFFIC_LIGHT_VIOLATION = 2
 uint8 TURNING_REGULATION_VIOLATION = 3
-

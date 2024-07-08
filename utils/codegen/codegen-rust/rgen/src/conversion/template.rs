@@ -8,7 +8,7 @@ const CONVERSION_TEMPLATE: &str =
 r#"/** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ SOFTWARE.
 
 #pragma once
 {extra-includes}
-#include <etsi_its_{pdu}_coding/{c_filename}.h>
+#include <etsi_its_{pdu}_coding/{pdu}_{c_filename}.h>
 {c_includes}
 #ifdef ROS1
 {ros1_includes}
@@ -47,12 +47,12 @@ namespace {pdu}_msgs = etsi_its_{pdu}_msgs::msg;
 
 namespace etsi_its_{pdu}_conversion {
 
-void toRos_{type}(const {c_type}_t& in, {pdu}_msgs::{ros_type}& out) {
+void toRos_{type}(const {pdu}_{c_type}_t& in, {pdu}_msgs::{ros_type}& out) {
   {to_ros_members}
 }
 
-void toStruct_{type}(const {pdu}_msgs::{ros_type}& in, {c_type}_t& out) {
-  memset(&out, 0, sizeof({c_type}_t));
+void toStruct_{type}(const {pdu}_msgs::{ros_type}& in, {pdu}_{c_type}_t& out) {
+  memset(&out, 0, sizeof({pdu}_{c_type}_t));
 
   {to_c_members}
 }
@@ -354,7 +354,7 @@ pub fn sequence_or_set_template(
             let cases = match inner {
                 InnerTypes::Choice(c) => {
                     c.options.iter().map(|im| {
-                        format!("  case {name}__{c_field_name}_PR_{ty}:\n    \
+                        format!("  case {pdu}_{name}__{c_field_name}_PR_{ty}:\n    \
                                  toRos_{ty}(in.{c_field_name}.choice.{c_member}, out.{r_field_name}.{r_member});\n    \
                                  out.{r_field_name}.choice.value = {pdu}_msgs::{linked_with}::{r_const_member};\n    \
                                  break;", 
@@ -441,7 +441,7 @@ pub fn sequence_or_set_template(
                     c.options.iter().map(|im| {
                         format!("  case {pdu}_msgs::{linked_with}::{r_const_member}:\n    \
                                  toStruct_{ty}(in.{r_field_name}.{r_member}, out.{c_field_name}.choice.{c_member});\n    \
-                                 out.{c_field_name}.present = {name}__{c_field_name}_PR::{name}__{c_field_name}_PR_{c_member};\n    \
+                                 out.{c_field_name}.present = {pdu}_{name}__{c_field_name}_PR::{pdu}_{name}__{c_field_name}_PR_{c_member};\n    \
                                  break;", 
                             pdu = &options.main_pdu,
                             linked_with = links.get(&c.linked_with).unwrap().name_type.ty,
@@ -492,24 +492,49 @@ pub fn sequence_or_set_template(
     let to_c_fmt_member = |member: &NamedSeqMember| -> String {
         if member.is_optional {
             if !member.has_default {
+                if !member.name_type.is_primitive {
                 format!(
                     "if (in.{r_member}_is_present) {{\n    \
-                         out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n    \
+                         out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
                          {conversion}\n  \
                          }}",
                     ty = member.name_type.ty,
                     c_member = member.name_type.name,
                     conversion = to_c_conversion_call(&member),
-                    r_member = to_ros_snake_case(&member.name_type.name)
+                    r_member = to_ros_snake_case(&member.name_type.name),
+                    pdu = &options.main_pdu
                 )
             } else {
+                    format!(
+                        "if (in.{r_member}_is_present) {{\n    \
+                            out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n    \
+                            {conversion}\n  \
+                            }}",
+                        ty = member.name_type.ty,
+                        c_member = member.name_type.name,
+                        conversion = to_c_conversion_call(&member),
+                        r_member = to_ros_snake_case(&member.name_type.name),
+                    )
+                }
+            } else {
+                if !member.name_type.is_primitive {
                 format!(
-                    "out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n  \
+                    "out.{c_member} = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n  \
                      {conversion}",
                     ty = member.name_type.ty,
                     c_member = member.name_type.name,
-                    conversion = to_c_conversion_call(&member)
+                    conversion = to_c_conversion_call(&member),
+                    pdu = &options.main_pdu
                 )
+                } else {
+                    format!(
+                        "out.{c_member} = ({ty}_t*) calloc(1, sizeof({ty}_t));\n  \
+                         {conversion}",
+                        ty = member.name_type.ty,
+                        c_member = member.name_type.name,
+                        conversion = to_c_conversion_call(&member),
+                    )
+                }
             }
         } else {
             to_c_conversion_call(&member)
@@ -566,11 +591,12 @@ pub fn sequence_or_set_of_template(
 
     let to_c_loop =
         format!("for (int i = 0; i < in.array.size(); ++i) {{\n    \
-                 {ty}_t* el = ({ty}_t*) calloc(1, sizeof({ty}_t));\n    \
+                 {pdu}_{ty}_t* el = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
                  toStruct_{ty}(in.array[i], *el);\n    \
                  if (asn_sequence_add(&out, el)) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");\n  \
                  }}", 
-                ty = member_type);
+                ty = member_type,
+                pdu = &options.main_pdu);
 
     conversion_template(
         comments,
@@ -629,13 +655,13 @@ pub fn choice_template(
             .map(|member| {
                 if !member.is_primitive {
                     format!(
-                        "  case {parent}_PR_{c_member}:\n    \
+                        "  case {pdu}_{parent}_PR_{c_member}:\n    \
                          toRos_{ty}(in.choice.{c_member}, out.{r_member});\n    \
                          out.choice = {pdu}_msgs::{parent}::CHOICE_{r_ch_member};",
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,
-                        c_member = member.name,
+                        c_member = member.name.replace('-', "_"),
                         r_member = to_ros_snake_case(&member.name),
                         r_ch_member = to_ros_const_case(&member.name)
                     )
@@ -658,11 +684,11 @@ pub fn choice_template(
                     format!(
                         "  case {pdu}_msgs::{parent}::CHOICE_{r_ch_member}:\n    \
                          toStruct_{ty}(in.{r_member}, out.choice.{c_member});\n    \
-                         out.present = {parent}_PR::{parent}_PR_{c_member};",
+                         out.present = {pdu}_{parent}_PR::{pdu}_{parent}_PR_{c_member};",
                         parent = &name,
                         ty = member.ty,
                         pdu = &options.main_pdu,
-                        c_member = member.name,
+                        c_member = member.name.replace('-', "_"),
                         r_member = to_ros_snake_case(&member.name),
                         r_ch_member = to_ros_const_case(&member.name)
                     )

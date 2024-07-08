@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/EmbarkationStatus.h>
+#include <etsi_its_denm_coding/denm_EmbarkationStatus.h>
 #include <etsi_its_denm_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_EmbarkationStatus(const EmbarkationStatus_t& in, denm_msgs::EmbarkationStatus& out) {
-
+void toRos_EmbarkationStatus(const denm_EmbarkationStatus_t& in, denm_msgs::EmbarkationStatus& out) {
   etsi_its_primitives_conversion::toRos_BOOLEAN(in, out.value);
 }
 
-void toStruct_EmbarkationStatus(const denm_msgs::EmbarkationStatus& in, EmbarkationStatus_t& out) {
+void toStruct_EmbarkationStatus(const denm_msgs::EmbarkationStatus& in, denm_EmbarkationStatus_t& out) {
+  memset(&out, 0, sizeof(denm_EmbarkationStatus_t));
 
-  memset(&out, 0, sizeof(EmbarkationStatus_t));
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.value, out);
 }
 
