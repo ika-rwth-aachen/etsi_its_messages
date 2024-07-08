@@ -10,9 +10,9 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_cam_msgs REQUIRED)
   find_package(etsi_its_denm_msgs REQUIRED)
-  find_package(etsi_its_cpm_msgs REQUIRED)
+  find_package(etsi_its_cpm_ts_msgs REQUIRED)
   
-  ament_export_dependencies(etsi_its_cam_msgs etsi_its_denm_msgs etsi_its_cpm_msgs)
+  ament_export_dependencies(etsi_its_cam_msgs etsi_its_denm_msgs etsi_its_cpm_ts_msgs)
   ament_package()
 
 # === ROS (CATKIN) =============================================================
@@ -21,14 +21,14 @@ elseif(${ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_msgs
     etsi_its_denm_msgs
-    etsi_its_cpm_msgs
+    etsi_its_cpm_ts_msgs
   )
 
   catkin_package(
     CATKIN_DEPENDS
       etsi_its_cam_msgs
       etsi_its_denm_msgs
-      etsi_its_cpm_msgs
+      etsi_its_cpm_ts_msgs
   )
 
 endif()
