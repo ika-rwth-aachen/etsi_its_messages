@@ -1,207 +1,155 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-
-    {
-      "name": "CAM asn1ToC",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/asn1ToC.py",
-      "args": [
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-t", "cam",
-        "-o", "etsi_its_coding/etsi_its_cam_coding"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM asn1ToC",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/asn1ToC.py",
-      "args": [
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-t", "denm",
-        "-o", "etsi_its_coding/etsi_its_denm_coding"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CPM asn1ToC",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/asn1ToC.py",
-      "args": [
-        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
-        "-t", "cpm",
-        "-o", "etsi_its_coding/etsi_its_cpm_coding"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CAM asn1ToRosMsg",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
-      "args": [
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM asn1ToRosMsg",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
-      "args": [
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CAM asn1ToConversionHeader",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
-      "args": [
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-t", "cam",
-        "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM asn1ToConversionHeader",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
-      "args": [
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-t", "denm",
-        "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CAM asn1ToRosMsg (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
-      "args": [
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-o", "etsi_its_msgs/etsi_its_cam_msgs/msg"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM asn1ToRosMsg (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
-      "args": [
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-o", "etsi_its_msgs/etsi_its_denm_msgs/msg"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CPM asn1ToRosMsg (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
-      "args": [
-        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
-        "-o", "etsi_its_msgs/etsi_its_cpm_msgs/msg"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CAM asn1ToConversionHeader (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
-      "args": [
-        "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
-        "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
-        "-t", "cam",
-        "-o", "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "DENM asn1ToConversionHeader (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
-      "args": [
-        "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-        "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
-        "-t", "denm",
-        "-o", "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-
-    {
-      "name": "CPM asn1ToConversionHeader (rgen)",
-      "type": "python",
-      "request": "launch",
-      "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
-      "args": [
-        "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-        "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
-        "-t", "cpm",
-        "-o", "etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-  ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CAM (coding)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+                "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
+                "-t",
+                "cam",
+                "-o",
+                "etsi_its_coding/etsi_its_cam_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CAM (msgs)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+                "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_cam_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CAM (conversion)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
+                "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
+                "-t",
+                "cam",
+                "-o",
+                "etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (coding)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-t",
+                "denm",
+                "-o",
+                "etsi_its_coding/etsi_its_denm_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (msgs)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_denm_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (conversion)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-t",
+                "denm",
+                "-o",
+                "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CPM (coding)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm",
+                "-o",
+                "etsi_its_coding/etsi_its_cpm_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CPM (msgs)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_cpm_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CPM (conversion)",
+            "type": "python",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm",
+                "-o",
+                "etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+    ]
 }
