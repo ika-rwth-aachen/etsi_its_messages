@@ -33,6 +33,7 @@ import subprocess
 import tempfile
 from typing import Dict, List
 
+
 def parseCli():
     """Parses script's CLI arguments.
 
@@ -93,8 +94,6 @@ def asn1Definitions(files: List[str]) -> Dict[str, str]:
 
 
 def main():
-    patch_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../../asn1/patch/patch-raw-files.py")
-    subprocess.run(["python3", patch_script], check=True)
 
     args = parseCli()
 
@@ -142,7 +141,6 @@ def main():
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):
                 shutil.move(f, os.path.join(args.output_dir, os.path.basename(f)))
 
-    subprocess.run(["python3", patch_script], check=True)
 
 if __name__ == "__main__":
 

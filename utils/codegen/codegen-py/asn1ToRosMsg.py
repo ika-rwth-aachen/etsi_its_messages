@@ -26,7 +26,6 @@
 
 import argparse
 import os
-import subprocess
 from typing import Dict
 
 import jinja2
@@ -120,8 +119,6 @@ def exportRosMsg(ros_msg: str, type_name: str, output_dir: str):
 
 
 def main():
-    patch_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../../asn1/patch/patch-raw-files.py")
-    subprocess.run(["python3", patch_script], check=True)
 
     args = parseCli()
 
@@ -140,7 +137,6 @@ def main():
 
         exportRosMsg(ros_msg, type_name, args.output_dir)
 
-    subprocess.run(["python3", patch_script], check=True)
 
 if __name__ == "__main__":
 
