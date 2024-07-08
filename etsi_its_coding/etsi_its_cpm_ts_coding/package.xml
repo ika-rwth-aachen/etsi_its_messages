@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="3">
 
-  <name>etsi_its_cpm_coding</name>
+  <name>etsi_its_cpm_ts_coding</name>
   <version>2.0.2</version>
-  <description>C++ compatible C source code for ETSI ITS CPMs generated from ASN.1 using asn1c</description>
+  <description>C++ compatible C source code for ETSI ITS CPMs (TS) generated from ASN.1 using asn1c</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>

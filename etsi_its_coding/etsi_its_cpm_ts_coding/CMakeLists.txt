@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(etsi_its_cpm_coding)
+project(etsi_its_cpm_ts_coding)
 
 find_package(ros_environment REQUIRED QUIET)
 set(ROS_VERSION $ENV{ROS_VERSION})
