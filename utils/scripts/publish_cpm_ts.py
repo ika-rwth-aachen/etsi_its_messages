@@ -26,7 +26,7 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_cpm_msgs.msg import *
+from etsi_its_cpm_ts_msgs.msg import *
 
 class Publisher(Node):
 
