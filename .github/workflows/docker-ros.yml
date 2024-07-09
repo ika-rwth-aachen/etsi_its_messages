@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
-          platform: amd64,arm64
+          platform: amd64
           target: dev,run
           image-tag: ros
           base-image: rwthika/ros:noetic
@@ -22,20 +22,20 @@ jobs:
     steps:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
-          platform: amd64,arm64
+          platform: amd64
           target: dev,run
           image-tag: ros2
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-industrial-ci: 'true'
           enable-recursive-vcs-import: 'false'
-  
+
   ros2-iron:
     runs-on: ubuntu-latest
     steps:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
-          platform: amd64,arm64
+          platform: amd64
           target: dev,run
           image-tag: ros2-iron
           base-image: rwthika/ros2:iron
@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
-          platform: amd64,arm64
+          platform: amd64
           target: dev,run
           image-tag: ros2-jazzy
           base-image: ubuntu:24.04
