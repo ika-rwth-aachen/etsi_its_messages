@@ -33,7 +33,7 @@ class Publisher(Node):
     def __init__(self):
 
         super().__init__("cpm_publisher")
-        topic = "/etsi_its_conversion/cpm/in"
+        topic = "/etsi_its_conversion/cpm_ts/in"
         self.publisher = self.create_publisher(CollectivePerceptionMessage, topic, 1)
         self.timer = self.create_timer(1.0, self.publish)
 
