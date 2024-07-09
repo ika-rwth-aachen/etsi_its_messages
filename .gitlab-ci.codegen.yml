@@ -81,7 +81,7 @@ etsi_its_denm_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_cpm_coding:
+etsi_its_cpm_ts_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
   script:
@@ -93,8 +93,8 @@ etsi_its_cpm_coding:
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -t cpm
-      -o etsi_its_coding/etsi_its_cpm_coding
+      -t cpm_ts
+      -o etsi_its_coding/etsi_its_cpm_ts_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -128,7 +128,7 @@ etsi_its_denm_msgs:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_cpm_msgs:
+etsi_its_cpm_ts_msgs:
   stage: ROS Messages
   needs: ["rgen-docker"]
   script:
@@ -140,7 +140,7 @@ etsi_its_cpm_msgs:
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -o etsi_its_msgs/etsi_its_cpm_msgs/msg
+      -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -176,7 +176,7 @@ etsi_its_denm_conversion:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_cpm_conversion:
+etsi_its_cpm_ts_conversion:
   stage: Conversion Headers
   needs: ["rgen-docker"]
   script:
@@ -188,8 +188,8 @@ etsi_its_cpm_conversion:
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -t cpm
-      -o etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion
+      -t cpm_ts
+      -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp

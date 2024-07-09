@@ -6,4 +6,4 @@ etsi_its_conversion:
     etsi_types:
       - cam
       - denm
-      - cpm
+      - cpm_ts
