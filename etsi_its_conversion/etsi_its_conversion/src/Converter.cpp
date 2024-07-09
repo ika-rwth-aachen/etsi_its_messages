@@ -292,8 +292,9 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
   if (detected_etsi_type == "cam") {
 
     // decode ASN1 bitstring to struct
-    cam_CAM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cam_CAM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    cam_CAM_t asn1_struct{};
+    cam_CAM_t* asn1_structp = &asn1_struct;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cam_CAM, (void **)&asn1_structp, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -301,9 +302,10 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       RCLCPP_ERROR(this->get_logger(),
 #endif
         "Failed to decode message");
+      ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cam_CAM, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cam_CAM, asn1_structp);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -311,7 +313,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     etsi_its_cam_msgs::msg::CAM msg;
 #endif
-    etsi_its_cam_conversion::toRos_CAM(*asn1_struct, msg);
+    etsi_its_cam_conversion::toRos_CAM(asn1_struct, msg);
 
     // publish msg
 #ifdef ROS1
@@ -319,12 +321,14 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     publisher_cam_->publish(msg);
 #endif
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, asn1_structp);
 
   } else if (detected_etsi_type == "denm") {
 
     // decode ASN1 bitstring to struct
-    denm_DENM_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    denm_DENM_t asn1_struct{};
+    denm_DENM_t* asn1_structp = &asn1_struct;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, (void **)&asn1_structp, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -332,9 +336,10 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       RCLCPP_ERROR(this->get_logger(),
 #endif
         "Failed to decode message");
+      ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_denm_DENM, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_denm_DENM, asn1_structp);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -342,7 +347,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     etsi_its_denm_msgs::msg::DENM msg;
 #endif
-    etsi_its_denm_conversion::toRos_DENM(*asn1_struct, msg);
+    etsi_its_denm_conversion::toRos_DENM(asn1_struct, msg);
 
     // publish msg
 #ifdef ROS1
@@ -350,12 +355,14 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     publisher_denm_->publish(msg);
 #endif
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, asn1_structp);
 
   } else if (detected_etsi_type == "cpm") {
 
     // decode ASN1 bitstring to struct
-    cpm_CollectivePerceptionMessage_t* asn1_struct = nullptr;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, (void **)&asn1_struct, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    cpm_CollectivePerceptionMessage_t asn1_struct{};
+    cpm_CollectivePerceptionMessage_t* asn1_structp = &asn1_struct;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, (void **)&asn1_structp, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -363,9 +370,10 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       RCLCPP_ERROR(this->get_logger(),
 #endif
         "Failed to decode message");
+      ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_CollectivePerceptionMessage, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -373,7 +381,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     etsi_its_cpm_msgs::msg::CollectivePerceptionMessage msg;
 #endif
-    etsi_its_cpm_conversion::toRos_CollectivePerceptionMessage(*asn1_struct, msg);
+    etsi_its_cpm_conversion::toRos_CollectivePerceptionMessage(asn1_struct, msg);
 
     // publish msg
 #ifdef ROS1
@@ -381,6 +389,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     publisher_cpm_->publish(msg);
 #endif
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
 
   } else {
 #ifdef ROS1
@@ -415,7 +424,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
     "Received CAM");
 
   // convert ROS msg to struct
-  cam_CAM_t asn1_struct;
+  cam_CAM_t asn1_struct{};
   etsi_its_cam_conversion::toStruct_CAM(*msg, asn1_struct);
   if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cam_CAM, &asn1_struct);
 
@@ -430,6 +439,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Check of struct failed: %s", error_buffer);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
     return;
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cam_CAM, &asn1_struct);
@@ -440,6 +450,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
     return;
   }
 
@@ -469,6 +480,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
   RCLCPP_DEBUG(this->get_logger(),
 #endif
     "Published CAM bitstring");
+  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
 }
 
 
@@ -486,7 +498,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
     "Received DENM");
 
   // convert ROS msg to struct
-  denm_DENM_t asn1_struct;
+  denm_DENM_t asn1_struct{};
   etsi_its_denm_conversion::toStruct_DENM(*msg, asn1_struct);
   if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_denm_DENM, &asn1_struct);
 
@@ -501,6 +513,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Check of struct failed: %s", error_buffer);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
     return;
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_denm_DENM, &asn1_struct);
@@ -511,6 +524,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
     return;
   }
 
@@ -540,6 +554,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
   RCLCPP_DEBUG(this->get_logger(),
 #endif
     "Published DENM bitstring");
+  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
 }
 
 #ifdef ROS1
@@ -556,7 +571,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
     "Received CPM");
 
   // convert ROS msg to struct
-  cpm_CollectivePerceptionMessage_t asn1_struct;
+  cpm_CollectivePerceptionMessage_t asn1_struct{};
   etsi_its_cpm_conversion::toStruct_CollectivePerceptionMessage(*msg, asn1_struct);
   if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
 
@@ -571,6 +586,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Check of struct failed: %s", error_buffer);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
     return;
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
@@ -581,6 +597,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
     return;
   }
 
@@ -610,6 +627,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
   RCLCPP_DEBUG(this->get_logger(),
 #endif
     "Published CPM bitstring");
+  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
 }
 
 }  // end of namespace
