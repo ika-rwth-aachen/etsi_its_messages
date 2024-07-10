@@ -181,6 +181,44 @@
             "justMyCode": true
         },
         {
+            "name": "MAPEM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_mapem_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "MAPEM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-t",
+                "mapem_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_mapem_ts_conversion/include/etsi_its_mapem_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "SPATEM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
@@ -196,6 +234,44 @@
                 "spatem_ts",
                 "-o",
                 "etsi_its_coding/etsi_its_spatem_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "SPATEM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_spatem_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "SPATEM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-t",
+                "spatem_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
