@@ -396,7 +396,7 @@ bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE
 }
 
 
-UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size) {
+UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) {
 
 #ifdef ROS1
   UdpPacket udp_msg;
@@ -405,7 +405,7 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
 #endif
   if (has_btp_destination_port_) {
     // add BTP destination port and destination port info
-    uint16_t destination_port = htons(kBtpHeaderDestinationPortCam); // TODO: dynamic port selection
+    uint16_t destination_port = htons(btp_header_destination_port);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
@@ -419,7 +419,7 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
 
 
 template <typename T_ros, typename T_struct>
-bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
+bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) {
 
   // convert ROS msg to struct
   auto asn1_struct = this->rosMessageToStruct(msg, type_descriptor, conversion_fn);
@@ -431,7 +431,7 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
   if (!successful) return false;
 
   // copy bitstring to ROS UDP msg
-  udp_msg = this->bufferToUdpPacketMessage(buffer, buffer_size);
+  udp_msg = this->bufferToUdpPacketMessage(buffer, buffer_size, btp_header_destination_port);
 
   return true;
 }
@@ -523,9 +523,14 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
 
   ROS12_LOG(DEBUG, "Received ETSI message of type '%s' as ROS message", type.c_str());
 
+  int btp_header_destination_port = 0;
+  if (type == "cam") btp_header_destination_port = kBtpHeaderDestinationPortCam;
+  else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
+  else if (type == "denm") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+
   // encode ROS msg to UDP msg
   UdpPacket udp_msg;
-  bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(*msg, udp_msg, type_descriptor, conversion_fn);
+  bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(*msg, udp_msg, type_descriptor, conversion_fn, btp_header_destination_port);
   if (!success) return;
 
   // publish UDP msg

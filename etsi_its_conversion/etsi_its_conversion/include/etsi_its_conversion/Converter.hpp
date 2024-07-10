@@ -94,7 +94,7 @@ class Converter : public rclcpp::Node {
     template <typename T_ros, typename T_struct>
     bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
 
-    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size);
+    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port);
 
     template <typename T_ros, typename T_struct>
     T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
@@ -103,7 +103,7 @@ class Converter : public rclcpp::Node {
     bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t* buffer, int& size);
 
     template <typename T_ros, typename T_struct>
-    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port);
 
 #ifdef ROS1
     void udpCallback(const UdpPacket::ConstPtr udp_msg);
