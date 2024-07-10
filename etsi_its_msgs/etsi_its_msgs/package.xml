@@ -16,6 +16,7 @@
   <license>MIT</license>
 
   <depend>etsi_its_cam_msgs</depend>
+  <depend>etsi_its_cam_ts_msgs</depend>
   <depend>etsi_its_denm_msgs</depend>
   <depend>etsi_its_cpm_ts_msgs</depend>
   <depend>ros_environment</depend>
