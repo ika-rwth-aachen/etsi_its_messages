@@ -28,6 +28,7 @@ import rclpy
 from rclpy.node import Node
 from etsi_its_denm_msgs.msg import *
 
+# TODO: denm conversion with this script is failing at the moment
 
 class Publisher(Node):
 
