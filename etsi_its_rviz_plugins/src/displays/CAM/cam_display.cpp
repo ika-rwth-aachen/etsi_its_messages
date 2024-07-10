@@ -103,11 +103,10 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
   // Generate CAM render object from message
   rclcpp::Time now = rviz_node_->now();
   uint64_t nanosecs = now.nanoseconds();
-  if (nanosecs == 0)
-  {
+  if (nanosecs == 0) {
     setStatus(
-          rviz_common::properties::StatusProperty::Warn, "Topic",
-          "Message received before clock got a valid time");
+      rviz_common::properties::StatusProperty::Warn, "Topic",
+      "Message received before clock got a valid time");
     return;
   }
 
