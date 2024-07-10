@@ -138,11 +138,17 @@ class Converter : public rclcpp::Node {
     static const int kEtsiMessagePayloadOffsetParamDefault;
     static const std::string kEtsiTypesParam;
     static const std::vector<std::string> kEtsiTypesParamDefault;
+    static const std::string kSubscriberQueueSizeParam;
+    static const int kSubscriberQueueSizeParamDefault;
+    static const std::string kPublisherQueueSizeParam;
+    static const int kPublisherQueueSizeParamDefault;
 
     bool has_btp_destination_port_;
     int btp_destination_port_offset_;
     int etsi_message_payload_offset_;
     std::vector<std::string> etsi_types_;
+    int subscriber_queue_size_;
+    int publisher_queue_size_;
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;

@@ -175,6 +175,8 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `btp_destination_port_offset` | `int` | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` |
 | `etsi_message_payload_offset` | `int` | number of bytes before actual ETSI message payload |
 | `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `cpm_ts`, `denm` |
+| `subscriber_queue_size` | `int` | queue size for incoming ROS messages |
+| `publisher_queue_size` | `int` | queue size for outgoing ROS messages |
 
 
 ## Access Functions
