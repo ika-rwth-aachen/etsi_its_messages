@@ -451,6 +451,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -481,6 +482,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #endif
     "Published CAM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
+  free(ret.buffer);
 }
 
 
@@ -525,6 +527,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -555,6 +558,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #endif
     "Published DENM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
+  free(ret.buffer);
 }
 
 #ifdef ROS1
@@ -598,6 +602,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -628,6 +633,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
 #endif
     "Published CPM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+  free(ret.buffer);
 }
 
 }  // end of namespace
