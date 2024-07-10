@@ -1,6 +1,5 @@
 #pragma once
 
-#include "etsi_its_cam_msgs/msg/cam.hpp"
 #include "etsi_its_denm_msgs/msg/denm.hpp"
 
 #include "displays/DENM/denm_render_object.hpp"
@@ -57,7 +56,7 @@ protected:
 
   // Properties
   rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_cause_code_, *show_sub_cause_code_;
-  rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
+  rviz_common::properties::FloatProperty *buffer_timeout_, *char_height_;
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
   std::unordered_map<int, DENMRenderObject> denms_;
