@@ -373,7 +373,7 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 
 
 template <typename T_struct>
-bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t* buffer, int& size) {
+bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
 
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
@@ -424,7 +424,7 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
   auto asn1_struct = this->rosMessageToStruct(msg, type_descriptor, conversion_fn);
 
   // encode struct to ASN1 bitstring
-  uint8_t* buffer;
+  uint8_t* buffer = nullptr;
   int buffer_size;
   bool successful = this->encodeStructToBuffer(asn1_struct, type_descriptor, buffer, buffer_size);
   if (!successful) return false;
