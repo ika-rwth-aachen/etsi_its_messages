@@ -9,12 +9,23 @@ jobs:
   bloom-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: at-wat/bloom-release-action@v0
+      - name: Release ROS
+        uses: at-wat/bloom-release-action@v0
         with:
-          ros_distro: noetic humble iron jazzy
+          ros_distro: noetic
           github_token_bloom: ${{ secrets.GH_TOKEN_FOR_BLOOM_RELEASE }}
           github_user: jpbusch
           git_user: Jean-Pierre Busch
           git_email: jean-pierre.busch@ika.rwth-aachen.de
-          release_repository_push_url: https://github.com/${{ github.repository }}-release.git
+          release_repository_push_url: https://github.com/ika-rwth-aachen/etsi_its_messages-release.git
+          open_pr: false
+      - name: Release ROS 2
+        uses: at-wat/bloom-release-action@v0
+        with:
+          ros_distro: humble iron jazzy
+          github_token_bloom: ${{ secrets.GH_TOKEN_FOR_BLOOM_RELEASE }}
+          github_user: jpbusch
+          git_user: Jean-Pierre Busch
+          git_email: jean-pierre.busch@ika.rwth-aachen.de
+          release_repository_push_url: https://github.com/ros2-gbp/etsi_its_messages-release.git
           open_pr: false

@@ -50,13 +50,16 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 
 ## Supported ETSI ITS Messages
 
-| Status | Acronym | Name | Version | Definition | Repository |
-| --- | --- | --- | --- | --- | --- |
-| :white_check_mark: | CAM | Cooperative Awareness Message | 1.4.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) | [Link](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2) |
-| :white_check_mark: | DENM | Decentralized Environmental Notification Message | 1.3.1 | [Link](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) | [Link](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3) |
-| :white_check_mark: | CPM | Collective Perception Message | 2.1.1 | [Link](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) | [Link](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324) |
+| Status | Acronym | Name | EN Specification | TS Specification |
+| --- | --- | --- | --- | --- |
+| :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | - |
+| :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | - |
+| :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) |
 | :soon: | MAPEM | Map Extended Message | - | - | - |
 | :soon: | SPATEM | Signal Phase and Timing Extended Message | - | - | - |
+
+> [!NOTE]
+> Message types that are standardized as *European Norms (EN)* are available as, e.g., `etsi_its_cam_msgs`. New message types or revisions of existing message types that are only specified in *Technical Specifications (TS)* are available as, e.g., `etsi_its_cpm_ts_msgs`.
 
 
 ## Packages
@@ -66,19 +69,19 @@ etsi_its_messages
 ├── etsi_its_coding
 │   ├── etsi_its_coding         # metapackage including all coding packages
 │   ├── etsi_its_cam_coding
-│   ├── etsi_its_cpm_coding
+│   ├── etsi_its_cpm_ts_coding
 │   └── etsi_its_denm_coding
 ├── etsi_its_conversion
 │   ├── etsi_its_conversion     # conversion node depending on all conversion packages
 │   ├── etsi_its_cam_conversion
-│   ├── etsi_its_cpm_conversion
+│   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
 │   └── etsi_its_primitives_conversion
 ├── etsi_its_messages           # metapackage including all others
 ├── etsi_its_msgs
 │   ├── etsi_its_msgs           # metapackage including all msg packages
 │   ├── etsi_its_cam_msgs
-│   ├── etsi_its_cpm_msgs
+│   ├── etsi_its_cpm_ts_msgs
 │   └── etsi_its_denm_msgs
 ├── etsi_its_msgs_utils
 └── etsi_its_rviz_plugins
@@ -138,12 +141,12 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 # ROS 2
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm,denm] -p has_btp_destination_port:=true -p btp_destination_port_offset:=8 -p etsi_message_payload_offset:=78
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm] -p has_btp_destination_port:=true -p btp_destination_port_offset:=8 -p etsi_message_payload_offset:=78
 
 # ROS
 roslaunch etsi_its_conversion converter.ros1.launch
 # or
-rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[cam,cpm,denm] _has_btp_destination_port:=true _btp_destination_port_offset:=8 _etsi_message_payload_offset:=78
+rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[cam,cpm_ts,denm] _has_btp_destination_port:=true _btp_destination_port_offset:=8 _etsi_message_payload_offset:=78
 ```
 
 #### Subscribed Topics
@@ -152,7 +155,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | --- | --- | --- |
 | `~/udp/in` | `udp_msgs/msg/UdpPacket` | UDP payload for conversion to ROS |
 | `~/cam/in` | `etsi_its_cam_msgs/msg/CAM` | CAM for conversion to UDP |
-| `~/cpm/in` | `etsi_its_cpm_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
+| `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
 
 #### Published Topics
@@ -161,7 +164,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | --- | --- | --- |
 | `~/udp/out` | `udp_msgs/msg/UdpPacket` | UDP payload converted from ROS message |
 | `~/cam/out` | `etsi_its_cam_msgs/msg/CAM` | CAM converted from UDP payload |
-| `~/cpm/out` | `etsi_its_cpm_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
+| `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
 
 #### Parameters
@@ -171,7 +174,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `has_btp_destination_port` | `bool` | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
 | `btp_destination_port_offset` | `int` | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` |
 | `etsi_message_payload_offset` | `int` | number of bytes before actual ETSI message payload |
-| `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `cpm`, `denm` |
+| `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `cpm_ts`, `denm` |
 
 
 ## Access Functions

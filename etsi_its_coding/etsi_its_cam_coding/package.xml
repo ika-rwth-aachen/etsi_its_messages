@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_cam_coding</name>
-  <version>2.0.2</version>
+  <version>2.1.0</version>
   <description>C++ compatible C source code for ETSI ITS CAMs generated from ASN.1 using asn1c</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
