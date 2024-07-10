@@ -103,7 +103,7 @@ const int kBtpHeaderDestinationPortCpmTs{2009};
 
 #ifdef ROS1
 const std::string Converter::kInputTopicUdp{"udp/in"};
-const std::string Converter::kOutputTopicUdp{"udp/out"};
+const std::string Converter::kOutputTopicUdp{"udp/in"};
 const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
@@ -112,7 +112,7 @@ const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
 #else
 const std::string Converter::kInputTopicUdp{"~/udp/in"};
-const std::string Converter::kOutputTopicUdp{"~/udp/out"};
+const std::string Converter::kOutputTopicUdp{"~/udp/in"};
 const std::string Converter::kInputTopicCam{"~/cam/in"};
 const std::string Converter::kOutputTopicCam{"~/cam/out"};
 const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
@@ -446,7 +446,7 @@ void Converter::udpCallback(const UdpPacket::ConstPtr udp_msg) {
 void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 #endif
 
-  ROS12_LOG(DEBUG, "Received bitstring");
+  ROS12_LOG(DEBUG, "Received bitstring (total payload size: %ld)", udp_msg->data.size());
 
   // auto-detect ETSI message type if BTP destination port is present
   std::string detected_etsi_type = etsi_types_[0];
@@ -463,7 +463,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
   }
 
   int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
-  ROS12_LOG(INFO, "Received ETSI message of type '%s' (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), msg_size, udp_msg->data.size());
+  ROS12_LOG(INFO, "Received ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), msg_size, udp_msg->data.size());
 
   if (detected_etsi_type == "cam") {
 
@@ -524,7 +524,7 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
 #endif
                             const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
-  ROS12_LOG(DEBUG, "Received ETSI message of type '%s' as ROS message", type.c_str());
+  ROS12_LOG(INFO, "Received ETSI message of type '%s' as ROS message", type.c_str());
 
   int btp_header_destination_port = 0;
   if (type == "cam") btp_header_destination_port = kBtpHeaderDestinationPortCam;
@@ -538,7 +538,8 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
 
   // publish UDP msg
   publisher_udp_->publish(udp_msg);
-  ROS12_LOG(INFO, "Published ETSI message of type '%s' as bitstring", type.c_str());
+  int msg_size = has_btp_destination_port_ ? udp_msg.data.size() - 4 : udp_msg.data.size();
+  ROS12_LOG(INFO, "Published ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", type.c_str(), msg_size, udp_msg.data.size());
 }
 
 
