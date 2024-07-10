@@ -352,20 +352,19 @@ T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_
 template <typename T_ros, typename T_struct>
 bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) {
 
-  T_struct* asn1_struct = nullptr;
-  bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, asn1_struct);
-  if (!success) return false;
+  T_struct asn1_struct{};
+  bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, &asn1_struct);
+  if (success) msg = this->structToRosMessage(asn1_struct, type_descriptor, conversion_fn);
+  ASN_STRUCT_FREE_CONTENTS_ONLY(*type_descriptor, &asn1_struct);
 
-  msg = this->structToRosMessage(*asn1_struct, type_descriptor, conversion_fn);
-
-  return true;
+  return success;
 }
 
 
 template <typename T_ros, typename T_struct>
 T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
-  T_struct asn1_struct;
+  T_struct asn1_struct{};
   conversion_fn(msg, asn1_struct);
   if (logLevelIsDebug()) asn_fprint(stdout, type_descriptor, &asn1_struct);
 
@@ -432,6 +431,10 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
 
   // copy bitstring to ROS UDP msg
   udp_msg = this->bufferToUdpPacketMessage(buffer, buffer_size, btp_header_destination_port);
+
+  // free memory
+  ASN_STRUCT_FREE_CONTENTS_ONLY(*type_descriptor, &asn1_struct);
+  free(buffer);
 
   return true;
 }

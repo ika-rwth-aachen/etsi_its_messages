@@ -55,7 +55,7 @@ class Publisher(Node):
         dangerous_goods_extended.phone_number_is_present = True
         dangerous_goods_extended.phone_number.value = "0241 123456789" # NumericString
         dangerous_goods_extended.company_name_is_present = True
-        dangerous_goods_extended.company_name = "ika, RWTH Aachen University" # UTF8String
+        dangerous_goods_extended.company_name = "ika, RWTH Aachen" # UTF8String
         msg.denm.alacarte.stationary_vehicle.carrying_dangerous_goods = dangerous_goods_extended
 
         self.get_logger().info(f"Publishing DENM")
