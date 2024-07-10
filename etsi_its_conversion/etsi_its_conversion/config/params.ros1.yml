@@ -4,4 +4,4 @@ etsi_message_payload_offset: 78 # default for Cohda Wireless MK-5 exampleETSI ap
 etsi_types:
   - cam
   - denm
-  - cpm
+  - cpm_ts

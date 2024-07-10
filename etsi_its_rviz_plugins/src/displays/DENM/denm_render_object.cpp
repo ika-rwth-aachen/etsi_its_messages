@@ -5,7 +5,7 @@ namespace etsi_its_msgs
 namespace displays
 {
 
-  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
+  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, uint16_t n_leap_seconds) {
 
     int zone;
     bool northp;
@@ -20,10 +20,10 @@ namespace displays
     sub_cause_code_type = etsi_its_denm_msgs::access::getSubCauseCodeType(denm);
     
     double heading; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-    if(etsi_its_denm_msgs::access::getIsHeadingPresent(denm)){
+    if(etsi_its_denm_msgs::access::getIsHeadingPresent(denm)) {
       heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0;
     }
-    else{
+    else {
       heading = 0*M_PI/180.0;
     }
     while(heading<0) heading+=2*M_PI;
@@ -32,10 +32,10 @@ namespace displays
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
 
-    if(etsi_its_denm_msgs::access::getIsSpeedPresent(denm)){
+    if(etsi_its_denm_msgs::access::getIsSpeedPresent(denm)) {
       speed = etsi_its_denm_msgs::access::getSpeed(denm);
     }
-    else{
+    else {
       speed = 0;
     }
   }
@@ -67,11 +67,11 @@ namespace displays
   return speed;
   }
 
-  std::string DENMRenderObject::getCauseCode(){
+  std::string DENMRenderObject::getCauseCode() {
     return cause_code_type;
   }
 
-  std::string DENMRenderObject::getSubCauseCode(){
+  std::string DENMRenderObject::getSubCauseCode() {
     return sub_cause_code_type;
   }
 

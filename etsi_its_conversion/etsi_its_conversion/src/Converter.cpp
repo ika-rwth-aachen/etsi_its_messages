@@ -50,7 +50,7 @@ const int kBtpHeaderDestinationPortDenm{2002};
 const int kBtpHeaderDestinationPortMap{2003};
 const int kBtpHeaderDestinationPortSpat{2004};
 const int kBtpHeaderDestinationPortIvi{2006};
-const int kBtpHeaderDestinationPortCpm{2009};
+const int kBtpHeaderDestinationPortCpmTs{2009};
 
 #ifdef ROS1
 const std::string Converter::kInputTopicUdp{"udp/in"};
@@ -59,8 +59,8 @@ const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
-const std::string Converter::kInputTopicCpm{"cpm/in"};
-const std::string Converter::kOutputTopicCpm{"cpm/out"};
+const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
+const std::string Converter::kOutputTopicCpmTs{"cpm_ts/out"};
 #else
 const std::string Converter::kInputTopicUdp{"~/udp/in"};
 const std::string Converter::kOutputTopicUdp{"~/udp/out"};
@@ -68,8 +68,8 @@ const std::string Converter::kInputTopicCam{"~/cam/in"};
 const std::string Converter::kOutputTopicCam{"~/cam/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
-const std::string Converter::kInputTopicCpm{"~/cpm/in"};
-const std::string Converter::kOutputTopicCpm{"~/cpm/out"};
+const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
+const std::string Converter::kOutputTopicCpmTs{"~/cpm_ts/out"};
 #endif
 
 const std::string Converter::kHasBtpDestinationPortParam{"has_btp_destination_port"};
@@ -79,7 +79,7 @@ const int Converter::kBtpDestinationPortOffsetParamDefault{8};
 const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payload_offset"};
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kEtsiTypesParam{"etsi_types"};
-const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm", "cpm"};
+const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "denm", "cpm_ts"};
 
 
 bool Converter::logLevelIsDebug() {
@@ -212,7 +212,7 @@ void Converter::setup() {
   publisher_udp_ = private_node_handle_.advertise<udp_msgs::UdpPacket>(kOutputTopicUdp, 1);
   publishers_["cam"] = private_node_handle_.advertise<etsi_its_cam_msgs::CAM>(kOutputTopicCam, 1);
   publishers_["denm"] = private_node_handle_.advertise<etsi_its_denm_msgs::DENM>(kOutputTopicDenm, 1);
-  publishers_["cpm"] = private_node_handle_.advertise<etsi_its_cpm_msgs::CollectivePerceptionMessage>(kOutputTopicCpm, 1);
+  publishers_["cpm_ts"] = private_node_handle_.advertise<etsi_its_cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, 1);
   subscriber_udp_ = private_node_handle_.subscribe(kInputTopicUdp, 1, &Converter::udpCallback, this);
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
     subscribers_["cam"] = private_node_handle_.subscribe(kInputTopicCam, 1, &Converter::rosCallbackCam, this);
@@ -224,16 +224,16 @@ void Converter::setup() {
     NODELET_INFO("Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_.getTopic().c_str(), publishers_["denm"].getTopic().c_str());
     NODELET_INFO("Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm") != etsi_types_.end()) {
-    subscribers_["cpm"] = private_node_handle_.subscribe(kInputTopicCpm, 1, &Converter::rosCallbackCpm, this);
-    NODELET_INFO("Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_.getTopic().c_str(), publishers_["cpm"].getTopic().c_str());
-    NODELET_INFO("Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscribers_["cpm"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
+    subscribers_["cpm_ts"] = private_node_handle_.subscribe(kInputTopicCpmTs, 1, &Converter::rosCallbackCpmTs, this);
+    NODELET_INFO("Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_.getTopic().c_str(), publishers_["cpm_ts"].getTopic().c_str());
+    NODELET_INFO("Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"].getTopic().c_str(), publisher_udp_.getTopic().c_str());
   }
 #else
   publisher_udp_ = this->create_publisher<udp_msgs::msg::UdpPacket>(kOutputTopicUdp, 1);
   publisher_cam_ = this->create_publisher<etsi_its_cam_msgs::msg::CAM>(kOutputTopicCam, 1);
   publisher_denm_ = this->create_publisher<etsi_its_denm_msgs::msg::DENM>(kOutputTopicDenm, 1);
-  publisher_cpm_ = this->create_publisher<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kOutputTopicCpm, 1);
+  publisher_cpm_ts_ = this->create_publisher<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage>(kOutputTopicCpmTs, 1);
   subscriber_udp_ = this->create_subscription<udp_msgs::msg::UdpPacket>(kInputTopicUdp, 1, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
     subscriber_cam_ = this->create_subscription<etsi_its_cam_msgs::msg::CAM>(kInputTopicCam, 1, std::bind(&Converter::rosCallbackCam, this, std::placeholders::_1));
@@ -245,10 +245,10 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscriber_denm_->get_topic_name(), publisher_udp_->get_topic_name());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm") != etsi_types_.end()) {
-    subscriber_cpm_ = this->create_subscription<etsi_its_cpm_msgs::msg::CollectivePerceptionMessage>(kInputTopicCpm, 1, std::bind(&Converter::rosCallbackCpm, this, std::placeholders::_1));
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscriber_cpm_->get_topic_name(), publisher_udp_->get_topic_name());
+  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
+    subscriber_cpm_ts_ = this->create_subscription<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage>(kInputTopicCpmTs, 1, std::bind(&Converter::rosCallbackCpmTs, this, std::placeholders::_1));
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CPM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_ts_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs on '%s' to UDP messages on '%s'", subscriber_cpm_ts_->get_topic_name(), publisher_udp_->get_topic_name());
   }
 #endif
 }
@@ -277,7 +277,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
     else if (destination_port == kBtpHeaderDestinationPortMap) detected_etsi_type = "map";
     else if (destination_port == kBtpHeaderDestinationPortSpat) detected_etsi_type = "spat";
     else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
-    else if (destination_port == kBtpHeaderDestinationPortCpm) detected_etsi_type = "cpm";
+    else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
     else detected_etsi_type = "unknown";
   }
 
@@ -357,12 +357,12 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #endif
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, asn1_structp);
 
-  } else if (detected_etsi_type == "cpm") {
+  } else if (detected_etsi_type == "cpm_ts") {
 
     // decode ASN1 bitstring to struct
-    cpm_CollectivePerceptionMessage_t asn1_struct{};
-    cpm_CollectivePerceptionMessage_t* asn1_structp = &asn1_struct;
-    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, (void **)&asn1_structp, &udp_msg->data[etsi_message_payload_offset_], msg_size);
+    cpm_ts_CollectivePerceptionMessage_t asn1_struct{};
+    cpm_ts_CollectivePerceptionMessage_t* asn1_structp = &asn1_struct;
+    asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_ts_CollectivePerceptionMessage, (void **)&asn1_structp, &udp_msg->data[etsi_message_payload_offset_], msg_size);
     if (ret.code != RC_OK) {
 #ifdef ROS1
       NODELET_ERROR(
@@ -370,24 +370,24 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       RCLCPP_ERROR(this->get_logger(),
 #endif
         "Failed to decode message");
-      ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
+      ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_struct);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
-    etsi_its_cpm_msgs::CollectivePerceptionMessage msg;
+    etsi_its_cpm_ts_msgs::CollectivePerceptionMessage msg;
 #else
-    etsi_its_cpm_msgs::msg::CollectivePerceptionMessage msg;
+    etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage msg;
 #endif
-    etsi_its_cpm_conversion::toRos_CollectivePerceptionMessage(asn1_struct, msg);
+    etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage(asn1_struct, msg);
 
     // publish msg
 #ifdef ROS1
-    publishers_["cpm"].publish(msg);
+    publishers_["cpm_ts"].publish(msg);
 #else
-    publisher_cpm_->publish(msg);
+    publisher_cpm_ts_->publish(msg);
 #endif
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
 
@@ -451,6 +451,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -481,6 +482,7 @@ void Converter::rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg)
 #endif
     "Published CAM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cam_CAM, &asn1_struct);
+  free(ret.buffer);
 }
 
 
@@ -525,6 +527,7 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -555,12 +558,13 @@ void Converter::rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr m
 #endif
     "Published DENM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_denm_DENM, &asn1_struct);
+  free(ret.buffer);
 }
 
 #ifdef ROS1
-void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::CollectivePerceptionMessage::ConstPtr msg) {
+void Converter::rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::CollectivePerceptionMessage::ConstPtr msg) {
 #else
-void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptionMessage::UniquePtr msg) {
+void Converter::rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage::UniquePtr msg) {
 #endif
 
 #ifdef ROS1
@@ -571,14 +575,14 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
     "Received CPM");
 
   // convert ROS msg to struct
-  cpm_CollectivePerceptionMessage_t asn1_struct{};
-  etsi_its_cpm_conversion::toStruct_CollectivePerceptionMessage(*msg, asn1_struct);
-  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+  cpm_ts_CollectivePerceptionMessage_t asn1_struct{};
+  etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage(*msg, asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
 
   // encode struct to ASN1 bitstring
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
-  int check_ret = asn_check_constraints(&asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct, error_buffer, &error_length);
+  int check_ret = asn_check_constraints(&asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct, error_buffer, &error_length);
   if (check_ret != 0) {
 #ifdef ROS1
     NODELET_ERROR(
@@ -589,7 +593,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
     return;
   }
-  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+  asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
   if (ret.result.encoded == -1) {
 #ifdef ROS1
     NODELET_ERROR(
@@ -598,6 +602,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+    free(ret.buffer);
     return;
   }
 
@@ -609,7 +614,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
 #endif
   if (has_btp_destination_port_) {
     // add BTP-Header, if type detection is enabled
-    uint16_t destination_port = htons(kBtpHeaderDestinationPortCpm);
+    uint16_t destination_port = htons(kBtpHeaderDestinationPortCpmTs);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
@@ -628,6 +633,7 @@ void Converter::rosCallbackCpm(const etsi_its_cpm_msgs::msg::CollectivePerceptio
 #endif
     "Published CPM bitstring");
   ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+  free(ret.buffer);
 }
 
 }  // end of namespace

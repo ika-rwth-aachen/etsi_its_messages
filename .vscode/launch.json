@@ -100,7 +100,7 @@
             "justMyCode": true
         },
         {
-            "name": "CPM (coding)",
+            "name": "CPM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
@@ -113,15 +113,15 @@
                 "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
                 "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "cpm",
+                "cpm_ts",
                 "-o",
-                "etsi_its_coding/etsi_its_cpm_coding"
+                "etsi_its_coding/etsi_its_cpm_ts_coding"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "CPM (msgs)",
+            "name": "CPM TS (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
@@ -134,13 +134,13 @@
                 "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
                 "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
                 "-o",
-                "etsi_its_msgs/etsi_its_cpm_msgs/msg"
+                "etsi_its_msgs/etsi_its_cpm_ts_msgs/msg"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "CPM (conversion)",
+            "name": "CPM TS (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
@@ -153,9 +153,9 @@
                 "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
                 "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "cpm",
+                "cpm_ts",
                 "-o",
-                "etsi_its_conversion/etsi_its_cpm_conversion/include/etsi_its_cpm_conversion"
+                "etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
