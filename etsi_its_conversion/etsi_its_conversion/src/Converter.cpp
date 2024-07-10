@@ -373,7 +373,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
