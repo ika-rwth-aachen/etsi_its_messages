@@ -29,25 +29,38 @@ SOFTWARE.
 #include <unordered_map>
 
 #include <etsi_its_cam_conversion/convertCAM.h>
-#include <etsi_its_denm_conversion/convertDENM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
+#include <etsi_its_denm_conversion/convertDENM.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
 #include <udp_msgs/UdpPacket.h>
 #include <etsi_its_cam_msgs/CAM.h>
-#include <etsi_its_denm_msgs/DENM.h>
 #include <etsi_its_cpm_ts_msgs/CollectivePerceptionMessage.h>
+#include <etsi_its_denm_msgs/DENM.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
-#include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/collective_perception_message.hpp>
+#include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
 
 
 namespace etsi_its_conversion {
+
+
+#ifdef ROS1
+using namespace udp_msgs;
+namespace cam_msgs = etsi_its_cam_msgs;
+namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
+namespace denm_msgs = etsi_its_denm_msgs;
+#else
+using namespace udp_msgs::msg;
+namespace cam_msgs = etsi_its_cam_msgs::msg;
+namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
+namespace denm_msgs = etsi_its_denm_msgs::msg;
+#endif
 
 
 #ifdef ROS1
@@ -72,21 +85,39 @@ class Converter : public rclcpp::Node {
 
     bool logLevelIsDebug();
 
-#ifdef ROS1
-    void udpCallback(const udp_msgs::UdpPacket::ConstPtr udp_msg);
-#else
-    void udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg);
-#endif
+    template <typename T_struct>
+    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
+
+    template <typename T_ros, typename T_struct>
+    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+
+    template <typename T_ros, typename T_struct>
+    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
+
+    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size);
+
+    template <typename T_ros, typename T_struct>
+    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+
+    template <typename T_struct>
+    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t* buffer, int& size);
+
+    template <typename T_ros, typename T_struct>
+    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
 #ifdef ROS1
-    void rosCallbackCam(const etsi_its_cam_msgs::CAM::ConstPtr msg);
-    void rosCallbackDenm(const etsi_its_denm_msgs::DENM::ConstPtr msg);
-    void rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::CollectivePerceptionMessage::ConstPtr msg);
+    void udpCallback(const UdpPacket::ConstPtr udp_msg);
 #else
-    void rosCallbackCam(const etsi_its_cam_msgs::msg::CAM::UniquePtr msg);
-    void rosCallbackDenm(const etsi_its_denm_msgs::msg::DENM::UniquePtr msg);
-    void rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage::UniquePtr msg);
+    void udpCallback(const UdpPacket::UniquePtr udp_msg);
 #endif
+
+    template <typename T_ros, typename T_struct>
+#ifdef ROS1
+    void rosCallback(const typename T_ros::ConstPtr msg,
+#else
+    void rosCallback(const typename T_ros::UniquePtr msg,
+#endif
+                     const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
   protected:
 
@@ -94,10 +125,10 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicUdp;
     static const std::string kInputTopicCam;
     static const std::string kOutputTopicCam;
-    static const std::string kInputTopicDenm;
-    static const std::string kOutputTopicDenm;
     static const std::string kInputTopicCpmTs;
     static const std::string kOutputTopicCpmTs;
+    static const std::string kInputTopicDenm;
+    static const std::string kOutputTopicDenm;
 
     static const std::string kHasBtpDestinationPortParam;
     static const bool kHasBtpDestinationPortParamDefault;
@@ -115,19 +146,17 @@ class Converter : public rclcpp::Node {
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
-    ros::Publisher publisher_udp_;
-    ros::Subscriber subscriber_udp_;
-    std::unordered_map<std::string, ros::Publisher> publishers_;
-    std::unordered_map<std::string, ros::Subscriber> subscribers_;
+    std::shared_ptr<ros::Subscriber> subscriber_udp_;
+    std::unordered_map<std::string, std::shared_ptr<ros::Publisher>> publishers_;
+    std::unordered_map<std::string, std::shared_ptr<ros::Subscriber>> subscribers_;
+    std::shared_ptr<ros::Publisher> publisher_udp_;
 #else
-    rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr publisher_udp_;
-    rclcpp::Subscription<udp_msgs::msg::UdpPacket>::SharedPtr subscriber_udp_;
-    rclcpp::Publisher<etsi_its_cam_msgs::msg::CAM>::SharedPtr publisher_cam_;
-    rclcpp::Subscription<etsi_its_cam_msgs::msg::CAM>::SharedPtr subscriber_cam_;
-    rclcpp::Publisher<etsi_its_denm_msgs::msg::DENM>::SharedPtr publisher_denm_;
-    rclcpp::Subscription<etsi_its_denm_msgs::msg::DENM>::SharedPtr subscriber_denm_;
-    rclcpp::Subscription<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage>::SharedPtr subscriber_cpm_ts_;
-    rclcpp::Publisher<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
+    rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
+    std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
+    rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
+    rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
+    rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 #endif
 
 };
