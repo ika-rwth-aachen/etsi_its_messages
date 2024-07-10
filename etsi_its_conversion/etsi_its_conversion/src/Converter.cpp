@@ -373,7 +373,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
       ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
       return;
     }
-    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_struct);
+    if (logLevelIsDebug()) asn_fprint(stdout, &asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
 
     // convert struct to ROS msg and publish
 #ifdef ROS1
@@ -389,7 +389,7 @@ void Converter::udpCallback(const udp_msgs::msg::UdpPacket::UniquePtr udp_msg) {
 #else
     publisher_cpm_ts_->publish(msg);
 #endif
-    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, asn1_structp);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, asn1_structp);
 
   } else {
 #ifdef ROS1
@@ -590,7 +590,7 @@ void Converter::rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::msg::CollectivePerc
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Check of struct failed: %s", error_buffer);
-    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
     return;
   }
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, &asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
@@ -601,7 +601,7 @@ void Converter::rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::msg::CollectivePerc
     RCLCPP_ERROR(this->get_logger(),
 #endif
       "Failed to encode message: %s", ret.result.failed_type->xml_tag);
-    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+    ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
     free(ret.buffer);
     return;
   }
@@ -632,7 +632,7 @@ void Converter::rosCallbackCpmTs(const etsi_its_cpm_ts_msgs::msg::CollectivePerc
   RCLCPP_DEBUG(this->get_logger(),
 #endif
     "Published CPM bitstring");
-  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_CollectivePerceptionMessage, &asn1_struct);
+  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_cpm_ts_CollectivePerceptionMessage, &asn1_struct);
   free(ret.buffer);
 }
 
