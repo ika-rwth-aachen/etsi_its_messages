@@ -273,7 +273,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
     publishers_["cam"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<cam_msgs::CAM>(kOutputTopicCam, publisher_queue_size_));
     boost::function<void(const cam_msgs::CAM::ConstPtr)> callback =
-      boost::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, _1, "CAM", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
+      boost::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, _1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
     subscribers_["cam"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<cam_msgs::CAM>(kInputTopicCam, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cam"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
@@ -281,7 +281,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
     publishers_["cpm_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_));
     boost::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::ConstPtr)> callback =
-      boost::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, _1, "CPM (TS)", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
+      boost::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, _1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
     subscribers_["cpm_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<cpm_ts_msgs::CollectivePerceptionMessage>(kInputTopicCpmTs, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cpm_ts"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS CPM (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
@@ -289,7 +289,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
     publishers_["denm"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<denm_msgs::DENM>(kOutputTopicDenm, publisher_queue_size_));
     boost::function<void(const denm_msgs::DENM::ConstPtr)> callback =
-      boost::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, _1, "DENM", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
+      boost::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, _1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["denm"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
@@ -300,7 +300,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
     publisher_cam_ = this->create_publisher<cam_msgs::CAM>(kOutputTopicCam, publisher_queue_size_);
     std::function<void(const cam_msgs::CAM::UniquePtr)> callback =
-      std::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, std::placeholders::_1, "CAM", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
+      std::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, std::placeholders::_1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
     subscribers_["cam"] = this->create_subscription<cam_msgs::CAM>(kInputTopicCam, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
@@ -308,7 +308,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
     publisher_cpm_ts_ = this->create_publisher<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_);
     std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::UniquePtr)> callback =
-      std::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, std::placeholders::_1, "CPM (TS)", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
+      std::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, std::placeholders::_1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
     subscribers_["cpm_ts"] = this->create_subscription<cpm_ts_msgs::CollectivePerceptionMessage>(kInputTopicCpmTs, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_ts_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS CPMs (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
@@ -316,7 +316,7 @@ void Converter::setup() {
   if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
     publisher_denm_ = this->create_publisher<denm_msgs::DENM>(kOutputTopicDenm, publisher_queue_size_);
     std::function<void(const denm_msgs::DENM::UniquePtr)> callback =
-      std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "DENM", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
+      std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
