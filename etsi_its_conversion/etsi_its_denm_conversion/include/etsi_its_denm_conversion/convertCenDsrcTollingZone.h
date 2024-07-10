@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +27,10 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/CenDsrcTollingZone.h>
+#include <etsi_its_denm_coding/denm_CenDsrcTollingZone.h>
+#include <etsi_its_denm_conversion/convertCenDsrcTollingZoneID.h>
 #include <etsi_its_denm_conversion/convertLatitude.h>
 #include <etsi_its_denm_conversion/convertLongitude.h>
-#include <etsi_its_denm_conversion/convertCenDsrcTollingZoneID.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/CenDsrcTollingZone.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -41,29 +42,24 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_CenDsrcTollingZone(const CenDsrcTollingZone_t& in, denm_msgs::CenDsrcTollingZone& out) {
-
+void toRos_CenDsrcTollingZone(const denm_CenDsrcTollingZone_t& in, denm_msgs::CenDsrcTollingZone& out) {
   toRos_Latitude(in.protectedZoneLatitude, out.protected_zone_latitude);
   toRos_Longitude(in.protectedZoneLongitude, out.protected_zone_longitude);
   if (in.cenDsrcTollingZoneID) {
     toRos_CenDsrcTollingZoneID(*in.cenDsrcTollingZoneID, out.cen_dsrc_tolling_zone_id);
     out.cen_dsrc_tolling_zone_id_is_present = true;
   }
-
 }
 
-void toStruct_CenDsrcTollingZone(const denm_msgs::CenDsrcTollingZone& in, CenDsrcTollingZone_t& out) {
-
-  memset(&out, 0, sizeof(CenDsrcTollingZone_t));
+void toStruct_CenDsrcTollingZone(const denm_msgs::CenDsrcTollingZone& in, denm_CenDsrcTollingZone_t& out) {
+  memset(&out, 0, sizeof(denm_CenDsrcTollingZone_t));
 
   toStruct_Latitude(in.protected_zone_latitude, out.protectedZoneLatitude);
   toStruct_Longitude(in.protected_zone_longitude, out.protectedZoneLongitude);
   if (in.cen_dsrc_tolling_zone_id_is_present) {
-    CenDsrcTollingZoneID_t cen_dsrc_tolling_zone_id;
-    toStruct_CenDsrcTollingZoneID(in.cen_dsrc_tolling_zone_id, cen_dsrc_tolling_zone_id);
-    out.cenDsrcTollingZoneID = new CenDsrcTollingZoneID_t(cen_dsrc_tolling_zone_id);
+    out.cenDsrcTollingZoneID = (denm_CenDsrcTollingZoneID_t*) calloc(1, sizeof(denm_CenDsrcTollingZoneID_t));
+    toStruct_CenDsrcTollingZoneID(in.cen_dsrc_tolling_zone_id, *out.cenDsrcTollingZoneID);
   }
-
 }
 
 }

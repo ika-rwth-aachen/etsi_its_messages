@@ -1,0 +1,4 @@
+numpy>=1.23.3
+pyshark~=0.6 # requires tshark installation
+rosbags~=0.9.16
+tqdm~=4.66.1

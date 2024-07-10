@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +52,10 @@ namespace etsi_its_primitives_conversion {
     if (std::numeric_limits<T>::max() < _INTEGER_in)
       throw std::range_error("Failed to convert long (" + std::to_string(_INTEGER_in) + ") to smaller integer type (max: " + std::to_string(std::numeric_limits<T>::max()) + ")");
     INTEGER_out = static_cast<T>(_INTEGER_in);
+  }
+
+  void toRos_INTEGER(const long& _INTEGER_in, int64_t& INTEGER_out) {
+    INTEGER_out = _INTEGER_in;
   }
 
   template <typename T>

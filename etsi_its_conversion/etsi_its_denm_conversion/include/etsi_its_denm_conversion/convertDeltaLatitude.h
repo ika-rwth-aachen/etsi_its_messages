@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/DeltaLatitude.h>
+#include <etsi_its_denm_coding/denm_DeltaLatitude.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DeltaLatitude(const DeltaLatitude_t& in, denm_msgs::DeltaLatitude& out) {
-
+void toRos_DeltaLatitude(const denm_DeltaLatitude_t& in, denm_msgs::DeltaLatitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_DeltaLatitude(const denm_msgs::DeltaLatitude& in, DeltaLatitude_t& out) {
+void toStruct_DeltaLatitude(const denm_msgs::DeltaLatitude& in, denm_DeltaLatitude_t& out) {
+  memset(&out, 0, sizeof(denm_DeltaLatitude_t));
 
-  memset(&out, 0, sizeof(DeltaLatitude_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

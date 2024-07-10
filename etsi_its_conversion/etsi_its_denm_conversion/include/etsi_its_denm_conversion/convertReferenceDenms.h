@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,16 +29,13 @@ SOFTWARE.
 
 #include <stdexcept>
 
-#include <etsi_its_denm_coding/asn_SEQUENCE_OF.h>
-#include <etsi_its_denm_coding/ReferenceDenms.h>
-#include <etsi_its_denm_coding/ActionID.h>
+#include <etsi_its_denm_coding/denm_ReferenceDenms.h>
 #include <etsi_its_denm_conversion/convertActionID.h>
+#include <etsi_its_denm_conversion/convertReferenceDenms.h>
 #ifdef ROS1
-#include <etsi_its_denm_msgs/ActionID.h>
 #include <etsi_its_denm_msgs/ReferenceDenms.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
-#include <etsi_its_denm_msgs/msg/action_id.hpp>
 #include <etsi_its_denm_msgs/msg/reference_denms.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif
@@ -45,28 +43,22 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_ReferenceDenms(const ReferenceDenms_t& in, denm_msgs::ReferenceDenms& out) {
-
-  for (int i = 0; i < in.list.count; i++) {
-    denm_msgs::ActionID array;
-    toRos_ActionID(*(in.list.array[i]), array);
-    out.array.push_back(array);
+void toRos_ReferenceDenms(const denm_ReferenceDenms_t& in, denm_msgs::ReferenceDenms& out) {
+  for (int i = 0; i < in.list.count; ++i) {
+    denm_msgs::ActionID el;
+    toRos_ActionID(*(in.list.array[i]), el);
+    out.array.push_back(el);
   }
-
 }
 
-void toStruct_ReferenceDenms(const denm_msgs::ReferenceDenms& in, ReferenceDenms_t& out) {
+void toStruct_ReferenceDenms(const denm_msgs::ReferenceDenms& in, denm_ReferenceDenms_t& out) {
+  memset(&out, 0, sizeof(denm_ReferenceDenms_t));
 
-  memset(&out, 0, sizeof(ReferenceDenms_t));
-
-  for (int i = 0; i < in.array.size(); i++) {
-    ActionID_t array;
-    toStruct_ActionID(in.array[i], array);
-    ActionID_t* array_ptr = new ActionID_t(array);
-    int status = asn_sequence_add(&out, array_ptr);
-    if (status != 0) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+  for (int i = 0; i < in.array.size(); ++i) {
+    denm_ActionID_t* el = (denm_ActionID_t*) calloc(1, sizeof(denm_ActionID_t));
+    toStruct_ActionID(in.array[i], *el);
+    if (asn_sequence_add(&out, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
   }
-
 }
 
 }

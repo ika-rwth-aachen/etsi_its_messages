@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +29,7 @@
 # ProtectedZoneRadius ::= INTEGER {oneMeter(1)} (1..255,...)
 # ------------------------------------------------------------------------------
 
-uint8 value
-uint8 MIN = 1
-uint8 MAX = 255
-uint8 ONE_METER = 1
-
+int64 value
+int64 MIN = 1
+int64 MAX = 255
+int64 ONE_METER = 1

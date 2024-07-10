@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PublicTransportContainer.h>
+#include <etsi_its_cam_coding/cam_PublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
 #include <etsi_its_cam_conversion/convertPtActivation.h>
 #ifdef ROS1
@@ -40,27 +41,22 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PublicTransportContainer(const PublicTransportContainer_t& in, cam_msgs::PublicTransportContainer& out) {
-
+void toRos_PublicTransportContainer(const cam_PublicTransportContainer_t& in, cam_msgs::PublicTransportContainer& out) {
   toRos_EmbarkationStatus(in.embarkationStatus, out.embarkation_status);
   if (in.ptActivation) {
     toRos_PtActivation(*in.ptActivation, out.pt_activation);
     out.pt_activation_is_present = true;
   }
-
 }
 
-void toStruct_PublicTransportContainer(const cam_msgs::PublicTransportContainer& in, PublicTransportContainer_t& out) {
-
-  memset(&out, 0, sizeof(PublicTransportContainer_t));
+void toStruct_PublicTransportContainer(const cam_msgs::PublicTransportContainer& in, cam_PublicTransportContainer_t& out) {
+  memset(&out, 0, sizeof(cam_PublicTransportContainer_t));
 
   toStruct_EmbarkationStatus(in.embarkation_status, out.embarkationStatus);
   if (in.pt_activation_is_present) {
-    PtActivation_t pt_activation;
-    toStruct_PtActivation(in.pt_activation, pt_activation);
-    out.ptActivation = new PtActivation_t(pt_activation);
+    out.ptActivation = (cam_PtActivation_t*) calloc(1, sizeof(cam_PtActivation_t));
+    toStruct_PtActivation(in.pt_activation, *out.ptActivation);
   }
-
 }
 
 }

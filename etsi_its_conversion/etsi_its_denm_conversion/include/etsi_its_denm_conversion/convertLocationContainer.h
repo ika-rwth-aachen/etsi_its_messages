@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +27,11 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/LocationContainer.h>
-#include <etsi_its_denm_conversion/convertSpeed.h>
+#include <etsi_its_denm_coding/denm_LocationContainer.h>
 #include <etsi_its_denm_conversion/convertHeading.h>
-#include <etsi_its_denm_conversion/convertTraces.h>
 #include <etsi_its_denm_conversion/convertRoadType.h>
+#include <etsi_its_denm_conversion/convertSpeed.h>
+#include <etsi_its_denm_conversion/convertTraces.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/LocationContainer.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -42,49 +43,38 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_LocationContainer(const LocationContainer_t& in, denm_msgs::LocationContainer& out) {
-
+void toRos_LocationContainer(const denm_LocationContainer_t& in, denm_msgs::LocationContainer& out) {
   if (in.eventSpeed) {
     toRos_Speed(*in.eventSpeed, out.event_speed);
     out.event_speed_is_present = true;
   }
-
   if (in.eventPositionHeading) {
     toRos_Heading(*in.eventPositionHeading, out.event_position_heading);
     out.event_position_heading_is_present = true;
   }
-
   toRos_Traces(in.traces, out.traces);
   if (in.roadType) {
     toRos_RoadType(*in.roadType, out.road_type);
     out.road_type_is_present = true;
   }
-
 }
 
-void toStruct_LocationContainer(const denm_msgs::LocationContainer& in, LocationContainer_t& out) {
-
-  memset(&out, 0, sizeof(LocationContainer_t));
+void toStruct_LocationContainer(const denm_msgs::LocationContainer& in, denm_LocationContainer_t& out) {
+  memset(&out, 0, sizeof(denm_LocationContainer_t));
 
   if (in.event_speed_is_present) {
-    Speed_t event_speed;
-    toStruct_Speed(in.event_speed, event_speed);
-    out.eventSpeed = new Speed_t(event_speed);
+    out.eventSpeed = (denm_Speed_t*) calloc(1, sizeof(denm_Speed_t));
+    toStruct_Speed(in.event_speed, *out.eventSpeed);
   }
-
   if (in.event_position_heading_is_present) {
-    Heading_t event_position_heading;
-    toStruct_Heading(in.event_position_heading, event_position_heading);
-    out.eventPositionHeading = new Heading_t(event_position_heading);
+    out.eventPositionHeading = (denm_Heading_t*) calloc(1, sizeof(denm_Heading_t));
+    toStruct_Heading(in.event_position_heading, *out.eventPositionHeading);
   }
-
   toStruct_Traces(in.traces, out.traces);
   if (in.road_type_is_present) {
-    RoadType_t road_type;
-    toStruct_RoadType(in.road_type, road_type);
-    out.roadType = new RoadType_t(road_type);
+    out.roadType = (denm_RoadType_t*) calloc(1, sizeof(denm_RoadType_t));
+    toStruct_RoadType(in.road_type, *out.roadType);
   }
-
 }
 
 }

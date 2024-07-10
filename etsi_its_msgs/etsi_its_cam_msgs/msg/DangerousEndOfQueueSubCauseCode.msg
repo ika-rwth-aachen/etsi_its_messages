@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,4 +37,3 @@ uint8 SUDDEN_END_OF_QUEUE = 1
 uint8 QUEUE_OVER_HILL = 2
 uint8 QUEUE_AROUND_BEND = 3
 uint8 QUEUE_IN_TUNNEL = 4
-

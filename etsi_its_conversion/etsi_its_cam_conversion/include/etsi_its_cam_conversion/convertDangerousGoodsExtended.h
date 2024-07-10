@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,15 +27,17 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/DangerousGoodsExtended.h>
-#include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
-#include <etsi_its_primitives_conversion/convertINTEGER.h>
+#include <etsi_its_cam_coding/cam_DangerousGoodsExtended.h>
+#include <etsi_its_cam_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#include <etsi_its_primitives_conversion/convertBOOLEAN.h>
+#include <etsi_its_cam_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
-#include <etsi_its_cam_conversion/convertPhoneNumber.h>
+#include <etsi_its_cam_coding/INTEGER.h>
+#include <etsi_its_primitives_conversion/convertINTEGER.h>
+#include <etsi_its_cam_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
+#include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
+#include <etsi_its_cam_conversion/convertPhoneNumber.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/DangerousGoodsExtended.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -46,8 +49,7 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_DangerousGoodsExtended(const DangerousGoodsExtended_t& in, cam_msgs::DangerousGoodsExtended& out) {
-
+void toRos_DangerousGoodsExtended(const cam_DangerousGoodsExtended_t& in, cam_msgs::DangerousGoodsExtended& out) {
   toRos_DangerousGoodsBasic(in.dangerousGoodsType, out.dangerous_goods_type);
   etsi_its_primitives_conversion::toRos_INTEGER(in.unNumber, out.un_number);
   etsi_its_primitives_conversion::toRos_BOOLEAN(in.elevatedTemperature, out.elevated_temperature);
@@ -57,22 +59,18 @@ void toRos_DangerousGoodsExtended(const DangerousGoodsExtended_t& in, cam_msgs::
     etsi_its_primitives_conversion::toRos_IA5String(*in.emergencyActionCode, out.emergency_action_code);
     out.emergency_action_code_is_present = true;
   }
-
   if (in.phoneNumber) {
     toRos_PhoneNumber(*in.phoneNumber, out.phone_number);
     out.phone_number_is_present = true;
   }
-
   if (in.companyName) {
     etsi_its_primitives_conversion::toRos_UTF8String(*in.companyName, out.company_name);
     out.company_name_is_present = true;
   }
-
 }
 
-void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in, DangerousGoodsExtended_t& out) {
-
-  memset(&out, 0, sizeof(DangerousGoodsExtended_t));
+void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in, cam_DangerousGoodsExtended_t& out) {
+  memset(&out, 0, sizeof(cam_DangerousGoodsExtended_t));
 
   toStruct_DangerousGoodsBasic(in.dangerous_goods_type, out.dangerousGoodsType);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.un_number, out.unNumber);
@@ -80,23 +78,17 @@ void toStruct_DangerousGoodsExtended(const cam_msgs::DangerousGoodsExtended& in,
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.tunnels_restricted, out.tunnelsRestricted);
   etsi_its_primitives_conversion::toStruct_BOOLEAN(in.limited_quantity, out.limitedQuantity);
   if (in.emergency_action_code_is_present) {
-    IA5String_t emergency_action_code;
-    etsi_its_primitives_conversion::toStruct_IA5String(in.emergency_action_code, emergency_action_code);
-    out.emergencyActionCode = new IA5String_t(emergency_action_code);
+    out.emergencyActionCode = (IA5String_t*) calloc(1, sizeof(IA5String_t));
+    etsi_its_primitives_conversion::toStruct_IA5String(in.emergency_action_code, *out.emergencyActionCode);
   }
-
   if (in.phone_number_is_present) {
-    PhoneNumber_t phone_number;
-    toStruct_PhoneNumber(in.phone_number, phone_number);
-    out.phoneNumber = new PhoneNumber_t(phone_number);
+    out.phoneNumber = (cam_PhoneNumber_t*) calloc(1, sizeof(cam_PhoneNumber_t));
+    toStruct_PhoneNumber(in.phone_number, *out.phoneNumber);
   }
-
   if (in.company_name_is_present) {
-    UTF8String_t company_name;
-    etsi_its_primitives_conversion::toStruct_UTF8String(in.company_name, company_name);
-    out.companyName = new UTF8String_t(company_name);
+    out.companyName = (UTF8String_t*) calloc(1, sizeof(UTF8String_t));
+    etsi_its_primitives_conversion::toStruct_UTF8String(in.company_name, *out.companyName);
   }
-
 }
 
 }

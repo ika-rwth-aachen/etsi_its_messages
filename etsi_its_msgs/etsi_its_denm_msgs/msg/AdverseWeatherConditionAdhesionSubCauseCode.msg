@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,4 +43,3 @@ uint8 OIL_ON_ROAD = 7
 uint8 LOOSE_CHIPPINGS = 8
 uint8 INSTANT_BLACK_ICE = 9
 uint8 ROADS_SALTED = 10
-

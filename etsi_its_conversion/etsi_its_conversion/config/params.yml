@@ -5,6 +5,7 @@ etsi_its_conversion:
     etsi_message_payload_offset: 78 # default for Cohda Wireless MK-5 exampleETSI application
     etsi_types:
       - cam
+      - cpm_ts
       - denm
-      - spatem
-      - mapem
+    subscriber_queue_size: 10
+    publisher_queue_size: 10

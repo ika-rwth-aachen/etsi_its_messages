@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/LateralAcceleration.h>
-#include <etsi_its_cam_conversion/convertLateralAccelerationValue.h>
+#include <etsi_its_cam_coding/cam_LateralAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
+#include <etsi_its_cam_conversion/convertLateralAccelerationValue.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/LateralAcceleration.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -40,15 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_LateralAcceleration(const LateralAcceleration_t& in, cam_msgs::LateralAcceleration& out) {
-
+void toRos_LateralAcceleration(const cam_LateralAcceleration_t& in, cam_msgs::LateralAcceleration& out) {
   toRos_LateralAccelerationValue(in.lateralAccelerationValue, out.lateral_acceleration_value);
   toRos_AccelerationConfidence(in.lateralAccelerationConfidence, out.lateral_acceleration_confidence);
 }
 
-void toStruct_LateralAcceleration(const cam_msgs::LateralAcceleration& in, LateralAcceleration_t& out) {
-
-  memset(&out, 0, sizeof(LateralAcceleration_t));
+void toStruct_LateralAcceleration(const cam_msgs::LateralAcceleration& in, cam_LateralAcceleration_t& out) {
+  memset(&out, 0, sizeof(cam_LateralAcceleration_t));
 
   toStruct_LateralAccelerationValue(in.lateral_acceleration_value, out.lateralAccelerationValue);
   toStruct_AccelerationConfidence(in.lateral_acceleration_confidence, out.lateralAccelerationConfidence);

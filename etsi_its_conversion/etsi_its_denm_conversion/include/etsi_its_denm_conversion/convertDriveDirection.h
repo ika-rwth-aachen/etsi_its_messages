@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/DriveDirection.h>
+#include <etsi_its_denm_coding/denm_DriveDirection.h>
+
 #ifdef ROS1
 #include <etsi_its_denm_msgs/DriveDirection.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -38,14 +40,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_DriveDirection(const DriveDirection_t& in, denm_msgs::DriveDirection& out) {
-
+void toRos_DriveDirection(const denm_DriveDirection_t& in, denm_msgs::DriveDirection& out) {
   out.value = in;
 }
 
-void toStruct_DriveDirection(const denm_msgs::DriveDirection& in, DriveDirection_t& out) {
+void toStruct_DriveDirection(const denm_msgs::DriveDirection& in, denm_DriveDirection_t& out) {
+  memset(&out, 0, sizeof(denm_DriveDirection_t));
 
-  memset(&out, 0, sizeof(DriveDirection_t));
   out = in.value;
 }
 

@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/PhoneNumber.h>
+#include <etsi_its_cam_coding/cam_PhoneNumber.h>
 #include <etsi_its_cam_coding/NumericString.h>
 #include <etsi_its_primitives_conversion/convertNumericString.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_PhoneNumber(const PhoneNumber_t& in, cam_msgs::PhoneNumber& out) {
-
+void toRos_PhoneNumber(const cam_PhoneNumber_t& in, cam_msgs::PhoneNumber& out) {
   etsi_its_primitives_conversion::toRos_NumericString(in, out.value);
 }
 
-void toStruct_PhoneNumber(const cam_msgs::PhoneNumber& in, PhoneNumber_t& out) {
+void toStruct_PhoneNumber(const cam_msgs::PhoneNumber& in, cam_PhoneNumber_t& out) {
+  memset(&out, 0, sizeof(cam_PhoneNumber_t));
 
-  memset(&out, 0, sizeof(PhoneNumber_t));
   etsi_its_primitives_conversion::toStruct_NumericString(in.value, out);
 }
 

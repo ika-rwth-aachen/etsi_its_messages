@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +43,7 @@ uint8 COMMERCIAL = 9
 uint8 MILITARY = 10
 uint8 ROAD_OPERATOR = 11
 uint8 TAXI = 12
-uint8 RESERVED_1 = 13
-uint8 RESERVED_2 = 14
-uint8 RESERVED_3 = 15
+uint8 RESERVED1 = 13
+uint8 RESERVED2 = 14
+uint8 RESERVED3 = 15
 

@@ -45,9 +45,7 @@
 
 #ifdef _MSC_VER			/* MSVS.Net */
 #ifndef __cplusplus
-#ifndef inline
 #define inline __inline
-#endif
 #endif
 #ifndef	ASSUMESTDTYPES	/* Standard types have been defined elsewhere */
 #define	ssize_t		SSIZE_T
@@ -65,13 +63,10 @@ typedef	unsigned int	uint32_t;
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <float.h>
-#ifndef isnan
 #define isnan _isnan
-#endif
 #define finite _finite
 #define copysign _copysign
 #define	ilogb	_logb
-#define random rand
 #else	/* !_MSC_VER */
 #include <stdint.h>
 #endif	/* _MSC_VER */
@@ -83,11 +78,23 @@ typedef	unsigned int	uint32_t;
 #else	/* !defined(__vxworks) */
 
 #include <inttypes.h>	/* C99 specifies this file */
+#ifdef HAVE_ARPA_INET_H
+#include <arpa/inet.h> /* for ntohl() */
+#define	sys_ntohl(foo)	ntohl(foo)
+#else /* !_HAVE_ARPA_INET_H */
 #ifdef HAVE_NETINET_IN_H
 #include <netinet/in.h> /* for ntohl() */
-#endif
 #define	sys_ntohl(foo)	ntohl(foo)
+#else /* !_HAVE_NETINET_IN_H */
+/* Here's the definition of ntohl() */
+#define sys_ntohl(l)   ((((l) << 24)  & 0xff000000)    \
+            | (((l) << 8) & 0xff0000)  \
+            | (((l) >> 8)  & 0xff00)   \
+            | ((l >> 24) & 0xff))
+#endif /* HAVE_NETINET_IN_H */
+#endif /* HAVE_ARPA_INET_H */
 #endif	/* defined(__vxworks) */
+
 
 #endif	/* _WIN32 */
 
@@ -159,14 +166,13 @@ typedef	unsigned int	uint32_t;
 #define ASN_PRI_SSIZE "zd"
 #define ASN_PRIuMAX PRIuMAX
 #define ASN_PRIdMAX PRIdMAX
-#else
-#if _MSC_VER >= 1800
-#define ASN_PRI_SIZE "zu"
-#define ASN_PRI_SSIZE "zd"
+#define ASN_PRIu64 PRIu64
+#define ASN_PRId64 PRId64
 #else
 #define ASN_PRI_SIZE "lu"
 #define ASN_PRI_SSIZE "ld"
-#endif
+#define ASN_PRIu64 "llu"
+#define ASN_PRId64 "lld"
 #if LLONG_MAX > LONG_MAX
 #define ASN_PRIuMAX "llu"
 #define ASN_PRIdMAX "lld"

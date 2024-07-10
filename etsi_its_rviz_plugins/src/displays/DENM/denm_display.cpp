@@ -28,10 +28,6 @@ DENMDisplay::DENMDisplay()
     "Timeout", 0.1f,
     "Time (in s) until visualizations disappear", this);
   buffer_timeout_->setMin(0);
-  bb_scale_ = new rviz_common::properties::FloatProperty(
-    "Scale", 1.0f,
-    "Scale of visualization", this);
-  bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(255, 0, 25),
     "Color", this);
@@ -76,7 +72,7 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
 {
   // Generate DENM render object from message
   rclcpp::Time now = rviz_node_->now();
-  DENMRenderObject denm(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds())); // 5 leap seconds in 2023
+  DENMRenderObject denm(*msg, getLeapSecondInsertionsSince2004((uint64_t)now.seconds())); // 5 leap seconds in 2023
   if (!denm.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
@@ -139,8 +135,6 @@ void DENMDisplay::update(float, float)
     // create arrow object
     std::shared_ptr<rviz_rendering::Arrow> arrow = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     
-    // set the dimensions of arrow
-    double scale = bb_scale_->getFloat();
     // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     arrow->setColor(bb_color);

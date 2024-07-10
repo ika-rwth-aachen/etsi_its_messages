@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/VDS.h>
+#include <etsi_its_cam_coding/cam_VDS.h>
 #include <etsi_its_cam_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VDS(const VDS_t& in, cam_msgs::VDS& out) {
-
+void toRos_VDS(const cam_VDS_t& in, cam_msgs::VDS& out) {
   etsi_its_primitives_conversion::toRos_IA5String(in, out.value);
 }
 
-void toStruct_VDS(const cam_msgs::VDS& in, VDS_t& out) {
+void toStruct_VDS(const cam_msgs::VDS& in, cam_VDS_t& out) {
+  memset(&out, 0, sizeof(cam_VDS_t));
 
-  memset(&out, 0, sizeof(VDS_t));
   etsi_its_primitives_conversion::toStruct_IA5String(in.value, out);
 }
 

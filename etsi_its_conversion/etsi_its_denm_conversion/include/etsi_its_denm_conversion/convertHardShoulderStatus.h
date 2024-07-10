@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/HardShoulderStatus.h>
+#include <etsi_its_denm_coding/denm_HardShoulderStatus.h>
+
 #ifdef ROS1
 #include <etsi_its_denm_msgs/HardShoulderStatus.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -38,14 +40,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_HardShoulderStatus(const HardShoulderStatus_t& in, denm_msgs::HardShoulderStatus& out) {
-
+void toRos_HardShoulderStatus(const denm_HardShoulderStatus_t& in, denm_msgs::HardShoulderStatus& out) {
   out.value = in;
 }
 
-void toStruct_HardShoulderStatus(const denm_msgs::HardShoulderStatus& in, HardShoulderStatus_t& out) {
+void toStruct_HardShoulderStatus(const denm_msgs::HardShoulderStatus& in, denm_HardShoulderStatus_t& out) {
+  memset(&out, 0, sizeof(denm_HardShoulderStatus_t));
 
-  memset(&out, 0, sizeof(HardShoulderStatus_t));
   out = in.value;
 }
 

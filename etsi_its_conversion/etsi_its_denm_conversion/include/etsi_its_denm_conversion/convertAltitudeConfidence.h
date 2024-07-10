@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_denm_coding/AltitudeConfidence.h>
+#include <etsi_its_denm_coding/denm_AltitudeConfidence.h>
+
 #ifdef ROS1
 #include <etsi_its_denm_msgs/AltitudeConfidence.h>
 namespace denm_msgs = etsi_its_denm_msgs;
@@ -38,14 +40,13 @@ namespace denm_msgs = etsi_its_denm_msgs::msg;
 
 namespace etsi_its_denm_conversion {
 
-void toRos_AltitudeConfidence(const AltitudeConfidence_t& in, denm_msgs::AltitudeConfidence& out) {
-
+void toRos_AltitudeConfidence(const denm_AltitudeConfidence_t& in, denm_msgs::AltitudeConfidence& out) {
   out.value = in;
 }
 
-void toStruct_AltitudeConfidence(const denm_msgs::AltitudeConfidence& in, AltitudeConfidence_t& out) {
+void toStruct_AltitudeConfidence(const denm_msgs::AltitudeConfidence& in, denm_AltitudeConfidence_t& out) {
+  memset(&out, 0, sizeof(denm_AltitudeConfidence_t));
 
-  memset(&out, 0, sizeof(AltitudeConfidence_t));
   out = in.value;
 }
 

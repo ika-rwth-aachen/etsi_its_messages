@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/Latitude.h>
+#include <etsi_its_cam_coding/cam_Latitude.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_Latitude(const Latitude_t& in, cam_msgs::Latitude& out) {
-
+void toRos_Latitude(const cam_Latitude_t& in, cam_msgs::Latitude& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Latitude(const cam_msgs::Latitude& in, Latitude_t& out) {
+void toStruct_Latitude(const cam_msgs::Latitude& in, cam_Latitude_t& out) {
+  memset(&out, 0, sizeof(cam_Latitude_t));
 
-  memset(&out, 0, sizeof(Latitude_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

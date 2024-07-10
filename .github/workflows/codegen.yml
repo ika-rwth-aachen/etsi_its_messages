@@ -4,17 +4,52 @@ on: push
 
 jobs:
 
+  build-docker-images:
+    name: build-docker-images
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Login to Docker registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+    - name: Build asn1c docker image
+      run: |
+        cd utils/codegen/docker
+        docker build -t ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci -f asn1c.Dockerfile .
+        docker push ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
+    - name: Build rgen docker image
+      run: |
+        cd utils/codegen/codegen-rust/docker
+        docker build -t ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci -f rgen.Dockerfile ..
+        docker push ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
+    - name: Push Docker Images
+      if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+      run: |
+        docker tag ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci ghcr.io/${{ github.repository }}:asn1c
+        docker push ghcr.io/${{ github.repository }}:asn1c
+        docker tag ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci ghcr.io/${{ github.repository }}:rgen
+        docker push ghcr.io/${{ github.repository }}:rgen
+
   etsi_its_coding:
     name: asn1c
     runs-on: ubuntu-latest
+    needs: build-docker-images
 
     strategy:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/asn1ToC.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -o etsi_its_coding/etsi_its_cam_coding -td ${{ github.workspace }}/tmp
+            script: ./utils/codegen/asn1ToC.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_coding/etsi_its_cam_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
           - message: denm
-            script: ./utils/codegen/asn1ToC.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_coding/etsi_its_denm_coding -td ${{ github.workspace }}/tmp
+            script: ./utils/codegen/asn1ToC.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_coding/etsi_its_denm_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
+          - message: cpm_ts
+            script: ./utils/codegen/asn1ToC.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_coding/etsi_its_cpm_ts_coding -di ghcr.io/${{ github.repository }}:asn1c_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -25,8 +60,6 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
-    - name: Install Python dependencies
-      run: pip install -r utils/requirements.txt
     - name: Login to Docker registry
       uses: docker/login-action@v3
       with:
@@ -36,6 +69,7 @@ jobs:
 
     - name: etsi_its_${{ matrix.message }}_coding
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         rm -rf ${{ github.workspace }}/tmp
         if [[ ! -z "$(git status --porcelain)" ]]; then
@@ -47,14 +81,17 @@ jobs:
   etsi_its_msgs:
     name: ROS Messages
     runs-on: ubuntu-latest
+    needs: build-docker-images
 
     strategy:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_cam_msgs/msg
+            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_cam_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
           - message: denm
-            script: ./utils/codegen/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg
+            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -o etsi_its_msgs/etsi_its_denm_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
+          - message: cpm_ts
+            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -65,10 +102,9 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
-    - name: Install Python dependencies
-      run: pip install -r utils/requirements.txt
     - name: etsi_its_${{ matrix.message }}_msgs
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"
@@ -79,14 +115,17 @@ jobs:
   etsi_its_conversion:
     name: Conversion Headers
     runs-on: ubuntu-latest
+    needs: build-docker-images
 
     strategy:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
           - message: denm
-            script: ./utils/codegen/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
+          - message: cpm_ts
+            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion -di ghcr.io/${{ github.repository }}:rgen_${{ github.sha }}_ci
 
     steps:
     - name: Checkout code
@@ -97,11 +136,9 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
-    - name: Install Python dependencies
-      run: pip install -r utils/requirements.txt
-      working-directory: ${{ github.workspace }}
     - name: etsi_its_${{ matrix.message }}_conversion
       run: |
+        ./asn1/patches/patch.sh
         ${{ matrix.script }}
         if [[ ! -z "$(git status --porcelain)" ]]; then
           echo "Code generation script resulted in changes to the repository"

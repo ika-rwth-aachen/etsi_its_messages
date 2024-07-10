@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/CenDsrcTollingZoneID.h>
+#include <etsi_its_cam_coding/cam_CenDsrcTollingZoneID.h>
 #include <etsi_its_cam_conversion/convertProtectedZoneID.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/CenDsrcTollingZoneID.h>
@@ -36,16 +37,16 @@ namespace cam_msgs = etsi_its_cam_msgs;
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif
 
+
 namespace etsi_its_cam_conversion {
 
-void toRos_CenDsrcTollingZoneID(const CenDsrcTollingZoneID_t& in, cam_msgs::CenDsrcTollingZoneID& out) {
-
+void toRos_CenDsrcTollingZoneID(const cam_CenDsrcTollingZoneID_t& in, cam_msgs::CenDsrcTollingZoneID& out) {
   toRos_ProtectedZoneID(in, out.value);
 }
 
-void toStruct_CenDsrcTollingZoneID(const cam_msgs::CenDsrcTollingZoneID& in, CenDsrcTollingZoneID_t& out) {
+void toStruct_CenDsrcTollingZoneID(const cam_msgs::CenDsrcTollingZoneID& in, cam_CenDsrcTollingZoneID_t& out) {
+  memset(&out, 0, sizeof(cam_CenDsrcTollingZoneID_t));
 
-  memset(&out, 0, sizeof(CenDsrcTollingZoneID_t));
   toStruct_ProtectedZoneID(in.value, out);
 }
 

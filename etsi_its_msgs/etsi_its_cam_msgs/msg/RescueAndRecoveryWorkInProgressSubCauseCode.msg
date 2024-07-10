@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,4 +38,3 @@ uint8 RESCUE_HELICOPTER_LANDING = 2
 uint8 POLICE_ACTIVITY_ONGOING = 3
 uint8 MEDICAL_EMERGENCY_ONGOING = 4
 uint8 CHILD_ABDUCTION_IN_PROGRESS = 5
-

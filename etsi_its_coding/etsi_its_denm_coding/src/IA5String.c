@@ -27,6 +27,7 @@ asn_TYPE_operation_t asn_OP_IA5String = {
     0,
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     OCTET_STRING_compare,
+    OCTET_STRING_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     OCTET_STRING_decode_ber,  /* Implemented in terms of OCTET STRING */
     OCTET_STRING_encode_der,
@@ -42,8 +43,10 @@ asn_TYPE_operation_t asn_OP_IA5String = {
     0,
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    OCTET_STRING_decode_jer_utf8,
     OCTET_STRING_encode_jer_utf8,
 #else
+    0,
     0,
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -91,6 +94,9 @@ asn_TYPE_descriptor_t asn_DEF_IA5String = {
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
         &asn_DEF_IA5String_per_constraints,
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+        0,
+#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
         IA5String_constraint
     },
     0, 0,  /* No members */

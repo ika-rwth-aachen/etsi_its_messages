@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,4 +37,3 @@ uint8 LONGITUDINAL_COLLISION_RISK = 1
 uint8 CROSSING_COLLISION_RISK = 2
 uint8 LATERAL_COLLISION_RISK = 3
 uint8 VULNERABLE_ROAD_USER = 4
-

@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,4 +37,3 @@ uint8 ACCIDENT_WITHOUT_E_CALL_TRIGGERED = 1
 uint8 ACCIDENT_WITH_E_CALL_MANUALLY_TRIGGERED = 2
 uint8 ACCIDENT_WITH_E_CALL_AUTOMATICALLY_TRIGGERED = 3
 uint8 ACCIDENT_WITH_E_CALL_TRIGGERED_WITHOUT_ACCESS_TO_CELLULAR_NETWORK = 4
-

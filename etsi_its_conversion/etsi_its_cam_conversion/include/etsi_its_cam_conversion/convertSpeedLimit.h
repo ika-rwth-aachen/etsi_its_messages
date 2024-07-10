@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SpeedLimit.h>
+#include <etsi_its_cam_coding/cam_SpeedLimit.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #ifdef ROS1
@@ -40,14 +41,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpeedLimit(const SpeedLimit_t& in, cam_msgs::SpeedLimit& out) {
-
+void toRos_SpeedLimit(const cam_SpeedLimit_t& in, cam_msgs::SpeedLimit& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_SpeedLimit(const cam_msgs::SpeedLimit& in, SpeedLimit_t& out) {
+void toStruct_SpeedLimit(const cam_msgs::SpeedLimit& in, cam_SpeedLimit_t& out) {
+  memset(&out, 0, sizeof(cam_SpeedLimit_t));
 
-  memset(&out, 0, sizeof(SpeedLimit_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

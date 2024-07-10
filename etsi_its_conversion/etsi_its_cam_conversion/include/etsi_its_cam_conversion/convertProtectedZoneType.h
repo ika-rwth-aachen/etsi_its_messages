@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/ProtectedZoneType.h>
+#include <etsi_its_cam_coding/cam_ProtectedZoneType.h>
+
 #ifdef ROS1
 #include <etsi_its_cam_msgs/ProtectedZoneType.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -38,14 +40,13 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ProtectedZoneType(const ProtectedZoneType_t& in, cam_msgs::ProtectedZoneType& out) {
-
+void toRos_ProtectedZoneType(const cam_ProtectedZoneType_t& in, cam_msgs::ProtectedZoneType& out) {
   out.value = in;
 }
 
-void toStruct_ProtectedZoneType(const cam_msgs::ProtectedZoneType& in, ProtectedZoneType_t& out) {
+void toStruct_ProtectedZoneType(const cam_msgs::ProtectedZoneType& in, cam_ProtectedZoneType_t& out) {
+  memset(&out, 0, sizeof(cam_ProtectedZoneType_t));
 
-  memset(&out, 0, sizeof(ProtectedZoneType_t));
   out = in.value;
 }
 

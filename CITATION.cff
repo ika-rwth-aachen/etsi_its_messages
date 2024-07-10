@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "We hope that our tools can help your research. If this is the case, please cite it using the following metadata."
+
+title: etsi_its_messages
+type: software
+repository-code: "https://github.com/ika-rwth-aachen/etsi_its_messages"
+date-released: 2023-11-29
+authors:
+  - given-names: Guido
+    family-names: Küppers
+  - given-names: Jean-Pierre
+    family-names: Busch
+  - given-names: Lennart
+    family-names: Reiher
+
+preferred-citation:
+  title: "V2AIX: A Multi-Modal Real-World Dataset of ETSI ITS V2X Messages in Public Road Traffic"
+  type: misc
+  # conference:
+  #   name:
+  # month:
+  year: 2023
+  # doi: ""
+  authors:
+    - given-names: Guido
+      family-names: Küppers
+      orcid: "https://orcid.org/0000-0002-9688-6373"
+    - given-names: Jean-Pierre
+      family-names: Busch
+      orcid: "https://orcid.org/0009-0000-1417-0463"
+    - given-names: Lennart
+      family-names: Reiher
+      orcid: "https://orcid.org/0000-0002-7309-164X"
+    - given-names: Lutz
+      family-names: Eckstein

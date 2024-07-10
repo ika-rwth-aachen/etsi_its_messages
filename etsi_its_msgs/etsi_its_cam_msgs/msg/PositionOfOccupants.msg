@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -51,24 +52,23 @@
 uint8[] value
 uint8 bits_unused
 uint8 SIZE_BITS = 20
-uint8 BIT_INDEX_ROW_1_LEFT_OCCUPIED = 0
-uint8 BIT_INDEX_ROW_1_RIGHT_OCCUPIED = 1
-uint8 BIT_INDEX_ROW_1_MID_OCCUPIED = 2
-uint8 BIT_INDEX_ROW_1_NOT_DETECTABLE = 3
-uint8 BIT_INDEX_ROW_1_NOT_PRESENT = 4
-uint8 BIT_INDEX_ROW_2_LEFT_OCCUPIED = 5
-uint8 BIT_INDEX_ROW_2_RIGHT_OCCUPIED = 6
-uint8 BIT_INDEX_ROW_2_MID_OCCUPIED = 7
-uint8 BIT_INDEX_ROW_2_NOT_DETECTABLE = 8
-uint8 BIT_INDEX_ROW_2_NOT_PRESENT = 9
-uint8 BIT_INDEX_ROW_3_LEFT_OCCUPIED = 10
-uint8 BIT_INDEX_ROW_3_RIGHT_OCCUPIED = 11
-uint8 BIT_INDEX_ROW_3_MID_OCCUPIED = 12
-uint8 BIT_INDEX_ROW_3_NOT_DETECTABLE = 13
-uint8 BIT_INDEX_ROW_3_NOT_PRESENT = 14
-uint8 BIT_INDEX_ROW_4_LEFT_OCCUPIED = 15
-uint8 BIT_INDEX_ROW_4_RIGHT_OCCUPIED = 16
-uint8 BIT_INDEX_ROW_4_MID_OCCUPIED = 17
-uint8 BIT_INDEX_ROW_4_NOT_DETECTABLE = 18
-uint8 BIT_INDEX_ROW_4_NOT_PRESENT = 19
-
+uint8 BIT_INDEX_ROW1_LEFT_OCCUPIED = 0
+uint8 BIT_INDEX_ROW1_RIGHT_OCCUPIED = 1
+uint8 BIT_INDEX_ROW1_MID_OCCUPIED = 2
+uint8 BIT_INDEX_ROW1_NOT_DETECTABLE = 3
+uint8 BIT_INDEX_ROW1_NOT_PRESENT = 4
+uint8 BIT_INDEX_ROW2_LEFT_OCCUPIED = 5
+uint8 BIT_INDEX_ROW2_RIGHT_OCCUPIED = 6
+uint8 BIT_INDEX_ROW2_MID_OCCUPIED = 7
+uint8 BIT_INDEX_ROW2_NOT_DETECTABLE = 8
+uint8 BIT_INDEX_ROW2_NOT_PRESENT = 9
+uint8 BIT_INDEX_ROW3_LEFT_OCCUPIED = 10
+uint8 BIT_INDEX_ROW3_RIGHT_OCCUPIED = 11
+uint8 BIT_INDEX_ROW3_MID_OCCUPIED = 12
+uint8 BIT_INDEX_ROW3_NOT_DETECTABLE = 13
+uint8 BIT_INDEX_ROW3_NOT_PRESENT = 14
+uint8 BIT_INDEX_ROW4_LEFT_OCCUPIED = 15
+uint8 BIT_INDEX_ROW4_RIGHT_OCCUPIED = 16
+uint8 BIT_INDEX_ROW4_MID_OCCUPIED = 17
+uint8 BIT_INDEX_ROW4_NOT_DETECTABLE = 18
+uint8 BIT_INDEX_ROW4_NOT_PRESENT = 19

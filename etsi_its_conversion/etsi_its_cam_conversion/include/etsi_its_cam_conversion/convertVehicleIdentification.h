@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/VehicleIdentification.h>
-#include <etsi_its_cam_conversion/convertWMInumber.h>
+#include <etsi_its_cam_coding/cam_VehicleIdentification.h>
 #include <etsi_its_cam_conversion/convertVDS.h>
+#include <etsi_its_cam_conversion/convertWMInumber.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/VehicleIdentification.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -40,36 +41,28 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_VehicleIdentification(const VehicleIdentification_t& in, cam_msgs::VehicleIdentification& out) {
-
+void toRos_VehicleIdentification(const cam_VehicleIdentification_t& in, cam_msgs::VehicleIdentification& out) {
   if (in.wMInumber) {
-    toRos_WMInumber(*in.wMInumber, out.wm_inumber);
-    out.wm_inumber_is_present = true;
+    toRos_WMInumber(*in.wMInumber, out.w_m_inumber);
+    out.w_m_inumber_is_present = true;
   }
-
   if (in.vDS) {
-    toRos_VDS(*in.vDS, out.vds);
-    out.vds_is_present = true;
+    toRos_VDS(*in.vDS, out.v_ds);
+    out.v_ds_is_present = true;
   }
-
 }
 
-void toStruct_VehicleIdentification(const cam_msgs::VehicleIdentification& in, VehicleIdentification_t& out) {
+void toStruct_VehicleIdentification(const cam_msgs::VehicleIdentification& in, cam_VehicleIdentification_t& out) {
+  memset(&out, 0, sizeof(cam_VehicleIdentification_t));
 
-  memset(&out, 0, sizeof(VehicleIdentification_t));
-
-  if (in.wm_inumber_is_present) {
-    WMInumber_t wm_inumber;
-    toStruct_WMInumber(in.wm_inumber, wm_inumber);
-    out.wMInumber = new WMInumber_t(wm_inumber);
+  if (in.w_m_inumber_is_present) {
+    out.wMInumber = (cam_WMInumber_t*) calloc(1, sizeof(cam_WMInumber_t));
+    toStruct_WMInumber(in.w_m_inumber, *out.wMInumber);
   }
-
-  if (in.vds_is_present) {
-    VDS_t vds;
-    toStruct_VDS(in.vds, vds);
-    out.vDS = new VDS_t(vds);
+  if (in.v_ds_is_present) {
+    out.vDS = (cam_VDS_t*) calloc(1, sizeof(cam_VDS_t));
+    toStruct_VDS(in.v_ds, *out.vDS);
   }
-
 }
 
 }
