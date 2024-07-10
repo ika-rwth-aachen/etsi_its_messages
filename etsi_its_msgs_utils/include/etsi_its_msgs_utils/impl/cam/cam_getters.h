@@ -32,5 +32,6 @@ SOFTWARE.
 #pragma once
 
 namespace etsi_its_cam_msgs::access {
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v1_getters.h>
 #include <etsi_its_msgs_utils/impl/cam/cam_getters_common.h>
 } // namespace etsi_its_cam_msgs::access

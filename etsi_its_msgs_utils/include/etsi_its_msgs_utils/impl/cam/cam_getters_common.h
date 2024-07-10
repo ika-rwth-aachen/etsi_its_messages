@@ -31,8 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_v1_getters.h>
-
 /**
  * @brief Get the Station ID object
  *

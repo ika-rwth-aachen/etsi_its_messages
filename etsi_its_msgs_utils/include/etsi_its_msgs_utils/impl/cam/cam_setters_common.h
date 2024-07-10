@@ -31,7 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_v1_setters.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 /**
