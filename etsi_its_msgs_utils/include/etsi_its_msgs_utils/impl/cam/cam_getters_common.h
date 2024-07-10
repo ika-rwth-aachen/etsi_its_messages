@@ -193,7 +193,7 @@ inline gm::PointStamped getUTMPosition(const CAM& cam, int& zone, bool& northp){
  */
 inline std::vector<bool> getExteriorLights(const CAM& cam){
   if(cam.cam.cam_parameters.low_frequency_container_is_present) {
-    if(cam.cam.cam_parameters.low_frequency_container.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
+    if(cam.cam.cam_parameters.low_frequency_container.choice == LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
       return getExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights);
     }
     else {
