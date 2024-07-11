@@ -55,18 +55,22 @@ const int kBtpHeaderDestinationPortCpmTs{2009};
 
 #ifdef ROS1
 const std::string Converter::kInputTopicUdp{"udp/in"};
-const std::string Converter::kOutputTopicUdp{"udp/in"};
+const std::string Converter::kOutputTopicUdp{"udp/out"};
 const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
+const std::string Converter::kInputTopicCamTs{"cam_ts/in"};
+const std::string Converter::kOutputTopicCamTs{"cam_ts/out"};
 const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
 #else
 const std::string Converter::kInputTopicUdp{"~/udp/in"};
-const std::string Converter::kOutputTopicUdp{"~/udp/in"};
+const std::string Converter::kOutputTopicUdp{"~/udp/out"};
 const std::string Converter::kInputTopicCam{"~/cam/in"};
 const std::string Converter::kOutputTopicCam{"~/cam/out"};
+const std::string Converter::kInputTopicCamTs{"~/cam_ts/in"};
+const std::string Converter::kOutputTopicCamTs{"~/cam_ts/out"};
 const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"~/cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
@@ -414,22 +418,35 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
     else detected_etsi_type = "unknown";
   }
 
+  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
+
   int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
-  ROS12_LOG(INFO, "Received ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), msg_size, udp_msg->data.size());
+  ROS12_LOG(INFO, "Received ETSI message of type '%s' (protocolVersion: %d) as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), *protocol_version , msg_size, udp_msg->data.size());
 
   if (detected_etsi_type == "cam") {
 
-    // decode buffer to ROS msg
-    cam_msgs::CAM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
-    if (!success) return;
-
-    // publish msg
+    if (*protocol_version == 2) { // CAM EN v1.4.1
+      cam_msgs::CAM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
+      if (!success) return;
 #ifdef ROS1
-    publishers_["cam"]->publish(msg);
+      publishers_["cam"]->publish(msg);
 #else
-    publisher_cam_->publish(msg);
+      publisher_cam_->publish(msg);
 #endif
+    } else if (*protocol_version == 3) { // CAM TS v2.1.1
+      cam_ts_msgs::CAM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_CAM_t&, cam_ts_msgs::CAM&)>(etsi_its_cam_ts_conversion::toRos_CAM), msg);
+      if (!success) return;
+#ifdef ROS1
+      publishers_["cam_ts"]->publish(msg);
+#else
+      publisher_cam_ts_->publish(msg);
+#endif
+    } else {
+      ROS12_LOG(ERROR, "Detected ETSI message type 'cam' with unknown protocol version %d, dropping message", *protocol_version);
+      return;
+    }
 
   } else if (detected_etsi_type == "cpm_ts") {
 
