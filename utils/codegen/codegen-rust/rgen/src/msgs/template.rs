@@ -1,5 +1,4 @@
-const MSG_TEMPLATE: &str = 
-r#"# ==============================================================================
+const MSG_TEMPLATE: &str = r#"# ==============================================================================
 # MIT License
 #
 # Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
@@ -194,21 +193,19 @@ pub fn sequence_or_set_template(
     default_methods: &str,
     class_fields: &str,
 ) -> String {
-    licensed!(
-        &vec![
-            &format!("## SEQUENCE {name}"),
-            comments,
-            members,
-            &nested_members.join("\n"),
-            annotations,
-            default_methods,
-            class_fields
-        ]
-        .into_iter()
-        .filter(|s| !s.is_empty())
-        .collect::<Vec<_>>()
-        .join("\n")
-    )
+    licensed!(&vec![
+        &format!("## SEQUENCE {name}"),
+        comments,
+        members,
+        &nested_members.join("\n"),
+        annotations,
+        default_methods,
+        class_fields
+    ]
+    .into_iter()
+    .filter(|s| !s.is_empty())
+    .collect::<Vec<_>>()
+    .join("\n"))
 }
 
 pub fn sequence_or_set_of_template(
@@ -254,18 +251,16 @@ pub fn choice_template(
     nested_options: Vec<String>,
     annotations: &str,
 ) -> String {
-    licensed!(
-        &vec![
-            &format!("## CHOICE {name}"),
-            comments,
-            "uint8 choice\n",
-            options,
-            &nested_options.join("\n"),
-            annotations
-        ]
-        .into_iter()
-        .filter(|s| !s.is_empty())
-        .collect::<Vec<_>>()
-        .join("\n")
-    )
+    licensed!(&vec![
+        &format!("## CHOICE {name}"),
+        comments,
+        "uint8 choice\n",
+        options,
+        &nested_options.join("\n"),
+        annotations
+    ]
+    .into_iter()
+    .filter(|s| !s.is_empty())
+    .collect::<Vec<_>>()
+    .join("\n"))
 }

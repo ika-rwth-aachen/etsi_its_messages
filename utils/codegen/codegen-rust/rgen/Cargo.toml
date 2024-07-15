@@ -16,6 +16,6 @@ name = "asn1-to-ros-conversion-headers"
 path = "src/conversion/bin.rs"   
 
 [dependencies]
-rasn-compiler = "0.1.4"
+rasn-compiler = { git = "https://github.com/librasn/compiler.git", rev = "ef06d5f827768726efe6a32da9e1ea1329fc4f7a" }
 regex = "1.10.4"
 clap = { version = "4.5.4", features = ["derive"] }

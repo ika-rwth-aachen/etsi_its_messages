@@ -17,8 +17,7 @@ fn main() {
     let args = Cli::parse();
 
     // Compile ROS messages
-    let compiler_res = Compiler::new()
-        .with_backend(Msgs)
+    let compiler_res = Compiler::<Msgs, _>::new()
         .add_asn_sources_by_path(args.paths.iter())
         .compile_to_string();
     let generated = &compiler_res.unwrap().generated;
