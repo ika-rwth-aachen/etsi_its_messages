@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,6 @@ PLUGINLIB_EXPORT_CLASS(etsi_its_conversion::Converter, nodelet::Nodelet)
 RCLCPP_COMPONENTS_REGISTER_NODE(etsi_its_conversion::Converter)
 #endif
 
-
 namespace etsi_its_conversion {
 
 const int kBtpHeaderDestinationPortCam{2001};
@@ -59,6 +58,8 @@ const std::string Converter::kInputTopicUdp{"udp/in"};
 const std::string Converter::kOutputTopicUdp{"udp/out"};
 const std::string Converter::kInputTopicCam{"cam/in"};
 const std::string Converter::kOutputTopicCam{"cam/out"};
+const std::string Converter::kInputTopicCamTs{"cam_ts/in"};
+const std::string Converter::kOutputTopicCamTs{"cam_ts/out"};
 const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
@@ -68,6 +69,8 @@ const std::string Converter::kInputTopicUdp{"~/udp/in"};
 const std::string Converter::kOutputTopicUdp{"~/udp/out"};
 const std::string Converter::kInputTopicCam{"~/cam/in"};
 const std::string Converter::kOutputTopicCam{"~/cam/out"};
+const std::string Converter::kInputTopicCamTs{"~/cam_ts/in"};
+const std::string Converter::kOutputTopicCamTs{"~/cam_ts/out"};
 const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"~/cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
@@ -80,8 +83,10 @@ const std::string Converter::kBtpDestinationPortOffsetParam{"btp_destination_por
 const int Converter::kBtpDestinationPortOffsetParamDefault{8};
 const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payload_offset"};
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
-const std::string Converter::kEtsiTypesParam{"etsi_types"};
-const std::vector<std::string> Converter::kEtsiTypesParamDefault{"cam", "cpm_ts", "denm"};
+const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
+const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
+const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm"};
+const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
@@ -166,29 +171,50 @@ void Converter::loadParameters() {
     ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to '%d'", kEtsiMessagePayloadOffsetParam.c_str(), kEtsiMessagePayloadOffsetParamDefault);
   }
 
-  // load etsi_types
+  // load ros2udp_etsi_types_
 #ifdef ROS1
-  if (!private_node_handle_.param<std::vector<std::string>>(kEtsiTypesParam, etsi_types_, kEtsiTypesParamDefault)) {
+  if (!private_node_handle_.param<std::vector<std::string>>(kRos2UdpEtsiTypesParam, ros2udp_etsi_types_, kRos2UdpEtsiTypesParamDefault)) {
 #else
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
-  std::stringstream ss;
-  ss << "list of ETSI types to convert, one of ";
-  for (const auto& e : kEtsiTypesParamDefault) ss << e << ", ";
-  param_desc.description = ss.str();
-  this->declare_parameter(kEtsiTypesParam, kEtsiTypesParamDefault, param_desc);
-  if (!this->get_parameter(kEtsiTypesParam, etsi_types_)) {
+  std::stringstream ss_ros2udp;
+  ss_ros2udp << "list of ETSI types to convert from ROS to UDP, one of ";
+  for (const auto& e : kRos2UdpEtsiTypesParamDefault) ss_ros2udp << e << ", ";
+  param_desc.description = ss_ros2udp.str();
+  this->declare_parameter(kRos2UdpEtsiTypesParam, kRos2UdpEtsiTypesParamDefault, param_desc);
+  if (!this->get_parameter(kRos2UdpEtsiTypesParam, ros2udp_etsi_types_)) {
 #endif
-    ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to all", kEtsiTypesParam.c_str());
+    ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to all", kRos2UdpEtsiTypesParam.c_str());
   }
 
-  // check etsi_types
-  for (const auto& e : etsi_types_) {
-    if (std::find(kEtsiTypesParamDefault.begin(), kEtsiTypesParamDefault.end(), e) == kEtsiTypesParamDefault.end())
-      ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kEtsiTypesParam.c_str());
+  // check ros2udp_etsi_types
+  for (const auto& e : ros2udp_etsi_types_) {
+    if (std::find(kRos2UdpEtsiTypesParamDefault.begin(), kRos2UdpEtsiTypesParamDefault.end(), e) == kRos2UdpEtsiTypesParamDefault.end())
+      ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kRos2UdpEtsiTypesParam.c_str());
   }
-  if (!has_btp_destination_port_ && etsi_types_.size() > 1) {
-    ROS12_LOG(WARN, "Parameter '%s' is set to 'false', but multiple 'etsi_types' are configured, dropping all but the first", kHasBtpDestinationPortParam.c_str());
-    etsi_types_.resize(1);
+
+  // load udp2ros_etsi_types_
+#ifdef ROS1
+  if (!private_node_handle_.param<std::vector<std::string>>(kUdp2RosEtsiTypesParam, udp2ros_etsi_types_, kUdp2RosEtsiTypesParamDefault)) {
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  std::stringstream ss_udp2ros;
+  ss_udp2ros << "list of ETSI types to convert from UDP to ROS, one of ";
+  for (const auto& e : kUdp2RosEtsiTypesParamDefault) ss_udp2ros << e << ", ";
+  param_desc.description = ss_udp2ros.str();
+  this->declare_parameter(kUdp2RosEtsiTypesParam, kUdp2RosEtsiTypesParamDefault, param_desc);
+  if (!this->get_parameter(kUdp2RosEtsiTypesParam, udp2ros_etsi_types_)) {
+#endif
+    ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to all", kUdp2RosEtsiTypesParam.c_str());
+  }
+
+  // check udp2ros_etsi_types
+  for (const auto& e : udp2ros_etsi_types_) {
+    if (std::find(kUdp2RosEtsiTypesParamDefault.begin(), kUdp2RosEtsiTypesParamDefault.end(), e) == kUdp2RosEtsiTypesParamDefault.end())
+      ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kUdp2RosEtsiTypesParam.c_str());
+  }
+  if (!has_btp_destination_port_ && udp2ros_etsi_types_.size() > 1) {
+    ROS12_LOG(WARN, "Parameter '%s' is set to 'false', but multiple 'udp2ros_etsi_types' are configured, dropping all but the first", kHasBtpDestinationPortParam.c_str());
+    udp2ros_etsi_types_.resize(1);
   }
 
   // load subscriber_queue_size
@@ -223,55 +249,87 @@ void Converter::setup() {
 #ifdef ROS1
   publisher_udp_ = std::make_shared<ros::Publisher>(private_node_handle_.advertise<UdpPacket>(kOutputTopicUdp, publisher_queue_size_));
   subscriber_udp_ = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe(kInputTopicUdp, subscriber_queue_size_, &Converter::udpCallback, this));
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) {
     publishers_["cam"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<cam_msgs::CAM>(kOutputTopicCam, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cam"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam") != ros2udp_etsi_types_.end()) {
     boost::function<void(const cam_msgs::CAM::ConstPtr)> callback =
       boost::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, _1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
     subscribers_["cam"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<cam_msgs::CAM>(kInputTopicCam, subscriber_queue_size_, callback));
-    ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cam"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) {
+    publishers_["cam_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<cam_ts_msgs::CAM>(kOutputTopicCamTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type CAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cam_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam_ts") != ros2udp_etsi_types_.end()) {
+    boost::function<void(const cam_ts_msgs::CAM::ConstPtr)> callback =
+      boost::bind(&Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>, this, _1, "cam_ts", &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_msgs::CAM&, cam_ts_CAM_t&)>(etsi_its_cam_ts_conversion::toStruct_CAM));
+    subscribers_["cam_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<cam_ts_msgs::CAM>(kInputTopicCamTs, subscriber_queue_size_, callback));
+    ROS12_LOG(INFO, "Converting native ROS CAM (TS) on '%s' to UDP messages on '%s'", subscribers_["cam_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cpm_ts") != udp2ros_etsi_types_.end()) {
     publishers_["cpm_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cpm_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cpm_ts") != ros2udp_etsi_types_.end()) {
     boost::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::ConstPtr)> callback =
       boost::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, _1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
     subscribers_["cpm_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<cpm_ts_msgs::CollectivePerceptionMessage>(kInputTopicCpmTs, subscriber_queue_size_, callback));
-    ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["cpm_ts"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS CPM (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) {
     publishers_["denm"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<denm_msgs::DENM>(kOutputTopicDenm, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["denm"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm") != ros2udp_etsi_types_.end()) {
     boost::function<void(const denm_msgs::DENM::ConstPtr)> callback =
       boost::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, _1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback));
-    ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["denm"]->getTopic().c_str());
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
 #else
   publisher_udp_ = this->create_publisher<UdpPacket>(kOutputTopicUdp, publisher_queue_size_);
   subscriber_udp_ = this->create_subscription<UdpPacket>(kInputTopicUdp, subscriber_queue_size_, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cam") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) {
     publisher_cam_ = this->create_publisher<cam_msgs::CAM>(kOutputTopicCam, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam") != ros2udp_etsi_types_.end()) {
     std::function<void(const cam_msgs::CAM::UniquePtr)> callback =
       std::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, std::placeholders::_1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
     subscribers_["cam"] = this->create_subscription<cam_msgs::CAM>(kInputTopicCam, subscriber_queue_size_, callback);
-    ROS12_LOG(INFO, "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "cpm_ts") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) {
+    publisher_cam_ts_ = this->create_publisher<cam_ts_msgs::CAM>(kOutputTopicCamTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type CAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam_ts") != ros2udp_etsi_types_.end()) {
+    std::function<void(const cam_ts_msgs::CAM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>, this, std::placeholders::_1, "cam_ts", &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_msgs::CAM&, cam_ts_CAM_t&)>(etsi_its_cam_ts_conversion::toStruct_CAM));
+    subscribers_["cam_ts"] = this->create_subscription<cam_ts_msgs::CAM>(kInputTopicCamTs, subscriber_queue_size_, callback);
+    ROS12_LOG(INFO, "Converting native ROS CAM (TS) on '%s' to UDP messages on '%s'", subscribers_["cam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cpm_ts") != udp2ros_etsi_types_.end()) {
     publisher_cpm_ts_ = this->create_publisher<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cpm_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::UniquePtr)> callback =
       std::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, std::placeholders::_1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
     subscribers_["cpm_ts"] = this->create_subscription<cpm_ts_msgs::CollectivePerceptionMessage>(kInputTopicCpmTs, subscriber_queue_size_, callback);
-    ROS12_LOG(INFO, "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_ts_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS CPMs (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
-  if (std::find(etsi_types_.begin(), etsi_types_.end(), "denm") != etsi_types_.end()) {
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) {
     publisher_denm_ = this->create_publisher<denm_msgs::DENM>(kOutputTopicDenm, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm") != ros2udp_etsi_types_.end()) {
     std::function<void(const denm_msgs::DENM::UniquePtr)> callback =
       std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
-    ROS12_LOG(INFO, "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
 #endif
@@ -402,7 +460,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
   ROS12_LOG(DEBUG, "Received bitstring (total payload size: %ld)", udp_msg->data.size());
 
   // auto-detect ETSI message type if BTP destination port is present
-  std::string detected_etsi_type = etsi_types_[0];
+  std::string detected_etsi_type = udp2ros_etsi_types_[0];
   if (has_btp_destination_port_) {
     const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
     uint16_t destination_port = ntohs(*btp_destination_port);
@@ -415,22 +473,33 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
     else detected_etsi_type = "unknown";
   }
 
+  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
+
   int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
-  ROS12_LOG(INFO, "Received ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), msg_size, udp_msg->data.size());
+  ROS12_LOG(INFO, "Received ETSI message of type '%s' (protocolVersion: %d) as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), *protocol_version , msg_size, udp_msg->data.size());
 
-  if (detected_etsi_type == "cam") {
+  if (detected_etsi_type == "cam" || detected_etsi_type == "cam_ts") {
 
-    // decode buffer to ROS msg
-    cam_msgs::CAM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
-    if (!success) return;
-
-    // publish msg
+    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) { // CAM EN v1.4.1
+      cam_msgs::CAM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
+      if (!success) return;
 #ifdef ROS1
-    publishers_["cam"]->publish(msg);
+      publishers_["cam"]->publish(msg);
 #else
-    publisher_cam_->publish(msg);
+      publisher_cam_->publish(msg);
 #endif
+    }
+    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) { // CAM TS v2.1.1
+      cam_ts_msgs::CAM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_CAM_t&, cam_ts_msgs::CAM&)>(etsi_its_cam_ts_conversion::toRos_CAM), msg);
+      if (!success) return;
+#ifdef ROS1
+      publishers_["cam_ts"]->publish(msg);
+#else
+      publisher_cam_ts_->publish(msg);
+#endif
+    }
 
   } else if (detected_etsi_type == "cpm_ts") {
 
@@ -480,7 +549,7 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
   ROS12_LOG(INFO, "Received ETSI message of type '%s' as ROS message", type.c_str());
 
   int btp_header_destination_port = 0;
-  if (type == "cam") btp_header_destination_port = kBtpHeaderDestinationPortCam;
+  if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
   else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
   else if (type == "denm") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
 

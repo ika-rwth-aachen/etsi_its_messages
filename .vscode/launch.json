@@ -51,6 +51,55 @@
             "justMyCode": true
         },
         {
+            "name": "CAM TS (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
+                "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cam_ts",
+                "-o",
+                "etsi_its_coding/etsi_its_cam_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CAM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
+                "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_cam_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CAM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
+                "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cam_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "DENM (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",

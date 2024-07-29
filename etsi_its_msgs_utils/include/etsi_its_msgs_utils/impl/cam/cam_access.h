@@ -31,10 +31,15 @@ SOFTWARE.
 
 #pragma once
 
-using namespace etsi_its_cam_msgs;
+#include <cstring>
+#include <iostream>
+#include <map>
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_access.h>
+#include <GeographicLib/UTMUPS.hpp>
 
 #include <etsi_its_msgs_utils/impl/cam/cam_getters.h>
 #include <etsi_its_msgs_utils/impl/cam/cam_setters.h>
+
+namespace etsi_its_cam_msgs::access {
 #include <etsi_its_msgs_utils/impl/cam/cam_utils.h>
+} // namespace etsi_its_cam_msgs::access

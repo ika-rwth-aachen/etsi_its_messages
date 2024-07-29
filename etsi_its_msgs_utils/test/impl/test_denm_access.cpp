@@ -37,7 +37,7 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   // since 2004-01-01T00:00:00.000Z.
   uint64_t t_2007 = ((uint64_t)1167609600)*1e9;
   TimestampIts t_its;
-  etsi_its_msgs::cdd_access::setTimestampITS(t_its, t_2007, 1);
+  etsi_its_denm_msgs::access::setTimestampITS(t_its, t_2007, 1);
   EXPECT_EQ(94694401000, t_its.value);
   
   setReferenceTime(denm, t_2007, 1);

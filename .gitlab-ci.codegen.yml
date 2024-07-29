@@ -66,6 +66,21 @@ etsi_its_cam_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_cam_ts_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
+      -t cam_ts
+      -o etsi_its_coding/etsi_its_cam_ts_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_denm_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
@@ -114,6 +129,20 @@ etsi_its_cam_msgs:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_cam_ts_msgs:
+  stage: ROS Messages
+  needs: ["rgen-docker"]
+  script:
+    - >
+      ./utils/codegen/codegen-rust/asn1ToRosMsg.py
+      asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
+      -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_RGEN_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_denm_msgs:
   stage: ROS Messages
   needs: ["rgen-docker"]
@@ -156,6 +185,21 @@ etsi_its_cam_conversion:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
       -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_RGEN_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_cam_ts_conversion:
+  stage: Conversion Headers
+  needs: ["rgen-docker"]
+  script:
+    - >
+      ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
+      asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
+      -t cam_ts
+      -o etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
