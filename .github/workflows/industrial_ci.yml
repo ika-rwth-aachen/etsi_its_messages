@@ -1,0 +1,23 @@
+name: industrial_ci
+
+on: pull_request
+
+jobs:
+  industrial_ci:
+    name: ROS ${{ matrix.ROS_DISTRO }} (${{ matrix.ROS_REPO }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ROS_DISTRO:
+          - noetic
+          - humble
+          - iron
+          - jazzy
+        ROS_REPO:
+          - testing
+          - main
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ros-industrial/industrial_ci@master
+        with:
+          config: ${{ toJSON(matrix) }}
