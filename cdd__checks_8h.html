@@ -102,17 +102,17 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a40265a706005f1753f2f5ede45ec9840" id="r_a40265a706005f1753f2f5ede45ec9840"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
-<tr class="memitem:a40265a706005f1753f2f5ede45ec9840"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a40265a706005f1753f2f5ede45ec9840">etsi_its_msgs::cdd_access::throwIfOutOfRange</a> (const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</td></tr>
-<tr class="separator:a40265a706005f1753f2f5ede45ec9840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a426a1dd8846d4184a2ca05dc5b9218cc" id="r_a426a1dd8846d4184a2ca05dc5b9218cc"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
+<tr class="memitem:a426a1dd8846d4184a2ca05dc5b9218cc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a> (const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</td></tr>
+<tr class="separator:a426a1dd8846d4184a2ca05dc5b9218cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD) </p>
 
 <p class="definition">Definition in file <a class="el" href="cdd__checks_8h_source.html">cdd_checks.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a40265a706005f1753f2f5ede45ec9840" name="a40265a706005f1753f2f5ede45ec9840"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40265a706005f1753f2f5ede45ec9840">&#9670;&#160;</a></span>throwIfOutOfRange()</h2>
+<a id="a426a1dd8846d4184a2ca05dc5b9218cc" name="a426a1dd8846d4184a2ca05dc5b9218cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a426a1dd8846d4184a2ca05dc5b9218cc">&#9670;&#160;</a></span>throwIfOutOfRange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,7 +120,7 @@ Functions</h2></td></tr>
 template&lt;typename T1 , typename T2 &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void etsi_its_msgs::cdd_access::throwIfOutOfRange </td>
+          <td class="memname">void throwIfOutOfRange </td>
           <td>(</td>
           <td class="paramtype">const T1 &amp;</td>          <td class="paramname"><span class="paramname"><em>val</em></span>, </td>
         </tr>
@@ -142,10 +142,10 @@ template&lt;typename T1 , typename T2 &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cdd__checks_8h_source.html#l00039">39</a> of file <a class="el" href="cdd__checks_8h_source.html">cdd_checks.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   39</span>                                                                                                {</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">if</span> (val &lt; min || val &gt; max) <span class="keywordflow">throw</span> std::invalid_argument(val_desc+<span class="stringliteral">&quot; value is out of range (&quot;</span>+std::to_string(min)+<span class="stringliteral">&quot;...&quot;</span>+std::to_string(max)+<span class="stringliteral">&quot;)!&quot;</span>);</div>
-<div class="line"><span class="lineno">   41</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="cdd__checks_8h_source.html#l00035">35</a> of file <a class="el" href="cdd__checks_8h_source.html">cdd_checks.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>                                                                                              {</div>
+<div class="line"><span class="lineno">   36</span>  <span class="keywordflow">if</span> (val &lt; min || val &gt; max) <span class="keywordflow">throw</span> std::invalid_argument(val_desc+<span class="stringliteral">&quot; value is out of range (&quot;</span>+std::to_string(min)+<span class="stringliteral">&quot;...&quot;</span>+std::to_string(max)+<span class="stringliteral">&quot;)!&quot;</span>);</div>
+<div class="line"><span class="lineno">   37</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

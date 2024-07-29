@@ -122,125 +122,22 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;<a class="code" href="constants_8h.html">etsi_its_msgs_utils/impl/constants.h</a>&gt;</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span>cdd = etsi_its_msgs::cdd_access;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span>etsi_its_cam_msgs {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">namespace </span>access {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span>etsi_its_cam_msgs::access {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h</a>&gt;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &lt;<a class="code" href="cam__setters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_setters_common.h</a>&gt;</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">   48</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">setItsPduHeader</a>(CAM&amp; cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0){</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">   48</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">setItsPduHeader</a>(CAM &amp;cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">setItsPduHeader</a>(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">   59</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">setGenerationDeltaTime</a>(GenerationDeltaTime&amp; generation_delta_time, <span class="keyword">const</span> uint64_t unix_nanosecs, <span class="keyword">const</span> uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    TimestampIts t_its;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    uint16_t gdt_value = t_its.value%65536;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    cdd::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, <span class="stringliteral">&quot;GenerationDeltaTime&quot;</span>);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    generation_delta_time.value=gdt_value;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
-</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a75355f19cdb9056086f3fd35cd19e371">   74</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">setGenerationDeltaTime</a>(CAM&amp; cam, <span class="keyword">const</span> uint64_t unix_nanosecs, <span class="keyword">const</span> uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_function" href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">setGenerationDeltaTime</a>(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
-</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#ae5d9ced593e2975a7fef4d1388abb14e">   84</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#ae5d9ced593e2975a7fef4d1388abb14e">setStationType</a>(CAM&amp; cam, <span class="keyword">const</span> uint8_t value){</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  }</div>
-</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a8a4ed39042192f5edfad1aee78b10897">   97</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a8a4ed39042192f5edfad1aee78b10897">setReferencePosition</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> latitude, <span class="keyword">const</span> <span class="keywordtype">double</span> longitude)</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
-</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a3f462be77f474c68aeae67fdffe1c308">  110</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a8a4ed39042192f5edfad1aee78b10897">setReferencePosition</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> latitude, <span class="keyword">const</span> <span class="keywordtype">double</span> longitude, <span class="keyword">const</span> <span class="keywordtype">double</span> altitude)</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    cdd::setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  }</div>
-</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a77cd6b7ec59129d0976fc07f4dd40364">  124</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a77cd6b7ec59129d0976fc07f4dd40364">setHeading</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> heading_val){</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    cdd::setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading, heading_val);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
-</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a692ddf5da0d016e7d23d4cca6ffabab7">  135</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a692ddf5da0d016e7d23d4cca6ffabab7">setVehicleDimensions</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> vehicle_length, <span class="keyword">const</span> <span class="keywordtype">double</span> vehicle_width){</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    cdd::setVehicleLength(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length, vehicle_length);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    cdd::setVehicleWidth(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width, vehicle_width);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  }</div>
-</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="foldopen" id="foldopen00146" data-start="{" data-end="}">
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a13dc4a4157b43c409bd5c6a68197a77a">  146</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a13dc4a4157b43c409bd5c6a68197a77a">setSpeed</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> speed_val){</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    cdd::setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  }</div>
-</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a8dacb45a7ed542e34c81b2345ae1ab6e">  156</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a8dacb45a7ed542e34c81b2345ae1ab6e">setLongitudinalAcceleration</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> lon_accel){</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    cdd::setLongitudinalAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration, lon_accel);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  }</div>
-</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a6097536d74df2f2e98e989d5f78077e8">  166</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a6097536d74df2f2e98e989d5f78077e8">setLateralAcceleration</a>(CAM&amp; cam, <span class="keyword">const</span> <span class="keywordtype">double</span> lat_accel){</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      cdd::setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  }</div>
-</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#aae7e2b24f28c91d9b6b65adbbd44e7ff">  183</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#aae7e2b24f28c91d9b6b65adbbd44e7ff">setFromUTMPosition</a>(CAM&amp; cam, <span class="keyword">const</span> gm::PointStamped&amp; utm_position, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; zone, <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; northp)</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    cdd::setFromUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  }</div>
-</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="foldopen" id="foldopen00194" data-start="{" data-end="}">
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a8eb35a1ee7dffe872e7cbd9c088d2280">  194</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a8eb35a1ee7dffe872e7cbd9c088d2280">setExteriorLights</a>(CAM&amp; cam, <span class="keyword">const</span> std::vector&lt;bool&gt;&amp; exterior_lights){</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">if</span>(etsi_its_cam_msgs::ExteriorLights::SIZE_BITS != exterior_lights.size()) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Vector has wrong size. (&quot;</span> + std::to_string(exterior_lights.size()) + <span class="stringliteral">&quot; != &quot;</span> + std::to_string(etsi_its_cam_msgs::ExteriorLights::SIZE_BITS) + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    }</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span>(cam.cam.cam_parameters.low_frequency_container_is_present) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      <span class="keywordflow">if</span>(cam.cam.cam_parameters.low_frequency_container.choice == etsi_its_cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        cdd::setExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights, exterior_lights);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!&quot;</span>);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  }</div>
-</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>} <span class="comment">// namespace access</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>} <span class="comment">// namespace etsi_its_cam_msgs</span></div>
-<div class="ttc" id="acam__setters_8h_html_a13dc4a4157b43c409bd5c6a68197a77a"><div class="ttname"><a href="cam__setters_8h.html#a13dc4a4157b43c409bd5c6a68197a77a">etsi_its_cam_msgs::access::setSpeed</a></div><div class="ttdeci">void setSpeed(CAM &amp;cam, const double speed_val)</div><div class="ttdoc">Set the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="#l00146">cam_setters.h:146</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a6097536d74df2f2e98e989d5f78077e8"><div class="ttname"><a href="cam__setters_8h.html#a6097536d74df2f2e98e989d5f78077e8">etsi_its_cam_msgs::access::setLateralAcceleration</a></div><div class="ttdeci">void setLateralAcceleration(CAM &amp;cam, const double lat_accel)</div><div class="ttdoc">Set the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="#l00166">cam_setters.h:166</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a692ddf5da0d016e7d23d4cca6ffabab7"><div class="ttname"><a href="cam__setters_8h.html#a692ddf5da0d016e7d23d4cca6ffabab7">etsi_its_cam_msgs::access::setVehicleDimensions</a></div><div class="ttdeci">void setVehicleDimensions(CAM &amp;cam, const double vehicle_length, const double vehicle_width)</div><div class="ttdoc">Set the vehicle dimensions.</div><div class="ttdef"><b>Definition</b> <a href="#l00135">cam_setters.h:135</a></div></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>} <span class="comment">// namespace etsi_its_cam_msgs::access</span></div>
 <div class="ttc" id="acam__setters_8h_html_a729c978afd3c95572c9d9af34e41bc54"><div class="ttname"><a href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">etsi_its_cam_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(CAM &amp;cam, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the ItsPduHeader-object for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">cam_setters.h:48</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a77cd6b7ec59129d0976fc07f4dd40364"><div class="ttname"><a href="cam__setters_8h.html#a77cd6b7ec59129d0976fc07f4dd40364">etsi_its_cam_msgs::access::setHeading</a></div><div class="ttdeci">void setHeading(CAM &amp;cam, const double heading_val)</div><div class="ttdoc">Set the Heading for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">cam_setters.h:124</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a8a4ed39042192f5edfad1aee78b10897"><div class="ttname"><a href="cam__setters_8h.html#a8a4ed39042192f5edfad1aee78b10897">etsi_its_cam_msgs::access::setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(CAM &amp;cam, const double latitude, const double longitude)</div><div class="ttdoc">Set the ReferencePosition for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00097">cam_setters.h:97</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a8dacb45a7ed542e34c81b2345ae1ab6e"><div class="ttname"><a href="cam__setters_8h.html#a8dacb45a7ed542e34c81b2345ae1ab6e">etsi_its_cam_msgs::access::setLongitudinalAcceleration</a></div><div class="ttdeci">void setLongitudinalAcceleration(CAM &amp;cam, const double lon_accel)</div><div class="ttdoc">Set the longitudinal acceleration.</div><div class="ttdef"><b>Definition</b> <a href="#l00156">cam_setters.h:156</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_a8eb35a1ee7dffe872e7cbd9c088d2280"><div class="ttname"><a href="cam__setters_8h.html#a8eb35a1ee7dffe872e7cbd9c088d2280">etsi_its_cam_msgs::access::setExteriorLights</a></div><div class="ttdeci">void setExteriorLights(CAM &amp;cam, const std::vector&lt; bool &gt; &amp;exterior_lights)</div><div class="ttdoc">Set the Exterior Lights by using a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="#l00194">cam_setters.h:194</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_aae7e2b24f28c91d9b6b65adbbd44e7ff"><div class="ttname"><a href="cam__setters_8h.html#aae7e2b24f28c91d9b6b65adbbd44e7ff">etsi_its_cam_msgs::access::setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(CAM &amp;cam, const gm::PointStamped &amp;utm_position, const int &amp;zone, const bool &amp;northp)</div><div class="ttdoc">Set the ReferencePosition of a CAM from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="#l00183">cam_setters.h:183</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_ae01d2af55f8aa4b14475dda8e70065a0"><div class="ttname"><a href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">etsi_its_cam_msgs::access::setGenerationDeltaTime</a></div><div class="ttdeci">void setGenerationDeltaTime(GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Set the GenerationDeltaTime-Value.</div><div class="ttdef"><b>Definition</b> <a href="#l00059">cam_setters.h:59</a></div></div>
-<div class="ttc" id="acam__setters_8h_html_ae5d9ced593e2975a7fef4d1388abb14e"><div class="ttname"><a href="cam__setters_8h.html#ae5d9ced593e2975a7fef4d1388abb14e">etsi_its_cam_msgs::access::setStationType</a></div><div class="ttdeci">void setStationType(CAM &amp;cam, const uint8_t value)</div><div class="ttdoc">Set the StationType for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00084">cam_setters.h:84</a></div></div>
+<div class="ttc" id="acam__setters__common_8h_html"><div class="ttname"><a href="cam__setters__common_8h.html">cam_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS CAM (EN and TS)</div></div>
+<div class="ttc" id="acdd__v1-3-1__setters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html">cdd_v1-3-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
 <div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

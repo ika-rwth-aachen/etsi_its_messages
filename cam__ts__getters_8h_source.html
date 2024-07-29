@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cdd/cdd_access.h Source File</title>
+<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cam/cam_ts_getters.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,15 +84,15 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_b480a592c0da3c853c2d3153cdd765c8.html">cdd</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_829b657d6d3b62591de719156955a7f1.html">cam</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">cdd_access.h</div></div>
+  <div class="headertitle"><div class="title">cam_ts_getters.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="cdd__access_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="cam__ts__getters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">=============================================================================</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">MIT License</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
@@ -120,14 +120,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__checks_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_checks.h</a>&gt;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_getters.h</a>&gt;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_setters.h</a>&gt;</span></div>
-<div class="ttc" id="acdd__checks_8h_html"><div class="ttname"><a href="cdd__checks_8h.html">cdd_checks.h</a></div><div class="ttdoc">Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)</div></div>
-<div class="ttc" id="acdd__getters_8h_html"><div class="ttname"><a href="cdd__getters_8h.html">cdd_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD)</div></div>
-<div class="ttc" id="acdd__setters_8h_html"><div class="ttname"><a href="cdd__setters_8h.html">cdd_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD)</div></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>etsi_its_cam_ts_msgs::access {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>} <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<div class="ttc" id="acam__getters__common_8h_html"><div class="ttname"><a href="cam__getters__common_8h.html">cam_getters_common.h</a></div><div class="ttdoc">Common getter functions for the ETSI ITS CAM (EN and TS)</div></div>
+<div class="ttc" id="acdd__v2-1-1__getters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__getters_8h.html">cdd_v2-1-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

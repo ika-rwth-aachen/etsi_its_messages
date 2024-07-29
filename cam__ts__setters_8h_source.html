@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cdd/cdd_checks.h Source File</title>
+<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cam/cam_ts_setters.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,15 +84,15 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_b480a592c0da3c853c2d3153cdd765c8.html">cdd</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_829b657d6d3b62591de719156955a7f1.html">cam</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">cdd_checks.h</div></div>
+  <div class="headertitle"><div class="title">cam_ts_setters.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="cdd__checks_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="cam__ts__setters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">=============================================================================</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">MIT License</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
@@ -120,10 +120,23 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">void</span> throwIfOutOfRange(<span class="keyword">const</span> T1&amp; val, <span class="keyword">const</span> T2&amp; min, <span class="keyword">const</span> T2&amp; max, <span class="keyword">const</span> std::string val_desc) {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (val &lt; min || val &gt; max) <span class="keywordflow">throw</span> std::invalid_argument(val_desc+<span class="stringliteral">&quot; value is out of range (&quot;</span>+std::to_string(min)+<span class="stringliteral">&quot;...&quot;</span>+std::to_string(max)+<span class="stringliteral">&quot;)!&quot;</span>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;<a class="code" href="constants_8h.html">etsi_its_msgs_utils/impl/constants.h</a>&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span>etsi_its_cam_ts_msgs::access {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h</a>&gt;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &lt;<a class="code" href="cam__setters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_setters_common.h</a>&gt;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="cam__ts__setters_8h.html#a311ec079124de0b5443c27af847717ad">   48</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> setItsPduHeader(CAM&amp; cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0){</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    setItsPduHeader(cam.header, MessageId::CAM, station_id, protocol_version);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<div class="ttc" id="acam__setters__common_8h_html"><div class="ttname"><a href="cam__setters__common_8h.html">cam_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS CAM (EN and TS)</div></div>
+<div class="ttc" id="acdd__v2-1-1__setters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__setters_8h.html">cdd_v2-1-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
+<div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
