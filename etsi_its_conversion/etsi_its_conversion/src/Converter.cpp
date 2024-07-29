@@ -213,7 +213,7 @@ void Converter::loadParameters() {
       ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', skipping", e.c_str(), kUdp2RosEtsiTypesParam.c_str());
   }
   if (!has_btp_destination_port_ && udp2ros_etsi_types_.size() > 1) {
-    ROS12_LOG(WARN, "Parameter '%s' is set to 'false', but multiple 'etsi_types' are configured, dropping all but the first", kHasBtpDestinationPortParam.c_str());
+    ROS12_LOG(WARN, "Parameter '%s' is set to 'false', but multiple 'udp2ros_etsi_types' are configured, dropping all but the first", kHasBtpDestinationPortParam.c_str());
     udp2ros_etsi_types_.resize(1);
   }
 
