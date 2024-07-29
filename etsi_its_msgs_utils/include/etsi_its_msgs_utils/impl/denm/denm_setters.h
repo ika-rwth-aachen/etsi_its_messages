@@ -35,7 +35,7 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_v1_setters.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h>
 
   /**
    * @brief Set the ItsPduHeader-object for a DENM

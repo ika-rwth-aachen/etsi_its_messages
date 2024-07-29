@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_v1_setters.h
+ * @file impl/cdd/cdd_v1-3-1_setters.h
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1
  */
 #pragma once

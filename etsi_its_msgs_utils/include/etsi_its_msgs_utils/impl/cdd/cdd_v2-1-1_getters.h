@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_v2_getters.h
+ * @file impl/cdd/cdd_v2-1-1_getters.h
  * @brief Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1
  */
 #pragma once

@@ -33,7 +33,7 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_v1_getters.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h>
 
   /**
    * @brief Get the Station ID object

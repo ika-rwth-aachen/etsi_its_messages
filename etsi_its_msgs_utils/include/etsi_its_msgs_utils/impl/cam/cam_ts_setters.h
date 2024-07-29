@@ -35,7 +35,7 @@ SOFTWARE.
 
 namespace etsi_its_cam_ts_msgs::access {
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_v2_setters.h>
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h>
 #include <etsi_its_msgs_utils/impl/cam/cam_setters_common.h>
 
   /**
