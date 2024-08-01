@@ -2,7 +2,7 @@ use clap::Parser;
 use regex::Regex;
 
 use rasn_compiler::prelude::*;
-use ros_backend::conversion::Conversion;
+use ros_backend::conversion::{Conversion, ConversionOptions};
 
 #[derive(Parser, Debug)]
 struct Cli {
@@ -19,10 +19,13 @@ struct Cli {
 fn main() {
     let args = Cli::parse();
 
-    let backend = Conversion::default().set_main_pdu_name(&args.pdu.clone());
+    let config = ConversionOptions {
+        main_pdu: args.pdu,
+    };
+    let backend = Conversion::from_config(config);
 
     // Compile conversion headers
-    let compiler_res = Compiler::new()
+    let compiler_res = Compiler::<Conversion, _>::new()
         .with_backend(backend)
         .add_asn_sources_by_path(args.paths.iter())
         .compile_to_string();
