@@ -2,6 +2,15 @@
 Changelog for package etsi_its_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.0 (2024-08-01)
+------------------
+* Merge pull request `#29 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/29>`_ from ika-rwth-aachen/cam-release2
+  Add ETSI ITS CAM TS (release2)
+* Merge pull request `#2 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/2>`_ from lreiher/fix-converter-memleak
+  Resolve conflicts with ika-rwth-aachen/etsi_its_messages and free ret.buffer
+* Merge remote-tracking branch 'ika/main' into fix-converter-memleak
+* Contributors: Jean-Pierre Busch, Lennart Reiher, v0-e
+
 2.1.0 (2024-07-09)
 ------------------
 * Merge pull request #22 from ika-rwth-aachen/improvement/package-naming
