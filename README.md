@@ -265,6 +265,11 @@ This repository uses the following software. For full license details, please re
     MIT License
     Copyright (c) 2008-2023, Charles Karney
     ```
+- [rasn](https://github.com/librasn/rasn)
+    ```
+    MIT License
+    Copyright (c) 2016 Erin Power
+    ```
 - [ROS](https://www.ros.org/)
     ```
     BSD 3-Clause License
