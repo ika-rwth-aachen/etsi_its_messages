@@ -8,7 +8,7 @@
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/ROS-noetic-blueviolet"/>
   <img src="https://img.shields.io/badge/ROS 2-humble|iron|jazzy-blueviolet"/>
-  <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM-aqua"/>
+  <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|VAM-aqua"/>
 </p>
 
 **ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
