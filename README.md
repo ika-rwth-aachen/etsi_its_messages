@@ -81,7 +81,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
 │   ├── etsi_its_primitives_conversion
-|   └── etsi_its_vam_ts_conversion
+│   └── etsi_its_vam_ts_conversion
 ├── etsi_its_messages           # metapackage including all others
 ├── etsi_its_msgs
 │   ├── etsi_its_msgs           # metapackage including all msg packages
@@ -89,7 +89,7 @@ etsi_its_messages
 │   ├── etsi_its_cam_ts_msgs
 │   ├── etsi_its_cpm_ts_msgs
 │   ├── etsi_its_denm_msgs
-|   └── etsi_its_vam_ts_msgs
+│   └── etsi_its_vam_ts_msgs
 ├── etsi_its_msgs_utils
 └── etsi_its_rviz_plugins
 ```
