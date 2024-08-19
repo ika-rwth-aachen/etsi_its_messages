@@ -13,3 +13,6 @@
 [submodule "doc/doxygen-awesome-css"]
 	path = doc/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
+[submodule "asn1/raw/vam-ts103300_3"]
+	path = asn1/raw/vam-ts103300_3
+	url = https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3.git
