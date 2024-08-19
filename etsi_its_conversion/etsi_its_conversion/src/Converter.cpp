@@ -300,7 +300,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "vam_ts") != ros2udp_etsi_types_.end()) {
     boost::function<void(const vam_ts_msgs::VAM::ConstPtr)> callback =
-      boost::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, _1, "vam_ts", &asn_DEF_vam_ts_CAM, std::function<void(const vam_ts_msgs::VAM&, vam_ts_VAM_t&)>(etsi_its_vam_ts_conversion::toStruct_VAM));
+      boost::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, _1, "vam_ts", &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_msgs::VAM&, vam_ts_VAM_t&)>(etsi_its_vam_ts_conversion::toStruct_VAM));
     subscribers_["vam_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<vam_ts_msgs::VAM>(kInputTopicVamTs, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting native ROS VAM (TS) on '%s' to UDP messages on '%s'", subscribers_["vam_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
