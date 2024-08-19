@@ -166,7 +166,6 @@ if(${ROS_VERSION} EQUAL 2)
     "msg/MessageSegmentationInfo.msg"
     "msg/MitigationForTechnologies.msg"
     "msg/MitigationPerTechnologyClass.msg"
-    "msg/MotorcylistSpecialContainer.msg"
     "msg/NumberOfOccupants.msg"
     "msg/ObjectClassDescription.msg"
     "msg/ObjectClass.msg"
