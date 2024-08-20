@@ -165,7 +165,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `~/cam_ts/in` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) for conversion to UDP |
 | `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
-| `~/vam_ts/in` | `etsi_its_vam_ts_msgs/msg/CAM` | VAM (TS) for conversion to UDP |
+| `~/vam_ts/in` | `etsi_its_vam_ts_msgs/msg/VAM` | VAM (TS) for conversion to UDP |
 
 #### Published Topics
 
@@ -176,7 +176,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `~/cam_ts/out` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) converted from UDP payload |
 | `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
-| `~/vam_ts/out` | `etsi_its_vam_ts_msgs/msg/CAM` | VAM (TS) converted from UDP payload |
+| `~/vam_ts/out` | `etsi_its_vam_ts_msgs/msg/VAM` | VAM (TS) converted from UDP payload |
 
 #### Parameters
 
