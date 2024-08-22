@@ -42,19 +42,22 @@ class Publisher(Node):
 
         msg = VAM()
 
-        msg.header.value.protocol_version.value = 2
+        msg.header.value.protocol_version.value = 3
         msg.header.value.message_id.value = msg.header.value.message_id.VAM
         msg.header.value.station_id.value = 32
 
         msg.vam.generation_delta_time.value = msg.vam.generation_delta_time.ONE_MILLI_SEC
 
-        msg.vam.vam_parameters.basic_container.station_type.value = msg.vam.vam_parameters.basic_container.station_type.PASSENGER_CAR
+        msg.vam.vam_parameters.basic_container.station_type.value = msg.vam.vam_parameters.basic_container.station_type.PEDESTRIAN
         msg.vam.vam_parameters.basic_container.reference_position.latitude.value = int(1e7 * 51.215169611787054)
 
         vru_high_frequency_container = VruHighFrequencyContainer()
         vru_high_frequency_container.speed.speed_value.value = 1
+        vru_high_frequency_container.speed.speed_confidence.value = vru_high_frequency_container.speed.speed_confidence.UNAVAILABLE
         vru_high_frequency_container.heading.value.value = vru_high_frequency_container.heading.value.WGS84_NORTH
-        vru_high_frequency_container.longitudinal_acceleration.longitudinal_acceleration_value.value = 0
+        vru_high_frequency_container.heading.confidence.value = vru_high_frequency_container.heading.confidence.UNAVAILABLE
+        vru_high_frequency_container.longitudinal_acceleration.longitudinal_acceleration_value.value = vru_high_frequency_container.longitudinal_acceleration.longitudinal_acceleration_value.UNAVAILABLE
+        vru_high_frequency_container.longitudinal_acceleration.longitudinal_acceleration_confidence.value = vru_high_frequency_container.longitudinal_acceleration.longitudinal_acceleration_confidence.UNAVAILABLE
         vru_high_frequency_container.device_usage_is_present = True
         vru_high_frequency_container.device_usage.value = vru_high_frequency_container.device_usage.LISTENING_TO_AUDIO
         msg.vam.vam_parameters.vru_high_frequency_container = vru_high_frequency_container
