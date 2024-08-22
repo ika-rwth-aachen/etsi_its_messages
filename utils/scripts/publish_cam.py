@@ -44,6 +44,7 @@ class Publisher(Node):
 
         msg.header.protocol_version = 2
         msg.header.message_id = msg.header.MESSAGE_ID_CAM
+        msg.header.station_id.value = 32
 
         msg.cam.generation_delta_time.value = msg.cam.generation_delta_time.ONE_MILLI_SEC
 

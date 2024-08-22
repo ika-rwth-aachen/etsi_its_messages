@@ -31,10 +31,15 @@ SOFTWARE.
 
 #pragma once
 
-using namespace etsi_its_denm_msgs;
+#include <cstring>
+#include <iostream>
+#include <map>
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_access.h>
+#include <GeographicLib/UTMUPS.hpp>
 
 #include <etsi_its_msgs_utils/impl/denm/denm_getters.h>
 #include <etsi_its_msgs_utils/impl/denm/denm_setters.h>
+
+namespace etsi_its_denm_msgs::access {
 #include <etsi_its_msgs_utils/impl/denm/denm_utils.h>
+} // namespace etsi_its_denm_msgs::access

@@ -26,17 +26,16 @@ SOFTWARE.
 
 /**
  * @file impl/denm/denm_setters.h
- * @brief Setter functions for the ETSI ITS DENM
+ * @brief Setter functions for the ETSI ITS DENM (EN)
  */
 
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/constants.h>
 
-namespace cdd = etsi_its_msgs::cdd_access;
-namespace etsi_its_denm_msgs {
+namespace etsi_its_denm_msgs::access {
 
-namespace access {
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h>
 
   /**
    * @brief Set the ItsPduHeader-object for a DENM
@@ -46,7 +45,7 @@ namespace access {
    * @param protocol_version
    */
   inline void setItsPduHeader(DENM& denm, const uint32_t station_id, const uint8_t protocol_version = 0){
-    cdd::setItsPduHeader(denm.header, ItsPduHeader::MESSAGE_ID_DENM, station_id, protocol_version);
+    setItsPduHeader(denm.header, ItsPduHeader::MESSAGE_ID_DENM, station_id, protocol_version);
   }
 
   /**
@@ -58,8 +57,8 @@ namespace access {
    */
   inline void setReferenceTime(DENM& denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second){
     TimestampIts t_its;
-    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
-    cdd::throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+    setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
+    throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
     denm.denm.management.reference_time = t_its;
   }
 
@@ -70,7 +69,7 @@ namespace access {
    * @param value station_type value to set
    */
   inline void setStationType(DENM& denm, const int value){
-    cdd::setStationType(denm.denm.management.station_type, value);
+    setStationType(denm.denm.management.station_type, value);
   }
 
   /**
@@ -84,7 +83,7 @@ namespace access {
    */
   inline void setReferencePosition(DENM& denm, const double latitude, const double longitude)
   {
-    cdd::setReferencePosition(denm.denm.management.event_position, latitude, longitude);
+    setReferencePosition(denm.denm.management.event_position, latitude, longitude);
   }
 
   /**
@@ -97,7 +96,7 @@ namespace access {
    */
   inline void setReferencePosition(DENM& denm, const double latitude, const double longitude, const double altitude)
   {
-    cdd::setReferencePosition(denm.denm.management.event_position, latitude, longitude, altitude);
+    setReferencePosition(denm.denm.management.event_position, latitude, longitude, altitude);
   }
 
   /**
@@ -126,7 +125,7 @@ namespace access {
    */
   inline void setHeading(DENM& denm, const double heading_val){
     if(denm.denm.location_is_present){
-      cdd::setHeading(denm.denm.location.event_position_heading, heading_val);
+      setHeading(denm.denm.location.event_position_heading, heading_val);
       setIsHeadingPresent(denm, true);
       }
     else{
@@ -157,7 +156,7 @@ namespace access {
    */
   inline void setSpeed(DENM& denm, const double speed_val){
     if(denm.denm.location_is_present){
-      cdd::setSpeed(denm.denm.location.event_speed, speed_val);
+      setSpeed(denm.denm.location.event_speed, speed_val);
       setIsSpeedPresent(denm, true);
       }
     else{
@@ -179,9 +178,7 @@ namespace access {
    */
   inline void setFromUTMPosition(DENM& denm, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
   {
-    cdd::setFromUTMPosition(denm.denm.management.event_position, utm_position, zone, northp);
+    setFromUTMPosition(denm.denm.management.event_position, utm_position, zone, northp);
   }
 
-} // namespace access
-
-} // namespace etsi_its_denm_msgs
+} // namespace etsi_its_denm_msgs::access

@@ -1,4 +1,4 @@
-use rasn_compiler::prelude::ir::IntegerType;
+use rasn_compiler::prelude::ir::{IntegerType, ASN1Value};
 
 pub trait IntegerTypeExt {
     fn to_str(self) -> &'static str;
@@ -19,6 +19,26 @@ impl IntegerTypeExt for IntegerType {
         }
     }
 }
+
+pub trait ASN1ValueExt {
+    fn is_const_type(&self) -> bool;
+}
+
+impl ASN1ValueExt for ASN1Value {
+    fn is_const_type(&self) -> bool {
+        match self {
+            ASN1Value::Null | ASN1Value::Boolean(_) | ASN1Value::EnumeratedValue { .. } => true,
+            ASN1Value::Choice { inner_value, .. } => inner_value.is_const_type(),
+            ASN1Value::LinkedIntValue { integer_type, .. } => {
+                integer_type != &IntegerType::Unbounded
+            }
+            ASN1Value::LinkedNestedValue { value, .. } => value.is_const_type(),
+            ASN1Value::LinkedElsewhereDefinedValue { can_be_const, .. } => *can_be_const,
+            _ => false,
+        }
+    }
+}
+
 pub fn to_ros_snake_case(input: &str) -> String {
     let input = input.replace('-', "_");
     let mut lowercase = String::with_capacity(input.len());

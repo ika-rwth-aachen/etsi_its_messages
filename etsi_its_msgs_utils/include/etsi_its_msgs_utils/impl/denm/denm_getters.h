@@ -26,16 +26,14 @@ SOFTWARE.
 
 /**
  * @file impl/denm/denm_getters.h
- * @brief Getter functions for the ETSI ITS DENM
+ * @brief Getter functions for the ETSI ITS DENM (EN)
  */
 
 #pragma once
 
-namespace cdd = etsi_its_msgs::cdd_access;
-namespace etsi_its_denm_msgs {
+namespace etsi_its_denm_msgs::access {
 
-namespace access {
-
+#include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h>
 
   /**
    * @brief Get the Station ID object
@@ -44,7 +42,7 @@ namespace access {
    * @return stationID value
    */
   inline uint32_t getStationID(const DENM& denm){
-    return cdd::getStationID(denm.header);
+    return getStationID(denm.header);
   }
 
   /**
@@ -84,7 +82,7 @@ namespace access {
    * @return Latitude value in degree as decimal number
    */
   inline double getLatitude(const DENM& denm){
-    return cdd::getLatitude(denm.denm.management.event_position.latitude);
+    return getLatitude(denm.denm.management.event_position.latitude);
   }
 
   /**
@@ -94,7 +92,7 @@ namespace access {
    * @return Longitude value in degree as decimal number
    */
   inline double getLongitude(const DENM& denm){
-    return cdd::getLongitude(denm.denm.management.event_position.longitude);
+    return getLongitude(denm.denm.management.event_position.longitude);
   }
 
   /**
@@ -104,7 +102,7 @@ namespace access {
    * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getAltitude(const DENM& denm){
-    return cdd::getAltitude(denm.denm.management.event_position.altitude);
+    return getAltitude(denm.denm.management.event_position.altitude);
   }
 
   /**
@@ -116,7 +114,7 @@ namespace access {
   inline double getHeading(const DENM& denm){
     if(denm.denm.location_is_present){
       if(denm.denm.location.event_position_heading_is_present){
-        return cdd::getHeading(denm.denm.location.event_position_heading);
+        return getHeading(denm.denm.location.event_position_heading);
       }
       else{
         throw std::invalid_argument("Heading is not present!");
@@ -151,7 +149,7 @@ namespace access {
   inline double getSpeed(const DENM& denm){
     if(denm.denm.location_is_present){
       if(denm.denm.location.event_speed_is_present){
-        return cdd::getSpeed(denm.denm.location.event_speed);
+        return getSpeed(denm.denm.location.event_speed);
       }
       else{
         throw std::invalid_argument("Speed is not present!");
@@ -186,7 +184,7 @@ namespace access {
    * @return gm::PointStamped geometry_msgs::PointStamped of the given position
    */
   inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp){
-    return cdd::getUTMPosition(denm.denm.management.event_position, zone, northp);
+    return getUTMPosition(denm.denm.management.event_position, zone, northp);
   }
 
   /**
@@ -417,6 +415,4 @@ namespace access {
     }
   }
 
-} // namespace access
-
-} // namespace etsi_its_denm_msgs
+} // namespace etsi_its_denm_msgs::access

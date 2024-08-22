@@ -324,9 +324,8 @@ dependencies = [
 
 [[package]]
 name = "rasn-compiler"
-version = "0.1.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3adfed8c1b48b6b8bb4c889c947376c9d27c69557975de3a490111c6df32aff9"
+version = "0.3.0"
+source = "git+https://github.com/librasn/compiler.git?rev=ef06d5f827768726efe6a32da9e1ea1329fc4f7a#ef06d5f827768726efe6a32da9e1ea1329fc4f7a"
 dependencies = [
  "chrono",
  "nom",

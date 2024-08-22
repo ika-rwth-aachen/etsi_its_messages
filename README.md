@@ -52,7 +52,7 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 
 | Status | Acronym | Name | EN Specification | TS Specification |
 | --- | --- | --- | --- | --- |
-| :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | - |
+| :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | [ETSI TS 103 900 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103900_103999/103900/02.01.01_60/ts_103900v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_ts103900)) |
 | :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | - |
 | :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) |
 | :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
@@ -69,11 +69,13 @@ etsi_its_messages
 ├── etsi_its_coding
 │   ├── etsi_its_coding         # metapackage including all coding packages
 │   ├── etsi_its_cam_coding
+│   ├── etsi_its_cam_ts_coding
 │   ├── etsi_its_cpm_ts_coding
 │   └── etsi_its_denm_coding
 ├── etsi_its_conversion
 │   ├── etsi_its_conversion     # conversion node depending on all conversion packages
 │   ├── etsi_its_cam_conversion
+│   ├── etsi_its_cam_ts_conversion
 │   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
 │   └── etsi_its_primitives_conversion
@@ -81,6 +83,7 @@ etsi_its_messages
 ├── etsi_its_msgs
 │   ├── etsi_its_msgs           # metapackage including all msg packages
 │   ├── etsi_its_cam_msgs
+│   ├── etsi_its_cam_ts_msgs
 │   ├── etsi_its_cpm_ts_msgs
 │   └── etsi_its_denm_msgs
 ├── etsi_its_msgs_utils
@@ -155,6 +158,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | --- | --- | --- |
 | `~/udp/in` | `udp_msgs/msg/UdpPacket` | UDP payload for conversion to ROS |
 | `~/cam/in` | `etsi_its_cam_msgs/msg/CAM` | CAM for conversion to UDP |
+| `~/cam_ts/in` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) for conversion to UDP |
 | `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
 
@@ -164,6 +168,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | --- | --- | --- |
 | `~/udp/out` | `udp_msgs/msg/UdpPacket` | UDP payload converted from ROS message |
 | `~/cam/out` | `etsi_its_cam_msgs/msg/CAM` | CAM converted from UDP payload |
+| `~/cam_ts/out` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) converted from UDP payload |
 | `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
 
@@ -174,7 +179,8 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `has_btp_destination_port` | `bool` | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
 | `btp_destination_port_offset` | `int` | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
-| `etsi_types` | `string[]` | list of ETSI types to convert | `cam`, `cpm_ts`, `denm` |
+| `ros2udp_etsi_types` | `string[]` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` (defaults to all norms and specifications of all possible ETSI types) | `cam`, `cam_ts`, `cpm_ts`, `denm` |
+| `udp2ros_etsi_types` | `string[]` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` (defaults only to the norm or specification of all possible ETSI types)  | `cam`, `cam_ts`, `cpm_ts`, `denm` |
 | `subscriber_queue_size` | `int` | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | queue size for outgoing ROS messages |
 
@@ -221,7 +227,7 @@ The *etsi_its_messages* package stack was created and used in order to record th
 > [Guido Küppers](https://github.com/gkueppers), [Jean-Pierre Busch](https://github.com/jpbusch) and [Lennart Reiher](https://github.com/lreiher), [Lutz Eckstein](https://www.ika.rwth-aachen.de/en/institute/team/univ-prof-dr-ing-lutz-eckstein.html)  
 > [Institute for Automotive Engineering (ika), RWTH Aachen University](https://www.ika.rwth-aachen.de/en/)
 >
-> <sup>*Abstract* – Connectivity is a main driver for the ongoing megatrend of automated mobility: future Cooperative Intelligent Transport Systems (C-ITS) will connect road vehicles, traffic signals, roadside infrastructure, and even vulnerable road users, sharing data and compute for safer, more efficient, and more comfortable mobility. In terms of communication technology for realizing such vehicle-to-everything (V2X) communication, the WLAN-based peer-to-peer approach (IEEE 802.11p, ITS-G5 in Europe) competes with C-V2X based on cellular technologies (4G and beyond). Irrespective of the underlying communication standard, common message interfaces are crucial for a common understanding between vehicles, especially from different manufacturers. Targeting this issue, the European Telecommunications Standards Institute (ETSI) has been standardizing V2X message formats such as the Cooperative Awareness Message (CAM). In this work, we present V2AIX, a multi-modal real-world dataset of ETSI ITS messages gathered in public road traffic, the first of its kind. Collected in measurement drives and with stationary infrastructure, we have recorded more than 230 000 V2X messages from more than 1800 vehicles and roadside units in public road traffic. Alongside a first analysis of the dataset, we present a way of integrating ETSI ITS V2X messages into the Robot Operating System (ROS). This enables researchers to not only thoroughly analyze real-world V2X data, but to also study and implement standardized V2X messages in ROS-based automated driving applications. The full dataset is publicly available for noncommercial use at https://v2aix.ika.rwth-aachen.de.</sup>
+> <sup>*Abstract* – Connectivity is a main driver for the ongoing megatrend of automated mobility: future Cooperative Intelligent Transport Systems (C-ITS) will connect road vehicles, traffic signals, roadside infrastructure, and even vulnerable road users, sharing data and compute for safer, more efficient, and more comfortable mobility. In terms of communication technology for realizing such vehicle-to-everything (V2X) communication, the WLAN-based peer-to-peer approach (IEEE 802.11p, ITS-G5 in Europe) competes with C-V2X based on cellular technologies (4G and beyond). Irrespective of the underlying communication standard, common message interfaces are crucial for a common understanding between vehicles, especially from different manufacturers. Targeting this issue, the European Telecommunications Standards Institute (ETSI) has been standardizing V2X message formats such as the Cooperative Awareness Message (CAM). In this work, we present V2AIX, a multi-modal real-world dataset of ETSI ITS messages gathered in public road traffic, the first of its kind. Collected in measurement drives and with stationary infrastructure, we have recorded more than 285 000 V2X messages from more than 2380 vehicles and roadside units in public road traffic. Alongside a first analysis of the dataset, we present a way of integrating ETSI ITS V2X messages into the Robot Operating System (ROS). This enables researchers to not only thoroughly analyze real-world V2X data, but to also study and implement standardized V2X messages in ROS-based automated driving applications. The full dataset is publicly available for non-commercial use at https://v2aix.ika.rwth-aachen.de.</sup>
 
 
 
@@ -258,6 +264,11 @@ This repository uses the following software. For full license details, please re
     ```
     MIT License
     Copyright (c) 2008-2023, Charles Karney
+    ```
+- [rasn](https://github.com/librasn/rasn)
+    ```
+    MIT License
+    Copyright (c) 2016 Erin Power
     ```
 - [ROS](https://www.ros.org/)
     ```
