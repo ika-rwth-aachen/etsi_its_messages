@@ -25,3 +25,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node \
 ```bash
 ./publish_cpm_ts.py
 ```
+
+```bash
+./publish_vam_ts.py
+```
