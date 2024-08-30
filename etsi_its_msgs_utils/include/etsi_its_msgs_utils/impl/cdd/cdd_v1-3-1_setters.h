@@ -209,7 +209,7 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
  * @param heading object to set
  * @param value Heading value in degree as decimal number
  */
-inline void setHeading(etsi_its_cpm_ts_msgs::msg::Heading& heading, const double value) {
+inline void setHeading(Heading& heading, const double value) {
   heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
   setHeadingValue(heading.heading_value, value);
 }

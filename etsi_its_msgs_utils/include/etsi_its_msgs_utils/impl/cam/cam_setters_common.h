@@ -195,6 +195,16 @@ inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, c
 }
 
 /**
+ * @brief Set the Exterior Lights by a vector of bools
+ *
+ * @param exterior_lights
+ * @param bits
+ */
+inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+  setBitString(exterior_lights, bits);
+}
+
+/**
  * @brief Set the Exterior Lights by using a vector of bools
  *
  * @param cam CAM to set the exterior lights
@@ -235,16 +245,6 @@ inline void setAccelerationControl(AccelerationControl& acceleration_control, co
  */
 inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
   setBitString(driving_lane_status, bits);
-}
-
-/**
- * @brief Set the Exterior Lights by a vector of bools
- *
- * @param exterior_lights
- * @param bits
- */
-inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
-  setBitString(exterior_lights, bits);
 }
 
 /**
