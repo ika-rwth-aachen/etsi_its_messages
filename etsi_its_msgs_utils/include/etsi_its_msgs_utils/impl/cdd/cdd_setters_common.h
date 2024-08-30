@@ -29,7 +29,8 @@ SOFTWARE.
  * @brief Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1
  */
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
 
 #include <cstring>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
@@ -172,3 +173,5 @@ inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
     }
   }
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
