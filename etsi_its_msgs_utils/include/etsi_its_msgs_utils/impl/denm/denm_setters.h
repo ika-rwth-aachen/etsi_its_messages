@@ -181,4 +181,24 @@ namespace etsi_its_denm_msgs::access {
     setFromUTMPosition(denm.denm.management.event_position, utm_position, zone, northp);
   }
 
+  /**
+   * @brief Set the Driving Lane Status by a vector of bools
+   *
+   * @param driving_lane_status
+   * @param bits
+   */
+  inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
+    setBitString(driving_lane_status, bits);
+  }
+
+  /**
+   * @brief Set the Lightbar Siren In Use by a vector of bools
+   *
+   * @param light_bar_siren_in_use
+   * @param bits
+   */
+  inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
+    setBitString(light_bar_siren_in_use, bits);
+  }
+
 } // namespace etsi_its_denm_msgs::access

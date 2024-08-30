@@ -110,6 +110,31 @@ inline void setHeading(CAM& cam, const double heading_val){
 }
 
 /**
+ * @brief Set the VehicleLengthValue object
+ *
+ * @param vehicle_length object to set
+ * @param value VehicleLengthValue in meter as decimal number
+ */
+inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, const double value) {
+  int64_t length = (int64_t)std::round(value*1e1);
+  throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
+  vehicle_length.value = length;
+}
+
+/**
+ * @brief Set the VehicleLength object
+ *
+ * VehicleLengthConfidenceIndication is set to UNAVAILABLE
+ *
+ * @param vehicle_length object to set
+ * @param value  VehicleLengthValue in meter as decimal number
+ */
+inline void setVehicleLength(VehicleLength& vehicle_length, const double value) {
+  vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;
+  setVehicleLengthValue(vehicle_length.vehicle_length_value, value);
+}
+
+/**
  * @brief Set the vehicle dimensions
  *
  * @param cam CAM to set the vehicle dimensions
@@ -190,4 +215,64 @@ inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights
   else {
     throw std::invalid_argument("LowFrequencyContainer is not present!");
   }
+}
+
+/**
+ * @brief Set the Acceleration Control by a vector of bools
+ *
+ * @param acceleration_control
+ * @param bits
+ */
+inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
+  setBitString(acceleration_control, bits);
+}
+
+/**
+ * @brief Set the Driving Lane Status by a vector of bools
+ *
+ * @param driving_lane_status
+ * @param bits
+ */
+inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
+  setBitString(driving_lane_status, bits);
+}
+
+/**
+ * @brief Set the Exterior Lights by a vector of bools
+ *
+ * @param exterior_lights
+ * @param bits
+ */
+inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
+  setBitString(exterior_lights, bits);
+}
+
+/**
+ * @brief Set the Special Transport Type by a vector of bools
+ *
+ * @param special_transport_type
+ * @param bits
+ */
+inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
+  setBitString(special_transport_type, bits);
+}
+
+/**
+ * @brief Set the Lightbar Siren In Use by a vector of bools
+ *
+ * @param light_bar_siren_in_use
+ * @param bits
+ */
+inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
+  setBitString(light_bar_siren_in_use, bits);
+}
+
+/**
+ * @brief Set the Emergency Priority by a vector of bools
+ *
+ * @param emergency_priority
+ * @param bits
+ */
+inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
+  setBitString(emergency_priority, bits);
 }

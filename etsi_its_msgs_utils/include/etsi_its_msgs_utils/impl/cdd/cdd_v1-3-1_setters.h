@@ -185,3 +185,31 @@ inline void setFromUTMPosition(ReferencePosition& reference_position, const gm::
   }
   setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
 }
+
+/**
+ * @brief Set the HeadingValue object
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
+ */
+inline void setHeadingValue(HeadingValue& heading, const double value) {
+  int64_t deg = (int64_t)std::round(value*1e1);
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  heading.value = deg;
+}
+
+/**
+ * @brief Set the Heading object
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ * HeadingConfidence is set to UNAVAILABLE
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
+ */
+inline void setHeading(etsi_its_cpm_ts_msgs::msg::Heading& heading, const double value) {
+  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+  setHeadingValue(heading.heading_value, value);
+}
