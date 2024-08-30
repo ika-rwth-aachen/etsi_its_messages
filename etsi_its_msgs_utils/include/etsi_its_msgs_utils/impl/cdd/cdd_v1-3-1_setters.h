@@ -28,7 +28,9 @@ SOFTWARE.
  * @file impl/cdd/cdd_v1-3-1_setters.h
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1
  */
-#pragma once
+
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
 
 #include <cstring>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
@@ -213,3 +215,5 @@ inline void setHeading(Heading& heading, const double value) {
   heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
   setHeadingValue(heading.heading_value, value);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H

@@ -29,7 +29,8 @@ SOFTWARE.
  * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1
  */
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
 
 #include <cstring>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
@@ -127,3 +128,5 @@ inline void setLateralAcceleration(AccelerationComponent& accel, const double va
   accel.confidence.value = AccelerationConfidence::UNAVAILABLE;
   setLateralAccelerationValue(accel.value, value);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H

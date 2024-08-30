@@ -28,7 +28,9 @@ SOFTWARE.
  * @file impl/cdd/cdd_getters_common.h
  * @brief Common getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1
  */
-#pragma once
+
+# ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
+# define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 
 #include <GeographicLib/UTMUPS.hpp>
 
@@ -207,3 +209,5 @@ inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_b
 inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
   return getBitString(emergency_priority.value, emergency_priority.bits_unused);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H

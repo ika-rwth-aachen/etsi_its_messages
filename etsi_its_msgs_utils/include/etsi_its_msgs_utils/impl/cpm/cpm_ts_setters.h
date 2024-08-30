@@ -29,9 +29,6 @@ SOFTWARE.
  * @brief Setter functions for the ETSI ITS CPM (TS)
  */
 
-#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
-#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
-
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/constants.h>
