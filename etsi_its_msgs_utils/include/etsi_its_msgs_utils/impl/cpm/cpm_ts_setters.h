@@ -48,7 +48,21 @@ namespace etsi_its_cpm_ts_msgs::access {
     setItsPduHeader(cpm.header, MessageId::CPM, station_id, protocol_version);
   }
 
-    /**
+  /**
+   * @brief Set the ReferenceTime-value
+   * 
+   * @param cpm CPM to set the ReferenceTime-Value for
+   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the ReferenceTime-Value from
+   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
+   */
+  inline void setReferenceTime(CollectivePerceptionMessage& cpm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second){
+    TimestampIts t_its;
+    setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
+    throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+    cpm.payload.management_container.reference_time = t_its;
+  }
+
+  /**
    * @brief Set the ReferencePositionWithConfidence for a CPM TS
    *
    * This function sets the latitude, longitude, and altitude of the CPMs reference position.

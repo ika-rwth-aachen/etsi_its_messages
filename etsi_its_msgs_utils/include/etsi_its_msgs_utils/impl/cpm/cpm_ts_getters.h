@@ -47,19 +47,39 @@ namespace etsi_its_cpm_ts_msgs::access {
     return getStationID(cpm.header);
   }
 
-/**
- * @brief Get the UTM Position defined within the BasicContainer of the CPM
- *
- * The position is transformed into UTM by using GeographicLib::UTMUPS
- * The altitude value is directly used as z-Coordinate
- *
- * @param[in] cpm CPM to get the UTM Position from
- * @param[out] zone the UTM zone (zero means UPS)
- * @param[out] northp hemisphere (true means north, false means south)
- * @return gm::PointStamped geometry_msgs::PointStamped of the given position
- */
-inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage& cpm, int& zone, bool& northp){
-  return getUTMPosition(cpm.payload.management_container.reference_position, zone, northp);
-}
+  /**
+   * @brief Get the Reference Time object
+   * 
+   * @param cpm CPM to get the ReferenceTime-Value from
+   * @return TimestampIts 
+   */
+  inline TimestampIts getReferenceTime(const CollectivePerceptionMessage& cpm){
+    return cpm.payload.management_container.reference_time;
+  }
+
+  /**
+   * @brief Get the ReferenceTime-Value
+   * 
+   * @param cpm CPM to get the ReferenceTime-Value from 
+   * @return uint64_t the ReferenceTime-Value
+   */
+  inline uint64_t getReferenceTimeValue(const CollectivePerceptionMessage& cpm){
+    return getReferenceTime(cpm).value;
+  }
+
+  /**
+   * @brief Get the UTM Position defined within the BasicContainer of the CPM
+   *
+   * The position is transformed into UTM by using GeographicLib::UTMUPS
+   * The altitude value is directly used as z-Coordinate
+   *
+   * @param[in] cpm CPM to get the UTM Position from
+   * @param[out] zone the UTM zone (zero means UPS)
+   * @param[out] northp hemisphere (true means north, false means south)
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage& cpm, int& zone, bool& northp){
+    return getUTMPosition(cpm.payload.management_container.reference_position, zone, northp);
+  }
   
 } // namespace etsi_its_cpm_ts_msgs::access
