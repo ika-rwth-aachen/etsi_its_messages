@@ -190,7 +190,7 @@ inline void setLateralAcceleration(CAM& cam, const double lat_accel){
  * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
  */
 inline void setReferencePosition(CAM& cam, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
-  setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);
+  setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);
 }
 
 /**

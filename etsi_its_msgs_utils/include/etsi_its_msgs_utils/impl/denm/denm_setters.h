@@ -73,29 +73,17 @@ namespace etsi_its_denm_msgs::access {
   }
 
   /**
-   * @brief Set the ReferencePosition for a DENM
+   * @brief Set the ReferencePositionWithConfidence for a DENM
    *
-   * Altitude is set to UNAVAILABLE
-   *
-   * @param denm DENM to set the ReferencePosition
-   * @param latitude Latitude value in degree as decimal number
-   * @param longitude Longitude value in degree as decimal number
-   */
-  inline void setReferencePosition(DENM& denm, const double latitude, const double longitude)
-  {
-    setReferencePosition(denm.denm.management.event_position, latitude, longitude);
-  }
-
-  /**
-   * @brief Set the ReferencePosition for a DENM
+   * This function sets the latitude, longitude, and altitude of the DENMs reference position.
+   * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
    *
    * @param denm DENM to set the ReferencePosition
-   * @param latitude Latitude value in degree as decimal number
-   * @param longitude Longitude value in degree as decimal number
-   * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
+   * @param latitude The latitude value position in degree as decimal number.
+   * @param longitude The longitude value in degree as decimal number.
+   * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
    */
-  inline void setReferencePosition(DENM& denm, const double latitude, const double longitude, const double altitude)
-  {
+  inline void setReferencePosition(DENM& denm, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
     setReferencePosition(denm.denm.management.event_position, latitude, longitude, altitude);
   }
 
