@@ -67,6 +67,36 @@ namespace etsi_its_cpm_ts_msgs::access {
     return getReferenceTime(cpm).value;
   }
 
+ /**
+   * @brief Get the Latitude value of CPM
+   * 
+   * @param cpm CPM to get the Latitude value from
+   * @return Latitude value in degree as decimal number
+   */
+  inline double getLatitude(const CollectivePerceptionMessage& cpm){
+    return getLatitude(cpm.payload.management_container.reference_position.latitude);
+  }
+
+  /**
+   * @brief Get the Longitude value of CPM
+   * 
+   * @param cpm CPM to get the Longitude value from
+   * @return Longitude value in degree as decimal number
+   */
+  inline double getLongitude(const CollectivePerceptionMessage& cpm){
+    return getLongitude(cpm.payload.management_container.reference_position.longitude);
+  }
+
+  /**
+   * @brief Get the Altitude value of CPM
+   * 
+   * @param cpm CPM to get the Altitude value from
+   * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
+   */
+  inline double getAltitude(const CollectivePerceptionMessage& cpm){
+    return getAltitude(cpm.payload.management_container.reference_position.altitude);
+  }
+
   /**
    * @brief Get the UTM Position defined within the BasicContainer of the CPM
    *
