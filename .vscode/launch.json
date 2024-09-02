@@ -211,7 +211,7 @@
         },
         {
             "name": "MAPEM TS (coding)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
@@ -231,7 +231,7 @@
         },
         {
             "name": "MAPEM TS (msgs)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
@@ -249,7 +249,7 @@
         },
         {
             "name": "MAPEM TS (conversion)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
@@ -269,7 +269,7 @@
         },
         {
             "name": "SPATEM TS (coding)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
@@ -289,7 +289,7 @@
         },
         {
             "name": "SPATEM TS (msgs)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
@@ -307,7 +307,7 @@
         },
         {
             "name": "SPATEM TS (conversion)",
-            "preLaunchTask": "Patch ASN.1 files",
+            "preLaunchTask": "Download external dependencies and patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
