@@ -44,46 +44,12 @@ if(${ROS_VERSION} EQUAL 2)
 
   if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
-    ament_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.ros2.cpp)
-    target_include_directories(${PROJECT_NAME}-cam_test PUBLIC
+    ament_add_gtest(${PROJECT_NAME}-test test/test_access.ros2.cpp)
+    target_include_directories(${PROJECT_NAME}-test PUBLIC test
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
       $<INSTALL_INTERFACE:include>
     )
-    target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
-    ament_target_dependencies(${PROJECT_NAME}-cam_test
-      etsi_its_msgs
-      GeographicLib
-      geometry_msgs
-    )
-    ament_add_gtest(${PROJECT_NAME}-cam_ts_test test/test_cam_ts_access.ros2.cpp)
-    target_include_directories(${PROJECT_NAME}-cam_ts_test PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include>
-    )
-    target_include_directories(${PROJECT_NAME}-cam_ts_test PUBLIC test)
-    ament_target_dependencies(${PROJECT_NAME}-cam_ts_test
-      etsi_its_msgs
-      GeographicLib
-      geometry_msgs
-    )
-    ament_add_gtest(${PROJECT_NAME}-cpm_ts_test test/test_cpm_ts_access.ros2.cpp)
-    target_include_directories(${PROJECT_NAME}-cpm_ts_test PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include>
-    )
-    target_include_directories(${PROJECT_NAME}-cpm_ts_test PUBLIC test)
-    ament_target_dependencies(${PROJECT_NAME}-cpm_ts_test
-      etsi_its_msgs
-      GeographicLib
-      geometry_msgs
-    )
-    ament_add_gtest(${PROJECT_NAME}-denm_test test/test_denm_access.ros2.cpp)
-    target_include_directories(${PROJECT_NAME}-denm_test PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-    )
-    target_include_directories(${PROJECT_NAME}-denm_test PUBLIC test)
-    ament_target_dependencies(${PROJECT_NAME}-denm_test
+    ament_target_dependencies(${PROJECT_NAME}-test
       etsi_its_msgs
       GeographicLib
       geometry_msgs
@@ -123,15 +89,10 @@ elseif(${ROS_VERSION} EQUAL 1)
   )
 
   if(CATKIN_ENABLE_TESTING)
-    catkin_add_gtest(${PROJECT_NAME}-cam_test test/test_cam_access.cpp)
-    catkin_add_gtest(${PROJECT_NAME}-denm_test test/test_denm_access.cpp)
-    if(TARGET ${PROJECT_NAME}-cam_test)
-      target_include_directories(${PROJECT_NAME}-cam_test PUBLIC test)
-      target_link_libraries(${PROJECT_NAME}-cam_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
-    endif()
-    if(TARGET ${PROJECT_NAME}-denm_test)
-      target_include_directories(${PROJECT_NAME}-denm_test PUBLIC test)
-      target_link_libraries(${PROJECT_NAME}-denm_test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
+    catkin_add_gtest(${PROJECT_NAME}-test test/test_access.cpp)
+    if(TARGET ${PROJECT_NAME}-test)
+      target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+      target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
     endif()
   endif()
 
