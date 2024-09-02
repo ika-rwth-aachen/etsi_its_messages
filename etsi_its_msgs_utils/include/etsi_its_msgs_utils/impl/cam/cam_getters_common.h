@@ -29,7 +29,8 @@ SOFTWARE.
  * @brief Common getter functions for the ETSI ITS CAM (EN and TS)
  */
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
 
 /**
  * @brief Get the Station ID object
@@ -286,3 +287,5 @@ inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_b
 inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
   return getBitString(emergency_priority.value, emergency_priority.bits_unused);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H

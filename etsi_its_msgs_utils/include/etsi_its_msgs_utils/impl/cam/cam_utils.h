@@ -32,7 +32,8 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_UTILS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_UTILS_H
 
 /**
  * @brief Get the TimestampITS from a given GenerationDeltaTime object
@@ -76,3 +77,5 @@ inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaT
   setTimestampITS(t_its, unix_timestamp_estimate, n_leap_seconds);
   return getUnixNanosecondsFromGenerationDeltaTime(generation_delta_time, t_its, n_leap_seconds);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_UTILS_H

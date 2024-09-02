@@ -29,7 +29,8 @@ SOFTWARE.
  * @brief Common setter functions for the ETSI ITS CAM (EN and TS)
  */
 
-#pragma once
+# ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
+# define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
 #include <etsi_its_msgs_utils/impl/constants.h>
 
@@ -292,3 +293,5 @@ inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, co
 inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
   setBitString(emergency_priority, bits);
 }
+
+#endif // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
