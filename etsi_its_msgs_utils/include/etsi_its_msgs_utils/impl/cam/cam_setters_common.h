@@ -70,30 +70,31 @@ inline void setStationType(CAM& cam, const uint8_t value){
 }
 
 /**
- * @brief Set the ReferencePosition for a CAM
+ * @brief Set the HeadingValue object
  *
- * Altitude is set to UNAVAILABLE
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
  *
- * @param cam CAM to set the ReferencePosition
- * @param latitude Latitude value in degree as decimal number
- * @param longitude Longitude value in degree as decimal number
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
  */
-inline void setReferencePosition(CAM& cam, const double latitude, const double longitude)
-{
-  setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);
+inline void setHeadingValue(HeadingValue& heading, const double value) {
+  int64_t deg = (int64_t)std::round(value*1e1);
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  heading.value = deg;
 }
 
 /**
- * @brief Set the ReferencePosition for a CAM
+ * @brief Set the Heading object
  *
- * @param cam CAM to set the ReferencePosition
- * @param latitude Latitude value in degree as decimal number
- * @param longitude Longitude value in degree as decimal number
- * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ * HeadingConfidence is set to UNAVAILABLE
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
  */
-inline void setReferencePosition(CAM& cam, const double latitude, const double longitude, const double altitude)
-{
-  setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);
+inline void setHeading(Heading& heading, const double value) {
+  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+  setHeadingValue(heading.heading_value, value);
 }
 
 /**
