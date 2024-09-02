@@ -141,6 +141,59 @@ inline void setSpeed(Speed& speed, const double value) {
 }
 
 /**
+ * @brief Sets the reference position in the given ReferencePostion object.
+ * 
+ * This function sets the latitude, longitude, and altitude of the reference position.
+ * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
+ * 
+ * @param ref_position ReferencePostion or ReferencePositionWithConfidence object to set the reference position in.
+ * @param latitude The latitude value position in degree as decimal number.
+ * @param longitude The longitude value in degree as decimal number.
+ * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
+ */
+template <typename T>
+inline void setReferencePosition(T& ref_position, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
+  setLatitude(ref_position.latitude, latitude);
+  setLongitude(ref_position.longitude, longitude);
+  if (altitude != AltitudeValue::UNAVAILABLE) {
+    setAltitude(ref_position.altitude, altitude);
+  } else {
+    ref_position.altitude.altitude_value.value = AltitudeValue::UNAVAILABLE;
+    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
+  }
+  // TODO: set confidence values
+}
+
+/**
+ * @brief Set the ReferencePosition from a given UTM-Position
+ *
+ * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+ * The z-Coordinate is directly used as altitude value
+ * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
+ *
+ * @param[out] reference_position ReferencePostion or ReferencePositionWithConfidence to set
+ * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
+ * @param[in] zone the UTM zone (zero means UPS) of the given position
+ * @param[in] northp hemisphere (true means north, false means south)
+ */
+template <typename T>
+inline void setFromUTMPosition(T& reference_position, const gm::PointStamped& utm_position, const int zone, const bool northp)
+{
+  std::string required_frame_prefix = "utm_";
+  if(utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0)
+  {
+    throw std::invalid_argument("Frame-ID of UTM Position '"+utm_position.header.frame_id+"' does not start with required prefix '"+required_frame_prefix+"'!");
+  }
+  double latitude, longitude;
+  try {
+    GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);
+  } catch (GeographicLib::GeographicErr& e) {
+    throw std::invalid_argument(e.what());
+  }
+  setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
+}
+
+/**
  * @brief Set a Bit String by a vector of bools
  *
  * @tparam T

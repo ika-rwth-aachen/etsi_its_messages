@@ -178,6 +178,21 @@ inline void setLateralAcceleration(CAM& cam, const double lat_accel){
 }
 
 /**
+ * @brief Set the ReferencePosition for a CAM
+ *
+ * This function sets the latitude, longitude, and altitude of the CAMs reference position.
+ * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
+ *
+ * @param cam CAM to set the ReferencePosition
+ * @param latitude The latitude value position in degree as decimal number.
+ * @param longitude The longitude value in degree as decimal number.
+ * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
+ */
+inline void setReferencePosition(CAM& cam, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
+  setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude);
+}
+
+/**
  * @brief Set the ReferencePosition of a CAM from a given UTM-Position
  *
  * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS

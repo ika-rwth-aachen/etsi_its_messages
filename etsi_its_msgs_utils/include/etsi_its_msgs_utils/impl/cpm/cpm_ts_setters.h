@@ -48,64 +48,35 @@ namespace etsi_its_cpm_ts_msgs::access {
     setItsPduHeader(cpm.header, MessageId::CPM, station_id, protocol_version);
   }
 
-  /**
-   * @brief Set the Reference Position object
+    /**
+   * @brief Set the ReferencePositionWithConfidence for a CPM TS
    *
-   * Altitude is set to UNAVAILABLE
+   * This function sets the latitude, longitude, and altitude of the CPMs reference position.
+   * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
    *
-   * @param ref_position object to set
-   * @param latitude Latitude value in degree as decimal number
-   * @param longitude Longitude value in degree as decimal number
+   * @param cpm CPM to set the ReferencePosition
+   * @param latitude The latitude value position in degree as decimal number.
+   * @param longitude The longitude value in degree as decimal number.
+   * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
    */
-  inline void setReferencePosition(ReferencePosition& ref_position, const double latitude, const double longitude)
-  {
-    setLatitude(ref_position.latitude, latitude);
-    setLongitude(ref_position.longitude, longitude);
-    ref_position.altitude.altitude_value.value  = AltitudeValue::UNAVAILABLE;
-    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
+  inline void setReferencePosition(CollectivePerceptionMessage& cpm, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
+    setReferencePosition(cpm.payload.management_container.reference_position, latitude, longitude, altitude);
   }
 
   /**
-   * @brief Set the Reference Position object
-   *
-   * @param ref_position object to set
-   * @param latitude Latitude value in degree as decimal number
-   * @param longitude Longitude value in degree as decimal number
-   * @param altitude Altitude value (above the reference ellipsoid surface) in meter as decimal number
-   */
-  inline void setReferencePosition(ReferencePosition& ref_position, const double latitude, const double longitude, const double altitude)
-  {
-    setLatitude(ref_position.latitude, latitude);
-    setLongitude(ref_position.longitude, longitude);
-    setAltitude(ref_position.altitude, altitude);
-  }
-
-  /**
-   * @brief Set the ReferencePosition from a given UTM-Position
+   * @brief Set the ReferencePosition of a CPM from a given UTM-Position
    *
    * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
    * The z-Coordinate is directly used as altitude value
    * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
    *
-   * @param[out] reference_position ReferencePosition to set
+   * @param[out] cpm CPM for which to set the ReferencePosition
    * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
    * @param[in] zone the UTM zone (zero means UPS) of the given position
    * @param[in] northp hemisphere (true means north, false means south)
    */
-  inline void setFromUTMPosition(ReferencePosition& reference_position, const gm::PointStamped& utm_position, const int zone, const bool northp)
-  {
-    std::string required_frame_prefix = "utm_";
-    if(utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0)
-    {
-      throw std::invalid_argument("Frame-ID of UTM Position '"+utm_position.header.frame_id+"' does not start with required prefix '"+required_frame_prefix+"'!");
-    }
-    double latitude, longitude;
-    try {
-      GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);
-    } catch (GeographicLib::GeographicErr& e) {
-      throw std::invalid_argument(e.what());
-    }
-    setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
+  inline void setFromUTMPosition(CollectivePerceptionMessage& cpm, const gm::PointStamped& utm_position, const int& zone, const bool& northp) {
+    setFromUTMPosition(cpm.payload.management_container.reference_position, utm_position, zone, northp);
   }
 
 } // namespace etsi_its_cpm_ts_msgs::access
