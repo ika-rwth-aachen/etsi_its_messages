@@ -106,6 +106,18 @@ namespace etsi_its_denm_msgs::access {
   }
 
   /**
+   * @brief Get the Heading value
+   *
+   * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+   *
+   * @param heading to get the Heading value from
+   * @return Heading value in degree as decimal number
+   */
+  inline double getHeading(const Heading& heading){
+    return ((double)heading.heading_value.value)*1e-1;
+  }
+
+  /**
    * @brief Get the Heading object
    * 
    * @param denm DENM to get the Heading-Value from
@@ -413,6 +425,26 @@ namespace etsi_its_denm_msgs::access {
     else{
       throw std::invalid_argument("SituationContainer is not present!");
     }
+  }
+
+  /**
+   * @brief Get the Driving Lane Status in form of bool vector
+   *
+   * @param driving_lane_status
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status){
+    return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+  }
+
+  /**
+   * @brief Get the Lightbar Siren In Use in form of bool vector
+   *
+   * @param light_bar_siren_in_use
+   * @return std::vector<bool>
+   */
+  inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
+    return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
   }
 
 } // namespace etsi_its_denm_msgs::access

@@ -102,6 +102,18 @@ inline double getAltitude(const CAM& cam){
 }
 
 /**
+ * @brief Get the Heading value
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the Heading value from
+ * @return Heading value in degree as decimal number
+ */
+inline double getHeading(const Heading& heading){
+  return ((double)heading.heading_value.value)*1e-1;
+}
+
+/**
  * @brief Get the Heading value of CAM
  *
  * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -111,6 +123,16 @@ inline double getAltitude(const CAM& cam){
  */
 inline double getHeading(const CAM& cam){
   return getHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+}
+
+/**
+ * @brief Get the Vehicle Length
+ *
+ * @param vehicleLength to get the vehicle length value from
+ * @return vehicle length value in meter as decimal number
+ */
+inline double getVehicleLength(const VehicleLength& vehicle_length){
+  return ((double)vehicle_length.vehicle_length_value.value)*1e-1;
 }
 
 /**
@@ -186,6 +208,16 @@ inline gm::PointStamped getUTMPosition(const CAM& cam, int& zone, bool& northp){
 }
 
 /**
+ * @brief Get the Exterior Lights in form of bool vector
+ *
+ * @param exterior_lights
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights){
+  return getBitString(exterior_lights.value, exterior_lights.bits_unused);
+}
+
+/**
  * @brief Get Exterior Lights as bool vector
  *
  * @param cam CAM to get the ExteriorLights values from
@@ -203,4 +235,54 @@ inline std::vector<bool> getExteriorLights(const CAM& cam){
   else {
     throw std::invalid_argument("LowFrequencyContainer is not present!");
   }
+}
+
+/**
+ * @brief Get Acceleration Control in form of bool vector
+ *
+ * @param acceleration_control
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control){
+  return getBitString(acceleration_control.value, acceleration_control.bits_unused);
+}
+
+/**
+ * @brief Get the Driving Lane Status in form of bool vector
+ *
+ * @param driving_lane_status
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status){
+  return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+}
+
+/**
+ * @brief Get the Special Transport Type in form of bool vector
+ *
+ * @param special_transport_type
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
+  return getBitString(special_transport_type.value, special_transport_type.bits_unused);
+}
+
+/**
+ * @brief Get the Lightbar Siren In Use in form of bool vector
+ *
+ * @param light_bar_siren_in_use
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
+  return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
+}
+
+/**
+ * @brief Get the Vehicle Role in form of bool vector
+ *
+ * @param vehicle_role
+ * @return std::vector<bool>
+ */
+inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
+  return getBitString(emergency_priority.value, emergency_priority.bits_unused);
 }

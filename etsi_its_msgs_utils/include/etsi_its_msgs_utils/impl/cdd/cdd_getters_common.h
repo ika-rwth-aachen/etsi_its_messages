@@ -76,28 +76,6 @@ inline double getAltitude(const Altitude& altitude){
 }
 
 /**
- * @brief Get the Heading value
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading to get the Heading value from
- * @return Heading value in degree as decimal number
- */
-inline double getHeading(const Heading& heading){
-  return ((double)heading.heading_value.value)*1e-1;
-}
-
-/**
- * @brief Get the Vehicle Length
- *
- * @param vehicleLength to get the vehicle length value from
- * @return vehicle length value in meter as decimal number
- */
-inline double getVehicleLength(const VehicleLength& vehicle_length){
-  return ((double)vehicle_length.vehicle_length_value.value)*1e-1;
-}
-
-/**
  * @brief Get the Vehicle Width
  *
  * @param vehicleWidth to get the vehicle width value from
@@ -151,63 +129,32 @@ inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const 
 }
 
 /**
- * @brief Get Acceleration Control in form of bool vector
+ * @brief Get the UTM Position defined by the given ReferencePosition
  *
- * @param acceleration_control
- * @return std::vector<bool>
- */
-inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control){
-  return getBitString(acceleration_control.value, acceleration_control.bits_unused);
-}
-
-/**
- * @brief Get the Driving Lane Status in form of bool vector
+ * The position is transformed into UTM by using GeographicLib::UTMUPS
+ * The altitude value is directly used as z-Coordinate
  *
- * @param driving_lane_status
- * @return std::vector<bool>
+ * @param[in] reference_position ReferencePosition or ReferencePositionWithConfidence to get the UTM Position from
+ * @param[out] zone the UTM zone (zero means UPS)
+ * @param[out] northp hemisphere (true means north, false means south)
+ * @return gm::PointStamped geometry_msgs::PointStamped of the given position
  */
-inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status){
-  return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
-}
-
-/**
- * @brief Get the Exterior Lights in form of bool vector
- *
- * @param exterior_lights
- * @return std::vector<bool>
- */
-inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights){
-  return getBitString(exterior_lights.value, exterior_lights.bits_unused);
-}
-
-/**
- * @brief Get the Special Transport Type in form of bool vector
- *
- * @param special_transport_type
- * @return std::vector<bool>
- */
-inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
-  return getBitString(special_transport_type.value, special_transport_type.bits_unused);
-}
-
-/**
- * @brief Get the Lightbar Siren In Use in form of bool vector
- *
- * @param light_bar_siren_in_use
- * @return std::vector<bool>
- */
-inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
-  return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
-}
-
-/**
- * @brief Get the Vehicle Role in form of bool vector
- *
- * @param vehicle_role
- * @return std::vector<bool>
- */
-inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
-  return getBitString(emergency_priority.value, emergency_priority.bits_unused);
+template <typename T>
+inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, bool& northp){
+  gm::PointStamped utm_point;
+  double latitude = getLatitude(reference_position.latitude);
+  double longitude = getLongitude(reference_position.longitude);
+  utm_point.point.z = getAltitude(reference_position.altitude);
+  try {
+    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+    std::string hemisphere;
+    if(northp) hemisphere="N";
+    else hemisphere="S";
+    utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
+  } catch (GeographicLib::GeographicErr& e) {
+    throw std::invalid_argument(e.what());
+  }
+  return utm_point;
 }
 
 #endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
