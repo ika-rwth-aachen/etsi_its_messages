@@ -32,7 +32,7 @@ SOFTWARE.
 #pragma once
 
 // Messages
-#include <etsi_its_cam_ts_msgs/CollectivePerceptionMessage.h>
+#include <etsi_its_cpm_ts_msgs/CollectivePerceptionMessage.h>
 #include <geometry_msgs/PointStamped.h>
 
 namespace etsi_its_cpm_ts_msgs {
