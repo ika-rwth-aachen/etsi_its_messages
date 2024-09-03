@@ -34,6 +34,7 @@ SOFTWARE.
 // Messages
 #include <etsi_its_cpm_ts_msgs/msg/collective_perception_message.hpp>
 #include <geometry_msgs/msg/point_stamped.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
 
 namespace etsi_its_cpm_ts_msgs {
     using namespace msg;
