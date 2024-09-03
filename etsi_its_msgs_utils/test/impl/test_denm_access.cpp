@@ -27,7 +27,7 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   denm_access::setReferenceTime(denm, t_2007, 1);
   EXPECT_EQ(94694401000, denm_access::getReferenceTimeValue(denm));
   uint64_t t_2007_off = t_2007 + 5*1e9;
-  EXPECT_EQ(t_2007, denm_access::getUnixNanosecondsFromReferenceTime(denm_access::getReferenceTime(denm), 1));
+  EXPECT_EQ(t_2007, denm_access::getUnixNanosecondsFromReferenceTime(denm_access::getReferenceTime(denm)));
 
   int stationType_val = randomInt(denm_msgs::StationType::MIN, denm_msgs::StationType::MAX);
   denm_access::setStationType(denm, stationType_val);

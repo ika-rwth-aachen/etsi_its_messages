@@ -27,7 +27,7 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_EQ(94694401000, t_its.value);
   cpm_ts_access::setReferenceTime(cpm, t_2007, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9));
   EXPECT_EQ(94694401000, cpm_ts_access::getReferenceTimeValue(cpm));
-  EXPECT_EQ(t_2007, cpm_ts_access::getUnixNanosecondsFromReferenceTime(cpm_ts_access::getReferenceTime(cpm), 1));
+  EXPECT_EQ(t_2007, cpm_ts_access::getUnixNanosecondsFromReferenceTime(cpm_ts_access::getReferenceTime(cpm)));
 
   double latitude = randomDouble(-90.0, 90.0);
   double longitude = randomDouble(-180.0, 180.0);
