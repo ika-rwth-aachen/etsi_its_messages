@@ -13,6 +13,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_msgs REQUIRED)
   find_package(GeographicLib REQUIRED)
   find_package(geometry_msgs REQUIRED)
+  find_package(tf2_geometry_msgs REQUIRED)
 
   add_library(${PROJECT_NAME} INTERFACE)
 
@@ -25,10 +26,11 @@ if(${ROS_VERSION} EQUAL 2)
     ${etsi_its_msgs_TARGETS}
     ${GeographicLib_LIBRARIES}
     ${geometry_msgs_TARGETS}
+    ${tf2_geometry_msgs_TARGETS}
   )
 
   ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
-  ament_export_dependencies(etsi_its_msgs geometry_msgs)
+  ament_export_dependencies(etsi_its_msgs geometry_msgs, tf2_geometry_msgs)
 
   install(DIRECTORY include/
     DESTINATION include/${PROJECT_NAME}
@@ -53,6 +55,7 @@ if(${ROS_VERSION} EQUAL 2)
       etsi_its_msgs
       GeographicLib
       geometry_msgs
+      tf2_geometry_msgs
     )
   endif()
 
@@ -66,6 +69,7 @@ elseif(${ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_msgs
     geometry_msgs
+    tf2_geometry_msgs
   )
 
   find_package(GeographicLib REQUIRED)
@@ -76,6 +80,7 @@ elseif(${ROS_VERSION} EQUAL 1)
     CATKIN_DEPENDS
       etsi_its_msgs
       geometry_msgs
+      tf2_geometry_msgs
   )
 
   include_directories(

@@ -34,7 +34,11 @@ SOFTWARE.
 // Messages
 #include <etsi_its_cpm_ts_msgs/CollectivePerceptionMessage.h>
 #include <geometry_msgs/PointStamped.h>
+#include <geometry_msgs/Pose.h>
+#include <geometry_msgs/PoseWithCovariance.h>
+#include <geometry_msgs/Quaternion.h>
 #include <geometry_msgs/Vector3.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 namespace etsi_its_cpm_ts_msgs {
     namespace gm = geometry_msgs;

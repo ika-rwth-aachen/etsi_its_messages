@@ -43,7 +43,9 @@ namespace etsi_its_cpm_ts_msgs::access {
    * @param cpm The CPM from which to retrieve the station ID.
    * @return The station ID extracted from the header of the CPM.
    */
-inline uint32_t getStationID(const CollectivePerceptionMessage &cpm) { return getStationID(cpm.header); }
+inline uint32_t getStationID(const CollectivePerceptionMessage &cpm) {
+  return getStationID(cpm.header);
+}
 
 /**
    * @brief Get the Reference Time object
@@ -94,7 +96,7 @@ inline double getAltitude(const CollectivePerceptionMessage &cpm) {
 }
 
 /**
-   * @brief Get the UTM Position defined within the BasicContainer of the CPM
+   * @brief Get the UTM Position defined within the ManagementContainer of the CPM
    *
    * The position is transformed into UTM by using GeographicLib::UTMUPS
    * The altitude value is directly used as z-Coordinate
@@ -108,320 +110,173 @@ inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage &cpm, i
   return getUTMPosition(cpm.payload.management_container.reference_position, zone, northp);
 }
 
-/**
-   * @brief Get the number of perceived objects in the CPM
-   * 
-   * @param cpm CPM to get the number of perceived objects from
-   * @return int the number of perceived objects
-   */
-inline int getNumberOfPerceivedObjects(const etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage &cpm) {
-  int number = cpm.payload.cpm_containers.value.array[0]
-                   .container_data.perceived_object_container.number_of_perceived_objects.value;
+inline std::vector<CpmContainerId> getCpmContainerIds(const CollectivePerceptionMessage &cpm) {
+  std::vector<CpmContainerId> container_ids;
+  for (int i = 0; i < cpm.payload.cpm_containers.value.array.size(); i++) {
+    container_ids.push_back(cpm.payload.cpm_containers.value.array[i].container_id.value);
+  }
+  return container_ids;
+}
+
+inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cpm, const CpmContainerId container_id){
+  for (int i = 0; i < cpm.payload.cpm_containers.value.array.size(); i++){
+    if (cpm.payload.cpm_containers.value.array[i].container_id.value == container_id){
+      return cpm.payload.cpm_containers.value.array[i];
+    }
+  }
+  throw std::invalid_argument("No Container with ID " + std::to_string(container_id) + " found in CPM");
+}
+
+inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptionMessage &cpm){
+  getCpmContainer(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);
+}
+
+inline uint8_t getNumberOfPerceivedObjects(const WrappedCpmContainer &container) {
+  if (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {
+    throw std::invalid_argument("Container is not a PerceivedObjectContainer");
+  }
+  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;
   return number;
 }
 
-// Getters for the PerceivedObject
-
-/**
-   * @brief Get the PerceivedObject from the CPM
-   * 
-   * @param cpm CPM to get the PerceivedObject from
-   * @param number_of_object the number of the object to get
-   * @return PerceivedObject the PerceivedObject
-   */
-inline etsi_its_cpm_ts_msgs::PerceivedObject getPerceivedObject(const CollectivePerceptionMessage &cpm,
-                                                                int number_of_object) {
-  return cpm.payload.cpm_containers.value.array[0]
-      .container_data.perceived_object_container.perceived_objects.array[number_of_object];
+inline uint8_t getNumberOfPerceivedObjects(const CollectivePerceptionMessage &cpm) {
+  return getNumberOfPerceivedObjects(getPerceivedObjectContainer(cpm));
 }
 
-//inline gm::PoseWithCovariance getPoseWithCovarianceOfPerceivedObject(const PerceivedObject &object) {}
+// getters for the PerceivedObject
 
-/**
-   * @brief Get the pose of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the pose from
-   * @return gm::pose the pose of the PerceivedObject
-   */
+inline PerceivedObject getPerceivedObject(const WrappedCpmContainer &container, const uint8_t i) {
+  if (i >= getNumberOfPerceivedObjects(container)) {
+    throw std::invalid_argument("Index out of range");
+  }
+  return container.container_data.perceived_object_container.perceived_objects.array[i];
+}
+
+inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) {
+  return object.object_id.value;
+}
+
+inline int32_t getCartesianCoordinate(const CartesianCoordinateWithConfidence &coordinate) {
+  return coordinate.value.value / 100;
+}
+
+inline uint16_t getCartesianCoordinateConfidence(const CartesianCoordinateWithConfidence &coordinate) {
+  return coordinate.confidence.value / 100;
+}
+
+inline gm::Point getPositionOfPerceivedObject(const PerceivedObject &object) {
+  gm::Point point;
+  point.x = getCartesianCoordinate(object.position.x_coordinate);
+  point.y = getCartesianCoordinate(object.position.y_coordinate);
+  if (object.position.z_coordinate_is_present) {
+    point.z = getCartesianCoordinate(object.position.z_coordinate);
+  }
+  return point;
+}
+
+inline uint16_t getCartesianAngle(const CartesianAngle &angle) {
+  return angle.value.value / 10;
+}
+
+inline uint8_t getCartesianAngleConfidence(const CartesianAngle &angle) {
+  return angle.confidence.value / 10;
+}
+
+inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.angles_is_present) throw std::invalid_argument("No angles present in PerceivedObject");
+  tf2::Quaternion q;
+  double roll{0}, pitch{0}, yaw{0};
+
+  if (object.angles.x_angle_is_present) {
+    roll = getCartesianAngle(object.angles.x_angle);
+  }
+  if (object.angles.y_angle_is_present) {
+    pitch = getCartesianAngle(object.angles.y_angle);
+  }
+  yaw = getCartesianAngle(object.angles.z_angle);
+  q.setRPY(roll, pitch, yaw);
+  
+  return tf2::toMsg(q);
+}
+
 inline gm::Pose getPoseOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Pose pose;
+  gm::Pose pose;
   pose.position = getPositionOfPerceivedObject(object);
   pose.orientation = getOrientationOfPerceivedObject(object);
   return pose;
 }
+//inline gm::PoseWithCovariance getPoseWithCovarianceOfPerceivedObject(const PerceivedObject &object) {}
 
-/**
-   * @brief Get the position of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the position from
-   * @return gm::Point the position of the PerceivedObject
-   */
-inline gm::Point getPositionOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Point point;
-  point.x = getXPositionOfPerceivedObject(object);
-  point.y = getYPositionOfPerceivedObject(object);
-  point.z = getZPositionOfPerceivedObject(object);
-  return point;
+inline int16_t getYawRateOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.z_angular_velocity_is_present) throw std::invalid_argument("No yaw rate present in PerceivedObject");
+   return object.z_angular_velocity.value.value;
 }
 
-/**
-   * @brief Get the x-coordinate of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the x-coordinate from
-   * @return double the x-coordinate of the PerceivedObject
-   */
-inline double getXPositionOfPerceivedObject(const PerceivedObject &object) {
-  double altitude = object.position.z_coordinate.value.value / 100.0;
-  return altitude;
+inline int16_t getVelocityComponent(const VelocityComponent &velocity) {
+  return velocity.value.value / 100;
 }
 
-/**
-   * @brief Get the y-coordinate of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the y-coordinate from
-   * @return double the y-coordinate of the PerceivedObject
-   */
-inline double getYPositionOfPerceivedObject(const PerceivedObject &object) {
-  double longitude = object.position.y_coordinate.value.value / 100.0;
-  return longitude;
+inline uint8_t getVelocityComponentConfidence(const VelocityComponent &velocity) {
+  return velocity.confidence.value / 100;
 }
 
-/**
-   * @brief Get the z-coordinate of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the z-coordinate from
-   * @return double the z-coordinate of the PerceivedObject
-   */
-inline double getZPositionOfPerceivedObject(const PerceivedObject &object) {
-  double latitude = object.position.x_coordinate.value.value / 100.0;
-  return latitude;
-}
-
-/**
-   * @brief Get the orientation of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the orientation from
-   * @return gm::Quaternion the orientation of the PerceivedObject
-   */
-inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Quaternion q;
-
-  double yaw = getYawOfObject(object);
-  double pitch = getPitchOfObject(object);
-  double roll = getRollOfObject(object);
-
-  yaw = yaw * M_PI / 180;
-  pitch = pitch * M_PI / 180;
-  roll = roll * M_PI / 180;
-
-  // Abbreviations for the various angular functions
-  double cy = cos(yaw * 0.5);
-  double sy = sin(yaw * 0.5);
-  double cp = cos(pitch * 0.5);
-  double sp = sin(pitch * 0.5);
-  double cr = cos(roll * 0.5);
-  double sr = sin(roll * 0.5);
-
-  q.w = cy * cp * cr + sy * sp * sr;
-  q.x = cy * cp * sr - sy * sp * cr;
-  q.y = sy * cp * sr + cy * sp * cr;
-  q.z = sy * cp * cr - cy * sp * sr;
-  return q;
-}
-
-/**
-   * @brief Get the roll of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the roll from
-   * @return double the roll of the PerceivedObject
-   */
-inline double getRollOfPerceivedObject(const PerceivedObject &object) {
-  double roll = object.angles.x_angle.value.value / 100.0;
-  return roll;
-}
-
-/**
-   * @brief Get the pitch of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the pitch from
-   * @return double the pitch of the PerceivedObject
-   */
-inline double getPitchOfPerceivedObject(const PerceivedObject &object) {
-  double pitch = object.angles.y_angle.value.value / 100.0;
-  return pitch;
-}
-
-/**
-   * @brief Get the yaw of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the yaw from
-   * @return double the yaw of the PerceivedObject
-   */
-inline double getYawOfPerceivedObject(const PerceivedObject &object) {
-  double yaw = object.angles.z_angle.value.value / 100.0;
-  return yaw;
-}
-
-/**
-   * @brief Get the yaw rate of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the yaw rate from
-   * @return double the yaw rate of the PerceivedObject
-   */
-inline double getYawRateOfPerceivedObject(const PerceivedObject &object) {}
-
-
-/**
-   * @brief Get the velocity of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the velocity from
-   * @return gm::Vector3 the velocity of the PerceivedObject
-   */
-inline gm::Vector3 getVelocityOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Vector3 velocity;
-  velocity.x = getXVelocityOfPerceivedObject;
-  velocity.y = getYVelocityOfPerceivedObject;
-  velocity.z = getZVelocityOfPerceivedObject;
+inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.velocity_is_present) throw std::invalid_argument("No velocity present in PerceivedObject");
+  if (object.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
+    throw std::invalid_argument("Velocity is not Cartesian");
+  }
+  gm::Vector3 velocity;
+  velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
+  velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
+  if (object.velocity.cartesian_velocity.z_velocity_is_present) {
+    velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+  }
   return velocity;
 }
 
-/**
-   * @brief Get the x-velocity of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the x-velocity from
-   * @return double the x-velocity of the PerceivedObject
-   */
-inline double getXVelocityOfPerceivedObject(const PerceivedObject &object) {
-
-  double velocity_x = object.velocity.cartesian_velocity.x_velocity.value.value;
-  return velocity_x;
+inline int16_t getAccelerationComponent(const AccelerationComponent &acceleration) {
+  return acceleration.value.value / 10;
 }
 
-/**
-   * @brief Get the y-velocity of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the y-velocity from
-   * @return double the y-velocity of the PerceivedObject
-   */
-inline double getYVelocityOfPerceivedObject(const PerceivedObject &object) {
-  double velocity_y = object.velocity.cartesian_velocity.y_velocity.value.value;
-  return velocity_y;
+inline uint8_t getAccelerationComponentConfidence(const AccelerationComponent &acceleration) {
+  return acceleration.confidence.value / 10;
 }
 
-/**
-   * @brief Get the z-velocity of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the z-velocity from
-   * @return double the z-velocity of the PerceivedObject
-   */
-inline double getZVelocityOfPerceivedObject(const PerceivedObject &object) {
-  double velocity_z = object.velocity.cartesian_velocity.z_velocity.value.value;
-  return velocity_z;
-}
-
-/**
-   * @brief Get the acceleration of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the acceleration from
-   * @return gm::Vector3 the acceleration of the PerceivedObject
-   */
-inline gm::Vector3 getAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Vector3 acceleration;
-  acceleration.x = getXAccelerationOfPerceivedObject;
-  acceleration.y = getYAccelerationOfPerceivedObject;
-  acceleration.z = getZAccelerationOfPerceivedObject;
+inline gm::Vector3 getCartesianAccelerationOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.acceleration_is_present) throw std::invalid_argument("No acceleration present in PerceivedObject");
+   if (object.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
+      throw std::invalid_argument("Acceleration is not Cartesian");
+   }
+  gm::Vector3 acceleration;
+  acceleration.x = getAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration);
+  acceleration.y = getAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration);
+  if (object.acceleration.cartesian_acceleration.z_acceleration_is_present) {
+    acceleration.z = getAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration);
+  }
   return acceleration;
 }
 
-/**
-   * @brief Get the x-acceleration of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the x-acceleration from
-   * @return double the x-acceleration of the PerceivedObject
-   */
-inline double getXAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  double acceleration_x = object.acceleration.cartesian_acceleration.x_acceleration.value.value;
-  return acceleration_x;
+inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_x_is_present) throw std::invalid_argument("No x-dimension present in PerceivedObject");
+  return object.object_dimension_x.value.value / 10;
 }
 
-/**
-   * @brief Get the y-acceleration of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the y-acceleration from
-   * @return double the y-acceleration of the PerceivedObject
-   */
-inline double getYAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  double acceleration_y = object.acceleration.cartesian_acceleration.y_acceleration.value.value;
-  return acceleration_y;
+inline uint16_t getYDimensionOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_y_is_present) throw std::invalid_argument("No y-dimension present in PerceivedObject");
+  return object.object_dimension_y.value.value / 10;
 }
 
-/**
-   * @brief Get the z-acceleration of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the z-acceleration from
-   * @return double the z-acceleration of the PerceivedObject
-   */
-inline double getZAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  double acceleration_z = object.acceleration.cartesian_acceleration.z_acceleration.value.value;
-  return acceleration_z;
+inline uint16_t getZDimensionOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_z_is_present) throw std::invalid_argument("No z-dimension present in PerceivedObject");
+  return object.object_dimension_z.value.value / 10;
 }
 
-/**
-   * @brief Get the dimensions of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the dimensions from
-   * @return gm::Vector3 the dimensions of the PerceivedObject
-   */
 inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object) {
   geometry_msgs::msg::Vector3 dimensions;
   dimensions.x = getXDimensionOfPerceivedObject(object);
   dimensions.y = getYDimensionOfPerceivedObject(object);
   dimensions.z = getZDimensionOfPerceivedObject(object);
   return dimensions;
-}
-
-/**
-   * @brief Get the x-dimension of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the x-dimension from
-   * @return double the x-dimension of the PerceivedObject
-   */
-inline double getXDimensionOfPerceivedObject(const PerceivedObject &object) {
-  double x_dimension = object.object_dimension_x.value.value / 10.0;
-  return x_dimension;
-}
-
-/**
-   * @brief Get the y-dimension of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the y-dimension from
-   * @return double the y-dimension of the PerceivedObject
-   */
-inline double getYDimensionOfPerceivedObject(const PerceivedObject &object) {
-  double y_dimension = object.object_dimension_y.value.value / 10.0;
-  return y_dimension;
-}
-
-/**
-   * @brief Get the z-dimension of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the z-dimension from
-   * @return double the z-dimension of the PerceivedObject
-   */
-inline double getZDimensionOfPerceivedObject(const PerceivedObject &object) {
-  double z_dimension = object.object_dimension_z.value.value / 10.0;
-  return z_dimension;
-}
-
-/**
-   * @brief Get the id of the PerceivedObject
-   * 
-   * @param object PerceivedObject to get the id from
-   * @return uint16_t the id of the PerceivedObject
-   */
-inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) {
-  int id = object.object_id.value;
-  return id;
 }
 
 }  // namespace etsi_its_cpm_ts_msgs::access
