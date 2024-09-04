@@ -279,4 +279,28 @@ inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object)
   return dimensions;
 }
 
+inline gm::Position getUTMPositionOfPerceivedObject(const CollectivePerceptionMessage &cpm, const PerceivedObject &object, int &zone, bool &is_northp) {
+  double ref_latitude = getLatitude(cpm); //addition needs to happen in wgs84
+  double ref_longitude = getLongitude(cpm);
+  double ref_altitude = getAltitude(cpm);
+
+  gm::PointStamped utm_point; 
+  gm::Position relative_position = getPositionOfPerceivedObject(object);
+  double absolute_longitude = ref_longitude + relative_position.x;
+  double absolute_latitude = ref_latitude + relative_position.y;
+  utm_point.z = ref_altitude + relative_position.z;
+
+  try { //cant use getUTMPosition here because its designed for the reference position
+    GeographicLib::UTMUPS::Forward(absolute_latitude, absolute_longitude, zone, is_northp, utm_point.point.x, utm_point.point.y);
+    std::string hemisphere;
+    if(northp) hemisphere="N";
+    else hemisphere="S";
+    utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
+  } catch (GeographicLib::GeographicErr& e) {
+    throw std::invalid_argument(e.what());
+  }
+  return utm_point;
+
+}
+
 }  // namespace etsi_its_cpm_ts_msgs::access
