@@ -104,10 +104,25 @@ inline double getAltitude(const CollectivePerceptionMessage &cpm) {
    * @param[in] cpm CPM to get the UTM Position from
    * @param[out] zone the UTM zone (zero means UPS)
    * @param[out] northp hemisphere (true means north, false means south)
-   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   * @return geometry_msgs::PointStamped of the given position with the UTM zone and hemisphere as frame_id
    */
 inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage &cpm, int &zone, bool &northp) {
   return getUTMPosition(cpm.payload.management_container.reference_position, zone, northp);
+}
+
+/**
+ * @brief Get the UTM Position defined within the ManagementContainer of the CPM
+ *
+ * The position is transformed into UTM by using GeographicLib::UTMUPS
+ * The altitude value is directly used as z-Coordinate
+ *
+ * @param cpm CPM from which to extract the UTM position.
+ * @return geometry_msgs::PointStamped of the given position with the UTM zone and hemisphere as frame_id
+ */
+inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage &cpm) {
+  int zone;
+  bool northp;
+  return getUTMPosition(cpm, zone, northp);
 }
 
 inline std::vector<uint8_t> getCpmContainerIds(const CollectivePerceptionMessage &cpm) {
@@ -128,7 +143,7 @@ inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cp
 }
 
 inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptionMessage &cpm){
-  getCpmContainer(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);
+  return getCpmContainer(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);
 }
 
 inline uint8_t getNumberOfPerceivedObjects(const WrappedCpmContainer &container) {
@@ -272,35 +287,24 @@ inline uint16_t getZDimensionOfPerceivedObject(const PerceivedObject &object) {
 }
 
 inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object) {
-  geometry_msgs::msg::Vector3 dimensions;
+  gm::Vector3 dimensions;
   dimensions.x = getXDimensionOfPerceivedObject(object);
   dimensions.y = getYDimensionOfPerceivedObject(object);
   dimensions.z = getZDimensionOfPerceivedObject(object);
   return dimensions;
 }
 
-inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePerceptionMessage &cpm, const PerceivedObject &object, int &zone, bool &is_northp) {
-  double ref_latitude = getLatitude(cpm); //addition needs to happen in wgs84
-  double ref_longitude = getLongitude(cpm);
-  double ref_altitude = getAltitude(cpm);
-
-  gm::PointStamped utm_point; 
+inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePerceptionMessage &cpm, const PerceivedObject &object) {
+  gm::PointStamped utm_position;
+  gm::PointStamped reference_position = getUTMPosition(cpm);
   gm::Point relative_position = getPositionOfPerceivedObject(object);
-  double absolute_longitude = ref_longitude + relative_position.x;
-  double absolute_latitude = ref_latitude + relative_position.y;
-  utm_point.point.z = ref_altitude + relative_position.z;
 
-  try { //cant use getUTMPosition here because its designed for the reference position
-    GeographicLib::UTMUPS::Forward(absolute_latitude, absolute_longitude, zone, is_northp, utm_point.point.x, utm_point.point.y);
-    std::string hemisphere;
-    if(is_northp) hemisphere="N";
-    else hemisphere="S";
-    utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
-  } catch (GeographicLib::GeographicErr& e) {
-    throw std::invalid_argument(e.what());
-  }
-  return utm_point;
+  utm_position.header.frame_id = reference_position.header.frame_id;
+  utm_position.point.x = reference_position.point.x + relative_position.x;
+  utm_position.point.y = reference_position.point.y + relative_position.y;
+  utm_position.point.z = reference_position.point.z + relative_position.z;
 
+  return utm_position;
 }
 
 }  // namespace etsi_its_cpm_ts_msgs::access

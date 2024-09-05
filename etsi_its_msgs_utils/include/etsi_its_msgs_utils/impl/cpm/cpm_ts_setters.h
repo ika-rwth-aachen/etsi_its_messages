@@ -128,6 +128,19 @@ namespace etsi_its_cpm_ts_msgs::access {
     }
   }
 
+  inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, PerceivedObject& object, const gm::PointStamped& utm_position, const uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE, const uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE, const uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE){
+    gm::PointStamped reference_position = getUTMPosition(cpm);
+    if (utm_position.header.frame_id != reference_position.header.frame_id){
+      throw std::invalid_argument("UTM-Position frame_id does not match the reference position frame_id");
+    }
+    setCartesianCoordinateWithConfidence(object.position.x_coordinate, (utm_position.point.x - reference_position.point.x) * 100, x_confidence);
+    setCartesianCoordinateWithConfidence(object.position.y_coordinate, (utm_position.point.y - reference_position.point.y) * 100, y_confidence);
+    if (utm_position.point.z != 0.0){
+      setCartesianCoordinateWithConfidence(object.position.z_coordinate, (utm_position.point.z - reference_position.point.z) * 100, z_confidence);
+      object.position.z_coordinate_is_present = true;
+    }
+  }
+
   inline void setVelocityComponent(VelocityComponent& velocity, const int16_t value, const uint8_t confidence = SpeedConfidence::UNAVAILABLE){
     // limit value range
     int16_t limited_value = std::min(VelocityComponentValue::NEGATIVE_OUT_OF_RANGE, std::max(VelocityComponentValue::POSITIVE_OUT_OF_RANGE, value));
