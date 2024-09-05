@@ -110,15 +110,15 @@ inline gm::PointStamped getUTMPosition(const CollectivePerceptionMessage &cpm, i
   return getUTMPosition(cpm.payload.management_container.reference_position, zone, northp);
 }
 
-inline std::vector<CpmContainerId> getCpmContainerIds(const CollectivePerceptionMessage &cpm) {
-  std::vector<CpmContainerId> container_ids;
+inline std::vector<uint8_t> getCpmContainerIds(const CollectivePerceptionMessage &cpm) {
+  std::vector<uint8_t> container_ids;
   for (int i = 0; i < cpm.payload.cpm_containers.value.array.size(); i++) {
     container_ids.push_back(cpm.payload.cpm_containers.value.array[i].container_id.value);
   }
   return container_ids;
 }
 
-inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cpm, const CpmContainerId container_id){
+inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cpm, const uint8_t container_id){
   for (int i = 0; i < cpm.payload.cpm_containers.value.array.size(); i++){
     if (cpm.payload.cpm_containers.value.array[i].container_id.value == container_id){
       return cpm.payload.cpm_containers.value.array[i];
@@ -279,21 +279,21 @@ inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object)
   return dimensions;
 }
 
-inline gm::Position getUTMPositionOfPerceivedObject(const CollectivePerceptionMessage &cpm, const PerceivedObject &object, int &zone, bool &is_northp) {
+inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePerceptionMessage &cpm, const PerceivedObject &object, int &zone, bool &is_northp) {
   double ref_latitude = getLatitude(cpm); //addition needs to happen in wgs84
   double ref_longitude = getLongitude(cpm);
   double ref_altitude = getAltitude(cpm);
 
   gm::PointStamped utm_point; 
-  gm::Position relative_position = getPositionOfPerceivedObject(object);
+  gm::Point relative_position = getPositionOfPerceivedObject(object);
   double absolute_longitude = ref_longitude + relative_position.x;
   double absolute_latitude = ref_latitude + relative_position.y;
-  utm_point.z = ref_altitude + relative_position.z;
+  utm_point.point.z = ref_altitude + relative_position.z;
 
   try { //cant use getUTMPosition here because its designed for the reference position
     GeographicLib::UTMUPS::Forward(absolute_latitude, absolute_longitude, zone, is_northp, utm_point.point.x, utm_point.point.y);
     std::string hemisphere;
-    if(northp) hemisphere="N";
+    if(is_northp) hemisphere="N";
     else hemisphere="S";
     utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
   } catch (GeographicLib::GeographicErr& e) {
