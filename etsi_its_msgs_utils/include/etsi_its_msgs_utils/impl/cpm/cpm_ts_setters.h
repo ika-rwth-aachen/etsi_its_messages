@@ -256,6 +256,11 @@ namespace etsi_its_cpm_ts_msgs::access {
     setMeasurementDeltaTimeOfPerceivedObject(object, delta_time);
   }
 
+  inline void initPerceivedObjectWithUTMPosition(CollectivePerceptionMessage& cpm, PerceivedObject& object, const gm::PointStamped& point, const int16_t delta_time = 0){
+    setUTMPositionOfPerceivedObject(cpm, object, point);
+    setMeasurementDeltaTimeOfPerceivedObject(object, delta_time);
+  }
+
   inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const uint8_t n_objects = 0){
     container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;
     container.container_data.choice = container.container_id;
