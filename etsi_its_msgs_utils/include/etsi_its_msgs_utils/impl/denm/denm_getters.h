@@ -200,6 +200,18 @@ namespace etsi_its_denm_msgs::access {
   }
 
   /**
+   * @brief 
+   * 
+   * @param denm DENM to get the UTM Position from
+   * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+   */
+  inline gm::PointStamped getUTMPosition(const DENM& denm){
+    int zone;
+    bool northp;
+    return getUTMPosition(denm.denm.management.event_position, zone, northp);
+  }
+
+  /**
    * @brief Get the Cause Code object
    * 
    * @param denm DENM to get the causeCode value from

@@ -209,6 +209,21 @@ inline gm::PointStamped getUTMPosition(const CAM& cam, int& zone, bool& northp){
 }
 
 /**
+ * @brief Get the UTM Position defined within the BasicContainer of the CAM
+ *
+ * The position is transformed into UTM by using GeographicLib::UTMUPS
+ * The altitude value is directly used as z-Coordinate
+ *
+ * @param[in] cam CAM to get the UTM Position from
+ * @return gm::PointStamped geometry_msgs::PointStamped of the given position
+ */
+inline gm::PointStamped getUTMPosition(const CAM& cam){
+  int zone;
+  bool northp;
+  return getUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);
+}
+
+/**
  * @brief Get the Exterior Lights in form of bool vector
  *
  * @param exterior_lights
