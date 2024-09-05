@@ -203,12 +203,13 @@ inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &obj
   double roll{0}, pitch{0}, yaw{0};
 
   if (object.angles.x_angle_is_present) {
-    roll = getCartesianAngle(object.angles.x_angle);
+
+    roll = (getCartesianAngle(object.angles.x_angle) - 180) / 180 * M_PI;
   }
   if (object.angles.y_angle_is_present) {
-    pitch = getCartesianAngle(object.angles.y_angle);
+    pitch = (getCartesianAngle(object.angles.y_angle) - 180) / 180 * M_PI;
   }
-  yaw = getCartesianAngle(object.angles.z_angle);
+  yaw = (getCartesianAngle(object.angles.z_angle) - 180) / 180 * M_PI;
   q.setRPY(roll, pitch, yaw);
   
   return tf2::toMsg(q);
