@@ -191,9 +191,9 @@ namespace etsi_its_cpm_ts_msgs::access {
 
   inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw, const uint8_t confidence = AngleConfidence::UNAVAILABLE){
     // wrap angle to range [0, 360]
-    double yaw_in_degrees = yaw * 180 / M_PI;
+    double yaw_in_degrees = yaw * 180 / M_PI + 180;
     while (yaw_in_degrees > 360.0) yaw_in_degrees -= 360.0;
-    while (yaw_in_degrees < 360.0) yaw_in_degrees += 360.0;
+    while (yaw_in_degrees < 0) yaw_in_degrees += 360.0;
     object.angles.z_angle.value.value = yaw_in_degrees * 10;
 
     if (confidence > AngleConfidence::MAX || confidence < AngleConfidence::MIN){
