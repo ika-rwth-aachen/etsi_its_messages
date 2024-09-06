@@ -143,7 +143,7 @@ namespace etsi_its_cpm_ts_msgs::access {
 
   inline void setVelocityComponent(VelocityComponent& velocity, const int16_t value, const uint8_t confidence = SpeedConfidence::UNAVAILABLE){
     // limit value range
-    int16_t limited_value = std::min(VelocityComponentValue::NEGATIVE_OUT_OF_RANGE, std::max(VelocityComponentValue::POSITIVE_OUT_OF_RANGE, value));
+    int16_t limited_value = std::max(VelocityComponentValue::NEGATIVE_OUT_OF_RANGE, std::min(VelocityComponentValue::POSITIVE_OUT_OF_RANGE, value));
     velocity.value.value = limited_value;
 
     // limit confidence range
@@ -167,7 +167,7 @@ namespace etsi_its_cpm_ts_msgs::access {
 
   inline void setAccelerationComponent(AccelerationComponent& acceleration, const int16_t value, const uint8_t confidence = AccelerationConfidence::UNAVAILABLE){
     // limit value range
-    int16_t limited_value = std::min(AccelerationValue::NEGATIVE_OUT_OF_RANGE, std::max(AccelerationValue::POSITIVE_OUT_OF_RANGE, value));
+    int16_t limited_value = std::max(AccelerationValue::NEGATIVE_OUT_OF_RANGE, std::min(AccelerationValue::POSITIVE_OUT_OF_RANGE, value));
     acceleration.value.value = limited_value;
 
     // limit confidence range
@@ -207,7 +207,7 @@ namespace etsi_its_cpm_ts_msgs::access {
   inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double yaw_rate, const uint8_t confidence = AngularSpeedConfidence::UNAVAILABLE){
     int16_t yaw_rate_in_degrees = yaw_rate * 180 / M_PI;
     if (yaw_rate_in_degrees != CartesianAngularVelocityComponentValue::UNAVAILABLE) {
-      yaw_rate_in_degrees = std::min(CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE, std::max(CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE, yaw_rate_in_degrees));    
+      yaw_rate_in_degrees = std::max(CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE, std::min(CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE, yaw_rate_in_degrees));    
     }
     object.z_angular_velocity.value.value = yaw_rate_in_degrees;
     object.z_angular_velocity.confidence.value = confidence;

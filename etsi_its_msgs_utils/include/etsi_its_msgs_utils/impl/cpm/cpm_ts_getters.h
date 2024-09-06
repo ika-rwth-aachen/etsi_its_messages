@@ -215,6 +215,14 @@ inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &obj
   return tf2::toMsg(q);
 }
 
+inline double getYawOfPerceivedObject(const PerceivedObject &object) {
+  gm::Quaternion orientation = getOrientationOfPerceivedObject(object);
+  tf2::Quaternion q(orientation.x, orientation.y, orientation.z, orientation.w);
+  double roll, pitch, yaw;
+  tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
+  return yaw;
+}
+
 inline gm::Pose getPoseOfPerceivedObject(const PerceivedObject &object) {
   gm::Pose pose;
   pose.position = getPositionOfPerceivedObject(object);
