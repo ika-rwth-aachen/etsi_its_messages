@@ -35,11 +35,11 @@ namespace displays
 
     for(int i=0; i<number_of_objects; i++) {
 
-    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm, i));
+    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
 
     geometry_msgs::msg::PointStamped position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
 
-    geometry_msgs::msg::Quaternion orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(cpm, object);
+    geometry_msgs::msg::Quaternion orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
 
     geometry_msgs::msg::Pose pose;
 

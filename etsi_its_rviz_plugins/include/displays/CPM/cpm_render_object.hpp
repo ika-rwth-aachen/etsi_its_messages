@@ -101,7 +101,7 @@ class CPMRenderObject
      *
      * @return double
      */
-    double getSpeed();
+    geometry_msgs::msg::Vector3 getSpeed();
 
   private:
     // member variables

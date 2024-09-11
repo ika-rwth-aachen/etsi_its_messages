@@ -228,7 +228,7 @@ void CPMDisplay::update(float, float)
         text+="\n";
       }
       if(show_speed_->getBool()) {
-        text+="Speed: " + std::to_string((int)(cpm.getSpeed()*3.6)) + " km/h";
+        // text+="Speed: " + std::to_string((int)(cpm.getSpeed()*3.6)) + " km/h";
       }
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
