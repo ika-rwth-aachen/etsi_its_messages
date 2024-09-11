@@ -31,36 +31,41 @@ namespace displays
 
   CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
 
-    // int zone;
-    // bool northp;
-    // geometry_msgs::msg::PointStamped p = etsi_its_cpm_ts_msgs::access::getUTMPosition(cpm, zone, northp);
-    // header.frame_id = p.header.frame_id;
+    int number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
 
-    // uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cpm_msgs::access::getGenerationDeltaTime(cpm), receive_time.nanoseconds(), n_leap_seconds);
+    for(int i=0; i<number_of_objects; i++) {
+
+    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm, i));
+
+    geometry_msgs::msg::PointStamped position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
+
+    geometry_msgs::msg::Quaternion orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(cpm, object);
+
+    geometry_msgs::msg::Pose pose;
+
+    pose.position = position.point;
+    pose.orientation = orientation;
+
+    geometry_msgs::msg::Vector3 dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
+    dimensions.z = 1.6;
+
+    header.frame_id = position.header.frame_id;
+
+    // uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cpm_ts_msgs::access::getGenerationDeltaTime(cpm), receive_time.nanoseconds(), n_leap_seconds);
     // header.stamp = rclcpp::Time(nanosecs);
 
-    // station_id = etsi_its_cpm_msgs::access::getStationID(cpm);
-    // station_type = etsi_its_cpm_msgs::access::getStationType(cpm);
+    uint32_t station_id = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
+    // station_type = etsi_its_cpm_ts_msgs::access::getStationType(cpm);
 
-    // double heading = (90-etsi_its_cpm_msgs::access::getHeading(cpm))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-    // while(heading<0) heading+=2*M_PI;
-    // pose.position = p.point;
-    // tf2::Quaternion orientation;
-    // orientation.setRPY(0.0, 0.0, heading);
-    // pose.orientation = tf2::toMsg(orientation);
-
-    // dimensions.x = etsi_its_cpm_msgs::access::getVehicleLength(cpm);
-    // dimensions.y = etsi_its_cpm_msgs::access::getVehicleWidth(cpm);
-    // dimensions.z = 1.6;
-
-    // speed = etsi_its_cpm_msgs::access::getSpeed(cpm);
+    geometry_msgs::msg::Vector3 velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
+    }
   }
 
   bool CPMRenderObject::validateFloats() {
     bool valid = true;
     valid = valid && rviz_common::validateFloats(pose);
     valid = valid && rviz_common::validateFloats(dimensions);
-    valid = valid && rviz_common::validateFloats(speed);
+    valid = valid && rviz_common::validateFloats(velocity);
     return valid;
   }
 
@@ -76,9 +81,9 @@ namespace displays
     return station_id;
   }
 
-  int CPMRenderObject::getStationType() {
-    return station_type;
-  }
+//   int CPMRenderObject::getStationType() {
+//     return station_type;
+//   }
 
   geometry_msgs::msg::Pose CPMRenderObject::getPose() {
     return pose;
@@ -89,8 +94,8 @@ namespace displays
     return dimensions;
   }
 
-  double CPMRenderObject::getSpeed() {
-    return speed;
+  geometry_msgs::msg::Vector3 CPMRenderObject::getSpeed() {
+    return velocity;
   }
 
 }  // namespace displays

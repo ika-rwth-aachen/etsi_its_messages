@@ -110,7 +110,8 @@ class CPMRenderObject
     int station_type;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
-    double speed;
+    geometry_msgs::msg::Vector3 velocity;
+    geometry_msgs::msg::Quaternion orientation;
 
 };
 
