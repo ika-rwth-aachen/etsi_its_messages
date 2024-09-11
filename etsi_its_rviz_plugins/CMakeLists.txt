@@ -29,6 +29,8 @@ if(${ROS_VERSION} EQUAL 2)
     include/displays/CAM/cam_render_object.hpp
     include/displays/DENM/denm_display.hpp
     include/displays/DENM/denm_render_object.hpp
+    include/displays/CPM/cpm_display.hpp
+    include/displays/CPM/cpm_render_object.hpp
   )
 
   foreach(header "${display_headers_to_moc}")
@@ -40,6 +42,8 @@ if(${ROS_VERSION} EQUAL 2)
     src/displays/CAM/cam_render_object.cpp
     src/displays/DENM/denm_display.cpp
     src/displays/DENM/denm_render_object.cpp
+    src/displays/CPM/cpm_display.cpp
+    src/displays/CPM/cpm_render_object.cpp
   )
 
   add_library(${PROJECT_NAME} SHARED
