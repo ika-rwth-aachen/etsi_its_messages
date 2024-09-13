@@ -45,6 +45,7 @@ namespace displays
 class CPMRenderObject
 {
   public:
+    CPMRenderObject() = default; // Default constructor
     CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second);
 
     /**
@@ -76,38 +77,38 @@ class CPMRenderObject
     uint32_t getStationID();
 
     /**
-     * @brief Get the StationType of CPM-object
-     *
-     * @return int
-     */
-    int getStationType();
-
-    /**
      * @brief Get pose of CPM-object
      *
      * @return geometry_msgs::msg::Pose
      */
-    geometry_msgs::msg::Pose getPose();
+    geometry_msgs::msg::Pose getPose(int i);
 
     /**
      * @brief Get dimensions of CPM-Object
      *
      * @return geometry_msgs::msg::Vector3 (x equals length, y equals width, z equals height)
      */
-    geometry_msgs::msg::Vector3 getDimensions();
+    geometry_msgs::msg::Vector3 getDimensions(int i);
 
     /**
      * @brief Get speed of CPM-object
      *
      * @return double
      */
-    geometry_msgs::msg::Vector3 getSpeed();
+    geometry_msgs::msg::Vector3 getSpeed(int i);
+
+    int getNumberOfObjects();
 
   private:
     // member variables
     std_msgs::msg::Header header;
+    uint8_t number_of_objects;
     uint32_t station_id;
     int station_type;
+    //declare an array of poses, dimensions and velocities
+    std::vector<geometry_msgs::msg::Pose> poses;
+    std::vector<geometry_msgs::msg::Vector3> dimensionss;
+    std::vector<geometry_msgs::msg::Vector3> velocities;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     geometry_msgs::msg::Vector3 velocity;

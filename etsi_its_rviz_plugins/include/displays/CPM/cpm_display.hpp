@@ -69,6 +69,7 @@ public:
   void onInitialize() override;
 
   void reset() override;
+  CPMRenderObject cpm;
 
 protected:
   void processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage::ConstSharedPtr msg) override;
@@ -84,6 +85,7 @@ protected:
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
   std::unordered_map<int, CPMRenderObject> cpms_;
+  
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };

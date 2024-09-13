@@ -31,33 +31,41 @@ namespace displays
 
   CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
 
-    int number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
+    uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
+
+
+    geometry_msgs::msg::Pose poses[number_of_objects];
+    geometry_msgs::msg::Vector3 dimensionss[number_of_objects];
+    geometry_msgs::msg::Vector3 velocities[number_of_objects];
 
     for(int i=0; i<number_of_objects; i++) {
 
     etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
 
-    geometry_msgs::msg::PointStamped position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
+    geometry_msgs::msg::Point position = etsi_its_cpm_ts_msgs::access::getPositionOfPerceivedObject(object);
 
     geometry_msgs::msg::Quaternion orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
 
     geometry_msgs::msg::Pose pose;
 
-    pose.position = position.point;
+    pose.position = position;
     pose.orientation = orientation;
+    poses[i] = pose;
 
     geometry_msgs::msg::Vector3 dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
     dimensions.z = 1.6;
+    dimensionss[i] = dimensions;
 
-    header.frame_id = position.header.frame_id;
+   //header.frame_id = position.header.frame_id;
+    header.frame_id = "map";
 
     // uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cpm_ts_msgs::access::getGenerationDeltaTime(cpm), receive_time.nanoseconds(), n_leap_seconds);
     // header.stamp = rclcpp::Time(nanosecs);
 
     uint32_t station_id = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
-    // station_type = etsi_its_cpm_ts_msgs::access::getStationType(cpm);
 
     geometry_msgs::msg::Vector3 velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
+    velocities[i] = velocity;
     }
   }
 
@@ -85,17 +93,21 @@ namespace displays
 //     return station_type;
 //   }
 
-  geometry_msgs::msg::Pose CPMRenderObject::getPose() {
-    return pose;
+  geometry_msgs::msg::Pose CPMRenderObject::getPose(int i) {
+    return poses[i];
   }
 
-  geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions() {
-
-    return dimensions;
+  int CPMRenderObject::getNumberOfObjects() {
+    return number_of_objects;
   }
 
-  geometry_msgs::msg::Vector3 CPMRenderObject::getSpeed() {
-    return velocity;
+  geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions(int i) {
+
+    return dimensionss[i];
+  }
+
+  geometry_msgs::msg::Vector3 CPMRenderObject::getSpeed(int i) {
+    return velocities[i];
   }
 
 }  // namespace displays

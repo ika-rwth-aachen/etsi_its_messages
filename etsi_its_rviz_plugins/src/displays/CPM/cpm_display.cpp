@@ -128,27 +128,25 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
 
 void CPMDisplay::update(float, float)
 {
-  // Check for outdated CPMs
-  for (auto it = cpms_.begin(); it != cpms_.end(); ) {
-    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) {
-      it = cpms_.erase(it);
-    }
-    else {
-      ++it;
-    }
-  }
-
-  // Render all valid cpms
+ 
   bboxs_.clear();
   texts_.clear();
-  for(auto it = cpms_.begin(); it != cpms_.end(); ++it) {
 
-    CPMRenderObject cpm = it->second;
+
+  //info logger for the number of perceived objects
+  u_int8_t number_of_objects = cpm.getNumberOfObjects();
+  //info logger for the number of perceived objects
+  RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Number of perceived objects: %d", number_of_objects);
+
+    //begin loop over all perceived objects
+    for(int i=0; i<5; i++) {
+
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
     if (!context_->getFrameManager()->getTransform(cpm.getHeader(), sn_position, sn_orientation)) {
       // Check if transform exists
-      setMissingTransformToFixedFrame(cpm.getHeader().frame_id);
+      // setMissingTransformToFixedFrame(cpm.getHeader().frame_id);
+      setMissingTransformToFixedFrame("map");
       return;
     }
     // We don't want to use the transform in sn_position and sn_orientation though, because they are only in float precision.
@@ -179,27 +177,15 @@ void CPMDisplay::update(float, float)
 
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node to the position relative to the fixed frame
-    geometry_msgs::msg::Pose pose = cpm.getPose();
-    geometry_msgs::msg::Vector3 dimensions = cpm.getDimensions();
+    geometry_msgs::msg::Pose pose = cpm.getPose(i);
+
+    geometry_msgs::msg::Vector3 dimensions = cpm.getDimensions(i);
     tf2::doTransform(pose, pose, transform_to_fixed_frame);
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
 
-    if(3 <= cpm.getStationType() && cpm.getStationType() <= 11)
-    {
-      // If the station type of the originating ITS-S is set to one out of the values 3 to 11
-      // the reference point shall be the ground position of the centre of the front side of
-      // the bounding box of the vehicle.
-      // https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.03.01_30/en_30263702v010301v.pdf
-      tf2::Quaternion q;
-      tf2::fromMsg(pose.orientation, q);
-      tf2::Matrix3x3 m(q);
-      tf2::Vector3 v(-dimensions.x/2.0, 0.0, dimensions.z/2.0);
-      v = m*v;
-      position.x += v.x();
-      position.y += v.y();
-      position.z += v.z();
-    }
+    //info logger for the position of the object
+    RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Position of the object: x: %f, y: %f, z: %f", position.x, position.y, position.z);
 
     // set pose of child scene node of bounding-box
     child_scene_node->setPosition(position);
@@ -242,6 +228,7 @@ void CPMDisplay::update(float, float)
       child_scene_node->attachObject(text_render.get());
       texts_.push_back(text_render);
     }
+
   }
 }
 
