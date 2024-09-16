@@ -69,7 +69,6 @@ public:
   void onInitialize() override;
 
   void reset() override;
-  CPMRenderObject cpm;
 
 protected:
   void processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage::ConstSharedPtr msg) override;

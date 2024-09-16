@@ -24,23 +24,20 @@ SOFTWARE.
 
 #include "displays/CPM/cpm_render_object.hpp"
 
-namespace etsi_its_msgs
-{
-namespace displays
-{
+namespace etsi_its_msgs {
+namespace displays {
 
-  CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
+CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time,
+                                 uint16_t n_leap_seconds) {
+  uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
 
-    uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
+  geometry_msgs::msg::Pose poses[number_of_objects];
+  geometry_msgs::msg::Vector3 dimensionss[number_of_objects];
+  geometry_msgs::msg::Vector3 velocities[number_of_objects];
 
-
-    geometry_msgs::msg::Pose poses[number_of_objects];
-    geometry_msgs::msg::Vector3 dimensionss[number_of_objects];
-    geometry_msgs::msg::Vector3 velocities[number_of_objects];
-
-    for(int i=0; i<number_of_objects; i++) {
-
-    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
+  for (int i = 0; i < number_of_objects; i++) {
+    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
+        etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
 
     geometry_msgs::msg::Point position = etsi_its_cpm_ts_msgs::access::getPositionOfPerceivedObject(object);
 
@@ -56,7 +53,7 @@ namespace displays
     dimensions.z = 1.6;
     dimensionss[i] = dimensions;
 
-   //header.frame_id = position.header.frame_id;
+    //header.frame_id = position.header.frame_id;
     header.frame_id = "map";
 
     // uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cpm_ts_msgs::access::getGenerationDeltaTime(cpm), receive_time.nanoseconds(), n_leap_seconds);
@@ -66,49 +63,34 @@ namespace displays
 
     geometry_msgs::msg::Vector3 velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
     velocities[i] = velocity;
-    }
   }
+}
 
-  bool CPMRenderObject::validateFloats() {
-    bool valid = true;
-    valid = valid && rviz_common::validateFloats(pose);
-    valid = valid && rviz_common::validateFloats(dimensions);
-    valid = valid && rviz_common::validateFloats(velocity);
-    return valid;
-  }
+bool CPMRenderObject::validateFloats() {
+  bool valid = true;
+  valid = valid && rviz_common::validateFloats(pose);
+  valid = valid && rviz_common::validateFloats(dimensions);
+  valid = valid && rviz_common::validateFloats(velocity);
+  return valid;
+}
 
-  double CPMRenderObject::getAge(rclcpp::Time now) {
-    return (now-header.stamp).seconds();
-  }
+double CPMRenderObject::getAge(rclcpp::Time now) { return (now - header.stamp).seconds(); }
 
-  std_msgs::msg::Header CPMRenderObject::getHeader() {
-    return header;
-  }
+std_msgs::msg::Header CPMRenderObject::getHeader() { return header; }
 
-  uint32_t CPMRenderObject::getStationID() {
-    return station_id;
-  }
+uint32_t CPMRenderObject::getStationID() { return station_id; }
 
 //   int CPMRenderObject::getStationType() {
 //     return station_type;
 //   }
 
-  geometry_msgs::msg::Pose CPMRenderObject::getPose(int i) {
-    return poses[i];
-  }
+geometry_msgs::msg::Pose CPMRenderObject::getPose(int i) { return poses[i]; }
 
-  int CPMRenderObject::getNumberOfObjects() {
-    return number_of_objects;
-  }
+int CPMRenderObject::getNumberOfObjects() { return number_of_objects; }
 
-  geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions(int i) {
+geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions(int i) { return dimensionss[i]; }
 
-    return dimensionss[i];
-  }
-
-  geometry_msgs::msg::Vector3 CPMRenderObject::getSpeed(int i) {
-    return velocities[i];
-  }
+geometry_msgs::msg::Vector3 CPMRenderObject::getSpeed(int i) { return velocities[i]; }
 
 }  // namespace displays
 }  // namespace etsi_its_msgs
