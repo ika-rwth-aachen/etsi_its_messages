@@ -8,17 +8,25 @@ echo "Finding .patch files in '$patches_dir' to apply to repositories in '$repos
 # loop over all .patch files in the patches directory
 find "$patches_dir" -type f -name "*.patch" | while read -r patch_file; do
 
-    # find the original repository path and apply the patch
+    # find the original repository path
     relative_path="$(dirname ${patch_file#$patches_dir/})"
     repo_path="$repos_dir/$relative_path"
     file_to_patch="$repo_path/$(basename ${patch_file%.patch})"
-    git -C "$repo_path" apply "$patch_file"
 
-    # copy the file to the patched directory and reverse the patch
+    # copy file to patch to temporary git repository
+    tmp_repo_path="$(mktemp -d)"
+    tmp_file_to_patch="$tmp_repo_path/$(basename ${patch_file%.patch})"
+    cp -r "$repo_path"/* "$tmp_repo_path"
+    git -C "$tmp_repo_path" init --quiet
+
+    # apply the patch
+    git -C "$tmp_repo_path" apply "$patch_file"
+
+    # move patched file to the patched directory
     patched_path="$patched_dir/$relative_path"
     patched_file="$patched_path/$(basename ${patch_file%.patch})"
     mkdir -p "$patched_path"
-    cp "$file_to_patch" "$patched_file"
-    git -C "$repo_path" apply --reverse --whitespace=nowarn "$patch_file"
+    mv "$tmp_file_to_patch" "$patched_file"
+
     echo "  Patched '$file_to_patch' and saved to '$patched_file'"
 done
