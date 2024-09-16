@@ -84,6 +84,9 @@ protected:
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 
   std::unordered_map<int, CPMRenderObject> cpms_;
+
+  // Rendering objects
+  std::vector<std::shared_ptr<CPMRenderObject>> cpm_render_objects_;
   
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;

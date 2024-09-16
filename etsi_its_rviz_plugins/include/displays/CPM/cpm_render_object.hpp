@@ -45,8 +45,7 @@ namespace displays
 class CPMRenderObject
 {
   public:
-    //CPMRenderObject() = default; // Default constructor
-    CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second);
+    CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second, uint8_t number_of_object=0);
 
     /**
      * @brief This function validates all float variables that are part of a CPMRenderObject
@@ -81,34 +80,30 @@ class CPMRenderObject
      *
      * @return geometry_msgs::msg::Pose
      */
-    geometry_msgs::msg::Pose getPose(int i);
+    geometry_msgs::msg::Pose getPose();
 
     /**
      * @brief Get dimensions of CPM-Object
      *
      * @return geometry_msgs::msg::Vector3 (x equals length, y equals width, z equals height)
      */
-    geometry_msgs::msg::Vector3 getDimensions(int i);
+    geometry_msgs::msg::Vector3 getDimensions();
 
     /**
      * @brief Get speed of CPM-object
      *
      * @return double
      */
-    geometry_msgs::msg::Vector3 getSpeed(int i);
+    geometry_msgs::msg::Vector3 getVelocity();
 
-    int getNumberOfObjects();
+    uint8_t getNumberOfObjects();
 
   private:
     // member variables
     std_msgs::msg::Header header;
-    uint8_t number_of_objects;
+    uint8_t number_of_objects_;
     uint32_t station_id;
     int station_type;
-    //declare an array of poses, dimensions and velocities
-    std::vector<geometry_msgs::msg::Pose> poses;
-    std::vector<geometry_msgs::msg::Vector3> dimensionss;
-    std::vector<geometry_msgs::msg::Vector3> velocities;
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     geometry_msgs::msg::Vector3 velocity;

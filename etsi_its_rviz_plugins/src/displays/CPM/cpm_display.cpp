@@ -92,38 +92,69 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
     return;
   }
 
-  uint16_t n_leap_seconds = getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds()));
 
-  CPMRenderObject cpm(*msg, now, n_leap_seconds);
+  uint16_t n_leap_seconds = getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds()));
+  uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(
+      etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(*msg));
+
+  RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "6");
+
+
+  cpm_render_objects_.clear();
+  for(int i=0; i<number_of_objects; i++){
+    CPMRenderObject cpm(*msg, now, n_leap_seconds, i);
+  
   if (!cpm.validateFloats()) {
     setStatus(rviz_common::properties::StatusProperty::Error, "Topic",
               "Message contained invalid floating point values (nans or infs)");
     return;
   }
+  cpm_render_objects_.push_back(std::make_shared<CPMRenderObject>(cpm));
+  
+  }
 
-  // Check if Station ID is already present in list
-  auto it = cpms_.find(cpm.getStationID());
-  if (it != cpms_.end())
-    it->second = cpm;  // Key exists, update the value
-  else
-    cpms_.insert(std::make_pair(cpm.getStationID(), cpm));
+  // // Check if Station ID is already present in list
+  // auto it = cpms_.find(cpm.getStationID());
+  // if (it != cpms_.end())
+  //   it->second = cpm;  // Key exists, update the value
+  // else
+  //   cpms_.insert(std::make_pair(cpm.getStationID(), cpm));
 
-  return;
+  // return;
+
+
+  
 }
 
 void CPMDisplay::update(float, float) {
+
+
+    // Check for outdated CPMs
+  for (auto it = cpms_.begin(); it != cpms_.end(); ) {
+    if (it->second.getAge(rviz_node_->now())/ 10e9 > buffer_timeout_->getFloat()) {
+      it = cpms_.erase(it);
+    }
+    else {
+      ++it;
+    }
+  }
   bboxs_.clear();
   texts_.clear();
+
+  RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "1");
+
   for (auto it = cpms_.begin(); it != cpms_.end(); ++it) {
     CPMRenderObject cpm = it->second;
 
-    //info logger for the number of perceived objects
-    u_int8_t number_of_objects = cpm.getNumberOfObjects();
-    //info logger for the number of perceived objects
-    RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Number of perceived objects: %d", number_of_objects);
+    RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "2");
 
-    //begin loop over all perceived objects
-    for (int i = 0; i < number_of_objects; i++) {
+    for(int i=0; i<cpm_render_objects_.size(); i++){
+
+      std::shared_ptr<etsi_its_msgs::displays::CPMRenderObject> cpm_ptr = cpm_render_objects_[i];
+      etsi_its_msgs::displays::CPMRenderObject cpm = *cpm_ptr;  // Dereference the shared_ptr to get the object
+
+      RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "3");
+
       Ogre::Vector3 sn_position;
       Ogre::Quaternion sn_orientation;
       if (!context_->getFrameManager()->getTransform(cpm.getHeader(), sn_position, sn_orientation)) {
@@ -161,9 +192,9 @@ void CPMDisplay::update(float, float) {
 
       auto child_scene_node = scene_node_->createChildSceneNode();
       // Set position of scene node to the position relative to the fixed frame
-      geometry_msgs::msg::Pose pose = cpm.getPose(i);
+      geometry_msgs::msg::Pose pose = cpm.getPose();
 
-      geometry_msgs::msg::Vector3 dimensions = cpm.getDimensions(i);
+      geometry_msgs::msg::Vector3 dimensions = cpm.getDimensions();
       tf2::doTransform(pose, pose, transform_to_fixed_frame);
       Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
       Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
@@ -215,7 +246,13 @@ void CPMDisplay::update(float, float) {
         child_scene_node->attachObject(text_render.get());
         texts_.push_back(text_render);
       }
-    }
+
+      }
+
+
+    
+ 
+    
   }
 }
 
