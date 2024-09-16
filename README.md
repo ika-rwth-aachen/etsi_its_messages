@@ -123,7 +123,7 @@ The *etsi_its_messages* package stack is also available as a Docker image, conta
 
 ```bash
 # ROS 2 (jazzy)
-docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros2
+docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:latest
 
 # ROS (noetic)
 docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
