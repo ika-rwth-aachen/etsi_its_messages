@@ -23,7 +23,7 @@ vam_ts_ItsPduHeaderVam_constraint(const asn_TYPE_descriptor_t *td, const void *s
 		/* Nothing is here. See below */
 	}
 	
-	return td->encoding_constraints.general_constraints(td, sptr, ctfailcb, app_key);
+	return SEQUENCE_constraint(td, sptr, ctfailcb, app_key);
 }
 
 /*
