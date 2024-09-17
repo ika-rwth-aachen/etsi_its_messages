@@ -13,7 +13,7 @@ ros-noetic:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros1
+    IMAGE_TAG: ros-noetic
     BASE_IMAGE: rwthika/ros:noetic
     COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
     ENABLE_INDUSTRIAL_CI: 'true'

@@ -11,7 +11,7 @@ jobs:
         with:
           platform: amd64
           target: dev,run
-          image-tag: ros
+          image-tag: ros-noetic
           base-image: rwthika/ros:noetic
           command: roslaunch etsi_its_conversion converter.ros1.launch
           enable-industrial-ci: 'true'
