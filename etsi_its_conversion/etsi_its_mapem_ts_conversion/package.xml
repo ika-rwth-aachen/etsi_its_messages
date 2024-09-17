@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="3">
 
-  <name>etsi_its_spatem_ts_coding</name>
-  <version>2.1.0</version>
-  <description>C++ compatible C source code for ETSI ITS SPATEMs (TS) generated from ASN.1 using asn1c</description>
+  <name>etsi_its_mapem_ts_conversion</name>
+  <version>2.2.0</version>
+  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS MAPEMs (TS)</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
@@ -15,6 +15,9 @@
 
   <license>MIT</license>
 
+  <depend>etsi_its_mapem_ts_coding</depend>
+  <depend>etsi_its_mapem_ts_msgs</depend>
+  <depend>etsi_its_primitives_conversion</depend>
   <depend>ros_environment</depend>
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="3">
 
-  <name>etsi_its_spatem_ts_coding</name>
-  <version>2.1.0</version>
-  <description>C++ compatible C source code for ETSI ITS SPATEMs (TS) generated from ASN.1 using asn1c</description>
+  <name>etsi_its_spatem_ts_msgs</name>
+  <version>2.2.0</version>
+  <description>ROS messages for ETSI ITS SPATEM (TS)</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
@@ -16,9 +16,17 @@
   <license>MIT</license>
 
   <depend>ros_environment</depend>
+  <depend>std_msgs</depend>
 
+  <!-- ROS 2 -->
+  <buildtool_depend condition="$ROS_VERSION == 2">rosidl_default_generators</buildtool_depend>
+  <exec_depend condition="$ROS_VERSION == 2">rosidl_default_runtime</exec_depend>
+  <member_of_group condition="$ROS_VERSION == 2">rosidl_interface_packages</member_of_group>
+
+  <!-- ROS -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+  <depend condition="$ROS_VERSION == 1">message_generation</depend>
+  <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
 
   <export>
     <build_type condition="$ROS_VERSION == 1">catkin</build_type>
