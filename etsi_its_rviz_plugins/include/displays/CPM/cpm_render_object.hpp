@@ -45,6 +45,9 @@ namespace displays
 class CPMRenderObject
 {
   public:
+    // CPMRenderObject() {
+    //     // Initialize members with default values if necessary
+    // }
     CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second, uint8_t number_of_object=0);
 
     /**

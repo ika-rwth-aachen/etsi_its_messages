@@ -33,18 +33,10 @@ CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerception
     etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
         etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), number_of_object);
 
-    geometry_msgs::msg::Point position = etsi_its_cpm_ts_msgs::access::getPositionOfPerceivedObject(object);
-
-    geometry_msgs::msg::Quaternion orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
-
-    geometry_msgs::msg::Pose pose;
-
-    pose.position = position;
-    pose.orientation = orientation;
-
-    geometry_msgs::msg::Vector3 dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
-    dimensions.z = 1.6;
-
+    pose.position = etsi_its_cpm_ts_msgs::access::getPositionOfPerceivedObject(object);
+    pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
+    dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
+    velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
     //header.frame_id = position.header.frame_id;
     header.frame_id = "map";
 
@@ -55,9 +47,6 @@ CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerception
     uint32_t station_id = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
     //hardcoded station_id to 10 for testing
     station_id = 10;
-
-    geometry_msgs::msg::Vector3 velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
-
 }
 
 bool CPMRenderObject::validateFloats() {

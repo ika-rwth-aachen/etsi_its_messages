@@ -87,6 +87,9 @@ protected:
 
   // Rendering objects
   std::vector<std::shared_ptr<CPMRenderObject>> cpm_render_objects_;
+
+  //vector of Poses
+  std::vector<geometry_msgs::msg::Pose> poses_;
   
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
