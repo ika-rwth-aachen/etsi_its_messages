@@ -122,11 +122,11 @@ catkin build -DCMAKE_BUILD_TYPE=Release etsi_its_messages
 The *etsi_its_messages* package stack is also available as a Docker image, containerized through [*docker-ros*](https://github.com/ika-rwth-aachen/docker-ros). Note that launching these containers starts the `etsi_its_conversion` node by default.
 
 ```bash
-# ROS 2 (jazzy)
-docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros2
+# ROS 2
+docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros2-jazzy
 
-# ROS (noetic)
-docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros
+# ROS
+docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros-noetic
 ```
 
 
