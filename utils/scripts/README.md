@@ -11,7 +11,8 @@ ros2 run etsi_its_conversion etsi_its_conversion_node \
         -r /etsi_its_conversion/udp/out:=/etsi_its_conversion/udp/in \
         -p has_btp_destination_port:=true \
         -p btp_destination_port_offset:=0 \
-        -p etsi_message_payload_offset:=4
+        -p etsi_message_payload_offset:=4 \
+        -p check_constraints_before_encoding:=false
 ```
 
 ```bash

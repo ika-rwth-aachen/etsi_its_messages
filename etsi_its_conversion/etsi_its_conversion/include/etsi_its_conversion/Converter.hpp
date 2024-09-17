@@ -158,6 +158,8 @@ class Converter : public rclcpp::Node {
     static const int kSubscriberQueueSizeParamDefault;
     static const std::string kPublisherQueueSizeParam;
     static const int kPublisherQueueSizeParamDefault;
+    static const std::string kCheckConstraintsBeforeEncodingParam;
+    static const bool kCheckConstraintsBeforeEncodingParamDefault;
 
     bool has_btp_destination_port_;
     int btp_destination_port_offset_;
@@ -166,6 +168,7 @@ class Converter : public rclcpp::Node {
     std::vector<std::string> udp2ros_etsi_types_;
     int subscriber_queue_size_;
     int publisher_queue_size_;
+    bool check_constraints_before_encoding_;
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;
