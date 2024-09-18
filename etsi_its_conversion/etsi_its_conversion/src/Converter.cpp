@@ -97,7 +97,7 @@ const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
 const int Converter::kPublisherQueueSizeParamDefault{10};
 const std::string Converter::kCheckConstraintsBeforeEncodingParam{"check_constraints_before_encoding"};
-const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{true};
+const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{false};
 
 
 bool Converter::logLevelIsDebug() {
