@@ -33,8 +33,15 @@
 #   intersectionID  IntersectionID   OPTIONAL,
 #   ...
 # }
-# -------------------------------------------------------------------------------XY-32b
-OffsetB16 x
+# ------------------------------------------------------------------------------
+int64 id
 
-OffsetB16 y
+LaneID lane
+bool lane_is_present
+
+LaneConnectionID connection_id
+bool connection_id_is_present
+
+IntersectionID intersection_id
+bool intersection_id_is_present
 

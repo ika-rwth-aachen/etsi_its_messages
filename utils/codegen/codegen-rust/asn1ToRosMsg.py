@@ -133,7 +133,7 @@ def main():
                     comments += "\n# --- ASN.1 Definition ---------------------------------------------------------\n" +\
                                 "\n".join(["# " + line for line in raw_def.split('\n')][:-1]) + '\n' +\
                                 "# ------------------------------------------------------------------------------"
-                msg = re.sub(r"^##\s([\w-]+)\s" + type + r"\b", comments, msg, flags=re.MULTILINE)
+                msg = re.sub(r"<typename>.*</typename>", comments, msg, flags=re.MULTILINE)
 
                 with open(f, "w") as file:
                     file.write(msg)

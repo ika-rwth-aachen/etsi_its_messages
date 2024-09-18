@@ -31,17 +31,13 @@
 #   sharedWith      LaneSharing,
 #   laneType        LaneTypeAttributes,
 #   regional        RegionalExtension {{Reg-LaneAttributes}} OPTIONAL
-# -------------------------------------------------------------------------------Vehicle
+# ------------------------------------------------------------------------------
+LaneDirection directional_use
 
-uint8[] value
-uint8 bits_unused
-int64 MIN_SIZE_BITS = 8
-int64 MAX_SIZE_BITS = 8
-uint8 BIT_INDEX_IS_VEHICLE_REVOCABLE_LANE = 0
-uint8 BIT_INDEX_IS_VEHICLE_FLY_OVER_LANE = 1
-uint8 BIT_INDEX_HOV_LANE_USE_ONLY = 2
-uint8 BIT_INDEX_RESTRICTED_TO_BUS_USE = 3
-uint8 BIT_INDEX_RESTRICTED_TO_TAXI_USE = 4
-uint8 BIT_INDEX_RESTRICTED_FROM_PUBLIC_USE = 5
-uint8 BIT_INDEX_HAS_I_RBEACON_COVERAGE = 6
-uint8 BIT_INDEX_PERMISSION_ON_REQUEST = 7
+LaneSharing shared_with
+
+LaneTypeAttributes lane_type
+
+LaneAttributesregional regional
+bool regional_is_present
+

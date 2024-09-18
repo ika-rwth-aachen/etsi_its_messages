@@ -1,3 +1,5 @@
+use crate::common::{to_ros_title_case};
+
 const MSG_TEMPLATE: &str = r#"# ==============================================================================
 # MIT License
 #
@@ -32,8 +34,9 @@ macro_rules! licensed {
 }
 
 pub fn typealias_template(comments: &str, name: &str, alias: &str, annotations: &str) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## TYPE-ALIAS {name}\n\
+        "<typename>TYPE-ALIAS {type_name}</typename>\n\
         {comments}\n\
         {alias} value\n\
         {annotations}"
@@ -41,16 +44,18 @@ pub fn typealias_template(comments: &str, name: &str, alias: &str, annotations: 
 }
 
 pub fn integer_value_template(comments: &str, name: &str, vtype: &str, value: &str) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## INTEGER-DEF {name}\n\
+        "<typename>INTEGER-DEF {type_name}</typename>\n\
         {comments}\n\
         {vtype} {name} = {value}"
     ))
 }
 
 pub fn lazy_static_value_template(comments: &str, name: &str, vtype: &str, value: &str) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## VALUE {name}\n\
+        "<typename>VALUE {type_name}</typename>\n\
         {comments}\n\
         {vtype} value = {value}"
     ))
@@ -66,8 +71,9 @@ pub fn integer_template(
     let typed_dvalues = dvalues
         .replace("{type}", &integer_type)
         .replace("{prefix}", "");
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## INTEGER {name}\n\
+        "<typename>INTEGER {type_name}</typename>\n\
         {comments}\n\
         {integer_type} value\n\
         {constraints}\n\
@@ -87,8 +93,9 @@ pub fn bit_string_template(comments: &str, name: &str, constraints: &str, dvalue
     let typed_dvalues = dvalues
         .replace("{type}", "uint8")
         .replace("{prefix}", "BIT_INDEX_");
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## BIT-STRING {name}\n\
+        "<typename>BIT-STRING {type_name}</typename>\n\
         {comments}\n\
         uint8[] value\n\
         uint8 bits_unused\n\
@@ -98,8 +105,9 @@ pub fn bit_string_template(comments: &str, name: &str, constraints: &str, dvalue
 }
 
 pub fn octet_string_template(comments: &str, name: &str, constraints: &str) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## OCTET-STRING {name}\n\
+        "<typename>OCTET-STRING {type_name}</typename>\n\
         {comments}\n\
         uint8[] value\n\
         {constraints}\n"
@@ -112,8 +120,9 @@ pub fn char_string_template(
     string_type: &str,
     constraints: &str,
 ) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## {string_type} {name}\n\
+        "<typename>{string_type} {type_name}</typename>\n\
         {comments}\n\
         string value\n\
         {constraints}\n"
@@ -121,8 +130,9 @@ pub fn char_string_template(
 }
 
 pub fn boolean_template(comments: &str, name: &str, constraints: &str) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## BOOLEAN {name}\n\
+        "<typename>BOOLEAN {type_name}</typename>\n\
         {comments}\n\
         bool value\n\
         {constraints}\n"
@@ -165,8 +175,9 @@ pub fn enumerated_template(
     enum_members: &str,
     annotations: &str,
 ) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## ENUMERATED {name}\n\
+        "<typename>ENUMERATED {type_name}</typename>\n\
         {comments}\n\
         uint8 value\n\
         {enum_members}\n\
@@ -193,8 +204,9 @@ pub fn sequence_or_set_template(
     default_methods: &str,
     class_fields: &str,
 ) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&vec![
-        &format!("## SEQUENCE {name}"),
+        &format!("<typename>SEQUENCE {type_name}</typename>"),
         comments,
         members,
         &nested_members.join("\n"),
@@ -216,8 +228,9 @@ pub fn sequence_or_set_of_template(
     member_type: &str,
     constraints: &str,
 ) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&format!(
-        "## SEQUENCE-OF {name}\n\
+        "<typename>SEQUENCE-OF {type_name}</typename>\n\
         {comments}\n\
         {member_type}[] array\n\
         {constraints}\n"
@@ -251,8 +264,9 @@ pub fn choice_template(
     nested_options: Vec<String>,
     annotations: &str,
 ) -> String {
+    let type_name = to_ros_title_case(name);
     licensed!(&vec![
-        &format!("## CHOICE {name}"),
+        &format!("<typename>CHOICE {type_name}</typename>"),
         comments,
         "uint8 choice\n",
         options,

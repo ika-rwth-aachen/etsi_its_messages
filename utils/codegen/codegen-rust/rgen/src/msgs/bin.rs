@@ -23,7 +23,7 @@ fn main() {
     let generated = &compiler_res.unwrap().generated;
 
     // Split generated code into individual messages
-    let re_name = Regex::new(r"##\s([\w-]+)\s(\w+)\b").unwrap();
+    let re_name = Regex::new(r"<typename>\s*([\w-]+)\s*([\w-]+)\s*</typename>").unwrap();
     let re_def = Regex::new(r"<typedef>\n((.|\n)*?)\n</typedef>").unwrap();
     generated.split_inclusive("</typedef>").for_each(|s| {
         if let Some(def_caps) = re_def.captures(s) {
@@ -34,7 +34,7 @@ fn main() {
             let name = if let Some(name_caps) = re_name.captures(definition) {
                 name_caps.get(2).unwrap().as_str()
             } else {
-                panic!("Failed to extract message name from definition: {}", definition);
+                panic!("Failed to extract message name from following definition:\n{}", definition);
             };
             let path = args.out.join(format!("{}.msg", name));
             std::fs::write(path, definition).unwrap();
