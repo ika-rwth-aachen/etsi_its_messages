@@ -34,22 +34,18 @@ impl Backend for Msgs {
         let tlds = self.merge_tlds(tlds);
         let (pdus, warnings): (Vec<String>, Vec<Box<dyn Error>>) =
             tlds.into_iter().fold((vec![], vec![]), |mut acc, tld| {
-                match self.generate_tld(tld) {
-                    Ok(s) => {
-                        s.len().gt(&0).then(|| {
-                            acc.0.push(format!(
-                                "<typedef>\n\
-                                 {s}\n\
-                                 </typedef>"
-                            ))
-                        });
-                        acc
-                    }
-                    Err(e) => {
-                        acc.1.push(Box::new(e));
-                        acc
-                    }
+            match self.generate_tld(tld) {
+                Ok(s) => {
+                s.len().gt(&0).then(|| {
+                    acc.0.push(s)
+                });
+                acc
                 }
+                Err(e) => {
+                acc.1.push(Box::new(e));
+                acc
+                }
+            }
             });
         Ok(GeneratedModule {
             generated: Some(format!("{}", pdus.join("\n\n"))),

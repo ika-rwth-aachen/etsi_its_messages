@@ -77,7 +77,7 @@ impl Msgs {
     }
 
     pub fn generate_tld(&self, tld: ToplevelDefinition) -> Result<String, GeneratorError> {
-        match tld {
+        let result = match tld {
             ToplevelDefinition::Type(t) => {
                 if t.parameterization.is_some() {
                     return Ok("".into());
@@ -116,7 +116,8 @@ impl Msgs {
                 ASN1Information::ObjectSet(_) => self.generate_information_object_set(i),
                 _ => Ok("".into()),
             },
-        }
+        }?;
+        Ok(format!("</typedef><typedef>\n{}\n</typedef>", result)) // leading closing tags helps with inner types
     }
 
     pub fn generate_typealias(

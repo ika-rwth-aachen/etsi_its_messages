@@ -28,10 +28,13 @@ fn main() {
     generated.split_inclusive("</typedef>").for_each(|s| {
         if let Some(def_caps) = re_def.captures(s) {
             let definition = def_caps.get(1).unwrap().as_str();
+            if definition.trim().is_empty() {
+                return;
+            }
             let name = if let Some(name_caps) = re_name.captures(definition) {
                 name_caps.get(2).unwrap().as_str()
             } else {
-                "unknown"
+                panic!("Failed to extract message name from definition: {}", definition);
             };
             let path = args.out.join(format!("{}.msg", name));
             std::fs::write(path, definition).unwrap();

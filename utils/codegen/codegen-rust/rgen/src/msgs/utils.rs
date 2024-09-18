@@ -585,7 +585,11 @@ impl Msgs {
             .map(|m| {
                 self.generate_tld(ToplevelDefinition::Type(ToplevelTypeDefinition {
                     parameterization: None,
-                    comments: " Inner type ".into(),
+                    comments: format!(
+                        "--- ASN.1 Definition found in {} {}",
+                        parent_name,
+                        "-".repeat(47 - parent_name.len())
+                    ).into(),
                     name: self.inner_name(&m.name, parent_name).to_string(),
                     ty: m.ty.clone(),
                     tag: None,
@@ -630,7 +634,11 @@ impl Msgs {
             .map(|m| {
                 self.generate_tld(ToplevelDefinition::Type(ToplevelTypeDefinition {
                     parameterization: None,
-                    comments: " Inner type ".into(),
+                    comments: format!(
+                        "--- ASN.1 Definition found in {} {}",
+                        parent_name,
+                        "-".repeat(47 - parent_name.len())
+                    ).into(),
                     name: self.inner_name(&m.name, parent_name).to_string(),
                     ty: m.ty.clone(),
                     tag: None,
