@@ -6,9 +6,12 @@ ros2udp_etsi_types:
   - cam_ts
   - cpm_ts
   - denm
+  - vam_ts
 udp2ros_etsi_types:
   - cam
   - cpm_ts
   - denm
+  - vam_ts
 subscriber_queue_size: 10
 publisher_queue_size: 10
+check_constraints_before_encoding: false # setting to true could lead to segmentation faults because of infinite recursion (https://github.com/vlm/asn1c/issues/410)

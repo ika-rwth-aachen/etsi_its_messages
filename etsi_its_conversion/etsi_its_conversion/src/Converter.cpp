@@ -52,6 +52,7 @@ const int kBtpHeaderDestinationPortMapem{2003};
 const int kBtpHeaderDestinationPortSpatem{2004};
 const int kBtpHeaderDestinationPortIvi{2006};
 const int kBtpHeaderDestinationPortCpmTs{2009};
+const int kBtpHeaderDestinationPortVamTs{2018};
 
 #ifdef ROS1
 const std::string Converter::kInputTopicUdp{"udp/in"};
@@ -64,6 +65,8 @@ const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
+const std::string Converter::kInputTopicVamTs{"vam_ts/in"};
+const std::string Converter::kOutputTopicVamTs{"vam_ts/out"};
 #else
 const std::string Converter::kInputTopicUdp{"~/udp/in"};
 const std::string Converter::kOutputTopicUdp{"~/udp/out"};
@@ -75,6 +78,8 @@ const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"~/cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
+const std::string Converter::kInputTopicVamTs{"~/vam_ts/in"};
+const std::string Converter::kOutputTopicVamTs{"~/vam_ts/out"};
 #endif
 
 const std::string Converter::kHasBtpDestinationPortParam{"has_btp_destination_port"};
@@ -85,12 +90,14 @@ const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payloa
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
-const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm"};
-const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm"};
+const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm", "vam_ts"};
+const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
 const int Converter::kPublisherQueueSizeParamDefault{10};
+const std::string Converter::kCheckConstraintsBeforeEncodingParam{"check_constraints_before_encoding"};
+const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{false};
 
 
 bool Converter::logLevelIsDebug() {
@@ -240,6 +247,18 @@ void Converter::loadParameters() {
 #endif
     ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to '%d'", kPublisherQueueSizeParam.c_str(), kPublisherQueueSizeParamDefault);
   }
+
+  // load check_constraints_before_encoding_
+#ifdef ROS1
+  if (!private_node_handle_.param<bool>(kCheckConstraintsBeforeEncodingParam, check_constraints_before_encoding_, kCheckConstraintsBeforeEncodingParamDefault)) {
+#else
+  param_desc = rcl_interfaces::msg::ParameterDescriptor();
+  param_desc.description = "whether an asn constraint check should be performed before encoding";
+  this->declare_parameter(kCheckConstraintsBeforeEncodingParam, kCheckConstraintsBeforeEncodingParamDefault, param_desc);
+  if (!this->get_parameter(kCheckConstraintsBeforeEncodingParam, check_constraints_before_encoding_)) {
+#endif
+    ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to '%s'", kCheckConstraintsBeforeEncodingParam.c_str(), kCheckConstraintsBeforeEncodingParamDefault ? "true" : "false");
+  }
 }
 
 
@@ -289,6 +308,16 @@ void Converter::setup() {
     subscribers_["denm"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "vam_ts") != udp2ros_etsi_types_.end()) {
+    publishers_["vam_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<vam_ts_msgs::VAM>(kOutputTopicVamTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type VAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["vam_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "vam_ts") != ros2udp_etsi_types_.end()) {
+    boost::function<void(const vam_ts_msgs::VAM::ConstPtr)> callback =
+      boost::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, _1, "vam_ts", &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_msgs::VAM&, vam_ts_VAM_t&)>(etsi_its_vam_ts_conversion::toStruct_VAM));
+    subscribers_["vam_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<vam_ts_msgs::VAM>(kInputTopicVamTs, subscriber_queue_size_, callback));
+    ROS12_LOG(INFO, "Converting native ROS VAM (TS) on '%s' to UDP messages on '%s'", subscribers_["vam_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
+  }
 #else
   publisher_udp_ = this->create_publisher<UdpPacket>(kOutputTopicUdp, publisher_queue_size_);
   subscriber_udp_ = this->create_subscription<UdpPacket>(kInputTopicUdp, subscriber_queue_size_, std::bind(&Converter::udpCallback, this, std::placeholders::_1));
@@ -331,6 +360,16 @@ void Converter::setup() {
       std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "vam_ts") != udp2ros_etsi_types_.end()) {
+    publisher_vam_ts_ = this->create_publisher<vam_ts_msgs::VAM>(kOutputTopicVamTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type VAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_vam_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "vam_ts") != ros2udp_etsi_types_.end()) {
+    std::function<void(const vam_ts_msgs::VAM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, std::placeholders::_1, "vam_ts", &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_msgs::VAM&, vam_ts_VAM_t&)>(etsi_its_vam_ts_conversion::toStruct_VAM));
+    subscribers_["vam_ts"] = this->create_subscription<vam_ts_msgs::VAM>(kInputTopicVamTs, subscriber_queue_size_, callback);
+    ROS12_LOG(INFO, "Converting native ROS VAM (TS) on '%s' to UDP messages on '%s'", subscribers_["vam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
 #endif
 }
@@ -386,13 +425,16 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 template <typename T_struct>
 bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
 
-  char error_buffer[1024];
-  size_t error_length = sizeof(error_buffer);
-  int check_ret = asn_check_constraints(type_descriptor, &asn1_struct, error_buffer, &error_length);
-  if (check_ret != 0) {
-    ROS12_LOG(ERROR, "Check of struct failed: %s", error_buffer);
-    return false;
+  if(check_constraints_before_encoding_) {
+    char error_buffer[1024];
+    size_t error_length = sizeof(error_buffer);
+    int check_ret = asn_check_constraints(type_descriptor, &asn1_struct, error_buffer, &error_length);
+    if (check_ret != 0) {
+      ROS12_LOG(ERROR, "Check of struct failed: %s", error_buffer);
+      return false;
+    }
   }
+
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, type_descriptor, &asn1_struct);
   if (ret.result.encoded == -1) {
     ROS12_LOG(ERROR, "Failed to encode message: %s", ret.result.failed_type->xml_tag);
@@ -470,6 +512,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
     else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
     else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem";
     else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem";
+    else if (destination_port == kBtpHeaderDestinationPortVamTs) detected_etsi_type = "vam_ts";
     else detected_etsi_type = "unknown";
   }
 
@@ -528,6 +571,19 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 #else
     publisher_denm_->publish(msg);
 #endif
+  } else if (detected_etsi_type == "vam_ts") {
+
+    // decode buffer to ROS msg
+    vam_ts_msgs::VAM msg;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_VAM_t&, vam_ts_msgs::VAM&)>(etsi_its_vam_ts_conversion::toRos_VAM), msg);
+    if (!success) return;
+
+    // publish msg
+#ifdef ROS1
+    publishers_["vam_ts"]->publish(msg);
+#else
+    publisher_vam_ts_->publish(msg);
+#endif
 
   } else {
     ROS12_LOG(ERROR, "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
@@ -552,6 +608,7 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
   if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
   else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
   else if (type == "denm") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "vam_ts") btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
 
   // encode ROS msg to UDP msg
   UdpPacket udp_msg;

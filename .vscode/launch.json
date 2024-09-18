@@ -209,5 +209,54 @@
             "console": "integratedTerminal",
             "justMyCode": true
         },
+        {
+            "name": "VAM TS (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "vam_ts",
+                "-o",
+                "etsi_its_coding/etsi_its_vam_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "VAM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
+                "-o",
+                "etsi_its_msgs/etsi_its_vam_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "VAM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "vam_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
     ]
 }
