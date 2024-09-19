@@ -60,7 +60,7 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(longitude, cpm_ts_access::getLongitude(cpm), 1e-7);
   EXPECT_NEAR(altitude, cpm_ts_access::getAltitude(cpm), 1e-2);
 
-  etsi_its_cpm_ts_msgs::msg::PerceivedObject object;
+  cpm_ts_msgs::PerceivedObject object;
   gm::Vector3 dimensions;
   dimensions.x = randomDouble(0.1, 25.6);
   dimensions.y = randomDouble(0.1, 25.6);

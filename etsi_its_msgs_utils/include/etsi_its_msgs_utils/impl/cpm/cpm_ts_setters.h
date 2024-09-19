@@ -136,10 +136,10 @@ inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, co
    * @param value Value to set in cm
    * @param confidence Confidence to set cm (optional)
    */
-inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const int32_t value,
+inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const int16_t value,
                                                  const uint16_t confidence = CoordinateConfidence::UNAVAILABLE) {
   // limit value range
-  int32_t limited_value = std::max(CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE,
+  int16_t limited_value = std::max(CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE,
                                    std::min(CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE, value));
   coordinate.value.value = limited_value;
 
