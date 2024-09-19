@@ -33,45 +33,39 @@ CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerception
     etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
         etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), number_of_object);
 
-    pose.position = etsi_its_cpm_ts_msgs::access::getPositionOfPerceivedObject(object);
-    pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
-    dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
-    velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
-    //header.frame_id = position.header.frame_id;
-    header.frame_id = "map";
+    geometry_msgs::msg::PointStamped utm_position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
 
+    pose_.position = utm_position.point;
+    pose_.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
+    dimensions_ = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
+    velocity_ = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
+
+    header_.frame_id =  utm_position.header.frame_id;
     uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_cpm_ts_msgs::access::getReferenceTime(cpm));
+    header_.stamp = rclcpp::Time(nanosecs);
 
-    header.stamp = rclcpp::Time(nanosecs);
-
-    uint32_t station_id = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
-    //hardcoded station_id to 10 for testing
-    station_id = 10;
+    station_id_ = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
 }
 
 bool CPMRenderObject::validateFloats() {
   bool valid = true;
-  valid = valid && rviz_common::validateFloats(pose);
-  valid = valid && rviz_common::validateFloats(dimensions);
-  valid = valid && rviz_common::validateFloats(velocity);
+  valid = valid && rviz_common::validateFloats(pose_);
+  valid = valid && rviz_common::validateFloats(dimensions_);
+  valid = valid && rviz_common::validateFloats(velocity_);
   return valid;
 }
 
-double CPMRenderObject::getAge(rclcpp::Time now) { return (now - header.stamp).seconds(); }
+double CPMRenderObject::getAge(rclcpp::Time now) { return (now - header_.stamp).seconds(); }
 
-std_msgs::msg::Header CPMRenderObject::getHeader() { return header; }
+std_msgs::msg::Header CPMRenderObject::getHeader() { return header_; }
 
-uint32_t CPMRenderObject::getStationID() { return station_id; }
+uint32_t CPMRenderObject::getStationID() { return station_id_; }
 
-geometry_msgs::msg::Pose CPMRenderObject::getPose() { return pose; }
+geometry_msgs::msg::Pose CPMRenderObject::getPose() { return pose_; }
 
-uint8_t CPMRenderObject::getNumberOfObjects() {
-  return number_of_objects_; 
-}
+geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions() { return dimensions_; }
 
-geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions() { return dimensions; }
-
-geometry_msgs::msg::Vector3 CPMRenderObject::getVelocity() { return velocity; }
+geometry_msgs::msg::Vector3 CPMRenderObject::getVelocity() { return velocity_; }
 
 }  // namespace displays
 }  // namespace etsi_its_msgs

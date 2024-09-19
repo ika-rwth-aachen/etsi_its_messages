@@ -60,5 +60,32 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(longitude, cpm_ts_access::getLongitude(cpm), 1e-7);
   EXPECT_NEAR(altitude, cpm_ts_access::getAltitude(cpm), 1e-2);
 
-  // TODO: check object list access
+  etsi_its_cpm_ts_msgs::msg::PerceivedObject object;
+  gm::Vector3 dimensions;
+  dimensions.x = randomDouble(0.1, 25.6);
+  dimensions.y = randomDouble(0.1, 25.6);
+  dimensions.z = randomDouble(0.1, 25.6);
+  cpm_ts_access::setDimensionsOfPerceivedObject(object, dimensions);
+  EXPECT_NEAR(dimensions.x, cpm_ts_access::getDimensionsOfPerceivedObject(object).x, 1e-1);
+  EXPECT_NEAR(dimensions.y, cpm_ts_access::getDimensionsOfPerceivedObject(object).y, 1e-1);
+  EXPECT_NEAR(dimensions.z, cpm_ts_access::getDimensionsOfPerceivedObject(object).z, 1e-1);
+
+  gm::Vector3 velocity;
+  velocity.x = randomDouble(-163.83, 163.83);
+  velocity.y = randomDouble(-163.83, 163.83);
+  velocity.z = randomDouble(-163.83, 163.83);
+  cpm_ts_access::setVelocityOfPerceivedObject(object, velocity);
+  EXPECT_NEAR(velocity.x, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).x, 1e-2);
+  EXPECT_NEAR(velocity.y, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).y, 1e-2);
+  EXPECT_NEAR(velocity.z, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).z, 1e-2);
+
+  gm::Vector3 acceleration;
+  acceleration.x = randomDouble(-16.0, 16.0);
+  acceleration.y = randomDouble(-16.0, 16.0);
+  acceleration.z = randomDouble(-16.0, 16.0);
+  cpm_ts_access::setAccelerationOfPerceivedObject(object, acceleration);
+  EXPECT_NEAR(acceleration.x, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).x, 1e-1);
+  EXPECT_NEAR(acceleration.y, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).y, 1e-1);
+  EXPECT_NEAR(acceleration.z, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).z, 1e-1);
+
 }

@@ -131,11 +131,6 @@ void CPMDisplay::update(float, float) {
   bboxs_.clear();
   texts_.clear();
   for (auto it = cpms_.begin(); it != cpms_.end(); ++it) {
-    //info logger for cpms size
-    RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Size of cpms: %d", cpms_.size());
-
-    //logger for cpm_render_objects size
-    RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Size of cpm_render_objects: %d", cpm_render_objects_.size());
     for (const auto& cpm_ptr : cpm_render_objects_) {
       // Dereference the shared_ptr to access the CPMRenderObject
       CPMRenderObject& cpm = *cpm_ptr;
@@ -153,8 +148,6 @@ void CPMDisplay::update(float, float) {
       std::string fixed_frame = fixed_frame_.toStdString();
       geometry_msgs::msg::PoseStamped pose_origin;
       pose_origin.header = cpm.getHeader();
-      //logger for the header frame id
-      RCLCPP_INFO(rclcpp::get_logger("cpm_display"), "Header frame id: %s", cpm.getHeader().frame_id.c_str());
       pose_origin.pose.position.x = 0;
       pose_origin.pose.position.y = 0;
       pose_origin.pose.position.z = 0;
@@ -214,7 +207,10 @@ void CPMDisplay::update(float, float) {
           text += "\n";
         }
         if (show_speed_->getBool()) {
-          // text+="Speed: " + std::to_string((int)(cpm.getSpeed()*3.6)) + " km/h";
+          geometry_msgs::msg::Vector3 velocity = cpm.getVelocity();
+          //get magnitude of velocity
+          double speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2) + pow(velocity.z, 2));
+          text += "Speed: " + std::to_string((int)(speed * 3.6)) + " km/h";
         }
         if (!text.size()) return;
         std::shared_ptr<rviz_rendering::MovableText> text_render =

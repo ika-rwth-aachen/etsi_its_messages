@@ -34,35 +34,28 @@ SOFTWARE.
 
 #include <rclcpp/rclcpp.hpp>
 
-namespace Ogre
-{
+namespace Ogre {
 class ManualObject;
 }
 
-namespace rviz_common
-{
-namespace properties
-{
-  class ColorProperty;
-  class FloatProperty;
+namespace rviz_common {
+namespace properties {
+class ColorProperty;
+class FloatProperty;
 }  // namespace properties
 }  // namespace rviz_common
 
-namespace etsi_its_msgs
-{
-namespace displays
-{
+namespace etsi_its_msgs {
+namespace displays {
 
 /**
  * @class CPMDisplay
  * @brief Displays an etsi_its_cpm_msgs::CollectivePerceptionMessage
  */
-class CPMDisplay : public
-  rviz_common::RosTopicDisplay<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage>
-{
+class CPMDisplay : public rviz_common::RosTopicDisplay<etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage> {
   Q_OBJECT
 
-public:
+ public:
   CPMDisplay();
   ~CPMDisplay() override;
 
@@ -70,11 +63,11 @@ public:
 
   void reset() override;
 
-protected:
+ protected:
   void processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage::ConstSharedPtr msg) override;
   void update(float wall_dt, float ros_dt) override;
 
-  Ogre::ManualObject * manual_object_;
+  Ogre::ManualObject *manual_object_;
 
   rclcpp::Node::SharedPtr rviz_node_;
 
@@ -88,9 +81,6 @@ protected:
   // Rendering objects
   std::vector<std::shared_ptr<CPMRenderObject>> cpm_render_objects_;
 
-  //vector of Poses
-  std::vector<geometry_msgs::msg::Pose> poses_;
-  
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };

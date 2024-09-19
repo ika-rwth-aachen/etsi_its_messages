@@ -45,9 +45,14 @@ namespace displays
 class CPMRenderObject
 {
   public:
-    // CPMRenderObject() {
-    //     // Initialize members with default values if necessary
-    // }
+    /**
+     * @brief Construct a new CPMRenderObject object
+     *
+     * @param cpm
+     * @param receive_time
+     * @param n_leap_seconds
+     * @param number_of_object
+     */
     CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second, uint8_t number_of_object=0);
 
     /**
@@ -99,18 +104,20 @@ class CPMRenderObject
      */
     geometry_msgs::msg::Vector3 getVelocity();
 
+    /**
+     * @brief Get number of objects in CPM-object
+     *
+     * @return uint8_t
+     */
     uint8_t getNumberOfObjects();
 
   private:
     // member variables
-    std_msgs::msg::Header header;
-    uint8_t number_of_objects_;
-    uint32_t station_id;
-    int station_type;
-    geometry_msgs::msg::Pose pose;
-    geometry_msgs::msg::Vector3 dimensions;
-    geometry_msgs::msg::Vector3 velocity;
-    geometry_msgs::msg::Quaternion orientation;
+    std_msgs::msg::Header header_;
+    uint32_t station_id_;
+    geometry_msgs::msg::Pose pose_;
+    geometry_msgs::msg::Vector3 dimensions_;
+    geometry_msgs::msg::Vector3 velocity_;
 
 };
 
