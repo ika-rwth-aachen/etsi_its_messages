@@ -62,8 +62,8 @@ MovementList states
 ManeuverAssistList maneuver_assist_list
 bool maneuver_assist_list_is_present
 
-IntersectionStateregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# IntersectionStateregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

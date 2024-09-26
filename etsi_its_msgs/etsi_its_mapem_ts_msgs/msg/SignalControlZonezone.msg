@@ -29,5 +29,5 @@
 
 RegionId region_id
 
-Reg-SignalControlZone reg_ext_value
+# Reg-SignalControlZone reg_ext_value
 

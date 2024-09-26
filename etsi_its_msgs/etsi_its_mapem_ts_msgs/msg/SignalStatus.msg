@@ -39,8 +39,8 @@ IntersectionReferenceID id
 
 SignalStatusPackageList sig_status
 
-SignalStatusregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# SignalStatusregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

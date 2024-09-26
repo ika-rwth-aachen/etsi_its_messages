@@ -43,7 +43,7 @@
 DDateTime utc_time
 bool utc_time_is_present
 
-Longitude long
+Longitude lon
 
 Latitude lat
 

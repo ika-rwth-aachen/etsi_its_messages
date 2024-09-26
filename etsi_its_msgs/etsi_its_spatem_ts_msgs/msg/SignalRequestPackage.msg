@@ -45,8 +45,8 @@ bool second_is_present
 DSecond duration
 bool duration_is_present
 
-SignalRequestPackageregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# SignalRequestPackageregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

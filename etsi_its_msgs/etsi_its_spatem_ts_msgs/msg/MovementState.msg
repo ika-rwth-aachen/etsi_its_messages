@@ -44,8 +44,8 @@ MovementEventList state_time_speed
 ManeuverAssistList maneuver_assist_list
 bool maneuver_assist_list_is_present
 
-MovementStateregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# MovementStateregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

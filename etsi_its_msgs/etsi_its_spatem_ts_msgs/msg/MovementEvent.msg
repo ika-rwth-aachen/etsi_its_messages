@@ -41,8 +41,8 @@ bool timing_is_present
 AdvisorySpeedList speeds
 bool speeds_is_present
 
-MovementEventregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# MovementEventregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

@@ -54,8 +54,8 @@ bool speed_limits_is_present
 
 RoadLaneSetList road_lane_set
 
-RoadSegmentregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# RoadSegmentregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

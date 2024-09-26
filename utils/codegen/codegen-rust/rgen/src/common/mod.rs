@@ -63,7 +63,11 @@ pub fn to_ros_snake_case(input: &str) -> String {
             lowercase.push(c.to_ascii_lowercase());
         }
     }
-    lowercase
+    match lowercase.as_str() {
+        "long" => "lon".to_string(),
+        "class" => "cls".to_string(),
+        _ => lowercase
+    }
 }
 
 pub fn to_ros_const_case(input: &str) -> String {

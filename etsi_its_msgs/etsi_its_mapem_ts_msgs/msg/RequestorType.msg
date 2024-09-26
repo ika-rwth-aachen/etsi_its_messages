@@ -48,6 +48,6 @@ bool iso3883_is_present
 VehicleType hpms_type
 bool hpms_type_is_present
 
-RequestorTyperegional regional
-bool regional_is_present
+# RequestorTyperegional regional
+# bool regional_is_present
 

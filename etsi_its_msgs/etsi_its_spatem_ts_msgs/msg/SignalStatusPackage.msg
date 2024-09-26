@@ -57,8 +57,8 @@ bool duration_is_present
 
 PrioritizationResponseStatus status
 
-SignalStatusPackageregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# SignalStatusPackageregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

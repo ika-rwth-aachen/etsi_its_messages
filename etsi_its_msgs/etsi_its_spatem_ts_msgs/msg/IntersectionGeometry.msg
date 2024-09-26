@@ -58,8 +58,8 @@ LaneList lane_set
 PreemptPriorityList preempt_priority_data
 bool preempt_priority_data_is_present
 
-IntersectionGeometryregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# IntersectionGeometryregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

@@ -58,6 +58,6 @@ uint8 CHOICE_LANE_ANGLE = 4
 SpeedLimitList speed_limits
 uint8 CHOICE_SPEED_LIMITS = 5
 
-LaneDataAttributeregional[] regional
+# LaneDataAttributeregional[] regional
 uint8 CHOICE_REGIONAL = 6
 

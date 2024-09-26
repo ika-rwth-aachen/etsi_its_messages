@@ -38,6 +38,6 @@ LaneSharing shared_with
 
 LaneTypeAttributes lane_type
 
-LaneAttributesregional regional
-bool regional_is_present
+# LaneAttributesregional regional
+# bool regional_is_present
 

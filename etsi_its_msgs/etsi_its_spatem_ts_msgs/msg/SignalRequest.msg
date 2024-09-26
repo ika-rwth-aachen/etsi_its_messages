@@ -46,8 +46,8 @@ IntersectionAccessPoint in_bound_lane
 IntersectionAccessPoint out_bound_lane
 bool out_bound_lane_is_present
 
-SignalRequestregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# SignalRequestregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

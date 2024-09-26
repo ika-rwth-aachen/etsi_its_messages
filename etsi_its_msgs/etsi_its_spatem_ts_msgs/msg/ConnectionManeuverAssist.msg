@@ -49,8 +49,8 @@ bool wait_on_stop_is_present
 PedestrianBicycleDetect ped_bicycle_detect
 bool ped_bicycle_detect_is_present
 
-ConnectionManeuverAssistregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# ConnectionManeuverAssistregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

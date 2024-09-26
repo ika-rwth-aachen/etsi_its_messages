@@ -61,8 +61,8 @@ bool transit_occupancy_is_present
 DeltaTime transit_schedule
 bool transit_schedule_is_present
 
-RequestorDescriptionregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# RequestorDescriptionregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

@@ -57,8 +57,8 @@ bool scale_xaxis_is_present
 ScaleB12 scale_yaxis
 bool scale_yaxis_is_present
 
-ComputedLaneregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# ComputedLaneregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

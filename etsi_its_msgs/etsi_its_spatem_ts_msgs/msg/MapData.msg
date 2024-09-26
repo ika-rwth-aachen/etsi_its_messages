@@ -61,8 +61,8 @@ bool data_parameters_is_present
 RestrictionClassList restriction_list
 bool restriction_list_is_present
 
-MapDataregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# MapDataregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

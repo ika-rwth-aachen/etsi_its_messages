@@ -54,8 +54,8 @@ bool d_width_is_present
 OffsetB10 d_elevation
 bool d_elevation_is_present
 
-NodeAttributeSetXYregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# NodeAttributeSetXYregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

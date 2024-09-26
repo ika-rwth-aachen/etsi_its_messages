@@ -63,8 +63,8 @@ bool connects_to_is_present
 OverlayLaneList overlays
 bool overlays_is_present
 
-GenericLaneregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# GenericLaneregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 

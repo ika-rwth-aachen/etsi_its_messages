@@ -51,11 +51,11 @@ bool confidence_is_present
 ZoneLength distance
 bool distance_is_present
 
-RestrictionClassID class
-bool class_is_present
+RestrictionClassID cls
+bool cls_is_present
 
-AdvisorySpeedregional[] regional
-bool regional_is_present
-uint8 REGIONAL_MIN_SIZE = 1
-uint8 REGIONAL_MAX_SIZE = 4
+# AdvisorySpeedregional[] regional
+# bool regional_is_present
+# uint8 REGIONAL_MIN_SIZE = 1
+# uint8 REGIONAL_MAX_SIZE = 4
 
