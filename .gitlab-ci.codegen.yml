@@ -6,6 +6,7 @@ default:
     - apk update
     - apk add bash python3
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - ./asn1/external/download.sh
     - ./asn1/patches/patch.sh
 
 variables:
@@ -123,6 +124,9 @@ etsi_its_mapem_ts_coding:
       ./utils/codegen/asn1ToC.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem_ts
       -o etsi_its_coding/etsi_its_mapem_ts_coding 
       -td /builds/$CI_PROJECT_PATH/tmp
@@ -136,8 +140,12 @@ etsi_its_spatem_ts_coding:
   script:
     - >
       ./utils/codegen/asn1ToC.py
-      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t spatem_ts
       -o etsi_its_coding/etsi_its_spatem_ts_coding
       -td /builds/$CI_PROJECT_PATH/tmp
@@ -213,6 +221,9 @@ etsi_its_mapem_ts_msgs:
       ./utils/codegen/codegen-rust/asn1ToRosMsg.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
       -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
@@ -225,8 +236,12 @@ etsi_its_spatem_ts_msgs:
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToRosMsg.py
-      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_RGEN_CI_IMAGE}
@@ -305,6 +320,9 @@ etsi_its_mapem_ts_conversion:
       ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem_ts
       -o etsi_its_conversion/etsi_its_mapem_ts_conversion/include/etsi_its_mapem_ts_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
@@ -318,8 +336,12 @@ etsi_its_spatem_ts_conversion:
   script:
     - >
       ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
-      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t spatem_ts
       -o etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
