@@ -32,6 +32,8 @@ SOFTWARE.
 #include <etsi_its_cam_ts_conversion/convertCAM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
 #include <etsi_its_denm_conversion/convertDENM.h>
+#include <etsi_its_mapem_ts_conversion/convertMAPEM.h>
+#include <etsi_its_spatem_ts_conversion/convertSPATEM.h>
 #ifdef ROS1
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
@@ -40,11 +42,15 @@ SOFTWARE.
 #include <etsi_its_cam_ts_msgs/CAM.h>
 #include <etsi_its_cpm_ts_msgs/CollectivePerceptionMessage.h>
 #include <etsi_its_denm_msgs/DENM.h>
+#include <etsi_its_mapem_ts_msgs/MAPEM.h>
+#include <etsi_its_spatem_ts_msgs/SPATEM.h>
 #else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 #include <etsi_its_cam_ts_msgs/msg/cam.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/collective_perception_message.hpp>
 #include <etsi_its_denm_msgs/msg/denm.hpp>
+#include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
+#include <etsi_its_spatem_ts_msgs/msg/spatem.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 #endif
@@ -59,12 +65,16 @@ namespace cam_msgs = etsi_its_cam_msgs;
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 namespace denm_msgs = etsi_its_denm_msgs;
+namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
+namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
 #else
 using namespace udp_msgs::msg;
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 namespace denm_msgs = etsi_its_denm_msgs::msg;
+namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
+namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 #endif
 
 
@@ -136,6 +146,10 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicCpmTs;
     static const std::string kInputTopicDenm;
     static const std::string kOutputTopicDenm;
+    static const std::string kInputTopicMapemTs;
+    static const std::string kOutputTopicMapemTs;
+    static const std::string kInputTopicSpatemTs;
+    static const std::string kOutputTopicSpatemTs;
 
     static const std::string kHasBtpDestinationPortParam;
     static const bool kHasBtpDestinationPortParamDefault;
@@ -173,6 +187,8 @@ class Converter : public rclcpp::Node {
     rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
     rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
     rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
+    rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
     rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 #endif
 
