@@ -27,48 +27,32 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_mapem_ts_coding/mapem_ts_Position3D.h>
-#include <etsi_its_mapem_ts_coding/regional[].h>
-#include <etsi_its_primitives_conversion/convertregional[].h>
-#include <etsi_its_mapem_ts_conversion/convertElevation.h>
-#include <etsi_its_mapem_ts_conversion/convertLatitude.h>
-#include <etsi_its_mapem_ts_conversion/convertLongitude.h>
+#include <etsi_its_mapem_ts_coding/mapem_ts_IntersectionState-addGrpC.h>
+#include <etsi_its_mapem_ts_conversion/convertPrioritizationResponseList.h>
 #ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/Position3D.h>
+#include <etsi_its_mapem_ts_msgs/IntersectionStateAddGrpC.h>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
 #else
-#include <etsi_its_mapem_ts_msgs/msg/position3_d.hpp>
+#include <etsi_its_mapem_ts_msgs/msg/intersection_state_add_grp_c.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_ts_conversion {
 
-void toRos_Position3D(const mapem_ts_Position3D_t& in, mapem_ts_msgs::Position3D& out) {
-  toRos_Latitude(in.lat, out.lat);
-  toRos_Longitude(in.long, out.lon);
-  if (in.elevation) {
-    toRos_Elevation(*in.elevation, out.elevation);
-    out.elevation_is_present = true;
-  }
-  if (in.regional) {
-    etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
-    out.regional_is_present = true;
+void toRos_IntersectionStateAddGrpC(const mapem_ts_IntersectionState_addGrpC_t& in, mapem_ts_msgs::IntersectionStateAddGrpC& out) {
+  if (in.activePrioritizations) {
+    toRos_PrioritizationResponseList(*in.activePrioritizations, out.active_prioritizations);
+    out.active_prioritizations_is_present = true;
   }
 }
 
-void toStruct_Position3D(const mapem_ts_msgs::Position3D& in, mapem_ts_Position3D_t& out) {
-  memset(&out, 0, sizeof(mapem_ts_Position3D_t));
+void toStruct_IntersectionStateAddGrpC(const mapem_ts_msgs::IntersectionStateAddGrpC& in, mapem_ts_IntersectionState_addGrpC_t& out) {
+  memset(&out, 0, sizeof(mapem_ts_IntersectionState_addGrpC_t));
 
-  toStruct_Latitude(in.lat, out.lat);
-  toStruct_Longitude(in.lon, out.long);
-  if (in.elevation_is_present) {
-    out.elevation = (mapem_ts_Elevation_t*) calloc(1, sizeof(mapem_ts_Elevation_t));
-    toStruct_Elevation(in.elevation, *out.elevation);
-  }
-  if (in.regional_is_present) {
-    out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));
-    etsi_its_primitives_conversion::toStruct_regional[](in.regional, *out.regional);
+  if (in.active_prioritizations_is_present) {
+    out.activePrioritizations = (mapem_ts_PrioritizationResponseList_t*) calloc(1, sizeof(mapem_ts_PrioritizationResponseList_t));
+    toStruct_PrioritizationResponseList(in.active_prioritizations, *out.activePrioritizations);
   }
 }
 

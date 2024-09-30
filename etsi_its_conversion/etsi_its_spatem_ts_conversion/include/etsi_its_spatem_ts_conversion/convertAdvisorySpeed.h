@@ -61,8 +61,8 @@ void toRos_AdvisorySpeed(const spatem_ts_AdvisorySpeed_t& in, spatem_ts_msgs::Ad
     out.distance_is_present = true;
   }
   if (in.class) {
-    toRos_RestrictionClassID(*in.class, out.class);
-    out.class_is_present = true;
+    toRos_RestrictionClassID(*in.class, out.cls);
+    out.cls_is_present = true;
   }
   if (in.regional) {
     etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
@@ -86,9 +86,9 @@ void toStruct_AdvisorySpeed(const spatem_ts_msgs::AdvisorySpeed& in, spatem_ts_A
     out.distance = (spatem_ts_ZoneLength_t*) calloc(1, sizeof(spatem_ts_ZoneLength_t));
     toStruct_ZoneLength(in.distance, *out.distance);
   }
-  if (in.class_is_present) {
+  if (in.cls_is_present) {
     out.class = (spatem_ts_RestrictionClassID_t*) calloc(1, sizeof(spatem_ts_RestrictionClassID_t));
-    toStruct_RestrictionClassID(in.class, *out.class);
+    toStruct_RestrictionClassID(in.cls, *out.class);
   }
   if (in.regional_is_present) {
     out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));

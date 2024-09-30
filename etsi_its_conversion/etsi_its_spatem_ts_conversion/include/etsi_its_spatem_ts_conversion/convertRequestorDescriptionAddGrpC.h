@@ -27,48 +27,41 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_spatem_ts_coding/spatem_ts_Position3D.h>
-#include <etsi_its_spatem_ts_coding/regional[].h>
-#include <etsi_its_primitives_conversion/convertregional[].h>
-#include <etsi_its_spatem_ts_conversion/convertElevation.h>
-#include <etsi_its_spatem_ts_conversion/convertLatitude.h>
-#include <etsi_its_spatem_ts_conversion/convertLongitude.h>
+#include <etsi_its_spatem_ts_coding/spatem_ts_RequestorDescription-addGrpC.h>
+#include <etsi_its_spatem_ts_conversion/convertBatteryStatus.h>
+#include <etsi_its_spatem_ts_conversion/convertFuelType.h>
 #ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/Position3D.h>
+#include <etsi_its_spatem_ts_msgs/RequestorDescriptionAddGrpC.h>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
 #else
-#include <etsi_its_spatem_ts_msgs/msg/position3_d.hpp>
+#include <etsi_its_spatem_ts_msgs/msg/requestor_description_add_grp_c.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_ts_conversion {
 
-void toRos_Position3D(const spatem_ts_Position3D_t& in, spatem_ts_msgs::Position3D& out) {
-  toRos_Latitude(in.lat, out.lat);
-  toRos_Longitude(in.long, out.lon);
-  if (in.elevation) {
-    toRos_Elevation(*in.elevation, out.elevation);
-    out.elevation_is_present = true;
+void toRos_RequestorDescriptionAddGrpC(const spatem_ts_RequestorDescription_addGrpC_t& in, spatem_ts_msgs::RequestorDescriptionAddGrpC& out) {
+  if (in.fuel) {
+    toRos_FuelType(*in.fuel, out.fuel);
+    out.fuel_is_present = true;
   }
-  if (in.regional) {
-    etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
-    out.regional_is_present = true;
+  if (in.batteryStatus) {
+    toRos_BatteryStatus(*in.batteryStatus, out.battery_status);
+    out.battery_status_is_present = true;
   }
 }
 
-void toStruct_Position3D(const spatem_ts_msgs::Position3D& in, spatem_ts_Position3D_t& out) {
-  memset(&out, 0, sizeof(spatem_ts_Position3D_t));
+void toStruct_RequestorDescriptionAddGrpC(const spatem_ts_msgs::RequestorDescriptionAddGrpC& in, spatem_ts_RequestorDescription_addGrpC_t& out) {
+  memset(&out, 0, sizeof(spatem_ts_RequestorDescription_addGrpC_t));
 
-  toStruct_Latitude(in.lat, out.lat);
-  toStruct_Longitude(in.lon, out.long);
-  if (in.elevation_is_present) {
-    out.elevation = (spatem_ts_Elevation_t*) calloc(1, sizeof(spatem_ts_Elevation_t));
-    toStruct_Elevation(in.elevation, *out.elevation);
+  if (in.fuel_is_present) {
+    out.fuel = (spatem_ts_FuelType_t*) calloc(1, sizeof(spatem_ts_FuelType_t));
+    toStruct_FuelType(in.fuel, *out.fuel);
   }
-  if (in.regional_is_present) {
-    out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));
-    etsi_its_primitives_conversion::toStruct_regional[](in.regional, *out.regional);
+  if (in.battery_status_is_present) {
+    out.batteryStatus = (spatem_ts_BatteryStatus_t*) calloc(1, sizeof(spatem_ts_BatteryStatus_t));
+    toStruct_BatteryStatus(in.battery_status, *out.batteryStatus);
   }
 }
 

@@ -27,48 +27,41 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_mapem_ts_coding/mapem_ts_Position3D.h>
-#include <etsi_its_mapem_ts_coding/regional[].h>
-#include <etsi_its_primitives_conversion/convertregional[].h>
-#include <etsi_its_mapem_ts_conversion/convertElevation.h>
-#include <etsi_its_mapem_ts_conversion/convertLatitude.h>
-#include <etsi_its_mapem_ts_conversion/convertLongitude.h>
+#include <etsi_its_mapem_ts_coding/mapem_ts_SignalStatusPackage-addGrpC.h>
+#include <etsi_its_mapem_ts_conversion/convertDeltaTime.h>
+#include <etsi_its_mapem_ts_conversion/convertRejectedReason.h>
 #ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/Position3D.h>
+#include <etsi_its_mapem_ts_msgs/SignalStatusPackageAddGrpC.h>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
 #else
-#include <etsi_its_mapem_ts_msgs/msg/position3_d.hpp>
+#include <etsi_its_mapem_ts_msgs/msg/signal_status_package_add_grp_c.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_ts_conversion {
 
-void toRos_Position3D(const mapem_ts_Position3D_t& in, mapem_ts_msgs::Position3D& out) {
-  toRos_Latitude(in.lat, out.lat);
-  toRos_Longitude(in.long, out.lon);
-  if (in.elevation) {
-    toRos_Elevation(*in.elevation, out.elevation);
-    out.elevation_is_present = true;
+void toRos_SignalStatusPackageAddGrpC(const mapem_ts_SignalStatusPackage_addGrpC_t& in, mapem_ts_msgs::SignalStatusPackageAddGrpC& out) {
+  if (in.synchToSchedule) {
+    toRos_DeltaTime(*in.synchToSchedule, out.synch_to_schedule);
+    out.synch_to_schedule_is_present = true;
   }
-  if (in.regional) {
-    etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
-    out.regional_is_present = true;
+  if (in.rejectedReason) {
+    toRos_RejectedReason(*in.rejectedReason, out.rejected_reason);
+    out.rejected_reason_is_present = true;
   }
 }
 
-void toStruct_Position3D(const mapem_ts_msgs::Position3D& in, mapem_ts_Position3D_t& out) {
-  memset(&out, 0, sizeof(mapem_ts_Position3D_t));
+void toStruct_SignalStatusPackageAddGrpC(const mapem_ts_msgs::SignalStatusPackageAddGrpC& in, mapem_ts_SignalStatusPackage_addGrpC_t& out) {
+  memset(&out, 0, sizeof(mapem_ts_SignalStatusPackage_addGrpC_t));
 
-  toStruct_Latitude(in.lat, out.lat);
-  toStruct_Longitude(in.lon, out.long);
-  if (in.elevation_is_present) {
-    out.elevation = (mapem_ts_Elevation_t*) calloc(1, sizeof(mapem_ts_Elevation_t));
-    toStruct_Elevation(in.elevation, *out.elevation);
+  if (in.synch_to_schedule_is_present) {
+    out.synchToSchedule = (mapem_ts_DeltaTime_t*) calloc(1, sizeof(mapem_ts_DeltaTime_t));
+    toStruct_DeltaTime(in.synch_to_schedule, *out.synchToSchedule);
   }
-  if (in.regional_is_present) {
-    out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));
-    etsi_its_primitives_conversion::toStruct_regional[](in.regional, *out.regional);
+  if (in.rejected_reason_is_present) {
+    out.rejectedReason = (mapem_ts_RejectedReason_t*) calloc(1, sizeof(mapem_ts_RejectedReason_t));
+    toStruct_RejectedReason(in.rejected_reason, *out.rejectedReason);
   }
 }
 

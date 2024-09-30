@@ -27,48 +27,50 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_spatem_ts_coding/spatem_ts_Position3D.h>
-#include <etsi_its_spatem_ts_coding/regional[].h>
-#include <etsi_its_primitives_conversion/convertregional[].h>
-#include <etsi_its_spatem_ts_conversion/convertElevation.h>
-#include <etsi_its_spatem_ts_conversion/convertLatitude.h>
-#include <etsi_its_spatem_ts_conversion/convertLongitude.h>
+#include <etsi_its_spatem_ts_coding/spatem_ts_NodeAttributeSet-addGrpC.h>
+#include <etsi_its_spatem_ts_conversion/convertNode.h>
+#include <etsi_its_spatem_ts_conversion/convertNodeLink.h>
+#include <etsi_its_spatem_ts_conversion/convertPtvRequestType.h>
 #ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/Position3D.h>
+#include <etsi_its_spatem_ts_msgs/NodeAttributeSetAddGrpC.h>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
 #else
-#include <etsi_its_spatem_ts_msgs/msg/position3_d.hpp>
+#include <etsi_its_spatem_ts_msgs/msg/node_attribute_set_add_grp_c.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 #endif
 
 
 namespace etsi_its_spatem_ts_conversion {
 
-void toRos_Position3D(const spatem_ts_Position3D_t& in, spatem_ts_msgs::Position3D& out) {
-  toRos_Latitude(in.lat, out.lat);
-  toRos_Longitude(in.long, out.lon);
-  if (in.elevation) {
-    toRos_Elevation(*in.elevation, out.elevation);
-    out.elevation_is_present = true;
+void toRos_NodeAttributeSetAddGrpC(const spatem_ts_NodeAttributeSet_addGrpC_t& in, spatem_ts_msgs::NodeAttributeSetAddGrpC& out) {
+  if (in.ptvRequest) {
+    toRos_PtvRequestType(*in.ptvRequest, out.ptv_request);
+    out.ptv_request_is_present = true;
   }
-  if (in.regional) {
-    etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
-    out.regional_is_present = true;
+  if (in.nodeLink) {
+    toRos_NodeLink(*in.nodeLink, out.node_link);
+    out.node_link_is_present = true;
+  }
+  if (in.node) {
+    toRos_Node(*in.node, out.node);
+    out.node_is_present = true;
   }
 }
 
-void toStruct_Position3D(const spatem_ts_msgs::Position3D& in, spatem_ts_Position3D_t& out) {
-  memset(&out, 0, sizeof(spatem_ts_Position3D_t));
+void toStruct_NodeAttributeSetAddGrpC(const spatem_ts_msgs::NodeAttributeSetAddGrpC& in, spatem_ts_NodeAttributeSet_addGrpC_t& out) {
+  memset(&out, 0, sizeof(spatem_ts_NodeAttributeSet_addGrpC_t));
 
-  toStruct_Latitude(in.lat, out.lat);
-  toStruct_Longitude(in.lon, out.long);
-  if (in.elevation_is_present) {
-    out.elevation = (spatem_ts_Elevation_t*) calloc(1, sizeof(spatem_ts_Elevation_t));
-    toStruct_Elevation(in.elevation, *out.elevation);
+  if (in.ptv_request_is_present) {
+    out.ptvRequest = (spatem_ts_PtvRequestType_t*) calloc(1, sizeof(spatem_ts_PtvRequestType_t));
+    toStruct_PtvRequestType(in.ptv_request, *out.ptvRequest);
   }
-  if (in.regional_is_present) {
-    out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));
-    etsi_its_primitives_conversion::toStruct_regional[](in.regional, *out.regional);
+  if (in.node_link_is_present) {
+    out.nodeLink = (spatem_ts_NodeLink_t*) calloc(1, sizeof(spatem_ts_NodeLink_t));
+    toStruct_NodeLink(in.node_link, *out.nodeLink);
+  }
+  if (in.node_is_present) {
+    out.node = (spatem_ts_Node_t*) calloc(1, sizeof(spatem_ts_Node_t));
+    toStruct_Node(in.node, *out.node);
   }
 }
 

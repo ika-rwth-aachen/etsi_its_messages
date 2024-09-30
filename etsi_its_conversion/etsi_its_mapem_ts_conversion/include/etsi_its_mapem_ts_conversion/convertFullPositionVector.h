@@ -54,7 +54,7 @@ void toRos_FullPositionVector(const mapem_ts_FullPositionVector_t& in, mapem_ts_
     toRos_DDateTime(*in.utcTime, out.utc_time);
     out.utc_time_is_present = true;
   }
-  toRos_Longitude(in.long, out.long);
+  toRos_Longitude(in.long, out.lon);
   toRos_Latitude(in.lat, out.lat);
   if (in.elevation) {
     toRos_Elevation(*in.elevation, out.elevation);
@@ -93,7 +93,7 @@ void toStruct_FullPositionVector(const mapem_ts_msgs::FullPositionVector& in, ma
     out.utcTime = (mapem_ts_DDateTime_t*) calloc(1, sizeof(mapem_ts_DDateTime_t));
     toStruct_DDateTime(in.utc_time, *out.utcTime);
   }
-  toStruct_Longitude(in.long, out.long);
+  toStruct_Longitude(in.lon, out.long);
   toStruct_Latitude(in.lat, out.lat);
   if (in.elevation_is_present) {
     out.elevation = (mapem_ts_Elevation_t*) calloc(1, sizeof(mapem_ts_Elevation_t));

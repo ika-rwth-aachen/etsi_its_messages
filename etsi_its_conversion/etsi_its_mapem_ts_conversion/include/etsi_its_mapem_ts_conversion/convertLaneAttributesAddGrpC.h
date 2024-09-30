@@ -27,48 +27,41 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_mapem_ts_coding/mapem_ts_Position3D.h>
-#include <etsi_its_mapem_ts_coding/regional[].h>
-#include <etsi_its_primitives_conversion/convertregional[].h>
-#include <etsi_its_mapem_ts_conversion/convertElevation.h>
-#include <etsi_its_mapem_ts_conversion/convertLatitude.h>
-#include <etsi_its_mapem_ts_conversion/convertLongitude.h>
+#include <etsi_its_mapem_ts_coding/mapem_ts_LaneAttributes-addGrpC.h>
+#include <etsi_its_mapem_ts_conversion/convertVehicleHeight.h>
+#include <etsi_its_mapem_ts_conversion/convertVehicleMass.h>
 #ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/Position3D.h>
+#include <etsi_its_mapem_ts_msgs/LaneAttributesAddGrpC.h>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
 #else
-#include <etsi_its_mapem_ts_msgs/msg/position3_d.hpp>
+#include <etsi_its_mapem_ts_msgs/msg/lane_attributes_add_grp_c.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 #endif
 
 
 namespace etsi_its_mapem_ts_conversion {
 
-void toRos_Position3D(const mapem_ts_Position3D_t& in, mapem_ts_msgs::Position3D& out) {
-  toRos_Latitude(in.lat, out.lat);
-  toRos_Longitude(in.long, out.lon);
-  if (in.elevation) {
-    toRos_Elevation(*in.elevation, out.elevation);
-    out.elevation_is_present = true;
+void toRos_LaneAttributesAddGrpC(const mapem_ts_LaneAttributes_addGrpC_t& in, mapem_ts_msgs::LaneAttributesAddGrpC& out) {
+  if (in.maxVehicleHeight) {
+    toRos_VehicleHeight(*in.maxVehicleHeight, out.max_vehicle_height);
+    out.max_vehicle_height_is_present = true;
   }
-  if (in.regional) {
-    etsi_its_primitives_conversion::toRos_regional[](*in.regional, out.regional);
-    out.regional_is_present = true;
+  if (in.maxVehicleWeight) {
+    toRos_VehicleMass(*in.maxVehicleWeight, out.max_vehicle_weight);
+    out.max_vehicle_weight_is_present = true;
   }
 }
 
-void toStruct_Position3D(const mapem_ts_msgs::Position3D& in, mapem_ts_Position3D_t& out) {
-  memset(&out, 0, sizeof(mapem_ts_Position3D_t));
+void toStruct_LaneAttributesAddGrpC(const mapem_ts_msgs::LaneAttributesAddGrpC& in, mapem_ts_LaneAttributes_addGrpC_t& out) {
+  memset(&out, 0, sizeof(mapem_ts_LaneAttributes_addGrpC_t));
 
-  toStruct_Latitude(in.lat, out.lat);
-  toStruct_Longitude(in.lon, out.long);
-  if (in.elevation_is_present) {
-    out.elevation = (mapem_ts_Elevation_t*) calloc(1, sizeof(mapem_ts_Elevation_t));
-    toStruct_Elevation(in.elevation, *out.elevation);
+  if (in.max_vehicle_height_is_present) {
+    out.maxVehicleHeight = (mapem_ts_VehicleHeight_t*) calloc(1, sizeof(mapem_ts_VehicleHeight_t));
+    toStruct_VehicleHeight(in.max_vehicle_height, *out.maxVehicleHeight);
   }
-  if (in.regional_is_present) {
-    out.regional = (regional[]_t*) calloc(1, sizeof(regional[]_t));
-    etsi_its_primitives_conversion::toStruct_regional[](in.regional, *out.regional);
+  if (in.max_vehicle_weight_is_present) {
+    out.maxVehicleWeight = (mapem_ts_VehicleMass_t*) calloc(1, sizeof(mapem_ts_VehicleMass_t));
+    toStruct_VehicleMass(in.max_vehicle_weight, *out.maxVehicleWeight);
   }
 }
 
