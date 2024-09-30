@@ -115,6 +115,36 @@ etsi_its_cpm_ts_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_mapem_ts_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      -t mapem_ts
+      -o etsi_its_coding/etsi_its_mapem_ts_coding 
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_spatem_ts_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      ./utils/codegen/asn1ToC.py
+      asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      -t spatem_ts
+      -o etsi_its_coding/etsi_its_spatem_ts_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_cam_msgs:
   stage: ROS Messages
   needs: ["rgen-docker"]
