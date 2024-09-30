@@ -5,16 +5,17 @@
  * 	`asn1c -fcompound-names -fprefix=spatem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
  */
 
-#ifndef	_spatem_ts_ConnectionTrajectory_addGrpC_H_
-#define	_spatem_ts_ConnectionTrajectory_addGrpC_H_
 
-
-#include <etsi_its_spatem_ts_coding/asn_application.h>
 
 /* Including external dependencies */
 #include "etsi_its_spatem_ts_coding/spatem_ts_NodeSetXY.h"
 #include "etsi_its_spatem_ts_coding/spatem_ts_LaneConnectionID.h"
 #include <etsi_its_spatem_ts_coding/constr_SEQUENCE.h>
+#ifndef	_spatem_ts_ConnectionTrajectory_addGrpC_H_
+#define	_spatem_ts_ConnectionTrajectory_addGrpC_H_
+
+
+#include <etsi_its_spatem_ts_coding/asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -35,16 +35,16 @@ typedef struct asn_struct_ctx_s {
 } asn_struct_ctx_t;
 
 #if !defined(ASN_DISABLE_BER_SUPPORT)
-#include <ber_decoder.h>  /* Basic Encoding Rules decoder */
-#include <der_encoder.h>  /* Distinguished Encoding Rules encoder */
+#include <etsi_its_mapem_ts_coding/ber_decoder.h>  /* Basic Encoding Rules decoder */
+#include <etsi_its_mapem_ts_coding/der_encoder.h>  /* Distinguished Encoding Rules encoder */
 #else
 typedef void (ber_type_decoder_f)(void);
 typedef void (der_type_encoder_f)(void);
 #endif  /* !defined(ASN_DISABLE_BER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_XER_SUPPORT)
-#include <xer_decoder.h>  /* Decoder of XER (XML, text) */
-#include <xer_encoder.h>  /* Encoder into XER (XML, text) */
+#include <etsi_its_mapem_ts_coding/xer_decoder.h>  /* Decoder of XER (XML, text) */
+#include <etsi_its_mapem_ts_coding/xer_encoder.h>  /* Encoder into XER (XML, text) */
 #else
 typedef void (xer_type_decoder_f)(void);
 typedef void (xer_type_encoder_f)(void);
@@ -52,7 +52,7 @@ typedef void (xer_type_encoder_f)(void);
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
 #include <jer_decoder.h>  /* Decoder of JER (JSON, text) */
-#include <jer_encoder.h>  /* Encoder into JER (JSON, text) */
+#include <etsi_its_mapem_ts_coding/jer_encoder.h>  /* Encoder into JER (JSON, text) */
 #else
 typedef void (jer_type_decoder_f)(void);
 typedef void (jer_type_encoder_f)(void);
@@ -75,8 +75,8 @@ typedef void (asn_random_fill_f)(void);
 #endif  /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
-#include <oer_decoder.h>  /* Octet Encoding Rules encoder */
-#include <oer_encoder.h>  /* Octet Encoding Rules encoder */
+#include <etsi_its_mapem_ts_coding/oer_decoder.h>  /* Octet Encoding Rules encoder */
+#include <etsi_its_mapem_ts_coding/oer_encoder.h>  /* Octet Encoding Rules encoder */
 #else
 typedef void (oer_type_decoder_f)(void);
 typedef void (oer_type_encoder_f)(void);
