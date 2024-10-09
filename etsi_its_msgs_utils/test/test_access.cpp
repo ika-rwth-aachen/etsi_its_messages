@@ -1,7 +1,6 @@
-
+#include <gtest/gtest.h>
 #include <cmath>
 #include <random>
-#include <gtest/gtest.h>
 
 #include <etsi_its_cam_msgs/CAM.h>
 #include <etsi_its_msgs_utils/cam_access.h>
@@ -38,7 +37,6 @@ namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 
 namespace denm_msgs = etsi_its_denm_msgs;
 #include <impl/test_denm_access.cpp>
-
 
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);

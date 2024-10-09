@@ -1,14 +1,13 @@
-#include <cmath>
 #include <gtest/gtest.h>
+#include <cmath>
 
 namespace cam_ts_access = etsi_its_cam_ts_msgs::access;
 
 TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
-
   cam_ts_msgs::CAM cam;
 
-  int station_id = randomInt(cam_ts_msgs::StationId::MIN,cam_ts_msgs::StationId::MAX);
-  int protocol_version = randomInt(cam_ts_msgs::OrdinalNumber1B::MIN,cam_ts_msgs::OrdinalNumber1B::MAX);
+  int station_id = randomInt(cam_ts_msgs::StationId::MIN, cam_ts_msgs::StationId::MAX);
+  int protocol_version = randomInt(cam_ts_msgs::OrdinalNumber1B::MIN, cam_ts_msgs::OrdinalNumber1B::MAX);
   cam_ts_access::setItsPduHeader(cam, station_id, protocol_version);
   EXPECT_EQ(cam_ts_msgs::MessageId::CAM, cam.header.message_id.value);
   EXPECT_EQ(protocol_version, cam.header.protocol_version.value);
@@ -19,19 +18,25 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
   // The value for TimestampIts for 2007-01-01T00:00:00.000Z is
   // 94694401000 milliseconds, which includes one leap second insertion
   // since 2004-01-01T00:00:00.000Z.
-  uint64_t t_2007 = ((uint64_t)1167609600)*1e9;
+  uint64_t t_2007 = ((uint64_t)1167609600) * 1e9;
   cam_ts_msgs::TimestampIts t_its;
-  EXPECT_EQ(1, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9));
-  cam_ts_access::setTimestampITS(t_its, t_2007, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9));
+  EXPECT_EQ(1, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9));
+  cam_ts_access::setTimestampITS(t_its, t_2007, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9));
   EXPECT_EQ(94694401000, t_its.value);
-  cam_ts_access::setGenerationDeltaTime(cam, t_2007, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9));
-  EXPECT_EQ(94694401000%65536, cam_ts_access::getGenerationDeltaTimeValue(cam));
+  cam_ts_access::setGenerationDeltaTime(cam, t_2007, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9));
+  EXPECT_EQ(94694401000 % 65536, cam_ts_access::getGenerationDeltaTimeValue(cam));
   cam_ts_msgs::TimestampIts t_its2;
-  uint64_t t_2007_off = t_2007 + 5*1e9;
-  cam_ts_access::setTimestampITS(t_its2, t_2007_off, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9));
-  EXPECT_EQ(94694401000, cam_ts_access::getTimestampITSFromGenerationDeltaTime(cam_ts_access::getGenerationDeltaTime(cam), t_its2).value);
-  EXPECT_EQ(t_2007, cam_ts_access::getUnixNanosecondsFromGenerationDeltaTime(cam_ts_access::getGenerationDeltaTime(cam), t_its2, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9)));
-  EXPECT_EQ(t_2007, cam_ts_access::getUnixNanosecondsFromGenerationDeltaTime(cam_ts_access::getGenerationDeltaTime(cam), t_2007_off, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007*1e-9)));
+  uint64_t t_2007_off = t_2007 + 5 * 1e9;
+  cam_ts_access::setTimestampITS(t_its2, t_2007_off, etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9));
+  EXPECT_EQ(
+      94694401000,
+      cam_ts_access::getTimestampITSFromGenerationDeltaTime(cam_ts_access::getGenerationDeltaTime(cam), t_its2).value);
+  EXPECT_EQ(t_2007, cam_ts_access::getUnixNanosecondsFromGenerationDeltaTime(
+                        cam_ts_access::getGenerationDeltaTime(cam), t_its2,
+                        etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9)));
+  EXPECT_EQ(t_2007, cam_ts_access::getUnixNanosecondsFromGenerationDeltaTime(
+                        cam_ts_access::getGenerationDeltaTime(cam), t_2007_off,
+                        etsi_its_msgs::getLeapSecondInsertionsSince2004(t_2007 * 1e-9)));
 
   int stationType_val = randomInt(cam_ts_msgs::TrafficParticipantType::MIN, cam_ts_msgs::TrafficParticipantType::MAX);
   cam_ts_access::setStationType(cam, stationType_val);
@@ -94,7 +99,8 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
     exterior_lights.at(i) = randomInt(0, 1);
   }
   cam.cam.cam_parameters.low_frequency_container_is_present = true;
-  cam.cam.cam_parameters.low_frequency_container.choice = cam_ts_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
+  cam.cam.cam_parameters.low_frequency_container.choice =
+      cam_ts_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
   cam_ts_access::setExteriorLights(cam, exterior_lights);
   EXPECT_EQ(exterior_lights, cam_ts_access::getExteriorLights(cam));
 }

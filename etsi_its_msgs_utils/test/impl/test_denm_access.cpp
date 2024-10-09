@@ -1,14 +1,14 @@
-#include <cmath>
 #include <gtest/gtest.h>
+#include <cmath>
 
 namespace denm_access = etsi_its_denm_msgs::access;
 
 TEST(etsi_its_denm_msgs, test_set_get_denm) {
-
   denm_msgs::DENM denm;
 
-  int station_id = randomInt(denm_msgs::StationID::MIN,denm_msgs::StationID::MAX);
-  int protocol_version = randomInt(denm_msgs::ItsPduHeader::PROTOCOL_VERSION_MIN,denm_msgs::ItsPduHeader::PROTOCOL_VERSION_MAX);
+  int station_id = randomInt(denm_msgs::StationID::MIN, denm_msgs::StationID::MAX);
+  int protocol_version =
+      randomInt(denm_msgs::ItsPduHeader::PROTOCOL_VERSION_MIN, denm_msgs::ItsPduHeader::PROTOCOL_VERSION_MAX);
   denm_access::setItsPduHeader(denm, station_id, protocol_version);
   EXPECT_EQ(denm_msgs::ItsPduHeader::MESSAGE_ID_DENM, denm.header.message_id);
   EXPECT_EQ(protocol_version, denm.header.protocol_version);
@@ -19,14 +19,14 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   // The value for TimestampIts for 2007-01-01T00:00:00.000Z is
   // 94694401000 milliseconds, which includes one leap second insertion
   // since 2004-01-01T00:00:00.000Z.
-  uint64_t t_2007 = ((uint64_t)1167609600)*1e9;
+  uint64_t t_2007 = ((uint64_t)1167609600) * 1e9;
   denm_msgs::TimestampIts t_its;
   denm_access::setTimestampITS(t_its, t_2007, 1);
   EXPECT_EQ(94694401000, t_its.value);
-  
+
   denm_access::setReferenceTime(denm, t_2007, 1);
   EXPECT_EQ(94694401000, denm_access::getReferenceTimeValue(denm));
-  uint64_t t_2007_off = t_2007 + 5*1e9;
+  uint64_t t_2007_off = t_2007 + 5 * 1e9;
   EXPECT_EQ(t_2007, denm_access::getUnixNanosecondsFromReferenceTime(denm_access::getReferenceTime(denm)));
 
   int stationType_val = randomInt(denm_msgs::StationType::MIN, denm_msgs::StationType::MAX);
