@@ -29,8 +29,8 @@ SOFTWARE.
  * @brief Common setter functions for the ETSI ITS CAM (EN and TS)
  */
 
-# ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
-# define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
 #include <etsi_its_msgs_utils/impl/constants.h>
 
@@ -41,12 +41,14 @@ SOFTWARE.
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
  * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
  */
-inline void setGenerationDeltaTime(GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+inline void setGenerationDeltaTime(
+    GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs,
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
-  uint16_t gdt_value = t_its.value%65536;
+  uint16_t gdt_value = t_its.value % 65536;
   throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
-  generation_delta_time.value=gdt_value;
+  generation_delta_time.value = gdt_value;
 }
 
 /**
@@ -56,7 +58,9 @@ inline void setGenerationDeltaTime(GenerationDeltaTime& generation_delta_time, c
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
  * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
  */
-inline void setGenerationDeltaTime(CAM& cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+inline void setGenerationDeltaTime(
+    CAM& cam, const uint64_t unix_nanosecs,
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
   setGenerationDeltaTime(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);
 }
 
@@ -66,7 +70,7 @@ inline void setGenerationDeltaTime(CAM& cam, const uint64_t unix_nanosecs, const
  * @param cam CAM-Message to set the station_type value
  * @param value station_type value to set
  */
-inline void setStationType(CAM& cam, const uint8_t value){
+inline void setStationType(CAM& cam, const uint8_t value) {
   setStationType(cam.cam.cam_parameters.basic_container.station_type, value);
 }
 
@@ -79,7 +83,7 @@ inline void setStationType(CAM& cam, const uint8_t value){
  * @param value Heading value in degree as decimal number
  */
 inline void setHeadingValue(HeadingValue& heading, const double value) {
-  int64_t deg = (int64_t)std::round(value*1e1);
+  int64_t deg = (int64_t)std::round(value * 1e1);
   throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
   heading.value = deg;
 }
@@ -107,8 +111,9 @@ inline void setHeading(Heading& heading, const double value) {
  * @param cam CAM to set the ReferencePosition
  * @param value Heading value in degree as decimal number
  */
-inline void setHeading(CAM& cam, const double heading_val){
-  setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading, heading_val);
+inline void setHeading(CAM& cam, const double heading_val) {
+  setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
+             heading_val);
 }
 
 /**
@@ -118,7 +123,7 @@ inline void setHeading(CAM& cam, const double heading_val){
  * @param value VehicleLengthValue in meter as decimal number
  */
 inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, const double value) {
-  int64_t length = (int64_t)std::round(value*1e1);
+  int64_t length = (int64_t)std::round(value * 1e1);
   throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
   vehicle_length.value = length;
 }
@@ -143,9 +148,12 @@ inline void setVehicleLength(VehicleLength& vehicle_length, const double value) 
  * @param vehicle_length vehicle length in meter as decimal number
  * @param vehicle_width vehicle width in meter as decimal number
  */
-inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const double vehicle_width){
-  setVehicleLength(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length, vehicle_length);
-  setVehicleWidth(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width, vehicle_width);
+inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const double vehicle_width) {
+  setVehicleLength(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length,
+      vehicle_length);
+  setVehicleWidth(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width,
+                  vehicle_width);
 }
 
 /**
@@ -154,7 +162,7 @@ inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const do
  * @param cam CAM to set the speed value
  * @param speed_val speed value to set in m/s as decimal number
  */
-inline void setSpeed(CAM& cam, const double speed_val){
+inline void setSpeed(CAM& cam, const double speed_val) {
   setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);
 }
 
@@ -164,8 +172,10 @@ inline void setSpeed(CAM& cam, const double speed_val){
  * @param cam CAM to set the acceleration value s
  * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
  */
-inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel){
-  setLongitudinalAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration, lon_accel);
+inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel) {
+  setLongitudinalAcceleration(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration,
+      lon_accel);
 }
 
 /**
@@ -174,9 +184,12 @@ inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel){
  * @param cam CAM to set the acceleration value s
  * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
  */
-inline void setLateralAcceleration(CAM& cam, const double lat_accel){
-    setLateralAcceleration(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration, lat_accel);
-    cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration_is_present = true;
+inline void setLateralAcceleration(CAM& cam, const double lat_accel) {
+  setLateralAcceleration(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration,
+      lat_accel);
+  cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
+      .lateral_acceleration_is_present = true;
 }
 
 /**
@@ -190,7 +203,8 @@ inline void setLateralAcceleration(CAM& cam, const double lat_accel){
  * @param longitude The longitude value in degree as decimal number.
  * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
  */
-inline void setReferencePosition(CAM& cam, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
+inline void setReferencePosition(CAM& cam, const double latitude, const double longitude,
+                                 const double altitude = AltitudeValue::UNAVAILABLE) {
   setReferencePosition(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);
 }
 
@@ -206,8 +220,7 @@ inline void setReferencePosition(CAM& cam, const double latitude, const double l
  * @param[in] zone the UTM zone (zero means UPS) of the given position
  * @param[in] northp hemisphere (true means north, false means south)
  */
-inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, const int& zone, const bool& northp)
-{
+inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, const int& zone, const bool& northp) {
   setFromUTMPosition(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);
 }
 
@@ -227,19 +240,21 @@ inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector
  * @param cam CAM to set the exterior lights
  * @param exterior_lights vector of bools to set the exterior lights
  */
-inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights){
-  if(ExteriorLights::SIZE_BITS != exterior_lights.size()) {
-    throw std::invalid_argument("Vector has wrong size. (" + std::to_string(exterior_lights.size()) + " != " + std::to_string(ExteriorLights::SIZE_BITS) + ")");
+inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights) {
+  if (ExteriorLights::SIZE_BITS != exterior_lights.size()) {
+    throw std::invalid_argument("Vector has wrong size. (" + std::to_string(exterior_lights.size()) +
+                                " != " + std::to_string(ExteriorLights::SIZE_BITS) + ")");
   }
-  if(cam.cam.cam_parameters.low_frequency_container_is_present) {
-    if(cam.cam.cam_parameters.low_frequency_container.choice == LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
-      setExteriorLights(cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights, exterior_lights);
-    }
-    else {
+  if (cam.cam.cam_parameters.low_frequency_container_is_present) {
+    if (cam.cam.cam_parameters.low_frequency_container.choice ==
+        LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {
+      setExteriorLights(
+          cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights,
+          exterior_lights);
+    } else {
       throw std::invalid_argument("LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!");
     }
-  }
-  else {
+  } else {
     throw std::invalid_argument("LowFrequencyContainer is not present!");
   }
 }
@@ -294,4 +309,4 @@ inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const st
   setBitString(emergency_priority, bits);
 }
 
-#endif // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H

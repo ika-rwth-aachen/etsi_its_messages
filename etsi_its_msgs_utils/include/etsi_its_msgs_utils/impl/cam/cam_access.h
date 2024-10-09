@@ -53,4 +53,4 @@ SOFTWARE.
 
 namespace etsi_its_cam_msgs::access {
 #include <etsi_its_msgs_utils/impl/cam/cam_utils.h>
-} // namespace etsi_its_cam_msgs::access
+}  // namespace etsi_its_cam_msgs::access
