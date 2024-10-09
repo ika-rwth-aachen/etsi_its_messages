@@ -50,4 +50,4 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 #include <etsi_its_msgs_utils/impl/denm/denm_utils.h>
-} // namespace etsi_its_denm_msgs::access
+}  // namespace etsi_its_denm_msgs::access
