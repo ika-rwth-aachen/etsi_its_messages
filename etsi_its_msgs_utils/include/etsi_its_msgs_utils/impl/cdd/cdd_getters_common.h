@@ -29,11 +29,10 @@ SOFTWARE.
  * @brief Common getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1
  */
 
-# ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
-# define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 
 #include <GeographicLib/UTMUPS.hpp>
-
 
 /**
 * @brief Get the StationID of ItsPduHeader
@@ -41,9 +40,7 @@ SOFTWARE.
 * @param header ItsPduHeader to get the StationID value from
 * @return stationID value
 */
-inline uint32_t getStationID(const ItsPduHeader& header){
-  return header.station_id.value;
-}
+inline uint32_t getStationID(const ItsPduHeader& header) { return header.station_id.value; }
 
 /**
  * @brief Get the Latitude value
@@ -51,9 +48,7 @@ inline uint32_t getStationID(const ItsPduHeader& header){
  * @param latitude to get the Latitude value from
  * @return Latitude value in degree as decimal number
  */
-inline double getLatitude(const Latitude& latitude){
-  return ((double)latitude.value)*1e-7;
-}
+inline double getLatitude(const Latitude& latitude) { return ((double)latitude.value) * 1e-7; }
 
 /**
  * @brief Get the Longitude value
@@ -61,9 +56,7 @@ inline double getLatitude(const Latitude& latitude){
  * @param longitude to get the Longitude value from
  * @return Longitude value in degree as decimal number
  */
-inline double getLongitude(const Longitude& longitude){
-  return ((double)longitude.value)*1e-7;
-}
+inline double getLongitude(const Longitude& longitude) { return ((double)longitude.value) * 1e-7; }
 
 /**
  * @brief Get the Altitude value
@@ -71,9 +64,7 @@ inline double getLongitude(const Longitude& longitude){
  * @param altitude to get the Altitude value from
  * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
  */
-inline double getAltitude(const Altitude& altitude){
-  return ((double)altitude.altitude_value.value)*1e-2;
-}
+inline double getAltitude(const Altitude& altitude) { return ((double)altitude.altitude_value.value) * 1e-2; }
 
 /**
  * @brief Get the Vehicle Width
@@ -81,9 +72,7 @@ inline double getAltitude(const Altitude& altitude){
  * @param vehicleWidth to get the vehicle width value from
  * @return vehicle width value in meter as decimal number
  */
-inline double getVehicleWidth(const VehicleWidth& vehicle_width){
-  return ((double)vehicle_width.value)*1e-1;
-}
+inline double getVehicleWidth(const VehicleWidth& vehicle_width) { return ((double)vehicle_width.value) * 1e-1; }
 
 /**
  * @brief Get the vehicle speed
@@ -91,9 +80,7 @@ inline double getVehicleWidth(const VehicleWidth& vehicle_width){
  * @param speed to get the speed value from
  * @return speed value in m/s as decimal number
  */
-inline double getSpeed(const Speed& speed){
-  return ((double)speed.speed_value.value)*1e-2;
-}
+inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
 /**
  * @brief Get a Bit String in form of bool vector
@@ -112,10 +99,8 @@ inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const 
 
   // loop over bytes in reverse order
   for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-
     // loop over bits in a byte
     for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
-
       // map bit index in byte to bit index in total bitstring
       int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
       if (byte_idx == 0 && bit_idx >= n_bits - bits_unused) break;
@@ -140,7 +125,7 @@ inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const 
  * @return gm::PointStamped geometry_msgs::PointStamped of the given position
  */
 template <typename T>
-inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, bool& northp){
+inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, bool& northp) {
   gm::PointStamped utm_point;
   double latitude = getLatitude(reference_position.latitude);
   double longitude = getLongitude(reference_position.longitude);
@@ -148,13 +133,16 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
   try {
     GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
     std::string hemisphere;
-    if(northp) hemisphere="N";
-    else hemisphere="S";
-    utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
+    if (northp) {
+      hemisphere = "N";
+    } else {
+      hemisphere = "S";
+    }
+    utm_point.header.frame_id = "utm_" + std::to_string(zone) + hemisphere;
   } catch (GeographicLib::GeographicErr& e) {
     throw std::invalid_argument(e.what());
   }
   return utm_point;
 }
 
-#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H

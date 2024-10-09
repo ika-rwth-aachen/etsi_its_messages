@@ -32,12 +32,11 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
 
-#include <cstring>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 #include <GeographicLib/UTMUPS.hpp>
-
+#include <cstring>
 
 /**
  * @brief Set the Station Id object
@@ -58,7 +57,8 @@ inline void setStationId(StationId& station_id, const uint32_t id_value) {
  * @param station_id
  * @param protocol_version
  */
-inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0) {
+inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id,
+                            const uint8_t protocol_version = 0) {
   setStationId(header.station_id, station_id);
   throwIfOutOfRange(message_id, MessageId::MIN, MessageId::MAX, "MessageID");
   header.message_id.value = message_id;
@@ -84,10 +84,14 @@ inline void setStationType(TrafficParticipantType& station_type, const uint8_t v
  * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
  */
 inline void setLongitudinalAccelerationValue(AccelerationValue& accel, const double value) {
-  int64_t accel_val = (int64_t)std::round(value*1e1);
-  if(accel_val>=AccelerationValue::MIN && accel_val<=AccelerationValue::MAX) accel.value = accel_val;
-  else if(accel_val<AccelerationValue::MIN) accel.value = AccelerationValue::MIN;
-  else if(accel_val>AccelerationValue::MAX) accel.value = AccelerationValue::MAX-1;
+  int64_t accel_val = (int64_t)std::round(value * 1e1);
+  if (accel_val >= AccelerationValue::MIN && accel_val <= AccelerationValue::MAX) {
+    accel.value = accel_val;
+  } else if (accel_val < AccelerationValue::MIN) {
+    accel.value = AccelerationValue::MIN;
+  } else if (accel_val > AccelerationValue::MAX) {
+    accel.value = AccelerationValue::MAX - 1;
+  }
 }
 
 /**
@@ -103,17 +107,21 @@ inline void setLongitudinalAcceleration(AccelerationComponent& accel, const doub
   setLongitudinalAccelerationValue(accel.value, value);
 }
 
-  /**
+/**
  * @brief Set the LateralAccelerationValue object
  *
  * @param accel object to set
  * @param value LateralAccelerationValue in m/s^2 as decimal number (left is positive)
  */
 inline void setLateralAccelerationValue(AccelerationValue& accel, const double value) {
-  int64_t accel_val = (int64_t)std::round(value*1e1);
-  if(accel_val>=AccelerationValue::MIN && accel_val<=AccelerationValue::MAX) accel.value = accel_val;
-  else if(accel_val<AccelerationValue::MIN) accel.value = AccelerationValue::MIN;
-  else if(accel_val>AccelerationValue::MAX) accel.value = AccelerationValue::MAX-1;
+  int64_t accel_val = (int64_t)std::round(value * 1e1);
+  if (accel_val >= AccelerationValue::MIN && accel_val <= AccelerationValue::MAX) {
+    accel.value = accel_val;
+  } else if (accel_val < AccelerationValue::MIN) {
+    accel.value = AccelerationValue::MIN;
+  } else if (accel_val > AccelerationValue::MAX) {
+    accel.value = AccelerationValue::MAX - 1;
+  }
 }
 
 /**
@@ -129,4 +137,4 @@ inline void setLateralAcceleration(AccelerationComponent& accel, const double va
   setLateralAccelerationValue(accel.value, value);
 }
 
-#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H

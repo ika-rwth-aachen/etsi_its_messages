@@ -32,11 +32,10 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
 
-#include <cstring>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
 #include <GeographicLib/UTMUPS.hpp>
-
+#include <cstring>
 
 /**
  * @brief Set the Station Id object
@@ -57,11 +56,13 @@ inline void setStationId(StationID& station_id, const uint32_t id_value) {
  * @param station_id
  * @param protocol_version
  */
-inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0) {
+inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id,
+                            const uint8_t protocol_version = 0) {
   setStationId(header.station_id, station_id);
   throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
   header.message_id = message_id;
-  throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX, "ProtocolVersion");
+  throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,
+                    "ProtocolVersion");
   header.protocol_version = protocol_version;
 }
 
@@ -83,10 +84,14 @@ inline void setStationType(StationType& station_type, const uint8_t value) {
  * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
  */
 inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& accel, const double value) {
-  int64_t accel_val = (int64_t)std::round(value*1e1);
-  if(accel_val>=LongitudinalAccelerationValue::MIN && accel_val<=LongitudinalAccelerationValue::MAX) accel.value = accel_val;
-  else if(accel_val<LongitudinalAccelerationValue::MIN) accel.value = LongitudinalAccelerationValue::MIN;
-  else if(accel_val>LongitudinalAccelerationValue::MAX) accel.value = LongitudinalAccelerationValue::MAX-1;
+  int64_t accel_val = (int64_t)std::round(value * 1e1);
+  if (accel_val >= LongitudinalAccelerationValue::MIN && accel_val <= LongitudinalAccelerationValue::MAX) {
+    accel.value = accel_val;
+  } else if (accel_val < LongitudinalAccelerationValue::MIN) {
+    accel.value = LongitudinalAccelerationValue::MIN;
+  } else if (accel_val > LongitudinalAccelerationValue::MAX) {
+    accel.value = LongitudinalAccelerationValue::MAX - 1;
+  }
 }
 
 /**
@@ -102,17 +107,21 @@ inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, const d
   setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);
 }
 
-  /**
+/**
  * @brief Set the LateralAccelerationValue object
  *
  * @param accel object to set
  * @param value LateralAccelerationValue in m/s^2 as decimal number (left is positive)
  */
 inline void setLateralAccelerationValue(LateralAccelerationValue& accel, const double value) {
-  int64_t accel_val = (int64_t)std::round(value*1e1);
-  if(accel_val>=LateralAccelerationValue::MIN && accel_val<=LateralAccelerationValue::MAX) accel.value = accel_val;
-  else if(accel_val<LateralAccelerationValue::MIN) accel.value = LateralAccelerationValue::MIN;
-  else if(accel_val>LateralAccelerationValue::MAX) accel.value = LateralAccelerationValue::MAX-1;
+  int64_t accel_val = (int64_t)std::round(value * 1e1);
+  if (accel_val >= LateralAccelerationValue::MIN && accel_val <= LateralAccelerationValue::MAX) {
+    accel.value = accel_val;
+  } else if (accel_val < LateralAccelerationValue::MIN) {
+    accel.value = LateralAccelerationValue::MIN;
+  } else if (accel_val > LateralAccelerationValue::MAX) {
+    accel.value = LateralAccelerationValue::MAX - 1;
+  }
 }
 
 /**
@@ -128,17 +137,4 @@ inline void setLateralAcceleration(LateralAcceleration& accel, const double valu
   setLateralAccelerationValue(accel.lateral_acceleration_value, value);
 }
 
-/**
- * @brief Set the ReferencePosition from a given UTM-Position
- *
- * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
- * The z-Coordinate is directly used as altitude value
- * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
- *
- * @param[out] reference_position ReferencePosition to set
- * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
- * @param[in] zone the UTM zone (zero means UPS) of the given position
- * @param[in] northp hemisphere (true means north, false means south)
- */
-
-#endif // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
