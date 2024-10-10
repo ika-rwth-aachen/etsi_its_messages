@@ -41,7 +41,9 @@ SOFTWARE.
  * @param n_leap_seconds number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
  * @return uint64_t the corresponding Unix-Nanoseconds
  */
-inline uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts& reference_time, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
-{
-  return reference_time.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;
+inline uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts& reference_time) {
+  double unix_time_with_leap_seconds = reference_time.value * 1e-3 + etsi_its_msgs::UNIX_SECONDS_2004;
+  uint16_t n_leap_seconds =
+      etsi_its_msgs::getLeapSecondInsertionsSince2004(static_cast<uint64_t>(unix_time_with_leap_seconds));
+  return (unix_time_with_leap_seconds - n_leap_seconds) * 1e9;
 }

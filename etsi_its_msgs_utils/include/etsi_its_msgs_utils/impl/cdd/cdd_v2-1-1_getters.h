@@ -28,9 +28,12 @@ SOFTWARE.
  * @file impl/cdd/cdd_v2-1-1_getters.h
  * @brief Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1
  */
-#pragma once
+
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_GETTERS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_GETTERS_H
 
 #include <GeographicLib/UTMUPS.hpp>
+
 #include <etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h>
 
 /**
@@ -39,8 +42,8 @@ SOFTWARE.
  * @param longitudinalAcceleration to get the lateral acceleration from
  * @return lateral acceleration in m/s^2 as decimal number (left is positive)
  */
-inline double getLongitudinalAcceleration(const AccelerationComponent& longitudinal_acceleration){
-  return ((int16_t)longitudinal_acceleration.value.value)*1e-1;
+inline double getLongitudinalAcceleration(const AccelerationComponent& longitudinal_acceleration) {
+  return ((int16_t)longitudinal_acceleration.value.value) * 1e-1;
 }
 
 /**
@@ -49,34 +52,8 @@ inline double getLongitudinalAcceleration(const AccelerationComponent& longitudi
  * @param lateralAcceleration to get the lateral acceleration from
  * @return lateral acceleration in m/s^2 as decimal number (left is positive)
  */
-inline double getLateralAcceleration(const AccelerationComponent& lateral_acceleration){
-  return ((int16_t)lateral_acceleration.value.value)*1e-1;
+inline double getLateralAcceleration(const AccelerationComponent& lateral_acceleration) {
+  return ((int16_t)lateral_acceleration.value.value) * 1e-1;
 }
 
-/**
- * @brief Get the UTM Position defined by the given ReferencePosition
- *
- * The position is transformed into UTM by using GeographicLib::UTMUPS
- * The altitude value is directly used as z-Coordinate
- *
- * @param[in] reference_position ReferencePosition to get the UTM Position from
- * @param[out] zone the UTM zone (zero means UPS)
- * @param[out] northp hemisphere (true means north, false means south)
- * @return gm::PointStamped geometry_msgs::PointStamped of the given position
- */
-inline gm::PointStamped getUTMPosition(const ReferencePositionWithConfidence& reference_position, int& zone, bool& northp){
-  gm::PointStamped utm_point;
-  double latitude = getLatitude(reference_position.latitude);
-  double longitude = getLongitude(reference_position.longitude);
-  utm_point.point.z = getAltitude(reference_position.altitude);
-  try {
-    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
-    std::string hemisphere;
-    if(northp) hemisphere="N";
-    else hemisphere="S";
-    utm_point.header.frame_id="utm_"+std::to_string(zone)+hemisphere;
-  } catch (GeographicLib::GeographicErr& e) {
-    throw std::invalid_argument(e.what());
-  }
-  return utm_point;
-}
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_GETTERS_H

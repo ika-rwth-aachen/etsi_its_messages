@@ -29,9 +29,14 @@ SOFTWARE.
  * @brief Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)
  */
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
 
 template <typename T1, typename T2>
 void throwIfOutOfRange(const T1& val, const T2& min, const T2& max, const std::string val_desc) {
-  if (val < min || val > max) throw std::invalid_argument(val_desc+" value is out of range ("+std::to_string(min)+"..."+std::to_string(max)+")!");
+  if (val < min || val > max)
+    throw std::invalid_argument(val_desc + " value is out of range (" + std::to_string(min) + "..." +
+                                std::to_string(max) + ")!");
 }
+
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H

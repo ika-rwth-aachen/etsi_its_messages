@@ -29,6 +29,14 @@ SOFTWARE.
  * @brief Main DENM access implementation header
  */
 
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_GETTERS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_GETTERS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H
+
 #pragma once
 
 #include <cstring>
@@ -42,4 +50,4 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 #include <etsi_its_msgs_utils/impl/denm/denm_utils.h>
-} // namespace etsi_its_denm_msgs::access
+}  // namespace etsi_its_denm_msgs::access

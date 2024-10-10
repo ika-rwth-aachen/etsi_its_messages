@@ -5,14 +5,14 @@ namespace etsi_its_msgs
 namespace displays
 {
 
-  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, uint16_t n_leap_seconds) {
+  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm) {
 
     int zone;
     bool northp;
     geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
     header.frame_id = p.header.frame_id;
   
-    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_denm_msgs::access::getReferenceTime(denm), n_leap_seconds);
+    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_denm_msgs::access::getReferenceTime(denm));
     header.stamp = rclcpp::Time(nanosecs);
 
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
