@@ -41,7 +41,7 @@ SOFTWARE.
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 namespace etsi_its_cpm_ts_msgs {
-    namespace gm = geometry_msgs;
+namespace gm = geometry_msgs;
 }
 
 // Implementation

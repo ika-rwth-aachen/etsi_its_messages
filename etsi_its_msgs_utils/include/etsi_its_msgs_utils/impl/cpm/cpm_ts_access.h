@@ -50,4 +50,4 @@ SOFTWARE.
 
 namespace etsi_its_cpm_ts_msgs::access {
 #include <etsi_its_msgs_utils/impl/cpm/cpm_ts_utils.h>
-} // namespace etsi_its_cpm_ts_msgs::access
+}  // namespace etsi_its_cpm_ts_msgs::access

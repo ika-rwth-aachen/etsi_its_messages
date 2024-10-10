@@ -38,24 +38,30 @@ namespace etsi_its_cpm_ts_msgs::access {
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h>
 
 /**
-   * @brief Set the ItsPduHeader-object for a CPM
-   *
-   * @param cpm CPM-Message to set the ItsPduHeader
-   * @param station_id
-   * @param protocol_version
-   */
+ * @brief Sets the ITS PDU header of a CPM.
+ *
+ * This function sets the ITS PDU header of a CPM with the provided station ID and protocol version.
+ *
+ * @param cpm The CPM to set the ITS PDU header for.
+ * @param station_id The station ID to set in the ITS PDU header.
+ * @param protocol_version The protocol version to set in the ITS PDU header. Default is 0.
+ */
 inline void setItsPduHeader(CollectivePerceptionMessage& cpm, const uint32_t station_id,
                             const uint8_t protocol_version = 0) {
   setItsPduHeader(cpm.header, MessageId::CPM, station_id, protocol_version);
 }
 
 /**
-   * @brief Set the ReferenceTime-value
-   * 
-   * @param cpm CPM to set the ReferenceTime-Value for
-   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the ReferenceTime-Value from
-   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
-   */
+ * @brief Sets the reference time in a CPM.
+ *
+ * This function sets the reference time in a CPM object. The reference time is represented
+ * by a Unix timestamp in nanoseconds including the number of leap seconds.
+ * The reference time is stored in the payload management container of the CPM.
+ *
+ * @param cpm The CPM object to set the reference time in.
+ * @param unix_nanosecs The Unix timestamp in nanoseconds representing the reference time.
+ * @param n_leap_seconds The number of leap seconds to be considered. Defaults to the todays number of leap seconds since 2004.
+ */
 inline void setReferenceTime(
     CollectivePerceptionMessage& cpm, const uint64_t unix_nanosecs,
     const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
@@ -66,59 +72,62 @@ inline void setReferenceTime(
 }
 
 /**
-   * @brief Set the ReferencePositionWithConfidence for a CPM TS
-   *
-   * This function sets the latitude, longitude, and altitude of the CPMs reference position.
-   * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
-   *
-   * @param cpm CPM to set the ReferencePosition
-   * @param latitude The latitude value position in degree as decimal number.
-   * @param longitude The longitude value in degree as decimal number.
-   * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
-   */
+ * @brief Set the ReferencePositionWithConfidence for a CPM TS
+ *
+ * This function sets the latitude, longitude, and altitude of the CPMs reference position.
+ * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
+ *
+ * @param cpm CPM to set the ReferencePosition
+ * @param latitude The latitude value position in degree as decimal number.
+ * @param longitude The longitude value in degree as decimal number.
+ * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
+ */
 inline void setReferencePosition(CollectivePerceptionMessage& cpm, const double latitude, const double longitude,
                                  const double altitude = AltitudeValue::UNAVAILABLE) {
   setReferencePosition(cpm.payload.management_container.reference_position, latitude, longitude, altitude);
 }
 
 /**
-   * @brief Set the ReferencePosition of a CPM from a given UTM-Position
-   *
-   * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
-   * The z-Coordinate is directly used as altitude value
-   * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
-   *
-   * @param[out] cpm CPM for which to set the ReferencePosition
-   * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
-   * @param[in] zone the UTM zone (zero means UPS) of the given position
-   * @param[in] northp hemisphere (true means north, false means south)
-   */
+ * @brief Set the ReferencePosition of a CPM from a given UTM-Position
+ *
+ * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
+ * The z-Coordinate is directly used as altitude value
+ * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
+ *
+ * @param[out] cpm CPM for which to set the ReferencePosition
+ * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position in meters
+ * @param[in] zone the UTM zone (zero means UPS) of the given position
+ * @param[in] northp hemisphere (true means north, false means south)
+ */
 inline void setFromUTMPosition(CollectivePerceptionMessage& cpm, const gm::PointStamped& utm_position, const int& zone,
                                const bool& northp) {
   setFromUTMPosition(cpm.payload.management_container.reference_position, utm_position, zone, northp);
 }
 
 /**
-   * @brief Set the ID of a PerceivedObject
-   *
-   * Sets the object_id of the PerceivedObject to the given ID.
-   *
-   * @param object PerceivedObject to set the ID for
-   * @param id ID to set
-   */
+ * @brief Set the ID of a PerceivedObject
+ *
+ * Sets the object_id of the PerceivedObject to the given ID.
+ *
+ * @param object PerceivedObject to set the ID for
+ * @param id ID to set
+ */
 inline void setIdOfPerceivedObject(PerceivedObject& object, const uint16_t id) {
   object.object_id.value = id;
   object.object_id_is_present = true;
 }
 
 /**
-   * @brief Set the measurement_delta_time of a PerceivedObject
-   *
-   * Sets the object_type of the PerceivedObject to the given type.
-   *
-   * @param object PerceivedObject to set the type for
-   * @param delta_time Delta time to set in milliseconds
-   */
+ * @brief Sets the measurement delta time of a PerceivedObject.
+ * 
+ * This function sets the measurement delta time of a PerceivedObject.
+ * The measurement delta time represents the time difference 
+ * between the reference time of the CPM and the measurement of the object.
+ * 
+ * @param object The PerceivedObject to set the measurement delta time for.
+ * @param delta_time The measurement delta time to set in milliseconds. Default value is 0.
+ * @throws std::invalid_argument if the delta_time is out of range.
+ */
 inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, const int16_t delta_time = 0) {
   if (delta_time < DeltaTimeMilliSecondSigned::MIN || delta_time > DeltaTimeMilliSecondSigned::MAX) {
     throw std::invalid_argument("MeasurementDeltaTime out of range");
@@ -128,14 +137,18 @@ inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, co
 }
 
 /**
-   * @brief Set cartesian coordinate with confidence
-   *
-   * Sets the object_type of the PerceivedObject to the given type.
-   *
-   * @param coordinate CartesianCoordinateWithConfidence to set
-   * @param value Value to set in cm
-   * @param confidence Confidence to set cm (optional)
-   */
+ * @brief Sets the value and confidence of a CartesianCoordinateWithConfidence object.
+ * 
+ * This function sets the value and confidence of a CartesianCoordinateWithConfidence object.
+ * The value is limited to the range defined by CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE
+ * and CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE. The confidence is limited to the range
+ * defined by CoordinateConfidence::MIN and CoordinateConfidence::MAX. If the provided confidence
+ * is out of range, the confidence value is set to CoordinateConfidence::OUT_OF_RANGE.
+ * 
+ * @param coordinate The CartesianCoordinateWithConfidence object to be modified.
+ * @param value The value to be set in centimeters.
+ * @param confidence The confidence to be set in centimeters (default: CoordinateConfidence::UNAVAILABLE).
+ */
 inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const int16_t value,
                                                  const uint16_t confidence = CoordinateConfidence::UNAVAILABLE) {
   // limit value range
@@ -152,17 +165,16 @@ inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfiden
 }
 
 /**
-   * @brief Set the position of the PerceivedObject
-   *
-   * Sets the position of the PerceivedObject to the given point.
-   * If the z-coordinate is not provided, it is set to 0.
-   *
-   * @param object PerceivedObject to set the position for
-   * @param point Point to set the position to in m
-   * @param x_confidence Confidence of the x-coordinate in m (optional)
-   * @param y_confidence Confidence of the y-coordinate in m (optional)
-   * @param z_confidence Confidence of the z-coordinate in m (optional)
-   */
+ * @brief Sets the position of a perceived object (relative to the CPM's reference position).
+ *
+ * This function sets the position of a perceived object using the provided coordinates and confidence values.
+ *
+ * @param object The PerceivedObject to set the position for.
+ * @param point The gm::Point representing the coordinates of the object in meters.
+ * @param x_confidence The confidence value in meters for the x-coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param y_confidence The confidence value in meters for the y-coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param z_confidence The confidence value in meters for the z-coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ */
 inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Point& point,
                                          const uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,
                                          const uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,
@@ -176,18 +188,20 @@ inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Poin
 }
 
 /**
-   * @brief Set the position of the PerceivedObject in UTM
-   *
-   * Sets the position of the PerceivedObject to the given UTM position.
-   * The UTM position is transformed to a relative position to the reference position of the CPM.
-   *
-   * @param cpm CPM to get the reference position from
-   * @param object PerceivedObject to set the position for
-   * @param utm_position UTM position to set the position to
-   * @param x_confidence Confidence of the x-coordinate in m (optional)
-   * @param y_confidence Confidence of the y-coordinate in m (optional)
-   * @param z_confidence Confidence of the z-coordinate in m (optional)
-   */
+ * @brief Sets the position of a perceived object based on a UTM position.
+ *
+ * This function sets the position of a perceived object using the provided UTM position and the CPM's reference position.
+ * It also allows specifying confidence values for the x, y, and z coordinates.
+ *
+ * @param cpm The CPM to get the reference position from.
+ * @param object The PerceivedObject to set the position for.
+ * @param utm_position gm::PointStamped representing the UTM position of the object including the frame_id (utm_<zone><N/S>).
+ * @param x_confidence The confidence value in meters for the x coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param y_confidence The confidence value in meters for the y coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param z_confidence The confidence value in meters for the z coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ *
+ * @throws std::invalid_argument if the UTM-Position frame_id does not match the reference position frame_id.
+ */
 inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, PerceivedObject& object,
                                             const gm::PointStamped& utm_position,
                                             const uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,
@@ -209,15 +223,16 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
 }
 
 /**
-   * @brief Set the orientation of the PerceivedObject
-   *
-   * Sets the orientation of the PerceivedObject to the given quaternion.
-   * If the roll and pitch angles are not provided, they are set to 0.
-   *
-   * @param velocity velocity (x,y,z) component to set
-   * @param value Value to set in cm/s
-   * @param confidence Confidence to set in cm/s (optional)
-   */
+ * @brief Sets the value and confidence of a VelocityComponent.
+ *
+ * This function sets the value and confidence of a VelocityComponent object. The value is limited to a specific range,
+ * and the confidence is limited to a specific range as well. If the provided value or confidence is out of range,
+ * it will be set to the corresponding out-of-range value.
+ *
+ * @param velocity The VelocityComponent object to set the value and confidence for.
+ * @param value The value to set for the VelocityComponent in cm/s.
+ * @param confidence The confidence to set for the VelocityComponent in cm/s. Default value is SpeedConfidence::UNAVAILABLE.
+ */
 inline void setVelocityComponent(VelocityComponent& velocity, const int16_t value,
                                  const uint8_t confidence = SpeedConfidence::UNAVAILABLE) {
   // limit value range
@@ -234,17 +249,17 @@ inline void setVelocityComponent(VelocityComponent& velocity, const int16_t valu
 }
 
 /**
-   * @brief Set the velocity of the PerceivedObject
-   *
-   * Sets the velocity of the PerceivedObject to the given velocity.
-   * If the z-velocity is not provided, it is set to 0.
-   *
-   * @param object PerceivedObject to set the velocity for
-   * @param cartesian_velocity Velocity to set in m/s
-   * @param x_confidence Confidence of the x-velocity in m/s (optional)
-   * @param y_confidence Confidence of the y-velocity in m/s (optional)
-   * @param z_confidence Confidence of the z-velocity in m/s (optional)
-   */
+ * Sets the velocity of a perceived object.
+ *
+ * This function sets the velocity of a perceived object using the provided Cartesian velocity components.
+ * Optionally, confidence values can be specified for each velocity component.
+ *
+ * @param object The perceived object for which the velocity is being set.
+ * @param cartesian_velocity The Cartesian velocity components (x, y, z) of the object (in m/s).
+ * @param x_confidence The confidence value in m/s for the x velocity component (default: SpeedConfidence::UNAVAILABLE).
+ * @param y_confidence The confidence value in m/s for the y velocity component (default: SpeedConfidence::UNAVAILABLE).
+ * @param z_confidence The confidence value in m/s for the z velocity component (default: SpeedConfidence::UNAVAILABLE).
+ */
 inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_velocity,
                                          const uint8_t x_confidence = SpeedConfidence::UNAVAILABLE,
                                          const uint8_t y_confidence = SpeedConfidence::UNAVAILABLE,
@@ -260,14 +275,16 @@ inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vect
 }
 
 /**
-   * @brief Set the acceleration component of the PerceivedObject
-   *
-   * Sets the acceleration component of the PerceivedObject to the given value.
-   *
-   * @param acceleration AccelerationComponent to set the value for
-   * @param value Value to set in dm/s^2
-   * @param confidence Confidence to set in dm/s^2 (optional)
-   */
+ * @brief Sets the value and confidence of a AccelerationComponent.
+ *
+ * This function sets the value and confidence of a AccelerationComponent object. The value is limited to a specific range,
+ * and the confidence is limited to a specific range as well. If the provided value or confidence is out of range,
+ * it will be set to the corresponding out-of-range value.
+ *
+ * @param acceleration The AccelerationComponent object to set the value and confidence for.
+ * @param value The value to set for the AccelerationComponent in dm/s^2.
+ * @param confidence The confidence to set for the AccelerationComponent in dm/s^2. Default value is AccelerationConfidence::UNAVAILABLE.
+ */
 inline void setAccelerationComponent(AccelerationComponent& acceleration, const int16_t value,
                                      const uint8_t confidence = AccelerationConfidence::UNAVAILABLE) {
   // limit value range
@@ -284,17 +301,17 @@ inline void setAccelerationComponent(AccelerationComponent& acceleration, const 
 }
 
 /**
-   * @brief Set the acceleration of the PerceivedObject
-   *
-   * Sets the acceleration of the PerceivedObject to the given acceleration.
-   * If the z-acceleration is not provided, it is set to 0.
-   *
-   * @param object PerceivedObject to set the acceleration for
-   * @param cartesian_acceleration Acceleration to set in m/s^2
-   * @param x_confidence Confidence of the x-acceleration in m/s^2 (optional)
-   * @param y_confidence Confidence of the y-acceleration in m/s^2 (optional)
-   * @param z_confidence Confidence of the z-acceleration in m/s^2 (optional)
-   */
+ * @brief Sets the acceleration of a perceived object.
+ *
+ * This function sets the acceleration of a perceived object using the provided Cartesian acceleration components.
+ * Optionally, confidence values can be specified for each acceleration component.
+ *
+ * @param object The perceived object for which the acceleration is being set.
+ * @param cartesian_acceleration The Cartesian acceleration components (x, y, z) of the object (in m/s^2).
+ * @param x_confidence The confidence value in m/s^2 for the x acceleration component (default: AccelerationConfidence::UNAVAILABLE).
+ * @param y_confidence The confidence value in m/s^2 for the y acceleration component (default: AccelerationConfidence::UNAVAILABLE).
+ * @param z_confidence The confidence value in m/s^2 for the z acceleration component (default: AccelerationConfidence::UNAVAILABLE).
+ */
 inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_acceleration,
                                              const uint8_t x_confidence = AccelerationConfidence::UNAVAILABLE,
                                              const uint8_t y_confidence = AccelerationConfidence::UNAVAILABLE,
@@ -313,18 +330,19 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
 }
 
 /**
-   * @brief Set the yaw angle of the PerceivedObject
-   *
-   * Sets the yaw angle of the PerceivedObject to the given angle.
-   *
-   * @param object PerceivedObject to set the roll angle for
-   * @param roll Roll angle to set in rad
-   * @param confidence Confidence of the roll angle in 0,1 degrees (optional)
-   */
+ * @brief Sets the yaw angle of a perceived object.
+ *
+ * This function sets the yaw angle of a PerceivedObject. The yaw angle is wrapped to the range [0, 360] degrees.
+ * The function also allows specifying the confidence level of the yaw angle.
+ *
+ * @param object The PerceivedObject to set the yaw angle for.
+ * @param yaw The yaw angle in radians.
+ * @param confidence The confidence level of the yaw angle in 0,1 degrees (optional, default is AngleConfidence::UNAVAILABLE).
+ */
 inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
                                     const uint8_t confidence = AngleConfidence::UNAVAILABLE) {
   // wrap angle to range [0, 360]
-  double yaw_in_degrees = yaw * 180 / M_PI + 180;
+  double yaw_in_degrees = yaw * 180 / M_PI + 180;  // TODO: check if this is correct
   while (yaw_in_degrees > 360.0) yaw_in_degrees -= 360.0;
   while (yaw_in_degrees < 0) yaw_in_degrees += 360.0;
   object.angles.z_angle.value.value = yaw_in_degrees * 10;
@@ -338,14 +356,16 @@ inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
 }
 
 /**
-   * @brief Set the yaw rate of the PerceivedObject
-   *
-   * Sets the yaw rate of the PerceivedObject
-   *
-   * @param object PerceivedObject to set the orientation for
-   * @param yaw_rate Yaw rate to set in rad/s
-   * @param confidence Confidence of the yaw rate in degrees/s (optional)
-   */
+ * @brief Sets the yaw rate of a perceived object.
+ *
+ * This function sets the yaw rate of a PerceivedObject. The yaw rate is limited to the range defined by
+ * CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE and CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE.
+ * The function also allows specifying the confidence level of the yaw rate.
+ *
+ * @param object The PerceivedObject to set the yaw rate for.
+ * @param yaw_rate The yaw rate in rad/s.
+ * @param confidence Confidence of the yaw rate defined in AngularSpeedConfidence (optional, default is AngularSpeedConfidence::UNAVAILABLE).
+ */
 inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double yaw_rate,
                                         const uint8_t confidence = AngularSpeedConfidence::UNAVAILABLE) {
   int16_t yaw_rate_in_degrees = yaw_rate * 180 / M_PI;
@@ -360,14 +380,19 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
 }
 
 /**
-   * @brief Set the dimension value to a given dimension
-   *
-   * Sets the dimension of the PerceivedObject to the given dimensions.
-   *
-   * @param dimension ObjectDimension to set the value for
-   * @param value Value to set in cm
-   * @param confidence Confidence of the value in cm (optional)
-   */
+ * @brief Sets the object dimension with the given value and confidence.
+ * 
+ * This function sets the value and confidence of the object dimension based on the provided parameters.
+ * The value is limited to the range defined by ObjectDimensionValue::MIN and ObjectDimensionValue::MAX.
+ * If the provided value is outside this range, the dimension value is set to ObjectDimensionValue::OUT_OF_RANGE.
+ * 
+ * The confidence is limited to the range defined by ObjectDimensionConfidence::MIN and ObjectDimensionConfidence::MAX.
+ * If the provided confidence is outside this range, the confidence value is set to ObjectDimensionConfidence::OUT_OF_RANGE.
+ * 
+ * @param dimension The object dimension to be set.
+ * @param value The value of the object dimension in decimeters.
+ * @param confidence The confidence of the object dimension in decimeters (optional, default is ObjectDimensionConfidence::UNAVAILABLE).
+ */
 inline void setObjectDimension(ObjectDimension& dimension, const uint16_t value,
                                const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
   // limit value range
@@ -386,14 +411,15 @@ inline void setObjectDimension(ObjectDimension& dimension, const uint16_t value,
 }
 
 /**
-   * @brief Set the x-dimension of the PerceivedObject
-   *
-   * Sets the x-dimension of the PerceivedObject to the given value.
-   *
-   * @param object PerceivedObject to set the x-dimension for
-   * @param value Value to set in m
-   * @param confidence Confidence of the value in m (optional)
-   */
+ * @brief Sets the x-dimension of a perceived object.
+ *
+ * This function sets the x-dimension of the given `PerceivedObject` to the specified value.
+ * The x-dimension usually represents the length of the object.
+ *
+ * @param object The `PerceivedObject` to modify.
+ * @param value The value to set as the x-dimension in meters.
+ * @param confidence The confidence of the x-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ */
 inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
   setObjectDimension(object.object_dimension_x, (uint16_t)(value * 10), confidence * 10);
@@ -401,14 +427,15 @@ inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double
 }
 
 /**
-   * @brief Set the y-dimension of the PerceivedObject
-   *
-   * Sets the y-dimension of the PerceivedObject to the given value.
-   *
-   * @param object PerceivedObject to set the y-dimension for
-   * @param value Value to set in m
-   * @param confidence Confidence of the value in m (optional)
-   */
+ * @brief Sets the y-dimension of a perceived object.
+ *
+ * This function sets the y-dimension of the given `PerceivedObject` to the specified value.
+ * The y-dimension usually represents the width of the object.
+ *
+ * @param object The `PerceivedObject` to modify.
+ * @param value The value to set as the y-dimension in meters.
+ * @param confidence The confidence of the y-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ */
 inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
   setObjectDimension(object.object_dimension_y, (uint16_t)(value * 10), confidence * 10);
@@ -416,14 +443,15 @@ inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double
 }
 
 /**
-   * @brief Set the z-dimension of the PerceivedObject
-   *
-   * Sets the z-dimension of the PerceivedObject to the given value.
-   *
-   * @param object PerceivedObject to set the z-dimension for
-   * @param value Value to set in m
-   * @param confidence Confidence of the value in m (optional)
-   */
+ * @brief Sets the z-dimension of a perceived object.
+ *
+ * This function sets the z-dimension of the given `PerceivedObject` to the specified value.
+ * The z-dimension usually represents the height of the object.
+ *
+ * @param object The `PerceivedObject` to modify.
+ * @param value The value to set as the z-dimension in meters.
+ * @param confidence The confidence of the z-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ */
 inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
   setObjectDimension(object.object_dimension_z, (uint16_t)(value * 10), confidence * 10);
@@ -431,16 +459,16 @@ inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double
 }
 
 /**
-   * @brief Set the dimensions of the PerceivedObject
-   *
-   * Sets the dimensions of the PerceivedObject to the given dimensions.
-   *
-   * @param object PerceivedObject to set the dimensions for
-   * @param dimensions Dimensions to set in m
-   * @param x_confidence Confidence of the x-dimension in m (optional)
-   * @param y_confidence Confidence of the y-dimension in m (optional)
-   * @param z_confidence Confidence of the z-dimension in m (optional)
-   */
+ * @brief Sets all dimensions of a perceived object.
+ *
+ * This function sets the dimensions of a perceived object using the provided dimensions and confidence values.
+ *
+ * @param object The perceived object to set the dimensions for.
+ * @param dimensions The dimensions of the object as a gm::Vector3 (x, y, z) in meters.
+ * @param x_confidence The confidence in meters for the x dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param y_confidence The confidence in meters for the y dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param z_confidence The confidence in meters for the z dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ */
 inline void setDimensionsOfPerceivedObject(PerceivedObject& object, const gm::Vector3& dimensions,
                                            const uint8_t x_confidence = ObjectDimensionConfidence::UNAVAILABLE,
                                            const uint8_t y_confidence = ObjectDimensionConfidence::UNAVAILABLE,
@@ -451,28 +479,31 @@ inline void setDimensionsOfPerceivedObject(PerceivedObject& object, const gm::Ve
 }
 
 /**
-   * @brief initialize a PerceivedObject
-   *
-   * Initializes all necessary fields of a PerceivedObject.
-   *
-   * @param object PerceivedObject to be initialized
-   * @param point Point to set the position to in m
-   * @param delta_time Delta time to set in milliseconds
-   */
+ * @brief Initializes a PerceivedObject with the given point and delta time.
+ *
+ * This function sets the position and measurement delta time of the PerceivedObject.
+ *
+ * @param object The PerceivedObject to be initialized.
+ * @param point The position of the PerceivedObject relative to the CPM's reference position in meters.
+ * @param delta_time The measurement delta time of the PerceivedObject in milliseconds (default = 0).
+ */
 inline void initPerceivedObject(PerceivedObject& object, const gm::Point& point, const int16_t delta_time = 0) {
   setPositionOfPerceivedObject(object, point);
   setMeasurementDeltaTimeOfPerceivedObject(object, delta_time);
 }
 
 /**
-   * @brief initialize a PerceivedObject
-   *
-   * Initializes all necessary fields of a PerceivedObject.
-   *
-   * @param object PerceivedObject to be initialized
-   * @param point UTM Point to set the position to in m
-   * @param delta_time Delta time to set in milliseconds
-   */
+ * @brief Initializes a PerceivedObject with the given point (utm-position) and delta time.
+ *
+ * This function initializes a PerceivedObject within a position and measurement delta time.
+ * It sets the position of a perceived object using the provided UTM position and the CPM's reference position.
+ * It sets the measurement delta time using the provided delta_time value.
+ *
+ * @param cpm The CPM to get the reference position from.
+ * @param object The PerceivedObject to be initialized.
+ * @param point The gm::PointStamped representing the UTM position of the object including the frame_id (utm_<zone><N/S>).
+ * @param delta_time The measurement delta time in milliseconds (default: 0).
+ */
 inline void initPerceivedObjectWithUTMPosition(CollectivePerceptionMessage& cpm, PerceivedObject& object,
                                                const gm::PointStamped& point, const int16_t delta_time = 0) {
   setUTMPositionOfPerceivedObject(cpm, object, point);
@@ -480,12 +511,12 @@ inline void initPerceivedObjectWithUTMPosition(CollectivePerceptionMessage& cpm,
 }
 
 /**
- * @brief Initializes the Perceived Object Container within a WrappedCpmContainer.
+ * @brief Initializes a WrappedCpmContainer as a PerceivedObjectContainer with the given number of objects.
  *
  * This function sets the container ID to PERCEIVED_OBJECT_CONTAINER and initializes
  * the number of perceived objects in the container to the specified value.
  *
- * @param container A reference to the WrappedCpmContainer to be initialized.
+ * @param container A reference to the WrappedCpmContainer to be initialized as a PerceivedObjectContainer.
  * @param n_objects The number of perceived objects to initialize in the container. Default is 0.
  */
 inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const uint8_t n_objects = 0) {
@@ -495,7 +526,7 @@ inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const u
 }
 
 /**
- * @brief Adds a PerceivedObject to the PerceivedObjectContainer within the given WrappedCpmContainer.
+ * @brief Adds a PerceivedObject to the PerceivedObjectContainer / WrappedCpmContainer.
  * 
  * This function checks if the provided container is a PerceivedObjectContainer. If it is, 
  * the function adds the given PerceivedObject to the container's perceived_objects array 
