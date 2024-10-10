@@ -91,16 +91,15 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
     return;
   }
 
-  uint16_t n_leap_seconds = getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds()));
   uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(
       etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(*msg));
 
-  CPMRenderObject cpm(*msg, now, n_leap_seconds, 0);
+  CPMRenderObject cpm(*msg, 0); // TODO: do we need this?
 
   cpm_render_objects_.clear();
 
   for (int i = 0; i < number_of_objects; i++) {
-    CPMRenderObject cpm(*msg, now, n_leap_seconds, i);
+    CPMRenderObject cpm(*msg, i);
     if (!cpm.validateFloats()) {
       setStatus(rviz_common::properties::StatusProperty::Error, "Topic",
                 "Message contained invalid floating point values (nans or infs)");

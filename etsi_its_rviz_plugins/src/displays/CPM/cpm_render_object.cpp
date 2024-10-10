@@ -27,8 +27,7 @@ SOFTWARE.
 namespace etsi_its_msgs {
 namespace displays {
 
-CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time,
-                                 uint16_t n_leap_seconds, uint8_t number_of_object) {
+CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, uint8_t number_of_object) {
                                 
     etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
         etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), number_of_object);

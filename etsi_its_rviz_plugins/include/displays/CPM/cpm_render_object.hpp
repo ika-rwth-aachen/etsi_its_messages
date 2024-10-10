@@ -53,7 +53,7 @@ class CPMRenderObject
      * @param n_leap_seconds
      * @param number_of_object
      */
-    CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, rclcpp::Time receive_time, uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second, uint8_t number_of_object=0);
+    CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, uint8_t number_of_object=0);
 
     /**
      * @brief This function validates all float variables that are part of a CPMRenderObject
