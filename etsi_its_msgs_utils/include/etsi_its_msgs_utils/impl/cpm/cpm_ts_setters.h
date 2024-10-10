@@ -213,7 +213,9 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
                                             const uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {
   gm::PointStamped reference_position = getUTMPosition(cpm);
   if (utm_position.header.frame_id != reference_position.header.frame_id) {
-    throw std::invalid_argument("UTM-Position frame_id does not match the reference position frame_id");
+    throw std::invalid_argument("UTM-Position frame_id (" + utm_position.header.frame_id +
+                                ") does not match the reference position frame_id (" + reference_position.header.frame_id +
+                                ")");
   }
   setCartesianCoordinateWithConfidence(object.position.x_coordinate,
                                        (utm_position.point.x - reference_position.point.x) * 100, x_confidence);
