@@ -40,20 +40,17 @@ namespace displays
 
 /**
  * @class CPMRenderObject
- * @brief
+ * @brief This class is used to render a CPM object in RViz
  */
 class CPMRenderObject
 {
   public:
     /**
-     * @brief Construct a new CPMRenderObject object
+     * @brief Construct a new CPMRenderObject object from a CPM message
      *
      * @param cpm
-     * @param receive_time
-     * @param n_leap_seconds
-     * @param number_of_object
      */
-    CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, uint8_t number_of_object=0);
+    CPMRenderObject(const etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm);
 
     /**
      * @brief This function validates all float variables that are part of a CPMRenderObject
@@ -67,58 +64,28 @@ class CPMRenderObject
      * @param now reference point in time to calculate the age with
      * @return age in seconds as double value
      */
-    double getAge(rclcpp::Time now);
+    double getAge(const rclcpp::Time now);
 
-    /**
-     * @brief Get header of CPM-object
-     *
-     * @return std_msgs::msg::Header
-     */
     std_msgs::msg::Header getHeader();
-
-    /**
-     * @brief Get the StationID of CPM-object
-     *
-     * @return int
-     */
     uint32_t getStationID();
+    geometry_msgs::msg::PointStamped getReferencePosition();
 
-    /**
-     * @brief Get pose of CPM-object
-     *
-     * @return geometry_msgs::msg::Pose
-     */
-    geometry_msgs::msg::Pose getPose();
-
-    /**
-     * @brief Get dimensions of CPM-Object
-     *
-     * @return geometry_msgs::msg::Vector3 (x equals length, y equals width, z equals height)
-     */
-    geometry_msgs::msg::Vector3 getDimensions();
-
-    /**
-     * @brief Get speed of CPM-object
-     *
-     * @return double
-     */
-    geometry_msgs::msg::Vector3 getVelocity();
-
-    /**
-     * @brief Get number of objects in CPM-object
-     *
-     * @return uint8_t
-     */
     uint8_t getNumberOfObjects();
+    geometry_msgs::msg::Pose getPoseOfObject(const uint8_t idx);
+    geometry_msgs::msg::Vector3 getDimensionsOfObject(const uint8_t idx);
+    geometry_msgs::msg::Vector3 getVelocityOfObject(const uint8_t idx);
+
+    struct Object {
+      geometry_msgs::msg::Pose pose;
+      geometry_msgs::msg::Vector3 dimensions;
+      geometry_msgs::msg::Vector3 velocity;
+    };
 
   private:
-    // member variables
     std_msgs::msg::Header header_;
     uint32_t station_id_;
-    geometry_msgs::msg::Pose pose_;
-    geometry_msgs::msg::Vector3 dimensions_;
-    geometry_msgs::msg::Vector3 velocity_;
-
+    geometry_msgs::msg::PointStamped reference_position_;
+    std::vector<Object> objects_;
 };
 
 }  // namespace displays

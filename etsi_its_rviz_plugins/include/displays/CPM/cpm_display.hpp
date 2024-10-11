@@ -78,9 +78,6 @@ class CPMDisplay : public rviz_common::RosTopicDisplay<etsi_its_cpm_ts_msgs::msg
 
   std::unordered_map<int, CPMRenderObject> cpms_;
 
-  // Rendering objects
-  std::vector<std::shared_ptr<CPMRenderObject>> cpm_render_objects_;
-
   std::vector<std::shared_ptr<rviz_rendering::Shape>> bboxs_;
   std::vector<std::shared_ptr<rviz_rendering::MovableText>> texts_;
 };

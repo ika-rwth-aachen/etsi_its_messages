@@ -27,45 +27,55 @@ SOFTWARE.
 namespace etsi_its_msgs {
 namespace displays {
 
-CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, uint8_t number_of_object) {
-  try {
-    etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
-        etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), number_of_object);
-    geometry_msgs::msg::PointStamped utm_position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
-    pose_.position = utm_position.point;
-    pose_.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
-    dimensions_ = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
-    velocity_ = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
-    header_.frame_id =  utm_position.header.frame_id;
-  } catch(const std::exception& e) {
-    RCLCPP_ERROR(rclcpp::get_logger("CPMRenderObject"), "Unavailable PerceivedObject from CPM: %s", e.what());
-  }
+CPMRenderObject::CPMRenderObject(const etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm) {
+
+  station_id_ = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
+  reference_position_ = etsi_its_cpm_ts_msgs::access::getUTMPosition(cpm);
 
   uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_cpm_ts_msgs::access::getReferenceTime(cpm));
   header_.stamp = rclcpp::Time(nanosecs);
+  header_.frame_id = reference_position_.header.frame_id;
 
-  station_id_ = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
+  int n_perceived_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(cpm);
+  for (int i = 0; i < n_perceived_objects; i++) {
+    etsi_its_cpm_ts_msgs::msg::PerceivedObject perceived_obj = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
+      etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
+    geometry_msgs::msg::PointStamped utm_position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, perceived_obj);
+    
+    Object obj;
+    obj.pose.position = utm_position.point;
+    obj.pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(perceived_obj);
+    obj.dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(perceived_obj);
+    obj.velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(perceived_obj);
+    objects_.push_back(obj);
+  }
 }
 
 bool CPMRenderObject::validateFloats() {
   bool valid = true;
-  valid = valid && rviz_common::validateFloats(pose_);
-  valid = valid && rviz_common::validateFloats(dimensions_);
-  valid = valid && rviz_common::validateFloats(velocity_);
+  for (size_t i = 0; i < objects_.size(); i++) {
+    valid = valid && rviz_common::validateFloats(objects_[i].pose);
+    valid = valid && rviz_common::validateFloats(objects_[i].dimensions);
+    valid = valid && rviz_common::validateFloats(objects_[i].velocity);
+  }
   return valid;
 }
 
-double CPMRenderObject::getAge(rclcpp::Time now) { return (now - header_.stamp).seconds(); }
+double CPMRenderObject::getAge(const rclcpp::Time now) { return (now - header_.stamp).seconds(); }
 
 std_msgs::msg::Header CPMRenderObject::getHeader() { return header_; }
 
 uint32_t CPMRenderObject::getStationID() { return station_id_; }
 
-geometry_msgs::msg::Pose CPMRenderObject::getPose() { return pose_; }
+geometry_msgs::msg::PointStamped CPMRenderObject::getReferencePosition() { return reference_position_; }
 
-geometry_msgs::msg::Vector3 CPMRenderObject::getDimensions() { return dimensions_; }
+geometry_msgs::msg::Pose CPMRenderObject::getPoseOfObject(const uint8_t idx) { return objects_[idx].pose; }
 
-geometry_msgs::msg::Vector3 CPMRenderObject::getVelocity() { return velocity_; }
+geometry_msgs::msg::Vector3 CPMRenderObject::getDimensionsOfObject(const uint8_t idx) { return objects_[idx].dimensions; }
+
+geometry_msgs::msg::Vector3 CPMRenderObject::getVelocityOfObject(const uint8_t idx) { return objects_[idx].velocity; }
+
+uint8_t CPMRenderObject::getNumberOfObjects() { return objects_.size(); }
 
 }  // namespace displays
 }  // namespace etsi_its_msgs

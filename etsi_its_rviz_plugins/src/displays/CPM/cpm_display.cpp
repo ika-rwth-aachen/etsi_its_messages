@@ -91,29 +91,21 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
     return;
   }
 
-  uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(
-      etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(*msg));
+  CPMRenderObject cpm(*msg);
 
-  CPMRenderObject cpm(*msg, 0); // TODO: do not use render object here; can be done with StationId and ReferenceTime
-
-  cpm_render_objects_.clear();
-
-  for (int i = 0; i < number_of_objects; i++) {
-    CPMRenderObject cpm(*msg, i);
-    if (!cpm.validateFloats()) {
-      setStatus(rviz_common::properties::StatusProperty::Error, "Topic",
-                "Message contained invalid floating point values (nans or infs)");
-      return;
-    }
-    cpm_render_objects_.push_back(std::make_shared<CPMRenderObject>(cpm));
+  if (!cpm.validateFloats()) {
+    setStatus(rviz_common::properties::StatusProperty::Error, "Topic",
+              "Message contained invalid floating point values (nans or infs)");
+    return;
   }
 
   // Check if Station ID is already present in list
   auto it = cpms_.find(cpm.getStationID());
-  if (it != cpms_.end())
+  if (it != cpms_.end()) {
     it->second = cpm;  // Key exists, update the value
-  else
+  } else {
     cpms_.insert(std::make_pair(cpm.getStationID(), cpm));
+  }
 
   return;
 }
@@ -121,7 +113,7 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
 void CPMDisplay::update(float, float) {
   // Check for outdated CPMs
   for (auto it = cpms_.begin(); it != cpms_.end();) {
-    if (it->second.getAge(rviz_node_->now()) / 10e9 > buffer_timeout_->getFloat()) {
+    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) {
       it = cpms_.erase(it);
     } else {
       ++it;
@@ -130,10 +122,8 @@ void CPMDisplay::update(float, float) {
   bboxs_.clear();
   texts_.clear();
   for (auto it = cpms_.begin(); it != cpms_.end(); ++it) {
-    for (const auto& cpm_ptr : cpm_render_objects_) {
-      // Dereference the shared_ptr to access the CPMRenderObject
-      CPMRenderObject& cpm = *cpm_ptr;
-
+    CPMRenderObject cpm = it->second;
+    for (int i = 0; i < cpm.getNumberOfObjects(); i++) {
       Ogre::Vector3 sn_position;
       Ogre::Quaternion sn_orientation;
       if (!context_->getFrameManager()->getTransform(cpm.getHeader(), sn_position, sn_orientation)) {
@@ -171,9 +161,9 @@ void CPMDisplay::update(float, float) {
 
       auto child_scene_node = scene_node_->createChildSceneNode();
       // Set position of scene node to the position relative to the fixed frame
-      geometry_msgs::msg::Pose pose = cpm.getPose();
+      geometry_msgs::msg::Pose pose = cpm.getPoseOfObject(i);
 
-      geometry_msgs::msg::Vector3 dimensions = cpm.getDimensions();
+      geometry_msgs::msg::Vector3 dimensions = cpm.getDimensionsOfObject(i);
       tf2::doTransform(pose, pose, transform_to_fixed_frame);
       Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
       Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
@@ -206,7 +196,7 @@ void CPMDisplay::update(float, float) {
           text += "\n";
         }
         if (show_speed_->getBool()) {
-          geometry_msgs::msg::Vector3 velocity = cpm.getVelocity();
+          geometry_msgs::msg::Vector3 velocity = cpm.getVelocityOfObject(i);
           //get magnitude of velocity
           double speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2) + pow(velocity.z, 2));
           text += "Speed: " + std::to_string((int)(speed * 3.6)) + " km/h";
