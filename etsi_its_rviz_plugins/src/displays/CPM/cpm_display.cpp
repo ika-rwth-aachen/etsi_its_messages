@@ -94,7 +94,7 @@ void CPMDisplay::processMessage(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionM
   uint8_t number_of_objects = etsi_its_cpm_ts_msgs::access::getNumberOfPerceivedObjects(
       etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(*msg));
 
-  CPMRenderObject cpm(*msg, 0); // TODO: do we need this?
+  CPMRenderObject cpm(*msg, 0); // TODO: do not use render object here; can be done with StationId and ReferenceTime
 
   cpm_render_objects_.clear();
 

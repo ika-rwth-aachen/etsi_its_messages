@@ -28,22 +28,23 @@ namespace etsi_its_msgs {
 namespace displays {
 
 CPMRenderObject::CPMRenderObject(etsi_its_cpm_ts_msgs::msg::CollectivePerceptionMessage cpm, uint8_t number_of_object) {
-                                
+  try {
     etsi_its_cpm_ts_msgs::msg::PerceivedObject object = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
         etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), number_of_object);
-
     geometry_msgs::msg::PointStamped utm_position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, object);
-
     pose_.position = utm_position.point;
     pose_.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(object);
     dimensions_ = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(object);
     velocity_ = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(object);
-
     header_.frame_id =  utm_position.header.frame_id;
-    uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_cpm_ts_msgs::access::getReferenceTime(cpm));
-    header_.stamp = rclcpp::Time(nanosecs);
+  } catch(const std::exception& e) {
+    RCLCPP_ERROR(rclcpp::get_logger("CPMRenderObject"), "Unavailable PerceivedObject from CPM: %s", e.what());
+  }
 
-    station_id_ = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
+  uint64_t nanosecs = etsi_its_cpm_ts_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_cpm_ts_msgs::access::getReferenceTime(cpm));
+  header_.stamp = rclcpp::Time(nanosecs);
+
+  station_id_ = etsi_its_cpm_ts_msgs::access::getStationID(cpm);
 }
 
 bool CPMRenderObject::validateFloats() {
