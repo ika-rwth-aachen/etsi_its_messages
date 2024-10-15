@@ -142,10 +142,12 @@ template&lt;typename T1 , typename T2 &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cdd__checks_8h_source.html#l00035">35</a> of file <a class="el" href="cdd__checks_8h_source.html">cdd_checks.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   35</span>                                                                                              {</div>
-<div class="line"><span class="lineno">   36</span>  <span class="keywordflow">if</span> (val &lt; min || val &gt; max) <span class="keywordflow">throw</span> std::invalid_argument(val_desc+<span class="stringliteral">&quot; value is out of range (&quot;</span>+std::to_string(min)+<span class="stringliteral">&quot;...&quot;</span>+std::to_string(max)+<span class="stringliteral">&quot;)!&quot;</span>);</div>
-<div class="line"><span class="lineno">   37</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__checks_8h_source.html#l00036">36</a> of file <a class="el" href="cdd__checks_8h_source.html">cdd_checks.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>                                                                                              {</div>
+<div class="line"><span class="lineno">   37</span>  <span class="keywordflow">if</span> (val &lt; min || val &gt; max)</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">throw</span> std::invalid_argument(val_desc + <span class="stringliteral">&quot; value is out of range (&quot;</span> + std::to_string(min) + <span class="stringliteral">&quot;...&quot;</span> +</div>
+<div class="line"><span class="lineno">   39</span>                                std::to_string(max) + <span class="stringliteral">&quot;)!&quot;</span>);</div>
+<div class="line"><span class="lineno">   40</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -155,13 +155,14 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the number of leap second insertions since 2004 for unix_seconds </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00060">60</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>{</div>
-<div class="line"><span class="lineno">   62</span>    <span class="comment">// Check if the map is empty</span></div>
-<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keyword">auto</span> it = <a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(unix_seconds); <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
-<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   66</span>    --it; <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> it-&gt;second; <span class="comment">// Return the corresponding value</span></div>
+<div class="fragment"><div class="line"><span class="lineno">   60</span>                                                                              {</div>
+<div class="line"><span class="lineno">   61</span>  <span class="comment">// Check if the map is empty</span></div>
+<div class="line"><span class="lineno">   62</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   63</span>  <span class="keyword">auto</span> it = <a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(</div>
+<div class="line"><span class="lineno">   64</span>      unix_seconds);  <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   65</span>  <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   66</span>  --it;               <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   67</span>  <span class="keywordflow">return</span> it-&gt;second;  <span class="comment">// Return the corresponding value</span></div>
 <div class="line"><span class="lineno">   68</span>}</div>
 <div class="ttc" id="aimpl_2cam_2cam__access_8h_html_aafe603bb28e789913ebc67681f21b357"><div class="ttname"><a href="impl_2cam_2cam__access_8h.html#aafe603bb28e789913ebc67681f21b357">etsi_its_cam_msgs::access::etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="impl_2cam_2cam__access_8h_source.html#l00046">cam_access.h:46</a></div></div>
 </div><!-- fragment -->
@@ -180,24 +181,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">    {UNIX_SECONDS_2004, 0},</div>
-<div class="line">    {1136073599, 1}, </div>
-<div class="line">    {1230767999, 2}, </div>
-<div class="line">    {1341100799, 3}, </div>
-<div class="line">    {1435708799, 4}, </div>
-<div class="line">    {1483228799, 5}  </div>
+<div class="line">    {UNIX_SECONDS_2004, 0},  </div>
+<div class="line">    {1136073599, 1},         </div>
+<div class="line">    {1230767999, 2},         </div>
+<div class="line">    {1341100799, 3},         </div>
+<div class="line">    {1435708799, 4},         </div>
+<div class="line">    {1483228799, 5}          </div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
 <p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00045">45</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                   {</div>
-<div class="line"><span class="lineno">   46</span>    {UNIX_SECONDS_2004, 0},</div>
-<div class="line"><span class="lineno">   47</span>    {1136073599, 1}, <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   48</span>    {1230767999, 2}, <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   49</span>    {1341100799, 3}, <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   50</span>    {1435708799, 4}, <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   51</span>    {1483228799, 5}  <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                  {</div>
+<div class="line"><span class="lineno">   46</span>    {UNIX_SECONDS_2004, 0},  <span class="comment">// 2004-01-01T00:00:00.000Z</span></div>
+<div class="line"><span class="lineno">   47</span>    {1136073599, 1},         <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   48</span>    {1230767999, 2},         <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   49</span>    {1341100799, 3},         <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   50</span>    {1435708799, 4},         <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   51</span>    {1483228799, 5}          <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
 <div class="line"><span class="lineno">   52</span>};</div>
 </div><!-- fragment -->
 </div>

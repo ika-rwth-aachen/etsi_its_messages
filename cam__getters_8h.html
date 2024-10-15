@@ -90,6 +90,7 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">cam_getters.h File Reference</div></div>
 </div><!--header-->
@@ -116,12 +117,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a38286e0d3d6ac7f1fccdb70ac6ec6949" id="r_a38286e0d3d6ac7f1fccdb70ac6ec6949"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38286e0d3d6ac7f1fccdb70ac6ec6949">etsi_its_cam_msgs::access::getAltitude</a> (const Altitude &amp;altitude)</td></tr>
 <tr class="memdesc:a38286e0d3d6ac7f1fccdb70ac6ec6949"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Altitude value.  <br /></td></tr>
 <tr class="separator:a38286e0d3d6ac7f1fccdb70ac6ec6949"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a577f5c208f19a2f2c77c1a60c4ea5349" id="r_a577f5c208f19a2f2c77c1a60c4ea5349"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a577f5c208f19a2f2c77c1a60c4ea5349">etsi_its_cam_msgs::access::getHeading</a> (const Heading &amp;heading)</td></tr>
-<tr class="memdesc:a577f5c208f19a2f2c77c1a60c4ea5349"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Heading value.  <br /></td></tr>
-<tr class="separator:a577f5c208f19a2f2c77c1a60c4ea5349"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a19e1726345ef495891e5b0057a7283" id="r_a9a19e1726345ef495891e5b0057a7283"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a19e1726345ef495891e5b0057a7283">etsi_its_cam_msgs::access::getVehicleLength</a> (const VehicleLength &amp;vehicle_length)</td></tr>
-<tr class="memdesc:a9a19e1726345ef495891e5b0057a7283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Length.  <br /></td></tr>
-<tr class="separator:a9a19e1726345ef495891e5b0057a7283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5372ed38995e4c8b154d126970fdb3cd" id="r_a5372ed38995e4c8b154d126970fdb3cd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5372ed38995e4c8b154d126970fdb3cd">etsi_its_cam_msgs::access::getVehicleWidth</a> (const VehicleWidth &amp;vehicle_width)</td></tr>
 <tr class="memdesc:a5372ed38995e4c8b154d126970fdb3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Width.  <br /></td></tr>
 <tr class="separator:a5372ed38995e4c8b154d126970fdb3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,33 +126,16 @@ Functions</h2></td></tr>
 <tr class="memitem:aeb65585dd4e82026ee72a95b49e1664d" id="r_aeb65585dd4e82026ee72a95b49e1664d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb65585dd4e82026ee72a95b49e1664d">etsi_its_cam_msgs::access::getBitString</a> (const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</td></tr>
 <tr class="memdesc:aeb65585dd4e82026ee72a95b49e1664d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Bit String in form of bool vector.  <br /></td></tr>
 <tr class="separator:aeb65585dd4e82026ee72a95b49e1664d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fbc27b9487c074256d695113af73487" id="r_a2fbc27b9487c074256d695113af73487"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fbc27b9487c074256d695113af73487">etsi_its_cam_msgs::access::getAccelerationControl</a> (const AccelerationControl &amp;acceleration_control)</td></tr>
-<tr class="memdesc:a2fbc27b9487c074256d695113af73487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Acceleration Control in form of bool vector.  <br /></td></tr>
-<tr class="separator:a2fbc27b9487c074256d695113af73487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa2dd9a49ed837660246344a3ad534ea" id="r_aaa2dd9a49ed837660246344a3ad534ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa2dd9a49ed837660246344a3ad534ea">etsi_its_cam_msgs::access::getDrivingLaneStatus</a> (const DrivingLaneStatus &amp;driving_lane_status)</td></tr>
-<tr class="memdesc:aaa2dd9a49ed837660246344a3ad534ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Driving Lane Status in form of bool vector.  <br /></td></tr>
-<tr class="separator:aaa2dd9a49ed837660246344a3ad534ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e7af26b31d221c6f9c093d338ea3447" id="r_a2e7af26b31d221c6f9c093d338ea3447"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e7af26b31d221c6f9c093d338ea3447">etsi_its_cam_msgs::access::getExteriorLights</a> (const ExteriorLights &amp;exterior_lights)</td></tr>
-<tr class="memdesc:a2e7af26b31d221c6f9c093d338ea3447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Exterior Lights in form of bool vector.  <br /></td></tr>
-<tr class="separator:a2e7af26b31d221c6f9c093d338ea3447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73b0733103d908b22b338c63aa88f41" id="r_ae73b0733103d908b22b338c63aa88f41"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae73b0733103d908b22b338c63aa88f41">etsi_its_cam_msgs::access::getSpecialTransportType</a> (const SpecialTransportType &amp;special_transport_type)</td></tr>
-<tr class="memdesc:ae73b0733103d908b22b338c63aa88f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Special Transport Type in form of bool vector.  <br /></td></tr>
-<tr class="separator:ae73b0733103d908b22b338c63aa88f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a790cbad9ea90f3455fbee342d8a06696" id="r_a790cbad9ea90f3455fbee342d8a06696"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a790cbad9ea90f3455fbee342d8a06696">etsi_its_cam_msgs::access::getLightBarSirenInUse</a> (const LightBarSirenInUse &amp;light_bar_siren_in_use)</td></tr>
-<tr class="memdesc:a790cbad9ea90f3455fbee342d8a06696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Lightbar Siren In Use in form of bool vector.  <br /></td></tr>
-<tr class="separator:a790cbad9ea90f3455fbee342d8a06696"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a612cc8a501677a630d14b15dbc6cb3b1" id="r_a612cc8a501677a630d14b15dbc6cb3b1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a612cc8a501677a630d14b15dbc6cb3b1">etsi_its_cam_msgs::access::getEmergencyPriority</a> (const EmergencyPriority &amp;emergency_priority)</td></tr>
-<tr class="memdesc:a612cc8a501677a630d14b15dbc6cb3b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Role in form of bool vector.  <br /></td></tr>
-<tr class="separator:a612cc8a501677a630d14b15dbc6cb3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1561a9c967993854d777edbe67006fae" id="r_a1561a9c967993854d777edbe67006fae"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1561a9c967993854d777edbe67006fae"><td class="memTemplItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1561a9c967993854d777edbe67006fae">etsi_its_cam_msgs::access::getUTMPosition</a> (const T &amp;reference_position, int &amp;zone, bool &amp;northp)</td></tr>
+<tr class="memdesc:a1561a9c967993854d777edbe67006fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined by the given ReferencePosition.  <br /></td></tr>
+<tr class="separator:a1561a9c967993854d777edbe67006fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4b5627487893667d4d513e82a25d984" id="r_ab4b5627487893667d4d513e82a25d984"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4b5627487893667d4d513e82a25d984">etsi_its_cam_msgs::access::getLongitudinalAcceleration</a> (const LongitudinalAcceleration &amp;longitudinal_acceleration)</td></tr>
 <tr class="memdesc:ab4b5627487893667d4d513e82a25d984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
 <tr class="separator:ab4b5627487893667d4d513e82a25d984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f6d5d84fb020d54f285e03d86578a4c" id="r_a3f6d5d84fb020d54f285e03d86578a4c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f6d5d84fb020d54f285e03d86578a4c">etsi_its_cam_msgs::access::getLateralAcceleration</a> (const LateralAcceleration &amp;lateral_acceleration)</td></tr>
 <tr class="memdesc:a3f6d5d84fb020d54f285e03d86578a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
 <tr class="separator:a3f6d5d84fb020d54f285e03d86578a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af17d3f9b643a78aaf8e940fd2810141b" id="r_af17d3f9b643a78aaf8e940fd2810141b"><td class="memItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af17d3f9b643a78aaf8e940fd2810141b">etsi_its_cam_msgs::access::getUTMPosition</a> (const ReferencePosition &amp;reference_position, int &amp;zone, bool &amp;northp)</td></tr>
-<tr class="memdesc:af17d3f9b643a78aaf8e940fd2810141b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined by the given ReferencePosition.  <br /></td></tr>
-<tr class="separator:af17d3f9b643a78aaf8e940fd2810141b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a173a7247d725f835683ffe3d54cfc6dc" id="r_a173a7247d725f835683ffe3d54cfc6dc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a173a7247d725f835683ffe3d54cfc6dc">etsi_its_cam_msgs::access::getStationID</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:a173a7247d725f835683ffe3d54cfc6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Station ID object.  <br /></td></tr>
 <tr class="separator:a173a7247d725f835683ffe3d54cfc6dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,9 +157,15 @@ Functions</h2></td></tr>
 <tr class="memitem:aecf9264221e3476cb0c1874df24c06c6" id="r_aecf9264221e3476cb0c1874df24c06c6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecf9264221e3476cb0c1874df24c06c6">etsi_its_cam_msgs::access::getAltitude</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:aecf9264221e3476cb0c1874df24c06c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Altitude value of CAM.  <br /></td></tr>
 <tr class="separator:aecf9264221e3476cb0c1874df24c06c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577f5c208f19a2f2c77c1a60c4ea5349" id="r_a577f5c208f19a2f2c77c1a60c4ea5349"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a577f5c208f19a2f2c77c1a60c4ea5349">etsi_its_cam_msgs::access::getHeading</a> (const Heading &amp;heading)</td></tr>
+<tr class="memdesc:a577f5c208f19a2f2c77c1a60c4ea5349"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Heading value.  <br /></td></tr>
+<tr class="separator:a577f5c208f19a2f2c77c1a60c4ea5349"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef469c2c55d46eddd227e64c9f8d4d49" id="r_aef469c2c55d46eddd227e64c9f8d4d49"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef469c2c55d46eddd227e64c9f8d4d49">etsi_its_cam_msgs::access::getHeading</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:aef469c2c55d46eddd227e64c9f8d4d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Heading value of CAM.  <br /></td></tr>
 <tr class="separator:aef469c2c55d46eddd227e64c9f8d4d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a19e1726345ef495891e5b0057a7283" id="r_a9a19e1726345ef495891e5b0057a7283"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a19e1726345ef495891e5b0057a7283">etsi_its_cam_msgs::access::getVehicleLength</a> (const VehicleLength &amp;vehicle_length)</td></tr>
+<tr class="memdesc:a9a19e1726345ef495891e5b0057a7283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Length.  <br /></td></tr>
+<tr class="separator:a9a19e1726345ef495891e5b0057a7283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab990877d401d4ad752a9ef3ac28d35b5" id="r_ab990877d401d4ad752a9ef3ac28d35b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab990877d401d4ad752a9ef3ac28d35b5">etsi_its_cam_msgs::access::getVehicleLength</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:ab990877d401d4ad752a9ef3ac28d35b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Length.  <br /></td></tr>
 <tr class="separator:ab990877d401d4ad752a9ef3ac28d35b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,9 +184,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a6cf4f55266f66c636ab8469a40d16b4e" id="r_a6cf4f55266f66c636ab8469a40d16b4e"><td class="memItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cf4f55266f66c636ab8469a40d16b4e">etsi_its_cam_msgs::access::getUTMPosition</a> (const CAM &amp;cam, int &amp;zone, bool &amp;northp)</td></tr>
 <tr class="memdesc:a6cf4f55266f66c636ab8469a40d16b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined within the BasicContainer of the CAM.  <br /></td></tr>
 <tr class="separator:a6cf4f55266f66c636ab8469a40d16b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd770ef0d6c5ff1af4f765c85c3f5106" id="r_abd770ef0d6c5ff1af4f765c85c3f5106"><td class="memItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd770ef0d6c5ff1af4f765c85c3f5106">etsi_its_cam_msgs::access::getUTMPosition</a> (const CAM &amp;cam)</td></tr>
+<tr class="memdesc:abd770ef0d6c5ff1af4f765c85c3f5106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined within the BasicContainer of the CAM.  <br /></td></tr>
+<tr class="separator:abd770ef0d6c5ff1af4f765c85c3f5106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7af26b31d221c6f9c093d338ea3447" id="r_a2e7af26b31d221c6f9c093d338ea3447"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e7af26b31d221c6f9c093d338ea3447">etsi_its_cam_msgs::access::getExteriorLights</a> (const ExteriorLights &amp;exterior_lights)</td></tr>
+<tr class="memdesc:a2e7af26b31d221c6f9c093d338ea3447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Exterior Lights in form of bool vector.  <br /></td></tr>
+<tr class="separator:a2e7af26b31d221c6f9c093d338ea3447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a934ac65e944926d922100e9a6be13d0c" id="r_a934ac65e944926d922100e9a6be13d0c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a934ac65e944926d922100e9a6be13d0c">etsi_its_cam_msgs::access::getExteriorLights</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:a934ac65e944926d922100e9a6be13d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Exterior Lights as bool vector.  <br /></td></tr>
 <tr class="separator:a934ac65e944926d922100e9a6be13d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fbc27b9487c074256d695113af73487" id="r_a2fbc27b9487c074256d695113af73487"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fbc27b9487c074256d695113af73487">etsi_its_cam_msgs::access::getAccelerationControl</a> (const AccelerationControl &amp;acceleration_control)</td></tr>
+<tr class="memdesc:a2fbc27b9487c074256d695113af73487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Acceleration Control in form of bool vector.  <br /></td></tr>
+<tr class="separator:a2fbc27b9487c074256d695113af73487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa2dd9a49ed837660246344a3ad534ea" id="r_aaa2dd9a49ed837660246344a3ad534ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa2dd9a49ed837660246344a3ad534ea">etsi_its_cam_msgs::access::getDrivingLaneStatus</a> (const DrivingLaneStatus &amp;driving_lane_status)</td></tr>
+<tr class="memdesc:aaa2dd9a49ed837660246344a3ad534ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Driving Lane Status in form of bool vector.  <br /></td></tr>
+<tr class="separator:aaa2dd9a49ed837660246344a3ad534ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73b0733103d908b22b338c63aa88f41" id="r_ae73b0733103d908b22b338c63aa88f41"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae73b0733103d908b22b338c63aa88f41">etsi_its_cam_msgs::access::getSpecialTransportType</a> (const SpecialTransportType &amp;special_transport_type)</td></tr>
+<tr class="memdesc:ae73b0733103d908b22b338c63aa88f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Special Transport Type in form of bool vector.  <br /></td></tr>
+<tr class="separator:ae73b0733103d908b22b338c63aa88f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a790cbad9ea90f3455fbee342d8a06696" id="r_a790cbad9ea90f3455fbee342d8a06696"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a790cbad9ea90f3455fbee342d8a06696">etsi_its_cam_msgs::access::getLightBarSirenInUse</a> (const LightBarSirenInUse &amp;light_bar_siren_in_use)</td></tr>
+<tr class="memdesc:a790cbad9ea90f3455fbee342d8a06696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Lightbar Siren In Use in form of bool vector.  <br /></td></tr>
+<tr class="separator:a790cbad9ea90f3455fbee342d8a06696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a612cc8a501677a630d14b15dbc6cb3b1" id="r_a612cc8a501677a630d14b15dbc6cb3b1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a612cc8a501677a630d14b15dbc6cb3b1">etsi_its_cam_msgs::access::getEmergencyPriority</a> (const EmergencyPriority &amp;emergency_priority)</td></tr>
+<tr class="memdesc:a612cc8a501677a630d14b15dbc6cb3b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Role in form of bool vector.  <br /></td></tr>
+<tr class="separator:a612cc8a501677a630d14b15dbc6cb3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Getter functions for the ETSI ITS CAM (EN) </p>
@@ -241,7 +246,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00158">158</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00255">255</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
 
 </div>
 </div>
@@ -277,11 +282,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Altitude value (above the reference ellipsoid surface) in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00073">73</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  106</span>                                  {</div>
-<div class="line"><span class="lineno">  107</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  108</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  109</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00068">68</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>{</div>
+<div class="line"><span class="lineno">  102</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  105</span>}</div>
 <div class="ttc" id="acam__getters__common_8h_html"><div class="ttname"><a href="cam__getters__common_8h.html">cam_getters_common.h</a></div><div class="ttdoc">Common getter functions for the ETSI ITS CAM (EN and TS)</div></div>
 <div class="ttc" id="acdd__v1-3-1__getters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__getters_8h.html">cdd_v1-3-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
 </div><!-- fragment -->
@@ -319,11 +325,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Altitude value (above the reference ellipsoid surface) in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00101">101</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  134</span>                                  {</div>
-<div class="line"><span class="lineno">  135</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  136</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  137</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00094">94</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>                                  {</div>
+<div class="line"><span class="lineno">  128</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  131</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -364,11 +371,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00126">126</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  159</span>                                  {</div>
-<div class="line"><span class="lineno">  160</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  161</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  162</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00093">93</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>                                  {</div>
+<div class="line"><span class="lineno">  127</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  130</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -404,11 +412,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00168">168</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  201</span>                                  {</div>
-<div class="line"><span class="lineno">  202</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  203</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  204</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00265">265</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  298</span>                                  {</div>
+<div class="line"><span class="lineno">  299</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  300</span> </div>
+<div class="line"><span class="lineno">  301</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  302</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -444,11 +453,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00208">208</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  241</span>                                  {</div>
-<div class="line"><span class="lineno">  242</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  243</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  244</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00295">295</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  328</span>                                  {</div>
+<div class="line"><span class="lineno">  329</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  330</span> </div>
+<div class="line"><span class="lineno">  331</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  332</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -484,11 +494,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00195">195</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  228</span>                                  {</div>
-<div class="line"><span class="lineno">  229</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  230</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  231</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00235">235</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  268</span>                                  {</div>
+<div class="line"><span class="lineno">  269</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  270</span> </div>
+<div class="line"><span class="lineno">  271</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  272</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -524,11 +535,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00178">178</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  211</span>                                  {</div>
-<div class="line"><span class="lineno">  212</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  213</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  214</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00225">225</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  258</span>                                  {</div>
+<div class="line"><span class="lineno">  259</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  260</span> </div>
+<div class="line"><span class="lineno">  261</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  262</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -564,9 +576,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>GenerationDeltaTime the GenerationDeltaTime </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00051">51</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>                                  {</div>
-<div class="line"><span class="lineno">   85</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00050">50</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{</div>
+<div class="line"><span class="lineno">   84</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   85</span> </div>
 <div class="line"><span class="lineno">   86</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
 <div class="line"><span class="lineno">   87</span>}</div>
 </div><!-- fragment -->
@@ -604,11 +617,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the GenerationDeltaTime-Value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00061">61</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>                                  {</div>
-<div class="line"><span class="lineno">   95</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   96</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   97</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00058">58</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>{</div>
+<div class="line"><span class="lineno">   92</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   95</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -645,11 +659,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00113">113</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  146</span>                                  {</div>
-<div class="line"><span class="lineno">  147</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  148</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  149</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00116">116</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>                                  {</div>
+<div class="line"><span class="lineno">  150</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  153</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -686,11 +701,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00085">85</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  118</span>                                  {</div>
-<div class="line"><span class="lineno">  119</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  120</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  121</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00106">106</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  139</span>{</div>
+<div class="line"><span class="lineno">  140</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  143</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -726,11 +742,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00163">163</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  196</span>                                  {</div>
-<div class="line"><span class="lineno">  197</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  198</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  199</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00179">179</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  212</span>                                  {</div>
+<div class="line"><span class="lineno">  213</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  214</span> </div>
+<div class="line"><span class="lineno">  215</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  216</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -766,11 +783,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00053">53</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   86</span>                                  {</div>
-<div class="line"><span class="lineno">   87</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   88</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   89</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00167">167</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  200</span>                                  {</div>
+<div class="line"><span class="lineno">  201</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  202</span> </div>
+<div class="line"><span class="lineno">  203</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  204</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -806,11 +824,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Latitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00081">81</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  114</span>                                  {</div>
-<div class="line"><span class="lineno">  115</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  116</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  117</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00074">74</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  107</span>                                  {</div>
+<div class="line"><span class="lineno">  108</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  111</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -846,9 +865,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Latitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00053">53</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   86</span>                                  {</div>
-<div class="line"><span class="lineno">   87</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00052">52</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   85</span>{</div>
+<div class="line"><span class="lineno">   86</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   87</span> </div>
 <div class="line"><span class="lineno">   88</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
 <div class="line"><span class="lineno">   89</span>}</div>
 </div><!-- fragment -->
@@ -886,11 +906,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00198">198</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  231</span>                                  {</div>
-<div class="line"><span class="lineno">  232</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  233</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  234</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00285">285</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  318</span>                                  {</div>
+<div class="line"><span class="lineno">  319</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  320</span> </div>
+<div class="line"><span class="lineno">  321</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  322</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -926,11 +947,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Longitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00091">91</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>                                  {</div>
-<div class="line"><span class="lineno">  125</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  126</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  127</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00084">84</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>                                  {</div>
+<div class="line"><span class="lineno">  118</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  119</span> </div>
+<div class="line"><span class="lineno">  120</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  121</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -966,11 +988,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Longitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00063">63</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>                                  {</div>
-<div class="line"><span class="lineno">   97</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   98</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   99</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00060">60</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>{</div>
+<div class="line"><span class="lineno">   94</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   95</span> </div>
+<div class="line"><span class="lineno">   96</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   97</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1006,11 +1029,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00153">153</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  186</span>                                  {</div>
-<div class="line"><span class="lineno">  187</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  188</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  189</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00168">168</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>                                  {</div>
+<div class="line"><span class="lineno">  202</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  203</span> </div>
+<div class="line"><span class="lineno">  204</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  205</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1046,11 +1070,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00043">43</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   76</span>                                  {</div>
-<div class="line"><span class="lineno">   77</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   78</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   79</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00157">157</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  190</span>                                  {</div>
+<div class="line"><span class="lineno">  191</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  192</span> </div>
+<div class="line"><span class="lineno">  193</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  194</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1086,11 +1111,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00188">188</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>                                  {</div>
-<div class="line"><span class="lineno">  222</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  223</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  224</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00275">275</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  308</span>                                  {</div>
+<div class="line"><span class="lineno">  309</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  310</span> </div>
+<div class="line"><span class="lineno">  311</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  312</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1126,11 +1152,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>speed value in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00143">143</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  176</span>                                  {</div>
-<div class="line"><span class="lineno">  177</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  178</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  179</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00158">158</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  191</span>                                  {</div>
+<div class="line"><span class="lineno">  192</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  193</span> </div>
+<div class="line"><span class="lineno">  194</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  195</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1166,11 +1193,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>speed value in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00115">115</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  148</span>                                  {</div>
-<div class="line"><span class="lineno">  149</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  150</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  151</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00084">84</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
+<div class="line"><span class="lineno">  118</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  119</span> </div>
+<div class="line"><span class="lineno">  120</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  121</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1206,11 +1234,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>stationID value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00041">41</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>                                  {</div>
-<div class="line"><span class="lineno">   75</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   76</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   77</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00042">42</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{</div>
+<div class="line"><span class="lineno">   76</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   79</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1246,11 +1275,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>stationID value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00043">43</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   76</span>                                  {</div>
-<div class="line"><span class="lineno">   77</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   78</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   79</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00044">44</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>{</div>
+<div class="line"><span class="lineno">   78</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   81</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1286,16 +1316,59 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>stationType value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00071">71</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  104</span>                                  {</div>
-<div class="line"><span class="lineno">  105</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  106</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  107</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00066">66</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   99</span>{</div>
+<div class="line"><span class="lineno">  100</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  103</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abd770ef0d6c5ff1af4f765c85c3f5106" name="abd770ef0d6c5ff1af4f765c85c3f5106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd770ef0d6c5ff1af4f765c85c3f5106">&#9670;&#160;</a></span>getUTMPosition() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gm::PointStamped etsi_its_cam_msgs::access::getUTMPosition </td>
+          <td>(</td>
+          <td class="paramtype">const CAM &amp;</td>          <td class="paramname"><span class="paramname"><em>cam</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the UTM Position defined within the BasicContainer of the CAM. </p>
+<p>The position is transformed into UTM by using GeographicLib::UTMUPS The altitude value is directly used as z-Coordinate</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cam</td><td>CAM to get the UTM Position from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00213">213</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  246</span>                                  {</div>
+<div class="line"><span class="lineno">  247</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  248</span> </div>
+<div class="line"><span class="lineno">  249</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  250</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a6cf4f55266f66c636ab8469a40d16b4e" name="a6cf4f55266f66c636ab8469a40d16b4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cf4f55266f66c636ab8469a40d16b4e">&#9670;&#160;</a></span>getUTMPosition() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf4f55266f66c636ab8469a40d16b4e">&#9670;&#160;</a></span>getUTMPosition() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1338,19 +1411,22 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00185">185</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  218</span>                                  {</div>
-<div class="line"><span class="lineno">  219</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  220</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  221</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00200">200</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  233</span>                                  {</div>
+<div class="line"><span class="lineno">  234</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  235</span> </div>
+<div class="line"><span class="lineno">  236</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  237</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af17d3f9b643a78aaf8e940fd2810141b" name="af17d3f9b643a78aaf8e940fd2810141b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af17d3f9b643a78aaf8e940fd2810141b">&#9670;&#160;</a></span>getUTMPosition() <span class="overload">[2/2]</span></h2>
+<a id="a1561a9c967993854d777edbe67006fae" name="a1561a9c967993854d777edbe67006fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1561a9c967993854d777edbe67006fae">&#9670;&#160;</a></span>getUTMPosition() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1358,7 +1434,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">gm::PointStamped etsi_its_cam_msgs::access::getUTMPosition </td>
           <td>(</td>
-          <td class="paramtype">const ReferencePosition &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_position</em></span>, </td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_position</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1382,7 +1458,7 @@ Functions</h2></td></tr>
 <p>The position is transformed into UTM by using GeographicLib::UTMUPS The altitude value is directly used as z-Coordinate</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">reference_position</td><td>ReferencePosition to get the UTM Position from </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">reference_position</td><td>ReferencePosition or ReferencePositionWithConfidence to get the UTM Position from </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">zone</td><td>the UTM zone (zero means UPS) </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">northp</td><td>hemisphere (true means north, false means south) </td></tr>
   </table>
@@ -1390,11 +1466,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00068">68</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  101</span>                                  {</div>
-<div class="line"><span class="lineno">  102</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  103</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  104</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00129">129</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  162</span>                                  {</div>
+<div class="line"><span class="lineno">  163</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  166</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1430,11 +1507,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle length value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00123">123</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  156</span>                                  {</div>
-<div class="line"><span class="lineno">  157</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  158</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  159</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00136">136</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  169</span>                                  {</div>
+<div class="line"><span class="lineno">  170</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  171</span> </div>
+<div class="line"><span class="lineno">  172</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  173</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1470,11 +1548,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle length value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00095">95</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  128</span>                                  {</div>
-<div class="line"><span class="lineno">  129</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  130</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  131</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00126">126</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  159</span>                                  {</div>
+<div class="line"><span class="lineno">  160</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  161</span> </div>
+<div class="line"><span class="lineno">  162</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  163</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1510,11 +1589,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00133">133</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  166</span>                                  {</div>
-<div class="line"><span class="lineno">  167</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  168</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  169</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00147">147</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  180</span>                                  {</div>
+<div class="line"><span class="lineno">  181</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  182</span> </div>
+<div class="line"><span class="lineno">  183</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  184</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1550,11 +1630,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00105">105</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  138</span>                                  {</div>
-<div class="line"><span class="lineno">  139</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  140</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  141</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters_8h_source.html#l00076">76</a> of file <a class="el" href="cam__getters_8h_source.html">cam_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>{</div>
+<div class="line"><span class="lineno">  110</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  113</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

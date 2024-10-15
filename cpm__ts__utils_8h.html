@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/denm/denm_utils.h File Reference</title>
+<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cpm/cpm_ts_utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,23 +84,23 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_74d93a3e5b086827f465e6b85cbd057e.html">denm</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_614574316f71757a2f9e974544fa663f.html">cpm</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">denm_utils.h File Reference</div></div>
+  <div class="headertitle"><div class="title">cpm_ts_utils.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Utility functions for the ETSI ITS DENM (EN)  
+<p>Utility functions for the ETSI ITS CPM (TS)  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="cdd__checks_8h_source.html">etsi_its_msgs_utils/impl/cdd/cdd_checks.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="constants_8h_source.html">etsi_its_msgs_utils/impl/constants.h</a>&gt;</code><br />
 </div>
-<p><a href="denm__utils_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="cpm__ts__utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -109,9 +109,9 @@ Functions</h2></td></tr>
 <tr class="separator:a02a5743ca1feba53d711b9e1761a5da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utility functions for the ETSI ITS DENM (EN) </p>
+<div class="textblock"><p>Utility functions for the ETSI ITS CPM (TS) </p>
 
-<p class="definition">Definition in file <a class="el" href="denm__utils_8h_source.html">denm_utils.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="cpm__ts__utils_8h_source.html">cpm_ts_utils.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a02a5743ca1feba53d711b9e1761a5da6" name="a02a5743ca1feba53d711b9e1761a5da6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02a5743ca1feba53d711b9e1761a5da6">&#9670;&#160;</a></span>getUnixNanosecondsFromReferenceTime()</h2>
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="denm__utils_8h_source.html#l00044">44</a> of file <a class="el" href="denm__utils_8h_source.html">denm_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpm__ts__utils_8h_source.html#l00044">44</a> of file <a class="el" href="cpm__ts__utils_8h_source.html">cpm_ts_utils.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   44</span>                                                                                        {</div>
 <div class="line"><span class="lineno">   45</span>  <span class="keywordtype">double</span> unix_time_with_leap_seconds = reference_time.value * 1e-3 + etsi_its_msgs::UNIX_SECONDS_2004;</div>
 <div class="line"><span class="lineno">   46</span>  uint16_t n_leap_seconds =</div>

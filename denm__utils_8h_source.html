@@ -124,14 +124,16 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="denm__utils_8h.html#a149bd7eaeccb57459362173f012d3e5b">   44</a></span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="denm__utils_8h.html#a149bd7eaeccb57459362173f012d3e5b">getUnixNanosecondsFromReferenceTime</a>(<span class="keyword">const</span> TimestampIts&amp; reference_time, <span class="keyword">const</span> uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">return</span> reference_time.value*1e6+etsi_its_msgs::UNIX_SECONDS_2004*1e9-n_leap_seconds*1e9;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="denm__utils_8h.html#a02a5743ca1feba53d711b9e1761a5da6">   44</a></span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="denm__utils_8h.html#a02a5743ca1feba53d711b9e1761a5da6">getUnixNanosecondsFromReferenceTime</a>(<span class="keyword">const</span> TimestampIts&amp; reference_time) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">double</span> unix_time_with_leap_seconds = reference_time.value * 1e-3 + etsi_its_msgs::UNIX_SECONDS_2004;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  uint16_t n_leap_seconds =</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      etsi_its_msgs::getLeapSecondInsertionsSince2004(<span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(unix_time_with_leap_seconds));</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordflow">return</span> (unix_time_with_leap_seconds - n_leap_seconds) * 1e9;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
 </div>
 <div class="ttc" id="acdd__checks_8h_html"><div class="ttname"><a href="cdd__checks_8h.html">cdd_checks.h</a></div><div class="ttdoc">Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)</div></div>
 <div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>
-<div class="ttc" id="adenm__utils_8h_html_a149bd7eaeccb57459362173f012d3e5b"><div class="ttname"><a href="denm__utils_8h.html#a149bd7eaeccb57459362173f012d3e5b">getUnixNanosecondsFromReferenceTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts &amp;reference_time, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given ReferenceTime object.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">denm_utils.h:44</a></div></div>
+<div class="ttc" id="adenm__utils_8h_html_a02a5743ca1feba53d711b9e1761a5da6"><div class="ttname"><a href="denm__utils_8h.html#a02a5743ca1feba53d711b9e1761a5da6">getUnixNanosecondsFromReferenceTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts &amp;reference_time)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given ReferenceTime object.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">denm_utils.h:44</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

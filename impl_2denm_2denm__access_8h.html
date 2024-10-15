@@ -90,6 +90,7 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">denm_access.h File Reference</div></div>
@@ -116,9 +117,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a509b6187f55ea99970d24ff799403463" id="r_a509b6187f55ea99970d24ff799403463"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a509b6187f55ea99970d24ff799403463">etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004</a> (const uint64_t unix_seconds)</td></tr>
 <tr class="memdesc:a509b6187f55ea99970d24ff799403463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the leap second insertions since 2004 for given unix seconds.  <br /></td></tr>
 <tr class="separator:a509b6187f55ea99970d24ff799403463"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac535de10c6513cfb7aff3850aefaa303" id="r_ac535de10c6513cfb7aff3850aefaa303"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac535de10c6513cfb7aff3850aefaa303">etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime</a> (const TimestampIts &amp;reference_time, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:ac535de10c6513cfb7aff3850aefaa303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix-Nanoseconds from a given ReferenceTime object.  <br /></td></tr>
-<tr class="separator:ac535de10c6513cfb7aff3850aefaa303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade558792e4563b5e257820027165cb73" id="r_ade558792e4563b5e257820027165cb73"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade558792e4563b5e257820027165cb73">etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime</a> (const TimestampIts &amp;reference_time)</td></tr>
+<tr class="memdesc:ade558792e4563b5e257820027165cb73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix-Nanoseconds from a given ReferenceTime object.  <br /></td></tr>
+<tr class="separator:ade558792e4563b5e257820027165cb73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -169,8 +170,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac535de10c6513cfb7aff3850aefaa303" name="ac535de10c6513cfb7aff3850aefaa303"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac535de10c6513cfb7aff3850aefaa303">&#9670;&#160;</a></span>getUnixNanosecondsFromReferenceTime()</h2>
+<a id="ade558792e4563b5e257820027165cb73" name="ade558792e4563b5e257820027165cb73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade558792e4563b5e257820027165cb73">&#9670;&#160;</a></span>getUnixNanosecondsFromReferenceTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,12 +182,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">uint64_t etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime </td>
           <td>(</td>
-          <td class="paramtype">const TimestampIts &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_time</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const TimestampIts &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_time</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -207,9 +204,9 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00082">82</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>                                   {</div>
-<div class="line"><span class="lineno">  125</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  126</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                                   {</div>
+<div class="line"><span class="lineno">  133</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  134</span>}</div>
 <div class="ttc" id="adenm__utils_8h_html"><div class="ttname"><a href="denm__utils_8h.html">denm_utils.h</a></div><div class="ttdoc">Utility functions for the ETSI ITS DENM (EN)</div></div>
 </div><!-- fragment -->
 </div>
@@ -245,7 +242,7 @@ template&lt;typename T1 , typename T2 &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00036">36</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00037">37</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
 
 </div>
 </div>
@@ -262,20 +259,20 @@ template&lt;typename T1 , typename T2 &gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">    {UNIX_SECONDS_2004, 0},</div>
-<div class="line">    {1136073599, 1}, </div>
-<div class="line">    {1230767999, 2}, </div>
-<div class="line">    {1341100799, 3}, </div>
-<div class="line">    {1435708799, 4}, </div>
-<div class="line">    {1483228799, 5}  </div>
+<div class="line">    {UNIX_SECONDS_2004, 0},  </div>
+<div class="line">    {1136073599, 1},         </div>
+<div class="line">    {1230767999, 2},         </div>
+<div class="line">    {1341100799, 3},         </div>
+<div class="line">    {1435708799, 4},         </div>
+<div class="line">    {1483228799, 5}          </div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
 <p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00046">46</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   88</span>                                   {</div>
-<div class="line"><span class="lineno">   89</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">   90</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>                                   {</div>
+<div class="line"><span class="lineno">   52</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">   53</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

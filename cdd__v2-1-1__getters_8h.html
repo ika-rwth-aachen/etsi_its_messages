@@ -110,9 +110,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a9a51b4db0e53e912c46bce4af489f19d" id="r_a9a51b4db0e53e912c46bce4af489f19d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a51b4db0e53e912c46bce4af489f19d">getLateralAcceleration</a> (const AccelerationComponent &amp;lateral_acceleration)</td></tr>
 <tr class="memdesc:a9a51b4db0e53e912c46bce4af489f19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
 <tr class="separator:a9a51b4db0e53e912c46bce4af489f19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab92061c1f1d32ca30e15275589b48f8e" id="r_ab92061c1f1d32ca30e15275589b48f8e"><td class="memItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab92061c1f1d32ca30e15275589b48f8e">getUTMPosition</a> (const ReferencePositionWithConfidence &amp;reference_position, int &amp;zone, bool &amp;northp)</td></tr>
-<tr class="memdesc:ab92061c1f1d32ca30e15275589b48f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined by the given ReferencePosition.  <br /></td></tr>
-<tr class="separator:ab92061c1f1d32ca30e15275589b48f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1. </p>
@@ -151,10 +148,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__v2-1-1__getters_8h_source.html#l00052">52</a> of file <a class="el" href="cdd__v2-1-1__getters_8h_source.html">cdd_v2-1-1_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>                                                                                       {</div>
-<div class="line"><span class="lineno">   53</span>  <span class="keywordflow">return</span> ((int16_t)lateral_acceleration.value.value)*1e-1;</div>
-<div class="line"><span class="lineno">   54</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__v2-1-1__getters_8h_source.html#l00055">55</a> of file <a class="el" href="cdd__v2-1-1__getters_8h_source.html">cdd_v2-1-1_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                                                        {</div>
+<div class="line"><span class="lineno">   56</span>  <span class="keywordflow">return</span> ((int16_t)lateral_acceleration.value.value) * 1e-1;</div>
+<div class="line"><span class="lineno">   57</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -190,77 +187,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__v2-1-1__getters_8h_source.html#l00042">42</a> of file <a class="el" href="cdd__v2-1-1__getters_8h_source.html">cdd_v2-1-1_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   42</span>                                                                                                 {</div>
-<div class="line"><span class="lineno">   43</span>  <span class="keywordflow">return</span> ((int16_t)longitudinal_acceleration.value.value)*1e-1;</div>
-<div class="line"><span class="lineno">   44</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ab92061c1f1d32ca30e15275589b48f8e" name="ab92061c1f1d32ca30e15275589b48f8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab92061c1f1d32ca30e15275589b48f8e">&#9670;&#160;</a></span>getUTMPosition()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">gm::PointStamped getUTMPosition </td>
-          <td>(</td>
-          <td class="paramtype">const ReferencePositionWithConfidence &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_position</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>zone</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>northp</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the UTM Position defined by the given ReferencePosition. </p>
-<p>The position is transformed into UTM by using GeographicLib::UTMUPS The altitude value is directly used as z-Coordinate</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">reference_position</td><td>ReferencePosition to get the UTM Position from </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">zone</td><td>the UTM zone (zero means UPS) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">northp</td><td>hemisphere (true means north, false means south) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__v2-1-1__getters_8h_source.html#l00067">67</a> of file <a class="el" href="cdd__v2-1-1__getters_8h_source.html">cdd_v2-1-1_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   67</span>                                                                                                                        {</div>
-<div class="line"><span class="lineno">   68</span>  gm::PointStamped utm_point;</div>
-<div class="line"><span class="lineno">   69</span>  <span class="keywordtype">double</span> latitude = <a class="code hl_function" href="cam__getters__common_8h.html#aa2da8d819a5280e20b96c23b64aa623a">getLatitude</a>(reference_position.latitude);</div>
-<div class="line"><span class="lineno">   70</span>  <span class="keywordtype">double</span> longitude = <a class="code hl_function" href="cam__getters__common_8h.html#a2dbc4b78682f8d6fc9701d78e823ac0a">getLongitude</a>(reference_position.longitude);</div>
-<div class="line"><span class="lineno">   71</span>  utm_point.point.z = <a class="code hl_function" href="cam__getters__common_8h.html#ab7220ec36a294287151f0280b26d540f">getAltitude</a>(reference_position.altitude);</div>
-<div class="line"><span class="lineno">   72</span>  <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">   73</span>    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);</div>
-<div class="line"><span class="lineno">   74</span>    std::string hemisphere;</div>
-<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">if</span>(northp) hemisphere=<span class="stringliteral">&quot;N&quot;</span>;</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">else</span> hemisphere=<span class="stringliteral">&quot;S&quot;</span>;</div>
-<div class="line"><span class="lineno">   77</span>    utm_point.header.frame_id=<span class="stringliteral">&quot;utm_&quot;</span>+std::to_string(zone)+hemisphere;</div>
-<div class="line"><span class="lineno">   78</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
-<div class="line"><span class="lineno">   80</span>  }</div>
-<div class="line"><span class="lineno">   81</span>  <span class="keywordflow">return</span> utm_point;</div>
-<div class="line"><span class="lineno">   82</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_a2dbc4b78682f8d6fc9701d78e823ac0a"><div class="ttname"><a href="cam__getters__common_8h.html#a2dbc4b78682f8d6fc9701d78e823ac0a">getLongitude</a></div><div class="ttdeci">double getLongitude(const CAM &amp;cam)</div><div class="ttdoc">Get the Longitude value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00090">cam_getters_common.h:90</a></div></div>
-<div class="ttc" id="acam__getters__common_8h_html_aa2da8d819a5280e20b96c23b64aa623a"><div class="ttname"><a href="cam__getters__common_8h.html#aa2da8d819a5280e20b96c23b64aa623a">getLatitude</a></div><div class="ttdeci">double getLatitude(const CAM &amp;cam)</div><div class="ttdoc">Get the Latitude value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00080">cam_getters_common.h:80</a></div></div>
-<div class="ttc" id="acam__getters__common_8h_html_ab7220ec36a294287151f0280b26d540f"><div class="ttname"><a href="cam__getters__common_8h.html#ab7220ec36a294287151f0280b26d540f">getAltitude</a></div><div class="ttdeci">double getAltitude(const CAM &amp;cam)</div><div class="ttdoc">Get the Altitude value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00100">cam_getters_common.h:100</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__v2-1-1__getters_8h_source.html#l00045">45</a> of file <a class="el" href="cdd__v2-1-1__getters_8h_source.html">cdd_v2-1-1_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                                                  {</div>
+<div class="line"><span class="lineno">   46</span>  <span class="keywordflow">return</span> ((int16_t)longitudinal_acceleration.value.value) * 1e-1;</div>
+<div class="line"><span class="lineno">   47</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -97,10 +97,10 @@ $(function(){ initResizable(false); });
 
 <p>Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;<a class="el" href="cdd__checks_8h_source.html">etsi_its_msgs_utils/impl/cdd/cdd_checks.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="cdd__checks_8h_source.html">etsi_its_msgs_utils/impl/cdd/cdd_checks.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="constants_8h_source.html">etsi_its_msgs_utils/impl/constants.h</a>&gt;</code><br />
 <code>#include &lt;GeographicLib/UTMUPS.hpp&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 </div>
 <p><a href="cdd__setters__common_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,18 +121,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a6fefcb0e418912e7e920235a9e2e76d7" id="r_a6fefcb0e418912e7e920235a9e2e76d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a> (Altitude &amp;altitude, const double value)</td></tr>
 <tr class="memdesc:a6fefcb0e418912e7e920235a9e2e76d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Altitude object.  <br /></td></tr>
 <tr class="separator:a6fefcb0e418912e7e920235a9e2e76d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa98b3ac8fa66187fd19323357c4e24bc" id="r_aa98b3ac8fa66187fd19323357c4e24bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a> (HeadingValue &amp;heading, const double value)</td></tr>
-<tr class="memdesc:aa98b3ac8fa66187fd19323357c4e24bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the HeadingValue object.  <br /></td></tr>
-<tr class="separator:aa98b3ac8fa66187fd19323357c4e24bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e8b5c51aec89da6d69adc77a4ece374" id="r_a7e8b5c51aec89da6d69adc77a4ece374"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8b5c51aec89da6d69adc77a4ece374">setHeading</a> (Heading &amp;heading, const double value)</td></tr>
-<tr class="memdesc:a7e8b5c51aec89da6d69adc77a4ece374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Heading object.  <br /></td></tr>
-<tr class="separator:a7e8b5c51aec89da6d69adc77a4ece374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56fb18d01480639649af1d9acb848b86" id="r_a56fb18d01480639649af1d9acb848b86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a> (VehicleLengthValue &amp;vehicle_length, const double value)</td></tr>
-<tr class="memdesc:a56fb18d01480639649af1d9acb848b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the VehicleLengthValue object.  <br /></td></tr>
-<tr class="separator:a56fb18d01480639649af1d9acb848b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a234cf10e13b8acee801edcd9405451a6" id="r_a234cf10e13b8acee801edcd9405451a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a234cf10e13b8acee801edcd9405451a6">setVehicleLength</a> (VehicleLength &amp;vehicle_length, const double value)</td></tr>
-<tr class="memdesc:a234cf10e13b8acee801edcd9405451a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the VehicleLength object.  <br /></td></tr>
-<tr class="separator:a234cf10e13b8acee801edcd9405451a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accca46176c8be97e41ff54618c6f307f" id="r_accca46176c8be97e41ff54618c6f307f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a> (VehicleWidth &amp;vehicle_width, const double value)</td></tr>
 <tr class="memdesc:accca46176c8be97e41ff54618c6f307f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the VehicleWidth object.  <br /></td></tr>
 <tr class="separator:accca46176c8be97e41ff54618c6f307f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,78 +130,24 @@ Functions</h2></td></tr>
 <tr class="memitem:ae870b1cab62677c6df2573eb87c1d91f" id="r_ae870b1cab62677c6df2573eb87c1d91f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae870b1cab62677c6df2573eb87c1d91f">setSpeed</a> (Speed &amp;speed, const double value)</td></tr>
 <tr class="memdesc:ae870b1cab62677c6df2573eb87c1d91f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Speed object.  <br /></td></tr>
 <tr class="separator:ae870b1cab62677c6df2573eb87c1d91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad636aa0d0819278faf0226bc93ae77db" id="r_ad636aa0d0819278faf0226bc93ae77db"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad636aa0d0819278faf0226bc93ae77db"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a> (T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</td></tr>
+<tr class="memdesc:ad636aa0d0819278faf0226bc93ae77db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference position in the given ReferencePostion object.  <br /></td></tr>
+<tr class="separator:ad636aa0d0819278faf0226bc93ae77db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7caadf8dc8a612e122882f60ee663600" id="r_a7caadf8dc8a612e122882f60ee663600"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7caadf8dc8a612e122882f60ee663600"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7caadf8dc8a612e122882f60ee663600">setFromUTMPosition</a> (T &amp;reference_position, const gm::PointStamped &amp;utm_position, const int zone, const bool northp)</td></tr>
+<tr class="memdesc:a7caadf8dc8a612e122882f60ee663600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ReferencePosition from a given UTM-Position.  <br /></td></tr>
+<tr class="separator:a7caadf8dc8a612e122882f60ee663600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac522d43b41df3f656a2896785b5fb388" id="r_ac522d43b41df3f656a2896785b5fb388"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac522d43b41df3f656a2896785b5fb388"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a> (T &amp;bitstring, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
 <tr class="memdesc:ac522d43b41df3f656a2896785b5fb388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a Bit String by a vector of bools.  <br /></td></tr>
 <tr class="separator:ac522d43b41df3f656a2896785b5fb388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa39cfb6c6d02e47ce9629d999e878dad" id="r_aa39cfb6c6d02e47ce9629d999e878dad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa39cfb6c6d02e47ce9629d999e878dad">setAccelerationControl</a> (AccelerationControl &amp;acceleration_control, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:aa39cfb6c6d02e47ce9629d999e878dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Acceleration Control by a vector of bools.  <br /></td></tr>
-<tr class="separator:aa39cfb6c6d02e47ce9629d999e878dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd62a8fb607a2ba43ccd90860ca49115" id="r_afd62a8fb607a2ba43ccd90860ca49115"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd62a8fb607a2ba43ccd90860ca49115">setDrivingLaneStatus</a> (DrivingLaneStatus &amp;driving_lane_status, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:afd62a8fb607a2ba43ccd90860ca49115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Driving Lane Status by a vector of bools.  <br /></td></tr>
-<tr class="separator:afd62a8fb607a2ba43ccd90860ca49115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a881453ee40c0c3bff954e5ee9aaae901" id="r_a881453ee40c0c3bff954e5ee9aaae901"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a881453ee40c0c3bff954e5ee9aaae901">setExteriorLights</a> (ExteriorLights &amp;exterior_lights, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:a881453ee40c0c3bff954e5ee9aaae901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Exterior Lights by a vector of bools.  <br /></td></tr>
-<tr class="separator:a881453ee40c0c3bff954e5ee9aaae901"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3328cea0b27bef50c2a353779c903e64" id="r_a3328cea0b27bef50c2a353779c903e64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3328cea0b27bef50c2a353779c903e64">setSpecialTransportType</a> (SpecialTransportType &amp;special_transport_type, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:a3328cea0b27bef50c2a353779c903e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Special Transport Type by a vector of bools.  <br /></td></tr>
-<tr class="separator:a3328cea0b27bef50c2a353779c903e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c84238ebbd469ec64a0bcfdb1f9abce" id="r_a3c84238ebbd469ec64a0bcfdb1f9abce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c84238ebbd469ec64a0bcfdb1f9abce">setLightBarSirenInUse</a> (LightBarSirenInUse &amp;light_bar_siren_in_use, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:a3c84238ebbd469ec64a0bcfdb1f9abce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Lightbar Siren In Use by a vector of bools.  <br /></td></tr>
-<tr class="separator:a3c84238ebbd469ec64a0bcfdb1f9abce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae676e1a8d9c587da4ae1c6b8232135da" id="r_ae676e1a8d9c587da4ae1c6b8232135da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae676e1a8d9c587da4ae1c6b8232135da">setEmergencyPriority</a> (EmergencyPriority &amp;emergency_priority, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
-<tr class="memdesc:ae676e1a8d9c587da4ae1c6b8232135da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Emergency Priority by a vector of bools.  <br /></td></tr>
-<tr class="separator:ae676e1a8d9c587da4ae1c6b8232135da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1. </p>
 
 <p class="definition">Definition in file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa39cfb6c6d02e47ce9629d999e878dad" name="aa39cfb6c6d02e47ce9629d999e878dad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa39cfb6c6d02e47ce9629d999e878dad">&#9670;&#160;</a></span>setAccelerationControl()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setAccelerationControl </td>
-          <td>(</td>
-          <td class="paramtype">AccelerationControl &amp;</td>          <td class="paramname"><span class="paramname"><em>acceleration_control</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Acceleration Control by a vector of bools. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">acceleration_control</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00235">235</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  235</span>                                                                                                           {</div>
-<div class="line"><span class="lineno">  236</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(acceleration_control, bits);</div>
-<div class="line"><span class="lineno">  237</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_ac522d43b41df3f656a2896785b5fb388"><div class="ttname"><a href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a></div><div class="ttdeci">void setBitString(T &amp;bitstring, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set a Bit String by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00203">cdd_setters_common.h:203</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="a6fefcb0e418912e7e920235a9e2e76d7" name="a6fefcb0e418912e7e920235a9e2e76d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fefcb0e418912e7e920235a9e2e76d7">&#9670;&#160;</a></span>setAltitude()</h2>
 
@@ -251,12 +185,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00100">100</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  100</span>                                                                {</div>
-<div class="line"><span class="lineno">  101</span>  altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  102</span>  <a class="code hl_function" href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a>(altitude.altitude_value, value);</div>
-<div class="line"><span class="lineno">  103</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_ab347d14233bc8d61c0db228b3f83bb6c"><div class="ttname"><a href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a></div><div class="ttdeci">void setAltitudeValue(AltitudeValue &amp;altitude, const double value)</div><div class="ttdoc">Set the AltitudeValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00085">cdd_setters_common.h:85</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00105">105</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>                                                                {</div>
+<div class="line"><span class="lineno">  106</span>  altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  107</span>  <a class="code hl_function" href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a>(altitude.altitude_value, value);</div>
+<div class="line"><span class="lineno">  108</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_ab347d14233bc8d61c0db228b3f83bb6c"><div class="ttname"><a href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a></div><div class="ttdeci">void setAltitudeValue(AltitudeValue &amp;altitude, const double value)</div><div class="ttdoc">Set the AltitudeValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00086">cdd_setters_common.h:86</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -296,13 +230,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00085">85</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   85</span>                                                                          {</div>
-<div class="line"><span class="lineno">   86</span>  int64_t alt_in_cm = (int64_t)std::round(value*1e2);</div>
-<div class="line"><span class="lineno">   87</span>  <span class="keywordflow">if</span>(alt_in_cm&gt;=AltitudeValue::MIN &amp;&amp; alt_in_cm&lt;=AltitudeValue::MAX) altitude.value = alt_in_cm;</div>
-<div class="line"><span class="lineno">   88</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_cm&lt;AltitudeValue::MIN) altitude.value = AltitudeValue::MIN;</div>
-<div class="line"><span class="lineno">   89</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_cm&gt;AltitudeValue::MAX) altitude.value = AltitudeValue::MAX;</div>
-<div class="line"><span class="lineno">   90</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00086">86</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                                          {</div>
+<div class="line"><span class="lineno">   87</span>  int64_t alt_in_cm = (int64_t)std::round(value * 1e2);</div>
+<div class="line"><span class="lineno">   88</span>  <span class="keywordflow">if</span> (alt_in_cm &gt;= AltitudeValue::MIN &amp;&amp; alt_in_cm &lt;= AltitudeValue::MAX) {</div>
+<div class="line"><span class="lineno">   89</span>    altitude.value = alt_in_cm;</div>
+<div class="line"><span class="lineno">   90</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &lt; AltitudeValue::MIN) {</div>
+<div class="line"><span class="lineno">   91</span>    altitude.value = AltitudeValue::MIN;</div>
+<div class="line"><span class="lineno">   92</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &gt; AltitudeValue::MAX) {</div>
+<div class="line"><span class="lineno">   93</span>    altitude.value = AltitudeValue::MAX;</div>
+<div class="line"><span class="lineno">   94</span>  }</div>
+<div class="line"><span class="lineno">   95</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -350,53 +288,63 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00203">203</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  203</span>                                                                    {</div>
-<div class="line"><span class="lineno">  204</span>  <span class="comment">// bit string size</span></div>
-<div class="line"><span class="lineno">  205</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
-<div class="line"><span class="lineno">  206</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = (bits.size() - 1) / bits_per_byte + 1;</div>
-<div class="line"><span class="lineno">  207</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
-<div class="line"><span class="lineno">  208</span> </div>
-<div class="line"><span class="lineno">  209</span>  <span class="comment">// init output</span></div>
-<div class="line"><span class="lineno">  210</span>  bitstring.bits_unused = n_bits - bits.size();</div>
-<div class="line"><span class="lineno">  211</span>  bitstring.value = std::vector&lt;uint8_t&gt;(n_bytes);</div>
-<div class="line"><span class="lineno">  212</span> </div>
-<div class="line"><span class="lineno">  213</span>  <span class="comment">// loop over all bytes in reverse order</span></div>
-<div class="line"><span class="lineno">  214</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = n_bytes - 1; byte_idx &gt;= 0; byte_idx--) {</div>
-<div class="line"><span class="lineno">  215</span> </div>
-<div class="line"><span class="lineno">  216</span>    <span class="comment">// loop over bits in a byte</span></div>
-<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = 0; bit_idx_in_byte &lt; bits_per_byte; bit_idx_in_byte++) {</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00209">209</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  209</span>                                                                    {</div>
+<div class="line"><span class="lineno">  210</span>  <span class="comment">// bit string size</span></div>
+<div class="line"><span class="lineno">  211</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
+<div class="line"><span class="lineno">  212</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = (bits.size() - 1) / bits_per_byte + 1;</div>
+<div class="line"><span class="lineno">  213</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
+<div class="line"><span class="lineno">  214</span> </div>
+<div class="line"><span class="lineno">  215</span>  <span class="comment">// init output</span></div>
+<div class="line"><span class="lineno">  216</span>  bitstring.bits_unused = n_bits - bits.size();</div>
+<div class="line"><span class="lineno">  217</span>  bitstring.value = std::vector&lt;uint8_t&gt;(n_bytes);</div>
 <div class="line"><span class="lineno">  218</span> </div>
-<div class="line"><span class="lineno">  219</span>      <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
-<div class="line"><span class="lineno">  220</span>      <span class="keywordtype">int</span> bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;</div>
-<div class="line"><span class="lineno">  221</span>      <span class="keywordflow">if</span> (byte_idx == 0 &amp;&amp; bit_idx &gt;= n_bits - bitstring.bits_unused) <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  222</span> </div>
-<div class="line"><span class="lineno">  223</span>      <span class="comment">// set bit in output bitstring appropriately</span></div>
-<div class="line"><span class="lineno">  224</span>      bitstring.value[byte_idx] |= bits[bit_idx] &lt;&lt; bit_idx_in_byte;</div>
-<div class="line"><span class="lineno">  225</span>    }</div>
-<div class="line"><span class="lineno">  226</span>  }</div>
-<div class="line"><span class="lineno">  227</span>}</div>
+<div class="line"><span class="lineno">  219</span>  <span class="comment">// loop over all bytes in reverse order</span></div>
+<div class="line"><span class="lineno">  220</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = n_bytes - 1; byte_idx &gt;= 0; byte_idx--) {</div>
+<div class="line"><span class="lineno">  221</span>    <span class="comment">// loop over bits in a byte</span></div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = 0; bit_idx_in_byte &lt; bits_per_byte; bit_idx_in_byte++) {</div>
+<div class="line"><span class="lineno">  223</span>      <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
+<div class="line"><span class="lineno">  224</span>      <span class="keywordtype">int</span> bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;</div>
+<div class="line"><span class="lineno">  225</span>      <span class="keywordflow">if</span> (byte_idx == 0 &amp;&amp; bit_idx &gt;= n_bits - bitstring.bits_unused) <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  226</span> </div>
+<div class="line"><span class="lineno">  227</span>      <span class="comment">// set bit in output bitstring appropriately</span></div>
+<div class="line"><span class="lineno">  228</span>      bitstring.value[byte_idx] |= bits[bit_idx] &lt;&lt; bit_idx_in_byte;</div>
+<div class="line"><span class="lineno">  229</span>    }</div>
+<div class="line"><span class="lineno">  230</span>  }</div>
+<div class="line"><span class="lineno">  231</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="afd62a8fb607a2ba43ccd90860ca49115" name="afd62a8fb607a2ba43ccd90860ca49115"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd62a8fb607a2ba43ccd90860ca49115">&#9670;&#160;</a></span>setDrivingLaneStatus()</h2>
+<a id="a7caadf8dc8a612e122882f60ee663600" name="a7caadf8dc8a612e122882f60ee663600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7caadf8dc8a612e122882f60ee663600">&#9670;&#160;</a></span>setFromUTMPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void setDrivingLaneStatus </td>
+          <td class="memname">void setFromUTMPosition </td>
           <td>(</td>
-          <td class="paramtype">DrivingLaneStatus &amp;</td>          <td class="paramname"><span class="paramname"><em>driving_lane_status</em></span>, </td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>reference_position</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
+          <td class="paramtype">const gm::PointStamped &amp;</td>          <td class="paramname"><span class="paramname"><em>utm_position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>zone</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>northp</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -406,197 +354,34 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the Driving Lane Status by a vector of bools. </p>
+<p>Set the ReferencePosition from a given UTM-Position. </p>
+<p>The position is transformed to latitude and longitude by using GeographicLib::UTMUPS The z-Coordinate is directly used as altitude value The frame_id of the given utm_position must be set to 'utm_&lt;zone&gt;&lt;N/S&gt;'</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">driving_lane_status</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">reference_position</td><td>ReferencePostion or ReferencePositionWithConfidence to set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">utm_position</td><td>geometry_msgs::PointStamped describing the given utm position </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">zone</td><td>the UTM zone (zero means UPS) of the given position </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">northp</td><td>hemisphere (true means north, false means south) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00245">245</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  245</span>                                                                                                      {</div>
-<div class="line"><span class="lineno">  246</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(driving_lane_status, bits);</div>
-<div class="line"><span class="lineno">  247</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ae676e1a8d9c587da4ae1c6b8232135da" name="ae676e1a8d9c587da4ae1c6b8232135da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae676e1a8d9c587da4ae1c6b8232135da">&#9670;&#160;</a></span>setEmergencyPriority()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setEmergencyPriority </td>
-          <td>(</td>
-          <td class="paramtype">EmergencyPriority &amp;</td>          <td class="paramname"><span class="paramname"><em>emergency_priority</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Emergency Priority by a vector of bools. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">emergency_priority</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00285">285</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  285</span>                                                                                                     {</div>
-<div class="line"><span class="lineno">  286</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(emergency_priority, bits);</div>
-<div class="line"><span class="lineno">  287</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a881453ee40c0c3bff954e5ee9aaae901" name="a881453ee40c0c3bff954e5ee9aaae901"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a881453ee40c0c3bff954e5ee9aaae901">&#9670;&#160;</a></span>setExteriorLights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setExteriorLights </td>
-          <td>(</td>
-          <td class="paramtype">ExteriorLights &amp;</td>          <td class="paramname"><span class="paramname"><em>exterior_lights</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Exterior Lights by a vector of bools. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">exterior_lights</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00255">255</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  255</span>                                                                                            {</div>
-<div class="line"><span class="lineno">  256</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(exterior_lights, bits);</div>
-<div class="line"><span class="lineno">  257</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a7e8b5c51aec89da6d69adc77a4ece374" name="a7e8b5c51aec89da6d69adc77a4ece374"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e8b5c51aec89da6d69adc77a4ece374">&#9670;&#160;</a></span>setHeading()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setHeading </td>
-          <td>(</td>
-          <td class="paramtype">Heading &amp;</td>          <td class="paramname"><span class="paramname"><em>heading</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Heading object. </p>
-<p>0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West HeadingConfidence is set to UNAVAILABLE</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">heading</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>Heading value in degree as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00128">128</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  128</span>                                                             {</div>
-<div class="line"><span class="lineno">  129</span>  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  130</span>  <a class="code hl_function" href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a>(heading.heading_value, value);</div>
-<div class="line"><span class="lineno">  131</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_aa98b3ac8fa66187fd19323357c4e24bc"><div class="ttname"><a href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a></div><div class="ttdeci">void setHeadingValue(HeadingValue &amp;heading, const double value)</div><div class="ttdoc">Set the HeadingValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00113">cdd_setters_common.h:113</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aa98b3ac8fa66187fd19323357c4e24bc" name="aa98b3ac8fa66187fd19323357c4e24bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa98b3ac8fa66187fd19323357c4e24bc">&#9670;&#160;</a></span>setHeadingValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setHeadingValue </td>
-          <td>(</td>
-          <td class="paramtype">HeadingValue &amp;</td>          <td class="paramname"><span class="paramname"><em>heading</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the HeadingValue object. </p>
-<p>0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">heading</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>Heading value in degree as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00113">113</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>                                                                       {</div>
-<div class="line"><span class="lineno">  114</span>  int64_t deg = (int64_t)std::round(value*1e1);</div>
-<div class="line"><span class="lineno">  115</span>  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, <span class="stringliteral">&quot;HeadingValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  116</span>  heading.value = deg;</div>
-<div class="line"><span class="lineno">  117</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00185">185</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  186</span>                                                  {</div>
+<div class="line"><span class="lineno">  187</span>  std::string required_frame_prefix = <span class="stringliteral">&quot;utm_&quot;</span>;</div>
+<div class="line"><span class="lineno">  188</span>  <span class="keywordflow">if</span> (utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0) {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Frame-ID of UTM Position &#39;&quot;</span> + utm_position.header.frame_id +</div>
+<div class="line"><span class="lineno">  190</span>                                <span class="stringliteral">&quot;&#39; does not start with required prefix &#39;&quot;</span> + required_frame_prefix + <span class="stringliteral">&quot;&#39;!&quot;</span>);</div>
+<div class="line"><span class="lineno">  191</span>  }</div>
+<div class="line"><span class="lineno">  192</span>  <span class="keywordtype">double</span> latitude, longitude;</div>
+<div class="line"><span class="lineno">  193</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  194</span>    GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);</div>
+<div class="line"><span class="lineno">  195</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
+<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
+<div class="line"><span class="lineno">  197</span>  }</div>
+<div class="line"><span class="lineno">  198</span>  <a class="code hl_function" href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a>(reference_position, latitude, longitude, utm_position.point.z);</div>
+<div class="line"><span class="lineno">  199</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_ad636aa0d0819278faf0226bc93ae77db"><div class="ttname"><a href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Sets the reference position in the given ReferencePostion object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00159">cdd_setters_common.h:159</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -636,55 +421,12 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00061">61</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                              {</div>
-<div class="line"><span class="lineno">   62</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
-<div class="line"><span class="lineno">   63</span>  throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
-<div class="line"><span class="lineno">   64</span>  latitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">   65</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a3c84238ebbd469ec64a0bcfdb1f9abce" name="a3c84238ebbd469ec64a0bcfdb1f9abce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c84238ebbd469ec64a0bcfdb1f9abce">&#9670;&#160;</a></span>setLightBarSirenInUse()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setLightBarSirenInUse </td>
-          <td>(</td>
-          <td class="paramtype">LightBarSirenInUse &amp;</td>          <td class="paramname"><span class="paramname"><em>light_bar_siren_in_use</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Lightbar Siren In Use by a vector of bools. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">light_bar_siren_in_use</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00275">275</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  275</span>                                                                                                           {</div>
-<div class="line"><span class="lineno">  276</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(light_bar_siren_in_use, bits);</div>
-<div class="line"><span class="lineno">  277</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00062">62</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>                                                              {</div>
+<div class="line"><span class="lineno">   63</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
+<div class="line"><span class="lineno">   64</span>  throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   65</span>  latitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   66</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -724,33 +466,45 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00073">73</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>                                                                 {</div>
-<div class="line"><span class="lineno">   74</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
-<div class="line"><span class="lineno">   75</span>  throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
-<div class="line"><span class="lineno">   76</span>  longitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">   77</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00074">74</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                                                 {</div>
+<div class="line"><span class="lineno">   75</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
+<div class="line"><span class="lineno">   76</span>  throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   77</span>  longitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   78</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3328cea0b27bef50c2a353779c903e64" name="a3328cea0b27bef50c2a353779c903e64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3328cea0b27bef50c2a353779c903e64">&#9670;&#160;</a></span>setSpecialTransportType()</h2>
+<a id="ad636aa0d0819278faf0226bc93ae77db" name="ad636aa0d0819278faf0226bc93ae77db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad636aa0d0819278faf0226bc93ae77db">&#9670;&#160;</a></span>setReferencePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void setSpecialTransportType </td>
+          <td class="memname">void setReferencePosition </td>
           <td>(</td>
-          <td class="paramtype">SpecialTransportType &amp;</td>          <td class="paramname"><span class="paramname"><em>special_transport_type</em></span>, </td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>ref_position</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; bool &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>bits</em></span>&#160;)</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>latitude</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>longitude</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>altitude</em></span><span class="paramdefsep"> = </span><span class="paramdefval">AltitudeValue::UNAVAILABLE</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -760,19 +514,33 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the Special Transport Type by a vector of bools. </p>
+<p>Sets the reference position in the given ReferencePostion object. </p>
+<p>This function sets the latitude, longitude, and altitude of the reference position. If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">special_transport_type</td><td></td></tr>
-    <tr><td class="paramname">bits</td><td></td></tr>
+    <tr><td class="paramname">ref_position</td><td>ReferencePostion or ReferencePositionWithConfidence object to set the reference position in. </td></tr>
+    <tr><td class="paramname">latitude</td><td>The latitude value position in degree as decimal number. </td></tr>
+    <tr><td class="paramname">longitude</td><td>The longitude value in degree as decimal number. </td></tr>
+    <tr><td class="paramname">altitude</td><td>The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00265">265</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  265</span>                                                                                                               {</div>
-<div class="line"><span class="lineno">  266</span>  <a class="code hl_function" href="#ac522d43b41df3f656a2896785b5fb388">setBitString</a>(special_transport_type, bits);</div>
-<div class="line"><span class="lineno">  267</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00159">159</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>                                                                                   {</div>
+<div class="line"><span class="lineno">  161</span>  <a class="code hl_function" href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a>(ref_position.latitude, latitude);</div>
+<div class="line"><span class="lineno">  162</span>  <a class="code hl_function" href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a>(ref_position.longitude, longitude);</div>
+<div class="line"><span class="lineno">  163</span>  <span class="keywordflow">if</span> (altitude != AltitudeValue::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  164</span>    <a class="code hl_function" href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a>(ref_position.altitude, altitude);</div>
+<div class="line"><span class="lineno">  165</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  166</span>    ref_position.altitude.altitude_value.value = AltitudeValue::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  167</span>    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  168</span>  }</div>
+<div class="line"><span class="lineno">  169</span>  <span class="comment">// TODO: set confidence values</span></div>
+<div class="line"><span class="lineno">  170</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a0680a3f512b077ace2dac6efe44c2118"><div class="ttname"><a href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a></div><div class="ttdeci">void setLongitude(Longitude &amp;longitude, const double deg)</div><div class="ttdoc">Set the Longitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00074">cdd_setters_common.h:74</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a6fefcb0e418912e7e920235a9e2e76d7"><div class="ttname"><a href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a></div><div class="ttdeci">void setAltitude(Altitude &amp;altitude, const double value)</div><div class="ttdoc">Set the Altitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00105">cdd_setters_common.h:105</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_ad06f7f27d89f95db3607743158a0be98"><div class="ttname"><a href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a></div><div class="ttdeci">void setLatitude(Latitude &amp;latitude, const double deg)</div><div class="ttdoc">Set the Latitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00062">cdd_setters_common.h:62</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -813,12 +581,12 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00190">190</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  190</span>                                                       {</div>
-<div class="line"><span class="lineno">  191</span>  speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  192</span>  <a class="code hl_function" href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a>(speed.speed_value, value);</div>
-<div class="line"><span class="lineno">  193</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a2c4e6201e1fc4116b6aaff2f9d35e5f0"><div class="ttname"><a href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a></div><div class="ttdeci">void setSpeedValue(SpeedValue &amp;speed, const double value)</div><div class="ttdoc">Set the SpeedValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00176">cdd_setters_common.h:176</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00142">142</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  142</span>                                                       {</div>
+<div class="line"><span class="lineno">  143</span>  speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  144</span>  <a class="code hl_function" href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a>(speed.speed_value, value);</div>
+<div class="line"><span class="lineno">  145</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a2c4e6201e1fc4116b6aaff2f9d35e5f0"><div class="ttname"><a href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a></div><div class="ttdeci">void setSpeedValue(SpeedValue &amp;speed, const double value)</div><div class="ttdoc">Set the SpeedValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00128">cdd_setters_common.h:128</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -858,12 +626,12 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00176">176</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  176</span>                                                                 {</div>
-<div class="line"><span class="lineno">  177</span>  int64_t speed_val = (int64_t)std::round(value*1e2);</div>
-<div class="line"><span class="lineno">  178</span>  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  179</span>  speed.value = speed_val;</div>
-<div class="line"><span class="lineno">  180</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00128">128</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  128</span>                                                                 {</div>
+<div class="line"><span class="lineno">  129</span>  int64_t speed_val = (int64_t)std::round(value * 1e2);</div>
+<div class="line"><span class="lineno">  130</span>  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  131</span>  speed.value = speed_val;</div>
+<div class="line"><span class="lineno">  132</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -910,103 +678,12 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00049">49</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                                                                                                                                                     {</div>
-<div class="line"><span class="lineno">   50</span>  uint64_t t_its = unix_nanosecs*1e-6 + (uint64_t)(n_leap_seconds*1e3) - etsi_its_msgs::UNIX_SECONDS_2004*1e3;</div>
-<div class="line"><span class="lineno">   51</span>  throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
-<div class="line"><span class="lineno">   52</span>  timestamp_its.value = t_its;</div>
-<div class="line"><span class="lineno">   53</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a234cf10e13b8acee801edcd9405451a6" name="a234cf10e13b8acee801edcd9405451a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a234cf10e13b8acee801edcd9405451a6">&#9670;&#160;</a></span>setVehicleLength()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setVehicleLength </td>
-          <td>(</td>
-          <td class="paramtype">VehicleLength &amp;</td>          <td class="paramname"><span class="paramname"><em>vehicle_length</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the VehicleLength object. </p>
-<p>VehicleLengthConfidenceIndication is set to UNAVAILABLE</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vehicle_length</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>VehicleLengthValue in meter as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00153">153</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                {</div>
-<div class="line"><span class="lineno">  154</span>  vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  155</span>  <a class="code hl_function" href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a>(vehicle_length.vehicle_length_value, value);</div>
-<div class="line"><span class="lineno">  156</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a56fb18d01480639649af1d9acb848b86"><div class="ttname"><a href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a></div><div class="ttdeci">void setVehicleLengthValue(VehicleLengthValue &amp;vehicle_length, const double value)</div><div class="ttdoc">Set the VehicleLengthValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00139">cdd_setters_common.h:139</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a56fb18d01480639649af1d9acb848b86" name="a56fb18d01480639649af1d9acb848b86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56fb18d01480639649af1d9acb848b86">&#9670;&#160;</a></span>setVehicleLengthValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setVehicleLengthValue </td>
-          <td>(</td>
-          <td class="paramtype">VehicleLengthValue &amp;</td>          <td class="paramname"><span class="paramname"><em>vehicle_length</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the VehicleLengthValue object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vehicle_length</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>VehicleLengthValue in meter as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00139">139</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                                                                                          {</div>
-<div class="line"><span class="lineno">  140</span>  int64_t length = (int64_t)std::round(value*1e1);</div>
-<div class="line"><span class="lineno">  141</span>  throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, <span class="stringliteral">&quot;VehicleLengthValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  142</span>  vehicle_length.value = length;</div>
-<div class="line"><span class="lineno">  143</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00048">48</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                                                                  {</div>
+<div class="line"><span class="lineno">   51</span>  uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
+<div class="line"><span class="lineno">   52</span>  throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
+<div class="line"><span class="lineno">   53</span>  timestamp_its.value = t_its;</div>
+<div class="line"><span class="lineno">   54</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1046,12 +723,12 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00164">164</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  164</span>                                                                             {</div>
-<div class="line"><span class="lineno">  165</span>  int64_t width = (int64_t)std::round(value*1e1);</div>
-<div class="line"><span class="lineno">  166</span>  throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, <span class="stringliteral">&quot;VehicleWidthValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  167</span>  vehicle_width.value = width;</div>
-<div class="line"><span class="lineno">  168</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00116">116</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                                             {</div>
+<div class="line"><span class="lineno">  117</span>  int64_t width = (int64_t)std::round(value * 1e1);</div>
+<div class="line"><span class="lineno">  118</span>  throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, <span class="stringliteral">&quot;VehicleWidthValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  119</span>  vehicle_width.value = width;</div>
+<div class="line"><span class="lineno">  120</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
