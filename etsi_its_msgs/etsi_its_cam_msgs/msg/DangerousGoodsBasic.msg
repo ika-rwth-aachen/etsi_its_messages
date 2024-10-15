@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -50,12 +51,12 @@
 # ------------------------------------------------------------------------------
 
 uint8 value
-uint8 EXPLOSIVES_1 = 0
-uint8 EXPLOSIVES_2 = 1
-uint8 EXPLOSIVES_3 = 2
-uint8 EXPLOSIVES_4 = 3
-uint8 EXPLOSIVES_5 = 4
-uint8 EXPLOSIVES_6 = 5
+uint8 EXPLOSIVES1 = 0
+uint8 EXPLOSIVES2 = 1
+uint8 EXPLOSIVES3 = 2
+uint8 EXPLOSIVES4 = 3
+uint8 EXPLOSIVES5 = 4
+uint8 EXPLOSIVES6 = 5
 uint8 FLAMMABLE_GASES = 6
 uint8 NON_FLAMMABLE_GASES = 7
 uint8 TOXIC_GASES = 8

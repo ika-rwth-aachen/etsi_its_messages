@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +27,14 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/SpecialVehicleContainer.h>
-#include <etsi_its_cam_conversion/convertPublicTransportContainer.h>
-#include <etsi_its_cam_conversion/convertSpecialTransportContainer.h>
+#include <etsi_its_cam_coding/cam_SpecialVehicleContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsContainer.h>
-#include <etsi_its_cam_conversion/convertRoadWorksContainerBasic.h>
-#include <etsi_its_cam_conversion/convertRescueContainer.h>
 #include <etsi_its_cam_conversion/convertEmergencyContainer.h>
+#include <etsi_its_cam_conversion/convertPublicTransportContainer.h>
+#include <etsi_its_cam_conversion/convertRescueContainer.h>
+#include <etsi_its_cam_conversion/convertRoadWorksContainerBasic.h>
 #include <etsi_its_cam_conversion/convertSafetyCarContainer.h>
+#include <etsi_its_cam_conversion/convertSpecialTransportContainer.h>
 #ifdef ROS1
 #include <etsi_its_cam_msgs/SpecialVehicleContainer.h>
 namespace cam_msgs = etsi_its_cam_msgs;
@@ -45,83 +46,74 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_SpecialVehicleContainer(const SpecialVehicleContainer_t& in, cam_msgs::SpecialVehicleContainer& out) {
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer) {
+void toRos_SpecialVehicleContainer(const cam_SpecialVehicleContainer_t& in, cam_msgs::SpecialVehicleContainer& out) {
+  switch (in.present) {
+  case cam_SpecialVehicleContainer_PR_publicTransportContainer:
     toRos_PublicTransportContainer(in.choice.publicTransportContainer, out.public_transport_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer) {
+    break;
+  case cam_SpecialVehicleContainer_PR_specialTransportContainer:
     toRos_SpecialTransportContainer(in.choice.specialTransportContainer, out.special_transport_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer) {
+    break;
+  case cam_SpecialVehicleContainer_PR_dangerousGoodsContainer:
     toRos_DangerousGoodsContainer(in.choice.dangerousGoodsContainer, out.dangerous_goods_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic) {
+    break;
+  case cam_SpecialVehicleContainer_PR_roadWorksContainerBasic:
     toRos_RoadWorksContainerBasic(in.choice.roadWorksContainerBasic, out.road_works_container_basic);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer) {
+    break;
+  case cam_SpecialVehicleContainer_PR_rescueContainer:
     toRos_RescueContainer(in.choice.rescueContainer, out.rescue_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer) {
+    break;
+  case cam_SpecialVehicleContainer_PR_emergencyContainer:
     toRos_EmergencyContainer(in.choice.emergencyContainer, out.emergency_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER;
-  }
-
-  if (in.present == SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer) {
+    break;
+  case cam_SpecialVehicleContainer_PR_safetyCarContainer:
     toRos_SafetyCarContainer(in.choice.safetyCarContainer, out.safety_car_container);
     out.choice = cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER;
+    break;
+  default: break;
   }
 }
 
-void toStruct_SpecialVehicleContainer(const cam_msgs::SpecialVehicleContainer& in, SpecialVehicleContainer_t& out) {
+void toStruct_SpecialVehicleContainer(const cam_msgs::SpecialVehicleContainer& in, cam_SpecialVehicleContainer_t& out) {
+  memset(&out, 0, sizeof(cam_SpecialVehicleContainer_t));
 
-  memset(&out, 0, sizeof(SpecialVehicleContainer_t));
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER) {
+  switch (in.choice) {
+  case cam_msgs::SpecialVehicleContainer::CHOICE_PUBLIC_TRANSPORT_CONTAINER:
     toStruct_PublicTransportContainer(in.public_transport_container, out.choice.publicTransportContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_publicTransportContainer;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_publicTransportContainer;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_SPECIAL_TRANSPORT_CONTAINER:
     toStruct_SpecialTransportContainer(in.special_transport_container, out.choice.specialTransportContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_specialTransportContainer;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_specialTransportContainer;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_DANGEROUS_GOODS_CONTAINER:
     toStruct_DangerousGoodsContainer(in.dangerous_goods_container, out.choice.dangerousGoodsContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_dangerousGoodsContainer;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_dangerousGoodsContainer;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_ROAD_WORKS_CONTAINER_BASIC:
     toStruct_RoadWorksContainerBasic(in.road_works_container_basic, out.choice.roadWorksContainerBasic);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_roadWorksContainerBasic;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_roadWorksContainerBasic;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_RESCUE_CONTAINER:
     toStruct_RescueContainer(in.rescue_container, out.choice.rescueContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_rescueContainer;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_rescueContainer;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_EMERGENCY_CONTAINER:
     toStruct_EmergencyContainer(in.emergency_container, out.choice.emergencyContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_emergencyContainer;
-  }
-
-  if (in.choice == cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER) {
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_emergencyContainer;
+    break;
+  case cam_msgs::SpecialVehicleContainer::CHOICE_SAFETY_CAR_CONTAINER:
     toStruct_SafetyCarContainer(in.safety_car_container, out.choice.safetyCarContainer);
-    out.present = SpecialVehicleContainer_PR::SpecialVehicleContainer_PR_safetyCarContainer;
+    out.present = cam_SpecialVehicleContainer_PR::cam_SpecialVehicleContainer_PR_safetyCarContainer;
+    break;
+  default: break;
   }
-
 }
 
 }

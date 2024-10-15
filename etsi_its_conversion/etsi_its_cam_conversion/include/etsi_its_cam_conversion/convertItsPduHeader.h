@@ -1,7 +1,8 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_cam_coding/ItsPduHeader.h>
-#include <etsi_its_primitives_conversion/convertINTEGER.h>
+#include <etsi_its_cam_coding/cam_ItsPduHeader.h>
+#include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_cam_conversion/convertStationID.h>
 #ifdef ROS1
@@ -41,16 +42,14 @@ namespace cam_msgs = etsi_its_cam_msgs::msg;
 
 namespace etsi_its_cam_conversion {
 
-void toRos_ItsPduHeader(const ItsPduHeader_t& in, cam_msgs::ItsPduHeader& out) {
-
+void toRos_ItsPduHeader(const cam_ItsPduHeader_t& in, cam_msgs::ItsPduHeader& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in.protocolVersion, out.protocol_version);
   etsi_its_primitives_conversion::toRos_INTEGER(in.messageID, out.message_id);
   toRos_StationID(in.stationID, out.station_id);
 }
 
-void toStruct_ItsPduHeader(const cam_msgs::ItsPduHeader& in, ItsPduHeader_t& out) {
-
-  memset(&out, 0, sizeof(ItsPduHeader_t));
+void toStruct_ItsPduHeader(const cam_msgs::ItsPduHeader& in, cam_ItsPduHeader_t& out) {
+  memset(&out, 0, sizeof(cam_ItsPduHeader_t));
 
   etsi_its_primitives_conversion::toStruct_INTEGER(in.protocol_version, out.protocolVersion);
   etsi_its_primitives_conversion::toStruct_INTEGER(in.message_id, out.messageID);

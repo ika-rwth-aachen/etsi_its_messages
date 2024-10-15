@@ -1,6 +1,6 @@
-# docker build -t ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c .
+# docker build -t ghcr.io/ika-rwth-aachen/etsi_its_messages:asn1c -f asn1c.Dockerfile .
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 # install essentials
 RUN apt-get update && \
@@ -14,27 +14,18 @@ RUN apt-get update && \
 # install asn1c dependencies
 RUN apt-get update && \
     apt-get install -y \
-        automake-1.15 \
+        automake \
+        bison \
         flex \
         libtool \
         m4 \
     && rm -rf /var/lib/apt/lists/*
 
-# install Bison 2.7
-WORKDIR /setup
-RUN wget http://ftp.gnu.org/gnu/bison/bison-2.7.tar.gz && \
-    tar -xvzf bison-2.7.tar.gz
-WORKDIR /setup/bison-2.7
-RUN PATH=$PATH:/usr/local/m4/bin/ && \
-    ./configure --prefix=/usr/local/bison --with-libiconv-prefix=/usr/local/libiconv/ && \
-    make && \
-    make install
-
 # install asnc1c
 WORKDIR /setup
-RUN git clone https://github.com/vlm/asn1c.git
+RUN git clone https://github.com/mouse07410/asn1c.git
 WORKDIR /setup/asn1c
-ARG ASN1C_COMMIT=9925dbb
+ARG ASN1C_COMMIT=9ac139f00f942b55d9961c7b9facbc1821aacb73
 RUN git checkout ${ASN1C_COMMIT} && \
     test -f configure || autoreconf -iv && \
     ./configure && \
@@ -49,5 +40,5 @@ RUN rm -rf /setup
 RUN mkdir input
 RUN mkdir output
 WORKDIR /output
-RUN echo "asn1c \$(find /input -name '*.asn') -fcompound-names -no-gen-example -gen-PER" > /asn1c.sh
+RUN echo "asn1c \$(find /input -name '*.asn' | sort) -fcompound-names -no-gen-BER --no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER" > /asn1c.sh
 CMD ["/bin/bash", "/asn1c.sh"]

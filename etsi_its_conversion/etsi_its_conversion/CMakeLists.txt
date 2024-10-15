@@ -11,7 +11,10 @@ if(${ROS_VERSION} EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
   find_package(etsi_its_cam_conversion REQUIRED)
+  find_package(etsi_its_cam_ts_conversion REQUIRED)
   find_package(etsi_its_denm_conversion REQUIRED)
+  find_package(etsi_its_cpm_ts_conversion REQUIRED)
+  find_package(etsi_its_vam_ts_conversion REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rclcpp_components REQUIRED)
   find_package(udp_msgs REQUIRED)
@@ -30,7 +33,10 @@ if(${ROS_VERSION} EQUAL 2)
 
   ament_target_dependencies(${PROJECT_NAME}
     etsi_its_cam_conversion
+    etsi_its_cam_ts_conversion
     etsi_its_denm_conversion
+    etsi_its_cpm_ts_conversion
+    etsi_its_vam_ts_conversion
     rclcpp
     rclcpp_components
     udp_msgs
@@ -63,7 +69,10 @@ elseif(${ROS_VERSION} EQUAL 1)
 
   find_package(catkin REQUIRED COMPONENTS
     etsi_its_cam_conversion
+    etsi_its_cam_ts_conversion
     etsi_its_denm_conversion
+    etsi_its_cpm_ts_conversion
+    etsi_its_vam_ts_conversion
     nodelet
     roscpp
     udp_msgs
@@ -74,7 +83,10 @@ elseif(${ROS_VERSION} EQUAL 1)
     LIBRARIES ${PROJECT_NAME}
     CATKIN_DEPENDS
       etsi_its_cam_conversion
+      etsi_its_cam_ts_conversion
       etsi_its_denm_conversion
+      etsi_its_cpm_ts_conversion
+      etsi_its_vam_ts_conversion
       nodelet
       roscpp
       udp_msgs

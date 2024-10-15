@@ -28,10 +28,6 @@ DENMDisplay::DENMDisplay()
     "Timeout", 0.1f,
     "Time (in s) until visualizations disappear", this);
   buffer_timeout_->setMin(0);
-  bb_scale_ = new rviz_common::properties::FloatProperty(
-    "Scale", 1.0f,
-    "Scale of visualization", this);
-  bb_scale_->setMin(0.01);
   color_property_ = new rviz_common::properties::ColorProperty(
     "Color", QColor(255, 0, 25),
     "Color", this);
@@ -76,7 +72,7 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
 {
   // Generate DENM render object from message
   rclcpp::Time now = rviz_node_->now();
-  DENMRenderObject denm(*msg, now, getLeapSecondInsertionsSince2004((uint64_t)now.seconds())); // 5 leap seconds in 2023
+  DENMRenderObject denm(*msg);
   if (!denm.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
@@ -101,7 +97,6 @@ void DENMDisplay::update(float, float)
         else ++it;
   }
   
-
   // Render all valid denms
   arrows_.clear();
   texts_.clear();
@@ -123,7 +118,6 @@ void DENMDisplay::update(float, float)
     auto child_scene_node = scene_node_->createChildSceneNode();
     // Set position of scene node
     geometry_msgs::msg::Pose pose = denm.getPose();
-    geometry_msgs::msg::Vector3 dimensions = denm.getDimensions();
     Ogre::Vector3 position(pose.position.x, pose.position.y, pose.position.z);
     Ogre::Quaternion orientation(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
 
@@ -141,13 +135,6 @@ void DENMDisplay::update(float, float)
     // create arrow object
     std::shared_ptr<rviz_rendering::Arrow> arrow = std::make_shared<rviz_rendering::Arrow>(scene_manager_, child_scene_node, shaft_length, shaft_diameter, head_length, head_diameter);
     
-    // set the dimensions of arrow
-    Ogre::Vector3 dims;
-    double scale = bb_scale_->getFloat();
-    dims.x = dimensions.x*scale;
-    dims.y = dimensions.y*scale;
-    dims.z = dimensions.z*scale;
-    arrow->setScale(dims);
     // set the color of arrow
     Ogre::ColourValue bb_color = rviz_common::properties::qtToOgre(color_property_->getColor());
     arrow->setColor(bb_color);
@@ -168,10 +155,10 @@ void DENMDisplay::update(float, float)
       if(show_sub_cause_code_->getBool()) {
         text+="SubCause: " + denm.getSubCauseCode();
       }
+   
       if(!text.size()) return;
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
-      double height = dims.z;
-      height+=text_render->getBoundingRadius();
+      double height = text_render->getBoundingRadius();
       Ogre::Vector3 offs(0.0, 0.0, height);
       // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
       text_render->setGlobalTranslation(offs);

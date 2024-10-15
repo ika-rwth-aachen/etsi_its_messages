@@ -1,7 +1,8 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -86,4 +87,3 @@ uint8 HAZARDOUS_LOCATION_DANGEROUS_CURVE = 96
 uint8 COLLISION_RISK = 97
 uint8 SIGNAL_VIOLATION = 98
 uint8 DANGEROUS_SITUATION = 99
-
