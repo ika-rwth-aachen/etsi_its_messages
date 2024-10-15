@@ -47,7 +47,7 @@ namespace displays {
 CPMDisplay::CPMDisplay() {
   // General Properties
   buffer_timeout_ =
-      new rviz_common::properties::FloatProperty("Timeout", 0.1f, "Time (in s) until objects disappear", this);
+      new rviz_common::properties::FloatProperty("Timeout", 1.0f, "Time period (in s) in which CPM are valid and should be displayed (now - reference_time of CPM)", this);
   buffer_timeout_->setMin(0);
   bb_scale_ = new rviz_common::properties::FloatProperty("Scale", 1.0f, "Scale of objects", this);
   bb_scale_->setMin(0.01);
@@ -56,7 +56,7 @@ CPMDisplay::CPMDisplay() {
       new rviz_common::properties::BoolProperty("Metadata", true, "Show metadata as text next to objects", this);
   text_color_property_ =
       new rviz_common::properties::ColorProperty("Color", QColor(25, 0, 255), "Text color", show_meta_);
-  char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
+  char_height_ = new rviz_common::properties::FloatProperty("Scale", 0.5, "Scale of text", show_meta_);
   show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, "Show StationID", show_meta_);
   show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, "Show speed", show_meta_);
 }
