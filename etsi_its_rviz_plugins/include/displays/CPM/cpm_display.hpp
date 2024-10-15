@@ -40,6 +40,7 @@ class ManualObject;
 
 namespace rviz_common {
 namespace properties {
+class BoolProperty;
 class ColorProperty;
 class FloatProperty;
 }  // namespace properties

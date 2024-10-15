@@ -128,8 +128,7 @@ void CPMDisplay::update(float, float) {
       Ogre::Quaternion sn_orientation;
       if (!context_->getFrameManager()->getTransform(cpm.getHeader(), sn_position, sn_orientation)) {
         // Check if transform exists
-        // setMissingTransformToFixedFrame(cpm.getHeader().frame_id);
-        setMissingTransformToFixedFrame("map");
+        setMissingTransformToFixedFrame(cpm.getHeader().frame_id);
         return;
       }
       // We don't want to use the transform in sn_position and sn_orientation though, because they are only in float precision.
@@ -172,7 +171,7 @@ void CPMDisplay::update(float, float) {
       child_scene_node->setPosition(position);
       child_scene_node->setOrientation(orientation);
 
-      // create boundind-box object
+      // create bounding-box object
       std::shared_ptr<rviz_rendering::Shape> bbox =
           std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
 

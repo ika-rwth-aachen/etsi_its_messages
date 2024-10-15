@@ -23,6 +23,7 @@ SOFTWARE.
 ============================================================================= */
 
 #include "etsi_its_cpm_ts_msgs/msg/collective_perception_message.hpp"
+#include <geometry_msgs/msg/point_stamped.hpp>
 #include <geometry_msgs/msg/pose.hpp>
 #include <geometry_msgs/msg/vector3.hpp>
 #include <std_msgs/msg/header.hpp>
