@@ -2,6 +2,12 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.3.0 (2024-10-15)
+------------------
+* Merge pull request `#38 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/38>`_ from ika-rwth-aachen/feature/cpm_utils
+  Adding CPM Access-Functions and RViz Plugin; and improve utils package for all message types
+* Contributors: Jean-Pierre Busch
+
 2.2.0 (2024-08-01)
 ------------------
 * Merge branch 'main' into refactor/conversion

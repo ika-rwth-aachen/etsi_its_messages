@@ -2,6 +2,9 @@
 Changelog for package etsi_its_cpm_ts_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.3.0 (2024-10-15)
+------------------
+
 2.2.0 (2024-08-01)
 ------------------
 * Merge pull request `#2 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/2>`_ from lreiher/fix-converter-memleak

@@ -2,6 +2,12 @@
 Changelog for package etsi_its_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.3.0 (2024-10-15)
+------------------
+* Merge pull request `#36 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/36>`_ from ika-rwth-aachen/vam-ts
+  Integrate VAM TS
+* Contributors: Guido Küppers
+
 2.2.0 (2024-08-01)
 ------------------
 * Merge pull request `#29 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/29>`_ from ika-rwth-aachen/cam-release2
