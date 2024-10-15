@@ -49,7 +49,8 @@ class Publisher(Node):
         msg.cam.generation_delta_time.value = msg.cam.generation_delta_time.ONE_MILLI_SEC
 
         msg.cam.cam_parameters.basic_container.station_type.value = msg.cam.cam_parameters.basic_container.station_type.PASSENGER_CAR
-        msg.cam.cam_parameters.basic_container.reference_position.latitude.value = int(1e7 * 51.215169611787054)
+        msg.cam.cam_parameters.basic_container.reference_position.latitude.value = int(50.787369 * 1e7)
+        msg.cam.cam_parameters.basic_container.reference_position.longitude.value = int(6.046504 * 1e7)
 
         basic_vehicle_container_high_frequency = BasicVehicleContainerHighFrequency()
         basic_vehicle_container_high_frequency.heading.heading_value.value = basic_vehicle_container_high_frequency.heading.heading_value.WGS84_NORTH
@@ -58,6 +59,8 @@ class Publisher(Node):
         basic_vehicle_container_high_frequency.speed.speed_confidence.value = basic_vehicle_container_high_frequency.speed.speed_confidence.MIN
         basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.value = basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.MIN
         basic_vehicle_container_high_frequency.vehicle_width.value = basic_vehicle_container_high_frequency.vehicle_width.MIN
+        basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.value = int(4.2 * 1e1)
+        basic_vehicle_container_high_frequency.vehicle_width.value = int(1.8 * 1e1)
         msg.cam.cam_parameters.high_frequency_container.choice = msg.cam.cam_parameters.high_frequency_container.CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY
         msg.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency = basic_vehicle_container_high_frequency
 

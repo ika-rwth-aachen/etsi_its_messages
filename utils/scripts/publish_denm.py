@@ -45,6 +45,10 @@ class Publisher(Node):
         msg.header.protocol_version = 2
         msg.header.message_id = msg.header.MESSAGE_ID_DENM
 
+        msg.denm.management = ManagementContainer()
+        msg.denm.management.event_position.latitude.value = int(msg.denm.management.event_position.latitude.ONE_MICRODEGREE_NORTH * 1e6 * 50.787369)
+        msg.denm.management.event_position.latitude.value = int(msg.denm.management.event_position.longitude.ONE_MICRODEGREE_EAST * 1e6 * 6.046504)
+
         msg.denm.alacarte_is_present = True
         msg.denm.alacarte.stationary_vehicle_is_present = True
         msg.denm.alacarte.stationary_vehicle.carrying_dangerous_goods_is_present = True
