@@ -36,17 +36,18 @@ SOFTWARE.
 namespace etsi_its_cam_ts_msgs::access {
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h>
+
 #include <etsi_its_msgs_utils/impl/cam/cam_setters_common.h>
 
-  /**
-   * @brief Set the ItsPduHeader-object for a CAM
-   *
-   * @param cam CAM-Message to set the ItsPduHeader
-   * @param station_id
-   * @param protocol_version
-   */
-  inline void setItsPduHeader(CAM& cam, const uint32_t station_id, const uint8_t protocol_version = 0){
-    setItsPduHeader(cam.header, MessageId::CAM, station_id, protocol_version);
-  }
+/**
+ * @brief Set the ItsPduHeader-object for a CAM
+ *
+ * @param cam CAM-Message to set the ItsPduHeader
+ * @param station_id
+ * @param protocol_version
+ */
+inline void setItsPduHeader(CAM& cam, const uint32_t station_id, const uint8_t protocol_version = 0) {
+  setItsPduHeader(cam.header, MessageId::CAM, station_id, protocol_version);
+}
 
-} // namespace etsi_its_cam_ts_msgs::access
+}  // namespace etsi_its_cam_ts_msgs::access

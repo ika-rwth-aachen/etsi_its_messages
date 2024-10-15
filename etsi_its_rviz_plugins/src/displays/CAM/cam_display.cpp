@@ -205,7 +205,7 @@ void CAMDisplay::update(float, float)
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
 
-    // create boundind-box object
+    // create bounding-box object
     std::shared_ptr<rviz_rendering::Shape> bbox = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Cube, scene_manager_, child_scene_node);
 
     // set the dimensions of bounding box

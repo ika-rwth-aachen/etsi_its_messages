@@ -25,35 +25,25 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_v1-3-1_getters.h
- * @brief Getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1
+ * @file impl/cpm/cpm_ts_utils.h
+ * @brief Utility functions for the ETSI ITS CPM (TS)
  */
 
-#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_GETTERS_H
-#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_GETTERS_H
+#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
 
-#include <GeographicLib/UTMUPS.hpp>
-
-#include <etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h>
+#pragma once
 
 /**
- * @brief Get the lateral acceleration
+ * @brief Get the Unix-Nanoseconds from a given ReferenceTime object
  *
- * @param longitudinalAcceleration to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
+ * @param reference_time the ReferenceTime object to get the Unix-Nanoseconds from
+ * @param n_leap_seconds number of leap-seconds since 2004. (Default: etsi_its_msgs::N_LEAP_SECONDS)
+ * @return uint64_t the corresponding Unix-Nanoseconds
  */
-inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration) {
-  return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;
+inline uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts& reference_time) {
+  double unix_time_with_leap_seconds = reference_time.value * 1e-3 + etsi_its_msgs::UNIX_SECONDS_2004;
+  uint16_t n_leap_seconds =
+      etsi_its_msgs::getLeapSecondInsertionsSince2004(static_cast<uint64_t>(unix_time_with_leap_seconds));
+  return (unix_time_with_leap_seconds - n_leap_seconds) * 1e9;
 }
-
-/**
- * @brief Get the lateral acceleration
- *
- * @param lateralAcceleration to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
- */
-inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration) {
-  return ((double)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;
-}
-
-#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_GETTERS_H
