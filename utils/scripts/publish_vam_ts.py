@@ -27,6 +27,7 @@
 import rclpy
 from rclpy.node import Node
 from etsi_its_vam_ts_msgs.msg import *
+import utils
 
 
 class Publisher(Node):
@@ -46,7 +47,7 @@ class Publisher(Node):
         msg.header.value.message_id.value = msg.header.value.message_id.VAM
         msg.header.value.station_id.value = 32
 
-        msg.vam.generation_delta_time.value = msg.vam.generation_delta_time.ONE_MILLI_SEC
+        msg.vam.generation_delta_time.value = int(utils.get_t_its(self.get_clock().now().nanoseconds) % 65536)
 
         msg.vam.vam_parameters.basic_container.station_type.value = msg.vam.vam_parameters.basic_container.station_type.PEDESTRIAN
         msg.vam.vam_parameters.basic_container.reference_position.latitude.value = int(1e7 * 51.215169611787054)

@@ -27,6 +27,7 @@
 import rclpy
 from rclpy.node import Node
 from etsi_its_cam_ts_msgs.msg import *
+import utils
 
 
 class Publisher(Node):
@@ -46,7 +47,7 @@ class Publisher(Node):
         msg.header.message_id.value = msg.header.message_id.CAM
         msg.header.station_id.value = 32
 
-        msg.cam.generation_delta_time.value = msg.cam.generation_delta_time.ONE_MILLI_SEC
+        msg.cam.generation_delta_time.value = int(utils.get_t_its(self.get_clock().now().nanoseconds) % 65536)
 
         msg.cam.cam_parameters.basic_container.station_type.value = msg.cam.cam_parameters.basic_container.station_type.PASSENGER_CAR
         msg.cam.cam_parameters.basic_container.reference_position.latitude.value = int(50.787369 * 1e7)

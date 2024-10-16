@@ -27,6 +27,7 @@
 import rclpy
 from rclpy.node import Node
 from etsi_its_cam_msgs.msg import *
+import utils
 
 
 class Publisher(Node):
@@ -36,7 +37,7 @@ class Publisher(Node):
         super().__init__("cam_publisher")
         topic = "/etsi_its_conversion/cam/in"
         self.publisher = self.create_publisher(CAM, topic, 1)
-        self.timer = self.create_timer(1.0, self.publish)
+        self.timer = self.create_timer(0.1, self.publish)
 
     def publish(self):
 
@@ -46,7 +47,7 @@ class Publisher(Node):
         msg.header.message_id = msg.header.MESSAGE_ID_CAM
         msg.header.station_id.value = 32
 
-        msg.cam.generation_delta_time.value = msg.cam.generation_delta_time.ONE_MILLI_SEC
+        msg.cam.generation_delta_time.value = int(utils.get_t_its(self.get_clock().now().nanoseconds) % 65536)
 
         msg.cam.cam_parameters.basic_container.station_type.value = msg.cam.cam_parameters.basic_container.station_type.PASSENGER_CAR
         msg.cam.cam_parameters.basic_container.reference_position.latitude.value = int(msg.cam.cam_parameters.basic_container.reference_position.latitude.ONE_MICRODEGREE_NORTH * 1e6 * 50.787369)
