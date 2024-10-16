@@ -44,9 +44,11 @@ CPMRenderObject::CPMRenderObject(const etsi_its_cpm_ts_msgs::msg::CollectivePerc
     
     Object obj;
     obj.pose.position = utm_position.point;
-    obj.pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(perceived_obj);
-    obj.dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(perceived_obj);
-    obj.velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(perceived_obj);
+    if(perceived_obj.angles_is_present) obj.pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(perceived_obj);
+    if(perceived_obj.object_dimension_x_is_present && perceived_obj.object_dimension_y_is_present && perceived_obj.object_dimension_z_is_present) {
+      obj.dimensions = etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject(perceived_obj);
+    }
+    if(perceived_obj.velocity_is_present) obj.velocity = etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject(perceived_obj);
     objects_.push_back(obj);
   }
 }
