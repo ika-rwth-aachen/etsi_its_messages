@@ -32,7 +32,7 @@ All message definitions and conversion functions are automatically generated bas
 - [Conversion Node](#conversion-node)
 - [Access Functions](#access-functions)
 - [Code Generation](#code-generation)
-- [V2AIX Dataset / Citation](#v2aix-dataset-citation)
+- [V2AIX Dataset / Citation](#v2aix-dataset--citation)
 - [Acknowledgements](#acknowledgements)
 - [Notice](#notice)
 
