@@ -48,6 +48,7 @@ def parseCli():
     parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
     parser.add_argument("-td", "--temp-dir", type=str, default=None, help="temporary directory for mounting files to container; uses tempfile by default")
+    parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
     parser.add_argument("-di", "--docker-image", type=str, default="ghcr.io/ika-rwth-aachen/etsi_its_messages:rgen", help="rgen Docker image")
 
     args = parser.parse_args()
@@ -92,6 +93,78 @@ def asn1Definitions(files: List[str]) -> Dict[str, str]:
 
     return asn1_raw
 
+def generate_rquired_msgs(parent_file_path: str) -> list:
+
+    file_list = []
+    
+    # load contents of msg file
+    with open(parent_file_path, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            # if line doesnt starts with # or empty line, get first word
+            if not line.startswith("#") and line.strip() != "":
+                msg_type = line.split()[0]
+                # if ends with message type ends with [], remove []
+                msg_type = msg_type[:-2] if msg_type.endswith("[]") else msg_type
+                # if "msg_type.msg" is in parent directory, add it to file_list
+                if os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg"):
+                    file_list.append(f"{msg_type}.msg")
+        for file in file_list:
+            file_list.extend(generate_rquired_msgs(f"{os.path.dirname(parent_file_path)}/{file}"))
+    
+    # make sure there are no duplicates and sort alphabetically
+    file_list = list(set(file_list))
+    
+    
+    return file_list
+
+def generate_cmakelists(msg_files: list, file_path: str, type: str) -> None:
+    with open(file_path, "w") as f:
+        # Static content for CMake configuration
+        f.write("cmake_minimum_required(VERSION 3.5)\n")
+        f.write(f"project(etsi_its_{type}_msgs)\n\n")
+        f.write("find_package(ros_environment REQUIRED QUIET)\n")
+        f.write("set(ROS_VERSION $ENV{ROS_VERSION})\n\n")
+
+        # ROS 2 (AMENT) section
+        f.write("# === ROS 2 (AMENT) ============================================================\n")
+        f.write("if(${ROS_VERSION} EQUAL 2)\n\n")
+        f.write("  find_package(ament_cmake REQUIRED)\n")
+        f.write("  find_package(rosidl_default_generators REQUIRED)\n\n")
+        
+        # Dynamically populate the msg files
+        f.write("  set(msg_files\n")
+        for msg_file in msg_files:
+            f.write(f"    \"msg/{msg_file}\"\n")
+        f.write("  )\n\n")
+
+        f.write("  rosidl_generate_interfaces(${PROJECT_NAME}\n")
+        f.write("    ${msg_files}\n")
+        f.write("  )\n\n")
+
+        f.write("  ament_export_dependencies(rosidl_default_runtime)\n\n")
+        f.write("  ament_package()\n\n")
+
+        # ROS (CATKIN) section
+        f.write("# === ROS (CATKIN) =============================================================\n")
+        f.write("elseif(${ROS_VERSION} EQUAL 1)\n\n")
+        f.write("  find_package(catkin REQUIRED COMPONENTS\n")
+        f.write("    message_generation\n")
+        f.write("    std_msgs\n")
+        f.write("  )\n\n")
+
+        f.write("  add_message_files(DIRECTORY msg)\n\n")
+        f.write("  generate_messages(\n")
+        f.write("    DEPENDENCIES std_msgs\n")
+        f.write("  )\n\n")
+
+        f.write("  catkin_package(\n")
+        f.write("    CATKIN_DEPENDS\n")
+        f.write("      message_runtime\n")
+        f.write("      std_msgs\n")
+        f.write("  )\n\n")
+
+        f.write("endif()\n")
 
 def main():
 
@@ -141,6 +214,18 @@ def main():
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):
                 shutil.move(f, os.path.join(args.output_dir, os.path.basename(f)))
 
+    msg_type = args.type.upper()
+    
+    # handle special cases
+    if args.type == "cpm_ts":
+        msg_type = "CollectivePerceptionMessage"
+    elif args.type == "cam_ts":
+        msg_type = "CAM"
+    elif args.type == "vam_ts":
+        msg_type = "VAM"
+
+    msg_files = generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg"))
+    generate_cmakelists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
 
 if __name__ == "__main__":
 

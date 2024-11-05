@@ -140,6 +140,7 @@ etsi_its_cam_msgs:
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
+      -t cam
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -154,6 +155,7 @@ etsi_its_cam_ts_msgs:
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
+      -t cam_ts
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -168,6 +170,7 @@ etsi_its_denm_msgs:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
+      -t denm
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -186,6 +189,7 @@ etsi_its_cpm_ts_msgs:
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
+      -t cpm_ts
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -200,6 +204,7 @@ etsi_its_vam_ts_msgs:
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
+      -t vam_ts
       -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
