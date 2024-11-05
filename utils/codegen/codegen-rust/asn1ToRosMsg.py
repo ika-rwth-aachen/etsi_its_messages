@@ -224,7 +224,9 @@ def main():
     elif args.type == "vam_ts":
         msg_type = "VAM"
 
-    msg_files = generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg"))
+    msg_files = [msg_type + ".msg"]
+    msg_files.extend(generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg")))
+    msg_files.sort()
     generate_cmakelists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
 
 if __name__ == "__main__":
