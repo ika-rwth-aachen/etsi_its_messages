@@ -93,10 +93,8 @@ def asn1Definitions(files: List[str]) -> Dict[str, str]:
 
     return asn1_raw
 
-def generate_rquired_msgs(parent_file_path: str) -> list:
+def generate_rquired_msgs(parent_file_path: str, file_list: list = []) -> list:
 
-    file_list = []
-    
     # load contents of msg file
     with open(parent_file_path, 'r') as file:
         lines = file.readlines()
@@ -106,11 +104,9 @@ def generate_rquired_msgs(parent_file_path: str) -> list:
                 msg_type = line.split()[0]
                 # if ends with message type ends with [], remove []
                 msg_type = msg_type[:-2] if msg_type.endswith("[]") else msg_type
-                # if "msg_type.msg" is in parent directory, add it to file_list
-                if os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg"):
-                    file_list.append(f"{msg_type}.msg")
-        for file in file_list:
-            file_list.extend(generate_rquired_msgs(f"{os.path.dirname(parent_file_path)}/{file}"))
+                if msg_type not in file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg"):
+                    file_list.append(msg_type)
+                    generate_rquired_msgs(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg", file_list)
     
     # make sure there are no duplicates and sort alphabetically
     file_list = list(set(file_list))
@@ -135,7 +131,7 @@ def generate_cmakelists(msg_files: list, file_path: str, type: str) -> None:
         # Dynamically populate the msg files
         f.write("  set(msg_files\n")
         for msg_file in msg_files:
-            f.write(f"    \"msg/{msg_file}\"\n")
+            f.write(f"    \"msg/{msg_file}.msg\"\n")
         f.write("  )\n\n")
 
         f.write("  rosidl_generate_interfaces(${PROJECT_NAME}\n")
@@ -224,8 +220,8 @@ def main():
     elif args.type == "vam_ts":
         msg_type = "VAM"
 
-    msg_files = [msg_type + ".msg"]
-    msg_files.extend(generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg")))
+    msg_files = [msg_type]
+    generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg"), msg_files)
     msg_files.sort()
     generate_cmakelists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
 
