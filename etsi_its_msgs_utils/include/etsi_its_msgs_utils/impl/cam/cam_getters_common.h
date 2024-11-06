@@ -140,6 +140,14 @@ inline double getVehicleLength(const CAM& cam) {
 /**
  * @brief Get the Vehicle Width
  *
+ * @param vehicleWidth to get the vehicle width value from
+ * @return vehicle width value in meter as decimal number
+ */
+inline double getVehicleWidth(const VehicleWidth& vehicle_width) { return ((double)vehicle_width.value) * 1e-1; }
+
+/**
+ * @brief Get the Vehicle Width
+ *
  * @param cam CAM to get the vehicle width value from
  * @return vehicle width value in meter as decimal number
  */
@@ -159,10 +167,10 @@ inline double getSpeed(const CAM& cam) {
 }
 
 /**
- * @brief Get the lateral acceleration
+ * @brief Get the longitudinal acceleration
  *
- * @param cam CAM to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
+ * @param cam CAM to get the longitudinal acceleration from
+ * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
  */
 inline double getLongitudinalAcceleration(const CAM& cam) {
   return getLongitudinalAcceleration(

@@ -37,10 +37,10 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h>
 
 /**
- * @brief Get the lateral acceleration
+ * @brief Get the longitudinal acceleration
  *
- * @param longitudinalAcceleration to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
+ * @param longitudinalAcceleration to get the longitudinal acceleration from
+ * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
  */
 inline double getLongitudinalAcceleration(const AccelerationComponent& longitudinal_acceleration) {
   return ((int16_t)longitudinal_acceleration.value.value) * 1e-1;

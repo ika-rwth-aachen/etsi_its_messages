@@ -67,14 +67,6 @@ inline double getLongitude(const Longitude& longitude) { return ((double)longitu
 inline double getAltitude(const Altitude& altitude) { return ((double)altitude.altitude_value.value) * 1e-2; }
 
 /**
- * @brief Get the Vehicle Width
- *
- * @param vehicleWidth to get the vehicle width value from
- * @return vehicle width value in meter as decimal number
- */
-inline double getVehicleWidth(const VehicleWidth& vehicle_width) { return ((double)vehicle_width.value) * 1e-1; }
-
-/**
  * @brief Get the vehicle speed
  *
  * @param speed to get the speed value from
