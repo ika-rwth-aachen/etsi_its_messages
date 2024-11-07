@@ -116,51 +116,59 @@ def generate_rquired_msgs(parent_file_path: str, file_list: list = []) -> list:
 
 def generate_cmakelists(msg_files: list, file_path: str, type: str) -> None:
     with open(file_path, "w") as f:
-        # Static content for CMake configuration
-        f.write("cmake_minimum_required(VERSION 3.5)\n")
-        f.write(f"project(etsi_its_{type}_msgs)\n\n")
-        f.write("find_package(ros_environment REQUIRED QUIET)\n")
-        f.write("set(ROS_VERSION $ENV{ROS_VERSION})\n\n")
+        msg_file_lines = "\n".join([f"    \"msg/{msg_file}.msg\"" for msg_file in msg_files])
 
-        # ROS 2 (AMENT) section
-        f.write("# === ROS 2 (AMENT) ============================================================\n")
-        f.write("if(${ROS_VERSION} EQUAL 2)\n\n")
-        f.write("  find_package(ament_cmake REQUIRED)\n")
-        f.write("  find_package(rosidl_default_generators REQUIRED)\n\n")
-        
-        # Dynamically populate the msg files
-        f.write("  set(msg_files\n")
-        for msg_file in msg_files:
-            f.write(f"    \"msg/{msg_file}.msg\"\n")
-        f.write("  )\n\n")
+    cmake_content = f"""\
+cmake_minimum_required(VERSION 3.5)
+project(etsi_its_{type}_msgs)
 
-        f.write("  rosidl_generate_interfaces(${PROJECT_NAME}\n")
-        f.write("    ${msg_files}\n")
-        f.write("  )\n\n")
+find_package(ros_environment REQUIRED QUIET)
+set(ROS_VERSION $ENV{{ROS_VERSION}})
 
-        f.write("  ament_export_dependencies(rosidl_default_runtime)\n\n")
-        f.write("  ament_package()\n\n")
+# === ROS 2 (AMENT) ============================================================
+if(${{ROS_VERSION}} EQUAL 2)
 
-        # ROS (CATKIN) section
-        f.write("# === ROS (CATKIN) =============================================================\n")
-        f.write("elseif(${ROS_VERSION} EQUAL 1)\n\n")
-        f.write("  find_package(catkin REQUIRED COMPONENTS\n")
-        f.write("    message_generation\n")
-        f.write("    std_msgs\n")
-        f.write("  )\n\n")
+  find_package(ament_cmake REQUIRED)
+  find_package(rosidl_default_generators REQUIRED)
 
-        f.write("  add_message_files(DIRECTORY msg)\n\n")
-        f.write("  generate_messages(\n")
-        f.write("    DEPENDENCIES std_msgs\n")
-        f.write("  )\n\n")
+  set(msg_files
+{msg_file_lines}
+  )
 
-        f.write("  catkin_package(\n")
-        f.write("    CATKIN_DEPENDS\n")
-        f.write("      message_runtime\n")
-        f.write("      std_msgs\n")
-        f.write("  )\n\n")
+  rosidl_generate_interfaces(${{PROJECT_NAME}}
+    ${{msg_files}}
+  )
 
-        f.write("endif()\n")
+  ament_export_dependencies(rosidl_default_runtime)
+
+  ament_package()
+
+# === ROS (CATKIN) =============================================================
+elseif(${{ROS_VERSION}} EQUAL 1)
+
+  find_package(catkin REQUIRED COMPONENTS
+    message_generation
+    std_msgs
+  )
+
+  add_message_files(DIRECTORY msg)
+
+  generate_messages(
+    DEPENDENCIES std_msgs
+  )
+
+  catkin_package(
+    CATKIN_DEPENDS
+      message_runtime
+      std_msgs
+  )
+
+endif()
+"""
+
+    # Write the entire content to the file in one operation
+    with open(file_path, "w") as f:
+        f.write(cmake_content)
 
 def main():
 
