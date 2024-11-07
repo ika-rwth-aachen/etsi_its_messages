@@ -210,6 +210,8 @@ def main():
             for f in glob.glob(os.path.join(container_output_dir, "*.msg")):
                 shutil.move(f, os.path.join(args.output_dir, os.path.basename(f)))
 
+
+    # generate CMakelists.txt and remove all msg files that are not required
     msg_type = args.type.upper()
     
     # handle special cases
@@ -224,6 +226,10 @@ def main():
     generate_rquired_msgs(os.path.join(args.output_dir, f"{msg_type}.msg"), msg_files)
     msg_files.sort()
     generate_cmakelists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
+    
+    for f in glob.glob(os.path.join(args.output_dir, "*.msg")):
+        if os.path.basename(f).split('.')[0] not in msg_files:
+            os.remove(f)
 
 if __name__ == "__main__":
 

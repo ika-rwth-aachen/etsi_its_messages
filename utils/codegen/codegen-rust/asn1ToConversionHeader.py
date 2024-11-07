@@ -54,6 +54,24 @@ def parseCli():
 
     return args
 
+def generate_rquired_conversion_files(parent_file_path: str, type: str, file_list: list = []) -> list:
+
+    # load contents of msg file
+    with open(parent_file_path, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            
+            if line.startswith(f"#include <etsi_its_{type}_conversion/convert"):
+                msg_type = line.split("/")[1].split(".")[0]
+                if msg_type not in file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.h"):
+                    file_list.append(msg_type)
+                    generate_rquired_conversion_files(f"{os.path.dirname(parent_file_path)}/{msg_type}.h", type, file_list)
+    
+    # make sure there are no duplicates and sort alphabetically
+    file_list = list(set(file_list))
+    
+    return file_list
+
 def main():
 
     args = parseCli()
@@ -98,6 +116,23 @@ def main():
             for f in glob.glob(os.path.join(container_output_dir, "*.h")):
                 shutil.move(f, os.path.join(args.output_dir, os.path.basename(f)))
 
+    ## remove all conversion files that are not required
+    msg_type = args.type.upper()
+    
+    # handle special cases
+    if args.type == "cpm_ts":
+        msg_type = "CollectivePerceptionMessage"
+    elif args.type == "cam_ts":
+        msg_type = "CAM"
+    elif args.type == "vam_ts":
+        msg_type = "VAM"
+
+    msg_files = [f"convert{msg_type}"]
+    generate_rquired_conversion_files(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, msg_files)
+    
+    for f in glob.glob(os.path.join(args.output_dir, "*.h")):
+        if os.path.basename(f).split(".")[0] not in msg_files:
+            os.remove(f)
 
 if __name__ == "__main__":
 
