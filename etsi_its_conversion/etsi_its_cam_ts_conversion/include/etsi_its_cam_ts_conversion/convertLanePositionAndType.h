@@ -44,22 +44,16 @@ namespace etsi_its_cam_ts_conversion {
 
 void toRos_LanePositionAndType(const cam_ts_LanePositionAndType_t& in, cam_ts_msgs::LanePositionAndType& out) {
   toRos_LanePosition(in.transversalPosition, out.transversal_position);
-  if (in.laneType) {
-    toRos_LaneType(*in.laneType, out.lane_type);
-  }
-  if (in.direction) {
-    toRos_Direction(*in.direction, out.direction);
-  }
+  toRos_LaneType(in.laneType, out.lane_type);
+  toRos_Direction(in.direction, out.direction);
 }
 
 void toStruct_LanePositionAndType(const cam_ts_msgs::LanePositionAndType& in, cam_ts_LanePositionAndType_t& out) {
   memset(&out, 0, sizeof(cam_ts_LanePositionAndType_t));
 
   toStruct_LanePosition(in.transversal_position, out.transversalPosition);
-  out.laneType = (cam_ts_LaneType_t*) calloc(1, sizeof(cam_ts_LaneType_t));
-  toStruct_LaneType(in.lane_type, *out.laneType);
-  out.direction = (cam_ts_Direction_t*) calloc(1, sizeof(cam_ts_Direction_t));
-  toStruct_Direction(in.direction, *out.direction);
+  toStruct_LaneType(in.lane_type, out.laneType);
+  toStruct_Direction(in.direction, out.direction);
 }
 
 }
