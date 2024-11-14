@@ -199,7 +199,7 @@ The `etsi_its_msgs_utils` package contains simple ROS 2 nodes for publishing sam
 
 ```bash
 # ROS 2 only
-ros2 run etsi_its_msgs_utils publish_cpm_ts_sensor_information.py
+ros2 run etsi_its_msgs_utils publish_cpm_ts.py
 ```
 
 You can then visualize the CPM in RViz with the provided demo configuration.
@@ -212,6 +212,7 @@ ros2 launch etsi_its_rviz_plugins demo.launch.py
 And finally, run the [Conversion Node](#conversion-node) to convert ROS 2 messages to binary payloads.
 
 ```bash
+# ROS 2 only
 ros2 run etsi_its_conversion etsi_its_conversion_node \
     --ros-args \
         -r __node:=etsi_its_conversion \
