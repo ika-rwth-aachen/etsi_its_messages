@@ -24,6 +24,8 @@
 # SOFTWARE.
 # ==============================================================================
 
+# Sample CPM from 4th ETSI C-V2X Plugtests, Malaga/ESP, Sep 2024
+
 import rclpy
 from rclpy.node import Node
 from etsi_its_cpm_ts_msgs.msg import *
