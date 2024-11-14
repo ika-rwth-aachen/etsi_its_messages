@@ -67,10 +67,13 @@ class Publisher(Node):
             perceived_object.position.y_coordinate.confidence.value = perceived_object.position.y_coordinate.confidence.UNAVAILABLE
             perceived_object.object_dimension_x_is_present = True
             perceived_object.object_dimension_x.value.value = int(3.5 * 1e1)
+            perceived_object.object_dimension_x.confidence.value = perceived_object.object_dimension_x.confidence.UNAVAILABLE
             perceived_object.object_dimension_y_is_present = True
             perceived_object.object_dimension_y.value.value = int(1.8 * 1e1)
+            perceived_object.object_dimension_y.confidence.value = perceived_object.object_dimension_y.confidence.UNAVAILABLE
             perceived_object.object_dimension_z_is_present = True
             perceived_object.object_dimension_z.value.value = int(1.6 * 1e1)
+            perceived_object.object_dimension_z.confidence.value = perceived_object.object_dimension_z.confidence.UNAVAILABLE
             perceived_object_container.perceived_objects.array.append(perceived_object)
 
         cpm_container.container_data.perceived_object_container = perceived_object_container

@@ -36,6 +36,17 @@ if(${ROS_VERSION} EQUAL 2)
     DESTINATION include/${PROJECT_NAME}
   )
 
+  # install all sample python scripts
+  file(GLOB SAMPLE_SCRIPTS "samples/publish_*.py")
+  install(
+    FILES "samples/utils.py"
+    DESTINATION lib/${PROJECT_NAME}
+  )
+  install(
+    PROGRAMS ${SAMPLE_SCRIPTS}
+    DESTINATION lib/${PROJECT_NAME}
+  )
+
   install(TARGETS ${PROJECT_NAME}
     EXPORT ${PROJECT_NAME}Targets
     ARCHIVE DESTINATION lib
