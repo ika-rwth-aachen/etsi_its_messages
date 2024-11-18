@@ -132,78 +132,77 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#af60ea3de1990eb0b94cbd5eeed46f1d0">   68</a></span><span class="keyword">inline</span> uint8_t getStationType(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.management.station_type.value; }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#abbcfd3bdca848351fa3b7bb52968c68e">   76</a></span><span class="keyword">inline</span> <span class="keywordtype">double</span> getLatitude(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getLatitude(denm.denm.management.event_position.latitude); }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#afdc328899995b5c97e4b7394af1d8181">   76</a></span><span class="keyword">inline</span> <span class="keywordtype">double</span> getLatitude(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getLatitude(denm.denm.management.event_position.latitude); }</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#afdc328899995b5c97e4b7394af1d8181">   84</a></span><span class="keyword">inline</span> <span class="keywordtype">double</span> getLongitude(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getLongitude(denm.denm.management.event_position.longitude); }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getLongitude(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getLongitude(denm.denm.management.event_position.longitude); }</div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a3f578f4cbd8d3b3eb889b9e7251c5f14">   85</a></span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getAltitude(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getAltitude(denm.denm.management.event_position.altitude); }</div>
-<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a3f578f4cbd8d3b3eb889b9e7251c5f14">   93</a></span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getHeading(<span class="keyword">const</span> Heading&amp; heading) { <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)heading.heading_value.value) * 1e-1; }</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getHeading(<span class="keyword">const</span> DENM&amp; denm) {</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (denm.denm.location.event_position_heading_is_present) {</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">return</span> getHeading(denm.denm.location.event_position_heading);</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Heading is not present!&quot;</span>);</div>
-</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a43cfd1f5546d687c337bdad4828a56ab">  121</a></span> </div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b">getIsHeadingPresent</a>(<span class="keyword">const</span> DENM&amp; denm) {</div>
-<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a43cfd1f5546d687c337bdad4828a56ab">  129</a></span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> denm.denm.location.event_position_heading_is_present;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  }</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="cam__getters_8h.html#ad3fa6461e9a5704fec0487633c84a2e5">getSpeed</a>(<span class="keyword">const</span> DENM&amp; denm) {</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getSpeed(<span class="keyword">const</span> DENM&amp; denm) {</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (denm.denm.location.event_speed_is_present) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      <span class="keywordflow">return</span> <a class="code hl_function" href="cam__getters_8h.html#ad3fa6461e9a5704fec0487633c84a2e5">getSpeed</a>(denm.denm.location.event_speed);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      <span class="keywordflow">return</span> getSpeed(denm.denm.location.event_speed);</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Speed is not present!&quot;</span>);</div>
-</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a671a975230636380570fb3e0ca77eae3">  151</a></span>  }</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="denm__getters_8h.html#a9d06b163f676225bb5ca126126ee6e3c">getIsSpeedPresent</a>(<span class="keyword">const</span> DENM&amp; denm) {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="keyword">inline</span> <span class="keywordtype">bool</span> getIsSpeedPresent(<span class="keyword">const</span> DENM&amp; denm) {</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">return</span> denm.denm.location.event_speed_is_present;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  }</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
-<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#acd7ed9fab89b8001fe1a08b78a594fb1">  167</a></span> </div>
-</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#aebfce02ff1cf4b0f5152ff2e1fcc6e15">  167</a></span> </div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keyword">inline</span> gm::PointStamped getUTMPosition(<span class="keyword">const</span> DENM&amp; denm, <span class="keywordtype">int</span>&amp; zone, <span class="keywordtype">bool</span>&amp; northp) {</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordflow">return</span> getUTMPosition(denm.denm.management.event_position, zone, northp);</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a671a975230636380570fb3e0ca77eae3">  179</a></span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="keyword">inline</span> gm::PointStamped getUTMPosition(<span class="keyword">const</span> DENM&amp; denm) {</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a7d1af3c8fde95f5b8df7f7f985954016">  187</a></span>  <span class="keywordtype">int</span> zone;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordtype">int</span> zone;</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  <span class="keywordtype">bool</span> northp;</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordflow">return</span> getUTMPosition(denm.denm.management.event_position, zone, northp);</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keyword">inline</span> uint8_t getCauseCode(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.situation.event_type.cause_code.value; }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keyword">inline</span> uint8_t getSubCauseCode(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.situation.event_type.sub_cause_code.value; }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#aeb624f49954fa8ffc83379e0c25bca0d">  191</a></span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">getCauseCode</a>(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.situation.event_type.cause_code.value; }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a993b296da4b12d45224488f4ba49241f">  199</a></span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="denm__getters_8h.html#a80b7c8ff449cac3e926b6e0df7a15077">getSubCauseCode</a>(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.situation.event_type.sub_cause_code.value; }</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="keyword">inline</span> std::string <a class="code hl_function" href="denm__getters_8h.html#a2897d5a42d5e104a0d2b888abc577841">getCauseCodeType</a>(<span class="keyword">const</span> DENM&amp; denm) {</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keywordflow">if</span> (denm.denm.situation_is_present) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="keyword">inline</span> std::string getCauseCodeType(<span class="keyword">const</span> DENM&amp; denm) {</div>
+<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a229383423d7758fd1d090d328b824b11">  217</a></span>  <span class="keywordflow">if</span> (denm.denm.situation_is_present) {</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">int</span> cause_code = <a class="code hl_function" href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">getCauseCode</a>(denm);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#aeb624f49954fa8ffc83379e0c25bca0d">  219</a></span>    std::string cause_code_type = <span class="stringliteral">&quot;undefined&quot;</span>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    std::string cause_code_type = <span class="stringliteral">&quot;undefined&quot;</span>;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">if</span> (cause_code == CauseCodeType().TRAFFIC_CONDITION)</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      cause_code_type = <span class="stringliteral">&quot;traffic condition&quot;</span>;</div>
@@ -211,7 +210,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      cause_code_type = <span class="stringliteral">&quot;accident&quot;</span>;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ROADWORKS)</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      cause_code_type = <span class="stringliteral">&quot;roadworks&quot;</span>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a993b296da4b12d45224488f4ba49241f">  227</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().IMPASSABILITY)</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().IMPASSABILITY)</div>
+</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      cause_code_type = <span class="stringliteral">&quot;impassibility&quot;</span>;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_ADHESION)</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      cause_code_type = <span class="stringliteral">&quot;adverse weather condition - adhesion&quot;</span>;</div>
@@ -219,87 +219,85 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      cause_code_type = <span class="stringliteral">&quot;aquaplanning&quot;</span>;</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_SURFACE_CONDITION)</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>      cause_code_type = <span class="stringliteral">&quot;hazardous location - surface condition&quot;</span>;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD)</div>
+<div class="foldopen" id="foldopen00235" data-start="{" data-end="}">
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b">  235</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD)</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      cause_code_type = <span class="stringliteral">&quot;hazardous location - obstacle on the road&quot;</span>;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a51dc4983b67e904d388304b30b07a93d">  237</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD)</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD)</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>      cause_code_type = <span class="stringliteral">&quot;hazardous location - animal on the road&quot;</span>;</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HUMAN_PRESENCE_ON_THE_ROAD)</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      cause_code_type = <span class="stringliteral">&quot;human presence on the road&quot;</span>;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().WRONG_WAY_DRIVING)</div>
+</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      cause_code_type = <span class="stringliteral">&quot;wrong way driving&quot;</span>;</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().RESCUE_AND_RECOVERY_WORK_IN_PROGRESS)</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      cause_code_type = <span class="stringliteral">&quot;rescue and recovery in progress&quot;</span>;</div>
-<div class="foldopen" id="foldopen00245" data-start="{" data-end="}">
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a229383423d7758fd1d090d328b824b11">  245</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION)</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_EXTREME_WEATHER_CONDITION)</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      cause_code_type = <span class="stringliteral">&quot;adverse weather condition - extreme weather condition&quot;</span>;</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_VISIBILITY)</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      cause_code_type = <span class="stringliteral">&quot;adverse weather condition - visibility&quot;</span>;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_PRECIPITATION)</div>
+<div class="foldopen" id="foldopen00249" data-start="{" data-end="}">
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a7e4bb790cafdbb83c1a745ba7b50c6b0">  249</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_PRECIPITATION)</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      cause_code_type = <span class="stringliteral">&quot;adverse weather condition - precipitation&quot;</span>;</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().SLOW_VEHICLE)</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      cause_code_type = <span class="stringliteral">&quot;slow vehicle&quot;</span>;</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().DANGEROUS_END_OF_QUEUE)</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      cause_code_type = <span class="stringliteral">&quot;dangerous end of queue&quot;</span>;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().VEHICLE_BREAKDOWN)</div>
-</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      cause_code_type = <span class="stringliteral">&quot;vehicle breakdown&quot;</span>;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().POST_CRASH)</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      cause_code_type = <span class="stringliteral">&quot;post crash&quot;</span>;</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HUMAN_PROBLEM)</div>
+</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      cause_code_type = <span class="stringliteral">&quot;human problem&quot;</span>;</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().STATIONARY_VEHICLE)</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      cause_code_type = <span class="stringliteral">&quot;stationary vehicle&quot;</span>;</div>
-<div class="foldopen" id="foldopen00263" data-start="{" data-end="}">
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b">  263</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().EMERGENCY_VEHICLE_APPROACHING)</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().EMERGENCY_VEHICLE_APPROACHING)</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      cause_code_type = <span class="stringliteral">&quot;emergency vehicle approaching&quot;</span>;</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_DANGEROUS_CURVE)</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      cause_code_type = <span class="stringliteral">&quot;hazardous location - dangerous curve&quot;</span>;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().COLLISION_RISK)</div>
+<div class="foldopen" id="foldopen00267" data-start="{" data-end="}">
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a9d06b163f676225bb5ca126126ee6e3c">  267</a></span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().COLLISION_RISK)</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      cause_code_type = <span class="stringliteral">&quot;collision risk&quot;</span>;</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().SIGNAL_VIOLATION)</div>
-</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      cause_code_type = <span class="stringliteral">&quot;signal violation&quot;</span>;</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().DANGEROUS_SITUATION)</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      cause_code_type = <span class="stringliteral">&quot;dangerous situation&quot;</span>;</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordflow">return</span> cause_code_type;</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;SituationContainer is not present!&quot;</span>);</div>
-<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a7e4bb790cafdbb83c1a745ba7b50c6b0">  277</a></span>  }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  }</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>}</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="keyword">inline</span> std::string getSubCauseCodeType(<span class="keyword">const</span> DENM&amp; denm) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="keyword">inline</span> std::string <a class="code hl_function" href="denm__getters_8h.html#abaca493f63ae2fc37044f803d3113834">getSubCauseCodeType</a>(<span class="keyword">const</span> DENM&amp; denm) {</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">if</span> (denm.denm.situation_is_present) {</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordtype">int</span> cause_code = getCauseCode(denm);</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordtype">int</span> sub_cause_code = getSubCauseCode(denm);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordtype">int</span> cause_code = <a class="code hl_function" href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">getCauseCode</a>(denm);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordtype">int</span> sub_cause_code = <a class="code hl_function" href="denm__getters_8h.html#a80b7c8ff449cac3e926b6e0df7a15077">getSubCauseCode</a>(denm);</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    std::string sub_cause_code_type = <span class="stringliteral">&quot;undefined&quot;</span>;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordflow">if</span> (cause_code == CauseCodeType().TRAFFIC_CONDITION) {</div>
+<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a6fa6570315cb1d9c031b21edf45e6527">  293</a></span>    <span class="keywordflow">if</span> (cause_code == CauseCodeType().TRAFFIC_CONDITION) {</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
-<div class="foldopen" id="foldopen00295" data-start="{" data-end="}">
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a9d06b163f676225bb5ca126126ee6e3c">  295</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 1)</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
+</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 2)</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam slowly increasing&quot;</span>;</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 3)</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam increasing&quot;</span>;</div>
-</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 4)</div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam strongly increasing&quot;</span>;</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 5)</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic stationary&quot;</span>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">  305</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic stationary&quot;</span>;</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 6)</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam slightly decreasing&quot;</span>;</div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 7)</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam decreasing&quot;</span>;</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 8)</div>
-<div class="foldopen" id="foldopen00311" data-start="{" data-end="}">
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a5b9f75246a8e288c13e3aa8be81dea92">  311</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam strongly decreasing&quot;</span>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        sub_cause_code_type = <span class="stringliteral">&quot;traffic jam strongly decreasing&quot;</span>;</div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ACCIDENT) {</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
-</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a80b7c8ff449cac3e926b6e0df7a15077">  313</a></span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 7)</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
@@ -307,13 +305,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        sub_cause_code_type = <span class="stringliteral">&quot;assistance requested (e-Call)&quot;</span>;</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ROADWORKS) {</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
-<div class="foldopen" id="foldopen00321" data-start="{" data-end="}">
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a6fa6570315cb1d9c031b21edf45e6527">  321</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 3)</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
+<div class="foldopen" id="foldopen00323" data-start="{" data-end="}">
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a2897d5a42d5e104a0d2b888abc577841">  323</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 4)</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        sub_cause_code_type = <span class="stringliteral">&quot;short-term stationary roadworks&quot;</span>;</div>
-</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 5)</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        sub_cause_code_type = <span class="stringliteral">&quot;street cleaning&quot;</span>;</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 6)</div>
@@ -321,7 +318,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().IMPASSABILITY)</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().ADVERSE_WEATHER_CONDITION_ADHESION) {</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">  333</a></span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 10)</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
@@ -329,7 +326,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_SURFACE_CONDITION) {</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a80b7c8ff449cac3e926b6e0df7a15077">  341</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 9)</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_OBSTACLE_ON_THE_ROAD) {</div>
@@ -339,8 +336,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HAZARDOUS_LOCATION_ANIMAL_ON_THE_ROAD) {</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
-<div class="foldopen" id="foldopen00351" data-start="{" data-end="}">
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#a2897d5a42d5e104a0d2b888abc577841">  351</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 4)</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HUMAN_PRESENCE_ON_THE_ROAD) {</div>
@@ -375,6 +371,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 3)</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
+</div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().SLOW_VEHICLE) {</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
@@ -384,7 +381,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code &gt;= 1 &amp;&amp; sub_cause_code &lt;= 8)</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
+<div class="foldopen" id="foldopen00395" data-start="{" data-end="}">
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#abaca493f63ae2fc37044f803d3113834">  395</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;not defined&quot;</span>;</div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().VEHICLE_BREAKDOWN) {</div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
@@ -403,7 +401,6 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 7)</div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        sub_cause_code_type = <span class="stringliteral">&quot;steering problem&quot;</span>;</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 8)</div>
-</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        sub_cause_code_type = <span class="stringliteral">&quot;tyre puncture&quot;</span>;</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().POST_CRASH) {</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
@@ -413,8 +410,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 2)</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        sub_cause_code_type = <span class="stringliteral">&quot;accident with e-Call manually triggered&quot;</span>;</div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 3)</div>
-<div class="foldopen" id="foldopen00423" data-start="{" data-end="}">
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="denm__getters_8h.html#abaca493f63ae2fc37044f803d3113834">  423</a></span>        sub_cause_code_type = <span class="stringliteral">&quot;accident with e-Call automatical triggered&quot;</span>;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        sub_cause_code_type = <span class="stringliteral">&quot;accident with e-Call automatical triggered&quot;</span>;</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 4)</div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        sub_cause_code_type = <span class="stringliteral">&quot;accident with e-Call triggered without a possible access to a cell network&quot;</span>;</div>
 <div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cause_code == CauseCodeType().HUMAN_PROBLEM) {</div>
@@ -511,15 +507,14 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>}  <span class="comment">// namespace etsi_its_denm_msgs::access</span></div>
 </div>
-<div class="ttc" id="acam__getters_8h_html_a790cbad9ea90f3455fbee342d8a06696"><div class="ttname"><a href="cam__getters_8h.html#a790cbad9ea90f3455fbee342d8a06696">etsi_its_cam_msgs::access::getLightBarSirenInUse</a></div><div class="ttdeci">std::vector&lt; bool &gt; getLightBarSirenInUse(const LightBarSirenInUse &amp;light_bar_siren_in_use)</div><div class="ttdoc">Get the Lightbar Siren In Use in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00285">cam_getters.h:285</a></div></div>
-<div class="ttc" id="acam__getters_8h_html_aaa2dd9a49ed837660246344a3ad534ea"><div class="ttname"><a href="cam__getters_8h.html#aaa2dd9a49ed837660246344a3ad534ea">etsi_its_cam_msgs::access::getDrivingLaneStatus</a></div><div class="ttdeci">std::vector&lt; bool &gt; getDrivingLaneStatus(const DrivingLaneStatus &amp;driving_lane_status)</div><div class="ttdoc">Get the Driving Lane Status in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00265">cam_getters.h:265</a></div></div>
-<div class="ttc" id="acam__getters_8h_html_ad3fa6461e9a5704fec0487633c84a2e5"><div class="ttname"><a href="cam__getters_8h.html#ad3fa6461e9a5704fec0487633c84a2e5">etsi_its_cam_msgs::access::getSpeed</a></div><div class="ttdeci">double getSpeed(const Speed &amp;speed)</div><div class="ttdoc">Get the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00084">cam_getters.h:84</a></div></div>
-<div class="ttc" id="acam__getters_8h_html_aeb65585dd4e82026ee72a95b49e1664d"><div class="ttname"><a href="cam__getters_8h.html#aeb65585dd4e82026ee72a95b49e1664d">etsi_its_cam_msgs::access::getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00093">cam_getters.h:93</a></div></div>
+<div class="ttc" id="acam__getters_8h_html_a790cbad9ea90f3455fbee342d8a06696"><div class="ttname"><a href="cam__getters_8h.html#a790cbad9ea90f3455fbee342d8a06696">etsi_its_cam_msgs::access::getLightBarSirenInUse</a></div><div class="ttdeci">std::vector&lt; bool &gt; getLightBarSirenInUse(const LightBarSirenInUse &amp;light_bar_siren_in_use)</div><div class="ttdoc">Get the Lightbar Siren In Use in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00293">cam_getters.h:293</a></div></div>
+<div class="ttc" id="acam__getters_8h_html_aaa2dd9a49ed837660246344a3ad534ea"><div class="ttname"><a href="cam__getters_8h.html#aaa2dd9a49ed837660246344a3ad534ea">etsi_its_cam_msgs::access::getDrivingLaneStatus</a></div><div class="ttdeci">std::vector&lt; bool &gt; getDrivingLaneStatus(const DrivingLaneStatus &amp;driving_lane_status)</div><div class="ttdoc">Get the Driving Lane Status in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00273">cam_getters.h:273</a></div></div>
+<div class="ttc" id="acam__getters_8h_html_aeb65585dd4e82026ee72a95b49e1664d"><div class="ttname"><a href="cam__getters_8h.html#aeb65585dd4e82026ee72a95b49e1664d">etsi_its_cam_msgs::access::getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters_8h_source.html#l00085">cam_getters.h:85</a></div></div>
 <div class="ttc" id="acdd__v1-3-1__getters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__getters_8h.html">cdd_v1-3-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
-<div class="ttc" id="adenm__getters_8h_html_a2897d5a42d5e104a0d2b888abc577841"><div class="ttname"><a href="denm__getters_8h.html#a2897d5a42d5e104a0d2b888abc577841">etsi_its_denm_msgs::access::getCauseCodeType</a></div><div class="ttdeci">std::string getCauseCodeType(const DENM &amp;denm)</div><div class="ttdoc">Get the Cause Code Type object.</div><div class="ttdef"><b>Definition</b> <a href="#l00351">denm_getters.h:351</a></div></div>
-<div class="ttc" id="adenm__getters_8h_html_a9d06b163f676225bb5ca126126ee6e3c"><div class="ttname"><a href="denm__getters_8h.html#a9d06b163f676225bb5ca126126ee6e3c">etsi_its_denm_msgs::access::getIsSpeedPresent</a></div><div class="ttdeci">bool getIsSpeedPresent(const DENM &amp;denm)</div><div class="ttdoc">Get the IsSpeedPresent object.</div><div class="ttdef"><b>Definition</b> <a href="#l00295">denm_getters.h:295</a></div></div>
-<div class="ttc" id="adenm__getters_8h_html_af15f82cb20108e986fbca7e07dc6522e"><div class="ttname"><a href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">etsi_its_denm_msgs::access::getCauseCode</a></div><div class="ttdeci">uint8_t getCauseCode(const DENM &amp;denm)</div><div class="ttdoc">Get the Cause Code object.</div><div class="ttdef"><b>Definition</b> <a href="#l00333">denm_getters.h:333</a></div></div>
-<div class="ttc" id="adenm__getters_8h_html_afcfde75caacde0f226d49aa0bca1b12b"><div class="ttname"><a href="denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b">etsi_its_denm_msgs::access::getIsHeadingPresent</a></div><div class="ttdeci">bool getIsHeadingPresent(const DENM &amp;denm)</div><div class="ttdoc">Get the IsHeadingPresent object.</div><div class="ttdef"><b>Definition</b> <a href="#l00263">denm_getters.h:263</a></div></div>
+<div class="ttc" id="adenm__getters_8h_html_a80b7c8ff449cac3e926b6e0df7a15077"><div class="ttname"><a href="denm__getters_8h.html#a80b7c8ff449cac3e926b6e0df7a15077">etsi_its_denm_msgs::access::getSubCauseCode</a></div><div class="ttdeci">uint8_t getSubCauseCode(const DENM &amp;denm)</div><div class="ttdoc">Get the Sub Cause Code object.</div><div class="ttdef"><b>Definition</b> <a href="#l00313">denm_getters.h:313</a></div></div>
+<div class="ttc" id="adenm__getters_8h_html_abaca493f63ae2fc37044f803d3113834"><div class="ttname"><a href="denm__getters_8h.html#abaca493f63ae2fc37044f803d3113834">etsi_its_denm_msgs::access::getSubCauseCodeType</a></div><div class="ttdeci">std::string getSubCauseCodeType(const DENM &amp;denm)</div><div class="ttdoc">Get the Sub Cause Code Type object.</div><div class="ttdef"><b>Definition</b> <a href="#l00395">denm_getters.h:395</a></div></div>
+<div class="ttc" id="adenm__getters_8h_html_af15f82cb20108e986fbca7e07dc6522e"><div class="ttname"><a href="denm__getters_8h.html#af15f82cb20108e986fbca7e07dc6522e">etsi_its_denm_msgs::access::getCauseCode</a></div><div class="ttdeci">uint8_t getCauseCode(const DENM &amp;denm)</div><div class="ttdoc">Get the Cause Code object.</div><div class="ttdef"><b>Definition</b> <a href="#l00305">denm_getters.h:305</a></div></div>
+<div class="ttc" id="adenm__getters_8h_html_afcfde75caacde0f226d49aa0bca1b12b"><div class="ttname"><a href="denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b">etsi_its_denm_msgs::access::getIsHeadingPresent</a></div><div class="ttdeci">bool getIsHeadingPresent(const DENM &amp;denm)</div><div class="ttdoc">Get the IsHeadingPresent object.</div><div class="ttdef"><b>Definition</b> <a href="#l00235">denm_getters.h:235</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

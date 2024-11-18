@@ -123,8 +123,18 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>etsi_its_cam_msgs::access {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h</a>&gt;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}  <span class="comment">// namespace etsi_its_cam_msgs::access</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="cam__getters_8h.html#ab4b5627487893667d4d513e82a25d984">getLongitudinalAcceleration</a>(<span class="keyword">const</span> LongitudinalAcceleration&amp; longitudinal_acceleration) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="cam__getters_8h.html#a0d6cf6acb1b08622a03693db7d0aaf41">   44</a></span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getLateralAcceleration(<span class="keyword">const</span> LateralAcceleration&amp; lateral_acceleration) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="cam__getters_8h.html#a41fb8b8ccc0d5269a1bfd365b9d8a03f">   58</a></span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}  <span class="comment">// namespace etsi_its_cam_msgs::access</span></div>
+<div class="ttc" id="acam__getters_8h_html_ab4b5627487893667d4d513e82a25d984"><div class="ttname"><a href="cam__getters_8h.html#ab4b5627487893667d4d513e82a25d984">etsi_its_cam_msgs::access::getLongitudinalAcceleration</a></div><div class="ttdeci">double getLongitudinalAcceleration(const LongitudinalAcceleration &amp;longitudinal_acceleration)</div><div class="ttdoc">Get the longitudinal acceleration.</div><div class="ttdef"><b>Definition</b> <a href="#l00151">cam_getters.h:151</a></div></div>
 <div class="ttc" id="acam__getters__common_8h_html"><div class="ttname"><a href="cam__getters__common_8h.html">cam_getters_common.h</a></div><div class="ttdoc">Common getter functions for the ETSI ITS CAM (EN and TS)</div></div>
 <div class="ttc" id="acdd__v1-3-1__getters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__getters_8h.html">cdd_v1-3-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
 </div><!-- fragment --></div><!-- contents -->

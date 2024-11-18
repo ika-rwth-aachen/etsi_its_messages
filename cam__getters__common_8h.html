@@ -135,6 +135,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3e9e718d01370b615b5ec3bdbf52907e" id="r_a3e9e718d01370b615b5ec3bdbf52907e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e9e718d01370b615b5ec3bdbf52907e">getVehicleLength</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:a3e9e718d01370b615b5ec3bdbf52907e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Length.  <br /></td></tr>
 <tr class="separator:a3e9e718d01370b615b5ec3bdbf52907e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49820ce7652181454f9ebb6d3a01cd32" id="r_a49820ce7652181454f9ebb6d3a01cd32"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49820ce7652181454f9ebb6d3a01cd32">getVehicleWidth</a> (const VehicleWidth &amp;vehicle_width)</td></tr>
+<tr class="memdesc:a49820ce7652181454f9ebb6d3a01cd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Width.  <br /></td></tr>
+<tr class="separator:a49820ce7652181454f9ebb6d3a01cd32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39bda47d2d6d2d852af49e90212e9488" id="r_a39bda47d2d6d2d852af49e90212e9488"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39bda47d2d6d2d852af49e90212e9488">getVehicleWidth</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:a39bda47d2d6d2d852af49e90212e9488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Width.  <br /></td></tr>
 <tr class="separator:a39bda47d2d6d2d852af49e90212e9488"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,7 +145,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ab31f50e90eb0ac0979b949492c626a99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the vehicle speed.  <br /></td></tr>
 <tr class="separator:ab31f50e90eb0ac0979b949492c626a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a722310cbdf05c9625ba8384d1f7628e2" id="r_a722310cbdf05c9625ba8384d1f7628e2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a722310cbdf05c9625ba8384d1f7628e2">getLongitudinalAcceleration</a> (const CAM &amp;cam)</td></tr>
-<tr class="memdesc:a722310cbdf05c9625ba8384d1f7628e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
+<tr class="memdesc:a722310cbdf05c9625ba8384d1f7628e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the longitudinal acceleration.  <br /></td></tr>
 <tr class="separator:a722310cbdf05c9625ba8384d1f7628e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0edaaf09e9b8a19303abf89eff3bc66" id="r_aa0edaaf09e9b8a19303abf89eff3bc66"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0edaaf09e9b8a19303abf89eff3bc66">getLateralAcceleration</a> (const CAM &amp;cam)</td></tr>
 <tr class="memdesc:aa0edaaf09e9b8a19303abf89eff3bc66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
@@ -212,11 +215,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00254">254</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  254</span>                                                                                               {</div>
-<div class="line"><span class="lineno">  255</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(acceleration_control.value, acceleration_control.bits_unused);</div>
-<div class="line"><span class="lineno">  256</span>}</div>
-<div class="ttc" id="acdd__getters__common_8h_html_af92ffd41288baa02e71fa63993f6b5f5"><div class="ttname"><a href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00092">cdd_getters_common.h:92</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00262">262</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  262</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  263</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(acceleration_control.value, acceleration_control.bits_unused);</div>
+<div class="line"><span class="lineno">  264</span>}</div>
+<div class="ttc" id="acdd__getters__common_8h_html_af92ffd41288baa02e71fa63993f6b5f5"><div class="ttname"><a href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00084">cdd_getters_common.h:84</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -292,10 +295,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00264">264</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  264</span>                                                                                          {</div>
-<div class="line"><span class="lineno">  265</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(driving_lane_status.value, driving_lane_status.bits_unused);</div>
-<div class="line"><span class="lineno">  266</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00272">272</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  272</span>                                                                                          {</div>
+<div class="line"><span class="lineno">  273</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(driving_lane_status.value, driving_lane_status.bits_unused);</div>
+<div class="line"><span class="lineno">  274</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -331,10 +334,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00294">294</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  294</span>                                                                                         {</div>
-<div class="line"><span class="lineno">  295</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(emergency_priority.value, emergency_priority.bits_unused);</div>
-<div class="line"><span class="lineno">  296</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00302">302</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  302</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  303</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(emergency_priority.value, emergency_priority.bits_unused);</div>
+<div class="line"><span class="lineno">  304</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -370,21 +373,21 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00234">234</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  234</span>                                                         {</div>
-<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container_is_present) {</div>
-<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container.choice ==</div>
-<div class="line"><span class="lineno">  237</span>        LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {</div>
-<div class="line"><span class="lineno">  238</span>      <span class="keywordflow">return</span> <a class="code hl_function" href="#ab99c731afbdebd93bbc5e85c9dc8c2ba">getExteriorLights</a>(</div>
-<div class="line"><span class="lineno">  239</span>          cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights);</div>
-<div class="line"><span class="lineno">  240</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  241</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!&quot;</span>);</div>
-<div class="line"><span class="lineno">  242</span>    }</div>
-<div class="line"><span class="lineno">  243</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not present!&quot;</span>);</div>
-<div class="line"><span class="lineno">  245</span>  }</div>
-<div class="line"><span class="lineno">  246</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_ab99c731afbdebd93bbc5e85c9dc8c2ba"><div class="ttname"><a href="#ab99c731afbdebd93bbc5e85c9dc8c2ba">getExteriorLights</a></div><div class="ttdeci">std::vector&lt; bool &gt; getExteriorLights(const ExteriorLights &amp;exterior_lights)</div><div class="ttdoc">Get the Exterior Lights in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00224">cam_getters_common.h:224</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00242">242</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  242</span>                                                         {</div>
+<div class="line"><span class="lineno">  243</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container_is_present) {</div>
+<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container.choice ==</div>
+<div class="line"><span class="lineno">  245</span>        LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {</div>
+<div class="line"><span class="lineno">  246</span>      <span class="keywordflow">return</span> <a class="code hl_function" href="#ab99c731afbdebd93bbc5e85c9dc8c2ba">getExteriorLights</a>(</div>
+<div class="line"><span class="lineno">  247</span>          cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights);</div>
+<div class="line"><span class="lineno">  248</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  249</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!&quot;</span>);</div>
+<div class="line"><span class="lineno">  250</span>    }</div>
+<div class="line"><span class="lineno">  251</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  252</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not present!&quot;</span>);</div>
+<div class="line"><span class="lineno">  253</span>  }</div>
+<div class="line"><span class="lineno">  254</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_ab99c731afbdebd93bbc5e85c9dc8c2ba"><div class="ttname"><a href="#ab99c731afbdebd93bbc5e85c9dc8c2ba">getExteriorLights</a></div><div class="ttdeci">std::vector&lt; bool &gt; getExteriorLights(const ExteriorLights &amp;exterior_lights)</div><div class="ttdoc">Get the Exterior Lights in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00232">cam_getters_common.h:232</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -420,10 +423,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00224">224</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  224</span>                                                                                {</div>
-<div class="line"><span class="lineno">  225</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(exterior_lights.value, exterior_lights.bits_unused);</div>
-<div class="line"><span class="lineno">  226</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00232">232</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  232</span>                                                                                {</div>
+<div class="line"><span class="lineno">  233</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(exterior_lights.value, exterior_lights.bits_unused);</div>
+<div class="line"><span class="lineno">  234</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -613,17 +616,17 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00178">178</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  178</span>                                                     {</div>
-<div class="line"><span class="lineno">  179</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency</div>
-<div class="line"><span class="lineno">  180</span>          .lateral_acceleration_is_present) {</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#aa0edaaf09e9b8a19303abf89eff3bc66">getLateralAcceleration</a>(</div>
-<div class="line"><span class="lineno">  182</span>        cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);</div>
-<div class="line"><span class="lineno">  183</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  184</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LateralAcceleration is not present!&quot;</span>);</div>
-<div class="line"><span class="lineno">  185</span>  }</div>
-<div class="line"><span class="lineno">  186</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_aa0edaaf09e9b8a19303abf89eff3bc66"><div class="ttname"><a href="#aa0edaaf09e9b8a19303abf89eff3bc66">getLateralAcceleration</a></div><div class="ttdeci">double getLateralAcceleration(const CAM &amp;cam)</div><div class="ttdoc">Get the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00178">cam_getters_common.h:178</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00186">186</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  186</span>                                                     {</div>
+<div class="line"><span class="lineno">  187</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency</div>
+<div class="line"><span class="lineno">  188</span>          .lateral_acceleration_is_present) {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#aa0edaaf09e9b8a19303abf89eff3bc66">getLateralAcceleration</a>(</div>
+<div class="line"><span class="lineno">  190</span>        cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);</div>
+<div class="line"><span class="lineno">  191</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LateralAcceleration is not present!&quot;</span>);</div>
+<div class="line"><span class="lineno">  193</span>  }</div>
+<div class="line"><span class="lineno">  194</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_aa0edaaf09e9b8a19303abf89eff3bc66"><div class="ttname"><a href="#aa0edaaf09e9b8a19303abf89eff3bc66">getLateralAcceleration</a></div><div class="ttdeci">double getLateralAcceleration(const CAM &amp;cam)</div><div class="ttdoc">Get the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00186">cam_getters_common.h:186</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -699,10 +702,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00284">284</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  284</span>                                                                                               {</div>
-<div class="line"><span class="lineno">  285</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);</div>
-<div class="line"><span class="lineno">  286</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00292">292</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  292</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  293</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);</div>
+<div class="line"><span class="lineno">  294</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -769,21 +772,21 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the lateral acceleration. </p>
+<p>Get the longitudinal acceleration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cam</td><td>CAM to get the lateral acceleration from </td></tr>
+    <tr><td class="paramname">cam</td><td>CAM to get the longitudinal acceleration from </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>longitudinal acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00167">167</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  167</span>                                                          {</div>
-<div class="line"><span class="lineno">  168</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a722310cbdf05c9625ba8384d1f7628e2">getLongitudinalAcceleration</a>(</div>
-<div class="line"><span class="lineno">  169</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);</div>
-<div class="line"><span class="lineno">  170</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_a722310cbdf05c9625ba8384d1f7628e2"><div class="ttname"><a href="#a722310cbdf05c9625ba8384d1f7628e2">getLongitudinalAcceleration</a></div><div class="ttdeci">double getLongitudinalAcceleration(const CAM &amp;cam)</div><div class="ttdoc">Get the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00167">cam_getters_common.h:167</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00175">175</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>                                                          {</div>
+<div class="line"><span class="lineno">  176</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a722310cbdf05c9625ba8384d1f7628e2">getLongitudinalAcceleration</a>(</div>
+<div class="line"><span class="lineno">  177</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);</div>
+<div class="line"><span class="lineno">  178</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_a722310cbdf05c9625ba8384d1f7628e2"><div class="ttname"><a href="#a722310cbdf05c9625ba8384d1f7628e2">getLongitudinalAcceleration</a></div><div class="ttdeci">double getLongitudinalAcceleration(const CAM &amp;cam)</div><div class="ttdoc">Get the longitudinal acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00175">cam_getters_common.h:175</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -819,10 +822,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00274">274</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  274</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">  275</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(special_transport_type.value, special_transport_type.bits_unused);</div>
-<div class="line"><span class="lineno">  276</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00282">282</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  282</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">  283</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5">getBitString</a>(special_transport_type.value, special_transport_type.bits_unused);</div>
+<div class="line"><span class="lineno">  284</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -858,11 +861,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>speed value in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00157">157</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  157</span>                                       {</div>
-<div class="line"><span class="lineno">  158</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ab31f50e90eb0ac0979b949492c626a99">getSpeed</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);</div>
-<div class="line"><span class="lineno">  159</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_ab31f50e90eb0ac0979b949492c626a99"><div class="ttname"><a href="#ab31f50e90eb0ac0979b949492c626a99">getSpeed</a></div><div class="ttdeci">double getSpeed(const CAM &amp;cam)</div><div class="ttdoc">Get the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00157">cam_getters_common.h:157</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00165">165</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  165</span>                                       {</div>
+<div class="line"><span class="lineno">  166</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ab31f50e90eb0ac0979b949492c626a99">getSpeed</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);</div>
+<div class="line"><span class="lineno">  167</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_ab31f50e90eb0ac0979b949492c626a99"><div class="ttname"><a href="#ab31f50e90eb0ac0979b949492c626a99">getSpeed</a></div><div class="ttdeci">double getSpeed(const CAM &amp;cam)</div><div class="ttdoc">Get the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00165">cam_getters_common.h:165</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -974,13 +977,13 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00212">212</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  212</span>                                                     {</div>
-<div class="line"><span class="lineno">  213</span>  <span class="keywordtype">int</span> zone;</div>
-<div class="line"><span class="lineno">  214</span>  <span class="keywordtype">bool</span> northp;</div>
-<div class="line"><span class="lineno">  215</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);</div>
-<div class="line"><span class="lineno">  216</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_a5e71129b2e1e20e90529137ae1fd37ee"><div class="ttname"><a href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a></div><div class="ttdeci">gm::PointStamped getUTMPosition(const CAM &amp;cam, int &amp;zone, bool &amp;northp)</div><div class="ttdoc">Get the UTM Position defined within the BasicContainer of the CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00199">cam_getters_common.h:199</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00220">220</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  220</span>                                                     {</div>
+<div class="line"><span class="lineno">  221</span>  <span class="keywordtype">int</span> zone;</div>
+<div class="line"><span class="lineno">  222</span>  <span class="keywordtype">bool</span> northp;</div>
+<div class="line"><span class="lineno">  223</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);</div>
+<div class="line"><span class="lineno">  224</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_a5e71129b2e1e20e90529137ae1fd37ee"><div class="ttname"><a href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a></div><div class="ttdeci">gm::PointStamped getUTMPosition(const CAM &amp;cam, int &amp;zone, bool &amp;northp)</div><div class="ttdoc">Get the UTM Position defined within the BasicContainer of the CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00207">cam_getters_common.h:207</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1028,10 +1031,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00199">199</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  199</span>                                                                              {</div>
-<div class="line"><span class="lineno">  200</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);</div>
-<div class="line"><span class="lineno">  201</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00207">207</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  207</span>                                                                              {</div>
+<div class="line"><span class="lineno">  208</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, zone, northp);</div>
+<div class="line"><span class="lineno">  209</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1116,7 +1119,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a id="a39bda47d2d6d2d852af49e90212e9488" name="a39bda47d2d6d2d852af49e90212e9488"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39bda47d2d6d2d852af49e90212e9488">&#9670;&#160;</a></span>getVehicleWidth()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a39bda47d2d6d2d852af49e90212e9488">&#9670;&#160;</a></span>getVehicleWidth() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1147,12 +1150,49 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00154">154</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>                                              {</div>
+<div class="line"><span class="lineno">  155</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a49820ce7652181454f9ebb6d3a01cd32">getVehicleWidth</a>(</div>
+<div class="line"><span class="lineno">  156</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width);</div>
+<div class="line"><span class="lineno">  157</span>}</div>
+<div class="ttc" id="acam__getters__common_8h_html_a49820ce7652181454f9ebb6d3a01cd32"><div class="ttname"><a href="#a49820ce7652181454f9ebb6d3a01cd32">getVehicleWidth</a></div><div class="ttdeci">double getVehicleWidth(const VehicleWidth &amp;vehicle_width)</div><div class="ttdoc">Get the Vehicle Width.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00146">cam_getters_common.h:146</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a49820ce7652181454f9ebb6d3a01cd32" name="a49820ce7652181454f9ebb6d3a01cd32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49820ce7652181454f9ebb6d3a01cd32">&#9670;&#160;</a></span>getVehicleWidth() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getVehicleWidth </td>
+          <td>(</td>
+          <td class="paramtype">const VehicleWidth &amp;</td>          <td class="paramname"><span class="paramname"><em>vehicle_width</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Vehicle Width. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vehicleWidth</td><td>to get the vehicle width value from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="cam__getters__common_8h_source.html#l00146">146</a> of file <a class="el" href="cam__getters__common_8h_source.html">cam_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  146</span>                                              {</div>
-<div class="line"><span class="lineno">  147</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a39bda47d2d6d2d852af49e90212e9488">getVehicleWidth</a>(</div>
-<div class="line"><span class="lineno">  148</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width);</div>
-<div class="line"><span class="lineno">  149</span>}</div>
-<div class="ttc" id="acam__getters__common_8h_html_a39bda47d2d6d2d852af49e90212e9488"><div class="ttname"><a href="#a39bda47d2d6d2d852af49e90212e9488">getVehicleWidth</a></div><div class="ttdeci">double getVehicleWidth(const CAM &amp;cam)</div><div class="ttdoc">Get the Vehicle Width.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00146">cam_getters_common.h:146</a></div></div>
+<div class="fragment"><div class="line"><span class="lineno">  146</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)vehicle_width.value) * 1e-1; }</div>
 </div><!-- fragment -->
 </div>
 </div>

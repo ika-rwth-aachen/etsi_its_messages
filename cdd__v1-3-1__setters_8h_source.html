@@ -152,56 +152,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
 </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="cdd__v1-3-1__setters_8h.html#a91b10fcaaab670d33e1d2be78c9a54db">   86</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#a91b10fcaaab670d33e1d2be78c9a54db">setLongitudinalAccelerationValue</a>(LongitudinalAccelerationValue&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  int64_t accel_val = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">if</span> (accel_val &gt;= LongitudinalAccelerationValue::MIN &amp;&amp; accel_val &lt;= LongitudinalAccelerationValue::MAX) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    accel.value = accel_val;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &lt; LongitudinalAccelerationValue::MIN) {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    accel.value = LongitudinalAccelerationValue::MIN;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &gt; LongitudinalAccelerationValue::MAX) {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    accel.value = LongitudinalAccelerationValue::MAX - 1;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
-</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="cdd__v1-3-1__setters_8h.html#af5a05cba8eff6f12d40b522adde316e0">  105</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#af5a05cba8eff6f12d40b522adde316e0">setLongitudinalAcceleration</a>(LongitudinalAcceleration&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#a91b10fcaaab670d33e1d2be78c9a54db">setLongitudinalAccelerationValue</a>(accel.longitudinal_acceleration_value, value);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="cdd__v1-3-1__setters_8h.html#a4e8858365f95563a167402bef362c6fe">  116</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#a4e8858365f95563a167402bef362c6fe">setLateralAccelerationValue</a>(LateralAccelerationValue&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  int64_t accel_val = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordflow">if</span> (accel_val &gt;= LateralAccelerationValue::MIN &amp;&amp; accel_val &lt;= LateralAccelerationValue::MAX) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    accel.value = accel_val;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &lt; LateralAccelerationValue::MIN) {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    accel.value = LateralAccelerationValue::MIN;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &gt; LateralAccelerationValue::MAX) {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    accel.value = LateralAccelerationValue::MAX - 1;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
-</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="cdd__v1-3-1__setters_8h.html#a56b4547bc16b8c6e87081f3a0be4c600">  135</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#a56b4547bc16b8c6e87081f3a0be4c600">setLateralAcceleration</a>(LateralAcceleration&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#a4e8858365f95563a167402bef362c6fe">setLateralAccelerationValue</a>(accel.lateral_acceleration_value, value);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
-</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#endif  </span><span class="comment">// ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif  </span><span class="comment">// ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H</span></div>
 <div class="ttc" id="acdd__checks_8h_html"><div class="ttname"><a href="cdd__checks_8h.html">cdd_checks.h</a></div><div class="ttdoc">Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)</div></div>
 <div class="ttc" id="acdd__setters__common_8h_html"><div class="ttname"><a href="cdd__setters__common_8h.html">cdd_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2....</div></div>
 <div class="ttc" id="acdd__v1-3-1__setters_8h_html_a40ba7f4b2e7baee3e3f780d16db6bca8"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#a40ba7f4b2e7baee3e3f780d16db6bca8">setStationId</a></div><div class="ttdeci">void setStationId(StationID &amp;station_id, const uint32_t id_value)</div><div class="ttdoc">Set the Station Id object.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">cdd_v1-3-1_setters.h:46</a></div></div>
-<div class="ttc" id="acdd__v1-3-1__setters_8h_html_a4e8858365f95563a167402bef362c6fe"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#a4e8858365f95563a167402bef362c6fe">setLateralAccelerationValue</a></div><div class="ttdeci">void setLateralAccelerationValue(LateralAccelerationValue &amp;accel, const double value)</div><div class="ttdoc">Set the LateralAccelerationValue object.</div><div class="ttdef"><b>Definition</b> <a href="#l00116">cdd_v1-3-1_setters.h:116</a></div></div>
-<div class="ttc" id="acdd__v1-3-1__setters_8h_html_a56b4547bc16b8c6e87081f3a0be4c600"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#a56b4547bc16b8c6e87081f3a0be4c600">setLateralAcceleration</a></div><div class="ttdeci">void setLateralAcceleration(LateralAcceleration &amp;accel, const double value)</div><div class="ttdoc">Set the LateralAcceleration object.</div><div class="ttdef"><b>Definition</b> <a href="#l00135">cdd_v1-3-1_setters.h:135</a></div></div>
-<div class="ttc" id="acdd__v1-3-1__setters_8h_html_a91b10fcaaab670d33e1d2be78c9a54db"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#a91b10fcaaab670d33e1d2be78c9a54db">setLongitudinalAccelerationValue</a></div><div class="ttdeci">void setLongitudinalAccelerationValue(LongitudinalAccelerationValue &amp;accel, const double value)</div><div class="ttdoc">Set the LongitudinalAccelerationValue object.</div><div class="ttdef"><b>Definition</b> <a href="#l00086">cdd_v1-3-1_setters.h:86</a></div></div>
 <div class="ttc" id="acdd__v1-3-1__setters_8h_html_aa0e2be80f5457e8b804e89eafac234d4"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#aa0e2be80f5457e8b804e89eafac234d4">setStationType</a></div><div class="ttdeci">void setStationType(StationType &amp;station_type, const uint8_t value)</div><div class="ttdoc">Set the Station Type.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">cdd_v1-3-1_setters.h:75</a></div></div>
 <div class="ttc" id="acdd__v1-3-1__setters_8h_html_ada626221bdfa5819644a8cecd9deefd7"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#ada626221bdfa5819644a8cecd9deefd7">setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00059">cdd_v1-3-1_setters.h:59</a></div></div>
-<div class="ttc" id="acdd__v1-3-1__setters_8h_html_af5a05cba8eff6f12d40b522adde316e0"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html#af5a05cba8eff6f12d40b522adde316e0">setLongitudinalAcceleration</a></div><div class="ttdeci">void setLongitudinalAcceleration(LongitudinalAcceleration &amp;accel, const double value)</div><div class="ttdoc">Set the LongitudinalAcceleration object.</div><div class="ttdef"><b>Definition</b> <a href="#l00105">cdd_v1-3-1_setters.h:105</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -115,9 +115,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ae1359c6a376fe023f67919e500ebfd10" id="r_ae1359c6a376fe023f67919e500ebfd10"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a> (const Altitude &amp;altitude)</td></tr>
 <tr class="memdesc:ae1359c6a376fe023f67919e500ebfd10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Altitude value.  <br /></td></tr>
 <tr class="separator:ae1359c6a376fe023f67919e500ebfd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49820ce7652181454f9ebb6d3a01cd32" id="r_a49820ce7652181454f9ebb6d3a01cd32"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49820ce7652181454f9ebb6d3a01cd32">getVehicleWidth</a> (const VehicleWidth &amp;vehicle_width)</td></tr>
-<tr class="memdesc:a49820ce7652181454f9ebb6d3a01cd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Vehicle Width.  <br /></td></tr>
-<tr class="separator:a49820ce7652181454f9ebb6d3a01cd32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae92836276f042eea0233be374dd82985" id="r_ae92836276f042eea0233be374dd82985"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae92836276f042eea0233be374dd82985">getSpeed</a> (const Speed &amp;speed)</td></tr>
 <tr class="memdesc:ae92836276f042eea0233be374dd82985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the vehicle speed.  <br /></td></tr>
 <tr class="separator:ae92836276f042eea0233be374dd82985"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,30 +205,30 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00092">92</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   92</span>                                                                                             {</div>
-<div class="line"><span class="lineno">   93</span>  <span class="comment">// bit string size</span></div>
-<div class="line"><span class="lineno">   94</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
-<div class="line"><span class="lineno">   95</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = buffer.size();</div>
-<div class="line"><span class="lineno">   96</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
-<div class="line"><span class="lineno">   97</span>  std::vector&lt;bool&gt; bits;</div>
-<div class="line"><span class="lineno">   98</span>  bits.resize(n_bits - bits_unused, 0);</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00084">84</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>                                                                                             {</div>
+<div class="line"><span class="lineno">   85</span>  <span class="comment">// bit string size</span></div>
+<div class="line"><span class="lineno">   86</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
+<div class="line"><span class="lineno">   87</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = buffer.size();</div>
+<div class="line"><span class="lineno">   88</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
+<div class="line"><span class="lineno">   89</span>  std::vector&lt;bool&gt; bits;</div>
+<div class="line"><span class="lineno">   90</span>  bits.resize(n_bits - bits_unused, 0);</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>  <span class="comment">// loop over bytes in reverse order</span></div>
+<div class="line"><span class="lineno">   93</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = n_bytes - 1; byte_idx &gt;= 0; byte_idx--) {</div>
+<div class="line"><span class="lineno">   94</span>    <span class="comment">// loop over bits in a byte</span></div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = 0; bit_idx_in_byte &lt; bits_per_byte; bit_idx_in_byte++) {</div>
+<div class="line"><span class="lineno">   96</span>      <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
+<div class="line"><span class="lineno">   97</span>      <span class="keywordtype">int</span> bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;</div>
+<div class="line"><span class="lineno">   98</span>      <span class="keywordflow">if</span> (byte_idx == 0 &amp;&amp; bit_idx &gt;= n_bits - bits_unused) <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">   99</span> </div>
-<div class="line"><span class="lineno">  100</span>  <span class="comment">// loop over bytes in reverse order</span></div>
-<div class="line"><span class="lineno">  101</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = n_bytes - 1; byte_idx &gt;= 0; byte_idx--) {</div>
-<div class="line"><span class="lineno">  102</span>    <span class="comment">// loop over bits in a byte</span></div>
-<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = 0; bit_idx_in_byte &lt; bits_per_byte; bit_idx_in_byte++) {</div>
-<div class="line"><span class="lineno">  104</span>      <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
-<div class="line"><span class="lineno">  105</span>      <span class="keywordtype">int</span> bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;</div>
-<div class="line"><span class="lineno">  106</span>      <span class="keywordflow">if</span> (byte_idx == 0 &amp;&amp; bit_idx &gt;= n_bits - bits_unused) <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>      <span class="comment">// extract bit from bitstring and set output array entry appropriately</span></div>
-<div class="line"><span class="lineno">  109</span>      <span class="keywordtype">bool</span> byte_has_true_bit = buffer[byte_idx] &amp; (1 &lt;&lt; bit_idx_in_byte);</div>
-<div class="line"><span class="lineno">  110</span>      <span class="keywordflow">if</span> (byte_has_true_bit) bits[bit_idx] = 1;</div>
-<div class="line"><span class="lineno">  111</span>    }</div>
-<div class="line"><span class="lineno">  112</span>  }</div>
-<div class="line"><span class="lineno">  113</span>  <span class="keywordflow">return</span> bits;</div>
-<div class="line"><span class="lineno">  114</span>}</div>
+<div class="line"><span class="lineno">  100</span>      <span class="comment">// extract bit from bitstring and set output array entry appropriately</span></div>
+<div class="line"><span class="lineno">  101</span>      <span class="keywordtype">bool</span> byte_has_true_bit = buffer[byte_idx] &amp; (1 &lt;&lt; bit_idx_in_byte);</div>
+<div class="line"><span class="lineno">  102</span>      <span class="keywordflow">if</span> (byte_has_true_bit) bits[bit_idx] = 1;</div>
+<div class="line"><span class="lineno">  103</span>    }</div>
+<div class="line"><span class="lineno">  104</span>  }</div>
+<div class="line"><span class="lineno">  105</span>  <span class="keywordflow">return</span> bits;</div>
+<div class="line"><span class="lineno">  106</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -341,8 +338,8 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>speed value in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00083">83</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)speed.speed_value.value) * 1e-2; }</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00075">75</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)speed.speed_value.value) * 1e-2; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -429,66 +426,29 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00128">128</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  128</span>                                                                                           {</div>
-<div class="line"><span class="lineno">  129</span>  gm::PointStamped utm_point;</div>
-<div class="line"><span class="lineno">  130</span>  <span class="keywordtype">double</span> latitude = <a class="code hl_function" href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a>(reference_position.latitude);</div>
-<div class="line"><span class="lineno">  131</span>  <span class="keywordtype">double</span> longitude = <a class="code hl_function" href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a>(reference_position.longitude);</div>
-<div class="line"><span class="lineno">  132</span>  utm_point.point.z = <a class="code hl_function" href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a>(reference_position.altitude);</div>
-<div class="line"><span class="lineno">  133</span>  <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  134</span>    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);</div>
-<div class="line"><span class="lineno">  135</span>    std::string hemisphere;</div>
-<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">if</span> (northp) {</div>
-<div class="line"><span class="lineno">  137</span>      hemisphere = <span class="stringliteral">&quot;N&quot;</span>;</div>
-<div class="line"><span class="lineno">  138</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  139</span>      hemisphere = <span class="stringliteral">&quot;S&quot;</span>;</div>
-<div class="line"><span class="lineno">  140</span>    }</div>
-<div class="line"><span class="lineno">  141</span>    utm_point.header.frame_id = <span class="stringliteral">&quot;utm_&quot;</span> + std::to_string(zone) + hemisphere;</div>
-<div class="line"><span class="lineno">  142</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
-<div class="line"><span class="lineno">  144</span>  }</div>
-<div class="line"><span class="lineno">  145</span>  <span class="keywordflow">return</span> utm_point;</div>
-<div class="line"><span class="lineno">  146</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00120">120</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  120</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  121</span>  gm::PointStamped utm_point;</div>
+<div class="line"><span class="lineno">  122</span>  <span class="keywordtype">double</span> latitude = <a class="code hl_function" href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a>(reference_position.latitude);</div>
+<div class="line"><span class="lineno">  123</span>  <span class="keywordtype">double</span> longitude = <a class="code hl_function" href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a>(reference_position.longitude);</div>
+<div class="line"><span class="lineno">  124</span>  utm_point.point.z = <a class="code hl_function" href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a>(reference_position.altitude);</div>
+<div class="line"><span class="lineno">  125</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  126</span>    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);</div>
+<div class="line"><span class="lineno">  127</span>    std::string hemisphere;</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">if</span> (northp) {</div>
+<div class="line"><span class="lineno">  129</span>      hemisphere = <span class="stringliteral">&quot;N&quot;</span>;</div>
+<div class="line"><span class="lineno">  130</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  131</span>      hemisphere = <span class="stringliteral">&quot;S&quot;</span>;</div>
+<div class="line"><span class="lineno">  132</span>    }</div>
+<div class="line"><span class="lineno">  133</span>    utm_point.header.frame_id = <span class="stringliteral">&quot;utm_&quot;</span> + std::to_string(zone) + hemisphere;</div>
+<div class="line"><span class="lineno">  134</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
+<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
+<div class="line"><span class="lineno">  136</span>  }</div>
+<div class="line"><span class="lineno">  137</span>  <span class="keywordflow">return</span> utm_point;</div>
+<div class="line"><span class="lineno">  138</span>}</div>
 <div class="ttc" id="acdd__getters__common_8h_html_a847d38d2334ce1dd7e3587b77e13fcf3"><div class="ttname"><a href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a></div><div class="ttdeci">double getLatitude(const Latitude &amp;latitude)</div><div class="ttdoc">Get the Latitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00051">cdd_getters_common.h:51</a></div></div>
 <div class="ttc" id="acdd__getters__common_8h_html_a91fca87ccb64088c1dd0cb68126c64a5"><div class="ttname"><a href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a></div><div class="ttdeci">double getLongitude(const Longitude &amp;longitude)</div><div class="ttdoc">Get the Longitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00059">cdd_getters_common.h:59</a></div></div>
 <div class="ttc" id="acdd__getters__common_8h_html_ae1359c6a376fe023f67919e500ebfd10"><div class="ttname"><a href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a></div><div class="ttdeci">double getAltitude(const Altitude &amp;altitude)</div><div class="ttdoc">Get the Altitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00067">cdd_getters_common.h:67</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a49820ce7652181454f9ebb6d3a01cd32" name="a49820ce7652181454f9ebb6d3a01cd32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49820ce7652181454f9ebb6d3a01cd32">&#9670;&#160;</a></span>getVehicleWidth()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double getVehicleWidth </td>
-          <td>(</td>
-          <td class="paramtype">const VehicleWidth &amp;</td>          <td class="paramname"><span class="paramname"><em>vehicle_width</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the Vehicle Width. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vehicleWidth</td><td>to get the vehicle width value from </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00075">75</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)vehicle_width.value) * 1e-1; }</div>
 </div><!-- fragment -->
 </div>
 </div>

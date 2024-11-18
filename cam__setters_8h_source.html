@@ -126,16 +126,61 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h</a>&gt;</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &lt;<a class="code" href="cam__setters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_setters_common.h</a>&gt;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">setItsPduHeader</a>(CAM &amp;cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <a class="code hl_function" href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">setItsPduHeader</a>(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a0c676c7d36213d16c85d0109020a900d">   53</a></span>}  <span class="comment">// namespace etsi_its_cam_msgs::access</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">setItsPduHeader</a>(CAM &amp;cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <a class="code hl_function" href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">setItsPduHeader</a>(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a34d4e20fd4a1552200776839e1a5cd3b">setLongitudinalAccelerationValue</a>(LongitudinalAccelerationValue&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  int64_t accel_val = (int64_t)std::round(value * 1e1);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordflow">if</span> (accel_val &gt;= LongitudinalAccelerationValue::MIN &amp;&amp; accel_val &lt;= LongitudinalAccelerationValue::MAX) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    accel.value = accel_val;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &lt; LongitudinalAccelerationValue::MIN) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    accel.value = LongitudinalAccelerationValue::MIN;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &gt; LongitudinalAccelerationValue::MAX) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    accel.value = LongitudinalAccelerationValue::MAX - 1;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">   66</a></span>}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setLongitudinalAcceleration(LongitudinalAcceleration&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#ae01d2af55f8aa4b14475dda8e70065a0">   80</a></span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#a834baa58ef7c99ada25ac787a17190aa">setLateralAccelerationValue</a>(LateralAccelerationValue&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  int64_t accel_val = (int64_t)std::round(value * 1e1);</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordflow">if</span> (accel_val &gt;= LateralAccelerationValue::MIN &amp;&amp; accel_val &lt;= LateralAccelerationValue::MAX) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    accel.value = accel_val;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &lt; LateralAccelerationValue::MIN) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    accel.value = LateralAccelerationValue::MIN;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_val &gt; LateralAccelerationValue::MAX) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    accel.value = LateralAccelerationValue::MAX - 1;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a729c978afd3c95572c9d9af34e41bc54">   96</a></span>}</div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a75355f19cdb9056086f3fd35cd19e371">   97</a></span> </div>
+</div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a34d4e20fd4a1552200776839e1a5cd3b">  106</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters_8h.html#afda5a87c87f46fe5c65cf3324f4f9208">setLateralAcceleration</a>(LateralAcceleration&amp; accel, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <a class="code hl_function" href="cam__setters_8h.html#a834baa58ef7c99ada25ac787a17190aa">setLateralAccelerationValue</a>(accel.lateral_acceleration_value, value);</div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="cam__setters_8h.html#a5da3f50dc97094d698286f0be299186d">  109</a></span>}</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#include &lt;<a class="code" href="cam__setters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_setters_common.h</a>&gt;</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}  <span class="comment">// namespace etsi_its_cam_msgs::access</span></div>
+</div>
+</div>
+</div>
+<div class="ttc" id="acam__setters_8h_html_a34d4e20fd4a1552200776839e1a5cd3b"><div class="ttname"><a href="cam__setters_8h.html#a34d4e20fd4a1552200776839e1a5cd3b">etsi_its_cam_msgs::access::setLongitudinalAccelerationValue</a></div><div class="ttdeci">void setLongitudinalAccelerationValue(LongitudinalAccelerationValue &amp;accel, const double value)</div><div class="ttdoc">Set the LongitudinalAccelerationValue object.</div><div class="ttdef"><b>Definition</b> <a href="#l00106">cam_setters.h:106</a></div></div>
 <div class="ttc" id="acam__setters_8h_html_a469beebc8ea17f762e3a328ccdf0e2f5"><div class="ttname"><a href="cam__setters_8h.html#a469beebc8ea17f762e3a328ccdf0e2f5">etsi_its_cam_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00066">cam_setters.h:66</a></div></div>
+<div class="ttc" id="acam__setters_8h_html_a834baa58ef7c99ada25ac787a17190aa"><div class="ttname"><a href="cam__setters_8h.html#a834baa58ef7c99ada25ac787a17190aa">etsi_its_cam_msgs::access::setLateralAccelerationValue</a></div><div class="ttdeci">void setLateralAccelerationValue(LateralAccelerationValue &amp;accel, const double value)</div><div class="ttdoc">Set the LateralAccelerationValue object.</div><div class="ttdef"><b>Definition</b> <a href="#l00136">cam_setters.h:136</a></div></div>
+<div class="ttc" id="acam__setters_8h_html_afda5a87c87f46fe5c65cf3324f4f9208"><div class="ttname"><a href="cam__setters_8h.html#afda5a87c87f46fe5c65cf3324f4f9208">etsi_its_cam_msgs::access::setLateralAcceleration</a></div><div class="ttdeci">void setLateralAcceleration(LateralAcceleration &amp;accel, const double value)</div><div class="ttdoc">Set the LateralAcceleration object.</div><div class="ttdef"><b>Definition</b> <a href="#l00155">cam_setters.h:155</a></div></div>
 <div class="ttc" id="acam__setters__common_8h_html"><div class="ttname"><a href="cam__setters__common_8h.html">cam_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS CAM (EN and TS)</div></div>
 <div class="ttc" id="acdd__v1-3-1__setters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html">cdd_v1-3-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
 <div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>

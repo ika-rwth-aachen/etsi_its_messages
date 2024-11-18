@@ -89,8 +89,6 @@ $(function(){ initResizable(false); });
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">cdd_v1-3-1_getters.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -101,100 +99,11 @@ $(function(){ initResizable(false); });
 <code>#include &lt;<a class="el" href="cdd__getters__common_8h_source.html">etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h</a>&gt;</code><br />
 </div>
 <p><a href="cdd__v1-3-1__getters_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a20cd566bce1a4f61c805574e8d4d089f" id="r_a20cd566bce1a4f61c805574e8d4d089f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20cd566bce1a4f61c805574e8d4d089f">getLongitudinalAcceleration</a> (const LongitudinalAcceleration &amp;longitudinal_acceleration)</td></tr>
-<tr class="memdesc:a20cd566bce1a4f61c805574e8d4d089f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
-<tr class="separator:a20cd566bce1a4f61c805574e8d4d089f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ede5c882ace17567004d1db2da06441" id="r_a1ede5c882ace17567004d1db2da06441"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ede5c882ace17567004d1db2da06441">getLateralAcceleration</a> (const LateralAcceleration &amp;lateral_acceleration)</td></tr>
-<tr class="memdesc:a1ede5c882ace17567004d1db2da06441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lateral acceleration.  <br /></td></tr>
-<tr class="separator:a1ede5c882ace17567004d1db2da06441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Getter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1. </p>
 
 <p class="definition">Definition in file <a class="el" href="cdd__v1-3-1__getters_8h_source.html">cdd_v1-3-1_getters.h</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a1ede5c882ace17567004d1db2da06441" name="a1ede5c882ace17567004d1db2da06441"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ede5c882ace17567004d1db2da06441">&#9670;&#160;</a></span>getLateralAcceleration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double getLateralAcceleration </td>
-          <td>(</td>
-          <td class="paramtype">const LateralAcceleration &amp;</td>          <td class="paramname"><span class="paramname"><em>lateral_acceleration</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the lateral acceleration. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lateralAcceleration</td><td>to get the lateral acceleration from </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__v1-3-1__getters_8h_source.html#l00055">55</a> of file <a class="el" href="cdd__v1-3-1__getters_8h_source.html">cdd_v1-3-1_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                                                      {</div>
-<div class="line"><span class="lineno">   56</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;</div>
-<div class="line"><span class="lineno">   57</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a20cd566bce1a4f61c805574e8d4d089f" name="a20cd566bce1a4f61c805574e8d4d089f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20cd566bce1a4f61c805574e8d4d089f">&#9670;&#160;</a></span>getLongitudinalAcceleration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double getLongitudinalAcceleration </td>
-          <td>(</td>
-          <td class="paramtype">const LongitudinalAcceleration &amp;</td>          <td class="paramname"><span class="paramname"><em>longitudinal_acceleration</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the lateral acceleration. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">longitudinalAcceleration</td><td>to get the lateral acceleration from </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cdd__v1-3-1__getters_8h_source.html#l00045">45</a> of file <a class="el" href="cdd__v1-3-1__getters_8h_source.html">cdd_v1-3-1_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                                                     {</div>
-<div class="line"><span class="lineno">   46</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;</div>
-<div class="line"><span class="lineno">   47</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
