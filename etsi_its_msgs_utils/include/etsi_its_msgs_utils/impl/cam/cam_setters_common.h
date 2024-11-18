@@ -117,6 +117,18 @@ inline void setHeading(CAM& cam, const double heading_val) {
 }
 
 /**
+ * @brief Set the VehicleWidth object
+ *
+ * @param vehicle_width object to set
+ * @param value VehicleWidth in meter as decimal number
+ */
+inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
+  int64_t width = (int64_t)std::round(value * 1e1);
+  throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
+  vehicle_width.value = width;
+}
+
+/**
  * @brief Set the VehicleLengthValue object
  *
  * @param vehicle_length object to set

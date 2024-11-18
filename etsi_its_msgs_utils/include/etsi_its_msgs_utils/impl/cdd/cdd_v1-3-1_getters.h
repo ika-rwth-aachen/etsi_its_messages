@@ -36,24 +36,4 @@ SOFTWARE.
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h>
 
-/**
- * @brief Get the lateral acceleration
- *
- * @param longitudinalAcceleration to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
- */
-inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration) {
-  return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;
-}
-
-/**
- * @brief Get the lateral acceleration
- *
- * @param lateralAcceleration to get the lateral acceleration from
- * @return lateral acceleration in m/s^2 as decimal number (left is positive)
- */
-inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration) {
-  return ((double)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;
-}
-
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_GETTERS_H
