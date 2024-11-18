@@ -30,9 +30,10 @@ All message definitions and conversion functions are automatically generated bas
 - [Packages](#packages)
 - [Installation](#installation)
 - [Conversion Node](#conversion-node)
+- [Sample Messages](#sample-messages)
 - [Access Functions](#access-functions)
 - [Code Generation](#code-generation)
-- [V2AIX Dataset / Citation](#v2aix-dataset-citation)
+- [V2AIX Dataset / Citation](#v2aix-dataset--citation)
 - [Acknowledgements](#acknowledgements)
 - [Notice](#notice)
 
@@ -190,6 +191,36 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `subscriber_queue_size` | `int` | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | queue size for outgoing ROS messages |
 | `check_constraints_before_encoding` | `bool` | whether an asn constraint check should be performed before encoding using asn1c's `asn_check_constraints` function (setting to `true` could lead to segmentation faults because of infinite recursion; [known asn1c issue](https://github.com/vlm/asn1c/issues/410)) |
+
+
+## Sample Messages
+
+The `etsi_its_msgs_utils` package contains simple ROS 2 nodes for publishing sample ROS 2 messages of the supported ETSI ITS message types, see [`./etsi_its_msgs_utils/samples/`](./etsi_its_msgs_utils/samples/). For example, publish a sample CPM by running the following.
+
+```bash
+# ROS 2 only
+ros2 run etsi_its_msgs_utils publish_cpm_ts.py
+```
+
+You can then visualize the CPM in RViz with the provided demo configuration.
+
+```bash
+# ROS 2 only
+ros2 launch etsi_its_rviz_plugins demo.launch.py
+```
+
+And finally, run the [Conversion Node](#conversion-node) to convert ROS 2 messages to binary payloads.
+
+```bash
+# ROS 2 only
+ros2 run etsi_its_conversion etsi_its_conversion_node \
+    --ros-args \
+        -r __node:=etsi_its_conversion \
+        -r /etsi_its_conversion/udp/out:=/etsi_its_conversion/udp/in \
+        -p has_btp_destination_port:=true \
+        -p btp_destination_port_offset:=0 \
+        -p etsi_message_payload_offset:=4
+```
 
 
 ## Access Functions
