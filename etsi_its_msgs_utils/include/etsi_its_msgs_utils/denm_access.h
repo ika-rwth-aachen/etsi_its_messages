@@ -35,16 +35,6 @@ SOFTWARE.
 #include <etsi_its_denm_msgs/DENM.h>
 #include <geometry_msgs/PointStamped.h>
 
-// Messages not in DENM.h, but needed to compile cdd::access
-#include <etsi_its_denm_msgs/AccelerationControl.h>
-#include <etsi_its_denm_msgs/EmergencyPriority.h>
-#include <etsi_its_denm_msgs/ExteriorLights.h>
-#include <etsi_its_denm_msgs/LateralAcceleration.h>
-#include <etsi_its_denm_msgs/LongitudinalAcceleration.h>
-#include <etsi_its_denm_msgs/SpecialTransportType.h>
-#include <etsi_its_denm_msgs/VehicleLength.h>
-#include <etsi_its_denm_msgs/VehicleWidth.h>
-
 namespace etsi_its_denm_msgs {
     namespace gm = geometry_msgs;
 }

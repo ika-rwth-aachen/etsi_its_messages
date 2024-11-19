@@ -2,6 +2,16 @@
 Changelog for package etsi_its_denm_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-11-19)
+------------------
+* Merge pull request `#42 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/42>`_ from ika-rwth-aachen/feature/auto-cmake-generation
+  Add automatic generation of CMakeLists.txt for msg packages
+* Merge branch 'main' into feature/denm-launchfile-transformation
+* Contributors: Jean-Pierre Busch, Lennart Reiher
+
+2.3.0 (2024-10-15)
+------------------
+
 2.2.0 (2024-08-01)
 ------------------
 * Merge pull request `#2 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/2>`_ from lreiher/fix-converter-memleak

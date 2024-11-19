@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="3">
+
+  <name>etsi_its_vam_ts_coding</name>
+  <version>2.4.0</version>
+  <description>C++ compatible C source code for ETSI ITS VAMs (TS) generated from ASN.1 using asn1c</description>
+
+  <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+
+  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
+  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+
+  <license>MIT</license>
+
+  <depend>ros_environment</depend>
+
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+  </export>
+
+</package>

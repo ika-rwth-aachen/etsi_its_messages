@@ -5,22 +5,26 @@ namespace etsi_its_msgs
 namespace displays
 {
 
-  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm, uint16_t n_leap_seconds) {
+  DENMRenderObject::DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm) {
 
     int zone;
     bool northp;
     geometry_msgs::msg::PointStamped p = etsi_its_denm_msgs::access::getUTMPosition(denm, zone, northp);
     header.frame_id = p.header.frame_id;
   
-    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_denm_msgs::access::getReferenceTime(denm), n_leap_seconds);
+    uint64_t nanosecs = etsi_its_denm_msgs::access::getUnixNanosecondsFromReferenceTime(etsi_its_denm_msgs::access::getReferenceTime(denm));
     header.stamp = rclcpp::Time(nanosecs);
 
     station_id = etsi_its_denm_msgs::access::getStationID(denm);
-    cause_code_type = etsi_its_denm_msgs::access::getCauseCodeType(denm);
-    sub_cause_code_type = etsi_its_denm_msgs::access::getSubCauseCodeType(denm);
-    
+    if(denm.denm.situation_is_present) {
+      cause_code_type = etsi_its_denm_msgs::access::getCauseCodeType(denm);
+      sub_cause_code_type = etsi_its_denm_msgs::access::getSubCauseCodeType(denm);
+    } else {
+      cause_code_type = "Not present";
+      sub_cause_code_type = "Not present";
+    }
     double heading; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-    if(etsi_its_denm_msgs::access::getIsHeadingPresent(denm)) {
+    if(denm.denm.location_is_present && etsi_its_denm_msgs::access::getIsHeadingPresent(denm)) {
       heading = (90-etsi_its_denm_msgs::access::getHeading(denm))*M_PI/180.0;
     }
     else {
@@ -32,7 +36,7 @@ namespace displays
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
 
-    if(etsi_its_denm_msgs::access::getIsSpeedPresent(denm)) {
+    if(denm.denm.location_is_present && etsi_its_denm_msgs::access::getIsSpeedPresent(denm)) {
       speed = etsi_its_denm_msgs::access::getSpeed(denm);
     }
     else {

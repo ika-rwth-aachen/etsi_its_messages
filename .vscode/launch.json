@@ -27,6 +27,8 @@
             "args": [
                 "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
                 "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
+                "-t",
+                "cam",
                 "-o",
                 "etsi_its_msgs/etsi_its_cam_msgs/msg"
             ],
@@ -76,6 +78,8 @@
             "args": [
                 "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
                 "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cam_ts",
                 "-o",
                 "etsi_its_msgs/etsi_its_cam_ts_msgs/msg"
             ],
@@ -95,6 +99,57 @@
                 "cam_ts",
                 "-o",
                 "etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-t",
+                "denm",
+                "-o",
+                "etsi_its_coding/etsi_its_denm_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-t",
+                "denm",
+                "-o",
+                "etsi_its_msgs/etsi_its_denm_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
+                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "-t",
+                "denm",
+                "-o",
+                "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -133,6 +188,8 @@
                 "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
                 "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
                 "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm_ts",
                 "-o",
                 "etsi_its_msgs/etsi_its_cpm_ts_msgs/msg"
             ],
@@ -161,50 +218,52 @@
             "justMyCode": true
         },
         {
-            "name": "DENM (coding)",
+            "name": "VAM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC.py",
             "args": [
-                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "denm",
+                "vam_ts",
                 "-o",
-                "etsi_its_coding/etsi_its_denm_coding"
+                "etsi_its_coding/etsi_its_vam_ts_coding"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "DENM (msgs)",
+            "name": "VAM TS (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
             "args": [
-                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "vam_ts",
                 "-o",
-                "etsi_its_msgs/etsi_its_denm_msgs/msg"
+                "etsi_its_msgs/etsi_its_vam_ts_msgs/msg"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "DENM (conversion)",
+            "name": "VAM TS (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
             "args": [
-                "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
-                "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "denm",
+                "vam_ts",
                 "-o",
-                "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
+                "etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -241,6 +300,8 @@
                 "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
                 "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-t",
+                "mapem_ts",
                 "-o",
                 "etsi_its_msgs/etsi_its_mapem_ts_msgs/msg"
             ],
@@ -299,6 +360,8 @@
                 "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
                 "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "-t",
+                "spatem_ts",
                 "-o",
                 "etsi_its_msgs/etsi_its_spatem_ts_msgs/msg"
             ],

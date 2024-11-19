@@ -4,12 +4,15 @@
 [submodule "asn1/raw/cam_ts103900"]
 	path = asn1/raw/cam_ts103900
 	url = https://forge.etsi.org/rep/ITS/asn1/cam_ts103900.git
-[submodule "denm_en302637_3"]
-	path = asn1/raw/denm_en302637_3
-	url = https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3.git
 [submodule "asn1/raw/cpm_ts103324"]
 	path = asn1/raw/cpm_ts103324
 	url = https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324.git
+[submodule "denm_en302637_3"]
+	path = asn1/raw/denm_en302637_3
+	url = https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3.git
+[submodule "asn1/raw/vam-ts103300_3"]
+	path = asn1/raw/vam-ts103300_3
+	url = https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3.git
 [submodule "doc/doxygen-awesome-css"]
 	path = doc/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
