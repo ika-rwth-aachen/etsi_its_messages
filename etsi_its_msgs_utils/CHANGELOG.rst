@@ -2,6 +2,16 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-11-19)
+------------------
+* Merge pull request `#42 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/42>`_ from ika-rwth-aachen/feature/auto-cmake-generation
+  Add automatic generation of CMakeLists.txt for msg packages
+* Merge branch 'main' into feature/auto-cmake-generation
+* Merge pull request `#44 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/44>`_ from ika-rwth-aachen/improvement/sample-scripts
+  Relocate sample scripts
+* Merge branch 'main' into feature/denm-launchfile-transformation
+* Contributors: Jean-Pierre Busch, Lennart Reiher
+
 2.3.0 (2024-10-15)
 ------------------
 * Merge pull request `#38 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/38>`_ from ika-rwth-aachen/feature/cpm_utils

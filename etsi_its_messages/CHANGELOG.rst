@@ -2,6 +2,11 @@
 Changelog for package etsi_its_messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-11-19)
+------------------
+* Merge branch 'main' into feature/denm-launchfile-transformation
+* Contributors: Lennart Reiher
+
 2.3.0 (2024-10-15)
 ------------------
 
