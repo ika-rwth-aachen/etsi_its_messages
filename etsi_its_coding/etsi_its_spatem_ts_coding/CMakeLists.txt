@@ -11,28 +11,28 @@ if(${ROS_VERSION} EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
 
-  add_library(${PROJECT_NAME} SHARED
-    ${SRC_FILES}
-  )
+  # add_library(${PROJECT_NAME} SHARED
+  #   ${SRC_FILES}
+  # )
 
-  target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
+  # target_include_directories(${PROJECT_NAME} PUBLIC
+  #   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  #   $<INSTALL_INTERFACE:include>
+  # )
 
-  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
+  # ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
 
-  install(DIRECTORY include/
-    DESTINATION include
-  )
+  # install(DIRECTORY include/
+  #   DESTINATION include
+  # )
 
-  install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Targets
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION lib
-    INCLUDES DESTINATION include
-  )
+  # install(TARGETS ${PROJECT_NAME}
+  #   EXPORT ${PROJECT_NAME}Targets
+  #   ARCHIVE DESTINATION lib
+  #   LIBRARY DESTINATION lib
+  #   RUNTIME DESTINATION lib
+  #   INCLUDES DESTINATION include
+  # )
 
   ament_package()
 
