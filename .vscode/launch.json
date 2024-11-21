@@ -23,7 +23,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
                 "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
@@ -40,7 +40,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn",
                 "asn1/raw/cam_en302637_2/cdd/ITS-Container.asn",
@@ -74,7 +74,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
                 "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
@@ -91,7 +91,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn",
                 "asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn",
@@ -125,7 +125,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
                 "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
@@ -142,7 +142,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn",
                 "asn1/raw/denm_en302637_3/cdd/ITS-Container.asn",
@@ -180,7 +180,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
                 "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
@@ -201,7 +201,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
                 "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
@@ -239,7 +239,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
                 "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
@@ -256,7 +256,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
                 "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
@@ -293,7 +293,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
                 "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
@@ -313,7 +313,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn",
                 "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
@@ -353,7 +353,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
                 "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
@@ -373,7 +373,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn",
                 "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
