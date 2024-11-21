@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+#include <etsi_its_{{ etsi_type }}_coding/{{ etsi_type }}_{{ t_name }}.h>
+
 #ifdef ROS1
 #include <etsi_its_{{ etsi_type }}_msgs/{{ t_name }}.h>
 namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
@@ -38,15 +40,15 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
-
+void toRos_{{ t_name }}(const {{ etsi_type }}_{{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
   out.value = in;
 }
 
-void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
+void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ etsi_type }}_{{ t_name }}_t& out) {
+  memset(&out, 0, sizeof({{etsi_type}}_{{ t_name }}_t));
 
-  memset(&out, 0, sizeof({{ t_name }}_t));
   out = in.value;
 }
 
 }
+

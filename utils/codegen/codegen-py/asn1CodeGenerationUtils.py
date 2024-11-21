@@ -61,7 +61,7 @@ def camel2SNAKE(s: str) -> str:
     ss = ss.upper().lstrip("_").replace("-", "_").replace("__", "_")
 
     # EXAMPLE_STRING_WITH_NUMBER123 -> EXAMPLE_STRING_WITH_NUMBER_123
-    ss = re.sub("([A-Z])([0-9])", r"\1_\2", ss)
+    # ss = re.sub("([A-Z])([0-9])", r"\1_\2", ss)
 
     # special cases
     ss = ss.replace("C_A_M", "CAM")
@@ -96,7 +96,7 @@ def camel2snake(s: str) -> str:
     ss = ss.lower().lstrip("_").replace("-", "_").replace("__", "_")
 
     # example_string_with_number123 -> example_string_with_number_123
-    ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
+    # ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
 
     # special cases
     ss = ss.replace("c_a_m", "cam")
@@ -105,6 +105,7 @@ def camel2snake(s: str) -> str:
     ss = ss.replace("s_p_a_t", "spat")
     ss = ss.replace("m_a_p_e_m", "mapem")
     ss = ss.replace("m_a_p", "map")
+    ss = ss.replace("v_a_m", "vam")
     ss = ss.replace("d_s_r_c", "dsrc")
     ss = ss.replace("r_s_u", "rsu")
     ss = ss.replace("w_m_i", "wmi")
@@ -365,6 +366,9 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             if member is None:
                 continue
 
+            if "components-of" in member:
+                member["type"] = member["components-of"]
+
             # check if type is known
             if member["type"] not in known_types:
                 if ".&" in member["type"]:
@@ -390,7 +394,21 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     Returns:
         Dict: jinja context
     """
-
+    
+    if "components-of" in asn1: # TODO
+        return {
+            "asn1_definition": None,
+            "comments": [],
+            "etsi_type": None,
+            "members": [{"t_name": t_name, "type": "TODO: components-of", "name": "is not yet supported", "name_cc": "is not yet supported"}],
+            "t_name": t_name,
+            "t_name_camel": noDash(t_name),
+            "t_name_snake": camel2snake(t_name),
+            "type": "components-of",
+            "asn1_type": "components-of",
+            "is_primitive": False,
+        }
+        
     type = asn1["type"]
 
     context = {
@@ -428,6 +446,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": ros_type,
             "asn1_type": type,
+            "t_name": type,
             "name": validRosField(camel2snake(name)),
             "name_cc": validCField(name),
             "constants": [],
@@ -527,19 +546,28 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
-                if member["default"] in asn1_values:
+                asn1_value = {}
+                if member["default"] in asn1_values: # DENM
                     asn1_value = asn1_values[member["default"]]
-                    default_value = asn1_value["value"]
-                    default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
-                    if asn1_value["type"] == 'INTEGER':
-                        default_type = simplestRosIntegerType(default_value, default_value)
-                    else:
-                        default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
-                    member_context["members"][0]["default"] = {
-                        "type": default_type,
-                        "name": default_name,
-                        "value": default_value
-                    }
+                elif "named-numbers" in asn1_types[member["type"]] and member["default"] in asn1_types[member["type"]]["named-numbers"]: # VAM TS
+                    asn1_value["value"] = asn1_types[member["type"]]["named-numbers"][member["default"]]
+                    asn1_value["type"] = asn1_types[member["type"]]["type"]
+                elif asn1_types[member["type"]]["type"] == "ENUMERATED":
+                    for default_tuple in asn1_types[member["type"]]["values"]:
+                        if default_tuple[0] == member["default"]:
+                            asn1_value["value"] = default_tuple[1]
+                            asn1_value["type"] = asn1_types[member["type"]]["type"]
+                default_value = asn1_value["value"]
+                default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
+                if asn1_value["type"] == 'INTEGER' or asn1_value["type"] == 'ENUMERATED':
+                    default_type = simplestRosIntegerType(default_value, default_value)
+                else:
+                    default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
+                member_context["members"][0]["default"] = {
+                    "type": default_type,
+                    "name": default_name,
+                    "value": default_value
+                }
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options

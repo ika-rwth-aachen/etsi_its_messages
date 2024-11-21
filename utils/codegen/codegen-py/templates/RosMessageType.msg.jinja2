@@ -2,6 +2,7 @@
 # MIT License
 #
 # Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -47,4 +48,4 @@ uint8 bits_unused
 {% for const in member.constants -%}
 {{ const.type }} {{ const.name }} = {{ const.value }}
 {% endfor %}
-{% endfor %}
+{% endfor -%}

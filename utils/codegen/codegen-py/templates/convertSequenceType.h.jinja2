@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,10 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
-{% for member in members -%}
+#include <etsi_its_{{ etsi_type }}_coding/{{ etsi_type }}_{{ t_name }}.h>
+{% for member in unique_sorted_members -%}
 {% if member.is_primitive -%}
+#include <etsi_its_{{ etsi_type }}_coding/{{ member.asn1_type }}.h>
 #include <etsi_its_primitives_conversion/convert{{ member.asn1_type }}.h>
 {% elif not member.is_choice_var -%}
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type|replace("[]", "") }}.h>
@@ -45,8 +47,8 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name_camel }}(const {{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
-{% for member in members -%}
+void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
+{%- for member in members -%}
 {% if member.optional or member.default %}
   if (in.{{ member.name_cc }}) {
 {%- if member.is_primitive %}
@@ -62,7 +64,7 @@ void toRos_{{ t_name_camel }}(const {{ t_name|replace("-", "_")|replace("Regiona
     out.{{ member.name }}_is_present = true;
 {%- endif %}
   }
-{% elif not member.is_choice_var %}
+{%- elif not member.is_choice_var %}
 {%- if member.is_primitive %}
   etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- elif member.is_choice %}
@@ -77,38 +79,33 @@ void toRos_{{ t_name_camel }}(const {{ t_name|replace("-", "_")|replace("Regiona
 {% endfor %}
 }
 
-void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& out) {
-
-  memset(&out, 0, sizeof({{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
+void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type }}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& out) {
+  memset(&out, 0, sizeof({{etsi_type}}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
 {% for member in members -%}
 {% if member.optional %}
   if (in.{{ member.name }}_is_present) {
 {%- if member.is_primitive %}
-    {{ member.asn1_type }}_t {{ member.name }};
-    etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
-    out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
+    out.{{member.name_cc}} = ({{ member.asn1_type }}_t*) calloc(1, sizeof({{ member.asn1_type }}_t));
+    etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- else %}
-    {{ member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t {{ member.name }};
 {%- if member.type|replace("[]", "") != "RegionalExtension" %}
-    toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
-    out.{{ member.name_cc }} = new {{ member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
+    out.{{member.name_cc}} = ({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0")}}_t));
+    toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- else %}
     // TODO: toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
     // TODO: out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
 {%- endif %}
 {%- endif %}
   }
-{% elif member.default %}
+{%- elif member.default %}
 {%- if member.is_primitive %}
-  {{ member.asn1_type }}_t {{ member.name }};
-  etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, {{ member.name }});
-  out.{{ member.name_cc }} = new {{ member.asn1_type }}_t({{ member.name }});
+  out.{{member.name_cc}} = ({{ member.asn1_type }}_t*) calloc(1, sizeof({{ member.asn1_type }}_t));
+  etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- else %}
-  {{ member.type|replace("[]", "") }}_t {{ member.name }};
-  toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
-  out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
+  out.{{member.name_cc}} = ({{etsi_type}}_{{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t*) calloc(1, sizeof({{etsi_type}}_{{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
+  toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- endif %}
-{% elif not member.is_choice_var %}
+{%- elif not member.is_choice_var %}
 {%- if member.is_primitive %}
   etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, out.{{ member.name_cc }});
 {%- elif member.is_choice %}
@@ -124,3 +121,4 @@ void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& 
 }
 
 }
+

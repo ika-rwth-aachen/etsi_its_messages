@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+#include <etsi_its_{{ etsi_type }}_coding/{{ etsi_type }}_{{ t_name }}.h>
 #include <etsi_its_{{ etsi_type }}_coding/{{ type }}.h>
 #include <etsi_its_primitives_conversion/convert{{ type }}.h>
 #ifdef ROS1
@@ -40,8 +41,8 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name_camel }}(const {{ t_name|replace("-", "_") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
-{% for member in members %}
+void toRos_{{ t_name_camel }}(const {{etsi_type}}_{{ t_name|replace("-", "_") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
+{%- for member in members %}
   etsi_its_primitives_conversion::toRos_{{ type }}(in, out.{{ member.name }});
 {%- if member.has_bits_unused %}
   out.bits_unused = in.bits_unused;
@@ -49,9 +50,10 @@ void toRos_{{ t_name_camel }}(const {{ t_name|replace("-", "_") }}_t& in, {{ ets
 {%- endfor %}
 }
 
-void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ t_name|replace("-", "_") }}_t& out) {
-{% for member in members %}
-  memset(&out, 0, sizeof({{ t_name|replace("-", "_") }}_t));
+void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type}}_{{ t_name|replace("-", "_") }}_t& out) {
+{%- for member in members %}
+  memset(&out, 0, sizeof({{ etsi_type}}_{{ t_name|replace("-", "_") }}_t));
+
   etsi_its_primitives_conversion::toStruct_{{ type }}(in.{{ member.name }}, out);
 {%- if member.has_bits_unused %}
   out.bits_unused = in.bits_unused;
@@ -60,3 +62,4 @@ void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& 
 }
 
 }
+
