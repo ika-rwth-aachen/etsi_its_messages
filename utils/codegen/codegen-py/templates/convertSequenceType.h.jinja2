@@ -68,7 +68,7 @@ void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_")|
 {%- if member.is_primitive %}
   etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(in.{{ member.name_cc }}, out.{{ member.name }});
 {%- elif member.is_choice %}
-  if (in.{{ member.choice_name }}.present == {{ t_name }}__{{ member.choice_name }}_PR::{{ t_name }}__{{ member.choice_name }}_PR_{{ member.choice_option_name }}) {
+  if (in.{{ member.choice_name }}.present == {{etsi_type}}_{{ t_name }}__{{ member.choice_name }}_PR::{{etsi_type}}_{{ t_name }}__{{ member.choice_name }}_PR_{{ member.choice_option_name }}) {
     toRos_{{ member.type }}(in.{{ member.choice_name }}.choice.{{ member.choice_option_name }}, out.{{ member.name }});
     out.{{ member.choice_var_name }} = {{ etsi_type}}_msgs::{{ t_name }}::{{ member.constants[0].name }};
   }
@@ -111,7 +111,7 @@ void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& 
 {%- elif member.is_choice %}
   if (in.{{ member.choice_var_name }} == {{ etsi_type}}_msgs::{{ t_name }}::{{ member.constants[0].name }}) {
     toStruct_{{ member.type }}(in.{{ member.name }}, out.{{ member.choice_name }}.choice.{{ member.choice_option_name }});
-    out.{{ member.choice_name }}.present = {{ t_name }}__{{ member.choice_name }}_PR::{{ t_name }}__{{ member.choice_name }}_PR_{{ member.choice_option_name }};
+    out.{{ member.choice_name }}.present = {{etsi_type}}_{{ t_name }}__{{ member.choice_name }}_PR::{{etsi_type}}_{{ t_name }}__{{ member.choice_name }}_PR_{{ member.choice_option_name }};
   }
 {%- else %}
   toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, out.{{ member.name_cc }});
