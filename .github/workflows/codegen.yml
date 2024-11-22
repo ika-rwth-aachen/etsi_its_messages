@@ -110,15 +110,15 @@ jobs:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_msgs/etsi_its_cam_msgs/msg -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_msgs/etsi_its_cam_msgs/msg
           - message: cam_ts
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
           - message: denm
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_msgs/etsi_its_denm_msgs/msg -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_msgs/etsi_its_denm_msgs/msg
           - message: cpm_ts
             script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg -di rgen:ci
           - message: vam_ts
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -128,6 +128,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
+          cache: pip
+      - name: Install dependencies 
+        run: pip install ./utils/codegen/codegen-py/requirements.txt
       - name: Download rgen-image (artifact)
         uses: actions/download-artifact@v4
         with:
@@ -154,15 +157,15 @@ jobs:
       matrix:
         include:
           - message: cam
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
           - message: cam_ts
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion
           - message: denm
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
           - message: cpm_ts
             script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion -di rgen:ci
           - message: vam_ts
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -172,6 +175,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
+          cache: pip
+      - name: Install dependencies
+        run: pip install ./utils/codegen/codegen-py/requirements.txt
       - name: Download rgen-image (artifact)
         uses: actions/download-artifact@v4
         with:
