@@ -252,8 +252,17 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
         with open(file) as f:
             lines = f.readlines()
         raw_def = None
-        for line in lines:
+        for line_idx, line in enumerate(lines):
             if "::=" in line:
+                comment_lines = []
+                for rline in reversed(lines[:line_idx]):
+                    if rline.strip().startswith("*/"):
+                        comment_lines.append(rline)
+                    elif len(comment_lines) > 0:
+                        comment_lines.append(rline)
+                    if rline.strip().startswith("/**"):
+                        comment_lines = list(reversed(comment_lines)) # TODO: only to keep diff to rgen small
+                        break
                 if line.rstrip().endswith("{"):
                     type = line.split("::=")[0].split("{")[0].strip().split()[0]
                     raw_def = ""
@@ -262,6 +271,7 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     if "}" in line or not ("{" in line or "}" in line):
                         raw_def = line
                         asn1_raw[type] = raw_def
+                        asn1_raw[type] += "".join(comment_lines)
                         raw_def = None
                     else:
                         raw_def = ""
@@ -269,6 +279,7 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                 raw_def += line
                 if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
                     asn1_raw[type] = raw_def
+                    asn1_raw[type] += "".join(comment_lines)
                     raw_def = None
 
     asn1_docs = asn1tools.parse_files(files)
