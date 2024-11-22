@@ -32,6 +32,7 @@
 #   closedLanes ClosedLanes OPTIONAL
 #  }
 # ------------------------------------------------------------------------------
+
 RoadworksSubCauseCode roadworks_sub_cause_code
 bool roadworks_sub_cause_code_is_present
 

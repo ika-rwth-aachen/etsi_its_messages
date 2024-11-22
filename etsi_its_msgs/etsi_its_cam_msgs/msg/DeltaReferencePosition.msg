@@ -32,6 +32,7 @@
 #     deltaAltitude DeltaAltitude
 # }
 # ------------------------------------------------------------------------------
+
 DeltaLatitude delta_latitude
 
 DeltaLongitude delta_longitude

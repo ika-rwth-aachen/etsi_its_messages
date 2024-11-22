@@ -29,7 +29,8 @@
 # PathDeltaTime ::= INTEGER {tenMilliSecondsInPast(1)} (1..65535, ...)
 # ------------------------------------------------------------------------------
 
-int64 value
-int64 MIN = 1
-int64 MAX = 65535
-int64 TEN_MILLI_SECONDS_IN_PAST = 1
+uint16 value
+uint16 MIN = 1
+uint16 MAX = 65535
+uint16 TEN_MILLI_SECONDS_IN_PAST = 1
+

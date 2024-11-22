@@ -31,7 +31,6 @@
 # 	cam CoopAwareness
 # }
 # ------------------------------------------------------------------------------
-# 	The root data frame for cooperative awareness messages
 
 ItsPduHeader header
 

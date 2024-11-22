@@ -32,6 +32,7 @@
 #         ...
 # }
 # ------------------------------------------------------------------------------
+
 CauseCodeType cause_code
 
 SubCauseCodeType sub_cause_code

@@ -32,6 +32,7 @@
 # 	pathHistory PathHistory
 # }
 # ------------------------------------------------------------------------------
+
 VehicleRole vehicle_role
 
 ExteriorLights exterior_lights

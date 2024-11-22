@@ -31,6 +31,7 @@
 # 	ptActivation PtActivation OPTIONAL
 # }
 # ------------------------------------------------------------------------------
+
 EmbarkationStatus embarkation_status
 
 PtActivation pt_activation

@@ -31,6 +31,7 @@
 # 	...
 # }
 # ------------------------------------------------------------------------------
+
 uint8 choice
 
 BasicVehicleContainerLowFrequency basic_vehicle_container_low_frequency

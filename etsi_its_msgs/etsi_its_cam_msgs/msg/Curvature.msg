@@ -31,6 +31,7 @@
 #  curvatureConfidence CurvatureConfidence
 # }
 # ------------------------------------------------------------------------------
+
 CurvatureValue curvature_value
 
 CurvatureConfidence curvature_confidence

@@ -36,6 +36,7 @@
 #         ...
 # }
 # ------------------------------------------------------------------------------
+
 ProtectedZoneType protected_zone_type
 
 TimestampIts expiry_time

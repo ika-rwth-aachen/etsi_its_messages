@@ -33,6 +33,7 @@
 #     altitude Altitude
 # }
 # ------------------------------------------------------------------------------
+
 Latitude latitude
 
 Longitude longitude
