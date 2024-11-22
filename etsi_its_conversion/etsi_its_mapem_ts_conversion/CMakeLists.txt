@@ -10,41 +10,41 @@ if(${ROS_VERSION} EQUAL 2)
   add_compile_definitions(ROS2)
 
   find_package(ament_cmake REQUIRED)
-  # find_package(etsi_its_mapem_ts_coding REQUIRED)
-  # find_package(etsi_its_mapem_ts_msgs REQUIRED)
-  # find_package(etsi_its_primitives_conversion REQUIRED)
+  find_package(etsi_its_mapem_ts_coding REQUIRED)
+  find_package(etsi_its_mapem_ts_msgs REQUIRED)
+  find_package(etsi_its_primitives_conversion REQUIRED)
 
-  # add_library(${PROJECT_NAME} INTERFACE)
+  add_library(${PROJECT_NAME} INTERFACE)
 
-  # target_include_directories(${PROJECT_NAME} INTERFACE
-  #   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  #   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
-  # )
+  target_include_directories(${PROJECT_NAME} INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+  )
 
-  # target_link_libraries(${PROJECT_NAME} INTERFACE
-  #   ${etsi_its_mapem_ts_coding_TARGETS}
-  #   ${etsi_its_mapem_ts_msgs_TARGETS}
-  #   ${etsi_its_primitives_conversion_TARGETS}
-  # )
+  target_link_libraries(${PROJECT_NAME} INTERFACE
+    ${etsi_its_mapem_ts_coding_TARGETS}
+    ${etsi_its_mapem_ts_msgs_TARGETS}
+    ${etsi_its_primitives_conversion_TARGETS}
+  )
 
-  # ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
-  # ament_export_dependencies(
-  #   etsi_its_mapem_ts_coding
-  #   etsi_its_mapem_ts_msgs
-  #   etsi_its_primitives_conversion
-  # )
+  ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
+  ament_export_dependencies(
+    etsi_its_mapem_ts_coding
+    etsi_its_mapem_ts_msgs
+    etsi_its_primitives_conversion
+  )
 
-  # install(DIRECTORY include/
-  #   DESTINATION include/${PROJECT_NAME}
-  # )
+  install(DIRECTORY include/
+    DESTINATION include/${PROJECT_NAME}
+  )
 
-  # install(TARGETS ${PROJECT_NAME}
-  #   EXPORT ${PROJECT_NAME}Targets
-  #   ARCHIVE DESTINATION lib
-  #   LIBRARY DESTINATION lib
-  #   RUNTIME DESTINATION lib
-  #   INCLUDES DESTINATION include
-  # )
+  install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
+    INCLUDES DESTINATION include
+  )
 
   ament_package()
 
