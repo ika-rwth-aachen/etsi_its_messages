@@ -35,23 +35,23 @@
 #     tornado      (5),
 #     blizzard     (6)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-ExtremeWeatherCondition`.
+#  *
+#  * The value shall be set to:
+#  * - 0 - `unavailable` - in case information on the type of extreme weather condition is unavailable,
+#  * - 1 - `strongWinds` - in case the type of extreme weather condition is strong wind,
+#  * - 2 - `damagingHail`- in case the type of extreme weather condition is damaging hail,
+#  * - 3 - `hurricane`   - in case the type of extreme weather condition is hurricane,
+#  * - 4 - `thunderstorm`- in case the type of extreme weather condition is thunderstorm,
+#  * - 5 - `tornado`     - in case the type of extreme weather condition is tornado,
+#  * - 6 - `blizzard`    - in case the type of extreme weather condition is blizzard.
+#  * - 7-255             - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-ExtremeWeatherCondition`.
-# *
-# * The value shall be set to:
-# * - 0 - `unavailable` - in case information on the type of extreme weather condition is unavailable,
-# * - 1 - `strongWinds` - in case the type of extreme weather condition is strong wind,
-# * - 2 - `damagingHail`- in case the type of extreme weather condition is damaging hail,
-# * - 3 - `hurricane`   - in case the type of extreme weather condition is hurricane,
-# * - 4 - `thunderstorm`- in case the type of extreme weather condition is thunderstorm,
-# * - 5 - `tornado`     - in case the type of extreme weather condition is tornado,
-# * - 6 - `blizzard`    - in case the type of extreme weather condition is blizzard.
-# * - 7-255             - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -63,3 +63,4 @@ uint8 HURRICANE = 3
 uint8 THUNDERSTORM = 4
 uint8 TORNADO = 5
 uint8 BLIZZARD = 6
+

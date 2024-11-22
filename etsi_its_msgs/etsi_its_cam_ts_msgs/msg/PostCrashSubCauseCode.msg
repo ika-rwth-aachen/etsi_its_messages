@@ -33,21 +33,21 @@
 #     accidentWithECallAutomaticallyTriggered                  (3), 
 #     accidentWithECallTriggeredWithoutAccessToCellularNetwork (4)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `postCrash` .
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`                                               - in case further detailed information on post crash event is unavailable,
+#  * - 1 `accidentWithoutECallTriggered`                             - in case no eCall has been triggered for an accident,
+#  * - 2 `accidentWithECallManuallyTriggered`                        - in case eCall has been manually triggered and transmitted to eCall back end,
+#  * - 3 `accidentWithECallAutomaticallyTriggered`                   - in case eCall has been automatically triggered and transmitted to eCall back end,
+#  * - 4 `accidentWithECallTriggeredWithoutAccessToCellularNetwork`  - in case eCall has been triggered but cellular network is not accessible from triggering vehicle.
+#  * - 5-255                                                         - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `postCrash` .
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`                                               - in case further detailed information on post crash event is unavailable,
-# * - 1 `accidentWithoutECallTriggered`                             - in case no eCall has been triggered for an accident,
-# * - 2 `accidentWithECallManuallyTriggered`                        - in case eCall has been manually triggered and transmitted to eCall back end,
-# * - 3 `accidentWithECallAutomaticallyTriggered`                   - in case eCall has been automatically triggered and transmitted to eCall back end,
-# * - 4 `accidentWithECallTriggeredWithoutAccessToCellularNetwork`  - in case eCall has been triggered but cellular network is not accessible from triggering vehicle.
-# * - 5-255                                                         - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -57,3 +57,4 @@ uint8 ACCIDENT_WITHOUT_E_CALL_TRIGGERED = 1
 uint8 ACCIDENT_WITH_E_CALL_MANUALLY_TRIGGERED = 2
 uint8 ACCIDENT_WITH_E_CALL_AUTOMATICALLY_TRIGGERED = 3
 uint8 ACCIDENT_WITH_E_CALL_TRIGGERED_WITHOUT_ACCESS_TO_CELLULAR_NETWORK = 4
+

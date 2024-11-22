@@ -27,16 +27,17 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # ProtectedCommunicationZonesRSU ::= SEQUENCE (SIZE(1..16)) OF ProtectedCommunicationZone 
+# /**
+#  * This DF shall contain a list of @ref ProtectedCommunicationZone provided by a road side ITS-S (Road Side Unit RSU).
+#  *
+#  * It may provide up to 16 protected communication zones information.
+#  *
+#  * @category: Infrastructure information, Communication information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF shall contain a list of @ref ProtectedCommunicationZone provided by a road side ITS-S (Road Side Unit RSU).
-# *
-# * It may provide up to 16 protected communication zones information.
-# *
-# * @category: Infrastructure information, Communication information
-# * @revision: V1.3.1
-# 
 
 ProtectedCommunicationZone[] array
 uint8 MIN_SIZE = 1
 uint8 MAX_SIZE = 16
+

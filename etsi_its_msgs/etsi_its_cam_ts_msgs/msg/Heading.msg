@@ -30,21 +30,21 @@
 #     headingValue         HeadingValue,
 #     headingConfidence    HeadingConfidence
 # }
+# /**
+#  * This DF represents the Heading in a WGS84 co-ordinates system.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field headingValue: the heading value.
+#  * 
+#  * @field headingConfidence: the confidence value of the heading value with a predefined confidence level.
+#  * 
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use the @ref Wgs84Angle instead. 
+#  * @category: Kinematic Information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the Heading in a WGS84 co-ordinates system.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * It shall include the following components: 
-# * 
-# * @field headingValue: the heading value.
-# * 
-# * @field headingConfidence: the confidence value of the heading value with a predefined confidence level.
-# * 
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use the @ref Wgs84Angle instead. 
-# * @category: Kinematic Information
-# * @revision: Description revised in V2.1.1
-# 
 
 HeadingValue heading_value
 

@@ -34,26 +34,25 @@
 #     ...,
 #     passToLeftOrRight   (4)
 # }
+# /**
+#  * This DE indicates traffic rules that apply to vehicles at a certain position.
+#  *
+#  * The value shall be set to:
+#  * - `0` - if overtaking is prohibited for all vehicles,
+#  * - `1` - if overtaking is prohibited for trucks,
+#  * - `2` - if vehicles should pass to the right lane,
+#  * - `3` - if vehicles should pass to the left lane.
+#  * - `4` - if vehicles should pass to the left or right lane.
+#  *
+#  * @category: Infrastructure information, Traffic information
+#  * @revision: Editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates traffic rules that apply to vehicles at a certain position.
-# *
-# * The value shall be set to:
-# * - `0` - if overtaking is prohibited for all vehicles,
-# * - `1` - if overtaking is prohibited for trucks,
-# * - `2` - if vehicles should pass to the right lane,
-# * - `3` - if vehicles should pass to the left lane.
-# * - `4` - if vehicles should pass to the left or right lane.
-# *
-# * @category: Infrastructure information, Traffic information
-# * @revision: Editorial update in V2.1.1
-# 
 
 uint8 value
 uint8 NO_PASSING = 0
 uint8 NO_PASSING_FOR_TRUCKS = 1
 uint8 PASS_TO_RIGHT = 2
 uint8 PASS_TO_LEFT = 3
-# .extended
 uint8 PASS_TO_LEFT_OR_RIGHT = 4
 

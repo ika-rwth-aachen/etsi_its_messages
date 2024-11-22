@@ -29,15 +29,15 @@
 #  DangerousGoodsContainer ::= SEQUENCE {
 #   dangerousGoodsBasic DangerousGoodsBasic
 #  }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Dangerous Goods Container.
 # *
-#* This type contains detaild information of the Dangerous Goods Container.
-#*
-#* It shall include the following components:
-#*
-#* @field dangerousGoodsBasic: identifies the type of the dangerous goods transported by the vehicle that originates the CAM. It shall be present if
-#* the data is available in the originating ITS S.
-#
+# * It shall include the following components:
+# *
+# * @field dangerousGoodsBasic: identifies the type of the dangerous goods transported by the vehicle that originates the CAM. It shall be present if
+# * the data is available in the originating ITS S.
+# */
+# ------------------------------------------------------------------------------
 
 DangerousGoodsBasic dangerous_goods_basic
 

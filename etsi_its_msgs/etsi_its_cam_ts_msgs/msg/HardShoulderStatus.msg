@@ -31,19 +31,19 @@
 #     closed               (1), 
 #     availableForDriving  (2)
 # }
+# /**
+#  * This DE indicates the current status of a hard shoulder: whether it is available for special usage
+#  * (e.g. for stopping or for driving) or closed for all vehicles.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `availableForStopping` - if the hard shoulder is available for stopping in e.g. emergency situations,
+#  * - 1 - `closed`               - if the hard shoulder is closed and cannot be occupied in any case,
+#  * - 2 - `availableForDriving`  - if the hard shoulder is available for regular driving.
+#  *
+#  * @category: Traffic information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the current status of a hard shoulder: whether it is available for special usage
-# * (e.g. for stopping or for driving) or closed for all vehicles.
-# * 
-# * The value shall be set to:
-# * - 0 - `availableForStopping` - if the hard shoulder is available for stopping in e.g. emergency situations,
-# * - 1 - `closed`               - if the hard shoulder is closed and cannot be occupied in any case,
-# * - 2 - `availableForDriving`  - if the hard shoulder is available for regular driving.
-# *
-# * @category: Traffic information
-# * @revision: Description revised in V2.1.1
-# 
 
 uint8 value
 uint8 AVAILABLE_FOR_STOPPING = 0

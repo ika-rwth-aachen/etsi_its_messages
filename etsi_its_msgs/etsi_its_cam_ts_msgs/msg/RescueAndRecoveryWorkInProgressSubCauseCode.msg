@@ -36,25 +36,25 @@
 #    prioritizedVehicle       (6),
 #    rescueAndRecoveryVehicle (7)
 # } (0..255)
-# ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `rescueAndRecoveryWorkInProgress` 
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`              - in case further detailed information on rescue and recovery work is unavailable,
-# * - 1 `emergencyVehicles`        - in case rescue and/or safeguarding work is ongoing by emergency vehicles, i.e. by vehicles that have the absolute right of way,
-# * - 2 `rescueHelicopterLanding`  - in case rescue helicopter is landing,
-# * - 3 `policeActivityOngoing`    - in case police activity is ongoing (only to be used if a more specific sub cause than (1) is needed),
-# * - 4 `medicalEmergencyOngoing`  - in case medical emergency recovery is ongoing (only to be used if a more specific sub cause than (1) is needed),
-# * - 5 `childAbductionInProgress` - in case a child kidnapping alarm is activated and rescue work is ongoing (only to be used if a more specific sub cause than (1) is needed),
-# * - 6 `prioritizedVehicle`       - in case rescue and/or safeguarding work is ongoing by prioritized vehicles, i.e. by vehicles that have priority but not the absolute right of way,
-# * - 7 `rescueAndRecoveryVehicle` - in case technical rescue work is ongoing by rescue and recovery vehicles.
-# * - 8-255: reserved for future usage.
-#
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1, named values 6 and 7 added in V2.2.1
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `rescueAndRecoveryWorkInProgress` 
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`              - in case further detailed information on rescue and recovery work is unavailable,
+#  * - 1 `emergencyVehicles`        - in case rescue and/or safeguarding work is ongoing by emergency vehicles, i.e. by vehicles that have the absolute right of way,
+#  * - 2 `rescueHelicopterLanding`  - in case rescue helicopter is landing,
+#  * - 3 `policeActivityOngoing`    - in case police activity is ongoing (only to be used if a more specific sub cause than (1) is needed),
+#  * - 4 `medicalEmergencyOngoing`  - in case medical emergency recovery is ongoing (only to be used if a more specific sub cause than (1) is needed),
+#  * - 5 `childAbductionInProgress` - in case a child kidnapping alarm is activated and rescue work is ongoing (only to be used if a more specific sub cause than (1) is needed),
+#  * - 6 `prioritizedVehicle`       - in case rescue and/or safeguarding work is ongoing by prioritized vehicles, i.e. by vehicles that have priority but not the absolute right of way,
+#  * - 7 `rescueAndRecoveryVehicle` - in case technical rescue work is ongoing by rescue and recovery vehicles.
+#  * - 8-255: reserved for future usage.
 # 
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1, named values 6 and 7 added in V2.2.1
+#  */
+# ------------------------------------------------------------------------------
 
 uint8 value
 uint8 MIN = 0
@@ -67,3 +67,4 @@ uint8 MEDICAL_EMERGENCY_ONGOING = 4
 uint8 CHILD_ABDUCTION_IN_PROGRESS = 5
 uint8 PRIORITIZED_VEHICLE = 6
 uint8 RESCUE_AND_RECOVERY_VEHICLE = 7
+

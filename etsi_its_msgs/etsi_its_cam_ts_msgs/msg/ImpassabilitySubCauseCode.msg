@@ -46,34 +46,34 @@
 #     fallenPowerCables         (16),
 #     snowDrifts                (17)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `impassability`
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`              - in case further detailed information about the unmanaged road blockage is unavailable,
+#  * - 1 `flooding          `       - in case the road is affected by flooding,
+#  * - 2 `dangerOfAvalanches`       - in case the road is at risk of being affected or blocked by avalanches,
+#  * - 3 `blastingOfAvalanches`     - in case there is an active blasting of avalanches on or near the road,
+#  * - 4 `landslips`                - in case the road is affected by landslips,
+#  * - 5 `chemicalSpillage`         - in case the road is affected by chemical spillage,
+#  * - 6 `winterClosure`            - in case the road is impassable due to a winter closure.
+#  * - 7 `sinkhole`                 - in case the road is impassable due to large holes in the road surface.
+#  * - 8 `earthquakeDamage`         - in case the road is obstructed or partially obstructed because of damage caused by an earthquake.
+#  * - 9 `fallenTrees`              - in case the road is obstructed or partially obstructed by one or more fallen trees. 
+#  * - 10 `rockfalls`               - in case the road is obstructed or partially obstructed due to fallen rocks.
+#  * - 11 `sewerOverflow`           - in case the road is obstructed or partially obstructed by overflows from one or more sewers. 
+#  * - 12 `stormDamage`             - in case the road is obstructed or partially obstructed by debris caused by strong winds.
+#  * - 13 `subsidence`              - in case the road surface has sunken or collapsed in places.
+#  * - 14 `burstPipe`               - in case the road surface has sunken or collapsed in places due to burst pipes.
+#  * - 15 `burstWaterMain`          - in case the road is obstructed due to local flooding and/or subsidence. 
+#  * - 16 `fallenPowerCables`       - in case the road is obstructed or partly obstructed by one or more fallen power cables.
+#  * - 17 `snowDrifts`              - in case the road is obstructed or partially obstructed by snow drifting in progress or patches of deep snow due to earlier drifting.
+#  * - 15-255                       - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: Created in V2.2.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `impassability`
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`              - in case further detailed information about the unmanaged road blockage is unavailable,
-# * - 1 `flooding          `       - in case the road is affected by flooding,
-# * - 2 `dangerOfAvalanches`       - in case the road is at risk of being affected or blocked by avalanches,
-# * - 3 `blastingOfAvalanches`     - in case there is an active blasting of avalanches on or near the road,
-# * - 4 `landslips`                - in case the road is affected by landslips,
-# * - 5 `chemicalSpillage`         - in case the road is affected by chemical spillage,
-# * - 6 `winterClosure`            - in case the road is impassable due to a winter closure.
-# * - 7 `sinkhole`                 - in case the road is impassable due to large holes in the road surface.
-# * - 8 `earthquakeDamage`         - in case the road is obstructed or partially obstructed because of damage caused by an earthquake.
-# * - 9 `fallenTrees`              - in case the road is obstructed or partially obstructed by one or more fallen trees. 
-# * - 10 `rockfalls`               - in case the road is obstructed or partially obstructed due to fallen rocks.
-# * - 11 `sewerOverflow`           - in case the road is obstructed or partially obstructed by overflows from one or more sewers. 
-# * - 12 `stormDamage`             - in case the road is obstructed or partially obstructed by debris caused by strong winds.
-# * - 13 `subsidence`              - in case the road surface has sunken or collapsed in places.
-# * - 14 `burstPipe`               - in case the road surface has sunken or collapsed in places due to burst pipes.
-# * - 15 `burstWaterMain`          - in case the road is obstructed due to local flooding and/or subsidence. 
-# * - 16 `fallenPowerCables`       - in case the road is obstructed or partly obstructed by one or more fallen power cables.
-# * - 17 `snowDrifts`              - in case the road is obstructed or partially obstructed by snow drifting in progress or patches of deep snow due to earlier drifting.
-# * - 15-255                       - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: Created in V2.2.1
-#
 
 uint8 value
 uint8 MIN = 0
@@ -96,3 +96,4 @@ uint8 BURST_PIPE = 14
 uint8 BURST_WATER_MAIN = 15
 uint8 FALLEN_POWER_CABLES = 16
 uint8 SNOW_DRIFTS = 17
+

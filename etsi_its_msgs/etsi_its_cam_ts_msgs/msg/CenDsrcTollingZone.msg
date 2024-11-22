@@ -32,21 +32,21 @@
 #     cenDsrcTollingZoneId      ProtectedZoneId OPTIONAL,
 #     ...
 # }
+# /**
+#  * The DF describes the position of a CEN DSRC road side equipment.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field protectedZoneLatitude: the latitude of the CEN DSRC road side equipment.
+#  * 
+#  * @field protectedZoneLongitude: the latitude of the CEN DSRC road side equipment. 
+#  * 
+#  * @field cenDsrcTollingZoneID: the optional ID of the CEN DSRC road side equipment.
+#  * 
+#  * @category: Infrastructure information, Communication information
+#  * @revision: revised in V2.1.1 (cenDsrcTollingZoneId is directly of type ProtectedZoneId)
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * The DF describes the position of a CEN DSRC road side equipment.
-# *
-# * It shall include the following components: 
-# * 
-# * @field protectedZoneLatitude: the latitude of the CEN DSRC road side equipment.
-# * 
-# * @field protectedZoneLongitude: the latitude of the CEN DSRC road side equipment. 
-# * 
-# * @field cenDsrcTollingZoneID: the optional ID of the CEN DSRC road side equipment.
-# * 
-# * @category: Infrastructure information, Communication information
-# * @revision: revised in V2.1.1 (cenDsrcTollingZoneId is directly of type ProtectedZoneId)
-# 
 
 Latitude protected_zone_latitude
 

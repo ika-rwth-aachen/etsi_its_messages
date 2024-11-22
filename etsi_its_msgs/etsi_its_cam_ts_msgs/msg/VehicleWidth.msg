@@ -30,22 +30,23 @@
 #     outOfRange  (61),  
 #     unavailable (62)
 # } (1..62)
-# ------------------------------------------------------------------------------
-# *
-# * This DE represents the width of a vehicle, excluding side mirrors and possible similar extensions.
-#
-# * The value shall be set to:
-# * - `n` (`n > 0` and `n < 61`) indicates the applicable value is equal to or less than n x 0,1 metre, and greater than (n-1) x 0,1 metre,
-# * - `61` indicates that the vehicle width is greater than 6,0 metres,
-# * - `62` indicates that the information in unavailable.
-# * 
-# * @unit: 0,1 metre
-# * @category: Vehicle information 
-# * @revision: Description updated in V2.1.1 (the meaning of 61 has changed slightly).
+# /**
+#  * This DE represents the width of a vehicle, excluding side mirrors and possible similar extensions.
 # 
+#  * The value shall be set to:
+#  * - `n` (`n > 0` and `n < 61`) indicates the applicable value is equal to or less than n x 0,1 metre, and greater than (n-1) x 0,1 metre,
+#  * - `61` indicates that the vehicle width is greater than 6,0 metres,
+#  * - `62` indicates that the information in unavailable.
+#  * 
+#  * @unit: 0,1 metre
+#  * @category: Vehicle information 
+#  * @revision: Description updated in V2.1.1 (the meaning of 61 has changed slightly).
+#  */
+# ------------------------------------------------------------------------------
 
 uint8 value
 uint8 MIN = 1
 uint8 MAX = 62
 uint8 OUT_OF_RANGE = 61
 uint8 UNAVAILABLE = 62
+

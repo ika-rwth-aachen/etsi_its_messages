@@ -39,27 +39,27 @@
 #     instantBlackIce  (9),
 #     roadsSalted      (10)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause code of the @ref CauseCode `adverseWeatherCondition-Adhesion`. 
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`     - in case information on the cause of the low road adhesion is unavailable,
+#  * - 1 - `heavyFrostOnRoad`- in case the low road adhesion is due to heavy frost on the road,
+#  * - 2 - `fuelOnRoad`      - in case the low road adhesion is due to fuel on the road,
+#  * - 3 - `mudOnRoad`       - in case the low road adhesion is due to mud on the road,
+#  * - 4 - `snowOnRoad`      - in case the low road adhesion is due to snow on the road,
+#  * - 5 - `iceOnRoad`       - in case the low road adhesion is due to ice on the road,
+#  * - 6 - `blackIceOnRoad`  - in case the low road adhesion is due to black ice on the road,
+#  * - 7 - `oilOnRoad`       - in case the low road adhesion is due to oil on the road,
+#  * - 8 - `looseChippings`  - in case the low road adhesion is due to loose gravel or stone fragments detached from a road surface or from a hazard,
+#  * - 9 - `instantBlackIce` - in case the low road adhesion is due to instant black ice on the road surface,
+#  * - 10 - `roadsSalted`    - when the low road adhesion is due to salted road,
+#  * - 11-255                - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause code of the @ref CauseCode `adverseWeatherCondition-Adhesion`. 
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`     - in case information on the cause of the low road adhesion is unavailable,
-# * - 1 - `heavyFrostOnRoad`- in case the low road adhesion is due to heavy frost on the road,
-# * - 2 - `fuelOnRoad`      - in case the low road adhesion is due to fuel on the road,
-# * - 3 - `mudOnRoad`       - in case the low road adhesion is due to mud on the road,
-# * - 4 - `snowOnRoad`      - in case the low road adhesion is due to snow on the road,
-# * - 5 - `iceOnRoad`       - in case the low road adhesion is due to ice on the road,
-# * - 6 - `blackIceOnRoad`  - in case the low road adhesion is due to black ice on the road,
-# * - 7 - `oilOnRoad`       - in case the low road adhesion is due to oil on the road,
-# * - 8 - `looseChippings`  - in case the low road adhesion is due to loose gravel or stone fragments detached from a road surface or from a hazard,
-# * - 9 - `instantBlackIce` - in case the low road adhesion is due to instant black ice on the road surface,
-# * - 10 - `roadsSalted`    - when the low road adhesion is due to salted road,
-# * - 11-255                - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -75,3 +75,4 @@ uint8 OIL_ON_ROAD = 7
 uint8 LOOSE_CHIPPINGS = 8
 uint8 INSTANT_BLACK_ICE = 9
 uint8 ROADS_SALTED = 10
+

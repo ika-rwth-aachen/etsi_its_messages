@@ -31,19 +31,19 @@
 #     glycemiaProblem (1), 
 #     heartProblem    (2)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode "humanProblem".
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`    - in case further detailed information on human health problem is unavailable,
+#  * - 1 - `glycemiaProblem`- in case human problem is due to glycaemia problem,
+#  * - 2 - `heartProblem`   - in case human problem is due to heart problem.
+#  * - 3-255                - reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode "humanProblem".
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`    - in case further detailed information on human health problem is unavailable,
-# * - 1 - `glycemiaProblem`- in case human problem is due to glycaemia problem,
-# * - 2 - `heartProblem`   - in case human problem is due to heart problem.
-# * - 3-255                - reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -51,3 +51,4 @@ uint8 MAX = 255
 uint8 UNAVAILABLE = 0
 uint8 GLYCEMIA_PROBLEM = 1
 uint8 HEART_PROBLEM = 2
+

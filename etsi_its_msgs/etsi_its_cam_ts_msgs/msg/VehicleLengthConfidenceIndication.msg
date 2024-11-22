@@ -33,22 +33,22 @@
 #     trailerPresenceIsUnknown        (3), 
 #     unavailable                     (4)
 # }
+# /**
+#  * This DE provides information about the presence of a trailer. 
+#  *
+#  * The value shall be set to:
+#  * - 0 `noTrailerPresent`                - to indicate that no trailer is present, i.e. either the vehicle is physically not enabled to tow a trailer or it has been detected that no trailer is present,
+#  * - 1 `trailerPresentWithKnownLength`   - to indicate that a trailer has been detected as present and the length is  included in the vehicle length value,
+#  * - 2 `trailerPresentWithUnknownLength` - to indicate that a trailer has been detected as present and the length is not included in the vehicle length value,
+#  * - 3 `trailerPresenceIsUnknown`        - to indicate that information about the trailer presence is unknown, i.e. the vehicle is physically enabled to tow a trailer but the detection of trailer presence/absence is not possible,
+#  * - 4 `unavailable`                     - to indicate that the information about the presence of a trailer is not available, i.e. it is neither known whether the vehicle is able to tow a trailer, 
+#  *                                        nor the detection of trailer presence/absence is possible.
+#  * 
+#  * @note: this DE is kept for backwards compatibility reasons only. It is recommended to use the @ref TrailerPresenceInformation instead. 
+#  * @category: Vehicle information
+#  * @revision: Description revised in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE provides information about the presence of a trailer. 
-# *
-# * The value shall be set to:
-# * - 0 `noTrailerPresent`                - to indicate that no trailer is present, i.e. either the vehicle is physically not enabled to tow a trailer or it has been detected that no trailer is present,
-# * - 1 `trailerPresentWithKnownLength`   - to indicate that a trailer has been detected as present and the length is  included in the vehicle length value,
-# * - 2 `trailerPresentWithUnknownLength` - to indicate that a trailer has been detected as present and the length is not included in the vehicle length value,
-# * - 3 `trailerPresenceIsUnknown`        - to indicate that information about the trailer presence is unknown, i.e. the vehicle is physically enabled to tow a trailer but the detection of trailer presence/absence is not possible,
-# * - 4 `unavailable`                     - to indicate that the information about the presence of a trailer is not available, i.e. it is neither known whether the vehicle is able to tow a trailer, 
-# *                                        nor the detection of trailer presence/absence is possible.
-# * 
-# * @note: this DE is kept for backwards compatibility reasons only. It is recommended to use the @ref TrailerPresenceInformation instead. 
-# * @category: Vehicle information
-# * @revision: Description revised in V2.1.1
-#
 
 uint8 value
 uint8 NO_TRAILER_PRESENT = 0

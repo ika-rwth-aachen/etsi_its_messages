@@ -31,20 +31,20 @@
 #     emergencyVehicleApproaching   (1), 
 #     prioritizedVehicleApproaching (2)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode "emergencyVehicleApproaching". 
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`                   - in case further detailed information on the emergency vehicle approaching event 
+#  *                                         is unavailable,
+#  * - 1 - `emergencyVehicleApproaching`   - in case an operating emergency vehicle is approaching,
+#  * - 2 - `prioritizedVehicleApproaching` - in case a prioritized vehicle is approaching,
+#  * - 3-255                               - reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode "emergencyVehicleApproaching". 
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`                   - in case further detailed information on the emergency vehicle approaching event 
-# *                                         is unavailable,
-# * - 1 - `emergencyVehicleApproaching`   - in case an operating emergency vehicle is approaching,
-# * - 2 - `prioritizedVehicleApproaching` - in case a prioritized vehicle is approaching,
-# * - 3-255                               - reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -52,3 +52,4 @@ uint8 MAX = 255
 uint8 UNAVAILABLE = 0
 uint8 EMERGENCY_VEHICLE_APPROACHING = 1
 uint8 PRIORITIZED_VEHICLE_APPROACHING = 2
+

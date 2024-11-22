@@ -31,22 +31,22 @@
 #     positiveOutOfRange (160),
 #     unavailable        (161)  
 # } (-160 .. 161)
+# /** 
+#  * This DE represents the value of an acceleration component in a defined coordinate system.
+#  *
+#  * The value shall be set to:
+#  * - `-160` for acceleration values equal to or less than -16 m/s^2,
+#  * - `n` (`n > -160` and `n <= 0`) to indicate negative acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
+#  * - `n` (`n > 0` and `n < 160`) to indicate positive acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
+#  * - `160` for acceleration values greater than 15,9 m/s^2,
+#  * - `161` when the data is unavailable.
+#  *
+#  * @note: the formula for values > -160 and <160 results in rounding up to the next value. Zero acceleration is indicated using n=0.
+#  * @unit 0,1 m/s^2
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents the value of an acceleration component in a defined coordinate system.
-# *
-# * The value shall be set to:
-# * - `-160` for acceleration values equal to or less than -16 m/s^2,
-# * - `n` (`n > -160` and `n <= 0`) to indicate negative acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
-# * - `n` (`n > 0` and `n < 160`) to indicate positive acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
-# * - `160` for acceleration values greater than 15,9 m/s^2,
-# * - `161` when the data is unavailable.
-# *
-# * @note: the formula for values > -160 and <160 results in rounding up to the next value. Zero acceleration is indicated using n=0.
-# * @unit 0,1 m/s^2
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-#
 
 int16 value
 int16 MIN = -160
@@ -54,3 +54,4 @@ int16 MAX = 161
 int16 NEGATIVE_OUT_OF_RANGE = -160
 int16 POSITIVE_OUT_OF_RANGE = 160
 int16 UNAVAILABLE = 161
+

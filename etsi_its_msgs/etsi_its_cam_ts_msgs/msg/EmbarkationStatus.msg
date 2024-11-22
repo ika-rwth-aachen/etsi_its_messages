@@ -27,14 +27,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # EmbarkationStatus ::= BOOLEAN
+# /**
+#  * This DE indicates whether a vehicle (e.g. public transport vehicle, truck) is under the embarkation process.
+#  * If that is the case, the value is *TRUE*, otherwise *FALSE*.
+#  *
+#  * @category: Vehicle information
+#  * @revision: editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates whether a vehicle (e.g. public transport vehicle, truck) is under the embarkation process.
-# * If that is the case, the value is *TRUE*, otherwise *FALSE*.
-# *
-# * @category: Vehicle information
-# * @revision: editorial update in V2.1.1
-# 
 
 bool value
 

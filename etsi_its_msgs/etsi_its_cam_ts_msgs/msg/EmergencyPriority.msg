@@ -30,6 +30,17 @@
 #     requestForRightOfWay                  (0), 
 #     requestForFreeCrossingAtATrafficLight (1)
 # } (SIZE(2))
+# /**
+#  * This DE indicates the right of priority requested or assumed by an operating emergency vehicle.
+#  * The right-of-priority bit shall be set to `1` if the corresponding right is requested.
+#  * 
+#  * The corresponding bit shall be set to 1 under the following conditions:
+#  * - 0 - `requestForRightOfWay`                  - when the vehicle is requesting/assuming the right of way,
+#  * - 1 - `requestForFreeCrossingAtATrafficLight` - when the vehicle is requesting/assuming the right to pass at a (red) traffic light.
+#  *
+#  * @category: Traffic information
+#  * @revision: description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
 
 uint8[] value
@@ -37,3 +48,4 @@ uint8 bits_unused
 uint8 SIZE_BITS = 2
 uint8 BIT_INDEX_REQUEST_FOR_RIGHT_OF_WAY = 0
 uint8 BIT_INDEX_REQUEST_FOR_FREE_CROSSING_AT_A_TRAFFIC_LIGHT = 1
+

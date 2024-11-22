@@ -35,29 +35,29 @@
 #     protectedZoneId           ProtectedZoneId OPTIONAL,
 #     ...
 # }
+# /**
+#  * This DF describes a zone of protection inside which the ITS communication should be restricted.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field protectedZoneType: type of the protected zone. 
+#  * 
+#  * @field expiryTime: optional time at which the validity of the protected communication zone will expire.
+#  * 
+#  * @field protectedZoneLatitude: latitude of the centre point of the protected communication zone.
+#  * 
+#  * @field protectedZoneLongitude: longitude of the centre point of the protected communication zone.
+#  * 
+#  * @field protectedZoneRadius: optional radius of the protected communication zone in metres.
+#  * 
+#  * @field protectedZoneId: the optional ID of the protected communication zone.
+#  * 
+#  * @note: A protected communication zone may be defined around a CEN DSRC road side equipment.
+#  * 
+#  * @category: Infrastructure information, Communication information
+#  * @revision: revised in V2.1.1 (changed protectedZoneID to protectedZoneId)
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF describes a zone of protection inside which the ITS communication should be restricted.
-# *
-# * It shall include the following components: 
-# * 
-# * @field protectedZoneType: type of the protected zone. 
-# * 
-# * @field expiryTime: optional time at which the validity of the protected communication zone will expire.
-# * 
-# * @field protectedZoneLatitude: latitude of the centre point of the protected communication zone.
-# * 
-# * @field protectedZoneLongitude: longitude of the centre point of the protected communication zone.
-# * 
-# * @field protectedZoneRadius: optional radius of the protected communication zone in metres.
-# * 
-# * @field protectedZoneId: the optional ID of the protected communication zone.
-# * 
-# * @note: A protected communication zone may be defined around a CEN DSRC road side equipment.
-# * 
-# * @category: Infrastructure information, Communication information
-# * @revision: revised in V2.1.1 (changed protectedZoneID to protectedZoneId)
-# 
 
 ProtectedZoneType protected_zone_type
 

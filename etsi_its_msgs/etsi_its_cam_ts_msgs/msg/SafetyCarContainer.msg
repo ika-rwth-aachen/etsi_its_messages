@@ -32,20 +32,20 @@
 # 	trafficRule TrafficRule OPTIONAL,
 # 	speedLimit SpeedLimit OPTIONAL
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Safety Car Container.
 # *
-#* This type contains detaild information of the Safety Car Container.
-#*
-#* It shall include the following components:
-#*
-#* @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
-#*
-#* @field incidentIndication: the optional incident related to the roadworks to provide additional information of the roadworks zone.
-#*
-#* @field trafficRule: an optional rule indicates whether vehicles are allowed to overtake a safety car that is originating this CAM.
-#*
-#* @field speedLimit: an optional speed indicates whether a speed limit is applied to vehicles following the safety car. 
-#
+# * It shall include the following components:
+# *
+# * @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
+# *
+# * @field incidentIndication: the optional incident related to the roadworks to provide additional information of the roadworks zone.
+# *
+# * @field trafficRule: an optional rule indicates whether vehicles are allowed to overtake a safety car that is originating this CAM.
+# *
+# * @field speedLimit: an optional speed indicates whether a speed limit is applied to vehicles following the safety car. 
+# */
+# ------------------------------------------------------------------------------
 
 LightBarSirenInUse light_bar_siren_in_use
 

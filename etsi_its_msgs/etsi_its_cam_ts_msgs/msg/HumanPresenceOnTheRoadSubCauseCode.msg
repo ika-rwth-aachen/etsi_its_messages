@@ -50,38 +50,38 @@
 #     motorcycle-and-sidecar-right (20), 
 #     motorcycle-and-sidecar-left  (21)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause code of the @ref CauseCode `humanPresenceOnTheRoad`.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`                    - in case further detailed information abou the human presence on the road is unavailable,
+#  * - 1 - `childrenOnRoadway`              - in case children are present on the road,
+#  * - 2 - `cyclistOnRoadway`               - in case cyclist(s) are present on the road,
+#  * - 3 - `motorcyclistOnRoadway`          - in case motorcyclist(s) are present on the road,
+#  * - 4 - `pedestrian`                     - in case pedestrian(s) of any type are present on the road,
+#  * - 5 - `ordinary-pedestrian`            - in case pedestrian(s) to which no more-specific profile applies are present on the road,
+#  * - 6 - `road-worker`                    - in case pedestrian(s) with the role of a road worker applies are present on the road,
+#  * - 7 - `first-responder`                - in case pedestrian(s) with the role of a first responder applies are present on the road,  
+#  * - 8 - `lightVruVehicle                 - in case light vru vehicle(s) of any type are present on the road,
+#  * - 9 - `bicyclist `                     - in case cycle(s) and their bicyclist(s) are present on the road,
+#  * - 10 - `wheelchair-user`               - in case wheelchair(s) and their user(s) are present on the road,
+#  * - 11 - `horse-and-rider`               - in case horse(s) and rider(s) are present on the road,
+#  * - 12 - `rollerskater`                  - in case rolleskater(s) and skater(s) are present on the road,
+#  * - 13 - `e-scooter`                     - in case e-scooter(s) and rider(s) are present on the road,
+#  * - 14 - `personal-transporter`          - in case personal-transporter(s) and rider(s) are present on the road,
+#  * - 15 - `pedelec`                       - in case pedelec(s) and rider(s) are present on the road,
+#  * - 16 - `speed-pedelec`                 - in case speed-pedelec(s) and rider(s) are present on the road,
+#  * - 17 - `ptw`                           - in case powered-two-wheeler(s) of any type are present on the road,
+#  * - 18 - `moped`                         - in case moped(s) and rider(s) are present on the road,
+#  * - 19 - `motorcycle`                    - in case motorcycle(s) and rider(s) are present on the road,
+#  * - 20 - `motorcycle-and-sidecar-right`  - in case motorcycle(s) with sidecar(s) on the right and rider are present on the road,
+#  * - 21 - `motorcycle-and-sidecar-left`   - in case motorcycle(s) with sidecar(s) on the left and rider are present on the road.
+#  * - 22-255                               - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: editorial revision in V2.1.1, named values 4-21 added in V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause code of the @ref CauseCode `humanPresenceOnTheRoad`.
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`                    - in case further detailed information abou the human presence on the road is unavailable,
-# * - 1 - `childrenOnRoadway`              - in case children are present on the road,
-# * - 2 - `cyclistOnRoadway`               - in case cyclist(s) are present on the road,
-# * - 3 - `motorcyclistOnRoadway`          - in case motorcyclist(s) are present on the road,
-# * - 4 - `pedestrian`                     - in case pedestrian(s) of any type are present on the road,
-# * - 5 - `ordinary-pedestrian`            - in case pedestrian(s) to which no more-specific profile applies are present on the road,
-# * - 6 - `road-worker`                    - in case pedestrian(s) with the role of a road worker applies are present on the road,
-# * - 7 - `first-responder`                - in case pedestrian(s) with the role of a first responder applies are present on the road,  
-# * - 8 - `lightVruVehicle                 - in case light vru vehicle(s) of any type are present on the road,
-# * - 9 - `bicyclist `                     - in case cycle(s) and their bicyclist(s) are present on the road,
-# * - 10 - `wheelchair-user`               - in case wheelchair(s) and their user(s) are present on the road,
-# * - 11 - `horse-and-rider`               - in case horse(s) and rider(s) are present on the road,
-# * - 12 - `rollerskater`                  - in case rolleskater(s) and skater(s) are present on the road,
-# * - 13 - `e-scooter`                     - in case e-scooter(s) and rider(s) are present on the road,
-# * - 14 - `personal-transporter`          - in case personal-transporter(s) and rider(s) are present on the road,
-# * - 15 - `pedelec`                       - in case pedelec(s) and rider(s) are present on the road,
-# * - 16 - `speed-pedelec`                 - in case speed-pedelec(s) and rider(s) are present on the road,
-# * - 17 - `ptw`                           - in case powered-two-wheeler(s) of any type are present on the road,
-# * - 18 - `moped`                         - in case moped(s) and rider(s) are present on the road,
-# * - 19 - `motorcycle`                    - in case motorcycle(s) and rider(s) are present on the road,
-# * - 20 - `motorcycle-and-sidecar-right`  - in case motorcycle(s) with sidecar(s) on the right and rider are present on the road,
-# * - 21 - `motorcycle-and-sidecar-left`   - in case motorcycle(s) with sidecar(s) on the left and rider are present on the road.
-# * - 22-255                               - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: editorial revision in V2.1.1, named values 4-21 added in V2.2.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -108,3 +108,4 @@ uint8 MOPED = 18
 uint8 MOTORCYCLE = 19
 uint8 MOTORCYCLE_AND_SIDECAR_RIGHT = 20
 uint8 MOTORCYCLE_AND_SIDECAR_LEFT = 21
+

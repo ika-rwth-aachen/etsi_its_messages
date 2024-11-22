@@ -48,16 +48,16 @@
 #     corrosiveSubstances                                  (18),
 #     miscellaneousDangerousSubstances                     (19)
 # }
+# /**
+#  * This DE indicates the type of the dangerous goods being carried by a heavy vehicle.
+#  * The value is assigned according to `class` and `division` definitions of dangerous goods as specified in part II,
+#  * chapter 2.1.1.1 of European Agreement concerning the International Carriage of Dangerous Goods by Road [3].
+#  * 
+#  * 
+#  * @category Vehicle information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the type of the dangerous goods being carried by a heavy vehicle.
-# * The value is assigned according to `class` and `division` definitions of dangerous goods as specified in part II,
-# * chapter 2.1.1.1 of European Agreement concerning the International Carriage of Dangerous Goods by Road [3].
-# * 
-# * 
-# * @category Vehicle information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 EXPLOSIVES1 = 0

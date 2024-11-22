@@ -31,22 +31,22 @@
 #     messageId          MessageId,
 #     stationId          StationId
 # }
+# /**
+#  * This DF represents a common message header for application and facilities layer messages.
+#  * It is included at the beginning of an ITS message as the message header.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field protocolVersion: version of the ITS message.
+#  *
+#  * @field messageId: type of the ITS message.
+#  *
+#  * @field stationId: the identifier of the ITS-S that generated the ITS message.
+#  *
+#  * @category: Communication information
+#  * @revision:  update in V2.1.1: messageID and stationID changed to messageId and stationId; messageId is of type MessageId.
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a common message header for application and facilities layer messages.
-# * It is included at the beginning of an ITS message as the message header.
-# *
-# * It shall include the following components: 
-# *
-# * @field protocolVersion: version of the ITS message.
-# *
-# * @field messageId: type of the ITS message.
-# *
-# * @field stationId: the identifier of the ITS-S that generated the ITS message.
-# *
-# * @category: Communication information
-# * @revision:  update in V2.1.1: messageID and stationID changed to messageId and stationId; messageId is of type MessageId.
-# 
 
 OrdinalNumber1B protocol_version
 

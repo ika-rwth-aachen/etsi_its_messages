@@ -31,18 +31,18 @@
 # 	incidentIndication CauseCodeV2 OPTIONAL,
 # 	emergencyPriority EmergencyPriority OPTIONAL
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Emergency Container.
 # *
-#* This type contains detaild information of the Emergency Container.
-#*
-#* It shall include the following components:
-#*
-#* @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
-#*
-#* @field incidentIndication: the optional incident related to the roadworks to provide additional information of the roadworks zone.
-#*
-#* @field emergencyPriority: the optional component represent right of way indicator of the vehicle ITS-S that originates the CAM PDU.
-#
+# * It shall include the following components:
+# *
+# * @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
+# *
+# * @field incidentIndication: the optional incident related to the roadworks to provide additional information of the roadworks zone.
+# *
+# * @field emergencyPriority: the optional component represent right of way indicator of the vehicle ITS-S that originates the CAM PDU.
+# */
+# ------------------------------------------------------------------------------
 
 LightBarSirenInUse light_bar_siren_in_use
 

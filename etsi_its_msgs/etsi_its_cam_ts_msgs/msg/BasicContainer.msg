@@ -31,19 +31,19 @@
 # 	referencePosition    ReferencePositionWithConfidence,
 # 	...
 # }
+# /** 
+#  * This DE represents a general container for usage in various types of messages.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field stationType: the type of technical context in which the ITS-S that has generated the message is integrated in.
+#  *
+#  * @field referencePosition: the reference position of the station that has generated the message that contains the basic container.
+#  *
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents a general container for usage in various types of messages.
-# *
-# * It shall include the following components: 
-# *
-# * @field stationType: the type of technical context in which the ITS-S that has generated the message is integrated in.
-# *
-# * @field referencePosition: the reference position of the station that has generated the message that contains the basic container.
-# *
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 TrafficParticipantType station_type
 

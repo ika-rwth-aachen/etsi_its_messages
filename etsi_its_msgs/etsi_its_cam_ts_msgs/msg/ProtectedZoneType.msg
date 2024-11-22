@@ -31,20 +31,19 @@
 #     ..., 
 #     temporaryCenDsrcTolling (1) 
 # }
+# /**
+#  * This DE indicates the type of a protected communication zone, so that an ITS-S is aware of the actions to do
+#  * while passing by such zone (e.g. reduce the transmit power in case of a DSRC tolling station).
+#  * 
+#  * The protected zone type is defined in ETSI TS 102 792 [14].
+#  * 
+#  * 
+#  * @category: Communication information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the type of a protected communication zone, so that an ITS-S is aware of the actions to do
-# * while passing by such zone (e.g. reduce the transmit power in case of a DSRC tolling station).
-# * 
-# * The protected zone type is defined in ETSI TS 102 792 [14].
-# * 
-# * 
-# * @category: Communication information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 PERMANENT_CEN_DSRC_TOLLING = 0
-# .extended
 uint8 TEMPORARY_CEN_DSRC_TOLLING = 1
 

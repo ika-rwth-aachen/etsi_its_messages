@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_cam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cam_ts_coding/cam_ts_ProtectedCommunicationZonesRSU.h>
+#include <etsi_its_cam_ts_coding/cam_ts_ProtectedCommunicationZone.h>
 #include <etsi_its_cam_ts_conversion/convertProtectedCommunicationZone.h>
-#include <etsi_its_cam_ts_conversion/convertProtectedCommunicationZonesRSU.h>
 #ifdef ROS1
+#include <etsi_its_cam_ts_msgs/ProtectedCommunicationZone.h>
 #include <etsi_its_cam_ts_msgs/ProtectedCommunicationZonesRSU.h>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
 #else
+#include <etsi_its_cam_ts_msgs/msg/protected_communication_zone.hpp>
 #include <etsi_its_cam_ts_msgs/msg/protected_communication_zones_rsu.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
 #endif

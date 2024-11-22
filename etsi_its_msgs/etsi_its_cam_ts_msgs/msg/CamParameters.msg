@@ -33,17 +33,17 @@
 # 	specialVehicleContainer  SpecialVehicleContainer OPTIONAL,
 # 	...
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * @field basicContainer: the mandatory basic container of the CAM.
 # *
-#* @field basicContainer: the mandatory basic container of the CAM.
-#*
-#* @field highFrequencyContainer: the mandatory container represents the high frequency of the CAM.
-#* 
-#* @field lowFrequencyContainer: the optional conatainer represents the low frequency of the CAM.
-#*
-#* @field specialVehicleContainer: The special container of the CAM shall be present as defined in clause 6.1.2. 
-#* The content of the container shall be set according to the value of the vehicleRole component as specified in Table 5. 
-#
+# * @field highFrequencyContainer: the mandatory container represents the high frequency of the CAM.
+# * 
+# * @field lowFrequencyContainer: the optional conatainer represents the low frequency of the CAM.
+# *
+# * @field specialVehicleContainer: The special container of the CAM shall be present as defined in clause 6.1.2. 
+# * The content of the container shall be set according to the value of the vehicleRole component as specified in Table 5. 
+# */
+# ------------------------------------------------------------------------------
 
 BasicContainer basic_container
 

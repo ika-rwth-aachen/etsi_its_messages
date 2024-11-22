@@ -32,20 +32,20 @@
 #     excessLength (2), 
 #     excessHeight (3)
 # } (SIZE(4))
+# /**
+#  * The DE indicates if a vehicle is carrying goods in the special transport conditions.
+#  *
+#  * The corresponding bit shall be set to 1 under the following conditions:
+#  * - 0 `heavyLoad`        - the vehicle is carrying goods with heavy load,
+#  * - 1 `excessWidth`      - the vehicle is carrying goods in excess of width,
+#  * - 2 `excessLength`     - the vehicle is carrying goods in excess of length,
+#  * - 3 `excessHeight`     - the vehicle is carrying goods in excess of height.
+#  *
+#  * Otherwise, the corresponding bit shall be set to 0.
+#  * @category Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * The DE indicates if a vehicle is carrying goods in the special transport conditions.
-# *
-# * The corresponding bit shall be set to 1 under the following conditions:
-# * - 0 `heavyLoad`        - the vehicle is carrying goods with heavy load,
-# * - 1 `excessWidth`      - the vehicle is carrying goods in excess of width,
-# * - 2 `excessLength`     - the vehicle is carrying goods in excess of length,
-# * - 3 `excessHeight`     - the vehicle is carrying goods in excess of height.
-# *
-# * Otherwise, the corresponding bit shall be set to 0.
-# * @category Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 uint8[] value
 uint8 bits_unused
@@ -54,3 +54,4 @@ uint8 BIT_INDEX_HEAVY_LOAD = 0
 uint8 BIT_INDEX_EXCESS_WIDTH = 1
 uint8 BIT_INDEX_EXCESS_LENGTH = 2
 uint8 BIT_INDEX_EXCESS_HEIGHT = 3
+

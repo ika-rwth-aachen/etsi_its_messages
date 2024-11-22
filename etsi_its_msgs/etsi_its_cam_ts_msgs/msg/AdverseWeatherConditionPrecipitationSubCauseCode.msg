@@ -32,20 +32,20 @@
 #     heavySnowfall (2),
 #     softHail      (3)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-Precipitation`. 
+#  *
+#  * The value shall be set to:
+#  * - 0 - `unavailable`   - in case information on the type of precipitation is unavailable,
+#  * - 1 - `heavyRain`     - in case the type of precipitation is heavy rain,
+#  * - 2 - `heavySnowfall` - in case the type of precipitation is heavy snow fall,
+#  * - 3 - `softHail`      - in case the type of precipitation is soft hail.
+#  * - 4-255               - are reserved for future usage
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-Precipitation`. 
-# *
-# * The value shall be set to:
-# * - 0 - `unavailable`   - in case information on the type of precipitation is unavailable,
-# * - 1 - `heavyRain`     - in case the type of precipitation is heavy rain,
-# * - 2 - `heavySnowfall` - in case the type of precipitation is heavy snow fall,
-# * - 3 - `softHail`      - in case the type of precipitation is soft hail.
-# * - 4-255               - are reserved for future usage
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -54,3 +54,4 @@ uint8 UNAVAILABLE = 0
 uint8 HEAVY_RAIN = 1
 uint8 HEAVY_SNOWFALL = 2
 uint8 SOFT_HAIL = 3
+

@@ -30,16 +30,16 @@
 # 	embarkationStatus EmbarkationStatus,
 # 	ptActivation PtActivation OPTIONAL
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Public Transport Container.
 # *
-#* This type contains detaild information of the Public Transport Container.
-#*
-#* It shall include the following components:
-#*
-#* @field embarkationStatus: It indicates whether the passenger embarkation is currently ongoing. 
-#*
-#* @field ptActivation: an optional component used for controlling traffic lights, barriers, bollards, etc.
-#
+# * It shall include the following components:
+# *
+# * @field embarkationStatus: It indicates whether the passenger embarkation is currently ongoing. 
+# *
+# * @field ptActivation: an optional component used for controlling traffic lights, barriers, bollards, etc.
+# */
+# ------------------------------------------------------------------------------
 
 EmbarkationStatus embarkation_status
 

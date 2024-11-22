@@ -30,19 +30,19 @@
 #     steeringWheelAngleValue         SteeringWheelAngleValue,
 #     steeringWheelAngleConfidence    SteeringWheelAngleConfidence
 # }
+# /**
+#  * This DF represents the steering wheel angle of the vehicle at certain point in time.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field steeringWheelAngleValue: steering wheel angle value.
+#  * 
+#  * @field steeringWheelAngleConfidence: confidence value of the steering wheel angle value.
+#  * 
+#  * @category: Vehicle information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the steering wheel angle of the vehicle at certain point in time.
-# *
-# * It shall include the following components: 
-# * 
-# * @field steeringWheelAngleValue: steering wheel angle value.
-# * 
-# * @field steeringWheelAngleConfidence: confidence value of the steering wheel angle value.
-# * 
-# * @category: Vehicle information
-# * @revision: Created in V2.1.1
-# 
 
 SteeringWheelAngleValue steering_wheel_angle_value
 

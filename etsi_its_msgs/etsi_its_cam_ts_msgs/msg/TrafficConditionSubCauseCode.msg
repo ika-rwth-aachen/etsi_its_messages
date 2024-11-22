@@ -38,26 +38,26 @@
 #     trafficJamStronglyDecreasing (8),
 #     trafficJamStable             (9)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `trafficCondition`. 
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`                  - in case further detailed information on the traffic condition is unavailable,
+#  * - 1 `increasedVolumeOfTraffic`     - in case the type of traffic condition is increased traffic volume,
+#  * - 2 `trafficJamSlowlyIncreasing`   - in case the type of traffic condition is a traffic jam which volume is increasing slowly,
+#  * - 3 `trafficJamIncreasing`         - in case the type of traffic condition is a traffic jam which volume is increasing,
+#  * - 4 `trafficJamStronglyIncreasing` - in case the type of traffic condition is a traffic jam which volume is strongly increasing,
+#  * - 5 `trafficJam`         `         - in case the type of traffic condition is a traffic jam and no further detailed information about its volume is available,
+#  * - 6 `trafficJamSlightlyDecreasing` - in case the type of traffic condition is a traffic jam which volume is decreasing slowly,
+#  * - 7 `trafficJamDecreasing`         - in case the type of traffic condition is a traffic jam which volume is decreasing,
+#  * - 8 `trafficJamStronglyDecreasing` - in case the type of traffic condition is a traffic jam which volume is decreasing rapidly,
+#  * - 9 `trafficJamStable`             - in case the traffic condition is a traffic jam with stable volume,
+#  * - 10-255: reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1, definition of value 0 and 1 changed in V2.2.1, name and definition of value 5 changed in V2.2.1, value 9 added in V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `trafficCondition`. 
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`                  - in case further detailed information on the traffic condition is unavailable,
-# * - 1 `increasedVolumeOfTraffic`     - in case the type of traffic condition is increased traffic volume,
-# * - 2 `trafficJamSlowlyIncreasing`   - in case the type of traffic condition is a traffic jam which volume is increasing slowly,
-# * - 3 `trafficJamIncreasing`         - in case the type of traffic condition is a traffic jam which volume is increasing,
-# * - 4 `trafficJamStronglyIncreasing` - in case the type of traffic condition is a traffic jam which volume is strongly increasing,
-# * - 5 `trafficJam`         `         - in case the type of traffic condition is a traffic jam and no further detailed information about its volume is available,
-# * - 6 `trafficJamSlightlyDecreasing` - in case the type of traffic condition is a traffic jam which volume is decreasing slowly,
-# * - 7 `trafficJamDecreasing`         - in case the type of traffic condition is a traffic jam which volume is decreasing,
-# * - 8 `trafficJamStronglyDecreasing` - in case the type of traffic condition is a traffic jam which volume is decreasing rapidly,
-# * - 9 `trafficJamStable`             - in case the traffic condition is a traffic jam with stable volume,
-# * - 10-255: reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1, definition of value 0 and 1 changed in V2.2.1, name and definition of value 5 changed in V2.2.1, value 9 added in V2.2.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -72,3 +72,4 @@ uint8 TRAFFIC_JAM_SLIGHTLY_DECREASING = 6
 uint8 TRAFFIC_JAM_DECREASING = 7
 uint8 TRAFFIC_JAM_STRONGLY_DECREASING = 8
 uint8 TRAFFIC_JAM_STABLE = 9
+

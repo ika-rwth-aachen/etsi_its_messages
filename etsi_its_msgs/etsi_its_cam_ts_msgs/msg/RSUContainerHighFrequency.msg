@@ -30,17 +30,17 @@
 # 	protectedCommunicationZonesRSU ProtectedCommunicationZonesRSU OPTIONAL,
 # 	...
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the RSU Container High Frequency.
 # *
-#* This type contains detaild information of the RSU Container High Frequency.
-#*
-#* It shall include the following components:
-#*
-#* @field protectedCommunicationZonesRSU: an optional Information about position of a CEN DSRC Tolling Station operating in the 5,8 GHz frequency 
-#* band. If this information is provided by RSUs a receiving vehicle ITS-S is prepared to adopt mitigation techniques when being in the vicinity of
-#* CEN DSRC tolling stations. 
-#
-#
+# * It shall include the following components:
+# *
+# * @field protectedCommunicationZonesRSU: an optional Information about position of a CEN DSRC Tolling Station operating in the 5,8 GHz frequency 
+# * band. If this information is provided by RSUs a receiving vehicle ITS-S is prepared to adopt mitigation techniques when being in the vicinity of
+# * CEN DSRC tolling stations. 
+# 
+# */
+# ------------------------------------------------------------------------------
 
 ProtectedCommunicationZonesRSU protected_communication_zones_rsu
 bool protected_communication_zones_rsu_is_present

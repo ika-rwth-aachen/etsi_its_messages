@@ -31,21 +31,21 @@
 #     deltaLongitude    DeltaLongitude,
 #     deltaAltitude     DeltaAltitude
 # }
+# /**
+#  * This DF defines a geographical point position as a 3 dimensional offset position to a geographical reference point.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field deltaLatitude: A delta latitude offset with regards to the latitude value of the reference position.
+#  *
+#  * @field deltaLongitude: A delta longitude offset with regards to the longitude value of the reference position.
+#  *
+#  * @field deltaAltitude: A delta altitude offset with regards to the altitude value of the reference position.
+#  *
+#  * @category: GeoReference information
+#  * @revision:  V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF defines a geographical point position as a 3 dimensional offset position to a geographical reference point.
-# *
-# * It shall include the following components: 
-# *
-# * @field deltaLatitude: A delta latitude offset with regards to the latitude value of the reference position.
-# *
-# * @field deltaLongitude: A delta longitude offset with regards to the longitude value of the reference position.
-# *
-# * @field deltaAltitude: A delta altitude offset with regards to the altitude value of the reference position.
-# *
-# * @category: GeoReference information
-# * @revision:  V1.3.1
-# 
 
 DeltaLatitude delta_latitude
 

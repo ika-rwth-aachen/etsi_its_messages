@@ -36,26 +36,26 @@
 # 	safetyCarContainer        SafetyCarContainer,
 # 	...
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type represent the Special Vehicle Container.
 # *
-#* This type represent the Special Vehicle Container.
-#*
-#* It shall include the following components:
-#*
-#* @field publicTransportContainer: If the vehicleRole component is set to publicTransport(1) this container shall be present.
-#*
-#* @field specialTransportContainer: If the vehicleRole component is set to specialTransport(2) this container shall be present.
-#*
-#* @field dangerousGoodsContainer: If the vehicleRole component is set to dangerousGoods(3) this container shall be present.
-#*
-#* @field roadWorksContainerBasic: If the vehicleRole component is set to roadWork(4) this container shall be present. 
-#*
-#* @field rescueContainer: If the vehicleRole component is set to rescue(5) this container shall be present. 
-#*
-#* @field emergencyContainer: If the vehicleRole component is set to emergency(6) this container shall be present.
-#*
-#* @field safetyCarContainer: If the vehicleRole component is set to safetyCar(7) this container shall be present. 
-#
+# * It shall include the following components:
+# *
+# * @field publicTransportContainer: If the vehicleRole component is set to publicTransport(1) this container shall be present.
+# *
+# * @field specialTransportContainer: If the vehicleRole component is set to specialTransport(2) this container shall be present.
+# *
+# * @field dangerousGoodsContainer: If the vehicleRole component is set to dangerousGoods(3) this container shall be present.
+# *
+# * @field roadWorksContainerBasic: If the vehicleRole component is set to roadWork(4) this container shall be present. 
+# *
+# * @field rescueContainer: If the vehicleRole component is set to rescue(5) this container shall be present. 
+# *
+# * @field emergencyContainer: If the vehicleRole component is set to emergency(6) this container shall be present.
+# *
+# * @field safetyCarContainer: If the vehicleRole component is set to safetyCar(7) this container shall be present. 
+# */
+# ------------------------------------------------------------------------------
 
 uint8 choice
 

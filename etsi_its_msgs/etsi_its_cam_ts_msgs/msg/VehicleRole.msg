@@ -44,31 +44,31 @@
 #     rfu1            (14), 
 #     rfu2            (15)
 # }
+# /**
+#  * This DE indicates the role played by a vehicle at a point in time.
+#  *
+#  * The value shall be set to:
+#  * - 0 `default`          - to indicate the default vehicle role as indicated by the vehicle type,
+#  * - 1 `publicTransport`  - to indicate that the vehicle is used to operate public transport service,
+#  * - 2 `specialTransport` - to indicate that the vehicle is used for special transport purpose, e.g. oversized trucks,
+#  * - 3 `dangerousGoods`   - to indicate that the vehicle is used for dangerous goods transportation,
+#  * - 4 `roadWork`         - to indicate that the vehicle is used to realize roadwork or road maintenance mission,
+#  * - 5 `rescue`           - to indicate that the vehicle is used for rescue purpose in case of an accident, e.g. as a towing service,
+#  * - 6 `emergency`        - to indicate that the vehicle is used for emergency mission, e.g. ambulance, fire brigade,
+#  * - 7 `safetyCar`        - to indicate that the vehicle is used for public safety, e.g. patrol,
+#  * - 8 `agriculture`      - to indicate that the vehicle is used for agriculture, e.g. farm tractor, 
+#  * - 9 `commercial`       - to indicate that the vehicle is used for transportation of commercial goods,
+#  * - 10 `military`        - to indicate that the vehicle is used for military purpose, 
+#  * - 11 `roadOperator`    - to indicate that the vehicle is used in road operator missions,
+#  * - 12 `taxi`            - to indicate that the vehicle is used to provide an authorized taxi service,
+#  * - 13 `uvar`            - to indicate that the vehicle is authorized to enter a zone according to the applicable Urban Vehicle Access Restrictions.
+#  * - 14 `rfu1`            - is reserved for future usage.
+#  * - 15 `rfu2`            - is reserved for future usage.
+#  * 
+#  * @category: Vehicle Information
+#  * @revision: Description updated in V2.1.1 (removed reference to CEN/TS 16157-3), value 13 assigned in V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the role played by a vehicle at a point in time.
-# *
-# * The value shall be set to:
-# * - 0 `default`          - to indicate the default vehicle role as indicated by the vehicle type,
-# * - 1 `publicTransport`  - to indicate that the vehicle is used to operate public transport service,
-# * - 2 `specialTransport` - to indicate that the vehicle is used for special transport purpose, e.g. oversized trucks,
-# * - 3 `dangerousGoods`   - to indicate that the vehicle is used for dangerous goods transportation,
-# * - 4 `roadWork`         - to indicate that the vehicle is used to realize roadwork or road maintenance mission,
-# * - 5 `rescue`           - to indicate that the vehicle is used for rescue purpose in case of an accident, e.g. as a towing service,
-# * - 6 `emergency`        - to indicate that the vehicle is used for emergency mission, e.g. ambulance, fire brigade,
-# * - 7 `safetyCar`        - to indicate that the vehicle is used for public safety, e.g. patrol,
-# * - 8 `agriculture`      - to indicate that the vehicle is used for agriculture, e.g. farm tractor, 
-# * - 9 `commercial`       - to indicate that the vehicle is used for transportation of commercial goods,
-# * - 10 `military`        - to indicate that the vehicle is used for military purpose, 
-# * - 11 `roadOperator`    - to indicate that the vehicle is used in road operator missions,
-# * - 12 `taxi`            - to indicate that the vehicle is used to provide an authorized taxi service,
-# * - 13 `uvar`            - to indicate that the vehicle is authorized to enter a zone according to the applicable Urban Vehicle Access Restrictions.
-# * - 14 `rfu1`            - is reserved for future usage.
-# * - 15 `rfu2`            - is reserved for future usage.
-# * 
-# * @category: Vehicle Information
-# * @revision: Description updated in V2.1.1 (removed reference to CEN/TS 16157-3), value 13 assigned in V2.2.1
-# 
 
 uint8 value
 uint8 DEFAULT = 0

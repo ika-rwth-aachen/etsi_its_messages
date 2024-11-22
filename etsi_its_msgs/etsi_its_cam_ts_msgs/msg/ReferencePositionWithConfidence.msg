@@ -32,23 +32,23 @@
 #     positionConfidenceEllipse    PositionConfidenceEllipse,
 #     altitude                     Altitude
 # }
+# /**
+#  * A position within a geographic coordinate system together with a confidence ellipse. 
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field latitude: the latitude of the geographical point.
+#  *
+#  * @field longitude: the longitude of the geographical point.
+#  *
+#  * @field positionConfidenceEllipse: the confidence ellipse associated to the geographical position.
+#  *
+#  * @field altitude: the altitude and an altitude accuracy of the geographical point.
+#  *
+#  * @category: GeoReference information
+#  * @revision: created in V2.1.1 based on @ref ReferencePosition but using @ref PositionConfidenceEllipse.
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * A position within a geographic coordinate system together with a confidence ellipse. 
-# *
-# * It shall include the following components: 
-# *
-# * @field latitude: the latitude of the geographical point.
-# *
-# * @field longitude: the longitude of the geographical point.
-# *
-# * @field positionConfidenceEllipse: the confidence ellipse associated to the geographical position.
-# *
-# * @field altitude: the altitude and an altitude accuracy of the geographical point.
-# *
-# * @category: GeoReference information
-# * @revision: created in V2.1.1 based on @ref ReferencePosition but using @ref PositionConfidenceEllipse.
-# 
 
 Latitude latitude
 

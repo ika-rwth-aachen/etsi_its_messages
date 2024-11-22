@@ -27,16 +27,17 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # GenerationDeltaTime ::= INTEGER { oneMilliSec(1) } (0..65535)
+# /**
+#  * This DE represents a timestamp based on TimestampIts modulo 65 536.
+#  * This means that generationDeltaTime = TimestampIts mod 65 536.
+#  *
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1 based on ETSI TS 103 900 [1]
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents a timestamp based on TimestampIts modulo 65 536.
-# * This means that generationDeltaTime = TimestampIts mod 65 536.
-# *
-# * @category: Basic information
-# * @revision: Created in V2.1.1 based on ETSI TS 103 900 [1]
-#
 
 uint16 value
 uint16 MIN = 0
 uint16 MAX = 65535
 uint16 ONE_MILLI_SEC = 1
+

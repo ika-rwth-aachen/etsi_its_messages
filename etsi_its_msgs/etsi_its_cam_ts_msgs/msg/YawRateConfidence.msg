@@ -37,35 +37,35 @@
 #     outOfRange    (7),
 #     unavailable   (8)
 # }
+# /**
+#  * This DE indicates the yaw rate confidence value which represents the estimated accuracy for a yaw rate value with a default confidence level of 95 %.
+#  * If required, the confidence level can be defined by the corresponding standards applying this DE.
+#  * 
+#  * The value shall be set to:
+#  * - `0` if the confidence value is equal to or less than 0,01 degree/second,
+#  * - `1` if the confidence value is equal to or less than 0,05 degrees/second or greater than 0,01 degree/second,
+#  * - `2` if the confidence value is equal to or less than 0,1 degree/second or greater than 0,05 degree/second,
+#  * - `3` if the confidence value is equal to or less than 1 degree/second or greater than 0,1 degree/second,
+#  * - `4` if the confidence value is equal to or less than 5 degrees/second or greater than 1 degrees/second,
+#  * - `5` if the confidence value is equal to or less than 10 degrees/second or greater than 5 degrees/second,
+#  * - `6` if the confidence value is equal to or less than 100 degrees/second or greater than 10 degrees/second,
+#  * - `7` if the confidence value is out of range, i.e. greater than 100 degrees/second,
+#  * - `8` if the confidence value is unavailable.
+#  * 
+#  * NOTE: The fact that a yaw rate value is received with confidence value set to `unavailable(8)` can be caused by
+#  * several reasons, such as:
+#  * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
+#  * - the sensor cannot calculate the accuracy due to lack of variables, or
+#  * - there has been a vehicle bus (e.g. CAN bus) error.
+#  * In all 3 cases above, the yaw rate value may be valid and used by the application.
+#  * 
+#  * If a yaw rate value is received and its confidence value is set to `outOfRange(7)`, it means that the 
+#  * yaw rate value is not valid and therefore cannot be trusted. Such value is not useful the application.
+#  * 
+#  * @category: Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the yaw rate confidence value which represents the estimated accuracy for a yaw rate value with a default confidence level of 95 %.
-# * If required, the confidence level can be defined by the corresponding standards applying this DE.
-# * 
-# * The value shall be set to:
-# * - `0` if the confidence value is equal to or less than 0,01 degree/second,
-# * - `1` if the confidence value is equal to or less than 0,05 degrees/second or greater than 0,01 degree/second,
-# * - `2` if the confidence value is equal to or less than 0,1 degree/second or greater than 0,05 degree/second,
-# * - `3` if the confidence value is equal to or less than 1 degree/second or greater than 0,1 degree/second,
-# * - `4` if the confidence value is equal to or less than 5 degrees/second or greater than 1 degrees/second,
-# * - `5` if the confidence value is equal to or less than 10 degrees/second or greater than 5 degrees/second,
-# * - `6` if the confidence value is equal to or less than 100 degrees/second or greater than 10 degrees/second,
-# * - `7` if the confidence value is out of range, i.e. greater than 100 degrees/second,
-# * - `8` if the confidence value is unavailable.
-# * 
-# * NOTE: The fact that a yaw rate value is received with confidence value set to `unavailable(8)` can be caused by
-# * several reasons, such as:
-# * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
-# * - the sensor cannot calculate the accuracy due to lack of variables, or
-# * - there has been a vehicle bus (e.g. CAN bus) error.
-# * In all 3 cases above, the yaw rate value may be valid and used by the application.
-# * 
-# * If a yaw rate value is received and its confidence value is set to `outOfRange(7)`, it means that the 
-# * yaw rate value is not valid and therefore cannot be trusted. Such value is not useful the application.
-# * 
-# * @category: Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 uint8 value
 uint8 DEG_SEC_000_01 = 0

@@ -31,19 +31,19 @@
 #     r09-16CodingType    (1), 
 #     vdv-50149CodingType (2)
 # } (0..255)
+# /**
+#  * This DE indicates a certain coding type of the PtActivationData data.
+#  *
+#  * The folowing value are specified:
+#  * - 0 `undefinedCodingType`  : undefined coding type,
+#  * - 1 `r09-16CodingType`     : coding of PtActivationData conform to VDV recommendation 420 [7],
+#  * - 2 `vdv-50149CodingType`  : coding of PtActivationData based on VDV recommendation 420 [7].
+#  * - 3 - 255                  : reserved for alternative and future use.
+#  * 
+#  * @category: Vehicle information 
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates a certain coding type of the PtActivationData data.
-# *
-# * The folowing value are specified:
-# * - 0 `undefinedCodingType`  : undefined coding type,
-# * - 1 `r09-16CodingType`     : coding of PtActivationData conform to VDV recommendation 420 [7],
-# * - 2 `vdv-50149CodingType`  : coding of PtActivationData based on VDV recommendation 420 [7].
-# * - 3 - 255                  : reserved for alternative and future use.
-# * 
-# * @category: Vehicle information 
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -51,3 +51,4 @@ uint8 MAX = 255
 uint8 UNDEFINED_CODING_TYPE = 0
 uint8 R09_16_CODING_TYPE = 1
 uint8 VDV_50149_CODING_TYPE = 2
+

@@ -27,16 +27,16 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # PathDeltaTime ::= INTEGER (1..65535, ...) 
+# /**
+#  * This DE represents the recorded or estimated travel time between a position and a predefined reference position. 
+#  *
+#  * @unit 0,01 second
+#  * @category: Basic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the recorded or estimated travel time between a position and a predefined reference position. 
-# *
-# * @unit 0,01 second
-# * @category: Basic information
-# * @revision: V1.3.1
-# 
 
-int64 value
-int64 MIN = 1
-int64 MAX = 65535
+uint16 value
+uint16 MIN = 1
+uint16 MAX = 65535
 

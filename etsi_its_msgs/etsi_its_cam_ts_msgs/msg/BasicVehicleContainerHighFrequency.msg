@@ -44,58 +44,58 @@
 # 	performanceClass PerformanceClass OPTIONAL,
 # 	cenDsrcTollingZone CenDsrcTollingZone OPTIONAL
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Basic Vehicle Container High Frequency.
 # *
-#* This type contains detaild information of the Basic Vehicle Container High Frequency.
-#*
-#* It shall include the following components:
-#*
-#* @field heading: It represent the heading and heading accuracy of the vehicle movement of the originating ITS-S with regards to the true north. 
-#* The heading accuracy provided in the heading Confidence value shall provide the accuracy of the measured vehicle heading with a confidence level 
-#* of 95 %. Otherwise, the value of the headingConfidence shall be set to unavailable.
-#*
-#* @field speed: It represent driving speed and speed accuracy of the originating ITS-S. The speed accuracy provided in the speedConfidence shall 
-#* provide the accuracy of the speed value with a confidence level of 95 %. Otherwise, the speedConfidence shall be set to unavailable.
-#*
-#* @field driveDirection: This component represent the vehicle drive direction (forward or backward) of the originating ITS-S.
-#*
-#* @field vehicleLength: This component represent the vehicle length value and vehicle length confidence indication of the vehicle ITS-S that 
-#* originate the CAM. 
-#*
-#* @field vehicleWidth: This component represents the Vehicle Width of the vehicle ITS-S that originates the CAM excluding side mirrors and possible
-#* similar extensions.
-#*
-#* @field longitudinalAcceleration: It represent the vehicle Longitudinal Acceleration of the originating ITS-S in the centre of the mass of the 
-#* empty vehicle. It shall include the measured vehicle longitudinal acceleration and its accuracy value with the confidence level of 95 %. 
-#* Otherwise, the longitudinalAccelerationConfidence shall be set to unavailable. 
-#*
-#* @field curvature: this component reppresent the actual trajectory of the vehicle. 
-#*
-#* @field curvatureCalculationMode: It indicates whether vehicle yaw-rate is used in the calculation of the curvature of the vehicle ITS-S that
-#* originates the CAM.
-#*
-#* @field yawRate: It denotes the vehicle rotation around the centre of mass of the empty vehicle. The leading sign denotes the direction of 
-#* rotation. The value is negative if the motion is clockwise when viewing from the top.
-#* yawRateConfidence denotes the accuracy for the 95 % confidence level for the measured yawRateValue. Otherwise, the value of yawRateConfidence
-#* shall be set to unavailable.
-#*
-#* @field accelerationControl: an optional component which represents the current status of the vehcile mechnanisms controlling the longitudinal movement of the vehcile ITS-S
-#* (e.g. brake pedal,  gas pedal, etc. engaged) that originate the CAM.
-#*
-#* @field lanePosition: an optional component which represents the lanePosition of the referencePosition of a vehicle. This component shall be present if the data is 
-#* available at the originating ITS-S.
-#*
-#* @field steeringWheelAngle: an optional component which indicates the steering wheel angle and accuracy as measured at the vehicle ITS-S that originates the CAM.
-#*
-#* @field lateralAcceleration: an optional component which represents the vehicle lateral acceleration of the originating ITS-S in the centre of the mass of the empty vehicle. 
-#* It shall include the measured vehicle lateral acceleration and its accuracy value with the confidence level of 95%.
-#*
-#* @field verticalAcceleration: an optional component which indicates the originating ITS-S in the centre of the mass of the empty vehicle.
-#* 
-#* @field performanceClass: an optional component characterizes the maximum age of the CAM data elements with regard to the generation delta time.
-#*
-#* @field cenDsrcTollingZone: an optional component which represents the information about the position of a CEN DSRC Tolling Station operating in the 5,8 GHz frequency band.
-#
+# * It shall include the following components:
+# *
+# * @field heading: It represent the heading and heading accuracy of the vehicle movement of the originating ITS-S with regards to the true north. 
+# * The heading accuracy provided in the heading Confidence value shall provide the accuracy of the measured vehicle heading with a confidence level 
+# * of 95 %. Otherwise, the value of the headingConfidence shall be set to unavailable.
+# *
+# * @field speed: It represent driving speed and speed accuracy of the originating ITS-S. The speed accuracy provided in the speedConfidence shall 
+# * provide the accuracy of the speed value with a confidence level of 95 %. Otherwise, the speedConfidence shall be set to unavailable.
+# *
+# * @field driveDirection: This component represent the vehicle drive direction (forward or backward) of the originating ITS-S.
+# *
+# * @field vehicleLength: This component represent the vehicle length value and vehicle length confidence indication of the vehicle ITS-S that 
+# * originate the CAM. 
+# *
+# * @field vehicleWidth: This component represents the Vehicle Width of the vehicle ITS-S that originates the CAM excluding side mirrors and possible
+# * similar extensions.
+# *
+# * @field longitudinalAcceleration: It represent the vehicle Longitudinal Acceleration of the originating ITS-S in the centre of the mass of the 
+# * empty vehicle. It shall include the measured vehicle longitudinal acceleration and its accuracy value with the confidence level of 95 %. 
+# * Otherwise, the longitudinalAccelerationConfidence shall be set to unavailable. 
+# *
+# * @field curvature: this component reppresent the actual trajectory of the vehicle. 
+# *
+# * @field curvatureCalculationMode: It indicates whether vehicle yaw-rate is used in the calculation of the curvature of the vehicle ITS-S that
+# * originates the CAM.
+# *
+# * @field yawRate: It denotes the vehicle rotation around the centre of mass of the empty vehicle. The leading sign denotes the direction of 
+# * rotation. The value is negative if the motion is clockwise when viewing from the top.
+# * yawRateConfidence denotes the accuracy for the 95 % confidence level for the measured yawRateValue. Otherwise, the value of yawRateConfidence
+# * shall be set to unavailable.
+# *
+# * @field accelerationControl: an optional component which represents the current status of the vehcile mechnanisms controlling the longitudinal movement of the vehcile ITS-S
+# * (e.g. brake pedal,  gas pedal, etc. engaged) that originate the CAM.
+# *
+# * @field lanePosition: an optional component which represents the lanePosition of the referencePosition of a vehicle. This component shall be present if the data is 
+# * available at the originating ITS-S.
+# *
+# * @field steeringWheelAngle: an optional component which indicates the steering wheel angle and accuracy as measured at the vehicle ITS-S that originates the CAM.
+# *
+# * @field lateralAcceleration: an optional component which represents the vehicle lateral acceleration of the originating ITS-S in the centre of the mass of the empty vehicle. 
+# * It shall include the measured vehicle lateral acceleration and its accuracy value with the confidence level of 95%.
+# *
+# * @field verticalAcceleration: an optional component which indicates the originating ITS-S in the centre of the mass of the empty vehicle.
+# * 
+# * @field performanceClass: an optional component characterizes the maximum age of the CAM data elements with regard to the generation delta time.
+# *
+# * @field cenDsrcTollingZone: an optional component which represents the information about the position of a CEN DSRC Tolling Station operating in the 5,8 GHz frequency band.
+# */
+# ------------------------------------------------------------------------------
 
 Heading heading
 

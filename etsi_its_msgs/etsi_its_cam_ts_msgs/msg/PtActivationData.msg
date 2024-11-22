@@ -27,20 +27,21 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # PtActivationData ::= OCTET STRING (SIZE(1..20))
+# /**
+#  * This DE is used for various tasks in the public transportation environment, especially for controlling traffic
+#  * signal systems to prioritize and speed up public transportation in urban area (e.g. intersection "_bottlenecks_").
+#  * The traffic lights may be controlled by an approaching bus or tram automatically. This permits "_In Time_" activation
+#  * of the green phase, will enable the individual traffic to clear a potential traffic jam in advance. Thereby the
+#  * approaching bus or tram may pass an intersection with activated green light without slowing down the speed due to
+#  * traffic congestion. Other usage of the DE is the provision of information like the public transport line number
+#  * or the schedule delay of a public transport vehicle.
+#  * 
+#  * @category: Vehicle information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE is used for various tasks in the public transportation environment, especially for controlling traffic
-# * signal systems to prioritize and speed up public transportation in urban area (e.g. intersection "_bottlenecks_").
-# * The traffic lights may be controlled by an approaching bus or tram automatically. This permits "_In Time_" activation
-# * of the green phase, will enable the individual traffic to clear a potential traffic jam in advance. Thereby the
-# * approaching bus or tram may pass an intersection with activated green light without slowing down the speed due to
-# * traffic congestion. Other usage of the DE is the provision of information like the public transport line number
-# * or the schedule delay of a public transport vehicle.
-# * 
-# * @category: Vehicle information
-# * @revision: V1.3.1
-# 
 
 uint8[] value
 uint8 MIN_SIZE = 1
 uint8 MAX_SIZE = 20
+

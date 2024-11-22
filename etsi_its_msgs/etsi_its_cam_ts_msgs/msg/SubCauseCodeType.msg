@@ -27,15 +27,15 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SubCauseCodeType ::= INTEGER (0..255)
+# /**
+#  * This DE indicates the generic sub cause of a detected event.
+#  * 
+#  * @note: The sub cause code value assignment varies based on value of @ref CauseCode.
+#  *
+#  * @category: Traffic information
+#  * @revision: Description revised in V2.1.1 (this is  the generic sub cause type)
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the generic sub cause of a detected event.
-# * 
-# * @note: The sub cause code value assignment varies based on value of @ref CauseCode.
-# *
-# * @category: Traffic information
-# * @revision: Description revised in V2.1.1 (this is  the generic sub cause type)
-# 
 
 uint8 value
 uint8 MIN = 0

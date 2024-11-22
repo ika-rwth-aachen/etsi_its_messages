@@ -30,17 +30,17 @@
 # 	generationDeltaTime GenerationDeltaTime,
 # 	camParameters       CamParameters
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type represents the CAM payload. 
 # *
-#* This type represents the CAM payload. 
-#*
-#* It shall include the following components: 
-#*
-#* @field generationDeltaTime: Time corresponding to the time of the reference position in the CAM, considered as time of the CAM generation.
-#*
-#* @field camParameters: The sequence of CAM mandatory and optional container.
-#*
-#
+# * It shall include the following components: 
+# *
+# * @field generationDeltaTime: Time corresponding to the time of the reference position in the CAM, considered as time of the CAM generation.
+# *
+# * @field camParameters: The sequence of CAM mandatory and optional container.
+# *
+# */
+# ------------------------------------------------------------------------------
 
 GenerationDeltaTime generation_delta_time
 

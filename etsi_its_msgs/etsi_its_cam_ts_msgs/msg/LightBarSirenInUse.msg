@@ -30,23 +30,24 @@
 #     lightBarActivated (0),
 #     sirenActivated    (1)
 # } (SIZE(2))
+# /**
+#  * This DE indicates the status of light bar and any sort of audible alarm system besides the horn.
+#  * This includes various common sirens as well as backup up beepers and other slow speed manoeuvring alerts.
+#  *
+#  * The corresponding bit shall be set to 1 under the following conditions:
+#  * - 0 - `lightBarActivated`      - when the light bar is activated,
+#  * - 1 - `sirenActivated`         - when the siren is activated.
+#  *
+#  * Otherwise, it shall be set to 0.
+#  *
+#  * @category Vehicle information
+#  * @revision: Editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the status of light bar and any sort of audible alarm system besides the horn.
-# * This includes various common sirens as well as backup up beepers and other slow speed manoeuvring alerts.
-# *
-# * The corresponding bit shall be set to 1 under the following conditions:
-# * - 0 - `lightBarActivated`      - when the light bar is activated,
-# * - 1 - `sirenActivated`         - when the siren is activated.
-# *
-# * Otherwise, it shall be set to 0.
-# *
-# * @category Vehicle information
-# * @revision: Editorial update in V2.1.1
-# 
 
 uint8[] value
 uint8 bits_unused
 uint8 SIZE_BITS = 2
 uint8 BIT_INDEX_LIGHT_BAR_ACTIVATED = 0
 uint8 BIT_INDEX_SIREN_ACTIVATED = 1
+

@@ -31,21 +31,21 @@
 #   lightBarSirenInUse LightBarSirenInUse,
 #   closedLanes ClosedLanes OPTIONAL
 #  }
-# ------------------------------------------------------------------------------
+#  /**
+# * This type contains detaild information of the Road Works Container Basic.
 # *
-#* This type contains detaild information of the Road Works Container Basic.
-#*
-#* It shall include the following components:
-#*
-#* @field roadworksSubCauseCode: The optional component, in case the originating ITS-S is mounted to a vehicle ITS-S participating to roadwork. It 
-#* provides information on the type of roadwork that it is currently undertaking. This component shall be present if the data is available in 
-#* originating ITS S.
-#*
-#* @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
-#*
-#* @field closedLanes: an optional component which provides information about the opening/closure status of the lanes ahead. Lanes are counted from
-#* the outside boarder of the road. If a lane is closed to traffic, the corresponding bit shall be set to 1.
-#
+# * It shall include the following components:
+# *
+# * @field roadworksSubCauseCode: The optional component, in case the originating ITS-S is mounted to a vehicle ITS-S participating to roadwork. It 
+# * provides information on the type of roadwork that it is currently undertaking. This component shall be present if the data is available in 
+# * originating ITS S.
+# *
+# * @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
+# *
+# * @field closedLanes: an optional component which provides information about the opening/closure status of the lanes ahead. Lanes are counted from
+# * the outside boarder of the road. If a lane is closed to traffic, the corresponding bit shall be set to 1.
+# */
+# ------------------------------------------------------------------------------
 
 RoadworksSubCauseCode roadworks_sub_cause_code
 bool roadworks_sub_cause_code_is_present

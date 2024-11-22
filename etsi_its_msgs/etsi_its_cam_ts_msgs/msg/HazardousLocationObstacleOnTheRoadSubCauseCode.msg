@@ -36,24 +36,24 @@
 #     hubCaps         (6), 
 #     waitingVehicles (7)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause code of the @ref CauseCode `hazardousLocation-ObstacleOnTheRoad`. 
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`    - in case further detailed information on the detected obstacle is unavailable,
+#  * - 1 - `shedLoad`       - in case detected obstacle is large amount of obstacles (shedload),
+#  * - 2 - `partsOfVehicles`- in case detected obstacles are parts of vehicles,
+#  * - 3 - `partsOfTyres`   - in case the detected obstacles are parts of tyres,
+#  * - 4 - `bigObjects`     - in case the detected obstacles are big objects,
+#  * - 5 - `fallenTrees`    - in case the detected obstacles are fallen trees,
+#  * - 6 - `hubCaps`        - in case the detected obstacles are hub caps,
+#  * - 7 - `waitingVehicles`- in case the detected obstacles are waiting vehicles.
+#  * - 8-255                - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause code of the @ref CauseCode `hazardousLocation-ObstacleOnTheRoad`. 
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`    - in case further detailed information on the detected obstacle is unavailable,
-# * - 1 - `shedLoad`       - in case detected obstacle is large amount of obstacles (shedload),
-# * - 2 - `partsOfVehicles`- in case detected obstacles are parts of vehicles,
-# * - 3 - `partsOfTyres`   - in case the detected obstacles are parts of tyres,
-# * - 4 - `bigObjects`     - in case the detected obstacles are big objects,
-# * - 5 - `fallenTrees`    - in case the detected obstacles are fallen trees,
-# * - 6 - `hubCaps`        - in case the detected obstacles are hub caps,
-# * - 7 - `waitingVehicles`- in case the detected obstacles are waiting vehicles.
-# * - 8-255                - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -66,3 +66,4 @@ uint8 BIG_OBJECTS = 4
 uint8 FALLEN_TREES = 5
 uint8 HUB_CAPS = 6
 uint8 WAITING_VEHICLES = 7
+

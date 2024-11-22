@@ -30,19 +30,19 @@
 #     value         AccelerationValue,
 #     confidence    AccelerationConfidence
 # }
+# /** 
+#  * This DF represents an acceleration component along with a confidence value.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field value: the value of the acceleration component which can be estimated as the mean of the current distribution.
+#  *
+#  * @field confidence: the confidence value associated to the provided value.
+#  *
+#  * @category: Kinematic Information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents an acceleration component along with a confidence value.
-# *
-# * It shall include the following components: 
-# *
-# * @field value: the value of the acceleration component which can be estimated as the mean of the current distribution.
-# *
-# * @field confidence: the confidence value associated to the provided value.
-# *
-# * @category: Kinematic Information
-# * @revision: Created in V2.1.1
-# 
 
 AccelerationValue value
 

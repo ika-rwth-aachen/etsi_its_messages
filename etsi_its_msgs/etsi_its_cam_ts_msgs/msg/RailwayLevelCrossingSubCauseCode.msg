@@ -33,22 +33,22 @@
 #     unguarded                   (3), 
 #     nominal                     (4)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `railwayLevelCrossing` .
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`                   - in case no further detailed information on the railway level crossing status is available,
+#  * - 1 `doNotCrossAbnormalSituation`   - in case when something wrong is detected by equation or sensors of the railway level crossing, 
+#                                          including level crossing is closed for too long (e.g. more than 10 minutes long ; default value),
+#  * - 2 `closed`                        - in case the crossing is closed (barriers down),
+#  * - 3 `unguarded`                     - in case the level crossing is unguarded (i.e a Saint Andrew cross level crossing without detection of train),
+#  * - 4 `nominal`                       - in case the barriers are up and lights are off.
+#  * - 5-255: reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `railwayLevelCrossing` .
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`                   - in case no further detailed information on the railway level crossing status is available,
-# * - 1 `doNotCrossAbnormalSituation`   - in case when something wrong is detected by equation or sensors of the railway level crossing, 
-#                                         including level crossing is closed for too long (e.g. more than 10 minutes long ; default value),
-# * - 2 `closed`                        - in case the crossing is closed (barriers down),
-# * - 3 `unguarded`                     - in case the level crossing is unguarded (i.e a Saint Andrew cross level crossing without detection of train),
-# * - 4 `nominal`                       - in case the barriers are up and lights are off.
-# * - 5-255: reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -58,3 +58,4 @@ uint8 DO_NOT_CROSS_ABNORMAL_SITUATION = 1
 uint8 CLOSED = 2
 uint8 UNGUARDED = 3
 uint8 NOMINAL = 4
+

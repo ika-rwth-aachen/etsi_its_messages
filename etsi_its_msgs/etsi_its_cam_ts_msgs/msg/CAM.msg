@@ -28,20 +28,18 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # CAM ::= SEQUENCE {
 # 	header ItsPduHeader (WITH COMPONENTS {... , protocolVersion (2), messageId(cam)}),
+# /** 
+# * This type represents the CAM PDU.
+# *
+# * It shall include the following componenets:
+# *
+# * @field header: the header of the CAM PDU.
+# *
+# * @field cam: the payload of the CAM PDU.
+# */ 
 # ------------------------------------------------------------------------------
-# 	The root data frame for cooperative awareness messages
-#* 
-#* This type represents the CAM PDU.
-#*
-#* It shall include the following componenets:
-#*
-#* @field header: the header of the CAM PDU.
-#*
-#* @field cam: the payload of the CAM PDU.
-#
 
 ItsPduHeader header
-int64 HEADER_MIN = 0
 
 CamPayload cam
 

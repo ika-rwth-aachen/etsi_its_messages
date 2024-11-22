@@ -31,23 +31,23 @@
 #     positiveOutOfRange (511),
 #     unavailable        (512)
 # } (-511..512)
+# /**
+#  * This DE represents the steering wheel angle of the vehicle at certain point in time.
+#  * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
+#  * 
+#  * The value shall be set to:
+#  * - `-511` if the steering wheel angle is equal to or greater than 511 x 1,5 degrees = 766,5 degrees to the right,
+#  * - `n` (`n > -511` and `n <= 0`) if  the steering wheel angle is equal to or less than n x 1,5 degrees, and greater than (n-1) x 1,5 degrees, 
+#       turning clockwise (i.e. to the right),
+#  * - `n` (`n >= 1` and `n < 511`) if the steering wheel angle is equal to or less than n x 0,1 degrees, and greater than (n-1) x 0,1 degrees, 
+#       turning counter-clockwise (i.e. to the left),
+#  * - `511` if the steering wheel angle is greater than 510 x 1,5 degrees = 765 degrees to the left,
+#  * - `512` if information is not available.
+#  *
+#  * @unit: 1,5 degree
+#  * @revision: Description revised in V2.1.1 (meaning of value 511 has changed slightly).
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the steering wheel angle of the vehicle at certain point in time.
-# * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
-# * 
-# * The value shall be set to:
-# * - `-511` if the steering wheel angle is equal to or greater than 511 x 1,5 degrees = 766,5 degrees to the right,
-# * - `n` (`n > -511` and `n <= 0`) if  the steering wheel angle is equal to or less than n x 1,5 degrees, and greater than (n-1) x 1,5 degrees, 
-#      turning clockwise (i.e. to the right),
-# * - `n` (`n >= 1` and `n < 511`) if the steering wheel angle is equal to or less than n x 0,1 degrees, and greater than (n-1) x 0,1 degrees, 
-#      turning counter-clockwise (i.e. to the left),
-# * - `511` if the steering wheel angle is greater than 510 x 1,5 degrees = 765 degrees to the left,
-# * - `512` if information is not available.
-# *
-# * @unit: 1,5 degree
-# * @revision: Description revised in V2.1.1 (meaning of value 511 has changed slightly).
-# 
 
 int16 value
 int16 MIN = -511
@@ -55,3 +55,4 @@ int16 MAX = 512
 int16 NEGATIVE_OUT_OF_RANGE = -511
 int16 POSITIVE_OUT_OF_RANGE = 511
 int16 UNAVAILABLE = 512
+

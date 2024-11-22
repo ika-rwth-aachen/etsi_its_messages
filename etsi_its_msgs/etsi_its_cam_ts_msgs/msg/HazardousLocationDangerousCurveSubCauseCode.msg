@@ -34,25 +34,25 @@
 #     multipleCurvesStartingWithLeftTurn                (4), 
 #     multipleCurvesStartingWithRightTurn               (5)
 # } (0..255)
+# /**
+#  * This DE represents the sub cause code of the @ref CauseCode  `hazardousLocation-DangerousCurve`.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`                                        - in case further detailed information on the dangerous curve is unavailable,
+#  * - 1 - `dangerousLeftTurnCurve`                             - in case the dangerous curve is a left turn curve,
+#  * - 2 - `dangerousRightTurnCurve`                            - in case the dangerous curve is a right turn curve,
+#  * - 3 - `multipleCurvesStartingWithUnknownTurningDirection`  - in case of multiple curves for which the starting curve turning direction is not known,
+#  * - 4 - `multipleCurvesStartingWithLeftTurn`                 - in case of multiple curves starting with a left turn curve,
+#  * - 5 - `multipleCurvesStartingWithRightTurn`                - in case of multiple curves starting with a right turn curve.
+#  * - 6-255                                                    - are reserved for future usage.
+#  * 
+#  * The definition of whether a curve is dangerous may vary according to region and according to vehicle types/mass
+#  * and vehicle speed driving on the curve. This definition is out of scope of the present document.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the sub cause code of the @ref CauseCode  `hazardousLocation-DangerousCurve`.
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`                                        - in case further detailed information on the dangerous curve is unavailable,
-# * - 1 - `dangerousLeftTurnCurve`                             - in case the dangerous curve is a left turn curve,
-# * - 2 - `dangerousRightTurnCurve`                            - in case the dangerous curve is a right turn curve,
-# * - 3 - `multipleCurvesStartingWithUnknownTurningDirection`  - in case of multiple curves for which the starting curve turning direction is not known,
-# * - 4 - `multipleCurvesStartingWithLeftTurn`                 - in case of multiple curves starting with a left turn curve,
-# * - 5 - `multipleCurvesStartingWithRightTurn`                - in case of multiple curves starting with a right turn curve.
-# * - 6-255                                                    - are reserved for future usage.
-# * 
-# * The definition of whether a curve is dangerous may vary according to region and according to vehicle types/mass
-# * and vehicle speed driving on the curve. This definition is out of scope of the present document.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -63,3 +63,4 @@ uint8 DANGEROUS_RIGHT_TURN_CURVE = 2
 uint8 MULTIPLE_CURVES_STARTING_WITH_UNKNOWN_TURNING_DIRECTION = 3
 uint8 MULTIPLE_CURVES_STARTING_WITH_LEFT_TURN = 4
 uint8 MULTIPLE_CURVES_STARTING_WITH_RIGHT_TURN = 5
+

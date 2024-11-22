@@ -27,14 +27,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # StationId ::= INTEGER(0..4294967295)
+# /**
+#  * This DE represents the identifier of an ITS-S.
+#  * The ITS-S ID may be a pseudonym. It may change over space and/or over time.
+#  *
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1 based on @ref StationID
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the identifier of an ITS-S.
-# * The ITS-S ID may be a pseudonym. It may change over space and/or over time.
-# *
-# * @category: Basic information
-# * @revision: Created in V2.1.1 based on @ref StationID
-# 
 
 uint32 value
 uint32 MIN = 0

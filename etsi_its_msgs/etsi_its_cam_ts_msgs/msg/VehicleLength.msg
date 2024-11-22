@@ -30,20 +30,20 @@
 #     vehicleLengthValue                   VehicleLengthValue,
 #     vehicleLengthConfidenceIndication    VehicleLengthConfidenceIndication
 # }
+# /**
+#  * This DF represents the length of vehicle and accuracy indication information.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field vehicleLengthValue: length of vehicle. 
+#  * 
+#  * @field vehicleLengthConfidenceIndication: indication of the length value confidence.
+#  * 
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref VehicleLengthV2 instead.
+#  * @category: Vehicle information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the length of vehicle and accuracy indication information.
-# *
-# * It shall include the following components: 
-# * 
-# * @field vehicleLengthValue: length of vehicle. 
-# * 
-# * @field vehicleLengthConfidenceIndication: indication of the length value confidence.
-# * 
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref VehicleLengthV2 instead.
-# * @category: Vehicle information
-# * @revision: V1.3.1
-# 
 
 VehicleLengthValue vehicle_length_value
 

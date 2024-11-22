@@ -37,25 +37,25 @@
 #     sandstorms      (7),
 #     swarmsOfInsects (8)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-Visibility`.
+#  *
+#  * The value shall be set to:
+#  * - 0 - `unavailable`    - in case information on the cause of low visibility is unavailable,
+#  * - 1 - `fog`            - in case the cause of low visibility is fog,
+#  * - 2 - `smoke`          - in case the cause of low visibility is smoke,
+#  * - 3 - `heavySnowfall`  - in case the cause of low visibility is heavy snow fall,
+#  * - 4 - `heavyRain`      - in case the cause of low visibility is heavy rain,
+#  * - 5 - `heavyHail`      - in case the cause of low visibility is heavy hail,
+#  * - 6 - `lowSunGlare`    - in case the cause of low visibility is sun glare,
+#  * - 7 - `sandstorms`     - in case the cause of low visibility is sand storm,
+#  * - 8 - `swarmsOfInsects`- in case the cause of low visibility is swarm of insects.
+#  * - 9-255                - are reserved for future usage
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `adverseWeatherCondition-Visibility`.
-# *
-# * The value shall be set to:
-# * - 0 - `unavailable`    - in case information on the cause of low visibility is unavailable,
-# * - 1 - `fog`            - in case the cause of low visibility is fog,
-# * - 2 - `smoke`          - in case the cause of low visibility is smoke,
-# * - 3 - `heavySnowfall`  - in case the cause of low visibility is heavy snow fall,
-# * - 4 - `heavyRain`      - in case the cause of low visibility is heavy rain,
-# * - 5 - `heavyHail`      - in case the cause of low visibility is heavy hail,
-# * - 6 - `lowSunGlare`    - in case the cause of low visibility is sun glare,
-# * - 7 - `sandstorms`     - in case the cause of low visibility is sand storm,
-# * - 8 - `swarmsOfInsects`- in case the cause of low visibility is swarm of insects.
-# * - 9-255                - are reserved for future usage
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -69,3 +69,4 @@ uint8 HEAVY_HAIL = 5
 uint8 LOW_SUN_GLARE = 6
 uint8 SANDSTORMS = 7
 uint8 SWARMS_OF_INSECTS = 8
+

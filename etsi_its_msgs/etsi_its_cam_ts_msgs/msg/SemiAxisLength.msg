@@ -31,6 +31,31 @@
 #     outOfRange  (4094), 
 #     unavailable (4095)
 # } (0..4095)
+# /**
+#  * This DE indicates the horizontal position confidence value which represents the estimated absolute position accuracy, in one of the axis direction as defined in a shape of ellipse with a 
+#  * confidence level of 95 %. 
+#  * 
+#  * The value shall be set to:
+#  * - `n` (`n > 0` and `n < 4 094`) if the accuracy is equal to or less than n * 0,01 metre,
+#  * - `4 094` if the accuracy is out of range, i.e. greater than 4,093 m,
+#  * - `4 095` if the accuracy information is unavailable.
+#  *
+#  * The value 0 shall not be used.
+#  * 
+#  * @note: The fact that a position coordinate value is received with confidence value set to `unavailable(4095)`.
+#  * can be caused by several reasons, such as:
+#  * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
+#  * - the sensor cannot calculate the accuracy due to lack of variables, or
+#  * - there has been a vehicle bus (e.g. CAN bus) error.
+#  * In all 3 cases above, the position coordinate value may be valid and used by the application.
+#  * If a position coordinate value is received and its confidence value is set to `outOfRange(4094)`, it means that
+#  * the position coordinate value is not valid and therefore cannot be trusted. Such value is not useful
+#  * for the application.
+# 
+#  * @unit 0,01 metre 
+#  * @category: GeoReference Information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
 
 uint16 value
@@ -39,3 +64,4 @@ uint16 MAX = 4095
 uint16 DO_NOT_USE = 0
 uint16 OUT_OF_RANGE = 4094
 uint16 UNAVAILABLE = 4095
+

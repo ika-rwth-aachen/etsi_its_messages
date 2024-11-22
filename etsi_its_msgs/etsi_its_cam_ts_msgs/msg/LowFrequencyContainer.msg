@@ -28,14 +28,14 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 #  LowFrequencyContainer ::= CHOICE {
 #   basicVehicleContainerLowFrequency BasicVehicleContainerLowFrequency (WITH COMPONENTS {..., pathHistory (SIZE (0..23))}),
-# ------------------------------------------------------------------------------
+# /**
+# * This type represents the low frequency container.
+# * 
+# * It shall include the following components: 
 # *
-#* This type represents the low frequency container.
-#* 
-#* It shall include the following components: 
-#*
-#* The low frequency container of the CAM when the originating ITS-S is of the type vehicle ITS-S. It shall be present as defined in clause 6.1.2.
-#
+# * The low frequency container of the CAM when the originating ITS-S is of the type vehicle ITS-S. It shall be present as defined in clause 6.1.2.
+# */
+# ------------------------------------------------------------------------------
 
 uint8 choice
 

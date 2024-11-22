@@ -30,33 +30,34 @@
 #     outOfRange                      (126), 
 #     unavailable                     (127)
 # } (1..127)
+# /**
+#  * This DE indicates the steering wheel angle confidence value which represents the estimated absolute accuracy for a  steering wheel angle value with a confidence level of 95 %.
+#  * 
+#  * The value shall be set to:
+#  * - `n` (`n > 0` and `n < 126`) if the confidence value is equal to or less than n x 1,5 degrees,
+#  * - `126` if the confidence value is out of range, i.e. greater than 187,5 degrees,
+#  * - `127` if the confidence value is not available.
+#  * 
+#  * @note: The fact that a steering wheel angle value is received with confidence value set to `unavailable(127)`
+#  * can be caused by several reasons, such as:
+#  * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
+#  * - the sensor cannot calculate the accuracy due to lack of variables, or
+#  * - there has been a vehicle bus (e.g. CAN bus) error.
+#  * In all 3 cases above, the steering wheel angle value may be valid and used by the application.
+#  * 
+#  * If a steering wheel angle value is received and its confidence value is set to `outOfRange(126)`,
+#  * it means that the steering wheel angle value is not valid and therefore cannot be trusted.
+#  * Such value is not useful for the application.
+#  * 
+#  * @unit: 1,5 degree
+#  * @category: Vehicle Information
+#  * @revision: Description revised in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the steering wheel angle confidence value which represents the estimated absolute accuracy for a  steering wheel angle value with a confidence level of 95 %.
-# * 
-# * The value shall be set to:
-# * - `n` (`n > 0` and `n < 126`) if the confidence value is equal to or less than n x 1,5 degrees,
-# * - `126` if the confidence value is out of range, i.e. greater than 187,5 degrees,
-# * - `127` if the confidence value is not available.
-# * 
-# * @note: The fact that a steering wheel angle value is received with confidence value set to `unavailable(127)`
-# * can be caused by several reasons, such as:
-# * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
-# * - the sensor cannot calculate the accuracy due to lack of variables, or
-# * - there has been a vehicle bus (e.g. CAN bus) error.
-# * In all 3 cases above, the steering wheel angle value may be valid and used by the application.
-# * 
-# * If a steering wheel angle value is received and its confidence value is set to `outOfRange(126)`,
-# * it means that the steering wheel angle value is not valid and therefore cannot be trusted.
-# * Such value is not useful for the application.
-# * 
-# * @unit: 1,5 degree
-# * @category: Vehicle Information
-# * @revision: Description revised in V2.1.1
-#
 
 uint8 value
 uint8 MIN = 1
 uint8 MAX = 127
 uint8 OUT_OF_RANGE = 126
 uint8 UNAVAILABLE = 127
+

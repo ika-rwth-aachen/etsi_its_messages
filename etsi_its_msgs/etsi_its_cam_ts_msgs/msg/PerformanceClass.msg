@@ -31,20 +31,20 @@
 #     performanceClassA (1), 
 #     performanceClassB (2)
 # } (0..7)
+# /**
+#  * This DE denotes the ability of an ITS-S to provide up-to-date information.
+#  * A performance class value is used to describe age of data. The exact values are out of scope of the present document.
+#  * 
+#  *  The value shall be set to:
+#  * - `0` if  the performance class is unknown,
+#  * - `1` for performance class A as defined in ETSI TS 101 539-1 [5],
+#  * - `2` for performance class B as defined in ETSI TS 101 539-1 [5],
+#  * -  3-7 reserved for future use.
+#  *
+#  * @category: Vehicle information
+#  * @revision: Editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE denotes the ability of an ITS-S to provide up-to-date information.
-# * A performance class value is used to describe age of data. The exact values are out of scope of the present document.
-# * 
-# *  The value shall be set to:
-# * - `0` if  the performance class is unknown,
-# * - `1` for performance class A as defined in ETSI TS 101 539-1 [5],
-# * - `2` for performance class B as defined in ETSI TS 101 539-1 [5],
-# * -  3-7 reserved for future use.
-# *
-# * @category: Vehicle information
-# * @revision: Editorial update in V2.1.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -52,3 +52,4 @@ uint8 MAX = 7
 uint8 UNAVAILABLE = 0
 uint8 PERFORMANCE_CLASS_A = 1
 uint8 PERFORMANCE_CLASS_B = 2
+

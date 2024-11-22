@@ -32,25 +32,25 @@
 #     drivingLaneStatus          DrivingLaneStatus OPTIONAL,
 #     ...
 # }
+# /**
+#  * This DF indicates the opening/closure status of the lanes of a carriageway.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field innerhardShoulderStatus: this information is optional and shall be included if an inner hard shoulder is present and the information is known.
+#  * It indicates the open/closing status of inner hard shoulder lanes. 
+#  * 
+#  * @field outerhardShoulderStatus: this information is optional and shall be included if an outer hard shoulder is present and the information is known.
+#  * It indicates the open/closing status of outer hard shoulder lanes. 
+#  * 
+#  * @field drivingLaneStatus: this information is optional and shall be included if the information is known.
+#  * It indicates the open/closing status of driving lanes. 
+#  * For carriageways with more than 13 driving lanes, the drivingLaneStatus component shall not be present.
+#  * 
+#  * @category: Infrastructure information, Road topology information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates the opening/closure status of the lanes of a carriageway.
-# *
-# * It shall include the following components: 
-# * 
-# * @field innerhardShoulderStatus: this information is optional and shall be included if an inner hard shoulder is present and the information is known.
-# * It indicates the open/closing status of inner hard shoulder lanes. 
-# * 
-# * @field outerhardShoulderStatus: this information is optional and shall be included if an outer hard shoulder is present and the information is known.
-# * It indicates the open/closing status of outer hard shoulder lanes. 
-# * 
-# * @field drivingLaneStatus: this information is optional and shall be included if the information is known.
-# * It indicates the open/closing status of driving lanes. 
-# * For carriageways with more than 13 driving lanes, the drivingLaneStatus component shall not be present.
-# * 
-# * @category: Infrastructure information, Road topology information
-# * @revision: Description revised in V2.1.1
-# 
 
 HardShoulderStatus innerhard_shoulder_status
 bool innerhard_shoulder_status_is_present

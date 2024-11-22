@@ -37,26 +37,26 @@
 #     unsecuredAccident                   (7),
 #     assistanceRequested                 (8)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause code of the @ref CauseCode `accident`.
+#  *
+#  * The value shall be set to:
+#  * - 0 - `unavailable`                        - in case the information on the sub cause of the accident is unavailable,
+#  * - 1 - `multiVehicleAccident`               - in case more than two vehicles are involved in accident,
+#  * - 2 - `heavyAccident`                      - in case the airbag of the vehicle involved in the accident is triggered, 
+#  *                                              the accident requires important rescue and/or recovery work,
+#  * - 3 - `accidentInvolvingLorry`             - in case the accident involves a lorry,
+#  * - 4 - `accidentInvolvingBus`               - in case the accident involves a bus,
+#  * - 5 - `accidentInvolvingHazardousMaterials`- in case the accident involves hazardous material,
+#  * - 6 - `accidentOnOppositeLane`             - in case the accident happens on opposite lanes,
+#  * - 7 - `unsecuredAccident`                  - in case the accident is not secured,
+#  * - 8 - `assistanceRequested`                - in case rescue and assistance are requested,
+#  * - 9-255                                    - reserved for future usage. 
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause code of the @ref CauseCode `accident`.
-# *
-# * The value shall be set to:
-# * - 0 - `unavailable`                        - in case the information on the sub cause of the accident is unavailable,
-# * - 1 - `multiVehicleAccident`               - in case more than two vehicles are involved in accident,
-# * - 2 - `heavyAccident`                      - in case the airbag of the vehicle involved in the accident is triggered, 
-# *                                              the accident requires important rescue and/or recovery work,
-# * - 3 - `accidentInvolvingLorry`             - in case the accident involves a lorry,
-# * - 4 - `accidentInvolvingBus`               - in case the accident involves a bus,
-# * - 5 - `accidentInvolvingHazardousMaterials`- in case the accident involves hazardous material,
-# * - 6 - `accidentOnOppositeLane`             - in case the accident happens on opposite lanes,
-# * - 7 - `unsecuredAccident`                  - in case the accident is not secured,
-# * - 8 - `assistanceRequested`                - in case rescue and assistance are requested,
-# * - 9-255                                    - reserved for future usage. 
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -70,3 +70,4 @@ uint8 ACCIDENT_INVOLVING_HAZARDOUS_MATERIALS = 5
 uint8 ACCIDENT_ON_OPPOSITE_LANE = 6
 uint8 UNSECURED_ACCIDENT = 7
 uint8 ASSISTANCE_REQUESTED = 8
+

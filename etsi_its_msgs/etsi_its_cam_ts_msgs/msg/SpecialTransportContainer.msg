@@ -30,17 +30,17 @@
 # 	specialTransportType SpecialTransportType,
 # 	lightBarSirenInUse LightBarSirenInUse
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Special Transport Container.
 # *
-#* This type contains detaild information of the Special Transport Container.
-#*
-#* It shall include the following components:
-#*
-#* @field specialTransportType: which indicates whether the originating ITS-S is mounted on a special transport vehicle with heavy or oversized load
-#* or both. It shall be present if the data is available in originating ITS-S.
-#*
-#* @field lightBarSirenInUse: indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
-#
+# * It shall include the following components:
+# *
+# * @field specialTransportType: which indicates whether the originating ITS-S is mounted on a special transport vehicle with heavy or oversized load
+# * or both. It shall be present if the data is available in originating ITS-S.
+# *
+# * @field lightBarSirenInUse: indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
+# */
+# ------------------------------------------------------------------------------
 
 SpecialTransportType special_transport_type
 

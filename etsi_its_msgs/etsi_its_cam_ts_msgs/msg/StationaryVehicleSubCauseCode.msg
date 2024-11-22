@@ -35,23 +35,23 @@
 #     carryingDangerousGoods (5), 
 #     vehicleOnFire          (6)
 # } (0..255)
+# /**
+#  * This DE provides the value of the sub cause codes of the @ref CauseCode "stationaryVehicle". 
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`           - in case further detailed information on stationary vehicle is unavailable,
+#  * - 1 `humanProblem`          - in case stationary vehicle is due to health problem of driver or passenger,
+#  * - 2 `vehicleBreakdown`      - in case stationary vehicle is due to vehicle break down,
+#  * - 3 `postCrash`             - in case stationary vehicle is caused by collision,
+#  * - 4 `publicTransportStop`   - in case public transport vehicle is stationary at bus stop,
+#  * - 5 `carryingDangerousGoods`- in case the stationary vehicle is carrying dangerous goods,
+#  * - 6 `vehicleOnFire`         - in case of vehicle on fire.
+#  * - 7-255 reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE provides the value of the sub cause codes of the @ref CauseCode "stationaryVehicle". 
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`           - in case further detailed information on stationary vehicle is unavailable,
-# * - 1 `humanProblem`          - in case stationary vehicle is due to health problem of driver or passenger,
-# * - 2 `vehicleBreakdown`      - in case stationary vehicle is due to vehicle break down,
-# * - 3 `postCrash`             - in case stationary vehicle is caused by collision,
-# * - 4 `publicTransportStop`   - in case public transport vehicle is stationary at bus stop,
-# * - 5 `carryingDangerousGoods`- in case the stationary vehicle is carrying dangerous goods,
-# * - 6 `vehicleOnFire`         - in case of vehicle on fire.
-# * - 7-255 reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -63,3 +63,4 @@ uint8 POST_CRASH = 3
 uint8 PUBLIC_TRANSPORT_STOP = 4
 uint8 CARRYING_DANGEROUS_GOODS = 5
 uint8 VEHICLE_ON_FIRE = 6
+

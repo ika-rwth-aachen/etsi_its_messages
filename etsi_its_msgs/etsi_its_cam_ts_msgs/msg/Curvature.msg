@@ -30,20 +30,20 @@
 #     curvatureValue         CurvatureValue,
 #     curvatureConfidence    CurvatureConfidence
 # }
+# /**
+#  * This DF represents the curvature of the vehicle trajectory and the associated confidence value.
+#  * The curvature detected by a vehicle represents the curvature of actual vehicle trajectory.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field curvatureValue: Detected curvature of the vehicle trajectory.
+#  * 
+#  * @field curvatureConfidence: along with a confidence value of the curvature value with a predefined confidence level. 
+#  * 
+#  * @category: Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the curvature of the vehicle trajectory and the associated confidence value.
-# * The curvature detected by a vehicle represents the curvature of actual vehicle trajectory.
-# *
-# * It shall include the following components: 
-# * 
-# * @field curvatureValue: Detected curvature of the vehicle trajectory.
-# * 
-# * @field curvatureConfidence: along with a confidence value of the curvature value with a predefined confidence level. 
-# * 
-# * @category: Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 CurvatureValue curvature_value
 

@@ -31,16 +31,16 @@
 # 	rsuContainerHighFrequency          RSUContainerHighFrequency,
 # 	...
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type represents the high frequency container.
+# * 
+# * It shall include the following components: 
 # *
-#* This type represents the high frequency container.
-#* 
-#* It shall include the following components: 
-#*
-#* @field basicVehicleContainerHighFrequency: The mandatory high frequency container of the CAM when the originating ITS-S is of the type vehicle ITS-S.
-#*
-#* @field rsuContainerHighFrequency: The mandatory high frequency container of CAM when the type of the originating ITS-S is RSU ITS-S.
-#
+# * @field basicVehicleContainerHighFrequency: The mandatory high frequency container of the CAM when the originating ITS-S is of the type vehicle ITS-S.
+# *
+# * @field rsuContainerHighFrequency: The mandatory high frequency container of CAM when the type of the originating ITS-S is RSU ITS-S.
+# */
+# ------------------------------------------------------------------------------
 
 uint8 choice
 

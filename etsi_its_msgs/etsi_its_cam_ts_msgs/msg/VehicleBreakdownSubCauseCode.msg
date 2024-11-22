@@ -39,27 +39,27 @@
 #     tyrePressureProblem  (9), 
 #     vehicleOnFire        (10)
 # } (0..255)
-# ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `vehicleBreakdown`. 
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`         - in case further detailed information on cause of vehicle break down is unavailable,
-# * - 1 `lackOfFuel`          - in case vehicle break down is due to lack of fuel,
-# * - 2 `lackOfBatteryPower`  - in case vehicle break down is caused by lack of battery power,
-# * - 3 `engineProblem`       - in case vehicle break down is caused by an engine problem,
-# * - 4 `transmissionProblem` - in case vehicle break down is caused by transmission problem,
-# * - 5 `engineCoolingProblem`- in case vehicle break down is caused by an engine cooling problem,
-# * - 6 `brakingSystemProblem`- in case vehicle break down is caused by a braking system problem,
-# * - 7 `steeringProblem`     - in case vehicle break down is caused by a steering problem,
-# * - 8 `tyrePuncture`        - in case vehicle break down is caused by tyre puncture,
-# * - 9 `tyrePressureProblem` - in case low tyre pressure in detected,
-# * - 10 `vehicleOnFire`      - in case the vehicle is on fire.
-# * - 11-255                  - are reserved for future usage.
-# *
-# * @category: Traffic information
-#
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `vehicleBreakdown`. 
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`         - in case further detailed information on cause of vehicle break down is unavailable,
+#  * - 1 `lackOfFuel`          - in case vehicle break down is due to lack of fuel,
+#  * - 2 `lackOfBatteryPower`  - in case vehicle break down is caused by lack of battery power,
+#  * - 3 `engineProblem`       - in case vehicle break down is caused by an engine problem,
+#  * - 4 `transmissionProblem` - in case vehicle break down is caused by transmission problem,
+#  * - 5 `engineCoolingProblem`- in case vehicle break down is caused by an engine cooling problem,
+#  * - 6 `brakingSystemProblem`- in case vehicle break down is caused by a braking system problem,
+#  * - 7 `steeringProblem`     - in case vehicle break down is caused by a steering problem,
+#  * - 8 `tyrePuncture`        - in case vehicle break down is caused by tyre puncture,
+#  * - 9 `tyrePressureProblem` - in case low tyre pressure in detected,
+#  * - 10 `vehicleOnFire`      - in case the vehicle is on fire.
+#  * - 11-255                  - are reserved for future usage.
+#  *
+#  * @category: Traffic information
 # 
+#  */
+# ------------------------------------------------------------------------------
 
 uint8 value
 uint8 MIN = 0
@@ -75,3 +75,4 @@ uint8 STEERING_PROBLEM = 7
 uint8 TYRE_PUNCTURE = 8
 uint8 TYRE_PRESSURE_PROBLEM = 9
 uint8 VEHICLE_ON_FIRE = 10
+

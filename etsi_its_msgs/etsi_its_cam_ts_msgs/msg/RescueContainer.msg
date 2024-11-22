@@ -29,14 +29,14 @@
 # RescueContainer ::= SEQUENCE {
 # 	lightBarSirenInUse LightBarSirenInUse
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Rescue Container.
 # *
-#* This type contains detaild information of the Rescue Container.
-#*
-#* It shall include the following components:
-#*
-#* @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
-#
+# * It shall include the following components:
+# *
+# * @field lightBarSirenInUse: it indicates whether light-bar or a siren is in use by the vehicle originating the CAM.
+# */
+# ------------------------------------------------------------------------------
 
 LightBarSirenInUse light_bar_siren_in_use
 

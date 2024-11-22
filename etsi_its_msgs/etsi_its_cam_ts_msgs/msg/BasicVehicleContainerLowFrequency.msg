@@ -31,19 +31,19 @@
 # 	exteriorLights ExteriorLights,
 # 	pathHistory Path
 # }
-# ------------------------------------------------------------------------------
+# /**
+# * This type contains detaild information of the Basic Vehicle Container Low Frequency.
 # *
-#* This type contains detaild information of the Basic Vehicle Container Low Frequency.
-#*
-#* It shall include the following components:
-#*
-#* @field vehicleRole: represent the role of the vehicle ITS-S that originates the CAM. Only values 0 to 7 shall be used.
-#*
-#* @field exteriorLights: represent the status of the most important exterior lights switches of the vehicle ITS-S that originates the CAM.
-#*
-#* @field pathHistory: which represents the vehicle's recent movement over some past time and/or distance. It consists of a list of path points,
-#* each represented as DF PathPoint. The list of path points may consist of up to 23 elements. 
-#
+# * It shall include the following components:
+# *
+# * @field vehicleRole: represent the role of the vehicle ITS-S that originates the CAM. Only values 0 to 7 shall be used.
+# *
+# * @field exteriorLights: represent the status of the most important exterior lights switches of the vehicle ITS-S that originates the CAM.
+# *
+# * @field pathHistory: which represents the vehicle's recent movement over some past time and/or distance. It consists of a list of path points,
+# * each represented as DF PathPoint. The list of path points may consist of up to 23 elements. 
+# */
+# ------------------------------------------------------------------------------
 
 VehicleRole vehicle_role
 

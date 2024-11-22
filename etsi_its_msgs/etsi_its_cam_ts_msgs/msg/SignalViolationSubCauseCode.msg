@@ -32,20 +32,20 @@
 #     trafficLightViolation      (2), 
 #     turningRegulationViolation (3)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause codes of the @ref CauseCode `signalViolation`.
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`               - in case further detailed information on signal violation event is unavailable,
+#  * - 1 `stopSignViolation`         - in case a stop sign violation is detected,
+#  * - 2 `trafficLightViolation`     - in case a traffic light violation is detected,
+#  * - 3 `turningRegulationViolation`- in case a turning regulation violation is detected.
+#  * - 4-255                         - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause codes of the @ref CauseCode `signalViolation`.
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`               - in case further detailed information on signal violation event is unavailable,
-# * - 1 `stopSignViolation`         - in case a stop sign violation is detected,
-# * - 2 `trafficLightViolation`     - in case a traffic light violation is detected,
-# * - 3 `turningRegulationViolation`- in case a turning regulation violation is detected.
-# * - 4-255                         - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -54,3 +54,4 @@ uint8 UNAVAILABLE = 0
 uint8 STOP_SIGN_VIOLATION = 1
 uint8 TRAFFIC_LIGHT_VIOLATION = 2
 uint8 TURNING_REGULATION_VIOLATION = 3
+

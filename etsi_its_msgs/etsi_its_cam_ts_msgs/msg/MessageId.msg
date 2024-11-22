@@ -49,37 +49,37 @@
 #     mcm               (20),
 #     pam               (21)
 # } (0..255)
+# /** 
+#  * This DE represents the type of facility layer message.
+#  *
+#  *  The value shall be set to:
+#  *	- 1  - `denm`              - for Decentralized Environmental Notification Message (DENM) as specified in ETSI EN 302 637-3 [2],
+#  *  - 2  - `cam`               - for Cooperative Awareness Message (CAM) as specified in ETSI EN 302 637-2 [1],
+#  *  - 3  - `poim`              - for Point of Interest message as specified in ETSI TS 103 916 [9],
+#  *  - 4  - `spatem`            - for Signal Phase And Timing Extended Message (SPATEM) as specified in ETSI TS 103 301 [15],
+#  *  - 5  - `mapem`             - for MAP Extended Message (MAPEM) as specified in ETSI TS 103 301 [15],
+#  *  - 6  - `ivim`              - for in Vehicle Information Message (IVIM) as specified in ETSI TS 103 301 [15],
+#  *  - 7  - `rfu1`              - reserved for future usage,
+#  *  - 8  - `rfu2`              - reserved for future usage,
+#  *  - 9  - `srem`              - for Signal Request Extended Message as specified in ETSI TS 103 301 [15],
+#  *  - 10 - `ssem`              - for Signal request Status Extended Message as specified in ETSI TS 103 301 [15],
+#  *  - 11 - `evcsn`             - for Electrical Vehicle Charging Spot Notification message as specified in ETSI TS 101 556-1 [9],
+#  *  - 12 - `saem`              - for Services Announcement Extended Message as specified in ETSI EN 302 890-1 [17],
+#  *  - 13 - `rtcmem`            - for Radio Technical Commission for Maritime Services Extended Message (RTCMEM) as specified in ETSI TS 103 301 [15],
+#  *  - 14 - `cpm`               - reserved for Collective Perception Message (CPM), 
+#  *  - 15 - `imzm`              - for Interference Management Zone Message (IMZM) as specified in ETSI TS 103 724 [13],
+#  *  - 16 - `vam`               - for Vulnerable Road User Awareness Message as specified in ETSI TS 130 300-3 [12], 
+#  *  - 17 - `dsm`               - reserved for Diagnosis, logging and Status Message,
+#  *  - 18 - `pcim`              - reserved for Parking Control Infrastructure Message,
+#  *  - 19 - `pcvm`              - reserved for Parking Control Vehicle Message,
+#  *  - 20 - `mcm`               - reserved for Manoeuvre Coordination Message,
+#  *  - 21 - `pam`               - reserved for Parking Availability Message,
+#  *  - 22-255                   - reserved for future usage.
+#  *
+#  * @category: Communication information
+#  * @revision: Created in V2.1.1 from @ref ItsPduHeader. Value 3 re-assigned to poim and value 7 and 8 reserved in V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents the type of facility layer message.
-# *
-# *  The value shall be set to:
-# *	- 1  - `denm`              - for Decentralized Environmental Notification Message (DENM) as specified in ETSI EN 302 637-3 [2],
-# *  - 2  - `cam`               - for Cooperative Awareness Message (CAM) as specified in ETSI EN 302 637-2 [1],
-# *  - 3  - `poim`              - for Point of Interest message as specified in ETSI TS 103 916 [9],
-# *  - 4  - `spatem`            - for Signal Phase And Timing Extended Message (SPATEM) as specified in ETSI TS 103 301 [15],
-# *  - 5  - `mapem`             - for MAP Extended Message (MAPEM) as specified in ETSI TS 103 301 [15],
-# *  - 6  - `ivim`              - for in Vehicle Information Message (IVIM) as specified in ETSI TS 103 301 [15],
-# *  - 7  - `rfu1`              - reserved for future usage,
-# *  - 8  - `rfu2`              - reserved for future usage,
-# *  - 9  - `srem`              - for Signal Request Extended Message as specified in ETSI TS 103 301 [15],
-# *  - 10 - `ssem`              - for Signal request Status Extended Message as specified in ETSI TS 103 301 [15],
-# *  - 11 - `evcsn`             - for Electrical Vehicle Charging Spot Notification message as specified in ETSI TS 101 556-1 [9],
-# *  - 12 - `saem`              - for Services Announcement Extended Message as specified in ETSI EN 302 890-1 [17],
-# *  - 13 - `rtcmem`            - for Radio Technical Commission for Maritime Services Extended Message (RTCMEM) as specified in ETSI TS 103 301 [15],
-# *  - 14 - `cpm`               - reserved for Collective Perception Message (CPM), 
-# *  - 15 - `imzm`              - for Interference Management Zone Message (IMZM) as specified in ETSI TS 103 724 [13],
-# *  - 16 - `vam`               - for Vulnerable Road User Awareness Message as specified in ETSI TS 130 300-3 [12], 
-# *  - 17 - `dsm`               - reserved for Diagnosis, logging and Status Message,
-# *  - 18 - `pcim`              - reserved for Parking Control Infrastructure Message,
-# *  - 19 - `pcvm`              - reserved for Parking Control Vehicle Message,
-# *  - 20 - `mcm`               - reserved for Manoeuvre Coordination Message,
-# *  - 21 - `pam`               - reserved for Parking Availability Message,
-# *  - 22-255                   - reserved for future usage.
-# *
-# * @category: Communication information
-# * @revision: Created in V2.1.1 from @ref ItsPduHeader. Value 3 re-assigned to poim and value 7 and 8 reserved in V2.2.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -105,3 +105,4 @@ uint8 PCIM = 18
 uint8 PCVM = 19
 uint8 MCM = 20
 uint8 PAM = 21
+

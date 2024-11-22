@@ -37,26 +37,26 @@
 #     deicing                         (7), 
 #     saltingVehicles                 (8)
 # } (0..255)
+# /**
+#  * This DE represents the sub cause codes of the @ref CauseCode "slowVehicle".
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`                    - in case further detailed information on slow vehicle driving event is
+#  *                                        unavailable,
+#  * - 1 `maintenanceVehicle`             - in case of a slow driving maintenance vehicle on the road,
+#  * - 2 `vehiclesSlowingToLookAtAccident`- in case vehicle is temporally slowing down to look at accident, spot, etc.,
+#  * - 3 `abnormalLoad`                   - in case an abnormal loaded vehicle is driving slowly on the road,
+#  * - 4 `abnormalWideLoad`               - in case an abnormal wide load vehicle is driving slowly on the road,
+#  * - 5 `convoy`                         - in case of slow driving convoy on the road,
+#  * - 6 `snowplough`                     - in case of slow driving snow plough on the road,
+#  * - 7 `deicing`                        - in case of slow driving de-icing vehicle on the road,
+#  * - 8 `saltingVehicles`                - in case of slow driving salting vehicle on the road.
+#  * - 9-255                              - are reserved for future usage.
+#  * 
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the sub cause codes of the @ref CauseCode "slowVehicle".
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`                    - in case further detailed information on slow vehicle driving event is
-# *                                        unavailable,
-# * - 1 `maintenanceVehicle`             - in case of a slow driving maintenance vehicle on the road,
-# * - 2 `vehiclesSlowingToLookAtAccident`- in case vehicle is temporally slowing down to look at accident, spot, etc.,
-# * - 3 `abnormalLoad`                   - in case an abnormal loaded vehicle is driving slowly on the road,
-# * - 4 `abnormalWideLoad`               - in case an abnormal wide load vehicle is driving slowly on the road,
-# * - 5 `convoy`                         - in case of slow driving convoy on the road,
-# * - 6 `snowplough`                     - in case of slow driving snow plough on the road,
-# * - 7 `deicing`                        - in case of slow driving de-icing vehicle on the road,
-# * - 8 `saltingVehicles`                - in case of slow driving salting vehicle on the road.
-# * - 9-255                              - are reserved for future usage.
-# * 
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -70,3 +70,4 @@ uint8 CONVOY = 5
 uint8 SNOWPLOUGH = 6
 uint8 DEICING = 7
 uint8 SALTING_VEHICLES = 8
+

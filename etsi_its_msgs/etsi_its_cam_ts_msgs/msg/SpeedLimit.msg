@@ -27,14 +27,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SpeedLimit ::= INTEGER (1..255)
+# /**
+#  * This DE represents a speed limitation applied to a geographical position, a road section or a geographical region.
+#  * 
+#  * @unit: km/h
+#  * @category: Infrastructure information, Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents a speed limitation applied to a geographical position, a road section or a geographical region.
-# * 
-# * @unit: km/h
-# * @category: Infrastructure information, Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 1

@@ -30,19 +30,19 @@
 #     pathPosition     DeltaReferencePosition,
 #     pathDeltaTime    PathDeltaTime OPTIONAL
 # }
+# /**
+#  * This DF defines an offset waypoint position within a path.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field pathPosition: The waypoint position defined as an offset position with regards to a pre-defined reference position. 
+#  *
+#  * @field pathDeltaTime: The optional travel time separated from a waypoint to the predefined reference position.
+#  *
+#  * @category GeoReference information
+#  * @revision: semantics updated in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF defines an offset waypoint position within a path.
-# *
-# * It shall include the following components: 
-# *
-# * @field pathPosition: The waypoint position defined as an offset position with regards to a pre-defined reference position. 
-# *
-# * @field pathDeltaTime: The optional travel time separated from a waypoint to the predefined reference position.
-# *
-# * @category GeoReference information
-# * @revision: semantics updated in V2.1.1
-# 
 
 DeltaReferencePosition path_position
 

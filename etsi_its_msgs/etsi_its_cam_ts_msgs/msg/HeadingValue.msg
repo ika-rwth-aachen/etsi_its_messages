@@ -34,17 +34,17 @@
 #     doNotUse    (3600),
 #     unavailable (3601)
 # } (0..3601)
+# /**
+#  * This DE represents the orientation of the horizontal velocity vector with regards to the WGS84 north.
+#  * When the information is not available, the DE shall be set to 3 601. The value 3600 shall not be used.
+#  *
+#  * @note: this DE is kept for backwards compatibility reasons only. It is recommended to use the @ref Wgs84AngleValue instead. 
+#  *
+#  * Unit: 0,1 degree
+#  * Categories: GeoReference information
+#  * @revision: Description revised in V2.1.1 (usage of value 3600 specified) 
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the orientation of the horizontal velocity vector with regards to the WGS84 north.
-# * When the information is not available, the DE shall be set to 3 601. The value 3600 shall not be used.
-# *
-# * @note: this DE is kept for backwards compatibility reasons only. It is recommended to use the @ref Wgs84AngleValue instead. 
-# *
-# * Unit: 0,1 degree
-# * Categories: GeoReference information
-# * @revision: Description revised in V2.1.1 (usage of value 3600 specified) 
-#
 
 uint16 value
 uint16 MIN = 0
@@ -55,3 +55,4 @@ uint16 WGS84_SOUTH = 1800
 uint16 WGS84_WEST = 2700
 uint16 DO_NOT_USE = 3600
 uint16 UNAVAILABLE = 3601
+

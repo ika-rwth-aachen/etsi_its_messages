@@ -31,18 +31,18 @@
 #     backward    (1), 
 #     unavailable (2)
 # }
+# /**
+#  * This DE indicates in which direction something is moving.
+#  *
+#  * The value shall be set to:
+#  * - 0 - `forward`     - to indicate it is moving forward,
+#  * - 1 - `backwards`   - to indicate it is moving backwards,
+#  * - 2 - `unavailable` - to indicate that the information is unavailable.
+#  *
+#  * @category: Kinematic information
+#  * @revision: editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates in which direction something is moving.
-# *
-# * The value shall be set to:
-# * - 0 - `forward`     - to indicate it is moving forward,
-# * - 1 - `backwards`   - to indicate it is moving backwards,
-# * - 2 - `unavailable` - to indicate that the information is unavailable.
-# *
-# * @category: Kinematic information
-# * @revision: editorial update in V2.1.1
-# 
 
 uint8 value
 uint8 FORWARD = 0

@@ -31,31 +31,31 @@
 #     positiveOutOfRange (32766), 
 #     unavailable        (32767)
 # } (-32766..32767)
+# /**
+#  * This DE represents the vehicle rotation around z-axis of the coordinate system centred on the centre of mass of the empty-loaded
+#  * vehicle. The leading sign denotes the direction of rotation.
+#  * 
+#  * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
+#  *
+#  * The value shall be set to:
+#  * - `-32 766` to indicate that the yaw rate is equal to or greater than 327,66 degrees/second to the right,
+#  * - `n` (`n > -32 766` and `n <= 0`) to indicate that the rotation is clockwise (i.e. to the right) and is equal to or less than n x 0,01 degrees/s, 
+#       and greater than (n-1) x 0,01 degrees/s,
+#  * - `n` (`n > 0` and `n < 32 766`) to indicate that the rotation is anti-clockwise (i.e. to the left) and is equal to or less than n x 0,01 degrees/s, 
+#       and greater than (n-1) x 0,01 degrees/s,
+#  * - `32 766` to indicate that the yaw rate is greater than 327.65 degrees/second to the left,
+#  * - `32 767` to indicate that the information is not available.
+#  * 
+#  * The yaw rate value shall be a raw data value, i.e. not filtered, smoothed or otherwise modified.
+#  * The reading instant should be the same as for the vehicle acceleration.
+#  * 
+#  * @note: The empty load vehicle is defined in ISO 1176 [8], clause 4.6.
+#  * 
+#  * @unit: 0,01 degree per second. 
+#  * @category: Vehicle Information
+#  * @revision: Desription revised in V2.1.1 (the meaning of 32766 has changed slightly). 
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the vehicle rotation around z-axis of the coordinate system centred on the centre of mass of the empty-loaded
-# * vehicle. The leading sign denotes the direction of rotation.
-# * 
-# * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
-# *
-# * The value shall be set to:
-# * - `-32 766` to indicate that the yaw rate is equal to or greater than 327,66 degrees/second to the right,
-# * - `n` (`n > -32 766` and `n <= 0`) to indicate that the rotation is clockwise (i.e. to the right) and is equal to or less than n x 0,01 degrees/s, 
-#      and greater than (n-1) x 0,01 degrees/s,
-# * - `n` (`n > 0` and `n < 32 766`) to indicate that the rotation is anti-clockwise (i.e. to the left) and is equal to or less than n x 0,01 degrees/s, 
-#      and greater than (n-1) x 0,01 degrees/s,
-# * - `32 766` to indicate that the yaw rate is greater than 327.65 degrees/second to the left,
-# * - `32 767` to indicate that the information is not available.
-# * 
-# * The yaw rate value shall be a raw data value, i.e. not filtered, smoothed or otherwise modified.
-# * The reading instant should be the same as for the vehicle acceleration.
-# * 
-# * @note: The empty load vehicle is defined in ISO 1176 [8], clause 4.6.
-# * 
-# * @unit: 0,01 degree per second. 
-# * @category: Vehicle Information
-# * @revision: Desription revised in V2.1.1 (the meaning of 32766 has changed slightly). 
-#
 
 int16 value
 int16 MIN = -32766
@@ -63,3 +63,4 @@ int16 MAX = 32767
 int16 NEGATIVE_OUT_OF_RANGE = -32766
 int16 POSITIVE_OUT_OF_RANGE = 32766
 int16 UNAVAILABLE = 32767
+

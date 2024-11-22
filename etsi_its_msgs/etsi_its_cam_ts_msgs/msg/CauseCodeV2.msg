@@ -30,21 +30,21 @@
 #     ccAndScc    CauseCodeChoice,
 #     ...
 # }
-# ------------------------------------------------------------------------------
-# *
-# * This DF is an alternative representation of the cause code value of a traffic event. 
-# *
-# * It shall include the following components: 
-# *
-# * @field ccAndScc: the main cause of a detected event. Each entry is of a different type and represents the sub cause code.
-#
-# * The semantics of the entire DF are completely defined by the choice value which represents the cause code value. 
-# * The interpretation of the sub cause code value may provide additional information that is not strictly necessary to understand 
-# * the cause code itself, and is therefore optional.
-# *
-# * @category: Traffic information
-# * @revision: Created in V2.1.1, description amended in V2.2.1
+# /**
+#  * This DF is an alternative representation of the cause code value of a traffic event. 
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field ccAndScc: the main cause of a detected event. Each entry is of a different type and represents the sub cause code.
 # 
+#  * The semantics of the entire DF are completely defined by the choice value which represents the cause code value. 
+#  * The interpretation of the sub cause code value may provide additional information that is not strictly necessary to understand 
+#  * the cause code itself, and is therefore optional.
+#  *
+#  * @category: Traffic information
+#  * @revision: Created in V2.1.1, description amended in V2.2.1
+#  */
+# ------------------------------------------------------------------------------
 
 CauseCodeChoice cc_and_scc
 

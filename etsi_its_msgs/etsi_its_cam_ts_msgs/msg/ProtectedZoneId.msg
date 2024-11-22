@@ -27,14 +27,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # ProtectedZoneId ::= INTEGER (0.. 134217727)
+# /**
+#  * This DE represents the indentifier of a protected communication zone.
+#  * 
+#  * 
+#  * @category: Infrastructure information, Communication information
+#  * @revision: Revision in V2.1.1 (changed name from ProtectedZoneID to ProtectedZoneId)
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the indentifier of a protected communication zone.
-# * 
-# * 
-# * @category: Infrastructure information, Communication information
-# * @revision: Revision in V2.1.1 (changed name from ProtectedZoneID to ProtectedZoneId)
-# 
 
 uint32 value
 uint32 MIN = 0

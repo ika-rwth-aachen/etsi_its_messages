@@ -31,19 +31,19 @@
 #     wrongLane      (1), 
 #     wrongDirection (2)
 # } (0..255)
+# /**
+#  * This DE represents the sub cause codes of the @ref CauseCode `wrongWayDriving` .
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`    - in case further detailed information on wrong way driving event is unavailable,
+#  * - 1 `wrongLane`      - in case vehicle is driving on a lane for which it has no authorization to use,
+#  * - 2 `wrongDirection` - in case vehicle is driving in a direction that it is not allowed,
+#  * - 3-255              - reserved for future usage.
+#  * 
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the sub cause codes of the @ref CauseCode `wrongWayDriving` .
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`    - in case further detailed information on wrong way driving event is unavailable,
-# * - 1 `wrongLane`      - in case vehicle is driving on a lane for which it has no authorization to use,
-# * - 2 `wrongDirection` - in case vehicle is driving in a direction that it is not allowed,
-# * - 3-255              - reserved for future usage.
-# * 
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -51,3 +51,4 @@ uint8 MAX = 255
 uint8 UNAVAILABLE = 0
 uint8 WRONG_LANE = 1
 uint8 WRONG_DIRECTION = 2
+

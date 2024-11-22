@@ -27,23 +27,23 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
+# /**
+#  * This DE indicates whether a driving lane is open to traffic.
+#  * 
+#  * A lane is counted from inside border of the road excluding the hard shoulder. The size of the bit string shall
+#  * correspond to the total number of the driving lanes in the carriageway.
+#  * 
+#  * The numbering is matched to @ref LanePosition.
+#  * The bit `0` is used to indicate the innermost lane, bit `1` is used to indicate the second lane from inside border.
+#  * 
+#  * If a lane is closed to traffic, the corresponding bit shall be set to `1`. Otherwise, it shall be set to `0`.
+#  * 
+#  * @note: hard shoulder status is not provided by this DE but in @ref HardShoulderStatus.
+#  * 
+#  * @category: Traffic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates whether a driving lane is open to traffic.
-# * 
-# * A lane is counted from inside border of the road excluding the hard shoulder. The size of the bit string shall
-# * correspond to the total number of the driving lanes in the carriageway.
-# * 
-# * The numbering is matched to @ref LanePosition.
-# * The bit `0` is used to indicate the innermost lane, bit `1` is used to indicate the second lane from inside border.
-# * 
-# * If a lane is closed to traffic, the corresponding bit shall be set to `1`. Otherwise, it shall be set to `0`.
-# * 
-# * @note: hard shoulder status is not provided by this DE but in @ref HardShoulderStatus.
-# * 
-# * @category: Traffic information
-# * @revision: V1.3.1
-# 
 
 uint8[] value
 uint8 bits_unused

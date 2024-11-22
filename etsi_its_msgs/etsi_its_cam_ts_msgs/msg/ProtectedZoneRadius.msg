@@ -27,17 +27,17 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # ProtectedZoneRadius ::= INTEGER (1..255,...)
+# /**
+#  * This DE represents the radius of a protected communication zone. 
+#  * 
+#  * 
+#  * @unit: metre
+#  * @category: Infrastructure information, Communication information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the radius of a protected communication zone. 
-# * 
-# * 
-# * @unit: metre
-# * @category: Infrastructure information, Communication information
-# * @revision: V1.3.1
-# 
 
-int64 value
-int64 MIN = 1
-int64 MAX = 255
+uint8 value
+uint8 MIN = 1
+uint8 MAX = 255
 

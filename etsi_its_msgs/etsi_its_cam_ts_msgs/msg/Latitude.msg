@@ -29,24 +29,25 @@
 # Latitude ::= INTEGER {
 #     unavailable(900000001)
 # } (-900000000..900000001)
+# /**
+#  * This DE represents the absolute geographical latitude in a WGS84 coordinate system, providing a range of 90 degrees in north or
+#  * in south hemisphere.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * The value shall be set to:
+#  * - `n` (`n >= -900 000 000` and `n < 0`) x 10^-7 degree, i.e. negative values for latitudes south of the Equator,
+#  * - `0` is used for the latitude of the equator,
+#  * - `n` (`n > 0` and `n < 900 000 001`) x 10^-7 degree, i.e. positive values for latitudes north of the Equator,
+#  * - `900 000 001` when the information is unavailable.
+#  *
+#  * @unit: 10^-7 degree
+#  * @category: GeoReference information
+#  * @revision: Editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the absolute geographical latitude in a WGS84 coordinate system, providing a range of 90 degrees in north or
-# * in south hemisphere.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * The value shall be set to:
-# * - `n` (`n >= -900 000 000` and `n < 0`) x 10^-7 degree, i.e. negative values for latitudes south of the Equator,
-# * - `0` is used for the latitude of the equator,
-# * - `n` (`n > 0` and `n < 900 000 001`) x 10^-7 degree, i.e. positive values for latitudes north of the Equator,
-# * - `900 000 001` when the information is unavailable.
-# *
-# * @unit: 10^-7 degree
-# * @category: GeoReference information
-# * @revision: Editorial update in V2.1.1
-# 
 
 int32 value
 int32 MIN = -900000000
 int32 MAX = 900000001
 int32 UNAVAILABLE = 900000001
+

@@ -38,26 +38,26 @@
 #     domesticAnimalsSmall  (8),
 #     domesticAnimalsLarge  (9)
 # } (0..255)
+# /**
+#  * This DE represents the value of the sub cause code of the @ref CauseCode `hazardousLocation-AnimalOnTheRoad`.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `unavailable`          - in case further detailed information on the animal(s) on the road is unavailable,
+#  * - 1 - `wildAnimals`          - in case wild animals of unknown size are present on the road,
+#  * - 2 - `herdOfAnimals`        - in case a herd of animals is present on the road,
+#  * - 3 - `smallAnimals`         - in case small size animals of unknown type are present on the road,
+#  * - 4 - `largeAnimals`         - in case large size animals of unknown type are present on the road,
+#  * - 5 - `wildAnimalsSmall`     - in case small size wild animal(s) are present on the road,
+#  * - 6 - `wildAnimalsLarge`     - in case large size wild animal(s) are present on the road,
+#  * - 7 - `domesticAnimals`      - in case domestic animal(s) of unknown size are detected on the road,
+#  * - 8 - `domesticAnimalsSmall` - in case small size domestic animal(s) are present on the road,
+#  * - 9 - `domesticAnimalsLarge` - in case large size domestic animal(s) are present on the road.
+#  * - 10-255                     - are reserved for future usage.
+#  *
+#  * @category: Traffic information
+#  * @revision: V1.3.1, named values 5 to 9 added in V2.2.1 
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the value of the sub cause code of the @ref CauseCode `hazardousLocation-AnimalOnTheRoad`.
-# * 
-# * The value shall be set to:
-# * - 0 - `unavailable`          - in case further detailed information on the animal(s) on the road is unavailable,
-# * - 1 - `wildAnimals`          - in case wild animals of unknown size are present on the road,
-# * - 2 - `herdOfAnimals`        - in case a herd of animals is present on the road,
-# * - 3 - `smallAnimals`         - in case small size animals of unknown type are present on the road,
-# * - 4 - `largeAnimals`         - in case large size animals of unknown type are present on the road,
-# * - 5 - `wildAnimalsSmall`     - in case small size wild animal(s) are present on the road,
-# * - 6 - `wildAnimalsLarge`     - in case large size wild animal(s) are present on the road,
-# * - 7 - `domesticAnimals`      - in case domestic animal(s) of unknown size are detected on the road,
-# * - 8 - `domesticAnimalsSmall` - in case small size domestic animal(s) are present on the road,
-# * - 9 - `domesticAnimalsLarge` - in case large size domestic animal(s) are present on the road.
-# * - 10-255                     - are reserved for future usage.
-# *
-# * @category: Traffic information
-# * @revision: V1.3.1, named values 5 to 9 added in V2.2.1 
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -72,3 +72,4 @@ uint8 WILD_ANIMALS_LARGE = 6
 uint8 DOMESTIC_ANIMALS = 7
 uint8 DOMESTIC_ANIMALS_SMALL = 8
 uint8 DOMESTIC_ANIMALS_LARGE = 9
+
