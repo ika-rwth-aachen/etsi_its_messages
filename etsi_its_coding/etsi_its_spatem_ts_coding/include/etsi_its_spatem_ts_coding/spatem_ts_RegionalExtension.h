@@ -5,11 +5,6 @@
  * 	`asn1c -fcompound-names -fprefix=spatem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
  */
 
-#ifndef	_spatem_ts_RegionalExtension_H_
-#define	_spatem_ts_RegionalExtension_H_
-
-
-#include <etsi_its_spatem_ts_coding/asn_application.h>
 
 /* Including external dependencies */
 #include "etsi_its_spatem_ts_coding/spatem_ts_RegionId.h"
@@ -29,6 +24,11 @@
 #include "etsi_its_spatem_ts_coding/spatem_ts_RequestorDescription-addGrpC.h"
 #include "etsi_its_spatem_ts_coding/spatem_ts_RestrictionUserType-addGrpC.h"
 #include "etsi_its_spatem_ts_coding/spatem_ts_SignalStatusPackage-addGrpC.h"
+#ifndef	_spatem_ts_RegionalExtension_H_
+#define	_spatem_ts_RegionalExtension_H_
+
+
+#include <etsi_its_spatem_ts_coding/asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {
