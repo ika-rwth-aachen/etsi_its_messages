@@ -33,25 +33,25 @@
 #     zCoordinate         CartesianCoordinateSmall OPTIONAL,
 #     radialShapesList    RadialShapesList
 # }
-# ------------------------------------------------------------------------------
-# *
-# * This DF describes a list of radial shapes. 
-# *
-# * It shall include the following components:
-#
-# * @field refPointId: the identification of the reference point in case of a sensor mounted to trailer. Defaults to ITS ReferencePoint (0).
-# * 
-# * @field xCoordinate: the x-coordinate of the offset point.
-# *
-# * @field yCoordinate: the y-coordinate of the offset point.
-# *
-# * @field zCoordinate: the optional z-coordinate of the offset point.
-# *
-# * @field radialShapesList: the list of radial shape details.
-# *
-# * @category: Georeference information
-# * @revision: created in V2.1.1
+# /**
+#  * This DF describes a list of radial shapes. 
+#  *
+#  * It shall include the following components:
 # 
+#  * @field refPointId: the identification of the reference point in case of a sensor mounted to trailer. Defaults to ITS ReferencePoint (0).
+#  * 
+#  * @field xCoordinate: the x-coordinate of the offset point.
+#  *
+#  * @field yCoordinate: the y-coordinate of the offset point.
+#  *
+#  * @field zCoordinate: the optional z-coordinate of the offset point.
+#  *
+#  * @field radialShapesList: the list of radial shape details.
+#  *
+#  * @category: Georeference information
+#  * @revision: created in V2.1.1
+#  */ 
+# ------------------------------------------------------------------------------
 
 Identifier1B ref_point_id
 

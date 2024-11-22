@@ -35,22 +35,22 @@
 #     protectedGeographicArea (5), 
 #     max                     (255)
 # }
+# /**
+#  * This DE represents the possible VRU environment conditions.
+#  *
+#  * - The value shall be set to:
+#  * - 0 `unavailable`            - to indicate that the information on the type of environment is unavailable,
+#  * - 1 `intersectionCrossing`   - to indicate that the VRU is on an intersection or crossing,
+#  * - 2 `zebraCrossing`          - to indicate that the VRU is on a  zebra crossing (crosswalk),
+#  * - 3 `sidewalk`               - to indicate that the VRU is on a sidewalk,
+#  * - 4 `onVehicleRoad`          - to indicate that the VRU is on a traffic lane,
+#  * - 5 `protectedGeographicArea`- to indicate that the VRU is in a protected area.
+#  * - value 5 to 255             - are reserved for future usage. Value 255 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the possible VRU environment conditions.
-# *
-# * - The value shall be set to:
-# * - 0 `unavailable`            - to indicate that the information on the type of environment is unavailable,
-# * - 1 `intersectionCrossing`   - to indicate that the VRU is on an intersection or crossing,
-# * - 2 `zebraCrossing`          - to indicate that the VRU is on a  zebra crossing (crosswalk),
-# * - 3 `sidewalk`               - to indicate that the VRU is on a sidewalk,
-# * - 4 `onVehicleRoad`          - to indicate that the VRU is on a traffic lane,
-# * - 5 `protectedGeographicArea`- to indicate that the VRU is in a protected area.
-# * - value 5 to 255             - are reserved for future usage. Value 255 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

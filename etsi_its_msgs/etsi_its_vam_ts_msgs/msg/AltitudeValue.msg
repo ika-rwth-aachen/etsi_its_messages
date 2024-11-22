@@ -31,22 +31,22 @@
 #     postiveOutOfRange  (800000),
 #     unavailable        (800001)
 # } (-100000..800001)
+# /**
+#  * This DE represents the altitude value in a WGS84 coordinate system.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * The value shall be set to: 
+#  * - `-100 000` if the altitude is equal to or less than -1 000 m,
+#  * - `n` (`n > -100 000` and `n < 800 000`) if the altitude is equal to or less than n  x 0,01 metre and greater than (n-1) x 0,01 metre,
+#  * - `800 000` if the altitude  greater than 7 999,99 m,
+#  * - `800 001` if the information is not available.
+#  *
+#  * @note: the range of this DE does not use the full binary encoding range, but all reasonable values are covered. In order to cover all possible altitude ranges a larger encoding would be necessary.
+#  * @unit: 0,01 metre
+#  * @category: GeoReference information
+#  * @revision: Description revised in V2.1.1 (definition of 800 000 has slightly changed) 
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the altitude value in a WGS84 coordinate system.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * The value shall be set to: 
-# * - `-100 000` if the altitude is equal to or less than -1 000 m,
-# * - `n` (`n > -100 000` and `n < 800 000`) if the altitude is equal to or less than n  x 0,01 metre and greater than (n-1) x 0,01 metre,
-# * - `800 000` if the altitude  greater than 7 999,99 m,
-# * - `800 001` if the information is not available.
-# *
-# * @note: the range of this DE does not use the full binary encoding range, but all reasonable values are covered. In order to cover all possible altitude ranges a larger encoding would be necessary.
-# * @unit: 0,01 metre
-# * @category: GeoReference information
-# * @revision: Description revised in V2.1.1 (definition of 800 000 has slightly changed) 
-# 
 
 int32 value
 int32 MIN = -100000
@@ -54,3 +54,4 @@ int32 MAX = 800001
 int32 NEGATIVE_OUT_OF_RANGE = -100000
 int32 POSTIVE_OUT_OF_RANGE = 800000
 int32 UNAVAILABLE = 800001
+

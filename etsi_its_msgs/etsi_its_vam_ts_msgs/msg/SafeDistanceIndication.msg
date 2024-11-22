@@ -32,26 +32,26 @@
 #     timeToCollision          DeltaTimeTenthOfSecond OPTIONAL,
 #     ...
 # }
+# /**
+#  * This DF provides the safe distance indication of a traffic participant with other traffic participant(s).
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field subjectStation: optionally indicates one "other" traffic participant identified by its ITS-S.
+#  *  
+#  * @field safeDistanceIndicator: indicates whether the distance between the ego ITS-S and the traffic participant(s) is safe.
+#  * If subjectStation is present then it indicates whether the distance between the ego ITS-S and the traffic participant indicated in the component subjectStation is safe. 
+#  *
+#  * @field timeToCollision: optionally indicated the time-to-collision calculated as sqrt(LaDi^2 + LoDi^2 + VDi^2/relative speed 
+#  * and represented in  the  nearest 100  ms. This component may be present only if subjectStation is present. 
+#  *
+#  * @note: the abbreviations used are Lateral Distance (LaD),  Longitudinal Distance (LoD) and Vertical Distance (VD) 
+#  * and their respective  thresholds, Minimum  Safe  Lateral  Distance (MSLaD), Minimum  Safe  Longitudinal Distance  (MSLoD),  and  Minimum  Safe Vertical Distance (MSVD).
+#  *
+#  * @category: Traffic information, Kinematic information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides the safe distance indication of a traffic participant with other traffic participant(s).
-# *
-# * It shall include the following components: 
-# * 
-# * @field subjectStation: optionally indicates one "other" traffic participant identified by its ITS-S.
-# *  
-# * @field safeDistanceIndicator: indicates whether the distance between the ego ITS-S and the traffic participant(s) is safe.
-# * If subjectStation is present then it indicates whether the distance between the ego ITS-S and the traffic participant indicated in the component subjectStation is safe. 
-# *
-# * @field timeToCollision: optionally indicated the time-to-collision calculated as sqrt(LaDi^2 + LoDi^2 + VDi^2/relative speed 
-# * and represented in  the  nearest 100  ms. This component may be present only if subjectStation is present. 
-# *
-# * @note: the abbreviations used are Lateral Distance (LaD),  Longitudinal Distance (LoD) and Vertical Distance (VD) 
-# * and their respective  thresholds, Minimum  Safe  Lateral  Distance (MSLaD), Minimum  Safe  Longitudinal Distance  (MSLoD),  and  Minimum  Safe Vertical Distance (MSVD).
-# *
-# * @category: Traffic information, Kinematic information
-# * @revision: created in V2.1.1
-# 
 
 StationId subject_station
 bool subject_station_is_present

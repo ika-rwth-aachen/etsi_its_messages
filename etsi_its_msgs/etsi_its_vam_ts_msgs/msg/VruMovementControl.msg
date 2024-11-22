@@ -36,23 +36,23 @@
 #     noReaction                 (6), 
 #     max                        (255)
 # }
+# /**
+#  *  This DE indicates the status of the possible human control over a VRU vehicle.
+#  *
+#  * The value shall be set to:
+#  * - 0 `unavailable`                 - to indicate that the information is unavailable,
+#  * - 1 `braking`                     - to indicate that the VRU is braking,
+#  * - 2 `hardBraking`                 - to indicate that the VRU is braking hard,
+#  * - 3 `stopPedaling`                - to indicate that the VRU stopped pedaling,
+#  * - 4 `brakingAndStopPedaling`      - to indicate that the VRU stopped pedaling an is braking,
+#  * - 5 `hardBrakingAndStopPedaling`  - to indicate that the VRU stopped pedaling an is braking hard,
+#  * - 6 `noReaction`                  - to indicate that the VRU is not changing its behavior.
+#  * - 7 to 255                        - are reserved for future usage. Value 255 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# *  This DE indicates the status of the possible human control over a VRU vehicle.
-# *
-# * The value shall be set to:
-# * - 0 `unavailable`                 - to indicate that the information is unavailable,
-# * - 1 `braking`                     - to indicate that the VRU is braking,
-# * - 2 `hardBraking`                 - to indicate that the VRU is braking hard,
-# * - 3 `stopPedaling`                - to indicate that the VRU stopped pedaling,
-# * - 4 `brakingAndStopPedaling`      - to indicate that the VRU stopped pedaling an is braking,
-# * - 5 `hardBrakingAndStopPedaling`  - to indicate that the VRU stopped pedaling an is braking hard,
-# * - 6 `noReaction`                  - to indicate that the VRU is not changing its behavior.
-# * - 7 to 255                        - are reserved for future usage. Value 255 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

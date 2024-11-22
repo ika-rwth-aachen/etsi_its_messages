@@ -31,20 +31,20 @@
 #    vruSpecific    VruSpecificExteriorLights,
 #    ...
 # }
+# /**
+#  * This DF represents the status of the exterior light switches of a VRU.
+#  * This DF is an extension of the vehicular DE @ref ExteriorLights.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field vehicular:  represents the status of the exterior light switches of a road vehicle.
+#  * 
+#  * @field vruSpecific: represents the status of the exterior light switches of a VRU.
+#  *
+#  * @category: VRU information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the status of the exterior light switches of a VRU.
-# * This DF is an extension of the vehicular DE @ref ExteriorLights.
-# *
-# * It shall include the following components: 
-# * 
-# * @field vehicular:  represents the status of the exterior light switches of a road vehicle.
-# * 
-# * @field vruSpecific: represents the status of the exterior light switches of a VRU.
-# *
-# * @category: VRU information
-# * @revision: created in V2.1.1
-# 
 
 ExteriorLights vehicular
 

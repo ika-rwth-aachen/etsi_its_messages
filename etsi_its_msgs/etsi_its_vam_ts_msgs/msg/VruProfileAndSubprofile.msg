@@ -33,22 +33,22 @@
 #    animal                         VruSubProfileAnimal,
 #    ...
 # }
+# /**
+#  * This DF indicates the profile of a VRU including sub-profile information
+#  * It identifies four options corresponding to the four types of VRU profiles specified in ETSI TS 103 300-2 [18]:
+#  *
+#  * @field pedestrian: VRU Profile 1 - Pedestrian.
+#  *
+#  * @field bicyclistAndLightVruVehicle: VRU Profile  2 - Bicyclist.
+#  *
+#  * @field motorcyclist: VRU Profile 3  - Motorcyclist.
+#  *
+#  * @field animal: VRU Profile  4 -  Animal.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates the profile of a VRU including sub-profile information
-# * It identifies four options corresponding to the four types of VRU profiles specified in ETSI TS 103 300-2 [18]:
-# *
-# * @field pedestrian: VRU Profile 1 - Pedestrian.
-# *
-# * @field bicyclistAndLightVruVehicle: VRU Profile  2 - Bicyclist.
-# *
-# * @field motorcyclist: VRU Profile 3  - Motorcyclist.
-# *
-# * @field animal: VRU Profile  4 -  Animal.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 choice
 

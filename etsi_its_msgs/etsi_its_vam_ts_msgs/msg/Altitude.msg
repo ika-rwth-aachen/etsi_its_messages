@@ -30,21 +30,21 @@
 #     altitudeValue         AltitudeValue,
 #     altitudeConfidence    AltitudeConfidence
 # }
+# /**
+#  * This DF provides the altitude and confidence level of an altitude information in a WGS84 coordinate system.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field altitudeValue: altitude of a geographical point.
+#  *
+#  * @field altitudeConfidence: confidence level of the altitudeValue.
+#  *
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use the @ref AltitudeWithConfidence instead. 
+#  * @category: GeoReference information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides the altitude and confidence level of an altitude information in a WGS84 coordinate system.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * It shall include the following components: 
-# *
-# * @field altitudeValue: altitude of a geographical point.
-# *
-# * @field altitudeConfidence: confidence level of the altitudeValue.
-# *
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use the @ref AltitudeWithConfidence instead. 
-# * @category: GeoReference information
-# * @revision: Description revised in V2.1.1
-# 
 
 AltitudeValue altitude_value
 

@@ -31,19 +31,19 @@
 #     clusterLeaveReason    ClusterLeaveReason,
 #     ...
 # }
+# /**
+#  * The DF provides information about the leaving of a cluster.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field clusterId: indicates the cluster.
+#  * 
+#  * @field clusterLeaveReason: indicates the reason for leaving. 
+#  *
+#  * @category: Cluster Information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * The DF provides information about the leaving of a cluster.
-# *
-# * It shall include the following components: 
-# * 
-# * @field clusterId: indicates the cluster.
-# * 
-# * @field clusterLeaveReason: indicates the reason for leaving. 
-# *
-# * @category: Cluster Information
-# * @revision: Created in V2.1.1
-# 
 
 Identifier1B cluster_id
 

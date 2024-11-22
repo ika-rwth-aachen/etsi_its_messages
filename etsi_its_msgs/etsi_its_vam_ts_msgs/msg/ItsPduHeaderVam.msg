@@ -27,16 +27,18 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 #    ItsPduHeaderVam ::= ItsPduHeader(WITH COMPONENTS {..., protocolVersion(3), messageId(vam)})
+# /**
+#  * @details ItsPduHeaderVam
+#  * The ITS PDU header for the VAM.
+#  *
+#  * This DF includes DEs for the VAM _protocolVersion_, the VAM message type identifier _messageID_ 
+#  * and the station identifier _stationID_ of the originating ITS-S.
+#  *
+#  * @category: Communication information
+#  * @revision: V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * @details ItsPduHeaderVam
-# * The ITS PDU header for the VAM.
-# *
-# * This DF includes DEs for the VAM _protocolVersion_, the VAM message type identifier _messageID_ 
-# * and the station identifier _stationID_ of the originating ITS-S.
-# *
-# * @category: Communication information
-# * @revision: V2.2.1
-# 
 
+# with-components: [None, ('protocolVersion', 3), ('messageId', 'vam')]
 ItsPduHeader value
+

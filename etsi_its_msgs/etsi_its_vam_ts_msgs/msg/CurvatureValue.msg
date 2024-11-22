@@ -32,31 +32,31 @@
 #     outOfRangePositive (1022), 
 #     unavailable        (1023)
 # } (-1023..1023)
+# /**
+#  * This DE describes vehicle turning curve with the following information:
+#  * ```
+#  *     Value = 1 / Radius * 10000
+#  * ```
+#  * wherein radius is the vehicle turning curve radius in metres. 
+#  * 
+#  * Positive values indicate a turning curve to the left hand side of the driver.
+#  * It corresponds to the vehicle coordinate system as defined in ISO 8855 [21].
+#  *
+#  * The value shall be set to:
+#  * - `-1023` for  values smaller than -1023,
+#  * - `n` (`n > -1023` and `n < 0`) for negative values equal to or less than `n`, and greater than `(n-1)`,
+#  * - `0` when the vehicle is moving straight,
+#  * - `n` (`n > 0` and `n < 1022`) for positive values equal to or less than `n`, and greater than `(n-1)`,
+#  * - `1022`, for values  greater than 1021,
+#  * - `1023`, if the information is not available.
+#  * 
+#  * @note: The present DE is limited to vehicle types as defined in ISO 8855 [21].
+#  * 
+#  * @unit: 1 over 10 000 metres
+#  * @category: Vehicle information
+#  * @revision: description revised in V2.1.1 (the definition of value 1022 has changed slightly)
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE describes vehicle turning curve with the following information:
-# * ```
-# *     Value = 1 / Radius * 10000
-# * ```
-# * wherein radius is the vehicle turning curve radius in metres. 
-# * 
-# * Positive values indicate a turning curve to the left hand side of the driver.
-# * It corresponds to the vehicle coordinate system as defined in ISO 8855 [21].
-# *
-# * The value shall be set to:
-# * - `-1023` for  values smaller than -1023,
-# * - `n` (`n > -1023` and `n < 0`) for negative values equal to or less than `n`, and greater than `(n-1)`,
-# * - `0` when the vehicle is moving straight,
-# * - `n` (`n > 0` and `n < 1022`) for positive values equal to or less than `n`, and greater than `(n-1)`,
-# * - `1022`, for values  greater than 1021,
-# * - `1023`, if the information is not available.
-# * 
-# * @note: The present DE is limited to vehicle types as defined in ISO 8855 [21].
-# * 
-# * @unit: 1 over 10 000 metres
-# * @category: Vehicle information
-# * @revision: description revised in V2.1.1 (the definition of value 1022 has changed slightly)
-# 
 
 int16 value
 int16 MIN = -1023
@@ -65,3 +65,4 @@ int16 OUT_OF_RANGE_NEGATIVE = -1023
 int16 STRAIGHT = 0
 int16 OUT_OF_RANGE_POSITIVE = 1022
 int16 UNAVAILABLE = 1023
+

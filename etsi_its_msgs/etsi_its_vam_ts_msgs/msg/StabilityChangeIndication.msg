@@ -31,19 +31,19 @@
 #     actionDeltaTime     DeltaTimeTenthOfSecond,
 #     ...
 # }
+# /**
+#  * This DF  provides the  indication of  change in stability.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field lossProbability: the probability of stability loss. 
+#  * 
+#  * @field actionDeltaTime: the period over which the the probability of stability loss is estimated. 
+#  *
+#  * @category: Kinematic information
+#  * @revision: V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF  provides the  indication of  change in stability.
-# *
-# * It shall include the following components: 
-# * 
-# * @field lossProbability: the probability of stability loss. 
-# * 
-# * @field actionDeltaTime: the period over which the the probability of stability loss is estimated. 
-# *
-# * @category: Kinematic information
-# * @revision: V2.1.1
-# 
 
 StabilityLossProbability loss_probability
 

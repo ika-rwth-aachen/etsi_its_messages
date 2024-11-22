@@ -29,31 +29,30 @@
 # VruClusterInformation ::= SEQUENCE { 
 #    clusterId                  Identifier1B OPTIONAL,
 #    clusterBoundingBoxShape    Shape (WITH COMPONENTS{..., elliptical ABSENT, radial ABSENT, radialShapes ABSENT}) OPTIONAL,
+# /** 
+#  * This DF provides information about a VRU cluster.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field clusterId: optional identifier of a VRU cluster .
+#  *
+#  * @field clusterBoundingBoxShape: optionally indicates the shape of the cluster bounding box.
+#  *
+#  * @field clusterCardinalitySize: indicates an estimation of the number of VRUs in the group, i.e. the known members in the cluster + 1 (for the cluster leader) .
+#  *
+#  * @field clusterProfiles: optionally identifies all the VRU profile types that are known to be within the cluster.
+#  * if this component is absent it means that the information is unavailable. 
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF provides information about a VRU cluster.
-# *
-# * It shall include the following components: 
-# *
-# * @field clusterId: optional identifier of a VRU cluster .
-# *
-# * @field clusterBoundingBoxShape: optionally indicates the shape of the cluster bounding box.
-# *
-# * @field clusterCardinalitySize: indicates an estimation of the number of VRUs in the group, i.e. the known members in the cluster + 1 (for the cluster leader) .
-# *
-# * @field clusterProfiles: optionally identifies all the VRU profile types that are known to be within the cluster.
-# * if this component is absent it means that the information is unavailable. 
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-#
 
 Identifier1B cluster_id
 bool cluster_id_is_present
 
 Shape cluster_bounding_box_shape
 bool cluster_bounding_box_shape_is_present
-int64 CLUSTER_BOUNDING_BOX_SHAPE_MIN = 0
 
 CardinalNumber1B cluster_cardinality_size
 

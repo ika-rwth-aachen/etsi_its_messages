@@ -30,22 +30,23 @@
 #     negativeOutOfRange (-3094),
 #     positiveOutOfRange (1001)
 # } (-3094..1001) 
+# /**
+#  * This DF represents the value of a cartesian coordinate with a range of -30,94 metres to +10,00 metres.
+#  *
+#  * The value shall be set to:
+#  * - `3094` if the longitudinal offset is out of range, i.e. less than or equal to -30,94 metres,
+#  * - `n` (`n > -3 094` and `n < 1 001`) if the longitudinal offset information is equal to or less than n x 0,01 metre and more than (n-1) x 0,01 metre,
+#  * - `1001` if the longitudinal offset is out of range, i.e. greater than 10 metres.
+#  *
+#  * @unit 0,01 m
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the value of a cartesian coordinate with a range of -30,94 metres to +10,00 metres.
-# *
-# * The value shall be set to:
-# * - `3094` if the longitudinal offset is out of range, i.e. less than or equal to -30,94 metres,
-# * - `n` (`n > -3 094` and `n < 1 001`) if the longitudinal offset information is equal to or less than n x 0,01 metre and more than (n-1) x 0,01 metre,
-# * - `1001` if the longitudinal offset is out of range, i.e. greater than 10 metres.
-# *
-# * @unit 0,01 m
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 int16 value
 int16 MIN = -3094
 int16 MAX = 1001
 int16 NEGATIVE_OUT_OF_RANGE = -3094
 int16 POSITIVE_OUT_OF_RANGE = 1001
+

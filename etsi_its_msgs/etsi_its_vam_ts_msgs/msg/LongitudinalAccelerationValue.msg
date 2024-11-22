@@ -31,26 +31,26 @@
 #     positiveOutOfRange (160),
 #     unavailable        (161)  
 # } (-160 .. 161)
+#  /**
+#  * This DE represents the vehicle acceleration at longitudinal direction in the centre of the mass of the empty vehicle.
+#  * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
+#  *
+#  * The value shall be set to:
+#  * - `-160` for acceleration values equal to or less than -16 m/s^2,
+#  * - `n` (`n > -160` and `n <= 0`) to indicate that the vehicle is braking with acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2
+#  * - `n` (`n > 0` and `n < 160`) to indicate that the vehicle is accelerating with acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
+#  * - `160` for acceleration values greater than 15,9 m/s^2,
+#  * - `161` when the data is unavailable. 
+#  * 
+#  * This acceleration is along the tangent plane of the road surface and does not include gravity components.
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationValue instead.
+#  * 
+#  * @note: The empty load vehicle is defined in ISO 1176 [8], clause 4.6.
+#  * @unit: 0,1 m/s^2
+#  * @category: Vehicle information
+#  * @revision: description revised in V2.1.1 (the meaning of 160 has changed slightly). T
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the vehicle acceleration at longitudinal direction in the centre of the mass of the empty vehicle.
-# * The value shall be provided in the vehicle coordinate system as defined in ISO 8855 [21], clause 2.11.
-# *
-# * The value shall be set to:
-# * - `-160` for acceleration values equal to or less than -16 m/s^2,
-# * - `n` (`n > -160` and `n <= 0`) to indicate that the vehicle is braking with acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2
-# * - `n` (`n > 0` and `n < 160`) to indicate that the vehicle is accelerating with acceleration equal to or less than n x 0,1 m/s^2, and greater than (n-1) x 0,1 m/s^2,
-# * - `160` for acceleration values greater than 15,9 m/s^2,
-# * - `161` when the data is unavailable. 
-# * 
-# * This acceleration is along the tangent plane of the road surface and does not include gravity components.
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationValue instead.
-# * 
-# * @note: The empty load vehicle is defined in ISO 1176 [8], clause 4.6.
-# * @unit: 0,1 m/s^2
-# * @category: Vehicle information
-# * @revision: description revised in V2.1.1 (the meaning of 160 has changed slightly). T
-# 
 
 int16 value
 int16 MIN = -160
@@ -58,3 +58,4 @@ int16 MAX = 161
 int16 NEGATIVE_OUT_OF_RANGE = -160
 int16 POSITIVE_OUT_OF_RANGE = 160
 int16 UNAVAILABLE = 161
+

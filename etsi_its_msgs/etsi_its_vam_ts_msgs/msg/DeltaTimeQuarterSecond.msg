@@ -29,18 +29,19 @@
 # DeltaTimeQuarterSecond::= INTEGER {
 #     unavailable (255)  
 # } (1..255) 
+# /** 
+#  * This DE represents a difference in time with respect to a reference time.
+#  * It can be interpreted as the first 8 bits of a GenerationDeltaTime. To convert it to a @ref GenerationDeltaTime, 
+#  * multiply by 256 (i.e. append a `00` byte)
+#  *
+#  * @unit: 256 * 0,001 s 
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents a difference in time with respect to a reference time.
-# * It can be interpreted as the first 8 bits of a GenerationDeltaTime. To convert it to a @ref GenerationDeltaTime, 
-# * multiply by 256 (i.e. append a `00` byte)
-# *
-# * @unit: 256 * 0,001 s 
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 MIN = 1
 uint8 MAX = 255
 uint8 UNAVAILABLE = 255
+

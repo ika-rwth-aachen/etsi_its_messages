@@ -33,20 +33,20 @@
 #     first-responder     (3),
 #     max                 (15)
 # }
+# /**
+#  * This DE indicates the profile of a pedestrian.
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`             - to indicate that the information on is unavailable,
+#  * - 1 `ordinary-pedestrian`     - to indicate a pedestrian to which no more-specific profile applies,
+#  * - 2 `road-worker`             - to indicate a pedestrian with the role of a road worker,
+#  * - 3 `first-responder`         - to indicate a pedestrian with the role of a first responder.
+#  * - value 4 to 15               - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the profile of a pedestrian.
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`             - to indicate that the information on is unavailable,
-# * - 1 `ordinary-pedestrian`     - to indicate a pedestrian to which no more-specific profile applies,
-# * - 2 `road-worker`             - to indicate a pedestrian with the role of a road worker,
-# * - 3 `first-responder`         - to indicate a pedestrian with the role of a first responder.
-# * - value 4 to 15               - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

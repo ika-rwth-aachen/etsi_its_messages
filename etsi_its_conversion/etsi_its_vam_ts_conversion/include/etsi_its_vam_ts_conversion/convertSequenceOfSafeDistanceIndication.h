@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_vam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_vam_ts_coding/vam_ts_SequenceOfSafeDistanceIndication.h>
+#include <etsi_its_vam_ts_coding/vam_ts_SafeDistanceIndication.h>
 #include <etsi_its_vam_ts_conversion/convertSafeDistanceIndication.h>
-#include <etsi_its_vam_ts_conversion/convertSequenceOfSafeDistanceIndication.h>
 #ifdef ROS1
+#include <etsi_its_vam_ts_msgs/SafeDistanceIndication.h>
 #include <etsi_its_vam_ts_msgs/SequenceOfSafeDistanceIndication.h>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
+#include <etsi_its_vam_ts_msgs/msg/safe_distance_indication.hpp>
 #include <etsi_its_vam_ts_msgs/msg/sequence_of_safe_distance_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif

@@ -28,21 +28,20 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 #     VruClusterInformationContainer::= SEQUENCE{ 
 #         vruClusterInformation    VruClusterInformation (WITH COMPONENTS{..., clusterId, clusterBoundingBoxShape PRESENT}), 
+#  /**
+#  * @details VruClusterInformationContainer
+#  * The VRU Cluster Information container of the VAM provides the information/parameters relevant to the VRU cluster.
+#  * It is mandatory if the VAM is transmitted by VRU cluster leader.
+#  * It includes the following components (setting indications are specified in clause 7.3.5 of TS 103 300-3): 
+#  *
+#  * @field vruClusterInformation: set of parammeters releated to the VRU cluster. 
+#  *        When transmitted by a VRU ITS-S, the clusterId and clusterBoundingBoxShape fields inside this DF shall be present.
+#  *        The clusterBoundingBoxShape is positioned with respect to the position sent in the BasicContainer.
+#  * 
+#  * @category: VRU information
+#  * @revision: V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * @details VruClusterInformationContainer
-# * The VRU Cluster Information container of the VAM provides the information/parameters relevant to the VRU cluster.
-# * It is mandatory if the VAM is transmitted by VRU cluster leader.
-# * It includes the following components (setting indications are specified in clause 7.3.5 of TS 103 300-3): 
-# *
-# * @field vruClusterInformation: set of parammeters releated to the VRU cluster. 
-# *        When transmitted by a VRU ITS-S, the clusterId and clusterBoundingBoxShape fields inside this DF shall be present.
-# *        The clusterBoundingBoxShape is positioned with respect to the position sent in the BasicContainer.
-# * 
-# * @category: VRU information
-# * @revision: V2.2.1
-# 
 
 VruClusterInformation vru_cluster_information
-int64 VRU_CLUSTER_INFORMATION_MIN = 0
 

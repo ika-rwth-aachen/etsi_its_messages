@@ -30,16 +30,16 @@
 #         generationDeltaTime  GenerationDeltaTime,
 #         vamParameters        VamParameters 
 #     }
+# /**
+#  * @details VruAwareness
+#  * VAM payload.
+#  *
+#  * It includes the time stamp of the VAM and the VAM different containers
+#  *
+#  * @category: Communication information
+#  * @revision: V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * @details VruAwareness
-# * VAM payload.
-# *
-# * It includes the time stamp of the VAM and the VAM different containers
-# *
-# * @category: Communication information
-# * @revision: V2.2.1
-# 
 
 GenerationDeltaTime generation_delta_time
 

@@ -31,23 +31,23 @@
 #     positiveOutOfRange (12799),
 #     unavailable        (12800)
 # } (-12700..12800)
+# /**
+#  * This DE represents an offset altitude with regards to a defined altitude value.
+#  * It may be used to describe a geographical point with regards to a specific reference geographical position.
+#  *
+#  * The value shall be set to:
+#  * - `-12 700` for values equal to or lower than -127 metres,
+#  * - `n` (`n > -12 700` and `n <= 0`) for altitude offset n x 0,01 metre below the reference position,
+#  * - `0` for no altitudinal offset,
+#  * - `n` (`n > 0` and `n < 12799`) for altitude offset n x 0,01 metre above the reference position,
+#  * - `12 799` for values equal to or greater than 127,99 metres,
+#  * - `12 800` when the information is unavailable.
+#  *
+#  * @unit: 0,01 metre
+#  * @category: GeoReference information
+#  * @revision: editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents an offset altitude with regards to a defined altitude value.
-# * It may be used to describe a geographical point with regards to a specific reference geographical position.
-# *
-# * The value shall be set to:
-# * - `-12 700` for values equal to or lower than -127 metres,
-# * - `n` (`n > -12 700` and `n <= 0`) for altitude offset n x 0,01 metre below the reference position,
-# * - `0` for no altitudinal offset,
-# * - `n` (`n > 0` and `n < 12799`) for altitude offset n x 0,01 metre above the reference position,
-# * - `12 799` for values equal to or greater than 127,99 metres,
-# * - `12 800` when the information is unavailable.
-# *
-# * @unit: 0,01 metre
-# * @category: GeoReference information
-# * @revision: editorial update in V2.1.1
-# 
 
 int16 value
 int16 MIN = -12700
@@ -55,3 +55,4 @@ int16 MAX = 12800
 int16 NEGATIVE_OUT_OF_RANGE = -12700
 int16 POSITIVE_OUT_OF_RANGE = 12799
 int16 UNAVAILABLE = 12800
+

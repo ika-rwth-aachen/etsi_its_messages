@@ -30,22 +30,23 @@
 #     outOfRange(32766),
 #     unavailable(32767)
 # }(0..32767)
+# /** 
+#  * This DE represents the longitudinal offset of a map-matched position along a matched lane, beginning from the lane's starting point.
+#  * 
+#  * The value shall be set to:
+#  * - `n` (`n >= 0` and `n < 32766`) if the longitudinal offset information is equal to or less than n x 0,1 metre and more than (n-1) x 0,1 metre,
+#  * - `32 766` if the longitudinal offset is out of range, i.e. greater than 3276,5 m,
+#  * - `32 767` if the longitudinal offset information is not available. 
+#  *
+#  * @unit 0,1 metre
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents the longitudinal offset of a map-matched position along a matched lane, beginning from the lane's starting point.
-# * 
-# * The value shall be set to:
-# * - `n` (`n >= 0` and `n < 32766`) if the longitudinal offset information is equal to or less than n x 0,1 metre and more than (n-1) x 0,1 metre,
-# * - `32 766` if the longitudinal offset is out of range, i.e. greater than 3276,5 m,
-# * - `32 767` if the longitudinal offset information is not available. 
-# *
-# * @unit 0,1 metre
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-#
 
 uint16 value
 uint16 MIN = 0
 uint16 MAX = 32767
 uint16 OUT_OF_RANGE = 32766
 uint16 UNAVAILABLE = 32767
+

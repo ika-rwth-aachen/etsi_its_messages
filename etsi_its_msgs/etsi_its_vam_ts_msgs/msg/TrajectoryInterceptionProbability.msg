@@ -29,21 +29,22 @@
 # TrajectoryInterceptionProbability ::= INTEGER { 
 #     unavailable (63) 
 # } (0..63) 
+# /**
+#  * This  DE  defines  the  probability  that the ego trajectory  intercepts  with any  other object's  trajectory  on the  road. 
+#  * 
+#  * The value shall be set to:
+#  * - `n` (`n >= 0` and `n <= 50`) to indicate the actual probability,
+#  * - the values between 51 and 62 are reserved,
+#  * - `63`: to indicate that the information is unavailable. 
+#  *
+#  * @unit: 2 %
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This  DE  defines  the  probability  that the ego trajectory  intercepts  with any  other object's  trajectory  on the  road. 
-# * 
-# * The value shall be set to:
-# * - `n` (`n >= 0` and `n <= 50`) to indicate the actual probability,
-# * - the values between 51 and 62 are reserved,
-# * - `63`: to indicate that the information is unavailable. 
-# *
-# * @unit: 2 %
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 MIN = 0
 uint8 MAX = 63
 uint8 UNAVAILABLE = 63
+

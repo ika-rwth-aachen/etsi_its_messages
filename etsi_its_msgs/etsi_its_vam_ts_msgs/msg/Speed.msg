@@ -30,19 +30,19 @@
 #     speedValue         SpeedValue,
 #     speedConfidence    SpeedConfidence
 # }
+# /**
+#  * This DF represents the speed and associated confidence value.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field speedValue: the speed value.
+#  * 
+#  * @field speedConfidence: the confidence value of the speed value.
+#  *
+#  * @category: Kinematic information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents the speed and associated confidence value.
-# *
-# * It shall include the following components: 
-# * 
-# * @field speedValue: the speed value.
-# * 
-# * @field speedConfidence: the confidence value of the speed value.
-# *
-# * @category: Kinematic information
-# * @revision: V1.3.1
-# 
 
 SpeedValue speed_value
 

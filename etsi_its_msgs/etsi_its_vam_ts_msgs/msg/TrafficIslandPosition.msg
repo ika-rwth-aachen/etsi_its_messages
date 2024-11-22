@@ -31,19 +31,19 @@
 #     otherSide    LanePositionAndType,
 #     ...
 # }
+# /**
+#  * Ths DF represents the a position on a traffic island between two lanes. 
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field oneSide: represents one lane.
+#  * 
+#  * @field otherSide: represents the other lane.
+#  * 
+#  * @category: Road Topology information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * Ths DF represents the a position on a traffic island between two lanes. 
-# *
-# * It shall include the following components: 
-# *
-# * @field oneSide: represents one lane.
-# * 
-# * @field otherSide: represents the other lane.
-# * 
-# * @category: Road Topology information
-# * @revision: Created in V2.1.1
-# 
 
 LanePositionAndType one_side
 

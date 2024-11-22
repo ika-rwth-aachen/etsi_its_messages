@@ -34,41 +34,41 @@
 #     verticalOpeningAngleStart                CartesianAngleValue OPTIONAL,
 #     verticalOpeningAngleEnd                  CartesianAngleValue OPTIONAL
 # }
+# /**
+#  * This DF describes a radial shape. The triangular or cone-shaped volume is
+#  * constructed by sweeping the provided range about the reference point  between a horizontal start 
+#  * and a horizontal end angle in positive angular direction of the WGS84
+#  * coordinate system. A vertical opening angle may be provided in a Cartesian coordinate system with
+#  * the x-axis located in the North-East plane of the WGS84 coordinate system. The sensor height may
+#  * be provided to reflect characteristics of sensors mounted at an altitude (e.g. sensors mounted
+#  * above intersections).
+#  *
+#  * It shall include the following components:
+#  * 
+#  * @field shapeReferencePoint: the optional reference point used for the definition of the shape, relative to an externally specified reference position. 
+#  * If this component is absent, the externally specified reference position represents the shape's  reference point. 
+#  *
+#  * @field range: the radial range of the shape from the shape's reference point. 
+#  *
+#  * @field stationaryHorizontalOpeningAngleStart:  the orientation indicating the beginning of the 
+#  * shape's horizontal opening angle in positive angular direction with respect to the 
+#  * WGS84 coordinate system.
+#  *
+#  * @field stationaryHorizontalOpeningAngleEnd: The orientation indicating the end of the shape's 
+#  * horizontal opening angle in positive angular direction with respect to the WGS84 coordinate system.
+#  *
+#  * @field verticalOpeningAngleStart: optional orientation indicating the beginning of the shape's
+#  * opening angle in positive angular direction of a Cartesian coordinate system with its x-axis 
+#  * located in the north-east plane of the WGS84 coordinate system.
+#  *
+#  * @field verticalOpeningAngleEnd: optional orientation indicating the end of the shape's 
+#  * vertical opening angle in positive angular direction of a Cartesian coordinate system with its x-axis 
+#  * located in the north-east plane of the WGS84 coordinate system. 
+#  *
+#  * @category GeoReference information
+#  * @revision: created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DF describes a radial shape. The triangular or cone-shaped volume is
-# * constructed by sweeping the provided range about the reference point  between a horizontal start 
-# * and a horizontal end angle in positive angular direction of the WGS84
-# * coordinate system. A vertical opening angle may be provided in a Cartesian coordinate system with
-# * the x-axis located in the North-East plane of the WGS84 coordinate system. The sensor height may
-# * be provided to reflect characteristics of sensors mounted at an altitude (e.g. sensors mounted
-# * above intersections).
-# *
-# * It shall include the following components:
-# * 
-# * @field shapeReferencePoint: the optional reference point used for the definition of the shape, relative to an externally specified reference position. 
-# * If this component is absent, the externally specified reference position represents the shape's  reference point. 
-# *
-# * @field range: the radial range of the shape from the shape's reference point. 
-# *
-# * @field stationaryHorizontalOpeningAngleStart:  the orientation indicating the beginning of the 
-# * shape's horizontal opening angle in positive angular direction with respect to the 
-# * WGS84 coordinate system.
-# *
-# * @field stationaryHorizontalOpeningAngleEnd: The orientation indicating the end of the shape's 
-# * horizontal opening angle in positive angular direction with respect to the WGS84 coordinate system.
-# *
-# * @field verticalOpeningAngleStart: optional orientation indicating the beginning of the shape's
-# * opening angle in positive angular direction of a Cartesian coordinate system with its x-axis 
-# * located in the north-east plane of the WGS84 coordinate system.
-# *
-# * @field verticalOpeningAngleEnd: optional orientation indicating the end of the shape's 
-# * vertical opening angle in positive angular direction of a Cartesian coordinate system with its x-axis 
-# * located in the north-east plane of the WGS84 coordinate system. 
-# *
-# * @category GeoReference information
-# * @revision: created in V2.1.1
-#
 
 CartesianPosition3d shape_reference_point
 bool shape_reference_point_is_present

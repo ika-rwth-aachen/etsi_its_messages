@@ -33,24 +33,24 @@
 #     mapPosition               MapPosition,
 #     ...
 # }	
+# /**
+#  * This DF indicates a transversal position in relation to the different lanes of the road. 
+#  * It is an extension of DE_LanePosition to cover locations (sidewalks, bicycle paths), where Vehicle ITS-S would normally not be present. 
+#  *
+#  * The following options are available:
+#  *
+#  * @field trafficLanePosition: a position on a traffic lane. 
+#  * 
+#  * @field nonTrafficLanePosition: a position on a lane which is not a traffic lane.
+#  * 
+#  * @field trafficIslandPosition: a position on a traffic island
+#  * 
+#  * @field mapPosition: a position on a lane identified in a MAPEM.
+#  *  
+#  * @category: Road Topology information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates a transversal position in relation to the different lanes of the road. 
-# * It is an extension of DE_LanePosition to cover locations (sidewalks, bicycle paths), where Vehicle ITS-S would normally not be present. 
-# *
-# * The following options are available:
-# *
-# * @field trafficLanePosition: a position on a traffic lane. 
-# * 
-# * @field nonTrafficLanePosition: a position on a lane which is not a traffic lane.
-# * 
-# * @field trafficIslandPosition: a position on a traffic island
-# * 
-# * @field mapPosition: a position on a lane identified in a MAPEM.
-# *  
-# * @category: Road Topology information
-# * @revision: created in V2.1.1
-# 
 
 uint8 choice
 

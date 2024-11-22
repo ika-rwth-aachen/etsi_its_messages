@@ -31,27 +31,27 @@
 #     semiMinorAxisLength         SemiAxisLength,
 #     semiMajorAxisOrientation    Wgs84AngleValue
 # }
+# /**
+#  * This DF indicates the horizontal position confidence ellipse which represents the estimated accuracy with a 
+#  * confidence level of 95 %. The centre of the ellipse shape corresponds to the reference
+#  * position point for which the position accuracy is evaluated.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field semiMajorAxisLength: half of length of the major axis, i.e. distance between the centre point
+#  * and major axis point of the position accuracy ellipse. 
+#  *
+#  * @field semiMinorAxisLength: half of length of the minor axis, i.e. distance between the centre point
+#  * and minor axis point of the position accuracy ellipse. 
+#  *
+#  * @field semiMajorAxisOrientation: orientation direction of the ellipse major axis of the position accuracy
+#  * ellipse with regards to the WGS84 north. 
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * @category GeoReference information
+#  * @revision: created in V2.1.1 based on @ref PosConfidenceEllipse
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates the horizontal position confidence ellipse which represents the estimated accuracy with a 
-# * confidence level of 95 %. The centre of the ellipse shape corresponds to the reference
-# * position point for which the position accuracy is evaluated.
-# *
-# * It shall include the following components: 
-# *
-# * @field semiMajorAxisLength: half of length of the major axis, i.e. distance between the centre point
-# * and major axis point of the position accuracy ellipse. 
-# *
-# * @field semiMinorAxisLength: half of length of the minor axis, i.e. distance between the centre point
-# * and minor axis point of the position accuracy ellipse. 
-# *
-# * @field semiMajorAxisOrientation: orientation direction of the ellipse major axis of the position accuracy
-# * ellipse with regards to the WGS84 north. 
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * @category GeoReference information
-# * @revision: created in V2.1.1 based on @ref PosConfidenceEllipse
-# 
 
 SemiAxisLength semi_major_axis_length
 

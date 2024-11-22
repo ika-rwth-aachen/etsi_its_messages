@@ -27,14 +27,14 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # StandardLength12b::= INTEGER (0..4095)
+# /**
+#  * The DE represents length as a measure of distance between points or as a dimension of an object or shape. 
+#  *
+#  * @unit: 0,1 metre
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * The DE represents length as a measure of distance between points or as a dimension of an object or shape. 
-# *
-# * @unit: 0,1 metre
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-# 
 
 uint16 value
 uint16 MIN = 0

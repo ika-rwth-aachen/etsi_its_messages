@@ -33,20 +33,20 @@
 #     high        (3), 
 #     max         (15)
 # }
+# /**
+#  * This DE indicates the approximate size of a VRU including the VRU vehicle used.
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`    - to indicate that there is no matched size class or due to privacy reasons in profile 1, 
+#  * - 1 `low`            - to indicate that the VRU size class is low depending on the VRU profile,
+#  * - 2 `medium`         - to indicate that the VRU size class is medium depending on the VRU profile,
+#  * - 3 `high`           - to indicate that the VRU size class is high depending on the VRU profile.
+#  * - 4 to 15            - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the approximate size of a VRU including the VRU vehicle used.
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`    - to indicate that there is no matched size class or due to privacy reasons in profile 1, 
-# * - 1 `low`            - to indicate that the VRU size class is low depending on the VRU profile,
-# * - 2 `medium`         - to indicate that the VRU size class is medium depending on the VRU profile,
-# * - 3 `high`           - to indicate that the VRU size class is high depending on the VRU profile.
-# * - 4 to 15            - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

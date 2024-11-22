@@ -33,27 +33,27 @@
 #     orientation            Wgs84AngleValue OPTIONAL,
 #     height                 StandardLength12b OPTIONAL
 # }
+# /** 
+#  * 
+#  * This DF represents the shape of an elliptical area or right elliptical cylinder that is centred on the shape's reference point. 
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field shapeReferencePoint: optional reference point which represents the centre of the ellipse, relative to an externally specified reference position. 
+#  * If this component is absent, the externally specified reference position represents the shape's  reference point. 
+#  *
+#  * @field semiMajorAxisLength: half length of the major axis of the ellipse.
+#  * 
+#  * @field semiMinorAxisLength: half length of the minor axis of the ellipse.
+#  *
+#  * @field orientation: the optional orientation of the major axis of the ellipse in the WGS84 coordinate system.
+#  * 
+#  * @field height: the optional height, present if the shape is a right elliptical cylinder extending in the positive z-axis.
+#  *
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * 
-# * This DF represents the shape of an elliptical area or right elliptical cylinder that is centred on the shape's reference point. 
-# *
-# * It shall include the following components: 
-# * 
-# * @field shapeReferencePoint: optional reference point which represents the centre of the ellipse, relative to an externally specified reference position. 
-# * If this component is absent, the externally specified reference position represents the shape's  reference point. 
-# *
-# * @field semiMajorAxisLength: half length of the major axis of the ellipse.
-# * 
-# * @field semiMinorAxisLength: half length of the minor axis of the ellipse.
-# *
-# * @field orientation: the optional orientation of the major axis of the ellipse in the WGS84 coordinate system.
-# * 
-# * @field height: the optional height, present if the shape is a right elliptical cylinder extending in the positive z-axis.
-# *
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-#
 
 CartesianPosition3d shape_reference_point
 bool shape_reference_point_is_present

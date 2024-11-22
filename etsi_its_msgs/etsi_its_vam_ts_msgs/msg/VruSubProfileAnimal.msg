@@ -33,20 +33,20 @@
 #     service-animal (3),   
 #     max            (15)
 # }
+# /**
+#  * This DE indicates the profile of an animal
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable`     - to indicate that the information  is unavailable,
+#  * - 1 `wild-animal`     - to indicate a animal living in the wildness, 
+#  * - 2 `farm-animal`     - to indicate an animal beloning to a farm,
+#  * - 3 `service-animal`  - to indicate an animal that supports a human being.
+#  * - 4 to 15             - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the profile of an animal
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable`     - to indicate that the information  is unavailable,
-# * - 1 `wild-animal`     - to indicate a animal living in the wildness, 
-# * - 2 `farm-animal`     - to indicate an animal beloning to a farm,
-# * - 3 `service-animal`  - to indicate an animal that supports a human being.
-# * - 4 to 15             - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

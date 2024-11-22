@@ -35,22 +35,22 @@
 #     receptionOfCpmContainingCluster    (5),
 #     max(15)                                                                 
 # }
+# /**
+#  * This DE indicates the reason why a cluster leader intends to break up the cluster.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `notProvided`                          - if the information is not provided,
+#  * - 1 - `clusteringPurposeCompleted`           - if the cluster purpose has been completed,
+#  * - 2 - `leaderMovedOutOfClusterBoundingBox`   - if the leader moved out of the cluster's bounding box,
+#  * - 3 - `joiningAnotherCluster`                - if the cluster leader is about to join another cluster,
+#  * - 4 - `enteringLowRiskAreaBasedOnMaps`       - if the cluster is entering an area idenrified as low risk based on the use of maps,
+#  * - 5 - `receptionOfCpmContainingCluster`      - if the leader received a Collective Perception Message containing information about the same cluster. 
+#  * - 6 to 15                                    - are reserved for future use.                                    
+#  *
+#  * @category: Cluster information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the reason why a cluster leader intends to break up the cluster.
-# * 
-# * The value shall be set to:
-# * - 0 - `notProvided`                          - if the information is not provided,
-# * - 1 - `clusteringPurposeCompleted`           - if the cluster purpose has been completed,
-# * - 2 - `leaderMovedOutOfClusterBoundingBox`   - if the leader moved out of the cluster's bounding box,
-# * - 3 - `joiningAnotherCluster`                - if the cluster leader is about to join another cluster,
-# * - 4 - `enteringLowRiskAreaBasedOnMaps`       - if the cluster is entering an area idenrified as low risk based on the use of maps,
-# * - 5 - `receptionOfCpmContainingCluster`      - if the leader received a Collective Perception Message containing information about the same cluster. 
-# * - 6 to 15                                    - are reserved for future use.                                    
-# *
-# * @category: Cluster information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 NOT_PROVIDED = 0

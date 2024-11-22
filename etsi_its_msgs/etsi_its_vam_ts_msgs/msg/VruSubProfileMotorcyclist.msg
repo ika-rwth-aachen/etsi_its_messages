@@ -34,21 +34,21 @@
 #     motorcycle-and-sidecar-left  (4), 
 #     max                          (15)
 # }
+# /**
+#  * This DE indicates the profile of a motorcyclist and corresponding vehicle.
+#  * 
+#  * The value shall be set to:
+#  * - 0 `unavailable `                  - to indicate that the information  is unavailable,
+#  * - 1 `moped`                         - to indicate a moped and rider,
+#  * - 2 `motorcycle`                    - to indicate a motorcycle and rider,
+#  * - 3 `motorcycle-and-sidecar-right`  - to indicate a motorcycle with sidecar on the right and rider,
+#  * - 4 `motorcycle-and-sidecar-left`   - to indicate  a motorcycle with sidecar on the left and rider.
+#  * - 5 to 15                           - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the profile of a motorcyclist and corresponding vehicle.
-# * 
-# * The value shall be set to:
-# * - 0 `unavailable `                  - to indicate that the information  is unavailable,
-# * - 1 `moped`                         - to indicate a moped and rider,
-# * - 2 `motorcycle`                    - to indicate a motorcycle and rider,
-# * - 3 `motorcycle-and-sidecar-right`  - to indicate a motorcycle with sidecar on the right and rider,
-# * - 4 `motorcycle-and-sidecar-left`   - to indicate  a motorcycle with sidecar on the left and rider.
-# * - 5 to 15                           - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

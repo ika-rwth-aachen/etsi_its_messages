@@ -30,20 +30,20 @@
 #     value         Wgs84AngleValue,
 #     confidence    Wgs84AngleConfidence
 # }
+# /** 
+#  * This DF represents an angular component along with a confidence value in the WGS84 coordinate system.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field value: the angle value, which can be estimated as the mean of the current distribution.
+#  *
+#  * @field confidence: the confidence value associated to the angle value.
+#  *
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents an angular component along with a confidence value in the WGS84 coordinate system.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * It shall include the following components: 
-# *
-# * @field value: the angle value, which can be estimated as the mean of the current distribution.
-# *
-# * @field confidence: the confidence value associated to the angle value.
-# *
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-#
 
 Wgs84AngleValue value
 

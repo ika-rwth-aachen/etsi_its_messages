@@ -27,14 +27,15 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # RadialShapesList ::= SEQUENCE SIZE(1..16,...) OF RadialShapeDetails
+# /** 
+#  * The DF contains a list of @ref RadialShapeDetails.
+#  *
+#  * @category: Georeference information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * The DF contains a list of @ref RadialShapeDetails.
-# *
-# * @category: Georeference information
-# * @revision: created in V2.1.1
-# 
 
 RadialShapeDetails[] array
-int64 MIN_SIZE = 1
-int64 MAX_SIZE = 16
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 16
+

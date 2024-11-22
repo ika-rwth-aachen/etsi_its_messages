@@ -27,13 +27,13 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # Identifier2B ::= INTEGER (0..65535)
+# /** 
+#  * This DE is a general identifier.
+#  * 
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE is a general identifier.
-# * 
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint16 value
 uint16 MIN = 0

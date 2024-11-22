@@ -30,20 +30,20 @@
 #     longitudinalAccelerationValue         LongitudinalAccelerationValue,
 #     longitudinalAccelerationConfidence    AccelerationConfidence
 # }
-# ------------------------------------------------------------------------------
-# *
-# * This DF indicates the vehicle acceleration at longitudinal direction and the confidence value of the longitudinal acceleration.
-# *
-# * It shall include the following components: 
-# *
-# * @field longitudinalAccelerationValue: longitudinal acceleration value at a point in time.
-#
-# * @field longitudinalAccelerationConfidence: confidence value of the longitudinal acceleration value.
-# *
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead. 
-# * @category: Vehicle information
-# * @revision: V1.3.1
+# /**
+#  * This DF indicates the vehicle acceleration at longitudinal direction and the confidence value of the longitudinal acceleration.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field longitudinalAccelerationValue: longitudinal acceleration value at a point in time.
 # 
+#  * @field longitudinalAccelerationConfidence: confidence value of the longitudinal acceleration value.
+#  *
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead. 
+#  * @category: Vehicle information
+#  * @revision: V1.3.1
+#  */
+# ------------------------------------------------------------------------------
 
 LongitudinalAccelerationValue longitudinal_acceleration_value
 

@@ -30,40 +30,17 @@
 #     accelerate (0), 
 #     decelerate (1) 
 # }
+# /** 
+#  * This DE indicates a change of acceleration.
+#  *
+#  * The value shall be set to:
+#  * - 0 - `accelerate` - if the magnitude of the horizontal velocity vector increases.
+#  * - 1 - `decelerate` - if the magnitude of the horizontal velocity vector decreases.
+#  *
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# Specification of CDD Data Elements: 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#* 
-# * This DE indicates a change of acceleration.
-# *
-# * The value shall be set to:
-# * - 0 - `accelerate` - if the magnitude of the horizontal velocity vector increases.
-# * - 1 - `decelerate` - if the magnitude of the horizontal velocity vector decreases.
-# *
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 ACCELERATE = 0

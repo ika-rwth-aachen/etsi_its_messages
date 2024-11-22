@@ -30,32 +30,33 @@
 #     outOfRange  (126), 
 #     unavailable (127)
 # } (1..127)
+# /**
+#  * This DE indicates the speed confidence value which represents the estimated absolute accuracy of a speed value with a default confidence level of 95 %.
+#  * If required, the confidence level can be defined by the corresponding standards applying this DE.
+#  * 
+#  * The value shall be set to:
+#  * - `n` (`n > 0` and `n < 126`) if the confidence value is equal to or less than n * 0,01 m/s.
+#  * - `126` if the confidence value is out of range, i.e. greater than 1,25 m/s,
+#  * - `127` if the confidence value information is not available.
+#  *  
+#  * @note: The fact that a speed value is received with confidence value set to `unavailable(127)` can be caused by several reasons, such as:
+#  * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
+#  * - the sensor cannot calculate the accuracy due to lack of variables, or
+#  * - there has been a vehicle bus (e.g. CAN bus) error.
+#  * In all 3 cases above, the speed value may be valid and used by the application.
+#  * 
+#  * @note: If a speed value is received and its confidence value is set to `outOfRange(126)`, it means that the speed value is not valid 
+#  * and therefore cannot be trusted. Such is not useful for the application.
+#  *
+#  * @unit: 0,01 m/s
+#  * @category: Vehicle information
+#  * @revision: Description revised in V2.1.1 
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the speed confidence value which represents the estimated absolute accuracy of a speed value with a default confidence level of 95 %.
-# * If required, the confidence level can be defined by the corresponding standards applying this DE.
-# * 
-# * The value shall be set to:
-# * - `n` (`n > 0` and `n < 126`) if the confidence value is equal to or less than n * 0,01 m/s.
-# * - `126` if the confidence value is out of range, i.e. greater than 1,25 m/s,
-# * - `127` if the confidence value information is not available.
-# *  
-# * @note: The fact that a speed value is received with confidence value set to `unavailable(127)` can be caused by several reasons, such as:
-# * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
-# * - the sensor cannot calculate the accuracy due to lack of variables, or
-# * - there has been a vehicle bus (e.g. CAN bus) error.
-# * In all 3 cases above, the speed value may be valid and used by the application.
-# * 
-# * @note: If a speed value is received and its confidence value is set to `outOfRange(126)`, it means that the speed value is not valid 
-# * and therefore cannot be trusted. Such is not useful for the application.
-# *
-# * @unit: 0,01 m/s
-# * @category: Vehicle information
-# * @revision: Description revised in V2.1.1 
-# 
 
 uint8 value
 uint8 MIN = 1
 uint8 MAX = 127
 uint8 OUT_OF_RANGE = 126
 uint8 UNAVAILABLE = 127
+

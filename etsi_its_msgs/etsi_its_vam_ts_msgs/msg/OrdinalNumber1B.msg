@@ -27,13 +27,13 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # OrdinalNumber1B ::= INTEGER(0..255) 
+# /**
+#  * The DE represents an ordinal number that indicates the position of an element in a set. 
+#  * 
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * The DE represents an ordinal number that indicates the position of an element in a set. 
-# * 
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 MIN = 0

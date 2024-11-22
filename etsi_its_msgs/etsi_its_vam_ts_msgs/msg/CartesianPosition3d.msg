@@ -31,21 +31,21 @@
 #     yCoordinate    CartesianCoordinate,
 #     zCoordinate    CartesianCoordinate OPTIONAL
 # }
+# /** 
+#  * This DF represents a  position in a two- or three-dimensional cartesian coordinate system.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field xCoordinate: the X coordinate value.
+#  *
+#  * @field yCoordinate: the Y coordinate value.
+#  *
+#  * @field zCoordinate: the optional Z coordinate value.
+#  * 
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents a  position in a two- or three-dimensional cartesian coordinate system.
-# *
-# * It shall include the following components: 
-# *
-# * @field xCoordinate: the X coordinate value.
-# *
-# * @field yCoordinate: the Y coordinate value.
-# *
-# * @field zCoordinate: the optional Z coordinate value.
-# * 
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-#
 
 CartesianCoordinate x_coordinate
 

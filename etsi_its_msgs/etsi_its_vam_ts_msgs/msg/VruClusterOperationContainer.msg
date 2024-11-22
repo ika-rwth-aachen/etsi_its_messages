@@ -33,22 +33,22 @@
 #         clusterIdChangeTimeInfo DeltaTimeQuarterSecond OPTIONAL,
 #         ...
 #     }
+#  /**
+#  * @details VruClusterOperationContainer
+#  * The VRU Cluster Operation container of the VAM provides information relevant to change of cluster state and composition.
+#  * It is mandatory if the VAM is transmitted by a VRU joining, leaving or breaking up a cluster.
+#  * It includes the following components (setting indications are specified in clause 7.3.5 of TS 103 300-3). 
+#  * At least one of the fields below shall be present if the container is present in the VAM: 
+#  *
+#  * @field clusterJoinInfo: indicates the intent of an individual VAM transmitter to join a cluster. 
+#  * @field clusterLeaveInfo : indicates that an individual VAM transmitter has recently left the VRU cluster. 
+#  * @field clusterBreakupInfo: indicates the intent of a cluster VAM transmitter to stop sending cluster VAMs. 
+#  * @field clusterIdChangeTimeInfo: indicates the intent of a cluster VAM transmitter to change cluster ID. 
+#  * 
+#  * @category: VRU information
+#  * @revision: V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * @details VruClusterOperationContainer
-# * The VRU Cluster Operation container of the VAM provides information relevant to change of cluster state and composition.
-# * It is mandatory if the VAM is transmitted by a VRU joining, leaving or breaking up a cluster.
-# * It includes the following components (setting indications are specified in clause 7.3.5 of TS 103 300-3). 
-# * At least one of the fields below shall be present if the container is present in the VAM: 
-# *
-# * @field clusterJoinInfo: indicates the intent of an individual VAM transmitter to join a cluster. 
-# * @field clusterLeaveInfo : indicates that an individual VAM transmitter has recently left the VRU cluster. 
-# * @field clusterBreakupInfo: indicates the intent of a cluster VAM transmitter to stop sending cluster VAMs. 
-# * @field clusterIdChangeTimeInfo: indicates the intent of a cluster VAM transmitter to change cluster ID. 
-# * 
-# * @category: VRU information
-# * @revision: V2.2.1
-# 
 
 ClusterJoinInfo cluster_join_info
 bool cluster_join_info_is_present

@@ -27,20 +27,20 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SafeDistanceIndicator::= BOOLEAN
+# /**
+#  * This DE indicates if a distance is safe. 
+#  *
+#  * The value shall be set to:
+#  * -  `FALSE`  if  the triple  {LaD,  LoD, VD} < {MSLaD, MSLoD, MSVD} is simultaneously  satisfied with confidence level of  90 % or  more, 
+#  * -  `TRUE` otherwise. 
+#  *
+#  * @note: the abbreviations used are Lateral Distance (LaD),  Longitudinal Distance (LoD) and Vertical Distance (VD) 
+#  * and their respective  thresholds, Minimum  Safe  Lateral  Distance (MSLaD), Minimum  Safe  Longitudinal Distance  (MSLoD),  and  Minimum  Safe Vertical Distance (MSVD).
+#  *
+#  * @category: Traffic information, Kinematic information
+#  * @revision: created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates if a distance is safe. 
-# *
-# * The value shall be set to:
-# * -  `FALSE`  if  the triple  {LaD,  LoD, VD} < {MSLaD, MSLoD, MSVD} is simultaneously  satisfied with confidence level of  90 % or  more, 
-# * -  `TRUE` otherwise. 
-# *
-# * @note: the abbreviations used are Lateral Distance (LaD),  Longitudinal Distance (LoD) and Vertical Distance (VD) 
-# * and their respective  thresholds, Minimum  Safe  Lateral  Distance (MSLaD), Minimum  Safe  Longitudinal Distance  (MSLoD),  and  Minimum  Safe Vertical Distance (MSVD).
-# *
-# * @category: Traffic information, Kinematic information
-# * @revision: created in V2.1.1
-#
 
 bool value
 

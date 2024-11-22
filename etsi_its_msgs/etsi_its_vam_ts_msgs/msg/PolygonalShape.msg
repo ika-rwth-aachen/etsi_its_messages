@@ -31,31 +31,29 @@
 #    polygon                SequenceOfCartesianPosition3d (SIZE(3..16,...)),
 #    height                 StandardLength12b OPTIONAL
 # }
+# /** 
+#  * This DF represents the shape of a polygonal area or of a right prism.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field shapeReferencePoint: the optional reference point used for the definition of the shape, relative to an externally specified reference position. 
+#  * If this component is absent, the externally specified reference position represents the shape's reference point. 
+#  *
+#  * @field polygon: the polygonal area represented by a list of minimum `3` to maximum `16` @ref CartesianPosition3d.
+#  * All nodes of the polygon shall be considered relative to the shape's reference point.
+#  *
+#  * @field height: the optional height, present if the shape is a right prism extending in the positive z-axis.
+#  * 
+#  * @category GeoReference information
+#  * @revision: created in V2.1.1
+#  *
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents the shape of a polygonal area or of a right prism.
-# *
-# * It shall include the following components: 
-# *
-# * @field shapeReferencePoint: the optional reference point used for the definition of the shape, relative to an externally specified reference position. 
-# * If this component is absent, the externally specified reference position represents the shape's reference point. 
-# *
-# * @field polygon: the polygonal area represented by a list of minimum `3` to maximum `16` @ref CartesianPosition3d.
-# * All nodes of the polygon shall be considered relative to the shape's reference point.
-# *
-# * @field height: the optional height, present if the shape is a right prism extending in the positive z-axis.
-# * 
-# * @category GeoReference information
-# * @revision: created in V2.1.1
-# *
-# 
 
 CartesianPosition3d shape_reference_point
 bool shape_reference_point_is_present
 
 SequenceOfCartesianPosition3d polygon
-int64 POLYGON_MIN_SIZE = 3
-int64 POLYGON_MAX_SIZE = 16
 
 StandardLength12b height
 bool height_is_present

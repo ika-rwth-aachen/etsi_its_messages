@@ -36,34 +36,34 @@
 #     outOfRange          (6),
 #     unavailable         (7)
 # }
+# /**
+#  * This DE indicates the acceleration confidence value which represents the estimated absolute accuracy range of a curvature value with a confidence level of 95 %.
+#  * If required, the confidence level can be defined by the corresponding standards applying this DE.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `onePerMeter-0-00002` - if the confidence value is less than or equal to 0,00002 m-1,
+#  * - 1 - `onePerMeter-0-0001`  - if the confidence value is less than or equal to 0,0001 m-1 and greater than 0,00002 m-1,
+#  * - 2 - `onePerMeter-0-0005`  - if the confidence value is less than or equal to 0,0005 m-1 and greater than 0,0001 m-1,
+#  * - 3 - `onePerMeter-0-002`   - if the confidence value is less than or equal to 0,002 m-1 and greater than 0,0005 m-1,
+#  * - 4 - `nePerMeter-0-01`     - if the confidence value is less than or equal to 0,01 m-1 and greater than 0,002 m-1,
+#  * - 5 - `nePerMeter-0-1`      - if the confidence value is less than or equal to 0,1 m-1  and greater than 0,01 m-1,
+#  * - 6 - `outOfRange`          - if the confidence value is out of range, i.e. greater than 0,1 m-1,
+#  * - 7 - `unavailable`         - if the confidence value is not available.
+#  * 
+#  * @note:	The fact that a curvature value is received with confidence value set to `unavailable(7)` can be caused by
+#  * several reasons, such as:
+#  * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
+#  * - the sensor cannot calculate the accuracy due to lack of variables, or
+#  * - there has been a vehicle bus (e.g. CAN bus) error.
+#  * In all 3 cases above, the curvature value may be valid and used by the application.
+#  * 
+#  * @note: If a curvature value is received and its confidence value is set to `outOfRange(6)`, it means that the curvature value is not valid 
+#  * and therefore cannot be trusted. Such value is not useful for the application.
+#  * 
+#  * @category: Vehicle information
+#  * @revision: Description revised in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the acceleration confidence value which represents the estimated absolute accuracy range of a curvature value with a confidence level of 95 %.
-# * If required, the confidence level can be defined by the corresponding standards applying this DE.
-# * 
-# * The value shall be set to:
-# * - 0 - `onePerMeter-0-00002` - if the confidence value is less than or equal to 0,00002 m-1,
-# * - 1 - `onePerMeter-0-0001`  - if the confidence value is less than or equal to 0,0001 m-1 and greater than 0,00002 m-1,
-# * - 2 - `onePerMeter-0-0005`  - if the confidence value is less than or equal to 0,0005 m-1 and greater than 0,0001 m-1,
-# * - 3 - `onePerMeter-0-002`   - if the confidence value is less than or equal to 0,002 m-1 and greater than 0,0005 m-1,
-# * - 4 - `nePerMeter-0-01`     - if the confidence value is less than or equal to 0,01 m-1 and greater than 0,002 m-1,
-# * - 5 - `nePerMeter-0-1`      - if the confidence value is less than or equal to 0,1 m-1  and greater than 0,01 m-1,
-# * - 6 - `outOfRange`          - if the confidence value is out of range, i.e. greater than 0,1 m-1,
-# * - 7 - `unavailable`         - if the confidence value is not available.
-# * 
-# * @note:	The fact that a curvature value is received with confidence value set to `unavailable(7)` can be caused by
-# * several reasons, such as:
-# * - the sensor cannot deliver the accuracy at the defined confidence level because it is a low-end sensor,
-# * - the sensor cannot calculate the accuracy due to lack of variables, or
-# * - there has been a vehicle bus (e.g. CAN bus) error.
-# * In all 3 cases above, the curvature value may be valid and used by the application.
-# * 
-# * @note: If a curvature value is received and its confidence value is set to `outOfRange(6)`, it means that the curvature value is not valid 
-# * and therefore cannot be trusted. Such value is not useful for the application.
-# * 
-# * @category: Vehicle information
-# * @revision: Description revised in V2.1.1
-#
 
 uint8 value
 uint8 ONE_PER_METER_0_00002 = 0

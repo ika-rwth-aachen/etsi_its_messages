@@ -33,25 +33,25 @@
 #     longitudinalLanePosition    LongitudinalLanePosition OPTIONAL,
 #     ...
 # }
+# /**
+#  * This DF indicates a position on a topology description transmitted in a MAPEM according to ETSI TS 103 301 [15].
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field mapReference: optionally identifies the MAPEM containing the topology information.
+#  * It is absent if the MAPEM topology is known from the context.
+#  * 
+#  * @field laneId: optionally identifies the lane in the road segment or intersection topology on which the position is located.
+#  *
+#  * @field connectionId: optionally identifies the connection inside the conflict area of an intersection, i.e. it identifies a trajectory for travelling through the
+#  * conflict area of an intersection which connects e.g an ingress with an egress lane.
+#  *
+#  * @field longitudinalLanePosition: optionally indicates the longitudinal offset of the map-matched position of the object along the lane or connection.
+#  * 
+#  * @category: Road topology information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates a position on a topology description transmitted in a MAPEM according to ETSI TS 103 301 [15].
-# *
-# * It shall include the following components: 
-# * 
-# * @field mapReference: optionally identifies the MAPEM containing the topology information.
-# * It is absent if the MAPEM topology is known from the context.
-# * 
-# * @field laneId: optionally identifies the lane in the road segment or intersection topology on which the position is located.
-# *
-# * @field connectionId: optionally identifies the connection inside the conflict area of an intersection, i.e. it identifies a trajectory for travelling through the
-# * conflict area of an intersection which connects e.g an ingress with an egress lane.
-# *
-# * @field longitudinalLanePosition: optionally indicates the longitudinal offset of the map-matched position of the object along the lane or connection.
-# * 
-# * @category: Road topology information
-# * @revision: Created in V2.1.1
-# 
 
 MapReference map_reference
 bool map_reference_is_present

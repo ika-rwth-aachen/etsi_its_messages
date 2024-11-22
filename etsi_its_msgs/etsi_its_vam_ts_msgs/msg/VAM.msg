@@ -31,6 +31,7 @@
 #         vam    VruAwareness
 #     }
 # ------------------------------------------------------------------------------
+
 ItsPduHeaderVam header
 
 VruAwareness vam

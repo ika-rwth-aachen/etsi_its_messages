@@ -31,21 +31,21 @@
 #     totalLossOfStability   (50), 
 #     unavailable            (63) 
 # } (0..63) 
+# /**
+#  * This DE indicates the estimated probability of a stability level and conversely also the probability of a stability loss.
+#  *
+#  * The value shall be set to:
+#  * - `0` to indicate an estimated probability of a loss of stability of 0 %, i.e. "stable", 
+#  * - `n` (`n > 0` and `n < 50`) to indicate the actual stability level,
+#  * - `50` to indicate a estimated probability of a loss of stability of 100 %, i.e. "total loss of stability",
+#  * - the values between 51 and 62 are reserved for future use,
+#  * - `63`: this value indicates that the information is unavailable.
+#  *
+#  * @unit: 2 %
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the estimated probability of a stability level and conversely also the probability of a stability loss.
-# *
-# * The value shall be set to:
-# * - `0` to indicate an estimated probability of a loss of stability of 0 %, i.e. "stable", 
-# * - `n` (`n > 0` and `n < 50`) to indicate the actual stability level,
-# * - `50` to indicate a estimated probability of a loss of stability of 100 %, i.e. "total loss of stability",
-# * - the values between 51 and 62 are reserved for future use,
-# * - `63`: this value indicates that the information is unavailable.
-# *
-# * @unit: 2 %
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -53,3 +53,4 @@ uint8 MAX = 63
 uint8 STABLE = 0
 uint8 TOTAL_LOSS_OF_STABILITY = 50
 uint8 UNAVAILABLE = 63
+

@@ -30,21 +30,21 @@
 #     region    Identifier2B OPTIONAL,
 #     id        Identifier2B
 # }
+# /**
+#  * This DF represents a unique id for a road segment
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field region: the optional identifier of the entity that is responsible for the region in which the road segment is placed.
+#  * It is the duty of that entity to guarantee that the @ref Id is unique within the region.
+#  *
+#  * @field id: the identifier of the road segment.
+#  *
+#  * @note: when the component region is present, the RoadSegmentReferenceId is guaranteed to be globally unique.
+#  * @category: GeoReference information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a unique id for a road segment
-# *
-# * It shall include the following components: 
-# *
-# * @field region: the optional identifier of the entity that is responsible for the region in which the road segment is placed.
-# * It is the duty of that entity to guarantee that the @ref Id is unique within the region.
-# *
-# * @field id: the identifier of the road segment.
-# *
-# * @note: when the component region is present, the RoadSegmentReferenceId is guaranteed to be globally unique.
-# * @category: GeoReference information
-# * @revision: created in V2.1.1
-# 
 
 Identifier2B region
 bool region_is_present

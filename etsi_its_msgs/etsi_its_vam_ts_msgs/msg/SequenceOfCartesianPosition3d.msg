@@ -27,14 +27,15 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SequenceOfCartesianPosition3d ::= SEQUENCE (SIZE(1..16, ...)) OF CartesianPosition3d
+# /** 
+#  * This DF shall contain a list of DF @ref CartesianPosition3d.
+#  * 
+#  * @category: GeoReference information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF shall contain a list of DF @ref CartesianPosition3d.
-# * 
-# * @category: GeoReference information
-# * @revision: created in V2.1.1
-# 
 
 CartesianPosition3d[] array
-int64 MIN_SIZE = 1
-int64 MAX_SIZE = 16
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 16
+

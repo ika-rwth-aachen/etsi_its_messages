@@ -32,18 +32,18 @@
 #     unavailable    (2), 
 #     ...
 # }
+# /**
+#  * The DE describes whether the yaw rate is used to calculate the curvature for a curvature value.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `yawRateUsed`    - if the yaw rate is used,
+#  * - 1 - `yawRateNotUsed` - if the yaw rate is not used,
+#  * - 2 - `unavailable`    - if the information of curvature calculation mode is unknown.
+#  *
+#  * @category: Vehicle information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * The DE describes whether the yaw rate is used to calculate the curvature for a curvature value.
-# * 
-# * The value shall be set to:
-# * - 0 - `yawRateUsed`    - if the yaw rate is used,
-# * - 1 - `yawRateNotUsed` - if the yaw rate is not used,
-# * - 2 - `unavailable`    - if the information of curvature calculation mode is unknown.
-# *
-# * @category: Vehicle information
-# * @revision: V1.3.1
-# 
 
 uint8 value
 uint8 YAW_RATE_USED = 0

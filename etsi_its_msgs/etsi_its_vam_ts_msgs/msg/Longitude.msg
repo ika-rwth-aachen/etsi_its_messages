@@ -30,27 +30,28 @@
 #     valueNotUsed (-1800000000),
 #     unavailable  (1800000001)
 # } (-1800000000..1800000001)
+# /**
+#  * This DE represents the absolute geographical longitude in a WGS84 coordinate system, providing a range of 180 degrees
+#  * to the east or to the west of the prime meridian.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * The value shall be set to:
+#  * - `n` (`n > -1 800 000 000` and `n < 0`) x 10^-7 degree, i.e. negative values for longitudes to the west,
+#  * - `0` to indicate the prime meridian,
+#  * - `n` (`n > 0` and `n < 1 800 000 001`) x 10^-7 degree, i.e. positive values for longitudes to the east,
+#  * - `1 800 000 001` when the information is unavailable.
+#  *
+#  * The value -1 800 000 000 shall not be used. 
+#  * 
+#  * @unit: 10^-7 degree
+#  * @category: GeoReference information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents the absolute geographical longitude in a WGS84 coordinate system, providing a range of 180 degrees
-# * to the east or to the west of the prime meridian.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * The value shall be set to:
-# * - `n` (`n > -1 800 000 000` and `n < 0`) x 10^-7 degree, i.e. negative values for longitudes to the west,
-# * - `0` to indicate the prime meridian,
-# * - `n` (`n > 0` and `n < 1 800 000 001`) x 10^-7 degree, i.e. positive values for longitudes to the east,
-# * - `1 800 000 001` when the information is unavailable.
-# *
-# * The value -1 800 000 000 shall not be used. 
-# * 
-# * @unit: 10^-7 degree
-# * @category: GeoReference information
-# * @revision: Description revised in V2.1.1
-# 
 
 int32 value
 int32 MIN = -1800000000
 int32 MAX = 1800000001
 int32 VALUE_NOT_USED = -1800000000
 int32 UNAVAILABLE = 1800000001
+

@@ -29,20 +29,21 @@
 # DeltaTimeTenthOfSecond::= INTEGER {
 #     unavailable (127)  
 # } (0..127) 
+# /** 
+#  * This DE represents a difference in time with respect to a reference time.
+#  *
+#  * The value shall be set to:
+#  * - `0` for a difference in time of 0 seconds. 
+#  * - `n` (`n > 0` and `n < 128`) to indicate a time value equal to or less than n x 0,1 s, and greater than (n-1) x 0,1 s,
+#  *
+#  * @unit: 0,1 s
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents a difference in time with respect to a reference time.
-# *
-# * The value shall be set to:
-# * - `0` for a difference in time of 0 seconds. 
-# * - `n` (`n > 0` and `n < 128`) to indicate a time value equal to or less than n x 0,1 s, and greater than (n-1) x 0,1 s,
-# *
-# * @unit: 0,1 s
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 MIN = 0
 uint8 MAX = 127
 uint8 UNAVAILABLE = 127
+

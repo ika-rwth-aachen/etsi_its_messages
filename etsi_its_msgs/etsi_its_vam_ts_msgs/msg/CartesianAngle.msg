@@ -30,19 +30,19 @@
 #     value         CartesianAngleValue,
 #     confidence    AngleConfidence
 # }
+# /** 
+#  * This DF represents a general Data Frame to describe an angle component along with a confidence value in a cartesian coordinate system.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field value: The angle value which can be estimated as the mean of the current distribution.
+#  *
+#  * @field confidence: The confidence value associated to the provided value.
+#  *
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents a general Data Frame to describe an angle component along with a confidence value in a cartesian coordinate system.
-# *
-# * It shall include the following components: 
-# *
-# * @field value: The angle value which can be estimated as the mean of the current distribution.
-# *
-# * @field confidence: The confidence value associated to the provided value.
-# *
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-# 
 
 CartesianAngleValue value
 

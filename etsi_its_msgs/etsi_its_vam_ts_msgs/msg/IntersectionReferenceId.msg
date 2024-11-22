@@ -30,21 +30,21 @@
 #     region    Identifier2B OPTIONAL,
 #     id        Identifier2B
 # }
+# /**
+#  * This DF represents a unique id for an intersection, in accordance with ETSI TS 103 301 [15].
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field region: the optional identifier of the entity that is responsible for the region in which the intersection is placed.
+#  * It is the duty of that entity to guarantee that the @ref Id is unique within the region.
+#  *
+#  * @field id: the identifier of the intersection
+#  *
+#  * @note: when the component region is present, the IntersectionReferenceId is guaranteed to be globally unique.
+#  * @category: Road topology information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a unique id for an intersection, in accordance with ETSI TS 103 301 [15].
-# *
-# * It shall include the following components: 
-# *
-# * @field region: the optional identifier of the entity that is responsible for the region in which the intersection is placed.
-# * It is the duty of that entity to guarantee that the @ref Id is unique within the region.
-# *
-# * @field id: the identifier of the intersection
-# *
-# * @note: when the component region is present, the IntersectionReferenceId is guaranteed to be globally unique.
-# * @category: Road topology information
-# * @revision: created in V2.1.1
-# 
 
 Identifier2B region
 bool region_is_present

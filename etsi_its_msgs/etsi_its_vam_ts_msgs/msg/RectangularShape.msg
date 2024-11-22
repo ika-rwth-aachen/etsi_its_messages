@@ -33,26 +33,26 @@
 #     orientation    Wgs84AngleValue OPTIONAL,
 #     height         StandardLength12b OPTIONAL
 # }
+# /** 
+#  * This DF represents the shape of a rectangular area or a right rectangular prism that is centred on a reference position defined outside of the context of this DF. 
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field centerPoint: represents an optional offset point which the rectangle is centred on with respect to the reference position.
+#  *
+#  * @field semiLength: represents half the length of the rectangle.
+#  * 
+#  * @field semiBreadth: represents half the breadth of the rectangle.
+#  *
+#  * @field orientation: represents the optional orientation of the lenght of the rectangle in the WGS84 coordinate system.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  *
+#  * @field height: represents the optional height, present if the shape is a right rectangular prism with height extending in the positive z-axis.
+#  *
+#  * @category GeoReference information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents the shape of a rectangular area or a right rectangular prism that is centred on a reference position defined outside of the context of this DF. 
-# *
-# * It shall include the following components: 
-# * 
-# * @field centerPoint: represents an optional offset point which the rectangle is centred on with respect to the reference position.
-# *
-# * @field semiLength: represents half the length of the rectangle.
-# * 
-# * @field semiBreadth: represents half the breadth of the rectangle.
-# *
-# * @field orientation: represents the optional orientation of the lenght of the rectangle in the WGS84 coordinate system.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# *
-# * @field height: represents the optional height, present if the shape is a right rectangular prism with height extending in the positive z-axis.
-# *
-# * @category GeoReference information
-# * @revision: created in V2.1.1
-# 
 
 CartesianPosition3d center_point
 bool center_point_is_present

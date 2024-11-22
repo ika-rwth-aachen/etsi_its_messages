@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_vam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_vam_ts_coding/vam_ts_SequenceOfCartesianPosition3d.h>
+#include <etsi_its_vam_ts_coding/vam_ts_CartesianPosition3d.h>
 #include <etsi_its_vam_ts_conversion/convertCartesianPosition3d.h>
-#include <etsi_its_vam_ts_conversion/convertSequenceOfCartesianPosition3d.h>
 #ifdef ROS1
+#include <etsi_its_vam_ts_msgs/CartesianPosition3d.h>
 #include <etsi_its_vam_ts_msgs/SequenceOfCartesianPosition3d.h>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
+#include <etsi_its_vam_ts_msgs/msg/cartesian_position3d.hpp>
 #include <etsi_its_vam_ts_msgs/msg/sequence_of_cartesian_position3d.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif

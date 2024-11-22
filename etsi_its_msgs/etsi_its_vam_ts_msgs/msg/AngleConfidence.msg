@@ -30,23 +30,24 @@
 #     outOfRange  (126),
 #     unavailable (127)   
 # } (1..127)
+# /** 
+#  * This DE indicates the angle confidence value which represents the estimated absolute accuracy of an angle value with a default confidence level of 95 %.
+#  * If required, the confidence level can be defined by the corresponding standards applying this DE.
+#  *
+#  * The value shall be set to: 
+#  * - `n` (`n > 0` and `n < 126`)  if the accuracy is equal to or less than n * 0,1 degrees and greater than (n-1) x * 0,1 degrees,
+#  * - `126` if the  accuracy is out of range, i.e. greater than 12,5 degrees,
+#  * - `127` if the accuracy information is not available.
+#  *
+#  * @unit: 0,1 degrees
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE indicates the angle confidence value which represents the estimated absolute accuracy of an angle value with a default confidence level of 95 %.
-# * If required, the confidence level can be defined by the corresponding standards applying this DE.
-# *
-# * The value shall be set to: 
-# * - `n` (`n > 0` and `n < 126`)  if the accuracy is equal to or less than n * 0,1 degrees and greater than (n-1) x * 0,1 degrees,
-# * - `126` if the  accuracy is out of range, i.e. greater than 12,5 degrees,
-# * - `127` if the accuracy information is not available.
-# *
-# * @unit: 0,1 degrees
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 MIN = 1
 uint8 MAX = 127
 uint8 OUT_OF_RANGE = 126
 uint8 UNAVAILABLE = 127
+

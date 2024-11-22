@@ -30,19 +30,19 @@
 #     yawRateValue         YawRateValue,
 #     yawRateConfidence    YawRateConfidence
 # }
+# /**
+#  * This DF represents a yaw rate of vehicle at a point in time.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field yawRateValue: yaw rate value at a point in time.
+#  * 
+#  * @field yawRateConfidence: confidence value associated to the yaw rate value.
+#  * 
+#  * @category: Vehicle Information
+#  * @revision: V1.3.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a yaw rate of vehicle at a point in time.
-# *
-# * It shall include the following components: 
-# * 
-# * @field yawRateValue: yaw rate value at a point in time.
-# * 
-# * @field yawRateConfidence: confidence value associated to the yaw rate value.
-# * 
-# * @category: Vehicle Information
-# * @revision: V1.3.1
-# 
 
 YawRateValue yaw_rate_value
 

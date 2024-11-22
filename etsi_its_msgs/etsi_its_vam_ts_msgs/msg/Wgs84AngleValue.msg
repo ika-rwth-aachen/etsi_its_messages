@@ -34,16 +34,16 @@
 #     doNotUse    (3600),
 #     unavailable (3601)
 # } (0..3601)
+# /** 
+#  * This DE represents an angle value in degrees described in the WGS84 reference system with respect to the WGS84 north.
+#  * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
+#  * When the information is not available, the DE shall be set to 3 601. The value 3600 shall not be used.
+#  *
+#  * @unit 0,1 degrees
+#  * @category: GeoReference Information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents an angle value in degrees described in the WGS84 reference system with respect to the WGS84 north.
-# * The specific WGS84 coordinate system is specified by the corresponding standards applying this DE.
-# * When the information is not available, the DE shall be set to 3 601. The value 3600 shall not be used.
-# *
-# * @unit 0,1 degrees
-# * @category: GeoReference Information
-# * @revision: Created in V2.1.1
-#
 
 uint16 value
 uint16 MIN = 0
@@ -54,3 +54,4 @@ uint16 WGS84_SOUTH = 1800
 uint16 WGS84_WEST = 2700
 uint16 DO_NOT_USE = 3600
 uint16 UNAVAILABLE = 3601
+

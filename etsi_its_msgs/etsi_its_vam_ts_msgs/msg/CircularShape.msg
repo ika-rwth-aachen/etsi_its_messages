@@ -31,24 +31,24 @@
 #     radius                 StandardLength12b,
 #     height                 StandardLength12b OPTIONAL
 # }
+# /** 
+#  * 
+#  * This DF represents the shape of a circular area or a right cylinder that is centred on the shape's reference point. 
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field shapeReferencePoint: optional reference point that represents the centre of the circle, relative to an externally specified reference position. 
+#  * If this component is absent, the externally specified reference position represents the shape's reference point. 
+#  *
+#  * @field radius: the radius of the circular area.
+#  *
+#  * @field height: the optional height, present if the shape is a right cylinder extending in the positive z-axis. 
+#  *
+#  * 
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * 
-# * This DF represents the shape of a circular area or a right cylinder that is centred on the shape's reference point. 
-# *
-# * It shall include the following components: 
-# * 
-# * @field shapeReferencePoint: optional reference point that represents the centre of the circle, relative to an externally specified reference position. 
-# * If this component is absent, the externally specified reference position represents the shape's reference point. 
-# *
-# * @field radius: the radius of the circular area.
-# *
-# * @field height: the optional height, present if the shape is a right cylinder extending in the positive z-axis. 
-# *
-# * 
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-# 
 
 CartesianPosition3d shape_reference_point
 bool shape_reference_point_is_present

@@ -27,13 +27,13 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # CardinalNumber1B ::= INTEGER(0..255)
+# /**
+#  * The DE represents a cardinal number that counts the size of a set. 
+#  * 
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * The DE represents a cardinal number that counts the size of a set. 
-# * 
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint8 value
 uint8 MIN = 0

@@ -35,27 +35,27 @@
 #   pathDeltaTime                 DeltaTimeTenthOfSecond,
 #   ... 
 # }
+# /**
+#  * This DF  defines a predicted offset waypoint position within a path.
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field deltaLatitude: an offset latitude with regards to a pre-defined reference position. 
+#  *
+#  * @field deltaLongitude: an offset longitude with regards to a pre-defined reference position. 
+#  * 
+#  * @field horizontalPositionConfidence: the confidence value associated to the horizontal geographical position.
+#  *
+#  * @field deltaAltitude: an offset altitude with regards to a pre-defined reference position. 
+#  *
+#  * @field altitudeConfidence: the confidence value associated to the altitude value of the geographical position.
+#  * 
+#  * @field pathDeltaTime: The  travel time separated from the waypoint to the predefined reference position.
+#  *
+#  * @category GeoReference information
+#  * @revision: semantics updated in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF  defines a predicted offset waypoint position within a path.
-# *
-# * It shall include the following components: 
-# *
-# * @field deltaLatitude: an offset latitude with regards to a pre-defined reference position. 
-# *
-# * @field deltaLongitude: an offset longitude with regards to a pre-defined reference position. 
-# * 
-# * @field horizontalPositionConfidence: the confidence value associated to the horizontal geographical position.
-# *
-# * @field deltaAltitude: an offset altitude with regards to a pre-defined reference position. 
-# *
-# * @field altitudeConfidence: the confidence value associated to the altitude value of the geographical position.
-# * 
-# * @field pathDeltaTime: The  travel time separated from the waypoint to the predefined reference position.
-# *
-# * @category GeoReference information
-# * @revision: semantics updated in V2.1.1
-# 
 
 DeltaLatitude delta_latitude
 
@@ -65,10 +65,10 @@ PosConfidenceEllipse horizontal_position_confidence
 bool horizontal_position_confidence_is_present
 
 DeltaAltitude delta_altitude
+uint16 DEFAULT_DELTA_ALTITUDE = 12800
 
 AltitudeConfidence altitude_confidence
+uint8 DEFAULT_ALTITUDE_CONFIDENCE = 15
 
 DeltaTimeTenthOfSecond path_delta_time
 
-
-int16 DELTA_ALTITUDE_DEFAULT = 12800

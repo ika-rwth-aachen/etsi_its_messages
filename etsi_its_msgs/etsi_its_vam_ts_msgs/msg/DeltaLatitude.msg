@@ -29,23 +29,24 @@
 # DeltaLatitude ::= INTEGER {
 #     unavailable (131072)
 # } (-131071..131072)
+# /**
+#  * This DE represents an offset latitude with regards to a defined latitude value.
+#  * It may be used to describe a geographical point with regards to a specific reference geographical position.
+#  *
+#  * The value shall be set to:
+#  * - `n` (`n >= -131 071` and `n < 0`) for offset n x 10^-7 degree towards the south from the reference position,
+#  * - `0` for no latitudinal offset,
+#  * - `n` (`n > 0` and `n < 131 072`) for offset n x 10^-7 degree towards the north from the reference position,
+#  * - `131 072` when the information is unavailable.
+#  *
+#  * @unit: 10^-7 degree
+#  * @category: GeoReference information
+#  * @revision: editorial update in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE represents an offset latitude with regards to a defined latitude value.
-# * It may be used to describe a geographical point with regards to a specific reference geographical position.
-# *
-# * The value shall be set to:
-# * - `n` (`n >= -131 071` and `n < 0`) for offset n x 10^-7 degree towards the south from the reference position,
-# * - `0` for no latitudinal offset,
-# * - `n` (`n > 0` and `n < 131 072`) for offset n x 10^-7 degree towards the north from the reference position,
-# * - `131 072` when the information is unavailable.
-# *
-# * @unit: 10^-7 degree
-# * @category: GeoReference information
-# * @revision: editorial update in V2.1.1
-# 
 
 int32 value
 int32 MIN = -131071
 int32 MAX = 131072
 int32 UNAVAILABLE = 131072
+

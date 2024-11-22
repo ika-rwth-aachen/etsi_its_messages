@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_vam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_vam_ts_coding/vam_ts_RadialShapesList.h>
+#include <etsi_its_vam_ts_coding/vam_ts_RadialShapeDetails.h>
 #include <etsi_its_vam_ts_conversion/convertRadialShapeDetails.h>
-#include <etsi_its_vam_ts_conversion/convertRadialShapesList.h>
 #ifdef ROS1
+#include <etsi_its_vam_ts_msgs/RadialShapeDetails.h>
 #include <etsi_its_vam_ts_msgs/RadialShapesList.h>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
+#include <etsi_its_vam_ts_msgs/msg/radial_shape_details.hpp>
 #include <etsi_its_vam_ts_msgs/msg/radial_shapes_list.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif

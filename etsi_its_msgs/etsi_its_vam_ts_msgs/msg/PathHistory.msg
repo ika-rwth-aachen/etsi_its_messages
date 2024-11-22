@@ -27,18 +27,18 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # PathHistory::= SEQUENCE (SIZE(40)) OF PathPoint
+# /**
+#  * This DF represents a path history with a set of path points.
+#  * It shall contain up to `40` @ref PathPoint. 
+#  * 
+#  * The first PathPoint presents an offset delta position with regards to an external reference position.
+#  * Each other PathPoint presents an offset delta position and optionally an offset travel time with regards to the previous PathPoint. 
+#  *
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref Path instead.
+#  * @category: GeoReference information, Vehicle information
+#  * @revision: semantics updated in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a path history with a set of path points.
-# * It shall contain up to `40` @ref PathPoint. 
-# * 
-# * The first PathPoint presents an offset delta position with regards to an external reference position.
-# * Each other PathPoint presents an offset delta position and optionally an offset travel time with regards to the previous PathPoint. 
-# *
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref Path instead.
-# * @category: GeoReference information, Vehicle information
-# * @revision: semantics updated in V2.1.1
-# 
 
 PathPoint[] array
-uint8 SIZE = 40
+

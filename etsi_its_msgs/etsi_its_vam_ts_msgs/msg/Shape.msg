@@ -35,27 +35,27 @@
 #    radialShapes      RadialShapes,
 #    ...
 # }
+# /**
+#  * This DF provides the definition of a geographical area or volume, based on different options.
+#  *
+#  * It is a choice of the following components: 
+#  *
+#  * @field rectangular: definition of an rectangular area or a right rectangular prism (with a rectangular base) also called a cuboid, or informally a rectangular box.
+#  *
+#  * @field circular: definition of an area of circular shape or a right circular cylinder.
+#  *
+#  * @field polygonal: definition of an area of polygonal shape or a right prism.
+#  *
+#  * @field elliptical: definition of an area of elliptical shape or a right elliptical cylinder.
+#  *
+#  * @field radial: definition of a radial shape.
+#  *
+#  * @field radialList: definition of list of radial shapes.
+#  *
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides the definition of a geographical area or volume, based on different options.
-# *
-# * It is a choice of the following components: 
-# *
-# * @field rectangular: definition of an rectangular area or a right rectangular prism (with a rectangular base) also called a cuboid, or informally a rectangular box.
-# *
-# * @field circular: definition of an area of circular shape or a right circular cylinder.
-# *
-# * @field polygonal: definition of an area of polygonal shape or a right prism.
-# *
-# * @field elliptical: definition of an area of elliptical shape or a right elliptical cylinder.
-# *
-# * @field radial: definition of a radial shape.
-# *
-# * @field radialList: definition of list of radial shapes.
-# *
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 choice
 

@@ -30,19 +30,19 @@
 # 	roadsegment     RoadSegmentReferenceId,
 # 	intersection    IntersectionReferenceId
 # 	}
+# /**
+#  * This DF provides the reference to the information contained in a MAPEM according to ETSI TS 103 301 [15]. 
+#  *
+#  * The following options are provided:
+#  * 
+#  * @field roadsegment: option that identifies the description of a road segment contained in a MAPEM.
+#  * 
+#  * @field intersection: option that identifies the description of an intersection contained in a MAPEM.
+#  *
+#  * @category: Road topology information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides the reference to the information contained in a MAPEM according to ETSI TS 103 301 [15]. 
-# *
-# * The following options are provided:
-# * 
-# * @field roadsegment: option that identifies the description of a road segment contained in a MAPEM.
-# * 
-# * @field intersection: option that identifies the description of an intersection contained in a MAPEM.
-# *
-# * @category: Road topology information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 choice
 

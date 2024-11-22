@@ -31,19 +31,19 @@
 #     joinTime     DeltaTimeQuarterSecond,
 #     ...
 # }
+# /**
+#  * This DF provides information about the joining of a cluster.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field clusterId: indicates the identifier of the cluster.
+#  * 
+#  * @field joinTime: indicates the time of joining. 
+#  *
+#  * @category: Cluster Information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides information about the joining of a cluster.
-# *
-# * It shall include the following components: 
-# * 
-# * @field clusterId: indicates the identifier of the cluster.
-# * 
-# * @field joinTime: indicates the time of joining. 
-# *
-# * @category: Cluster Information
-# * @revision: Created in V2.1.1
-# 
 
 Identifier1B cluster_id
 

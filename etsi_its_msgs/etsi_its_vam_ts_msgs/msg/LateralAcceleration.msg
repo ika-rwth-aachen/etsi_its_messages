@@ -30,20 +30,20 @@
 #     lateralAccelerationValue         LateralAccelerationValue,
 #     lateralAccelerationConfidence    AccelerationConfidence
 # }
+# /**
+#  * This DF indicates the vehicle acceleration at lateral direction and the confidence value of the lateral acceleration.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field lateralAccelerationValue: lateral acceleration value at a point in time.
+#  * 
+#  * @field lateralAccelerationConfidence: confidence value of the lateral acceleration value.
+#  *
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead.
+#  * @category Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates the vehicle acceleration at lateral direction and the confidence value of the lateral acceleration.
-# *
-# * It shall include the following components: 
-# * 
-# * @field lateralAccelerationValue: lateral acceleration value at a point in time.
-# * 
-# * @field lateralAccelerationConfidence: confidence value of the lateral acceleration value.
-# *
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead.
-# * @category Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 LateralAccelerationValue lateral_acceleration_value
 

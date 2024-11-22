@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_vam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_vam_ts_coding/vam_ts_PathHistory.h>
-#include <etsi_its_vam_ts_conversion/convertPathHistory.h>
+#include <etsi_its_vam_ts_coding/vam_ts_PathPoint.h>
 #include <etsi_its_vam_ts_conversion/convertPathPoint.h>
 #ifdef ROS1
+#include <etsi_its_vam_ts_msgs/PathPoint.h>
 #include <etsi_its_vam_ts_msgs/PathHistory.h>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
+#include <etsi_its_vam_ts_msgs/msg/path_point.hpp>
 #include <etsi_its_vam_ts_msgs/msg/path_history.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif

@@ -32,23 +32,23 @@
 #    trajectoryInterceptionConfidence   TrajectoryInterceptionConfidence OPTIONAL,
 #         ... 
 # }
+# /**
+#  * This DF  provides the trajectory  interception  indication  of  ego-VRU  ITS-S  with another ITS-Ss. 
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field subjectStation: indicates the subject station.
+#  * 
+#  * @field trajectoryInterceptionProbability: indicates the propbability of the interception of the subject station trajectory 
+#  * with the trajectory of the station indicated in the component subjectStation.
+#  *
+#  * @field trajectoryInterceptionConfidence: indicates the confidence of interception of the subject station trajectory 
+#  * with the trajectory of the station indicated in the component subjectStation.
+#  * 
+#  * @category: Vehicle information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF  provides the trajectory  interception  indication  of  ego-VRU  ITS-S  with another ITS-Ss. 
-# *
-# * It shall include the following components: 
-# * 
-# * @field subjectStation: indicates the subject station.
-# * 
-# * @field trajectoryInterceptionProbability: indicates the propbability of the interception of the subject station trajectory 
-# * with the trajectory of the station indicated in the component subjectStation.
-# *
-# * @field trajectoryInterceptionConfidence: indicates the confidence of interception of the subject station trajectory 
-# * with the trajectory of the station indicated in the component subjectStation.
-# * 
-# * @category: Vehicle information
-# * @revision: Created in V2.1.1
-# 
 
 StationId subject_station
 bool subject_station_is_present

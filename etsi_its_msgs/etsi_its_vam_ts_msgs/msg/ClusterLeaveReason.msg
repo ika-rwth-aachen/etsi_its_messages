@@ -38,25 +38,25 @@
 #     safetyCondition               (8),
 #     max(15)            
 # }
+# /**
+#  * This DE indicates the reason why a cluster participant is leaving the cluster.
+#  * 
+#  * The value shall be set to:
+#  * - 0 - `notProvided `                 - if the information is not provided,
+#  * - 1 - `clusterLeaderLost`            - if the cluster leader cannot be found anymore,   
+#  * - 2 - `clusterDisbandedByLeader`     - if the cluster has been disbanded by the leader,
+#  * - 3 - `outOfClusterBoundingBox`      - if the participants moved out of the cluster's bounding box,
+#  * - 4 - `outOfClusterSpeedRange`       - if the cluster speed moved out of a defined range, 
+#  * - 5 - `joiningAnotherCluster`        - if the participant is joining another cluster,
+#  * - 6 - `cancelledJoin`                - if the participant is cancelling a joining procedure,
+#  * - 7 - `failedJoin`                   - if the participant failed to join the cluster,
+#  * - 8 - `safetyCondition`              - if a safety condition applies.
+#  * - 9 to 15                            - are reserved for future use                             
+#  *
+#  * @category: Cluster information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the reason why a cluster participant is leaving the cluster.
-# * 
-# * The value shall be set to:
-# * - 0 - `notProvided `                 - if the information is not provided,
-# * - 1 - `clusterLeaderLost`            - if the cluster leader cannot be found anymore,   
-# * - 2 - `clusterDisbandedByLeader`     - if the cluster has been disbanded by the leader,
-# * - 3 - `outOfClusterBoundingBox`      - if the participants moved out of the cluster's bounding box,
-# * - 4 - `outOfClusterSpeedRange`       - if the cluster speed moved out of a defined range, 
-# * - 5 - `joiningAnotherCluster`        - if the participant is joining another cluster,
-# * - 6 - `cancelledJoin`                - if the participant is cancelling a joining procedure,
-# * - 7 - `failedJoin`                   - if the participant failed to join the cluster,
-# * - 8 - `safetyCondition`              - if a safety condition applies.
-# * - 9 to 15                            - are reserved for future use                             
-# *
-# * @category: Cluster information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 NOT_PROVIDED = 0

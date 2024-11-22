@@ -31,19 +31,19 @@
 #     laneType               LaneType,
 #     ...
 # }
+# /**
+#  * This DF indicates a transversal position in resolution of lanes and the associated lane type.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field transversalPosition: the transversal position.
+#  * 
+#  * @field laneType: the type of the lane identified in the component transversalPosition.
+#  * 
+#  * @category Road topology information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF indicates a transversal position in resolution of lanes and the associated lane type.
-# *
-# * It shall include the following components: 
-# * 
-# * @field transversalPosition: the transversal position.
-# * 
-# * @field laneType: the type of the lane identified in the component transversalPosition.
-# * 
-# * @category Road topology information
-# * @revision: Created in V2.1.1
-# 
 
 LanePosition transversal_position
 

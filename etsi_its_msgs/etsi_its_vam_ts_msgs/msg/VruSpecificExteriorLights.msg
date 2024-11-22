@@ -34,26 +34,26 @@
 #     legLight       (4),
 #     wheelLight     (5)
 # } (SIZE(8))
+# /**
+#  * This DE describes the status of the exterior light switches of a VRU.
+#  *
+#  * The value of each bit indicates the state of the switch, which commands the corresponding light. 
+#  * The bit corresponding to a specific light shall be set to 1, when the corresponding switch is turned on, either manually by the driver or VRU 
+#  * or automatically by a vehicle or VRU system: 
+#  * - 0 `unavailable`     - indicates no information available, 
+#  * - 1 `backFlashLight ` - indicates the status of the back flash light,
+#  * - 2 `helmetLight`     - indicates the status of the helmet light,
+#  * - 3 `armLight`        - indicates the status of the arm light,
+#  * - 4 `legLight`        - indicates the status of the leg light,
+#  * - 5 `wheelLight`      - indicates the status of the wheel light. 
+#  * - Bits 6 to 8         - are reserved for future use. 
+#  * The bit values do not indicate if the corresponding lamps are alight or not.
+#  * If  VRU is not equipped with a certain light or if the light switch status information is not available, the corresponding bit shall be set to 0.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */ 
 # ------------------------------------------------------------------------------
-# *
-# * This DE describes the status of the exterior light switches of a VRU.
-# *
-# * The value of each bit indicates the state of the switch, which commands the corresponding light. 
-# * The bit corresponding to a specific light shall be set to 1, when the corresponding switch is turned on, either manually by the driver or VRU 
-# * or automatically by a vehicle or VRU system: 
-# * - 0 `unavailable`     - indicates no information available, 
-# * - 1 `backFlashLight ` - indicates the status of the back flash light,
-# * - 2 `helmetLight`     - indicates the status of the helmet light,
-# * - 3 `armLight`        - indicates the status of the arm light,
-# * - 4 `legLight`        - indicates the status of the leg light,
-# * - 5 `wheelLight`      - indicates the status of the wheel light. 
-# * - Bits 6 to 8         - are reserved for future use. 
-# * The bit values do not indicate if the corresponding lamps are alight or not.
-# * If  VRU is not equipped with a certain light or if the light switch status information is not available, the corresponding bit shall be set to 0.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8[] value
 uint8 bits_unused
@@ -64,3 +64,4 @@ uint8 BIT_INDEX_HELMET_LIGHT = 2
 uint8 BIT_INDEX_ARM_LIGHT = 3
 uint8 BIT_INDEX_LEG_LIGHT = 4
 uint8 BIT_INDEX_WHEEL_LIGHT = 5
+

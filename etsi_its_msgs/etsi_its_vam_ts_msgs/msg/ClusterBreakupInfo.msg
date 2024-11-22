@@ -31,19 +31,19 @@
 #     breakupTime             DeltaTimeQuarterSecond,
 #     ...
 # }
+# /**
+#  * This DF provides information about the breakup of a cluster.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field clusterBreakupReason: indicates the reason for breakup.
+#  * 
+#  * @field breakupTime: indicates the time of breakup. 
+#  *
+#  * @category: Cluster Information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF provides information about the breakup of a cluster.
-# *
-# * It shall include the following components: 
-# * 
-# * @field clusterBreakupReason: indicates the reason for breakup.
-# * 
-# * @field breakupTime: indicates the time of breakup. 
-# *
-# * @category: Cluster Information
-# * @revision: Created in V2.1.1
-# 
 
 ClusterBreakupReason cluster_breakup_reason
 

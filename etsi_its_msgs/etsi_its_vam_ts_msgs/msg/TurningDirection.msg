@@ -30,17 +30,17 @@
 #     left, 
 #     right 
 # }
+# /**
+#  * This DE provides the turning direction. 
+#  * 
+#  * The value shall be set to:
+#  * - `left`  for turning to te left.
+#  * - `right` for turing to the right.
+#  *
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE provides the turning direction. 
-# * 
-# * The value shall be set to:
-# * - `left`  for turning to te left.
-# * - `right` for turing to the right.
-# *
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 LEFT = 0

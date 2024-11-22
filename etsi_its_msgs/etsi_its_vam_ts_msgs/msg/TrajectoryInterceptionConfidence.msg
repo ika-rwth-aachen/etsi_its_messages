@@ -32,19 +32,19 @@
 #     between70and90Percent (2), 
 #     above90Percent        (3) 
 # } (0..3)
+# /**
+#  * This DE  defines  the  confidence level of the trajectoryInterceptionProbability.
+#  *
+#  * The value shall be set to:
+#  * - `0` - to indicate confidence level less than 50 %,
+#  * - `1` - to indicate confidence level greater than or equal to 50 % and less than 70 %,
+#  * - `2` - to indicate confidence level greater than or equal to 70 % and less than 90 %,
+#  * - `3` - to indicate confidence level greater than or equal to 90%.
+#  * 
+#  * @category: Kinematic information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE  defines  the  confidence level of the trajectoryInterceptionProbability.
-# *
-# * The value shall be set to:
-# * - `0` - to indicate confidence level less than 50 %,
-# * - `1` - to indicate confidence level greater than or equal to 50 % and less than 70 %,
-# * - `2` - to indicate confidence level greater than or equal to 70 % and less than 90 %,
-# * - `3` - to indicate confidence level greater than or equal to 90%.
-# * 
-# * @category: Kinematic information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 MIN = 0
@@ -53,3 +53,4 @@ uint8 LESSTHAN50PERCENT = 0
 uint8 BETWEEN50AND70_PERCENT = 1
 uint8 BETWEEN70AND90_PERCENT = 2
 uint8 ABOVE90_PERCENT = 3
+

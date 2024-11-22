@@ -32,21 +32,21 @@
 # 		exteriorLights           VruExteriorLights OPTIONAL,
 #        ...
 #     }
+# /**
+#  * @details VruLowFrequencyContainer
+#  * The VRU LF container of the VAM contains potentially slow-changing information of the VRU ITS-S.
+#  * It is mandatory with higher periodicity as specified in clause 6.2 or when VRU cluster operation container is present.
+#  * It includes the following components (setting indications are specified in clause 7.3.4 of TS 103 300-3): 
+#  *
+#  * @field profileAndSubprofile: profile of the ITS-S that originates the VAM, including sub-profile information. 
+#  * @field sizeClass: information about the size of the VRU. 
+#  * @field exteriorLights: status of the most important exterior lights switches of the VRU ITS-S that originates the VAM. 
+#  *        _(conditional mandatory as specified in clause 7.3.4 of TS 103 300-3)_ 
+#  * 
+#  * @category: VRU information
+#  * @revision: V2.2.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * @details VruLowFrequencyContainer
-# * The VRU LF container of the VAM contains potentially slow-changing information of the VRU ITS-S.
-# * It is mandatory with higher periodicity as specified in clause 6.2 or when VRU cluster operation container is present.
-# * It includes the following components (setting indications are specified in clause 7.3.4 of TS 103 300-3): 
-# *
-# * @field profileAndSubprofile: profile of the ITS-S that originates the VAM, including sub-profile information. 
-# * @field sizeClass: information about the size of the VRU. 
-# * @field exteriorLights: status of the most important exterior lights switches of the VRU ITS-S that originates the VAM. 
-# *        _(conditional mandatory as specified in clause 7.3.4 of TS 103 300-3)_ 
-# * 
-# * @category: VRU information
-# * @revision: V2.2.1
-# 
 
 VruProfileAndSubprofile profile_and_subprofile
 

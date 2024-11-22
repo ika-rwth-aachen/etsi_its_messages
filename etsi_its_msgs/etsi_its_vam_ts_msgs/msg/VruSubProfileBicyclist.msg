@@ -38,25 +38,25 @@
 #     speed-pedelec        (8),
 #     max                  (15)
 # }
+# /**
+#  * This DE indicates the profile of a VRU and its light VRU vehicle / mounted animal. 
+#  *
+#  * The value shall be set to:
+#  * - 0 `unavailable`           - to indicate that the information  is unavailable,
+#  * - 1 `bicyclist `            - to indicate a cycle and bicyclist,
+#  * - 2 `wheelchair-user`       - to indicate a wheelchair and its user,
+#  * - 3 `horse-and-rider`       - to indicate a horse and rider,
+#  * - 4 `rollerskater`          - to indicate a rolleskater and skater,
+#  * - 5 `e-scooter`             - to indicate an e-scooter and rider,
+#  * - 6 `personal-transporter`  - to indicate a personal-transporter and rider,
+#  * - 7 `pedelec`               - to indicate a pedelec and rider,
+#  * - 8 `speed-pedelec`         - to indicate a speed-pedelec and rider.
+#  * - 9 to 15                   - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
+#  *
+#  * @category: VRU information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE indicates the profile of a VRU and its light VRU vehicle / mounted animal. 
-# *
-# * The value shall be set to:
-# * - 0 `unavailable`           - to indicate that the information  is unavailable,
-# * - 1 `bicyclist `            - to indicate a cycle and bicyclist,
-# * - 2 `wheelchair-user`       - to indicate a wheelchair and its user,
-# * - 3 `horse-and-rider`       - to indicate a horse and rider,
-# * - 4 `rollerskater`          - to indicate a rolleskater and skater,
-# * - 5 `e-scooter`             - to indicate an e-scooter and rider,
-# * - 6 `personal-transporter`  - to indicate a personal-transporter and rider,
-# * - 7 `pedelec`               - to indicate a pedelec and rider,
-# * - 8 `speed-pedelec`         - to indicate a speed-pedelec and rider.
-# * - 9 to 15                   - are reserved for future usage. Value 15 is set to "max" in order to bound the size of the encoded field.
-# *
-# * @category: VRU information
-# * @revision: Created in V2.1.1
-# 
 
 uint8 value
 uint8 UNAVAILABLE = 0

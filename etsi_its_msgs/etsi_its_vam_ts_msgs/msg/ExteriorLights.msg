@@ -36,36 +36,36 @@
 #     fogLightOn               (6),
 #     parkingLightsOn          (7)
 # } (SIZE(8))
+# /**
+#  * This DE describes the status of the exterior light switches of a vehicle incl. VRU vehicles.
+#  *
+#  * The corresponding bit shall be set to 1 under the following conditions:
+#  * - 0 - `lowBeamHeadlightsOn`    - when the low beam head light switch is on,
+#  * - 1 - `highBeamHeadlightsOn`   - when the high beam head light switch is on,
+#  * - 2 - `leftTurnSignalOn`       - when the left turnSignal switch is on,
+#  * - 3 - `rightTurnSignalOn`      - when the right turn signal switch is on,
+#  * - 4 - `daytimeRunningLightsOn` - when the daytime running light switch is on,
+#  * - 5 - `reverseLightOn`         - when the reverse light switch is on,
+#  * - 6 - `fogLightOn`             - when the tail fog light switch is on,
+#  * - 7 - `parkingLightsOn`        - when the parking light switch is on.
+#  * 
+#  * @note: The value of each bit indicates the state of the switch, which commands the corresponding light.
+#  * The bit corresponding to a specific light is set to `1`, when the corresponding switch is turned on,
+#  * either manually by the driver or automatically by a vehicle system. The bit value does not indicate
+#  * if the corresponding lamps are alight or not.
+#  * 
+#  * If a vehicle is not equipped with a certain light or if the light switch status information is not available,
+#  * the corresponding bit shall be set to `0`.
+#  * 
+#  * As the bit value indicates only the state of the switch, the turn signal and hazard signal bit values shall not
+#  * alternate with the blinking interval.
+#  * 
+#  * For hazard indicator, the `leftTurnSignalOn (2)` and `rightTurnSignalOn (3)` shall be both set to `1`.
+#  * 
+#  * @category Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DE describes the status of the exterior light switches of a vehicle incl. VRU vehicles.
-# *
-# * The corresponding bit shall be set to 1 under the following conditions:
-# * - 0 - `lowBeamHeadlightsOn`    - when the low beam head light switch is on,
-# * - 1 - `highBeamHeadlightsOn`   - when the high beam head light switch is on,
-# * - 2 - `leftTurnSignalOn`       - when the left turnSignal switch is on,
-# * - 3 - `rightTurnSignalOn`      - when the right turn signal switch is on,
-# * - 4 - `daytimeRunningLightsOn` - when the daytime running light switch is on,
-# * - 5 - `reverseLightOn`         - when the reverse light switch is on,
-# * - 6 - `fogLightOn`             - when the tail fog light switch is on,
-# * - 7 - `parkingLightsOn`        - when the parking light switch is on.
-# * 
-# * @note: The value of each bit indicates the state of the switch, which commands the corresponding light.
-# * The bit corresponding to a specific light is set to `1`, when the corresponding switch is turned on,
-# * either manually by the driver or automatically by a vehicle system. The bit value does not indicate
-# * if the corresponding lamps are alight or not.
-# * 
-# * If a vehicle is not equipped with a certain light or if the light switch status information is not available,
-# * the corresponding bit shall be set to `0`.
-# * 
-# * As the bit value indicates only the state of the switch, the turn signal and hazard signal bit values shall not
-# * alternate with the blinking interval.
-# * 
-# * For hazard indicator, the `leftTurnSignalOn (2)` and `rightTurnSignalOn (3)` shall be both set to `1`.
-# * 
-# * @category Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 uint8[] value
 uint8 bits_unused
@@ -78,3 +78,4 @@ uint8 BIT_INDEX_DAYTIME_RUNNING_LIGHTS_ON = 4
 uint8 BIT_INDEX_REVERSE_LIGHT_ON = 5
 uint8 BIT_INDEX_FOG_LIGHT_ON = 6
 uint8 BIT_INDEX_PARKING_LIGHTS_ON = 7
+

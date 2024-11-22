@@ -31,19 +31,19 @@
 #     actionDeltaTime    DeltaTimeTenthOfSecond,
 #     ...
 # }
+# /** 
+#  * This DF represents information associated to changes in acceleration. 
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field accelOrDecel: the indication of an acceleration change.
+#  *
+#  * @field actionDeltaTime: the period over which the acceleration change action is performed.
+#  *
+#  * @category: Kinematic Information
+#  * @revision: Created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents information associated to changes in acceleration. 
-# *
-# * It shall include the following components: 
-# *
-# * @field accelOrDecel: the indication of an acceleration change.
-# *
-# * @field actionDeltaTime: the period over which the acceleration change action is performed.
-# *
-# * @category: Kinematic Information
-# * @revision: Created in V2.1.1
-# 
 
 AccelerationChange accel_or_decel
 

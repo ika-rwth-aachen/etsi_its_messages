@@ -30,24 +30,25 @@
 #     valueNotUsed (3600),
 #     unavailable  (3601)
 # } (0..3601)
+# /** 
+#  * This DE represents an angle value described in a local Cartesian coordinate system, per default counted positive in
+#  * a right-hand local coordinate system from the abscissa.
+#  *
+#  * The value shall be set to: 
+#  * - `n` (`n >= 0` and `n < 3600`) if the angle is equal to or less than n x 0,1 degrees, and greater than (n-1) x 0,1 degrees,
+#  * - `36001` if the accuracy information is not available.
+#  *
+#  * The value 3600 shall not be used. 
+#  * 
+#  * @unit 0,1 degrees
+#  * @category: Basic information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE represents an angle value described in a local Cartesian coordinate system, per default counted positive in
-# * a right-hand local coordinate system from the abscissa.
-# *
-# * The value shall be set to: 
-# * - `n` (`n >= 0` and `n < 3600`) if the angle is equal to or less than n x 0,1 degrees, and greater than (n-1) x 0,1 degrees,
-# * - `36001` if the accuracy information is not available.
-# *
-# * The value 3600 shall not be used. 
-# * 
-# * @unit 0,1 degrees
-# * @category: Basic information
-# * @revision: Created in V2.1.1
-#
 
 uint16 value
 uint16 MIN = 0
 uint16 MAX = 3601
 uint16 VALUE_NOT_USED = 3600
 uint16 UNAVAILABLE = 3601
+

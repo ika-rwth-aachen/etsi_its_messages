@@ -36,17 +36,6 @@
 #         ...
 #     }
 # ------------------------------------------------------------------------------
-# *
-# * @details VamParameters
-# * The VAM payload includes the @ref BasicContainer and @ref VruHighFrequencyContainer. 
-# * The VAM payload may also include additional containers: @ref VruLowFrequencyContainer,
-# * @ref VruClusterInformationContainer, @ref VruClusterOperationContainer and @ref VruMotionPredictionContainer.
-# * The selection of the additional containers depends on the dissemination criteria, 
-# * e.g. _vruCluster_ or _MotionDynamicPrediction_ availability.
-# * 
-# * @category: Communication information
-# * @revision: V2.2.1
-#*
 
 BasicContainer basic_container
 

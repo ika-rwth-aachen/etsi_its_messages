@@ -31,19 +31,19 @@
 #     actionDeltaTime    DeltaTimeTenthOfSecond,
 #     ...
 # }
+# /**
+#  * This DF  provides  information  associated to heading  change indicators  such as  a  change  of  direction.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field direction: the direction of heading change value.
+#  * 
+#  * @field actionDeltaTime: the period over which a direction change action is performed. 
+#  * 
+#  * @category: Kinematic Information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF  provides  information  associated to heading  change indicators  such as  a  change  of  direction.
-# *
-# * It shall include the following components: 
-# * 
-# * @field direction: the direction of heading change value.
-# * 
-# * @field actionDeltaTime: the period over which a direction change action is performed. 
-# * 
-# * @category: Kinematic Information
-# * @revision: created in V2.1.1
-# 
 
 TurningDirection direction
 

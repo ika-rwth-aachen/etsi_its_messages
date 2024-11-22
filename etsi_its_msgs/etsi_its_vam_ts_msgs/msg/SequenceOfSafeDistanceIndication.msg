@@ -27,14 +27,15 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # SequenceOfSafeDistanceIndication ::= SEQUENCE(SIZE(1..8,...)) OF SafeDistanceIndication
+# /**
+#  * The DF contains a list of DF @ref SafeDistanceIndication.
+#  *
+#  * @category: Traffic information, Kinematic information
+#  * @revision: created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# *
-# * The DF contains a list of DF @ref SafeDistanceIndication.
-# *
-# * @category: Traffic information, Kinematic information
-# * @revision: created in V2.1.1
-#
 
 SafeDistanceIndication[] array
-int64 MIN_SIZE = 1
-int64 MAX_SIZE = 8
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 8
+

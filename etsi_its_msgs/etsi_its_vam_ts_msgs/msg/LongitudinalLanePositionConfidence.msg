@@ -30,23 +30,24 @@
 #     outOfRange  (1022),
 #     unavailable (1023)  
 # } (0..1023)
+# /** 
+#  * This DE indicates the longitudinal lane position confidence value which represents the estimated accuracy of longitudinal lane position measurement with a default confidence level of 95 %.
+#  * If required, the confidence level can be defined by the corresponding standards applying this DE.
+#  *
+#  * The value shall be set to:
+#  * - `n` (`n > 0` and `n < 1 022`) if the  confidence value is equal to or less than n x 0,1 m, and more than (n-1) x 0,1 m,
+#  * - `1 022` if the confidence value is out of range i.e. greater than 102,1 m,
+#  * - `1 023` if the confidence value is unavailable.
+#  *
+#  * @unit 0,1 metre
+#  * @category: GeoReference information
+#  * @revision: Created in V2.1.1
+# */
 # ------------------------------------------------------------------------------
-# * 
-# * This DE indicates the longitudinal lane position confidence value which represents the estimated accuracy of longitudinal lane position measurement with a default confidence level of 95 %.
-# * If required, the confidence level can be defined by the corresponding standards applying this DE.
-# *
-# * The value shall be set to:
-# * - `n` (`n > 0` and `n < 1 022`) if the  confidence value is equal to or less than n x 0,1 m, and more than (n-1) x 0,1 m,
-# * - `1 022` if the confidence value is out of range i.e. greater than 102,1 m,
-# * - `1 023` if the confidence value is unavailable.
-# *
-# * @unit 0,1 metre
-# * @category: GeoReference information
-# * @revision: Created in V2.1.1
-#
 
 uint16 value
 uint16 MIN = 0
 uint16 MAX = 1023
 uint16 OUT_OF_RANGE = 1022
 uint16 UNAVAILABLE = 1023
+

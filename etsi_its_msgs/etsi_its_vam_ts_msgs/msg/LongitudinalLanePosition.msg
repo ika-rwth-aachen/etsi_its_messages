@@ -30,19 +30,19 @@
 #     longitudinalLanePositionValue         LongitudinalLanePositionValue,
 #     longitudinalLanePositionConfidence    LongitudinalLanePositionConfidence
 # }
+# /** 
+#  * This DF represents the estimated position along the longitudinal length of a particular lane. 
+#  *
+#  * It shall include the following components: 
+#  *
+#  * @field  longitudinalLanePositionValue: the mean value of the longitudinal position within a particular length.
+#  *
+#  * @field  longitudinalLanePositionConfidence: The confidence value associated to the value.
+#  *
+#  * @category: Road topology information
+#  * @revision: created in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-# * 
-# * This DF represents the estimated position along the longitudinal length of a particular lane. 
-# *
-# * It shall include the following components: 
-# *
-# * @field  longitudinalLanePositionValue: the mean value of the longitudinal position within a particular length.
-# *
-# * @field  longitudinalLanePositionConfidence: The confidence value associated to the value.
-# *
-# * @category: Road topology information
-# * @revision: created in V2.1.1
-# 
 
 LongitudinalLanePositionValue longitudinal_lane_position_value
 

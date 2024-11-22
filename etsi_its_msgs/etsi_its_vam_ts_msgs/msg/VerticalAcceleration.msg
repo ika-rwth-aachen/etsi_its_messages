@@ -30,21 +30,20 @@
 #     verticalAccelerationValue         VerticalAccelerationValue,
 #     verticalAccelerationConfidence    AccelerationConfidence
 # }
+# /**
+#  * This DF indicates the vehicle acceleration at vertical direction and the associated confidence value.
+#  *
+#  * It shall include the following components: 
+#  * 
+#  * @field verticalAccelerationValue: vertical acceleration value at a point in time.
+#  * 
+#  * @field verticalAccelerationConfidence: confidence value of the vertical acceleration value with a predefined confidence level.
+#  * 
+#  * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead.
+#  * @category Vehicle information
+#  * @revision: Description revised in V2.1.1
+#  */
 # ------------------------------------------------------------------------------
-#  four and more octets length
-#*
-# * This DF indicates the vehicle acceleration at vertical direction and the associated confidence value.
-# *
-# * It shall include the following components: 
-# * 
-# * @field verticalAccelerationValue: vertical acceleration value at a point in time.
-# * 
-# * @field verticalAccelerationConfidence: confidence value of the vertical acceleration value with a predefined confidence level.
-# * 
-# * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use @ref AccelerationComponent instead.
-# * @category Vehicle information
-# * @revision: Description revised in V2.1.1
-# 
 
 VerticalAccelerationValue vertical_acceleration_value
 

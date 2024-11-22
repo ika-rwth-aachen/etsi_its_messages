@@ -27,18 +27,19 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # PathPredicted::= SEQUENCE (SIZE(0..15,...)) OF PathPointPredicted
+# /**
+#  * This DF represents a predicted path with a set of path points.
+#  * It shall contain up to `15` @ref PathPoint. 
+#  * 
+#  * The first PathPoint presents an offset delta position with regards to an external reference position.
+#  * Each other PathPoint presents an offset delta position and optionally an offset travel time with regards to the previous PathPoint. 
+#  *
+#  * @category: GeoReference information
+#  * @revision: created in V2.1.1 based on PathHistory
+#  */
 # ------------------------------------------------------------------------------
-# *
-# * This DF represents a predicted path with a set of path points.
-# * It shall contain up to `15` @ref PathPoint. 
-# * 
-# * The first PathPoint presents an offset delta position with regards to an external reference position.
-# * Each other PathPoint presents an offset delta position and optionally an offset travel time with regards to the previous PathPoint. 
-# *
-# * @category: GeoReference information
-# * @revision: created in V2.1.1 based on PathHistory
-# 
 
 PathPointPredicted[] array
-int64 MIN_SIZE = 0
-int64 MAX_SIZE = 15
+uint8 MIN_SIZE = 0
+uint8 MAX_SIZE = 15
+
