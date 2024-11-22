@@ -396,6 +396,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     """
     
     if "components-of" in asn1: # TODO
+        warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
         return {
             "asn1_definition": None,
             "comments": [],
@@ -543,6 +544,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if member is None:
                 continue
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            if member_context is None:
+                continue
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
@@ -592,6 +595,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "name" in asn1:
                 member_name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            if member_context is None:
+                continue
             if len(member_context["members"]) > 0:
                 if "name" in asn1:
                     member_context["members"][0]["choice_name"] = validCField(asn1["name"])
@@ -616,6 +621,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         # add field for array
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
+
+        if array_type == "RegionalExtension":
+            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            return None
+
         member_context = {
             "t_name": array_type,
             "type": f"{array_type}[]",
@@ -678,6 +688,10 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
 
     # custom types
     elif type in asn1_types:
+        
+        if type == "RegionalExtension":
+            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            return None
 
         name_cc = asn1["name"] if "name" in asn1 else "value"
         name = camel2snake(name_cc)
