@@ -32,6 +32,7 @@
 #     informationQuality InformationQuality
 # }
 # ------------------------------------------------------------------------------
+
 DeltaReferencePosition event_position
 
 PathDeltaTime event_delta_time

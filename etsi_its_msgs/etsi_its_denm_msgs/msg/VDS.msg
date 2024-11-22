@@ -31,3 +31,4 @@
 
 string value
 uint8 SIZE = 6
+

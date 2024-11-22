@@ -40,6 +40,7 @@
 # 	...
 # }
 # ------------------------------------------------------------------------------
+
 ActionID action_id
 
 TimestampIts detection_time
@@ -58,11 +59,10 @@ RelevanceTrafficDirection relevance_traffic_direction
 bool relevance_traffic_direction_is_present
 
 ValidityDuration validity_duration
+uint16 DEFAULT_VALIDITY_DURATION = 600
 
 TransmissionInterval transmission_interval
 bool transmission_interval_is_present
 
 StationType station_type
 
-
-uint32 VALIDITY_DURATION_DEFAULT = 600

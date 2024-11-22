@@ -32,6 +32,7 @@
 #     semiMajorOrientation HeadingValue
 # }
 # ------------------------------------------------------------------------------
+
 SemiAxisLength semi_major_confidence
 
 SemiAxisLength semi_minor_confidence

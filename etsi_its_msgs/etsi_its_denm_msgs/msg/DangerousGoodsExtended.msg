@@ -38,6 +38,7 @@
 #         ...
 # }
 # ------------------------------------------------------------------------------
+
 DangerousGoodsBasic dangerous_goods_type
 
 uint16 un_number

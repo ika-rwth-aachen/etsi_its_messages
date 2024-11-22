@@ -34,6 +34,7 @@
 # 	...
 # }
 # ------------------------------------------------------------------------------
+
 InformationQuality information_quality
 
 CauseCode event_type

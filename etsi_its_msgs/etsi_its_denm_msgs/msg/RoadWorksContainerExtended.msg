@@ -38,6 +38,7 @@
 # 	referenceDenms ReferenceDenms OPTIONAL
 #  }
 # ------------------------------------------------------------------------------
+
 LightBarSirenInUse light_bar_siren_in_use
 bool light_bar_siren_in_use_is_present
 

@@ -30,5 +30,6 @@
 # ------------------------------------------------------------------------------
 
 StationType[] array
-int64 MIN_SIZE = 1
-int64 MAX_SIZE = 3
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 3
+

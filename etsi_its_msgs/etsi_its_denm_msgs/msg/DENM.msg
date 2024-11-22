@@ -31,6 +31,7 @@
 # 	denm DecentralizedEnvironmentalNotificationMessage
 # }
 # ------------------------------------------------------------------------------
+
 ItsPduHeader header
 
 DecentralizedEnvironmentalNotificationMessage denm

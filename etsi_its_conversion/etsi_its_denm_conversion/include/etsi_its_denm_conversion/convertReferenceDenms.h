@@ -29,13 +29,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_denm_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_denm_coding/denm_ReferenceDenms.h>
+#include <etsi_its_denm_coding/denm_ActionID.h>
 #include <etsi_its_denm_conversion/convertActionID.h>
-#include <etsi_its_denm_conversion/convertReferenceDenms.h>
 #ifdef ROS1
+#include <etsi_its_denm_msgs/ActionID.h>
 #include <etsi_its_denm_msgs/ReferenceDenms.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
+#include <etsi_its_denm_msgs/msg/action_id.hpp>
 #include <etsi_its_denm_msgs/msg/reference_denms.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif

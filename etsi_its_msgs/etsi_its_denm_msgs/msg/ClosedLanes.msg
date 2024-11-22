@@ -33,6 +33,7 @@
 #     ...
 # }
 # ------------------------------------------------------------------------------
+
 HardShoulderStatus innerhard_shoulder_status
 bool innerhard_shoulder_status_is_present
 

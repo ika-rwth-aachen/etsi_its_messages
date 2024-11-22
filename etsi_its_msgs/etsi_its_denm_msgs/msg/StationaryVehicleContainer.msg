@@ -35,6 +35,7 @@
 # 	energyStorageType EnergyStorageType OPTIONAL
 # }
 # ------------------------------------------------------------------------------
+
 StationarySince stationary_since
 bool stationary_since_is_present
 
