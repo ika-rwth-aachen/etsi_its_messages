@@ -6,11 +6,15 @@ ros2udp_etsi_types:
   - cam_ts
   - cpm_ts
   - denm
+  - mapem_ts
+  - spatem_ts
   - vam_ts
 udp2ros_etsi_types:
   - cam
   - cpm_ts
   - denm
+  - mapem_ts
+  - spatem_ts
   - vam_ts
 subscriber_queue_size: 10
 publisher_queue_size: 10

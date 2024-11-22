@@ -316,26 +316,26 @@ void Converter::setup() {
     subscribers_["denm"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
-  // if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
-  //   publishers_["mapem_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_));
-  //   ROS12_LOG(INFO, "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["mapem_ts"]->getTopic().c_str());
-  // }
-  // if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mapem_ts") != ros2udp_etsi_types_.end()) {
-  //   boost::function<void(const mapem_ts_msgs::MAPEM::ConstPtr)> callback =
-  //     boost::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, _1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM&, mapem_ts_MAPEM_t&)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
-  //   subscribers_["mapem_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<mapem_ts_msgs::MAPEM>(kInputTopicMapemTs, subscriber_queue_size_, callback));
-  //   ROS12_LOG(INFO, "Converting native ROS MAPEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["mapem_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
-  // }
-  // if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "spatem_ts") != udp2ros_etsi_types_.end()) {
-  //   publishers_["spatem_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<spatem_ts_msgs::SPATEM>(kOutputTopicSpatemTs, publisher_queue_size_));
-  //   ROS12_LOG(INFO, "Converting UDP messages of type SPATEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["spatem_ts"]->getTopic().c_str());
-  // }
-  // if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "spatem_ts") != ros2udp_etsi_types_.end()) {
-  //   boost::function<void(const spatem_ts_msgs::SPATEM::ConstPtr)> callback =
-  //     boost::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, _1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM&, spatem_ts_SPATEM_t&)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
-  //   subscribers_["spatem_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<spatem_ts_msgs::SPATEM>(kInputTopicSpatemTs, subscriber_queue_size_, callback));
-  //   ROS12_LOG(INFO, "Converting native ROS SPATEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["spatem_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
-  // }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
+    publishers_["mapem_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["mapem_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mapem_ts") != ros2udp_etsi_types_.end()) {
+    boost::function<void(const mapem_ts_msgs::MAPEM::ConstPtr)> callback =
+      boost::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, _1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM&, mapem_ts_MAPEM_t&)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
+    subscribers_["mapem_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<mapem_ts_msgs::MAPEM>(kInputTopicMapemTs, subscriber_queue_size_, callback));
+    ROS12_LOG(INFO, "Converting native ROS MAPEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["mapem_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "spatem_ts") != udp2ros_etsi_types_.end()) {
+    publishers_["spatem_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<spatem_ts_msgs::SPATEM>(kOutputTopicSpatemTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type SPATEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["spatem_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "spatem_ts") != ros2udp_etsi_types_.end()) {
+    boost::function<void(const spatem_ts_msgs::SPATEM::ConstPtr)> callback =
+      boost::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, _1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM&, spatem_ts_SPATEM_t&)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
+    subscribers_["spatem_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<spatem_ts_msgs::SPATEM>(kInputTopicSpatemTs, subscriber_queue_size_, callback));
+    ROS12_LOG(INFO, "Converting native ROS SPATEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["spatem_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
+  }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "vam_ts") != udp2ros_etsi_types_.end()) {
     publishers_["vam_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<vam_ts_msgs::VAM>(kOutputTopicVamTs, publisher_queue_size_));
     ROS12_LOG(INFO, "Converting UDP messages of type VAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["vam_ts"]->getTopic().c_str());
@@ -389,26 +389,26 @@ void Converter::setup() {
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
-  // if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
-  //   publisher_mapem_ts_ = this->create_publisher<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_);
-  //   ROS12_LOG(INFO, "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_mapem_ts_->get_topic_name());
-  // }
-  // if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mapem_ts") != ros2udp_etsi_types_.end()) {
-  //   std::function<void(const mapem_ts_msgs::MAPEM::UniquePtr)> callback =
-  //     std::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, std::placeholders::_1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM&, mapem_ts_MAPEM_t&)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
-  //   subscribers_["mapem_ts"] = this->create_subscription<mapem_ts_msgs::MAPEM>(kInputTopicMapemTs, subscriber_queue_size_, callback);
-  //   ROS12_LOG(INFO, "Converting native ROS MAPEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["mapem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
-  // }
-  // if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "spatem_ts") != udp2ros_etsi_types_.end()) {
-  //   publisher_spatem_ts_ = this->create_publisher<spatem_ts_msgs::SPATEM>(kOutputTopicSpatemTs, publisher_queue_size_);
-  //   ROS12_LOG(INFO, "Converting UDP messages of type SPATEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_spatem_ts_->get_topic_name());
-  // }
-  // if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "spatem_ts") != ros2udp_etsi_types_.end()) {
-  //   std::function<void(const spatem_ts_msgs::SPATEM::UniquePtr)> callback =
-  //     std::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, std::placeholders::_1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM&, spatem_ts_SPATEM_t&)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
-  //   subscribers_["spatem_ts"] = this->create_subscription<spatem_ts_msgs::SPATEM>(kInputTopicSpatemTs, subscriber_queue_size_, callback);
-  //   ROS12_LOG(INFO, "Converting native ROS SPATEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["spatem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
-  // }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
+    publisher_mapem_ts_ = this->create_publisher<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_mapem_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mapem_ts") != ros2udp_etsi_types_.end()) {
+    std::function<void(const mapem_ts_msgs::MAPEM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, std::placeholders::_1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM&, mapem_ts_MAPEM_t&)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
+    subscribers_["mapem_ts"] = this->create_subscription<mapem_ts_msgs::MAPEM>(kInputTopicMapemTs, subscriber_queue_size_, callback);
+    ROS12_LOG(INFO, "Converting native ROS MAPEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["mapem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "spatem_ts") != udp2ros_etsi_types_.end()) {
+    publisher_spatem_ts_ = this->create_publisher<spatem_ts_msgs::SPATEM>(kOutputTopicSpatemTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type SPATEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_spatem_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "spatem_ts") != ros2udp_etsi_types_.end()) {
+    std::function<void(const spatem_ts_msgs::SPATEM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, std::placeholders::_1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM&, spatem_ts_SPATEM_t&)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
+    subscribers_["spatem_ts"] = this->create_subscription<spatem_ts_msgs::SPATEM>(kInputTopicSpatemTs, subscriber_queue_size_, callback);
+    ROS12_LOG(INFO, "Converting native ROS SPATEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["spatem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "vam_ts") != udp2ros_etsi_types_.end()) {
     publisher_vam_ts_ = this->create_publisher<vam_ts_msgs::VAM>(kOutputTopicVamTs, publisher_queue_size_);
     ROS12_LOG(INFO, "Converting UDP messages of type VAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_vam_ts_->get_topic_name());
@@ -633,33 +633,33 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
     publisher_vam_ts_->publish(msg);
 #endif
 
-  // } else if (detected_etsi_type == "mapem_ts") {
+  } else if (detected_etsi_type == "mapem_ts") {
 
-  //   // decode buffer to ROS msg
-  //   mapem_ts_msgs::MAPEM msg;
-  //   bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_MAPEM_t&, mapem_ts_msgs::MAPEM&)>(etsi_its_mapem_ts_conversion::toRos_MAPEM), msg);
-  //   if (!success) return;
+    // decode buffer to ROS msg
+    mapem_ts_msgs::MAPEM msg;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_MAPEM_t&, mapem_ts_msgs::MAPEM&)>(etsi_its_mapem_ts_conversion::toRos_MAPEM), msg);
+    if (!success) return;
 
-  //   // publish msg
-  // #ifdef ROS1
-  //   publishers_["mapem_ts"]->publish(msg);
-  // #else
-  //   publisher_mapem_ts_->publish(msg);
-  // #endif
+    // publish msg
+  #ifdef ROS1
+    publishers_["mapem_ts"]->publish(msg);
+  #else
+    publisher_mapem_ts_->publish(msg);
+  #endif
 
-  // } else if (detected_etsi_type == "spatem_ts") {
+  } else if (detected_etsi_type == "spatem_ts") {
 
-  //   // decode buffer to ROS msg
-  //   spatem_ts_msgs::SPATEM msg;
-  //   bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_SPATEM_t&, spatem_ts_msgs::SPATEM&)>(etsi_its_spatem_ts_conversion::toRos_SPATEM), msg);
-  //   if (!success) return;
+    // decode buffer to ROS msg
+    spatem_ts_msgs::SPATEM msg;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_SPATEM_t&, spatem_ts_msgs::SPATEM&)>(etsi_its_spatem_ts_conversion::toRos_SPATEM), msg);
+    if (!success) return;
 
-  //   // publish msg
-  // #ifdef ROS1
-  //   publishers_["spatem_ts"]->publish(msg);
-  // #else
-  //   publisher_spatem_ts_->publish(msg);
-  // #endif
+    // publish msg
+  #ifdef ROS1
+    publishers_["spatem_ts"]->publish(msg);
+  #else
+    publisher_spatem_ts_->publish(msg);
+  #endif
 
   } else {
     ROS12_LOG(ERROR, "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
