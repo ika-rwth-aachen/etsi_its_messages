@@ -96,6 +96,7 @@ jobs:
         run: docker load --input /tmp/asn1c-image.tar
       - name: etsi_its_${{ matrix.message }}_coding
         run: |
+          ./asn1/external/download.sh
           ./asn1/patches/patch.sh
           ${{ matrix.script }}
           rm -rf ${{ github.workspace }}/tmp
@@ -148,6 +149,7 @@ jobs:
         run: docker load --input /tmp/rgen-image.tar
       - name: etsi_its_${{ matrix.message }}_msgs
         run: |
+          ./asn1/external/download.sh
           ./asn1/patches/patch.sh
           ${{ matrix.script }}
           if [[ ! -z "$(git status --porcelain)" ]]; then
@@ -199,6 +201,7 @@ jobs:
         run: docker load --input /tmp/rgen-image.tar
       - name: etsi_its_${{ matrix.message }}_conversion
         run: |
+          ./asn1/external/download.sh
           ./asn1/patches/patch.sh
           ${{ matrix.script }}
           if [[ ! -z "$(git status --porcelain)" ]]; then
