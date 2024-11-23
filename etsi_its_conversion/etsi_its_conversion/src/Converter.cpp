@@ -68,7 +68,7 @@ const std::string Converter::kOutputTopicDenm{"denm/out"};
 const std::string Converter::kInputTopicMapemTs{"mapem_ts/in"};
 const std::string Converter::kOutputTopicMapemTs{"mapem_ts/out"};
 const std::string Converter::kInputTopicSpatemTs{"spatem_ts/in"};
-const std::string Converter::kOutpubTopicSpatemTs{"spatem_ts/out"};
+const std::string Converter::kOutputTopicSpatemTs{"spatem_ts/out"};
 const std::string Converter::kInputTopicVamTs{"vam_ts/in"};
 const std::string Converter::kOutputTopicVamTs{"vam_ts/out"};
 #else

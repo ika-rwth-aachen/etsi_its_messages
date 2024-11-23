@@ -5,7 +5,7 @@ default:
   before_script:
     - apk update
     - apk add bash python3 py3-pip
-    - pip3 install -r ./utils/codegen/codegen-py/requirements.txt
+    - pip3 install -r ./utils/codegen/codegen-py/requirements.txt --break-system-packages
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - ./asn1/external/download.sh
     - ./asn1/patches/patch.sh
