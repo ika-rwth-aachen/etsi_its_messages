@@ -53,6 +53,8 @@ CartesianPosition3d shape_reference_point
 bool shape_reference_point_is_present
 
 SequenceOfCartesianPosition3d polygon
+uint8 POLYGON_MIN_SIZE = 3
+uint8 POLYGON_MAX_SIZE = 16
 
 StandardLength12b height
 bool height_is_present

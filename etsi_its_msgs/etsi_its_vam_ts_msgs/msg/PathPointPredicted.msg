@@ -64,10 +64,10 @@ PosConfidenceEllipse horizontal_position_confidence
 bool horizontal_position_confidence_is_present
 
 DeltaAltitude delta_altitude
-uint16 DEFAULT_DELTA_ALTITUDE = 12800
+uint16 DELTA_ALTITUDE_DEFAULT = 12800
 
 AltitudeConfidence altitude_confidence
-uint8 DEFAULT_ALTITUDE_CONFIDENCE = 15
+uint8 ALTITUDE_CONFIDENCE_DEFAULT = 15
 
 DeltaTimeTenthOfSecond path_delta_time
 

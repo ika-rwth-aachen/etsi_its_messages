@@ -570,7 +570,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                             asn1_value["value"] = default_tuple[1]
                             asn1_value["type"] = asn1_types[member["type"]]["type"]
                 default_value = asn1_value["value"]
-                default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
+                default_name = validRosField(f"{camel2SNAKE(member['name'])}_DEFAULT", is_const=True)
                 if asn1_value["type"] == 'INTEGER' or asn1_value["type"] == 'ENUMERATED':
                     default_type = simplestRosIntegerType(default_value, default_value)
                 else:
@@ -652,8 +652,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
             if "name" in asn1:
-                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
-                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
+                min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
                 "name": validRosField(min_size_constant_name, is_const=True),
@@ -663,6 +663,17 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 "type": ros_type,
                 "name": validRosField(max_size_constant_name, is_const=True),
                 "value": max_size
+            })
+        elif "size" in asn1 and isinstance(asn1["size"][0], int):
+            size = asn1["size"][0]
+            ros_type = simplestRosIntegerType(size, size)
+            size_constant_name = "SIZE"
+            if "name" in asn1:
+                size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(size_constant_name, is_const=True),
+                "value": size
             })
 
         context["members"].append(member_context)
@@ -708,8 +719,41 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             "t_name": type,
             "type": validRosType(type),
             "name": validRosField(camel2snake(name)),
-            "name_cc": validCField(name_cc)
+            "name_cc": validCField(name_cc),
+            "constants": []
         })
+
+        # handle size in custom types
+        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
+            min_size = asn1["size"][0][0]
+            max_size = asn1["size"][0][1]
+            ros_type = simplestRosIntegerType(min_size, max_size)
+            min_size_constant_name = "MIN_SIZE"
+            max_size_constant_name = "MAX_SIZE"
+            if "name" in asn1:
+                min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(min_size_constant_name, is_const=True),
+                "value": min_size
+            })
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(max_size_constant_name, is_const=True),
+                "value": max_size
+            })
+        elif "size" in asn1 and isinstance(asn1["size"][0], int):
+            size = asn1["size"][0]
+            ros_type = simplestRosIntegerType(size, size)
+            size_constant_name = "SIZE"
+            if "name" in asn1:
+                size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(size_constant_name, is_const=True),
+                "value": size
+            })
 
     elif type == "NULL":
 
