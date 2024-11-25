@@ -256,7 +256,7 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
             if "::=" in line:
                 comment_lines = []
                 for rline in reversed(lines[:line_idx]):
-                    if rline.strip().startswith("*/"):
+                    if rline.strip().endswith("*/"):
                         comment_lines.append(rline)
                     elif len(comment_lines) > 0:
                         comment_lines.append(rline)
