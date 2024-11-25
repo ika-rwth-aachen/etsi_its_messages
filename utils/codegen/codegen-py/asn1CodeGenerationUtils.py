@@ -270,16 +270,14 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     type = line.split("::=")[0].strip().split()[0]
                     if "}" in line or not ("{" in line or "}" in line):
                         raw_def = line
-                        asn1_raw[type] = raw_def
-                        asn1_raw[type] += "".join(comment_lines)
+                        asn1_raw[type] = "".join(comment_lines) + raw_def
                         raw_def = None
                     else:
                         raw_def = ""
             if raw_def is not None:
                 raw_def += line
                 if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
-                    asn1_raw[type] = raw_def
-                    asn1_raw[type] += "".join(comment_lines)
+                    asn1_raw[type] = "".join(comment_lines) + raw_def
                     raw_def = None
 
     asn1_docs = asn1tools.parse_files(files)
