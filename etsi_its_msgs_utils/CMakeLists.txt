@@ -68,7 +68,6 @@ if(${ROS_VERSION} EQUAL 2)
       geometry_msgs
       tf2_geometry_msgs
     )
-
   endif()
 
   ament_package(
@@ -111,7 +110,6 @@ elseif(${ROS_VERSION} EQUAL 1)
       target_include_directories(${PROJECT_NAME}-test PUBLIC test)
       target_link_libraries(${PROJECT_NAME}-test ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
     endif()
-
   endif()
 
 endif()

@@ -31,7 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_cam_msgs::access {
@@ -63,51 +62,6 @@ inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& acce
     accel.value = LongitudinalAccelerationValue::MIN;
   } else if (accel_val > LongitudinalAccelerationValue::MAX) {
     accel.value = LongitudinalAccelerationValue::MAX - 1;
-  /**
-   * @brief Set the ItsPduHeader-object for a CAM
-   *
-   * @param cam CAM-Message to set the ItsPduHeader
-   * @param station_id
-   * @param protocol_version
-   */
-  inline void setItsPduHeader(CAM& cam, const uint32_t station_id, const uint8_t protocol_version = 0) {
-    cdd::setItsPduHeader(cam.header, ItsPduHeader::MESSAGE_ID_CAM, station_id, protocol_version);
-  }
-
-  /**
-   * @brief Set the GenerationDeltaTime-Value
-   *
-   * @param generation_delta_time GenerationDeltaTime to set the GenerationDeltaTime-Value for
-   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
-   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
-   */
-  inline void setGenerationDeltaTime(GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
-    TimestampIts t_its;
-    cdd::setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
-    uint16_t gdt_value = t_its.value%65536;
-    etsi_its_msgs::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
-    generation_delta_time.value=gdt_value;
-  }
-
-  /**
-   * @brief Set the Generation Delta Time object
-   *
-   * @param cam CAM to set the GenerationDeltaTime-Value for
-   * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
-   * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
-   */
-  inline void setGenerationDeltaTime(CAM& cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
-    setGenerationDeltaTime(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);
-  }
-
-  /**
-   * @brief Set the StationType for a CAM
-   *
-   * @param cam CAM-Message to set the station_type value
-   * @param value station_type value to set
-   */
-  inline void setStationType(CAM& cam, const uint8_t value){
-    cdd::setStationType(cam.cam.cam_parameters.basic_container.station_type, value);
   }
 }
 
