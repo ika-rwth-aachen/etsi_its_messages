@@ -46,18 +46,14 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
+void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_") }}_t& in, {{ etsi_type}}_msgs::{{ t_name_camel }}& out) {
 {%- for member in members -%}
 {% if member.optional or member.default %}
   if (in.{{ member.name_cc }}) {
 {%- if member.is_primitive %}
     etsi_its_primitives_conversion::toRos_{{ member.asn1_type }}(*in.{{ member.name_cc }}, out.{{ member.name }});
 {%- else %}
-{%- if member.type|replace("[]", "") != "RegionalExtension" %}
     toRos_{{ member.type|replace("[]", "") }}(*in.{{ member.name_cc }}, out.{{ member.name }});
-{%- else %}
-    // TODO: toRos_{{ member.type|replace("[]", "") }}(*in.{{ member.name_cc }}, out.{{ member.name }});
-{%- endif %}
 {%- endif %}
 {%- if member.optional %}
     out.{{ member.name }}_is_present = true;
@@ -78,8 +74,8 @@ void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_")|
 {% endfor %}
 }
 
-void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type }}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t& out) {
-  memset(&out, 0, sizeof({{etsi_type}}_{{ t_name|replace("-", "_")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
+void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type }}_{{ t_name|replace("-", "_") }}_t& out) {
+  memset(&out, 0, sizeof({{etsi_type}}_{{ t_name|replace("-", "_") }}_t));
 {% for member in members -%}
 {% if member.optional %}
   if (in.{{ member.name }}_is_present) {
@@ -87,13 +83,8 @@ void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& 
     out.{{member.name_cc}} = ({{ member.asn1_type }}_t*) calloc(1, sizeof({{ member.asn1_type }}_t));
     etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- else %}
-{%- if member.type|replace("[]", "") != "RegionalExtension" %}
-    out.{{member.name_cc}} = ({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0")}}_t));
+    out.{{member.name_cc}} = ({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.t_name|replace("-", "_")|replace("[]", "")}}_t));
     toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, *out.{{member.name_cc}});
-{%- else %}
-    // TODO: toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, {{ member.name }});
-    // TODO: out.{{ member.name_cc }} = new {{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t({{ member.name }});
-{%- endif %}
 {%- endif %}
   }
 {%- elif member.default %}
@@ -101,7 +92,7 @@ void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& 
   out.{{member.name_cc}} = ({{ member.asn1_type }}_t*) calloc(1, sizeof({{ member.asn1_type }}_t));
   etsi_its_primitives_conversion::toStruct_{{ member.asn1_type }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- else %}
-  out.{{member.name_cc}} = ({{etsi_type}}_{{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t*) calloc(1, sizeof({{etsi_type}}_{{ member.type|replace("[]", "")|replace("RegionalExtension", "RegionalExtension_364P0") }}_t));
+  out.{{member.name_cc}} = ({{etsi_type}}_{{ member.type|replace("[]", "") }}_t*) calloc(1, sizeof({{etsi_type}}_{{ member.type|replace("[]", "") }}_t));
   toStruct_{{ member.type|replace("[]", "") }}(in.{{ member.name }}, *out.{{member.name_cc}});
 {%- endif %}
 {%- elif not member.is_choice_var %}
