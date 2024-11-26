@@ -63,6 +63,10 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 > [!NOTE]
 > Message types that are standardized as *European Norms (EN)* are available as, e.g., `etsi_its_cam_msgs`. New message types or revisions of existing message types that are only specified in *Technical Specifications (TS)* are available as, e.g., `etsi_its_cpm_ts_msgs`.
 
+> [!WARNING]
+> **Limitations**
+> - `RegionalExtension` (defined in [`ISO-TS-19091-addgrp-C-2018.asn`](https://standards.iso.org/iso/ts/19091/ed-2/en/ISO-TS-19091-addgrp-C-2018.asn)) is not covered in ROS-equivalents of MAPEM and SPATEM messages
+
 
 ## Packages
 
