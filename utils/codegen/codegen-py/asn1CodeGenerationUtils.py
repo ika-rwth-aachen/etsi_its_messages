@@ -22,8 +22,8 @@
 # SOFTWARE.
 # ==============================================================================
 
+import logging
 import re
-import warnings
 import sys
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
@@ -31,6 +31,11 @@ from typing import Dict, List, Optional, Tuple
 import git
 import asn1tools
 import numpy as np
+
+
+# color logging levels in output
+logging.addLevelName(logging.WARNING, "\033[1;33m%s\033[1;0m" % logging.getLevelName(logging.WARNING))
+logging.addLevelName(logging.ERROR, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
 
 
 GIT_REPO = git.Repo(search_parent_directories=True)
@@ -390,7 +395,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             # check if type is known
             if member["type"] not in known_types:
                 if ".&" in member["type"]:
-                    warnings.warn(
+                    logging.warning(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{t_name}' seems to relate to a 'CLASS' type, not "
                         f"yet supported")
@@ -414,7 +419,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     """
 
     if "components-of" in asn1: # TODO
-        warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
+        logging.warning(f"Handling of 'components-of' in '{t_name}' not yet supported")
         return { # generate in a way such that compilation will not succeed
             "asn1_definition": None,
             "comments": [],
@@ -647,7 +652,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         array_type = asn1['element']['type']
 
         if array_type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            logging.warning(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported")
             return None
 
         member_context = {
@@ -725,7 +730,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     elif type in asn1_types:
 
         if type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            logging.warning(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported")
             return None
 
         name_cc = asn1["name"] if "name" in asn1 else "value"
@@ -776,6 +781,6 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
 
     else:
 
-        warnings.warn(f"Cannot handle type '{type}'")
+        logging.warning(f"Cannot handle type '{type}'")
 
     return context
