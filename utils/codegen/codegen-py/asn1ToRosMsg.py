@@ -30,6 +30,7 @@ import os
 from typing import Dict, List
 
 import jinja2
+from tqdm import tqdm
 
 from asn1CodeGenerationUtils import *
 
@@ -42,12 +43,12 @@ def parseCli():
     """
 
     parser = argparse.ArgumentParser(
-        description="Creates ROS .msg files from ASN1 definitions.",
+        description="Creates ROS .msg files from ASN.1 definitions.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
+    parser.add_argument("files", type=str, nargs="+", help="ASN.1 files")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
-    parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
+    parser.add_argument("-t", "--type", type=str, required=True, help="ASN.1 type")
 
     args = parser.parse_args()
 
@@ -69,7 +70,7 @@ def loadJinjaTemplate() -> jinja2.environment.Template:
 
 
 def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_raw: Dict[str, str], jinja_template: jinja2.environment.Template) -> str:
-    """Converts parsed ASN1 type information to a ROS message file string.
+    """Converts parsed ASN.1 type information to a ROS message file string.
 
     Args:
         type_name (str): type name
@@ -200,25 +201,22 @@ def main():
 
     args = parseCli()
 
+    # parse ASN.1 files
+    print("Parsing ASN.1 files ...")
     asn1_docs, asn1_raw = parseAsn1Files(args.files)
-
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
     asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
-
     checkTypeMembersInAsn1(asn1_types)
 
+    # generate ROS .msg files
     jinja_template = loadJinjaTemplate()
-
-    for type_name, asn1_type in asn1_types.items():
-
+    for type_name, asn1_type in (pbar := tqdm(asn1_types.items(), desc="Generating ROS .msg files")):
+        pbar.set_postfix_str(type_name)
         ros_msg = asn1TypeToRosMsg(type_name, asn1_type, asn1_types, asn1_values, asn1_raw, jinja_template)
-
         exportRosMsg(ros_msg, type_name, args.output_dir)
 
-    # generate CMakelists.txt and remove all msg files that are not required
+    # generate CMakeLists.txt and remove all files that are not required for top-level message type
     msg_type = args.type.upper()
-
-    # handle special cases
     if args.type == "cpm_ts":
         msg_type = "CollectivePerceptionMessage"
     elif args.type == "cam_ts":
@@ -229,13 +227,15 @@ def main():
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
-
     msg_files = findDependenciesOfRosMessageType(os.path.join(args.output_dir, f"{msg_type}.msg"), [msg_type])
+    print("Generating CMakeLists.txt ...")
     generateCMakeLists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
-
+    print("Removing files not required for top-level message type ...")
     for f in glob.glob(os.path.join(args.output_dir, "*.msg")):
         if os.path.splitext(os.path.basename(f))[0] not in msg_files:
             os.remove(f)
+
+    print(f"Generated {len(msg_files)} ROS .msg files for {msg_type}")
 
 if __name__ == "__main__":
 
