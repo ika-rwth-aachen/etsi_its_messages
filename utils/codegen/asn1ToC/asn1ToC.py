@@ -24,6 +24,9 @@
 # SOFTWARE.
 # ==============================================================================
 
+from math import ceil
+from multiprocessing import Pool
+
 import argparse
 import glob
 import os
@@ -31,7 +34,6 @@ import re
 import shutil
 import subprocess
 import tempfile
-
 
 def parseCli():
     """Parses script's CLI arguments.
@@ -54,9 +56,20 @@ def parseCli():
 
     return args
 
+def process_file(args):
+    file, headers, prefix = args
+    with open(file, "r") as f:
+        contents = f.read()
+        for header in headers:
+            if re.search(r'^#include\s+"{}"'.format(header), contents, re.MULTILINE):
+                contents = re.sub(r'(^#include\s+")({}")'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
+            if re.search(r'^#include\s+<{}>'.format(header), contents, re.MULTILINE):
+                contents = re.sub(r'(^#include\s+<)({}>)'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
+    with open(file, "w") as f:
+        f.write(contents)
 
 def adjustIncludes(parent_path: str):
-
+    print("Start adjusting includes")
     prefix = os.path.basename(parent_path)
 
     header_files = [os.path.join(parent_path, "include", prefix, f) for f in os.listdir(os.path.join(parent_path, "include", prefix))]
@@ -65,18 +78,13 @@ def adjustIncludes(parent_path: str):
     source_files = [f for f in source_files if os.path.isfile(f)]
     headers = [os.path.basename(f) for f in header_files]
 
-    for file in [*header_files, *source_files]:
-        print(file)
-        with open(file, "r") as f:
-            contents = f.read()
-            for header in headers:
-                if re.search(r'^#include\s+"{}"'.format(header), contents, re.MULTILINE):
-                    contents = re.sub(r'(^#include\s+")({}")'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
-                if re.search(r'^#include\s+<{}>'.format(header), contents, re.MULTILINE):
-                    contents = re.sub(r'(^#include\s+<)({}>)'.format(re.escape(header)), r'\1{}/\2'.format(prefix), contents, flags=re.MULTILINE)
-        with open(file, "w") as f:
-            f.write(contents)
+    # Prepare arguments for parallel processing
+    files_to_process = [(file, headers, prefix) for file in [*header_files, *source_files]]
 
+    # Use multiprocessing to process files in parallel
+    with Pool() as pool:
+        pool = Pool(ceil(os.cpu_count()*0.8))
+        pool.map(process_file, files_to_process)
 
 def main():
 
