@@ -24,9 +24,6 @@
 # SOFTWARE.
 # ==============================================================================
 
-from math import ceil
-from multiprocessing import Pool
-
 import argparse
 import glob
 import os
@@ -34,6 +31,8 @@ import re
 import shutil
 import subprocess
 import tempfile
+from math import ceil
+from multiprocessing import Pool
 
 def parseCli():
     """Parses script's CLI arguments.
@@ -56,7 +55,16 @@ def parseCli():
 
     return args
 
-def process_file(args):
+def adjustIncludesInFile(args):
+    """
+    Adjusts the include statements in a file by adding a prefix to the included headers.
+
+    Args:
+        args (tuple): A tuple containing the file path, list of headers, and prefix.
+
+    Returns:
+        None
+    """
     file, headers, prefix = args
     with open(file, "r") as f:
         contents = f.read()
@@ -84,7 +92,7 @@ def adjustIncludes(parent_path: str):
     # Use multiprocessing to process files in parallel
     with Pool() as pool:
         pool = Pool(ceil(os.cpu_count()*0.8))
-        pool.map(process_file, files_to_process)
+        pool.map(adjustIncludesInFile, files_to_process)
 
 def main():
 
