@@ -2,9 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Download external dependencies",
+            "type": "shell",
+            "command": "./asn1/external/download.sh",
+            "problemMatcher": []
+        },
+        {
             "label": "Patch ASN.1 files",
             "type": "shell",
             "command": "./asn1/patches/patch.sh",
+            "dependsOn": ["Download external dependencies"],
             "problemMatcher": []
         }
     ]

@@ -63,7 +63,11 @@ pub fn to_ros_snake_case(input: &str) -> String {
             lowercase.push(c.to_ascii_lowercase());
         }
     }
-    lowercase
+    match lowercase.as_str() {
+        "long" => "lon".to_string(),
+        "class" => "cls".to_string(),
+        _ => lowercase
+    }
 }
 
 pub fn to_ros_const_case(input: &str) -> String {
@@ -72,7 +76,19 @@ pub fn to_ros_const_case(input: &str) -> String {
 
 pub fn to_ros_title_case(input: &str) -> String {
     if !input.is_empty() {
-        let input = input.replace('-', "");
+        // abc-def -> AbcDef
+        let input = input.split('-').enumerate().map(|(i, part)| {
+            if i == 0 {
+            part.to_string()
+            } else {
+            let mut c = part.chars();
+            match c.next() {
+                None => String::new(),
+                Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+            }
+            }
+        }).collect::<String>();
+        // abcDef -> AbcDef
         input[0..1].to_uppercase() + &input[1..]
     } else {
         input.to_string()

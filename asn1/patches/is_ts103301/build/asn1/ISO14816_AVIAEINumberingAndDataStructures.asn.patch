@@ -1,0 +1,22 @@
+diff --git a/ISO14816_AVIAEINumberingAndDataStructures.asn b/ISO14816_AVIAEINumberingAndDataStructures.asn
+index 88d0ad1..22f2e4c 100644
+--- a/ISO14816_AVIAEINumberingAndDataStructures.asn
++++ b/ISO14816_AVIAEINumberingAndDataStructures.asn
+@@ -79,8 +79,8 @@ ServiceNumber::= BIT STRING (SIZE(32))(CONTAINING INTEGER (0..4294967295))
+ TaxCode::= OCTET STRING
+ 
+ AlphabetIndicator::= INTEGER {
+-	latinAlphabetNo1		(0), -- encoded as 00 00 00’B
+-	latinAlphabetNo2		(1), -- encoded as 00 00 01’B etc
++	latinAlphabetNo1		(0), -- encoded as 00 00 00 B
++	latinAlphabetNo2		(1), -- encoded as 00 00 01 B etc
+ 	latinAlphabetNo3		(2),
+ 	latinAlphabetNo4		(3),
+ 	latinCyrillicAlphabet	(4),
+@@ -127,4 +127,4 @@ END
+ /*
+    The ASN.1 specification has been checked for conformance to the ASN.1
+    standards by OSS ASN.1 Studio
+-*/
+\ No newline at end of file
++*/

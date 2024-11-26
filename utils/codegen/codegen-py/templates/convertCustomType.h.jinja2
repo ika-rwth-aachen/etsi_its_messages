@@ -26,7 +26,7 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_{{ etsi_type }}_coding/{{ t_name }}.h>
+#include <etsi_its_{{ etsi_type }}_coding/{{ etsi_type }}_{{ t_name }}.h>
 {% for member in members -%}
 #include <etsi_its_{{ etsi_type }}_conversion/convert{{ member.type }}.h>
 {% endfor -%}
@@ -38,20 +38,21 @@ namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs;
 namespace {{ etsi_type }}_msgs = etsi_its_{{ etsi_type }}_msgs::msg;
 #endif
 
+
 namespace etsi_its_{{ etsi_type }}_conversion {
 
-void toRos_{{ t_name }}(const {{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
-{% for member in members %}
+void toRos_{{ t_name }}(const {{ etsi_type }}_{{ t_name }}_t& in, {{ etsi_type}}_msgs::{{ t_name }}& out) {
+{%- for member in members %}
   toRos_{{ member.type }}(in, out.{{ member.name_cc }});
 {% endfor -%}
 }
 
-void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ t_name }}_t& out) {
-
-  memset(&out, 0, sizeof({{ t_name }}_t));
-{%- for member in members %}
+void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ etsi_type }}_{{ t_name }}_t& out) {
+  memset(&out, 0, sizeof({{ etsi_type}}_{{ t_name }}_t));
+{% for member in members %}
   toStruct_{{ member.type }}(in.{{ member.name }}, out);
 {% endfor -%}
 }
 
 }
+

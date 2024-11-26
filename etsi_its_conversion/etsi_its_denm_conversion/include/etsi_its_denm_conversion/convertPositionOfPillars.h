@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_denm_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_denm_coding/denm_PositionOfPillars.h>
+#include <etsi_its_denm_coding/denm_PosPillar.h>
 #include <etsi_its_denm_conversion/convertPosPillar.h>
-#include <etsi_its_denm_conversion/convertPositionOfPillars.h>
 #ifdef ROS1
+#include <etsi_its_denm_msgs/PosPillar.h>
 #include <etsi_its_denm_msgs/PositionOfPillars.h>
 namespace denm_msgs = etsi_its_denm_msgs;
 #else
+#include <etsi_its_denm_msgs/msg/pos_pillar.hpp>
 #include <etsi_its_denm_msgs/msg/position_of_pillars.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #endif

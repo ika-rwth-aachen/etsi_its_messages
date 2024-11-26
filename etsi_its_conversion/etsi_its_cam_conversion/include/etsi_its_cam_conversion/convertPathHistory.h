@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_cam_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cam_coding/cam_PathHistory.h>
-#include <etsi_its_cam_conversion/convertPathHistory.h>
+#include <etsi_its_cam_coding/cam_PathPoint.h>
 #include <etsi_its_cam_conversion/convertPathPoint.h>
 #ifdef ROS1
+#include <etsi_its_cam_msgs/PathPoint.h>
 #include <etsi_its_cam_msgs/PathHistory.h>
 namespace cam_msgs = etsi_its_cam_msgs;
 #else
+#include <etsi_its_cam_msgs/msg/path_point.hpp>
 #include <etsi_its_cam_msgs/msg/path_history.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 #endif

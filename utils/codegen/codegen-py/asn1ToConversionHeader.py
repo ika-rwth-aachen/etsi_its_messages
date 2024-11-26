@@ -25,8 +25,9 @@
 # ==============================================================================
 
 import argparse
+import glob
 import os
-from typing import Dict
+from typing import Dict, List
 
 import jinja2
 
@@ -107,6 +108,15 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
 
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
+    
+    # add a dict entry for unique and sorted members (used for includes)
+    seen = set()
+    unique_sorted_members = []
+    for member in jinja_context["members"]:
+        if "t_name" in member and member["t_name"] not in seen:
+            unique_sorted_members.append(member)
+            seen.add(member["t_name"])      
+    jinja_context["unique_sorted_members"] = sorted(unique_sorted_members, key=lambda member: member["t_name"])       
 
     # render jinja template with context
     header = jinja_template.render(jinja_context)
@@ -132,8 +142,26 @@ def exportConversionHeader(header: str, type_name: str, output_dir: str):
     filename = os.path.join(output_dir, f"convert{validRosType(type_name)}.h")
     with open(filename, "w", encoding="utf-8") as file:
         file.write(header)
-    print(filename)
 
+def findDependenciesOfConversionHeaders(parent_file_path: str, type: str, file_list: List[str] = []) -> List[str]:
+    # duplicate list to avoid modifying the original list
+    new_file_list = file_list.copy()
+
+    # load contents of conversion file
+    with open(parent_file_path, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            
+            if line.startswith(f"#include <etsi_its_{type}_conversion/convert"):
+                msg_type = line.split("/")[1].split(".")[0]
+                if msg_type not in new_file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.h"):
+                    new_file_list.append(msg_type)
+                    new_file_list = findDependenciesOfConversionHeaders(f"{os.path.dirname(parent_file_path)}/{msg_type}.h", type, new_file_list)
+    
+    # make sure there are no duplicates and sort alphabetically
+    new_file_list = sorted(list(set(new_file_list)))
+    
+    return new_file_list
 
 def main():
 
@@ -154,6 +182,26 @@ def main():
 
         exportConversionHeader(header, type_name, args.output_dir)
 
+    ## remove all conversion files that are not required
+    msg_type = args.type.upper()
+    
+    # handle special cases
+    if args.type == "cpm_ts":
+        msg_type = "CollectivePerceptionMessage"
+    elif args.type == "cam_ts":
+        msg_type = "CAM"
+    elif args.type == "mapem_ts":
+        msg_type = "MAPEM"
+    elif args.type == "spatem_ts":
+        msg_type = "SPATEM"
+    elif args.type == "vam_ts":
+        msg_type = "VAM"
+
+    header_files = findDependenciesOfConversionHeaders(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, [f"convert{msg_type}"])
+
+    for f in glob.glob(os.path.join(args.output_dir, "*.h")):
+        if os.path.splitext(os.path.basename(f))[0] not in header_files:
+            os.remove(f)
 
 if __name__ == "__main__":
 

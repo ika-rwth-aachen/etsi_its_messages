@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -40,6 +39,7 @@
 # 	...
 # }
 # ------------------------------------------------------------------------------
+
 ActionID action_id
 
 TimestampIts detection_time
@@ -58,11 +58,10 @@ RelevanceTrafficDirection relevance_traffic_direction
 bool relevance_traffic_direction_is_present
 
 ValidityDuration validity_duration
+uint16 VALIDITY_DURATION_DEFAULT = 600
 
 TransmissionInterval transmission_interval
 bool transmission_interval_is_present
 
 StationType station_type
 
-
-uint32 VALIDITY_DURATION_DEFAULT = 600

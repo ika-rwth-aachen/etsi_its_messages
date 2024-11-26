@@ -17,8 +17,10 @@
 
   <depend>etsi_its_cam_coding</depend>
   <depend>etsi_its_cam_ts_coding</depend>
-  <depend>etsi_its_denm_coding</depend>
   <depend>etsi_its_cpm_ts_coding</depend>
+  <depend>etsi_its_denm_coding</depend>
+  <depend>etsi_its_mapem_ts_coding</depend>
+  <depend>etsi_its_spatem_ts_coding</depend>
   <depend>etsi_its_vam_ts_coding</depend>
   <depend>ros_environment</depend>
 

@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,14 +29,14 @@ SOFTWARE.
 #include <etsi_its_denm_coding/denm_DangerousGoodsExtended.h>
 #include <etsi_its_denm_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
+#include <etsi_its_denm_conversion/convertDangerousGoodsBasic.h>
 #include <etsi_its_denm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
+#include <etsi_its_denm_conversion/convertPhoneNumber.h>
 #include <etsi_its_denm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
-#include <etsi_its_denm_conversion/convertDangerousGoodsBasic.h>
-#include <etsi_its_denm_conversion/convertPhoneNumber.h>
 #ifdef ROS1
 #include <etsi_its_denm_msgs/DangerousGoodsExtended.h>
 namespace denm_msgs = etsi_its_denm_msgs;

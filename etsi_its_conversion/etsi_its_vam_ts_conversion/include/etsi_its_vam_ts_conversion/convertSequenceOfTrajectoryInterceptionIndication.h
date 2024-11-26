@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_vam_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_vam_ts_coding/vam_ts_SequenceOfTrajectoryInterceptionIndication.h>
-#include <etsi_its_vam_ts_conversion/convertSequenceOfTrajectoryInterceptionIndication.h>
+#include <etsi_its_vam_ts_coding/vam_ts_TrajectoryInterceptionIndication.h>
 #include <etsi_its_vam_ts_conversion/convertTrajectoryInterceptionIndication.h>
 #ifdef ROS1
+#include <etsi_its_vam_ts_msgs/TrajectoryInterceptionIndication.h>
 #include <etsi_its_vam_ts_msgs/SequenceOfTrajectoryInterceptionIndication.h>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
+#include <etsi_its_vam_ts_msgs/msg/trajectory_interception_indication.hpp>
 #include <etsi_its_vam_ts_msgs/msg/sequence_of_trajectory_interception_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif

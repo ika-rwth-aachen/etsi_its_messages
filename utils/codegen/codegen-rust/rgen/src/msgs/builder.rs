@@ -7,7 +7,7 @@ use crate::common::*;
 use crate::msgs::Msgs;
 use crate::msgs::template::*;
 
-pub(crate) const INNER_ARRAY_LIKE_PREFIX: &str = "Anonymous_";
+pub(crate) const INNER_ARRAY_LIKE_PREFIX: &str = "Anonymous_"; // TODO: what does this influence?
 
 macro_rules! call_template {
     ($self:ident, $fn:ident, $tld:ident, $($args:expr),*) => {
@@ -77,7 +77,7 @@ impl Msgs {
     }
 
     pub fn generate_tld(&self, tld: ToplevelDefinition) -> Result<String, GeneratorError> {
-        match tld {
+        let result = match tld {
             ToplevelDefinition::Type(t) => {
                 if t.parameterization.is_some() {
                     return Ok("".into());
@@ -116,7 +116,8 @@ impl Msgs {
                 ASN1Information::ObjectSet(_) => self.generate_information_object_set(i),
                 _ => Ok("".into()),
             },
-        }
+        }?;
+        Ok(format!("</typedef><typedef>\n{}\n</typedef>", result)) // leading closing tags helps with inner types
     }
 
     pub fn generate_typealias(
@@ -661,8 +662,9 @@ impl Msgs {
                     format!("{type_id} {}", to_ros_snake_case(variant_name))
                 });
 
+                let field_enum_type_name = to_ros_title_case(&field_enum_name);
                 field_enums.push(format!(
-                    "## OPEN-TYPE {field_enum_name}\n{class_unique_id_type_name} choice\n{}",
+                    "<typename>OPEN-TYPE {field_enum_type_name}</typename>\n{class_unique_id_type_name} choice\n{}",
                     variants.fold("".to_string(), |mut acc, v| {
                         acc.push_str(&v);
                         acc.push_str("\n");

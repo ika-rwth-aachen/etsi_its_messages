@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,25 +42,25 @@ namespace etsi_its_denm_conversion {
 
 void toRos_VehicleIdentification(const denm_VehicleIdentification_t& in, denm_msgs::VehicleIdentification& out) {
   if (in.wMInumber) {
-    toRos_WMInumber(*in.wMInumber, out.w_m_inumber);
-    out.w_m_inumber_is_present = true;
+    toRos_WMInumber(*in.wMInumber, out.wm_inumber);
+    out.wm_inumber_is_present = true;
   }
   if (in.vDS) {
-    toRos_VDS(*in.vDS, out.v_ds);
-    out.v_ds_is_present = true;
+    toRos_VDS(*in.vDS, out.vds);
+    out.vds_is_present = true;
   }
 }
 
 void toStruct_VehicleIdentification(const denm_msgs::VehicleIdentification& in, denm_VehicleIdentification_t& out) {
   memset(&out, 0, sizeof(denm_VehicleIdentification_t));
 
-  if (in.w_m_inumber_is_present) {
+  if (in.wm_inumber_is_present) {
     out.wMInumber = (denm_WMInumber_t*) calloc(1, sizeof(denm_WMInumber_t));
-    toStruct_WMInumber(in.w_m_inumber, *out.wMInumber);
+    toStruct_WMInumber(in.wm_inumber, *out.wMInumber);
   }
-  if (in.v_ds_is_present) {
+  if (in.vds_is_present) {
     out.vDS = (denm_VDS_t*) calloc(1, sizeof(denm_VDS_t));
-    toStruct_VDS(in.v_ds, *out.vDS);
+    toStruct_VDS(in.vds, *out.vDS);
   }
 }
 

@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,3 +35,4 @@ uint8 EQUAL_OR_WITHIN_ZERO_POINT_ONE_DEGREE = 1
 uint8 EQUAL_OR_WITHIN_ONE_DEGREE = 10
 uint8 OUT_OF_RANGE = 126
 uint8 UNAVAILABLE = 127
+

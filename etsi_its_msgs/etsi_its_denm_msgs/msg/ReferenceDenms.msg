@@ -2,7 +2,6 @@
 # MIT License
 #
 # Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-# Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,5 +29,6 @@
 # ------------------------------------------------------------------------------
 
 ActionID[] array
-int64 MIN_SIZE = 1
-int64 MAX_SIZE = 8
+uint8 MIN_SIZE = 1
+uint8 MAX_SIZE = 8
+

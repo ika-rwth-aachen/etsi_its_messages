@@ -158,7 +158,7 @@ impl Conversion {
             ASN1Type::Integer(i) => (i.constraints.clone(), "INTEGER".into()),
             ASN1Type::Real(_) => (vec![], "float64".into()),
             ASN1Type::ObjectIdentifier(_o) => todo!(),
-            ASN1Type::BitString(_b) => todo!(),
+            ASN1Type::BitString(b) => (b.constraints.clone(), "uint8[]".into()),
             ASN1Type::OctetString(o) => (o.constraints.clone(), "uint8[]".into()),
             ASN1Type::GeneralizedTime(_o) => todo!(),
             ASN1Type::UTCTime(_o) => todo!(),

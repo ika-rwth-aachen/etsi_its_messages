@@ -61,7 +61,7 @@ def camel2SNAKE(s: str) -> str:
     ss = ss.upper().lstrip("_").replace("-", "_").replace("__", "_")
 
     # EXAMPLE_STRING_WITH_NUMBER123 -> EXAMPLE_STRING_WITH_NUMBER_123
-    ss = re.sub("([A-Z])([0-9])", r"\1_\2", ss)
+    # ss = re.sub("([A-Z])([0-9])", r"\1_\2", ss)
 
     # special cases
     ss = ss.replace("C_A_M", "CAM")
@@ -96,7 +96,7 @@ def camel2snake(s: str) -> str:
     ss = ss.lower().lstrip("_").replace("-", "_").replace("__", "_")
 
     # example_string_with_number123 -> example_string_with_number_123
-    ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
+    # ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
 
     # special cases
     ss = ss.replace("c_a_m", "cam")
@@ -105,6 +105,7 @@ def camel2snake(s: str) -> str:
     ss = ss.replace("s_p_a_t", "spat")
     ss = ss.replace("m_a_p_e_m", "mapem")
     ss = ss.replace("m_a_p", "map")
+    ss = ss.replace("v_a_m", "vam")
     ss = ss.replace("d_s_r_c", "dsrc")
     ss = ss.replace("r_s_u", "rsu")
     ss = ss.replace("w_m_i", "wmi")
@@ -251,8 +252,17 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
         with open(file) as f:
             lines = f.readlines()
         raw_def = None
-        for line in lines:
+        for line_idx, line in enumerate(lines):
             if "::=" in line:
+                comment_lines = []
+                for rline in reversed(lines[:line_idx]):
+                    if rline.strip().endswith("*/"):
+                        comment_lines.append(rline)
+                    elif len(comment_lines) > 0:
+                        comment_lines.append(rline)
+                    if rline.strip().startswith("/**"):
+                        comment_lines = reversed(comment_lines)
+                        break
                 if line.rstrip().endswith("{"):
                     type = line.split("::=")[0].split("{")[0].strip().split()[0]
                     raw_def = ""
@@ -260,14 +270,14 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     type = line.split("::=")[0].strip().split()[0]
                     if "}" in line or not ("{" in line or "}" in line):
                         raw_def = line
-                        asn1_raw[type] = raw_def
+                        asn1_raw[type] = "".join(comment_lines) + raw_def
                         raw_def = None
                     else:
                         raw_def = ""
             if raw_def is not None:
                 raw_def += line
                 if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
-                    asn1_raw[type] = raw_def
+                    asn1_raw[type] = "".join(comment_lines) + raw_def
                     raw_def = None
 
     asn1_docs = asn1tools.parse_files(files)
@@ -365,6 +375,9 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             if member is None:
                 continue
 
+            if "components-of" in member:
+                member["type"] = member["components-of"]
+
             # check if type is known
             if member["type"] not in known_types:
                 if ".&" in member["type"]:
@@ -390,7 +403,22 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     Returns:
         Dict: jinja context
     """
-
+    
+    if "components-of" in asn1: # TODO
+        warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
+        return { # generate in a way such that compilation will not succeed
+            "asn1_definition": None,
+            "comments": [],
+            "etsi_type": None,
+            "members": [{"t_name": t_name, "type": "TODO: components-of", "name": "is not yet supported", "name_cc": "is not yet supported"}],
+            "t_name": t_name,
+            "t_name_camel": noDash(t_name),
+            "t_name_snake": camel2snake(t_name),
+            "type": "components-of",
+            "asn1_type": "components-of",
+            "is_primitive": False,
+        }
+        
     type = asn1["type"]
 
     context = {
@@ -428,6 +456,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         member_context = {
             "type": ros_type,
             "asn1_type": type,
+            "t_name": type,
             "name": validRosField(camel2snake(name)),
             "name_cc": validCField(name),
             "constants": [],
@@ -524,22 +553,33 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if member is None:
                 continue
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            if member_context is None:
+                continue
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
+                asn1_value = {}
                 if member["default"] in asn1_values:
                     asn1_value = asn1_values[member["default"]]
-                    default_value = asn1_value["value"]
-                    default_name = validRosField(f"DEFAULT_{camel2SNAKE(member['name'])}", is_const=True)
-                    if asn1_value["type"] == 'INTEGER':
-                        default_type = simplestRosIntegerType(default_value, default_value)
-                    else:
-                        default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
-                    member_context["members"][0]["default"] = {
-                        "type": default_type,
-                        "name": default_name,
-                        "value": default_value
-                    }
+                elif "named-numbers" in asn1_types[member["type"]] and member["default"] in asn1_types[member["type"]]["named-numbers"]:
+                    asn1_value["value"] = asn1_types[member["type"]]["named-numbers"][member["default"]]
+                    asn1_value["type"] = asn1_types[member["type"]]["type"]
+                elif asn1_types[member["type"]]["type"] == "ENUMERATED":
+                    for default_tuple in asn1_types[member["type"]]["values"]:
+                        if default_tuple[0] == member["default"]:
+                            asn1_value["value"] = default_tuple[1]
+                            asn1_value["type"] = asn1_types[member["type"]]["type"]
+                default_value = asn1_value["value"]
+                default_name = validRosField(f"{camel2SNAKE(member['name'])}_DEFAULT", is_const=True)
+                if asn1_value["type"] == 'INTEGER' or asn1_value["type"] == 'ENUMERATED':
+                    default_type = simplestRosIntegerType(default_value, default_value)
+                else:
+                    default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
+                member_context["members"][0]["default"] = {
+                    "type": default_type,
+                    "name": default_name,
+                    "value": default_value
+                }
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
@@ -564,6 +604,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             if "name" in asn1:
                 member_name = validRosField(f"CHOICE_{camel2SNAKE(asn1['name'])}_{camel2SNAKE(member['name'])}", is_const=True)
             member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            if member_context is None:
+                continue
             if len(member_context["members"]) > 0:
                 if "name" in asn1:
                     member_context["members"][0]["choice_name"] = validCField(asn1["name"])
@@ -588,6 +630,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         # add field for array
         array_name = asn1["name"] if "name" in asn1 else "array"
         array_type = asn1['element']['type']
+
+        if array_type == "RegionalExtension":
+            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            return None
+
         member_context = {
             "t_name": array_type,
             "type": f"{array_type}[]",
@@ -605,8 +652,8 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
             if "name" in asn1:
-                min_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
-                max_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
+                min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
             member_context["constants"].append({
                 "type": ros_type,
                 "name": validRosField(min_size_constant_name, is_const=True),
@@ -616,6 +663,17 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 "type": ros_type,
                 "name": validRosField(max_size_constant_name, is_const=True),
                 "value": max_size
+            })
+        elif "size" in asn1 and isinstance(asn1["size"][0], int):
+            size = asn1["size"][0]
+            ros_type = simplestRosIntegerType(size, size)
+            size_constant_name = "SIZE"
+            if "name" in asn1:
+                size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
+            member_context["constants"].append({
+                "type": ros_type,
+                "name": validRosField(size_constant_name, is_const=True),
+                "value": size
             })
 
         context["members"].append(member_context)
@@ -650,6 +708,10 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
 
     # custom types
     elif type in asn1_types:
+        
+        if type == "RegionalExtension":
+            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            return None
 
         name_cc = asn1["name"] if "name" in asn1 else "value"
         name = camel2snake(name_cc)
@@ -657,8 +719,41 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             "t_name": type,
             "type": validRosType(type),
             "name": validRosField(camel2snake(name)),
-            "name_cc": validCField(name_cc)
+            "name_cc": validCField(name_cc),
+            "constants": []
         })
+
+        # handle size in custom types
+        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
+            min_size = asn1["size"][0][0]
+            max_size = asn1["size"][0][1]
+            ros_type = simplestRosIntegerType(min_size, max_size)
+            min_size_constant_name = "MIN_SIZE"
+            max_size_constant_name = "MAX_SIZE"
+            if "name" in asn1:
+                min_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{max_size_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(min_size_constant_name, is_const=True),
+                "value": min_size
+            })
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(max_size_constant_name, is_const=True),
+                "value": max_size
+            })
+        elif "size" in asn1 and isinstance(asn1["size"][0], int):
+            size = asn1["size"][0]
+            ros_type = simplestRosIntegerType(size, size)
+            size_constant_name = "SIZE"
+            if "name" in asn1:
+                size_constant_name = validRosField(f"{camel2SNAKE(asn1['name'])}_{size_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "type": ros_type,
+                "name": validRosField(size_constant_name, is_const=True),
+                "value": size
+            })
 
     elif type == "NULL":
 
