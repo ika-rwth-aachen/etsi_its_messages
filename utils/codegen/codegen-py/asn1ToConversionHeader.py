@@ -108,7 +108,6 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
 
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
-
     
     # add a dict entry for unique and sorted members (used for includes)
     seen = set()

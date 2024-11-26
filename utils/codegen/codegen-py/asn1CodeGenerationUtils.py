@@ -261,7 +261,7 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                     elif len(comment_lines) > 0:
                         comment_lines.append(rline)
                     if rline.strip().startswith("/**"):
-                        comment_lines = list(reversed(comment_lines)) # TODO: only to keep diff to rgen small
+                        comment_lines = reversed(comment_lines)
                         break
                 if line.rstrip().endswith("{"):
                     type = line.split("::=")[0].split("{")[0].strip().split()[0]
@@ -406,7 +406,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     
     if "components-of" in asn1: # TODO
         warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
-        return {
+        return { # generate in a way such that compilation will not succeed
             "asn1_definition": None,
             "comments": [],
             "etsi_type": None,
@@ -559,9 +559,9 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 member_context["members"][0]["optional"] = True
             if "default" in member:
                 asn1_value = {}
-                if member["default"] in asn1_values: # DENM
+                if member["default"] in asn1_values:
                     asn1_value = asn1_values[member["default"]]
-                elif "named-numbers" in asn1_types[member["type"]] and member["default"] in asn1_types[member["type"]]["named-numbers"]: # VAM TS
+                elif "named-numbers" in asn1_types[member["type"]] and member["default"] in asn1_types[member["type"]]["named-numbers"]:
                     asn1_value["value"] = asn1_types[member["type"]]["named-numbers"][member["default"]]
                     asn1_value["type"] = asn1_types[member["type"]]["type"]
                 elif asn1_types[member["type"]]["type"] == "ENUMERATED":
