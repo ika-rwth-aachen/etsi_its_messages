@@ -122,6 +122,12 @@ def main():
 
     adjustIncludes(output_dir)
 
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    patch_file = os.path.join(script_dir, f"patches/{args.type}.patch")
+    if os.path.exists(patch_file):
+        subprocess.run(["git", "apply", patch_file], check=True)
+
+    print("Successfully generated header and source files with asn1c.")
 
 if __name__ == "__main__":
 

@@ -1,0 +1,83 @@
+diff --git a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h
+index 80474765..daa530dc 100644
+--- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h
++++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h
+@@ -5,17 +5,17 @@
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  */
+ 
++/* Including external dependencies */
++#include "etsi_its_mapem_ts_coding/mapem_ts_NodeSetXY.h"
++#include "etsi_its_mapem_ts_coding/mapem_ts_LaneConnectionID.h"
++#include <etsi_its_mapem_ts_coding/constr_SEQUENCE.h>
++
+ #ifndef	_mapem_ts_ConnectionTrajectory_addGrpC_H_
+ #define	_mapem_ts_ConnectionTrajectory_addGrpC_H_
+ 
+ 
+ #include <etsi_its_mapem_ts_coding/asn_application.h>
+ 
+-/* Including external dependencies */
+-#include "etsi_its_mapem_ts_coding/mapem_ts_NodeSetXY.h"
+-#include "etsi_its_mapem_ts_coding/mapem_ts_LaneConnectionID.h"
+-#include <etsi_its_mapem_ts_coding/constr_SEQUENCE.h>
+-
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+diff --git a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h
+index 48c03456..e9469531 100644
+--- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h
++++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h
+@@ -5,11 +5,6 @@
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  */
+ 
+-#ifndef	_mapem_ts_NodeOffsetPointXY_H_
+-#define	_mapem_ts_NodeOffsetPointXY_H_
+-
+-
+-#include <etsi_its_mapem_ts_coding/asn_application.h>
+ 
+ /* Including external dependencies */
+ #include "etsi_its_mapem_ts_coding/mapem_ts_Node-XY-20b.h"
+@@ -21,6 +16,11 @@
+ #include "etsi_its_mapem_ts_coding/mapem_ts_Node-LLmD-64b.h"
+ #include "etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h"
+ #include <etsi_its_mapem_ts_coding/constr_CHOICE.h>
++#ifndef	_mapem_ts_NodeOffsetPointXY_H_
++#define	_mapem_ts_NodeOffsetPointXY_H_
++
++
++#include <etsi_its_mapem_ts_coding/asn_application.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff --git a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h
+index b5758b2d..f61d8c18 100644
+--- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h
++++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h
+@@ -5,11 +5,6 @@
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  */
+ 
+-#ifndef	_mapem_ts_RegionalExtension_H_
+-#define	_mapem_ts_RegionalExtension_H_
+-
+-
+-#include <etsi_its_mapem_ts_coding/asn_application.h>
+ 
+ /* Including external dependencies */
+ #include "etsi_its_mapem_ts_coding/mapem_ts_RegionId.h"
+@@ -29,6 +24,11 @@
+ #include "etsi_its_mapem_ts_coding/mapem_ts_RequestorDescription-addGrpC.h"
+ #include "etsi_its_mapem_ts_coding/mapem_ts_RestrictionUserType-addGrpC.h"
+ #include "etsi_its_mapem_ts_coding/mapem_ts_SignalStatusPackage-addGrpC.h"
++#ifndef	_mapem_ts_RegionalExtension_H_
++#define	_mapem_ts_RegionalExtension_H_
++
++
++#include <etsi_its_mapem_ts_coding/asn_application.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
