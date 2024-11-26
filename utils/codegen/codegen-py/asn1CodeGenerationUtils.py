@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # ==============================================================================
 # MIT License
 #
@@ -26,10 +24,21 @@
 
 import re
 import warnings
+import sys
+from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
+import git
 import asn1tools
 import numpy as np
+
+
+GIT_REPO = git.Repo(search_parent_directories=True)
+AUTO_GENERATE_COMMAND = "python3 " + " ".join(sys.argv)
+AUTO_GENERATE_DATE = datetime.now().replace(microsecond=0).isoformat()
+AUTO_GENERATE_COMMIT = GIT_REPO.head.object.hexsha
+if GIT_REPO.is_dirty():
+    AUTO_GENERATE_COMMIT += "-dirty"
 
 
 ASN1_PRIMITIVES_2_ROS = {
@@ -403,7 +412,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
     Returns:
         Dict: jinja context
     """
-    
+
     if "components-of" in asn1: # TODO
         warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
         return { # generate in a way such that compilation will not succeed
@@ -417,8 +426,11 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             "type": "components-of",
             "asn1_type": "components-of",
             "is_primitive": False,
+            "auto_generate_command": AUTO_GENERATE_COMMAND,
+            "auto_generate_date": AUTO_GENERATE_DATE,
+            "auto_generate_commit": AUTO_GENERATE_COMMIT,
         }
-        
+
     type = asn1["type"]
 
     context = {
@@ -432,6 +444,9 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         "type": noSpace(type),
         "asn1_type": type,
         "is_primitive": False,
+        "auto_generate_command": AUTO_GENERATE_COMMAND,
+        "auto_generate_date": AUTO_GENERATE_DATE,
+        "auto_generate_commit": AUTO_GENERATE_COMMIT,
     }
 
     # extra information / asn1 fields that are not processed as comments
@@ -708,7 +723,7 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
 
     # custom types
     elif type in asn1_types:
-        
+
         if type == "RegionalExtension":
             warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
             return None
