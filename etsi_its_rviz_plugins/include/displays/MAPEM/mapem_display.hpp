@@ -24,8 +24,8 @@ SOFTWARE.
 
 #pragma once
 
-#include "etsi_its_mapem_msgs/msg/mapem.hpp"
-#include "etsi_its_spatem_msgs/msg/spatem.hpp"
+#include "etsi_its_mapem_ts_msgs/msg/mapem.hpp"
+#include "etsi_its_spatem_ts_msgs/msg/spatem.hpp"
 
 #include "displays/MAPEM/intersection_render_object.hpp"
 
@@ -59,10 +59,10 @@ namespace displays
 
 /**
  * @class MAPEMDisplay
- * @brief Displays an etsi_its_mapem_msgs::MAPEM
+ * @brief Displays an etsi_its_mapem_ts_msgs::MAPEM
  */
 class MAPEMDisplay : public
-  rviz_common::RosTopicDisplay<etsi_its_mapem_msgs::msg::MAPEM>
+  rviz_common::RosTopicDisplay<etsi_its_mapem_ts_msgs::msg::MAPEM>
 {
   Q_OBJECT
 
@@ -79,14 +79,14 @@ protected Q_SLOTS:
   void changedSPATEMTopic();
 
 protected:
-  void processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg) override;
+  void processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstSharedPtr msg) override;
   void update(float wall_dt, float ros_dt) override;
-  void SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg);
+  void SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSharedPtr msg);
 
   Ogre::ManualObject *manual_object_;
 
   rclcpp::Node::SharedPtr rviz_node_;
-  rclcpp::Subscription<etsi_its_spatem_msgs::msg::SPATEM>::SharedPtr spatem_subscriber_;
+  rclcpp::Subscription<etsi_its_spatem_ts_msgs::msg::SPATEM>::SharedPtr spatem_subscriber_;
   rclcpp::QoS spatem_qos_profile_ = rclcpp::QoS(1);
 
   // Properties

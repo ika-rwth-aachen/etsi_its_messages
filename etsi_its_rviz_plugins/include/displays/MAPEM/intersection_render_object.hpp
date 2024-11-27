@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ============================================================================= */
 
-#include "etsi_its_mapem_msgs/msg/mapem.hpp"
-#include "etsi_its_spatem_msgs/msg/spatem.hpp"
+#include "etsi_its_mapem_ts_msgs/msg/mapem.hpp"
+#include "etsi_its_spatem_ts_msgs/msg/spatem.hpp"
 #include <geometry_msgs/msg/point.hpp>
 #include <std_msgs/msg/header.hpp>
 
@@ -52,7 +52,7 @@ typedef struct IntersectionLane {
 typedef struct IntersectionMovementState {
   std_msgs::msg::Header header;
   uint8_t signal_group_id;
-  etsi_its_spatem_msgs::msg::MovementPhaseState phase_state;
+  etsi_its_spatem_ts_msgs::msg::MovementPhaseState phase_state;
 } IntersectionMovementState;
 
 /**
@@ -62,7 +62,7 @@ typedef struct IntersectionMovementState {
 class IntersectionRenderObject
 {
   public:
-    IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time);
+    IntersectionRenderObject(etsi_its_mapem_ts_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_ts_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time);
 
     /**
      * @brief This function validates all float variables that are part of a IntersectionRenderObject

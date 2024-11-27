@@ -61,7 +61,7 @@ MAPEMDisplay::MAPEMDisplay() {
     "Time (in s) until MAP disappears", this);
   mapem_timeout_->setMin(0);
   spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "/etsi_its_conversion/spatem/out",
-      rosidl_generator_traits::data_type<etsi_its_spatem_msgs::msg::SPATEM>(),
+      rosidl_generator_traits::data_type<etsi_its_spatem_ts_msgs::msg::SPATEM>(),
       "Topic of corresponding SPATEMs", this, SLOT(changedSPATEMTopic()));
   spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
   viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
@@ -142,8 +142,8 @@ void MAPEMDisplay::changedSPATEMTopic() {
       topic_available = true;
       for (const auto & type : topic.second) {
         topic_message_type = type;
-        if (type == "etsi_its_spatem_msgs/msg/SPATEM") {
-          spatem_subscriber_ = rviz_node_->create_subscription<etsi_its_spatem_msgs::msg::SPATEM>(spatem_topic_property_->getTopicStd(), spatem_qos_profile_, std::bind(&MAPEMDisplay::SPATEMCallback, this, std::placeholders::_1));
+        if (type == "etsi_its_spatem_ts_msgs/msg/SPATEM") {
+          spatem_subscriber_ = rviz_node_->create_subscription<etsi_its_spatem_ts_msgs::msg::SPATEM>(spatem_topic_property_->getTopicStd(), spatem_qos_profile_, std::bind(&MAPEMDisplay::SPATEMCallback, this, std::placeholders::_1));
           return;
         }
       }
@@ -159,11 +159,11 @@ void MAPEMDisplay::changedSPATEMTopic() {
     setStatus(
       rviz_common::properties::StatusProperty::Warn, "SPATEM Topic",
       QString("Error subscribing to ") + QString::fromStdString(spatem_topic_property_->getTopicStd())
-      + QString(": Message type ") + QString::fromStdString(topic_message_type) + QString::fromStdString(" does not equal etsi_its_spatem_msgs::msg::SPATEM!"));
+      + QString(": Message type ") + QString::fromStdString(topic_message_type) + QString::fromStdString(" does not equal etsi_its_spatem_ts_msgs::msg::SPATEM!"));
   }
 }
 
-void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstSharedPtr msg) {
+void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSharedPtr msg) {
   rclcpp::Time now = rviz_node_->now();
   // iterate over all IntersectionStates
   for(size_t i = 0; i<msg->spat.intersections.array.size(); i++) {
@@ -183,7 +183,7 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstShared
     }
     // iterate over all MovemenStates
     for(size_t j=0; j<msg->spat.intersections.array[i].states.array.size(); j++) {
-      etsi_its_spatem_msgs::msg::MovementState spat_mvmt_state = msg->spat.intersections.array[i].states.array[j];
+      etsi_its_spatem_ts_msgs::msg::MovementState spat_mvmt_state = msg->spat.intersections.array[i].states.array[j];
       IntersectionMovementState mvmt_state;
       // Fill the IntersectionMovementState
       mvmt_state.signal_group_id = spat_mvmt_state.signal_group.value;
@@ -203,12 +203,12 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_msgs::msg::SPATEM::ConstShared
     rviz_common::properties::StatusProperty::Ok, "SPATEM Topic", QString::number(received_spats_) + " messages received");
 }
 
-void MAPEMDisplay::processMessage(etsi_its_mapem_msgs::msg::MAPEM::ConstSharedPtr msg) {
+void MAPEMDisplay::processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstSharedPtr msg) {
   // Process MAPEM message
   rclcpp::Time now = rviz_node_->now();
   // Intersections
   if(!msg->map.intersections_is_present) return;
-  etsi_its_mapem_msgs::msg::MinuteOfTheYear moy = msg->map.time_stamp;
+  etsi_its_mapem_ts_msgs::msg::MinuteOfTheYear moy = msg->map.time_stamp;
   for(size_t i = 0; i<msg->map.intersections.array.size(); i++)
   {
     IntersectionRenderObject intsct(msg->map.intersections.array[i], msg->map.time_stamp_is_present, moy, now);
@@ -319,43 +319,43 @@ void MAPEMDisplay::update(float, float) {
         if(mvmnt_it != intsctn.movement_states.end()) {
           switch (mvmnt_it->second.phase_state.value) {
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::UNAVAILABLE:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::UNAVAILABLE:
               sg->setColor(color_grey);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::DARK:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::DARK:
               sg->setColor(color_grey);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
               sg->setColor(color_red);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
               sg->setColor(color_red);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
               sg->setColor(color_orange);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
               sg->setColor(color_green);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
               sg->setColor(color_green);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
               sg->setColor(color_orange);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
               sg->setColor(color_orange);
               break;
 
-            case etsi_its_spatem_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
+            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
               sg->setColor(color_orange);
               break;
 

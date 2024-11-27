@@ -30,13 +30,13 @@ namespace etsi_its_msgs
 namespace displays
 {
 
-  IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
+  IntersectionRenderObject::IntersectionRenderObject(etsi_its_mapem_ts_msgs::msg::IntersectionGeometry intersection, bool timestamp_is_present, etsi_its_mapem_ts_msgs::msg::MinuteOfTheYear mapem_stamp, rclcpp::Time receive_time) {
 
-    intersection_id = etsi_its_mapem_msgs::access::getIntersectionID(intersection);
+    intersection_id = etsi_its_mapem_ts_msgs::access::getIntersectionID(intersection);
 
     int zone;
     bool northp;
-    ref_point = etsi_its_mapem_msgs::access::getRefPointUTMPositionWithConvergenceAngle(intersection, zone, northp, grid_convergence_angle);
+    ref_point = etsi_its_mapem_ts_msgs::access::getRefPointUTMPositionWithConvergenceAngle(intersection, zone, northp, grid_convergence_angle);
 
     if(timestamp_is_present) {
       uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
@@ -49,54 +49,54 @@ namespace displays
 
     // Parse the lanes
     for(size_t i=0; i<intersection.lane_set.array.size(); i++) {
-      etsi_its_mapem_msgs::msg::GenericLane gen_lane = intersection.lane_set.array[i];
+      etsi_its_mapem_ts_msgs::msg::GenericLane gen_lane = intersection.lane_set.array[i];
       IntersectionLane intsct_lane;
       intsct_lane.lane_id =  gen_lane.lane_id.value;
       // LaneDirection
-      std::vector<bool> lane_dir = etsi_its_mapem_msgs::access::getLaneDirection(gen_lane);
-      if(lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::bidirectional;
-      else if(!lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::no_travel;
-      else if(lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress; 
-      else if(!lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::egress;
+      std::vector<bool> lane_dir = etsi_its_mapem_ts_msgs::access::getLaneDirection(gen_lane);
+      if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::bidirectional;
+      else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::no_travel;
+      else if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress; 
+      else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::egress;
       else intsct_lane.direction = LaneDirection::unknown_direction;
       // LaneType
-      if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_VEHICLE) intsct_lane.type = LaneType::vehicle;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_CROSSWALK) intsct_lane.type = LaneType::crosswalk;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_BIKE_LANE) intsct_lane.type = LaneType::bike_lane;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_SIDEWALK) intsct_lane.type = LaneType::sidewalk;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_MEDIAN) intsct_lane.type = LaneType::median;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_STRIPING) intsct_lane.type = LaneType::striping;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_TRACKED_VEHICLE) intsct_lane.type = LaneType::tracked_vehicle;
-      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_msgs::msg::LaneTypeAttributes::CHOICE_PARKING) intsct_lane.type = LaneType::parking;
+      if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_VEHICLE) intsct_lane.type = LaneType::vehicle;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_CROSSWALK) intsct_lane.type = LaneType::crosswalk;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_BIKE_LANE) intsct_lane.type = LaneType::bike_lane;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_SIDEWALK) intsct_lane.type = LaneType::sidewalk;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_MEDIAN) intsct_lane.type = LaneType::median;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_STRIPING) intsct_lane.type = LaneType::striping;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_TRACKED_VEHICLE) intsct_lane.type = LaneType::tracked_vehicle;
+      else if(gen_lane.lane_attributes.lane_type.choice == etsi_its_mapem_ts_msgs::msg::LaneTypeAttributes::CHOICE_PARKING) intsct_lane.type = LaneType::parking;
       else intsct_lane.type = LaneType::unknown_type;
       // Nodes
-      if(gen_lane.node_list.choice == etsi_its_mapem_msgs::msg::NodeListXY::CHOICE_NODES) {
-        etsi_its_mapem_msgs::msg::NodeSetXY node_set = gen_lane.node_list.nodes;
+      if(gen_lane.node_list.choice == etsi_its_mapem_ts_msgs::msg::NodeListXY::CHOICE_NODES) {
+        etsi_its_mapem_ts_msgs::msg::NodeSetXY node_set = gen_lane.node_list.nodes;
         for(size_t j=0; j<node_set.array.size(); j++) {
           geometry_msgs::msg::Point p;
           switch (node_set.array[j].delta.choice) {
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_1:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_1:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
                   break;
 
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_2:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_2);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_2:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_2);
                   break;
 
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_3:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_3);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_3:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_3);
                   break;                        
                   
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_4:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_4);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_4:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_4);
                   break;                        
               
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_5:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_5);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_5:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_5);
                   break;                        
                   
-              case etsi_its_mapem_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_6:
-                  p = etsi_its_mapem_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_6);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_6:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_6);
                   break;
 
               default:
