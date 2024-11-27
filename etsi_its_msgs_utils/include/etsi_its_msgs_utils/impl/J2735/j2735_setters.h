@@ -32,6 +32,9 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/checks.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
+
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <GeographicLib/UTMUPS.hpp>
 
 namespace etsi_its_msgs {
@@ -45,7 +48,7 @@ namespace J2735_access {
    * @param moy_value value to set
    */
   inline void setMinuteOfTheYear(MinuteOfTheYear& moy, const uint32_t moy_value) {
-    throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
+    etsi_its_msgs::throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
     moy.value = moy_value;
   }
 
@@ -56,7 +59,7 @@ namespace J2735_access {
    * @param id_value value to set
    */
   inline void setIntersectionID(IntersectionID& intsct_id, const uint16_t id_value) {
-    throwIfOutOfRange(id_value, IntersectionID::MIN, IntersectionID::MAX, "IntersectionID");
+    etsi_its_msgs::throwIfOutOfRange(id_value, IntersectionID::MIN, IntersectionID::MAX, "IntersectionID");
     intsct_id.value = id_value;
   }
 

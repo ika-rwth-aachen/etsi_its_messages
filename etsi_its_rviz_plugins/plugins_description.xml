@@ -32,6 +32,7 @@
       Displays data from a etsi_its_cpm_ts_msgs::CollectivePerceptionMessage.
     </description>
     <message_type>etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage</message_type>
+  </class>
   
   <class
     name="etsi_its_msgs/MAPEMDisplay"
