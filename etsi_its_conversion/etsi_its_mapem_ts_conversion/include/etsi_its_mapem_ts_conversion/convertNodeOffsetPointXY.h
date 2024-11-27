@@ -49,27 +49,27 @@ void toRos_NodeOffsetPointXY(const mapem_ts_NodeOffsetPointXY_t& in, mapem_ts_ms
   switch (in.present) {
   case mapem_ts_NodeOffsetPointXY_PR_node_XY1:
     toRos_NodeXY20b(in.choice.node_XY1, out.node_xy1);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y1;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY1;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_XY2:
     toRos_NodeXY22b(in.choice.node_XY2, out.node_xy2);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y2;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY2;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_XY3:
     toRos_NodeXY24b(in.choice.node_XY3, out.node_xy3);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y3;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY3;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_XY4:
     toRos_NodeXY26b(in.choice.node_XY4, out.node_xy4);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y4;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY4;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_XY5:
     toRos_NodeXY28b(in.choice.node_XY5, out.node_xy5);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y5;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY5;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_XY6:
     toRos_NodeXY32b(in.choice.node_XY6, out.node_xy6);
-    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y6;
+    out.choice = mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY6;
     break;
   case mapem_ts_NodeOffsetPointXY_PR_node_LatLon:
     toRos_NodeLLmD64b(in.choice.node_LatLon, out.node_lat_lon);
@@ -83,27 +83,27 @@ void toStruct_NodeOffsetPointXY(const mapem_ts_msgs::NodeOffsetPointXY& in, mape
   memset(&out, 0, sizeof(mapem_ts_NodeOffsetPointXY_t));
 
   switch (in.choice) {
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y1:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY1:
     toStruct_NodeXY20b(in.node_xy1, out.choice.node_XY1);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY1;
     break;
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y2:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY2:
     toStruct_NodeXY22b(in.node_xy2, out.choice.node_XY2);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY2;
     break;
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y3:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY3:
     toStruct_NodeXY24b(in.node_xy3, out.choice.node_XY3);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY3;
     break;
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y4:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY4:
     toStruct_NodeXY26b(in.node_xy4, out.choice.node_XY4);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY4;
     break;
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y5:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY5:
     toStruct_NodeXY28b(in.node_xy5, out.choice.node_XY5);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY5;
     break;
-  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_X_Y6:
+  case mapem_ts_msgs::NodeOffsetPointXY::CHOICE_NODE_XY6:
     toStruct_NodeXY32b(in.node_xy6, out.choice.node_XY6);
     out.present = mapem_ts_NodeOffsetPointXY_PR::mapem_ts_NodeOffsetPointXY_PR_node_XY6;
     break;
