@@ -23,7 +23,7 @@ SOFTWARE.
 ============================================================================= */
 
 #include "displays/MAPEM/intersection_render_object.hpp"
-#include <etsi_its_msgs_utils/mapem_access.hpp>
+#include <etsi_its_msgs_utils/mapem_ts_access.hpp>
 
 namespace etsi_its_msgs
 {
@@ -75,28 +75,28 @@ namespace displays
         for(size_t j=0; j<node_set.array.size(); j++) {
           geometry_msgs::msg::Point p;
           switch (node_set.array[j].delta.choice) {
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_1:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_1);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y1:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy1);
                   break;
 
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_2:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_2);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y2:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy2);
                   break;
 
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_3:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_3);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y3:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy3);
                   break;                        
                   
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_4:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_4);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y4:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy4);
                   break;                        
               
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_5:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_5);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y5:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy5);
                   break;                        
                   
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y_6:
-                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy_6);
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y6:
+                  p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy6);
                   break;
 
               default:

@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "displays/MAPEM/mapem_display.hpp"
 
-#include <etsi_its_msgs_utils/spatem_access.hpp>
+#include <etsi_its_msgs_utils/spatem_ts_access.hpp>
 
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
