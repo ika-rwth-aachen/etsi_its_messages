@@ -25,15 +25,18 @@ SOFTWARE.
 */
 
 /**
- * @file impl/mapem/mapem_getters.h
+ * @file impl/mapem/mapem_ts_getters.h
  * @brief Getter functions for the ETSI ITS MAPEM
  */
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/asn1_utils.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
+
 namespace J2735 = etsi_its_msgs::J2735_access;
 
-namespace etsi_its_mapem_msgs {
+namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
 

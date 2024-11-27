@@ -29,12 +29,13 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS MAPEM
  */
 
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 #pragma once
 
 namespace J2735 = etsi_its_msgs::J2735_access;
-namespace etsi_its_mapem_msgs {
+namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
 

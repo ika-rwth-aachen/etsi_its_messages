@@ -25,19 +25,19 @@ SOFTWARE.
 */
 
 /**
- * @file mapem_access.h
+ * @file mapem_ts_access.h
  * @brief Main MAPEM access header to include in ROS 1 projects
  */
 
 #pragma once
 
 // Messages
-#include <etsi_its_mapem_msgs/MAPEM.h>
+#include <etsi_its_mapem_ts_msgs/MAPEM.h>
 #include <geometry_msgs/PointStamped.h>
 
-namespace etsi_its_mapem_msgs {
+namespace etsi_its_mapem_ts_msgs {
     namespace gm = geometry_msgs;
 }
 
 // Implementation
-#include <etsi_its_msgs_utils/impl/mapem/mapem_access.h>
+#include <etsi_its_msgs_utils/impl/mapem/mapem_ts_access.h>

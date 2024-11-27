@@ -25,19 +25,16 @@ SOFTWARE.
 */
 
 /**
- * @file spatem_access.h
- * @brief Main SPATEM access header to include in ROS 1 projects
+ * @file impl/mapem/mapem_ts_access.h
+ * @brief Main MAPEM access implementation header
  */
 
 #pragma once
 
-// Messages
-#include <etsi_its_spatem_msgs/SPATEM.h>
-#include <geometry_msgs/PointStamped.h>
+using namespace etsi_its_mapem_ts_msgs;
 
-namespace etsi_its_spatem_msgs {
-    namespace gm = geometry_msgs;
-}
+#include <etsi_its_msgs_utils/impl/J2735/j2735_access.h>
 
-// Implementation
-#include <etsi_its_msgs_utils/impl/spatem/spatem_access.h>
+#include <etsi_its_msgs_utils/impl/mapem/mapem_ts_getters.h>
+#include <etsi_its_msgs_utils/impl/mapem/mapem_ts_setters.h>
+#include <etsi_its_msgs_utils/impl/mapem/mapem_ts_utils.h>
