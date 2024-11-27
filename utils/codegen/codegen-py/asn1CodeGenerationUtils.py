@@ -58,6 +58,10 @@ def validRosType(s: str) -> str:
 
     ss = s
 
+    # keep built-in types as they are
+    if ss.rstrip("[]") in ["bool", "byte", "char", "float32", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "string", "wstring"]:
+        return ss
+
     # remove - and _
     ss = ss.replace("-", "").replace("_", "")
 
@@ -328,10 +332,10 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
 
     # loop all types
-    for t_name, type in asn1_types.items():
+    for asn1_type_name, asn1_type_info in asn1_types.items():
 
         # loop all members in type
-        for member in type.get("members", []):
+        for member in asn1_type_info.get("members", []):
 
             if member is None:
                 continue
@@ -344,20 +348,20 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                 if ".&" in member["type"]:
                     warnings.warn(
                         f"Type '{member['type']}' of member '{member['name']}' "
-                        f"in '{t_name}' seems to relate to a 'CLASS' type, not "
+                        f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
                         f"yet supported")
                 else:
                     raise TypeError(
                         f"Type '{member['type']}' of member '{member['name']}' "
-                        f"in '{t_name}' is undefined")
+                        f"in '{asn1_type_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict]) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
-        t_name (str): type name
-        asn1 (Dict): type information
+        asn1_type_name (str): type name
+        asn1_type_info (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_values (Dict[str, Dict]): value information of all values by name
 
@@ -365,154 +369,151 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         Dict: jinja context
     """
 
-    if "components-of" in asn1: # TODO
-        warnings.warn(f"Handling of 'components-of' in '{t_name}' not yet supported.")
+    if "components-of" in asn1_type_info:
+        warnings.warn(f"Handling of 'components-of' in '{asn1_type_name}' not yet supported.")
         return { # generate in a way such that compilation will not succeed
+            "etsi_type": None,
+            "asn1_type_type": "components-of",
+            "asn1_type_name": asn1_type_name,
+            "ros_msg_type": validRosType(asn1_type_name),
+            "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
+            "is_primitive": False,
+            "members": [{"asn1_type_name": asn1_type_name, "ros_msg_type": "TODO: components-of", "ros_field_name": "is not yet supported", "c_field_name": "is not yet supported"}],
             "asn1_definition": None,
             "comments": [],
-            "etsi_type": None,
-            "members": [{"t_name": t_name, "type": "TODO: components-of", "name": "is not yet supported", "name_cc": "is not yet supported"}],
-            "t_name": t_name,
-            "t_name_camel": validRosType(t_name),
-            "t_name_snake": validRosTypeHeader(t_name),
-            "type": "components-of",
-            "asn1_type": "components-of",
-            "is_primitive": False,
         }
 
-    type = asn1["type"]
+    asn1_type_type = asn1_type_info["type"]
 
     context = {
+        "etsi_type": None,                                              # cam
+        "asn1_type_type": noSpace(asn1_type_type),                      # SEQUENCE
+        "asn1_type_name": asn1_type_name,                               # CamParameters
+        "ros_msg_type": validRosType(asn1_type_name),                   # CamParameters
+        "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),  # cam_parameters
+        "is_primitive": False,
+        "members": [],
         "asn1_definition": None,
         "comments": [],
-        "etsi_type": None,
-        "members": [],
-        "t_name": t_name,
-        "t_name_camel": validRosType(t_name),
-        "t_name_snake": validRosTypeHeader(t_name),
-        "type": noSpace(type),
-        "asn1_type": type,
-        "is_primitive": False,
     }
 
     # extra information / asn1 fields that are not processed as comments
-    for k, v in asn1.items():
+    for k, v in asn1_type_info.items():
         if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
             context["comments"].append(f"{k}: {v}")
 
     # primitives
-    if type in ASN1_PRIMITIVES_2_ROS:
+    if asn1_type_type in ASN1_PRIMITIVES_2_ROS:
 
         # resolve ROS msg type
-        ros_type = ASN1_PRIMITIVES_2_ROS[type]
-        name = asn1["name"] if "name" in asn1 else "value"
+        ros_type = ASN1_PRIMITIVES_2_ROS[asn1_type_type]
+        name = asn1_type_info["name"] if "name" in asn1_type_info else "value"
 
         # choose simplest possible integer type
-        if "restricted-to" in asn1 and type == "INTEGER":
-            min_value = asn1["restricted-to"][0][0]
-            max_value = asn1["restricted-to"][0][1]
+        if "restricted-to" in asn1_type_info and asn1_type_type == "INTEGER":
+            min_value = asn1_type_info["restricted-to"][0][0]
+            max_value = asn1_type_info["restricted-to"][0][1]
             ros_type = simplestRosIntegerType(min_value, max_value)
 
         # parse member to jinja context
         member_context = {
-            "type": ros_type,
-            "asn1_type": type,
-            "t_name": type,
-            "name": validRosField(name),
-            "name_cc": validCFieldAsGenByAsn1c(name),
+            "asn1_type_name": asn1_type_type,
+            "ros_msg_type": validRosType(ros_type),
+            "ros_field_name": validRosField(name),
+            "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": [],
             "is_primitive": True,
             "has_bits_unused": False,
         }
 
         # add bits_unused field for BIT STRINGs
-        if type == "BIT STRING":
+        if asn1_type_type == "BIT STRING":
             member_context["has_bits_unused"] = True
 
         # add constants for limits
-        if "restricted-to" in asn1:
-            min_value = asn1["restricted-to"][0][0]
-            max_value = asn1["restricted-to"][0][1]
+        if "restricted-to" in asn1_type_info:
+            min_value = asn1_type_info["restricted-to"][0][0]
+            max_value = asn1_type_info["restricted-to"][0][1]
             min_constant_name = "MIN"
             max_constant_name = "MAX"
-            if "name" in asn1:
-                min_constant_name = validRosField(f"{asn1['name']}_{min_constant_name}", is_const=True)
-                max_constant_name = validRosField(f"{asn1['name']}_{max_constant_name}", is_const=True)
+            if "name" in asn1_type_info:
+                min_constant_name = validRosField(f"{asn1_type_info['name']}_{min_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{asn1_type_info['name']}_{max_constant_name}", is_const=True)
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(min_constant_name, is_const=True),
-                "value": min_value
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(min_constant_name, is_const=True),
+                "ros_value": min_value
             })
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(max_constant_name, is_const=True),
-                "value": max_value
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(max_constant_name, is_const=True),
+                "ros_value": max_value
             })
 
         # add constants for size limits
-        if "size" in asn1:
-            if isinstance(asn1["size"][0], tuple):
-                min_size = asn1["size"][0][0]
-                max_size = asn1["size"][0][1]
+        if "size" in asn1_type_info:
+            if isinstance(asn1_type_info["size"][0], tuple):
+                min_size = asn1_type_info["size"][0][0]
+                max_size = asn1_type_info["size"][0][1]
                 ros_type = simplestRosIntegerType(min_size, max_size)
-                min_size_constant_name = "MIN_SIZE" if type != "BIT STRING" else "MIN_SIZE_BITS"
-                max_size_constant_name = "MAX_SIZE" if type != "BIT STRING" else "MAX_SIZE_BITS"
-                if "name" in asn1:
-                    min_size_constant_name = validRosField(f"{asn1['name']}_{min_size_constant_name}", is_const=True)
-                    max_size_constant_name = validRosField(f"{asn1['name']}_{max_size_constant_name}", is_const=True)
+                min_size_constant_name = "MIN_SIZE" if asn1_type_type != "BIT STRING" else "MIN_SIZE_BITS"
+                max_size_constant_name = "MAX_SIZE" if asn1_type_type != "BIT STRING" else "MAX_SIZE_BITS"
+                if "name" in asn1_type_info:
+                    min_size_constant_name = validRosField(f"{asn1_type_info['name']}_{min_size_constant_name}", is_const=True)
+                    max_size_constant_name = validRosField(f"{asn1_type_info['name']}_{max_size_constant_name}", is_const=True)
                 member_context["constants"].append({
-                    "type": ros_type,
-                    "name": validRosField(min_size_constant_name, is_const=True),
-                    "value": min_size
+                    "ros_msg_type": validRosType(ros_type),
+                    "ros_field_name": validRosField(min_size_constant_name, is_const=True),
+                    "ros_value": min_size
                 })
                 member_context["constants"].append({
-                    "type": ros_type,
-                    "name": validRosField(max_size_constant_name, is_const=True),
-                    "value": max_size
+                    "ros_msg_type": validRosType(ros_type),
+                    "ros_field_name": validRosField(max_size_constant_name, is_const=True),
+                    "ros_value": max_size
                 })
             else:
-                size = asn1["size"][0]
+                size = asn1_type_info["size"][0]
                 ros_type = simplestRosIntegerType(size, size)
-                size_constant_name = "SIZE" if type != "BIT STRING" else "SIZE_BITS"
-                if "name" in asn1:
-                    size_constant_name = validRosField(f"{asn1['name']}_{size_constant_name}", is_const=True)
+                size_constant_name = "SIZE" if asn1_type_type != "BIT STRING" else "SIZE_BITS"
+                if "name" in asn1_type_info:
+                    size_constant_name = validRosField(f"{asn1_type_info['name']}_{size_constant_name}", is_const=True)
                 member_context["constants"].append({
-                    "type": ros_type,
-                    "name": validRosField(size_constant_name, is_const=True),
-                    "value": size
+                    "ros_msg_type": validRosType(ros_type),
+                    "ros_field_name": validRosField(size_constant_name, is_const=True),
+                    "ros_value": size
                 })
 
         # add constants for named numbers
-        if "named-numbers" in asn1:
-            for k, v in asn1["named-numbers"].items():
-                constant_name = validRosField(k)
-                if "name" in asn1:
-                    constant_name = validRosField(f"{asn1['name']}_{constant_name}", is_const=True)
+        if "named-numbers" in asn1_type_info:
+            for k, v in asn1_type_info["named-numbers"].items():
+                constant_name = validRosField(k, is_const=True)
+                if "name" in asn1_type_info:
+                    constant_name = validRosField(f"{asn1_type_info['name']}_{constant_name}", is_const=True)
                 member_context["constants"].append({
-                    "type": ros_type,
-                    "name": validRosField(constant_name, is_const=True),
-                    "value": v
+                    "ros_msg_type": validRosType(ros_type),
+                    "ros_field_name": validRosField(constant_name, is_const=True),
+                    "ros_value": v
                 })
 
         # add index constants for named bits
-        if "named-bits" in asn1:
-            for k, v in asn1["named-bits"]:
+        if "named-bits" in asn1_type_info:
+            for k, v in asn1_type_info["named-bits"]:
                 member_context["constants"].append({
-                    "type": "uint8",
-                    "name": validRosField(f"BIT_INDEX_{k}", is_const=True),
-                    "value": v
+                    "ros_msg_type": "uint8",
+                    "ros_field_name": validRosField(f"BIT_INDEX_{k}", is_const=True),
+                    "ros_value": v
                 })
 
         context["members"].append(member_context)
 
     # nested types
-    elif type == "SEQUENCE":
+    elif asn1_type_type == "SEQUENCE":
 
         # recursively add all members
-        for member in asn1["members"]:
+        for member in asn1_type_info["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
             if member_context is None:
                 continue
             if "optional" in member:
@@ -536,190 +537,190 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
                 else:
                     default_type = ASN1_PRIMITIVES_2_ROS[asn1_value["type"]]
                 member_context["members"][0]["default"] = {
-                    "type": default_type,
-                    "name": default_name,
-                    "value": default_value
+                    "ros_msg_type": validRosType(default_type),
+                    "ros_field_name": validRosField(default_name, is_const=True),
+                    "ros_value": default_value
                 }
             context["members"].extend(member_context["members"])
 
     # type aliases with multiple options
-    elif type == "CHOICE":
+    elif asn1_type_type == "CHOICE":
 
         # add flag for indicating active option
         name = "choice"
-        if "name" in asn1:
-            name = f"{asn1['name']}_{name}"
+        if "name" in asn1_type_info:
+            name = f"{asn1_type_info['name']}_{name}"
         name = validRosField(name)
         context["members"].append({
-            "type": "uint8",
-            "name": name,
+            "ros_msg_type": "uint8",
+            "ros_field_name": validRosField(name),
             "is_choice_var": True
         })
 
         # recursively add members for all options, incl. constant for flag
-        for im, member in enumerate(asn1["members"]):
+        for im, member in enumerate(asn1_type_info["members"]):
             if member is None:
                 continue
             member_name = validRosField(f"CHOICE_{member['name']}", is_const=True)
-            if "name" in asn1:
-                member_name = validRosField(f"CHOICE_{asn1['name']}_{member['name']}", is_const=True)
-            member_context = asn1TypeToJinjaContext(t_name, member, asn1_types, asn1_values)
+            if "name" in asn1_type_info:
+                member_name = validRosField(f"CHOICE_{asn1_type_info['name']}_{member['name']}", is_const=True)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
             if member_context is None:
                 continue
             if len(member_context["members"]) > 0:
-                if "name" in asn1:
-                    member_context["members"][0]["choice_name"] = validCFieldAsGenByAsn1c(asn1["name"])
-                    member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["name_cc"])
-                    member_context["members"][0]["name"] = validRosField(f"{asn1['name']}_{member_context['members'][0]['name']}")
-                    member_context["members"][0]["name_cc"] = validCFieldAsGenByAsn1c(f"{asn1['name']}_{member_context['members'][0]['name_cc']}")
+                if "name" in asn1_type_info:
+                    member_context["members"][0]["choice_name"] = validCFieldAsGenByAsn1c(asn1_type_info["name"])
+                    member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["c_field_name"])
+                    member_context["members"][0]["ros_field_name"] = validRosField(f"{asn1_type_info['name']}_{member_context['members'][0]['ros_field_name']}")
+                    member_context["members"][0]["c_field_name"] = validCFieldAsGenByAsn1c(f"{asn1_type_info['name']}_{member_context['members'][0]['c_field_name']}")
                 member_context["members"][0]["is_choice"] = True
                 member_context["members"][0]["choice_var_name"] = name
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
                 for c_idx, constant in enumerate(member_context["members"][0]["constants"]):
-                    member_context["members"][0]["constants"][c_idx]["name"] = validRosField(f"{member_context['members'][0]['name']}_{constant['name']}", is_const=True)
+                    member_context["members"][0]["constants"][c_idx]["ros_field_name"] = validRosField(f"{member_context['members'][0]['ros_field_name']}_{constant['ros_field_name']}", is_const=True)
                 member_context["members"][0]["constants"].append({
-                    "type": "uint8",
-                    "name": member_name,
-                    "value": im
+                    "ros_msg_type": "uint8",
+                    "ros_field_name": validRosField(member_name, is_const=True),
+                    "ros_value": im
                 })
             context["members"].extend(member_context["members"])
 
     # arrays
-    elif type == "SEQUENCE OF":
+    elif asn1_type_type == "SEQUENCE OF":
 
         # add field for array
-        array_name = asn1["name"] if "name" in asn1 else "array"
-        array_type = asn1['element']['type']
+        array_name = asn1_type_info["name"] if "name" in asn1_type_info else "array"
+        array_type = asn1_type_info['element']['type']
 
         if array_type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+            warnings.warn(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported.")
             return None
 
         member_context = {
-            "t_name": array_type,
-            "type": f"{array_type}[]",
-            "type_snake": f"{validRosTypeHeader(array_type)}[]",
-            "name": validRosField(array_name),
-            "name_cc": validCFieldAsGenByAsn1c(array_name),
+            "asn1_type_name": array_type,
+            "ros_msg_type": f"{validRosType(array_type)}[]",
+            "ros2_msg_type_file_name": f"{validRosTypeHeader(array_type)}",
+            "ros_field_name": validRosField(array_name),
+            "c_field_name": validCFieldAsGenByAsn1c(array_name),
             "constants": []
         }
 
         # add constants for size limits
-        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
-            min_size = asn1["size"][0][0]
-            max_size = asn1["size"][0][1]
+        if "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], tuple):
+            min_size = asn1_type_info["size"][0][0]
+            max_size = asn1_type_info["size"][0][1]
             ros_type = simplestRosIntegerType(min_size, max_size)
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
-            if "name" in asn1:
-                min_size_constant_name = validRosField(f"{asn1['name']}_{min_size_constant_name}", is_const=True)
-                max_size_constant_name = validRosField(f"{asn1['name']}_{max_size_constant_name}", is_const=True)
+            if "name" in asn1_type_info:
+                min_size_constant_name = validRosField(f"{asn1_type_info['name']}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{asn1_type_info['name']}_{max_size_constant_name}", is_const=True)
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(min_size_constant_name, is_const=True),
-                "value": min_size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(min_size_constant_name, is_const=True),
+                "ros_value": min_size
             })
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(max_size_constant_name, is_const=True),
-                "value": max_size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(max_size_constant_name, is_const=True),
+                "ros_value": max_size
             })
-        elif "size" in asn1 and isinstance(asn1["size"][0], int):
-            size = asn1["size"][0]
+        elif "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], int):
+            size = asn1_type_info["size"][0]
             ros_type = simplestRosIntegerType(size, size)
             size_constant_name = "SIZE"
-            if "name" in asn1:
-                size_constant_name = validRosField(f"{asn1['name']}_{size_constant_name}", is_const=True)
+            if "name" in asn1_type_info:
+                size_constant_name = validRosField(f"{asn1_type_info['name']}_{size_constant_name}", is_const=True)
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(size_constant_name, is_const=True),
-                "value": size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(size_constant_name, is_const=True),
+                "ros_value": size
             })
 
         context["members"].append(member_context)
 
     # enums
-    elif type == "ENUMERATED":
+    elif asn1_type_type == "ENUMERATED":
 
         # choose simplest possible integer type
-        values = [val[1] for val in asn1["values"] if val is not None]
+        values = [val[1] for val in asn1_type_info["values"] if val is not None]
         min_value = min(values)
         max_value = max(values)
         ros_type = simplestRosIntegerType(min_value, max_value)
 
         # add field for active value
         member_context = {
-            "type": ros_type,
-            "name": "value",
+            "ros_msg_type": validRosType(ros_type),
+            "ros_field_name": "value",
             "constants": [],
         }
 
         # add constants for all values
-        for val in asn1["values"]:
+        for val in asn1_type_info["values"]:
             if val is None:
                 continue
             member_context["constants"].append({
-                "type": ros_type,
-                "name": validRosField(val[0], is_const=True),
-                "value": val[1]
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(val[0], is_const=True),
+                "ros_value": val[1]
             })
 
         context["members"].append(member_context)
 
     # custom types
-    elif type in asn1_types:
+    elif asn1_type_type in asn1_types:
 
-        if type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{t_name}' not yet supported.")
+        if asn1_type_type == "RegionalExtension":
+            warnings.warn(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported.")
             return None
 
-        name = asn1["name"] if "name" in asn1 else "value"
+        name = asn1_type_info["name"] if "name" in asn1_type_info else "value"
         context["members"].append({
-            "t_name": type,
-            "type": validRosType(type),
-            "name": validRosField(name),
-            "name_cc": validCFieldAsGenByAsn1c(name),
+            "asn1_type_name": asn1_type_type,
+            "ros_msg_type": validRosType(asn1_type_type),
+            "ros_field_name": validRosField(name),
+            "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": []
         })
 
         # handle size in custom types
-        if "size" in asn1 and isinstance(asn1["size"][0], tuple):
-            min_size = asn1["size"][0][0]
-            max_size = asn1["size"][0][1]
+        if "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], tuple):
+            min_size = asn1_type_info["size"][0][0]
+            max_size = asn1_type_info["size"][0][1]
             ros_type = simplestRosIntegerType(min_size, max_size)
             min_size_constant_name = "MIN_SIZE"
             max_size_constant_name = "MAX_SIZE"
-            if "name" in asn1:
-                min_size_constant_name = validRosField(f"{asn1['name']}_{min_size_constant_name}", is_const=True)
-                max_size_constant_name = validRosField(f"{asn1['name']}_{max_size_constant_name}", is_const=True)
+            if "name" in asn1_type_info:
+                min_size_constant_name = validRosField(f"{asn1_type_info['name']}_{min_size_constant_name}", is_const=True)
+                max_size_constant_name = validRosField(f"{asn1_type_info['name']}_{max_size_constant_name}", is_const=True)
             context["members"][0]["constants"].append({
-                "type": ros_type,
-                "name": validRosField(min_size_constant_name, is_const=True),
-                "value": min_size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(min_size_constant_name, is_const=True),
+                "ros_value": min_size
             })
             context["members"][0]["constants"].append({
-                "type": ros_type,
-                "name": validRosField(max_size_constant_name, is_const=True),
-                "value": max_size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(max_size_constant_name, is_const=True),
+                "ros_value": max_size
             })
-        elif "size" in asn1 and isinstance(asn1["size"][0], int):
-            size = asn1["size"][0]
+        elif "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], int):
+            size = asn1_type_info["size"][0]
             ros_type = simplestRosIntegerType(size, size)
             size_constant_name = "SIZE"
-            if "name" in asn1:
-                size_constant_name = validRosField(f"{asn1['name']}_{size_constant_name}", is_const=True)
+            if "name" in asn1_type_info:
+                size_constant_name = validRosField(f"{asn1_type_info['name']}_{size_constant_name}", is_const=True)
             context["members"][0]["constants"].append({
-                "type": ros_type,
-                "name": validRosField(size_constant_name, is_const=True),
-                "value": size
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(size_constant_name, is_const=True),
+                "ros_value": size
             })
 
-    elif type == "NULL":
+    elif asn1_type_type == "NULL":
 
         pass
 
     else:
 
-        warnings.warn(f"Cannot handle type '{type}'")
+        warnings.warn(f"Cannot handle type '{asn1_type_type}'")
 
     return context

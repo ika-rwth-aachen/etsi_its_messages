@@ -46,6 +46,7 @@ class TestNaming(unittest.TestCase):
         self.assertEqual(validRosType("TYPE_NAME"), "TYPENAME")
         self.assertEqual(validRosType("Type_NAME_123"), "TypeNAME123")
         self.assertEqual(validRosType("1TypeName"), "A1TypeName")
+        self.assertEqual(validRosType("uint32[]"), "uint32[]")
 
     def test_validRosField(self):
         self.assertEqual(validRosField("a"), "a")
