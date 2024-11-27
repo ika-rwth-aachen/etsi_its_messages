@@ -100,10 +100,6 @@ def validRosField(s: str, is_const: bool = False) -> str:
     # remove leading _, replace - with _, remove double _
     ss = ss.lstrip("_").replace("-", "_").replace("__", "_")
 
-    # TODO: use this or not?
-    # add _ before number following lower-case letter
-    # ss = re.sub("([a-z])([0-9])", r"\1_\2", ss)
-
     # to upper, if const
     ss = ss.upper() if is_const else ss.lower()
 
@@ -126,9 +122,7 @@ def validRosTypeHeader(s: str) -> str:
         str: a_message_type
     """
 
-    # TODO: only works if "add _ before number following lower-case letter" is not used
-    # TODO: i think it leads to include problems, e.g., "#include <etsi_its_mapem_ts_msgs/msg/node_xy_20b.hpp>" in mapem_ts_conversion/convertNodeXY20b.h
-    return validRosField(s)
+    return validRosField(validRosType(s))
 
 
 def validCFieldAsGenByAsn1c(s: str) -> str:
