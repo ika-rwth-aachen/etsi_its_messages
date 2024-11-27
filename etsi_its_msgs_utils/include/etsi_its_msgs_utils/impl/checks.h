@@ -25,12 +25,14 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_checks.h
- * @brief Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)
+ * @file impl/checks.h
+ * @brief Sanity-check functions etc.
  */
 
-#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
-#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
+
+namespace etsi_its_msgs {
 
 template <typename T1, typename T2>
 void throwIfOutOfRange(const T1& val, const T2& min, const T2& max, const std::string val_desc) {
@@ -39,4 +41,10 @@ void throwIfOutOfRange(const T1& val, const T2& min, const T2& max, const std::s
                                 std::to_string(max) + ")!");
 }
 
-#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+inline void throwIfNotIsPresent(const bool is_present, const std::string val_desc) {
+  if (!is_present) throw std::invalid_argument(val_desc + " is not present!");
+}
+
+}  // namespace etsi_its_msgs
+
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
