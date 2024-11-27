@@ -50,5 +50,4 @@ TEST(etsi_its_mapem_ts_msgs, test_set_get_mapem) {
   timeinfo.tm_mon = 0;
   timeinfo.tm_year = 107; //years since 1900
   EXPECT_EQ((mktime(&timeinfo)+60*moy)*1e9, mapem_ts_access::getUnixNanoseconds(mapem, unix_stamp*1e9));
-  
 }
