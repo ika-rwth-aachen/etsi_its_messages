@@ -119,10 +119,10 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
     seen = set()
     unique_sorted_members = []
     for member in jinja_context["members"]:
-        if "t_name" in member and member["t_name"] not in seen:
+        if "asn1_type_name" in member and member["asn1_type_name"] not in seen:
             unique_sorted_members.append(member)
-            seen.add(member["t_name"])
-    jinja_context["unique_sorted_members"] = sorted(unique_sorted_members, key=lambda member: member["t_name"])
+            seen.add(member["asn1_type_name"])
+    jinja_context["unique_sorted_members"] = sorted(unique_sorted_members, key=lambda member: member["asn1_type_name"])
 
     # render jinja template with context
     header = jinja_template.render(jinja_context)

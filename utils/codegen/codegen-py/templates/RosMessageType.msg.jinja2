@@ -32,25 +32,25 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 {% for line in asn1_definition.split("\n") -%}
-# {{ line }}
+# {{line}}
 {% endfor -%}
 # ------------------------------------------------------------------------------
 
 {% for comment in comments -%}
-# {{ comment }}
+# {{comment}}
 {% endfor -%}
 {% for member in members -%}
-{{ member.type }} {{ member.name }}
+{{member.ros_msg_type}} {{member.ros_field_name}}
 {% if member.optional -%}
-bool {{ member.name }}_is_present
+bool {{member.ros_field_name}}_is_present
 {% endif -%}
 {% if member.default -%}
-{{ member.default.type }} {{ member.default.name }} = {{ member.default.value }}
+{{member.default.ros_msg_type}} {{member.default.ros_field_name}} = {{member.default.ros_value}}
 {% endif -%}
 {% if member.has_bits_unused -%}
 uint8 bits_unused
 {% endif -%}
 {% for const in member.constants -%}
-{{ const.type }} {{ const.name }} = {{ const.value }}
+{{const.ros_msg_type}} {{const.ros_field_name}} = {{const.ros_value}}
 {% endfor %}
 {% endfor -%}
