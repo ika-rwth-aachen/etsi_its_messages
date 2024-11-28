@@ -308,6 +308,86 @@ def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
     return asn1_values
 
+def extractAsn1ClassesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 class information from multiple ASN1 documents.
+    
+    Args:
+        asn1_docs (Dict): type information by document
+        
+    Raises:
+        ValueError: if a class is found in multiple documents
+        
+    Returns:
+        Dict[str, Dict]: class information by name
+    """
+
+    asn1_classes = {}
+    for doc, asn1 in asn1_docs.items():
+        for class_name in asn1["object-classes"]:
+            if class_name not in asn1_classes:
+                asn1_classes[class_name] = asn1["object-classes"][class_name]
+            else:
+                raise ValueError(f"Class '{class_name}' from '{doc}' is a duplicate")
+    
+    return asn1_classes
+
+def extractAsn1SetsFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 set information from multiple ASN1 documents.
+    
+    Args:
+        asn1_docs (Dict): type information by document
+        
+    Raises:
+        ValueError: if a set is found in multiple documents
+        
+    Returns:
+        Dict[str, Dict]: set information by name
+    """
+
+    asn1_sets = {}
+    for doc, asn1 in asn1_docs.items():
+        for set_name in asn1["object-sets"]:
+            if set_name not in asn1_sets:
+                asn1_sets[set_name] = asn1["object-sets"][set_name]
+            else:
+                raise ValueError(f"Set '{set_name}' from '{doc}' is a duplicate")
+    
+    return asn1_sets
+
+def addSetsToTypes(asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]):
+    """
+    Adds sets as CHOICES to the asn1_types dictionary based on the given ASN.1 sets, values, and classes.
+
+    Args:
+        asn1_types (Dict[str, Dict]): A dictionary containing the existing ASN.1 types.
+        asn1_values (Dict[str, Dict]): A dictionary containing the ASN.1 values.
+        asn1_sets (Dict[str, Dict]): A dictionary containing the ASN.1 sets.
+        asn1_classes (Dict[str, Dict]): A dictionary containing the ASN.1 classes.
+
+    Raises:
+        ValueError: If a set is already defined as a type.
+
+    Returns:
+        None
+    """
+    for set in asn1_sets:
+        if asn1_sets[set]["class"] in asn1_classes:
+            asn1_class = asn1_classes[asn1_sets[set]["class"]]
+            if set not in asn1_types:
+                asn1_type = {
+                    "type": "CHOICE",
+                    "members": []
+                }
+                for value in asn1_values:
+                    for member in asn1_class["members"]:
+                        if member["type"] == asn1_values[value]["type"]:
+                            asn1_type["members"].append({
+                                "name": value,
+                                "type": validRosType(value) # TODO: misuse of validRosType; just want to start with a capital letter
+                            })
+                asn1_types[set] = asn1_type
+            else:
+                raise ValueError(f"Set '{set}' is already defined as a type")
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     """Checks if all type information is known and supported.
@@ -339,7 +419,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
             # check if type is known
             if member["type"] not in known_types:
-                if ".&" in member["type"]:
+                if ".&" in member["type"]: # TODO: remove
                     warnings.warn(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
@@ -350,7 +430,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{asn1_type_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
@@ -358,6 +438,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         asn1_type_info (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_values (Dict[str, Dict]): value information of all values by name
+        asn1_sets (Dict[str, Dict]): set information of all sets by name
+        asn1_classes (Dict[str, Dict]): class information of all classes by name
 
     Returns:
         Dict: jinja context
@@ -507,7 +589,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         for member in asn1_type_info["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
             if member_context is None:
                 continue
             if "optional" in member:
@@ -558,7 +640,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             member_name = validRosField(f"CHOICE_{member['name']}", is_const=True)
             if "name" in asn1_type_info:
                 member_name = validRosField(f"CHOICE_{asn1_type_info['name']}_{member['name']}", is_const=True)
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
             if member_context is None:
                 continue
             if len(member_context["members"]) > 0:
@@ -708,6 +790,24 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 "ros_field_name": validRosField(size_constant_name, is_const=True),
                 "ros_value": size
             })
+
+    # class types
+    elif ".&" in asn1_type_type and asn1_type_type.split(".")[0] in asn1_classes:
+        asn1_class_name = asn1_type_type.split(".")[0]
+        asn1_class = asn1_classes[asn1_type_type.split(".")[0]]
+        for set in asn1_sets:
+            if asn1_sets[set]["class"] == asn1_class_name:
+                asn1_set_type = set
+        for member in asn1_class["members"]:
+            if member["name"] == asn1_type_type.split(".")[1]:
+                class_member = {}
+                class_member["name"] = asn1_type_info["name"]
+                if member["type"] in asn1_types:
+                    class_member["type"] = member["type"]
+                else:
+                    class_member["type"] = asn1_set_type
+                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+                context["members"].extend(member_context["members"])
 
     elif asn1_type_type == "NULL":
 
