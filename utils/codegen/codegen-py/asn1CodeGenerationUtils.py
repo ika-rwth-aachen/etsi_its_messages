@@ -25,10 +25,8 @@
 import logging
 import re
 import sys
-from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
-import git
 import asn1tools
 import numpy as np
 
@@ -38,12 +36,7 @@ logging.addLevelName(logging.WARNING, "\033[1;33m%s\033[1;0m" % logging.getLevel
 logging.addLevelName(logging.ERROR, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
 
 
-GIT_REPO = git.Repo(search_parent_directories=True)
 AUTO_GENERATE_COMMAND = "python3 " + " ".join(sys.argv)
-AUTO_GENERATE_DATE = datetime.now().replace(microsecond=0).isoformat()
-AUTO_GENERATE_COMMIT = GIT_REPO.head.object.hexsha
-if GIT_REPO.is_dirty():
-    AUTO_GENERATE_COMMIT += "-dirty"
 
 
 ASN1_PRIMITIVES_2_ROS = {
@@ -432,8 +425,6 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
             "asn1_type": "components-of",
             "is_primitive": False,
             "auto_generate_command": AUTO_GENERATE_COMMAND,
-            "auto_generate_date": AUTO_GENERATE_DATE,
-            "auto_generate_commit": AUTO_GENERATE_COMMIT,
         }
 
     type = asn1["type"]
@@ -450,8 +441,6 @@ def asn1TypeToJinjaContext(t_name: str, asn1: Dict, asn1_types: Dict[str, Dict],
         "asn1_type": type,
         "is_primitive": False,
         "auto_generate_command": AUTO_GENERATE_COMMAND,
-        "auto_generate_date": AUTO_GENERATE_DATE,
-        "auto_generate_commit": AUTO_GENERATE_COMMIT,
     }
 
     # extra information / asn1 fields that are not processed as comments
