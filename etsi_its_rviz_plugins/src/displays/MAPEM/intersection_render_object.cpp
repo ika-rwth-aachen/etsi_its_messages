@@ -75,27 +75,27 @@ namespace displays
         for(size_t j=0; j<node_set.array.size(); j++) {
           geometry_msgs::msg::Point p;
           switch (node_set.array[j].delta.choice) {
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y1:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY1:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy1);
                   break;
 
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y2:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY2:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy2);
                   break;
 
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y3:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY3:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy3);
                   break;                        
                   
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y4:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY4:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy4);
                   break;                        
               
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y5:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY5:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy5);
                   break;                        
                   
-              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_X_Y6:
+              case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY6:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy6);
                   break;
 
