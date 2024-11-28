@@ -75,7 +75,7 @@ void toRos_{{ t_name }}(const {{ etsi_type }}_{{ t_name }}_t& in, {{ etsi_type}}
 
 void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ etsi_type }}_{{ t_name }}_t& out) {
   memset(&out, 0, sizeof({{etsi_type}}_{{ t_name }}_t));
-{% for member in members %}
+{%- for member in members %}
   for (int i = 0; i < in.array.size(); ++i) {
     {{etsi_type}}_{{ member.type|replace("[]", "") }}_t* el = ({{etsi_type}}_{{ member.type|replace("[]", "") }}_t*) calloc(1, sizeof({{etsi_type}}_{{ member.type|replace("[]", "") }}_t));
     toStruct_{{ member.type|replace("[]", "") }}(in.array[i], *el);

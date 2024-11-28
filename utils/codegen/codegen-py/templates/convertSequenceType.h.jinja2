@@ -88,7 +88,7 @@ void toRos_{{ t_name_camel }}(const {{ etsi_type }}_{{ t_name|replace("-", "_") 
 
 void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type }}_{{ t_name|replace("-", "_") }}_t& out) {
   memset(&out, 0, sizeof({{etsi_type}}_{{ t_name|replace("-", "_") }}_t));
-{% for member in members -%}
+{%- for member in members -%}
 {% if member.optional %}
   if (in.{{ member.name }}_is_present) {
 {%- if member.is_primitive %}

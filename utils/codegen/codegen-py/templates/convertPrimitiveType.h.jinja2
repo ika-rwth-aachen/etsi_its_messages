@@ -64,7 +64,6 @@ void toRos_{{ t_name_camel }}(const {{etsi_type}}_{{ t_name|replace("-", "_") }}
 void toStruct_{{ t_name_camel }}(const {{ etsi_type}}_msgs::{{ t_name_camel }}& in, {{ etsi_type}}_{{ t_name|replace("-", "_") }}_t& out) {
 {%- for member in members %}
   memset(&out, 0, sizeof({{ etsi_type}}_{{ t_name|replace("-", "_") }}_t));
-
   etsi_its_primitives_conversion::toStruct_{{ type }}(in.{{ member.name }}, out);
 {%- if member.has_bits_unused %}
   out.bits_unused = in.bits_unused;

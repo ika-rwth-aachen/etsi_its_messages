@@ -73,7 +73,6 @@ void toRos_{{ t_name }}(const {{ etsi_type }}_{{ t_name }}_t& in, {{ etsi_type}}
 
 void toStruct_{{ t_name }}(const {{ etsi_type}}_msgs::{{ t_name }}& in, {{ etsi_type }}_{{ t_name }}_t& out) {
   memset(&out, 0, sizeof({{etsi_type}}_{{ t_name }}_t));
-
   switch (in.choice) {
 {%- for member in members %}
 {%- if member.name != "choice" -%}
