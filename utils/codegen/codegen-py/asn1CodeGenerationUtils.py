@@ -235,7 +235,8 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                         raw_def = ""
             if raw_def is not None:
                 raw_def += line
-                if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
+                # TODO: improve this condition
+                if "}" in line and not "}," in line and not "} |" in line and not "} )" in line and not "})" in line and not ("::=" in line and line.rstrip().endswith("{")):
                     asn1_raw[type] = "".join(comment_lines) + raw_def
                     raw_def = None
 
