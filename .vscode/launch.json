@@ -197,7 +197,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToRosMsg.py",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
                 "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
                 "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
@@ -218,7 +218,7 @@
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
-            "program": "utils/codegen/codegen-rust/asn1ToConversionHeader.py",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
                 "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
                 "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
