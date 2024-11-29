@@ -311,13 +311,13 @@ def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
 def extractAsn1ClassesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     """Extracts all parsed ASN1 class information from multiple ASN1 documents.
-    
+
     Args:
         asn1_docs (Dict): type information by document
-        
+
     Raises:
         ValueError: if a class is found in multiple documents
-        
+
     Returns:
         Dict[str, Dict]: class information by name
     """
@@ -329,18 +329,18 @@ def extractAsn1ClassesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
                 asn1_classes[class_name] = asn1["object-classes"][class_name]
             else:
                 raise ValueError(f"Class '{class_name}' from '{doc}' is a duplicate")
-    
+
     return asn1_classes
 
 def extractAsn1SetsFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     """Extracts all parsed ASN1 set information from multiple ASN1 documents.
-    
+
     Args:
         asn1_docs (Dict): type information by document
-        
+
     Raises:
         ValueError: if a set is found in multiple documents
-        
+
     Returns:
         Dict[str, Dict]: set information by name
     """
@@ -352,7 +352,7 @@ def extractAsn1SetsFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
                 asn1_sets[set_name] = asn1["object-sets"][set_name]
             else:
                 raise ValueError(f"Set '{set_name}' from '{doc}' is a duplicate")
-    
+
     return asn1_sets
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
@@ -625,10 +625,16 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
                 for c_idx, constant in enumerate(member_context["members"][0]["constants"]):
                     member_context["members"][0]["constants"][c_idx]["ros_field_name"] = validRosField(f"{member_context['members'][0]['ros_field_name']}_{constant['ros_field_name']}", is_const=True)
+                # set choice value based on index or asn1 values if identified by another property (e.g., in the case of CLASS)
+                choice_value = im
+                if "identified_by" in asn1_type_info:
+                    asn1_value_name = member_context["asn1_type_type"][0].lower() + member_context["asn1_type_type"][1:]
+                    if asn1_value_name in asn1_values:
+                        choice_value = asn1_values[asn1_value_name]["value"]
                 member_context["members"][0]["constants"].append({
                     "ros_msg_type": "uint8",
                     "ros_field_name": validRosField(member_name, is_const=True),
-                    "ros_value": im
+                    "ros_value": choice_value
                 })
             context["members"].extend(member_context["members"])
 

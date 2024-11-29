@@ -45,17 +45,17 @@ CpmContainerId container_id
 
 
 OriginatingVehicleContainer container_data_originating_vehicle_container
-uint8 CHOICE_CONTAINER_DATA_ORIGINATING_VEHICLE_CONTAINER = 0
+uint8 CHOICE_CONTAINER_DATA_ORIGINATING_VEHICLE_CONTAINER = 1
 
 OriginatingRsuContainer container_data_originating_rsu_container
-uint8 CHOICE_CONTAINER_DATA_ORIGINATING_RSU_CONTAINER = 1
+uint8 CHOICE_CONTAINER_DATA_ORIGINATING_RSU_CONTAINER = 2
 
 SensorInformationContainer container_data_sensor_information_container
-uint8 CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER = 2
+uint8 CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER = 3
 
 PerceptionRegionContainer container_data_perception_region_container
-uint8 CHOICE_CONTAINER_DATA_PERCEPTION_REGION_CONTAINER = 3
+uint8 CHOICE_CONTAINER_DATA_PERCEPTION_REGION_CONTAINER = 4
 
 PerceivedObjectContainer container_data_perceived_object_container
-uint8 CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER = 4
+uint8 CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER = 5
 
