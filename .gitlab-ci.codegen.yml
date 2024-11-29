@@ -170,7 +170,6 @@ etsi_its_spatem_ts_coding:
 
 etsi_its_cam_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -182,7 +181,6 @@ etsi_its_cam_msgs:
 
 etsi_its_cam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -194,7 +192,6 @@ etsi_its_cam_ts_msgs:
 
 etsi_its_denm_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -206,7 +203,6 @@ etsi_its_denm_msgs:
 
 etsi_its_cpm_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -224,7 +220,6 @@ etsi_its_cpm_ts_msgs:
 
 etsi_its_vam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -236,7 +231,6 @@ etsi_its_vam_ts_msgs:
 
 etsi_its_mapem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -251,7 +245,6 @@ etsi_its_mapem_ts_msgs:
 
 etsi_its_spatem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -266,7 +259,6 @@ etsi_its_spatem_ts_msgs:
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -278,7 +270,6 @@ etsi_its_cam_conversion:
 
 etsi_its_cam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -290,7 +281,6 @@ etsi_its_cam_ts_conversion:
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -302,7 +292,6 @@ etsi_its_denm_conversion:
 
 etsi_its_cpm_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -320,7 +309,6 @@ etsi_its_cpm_ts_conversion:
 
 etsi_its_vam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -332,7 +320,6 @@ etsi_its_vam_ts_conversion:
 
 etsi_its_mapem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -347,7 +334,6 @@ etsi_its_mapem_ts_conversion:
 
 etsi_its_spatem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
