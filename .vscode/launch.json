@@ -3,17 +3,17 @@
     "compounds": [
         {
             "name": "All (coding)",
-            "configurations": ["CAM (coding)", "CAM TS (coding)", "DENM (coding)", "CPM TS (coding)", "VAM TS (coding)", "MAPEM TS (coding)", "SPATEM TS (coding)"],
+            "configurations": ["CAM (coding)", "CAM TS (coding)", "DENM (coding)", "CPM TS (coding)", "VAM TS (coding)", "MAPEM TS (coding)", "SPATEM TS (coding), IVIM TS (coding)"],
             "stopAll": false
         },
         {
             "name": "All (msgs)",
-            "configurations": ["CAM (msgs)", "CAM TS (msgs)", "DENM (msgs)", "CPM TS (msgs)", "VAM TS (msgs)", "MAPEM TS (msgs)", "SPATEM TS (msgs)"],
+            "configurations": ["CAM (msgs)", "CAM TS (msgs)", "DENM (msgs)", "CPM TS (msgs)", "VAM TS (msgs)", "MAPEM TS (msgs)", "SPATEM TS (msgs), IVIM TS (msgs)"],
             "stopAll": false
         },
         {
             "name": "All (conversion)",
-            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)"],
+            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion), IVIM TS (conversion)"],
             "stopAll": false
         }
     ],
@@ -300,7 +300,7 @@
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
-                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
                 "ivim_ts",
@@ -325,7 +325,7 @@
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
-                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
                 "ivim_ts",
@@ -350,7 +350,7 @@
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
                 "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
-                "asn1/raw/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
                 "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
                 "ivim_ts",
