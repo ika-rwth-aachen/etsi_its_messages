@@ -40,6 +40,8 @@
 #  */
 #     VruClusterInformationContainer::= SEQUENCE{ 
 #         vruClusterInformation    VruClusterInformation (WITH COMPONENTS{..., clusterId, clusterBoundingBoxShape PRESENT}), 
+#         ...
+#     }
 # ------------------------------------------------------------------------------
 
 VruClusterInformation vru_cluster_information

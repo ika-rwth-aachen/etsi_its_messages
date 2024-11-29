@@ -45,6 +45,10 @@
 # VruClusterInformation ::= SEQUENCE { 
 #    clusterId                  Identifier1B OPTIONAL,
 #    clusterBoundingBoxShape    Shape (WITH COMPONENTS{..., elliptical ABSENT, radial ABSENT, radialShapes ABSENT}) OPTIONAL,
+#    clusterCardinalitySize     CardinalNumber1B,
+#    clusterProfiles            VruClusterProfiles OPTIONAL,
+#    ...
+# }
 # ------------------------------------------------------------------------------
 
 Identifier1B cluster_id
