@@ -34,7 +34,7 @@
 # {{comment}}
 {% endfor -%}
 {% for member in members -%}
-{% if not member.custom_identifier -%}
+{% if not member.disabled -%}
 {{member.ros_msg_type}} {{member.ros_field_name}}
 {% endif -%}
 {% if member.optional -%}

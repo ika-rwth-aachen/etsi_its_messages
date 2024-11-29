@@ -367,7 +367,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
         TypeError: if the type of a member is not part of the given types, hence unknown
     """
 
-    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL"]
+    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL", "CPM-CONTAINER-ID-AND-TYPE.&id", "CPM-CONTAINER-ID-AND-TYPE.&Type"]
     known_types += list(asn1_types.keys())
     known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
 
@@ -385,7 +385,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
             # check if type is known
             if member["type"] not in known_types:
-                if ".&" in member["type"]: # TODO: remove
+                if ".&" in member["type"]: # class type is currently just handled for CPM
                     warnings.warn(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
@@ -599,9 +599,10 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "is_choice_var": True
         })
 
+         # disable choice identifier, if identified by another property (e.g., in the case of CLASS)
         if "identified_by" in asn1_type_info:
             name = asn1_type_info["identified_by"]
-            context["members"][0]["custom_identifier"] = True
+            context["members"][0]["disabled"] = True
 
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1_type_info["members"]):
