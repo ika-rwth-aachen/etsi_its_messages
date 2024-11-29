@@ -125,6 +125,8 @@ bool object_dimension_x_is_present
 
 DeltaTimeMilliSecondSigned object_age
 bool object_age_is_present
+uint16 OBJECT_AGE_MIN = 0
+uint16 OBJECT_AGE_MAX = 2047
 
 ObjectPerceptionQuality object_perception_quality
 bool object_perception_quality_is_present

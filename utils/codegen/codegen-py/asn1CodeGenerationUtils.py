@@ -761,6 +761,27 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 "ros_value": size
             })
 
+        # add constants for limits (TODO: duplicate with primitives)
+        if "restricted-to" in asn1_type_info and isinstance(asn1_type_info["restricted-to"][0], tuple):
+            min_value = asn1_type_info["restricted-to"][0][0]
+            max_value = asn1_type_info["restricted-to"][0][1]
+            ros_type = simplestRosIntegerType(min_value, max_value)
+            min_constant_name = "MIN"
+            max_constant_name = "MAX"
+            if "name" in asn1_type_info:
+                min_constant_name = validRosField(f"{asn1_type_info['name']}_{min_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{asn1_type_info['name']}_{max_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(min_constant_name, is_const=True),
+                "ros_value": min_value
+            })
+            context["members"][0]["constants"].append({
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(max_constant_name, is_const=True),
+                "ros_value": max_value
+            })
+
     # class types
     elif ".&" in asn1_type_type and asn1_type_type.split(".")[0] in asn1_classes:
         asn1_class_name = asn1_type_type.split(".")[0]
