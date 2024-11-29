@@ -50,17 +50,16 @@ inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const 
 
   // loop over bytes in reverse order
   for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-
       // loop over bits in a byte
-      for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+      for (int bit_idx_in_byte = bits_per_byte - 1; bit_idx_in_byte >= 0; bit_idx_in_byte--) {
+        
+        // map bit index in byte to bit index in total bitstring
+        int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
+        if (byte_idx == 0 && bit_idx < bits_unused) break;
 
-      // map bit index in byte to bit index in total bitstring
-      int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx >= n_bits - bits_unused) break;
-
-      // extract bit from bitstring and set output array entry appropriately
-      bool byte_has_true_bit = buffer[byte_idx] & (1 << bit_idx_in_byte);
-      if (byte_has_true_bit) bits[bit_idx] = 1;
+        // extract bit from bitstring and set output array entry appropriately
+        bool byte_has_true_bit = buffer[byte_idx] & (1 << bit_idx_in_byte);
+        if (byte_has_true_bit) bits[bits_per_byte-bit_idx-1] = true;
       }
     }
   return bits;
