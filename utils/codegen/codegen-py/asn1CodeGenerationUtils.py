@@ -355,41 +355,6 @@ def extractAsn1SetsFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     
     return asn1_sets
 
-def addSetsToTypes(asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]):
-    """
-    Adds sets as CHOICES to the asn1_types dictionary based on the given ASN.1 sets, values, and classes.
-
-    Args:
-        asn1_types (Dict[str, Dict]): A dictionary containing the existing ASN.1 types.
-        asn1_values (Dict[str, Dict]): A dictionary containing the ASN.1 values.
-        asn1_sets (Dict[str, Dict]): A dictionary containing the ASN.1 sets.
-        asn1_classes (Dict[str, Dict]): A dictionary containing the ASN.1 classes.
-
-    Raises:
-        ValueError: If a set is already defined as a type.
-
-    Returns:
-        None
-    """
-    for set in asn1_sets:
-        if asn1_sets[set]["class"] in asn1_classes:
-            asn1_class = asn1_classes[asn1_sets[set]["class"]]
-            if set not in asn1_types:
-                asn1_type = {
-                    "type": "CHOICE",
-                    "members": []
-                }
-                for value in asn1_values:
-                    for member in asn1_class["members"]:
-                        if member["type"] == asn1_values[value]["type"]:
-                            asn1_type["members"].append({
-                                "name": value,
-                                "type": validRosType(value) # TODO: misuse of validRosType; just want to start with a capital letter
-                            })
-                asn1_types[set] = asn1_type
-            else:
-                raise ValueError(f"Set '{set}' is already defined as a type")
-
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     """Checks if all type information is known and supported.
 
@@ -634,6 +599,10 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "is_choice_var": True
         })
 
+        if "identified_by" in asn1_type_info:
+            name = asn1_type_info["identified_by"]
+            context["members"][0]["custom_identifier"] = True
+
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1_type_info["members"]):
             if member is None:
@@ -796,17 +765,23 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     elif ".&" in asn1_type_type and asn1_type_type.split(".")[0] in asn1_classes:
         asn1_class_name = asn1_type_type.split(".")[0]
         asn1_class = asn1_classes[asn1_type_type.split(".")[0]]
-        for set in asn1_sets:
-            if asn1_sets[set]["class"] == asn1_class_name:
-                asn1_set_type = set
         for member in asn1_class["members"]:
             if member["name"] == asn1_type_type.split(".")[1]:
-                class_member = {}
-                class_member["name"] = asn1_type_info["name"]
-                if member["type"] in asn1_types:
-                    class_member["type"] = member["type"]
-                else:
-                    class_member["type"] = asn1_set_type
+                class_member = {
+                    "name": asn1_type_info["name"],
+                    "type": member["type"]
+                }
+                if member["type"] not in asn1_types:
+                    class_member["type"] = "CHOICE"
+                    class_member["identified_by"] = "container_id.value" # TODO: get from table
+                    class_member["members"] = []
+                    for value in asn1_values:
+                        for member in asn1_class["members"]:
+                            if member["type"] == asn1_values[value]["type"]:
+                                class_member["members"].append({
+                                    "name": validRosType(value), # TODO: misuse of validRosType; just want to start with a capital letter
+                                    "type": validRosType(value) # TODO: misuse of validRosType; just want to start with a capital letter
+                                })
                 member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
                 context["members"].extend(member_context["members"])
 

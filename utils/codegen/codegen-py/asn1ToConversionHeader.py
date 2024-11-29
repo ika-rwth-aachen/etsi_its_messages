@@ -175,7 +175,6 @@ def main():
     asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
     asn1_sets = extractAsn1SetsFromDocs(asn1_docs)
     asn1_classes = extractAsn1ClassesFromDocs(asn1_docs)
-    addSetsToTypes(asn1_types, asn1_values, asn1_sets, asn1_classes)
 
     checkTypeMembersInAsn1(asn1_types)
 
