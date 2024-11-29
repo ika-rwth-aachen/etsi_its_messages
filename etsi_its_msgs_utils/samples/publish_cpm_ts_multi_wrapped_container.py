@@ -135,19 +135,17 @@ class Publisher(Node):
 
         # Sensor information container
         si_container = WrappedCpmContainer()
-        si_container.container_id.value = CpmContainerId.SENSOR_INFORMATION_CONTAINER
-        si_container.container_data.choice.value = si_container.container_id.value
-        si_container.container_data.sensor_information_container.array = [lidar_sensor, local_aggretation_sensor]
+        si_container.container_id.value = si_container.CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER
+        si_container.container_data_sensor_information_container.array = [lidar_sensor, local_aggretation_sensor]
         
         # Get perceived object
         perceived_object = self.get_perceived_object()
         
         # Perceived object container
         po_container = WrappedCpmContainer()
-        po_container.container_id.value = CpmContainerId.PERCEIVED_OBJECT_CONTAINER
-        po_container.container_data.choice.value = po_container.container_id.value
-        po_container.container_data.perceived_object_container.number_of_perceived_objects.value = 1
-        po_container.container_data.perceived_object_container.perceived_objects.array = [perceived_object]
+        po_container.container_id.value = po_container.CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER
+        po_container.container_data_perceived_object_container.number_of_perceived_objects.value = 1
+        po_container.container_data_perceived_object_container.perceived_objects.array = [perceived_object]
         
         # Append wrapped containers
         msg.payload.cpm_containers.value.array = [si_container, po_container]
