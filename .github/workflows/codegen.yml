@@ -87,6 +87,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
+          cache: pip
+      - name: Install dependencies 
+        run: pip install -r ./utils/codegen/asn1c/requirements.txt
       - name: Download asn1c-image (artifact)
         uses: actions/download-artifact@v4
         with:
