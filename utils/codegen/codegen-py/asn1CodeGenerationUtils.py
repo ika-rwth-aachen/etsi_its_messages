@@ -791,7 +791,6 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
 
     # class types
     elif ".&" in asn1_type_type and asn1_type_type.split(".")[0] in asn1_classes:
-        asn1_class_name = asn1_type_type.split(".")[0]
         asn1_class = asn1_classes[asn1_type_type.split(".")[0]]
         for member in asn1_class["members"]:
             if member["name"] == asn1_type_type.split(".")[1]:
@@ -801,14 +800,16 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 }
                 if member["type"] not in asn1_types:
                     class_member["type"] = "CHOICE"
-                    class_member["identified_by"] = "container_id.value" # TODO: get from table
                     class_member["members"] = []
+                    if type(asn1_type_info["table"]) is list:
+                        identifier = asn1_type_info["table"][1][0] # structure known from CPM
+                        class_member["identified_by"] = validRosField(identifier) + ".value"
                     for value in asn1_values:
                         for member in asn1_class["members"]:
                             if member["type"] == asn1_values[value]["type"]:
                                 class_member["members"].append({
-                                    "name": validRosType(value), # TODO: misuse of validRosType; just want to start with a capital letter
-                                    "type": validRosType(value) # TODO: misuse of validRosType; just want to start with a capital letter
+                                    "name": value,
+                                    "type": value[0].upper() + value[1:] # make sure type starts with upper case
                                 })
                 member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
                 context["members"].extend(member_context["members"])
