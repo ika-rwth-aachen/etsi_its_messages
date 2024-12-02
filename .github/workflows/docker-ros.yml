@@ -30,19 +30,6 @@ jobs:
           enable-industrial-ci: 'true'
           enable-recursive-vcs-import: 'false'
 
-  ros2-iron:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ika-rwth-aachen/docker-ros@main
-        with:
-          platform: amd64
-          target: dev,run
-          image-tag: ros2-iron
-          base-image: rwthika/ros2:iron
-          command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
-          enable-recursive-vcs-import: 'false'
-
   ros2-jazzy:
     runs-on: ubuntu-latest
     steps:
