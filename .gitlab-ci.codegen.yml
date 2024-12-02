@@ -170,7 +170,6 @@ etsi_its_spatem_ts_coding:
 
 etsi_its_cam_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -182,7 +181,6 @@ etsi_its_cam_msgs:
 
 etsi_its_cam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -194,7 +192,6 @@ etsi_its_cam_ts_msgs:
 
 etsi_its_denm_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -206,10 +203,9 @@ etsi_its_denm_msgs:
 
 etsi_its_cpm_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-rust/asn1ToRosMsg.py
+      ./utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -219,13 +215,11 @@ etsi_its_cpm_ts_msgs:
       -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
       -td /builds/$CI_PROJECT_PATH/tmp
       -t cpm_ts
-      -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_vam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -237,7 +231,6 @@ etsi_its_vam_ts_msgs:
 
 etsi_its_mapem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -252,7 +245,6 @@ etsi_its_mapem_ts_msgs:
 
 etsi_its_spatem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToRosMsg.py
@@ -267,7 +259,6 @@ etsi_its_spatem_ts_msgs:
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -279,7 +270,6 @@ etsi_its_cam_conversion:
 
 etsi_its_cam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -291,7 +281,6 @@ etsi_its_cam_ts_conversion:
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -303,10 +292,9 @@ etsi_its_denm_conversion:
 
 etsi_its_cpm_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
+      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -316,13 +304,11 @@ etsi_its_cpm_ts_conversion:
       -t cpm_ts
       -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
       -td /builds/$CI_PROJECT_PATH/tmp
-      -di ${_RGEN_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_vam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -334,7 +320,6 @@ etsi_its_vam_ts_conversion:
 
 etsi_its_mapem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py
@@ -349,7 +334,6 @@ etsi_its_mapem_ts_conversion:
 
 etsi_its_spatem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
       ./utils/codegen/codegen-py/asn1ToConversionHeader.py

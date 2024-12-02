@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_cpm_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_LowerTriangularPositiveSemidefiniteMatrixColumns.h>
+#include <etsi_its_cpm_ts_coding/cpm_ts_CorrelationColumn.h>
 #include <etsi_its_cpm_ts_conversion/convertCorrelationColumn.h>
-#include <etsi_its_cpm_ts_conversion/convertLowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #ifdef ROS1
+#include <etsi_its_cpm_ts_msgs/CorrelationColumn.h>
 #include <etsi_its_cpm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrixColumns.h>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 #else
+#include <etsi_its_cpm_ts_msgs/msg/correlation_column.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrix_columns.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 #endif

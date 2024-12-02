@@ -113,14 +113,13 @@ class Publisher(Node):
         msg.payload.management_container.reference_position.longitude.value = int(6.047076274316094 * 1e7)
 
         cpm_container = WrappedCpmContainer()
-        cpm_container.container_id.value = CpmContainerId.SENSOR_INFORMATION_CONTAINER
-        cpm_container.container_data.choice.value = cpm_container.container_id.value
+        cpm_container.container_id.value = cpm_container.CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER
 
         # Get sensor informations 
         lidar_sensor = self.get_lidar_sensor_information()
         local_aggretation_sensor = self.get_local_aggregation_sensor_information()
 
-        cpm_container.container_data.sensor_information_container.array = [lidar_sensor, local_aggretation_sensor]
+        cpm_container.container_data_sensor_information_container.array = [lidar_sensor, local_aggretation_sensor]
         msg.payload.cpm_containers.value.array.append(cpm_container)
 
         self.get_logger().info(f"Publishing CPM")

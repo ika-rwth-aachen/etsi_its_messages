@@ -36,6 +36,8 @@
 # */ 
 # CAM ::= SEQUENCE {
 # 	header ItsPduHeader (WITH COMPONENTS {... , protocolVersion (2), messageId(cam)}),
+# 	cam    CamPayload
+# }
 # ------------------------------------------------------------------------------
 
 ItsPduHeader header

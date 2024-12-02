@@ -76,7 +76,7 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     return jinja_templates
 
 
-def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], etsi_type: str, jinja_templates: jinja2.environment.Template) -> str:
+def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict], etsi_type: str, jinja_templates: jinja2.environment.Template) -> str:
     """Converts parsed ASN1 type information to a conversion header string.
 
     Args:
@@ -84,6 +84,8 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_values (Dict[str, Dict]): value information of all values by name
+        asn1_sets (Dict[str, Dict]): set information of all sets by name
+        asn1_classes (Dict[str, Dict]): class information of all classes by name
         etsi_type (str): ETSI message type, e.g., `cam`
         jinja_templates (Dict[str, jinja2.environment.Template]): jinja template
 
@@ -102,7 +104,7 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
         raise TypeError(f"No jinja template for type '{asn1_type['type']}'")
 
     # build jinja context based on asn1 type information
-    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values)
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes)
     if jinja_context is None:
         return None
 
@@ -171,6 +173,8 @@ def main():
 
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
     asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
+    asn1_sets = extractAsn1SetsFromDocs(asn1_docs)
+    asn1_classes = extractAsn1ClassesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
 
@@ -178,7 +182,7 @@ def main():
 
     for type_name, asn1_type in asn1_types.items():
 
-        header = asn1TypeToConversionHeader(type_name, asn1_type, asn1_types, asn1_values, args.type, jinja_templates)
+        header = asn1TypeToConversionHeader(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes, args.type, jinja_templates)
 
         exportConversionHeader(header, type_name, args.output_dir)
 

@@ -530,16 +530,15 @@ inline void initPerceivedObjectWithUTMPosition(CollectivePerceptionMessage& cpm,
 /**
  * @brief Initializes a WrappedCpmContainer as a PerceivedObjectContainer with the given number of objects.
  *
- * This function sets the container ID to PERCEIVED_OBJECT_CONTAINER and initializes
+ * This function sets the container ID to CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER and initializes
  * the number of perceived objects in the container to the specified value.
  *
  * @param container A reference to the WrappedCpmContainer to be initialized as a PerceivedObjectContainer.
  * @param n_objects The number of perceived objects to initialize in the container. Default is 0.
  */
 inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const uint8_t n_objects = 0) {
-  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;
-  container.container_data.choice = container.container_id;
-  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;
+  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;
+  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;
 }
 
 /**
@@ -556,11 +555,10 @@ inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const u
  * @throws std::invalid_argument if the container is not a PerceivedObjectContainer.
  */
 inline void addPerceivedObjectToContainer(WrappedCpmContainer& container, const PerceivedObject& perceived_object) {
-  if (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &&
-      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {
-    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);
-    container.container_data.perceived_object_container.number_of_perceived_objects.value =
-        container.container_data.perceived_object_container.perceived_objects.array.size();
+  if (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {
+    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);
+    container.container_data_perceived_object_container.number_of_perceived_objects.value =
+        container.container_data_perceived_object_container.perceived_objects.array.size();
   } else {
     throw std::invalid_argument("Container is not a PerceivedObjectContainer");
   }

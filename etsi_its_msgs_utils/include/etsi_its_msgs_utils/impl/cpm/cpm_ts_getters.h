@@ -166,7 +166,7 @@ inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cp
  * @return The perceived object container.
  */
 inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptionMessage &cpm) {
-  return getCpmContainer(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);
+  return getCpmContainer(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);
 }
 
 /**
@@ -177,10 +177,10 @@ inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptio
  * @throws std::invalid_argument if the container is not a PerceivedObjectContainer.
  */
 inline uint8_t getNumberOfPerceivedObjects(const WrappedCpmContainer &container) {
-  if (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {
+  if (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {
     throw std::invalid_argument("Container is not a PerceivedObjectContainer");
   }
-  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;
+  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;
   return number;
 }
 
@@ -210,7 +210,7 @@ inline PerceivedObject getPerceivedObject(const WrappedCpmContainer &container, 
   if (i >= getNumberOfPerceivedObjects(container)) {
     throw std::invalid_argument("Index out of range");
   }
-  return container.container_data.perceived_object_container.perceived_objects.array[i];
+  return container.container_data_perceived_object_container.perceived_objects.array[i];
 }
 
 /**

@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_cpm_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_ObjectClassDescription.h>
-#include <etsi_its_cpm_ts_conversion/convertObjectClassDescription.h>
+#include <etsi_its_cpm_ts_coding/cpm_ts_ObjectClassWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertObjectClassWithConfidence.h>
 #ifdef ROS1
+#include <etsi_its_cpm_ts_msgs/ObjectClassWithConfidence.h>
 #include <etsi_its_cpm_ts_msgs/ObjectClassDescription.h>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 #else
+#include <etsi_its_cpm_ts_msgs/msg/object_class_with_confidence.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/object_class_description.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 #endif
