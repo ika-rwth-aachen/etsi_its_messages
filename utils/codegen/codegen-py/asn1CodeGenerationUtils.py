@@ -808,7 +808,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                         for member in asn1_class["members"]:
                             if member["type"] == asn1_values[value]["type"]:
                                 class_member["members"].append({
-                                    "name": value,
+                                    "name": value[0].upper() + value[1:], # make sure type starts with upper case
                                     "type": value[0].upper() + value[1:] # make sure type starts with upper case
                                 })
                 member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
