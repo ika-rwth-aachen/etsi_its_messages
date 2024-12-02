@@ -360,14 +360,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  686</span>}</div>
 <div class="line"><span class="lineno">  687</span> </div>
 <div class="line"><span class="lineno">  696</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  697</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  697</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  698</span>}</div>
 <div class="line"><span class="lineno">  699</span> </div>
 <div class="line"><span class="lineno">  707</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  708</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  708</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  709</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  710</span>  }</div>
-<div class="line"><span class="lineno">  711</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  711</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  712</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  713</span>}</div>
 <div class="line"><span class="lineno">  714</span> </div>
@@ -380,7 +380,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  738</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  739</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  740</span>  }</div>
-<div class="line"><span class="lineno">  741</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  741</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  742</span>}</div>
 <div class="line"><span class="lineno">  743</span> </div>
 <div class="line"><span class="lineno">  752</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -773,14 +773,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  697</span>}</div>
 <div class="line"><span class="lineno">  698</span> </div>
 <div class="line"><span class="lineno">  707</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  708</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  708</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  709</span>}</div>
 <div class="line"><span class="lineno">  710</span> </div>
 <div class="line"><span class="lineno">  718</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  719</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  719</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  720</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  721</span>  }</div>
-<div class="line"><span class="lineno">  722</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  722</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  723</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  724</span>}</div>
 <div class="line"><span class="lineno">  725</span> </div>
@@ -793,7 +793,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  749</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  750</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  751</span>  }</div>
-<div class="line"><span class="lineno">  752</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  752</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  753</span>}</div>
 <div class="line"><span class="lineno">  754</span> </div>
 <div class="line"><span class="lineno">  763</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -1309,14 +1309,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  768</span>}</div>
 <div class="line"><span class="lineno">  769</span> </div>
 <div class="line"><span class="lineno">  778</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  779</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  779</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  780</span>}</div>
 <div class="line"><span class="lineno">  781</span> </div>
 <div class="line"><span class="lineno">  789</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  790</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  790</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  791</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  792</span>  }</div>
-<div class="line"><span class="lineno">  793</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  793</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  794</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  795</span>}</div>
 <div class="line"><span class="lineno">  796</span> </div>
@@ -1329,7 +1329,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  820</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  821</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  822</span>  }</div>
-<div class="line"><span class="lineno">  823</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  823</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  824</span>}</div>
 <div class="line"><span class="lineno">  825</span> </div>
 <div class="line"><span class="lineno">  834</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -2435,14 +2435,14 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  786</span>}</div>
 <div class="line"><span class="lineno">  787</span> </div>
 <div class="line"><span class="lineno">  796</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  797</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  797</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  798</span>}</div>
 <div class="line"><span class="lineno">  799</span> </div>
 <div class="line"><span class="lineno">  807</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  808</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  808</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  809</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  810</span>  }</div>
-<div class="line"><span class="lineno">  811</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  811</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  812</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  813</span>}</div>
 <div class="line"><span class="lineno">  814</span> </div>
@@ -2455,7 +2455,7 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  838</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  839</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  840</span>  }</div>
-<div class="line"><span class="lineno">  841</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  841</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  842</span>}</div>
 <div class="line"><span class="lineno">  843</span> </div>
 <div class="line"><span class="lineno">  852</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -2769,14 +2769,14 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  722</span>}</div>
 <div class="line"><span class="lineno">  723</span> </div>
 <div class="line"><span class="lineno">  732</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  733</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  733</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  734</span>}</div>
 <div class="line"><span class="lineno">  735</span> </div>
 <div class="line"><span class="lineno">  743</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  744</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  744</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  745</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  746</span>  }</div>
-<div class="line"><span class="lineno">  747</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  747</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  748</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  749</span>}</div>
 <div class="line"><span class="lineno">  750</span> </div>
@@ -2789,7 +2789,7 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  774</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  775</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  776</span>  }</div>
-<div class="line"><span class="lineno">  777</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  777</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  778</span>}</div>
 <div class="line"><span class="lineno">  779</span> </div>
 <div class="line"><span class="lineno">  788</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -3112,14 +3112,14 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  738</span>}</div>
 <div class="line"><span class="lineno">  739</span> </div>
 <div class="line"><span class="lineno">  748</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  749</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  749</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  750</span>}</div>
 <div class="line"><span class="lineno">  751</span> </div>
 <div class="line"><span class="lineno">  759</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  760</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  760</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  761</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  762</span>  }</div>
-<div class="line"><span class="lineno">  763</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  763</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  764</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  765</span>}</div>
 <div class="line"><span class="lineno">  766</span> </div>
@@ -3132,7 +3132,7 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  790</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  791</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  792</span>  }</div>
-<div class="line"><span class="lineno">  793</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  793</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  794</span>}</div>
 <div class="line"><span class="lineno">  795</span> </div>
 <div class="line"><span class="lineno">  804</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
@@ -3374,14 +3374,14 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  754</span>}</div>
 <div class="line"><span class="lineno">  755</span> </div>
 <div class="line"><span class="lineno">  764</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><span class="lineno">  765</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno">  765</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><span class="lineno">  766</span>}</div>
 <div class="line"><span class="lineno">  767</span> </div>
 <div class="line"><span class="lineno">  775</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><span class="lineno">  776</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  776</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="line"><span class="lineno">  777</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><span class="lineno">  778</span>  }</div>
-<div class="line"><span class="lineno">  779</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno">  779</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 <div class="line"><span class="lineno">  780</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><span class="lineno">  781</span>}</div>
 <div class="line"><span class="lineno">  782</span> </div>
@@ -3394,7 +3394,7 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  806</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
 <div class="line"><span class="lineno">  807</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 <div class="line"><span class="lineno">  808</span>  }</div>
-<div class="line"><span class="lineno">  809</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno">  809</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><span class="lineno">  810</span>}</div>
 <div class="line"><span class="lineno">  811</span> </div>
 <div class="line"><span class="lineno">  820</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>

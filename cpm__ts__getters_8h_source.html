@@ -178,15 +178,15 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="cpm__ts__getters_8h.html#a56b5e6e127429394b9088b6c5d232d7e">  159</a></span> </div>
 </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="cpm__ts__getters_8h.html#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cpm__ts__getters_8h.html#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cpm__ts__getters_8h.html#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keyword">inline</span> uint8_t getNumberOfPerceivedObjects(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordflow">if</span> (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
 <div class="foldopen" id="foldopen00181" data-start="{" data-end="}">
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="cpm__ts__getters_8h.html#acacbe898d0fe2a11531140ce16a21b12">  181</a></span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  }</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
 </div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <span class="keywordflow">return</span> number;</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}</div>
@@ -202,7 +202,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
 </div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordflow">return</span> container.container_data.perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">inline</span> uint16_t getIdOfPerceivedObject(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>

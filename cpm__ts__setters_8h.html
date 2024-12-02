@@ -288,7 +288,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00717">717</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00715">715</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
 
 </div>
 </div>
@@ -335,284 +335,282 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00694">694</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  729</span>                                     {</div>
-<div class="line"><span class="lineno">  730</span> </div>
-<div class="line"><span class="lineno">  731</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  732</span> </div>
-<div class="line"><span class="lineno">  742</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#ada626221bdfa5819644a8cecd9deefd7">setItsPduHeader</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> uint32_t station_id,</div>
-<div class="line"><span class="lineno">  743</span>                            <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
-<div class="line"><span class="lineno">  744</span>  <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#ada626221bdfa5819644a8cecd9deefd7">setItsPduHeader</a>(cpm.header, MessageId::CPM, station_id, protocol_version);</div>
-<div class="line"><span class="lineno">  745</span>}</div>
-<div class="line"><span class="lineno">  746</span> </div>
-<div class="line"><span class="lineno">  758</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a8a90e4d094c9259e0be959dbfd0086f7">setReferenceTime</a>(</div>
-<div class="line"><span class="lineno">  759</span>    CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  760</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) {</div>
-<div class="line"><span class="lineno">  761</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  762</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
-<div class="line"><span class="lineno">  763</span>  throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
-<div class="line"><span class="lineno">  764</span>  cpm.payload.management_container.reference_time = t_its;</div>
-<div class="line"><span class="lineno">  765</span>}</div>
-<div class="line"><span class="lineno">  766</span> </div>
-<div class="line"><span class="lineno">  778</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters__common_8h.html#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> <span class="keywordtype">double</span> latitude, <span class="keyword">const</span> <span class="keywordtype">double</span> longitude,</div>
-<div class="line"><span class="lineno">  779</span>                                 <span class="keyword">const</span> <span class="keywordtype">double</span> altitude = AltitudeValue::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  780</span>  <a class="code hl_function" href="cam__setters__common_8h.html#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(cpm.payload.management_container.reference_position, latitude, longitude, altitude);</div>
-<div class="line"><span class="lineno">  781</span>}</div>
-<div class="line"><span class="lineno">  782</span> </div>
-<div class="line"><span class="lineno">  795</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters__common_8h.html#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> gm::PointStamped&amp; utm_position, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; zone,</div>
-<div class="line"><span class="lineno">  796</span>                               <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; northp) {</div>
-<div class="line"><span class="lineno">  797</span>  <a class="code hl_function" href="cam__setters__common_8h.html#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(cpm.payload.management_container.reference_position, utm_position, zone, northp);</div>
-<div class="line"><span class="lineno">  798</span>}</div>
-<div class="line"><span class="lineno">  799</span> </div>
-<div class="line"><span class="lineno">  808</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a8114d67fdce63d66e23d67388ecf2091">setIdOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> uint16_t <span class="keywordtype">id</span>) {</div>
-<div class="line"><span class="lineno">  809</span>  <span class="keywordtype">object</span>.object_id.value = id;</div>
-<div class="line"><span class="lineno">  810</span>  <span class="keywordtype">object</span>.object_id_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  811</span>}</div>
-<div class="line"><span class="lineno">  812</span> </div>
-<div class="line"><span class="lineno">  824</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
-<div class="line"><span class="lineno">  825</span>  <span class="keywordflow">if</span> (delta_time &lt; DeltaTimeMilliSecondSigned::MIN || delta_time &gt; DeltaTimeMilliSecondSigned::MAX) {</div>
-<div class="line"><span class="lineno">  826</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;MeasurementDeltaTime out of range&quot;</span>);</div>
-<div class="line"><span class="lineno">  827</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  828</span>    <span class="keywordtype">object</span>.measurement_delta_time.value = delta_time;</div>
-<div class="line"><span class="lineno">  829</span>  }</div>
-<div class="line"><span class="lineno">  830</span>}</div>
-<div class="line"><span class="lineno">  831</span> </div>
-<div class="line"><span class="lineno">  845</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(CartesianCoordinateWithConfidence&amp; coordinate, <span class="keyword">const</span> int32_t value,</div>
-<div class="line"><span class="lineno">  846</span>                                                 <span class="keyword">const</span> uint16_t confidence = CoordinateConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  847</span>  <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno">  848</span>  <span class="keywordflow">if</span> (value &lt; CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  849</span>    coordinate.value.value = CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  850</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  851</span>    coordinate.value.value = CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  852</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  853</span>    coordinate.value.value = value;</div>
-<div class="line"><span class="lineno">  854</span>  }</div>
-<div class="line"><span class="lineno">  855</span> </div>
-<div class="line"><span class="lineno">  856</span>  <span class="comment">// limit confidence range</span></div>
-<div class="line"><span class="lineno">  857</span>  <span class="keywordflow">if</span> (confidence &gt; CoordinateConfidence::MAX || confidence &lt; CoordinateConfidence::MIN) {</div>
-<div class="line"><span class="lineno">  858</span>    coordinate.confidence.value = CoordinateConfidence::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  859</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  860</span>    coordinate.confidence.value = confidence;</div>
-<div class="line"><span class="lineno">  861</span>  }</div>
-<div class="line"><span class="lineno">  862</span>}</div>
-<div class="line"><span class="lineno">  863</span> </div>
-<div class="line"><span class="lineno">  875</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#aca2c7a4a6b103e14f92f582b5b114a1d">setPositionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Point&amp; point,</div>
-<div class="line"><span class="lineno">  876</span>                                         <span class="keyword">const</span> uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  877</span>                                         <span class="keyword">const</span> uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  878</span>                                         <span class="keyword">const</span> uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  879</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate, point.x * 100, x_confidence * 100);</div>
-<div class="line"><span class="lineno">  880</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate, point.y * 100, y_confidence * 100);</div>
-<div class="line"><span class="lineno">  881</span>  <span class="keywordflow">if</span> (point.z != 0.0) {</div>
-<div class="line"><span class="lineno">  882</span>    <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate, point.z * 100, z_confidence * 100);</div>
-<div class="line"><span class="lineno">  883</span>    <span class="keywordtype">object</span>.position.z_coordinate_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  884</span>  }</div>
-<div class="line"><span class="lineno">  885</span>}</div>
-<div class="line"><span class="lineno">  886</span> </div>
-<div class="line"><span class="lineno">  902</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1da5438bbc2b30d5d1139c51fe83e5bb">setUTMPositionOfPerceivedObject</a>(CollectivePerceptionMessage&amp; cpm, PerceivedObject&amp; <span class="keywordtype">object</span>,</div>
-<div class="line"><span class="lineno">  903</span>                                            <span class="keyword">const</span> gm::PointStamped&amp; utm_position,</div>
-<div class="line"><span class="lineno">  904</span>                                            <span class="keyword">const</span> uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  905</span>                                            <span class="keyword">const</span> uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  906</span>                                            <span class="keyword">const</span> uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  907</span>  gm::PointStamped reference_position = <a class="code hl_function" href="cam__getters__common_8h.html#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cpm);</div>
-<div class="line"><span class="lineno">  908</span>  <span class="keywordflow">if</span> (utm_position.header.frame_id != reference_position.header.frame_id) {</div>
-<div class="line"><span class="lineno">  909</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;UTM-Position frame_id (&quot;</span> + utm_position.header.frame_id +</div>
-<div class="line"><span class="lineno">  910</span>                                <span class="stringliteral">&quot;) does not match the reference position frame_id (&quot;</span> + reference_position.header.frame_id +</div>
-<div class="line"><span class="lineno">  911</span>                                <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  912</span>  }</div>
-<div class="line"><span class="lineno">  913</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate,</div>
-<div class="line"><span class="lineno">  914</span>                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence);</div>
-<div class="line"><span class="lineno">  915</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate,</div>
-<div class="line"><span class="lineno">  916</span>                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence);</div>
-<div class="line"><span class="lineno">  917</span>  <span class="keywordflow">if</span> (utm_position.point.z != 0.0) {</div>
-<div class="line"><span class="lineno">  918</span>    <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate,</div>
-<div class="line"><span class="lineno">  919</span>                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence);</div>
-<div class="line"><span class="lineno">  920</span>    <span class="keywordtype">object</span>.position.z_coordinate_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  921</span>  }</div>
-<div class="line"><span class="lineno">  922</span>}</div>
-<div class="line"><span class="lineno">  923</span> </div>
-<div class="line"><span class="lineno">  935</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(VelocityComponent&amp; velocity, <span class="keyword">const</span> int16_t value,</div>
-<div class="line"><span class="lineno">  936</span>                                 <span class="keyword">const</span> uint8_t confidence = SpeedConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  937</span>  <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno">  938</span>  <span class="keywordflow">if</span> (value &lt; VelocityComponentValue::NEGATIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  939</span>    velocity.value.value = VelocityComponentValue::NEGATIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  940</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; VelocityComponentValue::POSITIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  941</span>    velocity.value.value = VelocityComponentValue::POSITIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  942</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  943</span>    velocity.value.value = value;</div>
-<div class="line"><span class="lineno">  944</span>  }</div>
-<div class="line"><span class="lineno">  945</span> </div>
-<div class="line"><span class="lineno">  946</span>  <span class="comment">// limit confidence range</span></div>
-<div class="line"><span class="lineno">  947</span>  <span class="keywordflow">if</span> (confidence &gt; SpeedConfidence::MAX || confidence &lt; SpeedConfidence::MIN) {</div>
-<div class="line"><span class="lineno">  948</span>    velocity.confidence.value = SpeedConfidence::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  949</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  950</span>    velocity.confidence.value = confidence;</div>
-<div class="line"><span class="lineno">  951</span>  }</div>
-<div class="line"><span class="lineno">  952</span>}</div>
-<div class="line"><span class="lineno">  953</span> </div>
-<div class="line"><span class="lineno">  966</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#abd24f0535c56a3d4424f90dcb834474a">setVelocityOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; cartesian_velocity,</div>
-<div class="line"><span class="lineno">  967</span>                                         <span class="keyword">const</span> uint8_t x_confidence = SpeedConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  968</span>                                         <span class="keyword">const</span> uint8_t y_confidence = SpeedConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno">  969</span>                                         <span class="keyword">const</span> uint8_t z_confidence = SpeedConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  970</span>  <span class="keywordtype">object</span>.velocity.choice = Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY;</div>
-<div class="line"><span class="lineno">  971</span>  <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_confidence * 100);</div>
-<div class="line"><span class="lineno">  972</span>  <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_confidence * 100);</div>
-<div class="line"><span class="lineno">  973</span>  <span class="keywordflow">if</span> (cartesian_velocity.z != 0.0) {</div>
-<div class="line"><span class="lineno">  974</span>    <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_confidence * 100);</div>
-<div class="line"><span class="lineno">  975</span>    <span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  976</span>  }</div>
-<div class="line"><span class="lineno">  977</span>  <span class="keywordtype">object</span>.velocity_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  978</span>}</div>
-<div class="line"><span class="lineno">  979</span> </div>
-<div class="line"><span class="lineno">  991</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(AccelerationComponent&amp; acceleration, <span class="keyword">const</span> int16_t value,</div>
-<div class="line"><span class="lineno">  992</span>                                     <span class="keyword">const</span> uint8_t confidence = AccelerationConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  993</span>  <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno">  994</span>  <span class="keywordflow">if</span> (value &lt; AccelerationValue::NEGATIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  995</span>    acceleration.value.value = AccelerationValue::NEGATIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  996</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; AccelerationValue::POSITIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  997</span>    acceleration.value.value = AccelerationValue::POSITIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  998</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  999</span>    acceleration.value.value = value;</div>
-<div class="line"><span class="lineno"> 1000</span>  }</div>
-<div class="line"><span class="lineno"> 1001</span> </div>
-<div class="line"><span class="lineno"> 1002</span>  <span class="comment">// limit confidence range</span></div>
-<div class="line"><span class="lineno"> 1003</span>  <span class="keywordflow">if</span> (confidence &gt; AccelerationConfidence::MAX || confidence &lt; AccelerationConfidence::MIN) {</div>
-<div class="line"><span class="lineno"> 1004</span>    acceleration.confidence.value = AccelerationConfidence::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno"> 1005</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1006</span>    acceleration.confidence.value = confidence;</div>
-<div class="line"><span class="lineno"> 1007</span>  }</div>
-<div class="line"><span class="lineno"> 1008</span>}</div>
-<div class="line"><span class="lineno"> 1009</span> </div>
-<div class="line"><span class="lineno"> 1022</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ac6f4326045c45464574b6a59dcc36235">setAccelerationOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; cartesian_acceleration,</div>
-<div class="line"><span class="lineno"> 1023</span>                                             <span class="keyword">const</span> uint8_t x_confidence = AccelerationConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno"> 1024</span>                                             <span class="keyword">const</span> uint8_t y_confidence = AccelerationConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno"> 1025</span>                                             <span class="keyword">const</span> uint8_t z_confidence = AccelerationConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1026</span>  <span class="keywordtype">object</span>.acceleration.choice = Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION;</div>
-<div class="line"><span class="lineno"> 1027</span>  <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration, cartesian_acceleration.x * 10,</div>
-<div class="line"><span class="lineno"> 1028</span>                           x_confidence * 10);</div>
-<div class="line"><span class="lineno"> 1029</span>  <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration, cartesian_acceleration.y * 10,</div>
-<div class="line"><span class="lineno"> 1030</span>                           y_confidence * 10);</div>
-<div class="line"><span class="lineno"> 1031</span>  <span class="keywordflow">if</span> (cartesian_acceleration.z != 0.0) {</div>
-<div class="line"><span class="lineno"> 1032</span>    <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration, cartesian_acceleration.z * 10,</div>
-<div class="line"><span class="lineno"> 1033</span>                             z_confidence * 10);</div>
-<div class="line"><span class="lineno"> 1034</span>    <span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1035</span>  }</div>
-<div class="line"><span class="lineno"> 1036</span>  <span class="keywordtype">object</span>.acceleration_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1037</span>}</div>
-<div class="line"><span class="lineno"> 1038</span> </div>
-<div class="line"><span class="lineno"> 1049</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a91d4ba34ea7cd7288c8a3fd34a2e1ce9">setYawOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> yaw,</div>
-<div class="line"><span class="lineno"> 1050</span>                                    <span class="keyword">const</span> uint8_t confidence = AngleConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1051</span>  <span class="comment">// wrap angle to range [0, 360]</span></div>
-<div class="line"><span class="lineno"> 1052</span>  <span class="keywordtype">double</span> yaw_in_degrees = yaw * 180 / M_PI + 180;  <span class="comment">// TODO: check if this is correct</span></div>
-<div class="line"><span class="lineno"> 1053</span>  <span class="keywordflow">while</span> (yaw_in_degrees &gt; 360.0) yaw_in_degrees -= 360.0;</div>
-<div class="line"><span class="lineno"> 1054</span>  <span class="keywordflow">while</span> (yaw_in_degrees &lt; 0) yaw_in_degrees += 360.0;</div>
-<div class="line"><span class="lineno"> 1055</span>  <span class="keywordtype">object</span>.angles.z_angle.value.value = yaw_in_degrees * 10;</div>
-<div class="line"><span class="lineno"> 1056</span> </div>
-<div class="line"><span class="lineno"> 1057</span>  <span class="keywordflow">if</span> (confidence &gt; AngleConfidence::MAX || confidence &lt; AngleConfidence::MIN) {</div>
-<div class="line"><span class="lineno"> 1058</span>    <span class="keywordtype">object</span>.angles.z_angle.confidence.value = AngleConfidence::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno"> 1059</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1060</span>    <span class="keywordtype">object</span>.angles.z_angle.confidence.value = confidence;</div>
-<div class="line"><span class="lineno"> 1061</span>  }</div>
-<div class="line"><span class="lineno"> 1062</span>  <span class="keywordtype">object</span>.angles_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1063</span>}</div>
-<div class="line"><span class="lineno"> 1064</span> </div>
-<div class="line"><span class="lineno"> 1076</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ad4ef96eb81a2f200e5e9fcc2bcd393c8">setYawRateOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> yaw_rate,</div>
-<div class="line"><span class="lineno"> 1077</span>                                        <span class="keyword">const</span> uint8_t confidence = AngularSpeedConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1078</span>  int16_t yaw_rate_in_degrees = yaw_rate * 180 / M_PI;</div>
-<div class="line"><span class="lineno"> 1079</span>  <span class="keywordflow">if</span> (yaw_rate_in_degrees != CartesianAngularVelocityComponentValue::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1080</span>    <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno"> 1081</span>    <span class="keywordflow">if</span> (yaw_rate_in_degrees &lt; CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE) {</div>
-<div class="line"><span class="lineno"> 1082</span>      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE;</div>
-<div class="line"><span class="lineno"> 1083</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (yaw_rate_in_degrees &gt; CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno"> 1084</span>      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno"> 1085</span>    }</div>
-<div class="line"><span class="lineno"> 1086</span>  }</div>
-<div class="line"><span class="lineno"> 1087</span>  <span class="keywordtype">object</span>.z_angular_velocity.value.value = yaw_rate_in_degrees;</div>
-<div class="line"><span class="lineno"> 1088</span>  <span class="keywordtype">object</span>.z_angular_velocity.confidence.value = confidence;</div>
-<div class="line"><span class="lineno"> 1089</span>  <span class="keywordtype">object</span>.z_angular_velocity_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1090</span>}</div>
-<div class="line"><span class="lineno"> 1091</span> </div>
-<div class="line"><span class="lineno"> 1106</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(ObjectDimension&amp; dimension, <span class="keyword">const</span> uint16_t value,</div>
-<div class="line"><span class="lineno"> 1107</span>                               <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1108</span>  <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno"> 1109</span>  <span class="keywordflow">if</span> (value &lt; ObjectDimensionValue::MIN || value &gt; ObjectDimensionValue::MAX) {</div>
-<div class="line"><span class="lineno"> 1110</span>    dimension.value.value = ObjectDimensionValue::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno"> 1111</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1112</span>    dimension.value.value = value;</div>
-<div class="line"><span class="lineno"> 1113</span>  }</div>
-<div class="line"><span class="lineno"> 1114</span> </div>
-<div class="line"><span class="lineno"> 1115</span>  <span class="comment">// limit confidence range</span></div>
-<div class="line"><span class="lineno"> 1116</span>  <span class="keywordflow">if</span> (confidence &gt; ObjectDimensionConfidence::MAX || confidence &lt; ObjectDimensionConfidence::MIN) {</div>
-<div class="line"><span class="lineno"> 1117</span>    dimension.confidence.value = ObjectDimensionConfidence::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno"> 1118</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1119</span>    dimension.confidence.value = confidence;</div>
-<div class="line"><span class="lineno"> 1120</span>  }</div>
-<div class="line"><span class="lineno"> 1121</span>}</div>
-<div class="line"><span class="lineno"> 1122</span> </div>
-<div class="line"><span class="lineno"> 1133</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#aba6645d6f728ac345f0691da8c8088f4">setXDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
-<div class="line"><span class="lineno"> 1134</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1135</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_x, (uint16_t)(value * 10), confidence * 10);</div>
-<div class="line"><span class="lineno"> 1136</span>  <span class="keywordtype">object</span>.object_dimension_x_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1137</span>}</div>
-<div class="line"><span class="lineno"> 1138</span> </div>
-<div class="line"><span class="lineno"> 1149</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a38646cb1b65fc2c5b9c3a331e92e45f4">setYDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
-<div class="line"><span class="lineno"> 1150</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1151</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_y, (uint16_t)(value * 10), confidence * 10);</div>
-<div class="line"><span class="lineno"> 1152</span>  <span class="keywordtype">object</span>.object_dimension_y_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1153</span>}</div>
-<div class="line"><span class="lineno"> 1154</span> </div>
-<div class="line"><span class="lineno"> 1165</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ae21444357cbe689a19a025403205fccf">setZDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
-<div class="line"><span class="lineno"> 1166</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1167</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_z, (uint16_t)(value * 10), confidence * 10);</div>
-<div class="line"><span class="lineno"> 1168</span>  <span class="keywordtype">object</span>.object_dimension_z_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1169</span>}</div>
-<div class="line"><span class="lineno"> 1170</span> </div>
-<div class="line"><span class="lineno"> 1182</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1b4beab855989149bcb4c5522e9c93af">setDimensionsOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; dimensions,</div>
-<div class="line"><span class="lineno"> 1183</span>                                           <span class="keyword">const</span> uint8_t x_confidence = ObjectDimensionConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno"> 1184</span>                                           <span class="keyword">const</span> uint8_t y_confidence = ObjectDimensionConfidence::UNAVAILABLE,</div>
-<div class="line"><span class="lineno"> 1185</span>                                           <span class="keyword">const</span> uint8_t z_confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno"> 1186</span>  <a class="code hl_function" href="#aba6645d6f728ac345f0691da8c8088f4">setXDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.x, x_confidence);</div>
-<div class="line"><span class="lineno"> 1187</span>  <a class="code hl_function" href="#a38646cb1b65fc2c5b9c3a331e92e45f4">setYDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.y, y_confidence);</div>
-<div class="line"><span class="lineno"> 1188</span>  <a class="code hl_function" href="#ae21444357cbe689a19a025403205fccf">setZDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.z, z_confidence);</div>
-<div class="line"><span class="lineno"> 1189</span>}</div>
-<div class="line"><span class="lineno"> 1190</span> </div>
-<div class="line"><span class="lineno"> 1200</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#afbe0daaad4fa3dd05f9a6989a3ae732b">initPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Point&amp; point, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
-<div class="line"><span class="lineno"> 1201</span>  <a class="code hl_function" href="#aca2c7a4a6b103e14f92f582b5b114a1d">setPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>, point);</div>
-<div class="line"><span class="lineno"> 1202</span>  <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(<span class="keywordtype">object</span>, delta_time);</div>
-<div class="line"><span class="lineno"> 1203</span>}</div>
-<div class="line"><span class="lineno"> 1204</span> </div>
-<div class="line"><span class="lineno"> 1217</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ae6e626897fac5e47bc88ef632ab884fa">initPerceivedObjectWithUTMPosition</a>(CollectivePerceptionMessage&amp; cpm, PerceivedObject&amp; <span class="keywordtype">object</span>,</div>
-<div class="line"><span class="lineno"> 1218</span>                                               <span class="keyword">const</span> gm::PointStamped&amp; point, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
-<div class="line"><span class="lineno"> 1219</span>  <a class="code hl_function" href="#a1da5438bbc2b30d5d1139c51fe83e5bb">setUTMPositionOfPerceivedObject</a>(cpm, <span class="keywordtype">object</span>, point);</div>
-<div class="line"><span class="lineno"> 1220</span>  <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(<span class="keywordtype">object</span>, delta_time);</div>
-<div class="line"><span class="lineno"> 1221</span>}</div>
-<div class="line"><span class="lineno"> 1222</span> </div>
-<div class="line"><span class="lineno"> 1232</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1233</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1234</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1235</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1236</span>}</div>
-<div class="line"><span class="lineno"> 1237</span> </div>
-<div class="line"><span class="lineno"> 1251</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1252</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1253</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1254</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1255</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1256</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1257</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1258</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1259</span>  }</div>
-<div class="line"><span class="lineno"> 1260</span>}</div>
-<div class="line"><span class="lineno"> 1261</span> </div>
-<div class="line"><span class="lineno"> 1274</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1275</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1276</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1277</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1278</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1279</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1280</span>  }</div>
-<div class="line"><span class="lineno"> 1281</span>}</div>
-<div class="line"><span class="lineno"> 1282</span> </div>
-<div class="line"><span class="lineno"> 1283</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00693">693</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  728</span>                                     {</div>
+<div class="line"><span class="lineno">  729</span> </div>
+<div class="line"><span class="lineno">  730</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_setters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  731</span> </div>
+<div class="line"><span class="lineno">  741</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#ada626221bdfa5819644a8cecd9deefd7">setItsPduHeader</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> uint32_t station_id,</div>
+<div class="line"><span class="lineno">  742</span>                            <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
+<div class="line"><span class="lineno">  743</span>  <a class="code hl_function" href="cdd__v1-3-1__setters_8h.html#ada626221bdfa5819644a8cecd9deefd7">setItsPduHeader</a>(cpm.header, MessageId::CPM, station_id, protocol_version);</div>
+<div class="line"><span class="lineno">  744</span>}</div>
+<div class="line"><span class="lineno">  745</span> </div>
+<div class="line"><span class="lineno">  757</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a8a90e4d094c9259e0be959dbfd0086f7">setReferenceTime</a>(</div>
+<div class="line"><span class="lineno">  758</span>    CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
+<div class="line"><span class="lineno">  759</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  760</span>  TimestampIts t_its;</div>
+<div class="line"><span class="lineno">  761</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  762</span>  throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
+<div class="line"><span class="lineno">  763</span>  cpm.payload.management_container.reference_time = t_its;</div>
+<div class="line"><span class="lineno">  764</span>}</div>
+<div class="line"><span class="lineno">  765</span> </div>
+<div class="line"><span class="lineno">  777</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters__common_8h.html#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> <span class="keywordtype">double</span> latitude, <span class="keyword">const</span> <span class="keywordtype">double</span> longitude,</div>
+<div class="line"><span class="lineno">  778</span>                                 <span class="keyword">const</span> <span class="keywordtype">double</span> altitude = AltitudeValue::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  779</span>  <a class="code hl_function" href="cam__setters__common_8h.html#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(cpm.payload.management_container.reference_position, latitude, longitude, altitude);</div>
+<div class="line"><span class="lineno">  780</span>}</div>
+<div class="line"><span class="lineno">  781</span> </div>
+<div class="line"><span class="lineno">  794</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters__common_8h.html#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> gm::PointStamped&amp; utm_position, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; zone,</div>
+<div class="line"><span class="lineno">  795</span>                               <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; northp) {</div>
+<div class="line"><span class="lineno">  796</span>  <a class="code hl_function" href="cam__setters__common_8h.html#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(cpm.payload.management_container.reference_position, utm_position, zone, northp);</div>
+<div class="line"><span class="lineno">  797</span>}</div>
+<div class="line"><span class="lineno">  798</span> </div>
+<div class="line"><span class="lineno">  807</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a8114d67fdce63d66e23d67388ecf2091">setIdOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> uint16_t <span class="keywordtype">id</span>) {</div>
+<div class="line"><span class="lineno">  808</span>  <span class="keywordtype">object</span>.object_id.value = id;</div>
+<div class="line"><span class="lineno">  809</span>  <span class="keywordtype">object</span>.object_id_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  810</span>}</div>
+<div class="line"><span class="lineno">  811</span> </div>
+<div class="line"><span class="lineno">  823</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
+<div class="line"><span class="lineno">  824</span>  <span class="keywordflow">if</span> (delta_time &lt; DeltaTimeMilliSecondSigned::MIN || delta_time &gt; DeltaTimeMilliSecondSigned::MAX) {</div>
+<div class="line"><span class="lineno">  825</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;MeasurementDeltaTime out of range&quot;</span>);</div>
+<div class="line"><span class="lineno">  826</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  827</span>    <span class="keywordtype">object</span>.measurement_delta_time.value = delta_time;</div>
+<div class="line"><span class="lineno">  828</span>  }</div>
+<div class="line"><span class="lineno">  829</span>}</div>
+<div class="line"><span class="lineno">  830</span> </div>
+<div class="line"><span class="lineno">  844</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(CartesianCoordinateWithConfidence&amp; coordinate, <span class="keyword">const</span> int32_t value,</div>
+<div class="line"><span class="lineno">  845</span>                                                 <span class="keyword">const</span> uint16_t confidence = CoordinateConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  846</span>  <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno">  847</span>  <span class="keywordflow">if</span> (value &lt; CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  848</span>    coordinate.value.value = CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  849</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  850</span>    coordinate.value.value = CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  851</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  852</span>    coordinate.value.value = value;</div>
+<div class="line"><span class="lineno">  853</span>  }</div>
+<div class="line"><span class="lineno">  854</span> </div>
+<div class="line"><span class="lineno">  855</span>  <span class="comment">// limit confidence range</span></div>
+<div class="line"><span class="lineno">  856</span>  <span class="keywordflow">if</span> (confidence &gt; CoordinateConfidence::MAX || confidence &lt; CoordinateConfidence::MIN) {</div>
+<div class="line"><span class="lineno">  857</span>    coordinate.confidence.value = CoordinateConfidence::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  858</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  859</span>    coordinate.confidence.value = confidence;</div>
+<div class="line"><span class="lineno">  860</span>  }</div>
+<div class="line"><span class="lineno">  861</span>}</div>
+<div class="line"><span class="lineno">  862</span> </div>
+<div class="line"><span class="lineno">  874</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#aca2c7a4a6b103e14f92f582b5b114a1d">setPositionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Point&amp; point,</div>
+<div class="line"><span class="lineno">  875</span>                                         <span class="keyword">const</span> uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  876</span>                                         <span class="keyword">const</span> uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  877</span>                                         <span class="keyword">const</span> uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  878</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate, point.x * 100, x_confidence * 100);</div>
+<div class="line"><span class="lineno">  879</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate, point.y * 100, y_confidence * 100);</div>
+<div class="line"><span class="lineno">  880</span>  <span class="keywordflow">if</span> (point.z != 0.0) {</div>
+<div class="line"><span class="lineno">  881</span>    <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate, point.z * 100, z_confidence * 100);</div>
+<div class="line"><span class="lineno">  882</span>    <span class="keywordtype">object</span>.position.z_coordinate_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  883</span>  }</div>
+<div class="line"><span class="lineno">  884</span>}</div>
+<div class="line"><span class="lineno">  885</span> </div>
+<div class="line"><span class="lineno">  901</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1da5438bbc2b30d5d1139c51fe83e5bb">setUTMPositionOfPerceivedObject</a>(CollectivePerceptionMessage&amp; cpm, PerceivedObject&amp; <span class="keywordtype">object</span>,</div>
+<div class="line"><span class="lineno">  902</span>                                            <span class="keyword">const</span> gm::PointStamped&amp; utm_position,</div>
+<div class="line"><span class="lineno">  903</span>                                            <span class="keyword">const</span> uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  904</span>                                            <span class="keyword">const</span> uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  905</span>                                            <span class="keyword">const</span> uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  906</span>  gm::PointStamped reference_position = <a class="code hl_function" href="cam__getters__common_8h.html#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a>(cpm);</div>
+<div class="line"><span class="lineno">  907</span>  <span class="keywordflow">if</span> (utm_position.header.frame_id != reference_position.header.frame_id) {</div>
+<div class="line"><span class="lineno">  908</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;UTM-Position frame_id (&quot;</span> + utm_position.header.frame_id +</div>
+<div class="line"><span class="lineno">  909</span>                                <span class="stringliteral">&quot;) does not match the reference position frame_id (&quot;</span> + reference_position.header.frame_id +</div>
+<div class="line"><span class="lineno">  910</span>                                <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  911</span>  }</div>
+<div class="line"><span class="lineno">  912</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate,</div>
+<div class="line"><span class="lineno">  913</span>                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence);</div>
+<div class="line"><span class="lineno">  914</span>  <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate,</div>
+<div class="line"><span class="lineno">  915</span>                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence);</div>
+<div class="line"><span class="lineno">  916</span>  <span class="keywordflow">if</span> (utm_position.point.z != 0.0) {</div>
+<div class="line"><span class="lineno">  917</span>    <a class="code hl_function" href="#a1a3aaf08bc3475503726f2cfcfa13436">setCartesianCoordinateWithConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate,</div>
+<div class="line"><span class="lineno">  918</span>                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence);</div>
+<div class="line"><span class="lineno">  919</span>    <span class="keywordtype">object</span>.position.z_coordinate_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  920</span>  }</div>
+<div class="line"><span class="lineno">  921</span>}</div>
+<div class="line"><span class="lineno">  922</span> </div>
+<div class="line"><span class="lineno">  934</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(VelocityComponent&amp; velocity, <span class="keyword">const</span> int16_t value,</div>
+<div class="line"><span class="lineno">  935</span>                                 <span class="keyword">const</span> uint8_t confidence = SpeedConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  936</span>  <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno">  937</span>  <span class="keywordflow">if</span> (value &lt; VelocityComponentValue::NEGATIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  938</span>    velocity.value.value = VelocityComponentValue::NEGATIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  939</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; VelocityComponentValue::POSITIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  940</span>    velocity.value.value = VelocityComponentValue::POSITIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  941</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  942</span>    velocity.value.value = value;</div>
+<div class="line"><span class="lineno">  943</span>  }</div>
+<div class="line"><span class="lineno">  944</span> </div>
+<div class="line"><span class="lineno">  945</span>  <span class="comment">// limit confidence range</span></div>
+<div class="line"><span class="lineno">  946</span>  <span class="keywordflow">if</span> (confidence &gt; SpeedConfidence::MAX || confidence &lt; SpeedConfidence::MIN) {</div>
+<div class="line"><span class="lineno">  947</span>    velocity.confidence.value = SpeedConfidence::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  948</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  949</span>    velocity.confidence.value = confidence;</div>
+<div class="line"><span class="lineno">  950</span>  }</div>
+<div class="line"><span class="lineno">  951</span>}</div>
+<div class="line"><span class="lineno">  952</span> </div>
+<div class="line"><span class="lineno">  965</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#abd24f0535c56a3d4424f90dcb834474a">setVelocityOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; cartesian_velocity,</div>
+<div class="line"><span class="lineno">  966</span>                                         <span class="keyword">const</span> uint8_t x_confidence = SpeedConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  967</span>                                         <span class="keyword">const</span> uint8_t y_confidence = SpeedConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno">  968</span>                                         <span class="keyword">const</span> uint8_t z_confidence = SpeedConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  969</span>  <span class="keywordtype">object</span>.velocity.choice = Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY;</div>
+<div class="line"><span class="lineno">  970</span>  <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_confidence * 100);</div>
+<div class="line"><span class="lineno">  971</span>  <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_confidence * 100);</div>
+<div class="line"><span class="lineno">  972</span>  <span class="keywordflow">if</span> (cartesian_velocity.z != 0.0) {</div>
+<div class="line"><span class="lineno">  973</span>    <a class="code hl_function" href="#a2a0ccedd052d5e7962a73560ef34132b">setVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_confidence * 100);</div>
+<div class="line"><span class="lineno">  974</span>    <span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  975</span>  }</div>
+<div class="line"><span class="lineno">  976</span>  <span class="keywordtype">object</span>.velocity_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  977</span>}</div>
+<div class="line"><span class="lineno">  978</span> </div>
+<div class="line"><span class="lineno">  990</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(AccelerationComponent&amp; acceleration, <span class="keyword">const</span> int16_t value,</div>
+<div class="line"><span class="lineno">  991</span>                                     <span class="keyword">const</span> uint8_t confidence = AccelerationConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  992</span>  <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno">  993</span>  <span class="keywordflow">if</span> (value &lt; AccelerationValue::NEGATIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  994</span>    acceleration.value.value = AccelerationValue::NEGATIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  995</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value &gt; AccelerationValue::POSITIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  996</span>    acceleration.value.value = AccelerationValue::POSITIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  997</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  998</span>    acceleration.value.value = value;</div>
+<div class="line"><span class="lineno">  999</span>  }</div>
+<div class="line"><span class="lineno"> 1000</span> </div>
+<div class="line"><span class="lineno"> 1001</span>  <span class="comment">// limit confidence range</span></div>
+<div class="line"><span class="lineno"> 1002</span>  <span class="keywordflow">if</span> (confidence &gt; AccelerationConfidence::MAX || confidence &lt; AccelerationConfidence::MIN) {</div>
+<div class="line"><span class="lineno"> 1003</span>    acceleration.confidence.value = AccelerationConfidence::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno"> 1004</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1005</span>    acceleration.confidence.value = confidence;</div>
+<div class="line"><span class="lineno"> 1006</span>  }</div>
+<div class="line"><span class="lineno"> 1007</span>}</div>
+<div class="line"><span class="lineno"> 1008</span> </div>
+<div class="line"><span class="lineno"> 1021</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ac6f4326045c45464574b6a59dcc36235">setAccelerationOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; cartesian_acceleration,</div>
+<div class="line"><span class="lineno"> 1022</span>                                             <span class="keyword">const</span> uint8_t x_confidence = AccelerationConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno"> 1023</span>                                             <span class="keyword">const</span> uint8_t y_confidence = AccelerationConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno"> 1024</span>                                             <span class="keyword">const</span> uint8_t z_confidence = AccelerationConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1025</span>  <span class="keywordtype">object</span>.acceleration.choice = Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION;</div>
+<div class="line"><span class="lineno"> 1026</span>  <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration, cartesian_acceleration.x * 10,</div>
+<div class="line"><span class="lineno"> 1027</span>                           x_confidence * 10);</div>
+<div class="line"><span class="lineno"> 1028</span>  <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration, cartesian_acceleration.y * 10,</div>
+<div class="line"><span class="lineno"> 1029</span>                           y_confidence * 10);</div>
+<div class="line"><span class="lineno"> 1030</span>  <span class="keywordflow">if</span> (cartesian_acceleration.z != 0.0) {</div>
+<div class="line"><span class="lineno"> 1031</span>    <a class="code hl_function" href="#af9f7d4c0b8f99b0d04ce782990a2d960">setAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration, cartesian_acceleration.z * 10,</div>
+<div class="line"><span class="lineno"> 1032</span>                             z_confidence * 10);</div>
+<div class="line"><span class="lineno"> 1033</span>    <span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1034</span>  }</div>
+<div class="line"><span class="lineno"> 1035</span>  <span class="keywordtype">object</span>.acceleration_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1036</span>}</div>
+<div class="line"><span class="lineno"> 1037</span> </div>
+<div class="line"><span class="lineno"> 1048</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a91d4ba34ea7cd7288c8a3fd34a2e1ce9">setYawOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> yaw,</div>
+<div class="line"><span class="lineno"> 1049</span>                                    <span class="keyword">const</span> uint8_t confidence = AngleConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1050</span>  <span class="comment">// wrap angle to range [0, 360]</span></div>
+<div class="line"><span class="lineno"> 1051</span>  <span class="keywordtype">double</span> yaw_in_degrees = yaw * 180 / M_PI + 180;  <span class="comment">// TODO: check if this is correct</span></div>
+<div class="line"><span class="lineno"> 1052</span>  <span class="keywordflow">while</span> (yaw_in_degrees &gt; 360.0) yaw_in_degrees -= 360.0;</div>
+<div class="line"><span class="lineno"> 1053</span>  <span class="keywordflow">while</span> (yaw_in_degrees &lt; 0) yaw_in_degrees += 360.0;</div>
+<div class="line"><span class="lineno"> 1054</span>  <span class="keywordtype">object</span>.angles.z_angle.value.value = yaw_in_degrees * 10;</div>
+<div class="line"><span class="lineno"> 1055</span> </div>
+<div class="line"><span class="lineno"> 1056</span>  <span class="keywordflow">if</span> (confidence &gt; AngleConfidence::MAX || confidence &lt; AngleConfidence::MIN) {</div>
+<div class="line"><span class="lineno"> 1057</span>    <span class="keywordtype">object</span>.angles.z_angle.confidence.value = AngleConfidence::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno"> 1058</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1059</span>    <span class="keywordtype">object</span>.angles.z_angle.confidence.value = confidence;</div>
+<div class="line"><span class="lineno"> 1060</span>  }</div>
+<div class="line"><span class="lineno"> 1061</span>  <span class="keywordtype">object</span>.angles_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1062</span>}</div>
+<div class="line"><span class="lineno"> 1063</span> </div>
+<div class="line"><span class="lineno"> 1075</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ad4ef96eb81a2f200e5e9fcc2bcd393c8">setYawRateOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> yaw_rate,</div>
+<div class="line"><span class="lineno"> 1076</span>                                        <span class="keyword">const</span> uint8_t confidence = AngularSpeedConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1077</span>  int16_t yaw_rate_in_degrees = yaw_rate * 180 / M_PI;</div>
+<div class="line"><span class="lineno"> 1078</span>  <span class="keywordflow">if</span> (yaw_rate_in_degrees != CartesianAngularVelocityComponentValue::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1079</span>    <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno"> 1080</span>    <span class="keywordflow">if</span> (yaw_rate_in_degrees &lt; CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE) {</div>
+<div class="line"><span class="lineno"> 1081</span>      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE;</div>
+<div class="line"><span class="lineno"> 1082</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (yaw_rate_in_degrees &gt; CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno"> 1083</span>      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno"> 1084</span>    }</div>
+<div class="line"><span class="lineno"> 1085</span>  }</div>
+<div class="line"><span class="lineno"> 1086</span>  <span class="keywordtype">object</span>.z_angular_velocity.value.value = yaw_rate_in_degrees;</div>
+<div class="line"><span class="lineno"> 1087</span>  <span class="keywordtype">object</span>.z_angular_velocity.confidence.value = confidence;</div>
+<div class="line"><span class="lineno"> 1088</span>  <span class="keywordtype">object</span>.z_angular_velocity_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1089</span>}</div>
+<div class="line"><span class="lineno"> 1090</span> </div>
+<div class="line"><span class="lineno"> 1105</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(ObjectDimension&amp; dimension, <span class="keyword">const</span> uint16_t value,</div>
+<div class="line"><span class="lineno"> 1106</span>                               <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1107</span>  <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno"> 1108</span>  <span class="keywordflow">if</span> (value &lt; ObjectDimensionValue::MIN || value &gt; ObjectDimensionValue::MAX) {</div>
+<div class="line"><span class="lineno"> 1109</span>    dimension.value.value = ObjectDimensionValue::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno"> 1110</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1111</span>    dimension.value.value = value;</div>
+<div class="line"><span class="lineno"> 1112</span>  }</div>
+<div class="line"><span class="lineno"> 1113</span> </div>
+<div class="line"><span class="lineno"> 1114</span>  <span class="comment">// limit confidence range</span></div>
+<div class="line"><span class="lineno"> 1115</span>  <span class="keywordflow">if</span> (confidence &gt; ObjectDimensionConfidence::MAX || confidence &lt; ObjectDimensionConfidence::MIN) {</div>
+<div class="line"><span class="lineno"> 1116</span>    dimension.confidence.value = ObjectDimensionConfidence::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno"> 1117</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1118</span>    dimension.confidence.value = confidence;</div>
+<div class="line"><span class="lineno"> 1119</span>  }</div>
+<div class="line"><span class="lineno"> 1120</span>}</div>
+<div class="line"><span class="lineno"> 1121</span> </div>
+<div class="line"><span class="lineno"> 1132</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#aba6645d6f728ac345f0691da8c8088f4">setXDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
+<div class="line"><span class="lineno"> 1133</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1134</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_x, (uint16_t)(value * 10), confidence * 10);</div>
+<div class="line"><span class="lineno"> 1135</span>  <span class="keywordtype">object</span>.object_dimension_x_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1136</span>}</div>
+<div class="line"><span class="lineno"> 1137</span> </div>
+<div class="line"><span class="lineno"> 1148</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a38646cb1b65fc2c5b9c3a331e92e45f4">setYDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
+<div class="line"><span class="lineno"> 1149</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1150</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_y, (uint16_t)(value * 10), confidence * 10);</div>
+<div class="line"><span class="lineno"> 1151</span>  <span class="keywordtype">object</span>.object_dimension_y_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1152</span>}</div>
+<div class="line"><span class="lineno"> 1153</span> </div>
+<div class="line"><span class="lineno"> 1164</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ae21444357cbe689a19a025403205fccf">setZDimensionOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> <span class="keywordtype">double</span> value,</div>
+<div class="line"><span class="lineno"> 1165</span>                                           <span class="keyword">const</span> uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1166</span>  <a class="code hl_function" href="#a743d86a2379ac0d847517990e3051ea2">setObjectDimension</a>(<span class="keywordtype">object</span>.object_dimension_z, (uint16_t)(value * 10), confidence * 10);</div>
+<div class="line"><span class="lineno"> 1167</span>  <span class="keywordtype">object</span>.object_dimension_z_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1168</span>}</div>
+<div class="line"><span class="lineno"> 1169</span> </div>
+<div class="line"><span class="lineno"> 1181</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a1b4beab855989149bcb4c5522e9c93af">setDimensionsOfPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Vector3&amp; dimensions,</div>
+<div class="line"><span class="lineno"> 1182</span>                                           <span class="keyword">const</span> uint8_t x_confidence = ObjectDimensionConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno"> 1183</span>                                           <span class="keyword">const</span> uint8_t y_confidence = ObjectDimensionConfidence::UNAVAILABLE,</div>
+<div class="line"><span class="lineno"> 1184</span>                                           <span class="keyword">const</span> uint8_t z_confidence = ObjectDimensionConfidence::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno"> 1185</span>  <a class="code hl_function" href="#aba6645d6f728ac345f0691da8c8088f4">setXDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.x, x_confidence);</div>
+<div class="line"><span class="lineno"> 1186</span>  <a class="code hl_function" href="#a38646cb1b65fc2c5b9c3a331e92e45f4">setYDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.y, y_confidence);</div>
+<div class="line"><span class="lineno"> 1187</span>  <a class="code hl_function" href="#ae21444357cbe689a19a025403205fccf">setZDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>, dimensions.z, z_confidence);</div>
+<div class="line"><span class="lineno"> 1188</span>}</div>
+<div class="line"><span class="lineno"> 1189</span> </div>
+<div class="line"><span class="lineno"> 1199</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#afbe0daaad4fa3dd05f9a6989a3ae732b">initPerceivedObject</a>(PerceivedObject&amp; <span class="keywordtype">object</span>, <span class="keyword">const</span> gm::Point&amp; point, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
+<div class="line"><span class="lineno"> 1200</span>  <a class="code hl_function" href="#aca2c7a4a6b103e14f92f582b5b114a1d">setPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>, point);</div>
+<div class="line"><span class="lineno"> 1201</span>  <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(<span class="keywordtype">object</span>, delta_time);</div>
+<div class="line"><span class="lineno"> 1202</span>}</div>
+<div class="line"><span class="lineno"> 1203</span> </div>
+<div class="line"><span class="lineno"> 1216</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#ae6e626897fac5e47bc88ef632ab884fa">initPerceivedObjectWithUTMPosition</a>(CollectivePerceptionMessage&amp; cpm, PerceivedObject&amp; <span class="keywordtype">object</span>,</div>
+<div class="line"><span class="lineno"> 1217</span>                                               <span class="keyword">const</span> gm::PointStamped&amp; point, <span class="keyword">const</span> int16_t delta_time = 0) {</div>
+<div class="line"><span class="lineno"> 1218</span>  <a class="code hl_function" href="#a1da5438bbc2b30d5d1139c51fe83e5bb">setUTMPositionOfPerceivedObject</a>(cpm, <span class="keywordtype">object</span>, point);</div>
+<div class="line"><span class="lineno"> 1219</span>  <a class="code hl_function" href="#abb49f5815c283fd142ea50f358760a5e">setMeasurementDeltaTimeOfPerceivedObject</a>(<span class="keywordtype">object</span>, delta_time);</div>
+<div class="line"><span class="lineno"> 1220</span>}</div>
+<div class="line"><span class="lineno"> 1221</span> </div>
+<div class="line"><span class="lineno"> 1231</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
+<div class="line"><span class="lineno"> 1232</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1233</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1234</span>}</div>
+<div class="line"><span class="lineno"> 1235</span> </div>
+<div class="line"><span class="lineno"> 1249</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1250</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1251</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1252</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1253</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1254</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1255</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1256</span>  }</div>
+<div class="line"><span class="lineno"> 1257</span>}</div>
+<div class="line"><span class="lineno"> 1258</span> </div>
+<div class="line"><span class="lineno"> 1271</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1272</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1273</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1274</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1275</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1276</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1277</span>  }</div>
+<div class="line"><span class="lineno"> 1278</span>}</div>
+<div class="line"><span class="lineno"> 1279</span> </div>
+<div class="line"><span class="lineno"> 1280</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 <div class="ttc" id="acam__getters__common_8h_html_a5e71129b2e1e20e90529137ae1fd37ee"><div class="ttname"><a href="cam__getters__common_8h.html#a5e71129b2e1e20e90529137ae1fd37ee">getUTMPosition</a></div><div class="ttdeci">gm::PointStamped getUTMPosition(const CAM &amp;cam, int &amp;zone, bool &amp;northp)</div><div class="ttdoc">Get the UTM Position defined within the BasicContainer of the CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__getters__common_8h_source.html#l00207">cam_getters_common.h:207</a></div></div>
 <div class="ttc" id="acam__setters__common_8h_html_aa812192277920188abd842fb36d2caf2"><div class="ttname"><a href="cam__setters__common_8h.html#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(CAM &amp;cam, const gm::PointStamped &amp;utm_position, const int &amp;zone, const bool &amp;northp)</div><div class="ttdoc">Set the ReferencePosition of a CAM from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00235">cam_setters_common.h:235</a></div></div>
 <div class="ttc" id="acam__setters__common_8h_html_af6b307d10295b188e48796b8b2377db3"><div class="ttname"><a href="cam__setters__common_8h.html#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(CAM &amp;cam, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Set the ReferencePosition for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00218">cam_setters_common.h:218</a></div></div>
@@ -625,9 +623,9 @@ Functions</h2></td></tr>
 <div class="ttc" id="acpm__ts__setters_8h_html_a2a0ccedd052d5e7962a73560ef34132b"><div class="ttname"><a href="#a2a0ccedd052d5e7962a73560ef34132b">etsi_its_cpm_ts_msgs::access::setVelocityComponent</a></div><div class="ttdeci">void setVelocityComponent(VelocityComponent &amp;velocity, const int16_t value, const uint8_t confidence=SpeedConfidence::UNAVAILABLE)</div><div class="ttdoc">Sets the value and confidence of a VelocityComponent.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00378">cpm_ts_setters.h:378</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a307846214a4c3297ec38dc96daf6eed4"><div class="ttname"><a href="#a307846214a4c3297ec38dc96daf6eed4">etsi_its_cpm_ts_msgs::access::initPerceivedObjectContainer</a></div><div class="ttdeci">void initPerceivedObjectContainer(WrappedCpmContainer &amp;container, const uint8_t n_objects=0)</div><div class="ttdoc">Initializes a WrappedCpmContainer as a PerceivedObjectContainer with the given number of objects.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00675">cpm_ts_setters.h:675</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a38646cb1b65fc2c5b9c3a331e92e45f4"><div class="ttname"><a href="#a38646cb1b65fc2c5b9c3a331e92e45f4">etsi_its_cpm_ts_msgs::access::setYDimensionOfPerceivedObject</a></div><div class="ttdeci">void setYDimensionOfPerceivedObject(PerceivedObject &amp;object, const double value, const uint8_t confidence=ObjectDimensionConfidence::UNAVAILABLE)</div><div class="ttdoc">Sets the y-dimension of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00592">cpm_ts_setters.h:592</a></div></div>
-<div class="ttc" id="acpm__ts__setters_8h_html_a5ad9652e2997d91a09d287eddf2704fd"><div class="ttname"><a href="#a5ad9652e2997d91a09d287eddf2704fd">etsi_its_cpm_ts_msgs::access::addPerceivedObjectToContainer</a></div><div class="ttdeci">void addPerceivedObjectToContainer(WrappedCpmContainer &amp;container, const PerceivedObject &amp;perceived_object)</div><div class="ttdoc">Adds a PerceivedObject to the PerceivedObjectContainer / WrappedCpmContainer.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00694">cpm_ts_setters.h:694</a></div></div>
+<div class="ttc" id="acpm__ts__setters_8h_html_a5ad9652e2997d91a09d287eddf2704fd"><div class="ttname"><a href="#a5ad9652e2997d91a09d287eddf2704fd">etsi_its_cpm_ts_msgs::access::addPerceivedObjectToContainer</a></div><div class="ttdeci">void addPerceivedObjectToContainer(WrappedCpmContainer &amp;container, const PerceivedObject &amp;perceived_object)</div><div class="ttdoc">Adds a PerceivedObject to the PerceivedObjectContainer / WrappedCpmContainer.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00693">cpm_ts_setters.h:693</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a743d86a2379ac0d847517990e3051ea2"><div class="ttname"><a href="#a743d86a2379ac0d847517990e3051ea2">etsi_its_cpm_ts_msgs::access::setObjectDimension</a></div><div class="ttdeci">void setObjectDimension(ObjectDimension &amp;dimension, const uint16_t value, const uint8_t confidence=ObjectDimensionConfidence::UNAVAILABLE)</div><div class="ttdoc">Sets the object dimension with the given value and confidence.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00549">cpm_ts_setters.h:549</a></div></div>
-<div class="ttc" id="acpm__ts__setters_8h_html_a75791979f0a17e3b621c4a4333de27c1"><div class="ttname"><a href="#a75791979f0a17e3b621c4a4333de27c1">etsi_its_cpm_ts_msgs::access::addContainerToCPM</a></div><div class="ttdeci">void addContainerToCPM(CollectivePerceptionMessage &amp;cpm, const WrappedCpmContainer &amp;container)</div><div class="ttdoc">Adds a container to the Collective Perception Message (CPM).</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00717">cpm_ts_setters.h:717</a></div></div>
+<div class="ttc" id="acpm__ts__setters_8h_html_a75791979f0a17e3b621c4a4333de27c1"><div class="ttname"><a href="#a75791979f0a17e3b621c4a4333de27c1">etsi_its_cpm_ts_msgs::access::addContainerToCPM</a></div><div class="ttdeci">void addContainerToCPM(CollectivePerceptionMessage &amp;cpm, const WrappedCpmContainer &amp;container)</div><div class="ttdoc">Adds a container to the Collective Perception Message (CPM).</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00715">cpm_ts_setters.h:715</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a8114d67fdce63d66e23d67388ecf2091"><div class="ttname"><a href="#a8114d67fdce63d66e23d67388ecf2091">etsi_its_cpm_ts_msgs::access::setIdOfPerceivedObject</a></div><div class="ttdeci">void setIdOfPerceivedObject(PerceivedObject &amp;object, const uint16_t id)</div><div class="ttdoc">Set the ID of a PerceivedObject.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00251">cpm_ts_setters.h:251</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a8a90e4d094c9259e0be959dbfd0086f7"><div class="ttname"><a href="#a8a90e4d094c9259e0be959dbfd0086f7">etsi_its_cpm_ts_msgs::access::setReferenceTime</a></div><div class="ttdeci">void setReferenceTime(CollectivePerceptionMessage &amp;cpm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Sets the reference time in a CPM.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00201">cpm_ts_setters.h:201</a></div></div>
 <div class="ttc" id="acpm__ts__setters_8h_html_a91d4ba34ea7cd7288c8a3fd34a2e1ce9"><div class="ttname"><a href="#a91d4ba34ea7cd7288c8a3fd34a2e1ce9">etsi_its_cpm_ts_msgs::access::setYawOfPerceivedObject</a></div><div class="ttdeci">void setYawOfPerceivedObject(PerceivedObject &amp;object, const double yaw, const uint8_t confidence=AngleConfidence::UNAVAILABLE)</div><div class="ttdoc">Sets the yaw angle of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__setters_8h_source.html#l00492">cpm_ts_setters.h:492</a></div></div>
@@ -975,32 +973,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1170</span>}</div>
 <div class="line"><span class="lineno"> 1171</span> </div>
 <div class="line"><span class="lineno"> 1181</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1182</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1183</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1184</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1185</span>}</div>
-<div class="line"><span class="lineno"> 1186</span> </div>
-<div class="line"><span class="lineno"> 1200</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1201</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1202</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1203</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1204</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1205</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1206</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1207</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1208</span>  }</div>
-<div class="line"><span class="lineno"> 1209</span>}</div>
-<div class="line"><span class="lineno"> 1210</span> </div>
-<div class="line"><span class="lineno"> 1223</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1224</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1225</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1226</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1227</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1228</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1229</span>  }</div>
-<div class="line"><span class="lineno"> 1230</span>}</div>
-<div class="line"><span class="lineno"> 1231</span> </div>
-<div class="line"><span class="lineno"> 1232</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1182</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1183</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1184</span>}</div>
+<div class="line"><span class="lineno"> 1185</span> </div>
+<div class="line"><span class="lineno"> 1199</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1200</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1201</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1202</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1203</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1204</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1205</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1206</span>  }</div>
+<div class="line"><span class="lineno"> 1207</span>}</div>
+<div class="line"><span class="lineno"> 1208</span> </div>
+<div class="line"><span class="lineno"> 1221</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1222</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1223</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1224</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1225</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1226</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1227</span>  }</div>
+<div class="line"><span class="lineno"> 1228</span>}</div>
+<div class="line"><span class="lineno"> 1229</span> </div>
+<div class="line"><span class="lineno"> 1230</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1032,7 +1028,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initializes a WrappedCpmContainer as a PerceivedObjectContainer with the given number of objects. </p>
-<p>This function sets the container ID to PERCEIVED_OBJECT_CONTAINER and initializes the number of perceived objects in the container to the specified value.</p>
+<p>This function sets the container ID to CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER and initializes the number of perceived objects in the container to the specified value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">container</td><td>A reference to the WrappedCpmContainer to be initialized as a PerceivedObjectContainer. </td></tr>
@@ -1293,32 +1289,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1202</span>}</div>
 <div class="line"><span class="lineno"> 1203</span> </div>
 <div class="line"><span class="lineno"> 1213</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1214</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1215</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1216</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1217</span>}</div>
-<div class="line"><span class="lineno"> 1218</span> </div>
-<div class="line"><span class="lineno"> 1232</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1233</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1234</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1235</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1236</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1237</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1238</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1239</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1240</span>  }</div>
-<div class="line"><span class="lineno"> 1241</span>}</div>
-<div class="line"><span class="lineno"> 1242</span> </div>
-<div class="line"><span class="lineno"> 1255</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1256</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1257</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1258</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1259</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1260</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1261</span>  }</div>
-<div class="line"><span class="lineno"> 1262</span>}</div>
-<div class="line"><span class="lineno"> 1263</span> </div>
-<div class="line"><span class="lineno"> 1264</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1214</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1215</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1216</span>}</div>
+<div class="line"><span class="lineno"> 1217</span> </div>
+<div class="line"><span class="lineno"> 1231</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1232</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1233</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1234</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1235</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1236</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1237</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1238</span>  }</div>
+<div class="line"><span class="lineno"> 1239</span>}</div>
+<div class="line"><span class="lineno"> 1240</span> </div>
+<div class="line"><span class="lineno"> 1253</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1254</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1255</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1256</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1257</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1258</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1259</span>  }</div>
+<div class="line"><span class="lineno"> 1260</span>}</div>
+<div class="line"><span class="lineno"> 1261</span> </div>
+<div class="line"><span class="lineno"> 1262</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1623,32 +1617,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1187</span>}</div>
 <div class="line"><span class="lineno"> 1188</span> </div>
 <div class="line"><span class="lineno"> 1198</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1199</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1200</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1201</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1202</span>}</div>
-<div class="line"><span class="lineno"> 1203</span> </div>
-<div class="line"><span class="lineno"> 1217</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1218</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1219</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1220</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1221</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1222</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1223</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1224</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1225</span>  }</div>
-<div class="line"><span class="lineno"> 1226</span>}</div>
-<div class="line"><span class="lineno"> 1227</span> </div>
-<div class="line"><span class="lineno"> 1240</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1241</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1242</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1243</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1244</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1245</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1246</span>  }</div>
-<div class="line"><span class="lineno"> 1247</span>}</div>
-<div class="line"><span class="lineno"> 1248</span> </div>
-<div class="line"><span class="lineno"> 1249</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1199</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1200</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1201</span>}</div>
+<div class="line"><span class="lineno"> 1202</span> </div>
+<div class="line"><span class="lineno"> 1216</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1217</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1218</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1219</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1220</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1221</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1222</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1223</span>  }</div>
+<div class="line"><span class="lineno"> 1224</span>}</div>
+<div class="line"><span class="lineno"> 1225</span> </div>
+<div class="line"><span class="lineno"> 1238</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1239</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1240</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1241</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1242</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1243</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1244</span>  }</div>
+<div class="line"><span class="lineno"> 1245</span>}</div>
+<div class="line"><span class="lineno"> 1246</span> </div>
+<div class="line"><span class="lineno"> 1247</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2270,32 +2262,30 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno"> 1152</span>}</div>
 <div class="line"><span class="lineno"> 1153</span> </div>
 <div class="line"><span class="lineno"> 1163</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1164</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1165</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1166</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1167</span>}</div>
-<div class="line"><span class="lineno"> 1168</span> </div>
-<div class="line"><span class="lineno"> 1182</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1183</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1184</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1185</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1186</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1187</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1188</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1189</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1190</span>  }</div>
-<div class="line"><span class="lineno"> 1191</span>}</div>
-<div class="line"><span class="lineno"> 1192</span> </div>
-<div class="line"><span class="lineno"> 1205</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1206</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1207</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1208</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1209</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1210</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1211</span>  }</div>
-<div class="line"><span class="lineno"> 1212</span>}</div>
-<div class="line"><span class="lineno"> 1213</span> </div>
-<div class="line"><span class="lineno"> 1214</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1164</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1165</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1166</span>}</div>
+<div class="line"><span class="lineno"> 1167</span> </div>
+<div class="line"><span class="lineno"> 1181</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1182</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1183</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1184</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1185</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1186</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1187</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1188</span>  }</div>
+<div class="line"><span class="lineno"> 1189</span>}</div>
+<div class="line"><span class="lineno"> 1190</span> </div>
+<div class="line"><span class="lineno"> 1203</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1204</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1205</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1206</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1207</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1208</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1209</span>  }</div>
+<div class="line"><span class="lineno"> 1210</span>}</div>
+<div class="line"><span class="lineno"> 1211</span> </div>
+<div class="line"><span class="lineno"> 1212</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2911,13 +2901,14 @@ template&lt;typename T &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00549">549</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  558</span>                                                                                                                   {</div>
-<div class="line"><span class="lineno">  559</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno">  560</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno">  561</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno">  562</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno">  563</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno">  564</span>  } <span class="keywordflow">else</span> {</div>
+<div class="fragment"><div class="line"><span class="lineno">  557</span>                                                                                                                   {</div>
+<div class="line"><span class="lineno">  558</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno">  559</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno">  560</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno">  561</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno">  562</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  563</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno">  564</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3622,7 +3613,9 @@ template&lt;typename T &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cpm__ts__setters_8h_source.html#l00576">576</a> of file <a class="el" href="cpm__ts__setters_8h_source.html">cpm_ts_setters.h</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">  579</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  580</span>  <span class="comment">// check for maximum number of containers</span></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a91d4ba34ea7cd7288c8a3fd34a2e1ce9" name="a91d4ba34ea7cd7288c8a3fd34a2e1ce9"></a>
@@ -4028,32 +4021,30 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno"> 1119</span>}</div>
 <div class="line"><span class="lineno"> 1120</span> </div>
 <div class="line"><span class="lineno"> 1130</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1131</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1132</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1133</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1134</span>}</div>
-<div class="line"><span class="lineno"> 1135</span> </div>
-<div class="line"><span class="lineno"> 1149</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1150</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1151</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1152</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1153</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1154</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1155</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1156</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1157</span>  }</div>
-<div class="line"><span class="lineno"> 1158</span>}</div>
-<div class="line"><span class="lineno"> 1159</span> </div>
-<div class="line"><span class="lineno"> 1172</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1173</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1174</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1175</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1176</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1177</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1178</span>  }</div>
-<div class="line"><span class="lineno"> 1179</span>}</div>
-<div class="line"><span class="lineno"> 1180</span> </div>
-<div class="line"><span class="lineno"> 1181</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1131</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1132</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1133</span>}</div>
+<div class="line"><span class="lineno"> 1134</span> </div>
+<div class="line"><span class="lineno"> 1148</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1149</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1150</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1151</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1152</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1153</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1154</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1155</span>  }</div>
+<div class="line"><span class="lineno"> 1156</span>}</div>
+<div class="line"><span class="lineno"> 1157</span> </div>
+<div class="line"><span class="lineno"> 1170</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1171</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1172</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1173</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1174</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1175</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1176</span>  }</div>
+<div class="line"><span class="lineno"> 1177</span>}</div>
+<div class="line"><span class="lineno"> 1178</span> </div>
+<div class="line"><span class="lineno"> 1179</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -4352,32 +4343,30 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno"> 1135</span>}</div>
 <div class="line"><span class="lineno"> 1136</span> </div>
 <div class="line"><span class="lineno"> 1146</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a307846214a4c3297ec38dc96daf6eed4">initPerceivedObjectContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> uint8_t n_objects = 0) {</div>
-<div class="line"><span class="lineno"> 1147</span>  container.container_id.value = CpmContainerId::PERCEIVED_OBJECT_CONTAINER;</div>
-<div class="line"><span class="lineno"> 1148</span>  container.container_data.choice = container.container_id;</div>
-<div class="line"><span class="lineno"> 1149</span>  container.container_data.perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
-<div class="line"><span class="lineno"> 1150</span>}</div>
-<div class="line"><span class="lineno"> 1151</span> </div>
-<div class="line"><span class="lineno"> 1165</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
-<div class="line"><span class="lineno"> 1166</span>  <span class="keywordflow">if</span> (container.container_id.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1167</span>      container.container_data.choice.value == CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {</div>
-<div class="line"><span class="lineno"> 1168</span>    container.container_data.perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
-<div class="line"><span class="lineno"> 1169</span>    container.container_data.perceived_object_container.number_of_perceived_objects.value =</div>
-<div class="line"><span class="lineno"> 1170</span>        container.container_data.perceived_object_container.perceived_objects.array.size();</div>
-<div class="line"><span class="lineno"> 1171</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1172</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1173</span>  }</div>
-<div class="line"><span class="lineno"> 1174</span>}</div>
-<div class="line"><span class="lineno"> 1175</span> </div>
-<div class="line"><span class="lineno"> 1188</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
-<div class="line"><span class="lineno"> 1189</span>  <span class="comment">// check for maximum number of containers</span></div>
-<div class="line"><span class="lineno"> 1190</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
-<div class="line"><span class="lineno"> 1191</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
-<div class="line"><span class="lineno"> 1192</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1193</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1194</span>  }</div>
-<div class="line"><span class="lineno"> 1195</span>}</div>
-<div class="line"><span class="lineno"> 1196</span> </div>
-<div class="line"><span class="lineno"> 1197</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1147</span>  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER;</div>
+<div class="line"><span class="lineno"> 1148</span>  container.container_data_perceived_object_container.number_of_perceived_objects.value = n_objects;</div>
+<div class="line"><span class="lineno"> 1149</span>}</div>
+<div class="line"><span class="lineno"> 1150</span> </div>
+<div class="line"><span class="lineno"> 1164</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a5ad9652e2997d91a09d287eddf2704fd">addPerceivedObjectToContainer</a>(WrappedCpmContainer&amp; container, <span class="keyword">const</span> PerceivedObject&amp; perceived_object) {</div>
+<div class="line"><span class="lineno"> 1165</span>  <span class="keywordflow">if</span> (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1166</span>    container.container_data_perceived_object_container.perceived_objects.array.push_back(perceived_object);</div>
+<div class="line"><span class="lineno"> 1167</span>    container.container_data_perceived_object_container.number_of_perceived_objects.value =</div>
+<div class="line"><span class="lineno"> 1168</span>        container.container_data_perceived_object_container.perceived_objects.array.size();</div>
+<div class="line"><span class="lineno"> 1169</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1170</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1171</span>  }</div>
+<div class="line"><span class="lineno"> 1172</span>}</div>
+<div class="line"><span class="lineno"> 1173</span> </div>
+<div class="line"><span class="lineno"> 1186</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a75791979f0a17e3b621c4a4333de27c1">addContainerToCPM</a>(CollectivePerceptionMessage&amp; cpm, <span class="keyword">const</span> WrappedCpmContainer&amp; container) {</div>
+<div class="line"><span class="lineno"> 1187</span>  <span class="comment">// check for maximum number of containers</span></div>
+<div class="line"><span class="lineno"> 1188</span>  <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array.size() &lt; WrappedCpmContainers::MAX_SIZE) {</div>
+<div class="line"><span class="lineno"> 1189</span>    cpm.payload.cpm_containers.value.array.push_back(container);</div>
+<div class="line"><span class="lineno"> 1190</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1191</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Maximum number of CPM-Containers reached&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1192</span>  }</div>
+<div class="line"><span class="lineno"> 1193</span>}</div>
+<div class="line"><span class="lineno"> 1194</span> </div>
+<div class="line"><span class="lineno"> 1195</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
