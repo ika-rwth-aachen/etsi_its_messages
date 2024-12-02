@@ -90,7 +90,7 @@ def adjustIncludes(parent_path: str):
 
     # process files in parallel
     files_to_process = [(file, headers, prefix) for file in [*header_files, *source_files]]
-    with Pool(min(ceil(os.cpu_count() * 0.8), os.cpu_count() - 1)) as pool:
+    with Pool(max(1, min(ceil(os.cpu_count() * 0.8), os.cpu_count() - 1))) as pool:
         dummy = list(tqdm(pool.imap(adjustIncludesInFile, files_to_process), total=len(files_to_process), desc="Adjusting includes"))
 
 def main():
