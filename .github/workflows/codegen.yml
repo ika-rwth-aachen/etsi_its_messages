@@ -121,7 +121,7 @@ jobs:
           - message: denm
             script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_msgs/etsi_its_denm_msgs/msg
           - message: cpm_ts
-            script: ./utils/codegen/codegen-rust/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
           - message: mapem_ts
             script: ./utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t mapem_ts -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
           - message: spatem_ts
@@ -140,13 +140,6 @@ jobs:
           cache: pip
       - name: Install dependencies 
         run: pip install -r ./utils/codegen/codegen-py/requirements.txt
-      - name: Download rgen-image (artifact)
-        uses: actions/download-artifact@v4
-        with:
-          name: rgen-image
-          path: /tmp
-      - name: Load rgen-image
-        run: docker load --input /tmp/rgen-image.tar
       - name: etsi_its_${{ matrix.message }}_msgs
         run: |
           ./asn1/external/download.sh
@@ -173,7 +166,7 @@ jobs:
           - message: denm
             script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
           - message: cpm_ts
-            script: ./utils/codegen/codegen-rust/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion -di rgen:ci
+            script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
           - message: mapem_ts
             script: ./utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t mapem_ts -o etsi_its_conversion/etsi_its_mapem_ts_conversion/include/etsi_its_mapem_ts_conversion
           - message: spatem_ts
@@ -192,13 +185,6 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r ./utils/codegen/codegen-py/requirements.txt
-      - name: Download rgen-image (artifact)
-        uses: actions/download-artifact@v4
-        with:
-          name: rgen-image
-          path: /tmp
-      - name: Load rgen-image
-        run: docker load --input /tmp/rgen-image.tar
       - name: etsi_its_${{ matrix.message }}_conversion
         run: |
           ./asn1/external/download.sh

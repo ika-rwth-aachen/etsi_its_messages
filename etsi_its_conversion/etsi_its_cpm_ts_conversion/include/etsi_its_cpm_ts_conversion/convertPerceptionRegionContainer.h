@@ -2,7 +2,6 @@
 MIT License
 
 Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
-Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +28,16 @@ SOFTWARE.
 
 #include <stdexcept>
 
+#include <etsi_its_cpm_ts_coding/asn_SEQUENCE_OF.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceptionRegionContainer.h>
+#include <etsi_its_cpm_ts_coding/cpm_ts_PerceptionRegion.h>
 #include <etsi_its_cpm_ts_conversion/convertPerceptionRegion.h>
-#include <etsi_its_cpm_ts_conversion/convertPerceptionRegionContainer.h>
 #ifdef ROS1
+#include <etsi_its_cpm_ts_msgs/PerceptionRegion.h>
 #include <etsi_its_cpm_ts_msgs/PerceptionRegionContainer.h>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 #else
+#include <etsi_its_cpm_ts_msgs/msg/perception_region.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/perception_region_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 #endif

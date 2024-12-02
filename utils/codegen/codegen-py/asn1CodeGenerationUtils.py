@@ -242,7 +242,8 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
                         raw_def = ""
             if raw_def is not None:
                 raw_def += line
-                if "}" in line and not "}," in line and not ("::=" in line and line.rstrip().endswith("{")):
+                # TODO: improve this condition
+                if "}" in line and not "}," in line and not "} |" in line and not "} )" in line and not "})" in line and not ("::=" in line and line.rstrip().endswith("{")):
                     asn1_raw[type] = "".join(comment_lines) + raw_def
                     raw_def = None
 
@@ -315,6 +316,51 @@ def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
 
     return asn1_values
 
+def extractAsn1ClassesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 class information from multiple ASN1 documents.
+
+    Args:
+        asn1_docs (Dict): type information by document
+
+    Raises:
+        ValueError: if a class is found in multiple documents
+
+    Returns:
+        Dict[str, Dict]: class information by name
+    """
+
+    asn1_classes = {}
+    for doc, asn1 in asn1_docs.items():
+        for class_name in asn1["object-classes"]:
+            if class_name not in asn1_classes:
+                asn1_classes[class_name] = asn1["object-classes"][class_name]
+            else:
+                raise ValueError(f"Class '{class_name}' from '{doc}' is a duplicate")
+
+    return asn1_classes
+
+def extractAsn1SetsFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
+    """Extracts all parsed ASN1 set information from multiple ASN1 documents.
+
+    Args:
+        asn1_docs (Dict): type information by document
+
+    Raises:
+        ValueError: if a set is found in multiple documents
+
+    Returns:
+        Dict[str, Dict]: set information by name
+    """
+
+    asn1_sets = {}
+    for doc, asn1 in asn1_docs.items():
+        for set_name in asn1["object-sets"]:
+            if set_name not in asn1_sets:
+                asn1_sets[set_name] = asn1["object-sets"][set_name]
+            else:
+                raise ValueError(f"Set '{set_name}' from '{doc}' is a duplicate")
+
+    return asn1_sets
 
 def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
     """Checks if all type information is known and supported.
@@ -328,7 +374,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
         TypeError: if the type of a member is not part of the given types, hence unknown
     """
 
-    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL"]
+    known_types = ["SEQUENCE", "SEQUENCE OF", "CHOICE", "ENUMERATED", "NULL", "CPM-CONTAINER-ID-AND-TYPE.&id", "CPM-CONTAINER-ID-AND-TYPE.&Type"]
     known_types += list(asn1_types.keys())
     known_types += list(ASN1_PRIMITIVES_2_ROS.keys())
 
@@ -346,7 +392,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
 
             # check if type is known
             if member["type"] not in known_types:
-                if ".&" in member["type"]:
+                if ".&" in member["type"]: # class type is currently just handled for CPM
                     logging.warning(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
@@ -357,7 +403,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{asn1_type_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
@@ -365,6 +411,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         asn1_type_info (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_values (Dict[str, Dict]): value information of all values by name
+        asn1_sets (Dict[str, Dict]): set information of all sets by name
+        asn1_classes (Dict[str, Dict]): class information of all classes by name
 
     Returns:
         Dict: jinja context
@@ -516,7 +564,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         for member in asn1_type_info["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
             if member_context is None:
                 continue
             if "optional" in member:
@@ -560,6 +608,11 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "is_choice_var": True
         })
 
+         # disable choice identifier, if identified by another property (e.g., in the case of CLASS)
+        if "identified_by" in asn1_type_info:
+            name = asn1_type_info["identified_by"]
+            context["members"][0]["disabled"] = True
+
         # recursively add members for all options, incl. constant for flag
         for im, member in enumerate(asn1_type_info["members"]):
             if member is None:
@@ -567,7 +620,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             member_name = validRosField(f"CHOICE_{member['name']}", is_const=True)
             if "name" in asn1_type_info:
                 member_name = validRosField(f"CHOICE_{asn1_type_info['name']}_{member['name']}", is_const=True)
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
             if member_context is None:
                 continue
             if len(member_context["members"]) > 0:
@@ -581,10 +634,16 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
                 for c_idx, constant in enumerate(member_context["members"][0]["constants"]):
                     member_context["members"][0]["constants"][c_idx]["ros_field_name"] = validRosField(f"{member_context['members'][0]['ros_field_name']}_{constant['ros_field_name']}", is_const=True)
+                # set choice value based on index or asn1 values if identified by another property (e.g., in the case of CLASS)
+                choice_value = im
+                if "identified_by" in asn1_type_info:
+                    asn1_value_name = member_context["asn1_type_type"][0].lower() + member_context["asn1_type_type"][1:]
+                    if asn1_value_name in asn1_values:
+                        choice_value = asn1_values[asn1_value_name]["value"]
                 member_context["members"][0]["constants"].append({
                     "ros_msg_type": "uint8",
                     "ros_field_name": validRosField(member_name, is_const=True),
-                    "ros_value": im
+                    "ros_value": choice_value
                 })
             context["members"].extend(member_context["members"])
 
@@ -717,6 +776,52 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 "ros_field_name": validRosField(size_constant_name, is_const=True),
                 "ros_value": size
             })
+
+        # add constants for limits (TODO: duplicate with primitives)
+        if "restricted-to" in asn1_type_info and isinstance(asn1_type_info["restricted-to"][0], tuple):
+            min_value = asn1_type_info["restricted-to"][0][0]
+            max_value = asn1_type_info["restricted-to"][0][1]
+            ros_type = simplestRosIntegerType(min_value, max_value)
+            min_constant_name = "MIN"
+            max_constant_name = "MAX"
+            if "name" in asn1_type_info:
+                min_constant_name = validRosField(f"{asn1_type_info['name']}_{min_constant_name}", is_const=True)
+                max_constant_name = validRosField(f"{asn1_type_info['name']}_{max_constant_name}", is_const=True)
+            context["members"][0]["constants"].append({
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(min_constant_name, is_const=True),
+                "ros_value": min_value
+            })
+            context["members"][0]["constants"].append({
+                "ros_msg_type": validRosType(ros_type),
+                "ros_field_name": validRosField(max_constant_name, is_const=True),
+                "ros_value": max_value
+            })
+
+    # class types
+    elif ".&" in asn1_type_type and asn1_type_type.split(".")[0] in asn1_classes:
+        asn1_class = asn1_classes[asn1_type_type.split(".")[0]]
+        for member in asn1_class["members"]:
+            if member["name"] == asn1_type_type.split(".")[1]:
+                class_member = {
+                    "name": asn1_type_info["name"],
+                    "type": member["type"]
+                }
+                if member["type"] not in asn1_types:
+                    class_member["type"] = "CHOICE"
+                    class_member["members"] = []
+                    if type(asn1_type_info["table"]) is list:
+                        identifier = asn1_type_info["table"][1][0] # structure known from CPM
+                        class_member["identified_by"] = validRosField(identifier) + ".value"
+                    for value in asn1_values:
+                        for member in asn1_class["members"]:
+                            if member["type"] == asn1_values[value]["type"]:
+                                class_member["members"].append({
+                                    "name": value[0].upper() + value[1:], # make sure type starts with upper case
+                                    "type": value[0].upper() + value[1:] # make sure type starts with upper case
+                                })
+                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+                context["members"].extend(member_context["members"])
 
     elif asn1_type_type == "NULL":
 

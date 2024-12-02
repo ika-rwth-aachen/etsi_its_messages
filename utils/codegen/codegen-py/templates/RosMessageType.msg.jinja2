@@ -40,7 +40,9 @@
 # {{comment}}
 {% endfor -%}
 {% for member in members -%}
+{% if not member.disabled -%}
 {{member.ros_msg_type}} {{member.ros_field_name}}
+{% endif -%}
 {% if member.optional -%}
 bool {{member.ros_field_name}}_is_present
 {% endif -%}

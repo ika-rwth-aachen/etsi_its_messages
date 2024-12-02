@@ -34,6 +34,8 @@
 # */
 #  LowFrequencyContainer ::= CHOICE {
 #   basicVehicleContainerLowFrequency BasicVehicleContainerLowFrequency (WITH COMPONENTS {..., pathHistory (SIZE (0..23))}),
+# 	...
+# }
 # ------------------------------------------------------------------------------
 
 uint8 choice
