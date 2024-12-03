@@ -58,7 +58,7 @@ etsi_its_cam_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
@@ -73,7 +73,7 @@ etsi_its_cam_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
@@ -88,7 +88,7 @@ etsi_its_denm_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
@@ -103,7 +103,7 @@ etsi_its_cpm_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -122,7 +122,7 @@ etsi_its_vam_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -t vam_ts
@@ -137,7 +137,7 @@ etsi_its_mapem_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -155,7 +155,7 @@ etsi_its_spatem_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -172,7 +172,7 @@ etsi_its_cam_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_cam_msgs/msg
@@ -183,7 +183,7 @@ etsi_its_cam_ts_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
@@ -194,7 +194,7 @@ etsi_its_denm_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
@@ -205,7 +205,7 @@ etsi_its_cpm_ts_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -222,7 +222,7 @@ etsi_its_vam_ts_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
@@ -233,7 +233,7 @@ etsi_its_mapem_ts_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -247,7 +247,7 @@ etsi_its_spatem_ts_msgs:
   stage: ROS Messages
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -261,7 +261,7 @@ etsi_its_cam_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
@@ -272,7 +272,7 @@ etsi_its_cam_ts_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
@@ -283,7 +283,7 @@ etsi_its_denm_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
@@ -294,7 +294,7 @@ etsi_its_cpm_ts_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -311,7 +311,7 @@ etsi_its_vam_ts_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -t vam_ts
@@ -322,7 +322,7 @@ etsi_its_mapem_ts_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -336,7 +336,7 @@ etsi_its_spatem_ts_conversion:
   stage: Conversion Headers
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn

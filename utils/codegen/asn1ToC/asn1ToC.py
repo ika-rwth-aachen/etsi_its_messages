@@ -34,6 +34,9 @@ import tempfile
 from math import ceil
 from multiprocessing import Pool
 
+from tqdm import tqdm
+
+
 def parseCli():
     """Parses script's CLI arguments.
 
@@ -77,22 +80,18 @@ def adjustIncludesInFile(args):
         f.write(contents)
 
 def adjustIncludes(parent_path: str):
-    print("Start adjusting includes")
-    prefix = os.path.basename(parent_path)
 
+    prefix = os.path.basename(parent_path)
     header_files = [os.path.join(parent_path, "include", prefix, f) for f in os.listdir(os.path.join(parent_path, "include", prefix))]
     source_files = [os.path.join(parent_path, "src", f) for f in os.listdir(os.path.join(parent_path, "src"))]
     header_files = [f for f in header_files if os.path.isfile(f)]
     source_files = [f for f in source_files if os.path.isfile(f)]
     headers = [os.path.basename(f) for f in header_files]
 
-    # Prepare arguments for parallel processing
+    # process files in parallel
     files_to_process = [(file, headers, prefix) for file in [*header_files, *source_files]]
-
-    # Use multiprocessing to process files in parallel
-    with Pool() as pool:
-        pool = Pool(ceil(os.cpu_count()*0.8))
-        pool.map(adjustIncludesInFile, files_to_process)
+    with Pool(max(1, min(ceil(os.cpu_count() * 0.8), os.cpu_count() - 1))) as pool:
+        dummy = list(tqdm(pool.imap(adjustIncludesInFile, files_to_process), total=len(files_to_process), desc="Adjusting includes"))
 
 def main():
 
@@ -138,12 +137,13 @@ def main():
 
     adjustIncludes(output_dir)
 
+    print(f"Applying patches ...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     patch_file = os.path.join(script_dir, f"patches/{args.type}.patch")
     if os.path.exists(patch_file):
         subprocess.run(["git", "apply", patch_file], check=True)
 
-    print("Successfully generated header and source files with asn1c.")
+    print(f"Generated C/C++ library for {args.type}")
 
 if __name__ == "__main__":
 

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # ==============================================================================
 # MIT License
 #
@@ -24,12 +22,21 @@
 # SOFTWARE.
 # ==============================================================================
 
+import logging
 import re
-import warnings
+import sys
 from typing import Dict, List, Optional, Tuple
 
 import asn1tools
 import numpy as np
+
+
+# color logging levels in output
+logging.addLevelName(logging.WARNING, "\033[1;33m%s\033[1;0m" % logging.getLevelName(logging.WARNING))
+logging.addLevelName(logging.ERROR, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
+
+
+AUTO_GENERATE_COMMAND = "python3 " + " ".join(sys.argv)
 
 
 ASN1_PRIMITIVES_2_ROS = {
@@ -386,7 +393,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             # check if type is known
             if member["type"] not in known_types:
                 if ".&" in member["type"]: # class type is currently just handled for CPM
-                    warnings.warn(
+                    logging.warning(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
                         f"yet supported")
@@ -411,8 +418,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         Dict: jinja context
     """
 
-    if "components-of" in asn1_type_info:
-        warnings.warn(f"Handling of 'components-of' in '{asn1_type_name}' not yet supported.")
+    if "components-of" in asn1_type_info: # TODO
+        logging.warning(f"Handling of 'components-of' in '{asn1_type_name}' not yet supported")
         return { # generate in a way such that compilation will not succeed
             "etsi_type": None,
             "asn1_type_type": "components-of",
@@ -423,6 +430,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "members": [{"asn1_type_name": asn1_type_name, "ros_msg_type": "TODO: components-of", "ros_field_name": "is not yet supported", "c_field_name": "is not yet supported"}],
             "asn1_definition": None,
             "comments": [],
+            "auto_generate_command": AUTO_GENERATE_COMMAND,
         }
 
     asn1_type_type = asn1_type_info["type"]
@@ -437,6 +445,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         "members": [],
         "asn1_definition": None,
         "comments": [],
+        "auto_generate_command": AUTO_GENERATE_COMMAND,
     }
 
     # extra information / asn1 fields that are not processed as comments
@@ -646,7 +655,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         array_type = asn1_type_info['element']['type']
 
         if array_type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported.")
+            logging.warning(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported")
             return None
 
         member_context = {
@@ -724,7 +733,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     elif asn1_type_type in asn1_types:
 
         if asn1_type_type == "RegionalExtension":
-            warnings.warn(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported.")
+            logging.warning(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported")
             return None
 
         name = asn1_type_info["name"] if "name" in asn1_type_info else "value"
@@ -820,6 +829,6 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
 
     else:
 
-        warnings.warn(f"Cannot handle type '{asn1_type_type}'")
+        logging.warning(f"Cannot handle type '{asn1_type_type}'")
 
     return context
