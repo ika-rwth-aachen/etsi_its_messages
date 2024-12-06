@@ -54,7 +54,7 @@ def generate_launch_description():
     ]
 
     return LaunchDescription([
-        SetParameter("use_sim_time", LaunchConfiguration("use_sim_time")),
         *args,
+        SetParameter("use_sim_time", LaunchConfiguration("use_sim_time")),
         *nodes,
     ])
