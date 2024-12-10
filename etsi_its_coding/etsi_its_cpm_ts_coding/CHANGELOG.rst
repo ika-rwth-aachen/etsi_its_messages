@@ -2,6 +2,9 @@
 Changelog for package etsi_its_cpm_ts_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.0.0 (2024-12-10)
+------------------
+
 2.4.0 (2024-11-19)
 ------------------
 * Merge branch 'main' into feature/denm-launchfile-transformation

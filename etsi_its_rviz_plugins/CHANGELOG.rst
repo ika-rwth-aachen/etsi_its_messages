@@ -2,6 +2,9 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.0.0 (2024-12-10)
+------------------
+
 2.4.0 (2024-11-19)
 ------------------
 * Merge pull request `#39 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/39>`_ from ika-rwth-aachen/feature/denm-launchfile-transformation
