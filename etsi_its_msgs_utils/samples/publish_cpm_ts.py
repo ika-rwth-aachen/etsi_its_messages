@@ -51,8 +51,7 @@ class Publisher(Node):
 
 
         cpm_container = WrappedCpmContainer()
-        cpm_container.container_id.value = cpm_container.container_id.PERCEIVED_OBJECT_CONTAINER
-        cpm_container.container_data.choice.value = cpm_container.container_id.value
+        cpm_container.container_id.value = cpm_container.CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER
 
         perceived_object_container = PerceivedObjectContainer()
         perceived_object_container.number_of_perceived_objects.value = 2
@@ -76,7 +75,7 @@ class Publisher(Node):
             perceived_object.object_dimension_z.confidence.value = perceived_object.object_dimension_z.confidence.UNAVAILABLE
             perceived_object_container.perceived_objects.array.append(perceived_object)
 
-        cpm_container.container_data.perceived_object_container = perceived_object_container
+        cpm_container.container_data_perceived_object_container = perceived_object_container
         msg.payload.cpm_containers.value.array.append(cpm_container)
 
         self.get_logger().info(f"Publishing CPM")

@@ -34,6 +34,9 @@ import tempfile
 from math import ceil
 from multiprocessing import Pool
 
+from tqdm import tqdm
+
+
 def parseCli():
     """Parses script's CLI arguments.
 
@@ -77,22 +80,18 @@ def adjustIncludesInFile(args):
         f.write(contents)
 
 def adjustIncludes(parent_path: str):
-    print("Start adjusting includes")
-    prefix = os.path.basename(parent_path)
 
+    prefix = os.path.basename(parent_path)
     header_files = [os.path.join(parent_path, "include", prefix, f) for f in os.listdir(os.path.join(parent_path, "include", prefix))]
     source_files = [os.path.join(parent_path, "src", f) for f in os.listdir(os.path.join(parent_path, "src"))]
     header_files = [f for f in header_files if os.path.isfile(f)]
     source_files = [f for f in source_files if os.path.isfile(f)]
     headers = [os.path.basename(f) for f in header_files]
 
-    # Prepare arguments for parallel processing
+    # process files in parallel
     files_to_process = [(file, headers, prefix) for file in [*header_files, *source_files]]
-
-    # Use multiprocessing to process files in parallel
-    with Pool() as pool:
-        pool = Pool(ceil(os.cpu_count()*0.8))
-        pool.map(adjustIncludesInFile, files_to_process)
+    with Pool(max(1, min(ceil(os.cpu_count() * 0.8), os.cpu_count() - 1))) as pool:
+        dummy = list(tqdm(pool.imap(adjustIncludesInFile, files_to_process), total=len(files_to_process), desc="Adjusting includes"))
 
 def main():
 
@@ -112,23 +111,24 @@ def main():
             if args.temp_dir is None:
                 container_input_dir = temp_input_dir
                 container_output_dir = temp_output_dir
+                asn1c_cmd_file = tempfile.NamedTemporaryFile(delete=False).name
             else:
                 container_input_dir = os.path.join(args.temp_dir, "input")
                 container_output_dir = os.path.join(args.temp_dir, "output")
                 os.makedirs(container_input_dir, exist_ok=True)
                 os.makedirs(container_output_dir, exist_ok=True)
+                asn1c_cmd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "asn1c.sh")
 
             # copy input asn1 files to temporary directory
             for f in args.files:
                 shutil.copy(f, container_input_dir)
 
             # run asn1c docker container to generate header and source files
-            asn1c_cmd_file = tempfile.NamedTemporaryFile(delete=False)
-            with open(asn1c_cmd_file.name, "w") as f:
+            with open(asn1c_cmd_file, "w") as f:
                 f.write(f"asn1c $(find /input -name '*.asn' | sort) -fcompound-names -fprefix={args.type}_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER")
 
-            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", "-v", f"{asn1c_cmd_file.name}:/asn1c.sh", args.docker_image], check=True)
-            os.remove(asn1c_cmd_file.name)
+            subprocess.run(["docker", "run", "--rm", "-u", f"{os.getuid()}:{os.getgid()}", "-v", f"{container_input_dir}:/input:ro", "-v", f"{container_output_dir}:/output", "-v", f"{asn1c_cmd_file}:/asn1c.sh", args.docker_image], check=True)
+            os.remove(asn1c_cmd_file)
 
             # move generated header and source files to output directories
             for f in glob.glob(os.path.join(container_output_dir, "*.h")):
@@ -138,12 +138,13 @@ def main():
 
     adjustIncludes(output_dir)
 
+    print(f"Applying patches ...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     patch_file = os.path.join(script_dir, f"patches/{args.type}.patch")
     if os.path.exists(patch_file):
         subprocess.run(["git", "apply", patch_file], check=True)
 
-    print("Successfully generated header and source files with asn1c.")
+    print(f"Generated C/C++ library for {args.type}")
 
 if __name__ == "__main__":
 

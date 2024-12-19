@@ -7,7 +7,7 @@
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/ROS-noetic-blueviolet"/>
-  <img src="https://img.shields.io/badge/ROS 2-humble|iron|jazzy-blueviolet"/>
+  <img src="https://img.shields.io/badge/ROS 2-humble|jazzy-blueviolet"/>
   <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|MAPEM|SPATEM|VAM-aqua"/>
 </p>
 
@@ -263,6 +263,8 @@ cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_fre
 > This section is only relevant if you would like to (re-)run the code generation for ROS support based on ASN.1 definitions. If you only wish to use the supported message types in ROS, see [Installation](#installation) and [Conversion Node](#conversion-node).
 
 A given ASN.1 definition is used to generate corresponding C-structures, ROS message definitions, as well as conversion functions between those two formats. The raw ASN.1 definitions of the supported message types are included as Git submodules in the [`asn1/raw` subdirectory](./asn1/raw/). Make sure to clone recursively or initialize the submodules after cloning (`git submodule update --init --recursive`). Note that some of these definitions need to be downloaded and patched before code generation by running [`./asn1/external/download.sh`](./asn1/external/download.sh) and [`./asn1/patches/patch.sh`](./asn1/patches/patch.sh).
+
+The [currently used code generation tool is Python-based](./utils/codegen/codegen-py/). There is also an [alternative Rust-based implementation](./utils/codegen/codegen-rust/) that is currently not maintained anymore (added in #17, replaced again in #28, #48), but kept for reference.
 
 If you would like to re-run the generation of supported message types, we recommend to use the [*VS Code* debugging configurations](https://code.visualstudio.com/docs/editor/debugging) pre-configured in [`.vscode/launch.json`](./.vscode/launch.json). All script calls defined there can obviously also run outside of *VS Code*. Note that *Python* and *Docker* are required for code generation.
 

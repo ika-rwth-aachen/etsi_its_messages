@@ -44,7 +44,6 @@ if(${ROS_VERSION} EQUAL 2)
     "msg/CorrelationCellValue.msg"
     "msg/CorrelationColumn.msg"
     "msg/CpmContainerId.msg"
-    "msg/CpmContainers.msg"
     "msg/CpmPayload.msg"
     "msg/DeltaTimeMilliSecondSigned.msg"
     "msg/EllipticalShape.msg"

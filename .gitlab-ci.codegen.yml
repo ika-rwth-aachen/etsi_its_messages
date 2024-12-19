@@ -58,7 +58,7 @@ etsi_its_cam_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
@@ -73,7 +73,7 @@ etsi_its_cam_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
@@ -88,7 +88,7 @@ etsi_its_denm_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
@@ -103,7 +103,7 @@ etsi_its_cpm_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -122,7 +122,7 @@ etsi_its_vam_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -t vam_ts
@@ -137,7 +137,7 @@ etsi_its_mapem_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -155,7 +155,7 @@ etsi_its_spatem_ts_coding:
   needs: ["asn1c-docker"]
   script:
     - >
-      ./utils/codegen/asn1ToC/asn1ToC.py
+      utils/codegen/asn1ToC/asn1ToC.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -170,107 +170,96 @@ etsi_its_spatem_ts_coding:
 
 etsi_its_cam_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
-      -o etsi_its_msgs/etsi_its_cam_msgs/msg
       -t cam
+      -o etsi_its_msgs/etsi_its_cam_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
-      -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
       -t cam_ts
+      -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
-      -o etsi_its_msgs/etsi_its_denm_msgs/msg
       -t denm
+      -o etsi_its_msgs/etsi_its_denm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cpm_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-rust/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
       asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
-      -td /builds/$CI_PROJECT_PATH/tmp
       -t cpm_ts
-      -di ${_RGEN_CI_IMAGE}
-    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+      -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_vam_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
-      -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
       -t vam_ts
+      -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
       asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
-      -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
       -t mapem_ts
+      -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_spatem_ts_msgs:
   stage: ROS Messages
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToRosMsg.py
+      utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
       asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
       asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
-      -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
       -t spatem_ts
+      -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn
       asn1/raw/cam_en302637_2/cdd/ITS-Container.asn
       -t cam
@@ -279,10 +268,9 @@ etsi_its_cam_conversion:
 
 etsi_its_cam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
@@ -291,10 +279,9 @@ etsi_its_cam_ts_conversion:
 
 etsi_its_denm_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
@@ -303,10 +290,9 @@ etsi_its_denm_conversion:
 
 etsi_its_cpm_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-rust/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
       asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
       asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
@@ -315,17 +301,13 @@ etsi_its_cpm_ts_conversion:
       asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
       -t cpm_ts
       -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
-      -td /builds/$CI_PROJECT_PATH/tmp
-      -di ${_RGEN_CI_IMAGE}
-    - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_vam_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
       asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
       -t vam_ts
@@ -334,10 +316,9 @@ etsi_its_vam_ts_conversion:
 
 etsi_its_mapem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
@@ -349,10 +330,9 @@ etsi_its_mapem_ts_conversion:
 
 etsi_its_spatem_ts_conversion:
   stage: Conversion Headers
-  needs: ["rgen-docker"]
   script:
     - >
-      ./utils/codegen/codegen-py/asn1ToConversionHeader.py
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn
       asn1/raw/is_ts103301/cdd/ITS-Container.asn
       asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn

@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_rviz_plugins</name>
-  <version>2.4.0</version>
+  <version>3.0.0</version>
   <description>RViz plugin for ROS 2 messages based on ETSI ITS messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>

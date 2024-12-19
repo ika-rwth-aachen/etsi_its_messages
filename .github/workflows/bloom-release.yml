@@ -22,7 +22,7 @@ jobs:
       - name: Release ROS 2
         uses: at-wat/bloom-release-action@v0
         with:
-          ros_distro: humble iron jazzy
+          ros_distro: humble jazzy
           github_token_bloom: ${{ secrets.GH_TOKEN_FOR_BLOOM_RELEASE }}
           github_user: jpbusch
           git_user: Jean-Pierre Busch
