@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 
 /**
- * @file impl/asn1_utils.h
+ * @file impl/asn1_primitive_access.h
  * @brief File containing functions that are used in the context of ETIS ITS Messages related to ASN.1 datatype primitives
  */
 
@@ -87,11 +87,11 @@ inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
   for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
 
     // loop over bits in a byte
-    for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
+    for (int bit_idx_in_byte = bits_per_byte - 1; bit_idx_in_byte >= 0; bit_idx_in_byte--) {
 
       // map bit index in byte to bit index in total bitstring
       int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx >= n_bits - bitstring.bits_unused) break;
+      if (byte_idx == 0 && bit_idx < bitstring.bits_unused) break;
 
       // set bit in output bitstring appropriately
       bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
