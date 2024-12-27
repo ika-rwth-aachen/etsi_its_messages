@@ -29,7 +29,7 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS CAM (EN and TS)
  */
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_UTILS_H
@@ -46,7 +46,7 @@ inline TimestampIts getTimestampITSFromGenerationDeltaTime(const GenerationDelta
                                                            const TimestampIts& timestamp_estimate) {
   TimestampIts t_its;
   t_its.value = std::floor(timestamp_estimate.value / 65536) * 65536 + generation_delta_time.value;
-  throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+  etsi_its_msgs::throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
   return t_its;
 }
 

@@ -33,7 +33,7 @@ SOFTWARE.
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
-#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <GeographicLib/UTMUPS.hpp>
 #include <cstring>
 
@@ -44,7 +44,7 @@ SOFTWARE.
  * @param id_value
  */
 inline void setStationId(StationID& station_id, const uint32_t id_value) {
-  throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
+  etsi_its_msgs::throwIfOutOfRange(id_value, StationID::MIN, StationID::MAX, "StationID");
   station_id.value = id_value;
 }
 
@@ -59,9 +59,9 @@ inline void setStationId(StationID& station_id, const uint32_t id_value) {
 inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id,
                             const uint8_t protocol_version = 0) {
   setStationId(header.station_id, station_id);
-  throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
+  etsi_its_msgs::throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
   header.message_id = message_id;
-  throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,
+  etsi_its_msgs::throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,
                     "ProtocolVersion");
   header.protocol_version = protocol_version;
 }
@@ -73,7 +73,7 @@ inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, cons
  * @param value
  */
 inline void setStationType(StationType& station_type, const uint8_t value) {
-  throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
+  etsi_its_msgs::throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
   station_type.value = value;
 }
 

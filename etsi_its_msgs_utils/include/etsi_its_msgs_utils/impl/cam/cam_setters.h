@@ -32,6 +32,7 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_cam_msgs::access {

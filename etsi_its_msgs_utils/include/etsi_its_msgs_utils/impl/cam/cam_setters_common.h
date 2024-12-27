@@ -32,9 +32,6 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
-#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
-#include <etsi_its_msgs_utils/impl/constants.h>
-
 /**
  * @brief Set the GenerationDeltaTime-Value
  *
@@ -48,7 +45,7 @@ inline void setGenerationDeltaTime(
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
   uint16_t gdt_value = t_its.value % 65536;
-  throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
+  etsi_its_msgs::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
   generation_delta_time.value = gdt_value;
 }
 
@@ -85,7 +82,7 @@ inline void setStationType(CAM& cam, const uint8_t value) {
  */
 inline void setHeadingValue(HeadingValue& heading, const double value) {
   int64_t deg = (int64_t)std::round(value * 1e1);
-  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  etsi_its_msgs::throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
   heading.value = deg;
 }
 
@@ -125,7 +122,7 @@ inline void setHeading(CAM& cam, const double heading_val) {
  */
 inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
   int64_t width = (int64_t)std::round(value * 1e1);
-  throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
+  etsi_its_msgs::throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
   vehicle_width.value = width;
 }
 
@@ -137,7 +134,7 @@ inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
  */
 inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, const double value) {
   int64_t length = (int64_t)std::round(value * 1e1);
-  throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
+  etsi_its_msgs::throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
   vehicle_length.value = length;
 }
 

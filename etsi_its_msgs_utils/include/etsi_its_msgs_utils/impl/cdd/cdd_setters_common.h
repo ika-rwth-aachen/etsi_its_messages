@@ -32,7 +32,7 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 #include <GeographicLib/UTMUPS.hpp>
 #include <cstring>
@@ -49,7 +49,7 @@ inline void setTimestampITS(
     TimestampIts& timestamp_its, const uint64_t unix_nanosecs,
     const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
   uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;
-  throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+  etsi_its_msgs::throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
   timestamp_its.value = t_its;
 }
 
@@ -61,7 +61,7 @@ inline void setTimestampITS(
  */
 inline void setLatitude(Latitude& latitude, const double deg) {
   int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);
-  throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, "Latitude");
+  etsi_its_msgs::throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, "Latitude");
   latitude.value = angle_in_10_micro_degree;
 }
 
@@ -73,7 +73,7 @@ inline void setLatitude(Latitude& latitude, const double deg) {
  */
 inline void setLongitude(Longitude& longitude, const double deg) {
   int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);
-  throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, "Longitude");
+  etsi_its_msgs::throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, "Longitude");
   longitude.value = angle_in_10_micro_degree;
 }
 
@@ -115,7 +115,7 @@ inline void setAltitude(Altitude& altitude, const double value) {
  */
 inline void setSpeedValue(SpeedValue& speed, const double value) {
   int64_t speed_val = (int64_t)std::round(value * 1e2);
-  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
+  etsi_its_msgs::throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
   speed.value = speed_val;
 }
 

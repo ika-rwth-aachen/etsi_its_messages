@@ -34,7 +34,6 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
-#include <etsi_its_msgs_utils/impl/checks.h>
 #include <GeographicLib/UTMUPS.hpp>
 
 namespace etsi_its_msgs {
