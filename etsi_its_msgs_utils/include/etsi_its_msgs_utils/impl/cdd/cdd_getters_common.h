@@ -75,37 +75,6 @@ inline double getAltitude(const Altitude& altitude) { return ((double)altitude.a
 inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
 /**
- * @brief Get a Bit String in form of bool vector
- *
- * @param buffer as uint8_t vector
- * @param bits_unused number of bits to ignore at the end of the bit string
- * @return std::vector<bool>
- */
-inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const int bits_unused) {
-  // bit string size
-  const int bits_per_byte = 8;
-  const int n_bytes = buffer.size();
-  const int n_bits = n_bytes * bits_per_byte;
-  std::vector<bool> bits;
-  bits.resize(n_bits - bits_unused, 0);
-
-  // loop over bytes in reverse order
-  for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-    // loop over bits in a byte
-    for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
-      // map bit index in byte to bit index in total bitstring
-      int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx >= n_bits - bits_unused) break;
-
-      // extract bit from bitstring and set output array entry appropriately
-      bool byte_has_true_bit = buffer[byte_idx] & (1 << bit_idx_in_byte);
-      if (byte_has_true_bit) bits[bit_idx] = 1;
-    }
-  }
-  return bits;
-}
-
-/**
  * @brief Get the UTM Position defined by the given ReferencePosition
  *
  * The position is transformed into UTM by using GeographicLib::UTMUPS

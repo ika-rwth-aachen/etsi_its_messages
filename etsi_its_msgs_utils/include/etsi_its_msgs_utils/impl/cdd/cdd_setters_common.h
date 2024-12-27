@@ -186,36 +186,4 @@ inline void setFromUTMPosition(T& reference_position, const gm::PointStamped& ut
   setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
 }
 
-/**
- * @brief Set a Bit String by a vector of bools
- *
- * @tparam T
- * @param bitstring BitString to set
- * @param bits vector of bools
- */
-template <typename T>
-inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
-  // bit string size
-  const int bits_per_byte = 8;
-  const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
-  const int n_bits = n_bytes * bits_per_byte;
-
-  // init output
-  bitstring.bits_unused = n_bits - bits.size();
-  bitstring.value = std::vector<uint8_t>(n_bytes);
-
-  // loop over all bytes in reverse order
-  for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-    // loop over bits in a byte
-    for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
-      // map bit index in byte to bit index in total bitstring
-      int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx >= n_bits - bitstring.bits_unused) break;
-
-      // set bit in output bitstring appropriately
-      bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
-    }
-  }
-}
-
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H

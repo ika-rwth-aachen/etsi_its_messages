@@ -31,6 +31,7 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_denm_msgs::access {
@@ -200,7 +201,7 @@ inline void setFromUTMPosition(DENM& denm, const gm::PointStamped& utm_position,
  * @param bits
  */
 inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
-  setBitString(driving_lane_status, bits);
+  etsi_its_msgs::setBitString(driving_lane_status, bits);
 }
 
 /**
@@ -210,7 +211,7 @@ inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const s
  * @param bits
  */
 inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
-  setBitString(light_bar_siren_in_use, bits);
+  etsi_its_msgs::setBitString(light_bar_siren_in_use, bits);
 }
 
 }  // namespace etsi_its_denm_msgs::access

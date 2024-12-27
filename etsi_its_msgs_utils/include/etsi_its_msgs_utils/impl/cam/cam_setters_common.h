@@ -32,6 +32,7 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
+#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 /**
@@ -243,7 +244,7 @@ inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, c
  * @param bits
  */
 inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
-  setBitString(exterior_lights, bits);
+  etsi_its_msgs::setBitString(exterior_lights, bits);
 }
 
 /**
@@ -278,7 +279,7 @@ inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights
  * @param bits
  */
 inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
-  setBitString(acceleration_control, bits);
+  etsi_its_msgs::setBitString(acceleration_control, bits);
 }
 
 /**
@@ -288,7 +289,7 @@ inline void setAccelerationControl(AccelerationControl& acceleration_control, co
  * @param bits
  */
 inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
-  setBitString(driving_lane_status, bits);
+  etsi_its_msgs::setBitString(driving_lane_status, bits);
 }
 
 /**
@@ -298,7 +299,7 @@ inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const s
  * @param bits
  */
 inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
-  setBitString(special_transport_type, bits);
+  etsi_its_msgs::setBitString(special_transport_type, bits);
 }
 
 /**
@@ -308,7 +309,7 @@ inline void setSpecialTransportType(SpecialTransportType& special_transport_type
  * @param bits
  */
 inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
-  setBitString(light_bar_siren_in_use, bits);
+  etsi_its_msgs::setBitString(light_bar_siren_in_use, bits);
 }
 
 /**
@@ -318,7 +319,7 @@ inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, co
  * @param bits
  */
 inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
-  setBitString(emergency_priority, bits);
+  etsi_its_msgs::setBitString(emergency_priority, bits);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H

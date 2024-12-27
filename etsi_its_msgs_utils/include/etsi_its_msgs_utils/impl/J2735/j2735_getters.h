@@ -32,7 +32,7 @@ SOFTWARE.
 #pragma once
 
 #include <etsi_its_msgs_utils/impl/checks.h>
-#include <etsi_its_msgs_utils/impl/asn1_utils.h>
+#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
 
 namespace etsi_its_msgs {
 
