@@ -33,4 +33,4 @@ SOFTWARE.
 
 using namespace etsi_its_spatem_ts_msgs;
 
-#include <etsi_its_msgs_utils/impl/J2735/j2735_access.h>
+#include <etsi_its_msgs_utils/impl/spatem/spatem_ts_utils.h>
