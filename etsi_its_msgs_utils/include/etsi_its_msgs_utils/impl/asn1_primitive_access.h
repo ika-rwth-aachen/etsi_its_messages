@@ -94,7 +94,9 @@ inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
       if (byte_idx == 0 && bit_idx < bitstring.bits_unused) break;
 
       // set bit in output bitstring appropriately
-      bitstring.value[byte_idx] |= bits[bit_idx] << bit_idx_in_byte;
+      if (bit_idx < bits.size()) {
+        bitstring.value[byte_idx] |= bits[bits_per_byte - bit_idx - 1] << bit_idx_in_byte;
+      }
     }
   }
 }
