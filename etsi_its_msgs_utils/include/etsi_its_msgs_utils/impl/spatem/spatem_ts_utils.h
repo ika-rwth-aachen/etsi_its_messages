@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,6 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS SPATEM
  */
 
-#include <etsi_its_msgs_utils/impl/checks.h>
-#include <etsi_its_msgs_utils/impl/constants.h>
 
 #include <ctime>
 
@@ -75,5 +73,5 @@ namespace access {
     return ((uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_nanoseconds_estimate*1e-9))*1e9;
   }
 
-} // namespace etsi_its_spatem_msgs
+} // namespace etsi_its_spatem_ts_msgs
 } // namespace access
