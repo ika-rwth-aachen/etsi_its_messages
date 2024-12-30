@@ -91,7 +91,7 @@ protected:
 
   // Properties
   rviz_common::properties::BoolProperty *show_meta_, *viz_spatem_;
-  rviz_common::properties::FloatProperty *mapem_timeout_, *spatem_timeout_, *char_height_;
+  rviz_common::properties::FloatProperty *mapem_timeout_, *spatem_timeout_, *char_height_, *lane_width_property_, *spatem_sphere_scale_property_;
   rviz_common::properties::ColorProperty *color_property_ingress_, *color_property_egress_, *text_color_property_;
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
   rviz_common::properties::QosProfileProperty *spatem_qos_property_;

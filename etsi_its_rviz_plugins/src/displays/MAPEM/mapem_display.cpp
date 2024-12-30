@@ -70,12 +70,19 @@ MAPEMDisplay::MAPEMDisplay() {
     "SPATEM Timeout", 0.1f,
     "Time (in s) until SPAT disappears", viz_spatem_);
   spatem_timeout_->setMin(0);
+  spatem_sphere_scale_property_ = new rviz_common::properties::FloatProperty(
+    "SPATEM Sphere Scale", 1.0f,
+    "Scaling factor to adjuste size of SPATEM spheres", viz_spatem_);
+  spatem_sphere_scale_property_->setMin(0.1);
   color_property_ingress_ = new rviz_common::properties::ColorProperty(
     "Ingress Lane Color", QColor(85, 85, 255),
     "Color to visualize Ingress-Lanes", this);
   color_property_egress_ = new rviz_common::properties::ColorProperty(
     "Egress Lane Color", QColor(255, 170, 0),
     "Color to visualize Egress-Lanes", this);
+  lane_width_property_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Lane Width", 1.0, "Width of MAPEM-Lanes", this);
+  lane_width_property_->setMin(0.1);
   show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
     "Show metadata as text next to MAP reference point", this);
   text_color_property_ = new rviz_common::properties::ColorProperty(
@@ -276,10 +283,11 @@ void MAPEMDisplay::update(float, float) {
     std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
 
     // set the dimensions of sphere
+    double scale = spatem_sphere_scale_property_->getFloat();
     Ogre::Vector3 dims;
-    dims.x = 1.0;
-    dims.y = 1.0;
-    dims.z = 1.0;
+    dims.x = 1.0 * scale;
+    dims.y = 1.0 * scale;
+    dims.z = 1.0 * scale;
     sphere->setScale(dims);
 
     // set the color of sphere
@@ -295,7 +303,8 @@ void MAPEMDisplay::update(float, float) {
       else if(intsctn.lanes[i].direction == LaneDirection::egress) lane_color = rviz_common::properties::qtToOgre(color_property_egress_->getColor());
       else lane_color = color_grey;
       line->setColor(lane_color.r, lane_color.g, lane_color.b, lane_color.a);
-      line->setLineWidth(1.0);
+      double line_width = lane_width_property_->getFloat();
+      line->setLineWidth(line_width);
       for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++) {
         Ogre::Vector3 p;
         p.x = intsctn.lanes[i].nodes[j].x;
