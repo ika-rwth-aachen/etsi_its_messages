@@ -34,8 +34,6 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
 #include <etsi_its_msgs_utils/impl/checks.h>
 
-namespace J2735 = etsi_its_msgs::J2735_access;
-
 namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
@@ -83,13 +81,23 @@ namespace access {
   }
 
   /**
+   * @brief Get the IntersectionID value
+   * 
+   * @param intsct_id IntersectionID object to get the value from
+   * @return uint16_t the IntersectionID value
+   */
+  inline uint16_t getIntersectionID(const IntersectionID& intsct_id) {
+    return intsct_id.value;
+  }
+
+  /**
    * @brief Get the IntersectionId of an IntersectionGeometry object
    * 
    * @param intsct IntersectionGeometry object
    * @return uint16_t the IntersectionId value
    */
   inline uint16_t getIntersectionID(const IntersectionGeometry& intsct) {
-    return J2735::getIntersectionID(intsct.id.id);
+    return getIntersectionID(intsct.id.id);
   }
 
   /**

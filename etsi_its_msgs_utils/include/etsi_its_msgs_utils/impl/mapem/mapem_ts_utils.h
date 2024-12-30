@@ -25,19 +25,56 @@ SOFTWARE.
 */
 
 /**
- * @file impl/mapem/mapem_utils.h
+ * @file impl/mapem/mapem_ts_utils.h
  * @brief Utility functions for the ETSI ITS MAPEM
  */
 
 #include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
+#include <ctime>
+#include <GeographicLib/UTMUPS.hpp>
+
 #pragma once
 
-namespace J2735 = etsi_its_msgs::J2735_access;
 namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
+
+  /**
+   * @brief Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp
+   * 
+   * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
+   * @return uint64_t unix seconds of the beginning of the year
+   */
+  inline uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
+
+    // Get current time as a time_point
+    time_t ts = static_cast<time_t>(unixSecond); // Convert uint64_t to time_t
+
+    struct tm* timeinfo;
+    timeinfo = localtime(&ts);
+
+    // Set the timeinfo to the beginning of the year
+    timeinfo->tm_sec = 0;
+    timeinfo->tm_min = 0;
+    timeinfo->tm_hour = 0;
+    timeinfo->tm_mday = 1;
+    timeinfo->tm_mon = 0;
+
+    return mktime(timeinfo); // Convert struct tm back to Unix timestamp
+  }
+
+  /**
+   * @brief Get the unix nanoseconds from MinuteOfTheYear object
+   * 
+   * @param moy given MinuteOfTheYear object
+   * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
+   * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
+   */
+  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy, const uint64_t unix_nanoseconds_estimate) {
+    return ((uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_nanoseconds_estimate*1e-9))*1e9;
+  }
 
   /**
    * @brief Get the unix nanoseconds from MapData object
@@ -47,7 +84,7 @@ namespace access {
    * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
    */
   inline uint64_t getUnixNanosecondsFromMapData(const MapData& map, const uint64_t unix_nanoseconds_estimate) {
-    return J2735::getUnixNanosecondsFromMinuteOfTheYear(getMinuteOfTheYear(map), unix_nanoseconds_estimate);
+    return getUnixNanosecondsFromMinuteOfTheYear(getMinuteOfTheYear(map), unix_nanoseconds_estimate);
   }
 
   /**

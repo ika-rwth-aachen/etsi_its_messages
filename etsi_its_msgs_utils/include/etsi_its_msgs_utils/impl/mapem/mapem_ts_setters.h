@@ -34,10 +34,23 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
 #include <etsi_its_msgs_utils/impl/checks.h>
 
-namespace J2735 = etsi_its_msgs::J2735_access;
+#include <GeographicLib/UTMUPS.hpp>
+
 namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
+
+
+  /**
+   * @brief Set the MinuteOfTheYear object
+   * 
+   * @param moy MinuteOfTheYear object
+   * @param moy_value value to set
+   */
+  inline void setMinuteOfTheYear(MinuteOfTheYear& moy, const uint32_t moy_value) {
+    etsi_its_msgs::throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
+    moy.value = moy_value;
+  }
 
   /**
    * @brief Set the MinuteOfTheYear for a given MapData object
@@ -46,7 +59,7 @@ namespace access {
    * @param moy_value value to set
    */
   inline void setMinuteOfTheYear(MapData& map, const uint32_t moy_value) {
-    J2735::setMinuteOfTheYear(map.time_stamp, moy_value);
+    setMinuteOfTheYear(map.time_stamp, moy_value);
   }
 
   /**
@@ -60,13 +73,24 @@ namespace access {
   }
 
   /**
+   * @brief Set the IntersectionID value
+   * 
+   * @param intsct_id IntersectionID object
+   * @param id_value value to set
+   */
+  inline void setIntersectionID(IntersectionID& intsct_id, const uint16_t id_value) {
+    etsi_its_msgs::throwIfOutOfRange(id_value, IntersectionID::MIN, IntersectionID::MAX, "IntersectionID");
+    intsct_id.value = id_value;
+  }
+
+  /**
    * @brief Set the IntersectionID for an IntersectionGeometry object
    * 
    * @param intsct IntersectionGeometry object
    * @param id_value value to set
    */
   inline void setIntersectionID(IntersectionGeometry& intsct, const uint16_t id_value) {
-    J2735::setIntersectionID(intsct.id.id, id_value);
+    setIntersectionID(intsct.id.id, id_value);
   }
 
   /**
