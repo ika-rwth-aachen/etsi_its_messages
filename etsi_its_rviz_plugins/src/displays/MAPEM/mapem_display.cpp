@@ -171,7 +171,7 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
     // Check if IntersectionID is already present in intersections-list
     auto it = intersections_.find(intersection_id);
     if (it == intersections_.end()) continue; // intersection is not available, continue loop
-    // derive stamp from Intersection State#
+    // derive stamp from Intersection State
     std_msgs::msg::Header header;
     if(msg->spat.intersections.array[i].moy_is_present && msg->spat.intersections.array[i].time_stamp_is_present) {
       uint64_t nanosecs = etsi_its_spatem_ts_msgs::access::getUnixNanosecondsFromMinuteOfTheYear(msg->spat.intersections.array[i].moy, now.nanoseconds());
