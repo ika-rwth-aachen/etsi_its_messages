@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ namespace displays
     ref_point = etsi_its_mapem_ts_msgs::access::getRefPointUTMPositionWithConvergenceAngle(intersection, zone, northp, grid_convergence_angle);
 
     if(timestamp_is_present) {
-      uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
+      uint64_t nanosecs = etsi_its_mapem_ts_msgs::access::getUnixNanosecondsFromMinuteOfTheYear(mapem_stamp, receive_time.nanoseconds());
       header.stamp = rclcpp::Time(nanosecs);
     }
     else {

@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -174,7 +174,7 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
     // derive stamp from Intersection State#
     std_msgs::msg::Header header;
     if(msg->spat.intersections.array[i].moy_is_present && msg->spat.intersections.array[i].time_stamp_is_present) {
-      uint64_t nanosecs = etsi_its_msgs::J2735_access::getUnixNanosecondsFromMinuteOfTheYear(msg->spat.intersections.array[i].moy, now.nanoseconds());
+      uint64_t nanosecs = etsi_its_spatem_ts_msgs::access::getUnixNanosecondsFromMinuteOfTheYear(msg->spat.intersections.array[i].moy, now.nanoseconds());
       nanosecs += ((uint64_t )msg->spat.intersections.array[i].time_stamp.value)*1e6;
       header.stamp = rclcpp::Time(nanosecs);
     }
