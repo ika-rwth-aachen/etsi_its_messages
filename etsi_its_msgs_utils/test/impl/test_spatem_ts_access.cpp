@@ -16,7 +16,7 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   timeinfo.tm_mday = 4;
   timeinfo.tm_mon = 0;
   timeinfo.tm_year = 107; //years since 1900
-  uint64_t unix_stamp = mktime(&timeinfo);
+  uint64_t unix_stamp = timegm(&timeinfo);
   // Set time to beginning of 2007: 01.01.2007 0:00
   timeinfo.tm_sec = 0;
   timeinfo.tm_min = 0;
@@ -24,5 +24,5 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   timeinfo.tm_mday = 1;
   timeinfo.tm_mon = 0;
   timeinfo.tm_year = 107; //years since 1900
-  EXPECT_EQ((mktime(&timeinfo)+60*moy)*1e9, spatem_ts_access::getUnixNanosecondsFromMinuteOfTheYear(minute_of_the_year, unix_stamp*1e9));
+  EXPECT_EQ((timegm(&timeinfo)+60*moy)*1e9, spatem_ts_access::getUnixNanosecondsFromMinuteOfTheYear(minute_of_the_year, unix_stamp*1e9));
 }
