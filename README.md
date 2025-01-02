@@ -37,6 +37,9 @@ All message definitions and conversion functions are automatically generated bas
 - [Acknowledgements](#acknowledgements)
 - [Notice](#notice)
 
+> [!NOTE]  
+> Instructions for using the *etsi_its_messages* as a ROS driver for common V2X OBU/RSU hardware such as the *Cohda Wireless MK5* are found in [`DRIVERS.md`](./DRIVERS.md).
+
 
 ## Concept
 
