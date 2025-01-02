@@ -45,7 +45,7 @@ namespace access {
    * @return MinuteOfTheYear the minute of the year object
    */
   inline MinuteOfTheYear getMinuteOfTheYear(const MapData& map) {
-    throwIfNotIsPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
+    throwIfNotPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
     return map.time_stamp;
   }
 
@@ -157,7 +157,7 @@ namespace access {
    * @return Elevation value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getElevation(const Position3D& ref_point) {
-    throwIfNotIsPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
+    throwIfNotPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
     return getElevation(ref_point.elevation);
   }
 

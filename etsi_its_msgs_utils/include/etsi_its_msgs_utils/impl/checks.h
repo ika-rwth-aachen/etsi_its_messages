@@ -39,7 +39,7 @@ void throwIfOutOfRange(const T1& val, const T2& min, const T2& max, const std::s
                                 std::to_string(max) + ")!");
 }
 
-inline void throwIfNotIsPresent(const bool is_present, const std::string val_desc) {
+inline void throwIfNotPresent(const bool is_present, const std::string val_desc) {
   if (!is_present) throw std::invalid_argument(val_desc + " is not present!");
 }
 
