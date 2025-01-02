@@ -237,7 +237,11 @@ def main():
     generateCMakeLists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
     print("Removing files not required for top-level message type ...")
     for f in glob.glob(os.path.join(args.output_dir, "*.msg")):
-        if os.path.splitext(os.path.basename(f))[0] not in msg_files:
+        msg_filename = os.path.splitext(os.path.basename(f))[0]
+        if msg_type == "DENM" and msg_filename.endswith("SubCauseCode"):
+            # keep all SubCauseCode variants for DENM
+            continue
+        elif msg_filename not in msg_files:
             os.remove(f)
 
     print(f"Generated {len(msg_files)} ROS .msg files for {msg_type}")

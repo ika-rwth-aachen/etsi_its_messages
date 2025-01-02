@@ -207,7 +207,11 @@ def main():
         msg_type = "VAM"
     header_files = findDependenciesOfConversionHeaders(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, [f"convert{msg_type}"])
     for f in glob.glob(os.path.join(args.output_dir, "*.h")):
-        if os.path.splitext(os.path.basename(f))[0] not in header_files:
+        header_filename = os.path.splitext(os.path.basename(f))[0]
+        if msg_type == "DENM" and header_filename.endswith("SubCauseCode"):
+            # keep all SubCauseCode variants for DENM
+            continue
+        if header_filename not in header_files:
             os.remove(f)
 
     print(f"Generated {len(header_files)} conversion headers for {msg_type}")
