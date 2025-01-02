@@ -109,6 +109,7 @@ Visualization Manager:
           Egress Lane Color: 255; 170; 0
           Enabled: true
           Ingress Lane Color: 85; 85; 255
+          MAPEM Lane Width: 1
           MAPEM Timeout: 120
           Metadata:
             Scale: 4
@@ -129,7 +130,8 @@ Visualization Manager:
             Value: /etsi_its_conversion/mapem_ts/out
           Value: true
           Visualize SPATEMs:
-            SPATEM Timeout: 0.10000000149011612
+            SPATEM Sphere Scale: 1
+            SPATEM Timeout: 1
             Value: true
       Enabled: true
       Name: Incoming
@@ -196,6 +198,7 @@ Visualization Manager:
           Egress Lane Color: 255; 170; 0
           Enabled: true
           Ingress Lane Color: 85; 85; 255
+          MAPEM Lane Width: 1
           MAPEM Timeout: 120
           Metadata:
             Scale: 4
@@ -216,7 +219,8 @@ Visualization Manager:
             Value: /etsi_its_conversion/mapem_ts/in
           Value: true
           Visualize SPATEMs:
-            SPATEM Timeout: 0.10000000149011612
+            SPATEM Sphere Scale: 1
+            SPATEM Timeout: 1
             Value: true
       Enabled: true
       Name: Outgoing
