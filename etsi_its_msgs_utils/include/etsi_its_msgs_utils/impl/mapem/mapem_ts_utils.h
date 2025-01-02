@@ -53,7 +53,7 @@ namespace access {
     time_t ts = static_cast<time_t>(unixSecond); // Convert uint64_t to time_t
 
     struct tm* timeinfo;
-    timeinfo = localtime(&ts);
+    timeinfo = gmtime(&ts);
 
     // Set the timeinfo to the beginning of the year
     timeinfo->tm_sec = 0;
@@ -62,7 +62,7 @@ namespace access {
     timeinfo->tm_mday = 1;
     timeinfo->tm_mon = 0;
 
-    return mktime(timeinfo); // Convert struct tm back to Unix timestamp
+    return timegm(timeinfo); // Convert struct tm back to Unix timestamp
   }
 
   /**
