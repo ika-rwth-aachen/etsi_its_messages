@@ -31,12 +31,12 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
-#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_denm_msgs::access {
 
+#include <etsi_its_msgs_utils/impl/checks.h>
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_setters.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h>
 
 /**
@@ -62,7 +62,7 @@ inline void setReferenceTime(
     const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
-  etsi_its_msgs::throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+  throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
   denm.denm.management.reference_time = t_its;
 }
 
@@ -100,7 +100,7 @@ inline void setReferencePosition(DENM& denm, const double latitude, const double
  */
 inline void setHeadingValue(HeadingValue& heading, const double value) {
   int64_t deg = (int64_t)std::round(value * 1e1);
-  etsi_its_msgs::throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
   heading.value = deg;
 }
 
@@ -202,7 +202,7 @@ inline void setFromUTMPosition(DENM& denm, const gm::PointStamped& utm_position,
  * @param bits
  */
 inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(driving_lane_status, bits);
+  setBitString(driving_lane_status, bits);
 }
 
 /**
@@ -212,7 +212,7 @@ inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const s
  * @param bits
  */
 inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(light_bar_siren_in_use, bits);
+  setBitString(light_bar_siren_in_use, bits);
 }
 
 }  // namespace etsi_its_denm_msgs::access

@@ -31,10 +31,9 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
-
 namespace etsi_its_denm_msgs::access {
 
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h>
 
 /**
@@ -516,7 +515,7 @@ inline std::string getSubCauseCodeType(const DENM& denm) {
  * @return std::vector<bool>
  */
 inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status) {
-  return etsi_its_msgs::getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+  return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
 }
 
 /**
@@ -526,7 +525,7 @@ inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_l
  * @return std::vector<bool>
  */
 inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
-  return etsi_its_msgs::getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
+  return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
 }
 
 }  // namespace etsi_its_denm_msgs::access

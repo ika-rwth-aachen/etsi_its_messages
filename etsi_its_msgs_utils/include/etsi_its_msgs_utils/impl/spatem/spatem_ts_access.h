@@ -29,8 +29,8 @@ SOFTWARE.
  * @brief Main SPATEM access implementation header
  */
 
-#pragma once
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
 
-using namespace etsi_its_spatem_ts_msgs;
+#pragma once
 
 #include <etsi_its_msgs_utils/impl/spatem/spatem_ts_utils.h>

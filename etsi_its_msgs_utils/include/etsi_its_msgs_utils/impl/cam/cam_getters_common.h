@@ -32,6 +32,8 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
 
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
+
 /**
  * @brief Get the Station ID object
  *
@@ -230,7 +232,7 @@ inline gm::PointStamped getUTMPosition(const CAM& cam) {
  * @return std::vector<bool>
  */
 inline std::vector<bool> getExteriorLights(const ExteriorLights& exterior_lights) {
-  return etsi_its_msgs::getBitString(exterior_lights.value, exterior_lights.bits_unused);
+  return getBitString(exterior_lights.value, exterior_lights.bits_unused);
 }
 
 /**
@@ -260,7 +262,7 @@ inline std::vector<bool> getExteriorLights(const CAM& cam) {
  * @return std::vector<bool>
  */
 inline std::vector<bool> getAccelerationControl(const AccelerationControl& acceleration_control) {
-  return etsi_its_msgs::getBitString(acceleration_control.value, acceleration_control.bits_unused);
+  return getBitString(acceleration_control.value, acceleration_control.bits_unused);
 }
 
 /**
@@ -270,7 +272,7 @@ inline std::vector<bool> getAccelerationControl(const AccelerationControl& accel
  * @return std::vector<bool>
  */
 inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_lane_status) {
-  return etsi_its_msgs::getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
+  return getBitString(driving_lane_status.value, driving_lane_status.bits_unused);
 }
 
 /**
@@ -280,7 +282,7 @@ inline std::vector<bool> getDrivingLaneStatus(const DrivingLaneStatus& driving_l
  * @return std::vector<bool>
  */
 inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& special_transport_type) {
-  return etsi_its_msgs::getBitString(special_transport_type.value, special_transport_type.bits_unused);
+  return getBitString(special_transport_type.value, special_transport_type.bits_unused);
 }
 
 /**
@@ -290,7 +292,7 @@ inline std::vector<bool> getSpecialTransportType(const SpecialTransportType& spe
  * @return std::vector<bool>
  */
 inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_bar_siren_in_use) {
-  return etsi_its_msgs::getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
+  return getBitString(light_bar_siren_in_use.value, light_bar_siren_in_use.bits_unused);
 }
 
 /**
@@ -300,7 +302,7 @@ inline std::vector<bool> getLightBarSirenInUse(const LightBarSirenInUse& light_b
  * @return std::vector<bool>
  */
 inline std::vector<bool> getEmergencyPriority(const EmergencyPriority& emergency_priority) {
-  return etsi_its_msgs::getBitString(emergency_priority.value, emergency_priority.bits_unused);
+  return getBitString(emergency_priority.value, emergency_priority.bits_unused);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H

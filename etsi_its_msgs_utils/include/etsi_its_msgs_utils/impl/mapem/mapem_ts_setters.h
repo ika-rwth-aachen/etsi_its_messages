@@ -31,8 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
-#include <etsi_its_msgs_utils/impl/checks.h>
 
 #include <GeographicLib/UTMUPS.hpp>
 
@@ -40,6 +38,7 @@ namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
 
+#include <etsi_its_msgs_utils/impl/checks.h>
 
   /**
    * @brief Set the MinuteOfTheYear object
@@ -48,7 +47,7 @@ namespace access {
    * @param moy_value value to set
    */
   inline void setMinuteOfTheYear(MinuteOfTheYear& moy, const uint32_t moy_value) {
-    etsi_its_msgs::throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
+    throwIfOutOfRange(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, "MinuteOfTheYear");
     moy.value = moy_value;
   }
 
@@ -79,7 +78,7 @@ namespace access {
    * @param id_value value to set
    */
   inline void setIntersectionID(IntersectionID& intsct_id, const uint16_t id_value) {
-    etsi_its_msgs::throwIfOutOfRange(id_value, IntersectionID::MIN, IntersectionID::MAX, "IntersectionID");
+    throwIfOutOfRange(id_value, IntersectionID::MIN, IntersectionID::MAX, "IntersectionID");
     intsct_id.value = id_value;
   }
 
@@ -101,7 +100,7 @@ namespace access {
    */
   inline void setLatitude(Latitude& latitude, const double deg) {
     int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);
-    etsi_its_msgs::throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, "Latitude");
+    throwIfOutOfRange(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, "Latitude");
     latitude.value = angle_in_10_micro_degree;
   }
 
@@ -113,7 +112,7 @@ namespace access {
    */
   inline void setLongitude(Longitude& longitude, const double deg) {
     int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);
-    etsi_its_msgs::throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, "Longitude");
+    throwIfOutOfRange(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, "Longitude");
     longitude.value = angle_in_10_micro_degree;
   }
 

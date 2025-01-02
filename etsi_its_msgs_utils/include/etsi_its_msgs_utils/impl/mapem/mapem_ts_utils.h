@@ -29,9 +29,6 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS MAPEM
  */
 
-#include <etsi_its_msgs_utils/impl/checks.h>
-#include <etsi_its_msgs_utils/impl/constants.h>
-
 #include <ctime>
 #include <GeographicLib/UTMUPS.hpp>
 

@@ -32,6 +32,10 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
+#include <etsi_its_msgs_utils/impl/checks.h>
+#include <etsi_its_msgs_utils/impl/constants.h>
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_setters.h>
+
 /**
  * @brief Set the GenerationDeltaTime-Value
  *
@@ -45,7 +49,7 @@ inline void setGenerationDeltaTime(
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
   uint16_t gdt_value = t_its.value % 65536;
-  etsi_its_msgs::throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
+  throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
   generation_delta_time.value = gdt_value;
 }
 
@@ -82,7 +86,7 @@ inline void setStationType(CAM& cam, const uint8_t value) {
  */
 inline void setHeadingValue(HeadingValue& heading, const double value) {
   int64_t deg = (int64_t)std::round(value * 1e1);
-  etsi_its_msgs::throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
   heading.value = deg;
 }
 
@@ -122,7 +126,7 @@ inline void setHeading(CAM& cam, const double heading_val) {
  */
 inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
   int64_t width = (int64_t)std::round(value * 1e1);
-  etsi_its_msgs::throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
+  throwIfOutOfRange(width, VehicleWidth::MIN, VehicleWidth::MAX, "VehicleWidthValue");
   vehicle_width.value = width;
 }
 
@@ -134,7 +138,7 @@ inline void setVehicleWidth(VehicleWidth& vehicle_width, const double value) {
  */
 inline void setVehicleLengthValue(VehicleLengthValue& vehicle_length, const double value) {
   int64_t length = (int64_t)std::round(value * 1e1);
-  etsi_its_msgs::throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
+  throwIfOutOfRange(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, "VehicleLengthValue");
   vehicle_length.value = length;
 }
 
@@ -241,7 +245,7 @@ inline void setFromUTMPosition(CAM& cam, const gm::PointStamped& utm_position, c
  * @param bits
  */
 inline void setExteriorLights(ExteriorLights& exterior_lights, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(exterior_lights, bits);
+  setBitString(exterior_lights, bits);
 }
 
 /**
@@ -276,7 +280,7 @@ inline void setExteriorLights(CAM& cam, const std::vector<bool>& exterior_lights
  * @param bits
  */
 inline void setAccelerationControl(AccelerationControl& acceleration_control, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(acceleration_control, bits);
+  setBitString(acceleration_control, bits);
 }
 
 /**
@@ -286,7 +290,7 @@ inline void setAccelerationControl(AccelerationControl& acceleration_control, co
  * @param bits
  */
 inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(driving_lane_status, bits);
+  setBitString(driving_lane_status, bits);
 }
 
 /**
@@ -296,7 +300,7 @@ inline void setDrivingLaneStatus(DrivingLaneStatus& driving_lane_status, const s
  * @param bits
  */
 inline void setSpecialTransportType(SpecialTransportType& special_transport_type, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(special_transport_type, bits);
+  setBitString(special_transport_type, bits);
 }
 
 /**
@@ -306,7 +310,7 @@ inline void setSpecialTransportType(SpecialTransportType& special_transport_type
  * @param bits
  */
 inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(light_bar_siren_in_use, bits);
+  setBitString(light_bar_siren_in_use, bits);
 }
 
 /**
@@ -316,7 +320,7 @@ inline void setLightBarSirenInUse(LightBarSirenInUse& light_bar_siren_in_use, co
  * @param bits
  */
 inline void setEmergencyPriority(EmergencyPriority& emergency_priority, const std::vector<bool>& bits) {
-  etsi_its_msgs::setBitString(emergency_priority, bits);
+  setBitString(emergency_priority, bits);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H

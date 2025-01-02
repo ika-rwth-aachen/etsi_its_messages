@@ -46,7 +46,7 @@ inline TimestampIts getTimestampITSFromGenerationDeltaTime(const GenerationDelta
                                                            const TimestampIts& timestamp_estimate) {
   TimestampIts t_its;
   t_its.value = std::floor(timestamp_estimate.value / 65536) * 65536 + generation_delta_time.value;
-  etsi_its_msgs::throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
+  throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
   return t_its;
 }
 

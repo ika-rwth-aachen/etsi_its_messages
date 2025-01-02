@@ -29,7 +29,6 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS SPATEM
  */
 
-
 #include <ctime>
 
 #pragma once

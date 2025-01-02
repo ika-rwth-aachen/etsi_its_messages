@@ -31,12 +31,12 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/asn1_primitive_access.h>
-#include <etsi_its_msgs_utils/impl/checks.h>
-
 namespace etsi_its_mapem_ts_msgs {
 
 namespace access {
+
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 
     /**
    * @brief Get the value of MinuteOfTheYear object MapData object
@@ -45,7 +45,7 @@ namespace access {
    * @return MinuteOfTheYear the minute of the year object
    */
   inline MinuteOfTheYear getMinuteOfTheYear(const MapData& map) {
-    etsi_its_msgs::throwIfNotIsPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
+    throwIfNotIsPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
     return map.time_stamp;
   }
 
@@ -157,7 +157,7 @@ namespace access {
    * @return Elevation value (above the reference ellipsoid surface) in meter as decimal number
    */
   inline double getElevation(const Position3D& ref_point) {
-    etsi_its_msgs::throwIfNotIsPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
+    throwIfNotIsPresent(ref_point.elevation_is_present, "Position3D.elevation_is_present");
     return getElevation(ref_point.elevation);
   }
 
@@ -168,7 +168,7 @@ namespace access {
    * @return std::vector<bool>
    */
   inline std::vector<bool> getLaneDirection(const LaneDirection& lane_direction) {
-    return etsi_its_msgs::getBitString(lane_direction.value, lane_direction.bits_unused);
+    return getBitString(lane_direction.value, lane_direction.bits_unused);
   }
 
   /**

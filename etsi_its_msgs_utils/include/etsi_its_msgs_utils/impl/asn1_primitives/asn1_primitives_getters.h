@@ -24,14 +24,13 @@ SOFTWARE.
 =============================================================================
 */
 
-#pragma once
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_ASN1_PRIMITIVES_GETTERS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_ASN1_PRIMITIVES_GETTERS_H
 
 /**
- * @file impl/asn1_primitive_access.h
- * @brief File containing functions that are used in the context of ETIS ITS Messages related to ASN.1 datatype primitives
+ * @file impl/asn1_primitives_getters.h
+ * @brief File containing getter-functions that are used in the context of ETIS ITS Messages related to ASN.1 datatype primitives
  */
-
-namespace etsi_its_msgs {
 
 /**
  * @brief Get a Bit String in form of bool vector
@@ -65,40 +64,4 @@ inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const 
   return bits;
 }
 
-/**
- * @brief Set a Bit String by a vector of bools
- *
- * @tparam T
- * @param bitstring BitString to set
- * @param bits vector of bools
- */
-template <typename T>
-inline void setBitString(T& bitstring, const std::vector<bool>& bits) {
-  // bit string size
-  const int bits_per_byte = 8;
-  const int n_bytes = (bits.size() - 1) / bits_per_byte + 1;
-  const int n_bits = n_bytes * bits_per_byte;
-
-  // init output
-  bitstring.bits_unused = n_bits - bits.size();
-  bitstring.value = std::vector<uint8_t>(n_bytes);
-
-  // loop over all bytes in reverse order
-  for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-
-    // loop over bits in a byte
-    for (int bit_idx_in_byte = bits_per_byte - 1; bit_idx_in_byte >= 0; bit_idx_in_byte--) {
-
-      // map bit index in byte to bit index in total bitstring
-      int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx < bitstring.bits_unused) break;
-
-      // set bit in output bitstring appropriately
-      if (bit_idx < bits.size()) {
-        bitstring.value[byte_idx] |= bits[bits_per_byte - bit_idx - 1] << bit_idx_in_byte;
-      }
-    }
-  }
-}
-
-} // namespace etsi_its_msgs 
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_GETTERS_H

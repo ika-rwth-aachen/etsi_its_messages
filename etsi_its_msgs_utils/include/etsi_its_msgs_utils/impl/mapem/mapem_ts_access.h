@@ -29,9 +29,11 @@ SOFTWARE.
  * @brief Main MAPEM access implementation header
  */
 
-#pragma once
+#undef ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_ASN1_PRIMITIVES_GETTERS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_ASN1_PRIMITIVES_SETTERS_H
+#undef ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
 
-using namespace etsi_its_mapem_ts_msgs;
+#pragma once
 
 #include <etsi_its_msgs_utils/impl/mapem/mapem_ts_getters.h>
 #include <etsi_its_msgs_utils/impl/mapem/mapem_ts_setters.h>
