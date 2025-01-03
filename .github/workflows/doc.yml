@@ -6,6 +6,7 @@ on:
       - main
       - improvement/latest-release-tag-for-doxygen
 
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
