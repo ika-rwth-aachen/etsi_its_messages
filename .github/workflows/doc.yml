@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - improvement/latest-release-tag-for-doxygen
 
 jobs:
   build:
