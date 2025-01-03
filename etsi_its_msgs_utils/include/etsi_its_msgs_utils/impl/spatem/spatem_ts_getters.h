@@ -25,13 +25,49 @@ SOFTWARE.
 */
 
 /**
- * @file impl/spatem/spatem_ts_access.h
- * @brief Main SPATEM access implementation header
+ * @file impl/spatem/spatem_ts_getters.h
+ * @brief Getter functions for the ETSI ITS SPATEM
  */
-
-#undef ETSI_ITS_MSGS_UTILS_IMPL_CHECKS_H
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/spatem/spatem_ts_getters.h>
-#include <etsi_its_msgs_utils/impl/spatem/spatem_ts_utils.h>
+namespace etsi_its_spatem_ts_msgs {
+
+namespace access {
+
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
+
+/**
+ * @brief Get the intersection-id
+ * 
+ * @param intsct_id intersection-id object to get the value from
+ * @return uint16_t id of the intersection
+ */
+inline uint16_t getIntersectionID(const IntersectionID& intsct_id) {
+  return intsct_id.value;
+}
+
+/**
+ * @brief Get the intersection-id of an IntersectionReferenceID object
+ * 
+ * @param intsct_ref_id IntersectionReferenceID object
+ * @return uint16_t id of the intersection
+ */
+inline uint16_t getIntersectionID(const IntersectionReferenceID& intsct_ref_id) {
+  return getIntersectionID(intsct_ref_id.id);
+}
+
+/**
+ * @brief Get the intersection-id of an IntersectionState object
+ * 
+ * @param intsct IntersectionState object
+ * @return uint16_t id of the intersection
+ */
+inline uint16_t getIntersectionID(const IntersectionState& intsct) {
+  return getIntersectionID(intsct.id);
+}
+
+} // namespace access
+
+} // namespace etsi_its_spatem_ts_msgs

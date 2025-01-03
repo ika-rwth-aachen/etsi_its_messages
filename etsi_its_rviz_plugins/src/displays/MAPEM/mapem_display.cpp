@@ -174,7 +174,8 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
   rclcpp::Time now = rviz_node_->now();
   // iterate over all IntersectionStates
   for(size_t i = 0; i<msg->spat.intersections.array.size(); i++) {
-    unsigned int intersection_id = msg->spat.intersections.array[i].id.id.value;
+    etsi_its_spatem_ts_msgs::msg::IntersectionState intersection_state = msg->spat.intersections.array[i];
+    unsigned int intersection_id = etsi_its_spatem_ts_msgs::access::getIntersectionID(intersection_state);
     // Check if IntersectionID is already present in intersections-list
     auto it = intersections_.find(intersection_id);
     if (it == intersections_.end()) continue; // intersection is not available, continue loop
