@@ -130,7 +130,7 @@ Visualization Manager:
             Value: /etsi_its_conversion/mapem_ts/out
           Value: true
           Visualize SPATEMs:
-            SPATEM Sphere Scale: 1
+            SPATEM Sphere Scale: 3
             SPATEM Timeout: 1
             Value: true
       Enabled: true
