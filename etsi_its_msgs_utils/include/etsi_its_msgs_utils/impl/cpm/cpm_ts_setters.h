@@ -31,6 +31,7 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 namespace etsi_its_cpm_ts_msgs::access {

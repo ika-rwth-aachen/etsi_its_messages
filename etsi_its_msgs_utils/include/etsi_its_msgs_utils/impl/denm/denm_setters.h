@@ -35,6 +35,8 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 
+#include <etsi_its_msgs_utils/impl/checks.h>
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_setters.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h>
 
 /**

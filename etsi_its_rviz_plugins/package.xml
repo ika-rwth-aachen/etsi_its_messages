@@ -22,7 +22,11 @@
   <build_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</build_depend>
   <build_depend condition="$ROS_VERSION == 2">qtbase5-dev</build_depend>
   <build_export_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</build_export_depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_cam_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_cpm_ts_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_denm_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_mapem_ts_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">etsi_its_spatem_ts_msgs</depend>
   <depend condition="$ROS_VERSION == 2">etsi_its_msgs_utils</depend>
   <depend condition="$ROS_VERSION == 2">pluginlib</depend>
   <depend condition="$ROS_VERSION == 2">python3-pyproj</depend>

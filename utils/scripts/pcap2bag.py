@@ -31,8 +31,7 @@ import shutil
 import numpy as np
 import pyshark
 from rosbags.rosbag2 import Writer
-from rosbags.serde import serialize_cdr
-from rosbags.typesys import get_types_from_msg, register_types
+from rosbags.typesys import Stores, get_types_from_msg, get_typestore
 from tqdm import tqdm
 
 UDP_PACKET_MSG = """
@@ -41,12 +40,13 @@ string address
 uint16 src_port
 uint8[] data
 """
-register_types(get_types_from_msg(UDP_PACKET_MSG, "udp_msgs/msg/UdpPacket"))
 
-from rosbags.typesys.types import builtin_interfaces__msg__Time as Time
-from rosbags.typesys.types import std_msgs__msg__Header as Header
-from rosbags.typesys.types import udp_msgs__msg__UdpPacket as UdpPacket
+typestore = get_typestore(Stores.ROS2_HUMBLE)
+typestore.register(get_types_from_msg(UDP_PACKET_MSG, 'udp_msgs/msg/UdpPacket'))
 
+Time = typestore.types['builtin_interfaces/msg/Time']
+Header = typestore.types['std_msgs/msg/Header']
+UdpPacket = typestore.types['udp_msgs/msg/UdpPacket']
 
 def parseCli():
 
@@ -79,13 +79,15 @@ def main():
 
     # parse packets from pcap
     print(f"Loading packets from {args.pcap} ...", end="", flush=True)
-    pcap = pyshark.FileCapture("rx_r1a.pcap", include_raw=True, use_json=True)
+    pcap = pyshark.FileCapture(args.pcap, include_raw=True, use_json=True)
     pcap.load_packets()
     print(" done")
 
     # convert packets to ROS messages
     msgs = []
     for packet in tqdm(pcap, total=len(pcap), desc="Converting packets to ROS messages"):
+        if "btpb_raw" not in packet or "its_raw" not in packet:
+            continue
 
         btp_header = hexStringToUint8Array(packet.btpb_raw.value)
         its_payload = hexStringToUint8Array(packet.its_raw.value)
@@ -105,11 +107,11 @@ def main():
 
         topic = args.topic
         msg_type = UdpPacket.__msgtype__
-        connection = bag.add_connection(topic, msg_type)
+        connection = bag.add_connection(topic, msg_type, typestore=typestore)
 
         for msg in tqdm(msgs, desc=f"Writing ROS messages to {args.output_bag}"):
             timestamp = msg.header.stamp.sec * 1e9 + msg.header.stamp.nanosec
-            bag.write(connection, timestamp, serialize_cdr(msg, msg_type))
+            bag.write(connection, timestamp, typestore.serialize_cdr(msg, msg_type))
 
 
 if __name__ == "__main__":

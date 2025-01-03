@@ -12,7 +12,11 @@ if(${ROS_VERSION} EQUAL 2)
   endif()
 
   find_package(ament_cmake REQUIRED)
-  find_package(etsi_its_msgs REQUIRED)
+  find_package(etsi_its_cam_msgs REQUIRED)
+  find_package(etsi_its_cpm_ts_msgs REQUIRED)
+  find_package(etsi_its_denm_msgs REQUIRED)
+  find_package(etsi_its_mapem_ts_msgs REQUIRED)
+  find_package(etsi_its_spatem_ts_msgs REQUIRED)
   find_package(etsi_its_msgs_utils REQUIRED)
   find_package(pluginlib REQUIRED)
   find_package(rclcpp REQUIRED)
@@ -28,6 +32,7 @@ if(${ROS_VERSION} EQUAL 2)
     include/displays/CAM/cam_display.hpp
     include/displays/DENM/denm_display.hpp
     include/displays/CPM/cpm_display.hpp
+    include/displays/MAPEM/mapem_display.hpp
   )
 
   foreach(header "${display_headers_to_moc}")
@@ -41,6 +46,8 @@ if(${ROS_VERSION} EQUAL 2)
     src/displays/DENM/denm_render_object.cpp
     src/displays/CPM/cpm_display.cpp
     src/displays/CPM/cpm_render_object.cpp
+    src/displays/MAPEM/mapem_display.cpp
+    src/displays/MAPEM/intersection_render_object.cpp
   )
 
   add_library(${PROJECT_NAME} SHARED
@@ -64,7 +71,11 @@ if(${ROS_VERSION} EQUAL 2)
   ament_target_dependencies(${PROJECT_NAME}
     PUBLIC
     rclcpp
-    etsi_its_msgs
+    etsi_its_cam_msgs
+    etsi_its_cpm_ts_msgs
+    etsi_its_denm_msgs
+    etsi_its_mapem_ts_msgs
+    etsi_its_spatem_ts_msgs
     etsi_its_msgs_utils
     rviz_common
     rviz_default_plugins
@@ -77,7 +88,11 @@ if(${ROS_VERSION} EQUAL 2)
   ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 
   ament_export_dependencies(
-    etsi_its_msgs
+    etsi_its_cam_msgs
+    etsi_its_cpm_ts_msgs
+    etsi_its_denm_msgs
+    etsi_its_mapem_ts_msgs
+    etsi_its_spatem_ts_msgs
     etsi_its_msgs_utils
     rclcpp
     rviz_common

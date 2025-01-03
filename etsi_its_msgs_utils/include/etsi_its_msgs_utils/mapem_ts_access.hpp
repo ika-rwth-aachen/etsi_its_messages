@@ -25,18 +25,20 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_checks.h
- * @brief Sanity-check functions etc. for the ETSI ITS Common Data Dictionary (CDD)
+ * @file mapem_ts_access.hpp
+ * @brief Main MAPEM access header to include in ROS 2 projects
  */
 
-#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
-#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+#pragma once
 
-template <typename T1, typename T2>
-void throwIfOutOfRange(const T1& val, const T2& min, const T2& max, const std::string val_desc) {
-  if (val < min || val > max)
-    throw std::invalid_argument(val_desc + " value is out of range (" + std::to_string(min) + "..." +
-                                std::to_string(max) + ")!");
+// Messages
+#include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
+#include <geometry_msgs/msg/point_stamped.hpp>
+
+namespace etsi_its_mapem_ts_msgs {
+    using namespace msg;
+    namespace gm = geometry_msgs::msg;
 }
 
-#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_CHECKS_H
+// Implementation
+#include <etsi_its_msgs_utils/impl/mapem/mapem_ts_access.h>
