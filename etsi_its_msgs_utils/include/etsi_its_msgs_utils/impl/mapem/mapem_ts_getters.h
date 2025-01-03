@@ -45,7 +45,7 @@ namespace access {
    * @return MinuteOfTheYear the minute of the year object
    */
   inline MinuteOfTheYear getMinuteOfTheYear(const MapData& map) {
-    throwIfNotPresent(map.time_stamp_is_present, "mapem.map.time_stamp");
+    throwIfNotPresent(map.time_stamp_is_present, "map.time_stamp");
     return map.time_stamp;
   }
 
