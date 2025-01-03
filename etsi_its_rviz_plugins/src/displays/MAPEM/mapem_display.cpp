@@ -181,9 +181,13 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
     if (it == intersections_.end()) continue; // intersection is not available, continue loop
     // derive stamp from Intersection State
     std_msgs::msg::Header header;
-    if(msg->spat.intersections.array[i].moy_is_present && msg->spat.intersections.array[i].time_stamp_is_present) {
-      uint64_t nanosecs = etsi_its_spatem_ts_msgs::access::getUnixNanosecondsFromMinuteOfTheYear(msg->spat.intersections.array[i].moy, now.nanoseconds());
-      nanosecs += ((uint64_t )msg->spat.intersections.array[i].time_stamp.value)*1e6;
+    if(msg->spat.intersections.array[i].moy_is_present) {
+      etsi_its_spatem_ts_msgs::msg::MinuteOfTheYear moy = etsi_its_spatem_ts_msgs::access::getMinuteOfTheYear(intersection_state);
+      uint64_t nanosecs = etsi_its_spatem_ts_msgs::access::getUnixNanosecondsFromMinuteOfTheYear(moy, now.nanoseconds());
+      if(msg->spat.intersections.array[i].time_stamp_is_present) {
+        double secs_in_minute = etsi_its_spatem_ts_msgs::access::getDSecondValue(intersection_state);
+        nanosecs += (uint64_t)(secs_in_minute*1e9);
+      }
       header.stamp = rclcpp::Time(nanosecs);
     }
     else {
