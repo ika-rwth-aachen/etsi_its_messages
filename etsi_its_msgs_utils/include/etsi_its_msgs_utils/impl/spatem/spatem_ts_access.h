@@ -33,5 +33,6 @@ SOFTWARE.
 
 #pragma once
 
+#include <etsi_its_msgs_utils/impl/spatem/spatem_ts_setters.h>
 #include <etsi_its_msgs_utils/impl/spatem/spatem_ts_getters.h>
 #include <etsi_its_msgs_utils/impl/spatem/spatem_ts_utils.h>
