@@ -114,7 +114,7 @@ inline void setAltitude(Altitude& altitude, const double value) {
  * @param value SpeedValue in m/s as decimal number
  */
 inline void setSpeedValue(SpeedValue& speed, const double value) {
-  int64_t speed_val = (int64_t)std::round(value * 1e2);
+  uint16_t speed_val = (uint16_t)std::round(value * 1e2);
   throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
   speed.value = speed_val;
 }

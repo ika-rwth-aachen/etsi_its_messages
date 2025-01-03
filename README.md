@@ -247,11 +247,11 @@ The `etsi_its_msgs_utils` package contains header-only libraries providing helpf
 
 // ...
 
-double speed;
+double speed = 10.0; // vehicle speed in m/s
 etsi_its_cam_msgs::msg::CAM cam;
-etsi_its_cam_msgs::access::setSpeed(cam, 10.0);
+etsi_its_cam_msgs::access::setSpeed(cam, speed);
 // instead of
-cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed.speed_value.value = 10.0;
+cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed.speed_value.value = (uint16_t)(speed * 1e2);
 
 // ...
 ```
