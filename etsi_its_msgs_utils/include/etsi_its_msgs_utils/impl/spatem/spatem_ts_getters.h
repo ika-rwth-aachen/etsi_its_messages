@@ -109,6 +109,26 @@ namespace access {
     return getDSecondValue(getDSecond(intsct));
   }
 
+  /**
+   * @brief Get the Signal Group-ID of an SignalGroupID object
+   * 
+   * @param signal_group_id SignalGroupID object to get the id from
+   * @return uint8_t the id of the signal group
+   */
+  inline uint8_t getSignalGroupID(const SignalGroupID& signal_group_id) {
+    return signal_group_id.value;
+  }
+
+  /**
+   * @brief Get the Signal Group-ID of an MovementState object
+   * 
+   * @param mvmt_state MovementState object to get the id from
+   * @return uint8_t the id of the signal group
+   */
+  inline uint8_t getSignalGroupID(const MovementState& mvmt_state) {
+    return getSignalGroupID(mvmt_state.signal_group);
+  }
+
 } // namespace access
 
 } // namespace etsi_its_spatem_ts_msgs

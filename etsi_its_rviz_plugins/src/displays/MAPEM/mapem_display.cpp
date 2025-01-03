@@ -198,7 +198,7 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
       etsi_its_spatem_ts_msgs::msg::MovementState spat_mvmt_state = msg->spat.intersections.array[i].states.array[j];
       IntersectionMovementState mvmt_state;
       // Fill the IntersectionMovementState
-      mvmt_state.signal_group_id = spat_mvmt_state.signal_group.value;
+      mvmt_state.signal_group_id = etsi_its_spatem_ts_msgs::access::getSignalGroupID(spat_mvmt_state);
       mvmt_state.header = header;
       if(spat_mvmt_state.state_time_speed.array.size()) {
         mvmt_state.phase_state = spat_mvmt_state.state_time_speed.array[0].event_state;
