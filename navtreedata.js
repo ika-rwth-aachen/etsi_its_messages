@@ -22,14 +22,23 @@
 
  @licend  The above is the entire license notice for the JavaScript code in this file
 */
-var menudata={children:[
-{text:"Main Page",url:"index.html"},
-{text:"Files",url:"files.html",children:[
-{text:"File List",url:"files.html"},
-{text:"File Members",url:"globals.html",children:[
-{text:"All",url:"globals.html",children:[
-{text:"g",url:"globals.html#index_g"},
-{text:"s",url:"globals.html#index_s"}]},
-{text:"Functions",url:"globals_func.html",children:[
-{text:"g",url:"globals_func.html#index_g"},
-{text:"s",url:"globals_func.html#index_s"}]}]}]}]}
+var NAVTREE =
+[
+  [ "etsi_its_messages", "index.html", [
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ]
+      ] ]
+    ] ]
+  ] ]
+];
+
+var NAVTREEINDEX =
+[
+"cam__access_8h.html"
+];
+
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';

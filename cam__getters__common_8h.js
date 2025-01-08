@@ -1,0 +1,28 @@
+var cam__getters__common_8h =
+[
+    [ "getAccelerationControl", "cam__getters__common_8h.html#a434e75be3cebc8de83d9bf51452e5957", null ],
+    [ "getAltitude", "cam__getters__common_8h.html#ab7220ec36a294287151f0280b26d540f", null ],
+    [ "getDrivingLaneStatus", "cam__getters__common_8h.html#ad8159f846a1b7e567deb2ffe10b14182", null ],
+    [ "getEmergencyPriority", "cam__getters__common_8h.html#a8edc70eb416fa355c0a279c19c7b1904", null ],
+    [ "getExteriorLights", "cam__getters__common_8h.html#aae9035bdb12287962a92d1591ff870ec", null ],
+    [ "getExteriorLights", "cam__getters__common_8h.html#ab99c731afbdebd93bbc5e85c9dc8c2ba", null ],
+    [ "getGenerationDeltaTime", "cam__getters__common_8h.html#aea25d5ba6ae964d2ac984e835358124f", null ],
+    [ "getGenerationDeltaTimeValue", "cam__getters__common_8h.html#aa9a293ff035d739c7d11d09fdfb61f4c", null ],
+    [ "getHeading", "cam__getters__common_8h.html#aca9dc96522e6151d518f453643426742", null ],
+    [ "getHeading", "cam__getters__common_8h.html#a7199918b8b3b3616e3f3eb6615c9195d", null ],
+    [ "getLateralAcceleration", "cam__getters__common_8h.html#aa0edaaf09e9b8a19303abf89eff3bc66", null ],
+    [ "getLatitude", "cam__getters__common_8h.html#aa2da8d819a5280e20b96c23b64aa623a", null ],
+    [ "getLightBarSirenInUse", "cam__getters__common_8h.html#a500d94d29c47b513223781ce7c2790e2", null ],
+    [ "getLongitude", "cam__getters__common_8h.html#a2dbc4b78682f8d6fc9701d78e823ac0a", null ],
+    [ "getLongitudinalAcceleration", "cam__getters__common_8h.html#a722310cbdf05c9625ba8384d1f7628e2", null ],
+    [ "getSpecialTransportType", "cam__getters__common_8h.html#a45aad910003e21a1f8aa43791c6f36b2", null ],
+    [ "getSpeed", "cam__getters__common_8h.html#ab31f50e90eb0ac0979b949492c626a99", null ],
+    [ "getStationID", "cam__getters__common_8h.html#a7f594549b0926a9f15d3d9c49067a91f", null ],
+    [ "getStationType", "cam__getters__common_8h.html#a6357b55d74b40d86a8cb2462b685b04e", null ],
+    [ "getUTMPosition", "cam__getters__common_8h.html#a4ea10e4d1050fa532697c61b45b34297", null ],
+    [ "getUTMPosition", "cam__getters__common_8h.html#a5e71129b2e1e20e90529137ae1fd37ee", null ],
+    [ "getVehicleLength", "cam__getters__common_8h.html#a3e9e718d01370b615b5ec3bdbf52907e", null ],
+    [ "getVehicleLength", "cam__getters__common_8h.html#ae6bae9511c2cb8b7f5662246a4a80592", null ],
+    [ "getVehicleWidth", "cam__getters__common_8h.html#a39bda47d2d6d2d852af49e90212e9488", null ],
+    [ "getVehicleWidth", "cam__getters__common_8h.html#a49820ce7652181454f9ebb6d3a01cd32", null ]
+];
