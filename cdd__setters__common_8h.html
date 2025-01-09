@@ -639,7 +639,7 @@ template&lt;typename T&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00116">116</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  116</span>                                                                 {</div>
-<div class="line"><span class="lineno">  117</span>  int64_t speed_val = (int64_t)std::round(value * 1e2);</div>
+<div class="line"><span class="lineno">  117</span>  uint16_t speed_val = (uint16_t)std::round(value * 1e2);</div>
 <div class="line"><span class="lineno">  118</span>  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
 <div class="line"><span class="lineno">  119</span>  speed.value = speed_val;</div>
 <div class="line"><span class="lineno">  120</span>}</div>

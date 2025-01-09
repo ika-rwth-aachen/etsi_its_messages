@@ -189,7 +189,7 @@ $(function(){initNavTree('cdd__setters__common_8h_source.html',''); initResizabl
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
 <div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="cdd__setters__common_8h.html#a2c4e6201e1fc4116b6aaff2f9d35e5f0">  116</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cdd__setters__common_8h.html#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a>(SpeedValue&amp; speed, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  int64_t speed_val = (int64_t)std::round(value * 1e2);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  uint16_t speed_val = (uint16_t)std::round(value * 1e2);</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  speed.value = speed_val;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
