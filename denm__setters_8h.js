@@ -26,5 +26,7 @@ var denm__setters_8h =
     [ "etsi_its_denm_msgs::access::setStationId", "denm__setters_8h.html#a69f818637d2ed4404ecdf3f8bcc1289b", null ],
     [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#a3e4e7ef8a5aa01a9e79d10591868830c", null ],
     [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562", null ],
-    [ "etsi_its_denm_msgs::access::setTimestampITS", "denm__setters_8h.html#a5965d9057aacd6c3522ecb8eb7d08afd", null ]
+    [ "etsi_its_denm_msgs::access::setTimestampITS", "denm__setters_8h.html#a5965d9057aacd6c3522ecb8eb7d08afd", null ],
+    [ "etsi_its_denm_msgs::access::throwIfNotPresent", "denm__setters_8h.html#a004b1bfc2e78a422b845a5ad61ece717", null ],
+    [ "etsi_its_denm_msgs::access::throwIfOutOfRange", "denm__setters_8h.html#a08725084bdd2740ae6198b8c0eb3a09d", null ]
 ];

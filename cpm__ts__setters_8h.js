@@ -9,7 +9,6 @@ var cpm__ts__setters_8h =
     [ "etsi_its_cpm_ts_msgs::access::setAccelerationOfPerceivedObject", "cpm__ts__setters_8h.html#ac6f4326045c45464574b6a59dcc36235", null ],
     [ "etsi_its_cpm_ts_msgs::access::setAltitude", "cpm__ts__setters_8h.html#add49803279d7ea34758740150bcbfe37", null ],
     [ "etsi_its_cpm_ts_msgs::access::setAltitudeValue", "cpm__ts__setters_8h.html#a38192b60d740cfdbe89e802b461c533a", null ],
-    [ "etsi_its_cpm_ts_msgs::access::setBitString", "cpm__ts__setters_8h.html#a7878d308a383c196a43d8fb3a2ba7faa", null ],
     [ "etsi_its_cpm_ts_msgs::access::setCartesianCoordinateWithConfidence", "cpm__ts__setters_8h.html#a1a3aaf08bc3475503726f2cfcfa13436", null ],
     [ "etsi_its_cpm_ts_msgs::access::setDimensionsOfPerceivedObject", "cpm__ts__setters_8h.html#a1b4beab855989149bcb4c5522e9c93af", null ],
     [ "etsi_its_cpm_ts_msgs::access::setFromUTMPosition", "cpm__ts__setters_8h.html#ac3fab168fbae0fb337cfdc676ea6ea0f", null ],
@@ -41,5 +40,7 @@ var cpm__ts__setters_8h =
     [ "etsi_its_cpm_ts_msgs::access::setYawOfPerceivedObject", "cpm__ts__setters_8h.html#a91d4ba34ea7cd7288c8a3fd34a2e1ce9", null ],
     [ "etsi_its_cpm_ts_msgs::access::setYawRateOfPerceivedObject", "cpm__ts__setters_8h.html#ad4ef96eb81a2f200e5e9fcc2bcd393c8", null ],
     [ "etsi_its_cpm_ts_msgs::access::setYDimensionOfPerceivedObject", "cpm__ts__setters_8h.html#a38646cb1b65fc2c5b9c3a331e92e45f4", null ],
-    [ "etsi_its_cpm_ts_msgs::access::setZDimensionOfPerceivedObject", "cpm__ts__setters_8h.html#ae21444357cbe689a19a025403205fccf", null ]
+    [ "etsi_its_cpm_ts_msgs::access::setZDimensionOfPerceivedObject", "cpm__ts__setters_8h.html#ae21444357cbe689a19a025403205fccf", null ],
+    [ "etsi_its_cpm_ts_msgs::access::throwIfNotPresent", "cpm__ts__setters_8h.html#a8586cc58b259b6e74d96c548d4e62ba1", null ],
+    [ "etsi_its_cpm_ts_msgs::access::throwIfOutOfRange", "cpm__ts__setters_8h.html#a79e28d92d2455d1467a2801e738c3530", null ]
 ];

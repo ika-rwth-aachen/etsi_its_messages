@@ -40,5 +40,7 @@ var cam__ts__setters_8h =
     [ "etsi_its_cam_ts_msgs::access::setVehicleDimensions", "cam__ts__setters_8h.html#a16ee4fbb3352e8de62579e2e1a0592d2", null ],
     [ "etsi_its_cam_ts_msgs::access::setVehicleLength", "cam__ts__setters_8h.html#ab37416099177b6b4d783e1322fe4d48a", null ],
     [ "etsi_its_cam_ts_msgs::access::setVehicleLengthValue", "cam__ts__setters_8h.html#a91f963904af4e10babae47ff7b3fb344", null ],
-    [ "etsi_its_cam_ts_msgs::access::setVehicleWidth", "cam__ts__setters_8h.html#a27b7eb58e941869aa1ba84d9bdf5d9a0", null ]
+    [ "etsi_its_cam_ts_msgs::access::setVehicleWidth", "cam__ts__setters_8h.html#a27b7eb58e941869aa1ba84d9bdf5d9a0", null ],
+    [ "etsi_its_cam_ts_msgs::access::throwIfNotPresent", "impl_2cam_2cam__ts__access_8h.html#a5df6552bd3c95f4860fc64431cab1859", null ],
+    [ "etsi_its_cam_ts_msgs::access::throwIfOutOfRange", "impl_2cam_2cam__ts__access_8h.html#aa7f02bfe0bf19bc4e918cbd65f87d644", null ]
 ];

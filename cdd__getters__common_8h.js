@@ -1,7 +1,6 @@
 var cdd__getters__common_8h =
 [
     [ "getAltitude", "cdd__getters__common_8h.html#ae1359c6a376fe023f67919e500ebfd10", null ],
-    [ "getBitString", "cdd__getters__common_8h.html#af92ffd41288baa02e71fa63993f6b5f5", null ],
     [ "getLatitude", "cdd__getters__common_8h.html#a847d38d2334ce1dd7e3587b77e13fcf3", null ],
     [ "getLongitude", "cdd__getters__common_8h.html#a91fca87ccb64088c1dd0cb68126c64a5", null ],
     [ "getSpeed", "cdd__getters__common_8h.html#ae92836276f042eea0233be374dd82985", null ],

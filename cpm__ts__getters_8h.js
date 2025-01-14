@@ -4,7 +4,6 @@ var cpm__ts__getters_8h =
     [ "etsi_its_cpm_ts_msgs::access::getAccelerationComponentConfidence", "cpm__ts__getters_8h.html#ad000ae9df3d4eedac7838ff3a8e9ed28", null ],
     [ "etsi_its_cpm_ts_msgs::access::getAltitude", "cpm__ts__getters_8h.html#a34a9ba4c41f80b2200334336af5fea31", null ],
     [ "etsi_its_cpm_ts_msgs::access::getAltitude", "cpm__ts__getters_8h.html#a7e30ac8c183ad2da1cb27a03413d30df", null ],
-    [ "etsi_its_cpm_ts_msgs::access::getBitString", "cpm__ts__getters_8h.html#afc2357c2c66602deeb65269518e96473", null ],
     [ "etsi_its_cpm_ts_msgs::access::getCartesianAccelerationOfPerceivedObject", "cpm__ts__getters_8h.html#ae5028e64f78ec8daa32e4c3990183ccf", null ],
     [ "etsi_its_cpm_ts_msgs::access::getCartesianAngle", "cpm__ts__getters_8h.html#aa45d62a4a2d1f74d2860c60f51f546c4", null ],
     [ "etsi_its_cpm_ts_msgs::access::getCartesianAngleConfidence", "cpm__ts__getters_8h.html#a46324c832a077f98078a82d598d60be2", null ],

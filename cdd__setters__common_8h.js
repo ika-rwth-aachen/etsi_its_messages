@@ -2,7 +2,6 @@ var cdd__setters__common_8h =
 [
     [ "setAltitude", "cdd__setters__common_8h.html#a6fefcb0e418912e7e920235a9e2e76d7", null ],
     [ "setAltitudeValue", "cdd__setters__common_8h.html#ab347d14233bc8d61c0db228b3f83bb6c", null ],
-    [ "setBitString", "cdd__setters__common_8h.html#ac522d43b41df3f656a2896785b5fb388", null ],
     [ "setFromUTMPosition", "cdd__setters__common_8h.html#a7caadf8dc8a612e122882f60ee663600", null ],
     [ "setLatitude", "cdd__setters__common_8h.html#ad06f7f27d89f95db3607743158a0be98", null ],
     [ "setLongitude", "cdd__setters__common_8h.html#a0680a3f512b077ace2dac6efe44c2118", null ],
