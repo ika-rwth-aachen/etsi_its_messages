@@ -129,6 +129,39 @@ namespace access {
     return getSignalGroupID(mvmt_state.signal_group);
   }
 
+  /**
+   * @brief Get the current MovementEvent of a given MovementState object
+   * 
+   * @param mvmt_event MovementState object to get the MovementEvent from
+   * @return MovementEvent object
+   */
+  inline MovementEvent getCurrentMovementEvent(const MovementState& mvmt_state) {
+    if(mvmt_state.state_time_speed.array.size()<=0) {
+      throw std::runtime_error("MovementEventList is empty.");
+    }
+    return mvmt_state.state_time_speed.array[0];
+  }
+
+  /**
+   * @brief Get the Current MovementPhaseState object of a given MovementState object
+   * 
+   * @param mvmt_state MovementState object to get the MovementPhaseState from
+   * @return MovementPhaseState object
+   */
+  inline MovementPhaseState getCurrentMovementPhaseState(const MovementState& mvmt_state) {
+    return getCurrentMovementEvent(mvmt_state).event_state;
+  }
+
+  /**
+   * @brief Get the Current MovementPhaseState object of a given MovementState object
+   * 
+   * @param mvmt_state MovementState object to get the MovementPhaseState from
+   * @return MovementPhaseState object
+   */
+  inline uint8_t getCurrentMovementPhaseStateValue(const MovementState& mvmt_state) {
+    return getCurrentMovementPhaseState(mvmt_state).value;
+  }
+
 } // namespace access
 
 } // namespace etsi_its_spatem_ts_msgs

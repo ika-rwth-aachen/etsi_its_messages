@@ -46,4 +46,8 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   unsigned int signal_group_id = randomInt(spatem_ts_msgs::SignalGroupID::MIN, spatem_ts_msgs::SignalGroupID::MAX);
   spatem_ts_access::setSignalGroupID(movement_state, signal_group_id);
   EXPECT_EQ(signal_group_id, spatem_ts_access::getSignalGroupID(movement_state));
+  movement_state.state_time_speed.array.resize(1);
+  unsigned int event_state = randomInt(spatem_ts_msgs::MovementPhaseState::UNAVAILABLE, spatem_ts_msgs::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC);
+  movement_state.state_time_speed.array[0].event_state.value = event_state;
+  EXPECT_EQ(event_state, spatem_ts_access::getCurrentMovementPhaseStateValue(movement_state));
 }
