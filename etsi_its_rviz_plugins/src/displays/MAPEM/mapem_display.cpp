@@ -201,7 +201,7 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
       mvmt_state.signal_group_id = etsi_its_spatem_ts_msgs::access::getSignalGroupID(spat_mvmt_state);
       mvmt_state.header = header;
       if(spat_mvmt_state.state_time_speed.array.size()) {
-        mvmt_state.phase_state = spat_mvmt_state.state_time_speed.array[0].event_state;
+        mvmt_state.phase_state = etsi_its_spatem_ts_msgs::access::getCurrentMovementPhaseState(spat_mvmt_state);
       }
       // Check if SignalGroup is already present in IntersectionMovementState of Intersection
       auto mvmnt_it = it->second.movement_states.find(mvmt_state.signal_group_id);
