@@ -33,7 +33,7 @@ SOFTWARE.
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
-#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <GeographicLib/UTMUPS.hpp>
 #include <cstring>
 

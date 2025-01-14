@@ -29,7 +29,7 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS CAM (EN and TS)
  */
 
-#include <etsi_its_msgs_utils/impl/cdd/cdd_checks.h>
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_UTILS_H

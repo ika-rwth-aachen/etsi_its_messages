@@ -31,8 +31,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <etsi_its_msgs_utils/impl/constants.h>
-
 namespace etsi_its_cam_msgs::access {
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h>

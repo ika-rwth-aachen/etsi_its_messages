@@ -105,6 +105,34 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /etsi_its_conversion/cpm_ts/out
           Value: true
+        - Class: etsi_its_msgs/MAPEMDisplay
+          Egress Lane Color: 255; 170; 0
+          Enabled: true
+          Ingress Lane Color: 85; 85; 255
+          MAPEM Lane Width: 1
+          MAPEM Timeout: 120
+          Metadata:
+            Scale: 4
+            Text Color: 255; 255; 255
+            Value: true
+          Name: MAPEMDisplay
+          SPATEM Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/spatem_ts/out
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/mapem_ts/out
+          Value: true
+          Visualize SPATEMs:
+            SPATEM Sphere Scale: 3
+            SPATEM Timeout: 1
+            Value: true
       Enabled: true
       Name: Incoming
     - Class: rviz_common/Group
@@ -166,6 +194,34 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /etsi_its_conversion/cpm_ts/in
           Value: true
+        - Class: etsi_its_msgs/MAPEMDisplay
+          Egress Lane Color: 255; 170; 0
+          Enabled: true
+          Ingress Lane Color: 85; 85; 255
+          MAPEM Lane Width: 1
+          MAPEM Timeout: 120
+          Metadata:
+            Scale: 4
+            Text Color: 255; 255; 255
+            Value: true
+          Name: MAPEMDisplay
+          SPATEM Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/spatem_ts/in
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/mapem_ts/in
+          Value: true
+          Visualize SPATEMs:
+            SPATEM Sphere Scale: 1
+            SPATEM Timeout: 1
+            Value: true
       Enabled: true
       Name: Outgoing
   Enabled: true

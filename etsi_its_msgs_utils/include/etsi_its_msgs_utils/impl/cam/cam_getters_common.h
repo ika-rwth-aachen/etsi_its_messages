@@ -32,6 +32,8 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_GETTERS_COMMON_H
 
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
+
 /**
  * @brief Get the Station ID object
  *

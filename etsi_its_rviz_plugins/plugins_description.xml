@@ -33,4 +33,15 @@
     </description>
     <message_type>etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage</message_type>
   </class>
+  
+  <class
+    name="etsi_its_msgs/MAPEMDisplay"
+    type="etsi_its_msgs::displays::MAPEMDisplay"
+    base_class_type="rviz_common::Display"
+  >
+    <description>
+      Displays data from a etsi_its_mapem_ts_msgs::MAPEM.
+    </description>
+    <message_type>etsi_its_mapem_ts_msgs/msg/MAPEM</message_type>
+  </class>
 </library>
