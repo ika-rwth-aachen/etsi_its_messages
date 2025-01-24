@@ -202,6 +202,11 @@ void MAPEMDisplay::SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSha
       mvmt_state.header = header;
       if(spat_mvmt_state.state_time_speed.array.size()) {
         mvmt_state.phase_state = etsi_its_spatem_ts_msgs::access::getCurrentMovementPhaseState(spat_mvmt_state);
+
+        auto movement_event = etsi_its_spatem_ts_msgs::access::getCurrentMovementEvent(spat_mvmt_state);
+        if (movement_event.timing_is_present) {
+          mvmt_state.time_change_details = std::make_shared<etsi_its_spatem_ts_msgs::msg::TimeChangeDetails>(movement_event.timing);
+        }
       }
       // Check if SignalGroup is already present in IntersectionMovementState of Intersection
       auto mvmnt_it = it->second.movement_states.find(mvmt_state.signal_group_id);
@@ -268,7 +273,7 @@ void MAPEMDisplay::update(float, float) {
       return;
     }
     setTransformOk();
-
+    
     // set pose of scene node
     scene_node_->setPosition(sn_position);
     scene_node_->setOrientation(sn_orientation);
@@ -320,8 +325,11 @@ void MAPEMDisplay::update(float, float) {
       lane_lines_.push_back(line);
       // Signal Groups
       if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size() && intsctn.lanes[i].direction != LaneDirection::egress) {
+        
+        // create graphical circle to display current movement state phase
         std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
         sg->setScale(dims);
+
         // Set color according to state
         // Check if SignalGroup is present in IntersectionMovementState of Intersection
         std::unordered_map<int, IntersectionMovementState>::iterator mvmnt_it;
@@ -388,6 +396,55 @@ void MAPEMDisplay::update(float, float) {
         p.z = intsctn.lanes[i].nodes.front().z;
         sg->setPosition(p);
         signal_groups_.push_back(sg);
+
+        // create graphical text to display expected time for signal change
+        std::string text_content;
+
+        if(mvmnt_it != intsctn.movement_states.end()) {
+          if (mvmnt_it->second.time_change_details != nullptr) {
+
+            // time in 0.1 seconds until the next change occours in the future
+            uint16_t time = mvmnt_it->second.time_change_details->min_end_time.value;
+
+            if (time == 36001) {
+              // value is undefined or unknown
+              text_content = "undefined";
+            } else if (time == 36000) {
+              // used to indicate time >3600 seconds
+              text_content = ">36000s";
+            } else if (time >= 35991 && time <= 35999) {
+              // leap second
+              text_content = "leap second";
+            } else { // time >= 0 && time <= 36000
+              
+              // calculate elapsed seconds since the start of the last full hour  
+              float abs_time_hour = ((int)(mvmnt_it->second.header.stamp.sec)) % 3600 + (float)mvmnt_it->second.header.stamp.nanosec * 1e-9;
+              float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
+            
+              // set displayed precision to 0.1
+              std::stringstream ss;
+              ss << std::fixed << std::setprecision(1) << rel_time_until_change;
+              text_content = ss.str() + std::string("s");
+            }
+          } else {
+            text_content = "no time info";
+          }
+        } else {
+          text_content = "-";
+        }
+
+        std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_->getFloat());
+        Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
+        Ogre::Vector3 offset(
+        offset.x = intsctn.lanes[i].nodes.front().x - halfSize.x * 0.5,
+        offset.y = intsctn.lanes[i].nodes.front().y + halfSize.y,
+        offset.z = intsctn.lanes[i].nodes.front().z + 2);
+
+        text_render->setGlobalTranslation(offset);
+        Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
+        text_render->setColor(text_color);        
+        child_scene_node->attachObject(text_render.get());
+        texts_.push_back(text_render);
       }
     }
 
@@ -398,6 +455,7 @@ void MAPEMDisplay::update(float, float) {
       std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
       double height = dims.z;
       height+=text_render->getBoundingRadius();
+      
       Ogre::Vector3 offs(0.0, 0.0, height);
       // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
       text_render->setGlobalTranslation(offs);
