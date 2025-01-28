@@ -14,6 +14,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_cam_ts_conversion REQUIRED)
   find_package(etsi_its_cpm_ts_conversion REQUIRED)
   find_package(etsi_its_denm_conversion REQUIRED)
+  find_package(etsi_its_denm_ts_conversion REQUIRED)
   find_package(etsi_its_mapem_ts_conversion REQUIRED)
   find_package(etsi_its_spatem_ts_conversion REQUIRED)
   find_package(etsi_its_vam_ts_conversion REQUIRED)
@@ -38,6 +39,7 @@ if(${ROS_VERSION} EQUAL 2)
     etsi_its_cam_ts_conversion
     etsi_its_cpm_ts_conversion
     etsi_its_denm_conversion
+    etsi_its_denm_ts_conversion
     etsi_its_mapem_ts_conversion
     etsi_its_spatem_ts_conversion
     etsi_its_vam_ts_conversion
@@ -76,6 +78,7 @@ elseif(${ROS_VERSION} EQUAL 1)
     etsi_its_cam_ts_conversion
     etsi_its_cpm_ts_conversion
     etsi_its_denm_conversion
+    etsi_its_denm_ts_conversion
     etsi_its_mapem_ts_conversion
     etsi_its_spatem_ts_conversion
     etsi_its_vam_ts_conversion
@@ -92,6 +95,7 @@ elseif(${ROS_VERSION} EQUAL 1)
       etsi_its_cam_ts_conversion
       etsi_its_cpm_ts_conversion
       etsi_its_denm_conversion
+      etsi_its_denm_ts_conversion
       etsi_its_mapem_ts_conversion
       etsi_its_spatem_ts_conversion
       etsi_its_vam_ts_conversion

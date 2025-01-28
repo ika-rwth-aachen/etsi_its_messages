@@ -65,6 +65,8 @@ const std::string Converter::kInputTopicCpmTs{"cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"denm/in"};
 const std::string Converter::kOutputTopicDenm{"denm/out"};
+const std::string Converter::kInputTopicDenmTs{"denm_ts/in"};
+const std::string Converter::kOutputTopicDenmTs{"denm_ts/out"};
 const std::string Converter::kInputTopicMapemTs{"mapem_ts/in"};
 const std::string Converter::kOutputTopicMapemTs{"mapem_ts/out"};
 const std::string Converter::kInputTopicSpatemTs{"spatem_ts/in"};
@@ -82,6 +84,8 @@ const std::string Converter::kInputTopicCpmTs{"~/cpm_ts/in"};
 const std::string Converter::kOutputTopicCpmTs{"~/cpm_ts/out"};
 const std::string Converter::kInputTopicDenm{"~/denm/in"};
 const std::string Converter::kOutputTopicDenm{"~/denm/out"};
+const std::string Converter::kInputTopicDenmTs{"~/denm_ts/in"};
+const std::string Converter::kOutputTopicDenmTs{"~/denm_ts/out"};
 const std::string Converter::kInputTopicMapemTs{"~/mapem_ts/in"};
 const std::string Converter::kOutputTopicMapemTs{"~/mapem_ts/out"};
 const std::string Converter::kInputTopicSpatemTs{"~/spatem_ts/in"};
@@ -98,7 +102,7 @@ const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payloa
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
-const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm", "mapem_ts", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "spatem_ts", "vam_ts"};
 const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "mapem_ts", "spatem_ts", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
@@ -316,6 +320,16 @@ void Converter::setup() {
     subscribers_["denm"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback));
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
   }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm_ts") != udp2ros_etsi_types_.end()) {
+    publishers_["denm_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<denm_ts_msgs::DENM>(kOutputTopicDenmTs, publisher_queue_size_));
+    ROS12_LOG(INFO, "Converting UDP messages of type DENM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["denm_ts"]->getTopic().c_str());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm_ts") != ros2udp_etsi_types_.end()) {
+    boost::function<void(const denm_ts_msgs::DENM::ConstPtr)> callback =
+      boost::bind(&Converter::rosCallback<denm_ts_msgs::DENM, denm_ts_DENM_t>, this, _1, "denm_ts", &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_msgs::DENM&, denm_ts_DENM_t&)>(etsi_its_denm_ts_conversion::toStruct_DENM));
+    subscribers_["denm_ts"] = std::make_shared<ros::Subscriber>(private_node_handle_.subscribe<denm_ts_msgs::DENM>(kInputTopicDenmTs, subscriber_queue_size_, callback));
+    ROS12_LOG(INFO, "Converting native ROS DENMs (TS) on '%s' to UDP messages on '%s'", subscribers_["denm_ts"]->getTopic().c_str(), publisher_udp_->getTopic().c_str());
+  }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
     publishers_["mapem_ts"] = std::make_shared<ros::Publisher>(private_node_handle_.advertise<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_));
     ROS12_LOG(INFO, "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->getTopic().c_str(), publishers_["mapem_ts"]->getTopic().c_str());
@@ -388,6 +402,16 @@ void Converter::setup() {
       std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
     ROS12_LOG(INFO, "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
+  }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm_ts") != udp2ros_etsi_types_.end()) {
+    publisher_denm_ts_ = this->create_publisher<denm_ts_msgs::DENM>(kOutputTopicDenmTs, publisher_queue_size_);
+    ROS12_LOG(INFO, "Converting UDP messages of type DENM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_ts_->get_topic_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm_ts") != ros2udp_etsi_types_.end()) {
+    std::function<void(const denm_ts_msgs::DENM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<denm_ts_msgs::DENM, denm_ts_DENM_t>, this, std::placeholders::_1, "denm_ts", &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_msgs::DENM&, denm_ts_DENM_t&)>(etsi_its_denm_ts_conversion::toStruct_DENM));
+    subscribers_["denm_ts"] = this->create_subscription<denm_ts_msgs::DENM>(kInputTopicDenmTs, subscriber_queue_size_, callback);
+    ROS12_LOG(INFO, "Converting native ROS DENMs (TS) on '%s' to UDP messages on '%s'", subscribers_["denm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
     publisher_mapem_ts_ = this->create_publisher<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_);
@@ -606,19 +630,29 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
     publisher_cpm_ts_->publish(msg);
 #endif
 
-  } else if (detected_etsi_type == "denm") {
+  } else if (detected_etsi_type == "denm" || detected_etsi_type == "denm_ts") {
 
-    // decode buffer to ROS msg
-    denm_msgs::DENM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_DENM, std::function<void(const denm_DENM_t&, denm_msgs::DENM&)>(etsi_its_denm_conversion::toRos_DENM), msg);
-    if (!success) return;
-
-    // publish msg
+    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) { // DENM EN v1.3.1
+      denm_msgs::DENM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_DENM, std::function<void(const denm_DENM_t&, denm_msgs::DENM&)>(etsi_its_denm_conversion::toRos_DENM), msg);
+      if (!success) return;
 #ifdef ROS1
     publishers_["denm"]->publish(msg);
 #else
     publisher_denm_->publish(msg);
 #endif
+    }
+    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm_ts") != udp2ros_etsi_types_.end()) { // DENM TS v2.2.1
+      denm_ts_msgs::DENM msg;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_DENM_t&, denm_ts_msgs::DENM&)>(etsi_its_denm_ts_conversion::toRos_DENM), msg);
+      if (!success) return;
+#ifdef ROS1
+    publishers_["denm_ts"]->publish(msg);
+#else
+    publisher_denm_ts_->publish(msg);
+#endif
+    }
+
   } else if (detected_etsi_type == "vam_ts") {
 
     // decode buffer to ROS msg
@@ -683,7 +717,7 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
   int btp_header_destination_port = 0;
   if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
   else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
-  else if (type == "denm") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "denm" || type == "denm_ts") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
   else if (type == "mapem_ts") btp_header_destination_port = kBtpHeaderDestinationPortMapem;
   else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
   else if (type == "vam_ts") btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
