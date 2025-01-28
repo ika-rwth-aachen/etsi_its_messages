@@ -387,6 +387,14 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             if member is None:
                 continue
 
+            if isinstance(member, list):
+                for sub_member in member:
+                    if sub_member["type"] not in known_types:
+                        raise TypeError(
+                            f"Type '{sub_member['type']}' of member '{sub_member['name']}' "
+                            f"in '{asn1_type_name}' is undefined")
+                continue
+
             if "components-of" in member:
                 member["type"] = member["components-of"]
 
@@ -433,7 +441,27 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "auto_generate_command": AUTO_GENERATE_COMMAND,
         }
 
-    asn1_type_type = asn1_type_info["type"]
+    if isinstance(asn1_type_info, list):
+        members = []
+        print("list:" + str(asn1_type_name))
+        for sub_member in asn1_type_info:
+            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            if member_context is not None:
+                members.extend(member_context["members"])
+        return {
+            "etsi_type": None,
+            "asn1_type_type": "SEQUENCE OF",
+            "asn1_type_name": asn1_type_name,
+            "ros_msg_type": validRosType(asn1_type_name),
+            "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
+            "is_primitive": False,
+            "members": members,
+            "asn1_definition": None,
+            "comments": [],
+            "auto_generate_command": AUTO_GENERATE_COMMAND,
+        }
+    else:
+        asn1_type_type = asn1_type_info["type"]
 
     context = {
         "etsi_type": None,                                              # cam
