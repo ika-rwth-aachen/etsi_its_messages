@@ -427,19 +427,22 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     """
 
     if "components-of" in asn1_type_info: # TODO
+        if "name" not in asn1_type_info:
+            asn1_type_info["name"] = asn1_type_info["type"]
         logging.warning(f"Handling of 'components-of' in '{asn1_type_name}' not yet supported")
-        return { # generate in a way such that compilation will not succeed
-            "etsi_type": None,
-            "asn1_type_type": "components-of",
-            "asn1_type_name": asn1_type_name,
-            "ros_msg_type": validRosType(asn1_type_name),
-            "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
-            "is_primitive": False,
-            "members": [{"asn1_type_name": asn1_type_name, "ros_msg_type": "TODO: components-of", "ros_field_name": "is not yet supported", "c_field_name": "is not yet supported"}],
-            "asn1_definition": None,
-            "comments": [],
-            "auto_generate_command": AUTO_GENERATE_COMMAND,
-        }
+        # return { # generate in a way such that compilation will not succeed
+        #     "etsi_type": None,
+        #     "asn1_type_type": "components-of",
+        #     "asn1_type_name": asn1_type_name,
+        #     "ros_msg_type": validRosType(asn1_type_name),
+        #     "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
+        #     "is_primitive": False,
+        #     "members": [{"asn1_type_name": asn1_type_name, "ros_msg_type": "TODO: components-of", "ros_field_name": "is not yet supported", "c_field_name": "is not yet supported"}],
+        #     "asn1_definition": None,
+        #     "comments": [],
+        #     "auto_generate_command": AUTO_GENERATE_COMMAND,
+        # }
+
 
     if isinstance(asn1_type_info, list):
         members = []
