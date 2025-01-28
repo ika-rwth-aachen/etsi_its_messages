@@ -57,7 +57,7 @@ LanePositionWithLateralDetails ::= SEQUENCE {
 #pragma once
 
 #include <etsi_its_denm_ts_coding/denm_ts_LanePositionWithLateralDetails.h>
-#include <etsi_its_denm_ts_conversion/convertTODO: components-of.h>
+#include <etsi_its_denm_ts_conversion/convertLanePositionAndType.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength9b.h>
 #ifdef ROS1
 #include <etsi_its_denm_ts_msgs/LanePositionWithLateralDetails.h>
@@ -71,14 +71,14 @@ namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 namespace etsi_its_denm_ts_conversion {
 
 void toRos_LanePositionWithLateralDetails(const denm_ts_LanePositionWithLateralDetails_t& in, denm_ts_msgs::LanePositionWithLateralDetails& out) {
-  toRos_TODO: components-of(in.is not yet supported, out.is not yet supported);
+  toRos_LanePositionAndType(in.LanePositionAndType, out.lane_position_and_type);
   toRos_StandardLength9b(in.distanceToLeftBorder, out.distance_to_left_border);
   toRos_StandardLength9b(in.distanceToRightBorder, out.distance_to_right_border);
 }
 
 void toStruct_LanePositionWithLateralDetails(const denm_ts_msgs::LanePositionWithLateralDetails& in, denm_ts_LanePositionWithLateralDetails_t& out) {
   memset(&out, 0, sizeof(denm_ts_LanePositionWithLateralDetails_t));
-  toStruct_TODO: components-of(in.is not yet supported, out.is not yet supported);
+  toStruct_LanePositionAndType(in.lane_position_and_type, out.LanePositionAndType);
   toStruct_StandardLength9b(in.distance_to_left_border, out.distanceToLeftBorder);
   toStruct_StandardLength9b(in.distance_to_right_border, out.distanceToRightBorder);
 }

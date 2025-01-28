@@ -54,7 +54,7 @@
 # }
 # ------------------------------------------------------------------------------
 
-TODO: components-of is not yet supported
+LanePositionAndType lane_position_and_type
 
 StandardLength9b distance_to_left_border
 
