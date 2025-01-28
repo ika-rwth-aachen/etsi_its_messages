@@ -249,6 +249,97 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstShare
   return;
 }
 
+// Converts a value from message type "TimeMarkValue" into a string representation
+// time: time in 0.1 seconds until the next change occours in the future
+// header: time stamped message header which suits as an absolute time reference
+std::string ParseTimeMarkValueToSeconds(uint16_t time, std_msgs::msg::Header& header)
+{
+  std::string text_content;
+
+  // see etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark"
+  if (time == 36001) {
+    // value is undefined or unknown
+    text_content = "undefined";
+  } else if (time == 36000) {
+    // used to indicate time >3600 seconds
+    text_content = ">36000s";
+  } else if (time >= 35991 && time <= 35999) {
+    // leap second
+    text_content = "leap second";
+  } else { // time >= 0 && time <= 36000
+    // calculate elapsed seconds since the start of the last full hour  
+    float abs_time_hour = ((int)(header.stamp.sec)) % 3600 + (float)header.stamp.nanosec * 1e-9;
+    float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
+            
+    // set displayed precision to 0.1
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(1) << rel_time_until_change << "s";
+    text_content = ss.str();
+  }
+
+  return text_content;
+}
+
+// Converts a value from message type "TimeIntervalConfidence" into a string respresentation
+std::string ParseTimeIntervalConfidenceToPercent(uint16_t encoded_probability)
+{
+  std::string probability = "undefined";
+
+  switch (encoded_probability)
+  {
+    case 0:
+      probability = "21%";
+      break;
+    case 1:
+      probability = "36%";
+      break;
+    case 2: 
+      probability = "47%";
+      break;
+    case 3:
+      probability = "56%";
+      break;
+    case 4:
+      probability = "62%";
+      break;
+    case 5: 
+      probability = "68%";
+      break;
+    case 6:
+      probability = "73%";
+      break;
+    case 7:
+      probability = "77%";
+      break;
+    case 8:
+      probability = "81%";
+      break;
+    case 9:
+      probability = "85%";
+      break;
+    case 10:
+      probability = "88%";
+      break;
+    case 11:
+      probability = "91%";
+      break;
+    case 12:
+      probability = "94%";
+      break;
+    case 13:
+      probability = "96%";
+      break;
+    case 14: 
+      probability = "98%";
+      break;
+    case 15:
+      probability = "100%";
+      break;
+  }
+
+  return probability;
+}
+
 void MAPEMDisplay::update(float, float) {
   // Check for outdated intersections and movement states
   rclcpp::Time now = rviz_node_->now();
@@ -384,7 +475,6 @@ void MAPEMDisplay::update(float, float) {
             default:
               sg->setColor(color_grey);
               break;
-
           }
         }
         else {
@@ -396,35 +486,32 @@ void MAPEMDisplay::update(float, float) {
         p.z = intsctn.lanes[i].nodes.front().z;
         sg->setPosition(p);
         signal_groups_.push_back(sg);
-
+      
         // create graphical text to display expected time for signal change
         std::string text_content;
 
         if(mvmnt_it != intsctn.movement_states.end()) {
           if (mvmnt_it->second.time_change_details != nullptr) {
+            etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = mvmnt_it->second.time_change_details;
+            std_msgs::msg::Header& header = mvmnt_it->second.header;
 
-            // time in 0.1 seconds until the next change occours in the future
-            uint16_t time = mvmnt_it->second.time_change_details->min_end_time.value;
-
-            if (time == 36001) {
-              // value is undefined or unknown
-              text_content = "undefined";
-            } else if (time == 36000) {
-              // used to indicate time >3600 seconds
-              text_content = ">36000s";
-            } else if (time >= 35991 && time <= 35999) {
-              // leap second
-              text_content = "leap second";
-            } else { // time >= 0 && time <= 36000
-              
-              // calculate elapsed seconds since the start of the last full hour  
-              float abs_time_hour = ((int)(mvmnt_it->second.header.stamp.sec)) % 3600 + (float)mvmnt_it->second.header.stamp.nanosec * 1e-9;
-              float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
+            // 'Min end time' is the only required field in the TimeChangeDetail Etsi definition
+            text_content = std::string("Min end time: ") + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header);
             
-              // set displayed precision to 0.1
-              std::stringstream ss;
-              ss << std::fixed << std::setprecision(1) << rel_time_until_change;
-              text_content = ss.str() + std::string("s");
+            if (time_change_details->start_time_is_present) {
+              text_content += "\nStart time: " + ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header);
+            }
+            if (time_change_details->max_end_time_is_present) {
+              text_content += "\nMax end time: " + ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header);
+            }
+            if (time_change_details->likely_time_is_present) {
+              text_content += "\nLikely time: " + ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header);
+            }
+            if (time_change_details->confidence_is_present) {
+              text_content += "\nConfidence: " + ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value);
+            }
+            if (time_change_details->next_time_is_present) {
+              text_content += "\nNext time: " + ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header);
             }
           } else {
             text_content = "no time info";
