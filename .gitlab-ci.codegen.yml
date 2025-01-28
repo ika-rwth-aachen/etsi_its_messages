@@ -98,6 +98,21 @@ etsi_its_denm_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_denm_ts_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      utils/codegen/asn1ToC/asn1ToC.py
+      asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn
+      asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn
+      -t denm_ts
+      -o etsi_its_coding/etsi_its_denm_ts_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi 
+
 etsi_its_cpm_ts_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
@@ -201,6 +216,17 @@ etsi_its_denm_msgs:
       -o etsi_its_msgs/etsi_its_denm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_denm_ts_msgs:
+  stage: ROS Messages
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToRosMsg.py
+      asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn
+      asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn
+      -t denm_ts
+      -o etsi_its_msgs/etsi_its_denm_ts_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_cpm_ts_msgs:
   stage: ROS Messages
   script:
@@ -286,6 +312,17 @@ etsi_its_denm_conversion:
       asn1/raw/denm_en302637_3/cdd/ITS-Container.asn
       -t denm
       -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_denm_ts_conversion:
+  stage: Conversion Headers
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
+      asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn
+      asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn
+      -t denm_ts
+      -o etsi_its_conversion/etsi_its_denm_ts_conversion/include/etsi_its_denm_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cpm_ts_conversion:
