@@ -56,40 +56,75 @@ const Ogre::ColourValue color_red(0.8, 0.2, 0.2, 1.0);
 
 MAPEMDisplay::MAPEMDisplay() {
   // General Properties
-  mapem_timeout_ = new rviz_common::properties::FloatProperty(
-    "MAPEM Timeout", 120.0f,
-    "Time (in s) until MAP disappears", this);
-  mapem_timeout_->setMin(0);
   spatem_topic_property_ = new rviz_common::properties::RosTopicProperty("SPATEM Topic", "/etsi_its_conversion/spatem_ts/out",
       rosidl_generator_traits::data_type<etsi_its_spatem_ts_msgs::msg::SPATEM>(),
       "Topic of corresponding SPATEMs", this, SLOT(changedSPATEMTopic()));
   spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
+  
+  // MAPEM
+  viz_mapem_ = new rviz_common::properties::BoolProperty("Visualize MAPEMs", false,
+    "Show MAPEMs", this, SLOT(changedMAPEMViz()));
+
+  mapem_timeout_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Timeout", 120.0f,
+    "Time (in s) until MAP disappears", viz_mapem_);
+  mapem_timeout_->setMin(0);
+
+  color_property_ingress_ = new rviz_common::properties::ColorProperty(
+    "Ingress Lane Color", QColor(85, 85, 255),
+    "Color to visualize Ingress-Lanes", viz_mapem_);
+  color_property_egress_ = new rviz_common::properties::ColorProperty(
+    "Egress Lane Color", QColor(255, 170, 0),
+    "Color to visualize Egress-Lanes", viz_mapem_);
+  lane_width_property_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Lane Width", 1.0, "Width of MAPEM-Lanes", viz_mapem_);
+  lane_width_property_->setMin(0.1);
+  show_meta_mapem_ = new rviz_common::properties::BoolProperty("Metadata", true,
+    "Show metadata as text next to MAP reference point", viz_mapem_);
+  text_color_property_mapem_ = new rviz_common::properties::ColorProperty(
+    "Text Color", QColor(255, 255, 255),
+    "Text color", show_meta_mapem_);
+  char_height_mapem_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_mapem_);
+
+  // SPATEM
   viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
     "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
+  
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
     "SPATEM Timeout", 0.1f,
     "Time (in s) until SPAT disappears", viz_spatem_);
   spatem_timeout_->setMin(0);
+
   spatem_sphere_scale_property_ = new rviz_common::properties::FloatProperty(
     "SPATEM Sphere Scale", 1.0f,
     "Scaling factor to adjuste size of SPATEM spheres", viz_spatem_);
   spatem_sphere_scale_property_->setMin(0.1);
-  color_property_ingress_ = new rviz_common::properties::ColorProperty(
-    "Ingress Lane Color", QColor(85, 85, 255),
-    "Color to visualize Ingress-Lanes", this);
-  color_property_egress_ = new rviz_common::properties::ColorProperty(
-    "Egress Lane Color", QColor(255, 170, 0),
-    "Color to visualize Egress-Lanes", this);
-  lane_width_property_ = new rviz_common::properties::FloatProperty(
-    "MAPEM Lane Width", 1.0, "Width of MAPEM-Lanes", this);
-  lane_width_property_->setMin(0.1);
-  show_meta_ = new rviz_common::properties::BoolProperty("Metadata", true,
-    "Show metadata as text next to MAP reference point", this);
-  text_color_property_ = new rviz_common::properties::ColorProperty(
-    "Text Color", QColor(255, 255, 255),
-    "Text color", show_meta_);
-  char_height_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_);
 
+  show_meta_spatem_ = new rviz_common::properties::BoolProperty("Metadata", true,
+    "Show metadata as text next to SPATEM reference point", viz_spatem_);
+
+  text_color_property_spatem_ = new rviz_common::properties::ColorProperty(
+    "Text Color", QColor(255, 255, 255),
+    "Text color", show_meta_spatem_);
+  char_height_spatem_ = new rviz_common::properties::FloatProperty("Scale", 1.0, "Scale of text", show_meta_spatem_);
+
+  show_spatem_start_time = new rviz_common::properties::BoolProperty("Start time", true,
+    "Show SPATEM start time", show_meta_spatem_);
+
+  show_spatem_min_end_time = new rviz_common::properties::BoolProperty("Min end time", true,
+    "Show SPATEM min end time", show_meta_spatem_);
+
+  show_spatem_max_end_time = new rviz_common::properties::BoolProperty("Max end time", true,
+    "Show SPATEM max end time", show_meta_spatem_);
+
+  show_spatem_likely_time = new rviz_common::properties::BoolProperty("Likely time", true,
+    "Show SPATEM likely time", show_meta_spatem_);
+
+  show_spatem_confidence = new rviz_common::properties::BoolProperty("Confidence", true,
+    "Show SPATEM confidence", show_meta_spatem_);
+
+  show_spatem_next_time = new rviz_common::properties::BoolProperty("Next time", true,
+    "Show SPATEM next time", show_meta_spatem_);
 
 }
 
@@ -127,6 +162,10 @@ void MAPEMDisplay::changedSPATEMViz() {
     spatem_subscriber_.reset();
   } 
   else changedSPATEMTopic();
+}
+
+void MAPEMDisplay::changedMAPEMViz() {
+  // todo
 }
 
 void MAPEMDisplay::changedSPATEMTopic() {
@@ -487,66 +526,83 @@ void MAPEMDisplay::update(float, float) {
         sg->setPosition(p);
         signal_groups_.push_back(sg);
       
-        // create graphical text to display expected time for signal change
-        std::string text_content;
+        if (show_meta_spatem_->getBool())
+        {
+          // create graphical text to display time information for signal change (see TimeChangeDetail Etsi definition)
+          std::string text_content;
 
-        if(mvmnt_it != intsctn.movement_states.end()) {
-          if (mvmnt_it->second.time_change_details != nullptr) {
-            etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = mvmnt_it->second.time_change_details;
-            std_msgs::msg::Header& header = mvmnt_it->second.header;
+          if(mvmnt_it != intsctn.movement_states.end()) {
+            if (mvmnt_it->second.time_change_details != nullptr) {
+              etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = mvmnt_it->second.time_change_details;
+              std_msgs::msg::Header& header = mvmnt_it->second.header;
 
-            // 'Min end time' is the only required field in the TimeChangeDetail Etsi definition
-            text_content = std::string("Min end time: ") + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header);
-            
-            if (time_change_details->start_time_is_present) {
-              text_content += "\nStart time: " + ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header);
-            }
-            if (time_change_details->max_end_time_is_present) {
-              text_content += "\nMax end time: " + ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header);
-            }
-            if (time_change_details->likely_time_is_present) {
-              text_content += "\nLikely time: " + ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header);
-            }
-            if (time_change_details->confidence_is_present) {
-              text_content += "\nConfidence: " + ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value);
-            }
-            if (time_change_details->next_time_is_present) {
-              text_content += "\nNext time: " + ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header);
+              if (show_spatem_start_time->getBool()) {
+                text_content = "Start time: " 
+                  + (time_change_details->start_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header) : "-") 
+                  + "\n";
+              }
+
+              // 'Min end time' is the only required field 
+              if (show_spatem_min_end_time->getBool()) {
+                text_content += "Min end time: " 
+                + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header) +
+                "\n";
+              }
+              
+              if (show_spatem_max_end_time->getBool()) {
+                text_content += "Max end time: "
+                  + (time_change_details->max_end_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header) : "-") 
+                  + "\n";
+              }
+              if (show_spatem_likely_time->getBool()) {
+                text_content += "Likely time: "
+                  + (time_change_details->likely_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header) : "-") 
+                  + "\n";
+              }
+              if (show_spatem_confidence->getBool()) {
+                text_content += "Confidence: "
+                  + (time_change_details->confidence_is_present ? ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value) : "-") 
+                  + "\n";
+              }
+              if (show_spatem_next_time->getBool()) {
+                text_content += "Next time: "
+                  + (time_change_details->next_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header) : "-");
+              }
+            } else {
+              text_content = "no time info";
             }
           } else {
-            text_content = "no time info";
+            text_content = "-";
           }
-        } else {
-          text_content = "-";
+
+          std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_spatem_->getFloat());
+          Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
+          Ogre::Vector3 offset(
+          offset.x = intsctn.lanes[i].nodes.front().x - halfSize.x * 0.5,
+          offset.y = intsctn.lanes[i].nodes.front().y + halfSize.y,
+          offset.z = intsctn.lanes[i].nodes.front().z + 2);
+
+          text_render->setGlobalTranslation(offset);
+          Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_spatem_->getColor());
+          text_render->setColor(text_color);        
+          child_scene_node->attachObject(text_render.get());
+          texts_.push_back(text_render);
         }
-
-        std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_->getFloat());
-        Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
-        Ogre::Vector3 offset(
-        offset.x = intsctn.lanes[i].nodes.front().x - halfSize.x * 0.5,
-        offset.y = intsctn.lanes[i].nodes.front().y + halfSize.y,
-        offset.z = intsctn.lanes[i].nodes.front().z + 2);
-
-        text_render->setGlobalTranslation(offset);
-        Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
-        text_render->setColor(text_color);        
-        child_scene_node->attachObject(text_render.get());
-        texts_.push_back(text_render);
       }
     }
 
-    // Visualize meta-information as text
-    if(show_meta_->getBool()) {
+    // Visualize MAPEM meta-information as text
+    if(show_meta_mapem_->getBool()) {
       std::string text;
       text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
-      std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_->getFloat());
+      std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
       double height = dims.z;
       height+=text_render->getBoundingRadius();
       
       Ogre::Vector3 offs(0.0, 0.0, height);
       // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
       text_render->setGlobalTranslation(offs);
-      Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_->getColor());
+      Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_mapem_->getColor());
       text_render->setColor(text_color);
       child_scene_node->attachObject(text_render.get());
       texts_.push_back(text_render);
