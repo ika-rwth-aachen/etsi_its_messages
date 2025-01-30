@@ -62,7 +62,7 @@ MAPEMDisplay::MAPEMDisplay() {
   spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
   
   // MAPEM
-  viz_mapem_ = new rviz_common::properties::BoolProperty("Visualize MAPEMs", false,
+  viz_mapem_ = new rviz_common::properties::BoolProperty("Visualize MAPEMs", true,
     "Show MAPEMs", this, SLOT(changedMAPEMViz()));
 
   mapem_timeout_ = new rviz_common::properties::FloatProperty(
@@ -291,7 +291,7 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstShare
 // Converts a value from message type "TimeMarkValue" into a string representation
 // time: time in 0.1 seconds until the next change occours in the future
 // header: time stamped message header which suits as an absolute time reference
-std::string ParseTimeMarkValueToSeconds(uint16_t time, std_msgs::msg::Header& header)
+std::string ParseTimeMarkValueToSeconds(const uint16_t time, const std_msgs::msg::Header& header)
 {
   std::string text_content;
 
@@ -320,7 +320,7 @@ std::string ParseTimeMarkValueToSeconds(uint16_t time, std_msgs::msg::Header& he
 }
 
 // Converts a value from message type "TimeIntervalConfidence" into a string respresentation
-std::string ParseTimeIntervalConfidenceToPercent(uint16_t encoded_probability)
+std::string ParseTimeIntervalConfidenceToPercent(const uint16_t encoded_probability)
 {
   std::string probability = "undefined";
 
@@ -379,6 +379,207 @@ std::string ParseTimeIntervalConfidenceToPercent(uint16_t encoded_probability)
   return probability;
 }
 
+Ogre::ColourValue ParseMovementStatePhaseToColor(const uint8_t value)
+{
+  Ogre::ColourValue color;
+
+  switch (value) {
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::UNAVAILABLE:
+      color = color_grey;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::DARK:
+      color = color_grey;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
+      color = color_red;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
+      color = color_red;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
+      color = color_orange;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
+      color = color_green;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
+      color = color_green;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
+      color = color_orange;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
+      color = color_orange;
+      break;
+
+    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
+      color = color_orange;
+      break;
+
+    default:
+      color = color_grey;
+      break;
+  }
+
+  return color;
+}
+
+void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node) {
+  // create sphere object
+  std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
+
+  // set the dimensions of sphere
+  double scale = spatem_sphere_scale_property_->getFloat();
+  Ogre::Vector3 dims;
+  dims.x = 1.0 * scale;
+  dims.y = 1.0 * scale;
+  dims.z = 1.0 * scale;
+  sphere->setScale(dims);
+
+  // set the color of sphere
+  sphere->setColor(color_grey);
+  intsct_ref_points_.push_back(sphere);
+}
+
+void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane) {
+  // visualize the lanes
+  std::shared_ptr<rviz_rendering::BillboardLine> line = std::make_shared<rviz_rendering::BillboardLine>(scene_manager_, child_scene_node);
+  Ogre::ColourValue lane_color;
+  if(lane.direction == LaneDirection::ingress) lane_color = rviz_common::properties::qtToOgre(color_property_ingress_->getColor());
+  else if(lane.direction == LaneDirection::egress) lane_color = rviz_common::properties::qtToOgre(color_property_egress_->getColor());
+  else lane_color = color_grey;
+  line->setColor(lane_color.r, lane_color.g, lane_color.b, lane_color.a);
+  double line_width = lane_width_property_->getFloat();
+  line->setLineWidth(line_width);
+  for(size_t j = 0; j<lane.nodes.size(); j++) {
+    Ogre::Vector3 p;
+    p.x = lane.nodes[j].x;
+    p.y = lane.nodes[j].y;
+    p.z = lane.nodes[j].z;
+    line->addPoint(p);
+  }
+  lane_lines_.push_back(line); 
+}
+
+void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, IntersectionRenderObject& intsctn) {
+  std::string text;
+  text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
+  std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
+  double height = spatem_sphere_scale_property_->getFloat();
+  height+=text_render->getBoundingRadius();
+  
+  Ogre::Vector3 offs(0.0, 0.0, height);
+  // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
+  text_render->setGlobalTranslation(offs);
+  Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_mapem_->getColor());
+  text_render->setColor(text_color);
+  child_scene_node->attachObject(text_render.get());
+  texts_.push_back(text_render);
+}
+
+void MAPEMDisplay::RenderSpatemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state) {
+  // Signal Groups
+  if(viz_spatem_->getBool() && lane.signal_group_ids.size() && lane.direction != LaneDirection::egress) {
+        
+    // create graphical circle to display current movement state phase
+    std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
+          
+    // set the dimensions of sphere
+    double scale = spatem_sphere_scale_property_->getFloat();
+    Ogre::Vector3 dims;
+    dims.x = 1.0 * scale;
+    dims.y = 1.0 * scale;
+    dims.z = 1.0 * scale;
+          
+    sg->setScale(dims);
+
+    // Set color according to state
+    if(intersection_movement_state != nullptr) {
+      sg->setColor(ParseMovementStatePhaseToColor(intersection_movement_state->phase_state.value));
+    }
+    else {
+      sg->setColor(color_grey);
+    }
+
+    Ogre::Vector3 p;
+    p.x = lane.nodes.front().x;
+    p.y = lane.nodes.front().y;
+    p.z = lane.nodes.front().z;
+    sg->setPosition(p);
+    signal_groups_.push_back(sg);
+  }
+}
+
+void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state) {
+  std::string text_content;
+
+  if (intersection_movement_state != nullptr) {
+    if (intersection_movement_state->time_change_details != nullptr) {
+      etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = intersection_movement_state->time_change_details;
+      std_msgs::msg::Header& header = intersection_movement_state->header;
+      
+      if (show_spatem_start_time->getBool()) {
+        text_content = "Start time: " 
+          + (time_change_details->start_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header) : "-") 
+          + "\n";
+      }
+
+      // 'Min end time' is the only required field 
+      if (show_spatem_min_end_time->getBool()) {
+        text_content += "Min end time: " 
+        + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header) +
+        "\n";
+      }
+              
+      if (show_spatem_max_end_time->getBool()) {
+        text_content += "Max end time: "
+          + (time_change_details->max_end_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header) : "-") 
+          + "\n";
+      }
+      if (show_spatem_likely_time->getBool()) {
+        text_content += "Likely time: "
+          + (time_change_details->likely_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header) : "-") 
+          + "\n";
+      }
+      if (show_spatem_confidence->getBool()) {
+        text_content += "Confidence: "
+          + (time_change_details->confidence_is_present ? ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value) : "-") 
+          + "\n";
+      }
+      if (show_spatem_next_time->getBool()) {
+        text_content += "Next time: "
+          + (time_change_details->next_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header) : "-");
+      }
+    } else {
+      text_content = "no time info";
+    }
+  } else {
+    text_content = "-";
+  }
+
+  std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_spatem_->getFloat());
+  Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
+  Ogre::Vector3 offset(
+  offset.x = lane.nodes.front().x - halfSize.x * 0.5,
+  offset.y = lane.nodes.front().y + halfSize.y,
+  offset.z = lane.nodes.front().z + 2);
+
+  text_render->setGlobalTranslation(offset);
+  Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_spatem_->getColor());
+  text_render->setColor(text_color);        
+  child_scene_node->attachObject(text_render.get());
+  texts_.push_back(text_render);
+}
+
 void MAPEMDisplay::update(float, float) {
   // Check for outdated intersections and movement states
   rclcpp::Time now = rviz_node_->now();
@@ -419,193 +620,45 @@ void MAPEMDisplay::update(float, float) {
     child_scene_node->setPosition(position);
     child_scene_node->setOrientation(orientation);
 
-    // create sphere object
-    std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
-
-    // set the dimensions of sphere
-    double scale = spatem_sphere_scale_property_->getFloat();
-    Ogre::Vector3 dims;
-    dims.x = 1.0 * scale;
-    dims.y = 1.0 * scale;
-    dims.z = 1.0 * scale;
-    sphere->setScale(dims);
-
-    // set the color of sphere
-    sphere->setColor(color_grey);
-    intsct_ref_points_.push_back(sphere);
-
-    // visualize the lanes
-    for(size_t i = 0; i<intsctn.lanes.size(); i++)
-    {
-      std::shared_ptr<rviz_rendering::BillboardLine> line = std::make_shared<rviz_rendering::BillboardLine>(scene_manager_, child_scene_node);
-      Ogre::ColourValue lane_color;
-      if(intsctn.lanes[i].direction == LaneDirection::ingress) lane_color = rviz_common::properties::qtToOgre(color_property_ingress_->getColor());
-      else if(intsctn.lanes[i].direction == LaneDirection::egress) lane_color = rviz_common::properties::qtToOgre(color_property_egress_->getColor());
-      else lane_color = color_grey;
-      line->setColor(lane_color.r, lane_color.g, lane_color.b, lane_color.a);
-      double line_width = lane_width_property_->getFloat();
-      line->setLineWidth(line_width);
-      for(size_t j = 0; j<intsctn.lanes[i].nodes.size(); j++) {
-        Ogre::Vector3 p;
-        p.x = intsctn.lanes[i].nodes[j].x;
-        p.y = intsctn.lanes[i].nodes[j].y;
-        p.z = intsctn.lanes[i].nodes[j].z;
-        line->addPoint(p);
-      }
-      lane_lines_.push_back(line);
-      // Signal Groups
-      if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size() && intsctn.lanes[i].direction != LaneDirection::egress) {
-        
-        // create graphical circle to display current movement state phase
-        std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
-        sg->setScale(dims);
-
-        // Set color according to state
-        // Check if SignalGroup is present in IntersectionMovementState of Intersection
-        std::unordered_map<int, IntersectionMovementState>::iterator mvmnt_it;
-        for(size_t j=0; j<intsctn.lanes[i].signal_group_ids.size(); j++) {
-          mvmnt_it = intsctn.movement_states.find(intsctn.lanes[i].signal_group_ids[j]);
-          if (mvmnt_it != intsctn.movement_states.end()) break;
-          // Todo: How to handle when multiple signal_group_ids are present for one lane?
-        }
-        if(mvmnt_it != intsctn.movement_states.end()) {
-          switch (mvmnt_it->second.phase_state.value) {
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::UNAVAILABLE:
-              sg->setColor(color_grey);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::DARK:
-              sg->setColor(color_grey);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
-              sg->setColor(color_red);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
-              sg->setColor(color_red);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
-              sg->setColor(color_orange);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
-              sg->setColor(color_green);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
-              sg->setColor(color_green);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
-              sg->setColor(color_orange);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
-              sg->setColor(color_orange);
-              break;
-
-            case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
-              sg->setColor(color_orange);
-              break;
-
-            default:
-              sg->setColor(color_grey);
-              break;
-          }
-        }
-        else {
-          sg->setColor(color_grey);
-        }
-        Ogre::Vector3 p;
-        p.x = intsctn.lanes[i].nodes.front().x;
-        p.y = intsctn.lanes[i].nodes.front().y;
-        p.z = intsctn.lanes[i].nodes.front().z;
-        sg->setPosition(p);
-        signal_groups_.push_back(sg);
-      
-        if (show_meta_spatem_->getBool())
-        {
-          // create graphical text to display time information for signal change (see TimeChangeDetail Etsi definition)
-          std::string text_content;
-
-          if(mvmnt_it != intsctn.movement_states.end()) {
-            if (mvmnt_it->second.time_change_details != nullptr) {
-              etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = mvmnt_it->second.time_change_details;
-              std_msgs::msg::Header& header = mvmnt_it->second.header;
-
-              if (show_spatem_start_time->getBool()) {
-                text_content = "Start time: " 
-                  + (time_change_details->start_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header) : "-") 
-                  + "\n";
-              }
-
-              // 'Min end time' is the only required field 
-              if (show_spatem_min_end_time->getBool()) {
-                text_content += "Min end time: " 
-                + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header) +
-                "\n";
-              }
-              
-              if (show_spatem_max_end_time->getBool()) {
-                text_content += "Max end time: "
-                  + (time_change_details->max_end_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header) : "-") 
-                  + "\n";
-              }
-              if (show_spatem_likely_time->getBool()) {
-                text_content += "Likely time: "
-                  + (time_change_details->likely_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header) : "-") 
-                  + "\n";
-              }
-              if (show_spatem_confidence->getBool()) {
-                text_content += "Confidence: "
-                  + (time_change_details->confidence_is_present ? ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value) : "-") 
-                  + "\n";
-              }
-              if (show_spatem_next_time->getBool()) {
-                text_content += "Next time: "
-                  + (time_change_details->next_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header) : "-");
-              }
-            } else {
-              text_content = "no time info";
-            }
-          } else {
-            text_content = "-";
-          }
-
-          std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_spatem_->getFloat());
-          Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
-          Ogre::Vector3 offset(
-          offset.x = intsctn.lanes[i].nodes.front().x - halfSize.x * 0.5,
-          offset.y = intsctn.lanes[i].nodes.front().y + halfSize.y,
-          offset.z = intsctn.lanes[i].nodes.front().z + 2);
-
-          text_render->setGlobalTranslation(offset);
-          Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_spatem_->getColor());
-          text_render->setColor(text_color);        
-          child_scene_node->attachObject(text_render.get());
-          texts_.push_back(text_render);
-        }
-      }
+    // visualize intersection
+    if(viz_mapem_->getBool()) {
+      RenderMapemShapes(child_scene_node);
     }
 
+    // visualize the lanes
+    for(size_t i = 0; i<intsctn.lanes.size(); i++) {
+      if(viz_mapem_->getBool()) {
+        RenderMapemShapes(child_scene_node, intsctn.lanes[i]);
+      }
+
+      // Signal Groups
+      if(viz_spatem_->getBool() && intsctn.lanes[i].signal_group_ids.size() && intsctn.lanes[i].direction != LaneDirection::egress) {
+
+        // Check if SignalGroup is present in IntersectionMovementState of Intersection
+        std::unordered_map<int, IntersectionMovementState>::iterator mvmnt_it;
+        IntersectionMovementState* mvmnt_ptr = nullptr;
+
+        for(size_t j=0; j<intsctn.lanes[i].signal_group_ids.size(); j++) {
+          mvmnt_it = intsctn.movement_states.find(intsctn.lanes[i].signal_group_ids[j]);
+          if (mvmnt_it != intsctn.movement_states.end())
+          {
+            // todo: what happens if more than one entries are available?
+            mvmnt_ptr = &mvmnt_it->second;
+            break;
+          }
+        }
+
+        // Visualize current traffic state
+        RenderSpatemShapes(child_scene_node, intsctn.lanes[i], mvmnt_ptr);
+
+        // create graphical text to display time information for signal change (see TimeChangeDetail Etsi definition)
+        RenderSpatemTexts(child_scene_node, intsctn.lanes[i], mvmnt_ptr);
+      }
+
+    }
     // Visualize MAPEM meta-information as text
     if(show_meta_mapem_->getBool()) {
-      std::string text;
-      text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
-      std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
-      double height = dims.z;
-      height+=text_render->getBoundingRadius();
-      
-      Ogre::Vector3 offs(0.0, 0.0, height);
-      // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
-      text_render->setGlobalTranslation(offs);
-      Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_mapem_->getColor());
-      text_render->setColor(text_color);
-      child_scene_node->attachObject(text_render.get());
-      texts_.push_back(text_render);
+      RenderMapemTexts(child_scene_node, intsctn);
     }
   }
 }
