@@ -85,7 +85,7 @@ protected:
   void SPATEMCallback(etsi_its_spatem_ts_msgs::msg::SPATEM::ConstSharedPtr msg);
 
   void RenderMapemShapes(Ogre::SceneNode *child_scene_node);
-  void RenderMapemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane);
+  void RenderMapemShapesLane(Ogre::SceneNode *child_scene_node, IntersectionLane& lane);
   void RenderMapemTexts(Ogre::SceneNode *child_scene_node, IntersectionRenderObject& intsctn);
   void RenderSpatemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state);
   void RenderSpatemTexts(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state);

@@ -288,151 +288,6 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstShare
   return;
 }
 
-// Converts a value from message type "TimeMarkValue" into a string representation
-// time: time in 0.1 seconds until the next change occours in the future
-// header: time stamped message header which suits as an absolute time reference
-std::string ParseTimeMarkValueToSeconds(const uint16_t time, const std_msgs::msg::Header& header)
-{
-  std::string text_content;
-
-  // see etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark"
-  if (time == 36001) {
-    // value is undefined or unknown
-    text_content = "undefined";
-  } else if (time == 36000) {
-    // used to indicate time >3600 seconds
-    text_content = ">36000s";
-  } else if (time >= 35991 && time <= 35999) {
-    // leap second
-    text_content = "leap second";
-  } else { // time >= 0 && time <= 36000
-    // calculate elapsed seconds since the start of the last full hour  
-    float abs_time_hour = ((int)(header.stamp.sec)) % 3600 + (float)header.stamp.nanosec * 1e-9;
-    float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
-            
-    // set displayed precision to 0.1
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(1) << rel_time_until_change << "s";
-    text_content = ss.str();
-  }
-
-  return text_content;
-}
-
-// Converts a value from message type "TimeIntervalConfidence" into a string respresentation
-std::string ParseTimeIntervalConfidenceToPercent(const uint16_t encoded_probability)
-{
-  std::string probability = "undefined";
-
-  switch (encoded_probability)
-  {
-    case 0:
-      probability = "21%";
-      break;
-    case 1:
-      probability = "36%";
-      break;
-    case 2: 
-      probability = "47%";
-      break;
-    case 3:
-      probability = "56%";
-      break;
-    case 4:
-      probability = "62%";
-      break;
-    case 5: 
-      probability = "68%";
-      break;
-    case 6:
-      probability = "73%";
-      break;
-    case 7:
-      probability = "77%";
-      break;
-    case 8:
-      probability = "81%";
-      break;
-    case 9:
-      probability = "85%";
-      break;
-    case 10:
-      probability = "88%";
-      break;
-    case 11:
-      probability = "91%";
-      break;
-    case 12:
-      probability = "94%";
-      break;
-    case 13:
-      probability = "96%";
-      break;
-    case 14: 
-      probability = "98%";
-      break;
-    case 15:
-      probability = "100%";
-      break;
-  }
-
-  return probability;
-}
-
-Ogre::ColourValue ParseMovementStatePhaseToColor(const uint8_t value)
-{
-  Ogre::ColourValue color;
-
-  switch (value) {
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::UNAVAILABLE:
-      color = color_grey;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::DARK:
-      color = color_grey;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_THEN_PROCEED:
-      color = color_red;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::STOP_AND_REMAIN:
-      color = color_red;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PRE_MOVEMENT:
-      color = color_orange;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
-      color = color_green;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
-      color = color_green;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PERMISSIVE_CLEARANCE:
-      color = color_orange;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::PROTECTED_CLEARANCE:
-      color = color_orange;
-      break;
-
-    case etsi_its_spatem_ts_msgs::msg::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
-      color = color_orange;
-      break;
-
-    default:
-      color = color_grey;
-      break;
-  }
-
-  return color;
-}
-
 void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node) {
   // create sphere object
   std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
@@ -450,7 +305,7 @@ void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node) {
   intsct_ref_points_.push_back(sphere);
 }
 
-void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane) {
+void MAPEMDisplay::RenderMapemShapesLane(Ogre::SceneNode *child_scene_node, IntersectionLane& lane) {
   // visualize the lanes
   std::shared_ptr<rviz_rendering::BillboardLine> line = std::make_shared<rviz_rendering::BillboardLine>(scene_manager_, child_scene_node);
   Ogre::ColourValue lane_color;
@@ -504,7 +359,8 @@ void MAPEMDisplay::RenderSpatemShapes(Ogre::SceneNode *child_scene_node, Interse
 
     // Set color according to state
     if(intersection_movement_state != nullptr) {
-      sg->setColor(ParseMovementStatePhaseToColor(intersection_movement_state->phase_state.value));
+      std::array<float, 4> color = etsi_its_spatem_ts_msgs::access::interpretMovementStatePhaseAsColor(intersection_movement_state->phase_state.value);
+      sg->setColor(color.at(0), color.at(1), color.at(2), color.at(3));
     }
     else {
       sg->setColor(color_grey);
@@ -529,35 +385,45 @@ void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, Intersec
       
       if (show_spatem_start_time->getBool()) {
         text_content = "Start time: " 
-          + (time_change_details->start_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->start_time.value, header) : "-") 
+          + (time_change_details->start_time_is_present 
+            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->start_time.value, header.stamp.sec, header.stamp.nanosec)
+            : "-") 
           + "\n";
       }
 
       // 'Min end time' is the only required field 
       if (show_spatem_min_end_time->getBool()) {
         text_content += "Min end time: " 
-        + ParseTimeMarkValueToSeconds(time_change_details->min_end_time.value, header) +
-        "\n";
+        + etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->min_end_time.value, header.stamp.sec, header.stamp.nanosec)
+        + "\n";
       }
               
       if (show_spatem_max_end_time->getBool()) {
         text_content += "Max end time: "
-          + (time_change_details->max_end_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->max_end_time.value, header) : "-") 
+          + (time_change_details->max_end_time_is_present 
+            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->max_end_time.value, header.stamp.sec, header.stamp.nanosec)
+            : "-") 
           + "\n";
       }
       if (show_spatem_likely_time->getBool()) {
         text_content += "Likely time: "
-          + (time_change_details->likely_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->likely_time.value, header) : "-") 
+          + (time_change_details->likely_time_is_present 
+            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->likely_time.value, header.stamp.sec, header.stamp.nanosec)
+            : "-") 
           + "\n";
       }
       if (show_spatem_confidence->getBool()) {
         text_content += "Confidence: "
-          + (time_change_details->confidence_is_present ? ParseTimeIntervalConfidenceToPercent(time_change_details->confidence.value) : "-") 
+          + (time_change_details->confidence_is_present 
+            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsPercent(time_change_details->confidence.value) * 100)) + "%" 
+            : "-") 
           + "\n";
       }
       if (show_spatem_next_time->getBool()) {
         text_content += "Next time: "
-          + (time_change_details->next_time_is_present ? ParseTimeMarkValueToSeconds(time_change_details->next_time.value, header) : "-");
+          + (time_change_details->next_time_is_present 
+          ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsPercent(time_change_details->next_time.value) * 100)) + "%" 
+          : "-");
       }
     } else {
       text_content = "no time info";
@@ -628,7 +494,7 @@ void MAPEMDisplay::update(float, float) {
     // visualize the lanes
     for(size_t i = 0; i<intsctn.lanes.size(); i++) {
       if(viz_mapem_->getBool()) {
-        RenderMapemShapes(child_scene_node, intsctn.lanes[i]);
+        RenderMapemShapesLane(child_scene_node, intsctn.lanes[i]);
       }
 
       // Signal Groups
@@ -657,7 +523,7 @@ void MAPEMDisplay::update(float, float) {
 
     }
     // Visualize MAPEM meta-information as text
-    if(show_meta_mapem_->getBool()) {
+    if(viz_mapem_->getBool() && show_meta_mapem_->getBool()) {
       RenderMapemTexts(child_scene_node, intsctn);
     }
   }
