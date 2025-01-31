@@ -3,15 +3,27 @@
 The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and from [UPER-encoded](https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference/packed-encoding-rules.html) [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) payloads. This allows to build simple ROS drivers for common V2X OBUs and RSUs. This page contains instructions to connect common V2X hardware to ROS.
 
 **Tested V2X Hardware**
-- [Cohda Wireless MK5](#cohda-wireless-mk5)
+- [Cohda Wireless MK5/MK6](#cohda-wireless-mk5mk6)
 
 
-## [Cohda Wireless MK5](https://www.cohdawireless.com/solutions/mk5/)
+## [Cohda Wireless MK5/MK6](https://www.cohdawireless.com/solutions/mk6/)
 
-#### On the Cohda Wireless MK5
+#### Approach
 
-1. Download and flash the latest firmware (tested with `mk5-19.Release.139237-RSUETSI-typical`). [[Documentation](mk5-19.Release.139237-RSUETSI-typical.img)]
-1. Install the `exampleETSI` application to `/mnt/rw`. [[Documentation](https://support.cohdawireless.com/hc/en-us/articles/360001755856-ExampleETSI-Installing-Running)]
+- Run an application on the MK5/MK6 that forwards raw V2X message payloads to a UDP port on a host computer.
+- Bridge the UDP packets to ROS messages.
+- Run the `etsi_its_conversion` node to convert the UDP packets to and from `etsi_its_msgs` ROS messages.
+
+#### Prerequisites
+
+- To follow the documentation links, access to the Cohda Wireless support portal is required.
+- The MK5/MK6 is connected to a host computer and IP addresses of both devices are known.
+- The following was tested successfully with MK5 firmware `mk5-19.Release.139237-RSUETSI-typical` and a stock MK6 firmware.
+- The following only describes the setup for bridging received V2X messages to ROS. The other way, sending V2X messages from ROS via ITS-G5, should work similarly.
+
+#### On the Cohda Wireless MK5/MK6
+
+1. Install the `exampleETSI` application to `/mnt/rw`. [[Documentation](https://support.cohdawireless.com/hc/en-us/articles/360001755856-ExampleETSI-Installing-Running)] You may also install and configure any other (custom) application that supports forwarding V2X messages via UDP.
 1. Configure forwarding of BTP packets to the host computer via UDP in `/mnt/rw/exampleETSI/obu.conf` or `/mnt/rw/exampleETSI/rsu.conf`. [[Documentation](https://support.cohdawireless.com/hc/en-us/articles/115000972306-ETSI-Sending-receiving-BTP-packets-through-UDP)]
     ```
     ItsFacilitiesShellEnabled   = 1;     0, 1         # Enables / Disables support Facilities Shell interface
@@ -38,7 +50,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
         ros-$ROS_DISTRO-transport-drivers \
         ros-$ROS_DISTRO-etsi-its-conversion
     ```
-1. Configure the `udp_driver` node responsible for bridging the UDP packets received from the MK5 to [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) ROS messages.
+1. Configure the `udp_driver` node responsible for bridging the UDP packets received from the MK5/MK6 to [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) ROS messages.
     ```yml
     # config.udp_driver.yml
     /**/*:
@@ -84,7 +96,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
     ```bash
     ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args --params-file ./config.etsi_its_conversion.yml
     ```
-1. Receive, e.g., CAMs on `/etsi_its_conversion/cam/out`.
+1. Receive, e.g., CAMs on `/converter/cam/out`.
     ```bash
-    ros2 topic echo /etsi_its_conversion/cam/out
+    ros2 topic echo /converter/cam/out
     ```
