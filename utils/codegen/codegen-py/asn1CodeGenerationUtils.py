@@ -748,7 +748,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     elif asn1_type_type == "EXTENSION":
         for sub_member in asn1_type_info:
             member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
-            member_context["members"][0]["extension"] = True
+            member_context["members"][0]["extension_prefix"] = "ext1->"
             if member_context is not None:
                 context["members"].extend(member_context["members"])
 

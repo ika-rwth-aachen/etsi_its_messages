@@ -116,8 +116,14 @@ void toRos_AlacarteContainer(const denm_ts_AlacarteContainer_t& in, denm_ts_msgs
     toRos_StationaryVehicleContainer(*in.stationaryVehicle, out.stationary_vehicle);
     out.stationary_vehicle_is_present = true;
   }
-  toRos_RoadConfigurationContainer(in.roadConfiguration, out.road_configuration);
-  toRos_PreCrashContainer(in.preCrash, out.pre_crash);
+  if (in.ext1->roadConfiguration) {
+    toRos_RoadConfigurationContainer(*in.ext1->roadConfiguration, out.road_configuration);
+    out.road_configuration_is_present = true;
+  }
+  if (in.ext1->preCrash) {
+    toRos_PreCrashContainer(*in.ext1->preCrash, out.pre_crash);
+    out.pre_crash_is_present = true;
+  }
 }
 
 void toStruct_AlacarteContainer(const denm_ts_msgs::AlacarteContainer& in, denm_ts_AlacarteContainer_t& out) {
@@ -146,8 +152,14 @@ void toStruct_AlacarteContainer(const denm_ts_msgs::AlacarteContainer& in, denm_
     out.stationaryVehicle = (denm_ts_StationaryVehicleContainer_t*) calloc(1, sizeof(denm_ts_StationaryVehicleContainer_t));
     toStruct_StationaryVehicleContainer(in.stationary_vehicle, *out.stationaryVehicle);
   }
-  toStruct_RoadConfigurationContainer(in.road_configuration, out.roadConfiguration);
-  toStruct_PreCrashContainer(in.pre_crash, out.preCrash);
+  if (in.road_configuration_is_present) {
+    out.ext1->roadConfiguration = (denm_ts_RoadConfigurationContainer_t*) calloc(1, sizeof(denm_ts_RoadConfigurationContainer_t));
+    toStruct_RoadConfigurationContainer(in.road_configuration, *out.ext1->roadConfiguration);
+  }
+  if (in.pre_crash_is_present) {
+    out.ext1->preCrash = (denm_ts_PreCrashContainer_t*) calloc(1, sizeof(denm_ts_PreCrashContainer_t));
+    toStruct_PreCrashContainer(in.pre_crash, *out.ext1->preCrash);
+  }
 }
 
 }

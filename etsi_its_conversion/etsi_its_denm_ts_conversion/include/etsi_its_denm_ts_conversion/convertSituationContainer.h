@@ -98,8 +98,14 @@ void toRos_SituationContainer(const denm_ts_SituationContainer_t& in, denm_ts_ms
     toRos_EventZone(*in.eventZone, out.event_zone);
     out.event_zone_is_present = true;
   }
-  toRos_ActionIdList(in.linkedDenms, out.linked_denms);
-  toRos_Position1d(in.eventEnd, out.event_end);
+  if (in.ext1->linkedDenms) {
+    toRos_ActionIdList(*in.ext1->linkedDenms, out.linked_denms);
+    out.linked_denms_is_present = true;
+  }
+  if (in.ext1->eventEnd) {
+    toRos_Position1d(*in.ext1->eventEnd, out.event_end);
+    out.event_end_is_present = true;
+  }
 }
 
 void toStruct_SituationContainer(const denm_ts_msgs::SituationContainer& in, denm_ts_SituationContainer_t& out) {
@@ -114,8 +120,14 @@ void toStruct_SituationContainer(const denm_ts_msgs::SituationContainer& in, den
     out.eventZone = (denm_ts_EventZone_t*) calloc(1, sizeof(denm_ts_EventZone_t));
     toStruct_EventZone(in.event_zone, *out.eventZone);
   }
-  toStruct_ActionIdList(in.linked_denms, out.linkedDenms);
-  toStruct_Position1d(in.event_end, out.eventEnd);
+  if (in.linked_denms_is_present) {
+    out.ext1->linkedDenms = (denm_ts_ActionIdList_t*) calloc(1, sizeof(denm_ts_ActionIdList_t));
+    toStruct_ActionIdList(in.linked_denms, *out.ext1->linkedDenms);
+  }
+  if (in.event_end_is_present) {
+    out.ext1->eventEnd = (denm_ts_Position1d_t*) calloc(1, sizeof(denm_ts_Position1d_t));
+    toStruct_Position1d(in.event_end, *out.ext1->eventEnd);
+  }
 }
 
 }

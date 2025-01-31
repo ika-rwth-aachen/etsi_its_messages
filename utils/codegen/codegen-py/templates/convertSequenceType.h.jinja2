@@ -61,11 +61,11 @@ namespace etsi_its_{{etsi_type}}_conversion {
 void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_")}}_t& in, {{etsi_type}}_msgs::{{ros_msg_type}}& out) {
 {%- for member in members -%}
 {% if member.optional or member.default %}
-  if (in.{{member.c_field_name}}) {
+  if (in.{{member.extension_prefix}}{{member.c_field_name}}) {
 {%- if member.is_primitive %}
-    etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(*in.{{member.c_field_name}}, out.{{member.ros_field_name}});
+    etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(*in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
 {%- else %}
-    toRos_{{member.ros_msg_type|replace("[]", "")}}(*in.{{member.c_field_name}}, out.{{member.ros_field_name}});
+    toRos_{{member.ros_msg_type|replace("[]", "")}}(*in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
 {%- endif %}
 {%- if member.optional %}
     out.{{member.ros_field_name}}_is_present = true;
@@ -73,14 +73,14 @@ void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_
   }
 {%- elif not member.is_choice_var %}
 {%- if member.is_primitive %}
-  etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.c_field_name}}, out.{{member.ros_field_name}});
+  etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
 {%- elif member.is_choice %}
   if (in.{{member.choice_name}}.present == {{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR::{{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR_{{member.choice_option_name}}) {
     toRos_{{member.ros_msg_type}}(in.{{member.choice_name}}.choice.{{member.choice_option_name}}, out.{{member.ros_field_name}});
     out.{{member.choice_var_name}} = {{etsi_type}}_msgs::{{asn1_type_name}}::{{member.constants[0].ros_field_name}};
   }
 {%- else %}
-  toRos_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.c_field_name}}, out.{{member.ros_field_name}});
+  toRos_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}
@@ -92,31 +92,31 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
 {% if member.optional %}
   if (in.{{member.ros_field_name}}_is_present) {
 {%- if member.is_primitive %}
-    out.{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
-    etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.c_field_name}});
+    out.{{member.extension_prefix}}{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
+    etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- else %}
-    out.{{member.c_field_name}} = ({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")|replace("[]", "")}}_t));
-    toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, *out.{{member.c_field_name}});
+    out.{{member.extension_prefix}}{{member.c_field_name}} = ({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")|replace("[]", "")}}_t));
+    toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- endif %}
   }
 {%- elif member.default %}
 {%- if member.is_primitive %}
-  out.{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
-  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.c_field_name}});
+  out.{{member.extension_prefix}}{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
+  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- else %}
-  out.{{member.c_field_name}} = ({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t));
-  toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, *out.{{member.c_field_name}});
+  out.{{member.extension_prefix}}{{member.c_field_name}} = ({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t));
+  toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- endif %}
 {%- elif not member.is_choice_var %}
 {%- if member.is_primitive %}
-  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, out.{{member.c_field_name}});
+  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- elif member.is_choice %}
   if (in.{{member.choice_var_name}} == {{etsi_type}}_msgs::{{asn1_type_name}}::{{member.constants[0].ros_field_name}}) {
     toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.choice_name}}.choice.{{member.choice_option_name}});
     out.{{member.choice_name}}.present = {{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR::{{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR_{{member.choice_option_name}};
   }
 {%- else %}
-  toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, out.{{member.c_field_name}});
+  toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}

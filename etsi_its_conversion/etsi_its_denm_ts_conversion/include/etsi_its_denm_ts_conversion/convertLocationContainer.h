@@ -120,12 +120,30 @@ void toRos_LocationContainer(const denm_ts_LocationContainer_t& in, denm_ts_msgs
     toRos_RoadType(*in.roadType, out.road_type);
     out.road_type_is_present = true;
   }
-  toRos_GeneralizedLanePositions(in.lanePositions, out.lane_positions);
-  toRos_OccupiedLanesWithConfidence(in.occupiedLanes, out.occupied_lanes);
-  toRos_IvimReferences(in.linkedIvims, out.linked_ivims);
-  toRos_MapReferences(in.linkedMapems, out.linked_mapems);
-  toRos_TracesExtended(in.detectionZonesToSpecifiedEventPoint, out.detection_zones_to_specified_event_point);
-  toRos_PathPredictedList(in.predictedPaths, out.predicted_paths);
+  if (in.ext1->lanePositions) {
+    toRos_GeneralizedLanePositions(*in.ext1->lanePositions, out.lane_positions);
+    out.lane_positions_is_present = true;
+  }
+  if (in.ext1->occupiedLanes) {
+    toRos_OccupiedLanesWithConfidence(*in.ext1->occupiedLanes, out.occupied_lanes);
+    out.occupied_lanes_is_present = true;
+  }
+  if (in.ext1->linkedIvims) {
+    toRos_IvimReferences(*in.ext1->linkedIvims, out.linked_ivims);
+    out.linked_ivims_is_present = true;
+  }
+  if (in.ext1->linkedMapems) {
+    toRos_MapReferences(*in.ext1->linkedMapems, out.linked_mapems);
+    out.linked_mapems_is_present = true;
+  }
+  if (in.ext1->detectionZonesToSpecifiedEventPoint) {
+    toRos_TracesExtended(*in.ext1->detectionZonesToSpecifiedEventPoint, out.detection_zones_to_specified_event_point);
+    out.detection_zones_to_specified_event_point_is_present = true;
+  }
+  if (in.ext1->predictedPaths) {
+    toRos_PathPredictedList(*in.ext1->predictedPaths, out.predicted_paths);
+    out.predicted_paths_is_present = true;
+  }
 }
 
 void toStruct_LocationContainer(const denm_ts_msgs::LocationContainer& in, denm_ts_LocationContainer_t& out) {
@@ -143,12 +161,30 @@ void toStruct_LocationContainer(const denm_ts_msgs::LocationContainer& in, denm_
     out.roadType = (denm_ts_RoadType_t*) calloc(1, sizeof(denm_ts_RoadType_t));
     toStruct_RoadType(in.road_type, *out.roadType);
   }
-  toStruct_GeneralizedLanePositions(in.lane_positions, out.lanePositions);
-  toStruct_OccupiedLanesWithConfidence(in.occupied_lanes, out.occupiedLanes);
-  toStruct_IvimReferences(in.linked_ivims, out.linkedIvims);
-  toStruct_MapReferences(in.linked_mapems, out.linkedMapems);
-  toStruct_TracesExtended(in.detection_zones_to_specified_event_point, out.detectionZonesToSpecifiedEventPoint);
-  toStruct_PathPredictedList(in.predicted_paths, out.predictedPaths);
+  if (in.lane_positions_is_present) {
+    out.ext1->lanePositions = (denm_ts_GeneralizedLanePositions_t*) calloc(1, sizeof(denm_ts_GeneralizedLanePositions_t));
+    toStruct_GeneralizedLanePositions(in.lane_positions, *out.ext1->lanePositions);
+  }
+  if (in.occupied_lanes_is_present) {
+    out.ext1->occupiedLanes = (denm_ts_OccupiedLanesWithConfidence_t*) calloc(1, sizeof(denm_ts_OccupiedLanesWithConfidence_t));
+    toStruct_OccupiedLanesWithConfidence(in.occupied_lanes, *out.ext1->occupiedLanes);
+  }
+  if (in.linked_ivims_is_present) {
+    out.ext1->linkedIvims = (denm_ts_IvimReferences_t*) calloc(1, sizeof(denm_ts_IvimReferences_t));
+    toStruct_IvimReferences(in.linked_ivims, *out.ext1->linkedIvims);
+  }
+  if (in.linked_mapems_is_present) {
+    out.ext1->linkedMapems = (denm_ts_MapReferences_t*) calloc(1, sizeof(denm_ts_MapReferences_t));
+    toStruct_MapReferences(in.linked_mapems, *out.ext1->linkedMapems);
+  }
+  if (in.detection_zones_to_specified_event_point_is_present) {
+    out.ext1->detectionZonesToSpecifiedEventPoint = (denm_ts_TracesExtended_t*) calloc(1, sizeof(denm_ts_TracesExtended_t));
+    toStruct_TracesExtended(in.detection_zones_to_specified_event_point, *out.ext1->detectionZonesToSpecifiedEventPoint);
+  }
+  if (in.predicted_paths_is_present) {
+    out.ext1->predictedPaths = (denm_ts_PathPredictedList_t*) calloc(1, sizeof(denm_ts_PathPredictedList_t));
+    toStruct_PathPredictedList(in.predicted_paths, *out.ext1->predictedPaths);
+  }
 }
 
 }
