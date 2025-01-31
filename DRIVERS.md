@@ -4,6 +4,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
 
 **Tested V2X Hardware**
 - [Cohda Wireless MK5/MK6](#cohda-wireless-mk5mk6)
+- [cubesys cube:evk](#cubesys-cubeevk)
 
 
 ## [Cohda Wireless MK5/MK6](https://www.cohdawireless.com/solutions/mk6/)
@@ -99,4 +100,44 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
 1. Receive, e.g., CAMs on `/converter/cam/out`.
     ```bash
     ros2 topic echo /converter/cam/out
+    ```
+
+
+## [cubesys cube:evk](https://www.nfiniity.com/)
+
+#### Approach
+
+- The cube:evk natively supports `etsi_its_msgs` ROS 2 messages.
+- Launch the *cube-its* ROS 2 framework on the cube:evk to directly receive and send messages from ROS.
+
+#### Prequisites
+
+- The cube:evk is connected to a host computer and IP addresses of both devices are known.
+
+#### On the cube:evk
+
+1. Launch the *cube-its* ROS 2 framework.
+    ```bash
+    start-its --remote
+    ```
+
+#### On the host computer
+
+1. Install the [`etsi_its_msgs`](https://github.com/ika-rwth-aachen/etsi_its_messages) ROS packages.
+    ```bash
+    sudo apt install \
+        ros-$ROS_DISTRO-etsi-its-msgs
+    ```
+1. Configure the [ROS 2 domain](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Domain-ID.html) to receive ROS messages remotely from the cube:evk.
+    ```bash
+    export ROS_DOMAIN_ID=42
+    export ROS_LOCALHOST_ONLY=0
+    ```
+1. Receive, e.g., CAMs on `/its/cam_received`.
+    ```bash
+    ros2 topic echo /its/cam_received
+    ```
+1. Send, e.g., CAMs by publishing to `/its/cam_provided`
+    ```bash
+    ros2 topic pub /its/cam_provided etsi_its_cam_msgs/msg/CAM "{}"
     ```
