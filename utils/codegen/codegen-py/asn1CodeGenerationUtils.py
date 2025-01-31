@@ -444,25 +444,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         # }
 
 
-    if isinstance(asn1_type_info, list):
-        members = []
-        print("list:" + str(asn1_type_name))
-        for sub_member in asn1_type_info:
-            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
-            if member_context is not None:
-                members.extend(member_context["members"])
-        return {
-            "etsi_type": None,
-            "asn1_type_type": "SEQUENCE OF",
-            "asn1_type_name": asn1_type_name,
-            "ros_msg_type": validRosType(asn1_type_name),
-            "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
-            "is_primitive": False,
-            "members": members,
-            "asn1_definition": None,
-            "comments": [],
-            "auto_generate_command": AUTO_GENERATE_COMMAND,
-        }
+    if isinstance(asn1_type_info, list): # list represents the asn1 extension "[[ ]]" notation
+        asn1_type_type = "EXTENSION"
     else:
         asn1_type_type = asn1_type_info["type"]
 
@@ -480,9 +463,10 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     }
 
     # extra information / asn1 fields that are not processed as comments
-    for k, v in asn1_type_info.items():
-        if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
-            context["comments"].append(f"{k}: {v}")
+    if not isinstance(asn1_type_info, list):
+        for k, v in asn1_type_info.items():
+            if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
+                context["comments"].append(f"{k}: {v}")
 
     # primitives
     if asn1_type_type in ASN1_PRIMITIVES_2_ROS:
@@ -759,6 +743,14 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             })
 
         context["members"].append(member_context)
+        
+    # list aka extension "[[ ]]"    
+    elif asn1_type_type == "EXTENSION":
+        for sub_member in asn1_type_info:
+            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_context["members"][0]["extension"] = True
+            if member_context is not None:
+                context["members"].extend(member_context["members"])
 
     # custom types
     elif asn1_type_type in asn1_types:
@@ -775,6 +767,9 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": []
         })
+        
+        if "optional" in asn1_type_info:
+            context["members"][0]["optional"] = True
 
         # handle size in custom types
         if "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], tuple):

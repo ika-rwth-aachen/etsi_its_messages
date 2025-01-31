@@ -88,6 +88,8 @@ StationaryVehicleContainer stationary_vehicle
 bool stationary_vehicle_is_present
 
 RoadConfigurationContainer road_configuration
+bool road_configuration_is_present
 
 PreCrashContainer pre_crash
+bool pre_crash_is_present
 

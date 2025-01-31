@@ -79,6 +79,8 @@ EventZone event_zone
 bool event_zone_is_present
 
 ActionIdList linked_denms
+bool linked_denms_is_present
 
 Position1d event_end
+bool event_end_is_present
 

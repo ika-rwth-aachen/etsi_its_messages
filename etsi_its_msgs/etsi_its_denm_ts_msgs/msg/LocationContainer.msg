@@ -94,14 +94,20 @@ RoadType road_type
 bool road_type_is_present
 
 GeneralizedLanePositions lane_positions
+bool lane_positions_is_present
 
 OccupiedLanesWithConfidence occupied_lanes
+bool occupied_lanes_is_present
 
 IvimReferences linked_ivims
+bool linked_ivims_is_present
 
 MapReferences linked_mapems
+bool linked_mapems_is_present
 
 TracesExtended detection_zones_to_specified_event_point
+bool detection_zones_to_specified_event_point_is_present
 
 PathPredictedList predicted_paths
+bool predicted_paths_is_present
 
