@@ -333,7 +333,6 @@ void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, Intersect
   height+=text_render->getBoundingRadius();
   
   Ogre::Vector3 offs(0.0, 0.0, height);
-  // There is a bug in rviz_rendering::MovableText::setGlobalTranslation https://github.com/ros2/rviz/issues/974
   text_render->setGlobalTranslation(offs);
   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_mapem_->getColor());
   text_render->setColor(text_color);
@@ -508,7 +507,6 @@ void MAPEMDisplay::update(float, float) {
           mvmnt_it = intsctn.movement_states.find(intsctn.lanes[i].signal_group_ids[j]);
           if (mvmnt_it != intsctn.movement_states.end())
           {
-            // todo: what happens if more than one entries are available?
             mvmnt_ptr = &mvmnt_it->second;
             break;
           }
