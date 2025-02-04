@@ -97,7 +97,7 @@ protected:
   rclcpp::QoS spatem_qos_profile_ = rclcpp::QoS(1);
 
   // Properties
-  rviz_common::properties::BoolProperty *show_meta_spatem_, *show_meta_mapem_, *viz_spatem_, *viz_mapem_, *show_spatem_;
+  rviz_common::properties::BoolProperty *show_meta_spatem_, *show_meta_mapem_, *viz_spatem_, *viz_mapem_;
   rviz_common::properties::BoolProperty *show_spatem_start_time, *show_spatem_min_end_time, *show_spatem_max_end_time, *show_spatem_likely_time, *show_spatem_confidence, *show_spatem_next_time;
   rviz_common::properties::FloatProperty *mapem_timeout_, *spatem_timeout_, *char_height_mapem_, *char_height_spatem_, *lane_width_property_, *spatem_sphere_scale_property_;
   rviz_common::properties::ColorProperty *color_property_ingress_, *color_property_egress_, *text_color_property_mapem_, *text_color_property_spatem_;

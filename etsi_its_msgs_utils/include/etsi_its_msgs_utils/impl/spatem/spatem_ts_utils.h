@@ -80,12 +80,12 @@ namespace access {
   }
 
   /**
-   * @brief Interprets the TimeIntervalConfidence type as a percent value (see etsi definition)
+   * @brief Interprets the TimeIntervalConfidence type as a float value (see etsi definition)
    * 
    * @param encoded_probability Value from msg type TimeIntervalConfidence
-   * @return float percentage value [0, 1]
+   * @return confidence as float value [0, 1]
    */
-  inline float interpretTimeIntervalConfidenceAsPercent(const uint16_t encoded_probability) {
+  inline float interpretTimeIntervalConfidenceAsFloat(const uint16_t encoded_probability) {
     float probability = 0;
 
     switch (encoded_probability)
@@ -144,12 +144,12 @@ namespace access {
   }
 
   /**
-   * @brief Interprets the MovementStatePhase type as a color (see etsi definition)
+   * @brief Interprets the MovementPhaseState type as a color (see etsi definition)
    * 
-   * @param value Encoded color value from msg type TimeIntervalConfidence
+   * @param value Encoded color value from msg type MovementPhaseState
    * @return 4-dimensional array with color values as follows: r, g, b, a, each of these values within a range between [0, 1]
    */
-  inline std::array<float, 4> interpretMovementStatePhaseAsColor(const uint8_t value)
+  inline std::array<float, 4> interpretMovementPhaseStateAsColor(const uint8_t value)
   {
     std::array<float, 4> color;
 

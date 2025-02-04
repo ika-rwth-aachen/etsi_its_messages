@@ -63,7 +63,7 @@ MAPEMDisplay::MAPEMDisplay() {
   
   // MAPEM
   viz_mapem_ = new rviz_common::properties::BoolProperty("Visualize MAPEMs", true,
-    "Show MAPEMs", this, SLOT(changedMAPEMViz()));
+    "Show MAPEMs", this);
 
   mapem_timeout_ = new rviz_common::properties::FloatProperty(
     "MAPEM Timeout", 120.0f,
@@ -162,10 +162,6 @@ void MAPEMDisplay::changedSPATEMViz() {
     spatem_subscriber_.reset();
   } 
   else changedSPATEMTopic();
-}
-
-void MAPEMDisplay::changedMAPEMViz() {
-  // todo
 }
 
 void MAPEMDisplay::changedSPATEMTopic() {
@@ -358,7 +354,7 @@ void MAPEMDisplay::RenderSpatemShapes(Ogre::SceneNode *child_scene_node, Interse
 
     // Set color according to state
     if(intersection_movement_state != nullptr) {
-      std::array<float, 4> color = etsi_its_spatem_ts_msgs::access::interpretMovementStatePhaseAsColor(intersection_movement_state->phase_state.value);
+      std::array<float, 4> color = etsi_its_spatem_ts_msgs::access::interpretMovementPhaseStateAsColor(intersection_movement_state->phase_state.value);
       sg->setColor(color.at(0), color.at(1), color.at(2), color.at(3));
     }
     else {
@@ -414,14 +410,14 @@ void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, Intersec
       if (show_spatem_confidence->getBool()) {
         text_content += "Confidence: "
           + (time_change_details->confidence_is_present 
-            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsPercent(time_change_details->confidence.value) * 100)) + "%" 
+            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsFloat(time_change_details->confidence.value) * 100)) + "%" 
             : "-") 
           + "\n";
       }
       if (show_spatem_next_time->getBool()) {
         text_content += "Next time: "
           + (time_change_details->next_time_is_present 
-          ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsPercent(time_change_details->next_time.value) * 100)) + "%" 
+          ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->next_time.value, header.stamp.sec, header.stamp.nanosec)
           : "-");
       }
     } else {
