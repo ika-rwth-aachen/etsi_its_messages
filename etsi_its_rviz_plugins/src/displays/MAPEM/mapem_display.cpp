@@ -108,7 +108,7 @@ MAPEMDisplay::MAPEMDisplay() {
     "Text color", show_meta_spatem_);
   char_height_spatem_ = new rviz_common::properties::FloatProperty("Scale", 1.0, "Scale of text", show_meta_spatem_);
 
-  show_spatem_start_time = new rviz_common::properties::BoolProperty("Start time", true,
+  show_spatem_start_time = new rviz_common::properties::BoolProperty("Start time", false,
     "Show SPATEM start time", show_meta_spatem_);
 
   show_spatem_min_end_time = new rviz_common::properties::BoolProperty("Min end time", true,
@@ -117,13 +117,13 @@ MAPEMDisplay::MAPEMDisplay() {
   show_spatem_max_end_time = new rviz_common::properties::BoolProperty("Max end time", true,
     "Show SPATEM max end time", show_meta_spatem_);
 
-  show_spatem_likely_time = new rviz_common::properties::BoolProperty("Likely time", true,
+  show_spatem_likely_time = new rviz_common::properties::BoolProperty("Likely time", false,
     "Show SPATEM likely time", show_meta_spatem_);
 
-  show_spatem_confidence = new rviz_common::properties::BoolProperty("Confidence", true,
+  show_spatem_confidence = new rviz_common::properties::BoolProperty("Confidence", false,
     "Show SPATEM confidence", show_meta_spatem_);
 
-  show_spatem_next_time = new rviz_common::properties::BoolProperty("Next time", true,
+  show_spatem_next_time = new rviz_common::properties::BoolProperty("Next time", false,
     "Show SPATEM next time", show_meta_spatem_);
 
 }
