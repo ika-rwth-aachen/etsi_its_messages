@@ -155,35 +155,35 @@ namespace access {
 
     switch (value) {
 
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::UNAVAILABLE:
+      case MovementPhaseState::UNAVAILABLE:
         color = color_grey;
         break;
 
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::DARK:
+      case MovementPhaseState::DARK:
         color = color_grey;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::STOP_THEN_PROCEED:
+      case MovementPhaseState::STOP_THEN_PROCEED:
         color = color_red;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::STOP_AND_REMAIN:
+      case MovementPhaseState::STOP_AND_REMAIN:
         color = color_red;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::PRE_MOVEMENT:
+      case MovementPhaseState::PRE_MOVEMENT:
         color = color_orange;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
+      case MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
         color = color_green;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
+      case MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
         color = color_green;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::PERMISSIVE_CLEARANCE:
+      case MovementPhaseState::PERMISSIVE_CLEARANCE:
         color = color_orange;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::PROTECTED_CLEARANCE:
+      case MovementPhaseState::PROTECTED_CLEARANCE:
         color = color_orange;
         break;
-      case etsi_its_spatem_ts_msgs::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
+      case MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
         color = color_orange;
         break;
       default:
