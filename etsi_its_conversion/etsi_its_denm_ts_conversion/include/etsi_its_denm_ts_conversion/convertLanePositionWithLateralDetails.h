@@ -57,7 +57,9 @@ LanePositionWithLateralDetails ::= SEQUENCE {
 #pragma once
 
 #include <etsi_its_denm_ts_coding/denm_ts_LanePositionWithLateralDetails.h>
-#include <etsi_its_denm_ts_conversion/convertLanePositionAndType.h>
+#include <etsi_its_denm_ts_conversion/convertDirection.h>
+#include <etsi_its_denm_ts_conversion/convertLanePosition.h>
+#include <etsi_its_denm_ts_conversion/convertLaneType.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength9b.h>
 #ifdef ROS1
 #include <etsi_its_denm_ts_msgs/LanePositionWithLateralDetails.h>
@@ -71,14 +73,24 @@ namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 namespace etsi_its_denm_ts_conversion {
 
 void toRos_LanePositionWithLateralDetails(const denm_ts_LanePositionWithLateralDetails_t& in, denm_ts_msgs::LanePositionWithLateralDetails& out) {
-  toRos_LanePositionAndType(in.LanePositionAndType, out.lane_position_and_type);
+  toRos_LanePosition(in.transversalPosition, out.transversal_position);
+  if (in.laneType) {
+    toRos_LaneType(*in.laneType, out.lane_type);
+  }
+  if (in.direction) {
+    toRos_Direction(*in.direction, out.direction);
+  }
   toRos_StandardLength9b(in.distanceToLeftBorder, out.distance_to_left_border);
   toRos_StandardLength9b(in.distanceToRightBorder, out.distance_to_right_border);
 }
 
 void toStruct_LanePositionWithLateralDetails(const denm_ts_msgs::LanePositionWithLateralDetails& in, denm_ts_LanePositionWithLateralDetails_t& out) {
   memset(&out, 0, sizeof(denm_ts_LanePositionWithLateralDetails_t));
-  toStruct_LanePositionAndType(in.lane_position_and_type, out.LanePositionAndType);
+  toStruct_LanePosition(in.transversal_position, out.transversalPosition);
+  out.laneType = (denm_ts_LaneType_t*) calloc(1, sizeof(denm_ts_LaneType_t));
+  toStruct_LaneType(in.lane_type, *out.laneType);
+  out.direction = (denm_ts_Direction_t*) calloc(1, sizeof(denm_ts_Direction_t));
+  toStruct_Direction(in.direction, *out.direction);
   toStruct_StandardLength9b(in.distance_to_left_border, out.distanceToLeftBorder);
   toStruct_StandardLength9b(in.distance_to_right_border, out.distanceToRightBorder);
 }

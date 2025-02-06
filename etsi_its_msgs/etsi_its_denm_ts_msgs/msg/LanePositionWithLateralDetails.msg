@@ -54,7 +54,13 @@
 # }
 # ------------------------------------------------------------------------------
 
-LanePositionAndType lane_position_and_type
+LanePosition transversal_position
+
+LaneType lane_type
+uint8 LANE_TYPE_DEFAULT = 0
+
+Direction direction
+uint8 DIRECTION_DEFAULT = 0
 
 StandardLength9b distance_to_left_border
 
