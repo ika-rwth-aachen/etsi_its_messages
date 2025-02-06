@@ -120,9 +120,9 @@ $(function(){initNavTree('cdd__setters__common_8h.html',''); initResizable(true)
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2b64e5c7332b9bf6e435971b0a3ae06e" id="r_a2b64e5c7332b9bf6e435971b0a3ae06e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a2b64e5c7332b9bf6e435971b0a3ae06e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
-<tr class="separator:a2b64e5c7332b9bf6e435971b0a3ae06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cebeddb7ba669741fd0a601abf1f39" id="r_a34cebeddb7ba669741fd0a601abf1f39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:a34cebeddb7ba669741fd0a601abf1f39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
+<tr class="separator:a34cebeddb7ba669741fd0a601abf1f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad06f7f27d89f95db3607743158a0be98" id="r_ad06f7f27d89f95db3607743158a0be98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a> (Latitude &amp;latitude, const double deg)</td></tr>
 <tr class="memdesc:ad06f7f27d89f95db3607743158a0be98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Latitude object.  <br /></td></tr>
 <tr class="separator:ad06f7f27d89f95db3607743158a0be98"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -572,8 +572,8 @@ template&lt;typename T&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a2b64e5c7332b9bf6e435971b0a3ae06e" name="a2b64e5c7332b9bf6e435971b0a3ae06e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b64e5c7332b9bf6e435971b0a3ae06e">&#9670;&#160;</a></span>setTimestampITS()</h2>
+<a id="a34cebeddb7ba669741fd0a601abf1f39" name="a34cebeddb7ba669741fd0a601abf1f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34cebeddb7ba669741fd0a601abf1f39">&#9670;&#160;</a></span>setTimestampITS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -594,7 +594,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -609,14 +609,14 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">timestamp_its</td><td>TimestampITS object to set the timestamp </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">unix_nanosecs</td><td>Unix-Nanoseconds to set the timestamp for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epoch_offset</td><td>Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00 </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00048">48</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                                                                  {</div>
+<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                                                                     {</div>
 <div class="line"><span class="lineno">   51</span>  uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
 <div class="line"><span class="lineno">   52</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">   53</span>  timestamp_its.value = t_its;</div>

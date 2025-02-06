@@ -135,9 +135,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a509b6187f55ea99970d24ff799403463" id="r_a509b6187f55ea99970d24ff799403463"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="impl_2denm_2denm__access_8h.html#a509b6187f55ea99970d24ff799403463">etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004</a> (const uint64_t unix_seconds)</td></tr>
 <tr class="memdesc:a509b6187f55ea99970d24ff799403463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the leap second insertions since 2004 for given unix seconds.  <br /></td></tr>
 <tr class="separator:a509b6187f55ea99970d24ff799403463"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5965d9057aacd6c3522ecb8eb7d08afd" id="r_a5965d9057aacd6c3522ecb8eb7d08afd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5965d9057aacd6c3522ecb8eb7d08afd">etsi_its_denm_msgs::access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a5965d9057aacd6c3522ecb8eb7d08afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
-<tr class="separator:a5965d9057aacd6c3522ecb8eb7d08afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f75c29f07475c6fefba9d7246ebf582" id="r_a5f75c29f07475c6fefba9d7246ebf582"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f75c29f07475c6fefba9d7246ebf582">etsi_its_denm_msgs::access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:a5f75c29f07475c6fefba9d7246ebf582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
+<tr class="separator:a5f75c29f07475c6fefba9d7246ebf582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6b26e63e7b17be3a687ed901bd98a7e" id="r_af6b26e63e7b17be3a687ed901bd98a7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b26e63e7b17be3a687ed901bd98a7e">etsi_its_denm_msgs::access::setLatitude</a> (Latitude &amp;latitude, const double deg)</td></tr>
 <tr class="memdesc:af6b26e63e7b17be3a687ed901bd98a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Latitude object.  <br /></td></tr>
 <tr class="separator:af6b26e63e7b17be3a687ed901bd98a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,9 +176,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0c236dcf9da854b5e9477e7d36c490f9" id="r_a0c236dcf9da854b5e9477e7d36c490f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c236dcf9da854b5e9477e7d36c490f9">etsi_its_denm_msgs::access::setItsPduHeader</a> (DENM &amp;denm, const uint32_t station_id, const uint8_t protocol_version=0)</td></tr>
 <tr class="memdesc:a0c236dcf9da854b5e9477e7d36c490f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ItsPduHeader-object for a DENM.  <br /></td></tr>
 <tr class="separator:a0c236dcf9da854b5e9477e7d36c490f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ac34bd21696d7cd46e28b06ef699632" id="r_a9ac34bd21696d7cd46e28b06ef699632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ac34bd21696d7cd46e28b06ef699632">etsi_its_denm_msgs::access::setReferenceTime</a> (DENM &amp;denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a9ac34bd21696d7cd46e28b06ef699632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ReferenceTime-value.  <br /></td></tr>
-<tr class="separator:a9ac34bd21696d7cd46e28b06ef699632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a850c08978f95f3cdbca2cd9454613b89" id="r_a850c08978f95f3cdbca2cd9454613b89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a850c08978f95f3cdbca2cd9454613b89">etsi_its_denm_msgs::access::setReferenceTime</a> (DENM &amp;denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:a850c08978f95f3cdbca2cd9454613b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ReferenceTime-value.  <br /></td></tr>
+<tr class="separator:a850c08978f95f3cdbca2cd9454613b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e4e7ef8a5aa01a9e79d10591868830c" id="r_a3e4e7ef8a5aa01a9e79d10591868830c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e4e7ef8a5aa01a9e79d10591868830c">etsi_its_denm_msgs::access::setStationType</a> (DENM &amp;denm, const int value)</td></tr>
 <tr class="memdesc:a3e4e7ef8a5aa01a9e79d10591868830c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the StationType for a DENM.  <br /></td></tr>
 <tr class="separator:a3e4e7ef8a5aa01a9e79d10591868830c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -383,9 +383,9 @@ template&lt;typename T&gt; </div>
 <div class="fragment"></div>
 <div class="line"><span class="lineno">   60</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">   61</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">   62</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">   62</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">   63</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">   64</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">   64</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">   65</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">   66</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">   67</span>}</div>
@@ -436,9 +436,9 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno">  321</span></div>
 <div class="line"><span class="lineno">  329</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">  330</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  331</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  331</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">  332</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  333</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  333</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">  334</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">  335</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">  336</span>}</div>
@@ -587,9 +587,9 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno">  311</span></div>
 <div class="line"><span class="lineno">  319</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">  320</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  321</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  321</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">  322</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  323</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  323</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">  324</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">  325</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">  326</span>}</div>
@@ -936,9 +936,9 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno">  276</span></div>
 <div class="line"><span class="lineno">  284</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">  285</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  286</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">  287</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  288</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  288</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">  289</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">  290</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">  291</span>}</div>
@@ -1198,9 +1198,9 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno">  331</span></div>
 <div class="line"><span class="lineno">  339</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">  340</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  341</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  341</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">  342</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  343</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  343</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">  344</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">  345</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">  346</span>}</div>
@@ -1421,8 +1421,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a9ac34bd21696d7cd46e28b06ef699632" name="a9ac34bd21696d7cd46e28b06ef699632"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ac34bd21696d7cd46e28b06ef699632">&#9670;&#160;</a></span>setReferenceTime()</h2>
+<a id="a850c08978f95f3cdbca2cd9454613b89" name="a850c08978f95f3cdbca2cd9454613b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a850c08978f95f3cdbca2cd9454613b89">&#9670;&#160;</a></span>setReferenceTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1443,7 +1443,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1458,7 +1458,7 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramname">denm</td><td>DENM to set the ReferenceTime-Value for </td></tr>
     <tr><td class="paramname">unix_nanosecs</td><td>Timestamp in unix-nanoseconds to set the ReferenceTime-Value from </td></tr>
-    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::N_LEAP_SECONDS) </td></tr>
+    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1523,9 +1523,9 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno">  290</span></div>
 <div class="line"><span class="lineno">  298</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setReferenceTime(</div>
 <div class="line"><span class="lineno">  299</span>    DENM&amp; denm, <span class="keyword">const</span> uint64_t unix_nanosecs,</div>
-<div class="line"><span class="lineno">  300</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.end()-&gt;second) {</div>
+<div class="line"><span class="lineno">  300</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
 <div class="line"><span class="lineno">  301</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">  302</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
+<div class="line"><span class="lineno">  302</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_nanosecs, n_leap_seconds);</div>
 <div class="line"><span class="lineno">  303</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
 <div class="line"><span class="lineno">  304</span>  denm.denm.management.reference_time = t_its;</div>
 <div class="line"><span class="lineno">  305</span>}</div>
@@ -1805,8 +1805,8 @@ template&lt;typename T&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a5965d9057aacd6c3522ecb8eb7d08afd" name="a5965d9057aacd6c3522ecb8eb7d08afd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5965d9057aacd6c3522ecb8eb7d08afd">&#9670;&#160;</a></span>setTimestampITS()</h2>
+<a id="a5f75c29f07475c6fefba9d7246ebf582" name="a5f75c29f07475c6fefba9d7246ebf582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f75c29f07475c6fefba9d7246ebf582">&#9670;&#160;</a></span>setTimestampITS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1827,7 +1827,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1842,7 +1842,7 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">timestamp_its</td><td>TimestampITS object to set the timestamp </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">unix_nanosecs</td><td>Unix-Nanoseconds to set the timestamp for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epoch_offset</td><td>Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00 </td></tr>
   </table>
   </dd>
@@ -1890,11 +1890,7 @@ template&lt;typename T&gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="denm__setters_8h_source.html#l00058">58</a> of file <a class="el" href="denm__setters_8h_source.html">denm_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                                                            : etsi_its_msgs::N_LEAP_SECONDS)</div>
-<div class="line"><span class="lineno">   59</span> */</div>
-<div class="line"><span class="lineno">   60</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#a9ac34bd21696d7cd46e28b06ef699632">setReferenceTime</a>(</div>
-<div class="ttc" id="adenm__setters_8h_html_a9ac34bd21696d7cd46e28b06ef699632"><div class="ttname"><a href="#a9ac34bd21696d7cd46e28b06ef699632">etsi_its_denm_msgs::access::setReferenceTime</a></div><div class="ttdeci">void setReferenceTime(DENM &amp;denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Set the ReferenceTime-value.</div><div class="ttdef"><b>Definition</b> <a href="denm__setters_8h_source.html#l00126">denm_setters.h:126</a></div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <a id="a08725084bdd2740ae6198b8c0eb3a09d" name="a08725084bdd2740ae6198b8c0eb3a09d"></a>

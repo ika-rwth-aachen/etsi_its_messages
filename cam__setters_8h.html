@@ -129,9 +129,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aeb826dabafcacb7e3490907b40e14f84" id="r_aeb826dabafcacb7e3490907b40e14f84"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="impl_2cam_2cam__access_8h.html#aeb826dabafcacb7e3490907b40e14f84">etsi_its_cam_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004</a> (const uint64_t unix_seconds)</td></tr>
 <tr class="memdesc:aeb826dabafcacb7e3490907b40e14f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the leap second insertions since 2004 for given unix seconds.  <br /></td></tr>
 <tr class="separator:aeb826dabafcacb7e3490907b40e14f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d884fabaf30d73fb68e756e7aad6df6" id="r_a0d884fabaf30d73fb68e756e7aad6df6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d884fabaf30d73fb68e756e7aad6df6">etsi_its_cam_msgs::access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a0d884fabaf30d73fb68e756e7aad6df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
-<tr class="separator:a0d884fabaf30d73fb68e756e7aad6df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876ee4f8ed8239284de8c5ecb1a2b1ad" id="r_a876ee4f8ed8239284de8c5ecb1a2b1ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a876ee4f8ed8239284de8c5ecb1a2b1ad">etsi_its_cam_msgs::access::setTimestampITS</a> (TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:a876ee4f8ed8239284de8c5ecb1a2b1ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the TimestampITS object.  <br /></td></tr>
+<tr class="separator:a876ee4f8ed8239284de8c5ecb1a2b1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ac5a7233cdde15525fb2dbd80500346" id="r_a0ac5a7233cdde15525fb2dbd80500346"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ac5a7233cdde15525fb2dbd80500346">etsi_its_cam_msgs::access::setLatitude</a> (Latitude &amp;latitude, const double deg)</td></tr>
 <tr class="memdesc:a0ac5a7233cdde15525fb2dbd80500346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Latitude object.  <br /></td></tr>
 <tr class="separator:a0ac5a7233cdde15525fb2dbd80500346"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,12 +186,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a309250f989633bf4555cb01058af3cb3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a309250f989633bf4555cb01058af3cb3">etsi_its_cam_msgs::access::setBitString</a> (T &amp;bitstring, const std::vector&lt; bool &gt; &amp;bits)</td></tr>
 <tr class="memdesc:a309250f989633bf4555cb01058af3cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a Bit String by a vector of bools.  <br /></td></tr>
 <tr class="separator:a309250f989633bf4555cb01058af3cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae01d2af55f8aa4b14475dda8e70065a0" id="r_ae01d2af55f8aa4b14475dda8e70065a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae01d2af55f8aa4b14475dda8e70065a0">etsi_its_cam_msgs::access::setGenerationDeltaTime</a> (GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:ae01d2af55f8aa4b14475dda8e70065a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the GenerationDeltaTime-Value.  <br /></td></tr>
-<tr class="separator:ae01d2af55f8aa4b14475dda8e70065a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75355f19cdb9056086f3fd35cd19e371" id="r_a75355f19cdb9056086f3fd35cd19e371"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75355f19cdb9056086f3fd35cd19e371">etsi_its_cam_msgs::access::setGenerationDeltaTime</a> (CAM &amp;cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a75355f19cdb9056086f3fd35cd19e371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Generation Delta Time object.  <br /></td></tr>
-<tr class="separator:a75355f19cdb9056086f3fd35cd19e371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ae53a5d9662c59eef315e0e77f8b1f" id="r_ae6ae53a5d9662c59eef315e0e77f8b1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6ae53a5d9662c59eef315e0e77f8b1f">etsi_its_cam_msgs::access::setGenerationDeltaTime</a> (GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:ae6ae53a5d9662c59eef315e0e77f8b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the GenerationDeltaTime-Value.  <br /></td></tr>
+<tr class="separator:ae6ae53a5d9662c59eef315e0e77f8b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2c91b35eba400fb11795933331c52cd" id="r_af2c91b35eba400fb11795933331c52cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2c91b35eba400fb11795933331c52cd">etsi_its_cam_msgs::access::setGenerationDeltaTime</a> (CAM &amp;cam, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:af2c91b35eba400fb11795933331c52cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Generation Delta Time object.  <br /></td></tr>
+<tr class="separator:af2c91b35eba400fb11795933331c52cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5d9ced593e2975a7fef4d1388abb14e" id="r_ae5d9ced593e2975a7fef4d1388abb14e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5d9ced593e2975a7fef4d1388abb14e">etsi_its_cam_msgs::access::setStationType</a> (CAM &amp;cam, const uint8_t value)</td></tr>
 <tr class="memdesc:ae5d9ced593e2975a7fef4d1388abb14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the StationType for a CAM.  <br /></td></tr>
 <tr class="separator:ae5d9ced593e2975a7fef4d1388abb14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1098,8 +1098,8 @@ template&lt;typename T&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a75355f19cdb9056086f3fd35cd19e371" name="a75355f19cdb9056086f3fd35cd19e371"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75355f19cdb9056086f3fd35cd19e371">&#9670;&#160;</a></span>setGenerationDeltaTime() <span class="overload">[1/2]</span></h2>
+<a id="af2c91b35eba400fb11795933331c52cd" name="af2c91b35eba400fb11795933331c52cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2c91b35eba400fb11795933331c52cd">&#9670;&#160;</a></span>setGenerationDeltaTime() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1120,7 +1120,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1135,7 +1135,7 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramname">cam</td><td>CAM to set the GenerationDeltaTime-Value for </td></tr>
     <tr><td class="paramname">unix_nanosecs</td><td>Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from </td></tr>
-    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1144,8 +1144,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ae01d2af55f8aa4b14475dda8e70065a0" name="ae01d2af55f8aa4b14475dda8e70065a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae01d2af55f8aa4b14475dda8e70065a0">&#9670;&#160;</a></span>setGenerationDeltaTime() <span class="overload">[2/2]</span></h2>
+<a id="ae6ae53a5d9662c59eef315e0e77f8b1f" name="ae6ae53a5d9662c59eef315e0e77f8b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ae53a5d9662c59eef315e0e77f8b1f">&#9670;&#160;</a></span>setGenerationDeltaTime() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1166,7 +1166,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1181,7 +1181,7 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramname">generation_delta_time</td><td>GenerationDeltaTime to set the GenerationDeltaTime-Value for </td></tr>
     <tr><td class="paramname">unix_nanosecs</td><td>Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from </td></tr>
-    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramname">n_leap_seconds</td><td>Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.) </td></tr>
   </table>
   </dd>
 </dl>
@@ -2910,8 +2910,8 @@ template&lt;typename T&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a0d884fabaf30d73fb68e756e7aad6df6" name="a0d884fabaf30d73fb68e756e7aad6df6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d884fabaf30d73fb68e756e7aad6df6">&#9670;&#160;</a></span>setTimestampITS()</h2>
+<a id="a876ee4f8ed8239284de8c5ecb1a2b1ad" name="a876ee4f8ed8239284de8c5ecb1a2b1ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a876ee4f8ed8239284de8c5ecb1a2b1ad">&#9670;&#160;</a></span>setTimestampITS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2932,7 +2932,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -2947,7 +2947,7 @@ template&lt;typename T&gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">timestamp_its</td><td>TimestampITS object to set the timestamp </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">unix_nanosecs</td><td>Unix-Nanoseconds to set the timestamp for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n_leap_seconds</td><td>Number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epoch_offset</td><td>Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00 </td></tr>
   </table>
   </dd>

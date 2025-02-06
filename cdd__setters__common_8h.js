@@ -8,5 +8,5 @@ var cdd__setters__common_8h =
     [ "setReferencePosition", "cdd__setters__common_8h.html#ad636aa0d0819278faf0226bc93ae77db", null ],
     [ "setSpeed", "cdd__setters__common_8h.html#ae870b1cab62677c6df2573eb87c1d91f", null ],
     [ "setSpeedValue", "cdd__setters__common_8h.html#a2c4e6201e1fc4116b6aaff2f9d35e5f0", null ],
-    [ "setTimestampITS", "cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e", null ]
+    [ "setTimestampITS", "cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39", null ]
 ];

@@ -121,12 +121,12 @@ Functions</h2></td></tr>
 <tr class="memitem:afe8b542db1ad5da910eb8838e9455b32" id="r_afe8b542db1ad5da910eb8838e9455b32"><td class="memItemLeft" align="right" valign="top">TimestampIts&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a> (const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate)</td></tr>
 <tr class="memdesc:afe8b542db1ad5da910eb8838e9455b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the TimestampITS from a given GenerationDeltaTime object.  <br /></td></tr>
 <tr class="separator:afe8b542db1ad5da910eb8838e9455b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d23a586d612a43a2f7ecc62607f86cb" id="r_a5d23a586d612a43a2f7ecc62607f86cb"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d23a586d612a43a2f7ecc62607f86cb">getUnixNanosecondsFromGenerationDeltaTime</a> (const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a5d23a586d612a43a2f7ecc62607f86cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.  <br /></td></tr>
-<tr class="separator:a5d23a586d612a43a2f7ecc62607f86cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3698e4b7439e2ddcde928d35d947096e" id="r_a3698e4b7439e2ddcde928d35d947096e"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3698e4b7439e2ddcde928d35d947096e">getUnixNanosecondsFromGenerationDeltaTime</a> (const GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</td></tr>
-<tr class="memdesc:a3698e4b7439e2ddcde928d35d947096e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix Nanoseconds from Generation Delta Time object.  <br /></td></tr>
-<tr class="separator:a3698e4b7439e2ddcde928d35d947096e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6aaa3ef81386dfd5dc631b6e0d5c829" id="r_ad6aaa3ef81386dfd5dc631b6e0d5c829"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a> (const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:ad6aaa3ef81386dfd5dc631b6e0d5c829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.  <br /></td></tr>
+<tr class="separator:ad6aaa3ef81386dfd5dc631b6e0d5c829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4ba885df0246096635f1fd5f080759" id="r_a0d4ba885df0246096635f1fd5f080759"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d4ba885df0246096635f1fd5f080759">getUnixNanosecondsFromGenerationDeltaTime</a> (const GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</td></tr>
+<tr class="memdesc:a0d4ba885df0246096635f1fd5f080759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Unix Nanoseconds from Generation Delta Time object.  <br /></td></tr>
+<tr class="separator:a0d4ba885df0246096635f1fd5f080759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utility functions for the ETSI ITS CAM (EN and TS) </p>
@@ -181,8 +181,8 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a5d23a586d612a43a2f7ecc62607f86cb" name="a5d23a586d612a43a2f7ecc62607f86cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d23a586d612a43a2f7ecc62607f86cb">&#9670;&#160;</a></span>getUnixNanosecondsFromGenerationDeltaTime() <span class="overload">[1/2]</span></h2>
+<a id="ad6aaa3ef81386dfd5dc631b6e0d5c829" name="ad6aaa3ef81386dfd5dc631b6e0d5c829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">&#9670;&#160;</a></span>getUnixNanosecondsFromGenerationDeltaTime() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,7 +203,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -218,14 +218,14 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">generation_delta_time</td><td>the GenerationDeltaTime object to get the Unix-Nanoseconds from </td></tr>
     <tr><td class="paramname">timestamp_estimate</td><td>estimated time to calculate the corresponding generation from </td></tr>
-    <tr><td class="paramname">n_leap_seconds</td><td>number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second) </td></tr>
+    <tr><td class="paramname">n_leap_seconds</td><td>number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00061">61</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                                                  {</div>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                                                     {</div>
 <div class="line"><span class="lineno">   64</span>  TimestampIts t_its = <a class="code hl_function" href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a>(generation_delta_time, timestamp_estimate);</div>
 <div class="line"><span class="lineno">   65</span>  <span class="keywordflow">return</span> t_its.value * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
 <div class="line"><span class="lineno">   66</span>}</div>
@@ -233,8 +233,8 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3698e4b7439e2ddcde928d35d947096e" name="a3698e4b7439e2ddcde928d35d947096e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3698e4b7439e2ddcde928d35d947096e">&#9670;&#160;</a></span>getUnixNanosecondsFromGenerationDeltaTime() <span class="overload">[2/2]</span></h2>
+<a id="a0d4ba885df0246096635f1fd5f080759" name="a0d4ba885df0246096635f1fd5f080759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4ba885df0246096635f1fd5f080759">&#9670;&#160;</a></span>getUnixNanosecondsFromGenerationDeltaTime() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +255,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()-&gt;second</span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>n_leap_seconds</em></span><span class="paramdefsep"> = </span><span class="paramdefval">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()-&gt;second</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -270,19 +270,20 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">generation_delta_time</td><td>the GenerationDeltaTime object to get the Unix-Nanoseconds from </td></tr>
     <tr><td class="paramname">unix_timestamp_estimate</td><td>estimated unix-time (in Nanoseconds) to calculate the corresponding generation from </td></tr>
+    <tr><td class="paramname">n_leap_seconds</td><td>number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00075">75</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   77</span>                                                                                                  {</div>
-<div class="line"><span class="lineno">   78</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">   79</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a>(t_its, unix_timestamp_estimate, n_leap_seconds);</div>
-<div class="line"><span class="lineno">   80</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a5d23a586d612a43a2f7ecc62607f86cb">getUnixNanosecondsFromGenerationDeltaTime</a>(generation_delta_time, t_its, n_leap_seconds);</div>
-<div class="line"><span class="lineno">   81</span>}</div>
-<div class="ttc" id="acam__utils_8h_html_a5d23a586d612a43a2f7ecc62607f86cb"><div class="ttname"><a href="#a5d23a586d612a43a2f7ecc62607f86cb">getUnixNanosecondsFromGenerationDeltaTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00061">cam_utils.h:61</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_a2b64e5c7332b9bf6e435971b0a3ae06e"><div class="ttname"><a href="cdd__setters__common_8h.html#a2b64e5c7332b9bf6e435971b0a3ae06e">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00048">cdd_setters_common.h:48</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00076">76</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                                                     {</div>
+<div class="line"><span class="lineno">   79</span>  TimestampIts t_its;</div>
+<div class="line"><span class="lineno">   80</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_timestamp_estimate, n_leap_seconds);</div>
+<div class="line"><span class="lineno">   81</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a>(generation_delta_time, t_its, n_leap_seconds);</div>
+<div class="line"><span class="lineno">   82</span>}</div>
+<div class="ttc" id="acam__utils_8h_html_ad6aaa3ef81386dfd5dc631b6e0d5c829"><div class="ttname"><a href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00061">cam_utils.h:61</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a34cebeddb7ba669741fd0a601abf1f39"><div class="ttname"><a href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00048">cdd_setters_common.h:48</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
