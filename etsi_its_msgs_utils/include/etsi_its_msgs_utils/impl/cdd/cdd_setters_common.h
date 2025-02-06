@@ -42,12 +42,12 @@ SOFTWARE.
  *
  * @param[in] timestamp_its TimestampITS object to set the timestamp
  * @param[in] unix_nanosecs Unix-Nanoseconds to set the timestamp for
- * @param[in] n_leap_seconds Number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+ * @param[in] n_leap_seconds Number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.)
  * @param[in] epoch_offset Unix-Timestamp in seconds for the 01.01.2004 at 00:00:00
  */
 inline void setTimestampITS(
     TimestampIts& timestamp_its, const uint64_t unix_nanosecs,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;
   throwIfOutOfRange(t_its, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
   timestamp_its.value = t_its;

@@ -55,11 +55,11 @@ inline void setItsPduHeader(DENM& denm, const uint32_t station_id, const uint8_t
  * 
  * @param denm DENM to set the ReferenceTime-Value for
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the ReferenceTime-Value from
- * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::N_LEAP_SECONDS)
+ * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Defaults to the todays number of leap seconds since 2004.)
  */
 inline void setReferenceTime(
     DENM& denm, const uint64_t unix_nanosecs,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
   throwIfOutOfRange(t_its.value, TimestampIts::MIN, TimestampIts::MAX, "TimestampIts");
