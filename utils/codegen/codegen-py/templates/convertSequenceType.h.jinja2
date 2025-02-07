@@ -60,7 +60,7 @@ namespace etsi_its_{{etsi_type}}_conversion {
 
 void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_")}}_t& in, {{etsi_type}}_msgs::{{ros_msg_type}}& out) {
 {%- for member in members -%}
-{% if member.optional or member.default %}
+{% if member.optional or (member.default and member.default.ros_value != 0) %}
   if (in.{{member.extension_prefix}}{{member.c_field_name}}) {
 {%- if member.is_primitive %}
     etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(*in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
@@ -99,7 +99,7 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
     toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- endif %}
   }
-{%- elif member.default %}
+{%- elif member.default and member.default.ros_value != 0 %}
 {%- if member.is_primitive %}
   out.{{member.extension_prefix}}{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
   etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});

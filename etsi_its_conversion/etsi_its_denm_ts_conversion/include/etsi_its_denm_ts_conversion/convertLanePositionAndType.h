@@ -75,21 +75,15 @@ namespace etsi_its_denm_ts_conversion {
 
 void toRos_LanePositionAndType(const denm_ts_LanePositionAndType_t& in, denm_ts_msgs::LanePositionAndType& out) {
   toRos_LanePosition(in.transversalPosition, out.transversal_position);
-  if (in.laneType) {
-    toRos_LaneType(*in.laneType, out.lane_type);
-  }
-  if (in.direction) {
-    toRos_Direction(*in.direction, out.direction);
-  }
+  toRos_LaneType(in.laneType, out.lane_type);
+  toRos_Direction(in.direction, out.direction);
 }
 
 void toStruct_LanePositionAndType(const denm_ts_msgs::LanePositionAndType& in, denm_ts_LanePositionAndType_t& out) {
   memset(&out, 0, sizeof(denm_ts_LanePositionAndType_t));
   toStruct_LanePosition(in.transversal_position, out.transversalPosition);
-  out.laneType = (denm_ts_LaneType_t*) calloc(1, sizeof(denm_ts_LaneType_t));
-  toStruct_LaneType(in.lane_type, *out.laneType);
-  out.direction = (denm_ts_Direction_t*) calloc(1, sizeof(denm_ts_Direction_t));
-  toStruct_Direction(in.direction, *out.direction);
+  toStruct_LaneType(in.lane_type, out.laneType);
+  toStruct_Direction(in.direction, out.direction);
 }
 
 }
