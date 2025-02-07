@@ -194,11 +194,6 @@ namespace access {
   return color;
 }
 
-
-// Converts a value from message type "TimeMarkValue" into a string representation
-// time: time in 0.1 seconds until the next change occours in the future
-// header: time stamped message header which suits as an absolute time reference
-
 /**
  * @brief Interprets the type of a TimeMark message
  * See etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark"
