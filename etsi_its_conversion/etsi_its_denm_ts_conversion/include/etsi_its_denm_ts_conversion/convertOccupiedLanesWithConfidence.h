@@ -85,9 +85,17 @@ namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 namespace etsi_its_denm_ts_conversion {
 
 void toRos_OccupiedLanesWithConfidence(const denm_ts_OccupiedLanesWithConfidence_t& in, denm_ts_msgs::OccupiedLanesWithConfidence& out) {
-  toRos_LanePositionOptions(in.lanePositionBased, out.lane_position_based);
+  for (int i = 0; i < in.lanePositionBased.list.count; ++i) {
+    denm_ts_msgs::LanePositionOptions el;
+    toRos_LanePositionOptions(*(in.lanePositionBased.list.array[i]), el);
+    out.lane_position_based.push_back(el);
+  }
   if (in.mapBased) {
-    toRos_MapPosition(*in.mapBased, out.map_based);
+    for (int i = 0; i < in.mapBased->list.count; ++i) {
+      denm_ts_msgs::MapPosition el;
+      toRos_MapPosition(*(in.mapBased->list.array[i]), el);
+      out.map_based.push_back(el);
+    }
     out.map_based_is_present = true;
   }
   toRos_MetaInformation(in.confidence, out.confidence);
@@ -95,10 +103,17 @@ void toRos_OccupiedLanesWithConfidence(const denm_ts_OccupiedLanesWithConfidence
 
 void toStruct_OccupiedLanesWithConfidence(const denm_ts_msgs::OccupiedLanesWithConfidence& in, denm_ts_OccupiedLanesWithConfidence_t& out) {
   memset(&out, 0, sizeof(denm_ts_OccupiedLanesWithConfidence_t));
-  toStruct_LanePositionOptions(in.lane_position_based, out.lanePositionBased);
+    for (int i = 0; i < in.lane_position_based.size(); ++i) {
+      denm_ts_LanePositionOptions_t* el = (denm_ts_LanePositionOptions_t*) calloc(1, sizeof(denm_ts_LanePositionOptions_t));
+      toStruct_LanePositionOptions(in.lane_position_based[i], *el);
+      if (asn_sequence_add(&out.lanePositionBased, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    }
   if (in.map_based_is_present) {
-    out.mapBased = (denm_ts_MapPosition_t*) calloc(1, sizeof(denm_ts_MapPosition_t));
-    toStruct_MapPosition(in.map_based, *out.mapBased);
+    for (int i = 0; i < in.map_based.size(); ++i) {
+      denm_ts_MapPosition_t* el = (denm_ts_MapPosition_t*) calloc(1, sizeof(denm_ts_MapPosition_t));
+      toStruct_MapPosition(in.map_based[i], *el);
+      if (asn_sequence_add(&out.mapBased, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+    }
   }
   toStruct_MetaInformation(in.confidence, out.confidence);
 }
