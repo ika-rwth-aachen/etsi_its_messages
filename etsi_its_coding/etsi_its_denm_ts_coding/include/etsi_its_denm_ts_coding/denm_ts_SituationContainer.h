@@ -14,6 +14,7 @@
 /* Including external dependencies */
 #include "etsi_its_denm_ts_coding/denm_ts_InformationQuality.h"
 #include "etsi_its_denm_ts_coding/denm_ts_CauseCodeV2.h"
+#include "etsi_its_denm_ts_coding/denm_ts_EventZone.h"
 #include "etsi_its_denm_ts_coding/denm_ts_Position1d.h"
 #include <etsi_its_denm_ts_coding/constr_SEQUENCE.h>
 
@@ -23,7 +24,6 @@ extern "C" {
 
 /* Forward declarations */
 struct denm_ts_CauseCodeV2;
-struct denm_ts_EventZone;
 struct denm_ts_ActionIdList;
 
 /* denm_ts_SituationContainer */
@@ -31,7 +31,7 @@ typedef struct denm_ts_SituationContainer {
 	denm_ts_InformationQuality_t	 informationQuality;
 	denm_ts_CauseCodeV2_t	 eventType;
 	struct denm_ts_CauseCodeV2	*linkedCause;	/* OPTIONAL */
-	struct denm_ts_EventZone	*eventZone;	/* OPTIONAL */
+	denm_ts_EventZone_t	*eventZone;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
@@ -60,7 +60,6 @@ extern asn_per_constraints_t asn_PER_type_denm_ts_SituationContainer_constr_1;
 
 /* Referred external types */
 #include "etsi_its_denm_ts_coding/denm_ts_CauseCodeV2.h"
-#include "etsi_its_denm_ts_coding/denm_ts_EventZone.h"
 #include "etsi_its_denm_ts_coding/denm_ts_ActionIdList.h"
 
 #endif	/* _denm_ts_SituationContainer_H_ */
