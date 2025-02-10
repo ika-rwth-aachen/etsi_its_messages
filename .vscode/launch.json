@@ -13,7 +13,7 @@
         },
         {
             "name": "All (conversion)",
-            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "DENM TS (msgs)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)"],
+            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "DENM TS (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)"],
             "stopAll": false
         }
     ],
