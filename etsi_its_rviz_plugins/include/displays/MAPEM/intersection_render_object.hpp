@@ -53,6 +53,8 @@ typedef struct IntersectionMovementState {
   std_msgs::msg::Header header;
   uint8_t signal_group_id;
   etsi_its_spatem_ts_msgs::msg::MovementPhaseState phase_state;
+  etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details;
+
 } IntersectionMovementState;
 
 /**

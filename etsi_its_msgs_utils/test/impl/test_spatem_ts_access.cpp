@@ -50,4 +50,65 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   unsigned int event_state = randomInt(spatem_ts_msgs::MovementPhaseState::UNAVAILABLE, spatem_ts_msgs::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC);
   movement_state.state_time_speed.array[0].event_state.value = event_state;
   EXPECT_EQ(event_state, spatem_ts_access::getCurrentMovementPhaseStateValue(movement_state));
+
+  std::array<float, 4> movement_phase_state_color = spatem_ts_access::interpretMovementPhaseStateAsColor(5);
+  EXPECT_EQ(movement_phase_state_color[0], 0.18f); // color green
+  EXPECT_EQ(movement_phase_state_color[1], 0.79f);
+  EXPECT_EQ(movement_phase_state_color[2], 0.21f);
+  EXPECT_EQ(movement_phase_state_color[3], 1.0f);
+
+  std::array<float, 4> movement_phase_state_color2 = spatem_ts_access::interpretMovementPhaseStateAsColor(9);
+  EXPECT_EQ(movement_phase_state_color2[0], 0.9f); // color orange
+  EXPECT_EQ(movement_phase_state_color2[1], 0.7f);
+  EXPECT_EQ(movement_phase_state_color2[2], 0.09f);
+  EXPECT_EQ(movement_phase_state_color2[3], 1.0f);
+
+  std::array<float, 4> movement_phase_state_color3 = spatem_ts_access::interpretMovementPhaseStateAsColor(10);
+  EXPECT_EQ(movement_phase_state_color3[0], 0.5f); // color grey (out of definition range)
+  EXPECT_EQ(movement_phase_state_color3[1], 0.5f);
+  EXPECT_EQ(movement_phase_state_color3[2], 0.5f);
+  EXPECT_EQ(movement_phase_state_color3[3], 1.0f);
+
+  float confidence_as_float = spatem_ts_access::interpretTimeIntervalConfidenceAsFloat(0);
+  EXPECT_EQ(confidence_as_float, 0.21f);
+
+  float confidence_as_float2 = spatem_ts_access::interpretTimeIntervalConfidenceAsFloat(15);
+  EXPECT_EQ(confidence_as_float2, 1.0f);
+
+  int random_int_time = randomInt(0, 35990);
+  int random_int_seconds = randomInt(0, 3599);
+  float time_mark_as_seconds = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time, random_int_seconds, 0);
+  EXPECT_EQ(time_mark_as_seconds, (float)random_int_time * 0.1f - random_int_seconds);
+
+  int random_int_time2 = randomInt(0, 35990);
+  int random_int_seconds2 = randomInt(0, 3599);
+  uint random_uint_nanosecs2 = (uint)randomInt(0, 1e3 - 1) * 1e6;
+  double tolerance = 1e-4;
+
+  float time_mark_as_seconds2 = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time2, random_int_seconds2, random_uint_nanosecs2);
+  EXPECT_NEAR(time_mark_as_seconds2, (float)random_int_time2 * 0.1f - (random_int_seconds2 + (float)random_uint_nanosecs2 * 1e-9), tolerance);
+
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type = spatem_ts_access::interpretTimeMarkValueType(36001);
+  EXPECT_EQ(time_mark_value_type, spatem_ts_access::time_mark_value_interpretation::undefined);
+
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type2 = spatem_ts_access::interpretTimeMarkValueType(36000);
+  EXPECT_EQ(time_mark_value_type2, spatem_ts_access::time_mark_value_interpretation::over_an_hour);
+
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type3 = spatem_ts_access::interpretTimeMarkValueType(35991);
+  EXPECT_EQ(time_mark_value_type3, spatem_ts_access::time_mark_value_interpretation::leap_second);
+
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type4 = spatem_ts_access::interpretTimeMarkValueType(500);
+  EXPECT_EQ(time_mark_value_type4, spatem_ts_access::time_mark_value_interpretation::normal);
+
+  std::string time_mark_as_string = spatem_ts_access::parseTimeMarkValueToString(36001, 0, 0);
+  EXPECT_EQ(time_mark_as_string, std::string("undefined"));
+
+  std::string time_mark_as_string2 = spatem_ts_access::parseTimeMarkValueToString(36000, 0, 0);
+  EXPECT_EQ(time_mark_as_string2, std::string(">36000s"));
+
+  std::string time_mark_as_string3 = spatem_ts_access::parseTimeMarkValueToString(35991, 0, 0);
+  EXPECT_EQ(time_mark_as_string3, std::string("leap second"));
+
+  std::string time_mark_as_string4 = spatem_ts_access::parseTimeMarkValueToString(55, 0, 0);
+  EXPECT_EQ(time_mark_as_string4, std::string("5.5s"));
 }
