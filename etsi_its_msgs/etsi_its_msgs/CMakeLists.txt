@@ -12,6 +12,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_cam_ts_msgs REQUIRED)
   find_package(etsi_its_cpm_ts_msgs REQUIRED)
   find_package(etsi_its_denm_msgs REQUIRED)
+  find_package(etsi_its_denm_ts_msgs REQUIRED)
   find_package(etsi_its_mapem_ts_msgs REQUIRED)
   find_package(etsi_its_spatem_ts_msgs REQUIRED)
   find_package(etsi_its_vam_ts_msgs REQUIRED)
@@ -21,6 +22,7 @@ if(${ROS_VERSION} EQUAL 2)
     etsi_its_cam_ts_msgs
     etsi_its_cpm_ts_msgs
     etsi_its_denm_msgs
+    etsi_its_denm_ts_msgs
     etsi_its_mapem_ts_msgs
     etsi_its_spatem_ts_msgs
     etsi_its_vam_ts_msgs
@@ -36,6 +38,7 @@ elseif(${ROS_VERSION} EQUAL 1)
     etsi_its_cam_ts_msgs
     etsi_its_cpm_ts_msgs
     etsi_its_denm_msgs
+    etsi_its_denm_ts_msgs
     etsi_its_mapem_ts_msgs
     etsi_its_spatem_ts_msgs
     etsi_its_vam_ts_msgs
@@ -47,6 +50,7 @@ elseif(${ROS_VERSION} EQUAL 1)
       etsi_its_cam_ts_msgs
       etsi_its_cpm_ts_msgs
       etsi_its_denm_msgs
+      etsi_its_denm_ts_msgs
       etsi_its_mapem_ts_msgs
       etsi_its_spatem_ts_msgs
       etsi_its_vam_ts_msgs

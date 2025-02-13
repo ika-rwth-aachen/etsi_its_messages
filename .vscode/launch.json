@@ -3,17 +3,17 @@
     "compounds": [
         {
             "name": "All (coding)",
-            "configurations": ["CAM (coding)", "CAM TS (coding)", "DENM (coding)", "CPM TS (coding)", "VAM TS (coding)", "MAPEM TS (coding)", "SPATEM TS (coding)"],
+            "configurations": ["CAM (coding)", "CAM TS (coding)", "DENM (coding)", "DENM TS (coding)", "CPM TS (coding)", "VAM TS (coding)", "MAPEM TS (coding)", "SPATEM TS (coding)"],
             "stopAll": false
         },
         {
             "name": "All (msgs)",
-            "configurations": ["CAM (msgs)", "CAM TS (msgs)", "DENM (msgs)", "CPM TS (msgs)", "VAM TS (msgs)", "MAPEM TS (msgs)", "SPATEM TS (msgs)"],
+            "configurations": ["CAM (msgs)", "CAM TS (msgs)", "DENM (msgs)", "DENM TS (msgs)", "CPM TS (msgs)", "VAM TS (msgs)", "MAPEM TS (msgs)", "SPATEM TS (msgs)"],
             "stopAll": false
         },
         {
             "name": "All (conversion)",
-            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)"],
+            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "DENM TS (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)"],
             "stopAll": false
         }
     ],
@@ -167,6 +167,57 @@
                 "denm",
                 "-o",
                 "etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM TS (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC/asn1ToC.py",
+            "args": [
+                "asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn",
+                "asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "denm_ts",
+                "-o",
+                "etsi_its_coding/etsi_its_denm_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn",
+                "asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "denm_ts",
+                "-o",
+                "etsi_its_msgs/etsi_its_denm_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "DENM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn",
+                "asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "denm_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_denm_ts_conversion/include/etsi_its_denm_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

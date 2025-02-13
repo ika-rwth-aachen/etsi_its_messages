@@ -387,6 +387,15 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             if member is None:
                 continue
 
+            # list represents the asn1 extension "[[ ]]" notation
+            if isinstance(member, list):
+                for sub_member in member:
+                    if sub_member["type"] not in known_types:
+                        raise TypeError(
+                            f"Type '{sub_member['type']}' of member '{sub_member['name']}' "
+                            f"in '{asn1_type_name}' is undefined")
+                continue
+
             if "components-of" in member:
                 member["type"] = member["components-of"]
 
@@ -418,22 +427,10 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         Dict: jinja context
     """
 
-    if "components-of" in asn1_type_info: # TODO
-        logging.warning(f"Handling of 'components-of' in '{asn1_type_name}' not yet supported")
-        return { # generate in a way such that compilation will not succeed
-            "etsi_type": None,
-            "asn1_type_type": "components-of",
-            "asn1_type_name": asn1_type_name,
-            "ros_msg_type": validRosType(asn1_type_name),
-            "ros2_msg_type_file_name": validRosTypeHeader(asn1_type_name),
-            "is_primitive": False,
-            "members": [{"asn1_type_name": asn1_type_name, "ros_msg_type": "TODO: components-of", "ros_field_name": "is not yet supported", "c_field_name": "is not yet supported"}],
-            "asn1_definition": None,
-            "comments": [],
-            "auto_generate_command": AUTO_GENERATE_COMMAND,
-        }
-
-    asn1_type_type = asn1_type_info["type"]
+    if isinstance(asn1_type_info, list): # list represents the asn1 extension "[[ ]]" notation
+        asn1_type_type = "EXTENSION"
+    else:
+        asn1_type_type = asn1_type_info["type"]
 
     context = {
         "etsi_type": None,                                              # cam
@@ -449,12 +446,18 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     }
 
     # extra information / asn1 fields that are not processed as comments
-    for k, v in asn1_type_info.items():
-        if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
-            context["comments"].append(f"{k}: {v}")
+    if not isinstance(asn1_type_info, list):
+        for k, v in asn1_type_info.items():
+            if k not in ("type", "element", "members", "name", "named-bits", "named-numbers", "optional", "restricted-to", "size", "values", "default"):
+                context["comments"].append(f"{k}: {v}")
+
+    # components-of
+    if "components-of" in asn1_type_info:
+        member_context = asn1TypeToJinjaContext(asn1_type_name, asn1_types[asn1_type_info["components-of"]], asn1_types, asn1_values, asn1_sets, asn1_classes)
+        context["members"].extend(member_context["members"])
 
     # primitives
-    if asn1_type_type in ASN1_PRIMITIVES_2_ROS:
+    elif asn1_type_type in ASN1_PRIMITIVES_2_ROS:
 
         # resolve ROS msg type
         ros_type = ASN1_PRIMITIVES_2_ROS[asn1_type_type]
@@ -728,6 +731,14 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             })
 
         context["members"].append(member_context)
+        
+    # list aka extension "[[ ]]"    
+    elif asn1_type_type == "EXTENSION":
+        for sub_member in asn1_type_info:
+            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_context["members"][0]["extension_prefix"] = "ext1->"
+            if member_context is not None:
+                context["members"].extend(member_context["members"])
 
     # custom types
     elif asn1_type_type in asn1_types:
@@ -744,6 +755,9 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": []
         })
+        
+        if "optional" in asn1_type_info:
+            context["members"][0]["optional"] = True
 
         # handle size in custom types
         if "size" in asn1_type_info and isinstance(asn1_type_info["size"][0], tuple):

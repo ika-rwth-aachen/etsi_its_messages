@@ -8,6 +8,7 @@
       - cam_ts
       - cpm_ts
       - denm
+      - denm_ts
       - mapem_ts
       - spatem_ts
       - vam_ts

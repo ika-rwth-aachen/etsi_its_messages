@@ -237,6 +237,8 @@ def main():
         msg_type = "CollectivePerceptionMessage"
     elif args.type == "cam_ts":
         msg_type = "CAM"
+    elif args.type == "denm_ts":
+        msg_type = "DENM"
     elif args.type == "mapem_ts":
         msg_type = "MAPEM"
     elif args.type == "spatem_ts":

@@ -58,7 +58,7 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 | --- | --- | --- | --- | --- |
 | :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | [TS 103 900 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103900_103999/103900/02.01.01_60/ts_103900v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_ts103900)) |
 | :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) |
-| :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | - |
+| :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | [TS 103 831 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_ts103831)) |
 | :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
 | :white_check_mark: | SPATEM | Signal Phase and Timing Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
 | :white_check_mark: | VAM | VRU Awareness Message | - | [TS 103 300-3 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/10330003/02.02.01_60/ts_10330003v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3)) |
@@ -81,6 +81,7 @@ etsi_its_messages
 │   ├── etsi_its_cam_ts_coding
 │   ├── etsi_its_cpm_ts_coding
 │   ├── etsi_its_denm_coding
+│   ├── etsi_its_denm_ts_coding
 │   ├── etsi_its_mapem_ts_coding
 │   ├── etsi_its_spatem_ts_coding
 │   └── etsi_its_vam_ts_coding
@@ -90,6 +91,7 @@ etsi_its_messages
 │   ├── etsi_its_cam_ts_conversion
 │   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
+│   ├── etsi_its_denm_ts_conversion
 │   ├── etsi_its_mapem_ts_conversion
 │   ├── etsi_its_primitives_conversion
 │   ├── etsi_its_spatem_ts_conversion
@@ -101,6 +103,7 @@ etsi_its_messages
 │   ├── etsi_its_cam_ts_msgs
 │   ├── etsi_its_cpm_ts_msgs
 │   ├── etsi_its_denm_msgs
+│   ├── etsi_its_denm_ts_msgs
 │   ├── etsi_its_mapem_ts_msgs
 │   ├── etsi_its_spatem_ts_msgs
 │   └── etsi_its_vam_ts_msgs
@@ -179,6 +182,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `~/cam_ts/in` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) for conversion to UDP |
 | `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
+| `~/denm_ts/in` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) for conversion to UDP |
 | `~/mapem_ts/in` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) for conversion to UDP |
 | `~/spatem_ts/in` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) for conversion to UDP |
 | `~/vam_ts/in` | `etsi_its_vam_ts_msgs/msg/VAM` | VAM (TS) for conversion to UDP |
@@ -192,6 +196,7 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `~/cam_ts/out` | `etsi_its_cam_ts_msgs/msg/CAM` | CAM (TS) converted from UDP payload |
 | `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
+| `~/denm_ts/out` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) converted from UDP payload |
 | `~/mapem_ts/out` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) converted from UDP payload |
 | `~/spatem_ts/out` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) converted from UDP payload |
 | `~/vam_ts/out` | `etsi_its_vam_ts_msgs/msg/VAM` | VAM (TS) converted from UDP payload |
@@ -203,8 +208,8 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `has_btp_destination_port` | `bool` | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
 | `btp_destination_port_offset` | `int` | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
-| `ros2udp_etsi_types` | `string[]` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` (defaults to all norms and specifications of all possible ETSI types) | `cam`, `cam_ts`, `cpm_ts`, `denm`, `mapem_ts`, `spatem_ts`, `vam_ts` |
-| `udp2ros_etsi_types` | `string[]` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` (defaults only to the norm or specification of all possible ETSI types)  | `cam`, `cam_ts`, `cpm_ts`, `denm`, `mapem_ts`, `spatem_ts`, `vam_ts` |
+| `ros2udp_etsi_types` | `string[]` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` (defaults to all norms and specifications of all possible ETSI types) | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `spatem_ts`, `vam_ts` |
+| `udp2ros_etsi_types` | `string[]` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` (defaults only to the norm or specification of all possible ETSI types)  | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `spatem_ts`, `vam_ts` |
 | `subscriber_queue_size` | `int` | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | queue size for outgoing ROS messages |
 | `check_constraints_before_encoding` | `bool` | whether an asn constraint check should be performed before encoding using asn1c's `asn_check_constraints` function (setting to `true` could lead to segmentation faults because of infinite recursion; [known asn1c issue](https://github.com/vlm/asn1c/issues/410)) |

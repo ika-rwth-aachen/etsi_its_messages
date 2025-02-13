@@ -48,7 +48,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
 1. Install the [`udp_driver`](https://github.com/ros-drivers/transport_drivers) and [`etsi_its_conversion`](https://github.com/ika-rwth-aachen/etsi_its_messages) ROS packages.
     ```bash
     sudo apt install \
-        ros-$ROS_DISTRO-transport-drivers \
+        ros-$ROS_DISTRO-udp-driver \
         ros-$ROS_DISTRO-etsi-its-conversion
     ```
 1. Configure the `udp_driver` node responsible for bridging the UDP packets received from the MK5/MK6 to [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) ROS messages.
@@ -72,6 +72,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
           - cam_ts
           - cpm_ts
           - denm
+          - denm_ts
           - mapem_ts
           - spatem_ts
           - vam_ts
