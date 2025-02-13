@@ -387,6 +387,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
             if member is None:
                 continue
 
+            # list represents the asn1 extension "[[ ]]" notation
             if isinstance(member, list):
                 for sub_member in member:
                     if sub_member["type"] not in known_types:
