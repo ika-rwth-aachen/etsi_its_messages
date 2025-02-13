@@ -55,12 +55,12 @@ inline TimestampIts getTimestampITSFromGenerationDeltaTime(const GenerationDelta
  *
  * @param generation_delta_time the GenerationDeltaTime object to get the Unix-Nanoseconds from
  * @param timestamp_estimate estimated time to calculate the corresponding generation from
- * @param n_leap_seconds number of leap-seconds since 2004. (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+ * @param n_leap_seconds number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.)
  * @return uint64_t the corresponding Unix-Nanoseconds
  */
 inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(
     const GenerationDeltaTime& generation_delta_time, const TimestampIts& timestamp_estimate,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   TimestampIts t_its = getTimestampITSFromGenerationDeltaTime(generation_delta_time, timestamp_estimate);
   return t_its.value * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;
 }
@@ -70,11 +70,12 @@ inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(
  *
  * @param generation_delta_time the GenerationDeltaTime object to get the Unix-Nanoseconds from
  * @param unix_timestamp_estimate estimated unix-time (in Nanoseconds) to calculate the corresponding generation from
+ * @param n_leap_seconds number of leap-seconds since 2004. (Defaults to the todays number of leap seconds since 2004.)
  * @return uint64_t the corresponding Unix-Nanoseconds
  */
 inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(
     const GenerationDeltaTime& generation_delta_time, const uint64_t unix_timestamp_estimate,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   TimestampIts t_its;
   setTimestampITS(t_its, unix_timestamp_estimate, n_leap_seconds);
   return getUnixNanosecondsFromGenerationDeltaTime(generation_delta_time, t_its, n_leap_seconds);

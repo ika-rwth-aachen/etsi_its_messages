@@ -44,7 +44,7 @@ class Publisher(Node):
         msg = MAPEM()
 
         msg.header.protocol_version = 2
-        msg.header.message_id = msg.header.MESSAGE_ID_SPATEM
+        msg.header.message_id = msg.header.MESSAGE_ID_MAPEM
         msg.header.station_id.value = 100
 
         self.get_logger().info(f"Publishing MAPEM (TS)")
