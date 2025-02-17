@@ -2,6 +2,16 @@
 Changelog for package etsi_its_denm_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge branch 'main' into feature/spat-map-plugin
+* Merge pull request `#54 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/54>`_ from cubesys-GmbH/denm_subcausecodes
+  keep DENM SubCauseCode variants
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
 3.0.0 (2024-12-10)
 ------------------
 * Merge pull request `#46 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/46>`_ from ika-rwth-aachen/improvement/formatting

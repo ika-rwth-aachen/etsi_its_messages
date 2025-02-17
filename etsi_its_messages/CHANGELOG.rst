@@ -2,6 +2,11 @@
 Changelog for package etsi_its_messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers
+
 3.0.0 (2024-12-10)
 ------------------
 

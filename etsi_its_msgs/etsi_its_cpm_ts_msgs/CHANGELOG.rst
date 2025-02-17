@@ -2,6 +2,13 @@
 Changelog for package etsi_its_cpm_ts_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers, Lennart Reiher
+
 3.0.0 (2024-12-10)
 ------------------
 * Merge pull request `#46 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/46>`_ from ika-rwth-aachen/improvement/formatting

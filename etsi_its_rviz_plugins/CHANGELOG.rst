@@ -2,6 +2,20 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge branch 'main' into denm-v2
+* Merge pull request `#65 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/65>`_ from ika-rwth-aachen/improvement/display_spatem_timing_information
+  Improvement/display spatem timing information
+* Merge pull request `#66 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/66>`_ from ika-rwth-aachen/fix/default-leap-seconds
+  Use `rbegin()` instead of `end()` to access last element of `std::map` storing the leap-second insertions
+* Merge pull request `#55 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/55>`_ from ika-rwth-aachen/feature/spat-map-plugin
+  RViz Plugin for SPATEM/MAPEM
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: AlexanderWilczynski, Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
 3.0.0 (2024-12-10)
 ------------------
 

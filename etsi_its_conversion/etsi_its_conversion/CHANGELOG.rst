@@ -2,6 +2,15 @@
 Changelog for package etsi_its_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge pull request `#64 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/64>`_ from ika-rwth-aachen/denm-v2
+  Support DENM v2 (TS)
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
 3.0.0 (2024-12-10)
 ------------------
 * Merge pull request `#51 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/51>`_ from ika-rwth-aachen/improvement/converter-launch-file

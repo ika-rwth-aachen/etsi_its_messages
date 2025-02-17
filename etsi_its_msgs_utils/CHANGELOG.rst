@@ -2,6 +2,26 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge pull request `#64 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/64>`_ from ika-rwth-aachen/denm-v2
+  Support DENM v2 (TS)
+* Merge branch 'main' into denm-v2
+* Merge pull request `#65 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/65>`_ from ika-rwth-aachen/improvement/display_spatem_timing_information
+  Improvement/display spatem timing information
+* Merge pull request `#66 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/66>`_ from ika-rwth-aachen/fix/default-leap-seconds
+  Use `rbegin()` instead of `end()` to access last element of `std::map` storing the leap-second insertions
+* Merge remote-tracking branch 'origin/main' into improvement/display_spatem_timing_information
+* Merge pull request `#63 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/63>`_ from cubesys-GmbH/fix_mapem_message_id
+* Merge pull request `#55 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/55>`_ from ika-rwth-aachen/feature/spat-map-plugin
+  RViz Plugin for SPATEM/MAPEM
+* Merge pull request `#58 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/58>`_ from ika-rwth-aachen/fix/cam-setter-example
+  Fix example for access-functions in README
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Alexander Wilczynski, AlexanderWilczynski, Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
 3.0.0 (2024-12-10)
 ------------------
 * Merge pull request `#48 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/48>`_ from ika-rwth-aachen/improvement/cpm-codegen-py

@@ -2,6 +2,11 @@
 Changelog for package etsi_its_spatem_ts_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2025-02-17)
+------------------
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers
+
 3.0.0 (2024-12-10)
 ------------------
 * Merge pull request `#28 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/28>`_ from ika-rwth-aachen/feature/spatem-mapem
