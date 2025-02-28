@@ -26,6 +26,8 @@ def generate_launch_description():
         DeclareLaunchArgument("output_topic_denm_ts", default_value="~/denm_ts/out"),
         DeclareLaunchArgument("input_topic_mapem_ts", default_value="~/mapem_ts/in"),
         DeclareLaunchArgument("output_topic_mapem_ts", default_value="~/mapem_ts/out"),
+        DeclareLaunchArgument("input_topic_mcm_uulm", default_value="~/mcm_uulm/in"),
+        DeclareLaunchArgument("output_topic_mcm_uulm", default_value="~/mcm_uulm/out"),
         DeclareLaunchArgument("input_topic_spatem_ts", default_value="~/spatem_ts/in"),
         DeclareLaunchArgument("output_topic_spatem_ts", default_value="~/spatem_ts/out"),
         DeclareLaunchArgument("input_topic_vam_ts", default_value="~/vam_ts/in"),

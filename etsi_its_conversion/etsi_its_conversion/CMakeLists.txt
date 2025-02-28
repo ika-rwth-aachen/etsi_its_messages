@@ -16,6 +16,7 @@ if(${ROS_VERSION} EQUAL 2)
   find_package(etsi_its_denm_conversion REQUIRED)
   find_package(etsi_its_denm_ts_conversion REQUIRED)
   find_package(etsi_its_mapem_ts_conversion REQUIRED)
+  find_package(etsi_its_mcm_uulm_conversion REQUIRED)
   find_package(etsi_its_spatem_ts_conversion REQUIRED)
   find_package(etsi_its_vam_ts_conversion REQUIRED)
   find_package(rclcpp REQUIRED)
@@ -41,6 +42,7 @@ if(${ROS_VERSION} EQUAL 2)
     etsi_its_denm_conversion
     etsi_its_denm_ts_conversion
     etsi_its_mapem_ts_conversion
+    etsi_its_mcm_uulm_conversion
     etsi_its_spatem_ts_conversion
     etsi_its_vam_ts_conversion
     rclcpp
@@ -80,6 +82,7 @@ elseif(${ROS_VERSION} EQUAL 1)
     etsi_its_denm_conversion
     etsi_its_denm_ts_conversion
     etsi_its_mapem_ts_conversion
+    etsi_its_mcm_uulm_conversion
     etsi_its_spatem_ts_conversion
     etsi_its_vam_ts_conversion
     nodelet
@@ -97,6 +100,7 @@ elseif(${ROS_VERSION} EQUAL 1)
       etsi_its_denm_conversion
       etsi_its_denm_ts_conversion
       etsi_its_mapem_ts_conversion
+      etsi_its_mcm_uulm_conversion
       etsi_its_spatem_ts_conversion
       etsi_its_vam_ts_conversion
       nodelet
