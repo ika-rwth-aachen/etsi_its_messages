@@ -456,5 +456,56 @@
             "console": "integratedTerminal",
             "justMyCode": true
         },
+        {
+            "name": "UULM MCM TS (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC/asn1ToC.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "-t",
+                "mcm_ts",
+                "-o",
+                "etsi_its_coding/uulm_mcm_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "UULM MCM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "-t",
+                "mcm_ts",
+                "-o",
+                "etsi_its_msgs/uulm_mcm_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "UULM MCM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "-t",
+                "mcm_ts",
+                "-o",
+                "etsi_its_conversion/uulm_mcm_ts_conversion/include/uulm_mcm_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
     ]
 }
