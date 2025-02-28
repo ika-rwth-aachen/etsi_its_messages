@@ -22,3 +22,6 @@
 [submodule "asn1/raw/is_ts103301"]
 	path = asn1/raw/is_ts103301
 	url = https://forge.etsi.org/rep/ITS/asn1/is_ts103301.git
+[submodule "asn1/raw/uulm_mcm_etsi"]
+	path = asn1/raw/uulm_mcm_etsi
+	url = https://github.com/uulm-mrm/uulm_mcm_etsi.git
