@@ -466,9 +466,9 @@
                 "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
                 "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
                 "-t",
-                "mcm_ts",
+                "mcm_uulm",
                 "-o",
-                "etsi_its_coding/uulm_mcm_ts_coding"
+                "etsi_its_coding/etsi_its_mcm_uulm_coding"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -483,9 +483,9 @@
                 "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
                 "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
                 "-t",
-                "mcm_ts",
+                "mcm_uulm",
                 "-o",
-                "etsi_its_msgs/uulm_mcm_ts_msgs/msg"
+                "etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -500,9 +500,9 @@
                 "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
                 "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
                 "-t",
-                "mcm_ts",
+                "mcm_uulm",
                 "-o",
-                "etsi_its_conversion/uulm_mcm_ts_conversion/include/uulm_mcm_ts_conversion"
+                "etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

@@ -245,7 +245,7 @@ def main():
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
-    elif args.type == "mcm_ts":
+    elif args.type == "mcm_uulm":
         msg_type = "MCM"
     msg_files = findDependenciesOfRosMessageType(os.path.join(args.output_dir, f"{msg_type}.msg"), [msg_type])
     msg_files += additionalMessageTypes(args.output_dir, msg_type)

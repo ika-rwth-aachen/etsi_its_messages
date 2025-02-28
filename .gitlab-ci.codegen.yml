@@ -183,7 +183,7 @@ etsi_its_spatem_ts_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-uulm_mcm_ts_coding:
+etsi_its_mcm_uulm_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
   script:
@@ -191,8 +191,8 @@ uulm_mcm_ts_coding:
       utils/codegen/asn1ToC/asn1ToC.py
       asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      -t mcm_ts
-      -o etsi_its_coding/uulm_mcm_ts_coding
+      -t mcm_uulm
+      -o etsi_its_coding/etsi_its_mcm_uulm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -296,15 +296,15 @@ etsi_its_spatem_ts_msgs:
       -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-uulm_mcm_ts_msgs:
+etsi_its_mcm_uulm_msgs:
   stage: ROS Messages
   script:
     - >
       utils/codegen/codegen-py/asn1ToRosMsg.py
       asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      -t mcm_ts
-      -o etsi_its_msgs/uulm_mcm_ts_msgs/msg
+      -t mcm_uulm
+      -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_cam_conversion:
@@ -405,13 +405,13 @@ etsi_its_spatem_ts_conversion:
       -o etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-uulm_mcm_ts_conversion:
+etsi_its_mcm_uulm_conversion:
   stage: Conversion Headers
   script:
     - >
       utils/codegen/codegen-py/asn1ToConversionHeader.py
       asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      -t mcm_ts
-      -o etsi_its_conversion/uulm_mcm_ts_conversion/include/uulm_mcm_ts_conversion
+      -t mcm_uulm
+      -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
