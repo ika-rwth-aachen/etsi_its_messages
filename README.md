@@ -60,6 +60,7 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 | :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) |
 | :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | [TS 103 831 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_ts103831)) |
 | :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
+| :white_check_mark: | MCM | Maneuver Coordination Message | - | [Draft Version by UULM](https://github.com/uulm-mrm/uulm_mcm_etsi) |
 | :white_check_mark: | SPATEM | Signal Phase and Timing Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
 | :white_check_mark: | VAM | VRU Awareness Message | - | [TS 103 300-3 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/10330003/02.02.01_60/ts_10330003v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3)) |
 
@@ -338,6 +339,11 @@ This repository uses the following software. For full license details, please re
     All rights reserved.
     ```
 - [ROS 2](https://www.ros2.org/)
+    ```
+    Apache 2.0 License
+    All rights reserved.
+    ```
+- [UULM MCM ASN.1 Definition](https://github.com/uulm-mrm/uulm_mcm_etsi/blob/develop/TS103561_LUKAS_MCM.asn)
     ```
     Apache 2.0 License
     All rights reserved.
