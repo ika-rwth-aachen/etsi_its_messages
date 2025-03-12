@@ -173,6 +173,7 @@ class Converter : public rclcpp::Node {
     static const int kEtsiMessagePayloadOffsetParamDefault;
     static const std::string kRos2UdpEtsiTypesParam;
     static const std::string kUdp2RosEtsiTypesParam;
+    static const std::vector<std::string> kEtsiTypesParamSupportedOptions;
     static const std::vector<std::string> kRos2UdpEtsiTypesParamDefault;
     static const std::vector<std::string> kUdp2RosEtsiTypesParamDefault;
     static const std::string kSubscriberQueueSizeParam;
