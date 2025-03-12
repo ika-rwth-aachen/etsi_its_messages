@@ -102,9 +102,8 @@ const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payloa
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
-const std::vector<std::string> kRos2UdpEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "spatem_ts", "vam_ts"};
-const std::vector<std::string> kUdp2RosEtsiTypesParamSupportedOptions = kRos2UdpEtsiTypesParamSupportedOptions;
-const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = kRos2UdpEtsiTypesParamSupportedOptions;
+const std::vector<std::string> kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = kEtsiTypesParamSupportedOptions;
 const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "mapem_ts", "spatem_ts", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
@@ -209,7 +208,7 @@ void Converter::loadParameters() {
 
   // check ros2udp_etsi_types
   for (auto it = ros2udp_etsi_types_.begin(); it != ros2udp_etsi_types_.end(); ) {
-    if (std::find(kRos2UdpEtsiTypesParamSupportedOptions.begin(), kRos2UdpEtsiTypesParamSupportedOptions.end(), *it) == kRos2UdpEtsiTypesParamSupportedOptions.end()) {
+    if (std::find(kEtsiTypesParamSupportedOptions.begin(), kEtsiTypesParamSupportedOptions.end(), *it) == kEtsiTypesParamSupportedOptions.end()) {
       ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', removing", it->c_str(), kRos2UdpEtsiTypesParam.c_str());
       it = ros2udp_etsi_types_.erase(it);
     } else {
@@ -234,7 +233,7 @@ void Converter::loadParameters() {
 
   // check udp2ros_etsi_types
   for (auto it = udp2ros_etsi_types_.begin(); it != udp2ros_etsi_types_.end(); ) {
-    if (std::find(kUdp2RosEtsiTypesParamSupportedOptions.begin(), kUdp2RosEtsiTypesParamSupportedOptions.end(), *it) == kUdp2RosEtsiTypesParamSupportedOptions.end()) {
+    if (std::find(kEtsiTypesParamSupportedOptions.begin(), kEtsiTypesParamSupportedOptions.end(), *it) == kEtsiTypesParamSupportedOptions.end()) {
       ROS12_LOG(WARN, "Invalid value '%s' for parameter '%s', removing", it->c_str(), kRos2UdpEtsiTypesParam.c_str());
       it = udp2ros_etsi_types_.erase(it);
     } else {
