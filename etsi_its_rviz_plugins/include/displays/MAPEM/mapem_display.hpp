@@ -104,6 +104,9 @@ protected:
   rviz_common::properties::RosTopicProperty *spatem_topic_property_;
   rviz_common::properties::QosProfileProperty *spatem_qos_property_;
 
+  // Each Utm-SceneNode represents an utm frame
+  std::map<std::string, Ogre::SceneNode*> scene_nodes_utm_;
+
   std::unordered_map<int, IntersectionRenderObject> intersections_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_, signal_groups_;
   std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;

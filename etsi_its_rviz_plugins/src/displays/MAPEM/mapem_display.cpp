@@ -449,19 +449,26 @@ void MAPEMDisplay::update(float, float) {
   texts_.clear();
   for(auto it = intersections_.begin(); it != intersections_.end(); ++it) {
     IntersectionRenderObject intsctn = it->second;
+    std::string utm_frame_key = intsctn.getHeader().frame_id;
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
     if (!context_->getFrameManager()->getTransform(intsctn.getHeader(), sn_position, sn_orientation)) {
-      setMissingTransformToFixedFrame(intsctn.getHeader().frame_id);
+      setMissingTransformToFixedFrame(utm_frame_key);
       return;
     }
     setTransformOk();
     
-    // set pose of scene node
-    scene_node_->setPosition(sn_position);
-    scene_node_->setOrientation(sn_orientation);
+    // set pose of the corresponding utm scene node
+    if (scene_nodes_utm_.find(utm_frame_key) == scene_nodes_utm_.end()) {
+      Ogre::SceneNode* scene_node = scene_node_->createChildSceneNode(utm_frame_key);
+      scene_nodes_utm_.insert({utm_frame_key, scene_node});
+    }
 
-    auto child_scene_node = scene_node_->createChildSceneNode();
+    scene_nodes_utm_[utm_frame_key]->setPosition(sn_position);
+    scene_nodes_utm_[utm_frame_key]->setOrientation(sn_orientation);
+
+    auto child_scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode();
+
     // Set position of scene node
     geometry_msgs::msg::Point ref_position = intsctn.getRefPosition();
     Ogre::Vector3 position(ref_position.x, ref_position.y, ref_position.z);
