@@ -107,6 +107,9 @@ protected:
   // Each Utm-SceneNode represents an utm frame
   std::map<std::string, Ogre::SceneNode*> scene_nodes_utm_;
 
+  // Each Junction-SceneNode represents the origin of a junction coordinate frame
+  std::map<uint, Ogre::SceneNode*> scene_nodes_junctions_;
+
   std::unordered_map<int, IntersectionRenderObject> intersections_;
   std::vector<std::shared_ptr<rviz_rendering::Shape>> intsct_ref_points_, signal_groups_;
   std::vector<std::shared_ptr<rviz_rendering::BillboardLine>> lane_lines_;

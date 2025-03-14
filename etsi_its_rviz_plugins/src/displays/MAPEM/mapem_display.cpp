@@ -467,9 +467,16 @@ void MAPEMDisplay::update(float, float) {
     scene_nodes_utm_[utm_frame_key]->setPosition(sn_position);
     scene_nodes_utm_[utm_frame_key]->setOrientation(sn_orientation);
 
-    auto child_scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode();
-
     // Set position of scene node
+    uint intersection_id = intsctn.getIntersectionID();
+
+    if (scene_nodes_junctions_.find(intersection_id) == scene_nodes_junctions_.end()) {
+      Ogre::SceneNode* scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode(std::string("Junction: ") + std::to_string(intersection_id));
+      scene_nodes_junctions_.insert({intersection_id, scene_node});
+    }
+
+    auto child_scene_node = scene_nodes_junctions_[intersection_id];
+
     geometry_msgs::msg::Point ref_position = intsctn.getRefPosition();
     Ogre::Vector3 position(ref_position.x, ref_position.y, ref_position.z);
     tf2::Quaternion rot_offset = intsctn.getGridConvergenceQuaternion();
