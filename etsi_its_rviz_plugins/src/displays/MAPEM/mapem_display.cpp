@@ -91,7 +91,7 @@ MAPEMDisplay::MAPEMDisplay() {
   char_height_mapem_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_mapem_);
 
   // SPATEM
-  viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
+  viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", true,
     "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
   
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
