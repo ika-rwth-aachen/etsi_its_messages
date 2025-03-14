@@ -69,6 +69,11 @@ MAPEMDisplay::MAPEMDisplay() {
     "Time (in s) until MAP disappears", viz_mapem_);
   mapem_timeout_->setMin(0);
 
+  mapem_sphere_scale_property_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Sphere Scale", 1.0f,
+    "Scaling factor to adjuste size of MAPEM spheres", viz_mapem_);
+    mapem_sphere_scale_property_->setMin(0.1);
+
   color_property_ingress_ = new rviz_common::properties::ColorProperty(
     "Ingress Lane Color", QColor(85, 85, 255),
     "Color to visualize Ingress-Lanes", viz_mapem_);
@@ -280,7 +285,7 @@ void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node) {
   std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
 
   // set the dimensions of sphere
-  double scale = spatem_sphere_scale_property_->getFloat();
+  double scale = mapem_sphere_scale_property_->getFloat();
   Ogre::Vector3 dims;
   dims.x = 1.0 * scale;
   dims.y = 1.0 * scale;
@@ -316,7 +321,7 @@ void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, Intersect
   std::string text;
   text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
   std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
-  double height = spatem_sphere_scale_property_->getFloat();
+  double height = mapem_sphere_scale_property_->getFloat();
   height+=text_render->getBoundingRadius();
   
   Ogre::Vector3 offs(0.0, 0.0, height);
