@@ -28,7 +28,6 @@ SOFTWARE.
 
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
-#include <OgreManualObject.h>
 #include <OgreBillboardSet.h>
 #include <OgreMaterialManager.h>
 #include <OgreTechnique.h>
@@ -129,9 +128,6 @@ MAPEMDisplay::MAPEMDisplay() {
 }
 
 MAPEMDisplay::~MAPEMDisplay() {
-  if (initialized() ) {
-    scene_manager_->destroyManualObject(manual_object_);
-  }
 }
 
 void MAPEMDisplay::onInitialize() {
@@ -145,15 +141,10 @@ void MAPEMDisplay::onInitialize() {
         spatem_qos_profile_ = profile;
         changedSPATEMTopic();
       });
-
-  manual_object_ = scene_manager_->createManualObject();
-  manual_object_->setDynamic(true);
-  scene_node_->attachObject(manual_object_);
 }
 
 void MAPEMDisplay::reset() {
   RTDClass::reset();
-  manual_object_->clear();
 }
 
 void MAPEMDisplay::changedSPATEMViz() {
