@@ -102,8 +102,8 @@ const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payloa
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
-const std::vector<std::string> kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "spatem_ts", "vam_ts"};
-const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = kEtsiTypesParamSupportedOptions;
+const std::vector<std::string> Converter::kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = Converter::kEtsiTypesParamSupportedOptions;
 const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "mapem_ts", "spatem_ts", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
