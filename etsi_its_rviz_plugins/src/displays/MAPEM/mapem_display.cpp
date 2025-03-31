@@ -146,10 +146,16 @@ void MAPEMDisplay::onInitialize() {
         spatem_qos_profile_ = profile;
         changedSPATEMTopic();
       });
+  changedSPATEMViz();
 }
 
 void MAPEMDisplay::reset() {
   RTDClass::reset();
+  intersections_.clear();
+  intsct_ref_points_.clear();
+  lane_lines_.clear();
+  signal_groups_.clear();
+  texts_.clear();
 }
 
 void MAPEMDisplay::changedSPATEMViz() {
