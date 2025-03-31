@@ -146,6 +146,7 @@ void MAPEMDisplay::onInitialize() {
         spatem_qos_profile_ = profile;
         changedSPATEMTopic();
       });
+  changedSPATEMViz();
 }
 
 void MAPEMDisplay::reset() {
