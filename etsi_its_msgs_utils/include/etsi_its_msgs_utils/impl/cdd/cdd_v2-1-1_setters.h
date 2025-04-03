@@ -136,4 +136,28 @@ inline void setLateralAcceleration(AccelerationComponent& accel, const double va
   setLateralAccelerationValue(accel.value, value);
 }
 
+template <typename PositionConfidenceEllipse, typename Wgs84AngleValue = decltype(PositionConfidenceEllipse::semi_major_axis_orientation)>
+inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse, const double semi_major_axis,
+  const double semi_minor_axis, const double orientation) {
+  setSemiAxis(position_confidence_ellipse.semi_major_axis_length, semi_major_axis);
+  setSemiAxis(position_confidence_ellipse.semi_minor_axis_length, semi_minor_axis);
+  setHeadingValue(position_confidence_ellipse.semi_major_axis_orientation, orientation);
+}
+
+/**
+ * @brief Set the Pos Confidence Ellipse object
+ * 
+ * @param position_confidence_ellipse 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          The type needs to have an operator[] that resturns values of type double for at least indices 0-3.
+ *                          Possibilities include std::array<double, 4>, std::vector<double>, double*, ...
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ */
+template <typename PositionConfidenceEllipse>
+inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse, const std::array<double, 4>& covariance_matrix, const double object_heading){
+  auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromCovMatrix(covariance_matrix, object_heading);
+  setPositionConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
+}
+
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_SETTERS_H

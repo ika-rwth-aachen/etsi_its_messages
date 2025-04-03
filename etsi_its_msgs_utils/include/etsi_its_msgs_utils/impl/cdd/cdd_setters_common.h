@@ -35,7 +35,11 @@ SOFTWARE.
 #include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
 #include <GeographicLib/UTMUPS.hpp>
+#include <array>
+#include <cmath>
+#include <cstdint>
 #include <cstring>
+#include <type_traits>
 
 /**
  * @brief Set the TimestampITS object
@@ -185,5 +189,131 @@ inline void setFromUTMPosition(T& reference_position, const gm::PointStamped& ut
   }
   setReferencePosition(reference_position, latitude, longitude, utm_position.point.z);
 }
+
+/**
+ * @brief Set the HeadingValue object
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
+ */
+template <typename HeadingValue>
+inline void setHeadingValue(HeadingValue& heading, const double value) {
+  int64_t deg = (int64_t)std::round(value * 1e1);
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  heading.value = deg;
+}
+
+/**
+ * @brief Set the Heading object
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ * HeadingConfidence is set to UNAVAILABLE
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
+ */
+template <typename Heading, typename HeadingConfidence = decltype(Heading::heading_confidence)>
+void setHeading(Heading& heading, const double value) {
+  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+  setHeadingValue(heading.heading_value, value);
+}
+
+template <typename SemiAxisLength, typename = std::void_t<>>
+struct OneCentimeterHelper {
+    static constexpr int value = 1; // Default value
+};
+
+template <typename SemiAxisLength>
+struct OneCentimeterHelper<SemiAxisLength, std::void_t<decltype(SemiAxisLength::ONE_CENTIMETER)>> {
+    static constexpr int value = SemiAxisLength::ONE_CENTIMETER;
+};
+
+// See https://godbolt.org/z/Eceavfo99
+template <typename SemiAxisLength>
+inline void setSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
+  double semi_axis_length_val = std::round(length * OneCentimeterHelper<SemiAxisLength>::value * 1e2);
+  if(semi_axis_length_val < 1) {
+    semi_axis_length_val = SemiAxisLength::UNAVAILABLE;
+  } else if(semi_axis_length_val >= SemiAxisLength::OUT_OF_RANGE) {
+    semi_axis_length_val = SemiAxisLength::OUT_OF_RANGE;
+  }  
+  semi_axis_length.value = static_cast<uint16_t>(semi_axis_length_val);
+}
+
+/**
+ * @brief Set the Pos Confidence Ellipse object
+ * 
+ * @param[out] position_confidence_ellipse The PosConfidenceEllipse to set
+ * @param[in] semi_major_axis length of the semi-major axis in meters
+ * @param[in] semi_minor_axis length of the semi-minor axis in meters
+ * @param[in] orientation of the semi-major axis in degrees, with respect to WGS84
+ */
+template <typename PosConfidenceEllipse>
+inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse, const double semi_major_axis,
+  const double semi_minor_axis, const double orientation) {
+  setSemiAxis(position_confidence_ellipse.semi_major_confidence, semi_major_axis);
+  setSemiAxis(position_confidence_ellipse.semi_minor_confidence, semi_minor_axis);
+  setHeadingValue(position_confidence_ellipse.semi_major_orientation, orientation);
+}
+
+/**
+ * @brief Gets the values needed to set a confidence ellipse from a covariance matrix.
+ * 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ * @return std::tuple<double, double, double> semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84
+ */
+inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const std::array<double, 4>& covariance_matrix, const double object_heading) {
+  // An ellipse containing 95% of the points in a 2D Gaussian distribution
+  // has size 2.4477*sigma_{major/minor}
+  static constexpr double confidence_factor = 2.4477; // 95% confidence ellipse
+  if(covariance_matrix[1] != covariance_matrix[2]) {
+    throw std::invalid_argument("Covariance matrix is not symmetric");
+  }
+  double trace = covariance_matrix[0] + covariance_matrix[4];
+  double determinant = covariance_matrix[0] * covariance_matrix[4] - covariance_matrix[1] * covariance_matrix[1];
+  if (determinant <= 0) {
+    throw std::invalid_argument("Covariance matrix is not positive definite");
+  }
+  double eigenvalue1 = trace / 2 + std::sqrt(trace * trace / 4 - determinant);
+  double eigenvalue2 = trace / 2 - std::sqrt(trace * trace / 4 - determinant);
+  if(eigenvalue1 <= 0 || eigenvalue2 <= 0) {
+    throw std::invalid_argument("Covariance matrix is not positive definite");
+  }
+  double semi_major_axis = std::sqrt(eigenvalue1) * confidence_factor;
+  double semi_minor_axis = std::sqrt(eigenvalue2) * confidence_factor;
+  // object_heading - orientation of the ellipse, as WGS84 has positive angles to the right
+  double orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[4]);
+  orientation = orientation * 180 / M_PI; // Convert to degrees
+  // Normalize to [0, 360)
+  orientation = std::fmod(orientation + 360, 360);
+  while (orientation < 0) {
+    orientation += 360;
+  }
+  while (orientation >= 360) {
+    orientation -= 360;
+  }
+  return std::make_tuple(semi_major_axis, semi_minor_axis, orientation);
+}
+
+/**
+ * @brief Set the Pos Confidence Ellipse object
+ * 
+ * @param position_confidence_ellipse 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          The type needs to have an operator[] that resturns values of type double for at least indices 0-3.
+ *                          Possibilities include std::array<double, 4>, std::vector<double>, double*, ...
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ */
+template <typename PosConfidenceEllipse>
+inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse, const std::array<double, 4>& covariance_matrix, const double object_heading){
+  auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromCovMatrix(covariance_matrix, object_heading);
+  setPosConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
+}
+
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
