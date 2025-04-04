@@ -56,6 +56,13 @@ inline double getLateralAcceleration(const AccelerationComponent& lateral_accele
   return ((int16_t)lateral_acceleration.value.value) * 1e-1;
 }
 
+
+/**
+ * @brief Extract major axis length, minor axis length and orientation from the given position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to extract the values from
+ * @return std::tuple<double, double, double> major axis length in meters, minor axis length in meters, and orientation in degrees
+ */
 template <typename PositionConfidenceEllipse>
 inline std::tuple<double, double, double> getPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse) {
   return {
@@ -65,7 +72,13 @@ inline std::tuple<double, double, double> getPositionConfidenceEllipse(PositionC
   };
 }
 
-
+/**
+ * @brief Get the covariance matrix of the position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
+ * @param object_heading The object heading in radians
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse
+ */
 template <typename PositionConfidenceEllipse>
 inline std::array<double, 4> getPositionConfidenceEllipse(const PositionConfidenceEllipse& position_confidence_ellipse, const double object_heading){
   auto [semi_major, semi_minor, major_orientation] = getPositionConfidenceEllipse(position_confidence_ellipse);

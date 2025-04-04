@@ -56,6 +56,15 @@ inline double getLateralAcceleration(const LateralAcceleration& lateral_accelera
 
 #include <etsi_its_msgs_utils/impl/cam/cam_getters_common.h>
 
+/**
+ * @brief Get the confidence ellipse of the reference position as Covariance matrix
+ * 
+ * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
+ * where x is the longitudinal axis and y is the lateral axis of the vehicle.
+ * 
+ * @param cam The CAM message to get the reference position from
+ * @return const std::array<double, 4> the covariance matrix, as specified above
+ */
 inline const std::array<double, 4> getRefPosConfidence(CAM& cam) {
   double object_heading = getHeading(cam) * M_PI / 180.0;
   return getPosConfidenceEllipse(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);

@@ -220,7 +220,14 @@ void setHeadingInternal(Heading& heading, const double value) {
   setHeadingValue(heading.heading_value, value);
 }
 
-// See https://godbolt.org/z/Eceavfo99
+/**
+ * @brief Set the Semi Axis length
+ * 
+ * // See https://godbolt.org/z/Eceavfo99 on how the OneCentimeterHelper works with this template
+ * 
+ * @param semi_axis_length The SemiAxisLength to set
+ * @param length the desired length in meters
+ */
 template <typename SemiAxisLength>
 inline void setSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
   double semi_axis_length_val = std::round(length * etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value * 1e2);

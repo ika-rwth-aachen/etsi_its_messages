@@ -136,6 +136,14 @@ inline void setLateralAcceleration(AccelerationComponent& accel, const double va
   setLateralAccelerationValue(accel.value, value);
 }
 
+/**
+ * @brief Set the Position Confidence Ellipse object
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to set
+ * @param semi_major_axis The length of the semi-major axis in meters
+ * @param semi_minor_axis The length of the semi-minor axis in meters
+ * @param orientation The orientation of the semi-major axis in degrees, relative to WGS84
+ */
 template <typename PositionConfidenceEllipse, typename Wgs84AngleValue = decltype(PositionConfidenceEllipse::semi_major_axis_orientation)>
 inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse, const double semi_major_axis,
   const double semi_minor_axis, const double orientation) {

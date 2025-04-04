@@ -71,11 +71,15 @@ inline uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds) {
 // has size 2.4477*sigma_{major/minor}
 constexpr const double TWO_D_GAUSSIAN_FACTOR = 2.4477;
 
+
+// Helper struct to get the value of ONE_CENTIMETER from a given type, if it exists
+// Otherwise, it defaults to 1
 template <typename SemiAxisLength, typename = std::void_t<>>
 struct OneCentimeterHelper {
     static constexpr int value = 1; // Default value
 };
 
+// Specialization for types that have ONE_CENTIMETER defined
 template <typename SemiAxisLength>
 struct OneCentimeterHelper<SemiAxisLength, std::void_t<decltype(SemiAxisLength::ONE_CENTIMETER)>> {
     static constexpr int value = SemiAxisLength::ONE_CENTIMETER;

@@ -120,11 +120,23 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
 template <typename Heading>
 inline double getHeadingInternal(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
 
+/**
+ * @brief Get the Semi Axis object
+ * 
+ * @param semi_axis_length The SemiAxisLength object to get the semi axis from
+ * @return double the semi axis length in meters
+ */
 template <typename SemiAxisLength>
 inline double getSemiAxis(SemiAxisLength& semi_axis_length) {
   return ((double)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value;
 }
 
+/**
+ * @brief Extract major axis length, minor axis length and orientation from the given position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to extract the values from
+ * @return std::tuple<double, double, double> major axis length in meters, minor axis length in meters, and orientation in degrees
+ */
 template <typename PosConfidenceEllipse>
 inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse) {
   return {
@@ -134,6 +146,17 @@ inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceE
   };
 }
 
+/**
+ * @brief Convert the confidence ellipse to a covariance matrix
+ * 
+ * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
+ * 
+ * @param semi_major Semi major axis length in meters
+ * @param semi_minor Semi minor axis length in meters
+ * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
+ * @param object_heading object heading in radians, relative to WGS84
+ * @return std::array<double, 4> 
+ */
 inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading) {
   std::array<double, 4> covariance_matrix;
   double semi_major_squared = semi_major * semi_major / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
@@ -153,7 +176,13 @@ inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, d
   return covariance_matrix;
 }
 
-
+/**
+ * @brief Get the covariance matrix of the position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
+ * @param object_heading The object heading in radians
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse
+ */
 template <typename PosConfidenceEllipse>
 inline std::array<double, 4> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse, const double object_heading){
   auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
