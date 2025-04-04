@@ -99,7 +99,6 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   // Rotate the covariance matrix by a random angle
   // and repeat the test
   double phi = randomDouble(0.0, M_PI_2);
-  std::cerr << "phi: " << phi << std::endl;
   std::array<double, 4> covariance_matrix_rotated = {
     covariance_matrix[0] * std::cos(phi) * std::cos(phi) +
     covariance_matrix[3] * std::sin(phi) * std::sin(phi),
