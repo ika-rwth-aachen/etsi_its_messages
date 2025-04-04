@@ -29,8 +29,6 @@ SOFTWARE.
  * @brief Utility functions for the ETSI ITS CPM (TS)
  */
 
-#include <etsi_its_msgs_utils/impl/constants.h>
-
 #pragma once
 
 /**

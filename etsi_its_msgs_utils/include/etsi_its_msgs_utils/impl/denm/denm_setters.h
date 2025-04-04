@@ -91,34 +91,6 @@ inline void setReferencePosition(DENM& denm, const double latitude, const double
 }
 
 /**
- * @brief Set the HeadingValue object
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading object to set
- * @param value Heading value in degree as decimal number
- */
-inline void setHeadingValue(HeadingValue& heading, const double value) {
-  int64_t deg = (int64_t)std::round(value * 1e1);
-  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
-  heading.value = deg;
-}
-
-/**
- * @brief Set the Heading object
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- * HeadingConfidence is set to UNAVAILABLE
- *
- * @param heading object to set
- * @param value Heading value in degree as decimal number
- */
-inline void setHeading(Heading& heading, const double value) {
-  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
-  setHeadingValue(heading.heading_value, value);
-}
-
-/**
  * @brief Set the IsHeadingPresent object for DENM
  * 
  * @param denm DENM to set IsHeadingPresent
@@ -143,7 +115,7 @@ inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading) {
  */
 inline void setHeading(DENM& denm, const double heading_val) {
   if (denm.denm.location_is_present) {
-    setHeading(denm.denm.location.event_position_heading, heading_val);
+    setHeadingInternal(denm.denm.location.event_position_heading, heading_val);
     setIsHeadingPresent(denm, true);
   } else {
     throw std::invalid_argument("LocationContainer is not present!");

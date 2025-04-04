@@ -1,5 +1,8 @@
 {
     "version": "2.0.0",
+    "options": {
+        "cwd": "${env:WORKSPACE}"
+    },
     "tasks": [
         {
             "label": "Download external dependencies",
@@ -11,8 +14,30 @@
             "label": "Patch ASN.1 files",
             "type": "shell",
             "command": "./asn1/patches/patch.sh",
-            "dependsOn": ["Download external dependencies"],
+            "dependsOn": [
+                "Download external dependencies"
+            ],
             "problemMatcher": []
-        }
+        },
+        // === Build ==========
+        {
+            "label": "Build",
+            "detail": "Builds ROS workspace using 'colcon'",
+            "type": "shell",
+            "command": "colcon build --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=Debug' '-DCMAKE_EXPORT_COMPILE_COMMANDS=1'",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "Build with Build Type",
+            "detail": "Builds ROS workspace using 'colcon' with given build type",
+            "type": "shell",
+            "command": "colcon build --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=${input:cmake_build_type}' '-DCMAKE_EXPORT_COMPILE_COMMANDS=1'",
+            "group": "build",
+            "problemMatcher": "$gcc"
+        },
     ]
 }
