@@ -286,10 +286,6 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
   double semi_minor_axis = std::sqrt(eigenvalue2) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;
   // object_heading - orientation of the ellipse, as WGS84 has positive angles to the right
   double orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]);
-  std::cerr << "Covariance matrix: " << std::endl;
-  std::cerr << covariance_matrix[0] << " " << covariance_matrix[1] << std::endl;
-  std::cerr << covariance_matrix[2] << " " << covariance_matrix[3] << std::endl;
-  std::cerr << "Internal orientation: " << 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]) << std::endl;
   orientation = orientation * 180 / M_PI; // Convert to degrees
   // Normalize to [0, 180)
   // Not to 0, 360, as the ellipse is symmetric and the orientation is defined as the angle between the semi-major axis and the x-axis
