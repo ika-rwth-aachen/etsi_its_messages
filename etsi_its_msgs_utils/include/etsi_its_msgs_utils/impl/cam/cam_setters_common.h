@@ -86,7 +86,7 @@ inline void setStationType(CAM& cam, const uint8_t value) {
  * @param value Heading value in degree as decimal number
  */
 inline void setHeading(CAM& cam, const double heading_val) {
-  setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
+  setHeadingInternal(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
              heading_val);
 }
 

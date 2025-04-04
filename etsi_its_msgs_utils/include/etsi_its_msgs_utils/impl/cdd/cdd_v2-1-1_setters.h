@@ -150,8 +150,7 @@ inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_con
  * @param position_confidence_ellipse 
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
- *                          The type needs to have an operator[] that resturns values of type double for at least indices 0-3.
- *                          Possibilities include std::array<double, 4>, std::vector<double>, double*, ...
+ *                          Its coordinate system is aligned with the object (x = longitudinal, y = lateral)
  * @param object_heading The heading of the object in rad, with respect to WGS84
  */
 template <typename PositionConfidenceEllipse>

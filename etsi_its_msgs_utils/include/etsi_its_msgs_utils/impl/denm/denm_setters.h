@@ -115,7 +115,7 @@ inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading) {
  */
 inline void setHeading(DENM& denm, const double heading_val) {
   if (denm.denm.location_is_present) {
-    setHeading(denm.denm.location.event_position_heading, heading_val);
+    setHeadingInternal(denm.denm.location.event_position_heading, heading_val);
     setIsHeadingPresent(denm, true);
   } else {
     throw std::invalid_argument("LocationContainer is not present!");

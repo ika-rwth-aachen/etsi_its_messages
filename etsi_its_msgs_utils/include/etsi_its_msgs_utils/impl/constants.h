@@ -67,4 +67,8 @@ inline uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds) {
   return it->second;  // Return the corresponding value
 }
 
+// An ellipse containing 95% of the points in a 2D Gaussian distribution
+// has size 2.4477*sigma_{major/minor}
+constexpr const double TWO_D_GAUSSIAN_FACTOR = 2.4477;
+
 }  // namespace etsi_its_msgs

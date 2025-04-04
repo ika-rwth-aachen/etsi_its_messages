@@ -215,7 +215,7 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
  * @param value Heading value in degree as decimal number
  */
 template <typename Heading, typename HeadingConfidence = decltype(Heading::heading_confidence)>
-void setHeading(Heading& heading, const double value) {
+void setHeadingInternal(Heading& heading, const double value) {
   heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
   setHeadingValue(heading.heading_value, value);
 }
@@ -263,14 +263,13 @@ inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_el
  * 
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is aligned with the object (x = longitudinal, y = lateral)
  * @param object_heading The heading of the object in rad, with respect to WGS84
  * @return std::tuple<double, double, double> semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84
  */
 inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const std::array<double, 4>& covariance_matrix, const double object_heading) {
-  // An ellipse containing 95% of the points in a 2D Gaussian distribution
-  // has size 2.4477*sigma_{major/minor}
-  static constexpr double confidence_factor = 2.4477; // 95% confidence ellipse
-  if(covariance_matrix[1] != covariance_matrix[2]) {
+  
+  if(std::abs(covariance_matrix[1] - covariance_matrix[2]) > 1e-6) {
     throw std::invalid_argument("Covariance matrix is not symmetric");
   }
   double trace = covariance_matrix[0] + covariance_matrix[4];
@@ -283,8 +282,8 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
   if(eigenvalue1 <= 0 || eigenvalue2 <= 0) {
     throw std::invalid_argument("Covariance matrix is not positive definite");
   }
-  double semi_major_axis = std::sqrt(eigenvalue1) * confidence_factor;
-  double semi_minor_axis = std::sqrt(eigenvalue2) * confidence_factor;
+  double semi_major_axis = std::sqrt(eigenvalue1) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;
+  double semi_minor_axis = std::sqrt(eigenvalue2) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;
   // object_heading - orientation of the ellipse, as WGS84 has positive angles to the right
   double orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[4]);
   orientation = orientation * 180 / M_PI; // Convert to degrees
@@ -305,8 +304,7 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
  * @param position_confidence_ellipse 
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
- *                          The type needs to have an operator[] that resturns values of type double for at least indices 0-3.
- *                          Possibilities include std::array<double, 4>, std::vector<double>, double*, ...
+ *                          Its coordinate system is aligned with the object (x = longitudinal, y = lateral)
  * @param object_heading The heading of the object in rad, with respect to WGS84
  */
 template <typename PosConfidenceEllipse>
