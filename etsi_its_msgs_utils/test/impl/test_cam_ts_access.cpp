@@ -95,6 +95,11 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
     expected_heading -= 180;
   }
   EXPECT_NEAR(expected_heading, cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_orientation.value/10.0, 1e-1);
+  auto cov_get = cam_ts_access::getRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix[0], cov_get[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix[1], cov_get[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix[2], cov_get[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix[3], cov_get[3], 1e-1);
 
   // Rotate the covariance matrix by a random angle
   // and repeat the test
@@ -121,6 +126,11 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
     expected_heading -= 180;
   }
   EXPECT_NEAR(expected_heading, cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_orientation.value/10.0, 1e-1);
+  auto cov_get_rotated = cam_ts_access::getRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix_rotated[0], cov_get_rotated[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[1], cov_get_rotated[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
 
   double length = randomDouble(0.0, 102.2);
   double width = randomDouble(0.0, 6.2);
