@@ -121,7 +121,7 @@ template <typename Heading>
 inline double getHeadingInternal(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
 
 template <typename SemiAxisLength>
-inline double getSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
+inline double getSemiAxis(SemiAxisLength& semi_axis_length) {
   return ((double)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value;
 }
 
@@ -130,7 +130,7 @@ inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceE
   return {
     getSemiAxis(position_confidence_ellipse.semi_major_confidence),
     getSemiAxis(position_confidence_ellipse.semi_minor_confidence),
-    getHeadingValue(position_confidence_ellipse.semi_major_orientation)
+    position_confidence_ellipse.semi_major_orientation.value * 1e-1
   };
 }
 

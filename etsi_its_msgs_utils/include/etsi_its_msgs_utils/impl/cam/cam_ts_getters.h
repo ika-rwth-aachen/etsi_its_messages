@@ -35,4 +35,10 @@ namespace etsi_its_cam_ts_msgs::access {
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h>
 
 #include <etsi_its_msgs_utils/impl/cam/cam_getters_common.h>
+
+inline const std::array<double, 4> getRefPosConfidence(CAM& cam) {
+    double object_heading = getHeading(cam) * M_PI / 180.0;
+    return getPositionConfidenceEllipse(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);
+  }
+
 }  // namespace etsi_its_cam_ts_msgs::access

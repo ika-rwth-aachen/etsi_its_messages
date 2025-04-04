@@ -59,9 +59,9 @@ inline double getLateralAcceleration(const AccelerationComponent& lateral_accele
 template <typename PositionConfidenceEllipse>
 inline std::tuple<double, double, double> getPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse) {
   return {
-    getSemiAxis(position_confidence_ellipse.semi_major_confidence),
-    getSemiAxis(position_confidence_ellipse.semi_minor_confidence),
-    getHeadingValue(position_confidence_ellipse.semi_major_orientation)
+    getSemiAxis(position_confidence_ellipse.semi_major_axis_length),
+    getSemiAxis(position_confidence_ellipse.semi_minor_axis_length),
+    position_confidence_ellipse.semi_major_axis_orientation.value * 1e-1
   };
 }
 
