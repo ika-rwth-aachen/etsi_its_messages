@@ -93,16 +93,6 @@ inline double getLongitude(const DENM& denm) { return getLongitude(denm.denm.man
 inline double getAltitude(const DENM& denm) { return getAltitude(denm.denm.management.event_position.altitude); }
 
 /**
- * @brief Get the Heading value
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading to get the Heading value from
- * @return Heading value in degree as decimal number
- */
-inline double getHeading(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
-
-/**
  * @brief Get the Heading object
  * 
  * @param denm DENM to get the Heading-Value from
@@ -111,7 +101,7 @@ inline double getHeading(const Heading& heading) { return ((double)heading.headi
 inline double getHeading(const DENM& denm) {
   if (denm.denm.location_is_present) {
     if (denm.denm.location.event_position_heading_is_present) {
-      return getHeading(denm.denm.location.event_position_heading);
+      return getHeadingInternal(denm.denm.location.event_position_heading);
     } else {
       throw std::invalid_argument("Heading is not present!");
     }

@@ -32,6 +32,9 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 
+#include <array>
+#include <cmath>
+#include <cstdint>
 #include <GeographicLib/UTMUPS.hpp>
 
 /**
@@ -104,6 +107,57 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
     throw std::invalid_argument(e.what());
   }
   return utm_point;
+}
+
+/**
+ * @brief Get the Heading value
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the Heading value from
+ * @return Heading value in degree as decimal number
+ */
+template <typename Heading>
+inline double getHeadingInternal(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
+
+template <typename SemiAxisLength>
+inline double getSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
+  return ((double)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value;
+}
+
+template <typename PosConfidenceEllipse>
+inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse) {
+  return {
+    getSemiAxis(position_confidence_ellipse.semi_major_confidence),
+    getSemiAxis(position_confidence_ellipse.semi_minor_confidence),
+    getHeadingValue(position_confidence_ellipse.semi_major_orientation)
+  };
+}
+
+inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading) {
+  std::array<double, 4> covariance_matrix;
+  double semi_major_squared = semi_major * semi_major / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
+  double semi_minor_squared = semi_minor * semi_minor / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
+  double major_orientation_rad = major_orientation * M_PI / 180;
+  double object_heading_rad = object_heading;
+  
+  double angle_to_object = object_heading_rad - major_orientation_rad;
+
+  double cos_angle = std::cos(angle_to_object);
+  double sin_angle = std::sin(angle_to_object);
+  covariance_matrix[0] = semi_major_squared * cos_angle * cos_angle + semi_minor_squared * sin_angle * sin_angle;
+  covariance_matrix[1] = (semi_major_squared - semi_minor_squared) * cos_angle * sin_angle;
+  covariance_matrix[2] = covariance_matrix[1];
+  covariance_matrix[3] = semi_major_squared * sin_angle * sin_angle + semi_minor_squared * cos_angle * cos_angle;
+
+  return covariance_matrix;
+}
+
+
+template <typename PosConfidenceEllipse>
+inline std::array<double, 4> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse, const double object_heading){
+  auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
+  return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, object_heading);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H

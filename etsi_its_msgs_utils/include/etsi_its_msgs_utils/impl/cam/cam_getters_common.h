@@ -97,16 +97,6 @@ inline double getAltitude(const CAM& cam) {
 }
 
 /**
- * @brief Get the Heading value
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading to get the Heading value from
- * @return Heading value in degree as decimal number
- */
-inline double getHeading(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
-
-/**
  * @brief Get the Heading value of CAM
  *
  * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -115,7 +105,7 @@ inline double getHeading(const Heading& heading) { return ((double)heading.headi
  * @return Heading value in degree as decimal number
  */
 inline double getHeading(const CAM& cam) {
-  return getHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+  return getHeadingInternal(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
 }
 
 /**

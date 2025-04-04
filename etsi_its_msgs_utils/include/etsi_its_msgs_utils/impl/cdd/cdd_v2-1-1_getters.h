@@ -56,4 +56,20 @@ inline double getLateralAcceleration(const AccelerationComponent& lateral_accele
   return ((int16_t)lateral_acceleration.value.value) * 1e-1;
 }
 
+template <typename PositionConfidenceEllipse>
+inline std::tuple<double, double, double> getPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse) {
+  return {
+    getSemiAxis(position_confidence_ellipse.semi_major_confidence),
+    getSemiAxis(position_confidence_ellipse.semi_minor_confidence),
+    getHeadingValue(position_confidence_ellipse.semi_major_orientation)
+  };
+}
+
+
+template <typename PositionConfidenceEllipse>
+inline std::array<double, 4> getPositionConfidenceEllipse(const PositionConfidenceEllipse& position_confidence_ellipse, const double object_heading){
+  auto [semi_major, semi_minor, major_orientation] = getPositionConfidenceEllipse(position_confidence_ellipse);
+  return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, object_heading);
+}
+
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_1_1_GETTERS_H

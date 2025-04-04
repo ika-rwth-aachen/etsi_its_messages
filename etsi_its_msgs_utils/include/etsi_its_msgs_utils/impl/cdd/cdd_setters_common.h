@@ -220,20 +220,10 @@ void setHeadingInternal(Heading& heading, const double value) {
   setHeadingValue(heading.heading_value, value);
 }
 
-template <typename SemiAxisLength, typename = std::void_t<>>
-struct OneCentimeterHelper {
-    static constexpr int value = 1; // Default value
-};
-
-template <typename SemiAxisLength>
-struct OneCentimeterHelper<SemiAxisLength, std::void_t<decltype(SemiAxisLength::ONE_CENTIMETER)>> {
-    static constexpr int value = SemiAxisLength::ONE_CENTIMETER;
-};
-
 // See https://godbolt.org/z/Eceavfo99
 template <typename SemiAxisLength>
 inline void setSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
-  double semi_axis_length_val = std::round(length * OneCentimeterHelper<SemiAxisLength>::value * 1e2);
+  double semi_axis_length_val = std::round(length * etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value * 1e2);
   if(semi_axis_length_val < 1) {
     semi_axis_length_val = SemiAxisLength::UNAVAILABLE;
   } else if(semi_axis_length_val >= SemiAxisLength::OUT_OF_RANGE) {
