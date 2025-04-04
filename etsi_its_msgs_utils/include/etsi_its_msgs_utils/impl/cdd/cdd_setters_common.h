@@ -272,28 +272,33 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
   if(std::abs(covariance_matrix[1] - covariance_matrix[2]) > 1e-6) {
     throw std::invalid_argument("Covariance matrix is not symmetric");
   }
-  double trace = covariance_matrix[0] + covariance_matrix[4];
-  double determinant = covariance_matrix[0] * covariance_matrix[4] - covariance_matrix[1] * covariance_matrix[1];
-  if (determinant <= 0) {
+  double trace = covariance_matrix[0] + covariance_matrix[3];
+  double determinant = covariance_matrix[0] * covariance_matrix[3] - covariance_matrix[1] * covariance_matrix[1];
+  if (determinant <= 0 || covariance_matrix[0] <= 0) {
+    // https://sites.math.northwestern.edu/~clark/285/2006-07/handouts/pos-def.pdf:
+    // Therefore, a necessary and sufficient condition for the quadratic form of a symmetric 2 × 2 matrix
+    // to be positive definite is for det(A) > 0 and a > 0
     throw std::invalid_argument("Covariance matrix is not positive definite");
   }
   double eigenvalue1 = trace / 2 + std::sqrt(trace * trace / 4 - determinant);
   double eigenvalue2 = trace / 2 - std::sqrt(trace * trace / 4 - determinant);
-  if(eigenvalue1 <= 0 || eigenvalue2 <= 0) {
-    throw std::invalid_argument("Covariance matrix is not positive definite");
-  }
   double semi_major_axis = std::sqrt(eigenvalue1) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;
   double semi_minor_axis = std::sqrt(eigenvalue2) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;
   // object_heading - orientation of the ellipse, as WGS84 has positive angles to the right
-  double orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[4]);
+  double orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]);
+  std::cerr << "Covariance matrix: " << std::endl;
+  std::cerr << covariance_matrix[0] << " " << covariance_matrix[1] << std::endl;
+  std::cerr << covariance_matrix[2] << " " << covariance_matrix[3] << std::endl;
+  std::cerr << "Internal orientation: " << 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]) << std::endl;
   orientation = orientation * 180 / M_PI; // Convert to degrees
-  // Normalize to [0, 360)
-  orientation = std::fmod(orientation + 360, 360);
+  // Normalize to [0, 180)
+  // Not to 0, 360, as the ellipse is symmetric and the orientation is defined as the angle between the semi-major axis and the x-axis
+  orientation = std::fmod(orientation + 180, 180);
   while (orientation < 0) {
-    orientation += 360;
+    orientation += 180;
   }
-  while (orientation >= 360) {
-    orientation -= 360;
+  while (orientation >= 180) {
+    orientation -= 180;
   }
   return std::make_tuple(semi_major_axis, semi_minor_axis, orientation);
 }
