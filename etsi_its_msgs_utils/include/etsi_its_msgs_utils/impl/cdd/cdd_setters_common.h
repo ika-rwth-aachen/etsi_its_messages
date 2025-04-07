@@ -297,6 +297,21 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
 }
 
 /**
+ * @brief Gets the values needed to set a confidence ellipse from a covariance matrix.
+ * 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is aligned with the WGS axes (x = North, y = East)
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ * @return std::tuple<double, double, double> semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84
+ */
+inline std::tuple<double, double, double> confidenceEllipseFromWGSCovMatrix(const std::array<double, 4>& covariance_matrix) {
+  // The resulting ellipse is the same as if the cov matrix was given in vehicle coordinates
+  // and the object heading was set to 0.0
+  return confidenceEllipseFromCovMatrix(covariance_matrix, 0.0);
+}
+
+/**
  * @brief Set the Pos Confidence Ellipse object
  * 
  * @param position_confidence_ellipse 
@@ -310,6 +325,22 @@ inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_el
   auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromCovMatrix(covariance_matrix, object_heading);
   setPosConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
 }
+
+/**
+ * @brief Set the Pos Confidence Ellipse object
+ * 
+ * @param position_confidence_ellipse 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is aligned with the WGS axes (x = North, y = East)
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ */
+template <typename PosConfidenceEllipse>
+inline void setWGSPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse, const std::array<double, 4>& covariance_matrix){
+  auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromWGSCovMatrix(covariance_matrix);
+  setPosConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
+}
+
 
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H

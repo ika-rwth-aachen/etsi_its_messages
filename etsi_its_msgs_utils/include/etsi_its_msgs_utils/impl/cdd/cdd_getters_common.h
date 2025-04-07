@@ -155,7 +155,7 @@ inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceE
  * @param semi_minor Semi minor axis length in meters
  * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
  * @param object_heading object heading in radians, relative to WGS84
- * @return std::array<double, 4> 
+ * @return std::array<double, 4> The covariance matrix in vehicle coordinates (x = longitudinal, y = lateral)
  */
 inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading) {
   std::array<double, 4> covariance_matrix;
@@ -177,16 +177,44 @@ inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, d
 }
 
 /**
+ * @brief Convert the confidence ellipse to a covariance matrix
+ * 
+ * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
+ * 
+ * @param semi_major Semi major axis length in meters
+ * @param semi_minor Semi minor axis length in meters
+ * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
+ * @return std::array<double, 4> The covariance matrix in WGS coordinates (x = North, y = East)
+ */
+inline std::array<double, 4> WGSCovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation) {
+  // The WGS covariance matrix is the same as in vehicle coordinates, if it would have a heading of 0.0
+  return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, 0.0);
+}
+
+/**
  * @brief Get the covariance matrix of the position confidence ellipse
  * 
  * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
  * @param object_heading The object heading in radians
- * @return std::array<double, 4> The covariance matrix of the position confidence ellipse
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in vehicle coordinates (x = longitudinal, y = lateral)
  */
 template <typename PosConfidenceEllipse>
 inline std::array<double, 4> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse, const double object_heading){
   auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
   return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, object_heading);
+}
+
+/**
+ * @brief Get the covariance matrix of the position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
+ * @param object_heading The object heading in radians
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in WGS coordinates (x = North, y = East)
+ */
+template <typename PosConfidenceEllipse>
+inline std::array<double, 4> getWGSPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse){
+  auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
+  return WGSCovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H

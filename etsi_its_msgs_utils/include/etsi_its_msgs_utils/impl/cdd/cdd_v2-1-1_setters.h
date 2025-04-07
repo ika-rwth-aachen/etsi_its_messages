@@ -153,7 +153,7 @@ inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_con
 }
 
 /**
- * @brief Set the Pos Confidence Ellipse object
+ * @brief Set the Position Confidence Ellipse object
  * 
  * @param position_confidence_ellipse 
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
@@ -164,6 +164,21 @@ inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_con
 template <typename PositionConfidenceEllipse>
 inline void setPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse, const std::array<double, 4>& covariance_matrix, const double object_heading){
   auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromCovMatrix(covariance_matrix, object_heading);
+  setPositionConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
+}
+
+/**
+ * @brief Set the Position Confidence Ellipse object
+ * 
+ * @param position_confidence_ellipse 
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is aligned with the WGS axes (x = North, y = East)
+ * @param object_heading The heading of the object in rad, with respect to WGS84
+ */
+template <typename PositionConfidenceEllipse>
+inline void setWGSPositionConfidenceEllipse(PositionConfidenceEllipse& position_confidence_ellipse, const std::array<double, 4>& covariance_matrix){
+  auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromWGSCovMatrix(covariance_matrix);
   setPositionConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
 }
 

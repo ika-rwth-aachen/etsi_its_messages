@@ -133,4 +133,17 @@ inline void setRefPosConfidence(CAM& cam, const std::array<double, 4>& covarianc
                           covariance_matrix, object_heading);
 }
 
+/**
+ * @brief Set the confidence of the reference position
+ * 
+ * @param cam CAM-Message to set the confidence
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is WGS84 (x = North, y = East)
+ */
+inline void setWGSRefPosConfidence(CAM& cam, const std::array<double, 4>& covariance_matrix) {
+  setWGSPosConfidenceEllipse(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse,
+                             covariance_matrix);
+}
+
 }  // namespace etsi_its_cam_msgs::access

@@ -132,6 +132,14 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
   EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
 
+  // Set WGS84 confidence ellipse
+  cam_access::setWGSRefPosConfidence(cam, covariance_matrix_rotated);
+  cov_get_rotated = cam_access::getWGSRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix_rotated[0], cov_get_rotated[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[1], cov_get_rotated[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
+
   double length = randomDouble(0.0, 102.2);
   double width = randomDouble(0.0, 6.2);
   cam_access::setVehicleDimensions(cam, length, width);
