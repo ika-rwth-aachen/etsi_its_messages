@@ -157,6 +157,8 @@ inline void setSpeed(CAM& cam, const double speed_val, const double confidence =
  *
  * @param cam CAM to set the acceleration value s
  * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
+ * @param confidence standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ *                   Default is AccelerationConfidence::UNAVAILABLE
  */
 inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel, const double confidence = AccelerationConfidence::UNAVAILABLE) {
   setLongitudinalAcceleration(
@@ -169,6 +171,8 @@ inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel, const 
  *
  * @param cam CAM to set the acceleration value s
  * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
+ * @param confidence standard deviation of the lateral acceleration in m/s^2 as decimal number
+ *                   Default is AccelerationConfidence::UNAVAILABLE
  */
 inline void setLateralAcceleration(CAM& cam, const double lat_accel, const double confidence = AccelerationConfidence::UNAVAILABLE) {
   setLateralAcceleration(

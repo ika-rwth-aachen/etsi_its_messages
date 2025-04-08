@@ -38,12 +38,18 @@ namespace etsi_its_cam_msgs::access {
  * @brief Get the longitudinal acceleration
  *
  * @param longitudinalAcceleration to get the longitudinal acceleration from
- * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
+ * @return longitudinal acceleration in m/s^2 as decimal number (accelerating is positive)
  */
 inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longitudinal_acceleration) {
   return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;
 }
 
+/**
+ * @brief Get the Longitudinal Acceleration Confidence
+ * 
+ * @param longitudinal_acceleration to get the LongitudinalAccelerationConfidence from
+ * @return double standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ */
 inline double getLongitudinalAccelerationConfidence(const LongitudinalAcceleration& longitudinal_acceleration) {
   return ((double)longitudinal_acceleration.longitudinal_acceleration_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
@@ -58,6 +64,12 @@ inline double getLateralAcceleration(const LateralAcceleration& lateral_accelera
   return ((double)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;
 }
 
+/**
+ * @brief Get the Lateral Acceleration Confidence
+ * 
+ * @param longitudinal_acceleration to get the LateralAccelerationConfidence from
+ * @return double standard deviation of the lateral acceleration in m/s^2 as decimal number
+ */
 inline double getLateralAccelerationConfidence(const LateralAcceleration& lateral_acceleration) {
   return ((double)lateral_acceleration.lateral_acceleration_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }

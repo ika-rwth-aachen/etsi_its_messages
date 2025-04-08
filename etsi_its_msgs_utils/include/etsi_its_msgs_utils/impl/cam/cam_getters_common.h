@@ -167,13 +167,19 @@ inline double getSpeedConfidence(const CAM& cam) {
  * @brief Get the longitudinal acceleration
  *
  * @param cam CAM to get the longitudinal acceleration from
- * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
+ * @return longitudinal acceleration in m/s^2 as decimal number (accelerating is positive)
  */
 inline double getLongitudinalAcceleration(const CAM& cam) {
   return getLongitudinalAcceleration(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
 }
 
+/**
+ * @brief Get the Longitudinal Acceleration Confidence
+ * 
+ * @param cam CAM to get the LongitudinalAccelerationConfidence from
+ * @return double standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ */
 inline double getLongitudinalAccelerationConfidence(const CAM& cam) {
   return getLongitudinalAccelerationConfidence(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
@@ -195,6 +201,12 @@ inline double getLateralAcceleration(const CAM& cam) {
   }
 }
 
+/**
+ * @brief Get the Lateral Acceleration Confidence 
+ * 
+ * @param cam CAM to get the LateralAccelerationConfidence from
+ * @return double standard deviation of the lateral acceleration in m/s^2 as decimal number
+ */
 inline double getLateralAccelerationConfidence(const CAM& cam) {
   if (cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
           .lateral_acceleration_is_present) {

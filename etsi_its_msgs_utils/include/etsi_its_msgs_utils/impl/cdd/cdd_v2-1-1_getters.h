@@ -46,6 +46,12 @@ inline double getLongitudinalAcceleration(const AccelerationComponent& longitudi
   return ((double)longitudinal_acceleration.value.value) * 1e-1;
 }
 
+/**
+ * @brief Get the Longitudinal Acceleration Confidence
+ * 
+ * @param longitudinal_acceleration to get the LongitudinalAccelerationConfidence from
+ * @return double standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ */
 inline double getLongitudinalAccelerationConfidence(const AccelerationComponent& longitudinal_acceleration) {
   return ((double)longitudinal_acceleration.confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
@@ -60,6 +66,12 @@ inline double getLateralAcceleration(const AccelerationComponent& lateral_accele
   return ((double)lateral_acceleration.value.value) * 1e-1;
 }
 
+/**
+ * @brief Get the Lateral Acceleration Confidence
+ * 
+ * @param lateral_acceleration to get the LateralAccelerationConfidence from
+ * @return double standard deviation of the lateral acceleration in m/s^2 as decimal number
+ */
 inline double getLateralAccelerationConfidence(const AccelerationComponent& lateral_acceleration) {
   return ((double)lateral_acceleration.confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
