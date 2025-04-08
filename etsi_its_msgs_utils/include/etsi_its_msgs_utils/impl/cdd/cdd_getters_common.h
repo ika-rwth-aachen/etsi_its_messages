@@ -77,6 +77,10 @@ inline double getAltitude(const Altitude& altitude) { return ((double)altitude.a
  */
 inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
+inline double getSpeedConfidence(const Speed& speed) {
+  return ((double)speed.speed_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-2;
+}
+
 /**
  * @brief Get the UTM Position defined by the given ReferencePosition
  *

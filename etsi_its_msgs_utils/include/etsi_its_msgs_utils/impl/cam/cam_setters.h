@@ -53,7 +53,7 @@ inline void setItsPduHeader(CAM &cam, const uint32_t station_id, const uint8_t p
  * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
  */
 inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& accel, const double value) {
-  int64_t accel_val = (int64_t)std::round(value * 1e1);
+  auto accel_val = std::round(value * 1e1);
   if (accel_val >= LongitudinalAccelerationValue::MIN && accel_val <= LongitudinalAccelerationValue::MAX) {
     accel.value = accel_val;
   } else if (accel_val < LongitudinalAccelerationValue::MIN) {
@@ -71,8 +71,8 @@ inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& acce
  * @param accel object to set
  * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
  */
-inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, const double value) {
-  accel.longitudinal_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+inline void setLongitudinalAcceleration(LongitudinalAcceleration& accel, const double value, const double confidence = AccelerationConfidence::UNAVAILABLE) {
+  setAccelerationConfidence(accel.longitudinal_acceleration_confidence, confidence);
   setLongitudinalAccelerationValue(accel.longitudinal_acceleration_value, value);
 }
 
@@ -101,8 +101,8 @@ inline void setLateralAccelerationValue(LateralAccelerationValue& accel, const d
  * @param accel object to set
  * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
  */
-inline void setLateralAcceleration(LateralAcceleration& accel, const double value) {
-  accel.lateral_acceleration_confidence.value = AccelerationConfidence::UNAVAILABLE;
+inline void setLateralAcceleration(LateralAcceleration& accel, const double value, const double confidence = AccelerationConfidence::UNAVAILABLE) {
+  setAccelerationConfidence(accel.lateral_acceleration_confidence, confidence);
   setLateralAccelerationValue(accel.lateral_acceleration_value, value);
 }
 

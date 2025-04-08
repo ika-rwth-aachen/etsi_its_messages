@@ -148,8 +148,8 @@ inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const do
  * @param cam CAM to set the speed value
  * @param speed_val speed value to set in m/s as decimal number
  */
-inline void setSpeed(CAM& cam, const double speed_val) {
-  setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);
+inline void setSpeed(CAM& cam, const double speed_val, const double confidence = SpeedConfidence::UNAVAILABLE) {
+  setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val, confidence);
 }
 
 /**
@@ -158,10 +158,10 @@ inline void setSpeed(CAM& cam, const double speed_val) {
  * @param cam CAM to set the acceleration value s
  * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
  */
-inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel) {
+inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel, const double confidence = AccelerationConfidence::UNAVAILABLE) {
   setLongitudinalAcceleration(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration,
-      lon_accel);
+      lon_accel, confidence);
 }
 
 /**
@@ -170,10 +170,10 @@ inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel) {
  * @param cam CAM to set the acceleration value s
  * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
  */
-inline void setLateralAcceleration(CAM& cam, const double lat_accel) {
+inline void setLateralAcceleration(CAM& cam, const double lat_accel, const double confidence = AccelerationConfidence::UNAVAILABLE) {
   setLateralAcceleration(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration,
-      lat_accel);
+      lat_accel, confidence);
   cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
       .lateral_acceleration_is_present = true;
 }

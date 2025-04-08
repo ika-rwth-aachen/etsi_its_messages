@@ -101,8 +101,8 @@ inline void setLongitudinalAccelerationValue(AccelerationValue& accel, const dou
  * @param accel object to set
  * @param value LongitudinalAccelerationValue in m/s^2 as decimal number (braking is negative)
  */
-inline void setLongitudinalAcceleration(AccelerationComponent& accel, const double value) {
-  accel.confidence.value = AccelerationConfidence::UNAVAILABLE;
+inline void setLongitudinalAcceleration(AccelerationComponent& accel, const double value, const double confidence) {
+  setAccelerationConfidence(accel.confidence, confidence);
   setLongitudinalAccelerationValue(accel.value, value);
 }
 
@@ -131,8 +131,8 @@ inline void setLateralAccelerationValue(AccelerationValue& accel, const double v
  * @param accel object to set
  * @param value LaterallAccelerationValue in m/s^2 as decimal number (left is positive)
  */
-inline void setLateralAcceleration(AccelerationComponent& accel, const double value) {
-  accel.confidence.value = AccelerationConfidence::UNAVAILABLE;
+inline void setLateralAcceleration(AccelerationComponent& accel, const double value, const double confidence) {
+  setAccelerationConfidence(accel.confidence, confidence);
   setLateralAccelerationValue(accel.value, value);
 }
 

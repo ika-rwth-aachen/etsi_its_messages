@@ -43,7 +43,11 @@ SOFTWARE.
  * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
  */
 inline double getLongitudinalAcceleration(const AccelerationComponent& longitudinal_acceleration) {
-  return ((int16_t)longitudinal_acceleration.value.value) * 1e-1;
+  return ((double)longitudinal_acceleration.value.value) * 1e-1;
+}
+
+inline double getLongitudinalAccelerationConfidence(const AccelerationComponent& longitudinal_acceleration) {
+  return ((double)longitudinal_acceleration.confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 /**
@@ -53,7 +57,11 @@ inline double getLongitudinalAcceleration(const AccelerationComponent& longitudi
  * @return lateral acceleration in m/s^2 as decimal number (left is positive)
  */
 inline double getLateralAcceleration(const AccelerationComponent& lateral_acceleration) {
-  return ((int16_t)lateral_acceleration.value.value) * 1e-1;
+  return ((double)lateral_acceleration.value.value) * 1e-1;
+}
+
+inline double getLateralAccelerationConfidence(const AccelerationComponent& lateral_acceleration) {
+  return ((double)lateral_acceleration.confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 

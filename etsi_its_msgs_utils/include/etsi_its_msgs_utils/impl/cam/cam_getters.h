@@ -44,6 +44,10 @@ inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longit
   return ((double)longitudinal_acceleration.longitudinal_acceleration_value.value) * 1e-1;
 }
 
+inline double getLongitudinalAccelerationConfidence(const LongitudinalAcceleration& longitudinal_acceleration) {
+  return ((double)longitudinal_acceleration.longitudinal_acceleration_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+}
+
 /**
  * @brief Get the lateral acceleration
  *
@@ -52,6 +56,10 @@ inline double getLongitudinalAcceleration(const LongitudinalAcceleration& longit
  */
 inline double getLateralAcceleration(const LateralAcceleration& lateral_acceleration) {
   return ((double)lateral_acceleration.lateral_acceleration_value.value) * 1e-1;
+}
+
+inline double getLateralAccelerationConfidence(const LateralAcceleration& lateral_acceleration) {
+  return ((double)lateral_acceleration.lateral_acceleration_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 #include <etsi_its_msgs_utils/impl/cam/cam_getters_common.h>

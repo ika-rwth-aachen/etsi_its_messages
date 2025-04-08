@@ -147,15 +147,21 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(width, cam_access::getVehicleWidth(cam), 1e-1);
 
   double speed_val = randomDouble(0.0, 163.82);
-  cam_access::setSpeed(cam, speed_val);
+  double speed_conf = randomDouble(0.0, 0.625);
+  cam_access::setSpeed(cam, speed_val, speed_conf);
   EXPECT_NEAR(speed_val, cam_access::getSpeed(cam), 1e-2);
+  EXPECT_NEAR(speed_conf, cam_access::getSpeedConfidence(cam), 1e-2);
 
   double lon_accel = randomDouble(-16.0, 16.0);
   double lat_accel = randomDouble(-16.0, 16.0);
-  cam_access::setLongitudinalAcceleration(cam, lon_accel);
+  double lon_accel_conf = randomDouble(0.0, 5.0);
+  double lat_accel_conf = randomDouble(0.0, 5.0);
+  cam_access::setLongitudinalAcceleration(cam, lon_accel, lon_accel_conf);
   EXPECT_NEAR(lon_accel, cam_access::getLongitudinalAcceleration(cam), 1e-1);
-  cam_access::setLateralAcceleration(cam, lat_accel);
+  EXPECT_NEAR(lon_accel_conf, cam_access::getLongitudinalAccelerationConfidence(cam), 1e-1);
+  cam_access::setLateralAcceleration(cam, lat_accel, lat_accel_conf);
   EXPECT_NEAR(lat_accel, cam_access::getLateralAcceleration(cam), 1e-1);
+  EXPECT_NEAR(lat_accel_conf, cam_access::getLateralAccelerationConfidence(cam), 1e-1);
 
   std::vector<bool> exterior_lights(cam_msgs::ExteriorLights::SIZE_BITS);
   for (int i = 0; i < cam_msgs::ExteriorLights::SIZE_BITS; i++) {

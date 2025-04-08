@@ -158,6 +158,11 @@ inline double getSpeed(const CAM& cam) {
   return getSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);
 }
 
+inline double getSpeedConfidence(const CAM& cam) {
+  return getSpeedConfidence(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);
+}
+
 /**
  * @brief Get the longitudinal acceleration
  *
@@ -166,6 +171,11 @@ inline double getSpeed(const CAM& cam) {
  */
 inline double getLongitudinalAcceleration(const CAM& cam) {
   return getLongitudinalAcceleration(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
+}
+
+inline double getLongitudinalAccelerationConfidence(const CAM& cam) {
+  return getLongitudinalAccelerationConfidence(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
 }
 
@@ -182,6 +192,16 @@ inline double getLateralAcceleration(const CAM& cam) {
         cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);
   } else {
     throw std::invalid_argument("LateralAcceleration is not present!");
+  }
+}
+
+inline double getLateralAccelerationConfidence(const CAM& cam) {
+  if (cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
+          .lateral_acceleration_is_present) {
+    return getLateralAccelerationConfidence(
+        cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);
+  } else {
+    throw std::invalid_argument("LateralAccelerationConfidence is not present!");
   }
 }
 

@@ -142,9 +142,9 @@ inline void setIsSpeedPresent(DENM& denm, bool presence_of_speed) {
  * @param denm DENM to set the speed value
  * @param speed_val speed value to set in m/s as decimal number
  */
-inline void setSpeed(DENM& denm, const double speed_val) {
+inline void setSpeed(DENM& denm, const double speed_val, const double confidence = SpeedConfidence::UNAVAILABLE) {
   if (denm.denm.location_is_present) {
-    setSpeed(denm.denm.location.event_speed, speed_val);
+    setSpeed(denm.denm.location.event_speed, speed_val, confidence);
     setIsSpeedPresent(denm, true);
   } else {
     throw std::invalid_argument("LocationContainer is not present!");

@@ -118,9 +118,19 @@ inline void setAltitude(Altitude& altitude, const double value) {
  * @param value SpeedValue in m/s as decimal number
  */
 inline void setSpeedValue(SpeedValue& speed, const double value) {
-  uint16_t speed_val = (uint16_t)std::round(value * 1e2);
+  auto speed_val = std::round(value * 1e2);
   throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
-  speed.value = speed_val;
+  speed.value = static_cast<decltype(speed.value)>(speed_val);
+}
+
+inline void setSpeedConfidence(SpeedConfidence& speed_confidence, const double value) {
+  auto speed_conf = std::round(value * 1e2 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  if (speed_conf < SpeedConfidence::MIN && speed_conf > 0.0){
+    speed_conf = SpeedConfidence::MIN;
+  } else if (speed_conf >= SpeedConfidence::OUT_OF_RANGE || speed_conf <= 0.0) {
+    speed_conf = SpeedConfidence::UNAVAILABLE;
+  }
+  speed_confidence.value = static_cast<decltype(speed_confidence.value)>(speed_conf);
 }
 
 /**
@@ -131,9 +141,20 @@ inline void setSpeedValue(SpeedValue& speed, const double value) {
  * @param speed object to set
  * @param value  Speed in in m/s as decimal number
  */
-inline void setSpeed(Speed& speed, const double value) {
-  speed.speed_confidence.value = SpeedConfidence::UNAVAILABLE;
+inline void setSpeed(Speed& speed, const double value, const double confidence = SpeedConfidence::UNAVAILABLE) {
+  setSpeedConfidence(speed.speed_confidence, confidence);
   setSpeedValue(speed.speed_value, value);
+}
+
+template <typename AccelerationConfidence>
+inline void setAccelerationConfidence(AccelerationConfidence& accel_confidence, const double value) {
+  auto accel_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  if (accel_conf < AccelerationConfidence::MIN && accel_conf > 0.0){
+    accel_conf = AccelerationConfidence::MIN;
+  } else if (accel_conf >= AccelerationConfidence::OUT_OF_RANGE || accel_conf <= 0.0) {
+    accel_conf = AccelerationConfidence::UNAVAILABLE;
+  }
+  accel_confidence.value = static_cast<decltype(accel_confidence.value)>(accel_conf);
 }
 
 /**
@@ -231,8 +252,8 @@ void setHeadingInternal(Heading& heading, const double value) {
 template <typename SemiAxisLength>
 inline void setSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
   double semi_axis_length_val = std::round(length * etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value * 1e2);
-  if(semi_axis_length_val < 1) {
-    semi_axis_length_val = SemiAxisLength::UNAVAILABLE;
+  if(semi_axis_length_val < SemiAxisLength::MIN) {
+    semi_axis_length_val = SemiAxisLength::MIN;
   } else if(semi_axis_length_val >= SemiAxisLength::OUT_OF_RANGE) {
     semi_axis_length_val = SemiAxisLength::OUT_OF_RANGE;
   }  
