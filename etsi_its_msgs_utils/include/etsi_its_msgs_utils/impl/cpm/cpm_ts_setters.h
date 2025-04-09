@@ -439,8 +439,8 @@ inline void setObjectDimension(ObjectDimension& dimension, const uint16_t value,
  * @param confidence The confidence of the x-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
  */
 inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_x, (uint16_t)(value * 10), confidence * 10);
+                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+  setObjectDimension(object.object_dimension_x, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
   object.object_dimension_x_is_present = true;
 }
 
@@ -455,8 +455,8 @@ inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double
  * @param confidence The confidence of the y-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
  */
 inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_y, (uint16_t)(value * 10), confidence * 10);
+                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+  setObjectDimension(object.object_dimension_y, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
   object.object_dimension_y_is_present = true;
 }
 
@@ -471,8 +471,8 @@ inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double
  * @param confidence The confidence of the z-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
  */
 inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_z, (uint16_t)(value * 10), confidence * 10);
+                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+  setObjectDimension(object.object_dimension_z, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
   object.object_dimension_z_is_present = true;
 }
 
@@ -483,14 +483,14 @@ inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double
  *
  * @param object The perceived object to set the dimensions for.
  * @param dimensions The dimensions of the object as a gm::Vector3 (x, y, z) in meters.
- * @param x_confidence The confidence in meters for the x dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
- * @param y_confidence The confidence in meters for the y dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
- * @param z_confidence The confidence in meters for the z dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param x_confidence The standard deviation in meters for the x dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param y_confidence The standard deviation in meters for the y dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param z_confidence The standard deviation in meters for the z dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
  */
 inline void setDimensionsOfPerceivedObject(PerceivedObject& object, const gm::Vector3& dimensions,
-                                           const uint8_t x_confidence = ObjectDimensionConfidence::UNAVAILABLE,
-                                           const uint8_t y_confidence = ObjectDimensionConfidence::UNAVAILABLE,
-                                           const uint8_t z_confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+                                           const double x_confidence = ObjectDimensionConfidence::UNAVAILABLE,
+                                           const double y_confidence = ObjectDimensionConfidence::UNAVAILABLE,
+                                           const double z_confidence = ObjectDimensionConfidence::UNAVAILABLE) {
   setXDimensionOfPerceivedObject(object, dimensions.x, x_confidence);
   setYDimensionOfPerceivedObject(object, dimensions.y, y_confidence);
   setZDimensionOfPerceivedObject(object, dimensions.z, z_confidence);
@@ -584,6 +584,19 @@ inline void addContainerToCPM(CollectivePerceptionMessage& cpm, const WrappedCpm
   } else {
     throw std::invalid_argument("Maximum number of CPM-Containers reached");
   }
+}
+
+/**
+ * @brief Set the confidence of the reference position
+ * 
+ * @param cpm CPM-Message to set the confidence
+ * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
+ *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
+ *                          Its coordinate system is WGS84 (x = North, y = East)
+ */
+inline void setWGSRefPosConfidence(CollectivePerceptionMessage& cpm, const std::array<double, 4>& covariance_matrix) {
+  setWGSPosConfidenceEllipse(cpm.payload.management_container.reference_position.position_confidence_ellipse,
+                             covariance_matrix);
 }
 
 }  // namespace etsi_its_cpm_ts_msgs::access

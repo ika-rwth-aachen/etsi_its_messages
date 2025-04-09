@@ -513,4 +513,17 @@ inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePercepti
   return utm_position;
 }
 
+/**
+ * @brief Get the confidence ellipse of the reference position as Covariance matrix
+ * 
+ * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
+ * where x is WGS84 North and y is East
+ * 
+ * @param cpm The CPM message to get the reference position from
+ * @return const std::array<double, 4> the covariance matrix, as specified above
+ */
+inline const std::array<double, 4> getWGSRefPosConfidence(const CollectivePerceptionMessage &cpm) {
+  return getWGSPosConfidenceEllipse(cpm.payload.management_container.reference_position.position_confidence_ellipse);
+}
+
 }  // namespace etsi_its_cpm_ts_msgs::access

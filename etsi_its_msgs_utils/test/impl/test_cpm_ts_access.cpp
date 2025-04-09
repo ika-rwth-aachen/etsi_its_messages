@@ -41,6 +41,25 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(longitude, cpm_ts_access::getLongitude(cpm), 1e-7);
   EXPECT_NEAR(altitude, cpm_ts_access::getAltitude(cpm), 1e-2);
 
+  // Set WGS84 confidence ellipse
+  std::array<double, 4> covariance_matrix = {randomDouble(1.0, 100.0), 0.0,
+    0.0, randomDouble(1.0, 100.0)};
+  double phi = randomDouble(0.0, M_PI_2);
+  std::array<double, 4> covariance_matrix_rotated = {
+    covariance_matrix[0] * std::cos(phi) * std::cos(phi) +
+    covariance_matrix[3] * std::sin(phi) * std::sin(phi),
+    (covariance_matrix[0] - covariance_matrix[3]) * std::cos(phi) * std::sin(phi),
+    (covariance_matrix[0] - covariance_matrix[3]) * std::cos(phi) * std::sin(phi),
+    covariance_matrix[0] * std::sin(phi) * std::sin(phi) +
+    covariance_matrix[3] * std::cos(phi) * std::cos(phi)
+  };
+  cpm_ts_access::setWGSRefPosConfidence(cpm, covariance_matrix_rotated);
+  std::array<double, 4> cov_get_rotated = cpm_ts_access::getWGSRefPosConfidence(cpm);
+  EXPECT_NEAR(covariance_matrix_rotated[0], cov_get_rotated[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[1], cov_get_rotated[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
+
   // Set specific position to test utm projection
   latitude = 50.787467;
   longitude = 6.046498;
@@ -60,6 +79,19 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(altitude, cpm_ts_access::getAltitude(cpm), 1e-2);
 
   cpm_ts_msgs::PerceivedObject object;
+  double dx = randomDouble(-10.0, 10.0);;
+  double dy = randomDouble(-10.0, 10.0);
+  utm.point.x += dx;
+  utm.point.y += dy;
+  cpm_ts_access::setUTMPositionOfPerceivedObject(cpm, object, utm);
+  gm::PointStamped point = cpm_ts_access::getUTMPositionOfPerceivedObject(cpm, object);
+  EXPECT_NEAR(utm.point.x, point.point.x, 1e-1);
+  EXPECT_NEAR(utm.point.y, point.point.y, 1e-1);
+  gm::Point dpoint = cpm_ts_access::getPositionOfPerceivedObject(object);
+  EXPECT_NEAR(dx, dpoint.x, 1e-1);
+  EXPECT_NEAR(dy, dpoint.y, 1e-1);
+
+
   gm::Vector3 dimensions;
   dimensions.x = randomDouble(0.1, 25.6);
   dimensions.y = randomDouble(0.1, 25.6);
