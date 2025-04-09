@@ -209,9 +209,9 @@ inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Poin
  */
 inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, PerceivedObject& object,
                                             const gm::PointStamped& utm_position,
-                                            const uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,
-                                            const uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,
-                                            const uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {
+                                            const double x_confidence = CoordinateConfidence::UNAVAILABLE,
+                                            const double y_confidence = CoordinateConfidence::UNAVAILABLE,
+                                            const double z_confidence = CoordinateConfidence::UNAVAILABLE) {
   gm::PointStamped reference_position = getUTMPosition(cpm);
   if (utm_position.header.frame_id != reference_position.header.frame_id) {
     throw std::invalid_argument("UTM-Position frame_id (" + utm_position.header.frame_id +
@@ -219,12 +219,12 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
                                 ")");
   }
   setCartesianCoordinateWithConfidence(object.position.x_coordinate,
-                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence);
+                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence * 100);
   setCartesianCoordinateWithConfidence(object.position.y_coordinate,
-                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence);
+                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence * 100);
   if (utm_position.point.z != 0.0) {
     setCartesianCoordinateWithConfidence(object.position.z_coordinate,
-                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence);
+                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence * 100);
     object.position.z_coordinate_is_present = true;
   }
 }

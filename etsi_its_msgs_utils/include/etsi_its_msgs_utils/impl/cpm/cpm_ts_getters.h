@@ -31,6 +31,8 @@ SOFTWARE.
 
 #pragma once
 
+#include <tuple>
+
 namespace etsi_its_cpm_ts_msgs::access {
 
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h>
@@ -257,6 +259,15 @@ inline gm::Point getPositionOfPerceivedObject(const PerceivedObject &object) {
     point.z = double(getCartesianCoordinate(object.position.z_coordinate)) / 100.0;
   }
   return point;
+}
+
+inline std::tuple<double, double, double> getPositionOfPerceivedObjectConfidence(const PerceivedObject &object) {
+  double x_confidence = double(getCartesianCoordinateConfidence(object.position.x_coordinate)) / 100.0;
+  double y_confidence = double(getCartesianCoordinateConfidence(object.position.y_coordinate)) / 100.0;
+  double z_confidence = object.position.z_coordinate_is_present
+                            ? double(getCartesianCoordinateConfidence(object.position.z_coordinate)) / 100.0
+                            : CoordinateConfidence::UNAVAILABLE;
+  return std::make_tuple(x_confidence, y_confidence, z_confidence);
 }
 
 /**
