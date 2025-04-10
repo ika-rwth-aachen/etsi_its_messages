@@ -500,6 +500,11 @@ inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
   return object.object_dimension_x.value.value;
 }
 
+inline uint8_t getXDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_x_is_present) throw std::invalid_argument("No x-dimension present in PerceivedObject");
+  return object.object_dimension_x.confidence.value;
+}
+
 /**
  * @brief Retrieves the y-dimension of a perceived object.
  *
@@ -514,6 +519,11 @@ inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
 inline uint16_t getYDimensionOfPerceivedObject(const PerceivedObject &object) {
   if (!object.object_dimension_y_is_present) throw std::invalid_argument("No y-dimension present in PerceivedObject");
   return object.object_dimension_y.value.value;
+}
+
+inline uint8_t getYDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_y_is_present) throw std::invalid_argument("No y-dimension present in PerceivedObject");
+  return object.object_dimension_y.confidence.value;
 }
 
 /**
@@ -532,6 +542,11 @@ inline uint16_t getZDimensionOfPerceivedObject(const PerceivedObject &object) {
   return object.object_dimension_z.value.value;
 }
 
+inline uint8_t getZDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_z_is_present) throw std::invalid_argument("No z-dimension present in PerceivedObject");
+  return object.object_dimension_z.confidence.value;
+}
+
 /**
  * @brief Retrieves the dimensions of a perceived object.
  *
@@ -547,6 +562,13 @@ inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object)
   dimensions.y = double(getYDimensionOfPerceivedObject(object)) / 10.0;
   dimensions.z = double(getZDimensionOfPerceivedObject(object)) / 10.0;
   return dimensions;
+}
+
+inline std::tuple<double, double, double> getDimensionsConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  double conf_x = double(getXDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double conf_y = double(getYDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double conf_z = double(getZDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  return {conf_x, conf_y, conf_z};
 }
 
 /**

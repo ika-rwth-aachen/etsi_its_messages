@@ -150,22 +150,24 @@ inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, co
  * @param value The value to be set in centimeters.
  * @param confidence The confidence to be set in centimeters (default: CoordinateConfidence::UNAVAILABLE).
  */
-inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const int32_t value,
-                                                 const uint16_t confidence = CoordinateConfidence::UNAVAILABLE) {
+inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const double value,
+                                                 const double confidence = std::numeric_limits<double>::infinity()) {
   // limit value range
   if (value < CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE) {
     coordinate.value.value = CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE;
   } else if (value > CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE) {
     coordinate.value.value = CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE;
   } else {
-    coordinate.value.value = value;
+    coordinate.value.value = static_cast<int32_t>(value);
   }
 
   // limit confidence range
-  if (confidence > CoordinateConfidence::MAX || confidence < CoordinateConfidence::MIN) {
+  if (confidence == std::numeric_limits<double>::infinity()) {
+    coordinate.confidence.value = CoordinateConfidence::UNAVAILABLE;
+  } else if (confidence > CoordinateConfidence::MAX || confidence < CoordinateConfidence::MIN) {
     coordinate.confidence.value = CoordinateConfidence::OUT_OF_RANGE;
   } else {
-    coordinate.confidence.value = confidence;
+    coordinate.confidence.value = static_cast<uint16_t>(confidence);
   }
 }
 
@@ -181,9 +183,9 @@ inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfiden
  * @param z_confidence The confidence value in meters for the z-coordinate (default: CoordinateConfidence::UNAVAILABLE).
  */
 inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Point& point,
-                                         const double x_confidence = CoordinateConfidence::UNAVAILABLE,
-                                         const double y_confidence = CoordinateConfidence::UNAVAILABLE,
-                                         const double z_confidence = CoordinateConfidence::UNAVAILABLE) {
+                                         const double x_confidence = std::numeric_limits<double>::infinity(),
+                                         const double y_confidence = std::numeric_limits<double>::infinity(),
+                                         const double z_confidence = std::numeric_limits<double>::infinity()) {
   setCartesianCoordinateWithConfidence(object.position.x_coordinate, point.x * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   setCartesianCoordinateWithConfidence(object.position.y_coordinate, point.y * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (point.z != 0.0) {
@@ -209,9 +211,9 @@ inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Poin
  */
 inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, PerceivedObject& object,
                                             const gm::PointStamped& utm_position,
-                                            const double x_confidence = CoordinateConfidence::UNAVAILABLE,
-                                            const double y_confidence = CoordinateConfidence::UNAVAILABLE,
-                                            const double z_confidence = CoordinateConfidence::UNAVAILABLE) {
+                                            const double x_confidence = std::numeric_limits<double>::infinity(),
+                                            const double y_confidence = std::numeric_limits<double>::infinity(),
+                                            const double z_confidence = std::numeric_limits<double>::infinity()) {
   gm::PointStamped reference_position = getUTMPosition(cpm);
   if (utm_position.header.frame_id != reference_position.header.frame_id) {
     throw std::invalid_argument("UTM-Position frame_id (" + utm_position.header.frame_id +
@@ -444,21 +446,24 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
  * @param value The value of the object dimension in decimeters.
  * @param confidence The confidence of the object dimension in decimeters (optional, default is ObjectDimensionConfidence::UNAVAILABLE).
  */
-inline void setObjectDimension(ObjectDimension& dimension, const uint16_t value,
-                               const uint8_t confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+inline void setObjectDimension(ObjectDimension& dimension, const double value,
+                               const double confidence = std::numeric_limits<double>::infinity()) {
   // limit value range
   if (value < ObjectDimensionValue::MIN || value > ObjectDimensionValue::MAX) {
     dimension.value.value = ObjectDimensionValue::OUT_OF_RANGE;
   } else {
-    dimension.value.value = value;
+    dimension.value.value = static_cast<uint16_t>(value);
   }
 
   // limit confidence range
-  if (confidence > ObjectDimensionConfidence::MAX || confidence < ObjectDimensionConfidence::MIN) {
+  if (confidence == std::numeric_limits<double>::infinity()) {
+    dimension.confidence.value = ObjectDimensionConfidence::UNAVAILABLE;
+  } else   if (confidence > ObjectDimensionConfidence::MAX || confidence < ObjectDimensionConfidence::MIN) {
     dimension.confidence.value = ObjectDimensionConfidence::OUT_OF_RANGE;
   } else {
-    dimension.confidence.value = confidence;
+    dimension.confidence.value = static_cast<uint8_t>(confidence);
   }
+
 }
 
 /**
@@ -473,7 +478,7 @@ inline void setObjectDimension(ObjectDimension& dimension, const uint16_t value,
  */
 inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_x, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
+  setObjectDimension(object.object_dimension_x, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_x_is_present = true;
 }
 
@@ -489,7 +494,7 @@ inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double
  */
 inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_y, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
+  setObjectDimension(object.object_dimension_y, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_y_is_present = true;
 }
 
@@ -505,7 +510,7 @@ inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double
  */
 inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double value,
                                            const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_z, static_cast<uint16_t>(value * 10), static_cast<uint8_t>(confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR));
+  setObjectDimension(object.object_dimension_z, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_z_is_present = true;
 }
 
@@ -521,9 +526,9 @@ inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double
  * @param z_confidence The standard deviation in meters for the z dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
  */
 inline void setDimensionsOfPerceivedObject(PerceivedObject& object, const gm::Vector3& dimensions,
-                                           const double x_confidence = ObjectDimensionConfidence::UNAVAILABLE,
-                                           const double y_confidence = ObjectDimensionConfidence::UNAVAILABLE,
-                                           const double z_confidence = ObjectDimensionConfidence::UNAVAILABLE) {
+                                           const double x_confidence = std::numeric_limits<double>::infinity(),
+                                           const double y_confidence = std::numeric_limits<double>::infinity(),
+                                           const double z_confidence = std::numeric_limits<double>::infinity()) {
   setXDimensionOfPerceivedObject(object, dimensions.x, x_confidence);
   setYDimensionOfPerceivedObject(object, dimensions.y, y_confidence);
   setZDimensionOfPerceivedObject(object, dimensions.z, z_confidence);

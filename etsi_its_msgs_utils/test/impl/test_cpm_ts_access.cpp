@@ -83,23 +83,37 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   double dy = randomDouble(-10.0, 10.0);
   utm.point.x += dx;
   utm.point.y += dy;
-  cpm_ts_access::setUTMPositionOfPerceivedObject(cpm, object, utm);
+  double var_x = randomDouble(0.1, 20.48);
+  double var_y = randomDouble(0.1, 20.48);
+  double var_z = randomDouble(0.1, 20.48);
+  cpm_ts_access::setUTMPositionOfPerceivedObject(cpm, object, utm, var_x, var_y, var_z);
   gm::PointStamped point = cpm_ts_access::getUTMPositionOfPerceivedObject(cpm, object);
   EXPECT_NEAR(utm.point.x, point.point.x, 1e-1);
   EXPECT_NEAR(utm.point.y, point.point.y, 1e-1);
   gm::Point dpoint = cpm_ts_access::getPositionOfPerceivedObject(object);
   EXPECT_NEAR(dx, dpoint.x, 1e-1);
   EXPECT_NEAR(dy, dpoint.y, 1e-1);
+  auto [var_x_get, var_y_get, var_z_get] = cpm_ts_access::getPositionConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(var_x, var_x_get, 1e-2);
+  EXPECT_NEAR(var_y, var_y_get, 1e-2);
+  EXPECT_NEAR(var_z, var_z_get, 1e-2);
 
 
   gm::Vector3 dimensions;
   dimensions.x = randomDouble(0.1, 25.6);
   dimensions.y = randomDouble(0.1, 25.6);
   dimensions.z = randomDouble(0.1, 25.6);
-  cpm_ts_access::setDimensionsOfPerceivedObject(object, dimensions);
+  var_x = randomDouble(0.1, 1.5);
+  var_y = randomDouble(0.1, 1.5);
+  var_z = randomDouble(0.1, 1.5);
+  cpm_ts_access::setDimensionsOfPerceivedObject(object, dimensions, var_x, var_y, var_z);
   EXPECT_NEAR(dimensions.x, cpm_ts_access::getDimensionsOfPerceivedObject(object).x, 1e-1);
   EXPECT_NEAR(dimensions.y, cpm_ts_access::getDimensionsOfPerceivedObject(object).y, 1e-1);
   EXPECT_NEAR(dimensions.z, cpm_ts_access::getDimensionsOfPerceivedObject(object).z, 1e-1);
+  std::tie(var_x_get, var_y_get, var_z_get) = cpm_ts_access::getDimensionsConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(var_x, var_x_get, 1e-1);
+  EXPECT_NEAR(var_y, var_y_get, 1e-1);
+  EXPECT_NEAR(var_z, var_z_get, 1e-1);
 
   gm::Vector3 velocity;
   velocity.x = randomDouble(-163.83, 163.83);
