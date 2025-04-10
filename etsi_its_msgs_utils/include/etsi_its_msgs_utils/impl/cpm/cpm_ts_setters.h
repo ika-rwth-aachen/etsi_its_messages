@@ -181,13 +181,13 @@ inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfiden
  * @param z_confidence The confidence value in meters for the z-coordinate (default: CoordinateConfidence::UNAVAILABLE).
  */
 inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Point& point,
-                                         const uint16_t x_confidence = CoordinateConfidence::UNAVAILABLE,
-                                         const uint16_t y_confidence = CoordinateConfidence::UNAVAILABLE,
-                                         const uint16_t z_confidence = CoordinateConfidence::UNAVAILABLE) {
-  setCartesianCoordinateWithConfidence(object.position.x_coordinate, point.x * 100, x_confidence * 100);
-  setCartesianCoordinateWithConfidence(object.position.y_coordinate, point.y * 100, y_confidence * 100);
+                                         const double x_confidence = CoordinateConfidence::UNAVAILABLE,
+                                         const double y_confidence = CoordinateConfidence::UNAVAILABLE,
+                                         const double z_confidence = CoordinateConfidence::UNAVAILABLE) {
+  setCartesianCoordinateWithConfidence(object.position.x_coordinate, point.x * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  setCartesianCoordinateWithConfidence(object.position.y_coordinate, point.y * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (point.z != 0.0) {
-    setCartesianCoordinateWithConfidence(object.position.z_coordinate, point.z * 100, z_confidence * 100);
+    setCartesianCoordinateWithConfidence(object.position.z_coordinate, point.z * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.position.z_coordinate_is_present = true;
   }
 }
@@ -219,12 +219,12 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
                                 ")");
   }
   setCartesianCoordinateWithConfidence(object.position.x_coordinate,
-                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence * 100);
+                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   setCartesianCoordinateWithConfidence(object.position.y_coordinate,
-                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence * 100);
+                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (utm_position.point.z != 0.0) {
     setCartesianCoordinateWithConfidence(object.position.z_coordinate,
-                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence * 100);
+                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.position.z_coordinate_is_present = true;
   }
 }
@@ -240,22 +240,24 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
  * @param value The value to set for the VelocityComponent in cm/s.
  * @param confidence The confidence to set for the VelocityComponent in cm/s. Default value is SpeedConfidence::UNAVAILABLE.
  */
-inline void setVelocityComponent(VelocityComponent& velocity, const int16_t value,
-                                 const uint8_t confidence = SpeedConfidence::UNAVAILABLE) {
+inline void setVelocityComponent(VelocityComponent& velocity, const double value,
+                                 const double confidence = std::numeric_limits<double>::infinity()) {
   // limit value range
   if (value < VelocityComponentValue::NEGATIVE_OUT_OF_RANGE) {
     velocity.value.value = VelocityComponentValue::NEGATIVE_OUT_OF_RANGE;
   } else if (value > VelocityComponentValue::POSITIVE_OUT_OF_RANGE) {
     velocity.value.value = VelocityComponentValue::POSITIVE_OUT_OF_RANGE;
   } else {
-    velocity.value.value = value;
+    velocity.value.value = static_cast<int16_t>(value);
   }
 
   // limit confidence range
-  if (confidence > SpeedConfidence::MAX || confidence < SpeedConfidence::MIN) {
+  if(confidence == std::numeric_limits<double>::infinity()) {
+    velocity.confidence.value = SpeedConfidence::UNAVAILABLE;
+  } else if (confidence > SpeedConfidence::MAX || confidence < SpeedConfidence::MIN) {
     velocity.confidence.value = SpeedConfidence::OUT_OF_RANGE;
   } else {
-    velocity.confidence.value = confidence;
+    velocity.confidence.value = static_cast<uint8_t>(confidence);
   }
 }
 
@@ -272,14 +274,14 @@ inline void setVelocityComponent(VelocityComponent& velocity, const int16_t valu
  * @param z_confidence The confidence value in m/s for the z velocity component (default: SpeedConfidence::UNAVAILABLE).
  */
 inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_velocity,
-                                         const uint8_t x_confidence = SpeedConfidence::UNAVAILABLE,
-                                         const uint8_t y_confidence = SpeedConfidence::UNAVAILABLE,
-                                         const uint8_t z_confidence = SpeedConfidence::UNAVAILABLE) {
+                                         const double x_confidence = SpeedConfidence::UNAVAILABLE,
+                                         const double y_confidence = SpeedConfidence::UNAVAILABLE,
+                                         const double z_confidence = SpeedConfidence::UNAVAILABLE) {
   object.velocity.choice = Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY;
-  setVelocityComponent(object.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_confidence * 100);
-  setVelocityComponent(object.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_confidence * 100);
+  setVelocityComponent(object.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  setVelocityComponent(object.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (cartesian_velocity.z != 0.0) {
-    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_confidence * 100);
+    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.velocity.cartesian_velocity.z_velocity_is_present = true;
   }
   object.velocity_is_present = true;
@@ -296,22 +298,24 @@ inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vect
  * @param value The value to set for the AccelerationComponent in dm/s^2.
  * @param confidence The confidence to set for the AccelerationComponent in dm/s^2. Default value is AccelerationConfidence::UNAVAILABLE.
  */
-inline void setAccelerationComponent(AccelerationComponent& acceleration, const int16_t value,
-                                     const uint8_t confidence = AccelerationConfidence::UNAVAILABLE) {
+inline void setAccelerationComponent(AccelerationComponent& acceleration, const double value,
+                                     const double confidence = std::numeric_limits<double>::infinity()) {
   // limit value range
   if (value < AccelerationValue::NEGATIVE_OUT_OF_RANGE) {
     acceleration.value.value = AccelerationValue::NEGATIVE_OUT_OF_RANGE;
   } else if (value > AccelerationValue::POSITIVE_OUT_OF_RANGE) {
     acceleration.value.value = AccelerationValue::POSITIVE_OUT_OF_RANGE;
   } else {
-    acceleration.value.value = value;
+    acceleration.value.value = static_cast<int16_t>(value);
   }
 
   // limit confidence range
-  if (confidence > AccelerationConfidence::MAX || confidence < AccelerationConfidence::MIN) {
+  if(confidence == std::numeric_limits<double>::infinity()) {
+    acceleration.confidence.value = AccelerationConfidence::UNAVAILABLE;
+  } else if (confidence > AccelerationConfidence::MAX || confidence < AccelerationConfidence::MIN) {
     acceleration.confidence.value = AccelerationConfidence::OUT_OF_RANGE;
   } else {
-    acceleration.confidence.value = confidence;
+    acceleration.confidence.value = static_cast<uint8_t>(confidence);
   }
 }
 
@@ -328,17 +332,17 @@ inline void setAccelerationComponent(AccelerationComponent& acceleration, const 
  * @param z_confidence The confidence value in m/s^2 for the z acceleration component (default: AccelerationConfidence::UNAVAILABLE).
  */
 inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_acceleration,
-                                             const uint8_t x_confidence = AccelerationConfidence::UNAVAILABLE,
-                                             const uint8_t y_confidence = AccelerationConfidence::UNAVAILABLE,
-                                             const uint8_t z_confidence = AccelerationConfidence::UNAVAILABLE) {
+                                             const double x_confidence = std::numeric_limits<double>::infinity(),
+                                             const double y_confidence = std::numeric_limits<double>::infinity(),
+                                             const double z_confidence = std::numeric_limits<double>::infinity()) {
   object.acceleration.choice = Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION;
   setAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration, cartesian_acceleration.x * 10,
-                           x_confidence * 10);
+                           x_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   setAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration, cartesian_acceleration.y * 10,
-                           y_confidence * 10);
+                           y_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (cartesian_acceleration.z != 0.0) {
     setAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration, cartesian_acceleration.z * 10,
-                             z_confidence * 10);
+                             z_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.acceleration.cartesian_acceleration.z_acceleration_is_present = true;
   }
   object.acceleration_is_present = true;
@@ -352,20 +356,27 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
  *
  * @param object The PerceivedObject to set the yaw angle for.
  * @param yaw The yaw angle in radians.
- * @param confidence The confidence level of the yaw angle in 0,1 degrees (optional, default is AngleConfidence::UNAVAILABLE).
+ * @param confidence The standard deviation of the yaw angle in radians (optional, default is Infinity).
  */
 inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
-                                    const uint8_t confidence = AngleConfidence::UNAVAILABLE) {
+                                    double confidence = std::numeric_limits<double>::infinity()) {
   // wrap angle to range [0, 360]
   double yaw_in_degrees = yaw * 180 / M_PI + 180;  // TODO: check if this is correct
   while (yaw_in_degrees > 360.0) yaw_in_degrees -= 360.0;
   while (yaw_in_degrees < 0) yaw_in_degrees += 360.0;
   object.angles.z_angle.value.value = yaw_in_degrees * 10;
 
-  if (confidence > AngleConfidence::MAX || confidence < AngleConfidence::MIN) {
-    object.angles.z_angle.confidence.value = AngleConfidence::OUT_OF_RANGE;
+  if(confidence == std::numeric_limits<double>::infinity()) {
+    confidence = AngleConfidence::UNAVAILABLE;
   } else {
-    object.angles.z_angle.confidence.value = confidence;
+    confidence *= 180.0 / M_PI;
+    confidence *= 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to 0.1 degrees
+
+    if (confidence > AngleConfidence::MAX || confidence < AngleConfidence::MIN) {
+      object.angles.z_angle.confidence.value = AngleConfidence::OUT_OF_RANGE;
+    } else {
+      object.angles.z_angle.confidence.value = static_cast<uint8_t>(confidence);
+    }
   }
   object.angles_is_present = true;
 }
@@ -382,18 +393,40 @@ inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
  * @param confidence Confidence of the yaw rate defined in AngularSpeedConfidence (optional, default is AngularSpeedConfidence::UNAVAILABLE).
  */
 inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double yaw_rate,
-                                        const uint8_t confidence = AngularSpeedConfidence::UNAVAILABLE) {
-  int16_t yaw_rate_in_degrees = yaw_rate * 180 / M_PI;
-  if (yaw_rate_in_degrees != CartesianAngularVelocityComponentValue::UNAVAILABLE) {
-    // limit value range
-    if (yaw_rate_in_degrees < CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE) {
-      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE;
-    } else if (yaw_rate_in_degrees > CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE) {
-      yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE;
+                                        double confidence = std::numeric_limits<double>::infinity()) {
+  double yaw_rate_in_degrees = yaw_rate * 180.0 / M_PI;
+  // limit value range
+  if (yaw_rate_in_degrees < CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE) {
+    yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE;
+  } else if (yaw_rate_in_degrees > CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE) {
+    yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE;
+  }
+  
+  object.z_angular_velocity.value.value = yaw_rate_in_degrees;
+
+  if(confidence == std::numeric_limits<double>::infinity()) {
+    object.z_angular_velocity.confidence.value = AngularSpeedConfidence::UNAVAILABLE;
+  } else {
+    confidence *= 180.0 / M_PI;
+    confidence *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to degrees/s
+    // How stupid is this?!
+    static const std::map<double, uint8_t> confidence_map = {
+        {1.0, AngularSpeedConfidence::DEG_SEC_01},
+        {2.0, AngularSpeedConfidence::DEG_SEC_02},
+        {5.0, AngularSpeedConfidence::DEG_SEC_05},
+        {10.0, AngularSpeedConfidence::DEG_SEC_10},
+        {20.0, AngularSpeedConfidence::DEG_SEC_20},
+        {50.0, AngularSpeedConfidence::DEG_SEC_50},
+        {std::numeric_limits<double>::infinity(), AngularSpeedConfidence::OUT_OF_RANGE},
+    };
+    for(const auto& [thresh, conf_val] : confidence_map) {
+      if (confidence <= thresh) {
+        object.z_angular_velocity.confidence.value = conf_val;
+        break;
+      }
     }
   }
-  object.z_angular_velocity.value.value = yaw_rate_in_degrees;
-  object.z_angular_velocity.confidence.value = confidence;
+
   object.z_angular_velocity_is_present = true;
 }
 
