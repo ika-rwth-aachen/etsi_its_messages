@@ -74,6 +74,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
           - denm
           - denm_ts
           - mapem_ts
+          - mcm_uulm
           - spatem_ts
           - vam_ts
         udp2ros_etsi_types:
@@ -81,6 +82,7 @@ The `etsi_its_conversion` package converts `etsi_its_msgs` ROS messages to and f
           - cpm_ts
           - denm
           - mapem_ts
+          - mcm_uulm
           - spatem_ts
           - vam_ts
     ```
