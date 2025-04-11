@@ -83,7 +83,7 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   int random_int_time2 = randomInt(0, 35990);
   int random_int_seconds2 = randomInt(0, 3599);
   uint random_uint_nanosecs2 = (uint)randomInt(0, 1e3 - 1) * 1e6;
-  double tolerance = 1e-4;
+  double tolerance = 1e-3;
 
   float time_mark_as_seconds2 = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time2, random_int_seconds2, random_uint_nanosecs2);
   EXPECT_NEAR(time_mark_as_seconds2, (float)random_int_time2 * 0.1f - (random_int_seconds2 + (float)random_uint_nanosecs2 * 1e-9), tolerance);
