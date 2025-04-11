@@ -148,7 +148,7 @@ inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, co
  * 
  * @param coordinate The CartesianCoordinateWithConfidence object to be modified.
  * @param value The value to be set in centimeters.
- * @param confidence The confidence to be set in centimeters (default: CoordinateConfidence::UNAVAILABLE).
+ * @param confidence The confidence to be set in centimeters (default: infinity, which will map to CoordinateConfidence::UNAVAILABLE).
  */
 inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfidence& coordinate, const double value,
                                                  const double confidence = std::numeric_limits<double>::infinity()) {
@@ -178,18 +178,18 @@ inline void setCartesianCoordinateWithConfidence(CartesianCoordinateWithConfiden
  *
  * @param object The PerceivedObject to set the position for.
  * @param point The gm::Point representing the coordinates of the object in meters.
- * @param x_confidence The confidence value in meters for the x-coordinate (default: CoordinateConfidence::UNAVAILABLE).
- * @param y_confidence The confidence value in meters for the y-coordinate (default: CoordinateConfidence::UNAVAILABLE).
- * @param z_confidence The confidence value in meters for the z-coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param x_std The standard deviation in meters for the x-coordinate (default: infinity).
+ * @param y_std The standard deviation in meters for the y-coordinate (default: infinity).
+ * @param z_std The standard deviation in meters for the z-coordinate (default: infinity).
  */
 inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Point& point,
-                                         const double x_confidence = std::numeric_limits<double>::infinity(),
-                                         const double y_confidence = std::numeric_limits<double>::infinity(),
-                                         const double z_confidence = std::numeric_limits<double>::infinity()) {
-  setCartesianCoordinateWithConfidence(object.position.x_coordinate, point.x * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
-  setCartesianCoordinateWithConfidence(object.position.y_coordinate, point.y * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                         const double x_std = std::numeric_limits<double>::infinity(),
+                                         const double y_std = std::numeric_limits<double>::infinity(),
+                                         const double z_std = std::numeric_limits<double>::infinity()) {
+  setCartesianCoordinateWithConfidence(object.position.x_coordinate, point.x * 100, x_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  setCartesianCoordinateWithConfidence(object.position.y_coordinate, point.y * 100, y_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (point.z != 0.0) {
-    setCartesianCoordinateWithConfidence(object.position.z_coordinate, point.z * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+    setCartesianCoordinateWithConfidence(object.position.z_coordinate, point.z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.position.z_coordinate_is_present = true;
   }
 }
@@ -203,17 +203,17 @@ inline void setPositionOfPerceivedObject(PerceivedObject& object, const gm::Poin
  * @param cpm The CPM to get the reference position from.
  * @param object The PerceivedObject to set the position for.
  * @param utm_position gm::PointStamped representing the UTM position of the object including the frame_id (utm_<zone><N/S>).
- * @param x_confidence The confidence value in meters for the x coordinate (default: CoordinateConfidence::UNAVAILABLE).
- * @param y_confidence The confidence value in meters for the y coordinate (default: CoordinateConfidence::UNAVAILABLE).
- * @param z_confidence The confidence value in meters for the z coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param x_confidence The standard deviation in meters for the x coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param y_confidence The standard deviation in meters for the y coordinate (default: CoordinateConfidence::UNAVAILABLE).
+ * @param z_confidence The standard deviation in meters for the z coordinate (default: CoordinateConfidence::UNAVAILABLE).
  *
  * @throws std::invalid_argument if the UTM-Position frame_id does not match the reference position frame_id.
  */
 inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, PerceivedObject& object,
                                             const gm::PointStamped& utm_position,
-                                            const double x_confidence = std::numeric_limits<double>::infinity(),
-                                            const double y_confidence = std::numeric_limits<double>::infinity(),
-                                            const double z_confidence = std::numeric_limits<double>::infinity()) {
+                                            const double x_std = std::numeric_limits<double>::infinity(),
+                                            const double y_std = std::numeric_limits<double>::infinity(),
+                                            const double z_std = std::numeric_limits<double>::infinity()) {
   gm::PointStamped reference_position = getUTMPosition(cpm);
   if (utm_position.header.frame_id != reference_position.header.frame_id) {
     throw std::invalid_argument("UTM-Position frame_id (" + utm_position.header.frame_id +
@@ -221,12 +221,12 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
                                 ")");
   }
   setCartesianCoordinateWithConfidence(object.position.x_coordinate,
-                                       (utm_position.point.x - reference_position.point.x) * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                       (utm_position.point.x - reference_position.point.x) * 100, x_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   setCartesianCoordinateWithConfidence(object.position.y_coordinate,
-                                       (utm_position.point.y - reference_position.point.y) * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                       (utm_position.point.y - reference_position.point.y) * 100, y_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (utm_position.point.z != 0.0) {
     setCartesianCoordinateWithConfidence(object.position.z_coordinate,
-                                         (utm_position.point.z - reference_position.point.z) * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                         (utm_position.point.z - reference_position.point.z) * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.position.z_coordinate_is_present = true;
   }
 }
@@ -240,7 +240,7 @@ inline void setUTMPositionOfPerceivedObject(CollectivePerceptionMessage& cpm, Pe
  *
  * @param velocity The VelocityComponent object to set the value and confidence for.
  * @param value The value to set for the VelocityComponent in cm/s.
- * @param confidence The confidence to set for the VelocityComponent in cm/s. Default value is SpeedConfidence::UNAVAILABLE.
+ * @param confidence The confidence to set for the VelocityComponent in cm/s. Default value is infinity, mapping to SpeedConfidence::UNAVAILABLE.
  */
 inline void setVelocityComponent(VelocityComponent& velocity, const double value,
                                  const double confidence = std::numeric_limits<double>::infinity()) {
@@ -271,19 +271,19 @@ inline void setVelocityComponent(VelocityComponent& velocity, const double value
  *
  * @param object The perceived object for which the velocity is being set.
  * @param cartesian_velocity The Cartesian velocity components (x, y, z) of the object (in m/s).
- * @param x_confidence The confidence value in m/s for the x velocity component (default: SpeedConfidence::UNAVAILABLE).
- * @param y_confidence The confidence value in m/s for the y velocity component (default: SpeedConfidence::UNAVAILABLE).
- * @param z_confidence The confidence value in m/s for the z velocity component (default: SpeedConfidence::UNAVAILABLE).
+ * @param x_std The standard deviation in m/s for the x velocity component (default: infinity).
+ * @param y_std The standard deviation in m/s for the y velocity component (default: infinity).
+ * @param z_std The standard deviation in m/s for the z velocity component (default: infinity).
  */
 inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_velocity,
-                                         const double x_confidence = SpeedConfidence::UNAVAILABLE,
-                                         const double y_confidence = SpeedConfidence::UNAVAILABLE,
-                                         const double z_confidence = SpeedConfidence::UNAVAILABLE) {
+                                         const double x_std = std::numeric_limits<double>::infinity(),
+                                         const double y_std = std::numeric_limits<double>::infinity(),
+                                         const double z_std = std::numeric_limits<double>::infinity()) {
   object.velocity.choice = Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY;
-  setVelocityComponent(object.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
-  setVelocityComponent(object.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  setVelocityComponent(object.velocity.cartesian_velocity.x_velocity, cartesian_velocity.x * 100, x_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  setVelocityComponent(object.velocity.cartesian_velocity.y_velocity, cartesian_velocity.y * 100, y_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (cartesian_velocity.z != 0.0) {
-    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_confidence * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.velocity.cartesian_velocity.z_velocity_is_present = true;
   }
   object.velocity_is_present = true;
@@ -298,7 +298,7 @@ inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vect
  *
  * @param acceleration The AccelerationComponent object to set the value and confidence for.
  * @param value The value to set for the AccelerationComponent in dm/s^2.
- * @param confidence The confidence to set for the AccelerationComponent in dm/s^2. Default value is AccelerationConfidence::UNAVAILABLE.
+ * @param confidence The confidence to set for the AccelerationComponent in dm/s^2. Default value is infinity, mapping to AccelerationConfidence::UNAVAILABLE.
  */
 inline void setAccelerationComponent(AccelerationComponent& acceleration, const double value,
                                      const double confidence = std::numeric_limits<double>::infinity()) {
@@ -329,22 +329,22 @@ inline void setAccelerationComponent(AccelerationComponent& acceleration, const 
  *
  * @param object The perceived object for which the acceleration is being set.
  * @param cartesian_acceleration The Cartesian acceleration components (x, y, z) of the object (in m/s^2).
- * @param x_confidence The confidence value in m/s^2 for the x acceleration component (default: AccelerationConfidence::UNAVAILABLE).
- * @param y_confidence The confidence value in m/s^2 for the y acceleration component (default: AccelerationConfidence::UNAVAILABLE).
- * @param z_confidence The confidence value in m/s^2 for the z acceleration component (default: AccelerationConfidence::UNAVAILABLE).
+ * @param x_std The standard deviation in m/s^2 for the x acceleration component (default: infinity).
+ * @param y_std The standard deviation in m/s^2 for the y acceleration component (default: infinity).
+ * @param z_std The standard deviation in m/s^2 for the z acceleration component (default: infinity).
  */
 inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::Vector3& cartesian_acceleration,
-                                             const double x_confidence = std::numeric_limits<double>::infinity(),
-                                             const double y_confidence = std::numeric_limits<double>::infinity(),
-                                             const double z_confidence = std::numeric_limits<double>::infinity()) {
+                                             const double x_std = std::numeric_limits<double>::infinity(),
+                                             const double y_std = std::numeric_limits<double>::infinity(),
+                                             const double z_std = std::numeric_limits<double>::infinity()) {
   object.acceleration.choice = Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION;
   setAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration, cartesian_acceleration.x * 10,
-                           x_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                           x_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   setAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration, cartesian_acceleration.y * 10,
-                           y_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                           y_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (cartesian_acceleration.z != 0.0) {
     setAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration, cartesian_acceleration.z * 10,
-                             z_confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                             z_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.acceleration.cartesian_acceleration.z_acceleration_is_present = true;
   }
   object.acceleration_is_present = true;
@@ -358,26 +358,26 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
  *
  * @param object The PerceivedObject to set the yaw angle for.
  * @param yaw The yaw angle in radians.
- * @param confidence The standard deviation of the yaw angle in radians (optional, default is Infinity).
+ * @param yaw_std The standard deviation of the yaw angle in radians (optional, default is Infinity).
  */
 inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
-                                    double confidence = std::numeric_limits<double>::infinity()) {
+                                    double yaw_std = std::numeric_limits<double>::infinity()) {
   // wrap angle to range [0, 360]
-  double yaw_in_degrees = yaw * 180 / M_PI + 180;  // TODO: check if this is correct
+  double yaw_in_degrees = yaw * 180 / M_PI;
   while (yaw_in_degrees > 360.0) yaw_in_degrees -= 360.0;
-  while (yaw_in_degrees < 0) yaw_in_degrees += 360.0;
+  while (yaw_in_degrees <= 0.0) yaw_in_degrees += 360.0;
   object.angles.z_angle.value.value = yaw_in_degrees * 10;
 
-  if(confidence == std::numeric_limits<double>::infinity()) {
-    confidence = AngleConfidence::UNAVAILABLE;
+  if(yaw_std == std::numeric_limits<double>::infinity()) {
+    object.angles.z_angle.confidence.value = AngleConfidence::UNAVAILABLE;
   } else {
-    confidence *= 180.0 / M_PI;
-    confidence *= 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to 0.1 degrees
+    yaw_std *= 180.0 / M_PI;
+    yaw_std *= 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to 0.1 degrees
 
-    if (confidence > AngleConfidence::MAX || confidence < AngleConfidence::MIN) {
+    if (yaw_std > AngleConfidence::MAX || yaw_std < AngleConfidence::MIN) {
       object.angles.z_angle.confidence.value = AngleConfidence::OUT_OF_RANGE;
     } else {
-      object.angles.z_angle.confidence.value = static_cast<uint8_t>(confidence);
+      object.angles.z_angle.confidence.value = static_cast<uint8_t>(yaw_std);
     }
   }
   object.angles_is_present = true;
@@ -392,10 +392,10 @@ inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
  *
  * @param object The PerceivedObject to set the yaw rate for.
  * @param yaw_rate The yaw rate in rad/s.
- * @param confidence Confidence of the yaw rate defined in AngularSpeedConfidence (optional, default is AngularSpeedConfidence::UNAVAILABLE).
+ * @param yaw_rate_std Standard deviation of the yaw rate in rad/s (optional, default is infinity, mapping to AngularSpeedConfidence::UNAVAILABLE).
  */
 inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double yaw_rate,
-                                        double confidence = std::numeric_limits<double>::infinity()) {
+                                        double yaw_rate_std = std::numeric_limits<double>::infinity()) {
   double yaw_rate_in_degrees = yaw_rate * 180.0 / M_PI;
   // limit value range
   if (yaw_rate_in_degrees < CartesianAngularVelocityComponentValue::NEGATIVE_OUTOF_RANGE) {
@@ -406,11 +406,11 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
   
   object.z_angular_velocity.value.value = yaw_rate_in_degrees;
 
-  if(confidence == std::numeric_limits<double>::infinity()) {
+  if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
     object.z_angular_velocity.confidence.value = AngularSpeedConfidence::UNAVAILABLE;
   } else {
-    confidence *= 180.0 / M_PI;
-    confidence *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to degrees/s
+    yaw_rate_std *= 180.0 / M_PI;
+    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to degrees/s
     // How stupid is this?!
     static const std::map<double, uint8_t> confidence_map = {
         {1.0, AngularSpeedConfidence::DEG_SEC_01},
@@ -422,7 +422,7 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
         {std::numeric_limits<double>::infinity(), AngularSpeedConfidence::OUT_OF_RANGE},
     };
     for(const auto& [thresh, conf_val] : confidence_map) {
-      if (confidence <= thresh) {
+      if (yaw_rate_std <= thresh) {
         object.z_angular_velocity.confidence.value = conf_val;
         break;
       }
@@ -444,7 +444,7 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
  * 
  * @param dimension The object dimension to be set.
  * @param value The value of the object dimension in decimeters.
- * @param confidence The confidence of the object dimension in decimeters (optional, default is ObjectDimensionConfidence::UNAVAILABLE).
+ * @param confidence The confidence of the object dimension in decimeters (optional, default is infinty, mapping to ObjectDimensionConfidence::UNAVAILABLE).
  */
 inline void setObjectDimension(ObjectDimension& dimension, const double value,
                                const double confidence = std::numeric_limits<double>::infinity()) {
@@ -474,11 +474,11 @@ inline void setObjectDimension(ObjectDimension& dimension, const double value,
  *
  * @param object The `PerceivedObject` to modify.
  * @param value The value to set as the x-dimension in meters.
- * @param confidence The confidence of the x-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ * @param std The standard deviation of the x-dimension value in meters (optional, default is infinity).
  */
 inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_x, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                           const double std = std::numeric_limits<double>::infinity()) {
+  setObjectDimension(object.object_dimension_x, value * 10, std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_x_is_present = true;
 }
 
@@ -490,11 +490,11 @@ inline void setXDimensionOfPerceivedObject(PerceivedObject& object, const double
  *
  * @param object The `PerceivedObject` to modify.
  * @param value The value to set as the y-dimension in meters.
- * @param confidence The confidence of the y-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ * @param std The standard deviation of the y-dimension value in meters (optional, default is infinity).
  */
 inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_y, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                           const double std = std::numeric_limits<double>::infinity()) {
+  setObjectDimension(object.object_dimension_y, value * 10, std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_y_is_present = true;
 }
 
@@ -506,11 +506,11 @@ inline void setYDimensionOfPerceivedObject(PerceivedObject& object, const double
  *
  * @param object The `PerceivedObject` to modify.
  * @param value The value to set as the z-dimension in meters.
- * @param confidence The confidence of the z-dimension value in meters (optional, default is `ObjectDimensionConfidence::UNAVAILABLE`).
+ * @param std The standard deviation of the z-dimension value in meters (optional, default is infinity).
  */
 inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double value,
-                                           const double confidence = ObjectDimensionConfidence::UNAVAILABLE) {
-  setObjectDimension(object.object_dimension_z, value * 10, confidence * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+                                           const double std = std::numeric_limits<double>::infinity()) {
+  setObjectDimension(object.object_dimension_z, value * 10, std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   object.object_dimension_z_is_present = true;
 }
 
@@ -521,17 +521,17 @@ inline void setZDimensionOfPerceivedObject(PerceivedObject& object, const double
  *
  * @param object The perceived object to set the dimensions for.
  * @param dimensions The dimensions of the object as a gm::Vector3 (x, y, z) in meters.
- * @param x_confidence The standard deviation in meters for the x dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
- * @param y_confidence The standard deviation in meters for the y dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
- * @param z_confidence The standard deviation in meters for the z dimension (optional, default: ObjectDimensionConfidence::UNAVAILABLE).
+ * @param x_std The standard deviation in meters for the x dimension (optional, default: infinity).
+ * @param y_std The standard deviation in meters for the y dimension (optional, default: infinity).
+ * @param z_std The standard deviation in meters for the z dimension (optional, default: infinity).
  */
 inline void setDimensionsOfPerceivedObject(PerceivedObject& object, const gm::Vector3& dimensions,
-                                           const double x_confidence = std::numeric_limits<double>::infinity(),
-                                           const double y_confidence = std::numeric_limits<double>::infinity(),
-                                           const double z_confidence = std::numeric_limits<double>::infinity()) {
-  setXDimensionOfPerceivedObject(object, dimensions.x, x_confidence);
-  setYDimensionOfPerceivedObject(object, dimensions.y, y_confidence);
-  setZDimensionOfPerceivedObject(object, dimensions.z, z_confidence);
+                                           const double x_std = std::numeric_limits<double>::infinity(),
+                                           const double y_std = std::numeric_limits<double>::infinity(),
+                                           const double z_std = std::numeric_limits<double>::infinity()) {
+  setXDimensionOfPerceivedObject(object, dimensions.x, x_std);
+  setYDimensionOfPerceivedObject(object, dimensions.y, y_std);
+  setZDimensionOfPerceivedObject(object, dimensions.z, z_std);
 }
 
 /**

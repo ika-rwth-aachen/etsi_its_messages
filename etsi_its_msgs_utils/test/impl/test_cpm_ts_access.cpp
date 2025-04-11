@@ -78,11 +78,15 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(longitude, cpm_ts_access::getLongitude(cpm), 1e-7);
   EXPECT_NEAR(altitude, cpm_ts_access::getAltitude(cpm), 1e-2);
 
+  // Test perceived object
+  // Position
   cpm_ts_msgs::PerceivedObject object;
-  double dx = randomDouble(-10.0, 10.0);;
+  double dx = randomDouble(-10.0, 10.0);
   double dy = randomDouble(-10.0, 10.0);
+  double dz = randomDouble(-10.0, 10.0);
   utm.point.x += dx;
   utm.point.y += dy;
+  utm.point.z += dz;
   double var_x = randomDouble(0.1, 20.48);
   double var_y = randomDouble(0.1, 20.48);
   double var_z = randomDouble(0.1, 20.48);
@@ -90,15 +94,17 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   gm::PointStamped point = cpm_ts_access::getUTMPositionOfPerceivedObject(cpm, object);
   EXPECT_NEAR(utm.point.x, point.point.x, 1e-1);
   EXPECT_NEAR(utm.point.y, point.point.y, 1e-1);
+  EXPECT_NEAR(utm.point.z, point.point.z, 1e-1);
   gm::Point dpoint = cpm_ts_access::getPositionOfPerceivedObject(object);
   EXPECT_NEAR(dx, dpoint.x, 1e-1);
   EXPECT_NEAR(dy, dpoint.y, 1e-1);
+  EXPECT_NEAR(dz, dpoint.z, 1e-1);
   auto [var_x_get, var_y_get, var_z_get] = cpm_ts_access::getPositionConfidenceOfPerceivedObject(object);
   EXPECT_NEAR(var_x, var_x_get, 1e-2);
   EXPECT_NEAR(var_y, var_y_get, 1e-2);
   EXPECT_NEAR(var_z, var_z_get, 1e-2);
 
-
+  // Dimensions
   gm::Vector3 dimensions;
   dimensions.x = randomDouble(0.1, 25.6);
   dimensions.y = randomDouble(0.1, 25.6);
@@ -115,21 +121,56 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(var_y, var_y_get, 1e-1);
   EXPECT_NEAR(var_z, var_z_get, 1e-1);
 
+  // Yaw
+  double yaw = randomDouble(-M_PI, M_PI);
+  double yaw_std = randomDouble(0.0001, 0.109);
+  cpm_ts_access::setYawOfPerceivedObject(object, yaw, yaw_std);
+  EXPECT_NEAR(yaw, cpm_ts_access::getYawOfPerceivedObject(object), 1e-1 * M_PI / 180.0);
+  EXPECT_NEAR(yaw_std, cpm_ts_access::getYawConfidenceOfPerceivedObject(object), 1e-1 * M_PI / 180.0);
+
+  // Yaw rate
+  double yaw_rate = randomDouble(-4.45, 4.45);
+  double yaw_rate_std = randomDouble(0.0001, 0.436);
+  cpm_ts_access::setYawRateOfPerceivedObject(object, yaw_rate, yaw_rate_std);
+  EXPECT_NEAR(yaw_rate, cpm_ts_access::getYawRateOfPerceivedObject(object), 1e0 * M_PI / 180.0);
+  std::array<double, 6> yaw_std_possible_values{1.0, 2.0, 5.0, 10.0, 20.0, 50.0};
+  std::for_each(yaw_std_possible_values.begin(), yaw_std_possible_values.end(),
+                [](double& val) { val *= 0.5 * M_PI / 180.0; });
+  double expected_yaw_rate = *std::lower_bound(yaw_std_possible_values.begin(), yaw_std_possible_values.end(), yaw_rate_std);
+  EXPECT_NEAR(expected_yaw_rate, cpm_ts_access::getYawRateConfidenceOfPerceivedObject(object), 1e0 * M_PI / 180.0);
+
+
+  // Velocity
   gm::Vector3 velocity;
   velocity.x = randomDouble(-163.83, 163.83);
   velocity.y = randomDouble(-163.83, 163.83);
   velocity.z = randomDouble(-163.83, 163.83);
-  cpm_ts_access::setVelocityOfPerceivedObject(object, velocity);
+  double velocity_x_std = randomDouble(0.01, 0.625);
+  double velocity_y_std = randomDouble(0.01, 0.625);
+  double velocity_z_std = randomDouble(0.01, 0.625);
+  cpm_ts_access::setVelocityOfPerceivedObject(object, velocity, velocity_x_std, velocity_y_std, velocity_z_std);
   EXPECT_NEAR(velocity.x, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).x, 1e-2);
   EXPECT_NEAR(velocity.y, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).y, 1e-2);
   EXPECT_NEAR(velocity.z, cpm_ts_access::getCartesianVelocityOfPerceivedObject(object).z, 1e-2);
+  auto [vel_x_std_get, vel_y_std_get, vel_z_std_get] = cpm_ts_access::getCartesianVelocityConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(velocity_x_std, vel_x_std_get, 1e-2);
+  EXPECT_NEAR(velocity_y_std, vel_y_std_get, 1e-2);
+  EXPECT_NEAR(velocity_z_std, vel_z_std_get, 1e-2);
 
+  // Acceleration
   gm::Vector3 acceleration;
   acceleration.x = randomDouble(-16.0, 16.0);
   acceleration.y = randomDouble(-16.0, 16.0);
   acceleration.z = randomDouble(-16.0, 16.0);
-  cpm_ts_access::setAccelerationOfPerceivedObject(object, acceleration);
+  double acceleration_x_std = randomDouble(0.1, 5.0);
+  double acceleration_y_std = randomDouble(0.1, 5.0);
+  double acceleration_z_std = randomDouble(0.1, 5.0);
+  cpm_ts_access::setAccelerationOfPerceivedObject(object, acceleration, acceleration_x_std, acceleration_y_std, acceleration_z_std);
   EXPECT_NEAR(acceleration.x, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).x, 1e-1);
   EXPECT_NEAR(acceleration.y, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).y, 1e-1);
   EXPECT_NEAR(acceleration.z, cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object).z, 1e-1);
+  auto [acc_x_std_get, acc_y_std_get, acc_z_std_get] = cpm_ts_access::getCartesianAccelerationConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(acceleration_x_std, acc_x_std_get, 1e-1);
+  EXPECT_NEAR(acceleration_y_std, acc_y_std_get, 1e-1);
+  EXPECT_NEAR(acceleration_z_std, acc_z_std_get, 1e-1);
 }
