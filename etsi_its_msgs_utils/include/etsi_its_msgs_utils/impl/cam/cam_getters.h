@@ -85,7 +85,7 @@ inline double getLateralAccelerationConfidence(const LateralAcceleration& latera
  * @param cam The CAM message to get the reference position from
  * @return const std::array<double, 4> the covariance matrix, as specified above
  */
-inline const std::array<double, 4> getRefPosConfidence(CAM& cam) {
+inline const std::array<double, 4> getRefPosConfidence(const CAM& cam) {
   double object_heading = getHeading(cam) * M_PI / 180.0;
   return getPosConfidenceEllipse(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);
 }
@@ -99,7 +99,7 @@ inline const std::array<double, 4> getRefPosConfidence(CAM& cam) {
  * @param cam The CAM message to get the reference position from
  * @return const std::array<double, 4> the covariance matrix, as specified above
  */
-inline const std::array<double, 4> getWGSRefPosConfidence(CAM& cam) {
+inline const std::array<double, 4> getWGSRefPosConfidence(const CAM& cam) {
   return getWGSPosConfidenceEllipse(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);
 }
 

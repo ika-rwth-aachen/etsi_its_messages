@@ -123,6 +123,12 @@ inline void setSpeedValue(SpeedValue& speed, const double value) {
   speed.value = static_cast<decltype(speed.value)>(speed_val);
 }
 
+/**
+ * @brief Set the Speed Confidence object
+ * 
+ * @param speed_confidence object to set
+ * @param value standard deviation in m/s as decimal number
+ */
 inline void setSpeedConfidence(SpeedConfidence& speed_confidence, const double value) {
   auto speed_conf = std::round(value * 1e2 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
   if (speed_conf < SpeedConfidence::MIN && speed_conf > 0.0){
@@ -140,12 +146,19 @@ inline void setSpeedConfidence(SpeedConfidence& speed_confidence, const double v
  *
  * @param speed object to set
  * @param value  Speed in in m/s as decimal number
+ * @param confidence standard deviation in m/s as decimal number (Optional. Default is std::numeric_limits<double>::infinity(), mapping to SpeedConfidence::UNAVAILABLE)
  */
-inline void setSpeed(Speed& speed, const double value, const double confidence = SpeedConfidence::UNAVAILABLE) {
+inline void setSpeed(Speed& speed, const double value, const double confidence = std::numeric_limits<double>::infinity()) {
   setSpeedConfidence(speed.speed_confidence, confidence);
   setSpeedValue(speed.speed_value, value);
 }
 
+/**
+ * @brief Set the Acceleration Confidence object
+ * 
+ * @param accel_confidence object to set
+ * @param value standard deviation in m/s^2 as decimal number
+ */
 template <typename AccelerationConfidence>
 inline void setAccelerationConfidence(AccelerationConfidence& accel_confidence, const double value) {
   auto accel_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
