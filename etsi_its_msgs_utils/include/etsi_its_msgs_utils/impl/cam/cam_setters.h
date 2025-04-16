@@ -55,7 +55,7 @@ inline void setItsPduHeader(CAM &cam, const uint32_t station_id, const uint8_t p
 inline void setLongitudinalAccelerationValue(LongitudinalAccelerationValue& accel, const double value) {
   auto accel_val = std::round(value * 1e1);
   if (accel_val >= LongitudinalAccelerationValue::MIN && accel_val <= LongitudinalAccelerationValue::MAX) {
-    accel.value = accel_val;
+    accel.value = static_cast<int16_t>(accel_val);
   } else if (accel_val < LongitudinalAccelerationValue::MIN) {
     accel.value = LongitudinalAccelerationValue::MIN;
   } else if (accel_val > LongitudinalAccelerationValue::MAX) {

@@ -249,7 +249,7 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
  * @param value Heading value in degree as decimal number
  */
 template <typename Heading, typename HeadingConfidence = decltype(Heading::heading_confidence)>
-void setHeadingInternal(Heading& heading, const double value) {
+void setHeadingCDD(Heading& heading, const double value) {
   heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
   setHeadingValue(heading.heading_value, value);
 }

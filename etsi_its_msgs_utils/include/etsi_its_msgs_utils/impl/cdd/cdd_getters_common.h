@@ -77,6 +77,12 @@ inline double getAltitude(const Altitude& altitude) { return ((double)altitude.a
  */
 inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
+/**
+ * @brief Get the Speed Confidence 
+ * 
+ * @param speed to get the SpeedConfidence from
+ * @return double speed standard deviation in m/s as decimal number
+ */
 inline double getSpeedConfidence(const Speed& speed) {
   return ((double)speed.speed_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-2;
 }
@@ -122,7 +128,7 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
  * @return Heading value in degree as decimal number
  */
 template <typename Heading>
-inline double getHeadingInternal(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
+inline double getHeadingCDD(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
 
 /**
  * @brief Get the Semi Axis object
@@ -131,7 +137,7 @@ inline double getHeadingInternal(const Heading& heading) { return ((double)headi
  * @return double the semi axis length in meters
  */
 template <typename SemiAxisLength>
-inline double getSemiAxis(SemiAxisLength& semi_axis_length) {
+inline double getSemiAxis(const SemiAxisLength& semi_axis_length) {
   return ((double)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value;
 }
 
@@ -142,7 +148,7 @@ inline double getSemiAxis(SemiAxisLength& semi_axis_length) {
  * @return std::tuple<double, double, double> major axis length in meters, minor axis length in meters, and orientation in degrees
  */
 template <typename PosConfidenceEllipse>
-inline std::tuple<double, double, double> getPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_ellipse) {
+inline std::tuple<double, double, double> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse) {
   return {
     getSemiAxis(position_confidence_ellipse.semi_major_confidence),
     getSemiAxis(position_confidence_ellipse.semi_minor_confidence),

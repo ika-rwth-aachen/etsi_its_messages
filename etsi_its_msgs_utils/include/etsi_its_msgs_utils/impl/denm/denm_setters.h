@@ -115,7 +115,7 @@ inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading) {
  */
 inline void setHeading(DENM& denm, const double heading_val) {
   if (denm.denm.location_is_present) {
-    setHeadingInternal(denm.denm.location.event_position_heading, heading_val);
+    setHeadingCDD(denm.denm.location.event_position_heading, heading_val);
     setIsHeadingPresent(denm, true);
   } else {
     throw std::invalid_argument("LocationContainer is not present!");
@@ -141,8 +141,9 @@ inline void setIsSpeedPresent(DENM& denm, bool presence_of_speed) {
  *
  * @param denm DENM to set the speed value
  * @param speed_val speed value to set in m/s as decimal number
+ * @param confidence speed confidence value to set in m/s (default: infinity, mapping to SpeedConfidence::UNAVAILABLE)
  */
-inline void setSpeed(DENM& denm, const double speed_val, const double confidence = SpeedConfidence::UNAVAILABLE) {
+inline void setSpeed(DENM& denm, const double speed_val, const double confidence = std::numeric_limits<double>::infinity()) {
   if (denm.denm.location_is_present) {
     setSpeed(denm.denm.location.event_speed, speed_val, confidence);
     setIsSpeedPresent(denm, true);

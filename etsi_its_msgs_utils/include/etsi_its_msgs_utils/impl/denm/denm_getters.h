@@ -101,7 +101,7 @@ inline double getAltitude(const DENM& denm) { return getAltitude(denm.denm.manag
 inline double getHeading(const DENM& denm) {
   if (denm.denm.location_is_present) {
     if (denm.denm.location.event_position_heading_is_present) {
-      return getHeadingInternal(denm.denm.location.event_position_heading);
+      return getHeadingCDD(denm.denm.location.event_position_heading);
     } else {
       throw std::invalid_argument("Heading is not present!");
     }
@@ -154,6 +154,17 @@ inline bool getIsSpeedPresent(const DENM& denm) {
   } else {
     throw std::invalid_argument("LocationContainer is not present!");
   }
+}
+
+/**
+ * @brief Get the Speed Confidence
+ * 
+ * @param denm DENM to get the Speed Confidence from
+ * @return double standard deviation of the speed in m/s as decimal number
+ */
+inline double getSpeedConfidence(const DENM& denm) {
+  return getSpeedConfidence(
+    denm.denm.location.event_speed);
 }
 
 /**

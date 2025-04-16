@@ -362,10 +362,10 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
  */
 inline void setYawOfPerceivedObject(PerceivedObject& object, const double yaw,
                                     double yaw_std = std::numeric_limits<double>::infinity()) {
-  // wrap angle to range [0, 360]
+  // wrap angle to range [0, 360)
   double yaw_in_degrees = yaw * 180 / M_PI;
-  while (yaw_in_degrees > 360.0) yaw_in_degrees -= 360.0;
-  while (yaw_in_degrees <= 0.0) yaw_in_degrees += 360.0;
+  while (yaw_in_degrees >= 360.0) yaw_in_degrees -= 360.0;
+  while (yaw_in_degrees < 0.0) yaw_in_degrees += 360.0;
   object.angles.z_angle.value.value = yaw_in_degrees * 10;
 
   if(yaw_std == std::numeric_limits<double>::infinity()) {

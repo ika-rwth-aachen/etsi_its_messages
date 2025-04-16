@@ -318,6 +318,7 @@ inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &obj
   }
   yaw = (((double(getCartesianAngle(object.angles.z_angle)) / 10.0)) / 180.0) *
         M_PI;
+  // This wraps from -pi ti pi because setRPY only uses cos and sin of the angles
   q.setRPY(roll, pitch, yaw);
 
   return tf2::toMsg(q);
@@ -368,7 +369,7 @@ inline gm::Pose getPoseOfPerceivedObject(const PerceivedObject &object) {
  * @brief Get the yaw rate of the PerceivedObject
  * 
  * @param object PerceivedObject to get the yaw rate from
- * @return int16_t yaw rate of the PerceivedObject in rad/s
+ * @return double yaw rate of the PerceivedObject in rad/s
  * @throws std::invalid_argument If the yaw rate is not present in the object.
  */
 inline double getYawRateOfPerceivedObject(const PerceivedObject &object) {

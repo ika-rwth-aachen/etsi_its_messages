@@ -105,7 +105,7 @@ inline double getAltitude(const CAM& cam) {
  * @return Heading value in degree as decimal number
  */
 inline double getHeading(const CAM& cam) {
-  return getHeadingInternal(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+  return getHeadingCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
 }
 
 /**
@@ -158,6 +158,12 @@ inline double getSpeed(const CAM& cam) {
   return getSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);
 }
 
+/**
+ * @brief Get the Speed Confidence
+ * 
+ * @param cam CAM to get the Speed Confidence from
+ * @return double standard deviation of the speed in m/s as decimal number
+ */
 inline double getSpeedConfidence(const CAM& cam) {
   return getSpeedConfidence(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);
