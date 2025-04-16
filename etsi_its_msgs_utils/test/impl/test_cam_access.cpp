@@ -74,8 +74,73 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(altitude, cam_access::getAltitude(cam), 1e-2);
 
   double heading_val = randomDouble(0.0, 360.0);
-  cam_access::setHeading(cam, heading_val);
+  double heading_conf = randomDouble(0.0, 6.25);
+  cam_access::setHeading(cam, heading_val, heading_conf);
   EXPECT_NEAR(heading_val, cam_access::getHeading(cam), 1e-1);
+  EXPECT_NEAR(heading_conf, cam_access::getHeadingConfidence(cam), 1e-1);
+
+  std::array<double, 4> covariance_matrix = {randomDouble(1.0, 100.0), 0.0,
+    0.0, randomDouble(1.0, 100.0)};
+  // Make y component larger than x component so the ellipse will have its major axis 90° rotated
+  covariance_matrix[3] += covariance_matrix[0]; 
+  cam_access::setRefPosConfidence(cam, covariance_matrix, heading_val * M_PI / 180.0);
+  EXPECT_NEAR(heading_val, cam_access::getHeading(cam), 1e-1);
+  EXPECT_NEAR(covariance_matrix[3], std::pow( cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_confidence.value*0.01 / etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR, 2), 1e-1);
+  EXPECT_NEAR(covariance_matrix[0], std::pow( cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_minor_confidence.value*0.01 / etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR, 2), 1e-1);
+  double expected_heading = heading_val + 90.0;
+  // Normalize to [0, 180)
+  expected_heading = std::fmod(expected_heading + 180, 180);
+  while (expected_heading < 0) {
+    expected_heading += 180;
+  }
+  while (expected_heading >= 180) {
+    expected_heading -= 180;
+  }
+  EXPECT_NEAR(expected_heading, cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_orientation.value/10.0, 1e-1);
+  auto cov_get = cam_access::getRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix[0], cov_get[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix[1], cov_get[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix[2], cov_get[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix[3], cov_get[3], 1e-1);
+
+  // Rotate the covariance matrix by a random angle
+  // and repeat the test
+  double phi = randomDouble(0.0, M_PI_2);
+  std::array<double, 4> covariance_matrix_rotated = {
+    covariance_matrix[0] * std::cos(phi) * std::cos(phi) +
+    covariance_matrix[3] * std::sin(phi) * std::sin(phi),
+    (covariance_matrix[0] - covariance_matrix[3]) * std::cos(phi) * std::sin(phi),
+    (covariance_matrix[0] - covariance_matrix[3]) * std::cos(phi) * std::sin(phi),
+    covariance_matrix[0] * std::sin(phi) * std::sin(phi) +
+    covariance_matrix[3] * std::cos(phi) * std::cos(phi)
+  };
+  cam_access::setRefPosConfidence(cam, covariance_matrix_rotated, heading_val * M_PI / 180.0);
+  EXPECT_NEAR(heading_val, cam_access::getHeading(cam), 1e-1);
+  EXPECT_NEAR(covariance_matrix[3], std::pow( cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_confidence.value*0.01 / etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR, 2), 1e-1);
+  EXPECT_NEAR(covariance_matrix[0], std::pow( cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_minor_confidence.value*0.01 / etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR, 2), 1e-1);
+  expected_heading = heading_val - phi * 180.0 / M_PI + 90.0;
+  // Normalize to [0, 180)
+  expected_heading = std::fmod(expected_heading + 180, 180);
+  while (expected_heading < 0) {
+    expected_heading += 180;
+  }
+  while (expected_heading >= 180) {
+    expected_heading -= 180;
+  }
+  EXPECT_NEAR(expected_heading, cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_orientation.value/10.0, 1e-1);
+  auto cov_get_rotated = cam_access::getRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix_rotated[0], cov_get_rotated[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[1], cov_get_rotated[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
+
+  // Set WGS84 confidence ellipse
+  cam_access::setWGSRefPosConfidence(cam, covariance_matrix_rotated);
+  cov_get_rotated = cam_access::getWGSRefPosConfidence(cam);
+  EXPECT_NEAR(covariance_matrix_rotated[0], cov_get_rotated[0], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[1], cov_get_rotated[1], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[2], cov_get_rotated[2], 1e-1);
+  EXPECT_NEAR(covariance_matrix_rotated[3], cov_get_rotated[3], 1e-1);
 
   double length = randomDouble(0.0, 102.2);
   double width = randomDouble(0.0, 6.2);
@@ -84,15 +149,21 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(width, cam_access::getVehicleWidth(cam), 1e-1);
 
   double speed_val = randomDouble(0.0, 163.82);
-  cam_access::setSpeed(cam, speed_val);
+  double speed_conf = randomDouble(0.0, 0.625);
+  cam_access::setSpeed(cam, speed_val, speed_conf);
   EXPECT_NEAR(speed_val, cam_access::getSpeed(cam), 1e-2);
+  EXPECT_NEAR(speed_conf, cam_access::getSpeedConfidence(cam), 1e-2);
 
   double lon_accel = randomDouble(-16.0, 16.0);
   double lat_accel = randomDouble(-16.0, 16.0);
-  cam_access::setLongitudinalAcceleration(cam, lon_accel);
+  double lon_accel_conf = randomDouble(0.0, 5.0);
+  double lat_accel_conf = randomDouble(0.0, 5.0);
+  cam_access::setLongitudinalAcceleration(cam, lon_accel, lon_accel_conf);
   EXPECT_NEAR(lon_accel, cam_access::getLongitudinalAcceleration(cam), 1e-1);
-  cam_access::setLateralAcceleration(cam, lat_accel);
+  EXPECT_NEAR(lon_accel_conf, cam_access::getLongitudinalAccelerationConfidence(cam), 1e-1);
+  cam_access::setLateralAcceleration(cam, lat_accel, lat_accel_conf);
   EXPECT_NEAR(lat_accel, cam_access::getLateralAcceleration(cam), 1e-1);
+  EXPECT_NEAR(lat_accel_conf, cam_access::getLateralAccelerationConfidence(cam), 1e-1);
 
   std::vector<bool> exterior_lights(cam_msgs::ExteriorLights::SIZE_BITS);
   for (int i = 0; i < cam_msgs::ExteriorLights::SIZE_BITS; i++) {

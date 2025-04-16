@@ -97,16 +97,6 @@ inline double getAltitude(const CAM& cam) {
 }
 
 /**
- * @brief Get the Heading value
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading to get the Heading value from
- * @return Heading value in degree as decimal number
- */
-inline double getHeading(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
-
-/**
  * @brief Get the Heading value of CAM
  *
  * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -115,7 +105,18 @@ inline double getHeading(const Heading& heading) { return ((double)heading.headi
  * @return Heading value in degree as decimal number
  */
 inline double getHeading(const CAM& cam) {
-  return getHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+  return getHeadingCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+}
+
+/**
+ * @brief Get the Heading confidence of CAM
+ *
+ *
+ * @param cam CAM to get the Heading confidence from
+ * @return Heading standard deviation in degree as decimal number
+ */
+inline double getHeadingConfidence(const CAM& cam) {
+  return getHeadingConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
 }
 
 /**
@@ -169,13 +170,35 @@ inline double getSpeed(const CAM& cam) {
 }
 
 /**
+ * @brief Get the Speed Confidence
+ * 
+ * @param cam CAM to get the Speed Confidence from
+ * @return double standard deviation of the speed in m/s as decimal number
+ */
+inline double getSpeedConfidence(const CAM& cam) {
+  return getSpeedConfidence(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed);
+}
+
+/**
  * @brief Get the longitudinal acceleration
  *
  * @param cam CAM to get the longitudinal acceleration from
- * @return longitudinal acceleration in m/s^2 as decimal number (left is positive)
+ * @return longitudinal acceleration in m/s^2 as decimal number (accelerating is positive)
  */
 inline double getLongitudinalAcceleration(const CAM& cam) {
   return getLongitudinalAcceleration(
+      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
+}
+
+/**
+ * @brief Get the Longitudinal Acceleration Confidence
+ * 
+ * @param cam CAM to get the LongitudinalAccelerationConfidence from
+ * @return double standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ */
+inline double getLongitudinalAccelerationConfidence(const CAM& cam) {
+  return getLongitudinalAccelerationConfidence(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration);
 }
 
@@ -192,6 +215,22 @@ inline double getLateralAcceleration(const CAM& cam) {
         cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);
   } else {
     throw std::invalid_argument("LateralAcceleration is not present!");
+  }
+}
+
+/**
+ * @brief Get the Lateral Acceleration Confidence 
+ * 
+ * @param cam CAM to get the LateralAccelerationConfidence from
+ * @return double standard deviation of the lateral acceleration in m/s^2 as decimal number
+ */
+inline double getLateralAccelerationConfidence(const CAM& cam) {
+  if (cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
+          .lateral_acceleration_is_present) {
+    return getLateralAccelerationConfidence(
+        cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration);
+  } else {
+    throw std::invalid_argument("LateralAccelerationConfidence is not present!");
   }
 }
 

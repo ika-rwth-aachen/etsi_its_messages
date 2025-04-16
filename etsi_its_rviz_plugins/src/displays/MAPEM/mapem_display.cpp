@@ -28,7 +28,6 @@ SOFTWARE.
 
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
-#include <OgreManualObject.h>
 #include <OgreBillboardSet.h>
 #include <OgreMaterialManager.h>
 #include <OgreTechnique.h>
@@ -70,6 +69,11 @@ MAPEMDisplay::MAPEMDisplay() {
     "Time (in s) until MAP disappears", viz_mapem_);
   mapem_timeout_->setMin(0);
 
+  mapem_sphere_scale_property_ = new rviz_common::properties::FloatProperty(
+    "MAPEM Sphere Scale", 1.0f,
+    "Scaling factor to adjuste size of MAPEM spheres", viz_mapem_);
+    mapem_sphere_scale_property_->setMin(0.1);
+
   color_property_ingress_ = new rviz_common::properties::ColorProperty(
     "Ingress Lane Color", QColor(85, 85, 255),
     "Color to visualize Ingress-Lanes", viz_mapem_);
@@ -87,7 +91,7 @@ MAPEMDisplay::MAPEMDisplay() {
   char_height_mapem_ = new rviz_common::properties::FloatProperty("Scale", 4.0, "Scale of text", show_meta_mapem_);
 
   // SPATEM
-  viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", false,
+  viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", true,
     "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
   
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
@@ -129,9 +133,6 @@ MAPEMDisplay::MAPEMDisplay() {
 }
 
 MAPEMDisplay::~MAPEMDisplay() {
-  if (initialized() ) {
-    scene_manager_->destroyManualObject(manual_object_);
-  }
 }
 
 void MAPEMDisplay::onInitialize() {
@@ -145,15 +146,16 @@ void MAPEMDisplay::onInitialize() {
         spatem_qos_profile_ = profile;
         changedSPATEMTopic();
       });
-
-  manual_object_ = scene_manager_->createManualObject();
-  manual_object_->setDynamic(true);
-  scene_node_->attachObject(manual_object_);
+  changedSPATEMViz();
 }
 
 void MAPEMDisplay::reset() {
   RTDClass::reset();
-  manual_object_->clear();
+  intersections_.clear();
+  intsct_ref_points_.clear();
+  lane_lines_.clear();
+  signal_groups_.clear();
+  texts_.clear();
 }
 
 void MAPEMDisplay::changedSPATEMViz() {
@@ -289,7 +291,7 @@ void MAPEMDisplay::RenderMapemShapes(Ogre::SceneNode *child_scene_node) {
   std::shared_ptr<rviz_rendering::Shape> sphere = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
 
   // set the dimensions of sphere
-  double scale = spatem_sphere_scale_property_->getFloat();
+  double scale = mapem_sphere_scale_property_->getFloat();
   Ogre::Vector3 dims;
   dims.x = 1.0 * scale;
   dims.y = 1.0 * scale;
@@ -325,7 +327,7 @@ void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, Intersect
   std::string text;
   text+="IntersectionID: " + std::to_string(intsctn.getIntersectionID());
   std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
-  double height = spatem_sphere_scale_property_->getFloat();
+  double height = mapem_sphere_scale_property_->getFloat();
   height+=text_render->getBoundingRadius();
   
   Ogre::Vector3 offs(0.0, 0.0, height);
@@ -458,20 +460,34 @@ void MAPEMDisplay::update(float, float) {
   texts_.clear();
   for(auto it = intersections_.begin(); it != intersections_.end(); ++it) {
     IntersectionRenderObject intsctn = it->second;
+    std::string utm_frame_key = intsctn.getHeader().frame_id;
     Ogre::Vector3 sn_position;
     Ogre::Quaternion sn_orientation;
     if (!context_->getFrameManager()->getTransform(intsctn.getHeader(), sn_position, sn_orientation)) {
-      setMissingTransformToFixedFrame(intsctn.getHeader().frame_id);
+      setMissingTransformToFixedFrame(utm_frame_key);
       return;
     }
     setTransformOk();
     
-    // set pose of scene node
-    scene_node_->setPosition(sn_position);
-    scene_node_->setOrientation(sn_orientation);
+    // set pose of the corresponding utm scene node
+    if (scene_nodes_utm_.find(utm_frame_key) == scene_nodes_utm_.end()) {
+      Ogre::SceneNode* scene_node = scene_node_->createChildSceneNode(utm_frame_key);
+      scene_nodes_utm_.insert({utm_frame_key, scene_node});
+    }
 
-    auto child_scene_node = scene_node_->createChildSceneNode();
+    scene_nodes_utm_[utm_frame_key]->setPosition(sn_position);
+    scene_nodes_utm_[utm_frame_key]->setOrientation(sn_orientation);
+
     // Set position of scene node
+    uint intersection_id = intsctn.getIntersectionID();
+
+    if (scene_nodes_junctions_.find(intersection_id) == scene_nodes_junctions_.end()) {
+      Ogre::SceneNode* scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode(std::string("Junction: ") + std::to_string(intersection_id));
+      scene_nodes_junctions_.insert({intersection_id, scene_node});
+    }
+
+    auto child_scene_node = scene_nodes_junctions_[intersection_id];
+
     geometry_msgs::msg::Point ref_position = intsctn.getRefPosition();
     Ogre::Vector3 position(ref_position.x, ref_position.y, ref_position.z);
     tf2::Quaternion rot_offset = intsctn.getGridConvergenceQuaternion();
