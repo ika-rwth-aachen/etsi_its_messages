@@ -177,9 +177,6 @@ $(function(){initNavTree('denm__setters_8h_source.html',''); initResizable(true)
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562">setStationType</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">int</span> value) { <a class="code hl_function" href="denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562">setStationType</a>(denm.denm.management.station_type, value); }</div>
 </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
-<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582">   83</a></span><span class="comment"> * @param denm DENM to set the ReferencePosition</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"> * @param latitude The latitude value position in degree as decimal number.</span></div>
 <div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#aeaf10da65cdf46166ac1180705da9d24">   85</a></span><span class="comment"> * @param longitude The longitude value in degree as decimal number.</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).</span></div>
@@ -191,159 +188,119 @@ $(function(){initNavTree('denm__setters_8h_source.html',''); initResizable(true)
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
 </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af6b26e63e7b17be3a687ed901bd98a7e">   97</a></span><span class="comment"> *</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * @param heading object to set</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * @param value Heading value in degree as decimal number</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562">  101</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a6240142ceea2b28b38755cc8e6feca65">setHeadingValue</a>(HeadingValue&amp; heading, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setIsHeadingPresent(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_heading) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562">  101</a></span>    denm.denm.location.event_position_heading_is_present = presence_of_heading;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  }</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  int64_t deg = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <a class="code hl_function" href="denm__setters_8h.html#a08725084bdd2740ae6198b8c0eb3a09d">throwIfOutOfRange</a>(deg, HeadingValue::MIN, HeadingValue::MAX, <span class="stringliteral">&quot;HeadingValue&quot;</span>);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  heading.value = deg;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>}</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
 <div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a30784e56e287eb020e5968cc2095a1dc">  109</a></span><span class="comment"> *</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582">  109</a></span><span class="comment"> *</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"> * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * HeadingConfidence is set to UNAVAILABLE</span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> * @param heading object to set</span></div>
-</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> * @param denm DENM to set the ReferencePosition</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"> * @param value Heading value in degree as decimal number</span></div>
-<div class="foldopen" id="foldopen00115" data-start="{" data-end="}">
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a0c236dcf9da854b5e9477e7d36c490f9">  115</a></span><span class="comment"> */</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a4dfaa9a9a45050b372a4931c4a397b1d">setHeading</a>(Heading&amp; heading, <span class="keyword">const</span> <span class="keywordtype">double</span> value) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a0c236dcf9da854b5e9477e7d36c490f9">  115</a></span><span class="comment"> * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE)</span></div>
 </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <a class="code hl_function" href="denm__setters_8h.html#a6240142ceea2b28b38755cc8e6feca65">setHeadingValue</a>(heading.heading_value, value);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
-<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a3b2da82f00c69548f3209d7c086f5dc1">  121</a></span><span class="comment">/**</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> * @brief Set the IsHeadingPresent object for DENM</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"> * @param denm DENM to set IsHeadingPresent</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment"> * @param presence_of_heading IsHeadingPresent-Value (true or false)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a43615192d5d1aeb7b84d6cbcdda4ec3a">setHeading</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> heading_val, <span class="keyword">const</span> <span class="keywordtype">double</span> confidence = std::numeric_limits&lt;double&gt;::infinity()) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <a class="code hl_function" href="denm__setters_8h.html#a6c184773d66323ef2e0486715debe9be">setHeadingCDD</a>(denm.denm.location.event_position_heading, heading_val, confidence);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <a class="code hl_function" href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">setIsHeadingPresent</a>(denm, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af6b26e63e7b17be3a687ed901bd98a7e">  123</a></span>  }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
 <div class="foldopen" id="foldopen00126" data-start="{" data-end="}">
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a850c08978f95f3cdbca2cd9454613b89">  126</a></span><span class="comment"> */</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">setIsHeadingPresent</a>(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_heading) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    denm.denm.location.event_position_heading_is_present = presence_of_heading;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  }</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a850c08978f95f3cdbca2cd9454613b89">  126</a></span><span class="comment">/**</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"> * @brief Set the IsSpeedPresent object for DENM</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"> * </span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"> * @param denm DENM to set IsSpeedPresent</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"> * @param presence_of_heading IsSpeedPresent-Value (true or false)</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">setIsSpeedPresent</a>(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_speed) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
 </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
-<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af199280816d3e209a21cf1d3151df769">  140</a></span><span class="comment"> *</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a3e4e7ef8a5aa01a9e79d10591868830c">  141</a></span><span class="comment"> * @param denm DENM to set the ReferencePosition</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment"> * @param value Heading value in degree as decimal number</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    denm.denm.location.event_speed_is_present = presence_of_speed;</div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a30784e56e287eb020e5968cc2095a1dc">  135</a></span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
 </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a4dfaa9a9a45050b372a4931c4a397b1d">setHeading</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> heading_val) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_function" href="denm__setters_8h.html#a4dfaa9a9a45050b372a4931c4a397b1d">setHeading</a>(denm.denm.location.event_position_heading, heading_val);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_function" href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">setIsHeadingPresent</a>(denm, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  }</div>
-<div class="foldopen" id="foldopen00151" data-start="{" data-end="}">
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a2cc5fb52f53c8898a5e84542540be4db">  151</a></span>}</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span></div>
+<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a3b2da82f00c69548f3209d7c086f5dc1">  147</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#ad3cbc34012a3bcee2402f930aa9cfc0b">setSpeed</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> speed_val, <span class="keyword">const</span> <span class="keywordtype">double</span> confidence = std::numeric_limits&lt;double&gt;::infinity()) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <a class="code hl_function" href="denm__setters_8h.html#ad3cbc34012a3bcee2402f930aa9cfc0b">setSpeed</a>(denm.denm.location.event_speed, speed_val, confidence);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_function" href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">setIsSpeedPresent</a>(denm, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
 <div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#ac4133446cb513028afcd2850886b7238">  154</a></span><span class="comment"> * @brief Set the IsSpeedPresent object for DENM</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"> * @param denm DENM to set IsSpeedPresent</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment"> * @param presence_of_heading IsSpeedPresent-Value (true or false)</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#ac4133446cb513028afcd2850886b7238">  154</a></span>}</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
 </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">setIsSpeedPresent</a>(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_speed) {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    denm.denm.location.event_speed_is_present = presence_of_speed;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
 <div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a2cacb2a69084363a4911f58fe1ac2d0d">  165</a></span>}</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span></div>
-<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a6240142ceea2b28b38755cc8e6feca65">  167</a></span><span class="comment">/**</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"> * @brief Set the vehicle speed</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment"> * @param denm DENM to set the speed value</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment"> * @param speed_val speed value to set in m/s as decimal number</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">  165</a></span><span class="comment"> * @param[in] zone the UTM zone (zero means UPS) of the given position</span></div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#af199280816d3e209a21cf1d3151df769">  166</a></span><span class="comment"> * @param[in] northp hemisphere (true means north, false means south)</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">setFromUTMPosition</a>(DENM&amp; denm, <span class="keyword">const</span> gm::PointStamped&amp; utm_position, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; zone, <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; northp) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_function" href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">setFromUTMPosition</a>(denm.denm.management.event_position, utm_position, zone, northp);</div>
 </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a2cacb2a69084363a4911f58fe1ac2d0d">setSpeed</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> speed_val) {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_function" href="denm__setters_8h.html#a2cacb2a69084363a4911f58fe1ac2d0d">setSpeed</a>(denm.denm.location.event_speed, speed_val);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <a class="code hl_function" href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">setIsSpeedPresent</a>(denm, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span></div>
+</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span></div>
+<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a2cc5fb52f53c8898a5e84542540be4db">  177</a></span><span class="comment"> */</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a443aa2e2a110e7c252e0d62a70dba2d8">setDrivingLaneStatus</a>(DrivingLaneStatus&amp; driving_lane_status, <span class="keyword">const</span> std::vector&lt;bool&gt;&amp; bits) {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <a class="code hl_function" href="denm__setters_8h.html#ae9b67f26b61290cff23053e0c2d1cbfc">setBitString</a>(driving_lane_status, bits);</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>}</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span></div>
-<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a4dfaa9a9a45050b372a4931c4a397b1d">  182</a></span><span class="comment">/**</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment"> * @brief Set the ReferencePosition of a DENM from a given UTM-Position</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment"> * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS</span></div>
 </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment"> * The z-Coordinate is directly used as altitude value</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment"> * The frame_id of the given utm_position must be set to &#39;utm_&lt;zone&gt;&lt;N/S&gt;&#39;</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"> * @param[out] denm DENM for which to set the ReferencePosition</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment"> * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"> * @param[in] zone the UTM zone (zero means UPS) of the given position</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"> * @param[in] northp hemisphere (true means north, false means south)</span></div>
-<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">  193</a></span><span class="comment"> */</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">setFromUTMPosition</a>(DENM&amp; denm, <span class="keyword">const</span> gm::PointStamped&amp; utm_position, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; zone, <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; northp) {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <a class="code hl_function" href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">setFromUTMPosition</a>(denm.denm.management.event_position, utm_position, zone, northp);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span></div>
-</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__setters__common_8h.html#afd62a8fb607a2ba43ccd90860ca49115">setDrivingLaneStatus</a>(DrivingLaneStatus&amp; driving_lane_status, <span class="keyword">const</span> std::vector&lt;bool&gt;&amp; bits) {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  setBitString(driving_lane_status, bits);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span></div>
-<div class="foldopen" id="foldopen00208" data-start="{" data-end="}">
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">  208</a></span><span class="comment">/**</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"> * @brief Set the Lightbar Siren In Use by a vector of bools</span></div>
-<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a4fb14298d169131a12bf7e4be67764cd">  210</a></span><span class="comment"> *</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"> * @param light_bar_siren_in_use</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment"> * @param bits</span></div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#acc0877baed582427721de13b083fa1e9">setLightBarSirenInUse</a>(LightBarSirenInUse&amp; light_bar_siren_in_use, <span class="keyword">const</span> std::vector&lt;bool&gt;&amp; bits) {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_function" href="denm__setters_8h.html#ae9b67f26b61290cff23053e0c2d1cbfc">setBitString</a>(light_bar_siren_in_use, bits);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>}</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
-</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}  <span class="comment">// namespace etsi_its_denm_msgs::access</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span></div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#a43615192d5d1aeb7b84d6cbcdda4ec3a">  183</a></span><span class="comment"> * @brief Set the Lightbar Siren In Use by a vector of bools</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment"> * @param light_bar_siren_in_use</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment"> * @param bits</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__setters_8h.html#acc0877baed582427721de13b083fa1e9">setLightBarSirenInUse</a>(LightBarSirenInUse&amp; light_bar_siren_in_use, <span class="keyword">const</span> std::vector&lt;bool&gt;&amp; bits) {</div>
+<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="denm__setters_8h.html#ac726a955d527bcf77fe7db1912495ead">  189</a></span>  <a class="code hl_function" href="denm__setters_8h.html#ae9b67f26b61290cff23053e0c2d1cbfc">setBitString</a>(light_bar_siren_in_use, bits);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}  <span class="comment">// namespace etsi_its_denm_msgs::access</span></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="ttc" id="acam__setters__common_8h_html_afd62a8fb607a2ba43ccd90860ca49115"><div class="ttname"><a href="cam__setters__common_8h.html#afd62a8fb607a2ba43ccd90860ca49115">setDrivingLaneStatus</a></div><div class="ttdeci">void setDrivingLaneStatus(DrivingLaneStatus &amp;driving_lane_status, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Driving Lane Status by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00292">cam_setters_common.h:292</a></div></div>
 <div class="ttc" id="acdd__v1-3-1__setters_8h_html"><div class="ttname"><a href="cdd__v1-3-1__setters_8h.html">cdd_v1-3-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1.</div></div>
 <div class="ttc" id="achecks_8h_html"><div class="ttname"><a href="checks_8h.html">checks.h</a></div><div class="ttdoc">Sanity-check functions etc.</div></div>
 <div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>
 <div class="ttc" id="adenm__setters_8h_html_a08725084bdd2740ae6198b8c0eb3a09d"><div class="ttname"><a href="denm__setters_8h.html#a08725084bdd2740ae6198b8c0eb3a09d">etsi_its_denm_msgs::access::throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="#l00047">denm_setters.h:47</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a2cacb2a69084363a4911f58fe1ac2d0d"><div class="ttname"><a href="denm__setters_8h.html#a2cacb2a69084363a4911f58fe1ac2d0d">etsi_its_denm_msgs::access::setSpeed</a></div><div class="ttdeci">void setSpeed(Speed &amp;speed, const double value)</div><div class="ttdoc">Set the Speed object.</div><div class="ttdef"><b>Definition</b> <a href="#l00165">denm_setters.h:165</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a398fb4e4837ebd1e0fb9a0d4b6eb964a"><div class="ttname"><a href="denm__setters_8h.html#a398fb4e4837ebd1e0fb9a0d4b6eb964a">etsi_its_denm_msgs::access::setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Sets the reference position in the given ReferencePostion object.</div><div class="ttdef"><b>Definition</b> <a href="#l00182">denm_setters.h:182</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a4dfaa9a9a45050b372a4931c4a397b1d"><div class="ttname"><a href="denm__setters_8h.html#a4dfaa9a9a45050b372a4931c4a397b1d">etsi_its_denm_msgs::access::setHeading</a></div><div class="ttdeci">void setHeading(Heading &amp;heading, const double value)</div><div class="ttdoc">Set the Heading object.</div><div class="ttdef"><b>Definition</b> <a href="#l00182">denm_setters.h:182</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a5f75c29f07475c6fefba9d7246ebf582"><div class="ttname"><a href="denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582">etsi_its_denm_msgs::access::setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="#l00083">denm_setters.h:83</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a602a98f8a71f847b76d5e81b3084b212"><div class="ttname"><a href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">etsi_its_denm_msgs::access::setIsSpeedPresent</a></div><div class="ttdeci">void setIsSpeedPresent(DENM &amp;denm, bool presence_of_speed)</div><div class="ttdoc">Set the IsSpeedPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00225">denm_setters.h:225</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a6240142ceea2b28b38755cc8e6feca65"><div class="ttname"><a href="denm__setters_8h.html#a6240142ceea2b28b38755cc8e6feca65">etsi_its_denm_msgs::access::setHeadingValue</a></div><div class="ttdeci">void setHeadingValue(HeadingValue &amp;heading, const double value)</div><div class="ttdoc">Set the HeadingValue object.</div><div class="ttdef"><b>Definition</b> <a href="#l00167">denm_setters.h:167</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a80b79f2aafdeeafd88d107a8e5d0d4d4"><div class="ttname"><a href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">etsi_its_denm_msgs::access::setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(T &amp;reference_position, const gm::PointStamped &amp;utm_position, const int zone, const bool northp)</div><div class="ttdoc">Set the ReferencePosition from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="#l00208">denm_setters.h:208</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a398fb4e4837ebd1e0fb9a0d4b6eb964a"><div class="ttname"><a href="denm__setters_8h.html#a398fb4e4837ebd1e0fb9a0d4b6eb964a">etsi_its_denm_msgs::access::setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Sets the reference position in the given ReferencePostion object.</div><div class="ttdef"><b>Definition</b> <a href="#l00242">denm_setters.h:242</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a43615192d5d1aeb7b84d6cbcdda4ec3a"><div class="ttname"><a href="denm__setters_8h.html#a43615192d5d1aeb7b84d6cbcdda4ec3a">etsi_its_denm_msgs::access::setHeading</a></div><div class="ttdeci">void setHeading(DENM &amp;denm, const double heading_val, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Heading for a DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00183">denm_setters.h:183</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a443aa2e2a110e7c252e0d62a70dba2d8"><div class="ttname"><a href="denm__setters_8h.html#a443aa2e2a110e7c252e0d62a70dba2d8">etsi_its_denm_msgs::access::setDrivingLaneStatus</a></div><div class="ttdeci">void setDrivingLaneStatus(DrivingLaneStatus &amp;driving_lane_status, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Driving Lane Status by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="#l00244">denm_setters.h:244</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a5f75c29f07475c6fefba9d7246ebf582"><div class="ttname"><a href="denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582">etsi_its_denm_msgs::access::setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="#l00109">denm_setters.h:109</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a602a98f8a71f847b76d5e81b3084b212"><div class="ttname"><a href="denm__setters_8h.html#a602a98f8a71f847b76d5e81b3084b212">etsi_its_denm_msgs::access::setIsSpeedPresent</a></div><div class="ttdeci">void setIsSpeedPresent(DENM &amp;denm, bool presence_of_speed)</div><div class="ttdoc">Set the IsSpeedPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00198">denm_setters.h:198</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a6c184773d66323ef2e0486715debe9be"><div class="ttname"><a href="denm__setters_8h.html#a6c184773d66323ef2e0486715debe9be">etsi_its_denm_msgs::access::setHeadingCDD</a></div><div class="ttdeci">void setHeadingCDD(Heading &amp;heading, const double value, double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Heading object.</div><div class="ttdef"><b>Definition</b> <a href="#l00327">denm_setters.h:327</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a80b79f2aafdeeafd88d107a8e5d0d4d4"><div class="ttname"><a href="denm__setters_8h.html#a80b79f2aafdeeafd88d107a8e5d0d4d4">etsi_its_denm_msgs::access::setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(T &amp;reference_position, const gm::PointStamped &amp;utm_position, const int zone, const bool northp)</div><div class="ttdoc">Set the ReferencePosition from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="#l00268">denm_setters.h:268</a></div></div>
 <div class="ttc" id="adenm__setters_8h_html_a850c08978f95f3cdbca2cd9454613b89"><div class="ttname"><a href="denm__setters_8h.html#a850c08978f95f3cdbca2cd9454613b89">etsi_its_denm_msgs::access::setReferenceTime</a></div><div class="ttdeci">void setReferenceTime(DENM &amp;denm, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the ReferenceTime-value.</div><div class="ttdef"><b>Definition</b> <a href="#l00126">denm_setters.h:126</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_a9e8a625ed3b6d22e56dd5e0899553161"><div class="ttname"><a href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">etsi_its_denm_msgs::access::setIsHeadingPresent</a></div><div class="ttdeci">void setIsHeadingPresent(DENM &amp;denm, bool presence_of_heading)</div><div class="ttdoc">Set the IsHeadingPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00193">denm_setters.h:193</a></div></div>
-<div class="ttc" id="adenm__setters_8h_html_acc0877baed582427721de13b083fa1e9"><div class="ttname"><a href="denm__setters_8h.html#acc0877baed582427721de13b083fa1e9">etsi_its_denm_msgs::access::setLightBarSirenInUse</a></div><div class="ttdeci">void setLightBarSirenInUse(LightBarSirenInUse &amp;light_bar_siren_in_use, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Lightbar Siren In Use by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="#l00280">denm_setters.h:280</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_a9e8a625ed3b6d22e56dd5e0899553161"><div class="ttname"><a href="denm__setters_8h.html#a9e8a625ed3b6d22e56dd5e0899553161">etsi_its_denm_msgs::access::setIsHeadingPresent</a></div><div class="ttdeci">void setIsHeadingPresent(DENM &amp;denm, bool presence_of_heading)</div><div class="ttdoc">Set the IsHeadingPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00165">denm_setters.h:165</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_acc0877baed582427721de13b083fa1e9"><div class="ttname"><a href="denm__setters_8h.html#acc0877baed582427721de13b083fa1e9">etsi_its_denm_msgs::access::setLightBarSirenInUse</a></div><div class="ttdeci">void setLightBarSirenInUse(LightBarSirenInUse &amp;light_bar_siren_in_use, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Lightbar Siren In Use by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="#l00254">denm_setters.h:254</a></div></div>
+<div class="ttc" id="adenm__setters_8h_html_ad3cbc34012a3bcee2402f930aa9cfc0b"><div class="ttname"><a href="denm__setters_8h.html#ad3cbc34012a3bcee2402f930aa9cfc0b">etsi_its_denm_msgs::access::setSpeed</a></div><div class="ttdeci">void setSpeed(Speed &amp;speed, const double value, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Speed object.</div><div class="ttdef"><b>Definition</b> <a href="#l00208">denm_setters.h:208</a></div></div>
 <div class="ttc" id="adenm__setters_8h_html_ae9b67f26b61290cff23053e0c2d1cbfc"><div class="ttname"><a href="denm__setters_8h.html#ae9b67f26b61290cff23053e0c2d1cbfc">etsi_its_denm_msgs::access::setBitString</a></div><div class="ttdeci">void setBitString(T &amp;bitstring, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set a Bit String by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">denm_setters.h:44</a></div></div>
 <div class="ttc" id="adenm__setters_8h_html_aeaf10da65cdf46166ac1180705da9d24"><div class="ttname"><a href="denm__setters_8h.html#aeaf10da65cdf46166ac1180705da9d24">etsi_its_denm_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00085">denm_setters.h:85</a></div></div>
 <div class="ttc" id="adenm__setters_8h_html_af08f33b59ab90f3f75e7becb696ad562"><div class="ttname"><a href="denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562">etsi_its_denm_msgs::access::setStationType</a></div><div class="ttdeci">void setStationType(StationType &amp;station_type, const uint8_t value)</div><div class="ttdoc">Set the Station Type.</div><div class="ttdef"><b>Definition</b> <a href="#l00101">denm_setters.h:101</a></div></div>

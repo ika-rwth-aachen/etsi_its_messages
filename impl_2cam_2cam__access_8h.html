@@ -104,6 +104,7 @@ $(function(){initNavTree('impl_2cam_2cam__access_8h.html',''); initResizable(tru
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -124,6 +125,13 @@ $(function(){initNavTree('impl_2cam_2cam__access_8h.html',''); initResizable(tru
 </div>
 <p><a href="impl_2cam_2cam__access_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html">etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, typename &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengtb68a75d39429afb829a9bf7a19ddc663.html">etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, std::void_t&lt; decltype(SemiAxisLength::ONE_CENTIMETER)&gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a64ea2727207893a1158725178cf66dca" id="r_a64ea2727207893a1158725178cf66dca"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
@@ -153,6 +161,10 @@ Variables</h2></td></tr>
 <tr class="memitem:aafe603bb28e789913ebc67681f21b357" id="r_aafe603bb28e789913ebc67681f21b357"><td class="memItemLeft" align="right" valign="top">const std::map&lt; uint64_t, uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafe603bb28e789913ebc67681f21b357">etsi_its_cam_msgs::access::etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></td></tr>
 <tr class="memdesc:aafe603bb28e789913ebc67681f21b357"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion  <br /></td></tr>
 <tr class="separator:aafe603bb28e789913ebc67681f21b357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c819eb90671e60d3a49acb952ae0b8f" id="r_a8c819eb90671e60d3a49acb952ae0b8f"><td class="memItemLeft" align="right" valign="top">constexpr const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c819eb90671e60d3a49acb952ae0b8f">etsi_its_cam_msgs::access::etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR</a> = 2.0</td></tr>
+<tr class="separator:a8c819eb90671e60d3a49acb952ae0b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f2a85ec5682ead7f5d7cc45467b8985" id="r_a0f2a85ec5682ead7f5d7cc45467b8985"><td class="memItemLeft" align="right" valign="top">constexpr const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f2a85ec5682ead7f5d7cc45467b8985">etsi_its_cam_msgs::access::etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR</a> = 2.4477</td></tr>
+<tr class="separator:a0f2a85ec5682ead7f5d7cc45467b8985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main CAM access implementation header. </p>
@@ -232,10 +244,10 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TimestampIts the corresponding TimestampITS object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00083">83</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                                  {</div>
-<div class="line"><span class="lineno">  140</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  141</span>}</div>
+<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00105">105</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  161</span>                                  {</div>
+<div class="line"><span class="lineno">  162</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  163</span>}</div>
 <div class="ttc" id="acam__utils_8h_html"><div class="ttname"><a href="cam__utils_8h.html">cam_utils.h</a></div><div class="ttdoc">Utility functions for the ETSI ITS CAM (EN and TS)</div></div>
 </div><!-- fragment -->
 </div>
@@ -283,10 +295,10 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00099">99</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  155</span>                                  {</div>
-<div class="line"><span class="lineno">  156</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  157</span>}</div>
+<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00121">121</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  177</span>                                  {</div>
+<div class="line"><span class="lineno">  178</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  179</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -333,10 +345,10 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00114">114</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  170</span>                                  {</div>
-<div class="line"><span class="lineno">  171</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  172</span>}</div>
+<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00136">136</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  192</span>                                  {</div>
+<div class="line"><span class="lineno">  193</span><span class="preprocessor">#include &lt;<a class="code" href="cam__utils_8h.html">etsi_its_msgs_utils/impl/cam/cam_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  194</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -457,6 +469,54 @@ template&lt;typename T1, typename T2&gt; </div>
 <p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
 <p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00046">46</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
+
+</div>
+</div>
+<a id="a8c819eb90671e60d3a49acb952ae0b8f" name="a8c819eb90671e60d3a49acb952ae0b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c819eb90671e60d3a49acb952ae0b8f">&#9670;&#160;</a></span>ONE_D_GAUSSIAN_FACTOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double etsi_its_cam_msgs::access::etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR = 2.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00072">72</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f2a85ec5682ead7f5d7cc45467b8985" name="a0f2a85ec5682ead7f5d7cc45467b8985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f2a85ec5682ead7f5d7cc45467b8985">&#9670;&#160;</a></span>TWO_D_GAUSSIAN_FACTOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double etsi_its_cam_msgs::access::etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR = 2.4477</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="impl_2cam_2cam__access_8h_source.html#l00076">76</a> of file <a class="el" href="impl_2cam_2cam__access_8h_source.html">cam_access.h</a>.</p>
 
 </div>
 </div>

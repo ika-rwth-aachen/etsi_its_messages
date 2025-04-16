@@ -128,15 +128,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a898186f929c96d842a0540021b2535d5" id="r_a898186f929c96d842a0540021b2535d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a898186f929c96d842a0540021b2535d5">setStationType</a> (CAM &amp;cam, const uint8_t value)</td></tr>
 <tr class="memdesc:a898186f929c96d842a0540021b2535d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the StationType for a CAM.  <br /></td></tr>
 <tr class="separator:a898186f929c96d842a0540021b2535d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa98b3ac8fa66187fd19323357c4e24bc" id="r_aa98b3ac8fa66187fd19323357c4e24bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a> (HeadingValue &amp;heading, const double value)</td></tr>
-<tr class="memdesc:aa98b3ac8fa66187fd19323357c4e24bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the HeadingValue object.  <br /></td></tr>
-<tr class="separator:aa98b3ac8fa66187fd19323357c4e24bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e8b5c51aec89da6d69adc77a4ece374" id="r_a7e8b5c51aec89da6d69adc77a4ece374"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8b5c51aec89da6d69adc77a4ece374">setHeading</a> (Heading &amp;heading, const double value)</td></tr>
-<tr class="memdesc:a7e8b5c51aec89da6d69adc77a4ece374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Heading object.  <br /></td></tr>
-<tr class="separator:a7e8b5c51aec89da6d69adc77a4ece374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32ccbeccddeb3e9ece28d8d401915dd7" id="r_a32ccbeccddeb3e9ece28d8d401915dd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32ccbeccddeb3e9ece28d8d401915dd7">setHeading</a> (CAM &amp;cam, const double heading_val)</td></tr>
-<tr class="memdesc:a32ccbeccddeb3e9ece28d8d401915dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Heading for a CAM.  <br /></td></tr>
-<tr class="separator:a32ccbeccddeb3e9ece28d8d401915dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec871f5372440f4f013e597c61dbe6c" id="r_afec871f5372440f4f013e597c61dbe6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afec871f5372440f4f013e597c61dbe6c">setHeading</a> (CAM &amp;cam, const double heading_val, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</td></tr>
+<tr class="memdesc:afec871f5372440f4f013e597c61dbe6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Heading for a CAM.  <br /></td></tr>
+<tr class="separator:afec871f5372440f4f013e597c61dbe6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accca46176c8be97e41ff54618c6f307f" id="r_accca46176c8be97e41ff54618c6f307f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a> (VehicleWidth &amp;vehicle_width, const double value)</td></tr>
 <tr class="memdesc:accca46176c8be97e41ff54618c6f307f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the VehicleWidth object.  <br /></td></tr>
 <tr class="separator:accca46176c8be97e41ff54618c6f307f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,15 +143,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a54a29c23c98782ec9b2c2770526b6743" id="r_a54a29c23c98782ec9b2c2770526b6743"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54a29c23c98782ec9b2c2770526b6743">setVehicleDimensions</a> (CAM &amp;cam, const double vehicle_length, const double vehicle_width)</td></tr>
 <tr class="memdesc:a54a29c23c98782ec9b2c2770526b6743"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the vehicle dimensions.  <br /></td></tr>
 <tr class="separator:a54a29c23c98782ec9b2c2770526b6743"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3651ecc3584b2e1529a81ecef894cc64" id="r_a3651ecc3584b2e1529a81ecef894cc64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3651ecc3584b2e1529a81ecef894cc64">setSpeed</a> (CAM &amp;cam, const double speed_val)</td></tr>
-<tr class="memdesc:a3651ecc3584b2e1529a81ecef894cc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the vehicle speed.  <br /></td></tr>
-<tr class="separator:a3651ecc3584b2e1529a81ecef894cc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0565fb2b66efcb6411f3c02a193fab8b" id="r_a0565fb2b66efcb6411f3c02a193fab8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0565fb2b66efcb6411f3c02a193fab8b">setLongitudinalAcceleration</a> (CAM &amp;cam, const double lon_accel)</td></tr>
-<tr class="memdesc:a0565fb2b66efcb6411f3c02a193fab8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the longitudinal acceleration.  <br /></td></tr>
-<tr class="separator:a0565fb2b66efcb6411f3c02a193fab8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a271bc119587f5aeff1394048556f2a6a" id="r_a271bc119587f5aeff1394048556f2a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a271bc119587f5aeff1394048556f2a6a">setLateralAcceleration</a> (CAM &amp;cam, const double lat_accel)</td></tr>
-<tr class="memdesc:a271bc119587f5aeff1394048556f2a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the lateral acceleration.  <br /></td></tr>
-<tr class="separator:a271bc119587f5aeff1394048556f2a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec274b155db16e2780e100c546bff5a6" id="r_aec274b155db16e2780e100c546bff5a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec274b155db16e2780e100c546bff5a6">setSpeed</a> (CAM &amp;cam, const double speed_val, const double confidence=SpeedConfidence::UNAVAILABLE)</td></tr>
+<tr class="memdesc:aec274b155db16e2780e100c546bff5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the vehicle speed.  <br /></td></tr>
+<tr class="separator:aec274b155db16e2780e100c546bff5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a123f84fcf84bb58fc94e40cd4496581f" id="r_a123f84fcf84bb58fc94e40cd4496581f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a123f84fcf84bb58fc94e40cd4496581f">setLongitudinalAcceleration</a> (CAM &amp;cam, const double lon_accel, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</td></tr>
+<tr class="memdesc:a123f84fcf84bb58fc94e40cd4496581f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the longitudinal acceleration.  <br /></td></tr>
+<tr class="separator:a123f84fcf84bb58fc94e40cd4496581f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d52933fb5da5114386ec44e27f80aae" id="r_a7d52933fb5da5114386ec44e27f80aae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d52933fb5da5114386ec44e27f80aae">setLateralAcceleration</a> (CAM &amp;cam, const double lat_accel, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</td></tr>
+<tr class="memdesc:a7d52933fb5da5114386ec44e27f80aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the lateral acceleration.  <br /></td></tr>
+<tr class="separator:a7d52933fb5da5114386ec44e27f80aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6b307d10295b188e48796b8b2377db3" id="r_af6b307d10295b188e48796b8b2377db3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a> (CAM &amp;cam, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</td></tr>
 <tr class="memdesc:af6b307d10295b188e48796b8b2377db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ReferencePosition for a CAM.  <br /></td></tr>
 <tr class="separator:af6b307d10295b188e48796b8b2377db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,10 +221,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00282">282</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  282</span>                                                                                                           {</div>
-<div class="line"><span class="lineno">  283</span>  setBitString(acceleration_control, bits);</div>
-<div class="line"><span class="lineno">  284</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00259">259</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>                                                                                                           {</div>
+<div class="line"><span class="lineno">  260</span>  setBitString(acceleration_control, bits);</div>
+<div class="line"><span class="lineno">  261</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -270,10 +264,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00292">292</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  292</span>                                                                                                      {</div>
-<div class="line"><span class="lineno">  293</span>  setBitString(driving_lane_status, bits);</div>
-<div class="line"><span class="lineno">  294</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00269">269</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  269</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  270</span>  setBitString(driving_lane_status, bits);</div>
+<div class="line"><span class="lineno">  271</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -313,10 +307,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00322">322</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  322</span>                                                                                                     {</div>
-<div class="line"><span class="lineno">  323</span>  setBitString(emergency_priority, bits);</div>
-<div class="line"><span class="lineno">  324</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00299">299</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>                                                                                                     {</div>
+<div class="line"><span class="lineno">  300</span>  setBitString(emergency_priority, bits);</div>
+<div class="line"><span class="lineno">  301</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -356,26 +350,26 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00257">257</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  257</span>                                                                                {</div>
-<div class="line"><span class="lineno">  258</span>  <span class="keywordflow">if</span> (ExteriorLights::SIZE_BITS != exterior_lights.size()) {</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Vector has wrong size. (&quot;</span> + std::to_string(exterior_lights.size()) +</div>
-<div class="line"><span class="lineno">  260</span>                                <span class="stringliteral">&quot; != &quot;</span> + std::to_string(ExteriorLights::SIZE_BITS) + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  261</span>  }</div>
-<div class="line"><span class="lineno">  262</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container_is_present) {</div>
-<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container.choice ==</div>
-<div class="line"><span class="lineno">  264</span>        LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {</div>
-<div class="line"><span class="lineno">  265</span>      <a class="code hl_function" href="#a881453ee40c0c3bff954e5ee9aaae901">setExteriorLights</a>(</div>
-<div class="line"><span class="lineno">  266</span>          cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights,</div>
-<div class="line"><span class="lineno">  267</span>          exterior_lights);</div>
-<div class="line"><span class="lineno">  268</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  269</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!&quot;</span>);</div>
-<div class="line"><span class="lineno">  270</span>    }</div>
-<div class="line"><span class="lineno">  271</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  272</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not present!&quot;</span>);</div>
-<div class="line"><span class="lineno">  273</span>  }</div>
-<div class="line"><span class="lineno">  274</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a881453ee40c0c3bff954e5ee9aaae901"><div class="ttname"><a href="#a881453ee40c0c3bff954e5ee9aaae901">setExteriorLights</a></div><div class="ttdeci">void setExteriorLights(ExteriorLights &amp;exterior_lights, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Exterior Lights by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00247">cam_setters_common.h:247</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00234">234</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  234</span>                                                                                {</div>
+<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">if</span> (ExteriorLights::SIZE_BITS != exterior_lights.size()) {</div>
+<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Vector has wrong size. (&quot;</span> + std::to_string(exterior_lights.size()) +</div>
+<div class="line"><span class="lineno">  237</span>                                <span class="stringliteral">&quot; != &quot;</span> + std::to_string(ExteriorLights::SIZE_BITS) + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  238</span>  }</div>
+<div class="line"><span class="lineno">  239</span>  <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container_is_present) {</div>
+<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">if</span> (cam.cam.cam_parameters.low_frequency_container.choice ==</div>
+<div class="line"><span class="lineno">  241</span>        LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY) {</div>
+<div class="line"><span class="lineno">  242</span>      <a class="code hl_function" href="#a881453ee40c0c3bff954e5ee9aaae901">setExteriorLights</a>(</div>
+<div class="line"><span class="lineno">  243</span>          cam.cam.cam_parameters.low_frequency_container.basic_vehicle_container_low_frequency.exterior_lights,</div>
+<div class="line"><span class="lineno">  244</span>          exterior_lights);</div>
+<div class="line"><span class="lineno">  245</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  246</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY!&quot;</span>);</div>
+<div class="line"><span class="lineno">  247</span>    }</div>
+<div class="line"><span class="lineno">  248</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LowFrequencyContainer is not present!&quot;</span>);</div>
+<div class="line"><span class="lineno">  250</span>  }</div>
+<div class="line"><span class="lineno">  251</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_a881453ee40c0c3bff954e5ee9aaae901"><div class="ttname"><a href="#a881453ee40c0c3bff954e5ee9aaae901">setExteriorLights</a></div><div class="ttdeci">void setExteriorLights(ExteriorLights &amp;exterior_lights, const std::vector&lt; bool &gt; &amp;bits)</div><div class="ttdoc">Set the Exterior Lights by a vector of bools.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00224">cam_setters_common.h:224</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -415,10 +409,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00247">247</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  247</span>                                                                                            {</div>
-<div class="line"><span class="lineno">  248</span>  setBitString(exterior_lights, bits);</div>
-<div class="line"><span class="lineno">  249</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00224">224</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  224</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  225</span>  setBitString(exterior_lights, bits);</div>
+<div class="line"><span class="lineno">  226</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -471,11 +465,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00237">237</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  237</span>                                                                                                                  {</div>
-<div class="line"><span class="lineno">  238</span>  <a class="code hl_function" href="#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);</div>
-<div class="line"><span class="lineno">  239</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_aa812192277920188abd842fb36d2caf2"><div class="ttname"><a href="#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(CAM &amp;cam, const gm::PointStamped &amp;utm_position, const int &amp;zone, const bool &amp;northp)</div><div class="ttdoc">Set the ReferencePosition of a CAM from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00237">cam_setters_common.h:237</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00214">214</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  214</span>                                                                                                                  {</div>
+<div class="line"><span class="lineno">  215</span>  <a class="code hl_function" href="#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a>(cam.cam.cam_parameters.basic_container.reference_position, utm_position, zone, northp);</div>
+<div class="line"><span class="lineno">  216</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_aa812192277920188abd842fb36d2caf2"><div class="ttname"><a href="#aa812192277920188abd842fb36d2caf2">setFromUTMPosition</a></div><div class="ttdeci">void setFromUTMPosition(CAM &amp;cam, const gm::PointStamped &amp;utm_position, const int &amp;zone, const bool &amp;northp)</div><div class="ttdoc">Set the ReferencePosition of a CAM from a given UTM-Position.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00214">cam_setters_common.h:214</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -579,13 +573,13 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   52</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, <span class="stringliteral">&quot;GenerationDeltaTime&quot;</span>);</div>
 <div class="line"><span class="lineno">   53</span>  generation_delta_time.value = gdt_value;</div>
 <div class="line"><span class="lineno">   54</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a34cebeddb7ba669741fd0a601abf1f39"><div class="ttname"><a href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00048">cdd_setters_common.h:48</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a34cebeddb7ba669741fd0a601abf1f39"><div class="ttname"><a href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00052">cdd_setters_common.h:52</a></div></div>
 <div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00046">checks.h:46</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a32ccbeccddeb3e9ece28d8d401915dd7" name="a32ccbeccddeb3e9ece28d8d401915dd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32ccbeccddeb3e9ece28d8d401915dd7">&#9670;&#160;</a></span>setHeading() <span class="overload">[1/2]</span></h2>
+<a id="afec871f5372440f4f013e597c61dbe6c" name="afec871f5372440f4f013e597c61dbe6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec871f5372440f4f013e597c61dbe6c">&#9670;&#160;</a></span>setHeading()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -601,7 +595,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>heading_val</em></span>&#160;)</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>heading_val</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>confidence</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::numeric_limits&lt;double&gt;::infinity()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -617,113 +616,22 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">cam</td><td>CAM to set the ReferencePosition </td></tr>
     <tr><td class="paramname">value</td><td>Heading value in degree as decimal number </td></tr>
+    <tr><td class="paramname">confidence</td><td>standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00116">116</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                           {</div>
-<div class="line"><span class="lineno">  117</span>  <a class="code hl_function" href="#a7e8b5c51aec89da6d69adc77a4ece374">setHeading</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,</div>
-<div class="line"><span class="lineno">  118</span>             heading_val);</div>
-<div class="line"><span class="lineno">  119</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a7e8b5c51aec89da6d69adc77a4ece374"><div class="ttname"><a href="#a7e8b5c51aec89da6d69adc77a4ece374">setHeading</a></div><div class="ttdeci">void setHeading(Heading &amp;heading, const double value)</div><div class="ttdoc">Set the Heading object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00102">cam_setters_common.h:102</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00089">89</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>                                                                                                                          {</div>
+<div class="line"><span class="lineno">   90</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#aba8eac42f14130da2319f3e45468f6b8">setHeadingCDD</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,</div>
+<div class="line"><span class="lineno">   91</span>             heading_val, confidence);</div>
+<div class="line"><span class="lineno">   92</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_aba8eac42f14130da2319f3e45468f6b8"><div class="ttname"><a href="cdd__setters__common_8h.html#aba8eac42f14130da2319f3e45468f6b8">setHeadingCDD</a></div><div class="ttdeci">void setHeadingCDD(Heading &amp;heading, const double value, double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Heading object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00270">cdd_setters_common.h:270</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a7e8b5c51aec89da6d69adc77a4ece374" name="a7e8b5c51aec89da6d69adc77a4ece374"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e8b5c51aec89da6d69adc77a4ece374">&#9670;&#160;</a></span>setHeading() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setHeading </td>
-          <td>(</td>
-          <td class="paramtype">Heading &amp;</td>          <td class="paramname"><span class="paramname"><em>heading</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Heading object. </p>
-<p>0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West HeadingConfidence is set to UNAVAILABLE</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">heading</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>Heading value in degree as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00102">102</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                             {</div>
-<div class="line"><span class="lineno">  103</span>  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  104</span>  <a class="code hl_function" href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a>(heading.heading_value, value);</div>
-<div class="line"><span class="lineno">  105</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_aa98b3ac8fa66187fd19323357c4e24bc"><div class="ttname"><a href="#aa98b3ac8fa66187fd19323357c4e24bc">setHeadingValue</a></div><div class="ttdeci">void setHeadingValue(HeadingValue &amp;heading, const double value)</div><div class="ttdoc">Set the HeadingValue object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00087">cam_setters_common.h:87</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aa98b3ac8fa66187fd19323357c4e24bc" name="aa98b3ac8fa66187fd19323357c4e24bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa98b3ac8fa66187fd19323357c4e24bc">&#9670;&#160;</a></span>setHeadingValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setHeadingValue </td>
-          <td>(</td>
-          <td class="paramtype">HeadingValue &amp;</td>          <td class="paramname"><span class="paramname"><em>heading</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the HeadingValue object. </p>
-<p>0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">heading</td><td>object to set </td></tr>
-    <tr><td class="paramname">value</td><td>Heading value in degree as decimal number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00087">87</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   87</span>                                                                       {</div>
-<div class="line"><span class="lineno">   88</span>  int64_t deg = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><span class="lineno">   89</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(deg, HeadingValue::MIN, HeadingValue::MAX, <span class="stringliteral">&quot;HeadingValue&quot;</span>);</div>
-<div class="line"><span class="lineno">   90</span>  heading.value = deg;</div>
-<div class="line"><span class="lineno">   91</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a271bc119587f5aeff1394048556f2a6a" name="a271bc119587f5aeff1394048556f2a6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a271bc119587f5aeff1394048556f2a6a">&#9670;&#160;</a></span>setLateralAcceleration()</h2>
+<a id="a7d52933fb5da5114386ec44e27f80aae" name="a7d52933fb5da5114386ec44e27f80aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d52933fb5da5114386ec44e27f80aae">&#9670;&#160;</a></span>setLateralAcceleration()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -739,7 +647,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>lat_accel</em></span>&#160;)</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>lat_accel</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>confidence</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::numeric_limits&lt;double&gt;::infinity()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -754,19 +667,20 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">cam</td><td>CAM to set the acceleration value s </td></tr>
     <tr><td class="paramname">lat_accel</td><td>lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2 </td></tr>
+    <tr><td class="paramname">confidence</td><td>standard deviation of the lateral acceleration in m/s^2 as decimal number Default is infinity, mapping to AccelerationConfidence::UNAVAILABLE </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00201">201</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  201</span>                                                                     {</div>
-<div class="line"><span class="lineno">  202</span>  <a class="code hl_function" href="#a271bc119587f5aeff1394048556f2a6a">setLateralAcceleration</a>(</div>
-<div class="line"><span class="lineno">  203</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration,</div>
-<div class="line"><span class="lineno">  204</span>      lat_accel);</div>
-<div class="line"><span class="lineno">  205</span>  cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency</div>
-<div class="line"><span class="lineno">  206</span>      .lateral_acceleration_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  207</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a271bc119587f5aeff1394048556f2a6a"><div class="ttname"><a href="#a271bc119587f5aeff1394048556f2a6a">setLateralAcceleration</a></div><div class="ttdeci">void setLateralAcceleration(CAM &amp;cam, const double lat_accel)</div><div class="ttdoc">Set the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00201">cam_setters_common.h:201</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00178">178</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  178</span>                                                                                                                                    {</div>
+<div class="line"><span class="lineno">  179</span>  <a class="code hl_function" href="#a7d52933fb5da5114386ec44e27f80aae">setLateralAcceleration</a>(</div>
+<div class="line"><span class="lineno">  180</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration,</div>
+<div class="line"><span class="lineno">  181</span>      lat_accel, confidence);</div>
+<div class="line"><span class="lineno">  182</span>  cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency</div>
+<div class="line"><span class="lineno">  183</span>      .lateral_acceleration_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  184</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_a7d52933fb5da5114386ec44e27f80aae"><div class="ttname"><a href="#a7d52933fb5da5114386ec44e27f80aae">setLateralAcceleration</a></div><div class="ttdeci">void setLateralAcceleration(CAM &amp;cam, const double lat_accel, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the lateral acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00178">cam_setters_common.h:178</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -806,15 +720,15 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00312">312</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  312</span>                                                                                                           {</div>
-<div class="line"><span class="lineno">  313</span>  setBitString(light_bar_siren_in_use, bits);</div>
-<div class="line"><span class="lineno">  314</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00289">289</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  289</span>                                                                                                           {</div>
+<div class="line"><span class="lineno">  290</span>  setBitString(light_bar_siren_in_use, bits);</div>
+<div class="line"><span class="lineno">  291</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a0565fb2b66efcb6411f3c02a193fab8b" name="a0565fb2b66efcb6411f3c02a193fab8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0565fb2b66efcb6411f3c02a193fab8b">&#9670;&#160;</a></span>setLongitudinalAcceleration()</h2>
+<a id="a123f84fcf84bb58fc94e40cd4496581f" name="a123f84fcf84bb58fc94e40cd4496581f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a123f84fcf84bb58fc94e40cd4496581f">&#9670;&#160;</a></span>setLongitudinalAcceleration()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -830,7 +744,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>lon_accel</em></span>&#160;)</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>lon_accel</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>confidence</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::numeric_limits&lt;double&gt;::infinity()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -845,17 +764,18 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">cam</td><td>CAM to set the acceleration value s </td></tr>
     <tr><td class="paramname">lon_accel</td><td>longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2 </td></tr>
+    <tr><td class="paramname">confidence</td><td>standard deviation of the longitudinal acceleration in m/s^2 as decimal number Default is infinity, mapping to AccelerationConfidence::UNAVAILABLE </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00189">189</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  189</span>                                                                          {</div>
-<div class="line"><span class="lineno">  190</span>  <a class="code hl_function" href="#a0565fb2b66efcb6411f3c02a193fab8b">setLongitudinalAcceleration</a>(</div>
-<div class="line"><span class="lineno">  191</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration,</div>
-<div class="line"><span class="lineno">  192</span>      lon_accel);</div>
-<div class="line"><span class="lineno">  193</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a0565fb2b66efcb6411f3c02a193fab8b"><div class="ttname"><a href="#a0565fb2b66efcb6411f3c02a193fab8b">setLongitudinalAcceleration</a></div><div class="ttdeci">void setLongitudinalAcceleration(CAM &amp;cam, const double lon_accel)</div><div class="ttdoc">Set the longitudinal acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00189">cam_setters_common.h:189</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00164">164</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>                                                                                                                                         {</div>
+<div class="line"><span class="lineno">  165</span>  <a class="code hl_function" href="#a123f84fcf84bb58fc94e40cd4496581f">setLongitudinalAcceleration</a>(</div>
+<div class="line"><span class="lineno">  166</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration,</div>
+<div class="line"><span class="lineno">  167</span>      lon_accel, confidence);</div>
+<div class="line"><span class="lineno">  168</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_a123f84fcf84bb58fc94e40cd4496581f"><div class="ttname"><a href="#a123f84fcf84bb58fc94e40cd4496581f">setLongitudinalAcceleration</a></div><div class="ttdeci">void setLongitudinalAcceleration(CAM &amp;cam, const double lon_accel, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the longitudinal acceleration.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00164">cam_setters_common.h:164</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -908,11 +828,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00220">220</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>                                                                                   {</div>
-<div class="line"><span class="lineno">  222</span>  <a class="code hl_function" href="#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);</div>
-<div class="line"><span class="lineno">  223</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_af6b307d10295b188e48796b8b2377db3"><div class="ttname"><a href="#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(CAM &amp;cam, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Set the ReferencePosition for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00220">cam_setters_common.h:220</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00197">197</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  198</span>                                                                                   {</div>
+<div class="line"><span class="lineno">  199</span>  <a class="code hl_function" href="#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a>(cam.cam.cam_parameters.basic_container.reference_position, latitude, longitude, altitude);</div>
+<div class="line"><span class="lineno">  200</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_af6b307d10295b188e48796b8b2377db3"><div class="ttname"><a href="#af6b307d10295b188e48796b8b2377db3">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(CAM &amp;cam, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Set the ReferencePosition for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00197">cam_setters_common.h:197</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -952,15 +872,15 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00302">302</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  302</span>                                                                                                               {</div>
-<div class="line"><span class="lineno">  303</span>  setBitString(special_transport_type, bits);</div>
-<div class="line"><span class="lineno">  304</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00279">279</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  279</span>                                                                                                               {</div>
+<div class="line"><span class="lineno">  280</span>  setBitString(special_transport_type, bits);</div>
+<div class="line"><span class="lineno">  281</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3651ecc3584b2e1529a81ecef894cc64" name="a3651ecc3584b2e1529a81ecef894cc64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3651ecc3584b2e1529a81ecef894cc64">&#9670;&#160;</a></span>setSpeed()</h2>
+<a id="aec274b155db16e2780e100c546bff5a6" name="aec274b155db16e2780e100c546bff5a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec274b155db16e2780e100c546bff5a6">&#9670;&#160;</a></span>setSpeed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -976,7 +896,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>speed_val</em></span>&#160;)</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>speed_val</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>confidence</em></span><span class="paramdefsep"> = </span><span class="paramdefval">SpeedConfidence::UNAVAILABLE</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -995,11 +920,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00179">179</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                       {</div>
-<div class="line"><span class="lineno">  180</span>  <a class="code hl_function" href="#a3651ecc3584b2e1529a81ecef894cc64">setSpeed</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);</div>
-<div class="line"><span class="lineno">  181</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a3651ecc3584b2e1529a81ecef894cc64"><div class="ttname"><a href="#a3651ecc3584b2e1529a81ecef894cc64">setSpeed</a></div><div class="ttdeci">void setSpeed(CAM &amp;cam, const double speed_val)</div><div class="ttdoc">Set the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00179">cam_setters_common.h:179</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00152">152</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  152</span>                                                                                                             {</div>
+<div class="line"><span class="lineno">  153</span>  <a class="code hl_function" href="#aec274b155db16e2780e100c546bff5a6">setSpeed</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val, confidence);</div>
+<div class="line"><span class="lineno">  154</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_aec274b155db16e2780e100c546bff5a6"><div class="ttname"><a href="#aec274b155db16e2780e100c546bff5a6">setSpeed</a></div><div class="ttdeci">void setSpeed(CAM &amp;cam, const double speed_val, const double confidence=SpeedConfidence::UNAVAILABLE)</div><div class="ttdoc">Set the vehicle speed.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00152">cam_setters_common.h:152</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1089,16 +1014,16 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00165">165</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  165</span>                                                                                                    {</div>
-<div class="line"><span class="lineno">  166</span>  <a class="code hl_function" href="#a234cf10e13b8acee801edcd9405451a6">setVehicleLength</a>(</div>
-<div class="line"><span class="lineno">  167</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length,</div>
-<div class="line"><span class="lineno">  168</span>      vehicle_length);</div>
-<div class="line"><span class="lineno">  169</span>  <a class="code hl_function" href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width,</div>
-<div class="line"><span class="lineno">  170</span>                  vehicle_width);</div>
-<div class="line"><span class="lineno">  171</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a234cf10e13b8acee801edcd9405451a6"><div class="ttname"><a href="#a234cf10e13b8acee801edcd9405451a6">setVehicleLength</a></div><div class="ttdeci">void setVehicleLength(VehicleLength &amp;vehicle_length, const double value)</div><div class="ttdoc">Set the VehicleLength object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00153">cam_setters_common.h:153</a></div></div>
-<div class="ttc" id="acam__setters__common_8h_html_accca46176c8be97e41ff54618c6f307f"><div class="ttname"><a href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a></div><div class="ttdeci">void setVehicleWidth(VehicleWidth &amp;vehicle_width, const double value)</div><div class="ttdoc">Set the VehicleWidth object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00127">cam_setters_common.h:127</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00138">138</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  138</span>                                                                                                    {</div>
+<div class="line"><span class="lineno">  139</span>  <a class="code hl_function" href="#a234cf10e13b8acee801edcd9405451a6">setVehicleLength</a>(</div>
+<div class="line"><span class="lineno">  140</span>      cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_length,</div>
+<div class="line"><span class="lineno">  141</span>      vehicle_length);</div>
+<div class="line"><span class="lineno">  142</span>  <a class="code hl_function" href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a>(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.vehicle_width,</div>
+<div class="line"><span class="lineno">  143</span>                  vehicle_width);</div>
+<div class="line"><span class="lineno">  144</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_a234cf10e13b8acee801edcd9405451a6"><div class="ttname"><a href="#a234cf10e13b8acee801edcd9405451a6">setVehicleLength</a></div><div class="ttdeci">void setVehicleLength(VehicleLength &amp;vehicle_length, const double value)</div><div class="ttdoc">Set the VehicleLength object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00126">cam_setters_common.h:126</a></div></div>
+<div class="ttc" id="acam__setters__common_8h_html_accca46176c8be97e41ff54618c6f307f"><div class="ttname"><a href="#accca46176c8be97e41ff54618c6f307f">setVehicleWidth</a></div><div class="ttdeci">void setVehicleWidth(VehicleWidth &amp;vehicle_width, const double value)</div><div class="ttdoc">Set the VehicleWidth object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00100">cam_setters_common.h:100</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1139,12 +1064,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00153">153</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                {</div>
-<div class="line"><span class="lineno">  154</span>  vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  155</span>  <a class="code hl_function" href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a>(vehicle_length.vehicle_length_value, value);</div>
-<div class="line"><span class="lineno">  156</span>}</div>
-<div class="ttc" id="acam__setters__common_8h_html_a56fb18d01480639649af1d9acb848b86"><div class="ttname"><a href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a></div><div class="ttdeci">void setVehicleLengthValue(VehicleLengthValue &amp;vehicle_length, const double value)</div><div class="ttdoc">Set the VehicleLengthValue object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00139">cam_setters_common.h:139</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00126">126</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>                                                                                {</div>
+<div class="line"><span class="lineno">  127</span>  vehicle_length.vehicle_length_confidence_indication.value = VehicleLengthConfidenceIndication::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  128</span>  <a class="code hl_function" href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a>(vehicle_length.vehicle_length_value, value);</div>
+<div class="line"><span class="lineno">  129</span>}</div>
+<div class="ttc" id="acam__setters__common_8h_html_a56fb18d01480639649af1d9acb848b86"><div class="ttname"><a href="#a56fb18d01480639649af1d9acb848b86">setVehicleLengthValue</a></div><div class="ttdeci">void setVehicleLengthValue(VehicleLengthValue &amp;vehicle_length, const double value)</div><div class="ttdoc">Set the VehicleLengthValue object.</div><div class="ttdef"><b>Definition</b> <a href="cam__setters__common_8h_source.html#l00112">cam_setters_common.h:112</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1184,12 +1109,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00139">139</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                                                                                          {</div>
-<div class="line"><span class="lineno">  140</span>  int64_t length = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><span class="lineno">  141</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, <span class="stringliteral">&quot;VehicleLengthValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  142</span>  vehicle_length.value = length;</div>
-<div class="line"><span class="lineno">  143</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00112">112</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>                                                                                          {</div>
+<div class="line"><span class="lineno">  113</span>  int64_t length = (int64_t)std::round(value * 1e1);</div>
+<div class="line"><span class="lineno">  114</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(length, VehicleLengthValue::MIN, VehicleLengthValue::MAX, <span class="stringliteral">&quot;VehicleLengthValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  115</span>  vehicle_length.value = length;</div>
+<div class="line"><span class="lineno">  116</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1229,12 +1154,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00127">127</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  127</span>                                                                             {</div>
-<div class="line"><span class="lineno">  128</span>  int64_t width = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><span class="lineno">  129</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(width, VehicleWidth::MIN, VehicleWidth::MAX, <span class="stringliteral">&quot;VehicleWidthValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  130</span>  vehicle_width.value = width;</div>
-<div class="line"><span class="lineno">  131</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cam__setters__common_8h_source.html#l00100">100</a> of file <a class="el" href="cam__setters__common_8h_source.html">cam_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  100</span>                                                                             {</div>
+<div class="line"><span class="lineno">  101</span>  int64_t width = (int64_t)std::round(value * 1e1);</div>
+<div class="line"><span class="lineno">  102</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(width, VehicleWidth::MIN, VehicleWidth::MAX, <span class="stringliteral">&quot;VehicleWidthValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  103</span>  vehicle_width.value = width;</div>
+<div class="line"><span class="lineno">  104</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

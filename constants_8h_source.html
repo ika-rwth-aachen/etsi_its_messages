@@ -165,9 +165,36 @@ $(function(){initNavTree('constants_8h_source.html',''); initResizable(true); })
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
 </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}  <span class="comment">// namespace etsi_its_msgs</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">// An interval containing 95% of the points in a 1D Gaussian distribution</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">double</span> ONE_D_GAUSSIAN_FACTOR = 2.0;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">// An ellipse containing 95% of the points in a 2D Gaussian distribution</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">// has size 2.4477*sigma_{major/minor}</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">double</span> TWO_D_GAUSSIAN_FACTOR = 2.4477;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">// Helper struct to get the value of ONE_CENTIMETER from a given type, if it exists</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">// Otherwise, it defaults to 1</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> SemiAxisLength, <span class="keyword">typename</span> = std::<span class="keywordtype">void</span>_t&lt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="};">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="structetsi__its__msgs_1_1OneCentimeterHelper.html">   81</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structetsi__its__msgs_1_1OneCentimeterHelper.html">OneCentimeterHelper</a> {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">int</span> value = 1; <span class="comment">// Default value</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">// Specialization for types that have ONE_CENTIMETER defined</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> SemiAxisLength&gt;</div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="};">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="structetsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLength_00_01std_1_1void__t_3_01decltype45e7f73b825faac7e60cb4a332c33192.html">   87</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structetsi__its__msgs_1_1OneCentimeterHelper.html">OneCentimeterHelper</a>&lt;SemiAxisLength, std::void_t&lt;decltype(SemiAxisLength::ONE_CENTIMETER)&gt;&gt; {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">int</span> value = SemiAxisLength::ONE_CENTIMETER;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}  <span class="comment">// namespace etsi_its_msgs</span></div>
 <div class="ttc" id="aconstants_8h_html_a985af834e01c1ef58a3c86b5a8e04dcd"><div class="ttname"><a href="constants_8h.html#a985af834e01c1ef58a3c86b5a8e04dcd">etsi_its_msgs::getLeapSecondInsertionsSince2004</a></div><div class="ttdeci">uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds)</div><div class="ttdoc">Get the leap second insertions since 2004 for given unix seconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00060">constants.h:60</a></div></div>
 <div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="#l00045">constants.h:45</a></div></div>
+<div class="ttc" id="astructetsi__its__msgs_1_1OneCentimeterHelper_html"><div class="ttname"><a href="structetsi__its__msgs_1_1OneCentimeterHelper.html">etsi_its_msgs::OneCentimeterHelper</a></div><div class="ttdef"><b>Definition</b> <a href="#l00081">constants.h:81</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

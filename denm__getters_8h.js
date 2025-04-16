@@ -1,5 +1,6 @@
 var denm__getters_8h =
 [
+    [ "etsi_its_denm_msgs::access::CovMatrixFromConfidenceEllipse", "denm__getters_8h.html#a986f24466c906ea6e3e1216f2b0faa54", null ],
     [ "etsi_its_denm_msgs::access::getAltitude", "denm__getters_8h.html#af60ea3de1990eb0b94cbd5eeed46f1d0", null ],
     [ "etsi_its_denm_msgs::access::getAltitude", "denm__getters_8h.html#a993b296da4b12d45224488f4ba49241f", null ],
     [ "etsi_its_denm_msgs::access::getBitString", "denm__getters_8h.html#a3f578f4cbd8d3b3eb889b9e7251c5f14", null ],
@@ -7,7 +8,9 @@ var denm__getters_8h =
     [ "etsi_its_denm_msgs::access::getCauseCodeType", "denm__getters_8h.html#a2897d5a42d5e104a0d2b888abc577841", null ],
     [ "etsi_its_denm_msgs::access::getDrivingLaneStatus", "denm__getters_8h.html#a14e472ccea4d007a2dbafa72ad4f03d0", null ],
     [ "etsi_its_denm_msgs::access::getHeading", "denm__getters_8h.html#a229383423d7758fd1d090d328b824b11", null ],
-    [ "etsi_its_denm_msgs::access::getHeading", "denm__getters_8h.html#a51dc4983b67e904d388304b30b07a93d", null ],
+    [ "etsi_its_denm_msgs::access::getHeadingCDD", "denm__getters_8h.html#a5401352e8378217ebe23991a84d52ba9", null ],
+    [ "etsi_its_denm_msgs::access::getHeadingConfidence", "denm__getters_8h.html#a5216518725cd8499eac4400899163a1d", null ],
+    [ "etsi_its_denm_msgs::access::getHeadingConfidenceCDD", "denm__getters_8h.html#a656e1d8928464df8aef1eab6d413d477", null ],
     [ "etsi_its_denm_msgs::access::getIsHeadingPresent", "denm__getters_8h.html#afcfde75caacde0f226d49aa0bca1b12b", null ],
     [ "etsi_its_denm_msgs::access::getIsSpeedPresent", "denm__getters_8h.html#a9d06b163f676225bb5ca126126ee6e3c", null ],
     [ "etsi_its_denm_msgs::access::getLatitude", "denm__getters_8h.html#a2a9af29d8324d6412390a9d4d59515a6", null ],
@@ -15,10 +18,15 @@ var denm__getters_8h =
     [ "etsi_its_denm_msgs::access::getLightBarSirenInUse", "denm__getters_8h.html#a01a4f8edcab9acbe693cb623de2807e1", null ],
     [ "etsi_its_denm_msgs::access::getLongitude", "denm__getters_8h.html#aeb624f49954fa8ffc83379e0c25bca0d", null ],
     [ "etsi_its_denm_msgs::access::getLongitude", "denm__getters_8h.html#a58ebdbc4f3339cc37e33d2a14a3fbbb1", null ],
+    [ "etsi_its_denm_msgs::access::getPosConfidenceEllipse", "denm__getters_8h.html#a2ddc0e4dbeaf95fb9d4f34a24ab98215", null ],
+    [ "etsi_its_denm_msgs::access::getPosConfidenceEllipse", "denm__getters_8h.html#a7c00c618b5532b9fb80408b9c6fe93a5", null ],
     [ "etsi_its_denm_msgs::access::getReferenceTime", "denm__getters_8h.html#a7d1af3c8fde95f5b8df7f7f985954016", null ],
     [ "etsi_its_denm_msgs::access::getReferenceTimeValue", "denm__getters_8h.html#aebfce02ff1cf4b0f5152ff2e1fcc6e15", null ],
+    [ "etsi_its_denm_msgs::access::getSemiAxis", "denm__getters_8h.html#a15c8ba35df37fa7646977d05499ffffe", null ],
     [ "etsi_its_denm_msgs::access::getSpeed", "denm__getters_8h.html#a7e4bb790cafdbb83c1a745ba7b50c6b0", null ],
     [ "etsi_its_denm_msgs::access::getSpeed", "denm__getters_8h.html#afdc328899995b5c97e4b7394af1d8181", null ],
+    [ "etsi_its_denm_msgs::access::getSpeedConfidence", "denm__getters_8h.html#ae9a845f8a7a058e12f021766ac25e0a9", null ],
+    [ "etsi_its_denm_msgs::access::getSpeedConfidence", "denm__getters_8h.html#ac2623fbffb369b4d26d4fb942f199955", null ],
     [ "etsi_its_denm_msgs::access::getStationID", "denm__getters_8h.html#a671a975230636380570fb3e0ca77eae3", null ],
     [ "etsi_its_denm_msgs::access::getStationID", "denm__getters_8h.html#a5e5bab36c415de9f3b65b51f86c9d0f8", null ],
     [ "etsi_its_denm_msgs::access::getStationType", "denm__getters_8h.html#a76e24687a3c8ed9f92780aeb01738adc", null ],
@@ -26,5 +34,7 @@ var denm__getters_8h =
     [ "etsi_its_denm_msgs::access::getSubCauseCodeType", "denm__getters_8h.html#abaca493f63ae2fc37044f803d3113834", null ],
     [ "etsi_its_denm_msgs::access::getUTMPosition", "denm__getters_8h.html#a6fa6570315cb1d9c031b21edf45e6527", null ],
     [ "etsi_its_denm_msgs::access::getUTMPosition", "denm__getters_8h.html#a5b9f75246a8e288c13e3aa8be81dea92", null ],
-    [ "etsi_its_denm_msgs::access::getUTMPosition", "denm__getters_8h.html#a43cfd1f5546d687c337bdad4828a56ab", null ]
+    [ "etsi_its_denm_msgs::access::getUTMPosition", "denm__getters_8h.html#a43cfd1f5546d687c337bdad4828a56ab", null ],
+    [ "etsi_its_denm_msgs::access::getWGSPosConfidenceEllipse", "denm__getters_8h.html#afd53d4d13cd5a11b2aa19d4cde9de03f", null ],
+    [ "etsi_its_denm_msgs::access::WGSCovMatrixFromConfidenceEllipse", "denm__getters_8h.html#a4c98758ccb940d939a9b7b2bb79fb27b", null ]
 ];

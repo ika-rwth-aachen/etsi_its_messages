@@ -18,10 +18,13 @@ var searchData=
   ['cdd_5fv2_2d1_2d1_5fgetters_2eh_15',['cdd_v2-1-1_getters.h',['../cdd__v2-1-1__getters_8h.html',1,'']]],
   ['cdd_5fv2_2d1_2d1_5fsetters_2eh_16',['cdd_v2-1-1_setters.h',['../cdd__v2-1-1__setters_8h.html',1,'']]],
   ['checks_2eh_17',['checks.h',['../checks_8h.html',1,'']]],
-  ['constants_2eh_18',['constants.h',['../constants_8h.html',1,'']]],
-  ['cpm_5fts_5faccess_2eh_19',['cpm_ts_access.h',['../cpm__ts__access_8h.html',1,'']]],
-  ['cpm_5fts_5faccess_2ehpp_20',['cpm_ts_access.hpp',['../cpm__ts__access_8hpp.html',1,'']]],
-  ['cpm_5fts_5fgetters_2eh_21',['cpm_ts_getters.h',['../cpm__ts__getters_8h.html',1,'']]],
-  ['cpm_5fts_5fsetters_2eh_22',['cpm_ts_setters.h',['../cpm__ts__setters_8h.html',1,'']]],
-  ['cpm_5fts_5futils_2eh_23',['cpm_ts_utils.h',['../cpm__ts__utils_8h.html',1,'']]]
+  ['confidenceellipsefromcovmatrix_18',['confidenceEllipseFromCovMatrix',['../cam__setters_8h.html#a703e3302c44a161e5ab78339b493d292',1,'etsi_its_cam_msgs::access::confidenceEllipseFromCovMatrix()'],['../cam__ts__setters_8h.html#a337eca239448fd695e0d3824241e473e',1,'etsi_its_cam_ts_msgs::access::confidenceEllipseFromCovMatrix()'],['../cdd__setters__common_8h.html#a44d6aa0acb8afa65e275084c44c7a007',1,'confidenceEllipseFromCovMatrix():&#160;cdd_setters_common.h'],['../cpm__ts__setters_8h.html#adc98198dbc13ed4da4510e30a2f30f1b',1,'etsi_its_cpm_ts_msgs::access::confidenceEllipseFromCovMatrix()'],['../denm__setters_8h.html#a01e842ca42c7e9801b4fb85ba43fd062',1,'etsi_its_denm_msgs::access::confidenceEllipseFromCovMatrix()']]],
+  ['confidenceellipsefromwgscovmatrix_19',['confidenceEllipseFromWGSCovMatrix',['../cam__setters_8h.html#a5a69b360b23eb9503614ca6eef403e4d',1,'etsi_its_cam_msgs::access::confidenceEllipseFromWGSCovMatrix()'],['../cam__ts__setters_8h.html#a39ccacffe703a0e622ce4fab14b80e8f',1,'etsi_its_cam_ts_msgs::access::confidenceEllipseFromWGSCovMatrix()'],['../cdd__setters__common_8h.html#ae30faf8ab5185e8c76d37f5e93cc51e3',1,'confidenceEllipseFromWGSCovMatrix():&#160;cdd_setters_common.h'],['../cpm__ts__setters_8h.html#af9c458e013b4169e993154faf99d4145',1,'etsi_its_cpm_ts_msgs::access::confidenceEllipseFromWGSCovMatrix()'],['../denm__setters_8h.html#ab37677b422516fedce421968ebfe13d6',1,'etsi_its_denm_msgs::access::confidenceEllipseFromWGSCovMatrix()']]],
+  ['constants_2eh_20',['constants.h',['../constants_8h.html',1,'']]],
+  ['covmatrixfromconfidenceellipse_21',['CovMatrixFromConfidenceEllipse',['../cam__getters_8h.html#ac4dee0dcba1e54d08b42c1cdbe744b5a',1,'etsi_its_cam_msgs::access::CovMatrixFromConfidenceEllipse()'],['../cam__ts__getters_8h.html#ae35d7343ef47c1a6c48c216dba7c13e6',1,'etsi_its_cam_ts_msgs::access::CovMatrixFromConfidenceEllipse()'],['../cdd__getters__common_8h.html#ad36d55ad387c074607b6ae7f375a671f',1,'CovMatrixFromConfidenceEllipse():&#160;cdd_getters_common.h'],['../cpm__ts__getters_8h.html#ac3f8457e15a136913ac372347c3df8a6',1,'etsi_its_cpm_ts_msgs::access::CovMatrixFromConfidenceEllipse()'],['../denm__getters_8h.html#a986f24466c906ea6e3e1216f2b0faa54',1,'etsi_its_denm_msgs::access::CovMatrixFromConfidenceEllipse()']]],
+  ['cpm_5fts_5faccess_2eh_22',['cpm_ts_access.h',['../cpm__ts__access_8h.html',1,'']]],
+  ['cpm_5fts_5faccess_2ehpp_23',['cpm_ts_access.hpp',['../cpm__ts__access_8hpp.html',1,'']]],
+  ['cpm_5fts_5fgetters_2eh_24',['cpm_ts_getters.h',['../cpm__ts__getters_8h.html',1,'']]],
+  ['cpm_5fts_5fsetters_2eh_25',['cpm_ts_setters.h',['../cpm__ts__setters_8h.html',1,'']]],
+  ['cpm_5fts_5futils_2eh_26',['cpm_ts_utils.h',['../cpm__ts__utils_8h.html',1,'']]]
 ];

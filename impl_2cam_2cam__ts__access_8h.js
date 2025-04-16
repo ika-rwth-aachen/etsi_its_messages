@@ -1,5 +1,7 @@
 var impl_2cam_2cam__ts__access_8h =
 [
+    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, typename >", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
+    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLca3fbdbd3bab6d77ee8ebffbc2d38b60.html", null ],
     [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "impl_2cam_2cam__ts__access_8h.html#abcb625b67f4226a9e33f48d16b4ef967", null ],
     [ "etsi_its_cam_ts_msgs::access::getTimestampITSFromGenerationDeltaTime", "impl_2cam_2cam__ts__access_8h.html#a4a52bf10830ad1ec19eef6410678340b", null ],
     [ "etsi_its_cam_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime", "impl_2cam_2cam__ts__access_8h.html#a572ade61d511494f8cadc3c84fb681a2", null ],

@@ -104,6 +104,7 @@ $(function(){initNavTree('impl_2denm_2denm__access_8h.html',''); initResizable(t
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">denm_access.h File Reference</div></div>
@@ -123,6 +124,13 @@ $(function(){initNavTree('impl_2denm_2denm__access_8h.html',''); initResizable(t
 </div>
 <p><a href="impl_2denm_2denm__access_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html">etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, typename &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengfc7d53985d045d0dcaab7e94241c63f4.html">etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, std::void_t&lt; decltype(SemiAxisLength::ONE_CENTIMETER)&gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a509b6187f55ea99970d24ff799403463" id="r_a509b6187f55ea99970d24ff799403463"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a509b6187f55ea99970d24ff799403463">etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004</a> (const uint64_t unix_seconds)</td></tr>
@@ -139,6 +147,10 @@ Variables</h2></td></tr>
 <tr class="memitem:af883a975ecce56dbed56328704238a40" id="r_af883a975ecce56dbed56328704238a40"><td class="memItemLeft" align="right" valign="top">const std::map&lt; uint64_t, uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af883a975ecce56dbed56328704238a40">etsi_its_denm_msgs::access::etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></td></tr>
 <tr class="memdesc:af883a975ecce56dbed56328704238a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion  <br /></td></tr>
 <tr class="separator:af883a975ecce56dbed56328704238a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f231f9652e0fe21432b110f7efdcaf" id="r_ad9f231f9652e0fe21432b110f7efdcaf"><td class="memItemLeft" align="right" valign="top">constexpr const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9f231f9652e0fe21432b110f7efdcaf">etsi_its_denm_msgs::access::etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR</a> = 2.0</td></tr>
+<tr class="separator:ad9f231f9652e0fe21432b110f7efdcaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b28352b104980edbb5717019e48ed33" id="r_a1b28352b104980edbb5717019e48ed33"><td class="memItemLeft" align="right" valign="top">constexpr const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b28352b104980edbb5717019e48ed33">etsi_its_denm_msgs::access::etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR</a> = 2.4477</td></tr>
+<tr class="separator:a1b28352b104980edbb5717019e48ed33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main DENM access implementation header. </p>
@@ -214,10 +226,10 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00082">82</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  135</span>                                   {</div>
-<div class="line"><span class="lineno">  136</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  137</span>}</div>
+<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00104">104</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  157</span>                                   {</div>
+<div class="line"><span class="lineno">  158</span><span class="preprocessor">#include &lt;<a class="code" href="denm__utils_8h.html">etsi_its_msgs_utils/impl/denm/denm_utils.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  159</span>}</div>
 <div class="ttc" id="adenm__utils_8h_html"><div class="ttname"><a href="denm__utils_8h.html">denm_utils.h</a></div><div class="ttdoc">Utility functions for the ETSI ITS DENM (EN)</div></div>
 </div><!-- fragment -->
 </div>
@@ -246,6 +258,54 @@ Variables</h2></td></tr>
 <p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
 <p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00046">46</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
+
+</div>
+</div>
+<a id="ad9f231f9652e0fe21432b110f7efdcaf" name="ad9f231f9652e0fe21432b110f7efdcaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f231f9652e0fe21432b110f7efdcaf">&#9670;&#160;</a></span>ONE_D_GAUSSIAN_FACTOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double etsi_its_denm_msgs::access::etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR = 2.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00072">72</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
+
+</div>
+</div>
+<a id="a1b28352b104980edbb5717019e48ed33" name="a1b28352b104980edbb5717019e48ed33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b28352b104980edbb5717019e48ed33">&#9670;&#160;</a></span>TWO_D_GAUSSIAN_FACTOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double etsi_its_denm_msgs::access::etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR = 2.4477</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="impl_2denm_2denm__access_8h_source.html#l00076">76</a> of file <a class="el" href="impl_2denm_2denm__access_8h_source.html">denm_access.h</a>.</p>
 
 </div>
 </div>

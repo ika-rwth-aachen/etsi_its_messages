@@ -148,10 +148,46 @@ $(function(){initNavTree('cam__ts__setters_8h_source.html',''); initResizable(tr
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__ts__setters_8h.html#afa2c16ad22826341cd0f9bb0d3f30afa">setItsPduHeader</a>(CAM&amp; cam, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <a class="code hl_function" href="cam__ts__setters_8h.html#afa2c16ad22826341cd0f9bb0d3f30afa">setItsPduHeader</a>(cam.header, MessageId::CAM, station_id, protocol_version);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">inline</span> <span class="keywordtype">void</span> setRefPosConfidence(CAM&amp; cam, <span class="keyword">const</span> std::array&lt;double, 4&gt;&amp; covariance_matrix, <span class="keyword">const</span> <span class="keywordtype">double</span> object_heading) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">// First ensure, that the object has the correct heading by setting its value</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">double</span> orientation = object_heading * 180 / M_PI; <span class="comment">// Convert to degrees</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="comment">// Normalize to [0, 360)</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  orientation = std::fmod(orientation + 360, 360);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">while</span> (orientation &lt; 0) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    orientation += 360;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">while</span> (orientation &gt;= 360) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    orientation -= 360;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <a class="code hl_function" href="cam__ts__setters_8h.html#aa9a5384624053c324dc1821464ddcbee">setHeading</a>(cam, orientation);</div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="cam__ts__setters_8h.html#a1e79956083913d1208b794220886aab7">   72</a></span>  <a class="code hl_function" href="cam__ts__setters_8h.html#a7925c94ead7a0eee0107dbe2602c4fe3">setPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                          covariance_matrix, object_heading);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="cam__ts__setters_8h.html#ab423729eb12e8621fb3dccb7d029674f">   81</a></span><span class="comment"> *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> *                          Its coordinate system is WGS84 (x = North, y = East)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="cam__ts__setters_8h.html#a3264c98d0395d6e5d31be47215d8bca9">setWGSRefPosConfidence</a>(CAM&amp; cam, <span class="keyword">const</span> std::array&lt;double, 4&gt;&amp; covariance_matrix) {</div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="cam__ts__setters_8h.html#afa2c16ad22826341cd0f9bb0d3f30afa">   85</a></span>  <a class="code hl_function" href="cam__ts__setters_8h.html#ab0e7713d4f276f6d7f87abb10638f5d1">setWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                                  covariance_matrix);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+</div>
 </div>
 <div class="ttc" id="acam__setters__common_8h_html"><div class="ttname"><a href="cam__setters__common_8h.html">cam_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS CAM (EN and TS)</div></div>
+<div class="ttc" id="acam__ts__setters_8h_html_a3264c98d0395d6e5d31be47215d8bca9"><div class="ttname"><a href="cam__ts__setters_8h.html#a3264c98d0395d6e5d31be47215d8bca9">etsi_its_cam_ts_msgs::access::setWGSRefPosConfidence</a></div><div class="ttdeci">void setWGSRefPosConfidence(CAM &amp;cam, const std::array&lt; double, 4 &gt; &amp;covariance_matrix)</div><div class="ttdoc">Set the confidence of the reference position.</div><div class="ttdef"><b>Definition</b> <a href="#l00384">cam_ts_setters.h:384</a></div></div>
+<div class="ttc" id="acam__ts__setters_8h_html_a7925c94ead7a0eee0107dbe2602c4fe3"><div class="ttname"><a href="cam__ts__setters_8h.html#a7925c94ead7a0eee0107dbe2602c4fe3">etsi_its_cam_ts_msgs::access::setPositionConfidenceEllipse</a></div><div class="ttdeci">void setPositionConfidenceEllipse(PositionConfidenceEllipse &amp;position_confidence_ellipse, const double semi_major_axis, const double semi_minor_axis, const double orientation)</div><div class="ttdoc">Set the Position Confidence Ellipse object.</div><div class="ttdef"><b>Definition</b> <a href="#l00174">cam_ts_setters.h:174</a></div></div>
+<div class="ttc" id="acam__ts__setters_8h_html_aa9a5384624053c324dc1821464ddcbee"><div class="ttname"><a href="cam__ts__setters_8h.html#aa9a5384624053c324dc1821464ddcbee">etsi_its_cam_ts_msgs::access::setHeading</a></div><div class="ttdeci">void setHeading(CAM &amp;cam, const double heading_val, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Heading for a CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">cam_ts_setters.h:124</a></div></div>
+<div class="ttc" id="acam__ts__setters_8h_html_ab0e7713d4f276f6d7f87abb10638f5d1"><div class="ttname"><a href="cam__ts__setters_8h.html#ab0e7713d4f276f6d7f87abb10638f5d1">etsi_its_cam_ts_msgs::access::setWGSPositionConfidenceEllipse</a></div><div class="ttdeci">void setWGSPositionConfidenceEllipse(PositionConfidenceEllipse &amp;position_confidence_ellipse, const std::array&lt; double, 4 &gt; &amp;covariance_matrix)</div><div class="ttdoc">Set the Position Confidence Ellipse object.</div><div class="ttdef"><b>Definition</b> <a href="#l00206">cam_ts_setters.h:206</a></div></div>
 <div class="ttc" id="acam__ts__setters_8h_html_afa2c16ad22826341cd0f9bb0d3f30afa"><div class="ttname"><a href="cam__ts__setters_8h.html#afa2c16ad22826341cd0f9bb0d3f30afa">etsi_its_cam_ts_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00085">cam_ts_setters.h:85</a></div></div>
 <div class="ttc" id="acdd__v2-1-1__setters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__setters_8h.html">cdd_v2-1-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
 </div><!-- fragment --></div><!-- contents -->
