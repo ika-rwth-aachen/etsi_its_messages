@@ -189,8 +189,8 @@ etsi_its_mcm_uulm_coding:
   script:
     - >
       utils/codegen/asn1ToC/asn1ToC.py
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       -t mcm_uulm
       -o etsi_its_coding/etsi_its_mcm_uulm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
@@ -301,8 +301,8 @@ etsi_its_mcm_uulm_msgs:
   script:
     - >
       utils/codegen/codegen-py/asn1ToRosMsg.py
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       -t mcm_uulm
       -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
@@ -410,8 +410,8 @@ etsi_its_mcm_uulm_conversion:
   script:
     - >
       utils/codegen/codegen-py/asn1ToConversionHeader.py
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
       -t mcm_uulm
       -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
