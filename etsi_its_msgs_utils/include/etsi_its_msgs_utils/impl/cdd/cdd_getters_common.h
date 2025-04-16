@@ -131,6 +131,17 @@ template <typename Heading>
 inline double getHeadingCDD(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
 
 /**
+ * @brief Get the Heading value
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the Heading standard deviation from
+ * @return Heading standard deviation in degree as decimal number
+ */
+template <typename Heading>
+inline double getHeadingConfidenceCDD(const Heading& heading) { return ((double)heading.heading_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }
+
+/**
  * @brief Get the Semi Axis object
  * 
  * @param semi_axis_length The SemiAxisLength object to get the semi axis from

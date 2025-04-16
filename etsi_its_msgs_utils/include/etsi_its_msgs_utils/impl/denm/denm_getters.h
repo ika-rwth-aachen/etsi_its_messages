@@ -96,12 +96,30 @@ inline double getAltitude(const DENM& denm) { return getAltitude(denm.denm.manag
  * @brief Get the Heading object
  * 
  * @param denm DENM to get the Heading-Value from
- * @return getHeading value
+ * @return heading value in degree as decimal number
  */
 inline double getHeading(const DENM& denm) {
   if (denm.denm.location_is_present) {
     if (denm.denm.location.event_position_heading_is_present) {
       return getHeadingCDD(denm.denm.location.event_position_heading);
+    } else {
+      throw std::invalid_argument("Heading is not present!");
+    }
+  } else {
+    throw std::invalid_argument("LocationContainer is not present!");
+  }
+}
+
+/**
+ * @brief Get the Heading confidence
+ * 
+ * @param denm DENM to get the Heading-Value from
+ * @return standard deviation of heading in degrees as decimal number
+ */
+inline double getHeadingConfidence(const DENM& denm) {
+  if (denm.denm.location_is_present) {
+    if (denm.denm.location.event_position_heading_is_present) {
+      return getHeadingConfidenceCDD(denm.denm.location.event_position_heading);
     } else {
       throw std::invalid_argument("Heading is not present!");
     }

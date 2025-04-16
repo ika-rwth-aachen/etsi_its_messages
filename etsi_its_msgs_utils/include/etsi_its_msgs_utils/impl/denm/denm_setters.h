@@ -112,10 +112,11 @@ inline void setIsHeadingPresent(DENM& denm, bool presence_of_heading) {
  *
  * @param denm DENM to set the ReferencePosition
  * @param value Heading value in degree as decimal number
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE)
  */
-inline void setHeading(DENM& denm, const double heading_val) {
+inline void setHeading(DENM& denm, const double heading_val, const double confidence = std::numeric_limits<double>::infinity()) {
   if (denm.denm.location_is_present) {
-    setHeadingCDD(denm.denm.location.event_position_heading, heading_val);
+    setHeadingCDD(denm.denm.location.event_position_heading, heading_val, confidence);
     setIsHeadingPresent(denm, true);
   } else {
     throw std::invalid_argument("LocationContainer is not present!");

@@ -65,9 +65,11 @@ TEST(etsi_its_denm_msgs, test_set_get_denm) {
   EXPECT_NEAR(altitude, denm_access::getAltitude(denm), 1e-2);
 
   double heading_val = randomDouble(0.0, 360.0);
+  double heading_conf = randomDouble(0.0, 6.25);
   denm.denm.location_is_present = true;
-  denm_access::setHeading(denm, heading_val);
+  denm_access::setHeading(denm, heading_val, heading_conf);
   EXPECT_NEAR(heading_val, denm_access::getHeading(denm), 1e-1);
+  EXPECT_NEAR(heading_conf, denm_access::getHeadingConfidence(denm), 1e-1);
 
   double speed_val = randomDouble(0.0, 163.82);
   denm.denm.location_is_present = true;

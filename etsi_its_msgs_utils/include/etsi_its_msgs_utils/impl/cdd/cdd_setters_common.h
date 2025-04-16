@@ -240,6 +240,23 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
 }
 
 /**
+ * @brief Set the Heading Confidence object
+ * 
+ * @param heading_confidence object to set
+ * @param value standard deviation of heading in degree as decimal number
+ */
+template<typename HeadingConfidence>
+inline void setHeadingConfidence(HeadingConfidence& heading_confidence, const double value) {
+  auto heading_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  if (heading_conf < HeadingConfidence::MIN && heading_conf > 0.0){
+    heading_conf = HeadingConfidence::MIN;
+  } else if (heading_conf >= HeadingConfidence::OUT_OF_RANGE || heading_conf <= 0.0) {
+    heading_conf = HeadingConfidence::UNAVAILABLE;
+  }
+  heading_confidence.value = static_cast<decltype(heading_confidence.value)>(heading_conf);
+}
+
+/**
  * @brief Set the Heading object
  *
  * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -247,10 +264,11 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
  *
  * @param heading object to set
  * @param value Heading value in degree as decimal number
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE) 
  */
 template <typename Heading, typename HeadingConfidence = decltype(Heading::heading_confidence)>
-void setHeadingCDD(Heading& heading, const double value) {
-  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
+void setHeadingCDD(Heading& heading, const double value, double confidence = std::numeric_limits<double>::infinity()) {
+  setHeadingConfidence(heading.heading_confidence, confidence);
   setHeadingValue(heading.heading_value, value);
 }
 

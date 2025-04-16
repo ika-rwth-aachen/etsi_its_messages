@@ -109,6 +109,17 @@ inline double getHeading(const CAM& cam) {
 }
 
 /**
+ * @brief Get the Heading confidence of CAM
+ *
+ *
+ * @param cam CAM to get the Heading confidence from
+ * @return Heading standard deviation in degree as decimal number
+ */
+inline double getHeadingConfidence(const CAM& cam) {
+  return getHeadingConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
+}
+
+/**
  * @brief Get the Vehicle Length
  *
  * @param vehicleLength to get the vehicle length value from

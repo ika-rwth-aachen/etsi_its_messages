@@ -74,8 +74,10 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
   EXPECT_NEAR(altitude, cam_ts_access::getAltitude(cam), 1e-2);
 
   double heading_val = randomDouble(0.0, 360.0);
-  cam_ts_access::setHeading(cam, heading_val);
+  double heading_conf = randomDouble(0.0, 6.25);
+  cam_ts_access::setHeading(cam, heading_val, heading_conf);
   EXPECT_NEAR(heading_val, cam_ts_access::getHeading(cam), 1e-1);
+  EXPECT_NEAR(heading_conf, cam_ts_access::getHeadingConfidence(cam), 1e-1);
 
   std::array<double, 4> covariance_matrix = {randomDouble(1.0, 100.0), 0.0,
     0.0, randomDouble(1.0, 100.0)};

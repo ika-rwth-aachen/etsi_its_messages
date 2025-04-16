@@ -84,10 +84,11 @@ inline void setStationType(CAM& cam, const uint8_t value) {
  *
  * @param cam CAM to set the ReferencePosition
  * @param value Heading value in degree as decimal number
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE)
  */
-inline void setHeading(CAM& cam, const double heading_val) {
+inline void setHeading(CAM& cam, const double heading_val, const double confidence = std::numeric_limits<double>::infinity()) {
   setHeadingCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
-             heading_val);
+             heading_val, confidence);
 }
 
 /**
