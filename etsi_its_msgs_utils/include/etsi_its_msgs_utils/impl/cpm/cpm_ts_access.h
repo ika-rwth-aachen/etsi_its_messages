@@ -45,6 +45,7 @@ SOFTWARE.
 
 #include <GeographicLib/UTMUPS.hpp>
 
+#include <etsi_its_msgs_utils/impl/constants.h>
 #include <etsi_its_msgs_utils/impl/cpm/cpm_ts_getters.h>
 #include <etsi_its_msgs_utils/impl/cpm/cpm_ts_setters.h>
 
