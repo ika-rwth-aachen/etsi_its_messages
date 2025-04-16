@@ -54,15 +54,15 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 
 ## Supported ETSI ITS Messages
 
-| Status | Acronym | Name | EN Specification | TS Specification |
-| --- | --- | --- | --- | --- |
-| :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | [TS 103 900 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103900_103999/103900/02.01.01_60/ts_103900v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_ts103900)) |
-| :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) |
-| :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | [TS 103 831 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_ts103831)) |
-| :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
-| :white_check_mark: | MCM | Maneuver Coordination Message | - | [Draft Version by UULM](https://github.com/uulm-mrm/uulm_mcm_etsi) |
-| :white_check_mark: | SPATEM | Signal Phase and Timing Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) |
-| :white_check_mark: | VAM | VRU Awareness Message | - | [TS 103 300-3 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/10330003/02.02.01_60/ts_10330003v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3)) |
+| Status | Acronym | Name | EN Specification | TS Specification | TR Specification |
+| --- | --- | --- | --- | --- | --- |
+| :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | [TS 103 900 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103900_103999/103900/02.01.01_60/ts_103900v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_ts103900)) | - |
+| :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) | - |
+| :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | [TS 103 831 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_ts103831)) | - |
+| :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) | - |
+| :white_check_mark: | MCM | Maneuver Coordination Message | - | - | [TR 103 578 proposal by Ulm University](https://github.com/uulm-mrm/uulm_mcm_etsi) |
+| :white_check_mark: | SPATEM | Signal Phase and Timing Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) | - |
+| :white_check_mark: | VAM | VRU Awareness Message | - | [TS 103 300-3 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/10330003/02.02.01_60/ts_10330003v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/vam-ts103300_3)) | - |
 
 > [!NOTE]
 > Message types that are standardized as *European Norms (EN)* are available as, e.g., `etsi_its_cam_msgs`. New message types or revisions of existing message types that are only specified in *Technical Specifications (TS)* are available as, e.g., `etsi_its_cpm_ts_msgs`.
