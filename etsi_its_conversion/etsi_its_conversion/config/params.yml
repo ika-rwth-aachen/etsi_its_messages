@@ -10,6 +10,7 @@
       - denm
       - denm_ts
       - mapem_ts
+      - mcm_uulm
       - spatem_ts
       - vam_ts
     udp2ros_etsi_types:
@@ -17,6 +18,7 @@
       - cpm_ts
       - denm
       - mapem_ts
+      - mcm_uulm
       - spatem_ts
       - vam_ts
     subscriber_queue_size: 10

@@ -34,6 +34,7 @@ SOFTWARE.
 #include <etsi_its_denm_conversion/convertDENM.h>
 #include <etsi_its_denm_ts_conversion/convertDENM.h>
 #include <etsi_its_mapem_ts_conversion/convertMAPEM.h>
+#include <etsi_its_mcm_uulm_conversion/convertMCM.h>
 #include <etsi_its_spatem_ts_conversion/convertSPATEM.h>
 #include <etsi_its_vam_ts_conversion/convertVAM.h>
 #ifdef ROS1
@@ -46,6 +47,7 @@ SOFTWARE.
 #include <etsi_its_denm_msgs/DENM.h>
 #include <etsi_its_denm_ts_msgs/DENM.h>
 #include <etsi_its_mapem_ts_msgs/MAPEM.h>
+#include <etsi_its_mcm_uulm_msgs/MCM.h>
 #include <etsi_its_spatem_ts_msgs/SPATEM.h>
 #include <etsi_its_vam_ts_msgs/VAM.h>
 #else
@@ -55,6 +57,7 @@ SOFTWARE.
 #include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <etsi_its_denm_ts_msgs/msg/denm.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
+#include <etsi_its_mcm_uulm_msgs/msg/mcm.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/spatem.hpp>
 #include <etsi_its_vam_ts_msgs/msg/vam.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -73,6 +76,7 @@ namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
 namespace denm_msgs = etsi_its_denm_msgs;
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
+namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
 #else
@@ -83,6 +87,7 @@ namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
+namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 #endif
@@ -160,6 +165,8 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicDenmTs;
     static const std::string kInputTopicMapemTs;
     static const std::string kOutputTopicMapemTs;
+    static const std::string kInputTopicMcmUulm;
+    static const std::string kOutputTopicMcmUulm;
     static const std::string kInputTopicSpatemTs;
     static const std::string kOutputTopicSpatemTs;
     static const std::string kInputTopicVamTs;
@@ -207,6 +214,7 @@ class Converter : public rclcpp::Node {
     rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
     rclcpp::Publisher<denm_ts_msgs::DENM>::SharedPtr publisher_denm_ts_;
     rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
+    rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
     rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
     rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;

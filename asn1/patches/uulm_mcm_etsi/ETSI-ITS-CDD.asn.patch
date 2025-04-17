@@ -1,0 +1,46 @@
+diff --git a/ETSI-ITS-CDD.asn b/ETSI-ITS-CDD.asn
+index 2bcbb09..20238a4 100644
+--- a/ETSI-ITS-CDD.asn
++++ b/ETSI-ITS-CDD.asn
+@@ -3342,16 +3342,6 @@ StationaryVehicleSubCauseCode ::= INTEGER {
+  */
+ StationId ::= INTEGER(0..4294967295)
+ 
+-/**
+- * This DE represents the identifier of an ITS-S.
+- * The ITS-S ID may be a pseudonym. It may change over space and/or over time.
+- *
+- * @note: this DE is kept for backwards compatibility reasons only. It is recommended to use the @ref StationId instead.
+- * @category: Basic information
+- * @revision: V1.3.1
+- */
+-StationID ::= INTEGER(0..4294967295)
+-
+ /**
+  * This DE represents the type of technical context the ITS-S is integrated in.
+  * The station type depends on the integration environment of ITS-S into vehicle, mobile devices or at infrastructure.
+@@ -4482,24 +4472,6 @@ ActionId ::= SEQUENCE {
+     sequenceNumber          SequenceNumber
+ }
+ 
+-/**
+- * This DF represents an identifier used to describe a protocol action taken by an ITS-S.
+- *
+- * It shall include the following components:
+- *
+- * @field originatingStationId: Id of the ITS-S that takes the action.
+- *
+- * @field sequenceNumber: a sequence number.
+- *
+- * @note: this DF is kept for backwards compatibility reasons only. It is recommended to use the @ref ActionId instead.
+- * @category: Communication information
+- * @revision: V1.3.1
+- */
+-ActionID ::= SEQUENCE {
+-    originatingStationId    StationID,
+-    sequenceNumber          SequenceNumber
+-}
+-
+ /**
+  * This DF shall contain a list of @ref ActionId.
+ 

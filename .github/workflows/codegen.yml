@@ -80,6 +80,9 @@ jobs:
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_coding/etsi_its_spatem_ts_coding -di asn1c:ci
           - message: vam_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_coding/etsi_its_vam_ts_coding -di asn1c:ci
+          - message: mcm_uulm
+            script: utils/codegen/asn1ToC/asn1ToC.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_coding/etsi_its_mcm_uulm_coding -di asn1c:ci
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -90,7 +93,7 @@ jobs:
         with:
           python-version: "3.10"
           cache: pip
-      - name: Install dependencies 
+      - name: Install dependencies
         run: pip install -r ./utils/codegen/asn1ToC/requirements.txt
       - name: Download asn1c-image (artifact)
         uses: actions/download-artifact@v4
@@ -135,6 +138,8 @@ jobs:
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
           - message: vam_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
+          - message: mcm_uulm
+            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -182,6 +187,8 @@ jobs:
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion
           - message: vam_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion
+          - message: mcm_uulm
+            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
