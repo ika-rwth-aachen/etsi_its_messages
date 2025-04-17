@@ -637,4 +637,105 @@ inline void setWGSRefPosConfidence(CollectivePerceptionMessage& cpm, const std::
                              covariance_matrix);
 }
 
+/**
+ * @brief Initializes a WrappedCpmContainer as a SensorInformationContainer.
+ *
+ * This function sets the container ID to CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER and initializes
+ * an empty vector with SensorInformation.
+ *
+ * @param container A reference to the WrappedCpmContainer to be initialized as a SensorInformationContainer.
+ */
+inline void initSensorInformationContainer(WrappedCpmContainer& container) {
+  container.container_id.value = WrappedCpmContainer::CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER;
+  container.container_data_sensor_information_container.array = std::vector<SensorInformation>();
+}
+
+/**
+ * @brief Sets the sensorId of a SensorInformation object.
+ *
+ * This function sets the sensorId of a SensorInformation object. The sensorId is limited to the range defined by
+ * Identifier1B::MIN and Identifier1B::MAX.
+ *
+ * @param sensor_information The SensorInformation object to set the sensorId for.
+ * @param sensor_id The sensorId to set (default: 0).
+ * @throws std::invalid_argument if the sensor_id is out of range.
+ */
+inline void setSensorID(SensorInformation& sensor_information, const uint8_t sensor_id = 0) {
+  throwIfOutOfRange(sensor_id, Identifier1B::MIN, Identifier1B::MAX, "SensorID");
+  sensor_information.sensor_id.value = sensor_id;
+}
+
+/**
+ * @brief Sets the sensorType of a SensorInformation object.
+ *
+ * This function sets the sensorType of a SensorInformation object. The sensorType is limited to the range defined by
+ * SensorType::MIN and SensorType::MAX.
+ *
+ * @param sensor_information The SensorInformation object to set the sensorType for.
+ * @param sensor_type The sensorType to set (default: SensorType::UNDEFINED).
+ * @throws std::invalid_argument if the sensor_type is out of range.
+ */
+inline void setSensorType(SensorInformation& sensor_information, const uint8_t sensor_type = SensorType::UNDEFINED) {
+  throwIfOutOfRange(sensor_type, SensorType::MIN, SensorType::MAX, "SensorType");
+  sensor_information.sensor_type.value = sensor_type;
+}
+
+/**
+ * @brief Adds a SensorInformation to the SensorInformationContainer / WrappedCpmContainer.
+ *
+ * This function checks if the provided container is a SensorInformationContainer. If it is,
+ * the function adds the given SensorInformation to the container's sensor_information array.
+ * If the container is not a SensorInformationContainer, the function throws an
+ * std::invalid_argument exception. If the maximum number of SensorInformation entries is reached,
+ * it throws an exception. If the sensor_id or sensor_type is out of range, it throws an
+ * exception.
+ *
+ *
+ * @param container The WrappedCpmContainer to which the SensorInformation will be added.
+ * @param sensor_information The SensorInformation to add to the container.
+ *
+ * @throws std::invalid_argument if the container is not a SensorInformationContainer.
+ * @throws std::invalid_argument if the maximum number of SensorInformation entries is reached.
+ * @throws std::invalid_argument if the sensor_id or sensor_type is out of range.
+ */
+inline void addSensorInformationToContainer(WrappedCpmContainer& container, const SensorInformation& sensor_information) {
+  if (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER) {
+    // check for maximum number of SensorInformation entries
+    if (container.container_data_sensor_information_container.array.size() < SensorInformationContainer::MAX_SIZE ) {
+      throwIfOutOfRange(sensor_information.sensor_id.value, Identifier1B::MIN, Identifier1B::MAX, "SensorID");
+      throwIfOutOfRange(sensor_information.sensor_type.value, SensorType::MIN, SensorType::MAX, "SensorType");
+      container.container_data_sensor_information_container.array.push_back(sensor_information);
+    } else {
+      throw std::invalid_argument("Maximum number of entries SensorInformationContainers reached");
+    }
+  } else {
+    throw std::invalid_argument("Container is not a SensorInformationContainer");
+  }
+}
+
+/**
+ * @brief Adds a container to the Collective Perception Message (CPM).
+ *
+ * This function adds a SensorInformationContainer / WrappedCpmContainer to the CPM's payload.
+ * It first checks if the container is a SensorInformationContainer. If so, it checks if
+ * the number of entries is in the allowed range. If the number of entries is valid,
+ * it appends the container to the array. Otherwise, it throws an exception.
+ *
+ * @param cpm The Collective Perception Message to which the container will be added.
+ * @param container The WrappedCpmContainer to be added to the CPM.
+ *
+ * @throws std::invalid_argument if the container is not a SensorInformationContainer.
+ * @throws std::invalid_argument if the number of SensorInformation entries is out of range.
+ */
+inline void addSensorInformationContainerToCPM(CollectivePerceptionMessage& cpm, const WrappedCpmContainer& container) {
+  if (container.container_id.value == WrappedCpmContainer::CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER) {
+    throwIfOutOfRange(container.container_data_sensor_information_container.array.size(),
+      SensorInformationContainer::MIN_SIZE, SensorInformationContainer::MAX_SIZE, "SensorInformationContainer array size"
+    );
+    addContainerToCPM(cpm, container);
+  } else {
+    throw std::invalid_argument("Container is not a SensorInformationContainer");
+  }
+}
+
 }  // namespace etsi_its_cpm_ts_msgs::access
