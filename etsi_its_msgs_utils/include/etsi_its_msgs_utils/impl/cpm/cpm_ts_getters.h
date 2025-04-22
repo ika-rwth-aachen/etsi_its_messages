@@ -675,4 +675,24 @@ inline const std::array<double, 4> getWGSRefPosConfidence(const CollectivePercep
   return getWGSPosConfidenceEllipse(cpm.payload.management_container.reference_position.position_confidence_ellipse);
 }
 
+/**
+ * @brief Get the sensorId of a SensorInformation object.
+ * 
+ * @param sensor_information The SensorInformation to get the sensorId from
+ * @return uint8_t The sensorId of a SensorInformation object
+ */
+inline uint8_t getSensorID(const SensorInformation &sensor_information) {
+  return sensor_information.sensor_id.value;
+}
+
+/**
+ * @brief Get the sensorType of a SensorInformation object.
+ * 
+ * @param sensor_information The SensorInformation to get the sensorType from
+ * @return uint8_t The sensorType of a SensorInformation object
+ */
+inline uint8_t getSensorType(const SensorInformation &sensor_information) {
+  return sensor_information.sensor_type.value;
+}
+
 }  // namespace etsi_its_cpm_ts_msgs::access
