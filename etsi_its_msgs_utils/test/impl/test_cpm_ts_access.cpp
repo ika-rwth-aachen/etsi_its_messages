@@ -178,7 +178,7 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   cpm_ts_access::initSensorInformationContainer(sensor_information_container);
   int sensor_id = randomInt(cpm_ts_msgs::Identifier1B::MIN, cpm_ts_msgs::Identifier1B::MAX);
   int sensor_type = randomInt(cpm_ts_msgs::SensorType::MIN, cpm_ts_msgs::SensorType::MAX);
-  cpm_ts_access::SensorInformation sensor_information;
+  cpm_ts_msgs::SensorInformation sensor_information;
   cpm_ts_access::setSensorID(sensor_information, sensor_id);
   cpm_ts_access::setSensorType(sensor_information, sensor_type);
   cpm_ts_access::addSensorInformationToContainer(sensor_information_container, sensor_information);
