@@ -182,6 +182,6 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   cpm_ts_access::setSensorID(sensor_information, sensor_id);
   cpm_ts_access::setSensorType(sensor_information, sensor_type);
   cpm_ts_access::addSensorInformationToContainer(sensor_information_container, sensor_information);
-  EXPECT_EQ(sensor_id, cpm_ts_access::getSensorID(sensor_information_container));
-  EXPECT_EQ(sensor_type, cpm_ts_access::getSensorType(sensor_information_container));
+  EXPECT_EQ(sensor_id, cpm_ts_access::getSensorID(sensor_information));
+  EXPECT_EQ(sensor_type, cpm_ts_access::getSensorType(sensor_information));
 }
