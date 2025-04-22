@@ -43,6 +43,8 @@ var cpm__ts__getters_8h =
     [ "etsi_its_cpm_ts_msgs::access::getReferenceTime", "cpm__ts__getters_8h.html#acacbe898d0fe2a11531140ce16a21b12", null ],
     [ "etsi_its_cpm_ts_msgs::access::getReferenceTimeValue", "cpm__ts__getters_8h.html#a3e76c595a21bd486feb7def1bd468613", null ],
     [ "etsi_its_cpm_ts_msgs::access::getSemiAxis", "cpm__ts__getters_8h.html#a8b6a8dd0cebf93d822c6a3de84252bea", null ],
+    [ "etsi_its_cpm_ts_msgs::access::getSensorID", "cpm__ts__getters_8h.html#ac89c1b419cbd74616f6595f7e76b114b", null ],
+    [ "etsi_its_cpm_ts_msgs::access::getSensorType", "cpm__ts__getters_8h.html#a5572f881da5a0d44ea0c584941c10acc", null ],
     [ "etsi_its_cpm_ts_msgs::access::getSpeed", "cpm__ts__getters_8h.html#a105ce066059858aef302c41d05e30306", null ],
     [ "etsi_its_cpm_ts_msgs::access::getSpeedConfidence", "cpm__ts__getters_8h.html#a78de1cdbc5acabefc912b0e2d5d19985", null ],
     [ "etsi_its_cpm_ts_msgs::access::getStationID", "cpm__ts__getters_8h.html#a7d13aac7f613327137009bf4f3050c2e", null ],

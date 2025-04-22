@@ -326,6 +326,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ad3e4df63691042ca96a9985d11035c4c" id="r_ad3e4df63691042ca96a9985d11035c4c"><td class="memItemLeft" align="right" valign="top">const std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3e4df63691042ca96a9985d11035c4c">etsi_its_cpm_ts_msgs::access::getWGSRefPosConfidence</a> (const CollectivePerceptionMessage &amp;cpm)</td></tr>
 <tr class="memdesc:ad3e4df63691042ca96a9985d11035c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the confidence ellipse of the reference position as Covariance matrix.  <br /></td></tr>
 <tr class="separator:ad3e4df63691042ca96a9985d11035c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89c1b419cbd74616f6595f7e76b114b" id="r_ac89c1b419cbd74616f6595f7e76b114b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac89c1b419cbd74616f6595f7e76b114b">etsi_its_cpm_ts_msgs::access::getSensorID</a> (const SensorInformation &amp;sensor_information)</td></tr>
+<tr class="memdesc:ac89c1b419cbd74616f6595f7e76b114b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sensorId of a SensorInformation object.  <br /></td></tr>
+<tr class="separator:ac89c1b419cbd74616f6595f7e76b114b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5572f881da5a0d44ea0c584941c10acc" id="r_a5572f881da5a0d44ea0c584941c10acc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5572f881da5a0d44ea0c584941c10acc">etsi_its_cpm_ts_msgs::access::getSensorType</a> (const SensorInformation &amp;sensor_information)</td></tr>
+<tr class="memdesc:a5572f881da5a0d44ea0c584941c10acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sensorType of a SensorInformation object.  <br /></td></tr>
+<tr class="separator:a5572f881da5a0d44ea0c584941c10acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Getter functions for the ETSI ITS CPM (TS) </p>
@@ -732,8 +738,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1433</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1434</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1435</span>}</div>
-<div class="line"><span class="lineno"> 1436</span> </div>
-<div class="line"><span class="lineno"> 1437</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1436</span></div>
+<div class="line"><span class="lineno"> 1443</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1444</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1445</span>}</div>
+<div class="line"><span class="lineno"> 1446</span></div>
+<div class="line"><span class="lineno"> 1453</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1454</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1455</span>}</div>
+<div class="line"><span class="lineno"> 1456</span> </div>
+<div class="line"><span class="lineno"> 1457</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 <div class="ttc" id="acdd__v2-1-1__getters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__getters_8h.html">cdd_v2-1-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a07d5f0c0b6f6177e7469bb10e8a5ace3"><div class="ttname"><a href="#a07d5f0c0b6f6177e7469bb10e8a5ace3">etsi_its_cpm_ts_msgs::access::getYawRateConfidenceOfPerceivedObject</a></div><div class="ttdeci">double getYawRateConfidenceOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Get the Yaw Rate Confidence Of Perceived Object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00678">cpm_ts_getters.h:678</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a189b722f2fb8a28b6a02314408bdb1b9"><div class="ttname"><a href="#a189b722f2fb8a28b6a02314408bdb1b9">etsi_its_cpm_ts_msgs::access::getDimensionsConfidenceOfPerceivedObject</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; getDimensionsConfidenceOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Get the Dimensions Confidence Of Perceived Object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00923">cpm_ts_getters.h:923</a></div></div>
@@ -749,6 +763,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="acpm__ts__getters_8h_html_a48bccc42e5c7ae9623e9f81cbec1190a"><div class="ttname"><a href="#a48bccc42e5c7ae9623e9f81cbec1190a">etsi_its_cpm_ts_msgs::access::getYDimensionOfPerceivedObject</a></div><div class="ttdeci">uint16_t getYDimensionOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Retrieves the y-dimension of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00855">cpm_ts_getters.h:855</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a4f56fdad3f6a6cd15944b00e076affbb"><div class="ttname"><a href="#a4f56fdad3f6a6cd15944b00e076affbb">etsi_its_cpm_ts_msgs::access::getVelocityComponent</a></div><div class="ttdeci">double getVelocityComponent(const VelocityComponent &amp;velocity)</div><div class="ttdoc">Get the velocity component of the PerceivedObject.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00700">cpm_ts_getters.h:700</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a522511cfba571738e1800e5ce48eb927"><div class="ttname"><a href="#a522511cfba571738e1800e5ce48eb927">etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer</a></div><div class="ttdeci">WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptionMessage &amp;cpm)</div><div class="ttdoc">Retrieves the perceived object container from a CPM.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00459">cpm_ts_getters.h:459</a></div></div>
+<div class="ttc" id="acpm__ts__getters_8h_html_a5572f881da5a0d44ea0c584941c10acc"><div class="ttname"><a href="#a5572f881da5a0d44ea0c584941c10acc">etsi_its_cpm_ts_msgs::access::getSensorType</a></div><div class="ttdeci">uint8_t getSensorType(const SensorInformation &amp;sensor_information)</div><div class="ttdoc">Get the sensorType of a SensorInformation object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00983">cpm_ts_getters.h:983</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a6e03a3c45030ebc7b84c38faf1a3dabd"><div class="ttname"><a href="#a6e03a3c45030ebc7b84c38faf1a3dabd">etsi_its_cpm_ts_msgs::access::getYawRateOfPerceivedObject</a></div><div class="ttdeci">double getYawRateOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Get the yaw rate of the PerceivedObject.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00664">cpm_ts_getters.h:664</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a71824277aa35c3ef2a01c4b38f580847"><div class="ttname"><a href="#a71824277aa35c3ef2a01c4b38f580847">etsi_its_cpm_ts_msgs::access::getDimensionsOfPerceivedObject</a></div><div class="ttdeci">gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Retrieves the dimensions of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00909">cpm_ts_getters.h:909</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_a7381654955f3642b07a9bccb14bbc40c"><div class="ttname"><a href="#a7381654955f3642b07a9bccb14bbc40c">etsi_its_cpm_ts_msgs::access::getPoseOfPerceivedObject</a></div><div class="ttdeci">gm::Pose getPoseOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Get the pose of the PerceivedObject.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00650">cpm_ts_getters.h:650</a></div></div>
@@ -767,6 +782,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="acpm__ts__getters_8h_html_aba9d53fc5ae60d80c4335c215723b763"><div class="ttname"><a href="#aba9d53fc5ae60d80c4335c215723b763">etsi_its_cpm_ts_msgs::access::getIdOfPerceivedObject</a></div><div class="ttdeci">uint16_t getIdOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Retrieves the ID of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00515">cpm_ts_getters.h:515</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_abd03476fa6d229facafc1d545006bb74"><div class="ttname"><a href="#abd03476fa6d229facafc1d545006bb74">etsi_its_cpm_ts_msgs::access::getCartesianVelocityOfPerceivedObject</a></div><div class="ttdeci">gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Get the Cartesian velocity of the PerceivedObject.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00719">cpm_ts_getters.h:719</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_abf1eba31377f2d0cf0779a62339b3b2b"><div class="ttname"><a href="#abf1eba31377f2d0cf0779a62339b3b2b">etsi_its_cpm_ts_msgs::access::getXDimensionOfPerceivedObject</a></div><div class="ttdeci">uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &amp;object)</div><div class="ttdoc">Gets the x-dimension of a perceived object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00827">cpm_ts_getters.h:827</a></div></div>
+<div class="ttc" id="acpm__ts__getters_8h_html_ac89c1b419cbd74616f6595f7e76b114b"><div class="ttname"><a href="#ac89c1b419cbd74616f6595f7e76b114b">etsi_its_cpm_ts_msgs::access::getSensorID</a></div><div class="ttdeci">uint8_t getSensorID(const SensorInformation &amp;sensor_information)</div><div class="ttdoc">Get the sensorId of a SensorInformation object.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00973">cpm_ts_getters.h:973</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_acff7787922a345940dcbb78945c4a19d"><div class="ttname"><a href="#acff7787922a345940dcbb78945c4a19d">etsi_its_cpm_ts_msgs::access::getCpmContainerIds</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; getCpmContainerIds(const CollectivePerceptionMessage &amp;cpm)</div><div class="ttdoc">Retrieves the container IDs from a CPM.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00426">cpm_ts_getters.h:426</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_ad000ae9df3d4eedac7838ff3a8e9ed28"><div class="ttname"><a href="#ad000ae9df3d4eedac7838ff3a8e9ed28">etsi_its_cpm_ts_msgs::access::getAccelerationComponentConfidence</a></div><div class="ttdeci">double getAccelerationComponentConfidence(const AccelerationComponent &amp;acceleration)</div><div class="ttdoc">Get the confidence of the acceleration component.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00770">cpm_ts_getters.h:770</a></div></div>
 <div class="ttc" id="acpm__ts__getters_8h_html_ad3e4df63691042ca96a9985d11035c4c"><div class="ttname"><a href="#ad3e4df63691042ca96a9985d11035c4c">etsi_its_cpm_ts_msgs::access::getWGSRefPosConfidence</a></div><div class="ttdeci">const std::array&lt; double, 4 &gt; getWGSRefPosConfidence(const CollectivePerceptionMessage &amp;cpm)</div><div class="ttdoc">Get the confidence ellipse of the reference position as Covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cpm__ts__getters_8h_source.html#l00963">cpm_ts_getters.h:963</a></div></div>
@@ -1115,8 +1131,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1443</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1444</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1445</span>}</div>
-<div class="line"><span class="lineno"> 1446</span> </div>
-<div class="line"><span class="lineno"> 1447</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1446</span></div>
+<div class="line"><span class="lineno"> 1453</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1454</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1455</span>}</div>
+<div class="line"><span class="lineno"> 1456</span></div>
+<div class="line"><span class="lineno"> 1463</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1464</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1465</span>}</div>
+<div class="line"><span class="lineno"> 1466</span> </div>
+<div class="line"><span class="lineno"> 1467</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1533,8 +1557,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1476</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1477</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1478</span>}</div>
-<div class="line"><span class="lineno"> 1479</span> </div>
-<div class="line"><span class="lineno"> 1480</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1479</span></div>
+<div class="line"><span class="lineno"> 1486</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1487</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1488</span>}</div>
+<div class="line"><span class="lineno"> 1489</span></div>
+<div class="line"><span class="lineno"> 1496</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1497</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1498</span>}</div>
+<div class="line"><span class="lineno"> 1499</span> </div>
+<div class="line"><span class="lineno"> 1500</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1879,8 +1911,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1454</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1455</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1456</span>}</div>
-<div class="line"><span class="lineno"> 1457</span> </div>
-<div class="line"><span class="lineno"> 1458</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1457</span></div>
+<div class="line"><span class="lineno"> 1464</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1465</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1466</span>}</div>
+<div class="line"><span class="lineno"> 1467</span></div>
+<div class="line"><span class="lineno"> 1474</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1475</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1476</span>}</div>
+<div class="line"><span class="lineno"> 1477</span> </div>
+<div class="line"><span class="lineno"> 1478</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2372,8 +2412,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1414</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1415</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1416</span>}</div>
-<div class="line"><span class="lineno"> 1417</span> </div>
-<div class="line"><span class="lineno"> 1418</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1417</span></div>
+<div class="line"><span class="lineno"> 1424</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1425</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1426</span>}</div>
+<div class="line"><span class="lineno"> 1427</span></div>
+<div class="line"><span class="lineno"> 1434</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1435</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1436</span>}</div>
+<div class="line"><span class="lineno"> 1437</span> </div>
+<div class="line"><span class="lineno"> 1438</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2718,8 +2766,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1392</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1393</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1394</span>}</div>
-<div class="line"><span class="lineno"> 1395</span> </div>
-<div class="line"><span class="lineno"> 1396</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1395</span></div>
+<div class="line"><span class="lineno"> 1402</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1403</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1404</span>}</div>
+<div class="line"><span class="lineno"> 1405</span></div>
+<div class="line"><span class="lineno"> 1412</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1413</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1414</span>}</div>
+<div class="line"><span class="lineno"> 1415</span> </div>
+<div class="line"><span class="lineno"> 1416</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3144,8 +3200,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1596</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1597</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1598</span>}</div>
-<div class="line"><span class="lineno"> 1599</span> </div>
-<div class="line"><span class="lineno"> 1600</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1599</span></div>
+<div class="line"><span class="lineno"> 1606</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1607</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1608</span>}</div>
+<div class="line"><span class="lineno"> 1609</span></div>
+<div class="line"><span class="lineno"> 1616</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1617</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1618</span>}</div>
+<div class="line"><span class="lineno"> 1619</span> </div>
+<div class="line"><span class="lineno"> 1620</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3485,8 +3549,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno"> 1582</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1583</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1584</span>}</div>
-<div class="line"><span class="lineno"> 1585</span> </div>
-<div class="line"><span class="lineno"> 1586</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1585</span></div>
+<div class="line"><span class="lineno"> 1592</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1593</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1594</span>}</div>
+<div class="line"><span class="lineno"> 1595</span></div>
+<div class="line"><span class="lineno"> 1602</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1603</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1604</span>}</div>
+<div class="line"><span class="lineno"> 1605</span> </div>
+<div class="line"><span class="lineno"> 1606</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -4475,6 +4547,699 @@ template&lt;typename SemiAxisLength&gt; </div>
 <div class="fragment"></div><!-- fragment -->
 </div>
 </div>
+<a id="ac89c1b419cbd74616f6595f7e76b114b" name="ac89c1b419cbd74616f6595f7e76b114b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac89c1b419cbd74616f6595f7e76b114b">&#9670;&#160;</a></span>getSensorID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t etsi_its_cpm_ts_msgs::access::getSensorID </td>
+          <td>(</td>
+          <td class="paramtype">const SensorInformation &amp;</td>          <td class="paramname"><span class="paramname"><em>sensor_information</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the sensorId of a SensorInformation object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sensor_information</td><td>The SensorInformation to get the sensorId from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint8_t The sensorId of a SensorInformation object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cpm__ts__getters_8h_source.html#l00973">973</a> of file <a class="el" href="cpm__ts__getters_8h_source.html">cpm_ts_getters.h</a>.</p>
+<div class="fragment"></div>
+<div class="line"><span class="lineno"> 1020</span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="#a8a305da3dec2ea955976837259d9b402">getStationID</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) { <span class="keywordflow">return</span> <a class="code hl_function" href="#a8a305da3dec2ea955976837259d9b402">getStationID</a>(cpm.header); }</div>
+<div class="line"><span class="lineno"> 1021</span></div>
+<div class="line"><span class="lineno"> 1028</span><span class="keyword">inline</span> TimestampIts getReferenceTime(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1029</span>  <span class="keywordflow">return</span> cpm.payload.management_container.reference_time;</div>
+<div class="line"><span class="lineno"> 1030</span>}</div>
+<div class="line"><span class="lineno"> 1031</span></div>
+<div class="line"><span class="lineno"> 1038</span><span class="keyword">inline</span> uint64_t getReferenceTimeValue(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) { <span class="keywordflow">return</span> getReferenceTime(cpm).value; }</div>
+<div class="line"><span class="lineno"> 1039</span></div>
+<div class="line"><span class="lineno"> 1046</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#aa07466e457f05c85e8fe05cf0ccc79dc">getLatitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1047</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aa07466e457f05c85e8fe05cf0ccc79dc">getLatitude</a>(cpm.payload.management_container.reference_position.latitude);</div>
+<div class="line"><span class="lineno"> 1048</span>}</div>
+<div class="line"><span class="lineno"> 1049</span></div>
+<div class="line"><span class="lineno"> 1056</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a8388898d5fa37916b4982ff3d715a990">getLongitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1057</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a8388898d5fa37916b4982ff3d715a990">getLongitude</a>(cpm.payload.management_container.reference_position.longitude);</div>
+<div class="line"><span class="lineno"> 1058</span>}</div>
+<div class="line"><span class="lineno"> 1059</span></div>
+<div class="line"><span class="lineno"> 1066</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a34a9ba4c41f80b2200334336af5fea31">getAltitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1067</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a34a9ba4c41f80b2200334336af5fea31">getAltitude</a>(cpm.payload.management_container.reference_position.altitude);</div>
+<div class="line"><span class="lineno"> 1068</span>}</div>
+<div class="line"><span class="lineno"> 1069</span></div>
+<div class="line"><span class="lineno"> 1081</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm, <span class="keywordtype">int</span> &amp;zone, <span class="keywordtype">bool</span> &amp;northp) {</div>
+<div class="line"><span class="lineno"> 1082</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm.payload.management_container.reference_position, zone, northp);</div>
+<div class="line"><span class="lineno"> 1083</span>}</div>
+<div class="line"><span class="lineno"> 1084</span></div>
+<div class="line"><span class="lineno"> 1094</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1095</span>  <span class="keywordtype">int</span> zone;</div>
+<div class="line"><span class="lineno"> 1096</span>  <span class="keywordtype">bool</span> northp;</div>
+<div class="line"><span class="lineno"> 1097</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm, zone, northp);</div>
+<div class="line"><span class="lineno"> 1098</span>}</div>
+<div class="line"><span class="lineno"> 1099</span></div>
+<div class="line"><span class="lineno"> 1109</span><span class="keyword">inline</span> std::vector&lt;uint8_t&gt; <a class="code hl_function" href="#acff7787922a345940dcbb78945c4a19d">getCpmContainerIds</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1110</span>  std::vector&lt;uint8_t&gt; container_ids;</div>
+<div class="line"><span class="lineno"> 1111</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cpm.payload.cpm_containers.value.array.size(); i++) {</div>
+<div class="line"><span class="lineno"> 1112</span>    container_ids.push_back(cpm.payload.cpm_containers.value.array[i].container_id.value);</div>
+<div class="line"><span class="lineno"> 1113</span>  }</div>
+<div class="line"><span class="lineno"> 1114</span>  <span class="keywordflow">return</span> container_ids;</div>
+<div class="line"><span class="lineno"> 1115</span>}</div>
+<div class="line"><span class="lineno"> 1116</span></div>
+<div class="line"><span class="lineno"> 1125</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm, <span class="keyword">const</span> uint8_t container_id) {</div>
+<div class="line"><span class="lineno"> 1126</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cpm.payload.cpm_containers.value.array.size(); i++) {</div>
+<div class="line"><span class="lineno"> 1127</span>    <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array[i].container_id.value == container_id) {</div>
+<div class="line"><span class="lineno"> 1128</span>      <span class="keywordflow">return</span> cpm.payload.cpm_containers.value.array[i];</div>
+<div class="line"><span class="lineno"> 1129</span>    }</div>
+<div class="line"><span class="lineno"> 1130</span>  }</div>
+<div class="line"><span class="lineno"> 1131</span>  <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No Container with ID &quot;</span> + std::to_string(container_id) + <span class="stringliteral">&quot; found in CPM&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1132</span>}</div>
+<div class="line"><span class="lineno"> 1133</span></div>
+<div class="line"><span class="lineno"> 1142</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1143</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno"> 1144</span>}</div>
+<div class="line"><span class="lineno"> 1145</span></div>
+<div class="line"><span class="lineno"> 1153</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
+<div class="line"><span class="lineno"> 1154</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1155</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1156</span>  }</div>
+<div class="line"><span class="lineno"> 1157</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno"> 1158</span>  <span class="keywordflow">return</span> number;</div>
+<div class="line"><span class="lineno"> 1159</span>}</div>
+<div class="line"><span class="lineno"> 1160</span></div>
+<div class="line"><span class="lineno"> 1167</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1168</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(cpm));</div>
+<div class="line"><span class="lineno"> 1169</span>}</div>
+<div class="line"><span class="lineno"> 1170</span></div>
+<div class="line"><span class="lineno"> 1174</span></div>
+<div class="line"><span class="lineno"> 1183</span><span class="keyword">inline</span> PerceivedObject <a class="code hl_function" href="#ae049a0cb5a69bc2e856a8cdb2d92220f">getPerceivedObject</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container, <span class="keyword">const</span> uint8_t i) {</div>
+<div class="line"><span class="lineno"> 1184</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
+<div class="line"><span class="lineno"> 1185</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1186</span>  }</div>
+<div class="line"><span class="lineno"> 1187</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno"> 1188</span>}</div>
+<div class="line"><span class="lineno"> 1189</span></div>
+<div class="line"><span class="lineno"> 1198</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
+<div class="line"><span class="lineno"> 1199</span></div>
+<div class="line"><span class="lineno"> 1206</span><span class="keyword">inline</span> int32_t <a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keyword">const</span> CartesianCoordinateWithConfidence &amp;coordinate) {</div>
+<div class="line"><span class="lineno"> 1207</span>  <span class="keywordflow">return</span> coordinate.value.value;</div>
+<div class="line"><span class="lineno"> 1208</span>}</div>
+<div class="line"><span class="lineno"> 1209</span></div>
+<div class="line"><span class="lineno"> 1216</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keyword">const</span> CartesianCoordinateWithConfidence &amp;coordinate) {</div>
+<div class="line"><span class="lineno"> 1217</span>  <span class="keywordflow">return</span> coordinate.confidence.value;</div>
+<div class="line"><span class="lineno"> 1218</span>}</div>
+<div class="line"><span class="lineno"> 1219</span></div>
+<div class="line"><span class="lineno"> 1226</span><span class="keyword">inline</span> gm::Point <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1227</span>  gm::Point point;</div>
+<div class="line"><span class="lineno"> 1228</span>  point.x = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.x_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1229</span>  point.y = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.y_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1230</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.position.z_coordinate_is_present) {</div>
+<div class="line"><span class="lineno"> 1231</span>    point.z = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.z_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1232</span>  }</div>
+<div class="line"><span class="lineno"> 1233</span>  <span class="keywordflow">return</span> point;</div>
+<div class="line"><span class="lineno"> 1234</span>}</div>
+<div class="line"><span class="lineno"> 1235</span></div>
+<div class="line"><span class="lineno"> 1243</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#af872815cd43bfac17d873caa3a75d88e">getPositionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1244</span>  <span class="keywordtype">double</span> x_confidence = double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1245</span>  <span class="keywordtype">double</span> y_confidence = double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1246</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.position.z_coordinate_is_present</div>
+<div class="line"><span class="lineno"> 1247</span>                            ? double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR</div>
+<div class="line"><span class="lineno"> 1248</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1249</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1250</span>}</div>
+<div class="line"><span class="lineno"> 1251</span></div>
+<div class="line"><span class="lineno"> 1258</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keyword">const</span> CartesianAngle &amp;angle) { <span class="keywordflow">return</span> angle.value.value; }</div>
+<div class="line"><span class="lineno"> 1259</span></div>
+<div class="line"><span class="lineno"> 1266</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a46324c832a077f98078a82d598d60be2">getCartesianAngleConfidence</a>(<span class="keyword">const</span> CartesianAngle &amp;angle) { <span class="keywordflow">return</span> angle.confidence.value; }</div>
+<div class="line"><span class="lineno"> 1267</span></div>
+<div class="line"><span class="lineno"> 1278</span><span class="keyword">inline</span> gm::Quaternion <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1279</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.angles_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No angles present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1280</span>  tf2::Quaternion q;</div>
+<div class="line"><span class="lineno"> 1281</span>  <span class="keywordtype">double</span> roll{0}, pitch{0}, yaw{0};</div>
+<div class="line"><span class="lineno"> 1282</span> </div>
+<div class="line"><span class="lineno"> 1283</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.angles.x_angle_is_present) {</div>
+<div class="line"><span class="lineno"> 1284</span>    roll = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.x_angle)) / 10.0) ) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1285</span>           M_PI;</div>
+<div class="line"><span class="lineno"> 1286</span>  }</div>
+<div class="line"><span class="lineno"> 1287</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.angles.y_angle_is_present) {</div>
+<div class="line"><span class="lineno"> 1288</span>    pitch = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.y_angle)) / 10.0) ) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1289</span>            M_PI;</div>
+<div class="line"><span class="lineno"> 1290</span>  }</div>
+<div class="line"><span class="lineno"> 1291</span>  yaw = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.z_angle)) / 10.0)) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1292</span>        M_PI;</div>
+<div class="line"><span class="lineno"> 1293</span>  <span class="comment">// This wraps from -pi ti pi because setRPY only uses cos and sin of the angles</span></div>
+<div class="line"><span class="lineno"> 1294</span>  q.setRPY(roll, pitch, yaw);</div>
+<div class="line"><span class="lineno"> 1295</span> </div>
+<div class="line"><span class="lineno"> 1296</span>  <span class="keywordflow">return</span> tf2::toMsg(q);</div>
+<div class="line"><span class="lineno"> 1297</span>}</div>
+<div class="line"><span class="lineno"> 1298</span></div>
+<div class="line"><span class="lineno"> 1305</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a82a57945860573f27ff49af5eef45314">getYawOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1306</span>  gm::Quaternion orientation = <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1307</span>  tf2::Quaternion q(orientation.x, orientation.y, orientation.z, orientation.w);</div>
+<div class="line"><span class="lineno"> 1308</span>  <span class="keywordtype">double</span> roll, pitch, yaw;</div>
+<div class="line"><span class="lineno"> 1309</span>  tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);</div>
+<div class="line"><span class="lineno"> 1310</span>  <span class="keywordflow">return</span> yaw;</div>
+<div class="line"><span class="lineno"> 1311</span>}</div>
+<div class="line"><span class="lineno"> 1312</span></div>
+<div class="line"><span class="lineno"> 1320</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a336564eb74f3dc9f1bc18534762de3ac">getYawConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1321</span>  <span class="keywordflow">if</span>(!<span class="keywordtype">object</span>.angles_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No angles present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1322</span>  <span class="keywordtype">double</span> yaw_confidence = <span class="keywordtype">object</span>.angles.z_angle.confidence.value / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1323</span>  yaw_confidence *= M_PI / 180.0;  <span class="comment">// convert to radians</span></div>
+<div class="line"><span class="lineno"> 1324</span>  <span class="keywordflow">return</span> yaw_confidence;</div>
+<div class="line"><span class="lineno"> 1325</span>}</div>
+<div class="line"><span class="lineno"> 1326</span></div>
+<div class="line"><span class="lineno"> 1333</span><span class="keyword">inline</span> gm::Pose <a class="code hl_function" href="#a7381654955f3642b07a9bccb14bbc40c">getPoseOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1334</span>  gm::Pose pose;</div>
+<div class="line"><span class="lineno"> 1335</span>  pose.position = <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1336</span>  pose.orientation = <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1337</span>  <span class="keywordflow">return</span> pose;</div>
+<div class="line"><span class="lineno"> 1338</span>}</div>
+<div class="line"><span class="lineno"> 1339</span></div>
+<div class="line"><span class="lineno"> 1347</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a6e03a3c45030ebc7b84c38faf1a3dabd">getYawRateOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1348</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.z_angular_velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No yaw rate present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1349</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.z_angular_velocity.value.value * M_PI / 180.0;  <span class="comment">// convert to rad/s</span></div>
+<div class="line"><span class="lineno"> 1350</span>}</div>
+<div class="line"><span class="lineno"> 1351</span></div>
+<div class="line"><span class="lineno"> 1361</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a07d5f0c0b6f6177e7469bb10e8a5ace3">getYawRateConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1362</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.z_angular_velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No yaw rate present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1363</span>  <span class="keyword">auto</span> val = <span class="keywordtype">object</span>.z_angular_velocity.confidence.value;</div>
+<div class="line"><span class="lineno"> 1364</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;uint8_t, double&gt; confidence_map = {</div>
+<div class="line"><span class="lineno"> 1365</span>      {AngularSpeedConfidence::UNAVAILABLE, 0.0},</div>
+<div class="line"><span class="lineno"> 1366</span>      {AngularSpeedConfidence::DEG_SEC_01, 1.0},</div>
+<div class="line"><span class="lineno"> 1367</span>      {AngularSpeedConfidence::DEG_SEC_02, 2.0},</div>
+<div class="line"><span class="lineno"> 1368</span>      {AngularSpeedConfidence::DEG_SEC_05, 5.0},</div>
+<div class="line"><span class="lineno"> 1369</span>      {AngularSpeedConfidence::DEG_SEC_10, 10.0},</div>
+<div class="line"><span class="lineno"> 1370</span>      {AngularSpeedConfidence::DEG_SEC_20, 20.0},</div>
+<div class="line"><span class="lineno"> 1371</span>      {AngularSpeedConfidence::DEG_SEC_50, 50.0},</div>
+<div class="line"><span class="lineno"> 1372</span>      {AngularSpeedConfidence::OUT_OF_RANGE, std::numeric_limits&lt;double&gt;::infinity()},</div>
+<div class="line"><span class="lineno"> 1373</span>  };</div>
+<div class="line"><span class="lineno"> 1374</span>  <span class="keywordflow">return</span> confidence_map.at(val) * M_PI / 180.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  <span class="comment">// convert to rad/s</span></div>
+<div class="line"><span class="lineno"> 1375</span>}</div>
+<div class="line"><span class="lineno"> 1376</span></div>
+<div class="line"><span class="lineno"> 1383</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keyword">const</span> VelocityComponent &amp;velocity) { <span class="keywordflow">return</span> double(velocity.value.value) / 100.0; }</div>
+<div class="line"><span class="lineno"> 1384</span></div>
+<div class="line"><span class="lineno"> 1391</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keyword">const</span> VelocityComponent &amp;velocity) {</div>
+<div class="line"><span class="lineno"> 1392</span>  <span class="keywordflow">return</span> double(velocity.confidence.value) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1393</span>}</div>
+<div class="line"><span class="lineno"> 1394</span></div>
+<div class="line"><span class="lineno"> 1402</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#abd03476fa6d229facafc1d545006bb74">getCartesianVelocityOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1403</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No velocity present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1404</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {</div>
+<div class="line"><span class="lineno"> 1405</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Velocity is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1406</span>  }</div>
+<div class="line"><span class="lineno"> 1407</span>  gm::Vector3 velocity;</div>
+<div class="line"><span class="lineno"> 1408</span>  velocity.x = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity);</div>
+<div class="line"><span class="lineno"> 1409</span>  velocity.y = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity);</div>
+<div class="line"><span class="lineno"> 1410</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present) {</div>
+<div class="line"><span class="lineno"> 1411</span>    velocity.z = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity);</div>
+<div class="line"><span class="lineno"> 1412</span>  }</div>
+<div class="line"><span class="lineno"> 1413</span>  <span class="keywordflow">return</span> velocity;</div>
+<div class="line"><span class="lineno"> 1414</span>}</div>
+<div class="line"><span class="lineno"> 1415</span></div>
+<div class="line"><span class="lineno"> 1424</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#aa2132d165f1270a824040e1e1865c1dc">getCartesianVelocityConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1425</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No velocity present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1426</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {</div>
+<div class="line"><span class="lineno"> 1427</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Velocity is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1428</span>  }</div>
+<div class="line"><span class="lineno"> 1429</span>  <span class="keywordtype">double</span> x_confidence = <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity);</div>
+<div class="line"><span class="lineno"> 1430</span>  <span class="keywordtype">double</span> y_confidence = <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity);</div>
+<div class="line"><span class="lineno"> 1431</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present</div>
+<div class="line"><span class="lineno"> 1432</span>                            ? <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity)</div>
+<div class="line"><span class="lineno"> 1433</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1434</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1435</span>}</div>
+<div class="line"><span class="lineno"> 1436</span></div>
+<div class="line"><span class="lineno"> 1443</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keyword">const</span> AccelerationComponent &amp;acceleration) {</div>
+<div class="line"><span class="lineno"> 1444</span>  <span class="keywordflow">return</span> double(acceleration.value.value) / 10.0;</div>
+<div class="line"><span class="lineno"> 1445</span>}</div>
+<div class="line"><span class="lineno"> 1446</span></div>
+<div class="line"><span class="lineno"> 1453</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keyword">const</span> AccelerationComponent &amp;acceleration) {</div>
+<div class="line"><span class="lineno"> 1454</span>  <span class="keywordflow">return</span> double(acceleration.confidence.value) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1455</span>}</div>
+<div class="line"><span class="lineno"> 1456</span></div>
+<div class="line"><span class="lineno"> 1464</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#ae5028e64f78ec8daa32e4c3990183ccf">getCartesianAccelerationOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1465</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.acceleration_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No acceleration present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1466</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {</div>
+<div class="line"><span class="lineno"> 1467</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Acceleration is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1468</span>  }</div>
+<div class="line"><span class="lineno"> 1469</span>  gm::Vector3 acceleration;</div>
+<div class="line"><span class="lineno"> 1470</span>  acceleration.x = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration);</div>
+<div class="line"><span class="lineno"> 1471</span>  acceleration.y = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration);</div>
+<div class="line"><span class="lineno"> 1472</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present) {</div>
+<div class="line"><span class="lineno"> 1473</span>    acceleration.z = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration);</div>
+<div class="line"><span class="lineno"> 1474</span>  }</div>
+<div class="line"><span class="lineno"> 1475</span>  <span class="keywordflow">return</span> acceleration;</div>
+<div class="line"><span class="lineno"> 1476</span>}</div>
+<div class="line"><span class="lineno"> 1477</span></div>
+<div class="line"><span class="lineno"> 1486</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#a31507fffad48fb41b7bea7f0a7a10111">getCartesianAccelerationConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1487</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.acceleration_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No acceleration present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1488</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {</div>
+<div class="line"><span class="lineno"> 1489</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Acceleration is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1490</span>  }</div>
+<div class="line"><span class="lineno"> 1491</span>  <span class="keywordtype">double</span> x_confidence = <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration);</div>
+<div class="line"><span class="lineno"> 1492</span>  <span class="keywordtype">double</span> y_confidence = <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration);</div>
+<div class="line"><span class="lineno"> 1493</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present</div>
+<div class="line"><span class="lineno"> 1494</span>                            ? <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration)</div>
+<div class="line"><span class="lineno"> 1495</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1496</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1497</span>}</div>
+<div class="line"><span class="lineno"> 1498</span></div>
+<div class="line"><span class="lineno"> 1510</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#abf1eba31377f2d0cf0779a62339b3b2b">getXDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1511</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_x_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No x-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1512</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_x.value.value;</div>
+<div class="line"><span class="lineno"> 1513</span>}</div>
+<div class="line"><span class="lineno"> 1514</span></div>
+<div class="line"><span class="lineno"> 1522</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ab633bf9090d4a3f137bfa25ce536ecd7">getXDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1523</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_x_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No x-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1524</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_x.confidence.value;</div>
+<div class="line"><span class="lineno"> 1525</span>}</div>
+<div class="line"><span class="lineno"> 1526</span></div>
+<div class="line"><span class="lineno"> 1538</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a48bccc42e5c7ae9623e9f81cbec1190a">getYDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1539</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_y_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No y-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1540</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_y.value.value;</div>
+<div class="line"><span class="lineno"> 1541</span>}</div>
+<div class="line"><span class="lineno"> 1542</span></div>
+<div class="line"><span class="lineno"> 1550</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a8b2d40094fe6a6464bd3355a3562ccb1">getYDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1551</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_y_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No y-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1552</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_y.confidence.value;</div>
+<div class="line"><span class="lineno"> 1553</span>}</div>
+<div class="line"><span class="lineno"> 1554</span></div>
+<div class="line"><span class="lineno"> 1566</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a377b9a61698d64663a3194eebef5c800">getZDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1567</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_z_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No z-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1568</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_z.value.value;</div>
+<div class="line"><span class="lineno"> 1569</span>}</div>
+<div class="line"><span class="lineno"> 1570</span></div>
+<div class="line"><span class="lineno"> 1578</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#aa454cd6f2159d78dcd35378a6a5e42b2">getZDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1579</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_z_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No z-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1580</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_z.confidence.value;</div>
+<div class="line"><span class="lineno"> 1581</span>}</div>
+<div class="line"><span class="lineno"> 1582</span></div>
+<div class="line"><span class="lineno"> 1592</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#a71824277aa35c3ef2a01c4b38f580847">getDimensionsOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1593</span>  gm::Vector3 dimensions;</div>
+<div class="line"><span class="lineno"> 1594</span>  dimensions.x = double(<a class="code hl_function" href="#abf1eba31377f2d0cf0779a62339b3b2b">getXDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1595</span>  dimensions.y = double(<a class="code hl_function" href="#a48bccc42e5c7ae9623e9f81cbec1190a">getYDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1596</span>  dimensions.z = double(<a class="code hl_function" href="#a377b9a61698d64663a3194eebef5c800">getZDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1597</span>  <span class="keywordflow">return</span> dimensions;</div>
+<div class="line"><span class="lineno"> 1598</span>}</div>
+<div class="line"><span class="lineno"> 1599</span></div>
+<div class="line"><span class="lineno"> 1606</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#a189b722f2fb8a28b6a02314408bdb1b9">getDimensionsConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1607</span>  <span class="keywordtype">double</span> conf_x = double(<a class="code hl_function" href="#ab633bf9090d4a3f137bfa25ce536ecd7">getXDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1608</span>  <span class="keywordtype">double</span> conf_y = double(<a class="code hl_function" href="#a8b2d40094fe6a6464bd3355a3562ccb1">getYDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1609</span>  <span class="keywordtype">double</span> conf_z = double(<a class="code hl_function" href="#aa454cd6f2159d78dcd35378a6a5e42b2">getZDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1610</span>  <span class="keywordflow">return</span> {conf_x, conf_y, conf_z};</div>
+<div class="line"><span class="lineno"> 1611</span>}</div>
+<div class="line"><span class="lineno"> 1612</span></div>
+<div class="line"><span class="lineno"> 1623</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#a943cf039ff8b2476638f343f431bc8a0">getUTMPositionOfPerceivedObject</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm,</div>
+<div class="line"><span class="lineno"> 1624</span>                                                        <span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1625</span>  gm::PointStamped utm_position;</div>
+<div class="line"><span class="lineno"> 1626</span>  gm::PointStamped reference_position = <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm);</div>
+<div class="line"><span class="lineno"> 1627</span>  gm::Point relative_position = <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1628</span> </div>
+<div class="line"><span class="lineno"> 1629</span>  utm_position.header.frame_id = reference_position.header.frame_id;</div>
+<div class="line"><span class="lineno"> 1630</span>  utm_position.point.x = reference_position.point.x + relative_position.x;</div>
+<div class="line"><span class="lineno"> 1631</span>  utm_position.point.y = reference_position.point.y + relative_position.y;</div>
+<div class="line"><span class="lineno"> 1632</span>  utm_position.point.z = reference_position.point.z + relative_position.z;</div>
+<div class="line"><span class="lineno"> 1633</span> </div>
+<div class="line"><span class="lineno"> 1634</span>  <span class="keywordflow">return</span> utm_position;</div>
+<div class="line"><span class="lineno"> 1635</span>}</div>
+<div class="line"><span class="lineno"> 1636</span></div>
+<div class="line"><span class="lineno"> 1646</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1647</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno"> 1648</span>}</div>
+<div class="line"><span class="lineno"> 1649</span></div>
+<div class="line"><span class="lineno"> 1656</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1657</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1658</span>}</div>
+<div class="line"><span class="lineno"> 1659</span></div>
+<div class="line"><span class="lineno"> 1666</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1667</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1668</span>}</div>
+<div class="line"><span class="lineno"> 1669</span> </div>
+<div class="line"><span class="lineno"> 1670</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5572f881da5a0d44ea0c584941c10acc" name="a5572f881da5a0d44ea0c584941c10acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5572f881da5a0d44ea0c584941c10acc">&#9670;&#160;</a></span>getSensorType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t etsi_its_cpm_ts_msgs::access::getSensorType </td>
+          <td>(</td>
+          <td class="paramtype">const SensorInformation &amp;</td>          <td class="paramname"><span class="paramname"><em>sensor_information</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the sensorType of a SensorInformation object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sensor_information</td><td>The SensorInformation to get the sensorType from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint8_t The sensorType of a SensorInformation object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cpm__ts__getters_8h_source.html#l00983">983</a> of file <a class="el" href="cpm__ts__getters_8h_source.html">cpm_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1018</span>                                     {</div>
+<div class="line"><span class="lineno"> 1019</span> </div>
+<div class="line"><span class="lineno"> 1020</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno"> 1021</span></div>
+<div class="line"><span class="lineno"> 1030</span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="#a8a305da3dec2ea955976837259d9b402">getStationID</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) { <span class="keywordflow">return</span> <a class="code hl_function" href="#a8a305da3dec2ea955976837259d9b402">getStationID</a>(cpm.header); }</div>
+<div class="line"><span class="lineno"> 1031</span></div>
+<div class="line"><span class="lineno"> 1038</span><span class="keyword">inline</span> TimestampIts getReferenceTime(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1039</span>  <span class="keywordflow">return</span> cpm.payload.management_container.reference_time;</div>
+<div class="line"><span class="lineno"> 1040</span>}</div>
+<div class="line"><span class="lineno"> 1041</span></div>
+<div class="line"><span class="lineno"> 1048</span><span class="keyword">inline</span> uint64_t getReferenceTimeValue(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) { <span class="keywordflow">return</span> getReferenceTime(cpm).value; }</div>
+<div class="line"><span class="lineno"> 1049</span></div>
+<div class="line"><span class="lineno"> 1056</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#aa07466e457f05c85e8fe05cf0ccc79dc">getLatitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1057</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aa07466e457f05c85e8fe05cf0ccc79dc">getLatitude</a>(cpm.payload.management_container.reference_position.latitude);</div>
+<div class="line"><span class="lineno"> 1058</span>}</div>
+<div class="line"><span class="lineno"> 1059</span></div>
+<div class="line"><span class="lineno"> 1066</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a8388898d5fa37916b4982ff3d715a990">getLongitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1067</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a8388898d5fa37916b4982ff3d715a990">getLongitude</a>(cpm.payload.management_container.reference_position.longitude);</div>
+<div class="line"><span class="lineno"> 1068</span>}</div>
+<div class="line"><span class="lineno"> 1069</span></div>
+<div class="line"><span class="lineno"> 1076</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a34a9ba4c41f80b2200334336af5fea31">getAltitude</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1077</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a34a9ba4c41f80b2200334336af5fea31">getAltitude</a>(cpm.payload.management_container.reference_position.altitude);</div>
+<div class="line"><span class="lineno"> 1078</span>}</div>
+<div class="line"><span class="lineno"> 1079</span></div>
+<div class="line"><span class="lineno"> 1091</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm, <span class="keywordtype">int</span> &amp;zone, <span class="keywordtype">bool</span> &amp;northp) {</div>
+<div class="line"><span class="lineno"> 1092</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm.payload.management_container.reference_position, zone, northp);</div>
+<div class="line"><span class="lineno"> 1093</span>}</div>
+<div class="line"><span class="lineno"> 1094</span></div>
+<div class="line"><span class="lineno"> 1104</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1105</span>  <span class="keywordtype">int</span> zone;</div>
+<div class="line"><span class="lineno"> 1106</span>  <span class="keywordtype">bool</span> northp;</div>
+<div class="line"><span class="lineno"> 1107</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm, zone, northp);</div>
+<div class="line"><span class="lineno"> 1108</span>}</div>
+<div class="line"><span class="lineno"> 1109</span></div>
+<div class="line"><span class="lineno"> 1119</span><span class="keyword">inline</span> std::vector&lt;uint8_t&gt; <a class="code hl_function" href="#acff7787922a345940dcbb78945c4a19d">getCpmContainerIds</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1120</span>  std::vector&lt;uint8_t&gt; container_ids;</div>
+<div class="line"><span class="lineno"> 1121</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cpm.payload.cpm_containers.value.array.size(); i++) {</div>
+<div class="line"><span class="lineno"> 1122</span>    container_ids.push_back(cpm.payload.cpm_containers.value.array[i].container_id.value);</div>
+<div class="line"><span class="lineno"> 1123</span>  }</div>
+<div class="line"><span class="lineno"> 1124</span>  <span class="keywordflow">return</span> container_ids;</div>
+<div class="line"><span class="lineno"> 1125</span>}</div>
+<div class="line"><span class="lineno"> 1126</span></div>
+<div class="line"><span class="lineno"> 1135</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm, <span class="keyword">const</span> uint8_t container_id) {</div>
+<div class="line"><span class="lineno"> 1136</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cpm.payload.cpm_containers.value.array.size(); i++) {</div>
+<div class="line"><span class="lineno"> 1137</span>    <span class="keywordflow">if</span> (cpm.payload.cpm_containers.value.array[i].container_id.value == container_id) {</div>
+<div class="line"><span class="lineno"> 1138</span>      <span class="keywordflow">return</span> cpm.payload.cpm_containers.value.array[i];</div>
+<div class="line"><span class="lineno"> 1139</span>    }</div>
+<div class="line"><span class="lineno"> 1140</span>  }</div>
+<div class="line"><span class="lineno"> 1141</span>  <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No Container with ID &quot;</span> + std::to_string(container_id) + <span class="stringliteral">&quot; found in CPM&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1142</span>}</div>
+<div class="line"><span class="lineno"> 1143</span></div>
+<div class="line"><span class="lineno"> 1152</span><span class="keyword">inline</span> WrappedCpmContainer <a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1153</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad5db16cab574d29eaa109afbfef91970">getCpmContainer</a>(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);</div>
+<div class="line"><span class="lineno"> 1154</span>}</div>
+<div class="line"><span class="lineno"> 1155</span></div>
+<div class="line"><span class="lineno"> 1163</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container) {</div>
+<div class="line"><span class="lineno"> 1164</span>  <span class="keywordflow">if</span> (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {</div>
+<div class="line"><span class="lineno"> 1165</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Container is not a PerceivedObjectContainer&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1166</span>  }</div>
+<div class="line"><span class="lineno"> 1167</span>  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;</div>
+<div class="line"><span class="lineno"> 1168</span>  <span class="keywordflow">return</span> number;</div>
+<div class="line"><span class="lineno"> 1169</span>}</div>
+<div class="line"><span class="lineno"> 1170</span></div>
+<div class="line"><span class="lineno"> 1177</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1178</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(<a class="code hl_function" href="#a522511cfba571738e1800e5ce48eb927">getPerceivedObjectContainer</a>(cpm));</div>
+<div class="line"><span class="lineno"> 1179</span>}</div>
+<div class="line"><span class="lineno"> 1180</span></div>
+<div class="line"><span class="lineno"> 1184</span></div>
+<div class="line"><span class="lineno"> 1193</span><span class="keyword">inline</span> PerceivedObject <a class="code hl_function" href="#ae049a0cb5a69bc2e856a8cdb2d92220f">getPerceivedObject</a>(<span class="keyword">const</span> WrappedCpmContainer &amp;container, <span class="keyword">const</span> uint8_t i) {</div>
+<div class="line"><span class="lineno"> 1194</span>  <span class="keywordflow">if</span> (i &gt;= <a class="code hl_function" href="#a386dc484082e062f9a3480b479bf04b0">getNumberOfPerceivedObjects</a>(container)) {</div>
+<div class="line"><span class="lineno"> 1195</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Index out of range&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1196</span>  }</div>
+<div class="line"><span class="lineno"> 1197</span>  <span class="keywordflow">return</span> container.container_data_perceived_object_container.perceived_objects.array[i];</div>
+<div class="line"><span class="lineno"> 1198</span>}</div>
+<div class="line"><span class="lineno"> 1199</span></div>
+<div class="line"><span class="lineno"> 1208</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aba9d53fc5ae60d80c4335c215723b763">getIdOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) { <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_id.value; }</div>
+<div class="line"><span class="lineno"> 1209</span></div>
+<div class="line"><span class="lineno"> 1216</span><span class="keyword">inline</span> int32_t <a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keyword">const</span> CartesianCoordinateWithConfidence &amp;coordinate) {</div>
+<div class="line"><span class="lineno"> 1217</span>  <span class="keywordflow">return</span> coordinate.value.value;</div>
+<div class="line"><span class="lineno"> 1218</span>}</div>
+<div class="line"><span class="lineno"> 1219</span></div>
+<div class="line"><span class="lineno"> 1226</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keyword">const</span> CartesianCoordinateWithConfidence &amp;coordinate) {</div>
+<div class="line"><span class="lineno"> 1227</span>  <span class="keywordflow">return</span> coordinate.confidence.value;</div>
+<div class="line"><span class="lineno"> 1228</span>}</div>
+<div class="line"><span class="lineno"> 1229</span></div>
+<div class="line"><span class="lineno"> 1236</span><span class="keyword">inline</span> gm::Point <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1237</span>  gm::Point point;</div>
+<div class="line"><span class="lineno"> 1238</span>  point.x = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.x_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1239</span>  point.y = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.y_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1240</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.position.z_coordinate_is_present) {</div>
+<div class="line"><span class="lineno"> 1241</span>    point.z = double(<a class="code hl_function" href="#a3425549a17a4c1343a9a1589d8950e00">getCartesianCoordinate</a>(<span class="keywordtype">object</span>.position.z_coordinate)) / 100.0;</div>
+<div class="line"><span class="lineno"> 1242</span>  }</div>
+<div class="line"><span class="lineno"> 1243</span>  <span class="keywordflow">return</span> point;</div>
+<div class="line"><span class="lineno"> 1244</span>}</div>
+<div class="line"><span class="lineno"> 1245</span></div>
+<div class="line"><span class="lineno"> 1253</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#af872815cd43bfac17d873caa3a75d88e">getPositionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1254</span>  <span class="keywordtype">double</span> x_confidence = double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.x_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1255</span>  <span class="keywordtype">double</span> y_confidence = double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.y_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1256</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.position.z_coordinate_is_present</div>
+<div class="line"><span class="lineno"> 1257</span>                            ? double(<a class="code hl_function" href="#a3f87a7efc11fd260088875ab131cce63">getCartesianCoordinateConfidence</a>(<span class="keywordtype">object</span>.position.z_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR</div>
+<div class="line"><span class="lineno"> 1258</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1259</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1260</span>}</div>
+<div class="line"><span class="lineno"> 1261</span></div>
+<div class="line"><span class="lineno"> 1268</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keyword">const</span> CartesianAngle &amp;angle) { <span class="keywordflow">return</span> angle.value.value; }</div>
+<div class="line"><span class="lineno"> 1269</span></div>
+<div class="line"><span class="lineno"> 1276</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a46324c832a077f98078a82d598d60be2">getCartesianAngleConfidence</a>(<span class="keyword">const</span> CartesianAngle &amp;angle) { <span class="keywordflow">return</span> angle.confidence.value; }</div>
+<div class="line"><span class="lineno"> 1277</span></div>
+<div class="line"><span class="lineno"> 1288</span><span class="keyword">inline</span> gm::Quaternion <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1289</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.angles_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No angles present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1290</span>  tf2::Quaternion q;</div>
+<div class="line"><span class="lineno"> 1291</span>  <span class="keywordtype">double</span> roll{0}, pitch{0}, yaw{0};</div>
+<div class="line"><span class="lineno"> 1292</span> </div>
+<div class="line"><span class="lineno"> 1293</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.angles.x_angle_is_present) {</div>
+<div class="line"><span class="lineno"> 1294</span>    roll = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.x_angle)) / 10.0) ) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1295</span>           M_PI;</div>
+<div class="line"><span class="lineno"> 1296</span>  }</div>
+<div class="line"><span class="lineno"> 1297</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.angles.y_angle_is_present) {</div>
+<div class="line"><span class="lineno"> 1298</span>    pitch = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.y_angle)) / 10.0) ) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1299</span>            M_PI;</div>
+<div class="line"><span class="lineno"> 1300</span>  }</div>
+<div class="line"><span class="lineno"> 1301</span>  yaw = (((double(<a class="code hl_function" href="#aa45d62a4a2d1f74d2860c60f51f546c4">getCartesianAngle</a>(<span class="keywordtype">object</span>.angles.z_angle)) / 10.0)) / 180.0) *</div>
+<div class="line"><span class="lineno"> 1302</span>        M_PI;</div>
+<div class="line"><span class="lineno"> 1303</span>  <span class="comment">// This wraps from -pi ti pi because setRPY only uses cos and sin of the angles</span></div>
+<div class="line"><span class="lineno"> 1304</span>  q.setRPY(roll, pitch, yaw);</div>
+<div class="line"><span class="lineno"> 1305</span> </div>
+<div class="line"><span class="lineno"> 1306</span>  <span class="keywordflow">return</span> tf2::toMsg(q);</div>
+<div class="line"><span class="lineno"> 1307</span>}</div>
+<div class="line"><span class="lineno"> 1308</span></div>
+<div class="line"><span class="lineno"> 1315</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a82a57945860573f27ff49af5eef45314">getYawOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1316</span>  gm::Quaternion orientation = <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1317</span>  tf2::Quaternion q(orientation.x, orientation.y, orientation.z, orientation.w);</div>
+<div class="line"><span class="lineno"> 1318</span>  <span class="keywordtype">double</span> roll, pitch, yaw;</div>
+<div class="line"><span class="lineno"> 1319</span>  tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);</div>
+<div class="line"><span class="lineno"> 1320</span>  <span class="keywordflow">return</span> yaw;</div>
+<div class="line"><span class="lineno"> 1321</span>}</div>
+<div class="line"><span class="lineno"> 1322</span></div>
+<div class="line"><span class="lineno"> 1330</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a336564eb74f3dc9f1bc18534762de3ac">getYawConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1331</span>  <span class="keywordflow">if</span>(!<span class="keywordtype">object</span>.angles_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No angles present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1332</span>  <span class="keywordtype">double</span> yaw_confidence = <span class="keywordtype">object</span>.angles.z_angle.confidence.value / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1333</span>  yaw_confidence *= M_PI / 180.0;  <span class="comment">// convert to radians</span></div>
+<div class="line"><span class="lineno"> 1334</span>  <span class="keywordflow">return</span> yaw_confidence;</div>
+<div class="line"><span class="lineno"> 1335</span>}</div>
+<div class="line"><span class="lineno"> 1336</span></div>
+<div class="line"><span class="lineno"> 1343</span><span class="keyword">inline</span> gm::Pose <a class="code hl_function" href="#a7381654955f3642b07a9bccb14bbc40c">getPoseOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1344</span>  gm::Pose pose;</div>
+<div class="line"><span class="lineno"> 1345</span>  pose.position = <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1346</span>  pose.orientation = <a class="code hl_function" href="#af9b577bea6f683d3f8fd7e4df74c61a3">getOrientationOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1347</span>  <span class="keywordflow">return</span> pose;</div>
+<div class="line"><span class="lineno"> 1348</span>}</div>
+<div class="line"><span class="lineno"> 1349</span></div>
+<div class="line"><span class="lineno"> 1357</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a6e03a3c45030ebc7b84c38faf1a3dabd">getYawRateOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1358</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.z_angular_velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No yaw rate present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1359</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.z_angular_velocity.value.value * M_PI / 180.0;  <span class="comment">// convert to rad/s</span></div>
+<div class="line"><span class="lineno"> 1360</span>}</div>
+<div class="line"><span class="lineno"> 1361</span></div>
+<div class="line"><span class="lineno"> 1371</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a07d5f0c0b6f6177e7469bb10e8a5ace3">getYawRateConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1372</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.z_angular_velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No yaw rate present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1373</span>  <span class="keyword">auto</span> val = <span class="keywordtype">object</span>.z_angular_velocity.confidence.value;</div>
+<div class="line"><span class="lineno"> 1374</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;uint8_t, double&gt; confidence_map = {</div>
+<div class="line"><span class="lineno"> 1375</span>      {AngularSpeedConfidence::UNAVAILABLE, 0.0},</div>
+<div class="line"><span class="lineno"> 1376</span>      {AngularSpeedConfidence::DEG_SEC_01, 1.0},</div>
+<div class="line"><span class="lineno"> 1377</span>      {AngularSpeedConfidence::DEG_SEC_02, 2.0},</div>
+<div class="line"><span class="lineno"> 1378</span>      {AngularSpeedConfidence::DEG_SEC_05, 5.0},</div>
+<div class="line"><span class="lineno"> 1379</span>      {AngularSpeedConfidence::DEG_SEC_10, 10.0},</div>
+<div class="line"><span class="lineno"> 1380</span>      {AngularSpeedConfidence::DEG_SEC_20, 20.0},</div>
+<div class="line"><span class="lineno"> 1381</span>      {AngularSpeedConfidence::DEG_SEC_50, 50.0},</div>
+<div class="line"><span class="lineno"> 1382</span>      {AngularSpeedConfidence::OUT_OF_RANGE, std::numeric_limits&lt;double&gt;::infinity()},</div>
+<div class="line"><span class="lineno"> 1383</span>  };</div>
+<div class="line"><span class="lineno"> 1384</span>  <span class="keywordflow">return</span> confidence_map.at(val) * M_PI / 180.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  <span class="comment">// convert to rad/s</span></div>
+<div class="line"><span class="lineno"> 1385</span>}</div>
+<div class="line"><span class="lineno"> 1386</span></div>
+<div class="line"><span class="lineno"> 1393</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keyword">const</span> VelocityComponent &amp;velocity) { <span class="keywordflow">return</span> double(velocity.value.value) / 100.0; }</div>
+<div class="line"><span class="lineno"> 1394</span></div>
+<div class="line"><span class="lineno"> 1401</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keyword">const</span> VelocityComponent &amp;velocity) {</div>
+<div class="line"><span class="lineno"> 1402</span>  <span class="keywordflow">return</span> double(velocity.confidence.value) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1403</span>}</div>
+<div class="line"><span class="lineno"> 1404</span></div>
+<div class="line"><span class="lineno"> 1412</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#abd03476fa6d229facafc1d545006bb74">getCartesianVelocityOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1413</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No velocity present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1414</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {</div>
+<div class="line"><span class="lineno"> 1415</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Velocity is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1416</span>  }</div>
+<div class="line"><span class="lineno"> 1417</span>  gm::Vector3 velocity;</div>
+<div class="line"><span class="lineno"> 1418</span>  velocity.x = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity);</div>
+<div class="line"><span class="lineno"> 1419</span>  velocity.y = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity);</div>
+<div class="line"><span class="lineno"> 1420</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present) {</div>
+<div class="line"><span class="lineno"> 1421</span>    velocity.z = <a class="code hl_function" href="#a4f56fdad3f6a6cd15944b00e076affbb">getVelocityComponent</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity);</div>
+<div class="line"><span class="lineno"> 1422</span>  }</div>
+<div class="line"><span class="lineno"> 1423</span>  <span class="keywordflow">return</span> velocity;</div>
+<div class="line"><span class="lineno"> 1424</span>}</div>
+<div class="line"><span class="lineno"> 1425</span></div>
+<div class="line"><span class="lineno"> 1434</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#aa2132d165f1270a824040e1e1865c1dc">getCartesianVelocityConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1435</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.velocity_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No velocity present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1436</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {</div>
+<div class="line"><span class="lineno"> 1437</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Velocity is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1438</span>  }</div>
+<div class="line"><span class="lineno"> 1439</span>  <span class="keywordtype">double</span> x_confidence = <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.x_velocity);</div>
+<div class="line"><span class="lineno"> 1440</span>  <span class="keywordtype">double</span> y_confidence = <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.y_velocity);</div>
+<div class="line"><span class="lineno"> 1441</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity_is_present</div>
+<div class="line"><span class="lineno"> 1442</span>                            ? <a class="code hl_function" href="#aa7c2ce096f295280653636fe6380d869">getVelocityComponentConfidence</a>(<span class="keywordtype">object</span>.velocity.cartesian_velocity.z_velocity)</div>
+<div class="line"><span class="lineno"> 1443</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1444</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1445</span>}</div>
+<div class="line"><span class="lineno"> 1446</span></div>
+<div class="line"><span class="lineno"> 1453</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keyword">const</span> AccelerationComponent &amp;acceleration) {</div>
+<div class="line"><span class="lineno"> 1454</span>  <span class="keywordflow">return</span> double(acceleration.value.value) / 10.0;</div>
+<div class="line"><span class="lineno"> 1455</span>}</div>
+<div class="line"><span class="lineno"> 1456</span></div>
+<div class="line"><span class="lineno"> 1463</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keyword">const</span> AccelerationComponent &amp;acceleration) {</div>
+<div class="line"><span class="lineno"> 1464</span>  <span class="keywordflow">return</span> double(acceleration.confidence.value) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1465</span>}</div>
+<div class="line"><span class="lineno"> 1466</span></div>
+<div class="line"><span class="lineno"> 1474</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#ae5028e64f78ec8daa32e4c3990183ccf">getCartesianAccelerationOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1475</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.acceleration_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No acceleration present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1476</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {</div>
+<div class="line"><span class="lineno"> 1477</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Acceleration is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1478</span>  }</div>
+<div class="line"><span class="lineno"> 1479</span>  gm::Vector3 acceleration;</div>
+<div class="line"><span class="lineno"> 1480</span>  acceleration.x = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration);</div>
+<div class="line"><span class="lineno"> 1481</span>  acceleration.y = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration);</div>
+<div class="line"><span class="lineno"> 1482</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present) {</div>
+<div class="line"><span class="lineno"> 1483</span>    acceleration.z = <a class="code hl_function" href="#af5ef8c14b6cc46a3995e0e01ff01b2e2">getAccelerationComponent</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration);</div>
+<div class="line"><span class="lineno"> 1484</span>  }</div>
+<div class="line"><span class="lineno"> 1485</span>  <span class="keywordflow">return</span> acceleration;</div>
+<div class="line"><span class="lineno"> 1486</span>}</div>
+<div class="line"><span class="lineno"> 1487</span></div>
+<div class="line"><span class="lineno"> 1496</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#a31507fffad48fb41b7bea7f0a7a10111">getCartesianAccelerationConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1497</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.acceleration_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No acceleration present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1498</span>  <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {</div>
+<div class="line"><span class="lineno"> 1499</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Acceleration is not Cartesian&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1500</span>  }</div>
+<div class="line"><span class="lineno"> 1501</span>  <span class="keywordtype">double</span> x_confidence = <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.x_acceleration);</div>
+<div class="line"><span class="lineno"> 1502</span>  <span class="keywordtype">double</span> y_confidence = <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.y_acceleration);</div>
+<div class="line"><span class="lineno"> 1503</span>  <span class="keywordtype">double</span> z_confidence = <span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration_is_present</div>
+<div class="line"><span class="lineno"> 1504</span>                            ? <a class="code hl_function" href="#ad000ae9df3d4eedac7838ff3a8e9ed28">getAccelerationComponentConfidence</a>(<span class="keywordtype">object</span>.acceleration.cartesian_acceleration.z_acceleration)</div>
+<div class="line"><span class="lineno"> 1505</span>                            : std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><span class="lineno"> 1506</span>  <span class="keywordflow">return</span> std::make_tuple(x_confidence, y_confidence, z_confidence);</div>
+<div class="line"><span class="lineno"> 1507</span>}</div>
+<div class="line"><span class="lineno"> 1508</span></div>
+<div class="line"><span class="lineno"> 1520</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#abf1eba31377f2d0cf0779a62339b3b2b">getXDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1521</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_x_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No x-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1522</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_x.value.value;</div>
+<div class="line"><span class="lineno"> 1523</span>}</div>
+<div class="line"><span class="lineno"> 1524</span></div>
+<div class="line"><span class="lineno"> 1532</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ab633bf9090d4a3f137bfa25ce536ecd7">getXDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1533</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_x_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No x-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1534</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_x.confidence.value;</div>
+<div class="line"><span class="lineno"> 1535</span>}</div>
+<div class="line"><span class="lineno"> 1536</span></div>
+<div class="line"><span class="lineno"> 1548</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a48bccc42e5c7ae9623e9f81cbec1190a">getYDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1549</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_y_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No y-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1550</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_y.value.value;</div>
+<div class="line"><span class="lineno"> 1551</span>}</div>
+<div class="line"><span class="lineno"> 1552</span></div>
+<div class="line"><span class="lineno"> 1560</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a8b2d40094fe6a6464bd3355a3562ccb1">getYDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1561</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_y_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No y-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1562</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_y.confidence.value;</div>
+<div class="line"><span class="lineno"> 1563</span>}</div>
+<div class="line"><span class="lineno"> 1564</span></div>
+<div class="line"><span class="lineno"> 1576</span><span class="keyword">inline</span> uint16_t <a class="code hl_function" href="#a377b9a61698d64663a3194eebef5c800">getZDimensionOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1577</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_z_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No z-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1578</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_z.value.value;</div>
+<div class="line"><span class="lineno"> 1579</span>}</div>
+<div class="line"><span class="lineno"> 1580</span></div>
+<div class="line"><span class="lineno"> 1588</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#aa454cd6f2159d78dcd35378a6a5e42b2">getZDimensionConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1589</span>  <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>.object_dimension_z_is_present) <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No z-dimension present in PerceivedObject&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1590</span>  <span class="keywordflow">return</span> <span class="keywordtype">object</span>.object_dimension_z.confidence.value;</div>
+<div class="line"><span class="lineno"> 1591</span>}</div>
+<div class="line"><span class="lineno"> 1592</span></div>
+<div class="line"><span class="lineno"> 1602</span><span class="keyword">inline</span> gm::Vector3 <a class="code hl_function" href="#a71824277aa35c3ef2a01c4b38f580847">getDimensionsOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1603</span>  gm::Vector3 dimensions;</div>
+<div class="line"><span class="lineno"> 1604</span>  dimensions.x = double(<a class="code hl_function" href="#abf1eba31377f2d0cf0779a62339b3b2b">getXDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1605</span>  dimensions.y = double(<a class="code hl_function" href="#a48bccc42e5c7ae9623e9f81cbec1190a">getYDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1606</span>  dimensions.z = double(<a class="code hl_function" href="#a377b9a61698d64663a3194eebef5c800">getZDimensionOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0;</div>
+<div class="line"><span class="lineno"> 1607</span>  <span class="keywordflow">return</span> dimensions;</div>
+<div class="line"><span class="lineno"> 1608</span>}</div>
+<div class="line"><span class="lineno"> 1609</span></div>
+<div class="line"><span class="lineno"> 1616</span><span class="keyword">inline</span> std::tuple&lt;double, double, double&gt; <a class="code hl_function" href="#a189b722f2fb8a28b6a02314408bdb1b9">getDimensionsConfidenceOfPerceivedObject</a>(<span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1617</span>  <span class="keywordtype">double</span> conf_x = double(<a class="code hl_function" href="#ab633bf9090d4a3f137bfa25ce536ecd7">getXDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1618</span>  <span class="keywordtype">double</span> conf_y = double(<a class="code hl_function" href="#a8b2d40094fe6a6464bd3355a3562ccb1">getYDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1619</span>  <span class="keywordtype">double</span> conf_z = double(<a class="code hl_function" href="#aa454cd6f2159d78dcd35378a6a5e42b2">getZDimensionConfidenceOfPerceivedObject</a>(<span class="keywordtype">object</span>)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno"> 1620</span>  <span class="keywordflow">return</span> {conf_x, conf_y, conf_z};</div>
+<div class="line"><span class="lineno"> 1621</span>}</div>
+<div class="line"><span class="lineno"> 1622</span></div>
+<div class="line"><span class="lineno"> 1633</span><span class="keyword">inline</span> gm::PointStamped <a class="code hl_function" href="#a943cf039ff8b2476638f343f431bc8a0">getUTMPositionOfPerceivedObject</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm,</div>
+<div class="line"><span class="lineno"> 1634</span>                                                        <span class="keyword">const</span> PerceivedObject &amp;<span class="keywordtype">object</span>) {</div>
+<div class="line"><span class="lineno"> 1635</span>  gm::PointStamped utm_position;</div>
+<div class="line"><span class="lineno"> 1636</span>  gm::PointStamped reference_position = <a class="code hl_function" href="#af9c47b856034ae7c759d2771ba27b9b3">getUTMPosition</a>(cpm);</div>
+<div class="line"><span class="lineno"> 1637</span>  gm::Point relative_position = <a class="code hl_function" href="#a3a3b33c88f8cac43e177eacfa3234092">getPositionOfPerceivedObject</a>(<span class="keywordtype">object</span>);</div>
+<div class="line"><span class="lineno"> 1638</span> </div>
+<div class="line"><span class="lineno"> 1639</span>  utm_position.header.frame_id = reference_position.header.frame_id;</div>
+<div class="line"><span class="lineno"> 1640</span>  utm_position.point.x = reference_position.point.x + relative_position.x;</div>
+<div class="line"><span class="lineno"> 1641</span>  utm_position.point.y = reference_position.point.y + relative_position.y;</div>
+<div class="line"><span class="lineno"> 1642</span>  utm_position.point.z = reference_position.point.z + relative_position.z;</div>
+<div class="line"><span class="lineno"> 1643</span> </div>
+<div class="line"><span class="lineno"> 1644</span>  <span class="keywordflow">return</span> utm_position;</div>
+<div class="line"><span class="lineno"> 1645</span>}</div>
+<div class="line"><span class="lineno"> 1646</span></div>
+<div class="line"><span class="lineno"> 1656</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
+<div class="line"><span class="lineno"> 1657</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno"> 1658</span>}</div>
+<div class="line"><span class="lineno"> 1659</span></div>
+<div class="line"><span class="lineno"> 1666</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1667</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1668</span>}</div>
+<div class="line"><span class="lineno"> 1669</span></div>
+<div class="line"><span class="lineno"> 1676</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1677</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1678</span>}</div>
+<div class="line"><span class="lineno"> 1679</span> </div>
+<div class="line"><span class="lineno"> 1680</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a105ce066059858aef302c41d05e30306" name="a105ce066059858aef302c41d05e30306"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a105ce066059858aef302c41d05e30306">&#9670;&#160;</a></span>getSpeed()</h2>
 
@@ -4654,7 +5419,8 @@ template&lt;typename SemiAxisLength&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>geometry_msgs::PointStamped of the given position with the UTM zone and hemisphere as frame_id </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="cpm__ts__getters_8h_source.html#l00411">411</a> of file <a class="el" href="cpm__ts__getters_8h_source.html">cpm_ts_getters.h</a>.</p>
-<div class="fragment"></div><!-- fragment -->
+<div class="fragment"><div class="line"><span class="lineno">  411</span>                                                                      { <span class="keywordflow">return</span> double(velocity.value.value) / 100.0; }</div>
+<div class="line"><span class="lineno">  412</span></div><!-- fragment -->
 </div>
 </div>
 <a id="af840522ca3fae34e7d8a6620f74fe9a9" name="af840522ca3fae34e7d8a6620f74fe9a9"></a>
@@ -5097,8 +5863,16 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno"> 1613</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1614</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1615</span>}</div>
-<div class="line"><span class="lineno"> 1616</span> </div>
-<div class="line"><span class="lineno"> 1617</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1616</span></div>
+<div class="line"><span class="lineno"> 1623</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1624</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1625</span>}</div>
+<div class="line"><span class="lineno"> 1626</span></div>
+<div class="line"><span class="lineno"> 1633</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1634</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1635</span>}</div>
+<div class="line"><span class="lineno"> 1636</span> </div>
+<div class="line"><span class="lineno"> 1637</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -5437,8 +6211,16 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno"> 1373</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1374</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1375</span>}</div>
-<div class="line"><span class="lineno"> 1376</span> </div>
-<div class="line"><span class="lineno"> 1377</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1376</span></div>
+<div class="line"><span class="lineno"> 1383</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1384</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1385</span>}</div>
+<div class="line"><span class="lineno"> 1386</span></div>
+<div class="line"><span class="lineno"> 1393</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1394</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1395</span>}</div>
+<div class="line"><span class="lineno"> 1396</span> </div>
+<div class="line"><span class="lineno"> 1397</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -5777,8 +6559,16 @@ template&lt;typename T&gt; </div>
 <div class="line"><span class="lineno"> 1381</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1382</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1383</span>}</div>
-<div class="line"><span class="lineno"> 1384</span> </div>
-<div class="line"><span class="lineno"> 1385</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1384</span></div>
+<div class="line"><span class="lineno"> 1391</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1392</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1393</span>}</div>
+<div class="line"><span class="lineno"> 1394</span></div>
+<div class="line"><span class="lineno"> 1401</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1402</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1403</span>}</div>
+<div class="line"><span class="lineno"> 1404</span> </div>
+<div class="line"><span class="lineno"> 1405</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -6196,8 +6986,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1636</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1637</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1638</span>}</div>
-<div class="line"><span class="lineno"> 1639</span> </div>
-<div class="line"><span class="lineno"> 1640</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1639</span></div>
+<div class="line"><span class="lineno"> 1646</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1647</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1648</span>}</div>
+<div class="line"><span class="lineno"> 1649</span></div>
+<div class="line"><span class="lineno"> 1656</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1657</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1658</span>}</div>
+<div class="line"><span class="lineno"> 1659</span> </div>
+<div class="line"><span class="lineno"> 1660</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -6542,8 +7340,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1512</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1513</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1514</span>}</div>
-<div class="line"><span class="lineno"> 1515</span> </div>
-<div class="line"><span class="lineno"> 1516</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1515</span></div>
+<div class="line"><span class="lineno"> 1522</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1523</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1524</span>}</div>
+<div class="line"><span class="lineno"> 1525</span></div>
+<div class="line"><span class="lineno"> 1532</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1533</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1534</span>}</div>
+<div class="line"><span class="lineno"> 1535</span> </div>
+<div class="line"><span class="lineno"> 1536</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -6889,8 +7695,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1500</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1501</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1502</span>}</div>
-<div class="line"><span class="lineno"> 1503</span> </div>
-<div class="line"><span class="lineno"> 1504</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1503</span></div>
+<div class="line"><span class="lineno"> 1510</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1511</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1512</span>}</div>
+<div class="line"><span class="lineno"> 1513</span></div>
+<div class="line"><span class="lineno"> 1520</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1521</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1522</span>}</div>
+<div class="line"><span class="lineno"> 1523</span> </div>
+<div class="line"><span class="lineno"> 1524</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -7013,7 +7827,7 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cpm__ts__getters_8h_source.html#l00678">678</a> of file <a class="el" href="cpm__ts__getters_8h_source.html">cpm_ts_getters.h</a>.</p>
-
+<div class="fragment"></div><!-- fragment -->
 </div>
 </div>
 <a id="a6e03a3c45030ebc7b84c38faf1a3dabd" name="a6e03a3c45030ebc7b84c38faf1a3dabd"></a>
@@ -7396,8 +8210,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1540</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1541</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1542</span>}</div>
-<div class="line"><span class="lineno"> 1543</span> </div>
-<div class="line"><span class="lineno"> 1544</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1543</span></div>
+<div class="line"><span class="lineno"> 1550</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1551</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1552</span>}</div>
+<div class="line"><span class="lineno"> 1553</span></div>
+<div class="line"><span class="lineno"> 1560</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1561</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1562</span>}</div>
+<div class="line"><span class="lineno"> 1563</span> </div>
+<div class="line"><span class="lineno"> 1564</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -7743,8 +8565,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1528</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1529</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1530</span>}</div>
-<div class="line"><span class="lineno"> 1531</span> </div>
-<div class="line"><span class="lineno"> 1532</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1531</span></div>
+<div class="line"><span class="lineno"> 1538</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1539</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1540</span>}</div>
+<div class="line"><span class="lineno"> 1541</span></div>
+<div class="line"><span class="lineno"> 1548</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1549</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1550</span>}</div>
+<div class="line"><span class="lineno"> 1551</span> </div>
+<div class="line"><span class="lineno"> 1552</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -8089,8 +8919,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1568</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1569</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1570</span>}</div>
-<div class="line"><span class="lineno"> 1571</span> </div>
-<div class="line"><span class="lineno"> 1572</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1571</span></div>
+<div class="line"><span class="lineno"> 1578</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1579</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1580</span>}</div>
+<div class="line"><span class="lineno"> 1581</span></div>
+<div class="line"><span class="lineno"> 1588</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1589</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1590</span>}</div>
+<div class="line"><span class="lineno"> 1591</span> </div>
+<div class="line"><span class="lineno"> 1592</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -8436,8 +9274,16 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 <div class="line"><span class="lineno"> 1556</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#ad3e4df63691042ca96a9985d11035c4c">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CollectivePerceptionMessage &amp;cpm) {</div>
 <div class="line"><span class="lineno"> 1557</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aaa6cbb61d41314ca65fd2d0f920cf3dc">getWGSPosConfidenceEllipse</a>(cpm.payload.management_container.reference_position.position_confidence_ellipse);</div>
 <div class="line"><span class="lineno"> 1558</span>}</div>
-<div class="line"><span class="lineno"> 1559</span> </div>
-<div class="line"><span class="lineno"> 1560</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
+<div class="line"><span class="lineno"> 1559</span></div>
+<div class="line"><span class="lineno"> 1566</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#ac89c1b419cbd74616f6595f7e76b114b">getSensorID</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1567</span>  <span class="keywordflow">return</span> sensor_information.sensor_id.value;</div>
+<div class="line"><span class="lineno"> 1568</span>}</div>
+<div class="line"><span class="lineno"> 1569</span></div>
+<div class="line"><span class="lineno"> 1576</span><span class="keyword">inline</span> uint8_t <a class="code hl_function" href="#a5572f881da5a0d44ea0c584941c10acc">getSensorType</a>(<span class="keyword">const</span> SensorInformation &amp;sensor_information) {</div>
+<div class="line"><span class="lineno"> 1577</span>  <span class="keywordflow">return</span> sensor_information.sensor_type.value;</div>
+<div class="line"><span class="lineno"> 1578</span>}</div>
+<div class="line"><span class="lineno"> 1579</span> </div>
+<div class="line"><span class="lineno"> 1580</span>}  <span class="comment">// namespace etsi_its_cpm_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
