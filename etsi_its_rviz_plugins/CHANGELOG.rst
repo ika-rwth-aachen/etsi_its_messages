@@ -2,6 +2,15 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2025-04-22)
+------------------
+* Merge branch 'main' into uulm-mcm
+* Merge pull request `#73 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/73>`_ from ika-rwth-aachen/fix/spatem-viz
+  Fix visualization of SPATEMS on Startup of RViz
+* Merge pull request `#70 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/70>`_ from ika-rwth-aachen/improvement/display_different_utm_zones_at_once
+  Improvement/display different utm zones at once
+* Contributors: Guido Küppers, Jean-Pierre Busch
+
 3.1.0 (2025-02-17)
 ------------------
 * Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright

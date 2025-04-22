@@ -2,6 +2,17 @@
 Changelog for package etsi_its_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2025-04-22)
+------------------
+* Merge pull request `#75 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/75>`_ from ika-rwth-aachen/uulm-mcm
+  Add MCM version of Ulm University
+* Merge branch 'main' into uulm-mcm
+* Merge pull request `#72 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/72>`_ from ika-rwth-aachen/fix-runtime-error
+  Fix critical runtime bug
+* Merge pull request `#69 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/69>`_ from ika-rwth-aachen/fix-udp-pub-sub
+  Only create UDP publisher/subscriber if required
+* Contributors: Jean-Pierre Busch, Lennart Reiher
+
 3.1.0 (2025-02-17)
 ------------------
 * Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright

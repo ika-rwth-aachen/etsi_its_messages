@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_cpm_ts_conversion</name>
-  <version>3.1.0</version>
+  <version>3.2.0</version>
   <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS CPMs (TS)</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>

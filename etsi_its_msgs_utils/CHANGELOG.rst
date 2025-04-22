@@ -2,6 +2,15 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2025-04-22)
+------------------
+* Merge pull request `#76 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/76>`_ from ika-rwth-aachen/feature/sensorinformation-utils
+  Add setter functions for SensorInformationContainer
+* Merge branch 'main' into uulm-mcm
+* Merge pull request `#74 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/74>`_ from FabianThomsen/feature/var-utils
+  Add setters and getters for (co)variances
+* Contributors: Jean-Pierre Busch
+
 3.1.0 (2025-02-17)
 ------------------
 * Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright

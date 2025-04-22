@@ -2,6 +2,9 @@
 Changelog for package etsi_its_denm_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2025-04-22)
+------------------
+
 3.1.0 (2025-02-17)
 ------------------
 * Merge branch 'main' into feature/spat-map-plugin

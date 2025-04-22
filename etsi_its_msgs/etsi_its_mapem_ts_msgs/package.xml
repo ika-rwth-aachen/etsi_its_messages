@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_mapem_ts_msgs</name>
-  <version>3.1.0</version>
+  <version>3.2.0</version>
   <description>ROS messages for ETSI ITS MAPEM (TS)</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
