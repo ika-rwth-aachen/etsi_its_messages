@@ -139,7 +139,6 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   double expected_yaw_rate = *std::lower_bound(yaw_std_possible_values.begin(), yaw_std_possible_values.end(), yaw_rate_std);
   EXPECT_NEAR(expected_yaw_rate, cpm_ts_access::getYawRateConfidenceOfPerceivedObject(object), 1e0 * M_PI / 180.0);
 
-
   // Velocity
   gm::Vector3 velocity;
   velocity.x = randomDouble(-163.83, 163.83);
@@ -173,4 +172,16 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(acceleration_x_std, acc_x_std_get, 1e-1);
   EXPECT_NEAR(acceleration_y_std, acc_y_std_get, 1e-1);
   EXPECT_NEAR(acceleration_z_std, acc_z_std_get, 1e-1);
+
+  // SensorInformation
+  cpm_ts_msgs::WrappedCpmContainer sensor_information_container;
+  cpm_ts_access::initSensorInformationContainer(sensor_information_container);
+  int sensor_id = randomInt(cpm_ts_msgs::Identifier1B::MIN, cpm_ts_msgs::Identifier1B::MAX);
+  int sensor_type = randomInt(cpm_ts_msgs::SensorType::MIN, cpm_ts_msgs::SensorType::MAX);
+  cpm_ts_msgs::SensorInformation sensor_information;
+  cpm_ts_access::setSensorID(sensor_information, sensor_id);
+  cpm_ts_access::setSensorType(sensor_information, sensor_type);
+  cpm_ts_access::addSensorInformationToContainer(sensor_information_container, sensor_information);
+  EXPECT_EQ(sensor_id, cpm_ts_access::getSensorID(sensor_information));
+  EXPECT_EQ(sensor_type, cpm_ts_access::getSensorType(sensor_information));
 }
