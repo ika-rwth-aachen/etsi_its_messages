@@ -40,5 +40,5 @@ RUN rm -rf /setup
 RUN mkdir input
 RUN mkdir output
 WORKDIR /output
-RUN echo "asn1c \$(find /input -name '*.asn' | sort) -fcompound-names -no-gen-BER --no-gen-XER -no-gen-OER -no-gen-example -gen-UPER" > /asn1c.sh
+RUN echo "asn1c \$(find /input -name '*.asn' | sort) -fcompound-names -no-gen-BER --no-gen-XER -no-gen-OER -no-gen-example -gen-UPER -gen-JER" > /asn1c.sh
 CMD ["/bin/bash", "/asn1c.sh"]
