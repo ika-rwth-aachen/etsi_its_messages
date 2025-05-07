@@ -114,7 +114,6 @@ const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
 const int Converter::kPublisherQueueSizeParamDefault{10};
-const std::string Converter::kCheckConstraintsBeforeEncodingParam{"check_constraints_before_encoding"};
 const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{false};
 
 
@@ -272,18 +271,6 @@ void Converter::loadParameters() {
   if (!this->get_parameter(kPublisherQueueSizeParam, publisher_queue_size_)) {
 #endif
     ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to '%d'", kPublisherQueueSizeParam.c_str(), kPublisherQueueSizeParamDefault);
-  }
-
-  // load check_constraints_before_encoding_
-#ifdef ROS1
-  if (!private_node_handle_.param<bool>(kCheckConstraintsBeforeEncodingParam, check_constraints_before_encoding_, kCheckConstraintsBeforeEncodingParamDefault)) {
-#else
-  param_desc = rcl_interfaces::msg::ParameterDescriptor();
-  param_desc.description = "whether an asn constraint check should be performed before encoding";
-  this->declare_parameter(kCheckConstraintsBeforeEncodingParam, kCheckConstraintsBeforeEncodingParamDefault, param_desc);
-  if (!this->get_parameter(kCheckConstraintsBeforeEncodingParam, check_constraints_before_encoding_)) {
-#endif
-    ROS12_LOG(WARN, "Parameter '%s' is not set, defaulting to '%s'", kCheckConstraintsBeforeEncodingParam.c_str(), kCheckConstraintsBeforeEncodingParamDefault ? "true" : "false");
   }
 }
 
@@ -539,14 +526,12 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 template <typename T_struct>
 bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
 
-  if(check_constraints_before_encoding_) {
-    char error_buffer[1024];
-    size_t error_length = sizeof(error_buffer);
-    int check_ret = asn_check_constraints(type_descriptor, &asn1_struct, error_buffer, &error_length);
-    if (check_ret != 0) {
-      ROS12_LOG(ERROR, "Check of struct failed: %s", error_buffer);
-      return false;
-    }
+  char error_buffer[1024];
+  size_t error_length = sizeof(error_buffer);
+  int check_ret = asn_check_constraints(type_descriptor, &asn1_struct, error_buffer, &error_length);
+  if (check_ret != 0) {
+    ROS12_LOG(ERROR, "Check of struct failed: %s", error_buffer);
+    return false;
   }
 
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, type_descriptor, &asn1_struct);

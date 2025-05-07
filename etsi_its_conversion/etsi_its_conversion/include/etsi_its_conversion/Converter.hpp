@@ -197,7 +197,6 @@ class Converter : public rclcpp::Node {
     std::vector<std::string> udp2ros_etsi_types_;
     int subscriber_queue_size_;
     int publisher_queue_size_;
-    bool check_constraints_before_encoding_;
 
 #ifdef ROS1
     ros::NodeHandle private_node_handle_;

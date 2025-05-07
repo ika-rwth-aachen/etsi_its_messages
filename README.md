@@ -218,7 +218,6 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 | `udp2ros_etsi_types` | `string[]` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` (defaults to all supported ETSI types, either EN or TS version)  | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` |
 | `subscriber_queue_size` | `int` | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | queue size for outgoing ROS messages |
-| `check_constraints_before_encoding` | `bool` | whether an asn constraint check should be performed before encoding using asn1c's `asn_check_constraints` function (setting to `true` could lead to segmentation faults because of infinite recursion; [known asn1c issue](https://github.com/vlm/asn1c/issues/410)) |
 
 
 ## Sample Messages
