@@ -25,7 +25,7 @@ RUN apt-get update && \
 WORKDIR /setup
 RUN git clone https://github.com/mouse07410/asn1c.git
 WORKDIR /setup/asn1c
-ARG ASN1C_COMMIT=9ac139f00f942b55d9961c7b9facbc1821aacb73
+ARG ASN1C_COMMIT=a99409e29af43f50ecd225788e3bdf5e6a54bba3
 RUN git checkout ${ASN1C_COMMIT} && \
     test -f configure || autoreconf -iv && \
     ./configure && \
