@@ -24,7 +24,7 @@ vam_ts_ItsPduHeaderVam_constraint(const asn_TYPE_descriptor_t *td, const void *s
 	}
 	
 	/* prevent infinite recursion */
-	if (td->encoding_constraints.general_constraints != vam_ts_ItsPduHeaderVam_constraint) {
+	if(td->encoding_constraints.general_constraints != vam_ts_ItsPduHeaderVam_constraint) {
 		return td->encoding_constraints.general_constraints(td, sptr, ctfailcb, app_key);
 	} else {
 		return 0;
