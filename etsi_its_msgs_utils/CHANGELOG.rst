@@ -2,6 +2,9 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.1 (2025-05-16)
+------------------
+
 3.2.0 (2025-04-22)
 ------------------
 * Merge pull request `#76 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/76>`_ from ika-rwth-aachen/feature/sensorinformation-utils

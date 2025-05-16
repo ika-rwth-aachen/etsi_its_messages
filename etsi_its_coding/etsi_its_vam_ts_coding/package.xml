@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_vam_ts_coding</name>
-  <version>3.2.0</version>
+  <version>3.2.1</version>
   <description>C++ compatible C source code for ETSI ITS VAMs (TS) generated from ASN.1 using asn1c</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>

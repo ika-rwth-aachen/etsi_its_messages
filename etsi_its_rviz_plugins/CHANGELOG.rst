@@ -2,6 +2,9 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.1 (2025-05-16)
+------------------
+
 3.2.0 (2025-04-22)
 ------------------
 * Merge branch 'main' into uulm-mcm
