@@ -79,6 +79,17 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
   EXPECT_NEAR(heading_val, cam_access::getHeading(cam), 1e-1);
   EXPECT_NEAR(heading_conf, cam_access::getHeadingConfidence(cam), 1e-1);
 
+  double yaw_rate = randomDouble(-327.65, 327.65);
+  double yaw_rate_conf = randomDouble(0.0, 49.5);
+  std::cerr << "yaw_rate: " << yaw_rate << ", yaw_rate_conf: " << yaw_rate_conf << std::endl;
+  cam_access::setYawRate(cam, yaw_rate, yaw_rate_conf);
+  EXPECT_NEAR(yaw_rate, cam_access::getYawRate(cam), 1e-2);
+  std::array<double, 7> yaw_std_possible_values{0.01, 0.05, 0.1, 1.0, 5.0, 10.0, 100.0};
+  std::for_each(yaw_std_possible_values.begin(), yaw_std_possible_values.end(),
+                [](double& val) { val *= 0.5; });
+  double expected_yaw_rate = *std::lower_bound(yaw_std_possible_values.begin(), yaw_std_possible_values.end(), yaw_rate_conf);
+  EXPECT_NEAR(expected_yaw_rate, cam_access::getYawRateConfidence(cam), 1e-2);
+
   std::array<double, 4> covariance_matrix = {randomDouble(1.0, 100.0), 0.0,
     0.0, randomDouble(1.0, 100.0)};
   // Make y component larger than x component so the ellipse will have its major axis 90° rotated

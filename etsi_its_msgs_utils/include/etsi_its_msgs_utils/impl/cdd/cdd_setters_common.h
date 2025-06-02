@@ -282,7 +282,7 @@ void setHeadingCDD(Heading& heading, const double value, double confidence = std
 template <typename YawRate, typename YawRateValue = decltype(YawRate::yaw_rate_value), typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)>
 inline void setYawRateCDD(YawRate& yaw_rate, const double value,
                                         double confidence = std::numeric_limits<double>::infinity()) {
-  double yaw_rate_in_001_degrees = value;
+  double yaw_rate_in_001_degrees = value * 100.0;
   // limit value range
   if (yaw_rate_in_001_degrees < YawRateValue::MIN) {
     yaw_rate_in_001_degrees = YawRateValue::MIN; // MIN should be NEGATIVE_OUT_OF_RANGE, but CAM only has MIN
@@ -299,13 +299,13 @@ inline void setYawRateCDD(YawRate& yaw_rate, const double value,
     yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
     // How stupid is this?!
     static const std::map<double, uint8_t> confidence_map = {
-        {YawRateConfidence::DEG_SEC_000_01, 0.01},
-        {YawRateConfidence::DEG_SEC_000_05, 0.05},
-        {YawRateConfidence::DEG_SEC_000_10, 0.1},
-        {YawRateConfidence::DEG_SEC_001_00, 1.0},
-        {YawRateConfidence::DEG_SEC_005_00, 5.0},
-        {YawRateConfidence::DEG_SEC_010_00, 10.0},
-        {YawRateConfidence::DEG_SEC_100_00, 100.0},
+        {0.01, YawRateConfidence::DEG_SEC_000_01},
+        {0.05, YawRateConfidence::DEG_SEC_000_05},
+        {0.1, YawRateConfidence::DEG_SEC_000_10},
+        {1.0, YawRateConfidence::DEG_SEC_001_00},
+        {5.0, YawRateConfidence::DEG_SEC_005_00},
+        {10.0, YawRateConfidence::DEG_SEC_010_00},
+        {100.0, YawRateConfidence::DEG_SEC_100_00},
         {std::numeric_limits<double>::infinity(), YawRateConfidence::OUT_OF_RANGE},
     };
     for(const auto& [thresh, conf_val] : confidence_map) {

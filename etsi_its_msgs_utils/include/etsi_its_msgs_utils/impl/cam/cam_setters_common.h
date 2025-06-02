@@ -91,6 +91,14 @@ inline void setHeading(CAM& cam, const double heading_val, const double confiden
              heading_val, confidence);
 }
 
+/**
+ * @brief Set the Yaw Rate for a CAM
+ *
+ * @param cam CAM to set the YawRate
+ * @param yaw_rate_val Yaw rate value in degrees per second as decimal number
+ * @param confidence standard deviation of yaw rate in degrees per second as decimal number (default: infinity, mapping to YawRateConfidence::UNAVAILABLE)
+ */
+
 inline void setYawRate(CAM& cam, const double yaw_rate_val,
                      const double confidence = std::numeric_limits<double>::infinity()) {
   setYawRateCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate,
