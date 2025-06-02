@@ -119,6 +119,14 @@ inline double getHeadingConfidence(const CAM& cam) {
   return getHeadingConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
 }
 
+inline double getYawRate(const CAM& cam) {
+  return getYawRateCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate);
+}
+
+inline double getYawRateConfidence(const CAM& cam) {
+  return getYawRateConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate);
+}
+
 /**
  * @brief Get the Vehicle Length
  *
