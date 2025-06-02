@@ -273,6 +273,51 @@ void setHeadingCDD(Heading& heading, const double value, double confidence = std
 }
 
 /**
+ * @brief Set the Yaw Rate object
+ * 
+ * @param yaw_rate object to set
+ * @param value Yaw rate in degrees per second as decimal number
+ * @param confidence standard deviation of yaw rate in degrees per second as decimal number (default: infinity, mapping to YawRateConfidence::UNAVAILABLE)
+ */
+template <typename YawRate, typename YawRateValue = decltype(YawRate::yaw_rate_value), typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)>
+inline void setYawRateCDD(YawRate& yaw_rate, const double value,
+                                        double confidence = std::numeric_limits<double>::infinity()) {
+  double yaw_rate_in_001_degrees = value;
+  // limit value range
+  if (yaw_rate_in_001_degrees < YawRateValue::MIN) {
+    yaw_rate_in_001_degrees = YawRateValue::MIN; // MIN should be NEGATIVE_OUT_OF_RANGE, but CAM only has MIN
+  } else if (yaw_rate_in_001_degrees > YawRateValue::MAX - 1) {
+    yaw_rate_in_001_degrees = YawRateValue::MAX - 1; // MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX
+  }
+  
+  yaw_rate.yaw_rate_value.value = yaw_rate_in_001_degrees;
+
+  double yaw_rate_std = confidence;
+  if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
+    yaw_rate.yaw_rate_confidence.value = YawRateConfidence::UNAVAILABLE;
+  } else {
+    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+    // How stupid is this?!
+    static const std::map<double, uint8_t> confidence_map = {
+        {YawRateConfidence::DEG_SEC_000_01, 0.01},
+        {YawRateConfidence::DEG_SEC_000_05, 0.05},
+        {YawRateConfidence::DEG_SEC_000_10, 0.1},
+        {YawRateConfidence::DEG_SEC_001_00, 1.0},
+        {YawRateConfidence::DEG_SEC_005_00, 5.0},
+        {YawRateConfidence::DEG_SEC_010_00, 10.0},
+        {YawRateConfidence::DEG_SEC_100_00, 100.0},
+        {std::numeric_limits<double>::infinity(), YawRateConfidence::OUT_OF_RANGE},
+    };
+    for(const auto& [thresh, conf_val] : confidence_map) {
+      if (yaw_rate_std <= thresh) {
+        yaw_rate.yaw_rate_confidence.value = conf_val;
+        break;
+      }
+    }
+  }
+}
+
+/**
  * @brief Set the Semi Axis length
  * 
  * // See https://godbolt.org/z/Eceavfo99 on how the OneCentimeterHelper works with this template

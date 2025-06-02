@@ -91,6 +91,12 @@ inline void setHeading(CAM& cam, const double heading_val, const double confiden
              heading_val, confidence);
 }
 
+inline void setYawRate(CAM& cam, const double yaw_rate_val,
+                     const double confidence = std::numeric_limits<double>::infinity()) {
+  setYawRateCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate,
+                yaw_rate_val, confidence);
+}
+
 /**
  * @brief Set the VehicleWidth object
  *
