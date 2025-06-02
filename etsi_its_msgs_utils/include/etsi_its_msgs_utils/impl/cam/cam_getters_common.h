@@ -119,10 +119,22 @@ inline double getHeadingConfidence(const CAM& cam) {
   return getHeadingConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading);
 }
 
+/**
+ * @brief Get the Yaw Rate of CAM
+ * 
+ * @param cam CAM to get the YawRate from
+ * @return double yaw rate in degrees per second as decimal number
+ */
 inline double getYawRate(const CAM& cam) {
   return getYawRateCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate);
 }
 
+/**
+ * @brief Get the Yaw Rate Confidence of CAM
+ * 
+ * @param cam CAM to get the YawRateConfidence from
+ * @return double yaw rate standard deviation in degrees per second as decimal number
+ */
 inline double getYawRateConfidence(const CAM& cam) {
   return getYawRateConfidenceCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate);
 }
