@@ -200,7 +200,7 @@ namespace access {
  * @param time The value inside the TimeMark message
  * @return Type as time_mark_value_interpretation 
  */
-time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
+inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
   time_mark_value_interpretation type;
 
   if (time == 36001) {
@@ -227,7 +227,7 @@ time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
  * @param nanosec Elapsed nanoseconds since the start of the last full hour (timestamp)
  * @return Time in seconds refered to the given timestamp
  */
-float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
+inline float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
   // calculate elapsed seconds since the start of the last full hour  
   float abs_time_hour = ((int)(seconds)) % 3600 + (float)nanosec * 1e-9;
   float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
@@ -243,7 +243,7 @@ float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds
  * @param nanosec Elapsed nanoseconds since the start of the last full hour (timestamp)
  * @return Decoded String representation of the encoded time
  */
-std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
+inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
 {
   time_mark_value_interpretation time_type = interpretTimeMarkValueType(time);
 
@@ -272,6 +272,6 @@ std::string parseTimeMarkValueToString(const uint16_t time, const int32_t second
   return text_content;
 }
 
-
 } // namespace etsi_its_spatem_ts_msgs
+
 } // namespace access
