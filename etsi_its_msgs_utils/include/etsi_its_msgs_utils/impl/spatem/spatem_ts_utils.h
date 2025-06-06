@@ -37,10 +37,11 @@ namespace etsi_its_spatem_ts_msgs {
 
 namespace access {
 
-  const std::array<float, 4> color_grey {0.5, 0.5, 0.5, 1.0};
-  const std::array<float, 4> color_green {0.18, 0.79, 0.21, 1.0};
-  const std::array<float, 4> color_orange {0.9, 0.7, 0.09, 1.0};
-  const std::array<float, 4> color_red {0.8, 0.2, 0.2, 1.0};
+  static constexpr  std::array<float, 4> COLOR_GREY {0.5, 0.5, 0.5, 1.0};
+  static constexpr  std::array<float, 4> COLOR_GREEN {0.18, 0.79, 0.21, 1.0};
+  static constexpr  std::array<float, 4> COLOR_ORANGE {0.9, 0.7, 0.09, 1.0};
+  static constexpr  std::array<float, 4> COLOR_RED {0.8, 0.2, 0.2, 1.0};
+
   static constexpr int HOUR_IN_SECONDS = 3600;
   static constexpr int HALF_HOUR_IN_SECONDS = 1800;
   static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL; 
@@ -160,38 +161,38 @@ namespace access {
     switch (value) {
 
       case MovementPhaseState::UNAVAILABLE:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
 
       case MovementPhaseState::DARK:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
       case MovementPhaseState::STOP_THEN_PROCEED:
-        color = color_red;
+        color = COLOR_RED;
         break;
       case MovementPhaseState::STOP_AND_REMAIN:
-        color = color_red;
+        color = COLOR_RED;
         break;
       case MovementPhaseState::PRE_MOVEMENT:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
-        color = color_green;
+        color = COLOR_GREEN;
         break;
       case MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
-        color = color_green;
+        color = COLOR_GREEN;
         break;
       case MovementPhaseState::PERMISSIVE_CLEARANCE:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::PROTECTED_CLEARANCE:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       default:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
   }
 
