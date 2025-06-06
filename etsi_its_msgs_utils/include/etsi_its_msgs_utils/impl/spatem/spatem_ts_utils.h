@@ -254,7 +254,7 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   */
 inline float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
   // calculate elapsed seconds since the start of the last full hour  
-  float abs_time_hour = ((int)(seconds)) % 3600 + (float)nanosec * 1e-9;
+  float abs_time_hour = ((int)(seconds)) % HOUR_IN_SECONDS + (float)nanosec * 1e-9;
   float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
 
   // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
