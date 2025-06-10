@@ -63,13 +63,8 @@ WrappedCpmContainer ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertPerceivedObjectContainer.h>
 #include <etsi_its_cpm_ts_conversion/convertPerceptionRegionContainer.h>
 #include <etsi_its_cpm_ts_conversion/convertSensorInformationContainer.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/WrappedCpmContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/wrapped_cpm_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

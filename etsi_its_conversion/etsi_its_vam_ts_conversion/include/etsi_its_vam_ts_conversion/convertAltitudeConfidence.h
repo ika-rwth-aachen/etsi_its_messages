@@ -93,13 +93,8 @@ AltitudeConfidence ::= ENUMERATED {
 
 #include <etsi_its_vam_ts_coding/vam_ts_AltitudeConfidence.h>
 
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/AltitudeConfidence.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/altitude_confidence.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

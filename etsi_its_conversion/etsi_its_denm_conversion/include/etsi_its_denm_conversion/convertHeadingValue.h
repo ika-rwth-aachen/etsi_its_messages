@@ -42,13 +42,8 @@ HeadingValue ::= INTEGER {wgs84North(0), wgs84East(900), wgs84South(1800), wgs84
 #include <etsi_its_denm_coding/denm_HeadingValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/HeadingValue.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/heading_value.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

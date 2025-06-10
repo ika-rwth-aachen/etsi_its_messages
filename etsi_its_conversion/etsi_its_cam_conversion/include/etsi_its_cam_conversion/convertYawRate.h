@@ -45,13 +45,8 @@ YawRate::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_YawRate.h>
 #include <etsi_its_cam_conversion/convertYawRateConfidence.h>
 #include <etsi_its_cam_conversion/convertYawRateValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/YawRate.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/yaw_rate.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

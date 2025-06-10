@@ -70,13 +70,8 @@ AdverseWeatherCondition-VisibilitySubCauseCode ::= INTEGER {
 #include <etsi_its_cam_ts_coding/cam_ts_AdverseWeatherCondition-VisibilitySubCauseCode.h>
 #include <etsi_its_cam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/AdverseWeatherConditionVisibilitySubCauseCode.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/adverse_weather_condition_visibility_sub_cause_code.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

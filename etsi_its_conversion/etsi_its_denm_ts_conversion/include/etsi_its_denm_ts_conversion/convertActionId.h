@@ -57,13 +57,8 @@ ActionId ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_ActionId.h>
 #include <etsi_its_denm_ts_conversion/convertSequenceNumber.h>
 #include <etsi_its_denm_ts_conversion/convertStationId.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ActionId.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/action_id.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

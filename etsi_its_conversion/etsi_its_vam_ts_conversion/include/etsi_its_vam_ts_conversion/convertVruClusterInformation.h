@@ -67,13 +67,8 @@ VruClusterInformation ::= SEQUENCE {
 #include <etsi_its_vam_ts_conversion/convertIdentifier1B.h>
 #include <etsi_its_vam_ts_conversion/convertShape.h>
 #include <etsi_its_vam_ts_conversion/convertVruClusterProfiles.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruClusterInformation.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_cluster_information.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

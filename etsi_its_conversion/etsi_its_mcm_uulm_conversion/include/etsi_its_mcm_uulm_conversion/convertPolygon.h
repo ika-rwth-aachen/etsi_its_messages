@@ -45,15 +45,9 @@ Polygon ::= SEQUENCE SIZE(1..128, ...) OF Waypoint
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_Polygon.h>
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_Waypoint.h>
 #include <etsi_its_mcm_uulm_conversion/convertWaypoint.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/Waypoint.h>
-#include <etsi_its_mcm_uulm_msgs/Polygon.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/waypoint.hpp>
 #include <etsi_its_mcm_uulm_msgs/msg/polygon.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

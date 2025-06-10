@@ -42,13 +42,8 @@ AltitudeValue ::= INTEGER {referenceEllipsoidSurface(0), oneCentimeter(1), unava
 #include <etsi_its_cam_coding/cam_AltitudeValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/AltitudeValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/altitude_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

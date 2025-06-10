@@ -42,13 +42,8 @@ ManeuverID ::= INTEGER (0..65535)
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_ManeuverID.h>
 #include <etsi_its_mcm_uulm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ManeuverID.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/maneuver_id.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

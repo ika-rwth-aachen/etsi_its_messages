@@ -78,13 +78,8 @@ RadialShape ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertCartesianAngleValue.h>
 #include <etsi_its_denm_ts_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength12b.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RadialShape.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/radial_shape.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

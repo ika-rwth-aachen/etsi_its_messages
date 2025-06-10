@@ -42,13 +42,8 @@ SteeringWheelAngleConfidence ::= INTEGER {equalOrWithinOnePointFiveDegree (1), o
 #include <etsi_its_cam_coding/cam_SteeringWheelAngleConfidence.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SteeringWheelAngleConfidence.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/steering_wheel_angle_confidence.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

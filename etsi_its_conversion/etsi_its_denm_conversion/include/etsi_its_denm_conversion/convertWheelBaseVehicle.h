@@ -42,13 +42,8 @@ WheelBaseVehicle ::= INTEGER {tenCentimeters(1), unavailable(127)} (1..127)
 #include <etsi_its_denm_coding/denm_WheelBaseVehicle.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/WheelBaseVehicle.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/wheel_base_vehicle.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

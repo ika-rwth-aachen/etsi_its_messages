@@ -48,15 +48,9 @@ NodeAttributeXYList ::= SEQUENCE (SIZE(1..8)) OF NodeAttributeXY
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeAttributeXYList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeAttributeXY.h>
 #include <etsi_its_mapem_ts_conversion/convertNodeAttributeXY.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeAttributeXY.h>
-#include <etsi_its_mapem_ts_msgs/NodeAttributeXYList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_attribute_xy.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/node_attribute_xy_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

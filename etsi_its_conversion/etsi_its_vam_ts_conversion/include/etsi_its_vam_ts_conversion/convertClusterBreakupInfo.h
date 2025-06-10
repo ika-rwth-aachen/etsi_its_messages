@@ -58,13 +58,8 @@ ClusterBreakupInfo ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_ClusterBreakupInfo.h>
 #include <etsi_its_vam_ts_conversion/convertClusterBreakupReason.h>
 #include <etsi_its_vam_ts_conversion/convertDeltaTimeQuarterSecond.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/ClusterBreakupInfo.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/cluster_breakup_info.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

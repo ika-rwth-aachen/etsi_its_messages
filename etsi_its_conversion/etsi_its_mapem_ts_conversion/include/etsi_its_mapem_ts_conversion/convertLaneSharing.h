@@ -56,13 +56,8 @@ LaneSharing ::= BIT STRING {
 #include <etsi_its_mapem_ts_coding/mapem_ts_LaneSharing.h>
 #include <etsi_its_mapem_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneSharing.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_sharing.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -42,13 +42,8 @@ SteeringWheelAngleValue ::= INTEGER {straight(0), onePointFiveDegreesToRight(-1)
 #include <etsi_its_cam_coding/cam_SteeringWheelAngleValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SteeringWheelAngleValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/steering_wheel_angle_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

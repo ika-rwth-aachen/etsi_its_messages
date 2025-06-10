@@ -48,15 +48,9 @@ RestrictionUserTypeList ::= SEQUENCE (SIZE(1..16)) OF  RestrictionUserType
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionUserTypeList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionUserType.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionUserType.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RestrictionUserType.h>
-#include <etsi_its_mapem_ts_msgs/RestrictionUserTypeList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/restriction_user_type.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/restriction_user_type_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

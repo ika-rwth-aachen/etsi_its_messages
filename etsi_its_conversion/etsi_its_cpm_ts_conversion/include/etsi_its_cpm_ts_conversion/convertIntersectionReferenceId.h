@@ -62,13 +62,8 @@ IntersectionReferenceId ::= SEQUENCE {
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_IntersectionReferenceId.h>
 #include <etsi_its_cpm_ts_conversion/convertIdentifier2B.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/IntersectionReferenceId.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/intersection_reference_id.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

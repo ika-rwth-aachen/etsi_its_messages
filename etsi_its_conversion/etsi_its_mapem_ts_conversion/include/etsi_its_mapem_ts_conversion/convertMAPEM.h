@@ -54,13 +54,8 @@ MAPEM ::= SEQUENCE {
 #include <etsi_its_mapem_ts_coding/mapem_ts_MAPEM.h>
 #include <etsi_its_mapem_ts_conversion/convertItsPduHeader.h>
 #include <etsi_its_mapem_ts_conversion/convertMapData.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/MAPEM.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

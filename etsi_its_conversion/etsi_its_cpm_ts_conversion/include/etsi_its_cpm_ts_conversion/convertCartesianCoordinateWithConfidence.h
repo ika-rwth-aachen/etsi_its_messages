@@ -61,13 +61,8 @@ CartesianCoordinateWithConfidence ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_CartesianCoordinateWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertCartesianCoordinateLarge.h>
 #include <etsi_its_cpm_ts_conversion/convertCoordinateConfidence.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CartesianCoordinateWithConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cartesian_coordinate_with_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

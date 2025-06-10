@@ -45,15 +45,9 @@ Traces ::= SEQUENCE SIZE(1..7) OF PathHistory
 #include <etsi_its_denm_coding/denm_Traces.h>
 #include <etsi_its_denm_coding/denm_PathHistory.h>
 #include <etsi_its_denm_conversion/convertPathHistory.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PathHistory.h>
-#include <etsi_its_denm_msgs/Traces.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/path_history.hpp>
 #include <etsi_its_denm_msgs/msg/traces.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

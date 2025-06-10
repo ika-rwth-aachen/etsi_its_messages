@@ -63,13 +63,8 @@ ImpactReductionContainer ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertTurningRadius.h>
 #include <etsi_its_denm_conversion/convertVehicleMass.h>
 #include <etsi_its_denm_conversion/convertWheelBaseVehicle.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/ImpactReductionContainer.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/impact_reduction_container.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

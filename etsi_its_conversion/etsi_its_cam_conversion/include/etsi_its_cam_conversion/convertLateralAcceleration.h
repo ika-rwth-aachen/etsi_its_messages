@@ -45,13 +45,8 @@ LateralAcceleration ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_LateralAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cam_conversion/convertLateralAccelerationValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/LateralAcceleration.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/lateral_acceleration.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

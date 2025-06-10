@@ -69,13 +69,8 @@ ManagementContainer ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertMessageSegmentationInfo.h>
 #include <etsi_its_cpm_ts_conversion/convertReferencePosition.h>
 #include <etsi_its_cpm_ts_conversion/convertTimestampIts.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/ManagementContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/management_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

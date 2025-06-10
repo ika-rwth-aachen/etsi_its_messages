@@ -63,13 +63,8 @@ CartesianPosition3dWithConfidence::= SEQUENCE{
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_CartesianPosition3dWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertCartesianCoordinateWithConfidence.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CartesianPosition3dWithConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cartesian_position3d_with_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

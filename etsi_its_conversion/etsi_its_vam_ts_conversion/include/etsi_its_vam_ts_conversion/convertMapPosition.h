@@ -67,13 +67,8 @@ MapPosition ::= SEQUENCE {
 #include <etsi_its_vam_ts_conversion/convertIdentifier1B.h>
 #include <etsi_its_vam_ts_conversion/convertLongitudinalLanePosition.h>
 #include <etsi_its_vam_ts_conversion/convertMapReference.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/MapPosition.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/map_position.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

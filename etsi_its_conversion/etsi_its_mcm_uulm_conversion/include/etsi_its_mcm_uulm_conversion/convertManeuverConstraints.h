@@ -47,13 +47,8 @@ ManeuverConstraints ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertLongitudinalManeuverWaypointContainer.h>
 #include <etsi_its_mcm_uulm_conversion/convertManeuverType.h>
 #include <etsi_its_mcm_uulm_conversion/convertPolygon.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ManeuverConstraints.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/maneuver_constraints.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

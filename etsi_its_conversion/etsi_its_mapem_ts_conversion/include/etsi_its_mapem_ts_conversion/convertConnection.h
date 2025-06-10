@@ -54,13 +54,8 @@ Connection ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertLaneConnectionID.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionClassID.h>
 #include <etsi_its_mapem_ts_conversion/convertSignalGroupID.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/Connection.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/connection.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

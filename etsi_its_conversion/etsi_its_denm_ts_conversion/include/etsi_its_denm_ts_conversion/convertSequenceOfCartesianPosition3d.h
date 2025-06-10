@@ -51,15 +51,9 @@ SequenceOfCartesianPosition3d ::= SEQUENCE (SIZE(1..16, ...)) OF CartesianPositi
 #include <etsi_its_denm_ts_coding/denm_ts_SequenceOfCartesianPosition3d.h>
 #include <etsi_its_denm_ts_coding/denm_ts_CartesianPosition3d.h>
 #include <etsi_its_denm_ts_conversion/convertCartesianPosition3d.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CartesianPosition3d.h>
-#include <etsi_its_denm_ts_msgs/SequenceOfCartesianPosition3d.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/cartesian_position3d.hpp>
 #include <etsi_its_denm_ts_msgs/msg/sequence_of_cartesian_position3d.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

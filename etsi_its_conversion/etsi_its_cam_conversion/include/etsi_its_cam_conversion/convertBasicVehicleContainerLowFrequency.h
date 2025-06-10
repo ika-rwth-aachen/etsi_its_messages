@@ -47,13 +47,8 @@ BasicVehicleContainerLowFrequency  ::= SEQUENCE {
 #include <etsi_its_cam_conversion/convertExteriorLights.h>
 #include <etsi_its_cam_conversion/convertPathHistory.h>
 #include <etsi_its_cam_conversion/convertVehicleRole.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/BasicVehicleContainerLowFrequency.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/basic_vehicle_container_low_frequency.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

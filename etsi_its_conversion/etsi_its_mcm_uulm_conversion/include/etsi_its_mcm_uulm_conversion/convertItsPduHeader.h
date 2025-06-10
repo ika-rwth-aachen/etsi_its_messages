@@ -62,13 +62,8 @@ ItsPduHeader ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertMessageId.h>
 #include <etsi_its_mcm_uulm_conversion/convertOrdinalNumber1B.h>
 #include <etsi_its_mcm_uulm_conversion/convertStationId.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ItsPduHeader.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/its_pdu_header.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

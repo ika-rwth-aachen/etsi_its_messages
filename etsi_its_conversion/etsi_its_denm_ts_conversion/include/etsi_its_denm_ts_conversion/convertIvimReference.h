@@ -57,13 +57,8 @@ IvimReference::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_IvimReference.h>
 #include <etsi_its_denm_ts_conversion/convertIviIdentificationNumber.h>
 #include <etsi_its_denm_ts_conversion/convertProvider.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/IvimReference.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/ivim_reference.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

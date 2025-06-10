@@ -53,13 +53,8 @@ MovementState ::= SEQUENCE {
 #include <etsi_its_spatem_ts_conversion/convertManeuverAssistList.h>
 #include <etsi_its_spatem_ts_conversion/convertMovementEventList.h>
 #include <etsi_its_spatem_ts_conversion/convertSignalGroupID.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/MovementState.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/movement_state.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

@@ -53,13 +53,8 @@ DeltaTimeSecond ::= INTEGER  (0..86400)
 #include <etsi_its_denm_ts_coding/denm_ts_DeltaTimeSecond.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/DeltaTimeSecond.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/delta_time_second.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -51,15 +51,9 @@ TracesExtended ::= SEQUENCE SIZE(1..7) OF PathExtended
 #include <etsi_its_denm_ts_coding/denm_ts_TracesExtended.h>
 #include <etsi_its_denm_ts_coding/denm_ts_PathExtended.h>
 #include <etsi_its_denm_ts_conversion/convertPathExtended.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathExtended.h>
-#include <etsi_its_denm_ts_msgs/TracesExtended.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_extended.hpp>
 #include <etsi_its_denm_ts_msgs/msg/traces_extended.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

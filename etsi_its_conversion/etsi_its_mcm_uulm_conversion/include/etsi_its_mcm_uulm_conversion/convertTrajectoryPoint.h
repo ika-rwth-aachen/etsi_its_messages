@@ -47,13 +47,8 @@ TrajectoryPoint ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertHeadingValue.h>
 #include <etsi_its_mcm_uulm_conversion/convertSpeedValue.h>
 #include <etsi_its_mcm_uulm_conversion/convertWaypoint.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/TrajectoryPoint.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/trajectory_point.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

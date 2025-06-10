@@ -42,13 +42,8 @@ SpeedValue ::= INTEGER {standstill(0), oneCentimeterPerSec(1), unavailable(16383
 #include <etsi_its_denm_coding/denm_SpeedValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/SpeedValue.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/speed_value.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

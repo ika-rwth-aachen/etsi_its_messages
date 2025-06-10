@@ -58,13 +58,8 @@ DeltaTimeMilliSecondSigned ::= INTEGER (-2048..2047)
 #include <etsi_its_cpm_ts_coding/cpm_ts_DeltaTimeMilliSecondSigned.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/DeltaTimeMilliSecondSigned.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/delta_time_milli_second_signed.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

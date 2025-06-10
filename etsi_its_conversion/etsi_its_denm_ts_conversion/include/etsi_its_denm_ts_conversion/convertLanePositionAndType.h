@@ -62,13 +62,8 @@ LanePositionAndType::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertDirection.h>
 #include <etsi_its_denm_ts_conversion/convertLanePosition.h>
 #include <etsi_its_denm_ts_conversion/convertLaneType.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/LanePositionAndType.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/lane_position_and_type.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

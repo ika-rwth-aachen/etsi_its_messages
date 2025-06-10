@@ -66,13 +66,8 @@ RoadConfigurationSection ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertMapemConfiguration.h>
 #include <etsi_its_denm_ts_conversion/convertRoadSectionDefinition.h>
 #include <etsi_its_denm_ts_conversion/convertRoadType.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadConfigurationSection.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_configuration_section.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

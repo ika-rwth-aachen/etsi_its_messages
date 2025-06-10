@@ -48,15 +48,9 @@ PreemptPriorityList ::= SEQUENCE (SIZE(1..32)) OF SignalControlZone
 #include <etsi_its_mapem_ts_coding/mapem_ts_PreemptPriorityList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_SignalControlZone.h>
 #include <etsi_its_mapem_ts_conversion/convertSignalControlZone.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/SignalControlZone.h>
-#include <etsi_its_mapem_ts_msgs/PreemptPriorityList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/signal_control_zone.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/preempt_priority_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

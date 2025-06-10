@@ -57,13 +57,8 @@ CartesianAngle ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_CartesianAngle.h>
 #include <etsi_its_denm_ts_conversion/convertAngleConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertCartesianAngleValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CartesianAngle.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/cartesian_angle.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

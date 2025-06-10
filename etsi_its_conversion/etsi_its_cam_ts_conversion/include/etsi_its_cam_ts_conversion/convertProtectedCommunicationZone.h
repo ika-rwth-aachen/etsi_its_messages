@@ -76,13 +76,8 @@ ProtectedCommunicationZone ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertProtectedZoneRadius.h>
 #include <etsi_its_cam_ts_conversion/convertProtectedZoneType.h>
 #include <etsi_its_cam_ts_conversion/convertTimestampIts.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/ProtectedCommunicationZone.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/protected_communication_zone.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

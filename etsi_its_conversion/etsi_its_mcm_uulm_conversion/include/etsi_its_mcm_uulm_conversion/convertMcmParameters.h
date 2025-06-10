@@ -45,13 +45,8 @@ McmParameters ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_McmParameters.h>
 #include <etsi_its_mcm_uulm_conversion/convertBasicContainer.h>
 #include <etsi_its_mcm_uulm_conversion/convertManeuverContainer.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/McmParameters.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/mcm_parameters.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

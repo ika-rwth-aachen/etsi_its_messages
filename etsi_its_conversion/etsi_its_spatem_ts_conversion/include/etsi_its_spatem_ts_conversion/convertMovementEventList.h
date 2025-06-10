@@ -48,15 +48,9 @@ MovementEventList ::= SEQUENCE (SIZE(1..16)) OF MovementEvent
 #include <etsi_its_spatem_ts_coding/spatem_ts_MovementEventList.h>
 #include <etsi_its_spatem_ts_coding/spatem_ts_MovementEvent.h>
 #include <etsi_its_spatem_ts_conversion/convertMovementEvent.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/MovementEvent.h>
-#include <etsi_its_spatem_ts_msgs/MovementEventList.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/movement_event.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/movement_event_list.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

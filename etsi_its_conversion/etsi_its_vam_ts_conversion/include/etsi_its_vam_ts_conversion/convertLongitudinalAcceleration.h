@@ -58,13 +58,8 @@ LongitudinalAcceleration ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_LongitudinalAcceleration.h>
 #include <etsi_its_vam_ts_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_vam_ts_conversion/convertLongitudinalAccelerationValue.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/LongitudinalAcceleration.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/longitudinal_acceleration.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

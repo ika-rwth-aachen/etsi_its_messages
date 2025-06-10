@@ -49,13 +49,8 @@ RoadUserContainer ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertDesiredRoute.h>
 #include <etsi_its_mcm_uulm_conversion/convertPlannedTrajectory.h>
 #include <etsi_its_mcm_uulm_conversion/convertRoadUserState.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/RoadUserContainer.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/road_user_container.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

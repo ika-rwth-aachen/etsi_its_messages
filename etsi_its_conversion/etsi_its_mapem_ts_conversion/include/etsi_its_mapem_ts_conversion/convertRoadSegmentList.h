@@ -48,15 +48,9 @@ RoadSegmentList ::= SEQUENCE (SIZE(1..32)) OF RoadSegment
 #include <etsi_its_mapem_ts_coding/mapem_ts_RoadSegmentList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_RoadSegment.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadSegment.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RoadSegment.h>
-#include <etsi_its_mapem_ts_msgs/RoadSegmentList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/road_segment.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/road_segment_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -53,15 +53,9 @@ TrailerDataSet::= SEQUENCE SIZE(1..8,...) OF TrailerData (WITH COMPONENTS {... ,
 #include <etsi_its_cpm_ts_coding/cpm_ts_TrailerDataSet.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_TrailerData.h>
 #include <etsi_its_cpm_ts_conversion/convertTrailerData.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/TrailerData.h>
-#include <etsi_its_cpm_ts_msgs/TrailerDataSet.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/trailer_data.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/trailer_data_set.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

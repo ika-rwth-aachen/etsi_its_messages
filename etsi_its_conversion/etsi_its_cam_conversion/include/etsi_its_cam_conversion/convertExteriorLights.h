@@ -51,13 +51,8 @@ ExteriorLights ::= BIT STRING {
 #include <etsi_its_cam_coding/cam_ExteriorLights.h>
 #include <etsi_its_cam_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/ExteriorLights.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/exterior_lights.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

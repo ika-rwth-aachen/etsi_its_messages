@@ -58,13 +58,8 @@ NodeOffsetPointXY ::= CHOICE {
 #include <etsi_its_mapem_ts_conversion/convertNodeXY26b.h>
 #include <etsi_its_mapem_ts_conversion/convertNodeXY28b.h>
 #include <etsi_its_mapem_ts_conversion/convertNodeXY32b.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeOffsetPointXY.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_offset_point_xy.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

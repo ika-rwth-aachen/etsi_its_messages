@@ -55,13 +55,8 @@ NodeAttributeSetXY ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertNodeAttributeXYList.h>
 #include <etsi_its_mapem_ts_conversion/convertOffsetB10.h>
 #include <etsi_its_mapem_ts_conversion/convertSegmentAttributeXYList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeAttributeSetXY.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_attribute_set_xy.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

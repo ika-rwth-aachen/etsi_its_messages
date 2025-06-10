@@ -59,13 +59,8 @@ SpeedLimitType ::= ENUMERATED {
 
 #include <etsi_its_mapem_ts_coding/mapem_ts_SpeedLimitType.h>
 
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/SpeedLimitType.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/speed_limit_type.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

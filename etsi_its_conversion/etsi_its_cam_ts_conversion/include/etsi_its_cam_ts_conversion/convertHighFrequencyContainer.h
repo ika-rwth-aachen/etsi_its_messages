@@ -55,13 +55,8 @@ HighFrequencyContainer ::= CHOICE {
 #include <etsi_its_cam_ts_coding/cam_ts_HighFrequencyContainer.h>
 #include <etsi_its_cam_ts_conversion/convertBasicVehicleContainerHighFrequency.h>
 #include <etsi_its_cam_ts_conversion/convertRSUContainerHighFrequency.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/HighFrequencyContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/high_frequency_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

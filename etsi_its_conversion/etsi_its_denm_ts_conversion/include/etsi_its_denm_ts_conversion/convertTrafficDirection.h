@@ -60,13 +60,8 @@ python3 \
 
 #include <etsi_its_denm_ts_coding/denm_ts_TrafficDirection.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/TrafficDirection.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/traffic_direction.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -87,13 +87,8 @@ TrailerData ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_ts_conversion/convertStandardLength1B.h>
 #include <etsi_its_cpm_ts_conversion/convertVehicleWidth.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/TrailerData.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/trailer_data.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

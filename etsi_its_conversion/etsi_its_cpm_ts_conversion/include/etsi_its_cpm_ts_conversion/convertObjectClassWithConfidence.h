@@ -61,13 +61,8 @@ ObjectClassWithConfidence ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_ObjectClassWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertConfidenceLevel.h>
 #include <etsi_its_cpm_ts_conversion/convertObjectClass.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/ObjectClassWithConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/object_class_with_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

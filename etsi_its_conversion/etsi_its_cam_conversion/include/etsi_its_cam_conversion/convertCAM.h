@@ -45,13 +45,8 @@ CAM ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_CAM.h>
 #include <etsi_its_cam_conversion/convertCoopAwareness.h>
 #include <etsi_its_cam_conversion/convertItsPduHeader.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/CAM.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/cam.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

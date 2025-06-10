@@ -52,15 +52,9 @@ MapemConnectionList ::=  SEQUENCE (SIZE(1..8,...)) OF Identifier1B
 #include <etsi_its_denm_ts_coding/denm_ts_MapemConnectionList.h>
 #include <etsi_its_denm_ts_coding/denm_ts_Identifier1B.h>
 #include <etsi_its_denm_ts_conversion/convertIdentifier1B.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Identifier1B.h>
-#include <etsi_its_denm_ts_msgs/MapemConnectionList.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/identifier1_b.hpp>
 #include <etsi_its_denm_ts_msgs/msg/mapem_connection_list.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

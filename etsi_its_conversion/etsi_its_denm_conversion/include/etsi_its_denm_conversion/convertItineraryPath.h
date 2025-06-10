@@ -45,15 +45,9 @@ ItineraryPath ::= SEQUENCE SIZE(1..40) OF ReferencePosition
 #include <etsi_its_denm_coding/denm_ItineraryPath.h>
 #include <etsi_its_denm_coding/denm_ReferencePosition.h>
 #include <etsi_its_denm_conversion/convertReferencePosition.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/ReferencePosition.h>
-#include <etsi_its_denm_msgs/ItineraryPath.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/reference_position.hpp>
 #include <etsi_its_denm_msgs/msg/itinerary_path.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

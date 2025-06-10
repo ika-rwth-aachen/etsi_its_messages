@@ -65,13 +65,8 @@ python3 \
 #include <etsi_its_vam_ts_conversion/convertVruHighFrequencyContainer.h>
 #include <etsi_its_vam_ts_conversion/convertVruLowFrequencyContainer.h>
 #include <etsi_its_vam_ts_conversion/convertVruMotionPredictionContainer.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VamParameters.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vam_parameters.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

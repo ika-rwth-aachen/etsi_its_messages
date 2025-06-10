@@ -41,13 +41,8 @@ StationarySince ::= ENUMERATED {lessThan1Minute(0), lessThan2Minutes(1), lessTha
 
 #include <etsi_its_denm_coding/denm_StationarySince.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_msgs/StationarySince.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/stationary_since.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

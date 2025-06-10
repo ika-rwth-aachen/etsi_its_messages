@@ -49,13 +49,8 @@ StandardLength9b::= INTEGER (0..511)
 #include <etsi_its_denm_ts_coding/denm_ts_StandardLength9b.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/StandardLength9b.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/standard_length9b.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -42,13 +42,8 @@ ProtectedZoneID ::= INTEGER (0.. 134217727)
 #include <etsi_its_cam_coding/cam_ProtectedZoneID.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/ProtectedZoneID.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/protected_zone_id.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

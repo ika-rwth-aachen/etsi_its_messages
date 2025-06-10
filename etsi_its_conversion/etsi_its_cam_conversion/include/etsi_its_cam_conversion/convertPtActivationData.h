@@ -42,13 +42,8 @@ PtActivationData ::= OCTET STRING (SIZE(1..20))
 #include <etsi_its_cam_coding/cam_PtActivationData.h>
 #include <etsi_its_cam_coding/OCTET_STRING.h>
 #include <etsi_its_primitives_conversion/convertOCTET_STRING.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PtActivationData.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/pt_activation_data.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

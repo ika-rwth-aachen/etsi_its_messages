@@ -42,13 +42,8 @@ PtActivationType ::= INTEGER {undefinedCodingType(0), r09-16CodingType(1), vdv-5
 #include <etsi_its_cam_coding/cam_PtActivationType.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PtActivationType.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/pt_activation_type.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

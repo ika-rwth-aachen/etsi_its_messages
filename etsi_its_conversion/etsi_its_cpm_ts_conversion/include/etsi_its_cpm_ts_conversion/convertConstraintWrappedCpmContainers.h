@@ -48,13 +48,8 @@ ConstraintWrappedCpmContainers ::= WrappedCpmContainers
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_ConstraintWrappedCpmContainers.h>
 #include <etsi_its_cpm_ts_conversion/convertWrappedCpmContainers.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/ConstraintWrappedCpmContainers.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/constraint_wrapped_cpm_containers.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

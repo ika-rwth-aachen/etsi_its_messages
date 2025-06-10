@@ -42,13 +42,8 @@ VehicleWidth ::= INTEGER {tenCentimeters(1), outOfRange(61), unavailable(62)} (1
 #include <etsi_its_cam_coding/cam_VehicleWidth.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/VehicleWidth.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/vehicle_width.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

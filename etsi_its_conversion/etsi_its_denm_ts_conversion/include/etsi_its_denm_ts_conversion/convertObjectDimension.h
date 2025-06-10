@@ -57,13 +57,8 @@ ObjectDimension ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_ObjectDimension.h>
 #include <etsi_its_denm_ts_conversion/convertObjectDimensionConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertObjectDimensionValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ObjectDimension.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/object_dimension.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

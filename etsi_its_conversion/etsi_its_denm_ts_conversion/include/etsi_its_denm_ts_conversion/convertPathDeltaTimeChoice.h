@@ -58,13 +58,8 @@ PathDeltaTimeChoice::= CHOICE {
 #include <etsi_its_denm_ts_coding/denm_ts_PathDeltaTimeChoice.h>
 #include <etsi_its_denm_ts_conversion/convertDeltaTimeTenSeconds.h>
 #include <etsi_its_denm_ts_conversion/convertDeltaTimeTenthOfSecond.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathDeltaTimeChoice.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_delta_time_choice.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

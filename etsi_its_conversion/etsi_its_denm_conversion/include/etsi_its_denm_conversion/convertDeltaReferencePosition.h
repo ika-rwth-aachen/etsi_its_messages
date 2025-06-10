@@ -47,13 +47,8 @@ DeltaReferencePosition ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertDeltaAltitude.h>
 #include <etsi_its_denm_conversion/convertDeltaLatitude.h>
 #include <etsi_its_denm_conversion/convertDeltaLongitude.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DeltaReferencePosition.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/delta_reference_position.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

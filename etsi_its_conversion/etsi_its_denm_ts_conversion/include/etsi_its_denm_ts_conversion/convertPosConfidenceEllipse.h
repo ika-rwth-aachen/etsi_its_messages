@@ -67,13 +67,8 @@ PosConfidenceEllipse ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_PosConfidenceEllipse.h>
 #include <etsi_its_denm_ts_conversion/convertHeadingValue.h>
 #include <etsi_its_denm_ts_conversion/convertSemiAxisLength.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PosConfidenceEllipse.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/pos_confidence_ellipse.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -74,13 +74,8 @@ SensorInformation ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertIdentifier1B.h>
 #include <etsi_its_cpm_ts_conversion/convertSensorType.h>
 #include <etsi_its_cpm_ts_conversion/convertShape.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/SensorInformation.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/sensor_information.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

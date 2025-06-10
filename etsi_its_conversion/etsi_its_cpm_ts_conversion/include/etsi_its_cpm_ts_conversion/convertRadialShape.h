@@ -89,13 +89,8 @@ RadialShape ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_ts_conversion/convertStandardLength12b.h>
 #include <etsi_its_cpm_ts_conversion/convertWgs84AngleValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/RadialShape.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/radial_shape.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

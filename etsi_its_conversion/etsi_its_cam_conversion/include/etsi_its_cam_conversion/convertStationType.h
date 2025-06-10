@@ -43,13 +43,8 @@ lightTruck(7), heavyTruck(8), trailer(9), specialVehicles(10), tram(11), roadSid
 #include <etsi_its_cam_coding/cam_StationType.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/StationType.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/station_type.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

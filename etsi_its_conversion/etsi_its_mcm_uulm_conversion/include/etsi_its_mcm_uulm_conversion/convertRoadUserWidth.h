@@ -46,13 +46,8 @@ RoadUserWidth ::= INTEGER {
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_RoadUserWidth.h>
 #include <etsi_its_mcm_uulm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/RoadUserWidth.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/road_user_width.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

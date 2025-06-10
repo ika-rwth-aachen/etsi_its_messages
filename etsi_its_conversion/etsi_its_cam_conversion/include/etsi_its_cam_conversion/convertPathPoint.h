@@ -45,13 +45,8 @@ PathPoint ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_PathPoint.h>
 #include <etsi_its_cam_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_cam_conversion/convertPathDeltaTime.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PathPoint.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/path_point.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

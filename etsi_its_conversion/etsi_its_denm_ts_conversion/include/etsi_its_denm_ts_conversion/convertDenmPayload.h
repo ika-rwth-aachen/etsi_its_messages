@@ -63,13 +63,8 @@ DenmPayload ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertLocationContainer.h>
 #include <etsi_its_denm_ts_conversion/convertManagementContainer.h>
 #include <etsi_its_denm_ts_conversion/convertSituationContainer.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/DenmPayload.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/denm_payload.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

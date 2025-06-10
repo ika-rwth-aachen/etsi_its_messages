@@ -62,13 +62,8 @@ MetaInformation::=SEQUENCE{
 #include <etsi_its_denm_ts_conversion/convertConfidenceLevel.h>
 #include <etsi_its_denm_ts_conversion/convertSensorTypes.h>
 #include <etsi_its_denm_ts_conversion/convertStoredInformationType.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/MetaInformation.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/meta_information.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -75,13 +75,8 @@ SpecialVehicleContainer ::= CHOICE {
 #include <etsi_its_cam_ts_conversion/convertRoadWorksContainerBasic.h>
 #include <etsi_its_cam_ts_conversion/convertSafetyCarContainer.h>
 #include <etsi_its_cam_ts_conversion/convertSpecialTransportContainer.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/SpecialVehicleContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/special_vehicle_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

@@ -42,13 +42,8 @@ YawRateValue ::= INTEGER {straight(0), degSec-000-01ToRight(-1), degSec-000-01To
 #include <etsi_its_cam_coding/cam_YawRateValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/YawRateValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/yaw_rate_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

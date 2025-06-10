@@ -59,13 +59,8 @@ RoadSegment ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertRoadLaneSetList.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadSegmentReferenceID.h>
 #include <etsi_its_mapem_ts_conversion/convertSpeedLimitList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RoadSegment.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/road_segment.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

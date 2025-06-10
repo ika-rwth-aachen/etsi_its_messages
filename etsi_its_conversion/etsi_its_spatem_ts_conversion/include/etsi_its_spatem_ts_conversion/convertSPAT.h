@@ -51,13 +51,8 @@ SPAT ::= SEQUENCE {
 #include <etsi_its_spatem_ts_conversion/convertDescriptiveName.h>
 #include <etsi_its_spatem_ts_conversion/convertIntersectionStateList.h>
 #include <etsi_its_spatem_ts_conversion/convertMinuteOfTheYear.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/SPAT.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/spat.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

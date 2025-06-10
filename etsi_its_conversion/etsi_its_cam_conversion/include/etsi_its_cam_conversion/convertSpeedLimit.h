@@ -42,13 +42,8 @@ SpeedLimit ::= INTEGER {oneKmPerHour(1)} (1..255)
 #include <etsi_its_cam_coding/cam_SpeedLimit.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SpeedLimit.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/speed_limit.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

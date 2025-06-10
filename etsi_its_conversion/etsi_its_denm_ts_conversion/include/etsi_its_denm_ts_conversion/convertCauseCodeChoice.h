@@ -246,13 +246,8 @@ CauseCodeChoice::= CHOICE {
 #include <etsi_its_denm_ts_conversion/convertTrafficConditionSubCauseCode.h>
 #include <etsi_its_denm_ts_conversion/convertVehicleBreakdownSubCauseCode.h>
 #include <etsi_its_denm_ts_conversion/convertWrongWayDrivingSubCauseCode.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CauseCodeChoice.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/cause_code_choice.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

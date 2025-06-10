@@ -49,13 +49,8 @@ StationId ::= INTEGER(0..4294967295)
 #include <etsi_its_vam_ts_coding/vam_ts_StationId.h>
 #include <etsi_its_vam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/StationId.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/station_id.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

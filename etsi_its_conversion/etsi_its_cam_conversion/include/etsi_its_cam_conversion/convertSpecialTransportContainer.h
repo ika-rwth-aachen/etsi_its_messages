@@ -45,13 +45,8 @@ SpecialTransportContainer ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_SpecialTransportContainer.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_conversion/convertSpecialTransportType.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SpecialTransportContainer.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/special_transport_container.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

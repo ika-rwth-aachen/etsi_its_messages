@@ -50,13 +50,8 @@ AdvisorySpeedType ::= ENUMERATED {
 
 #include <etsi_its_spatem_ts_coding/spatem_ts_AdvisorySpeedType.h>
 
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/AdvisorySpeedType.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/advisory_speed_type.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

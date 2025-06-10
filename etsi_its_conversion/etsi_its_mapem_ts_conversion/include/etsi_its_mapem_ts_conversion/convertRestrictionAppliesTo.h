@@ -60,13 +60,8 @@ RestrictionAppliesTo ::= ENUMERATED {
 
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionAppliesTo.h>
 
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RestrictionAppliesTo.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/restriction_applies_to.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

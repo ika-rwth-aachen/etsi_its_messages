@@ -41,13 +41,8 @@ RelevanceTrafficDirection ::= ENUMERATED {allTrafficDirections(0), upstreamTraff
 
 #include <etsi_its_denm_coding/denm_RelevanceTrafficDirection.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_msgs/RelevanceTrafficDirection.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/relevance_traffic_direction.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

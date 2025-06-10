@@ -51,13 +51,8 @@ python3 \
 
 #include <etsi_its_vam_ts_coding/vam_ts_ItsPduHeaderVam.h>
 #include <etsi_its_vam_ts_conversion/convertItsPduHeader.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/ItsPduHeaderVam.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/its_pdu_header_vam.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

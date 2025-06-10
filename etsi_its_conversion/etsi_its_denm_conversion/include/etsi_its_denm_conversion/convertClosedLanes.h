@@ -47,13 +47,8 @@ ClosedLanes ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_ClosedLanes.h>
 #include <etsi_its_denm_conversion/convertDrivingLaneStatus.h>
 #include <etsi_its_denm_conversion/convertHardShoulderStatus.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/ClosedLanes.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/closed_lanes.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

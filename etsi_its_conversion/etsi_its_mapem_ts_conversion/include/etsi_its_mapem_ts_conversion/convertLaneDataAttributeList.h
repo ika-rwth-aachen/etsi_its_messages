@@ -48,15 +48,9 @@ LaneDataAttributeList ::= SEQUENCE (SIZE(1..8)) OF LaneDataAttribute
 #include <etsi_its_mapem_ts_coding/mapem_ts_LaneDataAttributeList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_LaneDataAttribute.h>
 #include <etsi_its_mapem_ts_conversion/convertLaneDataAttribute.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneDataAttribute.h>
-#include <etsi_its_mapem_ts_msgs/LaneDataAttributeList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_data_attribute.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/lane_data_attribute_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -42,13 +42,8 @@ DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
 #include <etsi_its_cam_coding/cam_DrivingLaneStatus.h>
 #include <etsi_its_cam_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/DrivingLaneStatus.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/driving_lane_status.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

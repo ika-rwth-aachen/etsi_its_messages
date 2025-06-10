@@ -67,13 +67,8 @@ RadialShapes ::= SEQUENCE {
 #include <etsi_its_vam_ts_conversion/convertCartesianCoordinateSmall.h>
 #include <etsi_its_vam_ts_conversion/convertIdentifier1B.h>
 #include <etsi_its_vam_ts_conversion/convertRadialShapesList.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/RadialShapes.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/radial_shapes.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

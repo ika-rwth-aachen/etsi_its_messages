@@ -51,15 +51,9 @@ MapemConfiguration::= SEQUENCE(SIZE(1..16,...)) OF MapemElementReference
 #include <etsi_its_denm_ts_coding/denm_ts_MapemConfiguration.h>
 #include <etsi_its_denm_ts_coding/denm_ts_MapemElementReference.h>
 #include <etsi_its_denm_ts_conversion/convertMapemElementReference.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/MapemElementReference.h>
-#include <etsi_its_denm_ts_msgs/MapemConfiguration.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/mapem_element_reference.hpp>
 #include <etsi_its_denm_ts_msgs/msg/mapem_configuration.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

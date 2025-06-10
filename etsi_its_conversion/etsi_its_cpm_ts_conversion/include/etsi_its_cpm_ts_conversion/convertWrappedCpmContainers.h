@@ -52,15 +52,9 @@ WrappedCpmContainers::= SEQUENCE SIZE(1..8,...) OF WrappedCpmContainer
 #include <etsi_its_cpm_ts_coding/cpm_ts_WrappedCpmContainers.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_WrappedCpmContainer.h>
 #include <etsi_its_cpm_ts_conversion/convertWrappedCpmContainer.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/WrappedCpmContainer.h>
-#include <etsi_its_cpm_ts_msgs/WrappedCpmContainers.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/wrapped_cpm_container.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/wrapped_cpm_containers.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

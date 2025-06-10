@@ -51,13 +51,8 @@ RoadUserState ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertRoadUserType.h>
 #include <etsi_its_mcm_uulm_conversion/convertRoadUserWidth.h>
 #include <etsi_its_mcm_uulm_conversion/convertSpeedValue.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/RoadUserState.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/road_user_state.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

@@ -45,15 +45,9 @@ ProtectedCommunicationZonesRSU ::= SEQUENCE (SIZE(1..16)) OF ProtectedCommunicat
 #include <etsi_its_cam_coding/cam_ProtectedCommunicationZonesRSU.h>
 #include <etsi_its_cam_coding/cam_ProtectedCommunicationZone.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZone.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/ProtectedCommunicationZone.h>
-#include <etsi_its_cam_msgs/ProtectedCommunicationZonesRSU.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/protected_communication_zone.hpp>
 #include <etsi_its_cam_msgs/msg/protected_communication_zones_rsu.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

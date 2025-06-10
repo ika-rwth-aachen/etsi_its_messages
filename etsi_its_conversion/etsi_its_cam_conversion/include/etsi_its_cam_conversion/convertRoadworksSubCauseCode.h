@@ -42,13 +42,8 @@ RoadworksSubCauseCode ::= INTEGER {unavailable(0), majorRoadworks(1), roadMarkin
 #include <etsi_its_cam_coding/cam_RoadworksSubCauseCode.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/RoadworksSubCauseCode.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/roadworks_sub_cause_code.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

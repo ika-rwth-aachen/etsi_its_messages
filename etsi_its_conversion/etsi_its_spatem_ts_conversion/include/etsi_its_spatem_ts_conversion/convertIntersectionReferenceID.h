@@ -48,13 +48,8 @@ IntersectionReferenceID ::= SEQUENCE {
 #include <etsi_its_spatem_ts_coding/spatem_ts_IntersectionReferenceID.h>
 #include <etsi_its_spatem_ts_conversion/convertIntersectionID.h>
 #include <etsi_its_spatem_ts_conversion/convertRoadRegulatorID.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/IntersectionReferenceID.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/intersection_reference_id.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {
