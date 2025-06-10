@@ -3,7 +3,7 @@
 
   <name>etsi_its_rviz_plugins</name>
   <version>3.2.1</version>
-  <description>RViz plugin for ROS 2 messages based on ETSI ITS messages</description>
+  <description>RViz plugins for etsi_its_messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
   <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
@@ -15,42 +15,35 @@
 
   <license>MIT</license>
 
-  <depend>ros_environment</depend>
-
-  <!-- ROS 2 -->
-  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
-  <build_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">qtbase5-dev</build_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</build_export_depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_cam_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_cpm_ts_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_denm_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_mapem_ts_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_spatem_ts_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">etsi_its_msgs_utils</depend>
-  <depend condition="$ROS_VERSION == 2">pluginlib</depend>
-  <depend condition="$ROS_VERSION == 2">python3-pyproj</depend>
-  <depend condition="$ROS_VERSION == 2">rclcpp</depend>
-  <depend condition="$ROS_VERSION == 2">rviz_common</depend>
-  <depend condition="$ROS_VERSION == 2">rviz_default_plugins</depend>
-  <depend condition="$ROS_VERSION == 2">rviz_rendering</depend>
-  <depend condition="$ROS_VERSION == 2">tf2_geometry_msgs</depend>
-  <depend condition="$ROS_VERSION == 2">tf2_ros</depend>
-  <depend condition="$ROS_VERSION == 2">tf2</depend>
-  <exec_depend condition="$ROS_VERSION == 2">libqt5-core</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">libqt5-gui</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">libqt5-opengl</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">libqt5-widgets</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">rviz_ogre_vendor</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">rviz_satellite</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">rviz2</exec_depend>
-
-  <!-- ROS -->
-  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rviz_ogre_vendor</build_depend>
+  <build_depend>qtbase5-dev</build_depend>
+  <build_export_depend>rviz_ogre_vendor</build_export_depend>
+  <depend>etsi_its_cam_msgs</depend>
+  <depend>etsi_its_cpm_ts_msgs</depend>
+  <depend>etsi_its_denm_msgs</depend>
+  <depend>etsi_its_mapem_ts_msgs</depend>
+  <depend>etsi_its_spatem_ts_msgs</depend>
+  <depend>etsi_its_msgs_utils</depend>
+  <depend>pluginlib</depend>
+  <depend>python3-pyproj</depend>
+  <depend>rclcpp</depend>
+  <depend>rviz_common</depend>
+  <depend>rviz_default_plugins</depend>
+  <depend>rviz_rendering</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2</depend>
+  <exec_depend>libqt5-core</exec_depend>
+  <exec_depend>libqt5-gui</exec_depend>
+  <exec_depend>libqt5-opengl</exec_depend>
+  <exec_depend>libqt5-widgets</exec_depend>
+  <exec_depend>rviz_ogre_vendor</exec_depend>
+  <exec_depend>rviz_satellite</exec_depend>
+  <exec_depend>rviz2</exec_depend>
 
   <export>
-    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
-    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 
 </package>

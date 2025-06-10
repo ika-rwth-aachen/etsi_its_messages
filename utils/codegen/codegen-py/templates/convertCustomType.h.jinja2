@@ -42,13 +42,8 @@ SOFTWARE.
 {% for member in members -%}
 #include <etsi_its_{{etsi_type}}_conversion/convert{{member.ros_msg_type}}.h>
 {% endfor -%}
-#ifdef ROS1
-#include <etsi_its_{{etsi_type}}_msgs/{{ros_msg_type}}.h>
-namespace {{etsi_type}}_msgs = etsi_its_{{etsi_type}}_msgs;
-#else
 #include <etsi_its_{{etsi_type}}_msgs/msg/{{ros2_msg_type_file_name}}.hpp>
 namespace {{etsi_type}}_msgs = etsi_its_{{etsi_type}}_msgs::msg;
-#endif
 
 
 namespace etsi_its_{{etsi_type}}_conversion {
