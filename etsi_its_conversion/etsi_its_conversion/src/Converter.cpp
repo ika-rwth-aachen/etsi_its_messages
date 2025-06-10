@@ -101,6 +101,8 @@ Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", opt
 
 void Converter::loadParameters() {
 
+  rcl_interfaces::msg::ParameterDescriptor param_desc;
+
   // load has_btp_destination_port
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   param_desc.description = "whether incoming/outgoing UDP messages include a 4-byte BTP header";
