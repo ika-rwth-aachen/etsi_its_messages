@@ -42,13 +42,8 @@ VehicleLengthValue ::= INTEGER {tenCentimeters(1), outOfRange(1022), unavailable
 #include <etsi_its_cam_coding/cam_VehicleLengthValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/VehicleLengthValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/vehicle_length_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

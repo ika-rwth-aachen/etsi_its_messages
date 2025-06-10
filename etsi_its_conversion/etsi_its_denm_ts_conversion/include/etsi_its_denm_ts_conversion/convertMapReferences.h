@@ -51,15 +51,9 @@ MapReferences::= SEQUENCE (SIZE(1..8,...)) OF MapReference
 #include <etsi_its_denm_ts_coding/denm_ts_MapReferences.h>
 #include <etsi_its_denm_ts_coding/denm_ts_MapReference.h>
 #include <etsi_its_denm_ts_conversion/convertMapReference.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/MapReference.h>
-#include <etsi_its_denm_ts_msgs/MapReferences.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/map_reference.hpp>
 #include <etsi_its_denm_ts_msgs/msg/map_references.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

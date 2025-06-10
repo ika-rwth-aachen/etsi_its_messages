@@ -50,13 +50,8 @@ CpmContainerId ::= INTEGER (1..16)
 #include <etsi_its_cpm_ts_coding/cpm_ts_CpmContainerId.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CpmContainerId.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cpm_container_id.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

@@ -104,13 +104,8 @@ python3 \
 #include <etsi_its_vam_ts_conversion/convertVruMovementControl.h>
 #include <etsi_its_vam_ts_conversion/convertWgs84Angle.h>
 #include <etsi_its_vam_ts_conversion/convertYawRate.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruHighFrequencyContainer.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_high_frequency_container.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

@@ -66,13 +66,8 @@ PathPredicted2::= SEQUENCE{
 #include <etsi_its_denm_ts_conversion/convertConfidenceLevel.h>
 #include <etsi_its_denm_ts_conversion/convertPathPredicted.h>
 #include <etsi_its_denm_ts_conversion/convertUsageIndication.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathPredicted2.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_predicted2.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

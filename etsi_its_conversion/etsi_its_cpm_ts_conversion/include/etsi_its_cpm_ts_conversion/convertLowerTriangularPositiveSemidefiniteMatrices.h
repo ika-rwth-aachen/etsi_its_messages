@@ -55,15 +55,9 @@ LowerTriangularPositiveSemidefiniteMatrices::= SEQUENCE SIZE (1..4) OF LowerTria
 #include <etsi_its_cpm_ts_coding/cpm_ts_LowerTriangularPositiveSemidefiniteMatrices.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_LowerTriangularPositiveSemidefiniteMatrix.h>
 #include <etsi_its_cpm_ts_conversion/convertLowerTriangularPositiveSemidefiniteMatrix.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrix.h>
-#include <etsi_its_cpm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrices.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrix.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrices.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

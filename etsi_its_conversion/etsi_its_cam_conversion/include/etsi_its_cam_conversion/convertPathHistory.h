@@ -45,15 +45,9 @@ PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
 #include <etsi_its_cam_coding/cam_PathHistory.h>
 #include <etsi_its_cam_coding/cam_PathPoint.h>
 #include <etsi_its_cam_conversion/convertPathPoint.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PathPoint.h>
-#include <etsi_its_cam_msgs/PathHistory.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/path_point.hpp>
 #include <etsi_its_cam_msgs/msg/path_history.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

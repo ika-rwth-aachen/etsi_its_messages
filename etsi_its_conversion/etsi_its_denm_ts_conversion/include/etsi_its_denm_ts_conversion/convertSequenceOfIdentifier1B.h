@@ -51,15 +51,9 @@ SequenceOfIdentifier1B ::= SEQUENCE SIZE(1..128, ...) OF Identifier1B
 #include <etsi_its_denm_ts_coding/denm_ts_SequenceOfIdentifier1B.h>
 #include <etsi_its_denm_ts_coding/denm_ts_Identifier1B.h>
 #include <etsi_its_denm_ts_conversion/convertIdentifier1B.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Identifier1B.h>
-#include <etsi_its_denm_ts_msgs/SequenceOfIdentifier1B.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/identifier1_b.hpp>
 #include <etsi_its_denm_ts_msgs/msg/sequence_of_identifier1_b.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -51,15 +51,9 @@ Traces ::= SEQUENCE SIZE(1..7) OF Path
 #include <etsi_its_denm_ts_coding/denm_ts_Traces.h>
 #include <etsi_its_denm_ts_coding/denm_ts_Path.h>
 #include <etsi_its_denm_ts_conversion/convertPath.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Path.h>
-#include <etsi_its_denm_ts_msgs/Traces.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path.hpp>
 #include <etsi_its_denm_ts_msgs/msg/traces.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

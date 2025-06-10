@@ -41,13 +41,8 @@ CurvatureCalculationMode ::= ENUMERATED {yawRateUsed(0), yawRateNotUsed(1), unav
 
 #include <etsi_its_cam_coding/cam_CurvatureCalculationMode.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/CurvatureCalculationMode.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/curvature_calculation_mode.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

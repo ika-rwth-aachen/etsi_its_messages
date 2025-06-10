@@ -41,13 +41,8 @@ ManeuverResponse ::= ENUMERATED {accept(0), reject(1), pending(2)}
 
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_ManeuverResponse.h>
 
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ManeuverResponse.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/maneuver_response.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

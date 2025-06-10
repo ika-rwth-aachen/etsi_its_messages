@@ -52,15 +52,9 @@ GeneralizedLanePositions ::= SEQUENCE (SIZE(1..4)) OF GeneralizedLanePosition
 #include <etsi_its_denm_ts_coding/denm_ts_GeneralizedLanePositions.h>
 #include <etsi_its_denm_ts_coding/denm_ts_GeneralizedLanePosition.h>
 #include <etsi_its_denm_ts_conversion/convertGeneralizedLanePosition.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/GeneralizedLanePosition.h>
-#include <etsi_its_denm_ts_msgs/GeneralizedLanePositions.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/generalized_lane_position.hpp>
 #include <etsi_its_denm_ts_msgs/msg/generalized_lane_positions.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

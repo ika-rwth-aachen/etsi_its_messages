@@ -59,13 +59,8 @@ TurningRadius ::= INTEGER {
 #include <etsi_its_denm_ts_coding/denm_ts_TurningRadius.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/TurningRadius.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/turning_radius.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

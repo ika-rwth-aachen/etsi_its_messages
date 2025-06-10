@@ -42,13 +42,8 @@ SpeedValue ::= INTEGER {standstill(0), oneCentimeterPerSec(1), unavailable(16383
 #include <etsi_its_cam_coding/cam_SpeedValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SpeedValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/speed_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

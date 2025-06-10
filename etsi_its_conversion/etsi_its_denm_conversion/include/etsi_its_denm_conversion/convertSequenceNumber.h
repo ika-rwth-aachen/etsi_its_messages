@@ -42,13 +42,8 @@ SequenceNumber ::=  INTEGER (0..65535)
 #include <etsi_its_denm_coding/denm_SequenceNumber.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/SequenceNumber.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/sequence_number.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

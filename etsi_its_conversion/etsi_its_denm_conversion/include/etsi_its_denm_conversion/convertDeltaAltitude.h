@@ -42,13 +42,8 @@ DeltaAltitude ::= INTEGER {oneCentimeterUp (1), oneCentimeterDown (-1), unavaila
 #include <etsi_its_denm_coding/denm_DeltaAltitude.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DeltaAltitude.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/delta_altitude.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

@@ -52,15 +52,9 @@ PerceptionRegionContainer ::= SEQUENCE SIZE(1..256, ...) OF PerceptionRegion
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceptionRegionContainer.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceptionRegion.h>
 #include <etsi_its_cpm_ts_conversion/convertPerceptionRegion.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/PerceptionRegion.h>
-#include <etsi_its_cpm_ts_msgs/PerceptionRegionContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/perception_region.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/perception_region_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

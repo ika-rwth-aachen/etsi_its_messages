@@ -43,13 +43,8 @@ python3 \
 
 #include <etsi_its_cam_coding/cam_DangerousGoodsContainer.h>
 #include <etsi_its_cam_conversion/convertDangerousGoodsBasic.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/DangerousGoodsContainer.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/dangerous_goods_container.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

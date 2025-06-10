@@ -45,13 +45,8 @@ Heading ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_Heading.h>
 #include <etsi_its_denm_conversion/convertHeadingConfidence.h>
 #include <etsi_its_denm_conversion/convertHeadingValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/Heading.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/heading.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

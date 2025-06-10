@@ -62,13 +62,8 @@ SafetyCarContainer ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_ts_conversion/convertSpeedLimit.h>
 #include <etsi_its_cam_ts_conversion/convertTrafficRule.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/SafetyCarContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/safety_car_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

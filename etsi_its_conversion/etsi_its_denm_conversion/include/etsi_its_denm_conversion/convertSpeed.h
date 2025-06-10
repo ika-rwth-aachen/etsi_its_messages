@@ -45,13 +45,8 @@ Speed ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_Speed.h>
 #include <etsi_its_denm_conversion/convertSpeedConfidence.h>
 #include <etsi_its_denm_conversion/convertSpeedValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/Speed.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/speed.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

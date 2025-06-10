@@ -65,13 +65,8 @@ ReferencePositionWithConfidence ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertLatitude.h>
 #include <etsi_its_mcm_uulm_conversion/convertLongitude.h>
 #include <etsi_its_mcm_uulm_conversion/convertPositionConfidenceEllipse.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ReferencePositionWithConfidence.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/reference_position_with_confidence.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

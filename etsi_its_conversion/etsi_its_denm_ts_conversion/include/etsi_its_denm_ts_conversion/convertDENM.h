@@ -54,13 +54,8 @@ DENM ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_DENM.h>
 #include <etsi_its_denm_ts_conversion/convertDenmPayload.h>
 #include <etsi_its_denm_ts_conversion/convertItsPduHeader.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/DENM.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/denm.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

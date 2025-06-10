@@ -48,15 +48,9 @@ EnabledLaneList ::= SEQUENCE (SIZE(1..16)) OF LaneID
 #include <etsi_its_spatem_ts_coding/spatem_ts_EnabledLaneList.h>
 #include <etsi_its_spatem_ts_coding/spatem_ts_LaneID.h>
 #include <etsi_its_spatem_ts_conversion/convertLaneID.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/LaneID.h>
-#include <etsi_its_spatem_ts_msgs/EnabledLaneList.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/lane_id.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/enabled_lane_list.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

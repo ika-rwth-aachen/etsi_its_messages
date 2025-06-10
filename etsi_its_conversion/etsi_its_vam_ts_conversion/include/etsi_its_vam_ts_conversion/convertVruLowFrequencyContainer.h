@@ -62,13 +62,8 @@ python3 \
 #include <etsi_its_vam_ts_conversion/convertVruExteriorLights.h>
 #include <etsi_its_vam_ts_conversion/convertVruProfileAndSubprofile.h>
 #include <etsi_its_vam_ts_conversion/convertVruSizeClass.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruLowFrequencyContainer.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_low_frequency_container.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

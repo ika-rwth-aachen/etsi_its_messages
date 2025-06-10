@@ -45,13 +45,8 @@ WaitOnStopline ::= BOOLEAN
 #include <etsi_its_spatem_ts_coding/spatem_ts_WaitOnStopline.h>
 #include <etsi_its_spatem_ts_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/WaitOnStopline.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/wait_on_stopline.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

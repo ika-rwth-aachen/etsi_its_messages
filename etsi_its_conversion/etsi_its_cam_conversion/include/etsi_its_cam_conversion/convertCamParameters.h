@@ -50,13 +50,8 @@ CamParameters ::= SEQUENCE {
 #include <etsi_its_cam_conversion/convertHighFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertLowFrequencyContainer.h>
 #include <etsi_its_cam_conversion/convertSpecialVehicleContainer.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/CamParameters.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/cam_parameters.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

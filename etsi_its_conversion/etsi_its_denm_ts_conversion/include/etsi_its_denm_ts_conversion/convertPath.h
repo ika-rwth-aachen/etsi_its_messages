@@ -55,15 +55,9 @@ Path::= SEQUENCE (SIZE(0..40)) OF PathPoint
 #include <etsi_its_denm_ts_coding/denm_ts_Path.h>
 #include <etsi_its_denm_ts_coding/denm_ts_PathPoint.h>
 #include <etsi_its_denm_ts_conversion/convertPathPoint.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathPoint.h>
-#include <etsi_its_denm_ts_msgs/Path.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_point.hpp>
 #include <etsi_its_denm_ts_msgs/msg/path.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

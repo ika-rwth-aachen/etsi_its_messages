@@ -59,13 +59,8 @@ Heading ::= SEQUENCE {
 #include <etsi_its_cam_ts_coding/cam_ts_Heading.h>
 #include <etsi_its_cam_ts_conversion/convertHeadingConfidence.h>
 #include <etsi_its_cam_ts_conversion/convertHeadingValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/Heading.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/heading.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

@@ -61,13 +61,8 @@ ObjectFace ::= ENUMERATED {
 
 #include <etsi_its_denm_ts_coding/denm_ts_ObjectFace.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ObjectFace.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/object_face.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

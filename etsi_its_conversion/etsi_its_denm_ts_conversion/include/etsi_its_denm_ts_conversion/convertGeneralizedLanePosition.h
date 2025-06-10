@@ -71,13 +71,8 @@ GeneralizedLanePosition ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertLanePositionOptions.h>
 #include <etsi_its_denm_ts_conversion/convertMapPosition.h>
 #include <etsi_its_denm_ts_conversion/convertMetaInformation.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/GeneralizedLanePosition.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/generalized_lane_position.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

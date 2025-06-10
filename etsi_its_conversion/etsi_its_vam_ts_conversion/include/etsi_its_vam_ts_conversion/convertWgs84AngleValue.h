@@ -58,13 +58,8 @@ Wgs84AngleValue ::= INTEGER {
 #include <etsi_its_vam_ts_coding/vam_ts_Wgs84AngleValue.h>
 #include <etsi_its_vam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/Wgs84AngleValue.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/wgs84_angle_value.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

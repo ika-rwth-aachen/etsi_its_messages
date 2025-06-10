@@ -57,13 +57,8 @@ CurvatureCalculationMode ::= ENUMERATED {
 
 #include <etsi_its_vam_ts_coding/vam_ts_CurvatureCalculationMode.h>
 
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/CurvatureCalculationMode.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/curvature_calculation_mode.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

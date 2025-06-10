@@ -52,15 +52,9 @@ LowerTriangularPositiveSemidefiniteMatrixColumns ::= SEQUENCE SIZE (1..13,...) O
 #include <etsi_its_denm_ts_coding/denm_ts_LowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #include <etsi_its_denm_ts_coding/denm_ts_CorrelationColumn.h>
 #include <etsi_its_denm_ts_conversion/convertCorrelationColumn.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CorrelationColumn.h>
-#include <etsi_its_denm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrixColumns.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/correlation_column.hpp>
 #include <etsi_its_denm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrix_columns.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

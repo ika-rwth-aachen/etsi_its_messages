@@ -45,13 +45,8 @@ IntersectionID ::= INTEGER (0..65535)
 #include <etsi_its_spatem_ts_coding/spatem_ts_IntersectionID.h>
 #include <etsi_its_spatem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/IntersectionID.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/intersection_id.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

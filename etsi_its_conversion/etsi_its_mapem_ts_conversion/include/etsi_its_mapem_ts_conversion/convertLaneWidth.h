@@ -45,13 +45,8 @@ LaneWidth ::= INTEGER (0..32767)
 #include <etsi_its_mapem_ts_coding/mapem_ts_LaneWidth.h>
 #include <etsi_its_mapem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneWidth.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_width.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

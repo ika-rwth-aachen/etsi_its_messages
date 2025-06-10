@@ -42,13 +42,8 @@ TurningRadius ::= INTEGER {point4Meters(1), unavailable(255)} (1..255)
 #include <etsi_its_denm_coding/denm_TurningRadius.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/TurningRadius.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/turning_radius.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

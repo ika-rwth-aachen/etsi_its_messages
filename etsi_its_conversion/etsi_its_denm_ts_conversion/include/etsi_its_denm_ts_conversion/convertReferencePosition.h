@@ -66,13 +66,8 @@ ReferencePosition ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertLatitude.h>
 #include <etsi_its_denm_ts_conversion/convertLongitude.h>
 #include <etsi_its_denm_ts_conversion/convertPosConfidenceEllipse.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ReferencePosition.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/reference_position.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

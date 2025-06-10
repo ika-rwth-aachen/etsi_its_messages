@@ -51,13 +51,8 @@ Position3D ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertElevation.h>
 #include <etsi_its_mapem_ts_conversion/convertLatitude.h>
 #include <etsi_its_mapem_ts_conversion/convertLongitude.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/Position3D.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/position3_d.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -59,13 +59,8 @@ RoadWorksContainerExtended ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertRestrictedTypes.h>
 #include <etsi_its_denm_conversion/convertSpeedLimit.h>
 #include <etsi_its_denm_conversion/convertTrafficRule.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/RoadWorksContainerExtended.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/road_works_container_extended.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

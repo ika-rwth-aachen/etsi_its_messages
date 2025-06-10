@@ -62,13 +62,8 @@ Longitude ::= INTEGER {
 #include <etsi_its_vam_ts_coding/vam_ts_Longitude.h>
 #include <etsi_its_vam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/Longitude.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/longitude.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

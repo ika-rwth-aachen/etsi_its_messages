@@ -10,13 +10,8 @@ e2e_hs!(
 #include <etsi_its_test_coding/SingleByte.h>
 #include <etsi_its_test_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_test_msgs/SingleByte.hpp>
-namespace test_msgs = etsi_its_test_msgs;
-#else
 #include <etsi_its_test_msgs/msg/single_byte.hpp>
 namespace test_msgs = etsi_its_test_msgs::msg;
-#endif 
 
 namespace etsi_its_test_conversion {
 
@@ -43,13 +38,8 @@ e2e_hs!(
 #include <etsi_its_test_coding/Unbound.h>
 #include <etsi_its_test_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_test_msgs/Unbound.hpp>
-namespace test_msgs = etsi_its_test_msgs;
-#else
 #include <etsi_its_test_msgs/msg/unbound.hpp>
-namespace test_msgs = etsi_its_test_msgs::msg;
-#endif 
+namespace test_msgs = etsi_its_test_msgs::msg; 
 
 namespace etsi_its_test_conversion {
 
@@ -78,13 +68,8 @@ e2e_hs!(
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_test_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_test_msgs/Seq.hpp>
-namespace test_msgs = etsi_its_test_msgs;
-#else
 #include <etsi_its_test_msgs/msg/seq.hpp>
 namespace test_msgs = etsi_its_test_msgs::msg;
-#endif 
 
 namespace etsi_its_test_conversion {
 
@@ -112,13 +97,8 @@ e2e_hs!(boolean,
 #include <etsi_its_test_coding/Maybe.h>
 #include <etsi_its_test_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#ifdef ROS1
-#include <etsi_its_test_msgs/Maybe.hpp>
-namespace test_msgs = etsi_its_test_msgs;
-#else
 #include <etsi_its_test_msgs/msg/maybe.hpp>
 namespace test_msgs = etsi_its_test_msgs::msg;
-#endif 
 
 namespace etsi_its_test_conversion {
 

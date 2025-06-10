@@ -45,13 +45,8 @@ python3 \
 #include <etsi_its_vam_ts_coding/vam_ts_VAM.h>
 #include <etsi_its_vam_ts_conversion/convertItsPduHeaderVam.h>
 #include <etsi_its_vam_ts_conversion/convertVruAwareness.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VAM.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vam.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

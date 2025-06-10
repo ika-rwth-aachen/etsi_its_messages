@@ -55,13 +55,8 @@ CamPayload ::= SEQUENCE {
 #include <etsi_its_cam_ts_coding/cam_ts_CamPayload.h>
 #include <etsi_its_cam_ts_conversion/convertCamParameters.h>
 #include <etsi_its_cam_ts_conversion/convertGenerationDeltaTime.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/CamPayload.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/cam_payload.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

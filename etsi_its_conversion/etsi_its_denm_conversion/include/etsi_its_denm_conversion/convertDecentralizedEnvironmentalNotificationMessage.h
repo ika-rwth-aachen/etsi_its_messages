@@ -49,13 +49,8 @@ DecentralizedEnvironmentalNotificationMessage ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertLocationContainer.h>
 #include <etsi_its_denm_conversion/convertManagementContainer.h>
 #include <etsi_its_denm_conversion/convertSituationContainer.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DecentralizedEnvironmentalNotificationMessage.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/decentralized_environmental_notification_message.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

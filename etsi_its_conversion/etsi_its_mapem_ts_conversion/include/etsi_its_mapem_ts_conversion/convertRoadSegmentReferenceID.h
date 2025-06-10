@@ -48,13 +48,8 @@ RoadSegmentReferenceID ::= SEQUENCE {
 #include <etsi_its_mapem_ts_coding/mapem_ts_RoadSegmentReferenceID.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadRegulatorID.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadSegmentID.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RoadSegmentReferenceID.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/road_segment_reference_id.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

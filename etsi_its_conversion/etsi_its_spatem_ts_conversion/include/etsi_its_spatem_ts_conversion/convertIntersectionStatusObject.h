@@ -60,13 +60,8 @@ IntersectionStatusObject ::= BIT STRING {
 #include <etsi_its_spatem_ts_coding/spatem_ts_IntersectionStatusObject.h>
 #include <etsi_its_spatem_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/IntersectionStatusObject.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/intersection_status_object.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

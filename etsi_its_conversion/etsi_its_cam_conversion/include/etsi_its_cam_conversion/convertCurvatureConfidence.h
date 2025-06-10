@@ -50,13 +50,8 @@ CurvatureConfidence ::= ENUMERATED {
 
 #include <etsi_its_cam_coding/cam_CurvatureConfidence.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/CurvatureConfidence.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/curvature_confidence.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

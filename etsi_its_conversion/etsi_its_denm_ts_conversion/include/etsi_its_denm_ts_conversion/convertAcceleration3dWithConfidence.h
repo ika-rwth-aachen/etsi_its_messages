@@ -57,13 +57,8 @@ Acceleration3dWithConfidence::= CHOICE {
 #include <etsi_its_denm_ts_coding/denm_ts_Acceleration3dWithConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertAccelerationCartesian.h>
 #include <etsi_its_denm_ts_conversion/convertAccelerationPolarWithZ.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Acceleration3dWithConfidence.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/acceleration3d_with_confidence.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

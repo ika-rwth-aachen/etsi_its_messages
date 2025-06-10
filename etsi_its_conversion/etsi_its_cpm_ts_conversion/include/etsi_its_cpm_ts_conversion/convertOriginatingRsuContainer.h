@@ -56,13 +56,8 @@ OriginatingRsuContainer ::= SEQUENCE{
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_OriginatingRsuContainer.h>
 #include <etsi_its_cpm_ts_conversion/convertMapReference.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/OriginatingRsuContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/originating_rsu_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

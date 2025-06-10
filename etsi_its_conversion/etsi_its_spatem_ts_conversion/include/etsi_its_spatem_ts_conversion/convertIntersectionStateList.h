@@ -48,15 +48,9 @@ IntersectionStateList ::= SEQUENCE (SIZE(1..32)) OF  IntersectionState
 #include <etsi_its_spatem_ts_coding/spatem_ts_IntersectionStateList.h>
 #include <etsi_its_spatem_ts_coding/spatem_ts_IntersectionState.h>
 #include <etsi_its_spatem_ts_conversion/convertIntersectionState.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/IntersectionState.h>
-#include <etsi_its_spatem_ts_msgs/IntersectionStateList.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/intersection_state.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/intersection_state_list.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

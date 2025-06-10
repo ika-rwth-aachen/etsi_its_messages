@@ -41,13 +41,8 @@ HardShoulderStatus ::= ENUMERATED {availableForStopping(0), closed(1), available
 
 #include <etsi_its_cam_coding/cam_HardShoulderStatus.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/HardShoulderStatus.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/hard_shoulder_status.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

@@ -42,13 +42,8 @@ HeadingValue ::= INTEGER {wgs84North(0), wgs84East(900), wgs84South(1800), wgs84
 #include <etsi_its_cam_coding/cam_HeadingValue.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/HeadingValue.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/heading_value.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

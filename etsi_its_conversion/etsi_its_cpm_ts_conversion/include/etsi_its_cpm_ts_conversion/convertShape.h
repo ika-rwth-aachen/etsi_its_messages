@@ -78,13 +78,8 @@ Shape::= CHOICE {
 #include <etsi_its_cpm_ts_conversion/convertRadialShape.h>
 #include <etsi_its_cpm_ts_conversion/convertRadialShapes.h>
 #include <etsi_its_cpm_ts_conversion/convertRectangularShape.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/Shape.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/shape.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

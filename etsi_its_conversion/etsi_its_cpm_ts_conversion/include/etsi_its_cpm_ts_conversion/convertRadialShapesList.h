@@ -55,15 +55,9 @@ RadialShapesList ::= SEQUENCE SIZE(1..16,...) OF RadialShapeDetails
 #include <etsi_its_cpm_ts_coding/cpm_ts_RadialShapesList.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_RadialShapeDetails.h>
 #include <etsi_its_cpm_ts_conversion/convertRadialShapeDetails.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/RadialShapeDetails.h>
-#include <etsi_its_cpm_ts_msgs/RadialShapesList.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/radial_shape_details.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/radial_shapes_list.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

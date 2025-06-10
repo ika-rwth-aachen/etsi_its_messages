@@ -58,13 +58,8 @@ DrivingLaneStatus ::= BIT STRING (SIZE (1..13))
 #include <etsi_its_denm_ts_coding/denm_ts_DrivingLaneStatus.h>
 #include <etsi_its_denm_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/DrivingLaneStatus.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/driving_lane_status.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

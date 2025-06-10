@@ -50,13 +50,8 @@ LocationContainer ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertRoadType.h>
 #include <etsi_its_denm_conversion/convertSpeed.h>
 #include <etsi_its_denm_conversion/convertTraces.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/LocationContainer.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/location_container.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

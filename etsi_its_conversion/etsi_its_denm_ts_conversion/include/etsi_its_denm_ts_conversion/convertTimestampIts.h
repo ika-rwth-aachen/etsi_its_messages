@@ -60,13 +60,8 @@ TimestampIts ::= INTEGER (0..4398046511103)
 #include <etsi_its_denm_ts_coding/denm_ts_TimestampIts.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/TimestampIts.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/timestamp_its.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

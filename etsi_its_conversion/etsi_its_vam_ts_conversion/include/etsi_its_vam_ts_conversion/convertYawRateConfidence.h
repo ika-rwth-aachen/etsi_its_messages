@@ -79,13 +79,8 @@ YawRateConfidence ::= ENUMERATED {
 
 #include <etsi_its_vam_ts_coding/vam_ts_YawRateConfidence.h>
 
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/YawRateConfidence.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/yaw_rate_confidence.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

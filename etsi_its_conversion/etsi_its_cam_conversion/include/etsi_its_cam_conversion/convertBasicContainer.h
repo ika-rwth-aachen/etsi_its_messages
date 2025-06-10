@@ -46,13 +46,8 @@ BasicContainer ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_BasicContainer.h>
 #include <etsi_its_cam_conversion/convertReferencePosition.h>
 #include <etsi_its_cam_conversion/convertStationType.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/BasicContainer.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/basic_container.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

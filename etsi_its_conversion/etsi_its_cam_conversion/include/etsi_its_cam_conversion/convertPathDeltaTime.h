@@ -42,13 +42,8 @@ PathDeltaTime ::= INTEGER {tenMilliSecondsInPast(1)} (1..65535, ...)
 #include <etsi_its_cam_coding/cam_PathDeltaTime.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PathDeltaTime.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/path_delta_time.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

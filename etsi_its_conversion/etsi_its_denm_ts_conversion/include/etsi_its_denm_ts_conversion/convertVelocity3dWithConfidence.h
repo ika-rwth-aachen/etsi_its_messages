@@ -57,13 +57,8 @@ Velocity3dWithConfidence::= CHOICE{
 #include <etsi_its_denm_ts_coding/denm_ts_Velocity3dWithConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertVelocityCartesian.h>
 #include <etsi_its_denm_ts_conversion/convertVelocityPolarWithZ.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Velocity3dWithConfidence.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/velocity3d_with_confidence.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

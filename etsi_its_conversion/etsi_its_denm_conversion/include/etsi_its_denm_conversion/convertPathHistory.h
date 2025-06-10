@@ -45,15 +45,9 @@ PathHistory::= SEQUENCE (SIZE(0..40)) OF PathPoint
 #include <etsi_its_denm_coding/denm_PathHistory.h>
 #include <etsi_its_denm_coding/denm_PathPoint.h>
 #include <etsi_its_denm_conversion/convertPathPoint.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PathPoint.h>
-#include <etsi_its_denm_msgs/PathHistory.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/path_point.hpp>
 #include <etsi_its_denm_msgs/msg/path_history.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

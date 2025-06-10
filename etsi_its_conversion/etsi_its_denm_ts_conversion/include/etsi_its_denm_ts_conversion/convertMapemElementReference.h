@@ -62,13 +62,8 @@ MapemElementReference::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertMapReference.h>
 #include <etsi_its_denm_ts_conversion/convertMapemConnectionList.h>
 #include <etsi_its_denm_ts_conversion/convertMapemLaneList.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/MapemElementReference.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/mapem_element_reference.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -49,13 +49,8 @@ NodeListXY ::= CHOICE {
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeListXY.h>
 #include <etsi_its_mapem_ts_conversion/convertComputedLane.h>
 #include <etsi_its_mapem_ts_conversion/convertNodeSetXY.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeListXY.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_list_xy.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

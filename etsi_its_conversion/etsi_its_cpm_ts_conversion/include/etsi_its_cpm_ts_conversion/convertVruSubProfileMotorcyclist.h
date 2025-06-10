@@ -66,13 +66,8 @@ VruSubProfileMotorcyclist ::= ENUMERATED {
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_VruSubProfileMotorcyclist.h>
 
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/VruSubProfileMotorcyclist.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/vru_sub_profile_motorcyclist.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

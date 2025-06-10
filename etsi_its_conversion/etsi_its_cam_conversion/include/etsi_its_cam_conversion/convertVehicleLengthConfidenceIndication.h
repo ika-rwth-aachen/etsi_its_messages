@@ -41,13 +41,8 @@ VehicleLengthConfidenceIndication ::= ENUMERATED {noTrailerPresent(0), trailerPr
 
 #include <etsi_its_cam_coding/cam_VehicleLengthConfidenceIndication.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/VehicleLengthConfidenceIndication.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/vehicle_length_confidence_indication.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

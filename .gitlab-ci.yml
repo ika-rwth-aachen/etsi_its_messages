@@ -5,20 +5,6 @@ Code Generation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
-ros-noetic:
-  trigger:
-    include:
-      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
-    strategy: depend
-  variables:
-    PLATFORM: amd64,arm64
-    TARGET: dev,run
-    IMAGE_TAG: ros-noetic
-    BASE_IMAGE: rwthika/ros:noetic
-    COMMAND: roslaunch etsi_its_conversion converter.ros1.launch
-    ENABLE_INDUSTRIAL_CI: 'true'
-    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
-
 ros2-humble:
   trigger:
     include:

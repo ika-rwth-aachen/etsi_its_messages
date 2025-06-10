@@ -53,13 +53,8 @@ StandardLength12b::= INTEGER (0..4095)
 #include <etsi_its_cpm_ts_coding/cpm_ts_StandardLength12b.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/StandardLength12b.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/standard_length12b.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

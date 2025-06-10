@@ -46,13 +46,8 @@ CauseCode ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_CauseCode.h>
 #include <etsi_its_denm_conversion/convertCauseCodeType.h>
 #include <etsi_its_denm_conversion/convertSubCauseCodeType.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/CauseCode.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/cause_code.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

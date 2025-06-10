@@ -58,13 +58,8 @@ RoadSegmentReferenceId ::= SEQUENCE {
 
 #include <etsi_its_denm_ts_coding/denm_ts_RoadSegmentReferenceId.h>
 #include <etsi_its_denm_ts_conversion/convertIdentifier2B.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadSegmentReferenceId.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_segment_reference_id.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

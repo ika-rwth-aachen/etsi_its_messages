@@ -41,13 +41,8 @@ DriveDirection ::= ENUMERATED {forward (0), backward (1), unavailable (2)}
 
 #include <etsi_its_cam_coding/cam_DriveDirection.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/DriveDirection.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/drive_direction.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

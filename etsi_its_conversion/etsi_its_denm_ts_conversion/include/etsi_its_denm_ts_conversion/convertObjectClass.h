@@ -67,13 +67,8 @@ ObjectClass ::= CHOICE {
 #include <etsi_its_denm_ts_conversion/convertTrafficParticipantType.h>
 #include <etsi_its_denm_ts_conversion/convertVruClusterInformation.h>
 #include <etsi_its_denm_ts_conversion/convertVruProfileAndSubprofile.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ObjectClass.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/object_class.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

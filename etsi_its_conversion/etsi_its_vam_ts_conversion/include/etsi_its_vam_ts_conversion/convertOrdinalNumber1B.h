@@ -48,13 +48,8 @@ OrdinalNumber1B ::= INTEGER(0..255)
 #include <etsi_its_vam_ts_coding/vam_ts_OrdinalNumber1B.h>
 #include <etsi_its_vam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/OrdinalNumber1B.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/ordinal_number1_b.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

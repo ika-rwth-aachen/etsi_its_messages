@@ -48,13 +48,8 @@ ItsPduHeader ::= SEQUENCE {
 #include <etsi_its_spatem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_spatem_ts_conversion/convertStationID.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/ItsPduHeader.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/its_pdu_header.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

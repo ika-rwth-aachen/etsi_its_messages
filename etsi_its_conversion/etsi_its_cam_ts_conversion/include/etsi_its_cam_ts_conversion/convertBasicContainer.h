@@ -58,13 +58,8 @@ BasicContainer ::= SEQUENCE {
 #include <etsi_its_cam_ts_coding/cam_ts_BasicContainer.h>
 #include <etsi_its_cam_ts_conversion/convertReferencePositionWithConfidence.h>
 #include <etsi_its_cam_ts_conversion/convertTrafficParticipantType.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/BasicContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/basic_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

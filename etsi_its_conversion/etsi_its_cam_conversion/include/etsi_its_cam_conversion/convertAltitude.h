@@ -45,13 +45,8 @@ Altitude ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_Altitude.h>
 #include <etsi_its_cam_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_cam_conversion/convertAltitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/Altitude.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/altitude.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

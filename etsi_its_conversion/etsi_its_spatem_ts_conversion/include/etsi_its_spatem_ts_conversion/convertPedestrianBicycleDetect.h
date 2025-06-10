@@ -45,13 +45,8 @@ PedestrianBicycleDetect ::= BOOLEAN
 #include <etsi_its_spatem_ts_coding/spatem_ts_PedestrianBicycleDetect.h>
 #include <etsi_its_spatem_ts_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/PedestrianBicycleDetect.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/pedestrian_bicycle_detect.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

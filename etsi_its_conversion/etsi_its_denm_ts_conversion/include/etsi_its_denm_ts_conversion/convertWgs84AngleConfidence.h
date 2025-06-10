@@ -59,13 +59,8 @@ Wgs84AngleConfidence ::= INTEGER {
 #include <etsi_its_denm_ts_coding/denm_ts_Wgs84AngleConfidence.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Wgs84AngleConfidence.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/wgs84_angle_confidence.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

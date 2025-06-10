@@ -61,13 +61,8 @@ LanePositionWithLateralDetails ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertLanePosition.h>
 #include <etsi_its_denm_ts_conversion/convertLaneType.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength9b.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/LanePositionWithLateralDetails.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/lane_position_with_lateral_details.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

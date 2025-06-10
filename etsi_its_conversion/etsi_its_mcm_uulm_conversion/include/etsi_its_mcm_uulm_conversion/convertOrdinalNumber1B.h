@@ -48,13 +48,8 @@ OrdinalNumber1B ::= INTEGER(0..255)
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_OrdinalNumber1B.h>
 #include <etsi_its_mcm_uulm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/OrdinalNumber1B.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/ordinal_number1_b.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

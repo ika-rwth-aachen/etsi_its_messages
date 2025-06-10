@@ -62,13 +62,8 @@ LowerTriangularPositiveSemidefiniteMatrix ::= SEQUENCE{
 #include <etsi_its_denm_ts_coding/denm_ts_LowerTriangularPositiveSemidefiniteMatrix.h>
 #include <etsi_its_denm_ts_conversion/convertLowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #include <etsi_its_denm_ts_conversion/convertMatrixIncludedComponents.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrix.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrix.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

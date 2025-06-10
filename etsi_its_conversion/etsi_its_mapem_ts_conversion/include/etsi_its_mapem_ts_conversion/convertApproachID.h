@@ -45,13 +45,8 @@ ApproachID ::= INTEGER (0..15)
 #include <etsi_its_mapem_ts_coding/mapem_ts_ApproachID.h>
 #include <etsi_its_mapem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/ApproachID.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/approach_id.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

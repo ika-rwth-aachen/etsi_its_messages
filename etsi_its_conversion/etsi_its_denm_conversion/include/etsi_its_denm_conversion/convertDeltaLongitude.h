@@ -42,13 +42,8 @@ DeltaLongitude ::= INTEGER {oneMicrodegreeEast (10), oneMicrodegreeWest (-10), u
 #include <etsi_its_denm_coding/denm_DeltaLongitude.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DeltaLongitude.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/delta_longitude.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

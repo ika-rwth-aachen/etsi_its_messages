@@ -51,15 +51,9 @@ RoadConfigurationSectionList::=  SEQUENCE (SIZE(1..8,...))  OF RoadConfiguration
 #include <etsi_its_denm_ts_coding/denm_ts_RoadConfigurationSectionList.h>
 #include <etsi_its_denm_ts_coding/denm_ts_RoadConfigurationSection.h>
 #include <etsi_its_denm_ts_conversion/convertRoadConfigurationSection.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadConfigurationSection.h>
-#include <etsi_its_denm_ts_msgs/RoadConfigurationSectionList.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_configuration_section.hpp>
 #include <etsi_its_denm_ts_msgs/msg/road_configuration_section_list.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

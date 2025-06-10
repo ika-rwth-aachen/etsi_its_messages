@@ -42,13 +42,8 @@ PostCrashSubCauseCode ::= INTEGER {unavailable(0), accidentWithoutECallTriggered
 #include <etsi_its_denm_coding/denm_PostCrashSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PostCrashSubCauseCode.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/post_crash_sub_cause_code.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

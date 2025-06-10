@@ -45,13 +45,8 @@ RoadwayCrownAngle ::= INTEGER (-128..127)
 #include <etsi_its_mapem_ts_coding/mapem_ts_RoadwayCrownAngle.h>
 #include <etsi_its_mapem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RoadwayCrownAngle.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/roadway_crown_angle.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {
