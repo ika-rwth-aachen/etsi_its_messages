@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         ROS_DISTRO:
-          - noetic
           - humble
           - jazzy
         ROS_REPO:
