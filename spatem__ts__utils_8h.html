@@ -105,8 +105,7 @@ $(function(){initNavTree('spatem__ts__utils_8h.html',''); initResizable(true); }
 <div class="header">
   <div class="summary">
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">spatem_ts_utils.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -143,23 +142,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a85b380388e8aa682e7b4bb703061d9e4" id="r_a85b380388e8aa682e7b4bb703061d9e4"><td class="memItemLeft" align="right" valign="top">time_mark_value_interpretation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85b380388e8aa682e7b4bb703061d9e4">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueType</a> (const uint16_t time)</td></tr>
 <tr class="memdesc:a85b380388e8aa682e7b4bb703061d9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interprets the type of a TimeMark message See etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark".  <br /></td></tr>
 <tr class="separator:a85b380388e8aa682e7b4bb703061d9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43541f4a6593cbfa3a435721c00f0d46" id="r_a43541f4a6593cbfa3a435721c00f0d46"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43541f4a6593cbfa3a435721c00f0d46">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsNanoSeconds</a> (const uint16_t time, const uint64_t nanosec)</td></tr>
+<tr class="memdesc:a43541f4a6593cbfa3a435721c00f0d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the delta between the encoded time mark and the current timestamp.  <br /></td></tr>
+<tr class="separator:a43541f4a6593cbfa3a435721c00f0d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84610814e3088a91f4c6a6e5c076b19b" id="r_a84610814e3088a91f4c6a6e5c076b19b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84610814e3088a91f4c6a6e5c076b19b">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsSeconds</a> (const uint16_t time, const int32_t seconds, const uint32_t nanosec)</td></tr>
-<tr class="memdesc:a84610814e3088a91f4c6a6e5c076b19b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the amount of seconds until the given time is reached.  <br /></td></tr>
+<tr class="memdesc:a84610814e3088a91f4c6a6e5c076b19b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the delta between the encoded time mark and the current timestamp.  <br /></td></tr>
 <tr class="separator:a84610814e3088a91f4c6a6e5c076b19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dac29f2eaa5a85ad4fbdf03155755c0" id="r_a9dac29f2eaa5a85ad4fbdf03155755c0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dac29f2eaa5a85ad4fbdf03155755c0">etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString</a> (const uint16_t time, const int32_t seconds, const uint32_t nanosec)</td></tr>
 <tr class="memdesc:a9dac29f2eaa5a85ad4fbdf03155755c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a value from message type TimeMarkValue into a string representation.  <br /></td></tr>
 <tr class="separator:a9dac29f2eaa5a85ad4fbdf03155755c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ab19442ec9147f121a4e9dc09e3076f0d" id="r_ab19442ec9147f121a4e9dc09e3076f0d"><td class="memItemLeft" align="right" valign="top">const std::array&lt; float, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab19442ec9147f121a4e9dc09e3076f0d">etsi_its_spatem_ts_msgs::access::color_grey</a> {0.5, 0.5, 0.5, 1.0}</td></tr>
-<tr class="separator:ab19442ec9147f121a4e9dc09e3076f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3673d51902a396c5cba9f87ebfd1c6a9" id="r_a3673d51902a396c5cba9f87ebfd1c6a9"><td class="memItemLeft" align="right" valign="top">const std::array&lt; float, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3673d51902a396c5cba9f87ebfd1c6a9">etsi_its_spatem_ts_msgs::access::color_green</a> {0.18, 0.79, 0.21, 1.0}</td></tr>
-<tr class="separator:a3673d51902a396c5cba9f87ebfd1c6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affa846dd40db30e3acabc225e9daf421" id="r_affa846dd40db30e3acabc225e9daf421"><td class="memItemLeft" align="right" valign="top">const std::array&lt; float, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affa846dd40db30e3acabc225e9daf421">etsi_its_spatem_ts_msgs::access::color_orange</a> {0.9, 0.7, 0.09, 1.0}</td></tr>
-<tr class="separator:affa846dd40db30e3acabc225e9daf421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31404c6e3433f1c11c1e6205b1d7f46d" id="r_a31404c6e3433f1c11c1e6205b1d7f46d"><td class="memItemLeft" align="right" valign="top">const std::array&lt; float, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31404c6e3433f1c11c1e6205b1d7f46d">etsi_its_spatem_ts_msgs::access::color_red</a> {0.8, 0.2, 0.2, 1.0}</td></tr>
-<tr class="separator:a31404c6e3433f1c11c1e6205b1d7f46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utility functions for the ETSI ITS SPATEM. </p>
@@ -178,8 +169,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00045">45</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>{ normal, undefined, over_an_hour, leap_second };</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00053">53</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>{ normal, undefined, over_an_hour, leap_second };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -221,11 +212,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00078">78</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                                                                              {</div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">return</span> ((uint64_t)(moy.value*60) + <a class="code hl_function" href="#a05620c9a8ad99267d3dba2a29de26908">getUnixSecondsOfYear</a>(unix_nanoseconds_estimate*1e-9))*1e9;</div>
-<div class="line"><span class="lineno">   80</span>  }</div>
-<div class="ttc" id="aspatem__ts__utils_8h_html_a05620c9a8ad99267d3dba2a29de26908"><div class="ttname"><a href="#a05620c9a8ad99267d3dba2a29de26908">etsi_its_spatem_ts_msgs::access::getUnixSecondsOfYear</a></div><div class="ttdeci">uint64_t getUnixSecondsOfYear(const uint64_t unixSecond)</div><div class="ttdoc">Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp.</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00053">spatem_ts_utils.h:53</a></div></div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00086">86</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                                                                                              {</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">return</span> ((uint64_t)(moy.value*60) + <a class="code hl_function" href="#a05620c9a8ad99267d3dba2a29de26908">getUnixSecondsOfYear</a>(unix_nanoseconds_estimate*1e-9))*1e9;</div>
+<div class="line"><span class="lineno">   88</span>  }</div>
+<div class="ttc" id="aspatem__ts__utils_8h_html_a05620c9a8ad99267d3dba2a29de26908"><div class="ttname"><a href="#a05620c9a8ad99267d3dba2a29de26908">etsi_its_spatem_ts_msgs::access::getUnixSecondsOfYear</a></div><div class="ttdeci">uint64_t getUnixSecondsOfYear(const uint64_t unixSecond)</div><div class="ttdoc">Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp.</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00061">spatem_ts_utils.h:61</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -261,24 +252,24 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t unix seconds of the beginning of the year </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00053">53</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   53</span>                                                                  {</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>    <span class="comment">// Get current time as a time_point</span></div>
-<div class="line"><span class="lineno">   56</span>    time_t ts = <span class="keyword">static_cast&lt;</span>time_t<span class="keyword">&gt;</span>(unixSecond); <span class="comment">// Convert uint64_t to time_t</span></div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>    <span class="keyword">struct </span>tm* timeinfo;</div>
-<div class="line"><span class="lineno">   59</span>    timeinfo = gmtime(&amp;ts);</div>
-<div class="line"><span class="lineno">   60</span> </div>
-<div class="line"><span class="lineno">   61</span>    <span class="comment">// Set the timeinfo to the beginning of the year</span></div>
-<div class="line"><span class="lineno">   62</span>    timeinfo-&gt;tm_sec = 0;</div>
-<div class="line"><span class="lineno">   63</span>    timeinfo-&gt;tm_min = 0;</div>
-<div class="line"><span class="lineno">   64</span>    timeinfo-&gt;tm_hour = 0;</div>
-<div class="line"><span class="lineno">   65</span>    timeinfo-&gt;tm_mday = 1;</div>
-<div class="line"><span class="lineno">   66</span>    timeinfo-&gt;tm_mon = 0;</div>
-<div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>    <span class="keywordflow">return</span> timegm(timeinfo); <span class="comment">// Convert struct tm back to Unix timestamp</span></div>
-<div class="line"><span class="lineno">   69</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00061">61</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                                  {</div>
+<div class="line"><span class="lineno">   62</span> </div>
+<div class="line"><span class="lineno">   63</span>    <span class="comment">// Get current time as a time_point</span></div>
+<div class="line"><span class="lineno">   64</span>    time_t ts = <span class="keyword">static_cast&lt;</span>time_t<span class="keyword">&gt;</span>(unixSecond); <span class="comment">// Convert uint64_t to time_t</span></div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>    <span class="keyword">struct </span>tm* timeinfo;</div>
+<div class="line"><span class="lineno">   67</span>    timeinfo = gmtime(&amp;ts);</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>    <span class="comment">// Set the timeinfo to the beginning of the year</span></div>
+<div class="line"><span class="lineno">   70</span>    timeinfo-&gt;tm_sec = 0;</div>
+<div class="line"><span class="lineno">   71</span>    timeinfo-&gt;tm_min = 0;</div>
+<div class="line"><span class="lineno">   72</span>    timeinfo-&gt;tm_hour = 0;</div>
+<div class="line"><span class="lineno">   73</span>    timeinfo-&gt;tm_mday = 1;</div>
+<div class="line"><span class="lineno">   74</span>    timeinfo-&gt;tm_mon = 0;</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">return</span> timegm(timeinfo); <span class="comment">// Convert struct tm back to Unix timestamp</span></div>
+<div class="line"><span class="lineno">   77</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,50 +305,50 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>4-dimensional array with color values as follows: r, g, b, a, each of these values within a range between [0, 1] </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00152">152</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  153</span>  {</div>
-<div class="line"><span class="lineno">  154</span>    std::array&lt;float, 4&gt; color;</div>
-<div class="line"><span class="lineno">  155</span> </div>
-<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">switch</span> (value) {</div>
-<div class="line"><span class="lineno">  157</span> </div>
-<div class="line"><span class="lineno">  158</span>      <span class="keywordflow">case</span> MovementPhaseState::UNAVAILABLE:</div>
-<div class="line"><span class="lineno">  159</span>        color = color_grey;</div>
-<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  161</span> </div>
-<div class="line"><span class="lineno">  162</span>      <span class="keywordflow">case</span> MovementPhaseState::DARK:</div>
-<div class="line"><span class="lineno">  163</span>        color = color_grey;</div>
-<div class="line"><span class="lineno">  164</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  165</span>      <span class="keywordflow">case</span> MovementPhaseState::STOP_THEN_PROCEED:</div>
-<div class="line"><span class="lineno">  166</span>        color = color_red;</div>
-<div class="line"><span class="lineno">  167</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  168</span>      <span class="keywordflow">case</span> MovementPhaseState::STOP_AND_REMAIN:</div>
-<div class="line"><span class="lineno">  169</span>        color = color_red;</div>
-<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  171</span>      <span class="keywordflow">case</span> MovementPhaseState::PRE_MOVEMENT:</div>
-<div class="line"><span class="lineno">  172</span>        color = color_orange;</div>
-<div class="line"><span class="lineno">  173</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  174</span>      <span class="keywordflow">case</span> MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:</div>
-<div class="line"><span class="lineno">  175</span>        color = color_green;</div>
-<div class="line"><span class="lineno">  176</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  177</span>      <span class="keywordflow">case</span> MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:</div>
-<div class="line"><span class="lineno">  178</span>        color = color_green;</div>
-<div class="line"><span class="lineno">  179</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  180</span>      <span class="keywordflow">case</span> MovementPhaseState::PERMISSIVE_CLEARANCE:</div>
-<div class="line"><span class="lineno">  181</span>        color = color_orange;</div>
-<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  183</span>      <span class="keywordflow">case</span> MovementPhaseState::PROTECTED_CLEARANCE:</div>
-<div class="line"><span class="lineno">  184</span>        color = color_orange;</div>
-<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  186</span>      <span class="keywordflow">case</span> MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:</div>
-<div class="line"><span class="lineno">  187</span>        color = color_orange;</div>
-<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  189</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  190</span>        color = color_grey;</div>
-<div class="line"><span class="lineno">  191</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  192</span>  }</div>
-<div class="line"><span class="lineno">  193</span> </div>
-<div class="line"><span class="lineno">  194</span>  <span class="keywordflow">return</span> color;</div>
-<div class="line"><span class="lineno">  195</span>}</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00160">160</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  161</span>  {</div>
+<div class="line"><span class="lineno">  162</span>    std::array&lt;float, 4&gt; color;</div>
+<div class="line"><span class="lineno">  163</span> </div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">switch</span> (value) {</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>      <span class="keywordflow">case</span> MovementPhaseState::UNAVAILABLE:</div>
+<div class="line"><span class="lineno">  167</span>        color = COLOR_GREY;</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>      <span class="keywordflow">case</span> MovementPhaseState::DARK:</div>
+<div class="line"><span class="lineno">  171</span>        color = COLOR_GREY;</div>
+<div class="line"><span class="lineno">  172</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  173</span>      <span class="keywordflow">case</span> MovementPhaseState::STOP_THEN_PROCEED:</div>
+<div class="line"><span class="lineno">  174</span>        color = COLOR_RED;</div>
+<div class="line"><span class="lineno">  175</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  176</span>      <span class="keywordflow">case</span> MovementPhaseState::STOP_AND_REMAIN:</div>
+<div class="line"><span class="lineno">  177</span>        color = COLOR_RED;</div>
+<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  179</span>      <span class="keywordflow">case</span> MovementPhaseState::PRE_MOVEMENT:</div>
+<div class="line"><span class="lineno">  180</span>        color = COLOR_ORANGE;</div>
+<div class="line"><span class="lineno">  181</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  182</span>      <span class="keywordflow">case</span> MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:</div>
+<div class="line"><span class="lineno">  183</span>        color = COLOR_GREEN;</div>
+<div class="line"><span class="lineno">  184</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  185</span>      <span class="keywordflow">case</span> MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:</div>
+<div class="line"><span class="lineno">  186</span>        color = COLOR_GREEN;</div>
+<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  188</span>      <span class="keywordflow">case</span> MovementPhaseState::PERMISSIVE_CLEARANCE:</div>
+<div class="line"><span class="lineno">  189</span>        color = COLOR_ORANGE;</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  191</span>      <span class="keywordflow">case</span> MovementPhaseState::PROTECTED_CLEARANCE:</div>
+<div class="line"><span class="lineno">  192</span>        color = COLOR_ORANGE;</div>
+<div class="line"><span class="lineno">  193</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  194</span>      <span class="keywordflow">case</span> MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:</div>
+<div class="line"><span class="lineno">  195</span>        color = COLOR_ORANGE;</div>
+<div class="line"><span class="lineno">  196</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  197</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  198</span>        color = COLOR_GREY;</div>
+<div class="line"><span class="lineno">  199</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  200</span>  }</div>
+<div class="line"><span class="lineno">  201</span> </div>
+<div class="line"><span class="lineno">  202</span>  <span class="keywordflow">return</span> color;</div>
+<div class="line"><span class="lineno">  203</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -393,64 +384,118 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>confidence as float value [0, 1] </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00088">88</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   88</span>                                                                                          {</div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordtype">float</span> probability = 0;</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">switch</span> (encoded_probability)</div>
-<div class="line"><span class="lineno">   92</span>    {</div>
-<div class="line"><span class="lineno">   93</span>      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><span class="lineno">   94</span>        probability = 0.21;</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   96</span>      <span class="keywordflow">case</span> 1:</div>
-<div class="line"><span class="lineno">   97</span>        probability = 0.36;</div>
-<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   99</span>      <span class="keywordflow">case</span> 2: </div>
-<div class="line"><span class="lineno">  100</span>        probability = 0.47;</div>
-<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  102</span>      <span class="keywordflow">case</span> 3:</div>
-<div class="line"><span class="lineno">  103</span>        probability = 0.56;</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  105</span>      <span class="keywordflow">case</span> 4:</div>
-<div class="line"><span class="lineno">  106</span>        probability = 0.62;</div>
-<div class="line"><span class="lineno">  107</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  108</span>      <span class="keywordflow">case</span> 5: </div>
-<div class="line"><span class="lineno">  109</span>        probability = 0.68;</div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  111</span>      <span class="keywordflow">case</span> 6:</div>
-<div class="line"><span class="lineno">  112</span>        probability = 0.73;</div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  114</span>      <span class="keywordflow">case</span> 7:</div>
-<div class="line"><span class="lineno">  115</span>        probability = 0.77;</div>
-<div class="line"><span class="lineno">  116</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  117</span>      <span class="keywordflow">case</span> 8:</div>
-<div class="line"><span class="lineno">  118</span>        probability = 0.81;</div>
-<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  120</span>      <span class="keywordflow">case</span> 9:</div>
-<div class="line"><span class="lineno">  121</span>        probability = 0.85;</div>
-<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  123</span>      <span class="keywordflow">case</span> 10:</div>
-<div class="line"><span class="lineno">  124</span>        probability = 0.88;</div>
-<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  126</span>      <span class="keywordflow">case</span> 11:</div>
-<div class="line"><span class="lineno">  127</span>        probability = 0.91;</div>
-<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  129</span>      <span class="keywordflow">case</span> 12:</div>
-<div class="line"><span class="lineno">  130</span>        probability = 0.94;</div>
-<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  132</span>      <span class="keywordflow">case</span> 13:</div>
-<div class="line"><span class="lineno">  133</span>        probability = 0.96;</div>
-<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  135</span>      <span class="keywordflow">case</span> 14:</div>
-<div class="line"><span class="lineno">  136</span>        probability = 0.98;</div>
-<div class="line"><span class="lineno">  137</span>        <span class="keywordflow">break</span>; </div>
-<div class="line"><span class="lineno">  138</span>      <span class="keywordflow">case</span> 15:</div>
-<div class="line"><span class="lineno">  139</span>        probability = 1.0;</div>
-<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  141</span>    }</div>
-<div class="line"><span class="lineno">  142</span> </div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">return</span> probability;</div>
-<div class="line"><span class="lineno">  144</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00096">96</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>                                                                                          {</div>
+<div class="line"><span class="lineno">   97</span>    <span class="keywordtype">float</span> probability = 0;</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>    <span class="keywordflow">switch</span> (encoded_probability)</div>
+<div class="line"><span class="lineno">  100</span>    {</div>
+<div class="line"><span class="lineno">  101</span>      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><span class="lineno">  102</span>        probability = 0.21;</div>
+<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  104</span>      <span class="keywordflow">case</span> 1:</div>
+<div class="line"><span class="lineno">  105</span>        probability = 0.36;</div>
+<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  107</span>      <span class="keywordflow">case</span> 2: </div>
+<div class="line"><span class="lineno">  108</span>        probability = 0.47;</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  110</span>      <span class="keywordflow">case</span> 3:</div>
+<div class="line"><span class="lineno">  111</span>        probability = 0.56;</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  113</span>      <span class="keywordflow">case</span> 4:</div>
+<div class="line"><span class="lineno">  114</span>        probability = 0.62;</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  116</span>      <span class="keywordflow">case</span> 5: </div>
+<div class="line"><span class="lineno">  117</span>        probability = 0.68;</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  119</span>      <span class="keywordflow">case</span> 6:</div>
+<div class="line"><span class="lineno">  120</span>        probability = 0.73;</div>
+<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  122</span>      <span class="keywordflow">case</span> 7:</div>
+<div class="line"><span class="lineno">  123</span>        probability = 0.77;</div>
+<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  125</span>      <span class="keywordflow">case</span> 8:</div>
+<div class="line"><span class="lineno">  126</span>        probability = 0.81;</div>
+<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  128</span>      <span class="keywordflow">case</span> 9:</div>
+<div class="line"><span class="lineno">  129</span>        probability = 0.85;</div>
+<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  131</span>      <span class="keywordflow">case</span> 10:</div>
+<div class="line"><span class="lineno">  132</span>        probability = 0.88;</div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  134</span>      <span class="keywordflow">case</span> 11:</div>
+<div class="line"><span class="lineno">  135</span>        probability = 0.91;</div>
+<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  137</span>      <span class="keywordflow">case</span> 12:</div>
+<div class="line"><span class="lineno">  138</span>        probability = 0.94;</div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  140</span>      <span class="keywordflow">case</span> 13:</div>
+<div class="line"><span class="lineno">  141</span>        probability = 0.96;</div>
+<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  143</span>      <span class="keywordflow">case</span> 14:</div>
+<div class="line"><span class="lineno">  144</span>        probability = 0.98;</div>
+<div class="line"><span class="lineno">  145</span>        <span class="keywordflow">break</span>; </div>
+<div class="line"><span class="lineno">  146</span>      <span class="keywordflow">case</span> 15:</div>
+<div class="line"><span class="lineno">  147</span>        probability = 1.0;</div>
+<div class="line"><span class="lineno">  148</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  149</span>    }</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> probability;</div>
+<div class="line"><span class="lineno">  152</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a43541f4a6593cbfa3a435721c00f0d46" name="a43541f4a6593cbfa3a435721c00f0d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43541f4a6593cbfa3a435721c00f0d46">&#9670;&#160;</a></span>interpretTimeMarkValueAsNanoSeconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsNanoSeconds </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>time</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t</td>          <td class="paramname"><span class="paramname"><em>nanosec</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the delta between the encoded time mark and the current timestamp. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Encoded time value since the start of the last full hour in 0.1 seconds </td></tr>
+    <tr><td class="paramname">nanosec</td><td>Timestamp in nanoseconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Delta time between the time stamp and the next time mark in nanoseconds </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00237">237</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  237</span>                                                                                                 {</div>
+<div class="line"><span class="lineno">  238</span>  <span class="comment">// calculate elapsed nanoseconds since the start of the last full hour in nanoseconds </span></div>
+<div class="line"><span class="lineno">  239</span>  int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));</div>
+<div class="line"><span class="lineno">  240</span>  int64_t abs_time_decoded_nanosec = <span class="keyword">static_cast&lt;</span>int64_t<span class="keyword">&gt;</span>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS;</div>
+<div class="line"><span class="lineno">  241</span>  int64_t rel_time_until_change =  abs_time_decoded_nanosec - abs_time_hour_nanosec;</div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>  <span class="comment">// adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )</span></div>
+<div class="line"><span class="lineno">  244</span>  <span class="keywordflow">if</span> (rel_time_until_change &lt; - HALF_HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS) {</div>
+<div class="line"><span class="lineno">  245</span>    rel_time_until_change += HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;</div>
+<div class="line"><span class="lineno">  246</span>  }</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>  <span class="keywordflow">return</span> rel_time_until_change;</div>
+<div class="line"><span class="lineno">  249</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -459,6 +504,9 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">float etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsSeconds </td>
@@ -476,27 +524,37 @@ Variables</h2></td></tr>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>nanosec</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Calculate the amount of seconds until the given time is reached. </p>
+<p>Calculates the delta between the encoded time mark and the current timestamp. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">time</td><td>Encoded time value in the future </td></tr>
-    <tr><td class="paramname">seconds</td><td>Elapsed seconds since the start of the last full hour (timestamp) </td></tr>
-    <tr><td class="paramname">nanosec</td><td>Elapsed nanoseconds since the start of the last full hour (timestamp) </td></tr>
+    <tr><td class="paramname">time</td><td>Encoded time value since the start of the last full hour in 0.1 seconds </td></tr>
+    <tr><td class="paramname">seconds</td><td>Timestamp in seconds </td></tr>
+    <tr><td class="paramname">nanosec</td><td>Timestamp in nanoseconds </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Time in seconds refered to the given timestamp </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Delta time between the time stamp and the next time mark in nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00230">230</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  230</span>                                                                                                          {</div>
-<div class="line"><span class="lineno">  231</span>  <span class="comment">// calculate elapsed seconds since the start of the last full hour  </span></div>
-<div class="line"><span class="lineno">  232</span>  <span class="keywordtype">float</span> abs_time_hour = ((int)(seconds)) % 3600 + (<span class="keywordtype">float</span>)nanosec * 1e-9;</div>
-<div class="line"><span class="lineno">  233</span>  <span class="keywordtype">float</span> rel_time_until_change = (float)time * 0.1f - abs_time_hour;</div>
-<div class="line"><span class="lineno">  234</span>            </div>
-<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">return</span> rel_time_until_change;</div>
-<div class="line"><span class="lineno">  236</span>}</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00259">259</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>                                                                                                                 {</div>
+<div class="line"><span class="lineno">  260</span>  <span class="comment">// calculate elapsed seconds since the start of the last full hour  </span></div>
+<div class="line"><span class="lineno">  261</span>  <span class="keywordtype">float</span> abs_time_hour = ((int)(seconds)) % HOUR_IN_SECONDS + (<span class="keywordtype">float</span>)nanosec * 1e-9;</div>
+<div class="line"><span class="lineno">  262</span>  <span class="keywordtype">float</span> rel_time_until_change = (float)time * FACTOR_ETSI_TIMEMARK_TO_SECONDS - abs_time_hour;</div>
+<div class="line"><span class="lineno">  263</span> </div>
+<div class="line"><span class="lineno">  264</span>  <span class="comment">// adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )</span></div>
+<div class="line"><span class="lineno">  265</span>  <span class="keywordflow">if</span> (rel_time_until_change &lt; - HALF_HOUR_IN_SECONDS) {</div>
+<div class="line"><span class="lineno">  266</span>    rel_time_until_change += HOUR_IN_SECONDS;</div>
+<div class="line"><span class="lineno">  267</span>  }</div>
+<div class="line"><span class="lineno">  268</span> </div>
+<div class="line"><span class="lineno">  269</span>  <span class="keywordflow">return</span> rel_time_until_change;</div>
+<div class="line"><span class="lineno">  270</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -505,6 +563,9 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">time_mark_value_interpretation etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueType </td>
@@ -513,6 +574,11 @@ Variables</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Interprets the type of a TimeMark message See etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark". </p>
@@ -524,25 +590,25 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Type as time_mark_value_interpretation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00203">203</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  203</span>                                                                               {</div>
-<div class="line"><span class="lineno">  204</span>  time_mark_value_interpretation type;</div>
-<div class="line"><span class="lineno">  205</span> </div>
-<div class="line"><span class="lineno">  206</span>  <span class="keywordflow">if</span> (time == 36001) {</div>
-<div class="line"><span class="lineno">  207</span>    <span class="comment">// value is undefined or unknown</span></div>
-<div class="line"><span class="lineno">  208</span>    type = time_mark_value_interpretation::undefined;</div>
-<div class="line"><span class="lineno">  209</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (time == 36000) {</div>
-<div class="line"><span class="lineno">  210</span>    <span class="comment">// used to indicate time &gt;3600 seconds</span></div>
-<div class="line"><span class="lineno">  211</span>    type = time_mark_value_interpretation::over_an_hour;</div>
-<div class="line"><span class="lineno">  212</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (time &gt;= 35991 &amp;&amp; time &lt;= 35999) {</div>
-<div class="line"><span class="lineno">  213</span>    <span class="comment">// leap second</span></div>
-<div class="line"><span class="lineno">  214</span>    type = time_mark_value_interpretation::leap_second;</div>
-<div class="line"><span class="lineno">  215</span>  } <span class="keywordflow">else</span> { <span class="comment">// time &gt;= 0 &amp;&amp; time &lt;= 36000</span></div>
-<div class="line"><span class="lineno">  216</span>    type = time_mark_value_interpretation::normal;</div>
-<div class="line"><span class="lineno">  217</span>  }</div>
-<div class="line"><span class="lineno">  218</span> </div>
-<div class="line"><span class="lineno">  219</span>  <span class="keywordflow">return</span> type;</div>
-<div class="line"><span class="lineno">  220</span>}</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00211">211</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  211</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  212</span>  time_mark_value_interpretation type;</div>
+<div class="line"><span class="lineno">  213</span> </div>
+<div class="line"><span class="lineno">  214</span>  <span class="keywordflow">if</span> (time == 36001) {</div>
+<div class="line"><span class="lineno">  215</span>    <span class="comment">// value is undefined or unknown</span></div>
+<div class="line"><span class="lineno">  216</span>    type = time_mark_value_interpretation::undefined;</div>
+<div class="line"><span class="lineno">  217</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (time == 36000) {</div>
+<div class="line"><span class="lineno">  218</span>    <span class="comment">// used to indicate time &gt;3600 seconds</span></div>
+<div class="line"><span class="lineno">  219</span>    type = time_mark_value_interpretation::over_an_hour;</div>
+<div class="line"><span class="lineno">  220</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (time &gt;= 35991 &amp;&amp; time &lt;= 35999) {</div>
+<div class="line"><span class="lineno">  221</span>    <span class="comment">// leap second</span></div>
+<div class="line"><span class="lineno">  222</span>    type = time_mark_value_interpretation::leap_second;</div>
+<div class="line"><span class="lineno">  223</span>  } <span class="keywordflow">else</span> { <span class="comment">// time &gt;= 0 &amp;&amp; time &lt;= 36000</span></div>
+<div class="line"><span class="lineno">  224</span>    type = time_mark_value_interpretation::normal;</div>
+<div class="line"><span class="lineno">  225</span>  }</div>
+<div class="line"><span class="lineno">  226</span> </div>
+<div class="line"><span class="lineno">  227</span>  <span class="keywordflow">return</span> type;</div>
+<div class="line"><span class="lineno">  228</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -551,6 +617,9 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::string etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString </td>
@@ -568,6 +637,11 @@ Variables</h2></td></tr>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>nanosec</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Converts a value from message type TimeMarkValue into a string representation. </p>
@@ -581,105 +655,36 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Decoded String representation of the encoded time </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00246">246</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  247</span>{</div>
-<div class="line"><span class="lineno">  248</span>  time_mark_value_interpretation time_type = <a class="code hl_function" href="#a85b380388e8aa682e7b4bb703061d9e4">interpretTimeMarkValueType</a>(time);</div>
-<div class="line"><span class="lineno">  249</span> </div>
-<div class="line"><span class="lineno">  250</span>  std::string text_content;</div>
-<div class="line"><span class="lineno">  251</span> </div>
-<div class="line"><span class="lineno">  252</span>  <span class="keywordflow">switch</span> (time_type) {</div>
-<div class="line"><span class="lineno">  253</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::undefined:</div>
-<div class="line"><span class="lineno">  254</span>      text_content = <span class="stringliteral">&quot;undefined&quot;</span>;</div>
-<div class="line"><span class="lineno">  255</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  256</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::over_an_hour:</div>
-<div class="line"><span class="lineno">  257</span>      text_content = <span class="stringliteral">&quot;&gt;36000s&quot;</span>;</div>
-<div class="line"><span class="lineno">  258</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::leap_second:</div>
-<div class="line"><span class="lineno">  260</span>      text_content = <span class="stringliteral">&quot;leap second&quot;</span>;</div>
-<div class="line"><span class="lineno">  261</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  262</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::normal:</div>
-<div class="line"><span class="lineno">  263</span>      <span class="keywordtype">float</span> rel_time_until_change = <a class="code hl_function" href="#a84610814e3088a91f4c6a6e5c076b19b">interpretTimeMarkValueAsSeconds</a>(time, seconds, nanosec);</div>
-<div class="line"><span class="lineno">  264</span> </div>
-<div class="line"><span class="lineno">  265</span>      <span class="comment">// set displayed precision to 0.1</span></div>
-<div class="line"><span class="lineno">  266</span>      std::stringstream ss;</div>
-<div class="line"><span class="lineno">  267</span>      ss &lt;&lt; std::fixed &lt;&lt; std::setprecision(1) &lt;&lt; rel_time_until_change &lt;&lt; <span class="stringliteral">&quot;s&quot;</span>;</div>
-<div class="line"><span class="lineno">  268</span>      text_content = ss.str();</div>
-<div class="line"><span class="lineno">  269</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  270</span>  }</div>
-<div class="line"><span class="lineno">  271</span> </div>
-<div class="line"><span class="lineno">  272</span>  <span class="keywordflow">return</span> text_content;</div>
-<div class="line"><span class="lineno">  273</span>}</div>
-<div class="ttc" id="aspatem__ts__utils_8h_html_a84610814e3088a91f4c6a6e5c076b19b"><div class="ttname"><a href="#a84610814e3088a91f4c6a6e5c076b19b">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsSeconds</a></div><div class="ttdeci">float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec)</div><div class="ttdoc">Calculate the amount of seconds until the given time is reached.</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00230">spatem_ts_utils.h:230</a></div></div>
-<div class="ttc" id="aspatem__ts__utils_8h_html_a85b380388e8aa682e7b4bb703061d9e4"><div class="ttname"><a href="#a85b380388e8aa682e7b4bb703061d9e4">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueType</a></div><div class="ttdeci">time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time)</div><div class="ttdoc">Interprets the type of a TimeMark message See etsi ASNI1 - IS TS 103 301 documentation for for the en...</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00203">spatem_ts_utils.h:203</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a3673d51902a396c5cba9f87ebfd1c6a9" name="a3673d51902a396c5cba9f87ebfd1c6a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3673d51902a396c5cba9f87ebfd1c6a9">&#9670;&#160;</a></span>color_green</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::array&lt;float, 4&gt; etsi_its_spatem_ts_msgs::access::color_green {0.18, 0.79, 0.21, 1.0}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00041">41</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>{0.18, 0.79, 0.21, 1.0};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ab19442ec9147f121a4e9dc09e3076f0d" name="ab19442ec9147f121a4e9dc09e3076f0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab19442ec9147f121a4e9dc09e3076f0d">&#9670;&#160;</a></span>color_grey</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::array&lt;float, 4&gt; etsi_its_spatem_ts_msgs::access::color_grey {0.5, 0.5, 0.5, 1.0}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00040">40</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>{0.5, 0.5, 0.5, 1.0};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="affa846dd40db30e3acabc225e9daf421" name="affa846dd40db30e3acabc225e9daf421"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affa846dd40db30e3acabc225e9daf421">&#9670;&#160;</a></span>color_orange</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::array&lt;float, 4&gt; etsi_its_spatem_ts_msgs::access::color_orange {0.9, 0.7, 0.09, 1.0}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00042">42</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   42</span>{0.9, 0.7, 0.09, 1.0};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a31404c6e3433f1c11c1e6205b1d7f46d" name="a31404c6e3433f1c11c1e6205b1d7f46d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31404c6e3433f1c11c1e6205b1d7f46d">&#9670;&#160;</a></span>color_red</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::array&lt;float, 4&gt; etsi_its_spatem_ts_msgs::access::color_red {0.8, 0.2, 0.2, 1.0}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00043">43</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>{0.8, 0.2, 0.2, 1.0};</div>
+<p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00280">280</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  281</span>{</div>
+<div class="line"><span class="lineno">  282</span>  time_mark_value_interpretation time_type = <a class="code hl_function" href="#a85b380388e8aa682e7b4bb703061d9e4">interpretTimeMarkValueType</a>(time);</div>
+<div class="line"><span class="lineno">  283</span> </div>
+<div class="line"><span class="lineno">  284</span>  std::string text_content;</div>
+<div class="line"><span class="lineno">  285</span> </div>
+<div class="line"><span class="lineno">  286</span>  <span class="keywordflow">switch</span> (time_type) {</div>
+<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::undefined:</div>
+<div class="line"><span class="lineno">  288</span>      text_content = <span class="stringliteral">&quot;undefined&quot;</span>;</div>
+<div class="line"><span class="lineno">  289</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  290</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::over_an_hour:</div>
+<div class="line"><span class="lineno">  291</span>      text_content = <span class="stringliteral">&quot;&gt;36000s&quot;</span>;</div>
+<div class="line"><span class="lineno">  292</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  293</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::leap_second:</div>
+<div class="line"><span class="lineno">  294</span>      text_content = <span class="stringliteral">&quot;leap second&quot;</span>;</div>
+<div class="line"><span class="lineno">  295</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  296</span>    <span class="keywordflow">case</span> time_mark_value_interpretation::normal:</div>
+<div class="line"><span class="lineno">  297</span>      <span class="keywordtype">float</span> rel_time_until_change = <a class="code hl_function" href="#a84610814e3088a91f4c6a6e5c076b19b">interpretTimeMarkValueAsSeconds</a>(time, seconds, nanosec);</div>
+<div class="line"><span class="lineno">  298</span> </div>
+<div class="line"><span class="lineno">  299</span>      <span class="comment">// set displayed precision to 0.1</span></div>
+<div class="line"><span class="lineno">  300</span>      std::stringstream ss;</div>
+<div class="line"><span class="lineno">  301</span>      ss &lt;&lt; std::fixed &lt;&lt; std::setprecision(1) &lt;&lt; rel_time_until_change &lt;&lt; <span class="stringliteral">&quot;s&quot;</span>;</div>
+<div class="line"><span class="lineno">  302</span>      text_content = ss.str();</div>
+<div class="line"><span class="lineno">  303</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  304</span>  }</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>  <span class="keywordflow">return</span> text_content;</div>
+<div class="line"><span class="lineno">  307</span>}</div>
+<div class="ttc" id="aspatem__ts__utils_8h_html_a84610814e3088a91f4c6a6e5c076b19b"><div class="ttname"><a href="#a84610814e3088a91f4c6a6e5c076b19b">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsSeconds</a></div><div class="ttdeci">float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec)</div><div class="ttdoc">Calculates the delta between the encoded time mark and the current timestamp.</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00259">spatem_ts_utils.h:259</a></div></div>
+<div class="ttc" id="aspatem__ts__utils_8h_html_a85b380388e8aa682e7b4bb703061d9e4"><div class="ttname"><a href="#a85b380388e8aa682e7b4bb703061d9e4">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueType</a></div><div class="ttdeci">time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time)</div><div class="ttdoc">Interprets the type of a TimeMark message See etsi ASNI1 - IS TS 103 301 documentation for for the en...</div><div class="ttdef"><b>Definition</b> <a href="spatem__ts__utils_8h_source.html#l00211">spatem_ts_utils.h:211</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
