@@ -44,8 +44,11 @@ namespace access {
 
   static constexpr int HOUR_IN_SECONDS = 3600;
   static constexpr int HALF_HOUR_IN_SECONDS = 1800;
-  static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL; 
-  static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS_10e8 = 100000000LL;
+  static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL;
+
+  // ETSI Timemark value equals 0.1 seconds and 10e8 nanoseconds
+  static constexpr int64_t FACTOR_ETSI_TIMEMARK_TO_NANOSECONDS = 100000000LL;
+  static constexpr float FACTOR_ETSI_TIMEMARK_TO_SECONDS = 0.1f;
 
   enum time_mark_value_interpretation { normal, undefined, over_an_hour, leap_second };
 
@@ -232,9 +235,9 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   * @return Delta time between the time stamp and the next time mark in nanoseconds
   */
  inline int64_t interpretTimeMarkValueAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
-  // calculate elapsed nanoseconds since the start of the last full hour  in nanoseconds 
-  int64_t abs_time_hour_nanosec = ((nanosec) % (3600 * 1000000000LL));
-  int64_t abs_time_decoded_nanosec = static_cast<int64_t>(time) * 100000000LL;
+  // calculate elapsed nanoseconds since the start of the last full hour in nanoseconds 
+  int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
+  int64_t abs_time_decoded_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS;
   int64_t rel_time_until_change =  abs_time_decoded_nanosec - abs_time_hour_nanosec;
 
   // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
@@ -256,7 +259,7 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
 inline float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
   // calculate elapsed seconds since the start of the last full hour  
   float abs_time_hour = ((int)(seconds)) % HOUR_IN_SECONDS + (float)nanosec * 1e-9;
-  float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
+  float rel_time_until_change = (float)time * FACTOR_ETSI_TIMEMARK_TO_SECONDS - abs_time_hour;
 
   // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
   if (rel_time_until_change < - HALF_HOUR_IN_SECONDS) {
