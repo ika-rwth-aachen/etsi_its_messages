@@ -88,6 +88,28 @@ inline double getSpeedConfidence(const Speed& speed) {
 }
 
 /**
+ * @brief Get the AccelerationMagnitude value
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitude from
+ * @return double acceleration magnitude in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitude(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_magnitude_value.value) * 1e-1;
+}
+
+/**
+ * @brief Get the AccelerationMagnitude Confidence
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitudeConfidence from
+ * @return double acceleration magnitude standard deviation in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitudeConfidence(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-1;
+}
+
+/**
  * @brief Get the UTM Position defined by the given ReferencePosition
  *
  * The position is transformed into UTM by using GeographicLib::UTMUPS

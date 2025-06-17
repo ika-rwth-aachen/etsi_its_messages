@@ -154,6 +154,52 @@ inline void setSpeed(Speed& speed, const double value, const double confidence =
 }
 
 /**
+ * @brief Set the Acceleration Magnitude Value object
+ * 
+ * @param accel_mag_value object to set
+ * @param value AccelerationMagnitudeValue in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitudeValue>
+inline void setAccelerationMagnitudeValue(AccelerationMagnitudeValue& accel_mag_value, const double value) {
+  auto accel_mag = std::round(value * 1e1);
+  throwIfOutOfRange(accel_mag, AccelerationMagnitudeValue::MIN, AccelerationMagnitudeValue::MAX, "AccelerationMagnitudeValue");
+  accel_mag_value.value = static_cast<decltype(accel_mag_value.value)>(accel_mag);
+}
+
+/**
+ * @brief Set the AccelerationMagnitude Confidence object
+ * 
+ * @param accel_mag_confidence object to set
+ * @param value standard deviation in m/s^2 as decimal number
+ */
+template <typename AccelerationConfidence>
+inline void setAccelerationMagnitudeConfidence(AccelerationConfidence& accel_mag_confidence, const double value) {
+  auto accel_mag_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  if (accel_mag_conf < AccelerationConfidence::MIN && accel_mag_conf > 0.0){
+    accel_mag_conf = AccelerationConfidence::MIN;
+  } else if (accel_mag_conf >= AccelerationConfidence::OUT_OF_RANGE || accel_mag_conf <= 0.0) {
+    accel_mag_conf = AccelerationConfidence::UNAVAILABLE;
+  }
+  accel_mag_confidence.value = static_cast<decltype(accel_mag_confidence.value)>(accel_mag_conf);
+}
+
+/**
+ * @brief Set the AccelerationMagnitude object
+ *
+ * AccelerationConfidence is set to UNAVAILABLE
+ *
+ * @param accel_mag object to set
+ * @param value AccelerationMagnitudeValue in m/s^2 as decimal number
+ * @param confidence standard deviation in m/s^2 as decimal number (default: infinity, mapping to AccelerationConfidence::UNAVAILABLE)
+ */
+template<typename AccelerationMagnitude>
+inline void setAccelerationMagnitude(AccelerationMagnitude& accel_mag, const double value,
+                                     const double confidence = std::numeric_limits<double>::infinity()) {
+  setAccelerationMagnitudeConfidence(accel_mag.acceleration_confidence, confidence);
+  setAccelerationMagnitudeValue(accel_mag.acceleration_magnitude_value, value);
+}
+
+/**
  * @brief Set the Acceleration Confidence object
  * 
  * @param accel_confidence object to set
