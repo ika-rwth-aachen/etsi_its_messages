@@ -275,7 +275,7 @@ inline void setCartesianAngle(CartesianAngle& angle, const double value,
   // wrap angle to 0..2pi
   double wrapped_value = fmod(value, 2*M_PI);
   if (wrapped_value < 0.0) {
-    wrapped_value += 2*M_PI;
+    wrapped_value += 2 * M_PI;
   }
   angle.value.value = static_cast<uint16_t>(wrapped_value * 180 / M_PI * 10); // convert to 0.1 degrees
 
@@ -411,6 +411,17 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
   object.acceleration_is_present = true;
 }
 
+/**
+ * @brief Set the Polar Acceleration Of Perceived Object object
+ * 
+ * @param object PerceivedObject to set the Polar Acceleration for
+ * @param magnitude The magnitude of the acceleration in m/s^2 in the xy plane.
+ * @param angle The angle of the acceleration in radians in the xy plane.
+ * @param z The z component of the acceleration in m/s^2 (default: 0.0).
+ * @param magnitude_std The standard deviation in m/s^2 for the acceleration magnitude (default: infinity).
+ * @param angle_std The standard deviation in radians for the angle (default: infinity).
+ * @param z_std The standard deviation in m/s^2 for the z acceleration component (default: infinity).
+ */
 inline void setPolarAccelerationOfPerceivedObject(PerceivedObject& object,
                                               const double magnitude,
                                               const double angle,
@@ -422,7 +433,7 @@ inline void setPolarAccelerationOfPerceivedObject(PerceivedObject& object,
   setAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude, magnitude, magnitude_std);
   setCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction, angle, angle_std);
   if (z != 0.0) {
-    setAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration, z * 10,
+    setAccelerationComponent(object.acceleration.polar_acceleration.z_acceleration, z * 10,
                              z_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.acceleration.polar_acceleration.z_acceleration_is_present = true;
   } else {

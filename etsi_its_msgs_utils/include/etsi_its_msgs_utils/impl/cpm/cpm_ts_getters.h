@@ -441,7 +441,6 @@ inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &
       velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
     }
   } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
-    gm::Vector3 velocity;
     velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
     velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
     if (object.velocity.cartesian_velocity.z_velocity_is_present) {
@@ -466,10 +465,11 @@ inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPercei
     throw std::invalid_argument("No velocity present in PerceivedObject");
   }
   if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
-    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude);
-    double angle_confidence = getCartesianAngleConfidence(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+    double angle_confidence = getCartesianAngleConfidence(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
     double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
-    double lateral_confidence = speed_confidence * angle_confidence; // not exactly, but best approximation
+    double lateral_confidence = speed * angle_confidence; // not exactly, but best approximation
     double x_confidence = speed_confidence * cos(angle) * cos(angle) 
                           + lateral_confidence * sin(angle) * sin(angle);
     double y_confidence = speed_confidence * sin(angle) * sin(angle)
@@ -566,9 +566,10 @@ inline std::tuple<double, double, double> getCartesianAccelerationConfidenceOfPe
     return std::make_tuple(x_confidence, y_confidence, z_confidence);
   } else if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION) {
     double magnitude_confidence = getAccelerationMagnitudeConfidence(object.acceleration.polar_acceleration.acceleration_magnitude);
-    double angle_confidence = getCartesianAngleConfidence(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double angle_confidence = getCartesianAngleConfidence(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double magnitude = getAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude);
     double angle = getCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
-    double lateral_confidence = magnitude_confidence * angle_confidence; // best approximation
+    double lateral_confidence = magnitude * angle_confidence; // best approximation
     double x_confidence = magnitude_confidence * cos(angle) * cos(angle)
                           + lateral_confidence * sin(angle) * sin(angle);
     double y_confidence = magnitude_confidence * sin(angle) * sin(angle)
