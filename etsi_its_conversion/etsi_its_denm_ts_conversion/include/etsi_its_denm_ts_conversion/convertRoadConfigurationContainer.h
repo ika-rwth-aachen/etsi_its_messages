@@ -56,13 +56,8 @@ RoadConfigurationContainer ::=  SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_RoadConfigurationContainer.h>
 #include <etsi_its_denm_ts_conversion/convertMetaInformation.h>
 #include <etsi_its_denm_ts_conversion/convertRoadConfigurationSectionList.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadConfigurationContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_configuration_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

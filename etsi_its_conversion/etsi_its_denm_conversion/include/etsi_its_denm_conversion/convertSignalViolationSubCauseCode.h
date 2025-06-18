@@ -42,13 +42,8 @@ SignalViolationSubCauseCode ::= INTEGER {unavailable(0), stopSignViolation(1), t
 #include <etsi_its_denm_coding/denm_SignalViolationSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/SignalViolationSubCauseCode.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/signal_violation_sub_cause_code.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

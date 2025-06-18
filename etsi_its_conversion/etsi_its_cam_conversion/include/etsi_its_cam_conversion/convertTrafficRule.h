@@ -42,13 +42,8 @@ TrafficRule ::= ENUMERATED {noPassing(0), noPassingForTrucks(1), passToRight(2),
 
 #include <etsi_its_cam_coding/cam_TrafficRule.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/TrafficRule.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/traffic_rule.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

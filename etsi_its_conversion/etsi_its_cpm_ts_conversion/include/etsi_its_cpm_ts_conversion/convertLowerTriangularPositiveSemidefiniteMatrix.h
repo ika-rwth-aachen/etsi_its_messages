@@ -66,13 +66,8 @@ LowerTriangularPositiveSemidefiniteMatrix ::= SEQUENCE{
 #include <etsi_its_cpm_ts_coding/cpm_ts_LowerTriangularPositiveSemidefiniteMatrix.h>
 #include <etsi_its_cpm_ts_conversion/convertLowerTriangularPositiveSemidefiniteMatrixColumns.h>
 #include <etsi_its_cpm_ts_conversion/convertMatrixIncludedComponents.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/LowerTriangularPositiveSemidefiniteMatrix.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/lower_triangular_positive_semidefinite_matrix.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

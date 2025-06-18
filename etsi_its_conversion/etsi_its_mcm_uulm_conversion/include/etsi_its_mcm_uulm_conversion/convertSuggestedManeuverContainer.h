@@ -45,13 +45,8 @@ SuggestedManeuverContainer ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_SuggestedManeuverContainer.h>
 #include <etsi_its_mcm_uulm_conversion/convertStationId.h>
 #include <etsi_its_mcm_uulm_conversion/convertSuggestedManeuver.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/SuggestedManeuverContainer.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/suggested_maneuver_container.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

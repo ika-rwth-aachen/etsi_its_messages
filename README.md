@@ -6,16 +6,15 @@
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
-  <img src="https://img.shields.io/badge/ROS-noetic-blueviolet"/>
   <img src="https://img.shields.io/badge/ROS 2-humble|jazzy-blueviolet"/>
   <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|MAPEM|MCM|SPATEM|VAM-aqua"/>
 </p>
 
-**ROS / ROS 2 Support for ETSI ITS Messages for V2X Communication**
+**ROS Support for ETSI ITS Messages for V2X Communication**
 
 <img src="assets/teaser.gif" align="right" height=220>
 
-<p align="left">The <i>etsi_its_messages</i> package stack allows to use standardized ETSI ITS messages for V2X communication in ROS / ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization (ROS 2 only).</p>
+<p align="left">The <i>etsi_its_messages</i> package stack allows to use standardized ETSI ITS messages for V2X communication in ROS 2 systems. Apart from the definition of ROS message equivalents to the ETSI ITS standards, this package stack also includes a conversion node for serializing the messages to and from a UDP payload, as well as RViz plugins for visualization.</p>
 
 All message definitions and conversion functions are automatically generated based on the [ASN.1 definitions](https://forge.etsi.org/rep/ITS/asn1) of the standardized ETSI ITS messages.
 
@@ -118,7 +117,7 @@ etsi_its_messages
 
 ## Installation
 
-All *etsi_its_messages* packages are released as official ROS / ROS 2 packages and can easily be installed via a package manager.
+All *etsi_its_messages* packages are released as official ROS 2 packages and can easily be installed via a package manager.
 
 ```bash
 sudo apt update
@@ -130,16 +129,9 @@ sudo apt install ros-$ROS_DISTRO-etsi-its-cam-msgs
 If you would like to install *etsi_its_messages* from source, simply clone this repository into your ROS workspace. All dependencies that are listed in the packages' `package.xml` can be installed using [*rosdep*](http://wiki.ros.org/rosdep).
 
 ```bash
-# etsi_its_messages$
-rosdep install -r --ignore-src --from-paths .
-
-# ROS 2
 # workspace$
+rosdep install -r --ignore-src --from-paths src
 colcon build --packages-up-to etsi_its_messages --cmake-args -DCMAKE_BUILD_TYPE=Release
-
-# ROS
-# workspace$
-catkin build -DCMAKE_BUILD_TYPE=Release etsi_its_messages
 ```
 
 ### docker-ros
@@ -147,17 +139,13 @@ catkin build -DCMAKE_BUILD_TYPE=Release etsi_its_messages
 The *etsi_its_messages* package stack is also available as a Docker image, containerized through [*docker-ros*](https://github.com/ika-rwth-aachen/docker-ros). Note that launching these containers starts the `etsi_its_conversion` node by default.
 
 ```bash
-# ROS 2
-docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros2-jazzy
-
-# ROS
-docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:ros-noetic
+docker run --rm ghcr.io/ika-rwth-aachen/etsi_its_messages:latest
 ```
 
 
 ## Conversion Node
 
-The `etsi_its_conversion` package provides a C++ ROS nodelet or ROS 2 component node for converting `etsi_its_msgs` ROS messages to and from [UPER-encoded](https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference/packed-encoding-rules.html) [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) payloads. This way, ETSI ITS messages cannot only be used within the ROS ecosystem, but may also be received from or sent to outside applications.
+The `etsi_its_conversion` package provides a ROS 2 C++ component node for converting `etsi_its_msgs` ROS messages to and from [UPER-encoded](https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference/packed-encoding-rules.html) [`udp_msgs/msg/UdpPacket`](https://github.com/flynneva/udp_msgs/blob/main/msg/UdpPacket.msg) payloads. This way, ETSI ITS messages cannot only be used within the ROS ecosystem, but may also be received from or sent to outside applications.
 
 The package depends on one dedicated package for each ETSI ITS message type, e.g., `etsi_its_cam_conversion`. These packages hold header-only libraries with recursive conversion functions for each nested message type.
 
@@ -166,15 +154,9 @@ The package depends on one dedicated package for each ETSI ITS message type, e.g
 The conversion node bridges all ETSI ITS message types at the same time in both directions.
 
 ```bash
-# ROS 2
 ros2 launch etsi_its_conversion converter.launch.py
 # or
 ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=8 -p etsi_message_payload_offset:=78
-
-# ROS
-roslaunch etsi_its_conversion converter.ros1.launch
-# or
-rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] _has_btp_destination_port:=true _btp_destination_port_offset:=8 _etsi_message_payload_offset:=78
 ```
 
 #### Subscribed Topics
@@ -225,21 +207,18 @@ rosrun nodelet nodelet standalone etsi_its_conversion/Converter _etsi_types:=[ca
 The `etsi_its_msgs_utils` package contains simple ROS 2 nodes for publishing sample ROS 2 messages of the supported ETSI ITS message types, see [`./etsi_its_msgs_utils/samples/`](./etsi_its_msgs_utils/samples/). For example, publish a sample CPM by running the following.
 
 ```bash
-# ROS 2 only
 ros2 run etsi_its_msgs_utils publish_cpm_ts.py
 ```
 
 You can then visualize the CPM in RViz with the provided demo configuration.
 
 ```bash
-# ROS 2 only
 ros2 launch etsi_its_rviz_plugins demo.launch.py
 ```
 
 And finally, run the [Conversion Node](#conversion-node) to convert ROS 2 messages to binary payloads.
 
 ```bash
-# ROS 2 only
 ros2 run etsi_its_conversion etsi_its_conversion_node \
     --ros-args \
         -r __node:=etsi_its_conversion \
@@ -336,11 +315,6 @@ This repository uses the following software. For full license details, please re
     ```
     MIT License
     Copyright (c) 2016 Erin Power
-    ```
-- [ROS](https://www.ros.org/)
-    ```
-    BSD 3-Clause License
-    All rights reserved.
     ```
 - [ROS 2](https://www.ros2.org/)
     ```

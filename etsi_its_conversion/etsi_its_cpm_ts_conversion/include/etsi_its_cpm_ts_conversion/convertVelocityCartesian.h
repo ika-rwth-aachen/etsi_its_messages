@@ -63,13 +63,8 @@ VelocityCartesian::= SEQUENCE {
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_VelocityCartesian.h>
 #include <etsi_its_cpm_ts_conversion/convertVelocityComponent.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/VelocityCartesian.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/velocity_cartesian.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

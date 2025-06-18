@@ -61,13 +61,8 @@ IntersectionGeometry ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertPosition3D.h>
 #include <etsi_its_mapem_ts_conversion/convertPreemptPriorityList.h>
 #include <etsi_its_mapem_ts_conversion/convertSpeedLimitList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/IntersectionGeometry.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/intersection_geometry.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

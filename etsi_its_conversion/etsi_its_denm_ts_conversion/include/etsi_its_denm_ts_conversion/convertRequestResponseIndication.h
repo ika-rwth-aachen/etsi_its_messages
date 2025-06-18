@@ -55,13 +55,8 @@ RequestResponseIndication ::= ENUMERATED {
 
 #include <etsi_its_denm_ts_coding/denm_ts_RequestResponseIndication.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RequestResponseIndication.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/request_response_indication.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -61,13 +61,8 @@ DeltaReferencePosition ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertDeltaAltitude.h>
 #include <etsi_its_cam_ts_conversion/convertDeltaLatitude.h>
 #include <etsi_its_cam_ts_conversion/convertDeltaLongitude.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/DeltaReferencePosition.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/delta_reference_position.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

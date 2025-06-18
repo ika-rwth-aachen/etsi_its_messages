@@ -93,13 +93,8 @@ AltitudeConfidence ::= ENUMERATED {
 
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_AltitudeConfidence.h>
 
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/AltitudeConfidence.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/altitude_confidence.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

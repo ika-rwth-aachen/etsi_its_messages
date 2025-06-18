@@ -74,13 +74,8 @@ Shape::= CHOICE {
 #include <etsi_its_vam_ts_conversion/convertRadialShape.h>
 #include <etsi_its_vam_ts_conversion/convertRadialShapes.h>
 #include <etsi_its_vam_ts_conversion/convertRectangularShape.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/Shape.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/shape.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

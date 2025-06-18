@@ -41,13 +41,8 @@ PositioningSolutionType ::= ENUMERATED {noPositioningSolution(0), sGNSS(1), dGNS
 
 #include <etsi_its_denm_coding/denm_PositioningSolutionType.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PositioningSolutionType.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/positioning_solution_type.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

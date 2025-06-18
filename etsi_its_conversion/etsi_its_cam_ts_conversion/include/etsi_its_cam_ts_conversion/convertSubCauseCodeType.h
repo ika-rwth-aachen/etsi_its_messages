@@ -50,13 +50,8 @@ SubCauseCodeType ::= INTEGER (0..255)
 #include <etsi_its_cam_ts_coding/cam_ts_SubCauseCodeType.h>
 #include <etsi_its_cam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/SubCauseCodeType.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/sub_cause_code_type.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

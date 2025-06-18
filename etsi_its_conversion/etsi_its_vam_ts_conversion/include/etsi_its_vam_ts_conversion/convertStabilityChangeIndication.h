@@ -58,13 +58,8 @@ StabilityChangeIndication ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_StabilityChangeIndication.h>
 #include <etsi_its_vam_ts_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_vam_ts_conversion/convertStabilityLossProbability.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/StabilityChangeIndication.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/stability_change_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

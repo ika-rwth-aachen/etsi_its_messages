@@ -45,13 +45,8 @@ ManeuverCoordinationMessage ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_ManeuverCoordinationMessage.h>
 #include <etsi_its_mcm_uulm_conversion/convertGenerationDeltaTime.h>
 #include <etsi_its_mcm_uulm_conversion/convertMcmParameters.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ManeuverCoordinationMessage.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/maneuver_coordination_message.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

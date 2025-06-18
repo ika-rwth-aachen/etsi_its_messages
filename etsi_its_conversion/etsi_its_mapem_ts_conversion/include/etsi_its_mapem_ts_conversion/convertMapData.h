@@ -61,13 +61,8 @@ MapData ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertMsgCount.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionClassList.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadSegmentList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/MapData.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/map_data.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

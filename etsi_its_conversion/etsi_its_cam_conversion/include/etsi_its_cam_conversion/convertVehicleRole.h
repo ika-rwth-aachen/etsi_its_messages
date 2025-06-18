@@ -41,13 +41,8 @@ VehicleRole ::= ENUMERATED {default(0), publicTransport(1), specialTransport(2),
 
 #include <etsi_its_cam_coding/cam_VehicleRole.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/VehicleRole.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/vehicle_role.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

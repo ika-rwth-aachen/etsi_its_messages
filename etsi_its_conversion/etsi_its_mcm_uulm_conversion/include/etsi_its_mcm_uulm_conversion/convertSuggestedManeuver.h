@@ -51,13 +51,8 @@ SuggestedManeuver ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertManeuverID.h>
 #include <etsi_its_mcm_uulm_conversion/convertManeuverParameters.h>
 #include <etsi_its_mcm_uulm_conversion/convertParticipatingRoadUserIDContainer.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/SuggestedManeuver.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/suggested_maneuver.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

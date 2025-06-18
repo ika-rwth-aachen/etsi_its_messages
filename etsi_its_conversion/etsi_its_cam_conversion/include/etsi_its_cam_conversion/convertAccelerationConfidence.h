@@ -42,13 +42,8 @@ AccelerationConfidence ::= INTEGER {pointOneMeterPerSecSquared(1), outOfRange(10
 #include <etsi_its_cam_coding/cam_AccelerationConfidence.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/AccelerationConfidence.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/acceleration_confidence.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

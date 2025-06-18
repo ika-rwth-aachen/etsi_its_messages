@@ -47,13 +47,8 @@ PlannedTrajectory ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertTrajectoryPointContainer.h>
 #include <etsi_its_mcm_uulm_conversion/convertTrajectoryPointDeltaTime.h>
 #include <etsi_its_mcm_uulm_conversion/convertTrajectoryStartDeltaTime.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/PlannedTrajectory.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/planned_trajectory.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

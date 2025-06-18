@@ -61,13 +61,8 @@ Velocity3dWithConfidence::= CHOICE{
 #include <etsi_its_cpm_ts_coding/cpm_ts_Velocity3dWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertVelocityCartesian.h>
 #include <etsi_its_cpm_ts_conversion/convertVelocityPolarWithZ.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/Velocity3dWithConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/velocity3d_with_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

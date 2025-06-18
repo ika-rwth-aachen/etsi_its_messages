@@ -58,13 +58,8 @@ ClusterLeaveInfo ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_ClusterLeaveInfo.h>
 #include <etsi_its_vam_ts_conversion/convertClusterLeaveReason.h>
 #include <etsi_its_vam_ts_conversion/convertIdentifier1B.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/ClusterLeaveInfo.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/cluster_leave_info.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

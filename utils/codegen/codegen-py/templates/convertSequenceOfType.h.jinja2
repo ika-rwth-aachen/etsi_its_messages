@@ -46,19 +46,11 @@ SOFTWARE.
 #include <etsi_its_{{etsi_type}}_coding/{{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}.h>
 #include <etsi_its_{{etsi_type}}_conversion/convert{{member.ros_msg_type|replace("[]", "")}}.h>
 {% endfor -%}
-#ifdef ROS1
-{% for member in members -%}
-#include <etsi_its_{{etsi_type}}_msgs/{{member.ros_msg_type|replace("[]", "")}}.h>
-{% endfor -%}
-#include <etsi_its_{{etsi_type}}_msgs/{{ros_msg_type}}.h>
-namespace {{etsi_type}}_msgs = etsi_its_{{etsi_type}}_msgs;
-#else
 {% for member in members -%}
 #include <etsi_its_{{etsi_type}}_msgs/msg/{{member.ros2_msg_type_file_name}}.hpp>
 {% endfor -%}
 #include <etsi_its_{{etsi_type}}_msgs/msg/{{ros2_msg_type_file_name}}.hpp>
 namespace {{etsi_type}}_msgs = etsi_its_{{etsi_type}}_msgs::msg;
-#endif
 
 
 namespace etsi_its_{{etsi_type}}_conversion {

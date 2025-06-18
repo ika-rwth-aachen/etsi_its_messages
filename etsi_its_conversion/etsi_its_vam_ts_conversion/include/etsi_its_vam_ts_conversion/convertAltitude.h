@@ -59,13 +59,8 @@ Altitude ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_Altitude.h>
 #include <etsi_its_vam_ts_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_vam_ts_conversion/convertAltitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/Altitude.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/altitude.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

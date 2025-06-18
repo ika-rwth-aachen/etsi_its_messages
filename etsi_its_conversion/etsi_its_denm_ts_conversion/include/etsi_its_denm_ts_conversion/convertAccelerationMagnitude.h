@@ -57,13 +57,8 @@ AccelerationMagnitude::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_AccelerationMagnitude.h>
 #include <etsi_its_denm_ts_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertAccelerationMagnitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/AccelerationMagnitude.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/acceleration_magnitude.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

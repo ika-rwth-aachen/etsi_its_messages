@@ -60,13 +60,8 @@ PerceivedObjectContainer ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceivedObjectContainer.h>
 #include <etsi_its_cpm_ts_conversion/convertCardinalNumber1B.h>
 #include <etsi_its_cpm_ts_conversion/convertPerceivedObjects.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/PerceivedObjectContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/perceived_object_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

@@ -76,13 +76,8 @@ SituationContainer ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertEventZone.h>
 #include <etsi_its_denm_ts_conversion/convertInformationQuality.h>
 #include <etsi_its_denm_ts_conversion/convertPosition1d.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/SituationContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/situation_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

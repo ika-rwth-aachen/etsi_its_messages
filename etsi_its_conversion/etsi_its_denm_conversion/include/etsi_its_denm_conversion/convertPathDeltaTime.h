@@ -42,13 +42,8 @@ PathDeltaTime ::= INTEGER {tenMilliSecondsInPast(1)} (1..65535, ...)
 #include <etsi_its_denm_coding/denm_PathDeltaTime.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PathDeltaTime.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/path_delta_time.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

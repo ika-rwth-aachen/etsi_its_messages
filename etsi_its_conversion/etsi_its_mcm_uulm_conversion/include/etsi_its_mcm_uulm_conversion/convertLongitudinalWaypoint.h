@@ -55,13 +55,8 @@ LongitudinalWaypoint ::= SEQUENCE {
 #include <etsi_its_mcm_uulm_conversion/convertWaypoint.h>
 #include <etsi_its_mcm_uulm_conversion/convertWaypointDeltaTime.h>
 #include <etsi_its_mcm_uulm_conversion/convertYieldToRoadUserContainer.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/LongitudinalWaypoint.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/longitudinal_waypoint.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

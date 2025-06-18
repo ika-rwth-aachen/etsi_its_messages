@@ -42,13 +42,8 @@ DeltaAltitude ::= INTEGER {oneCentimeterUp (1), oneCentimeterDown (-1), unavaila
 #include <etsi_its_cam_coding/cam_DeltaAltitude.h>
 #include <etsi_its_cam_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/DeltaAltitude.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/delta_altitude.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

@@ -58,13 +58,8 @@ Wgs84Angle ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_Wgs84Angle.h>
 #include <etsi_its_denm_ts_conversion/convertWgs84AngleConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertWgs84AngleValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Wgs84Angle.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/wgs84_angle.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

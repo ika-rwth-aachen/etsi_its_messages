@@ -42,13 +42,8 @@ ParticipatingRoadUserIndex ::= INTEGER(0..127)
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_ParticipatingRoadUserIndex.h>
 #include <etsi_its_mcm_uulm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ParticipatingRoadUserIndex.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/participating_road_user_index.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

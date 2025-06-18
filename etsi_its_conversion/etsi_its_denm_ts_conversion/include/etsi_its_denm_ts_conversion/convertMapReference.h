@@ -57,13 +57,8 @@ MapReference::= CHOICE {
 #include <etsi_its_denm_ts_coding/denm_ts_MapReference.h>
 #include <etsi_its_denm_ts_conversion/convertIntersectionReferenceId.h>
 #include <etsi_its_denm_ts_conversion/convertRoadSegmentReferenceId.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/MapReference.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/map_reference.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

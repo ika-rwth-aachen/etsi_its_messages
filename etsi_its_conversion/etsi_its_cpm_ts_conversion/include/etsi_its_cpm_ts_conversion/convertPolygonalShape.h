@@ -68,13 +68,8 @@ PolygonalShape ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertCartesianPosition3d.h>
 #include <etsi_its_cpm_ts_conversion/convertSequenceOfCartesianPosition3d.h>
 #include <etsi_its_cpm_ts_conversion/convertStandardLength12b.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/PolygonalShape.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/polygonal_shape.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

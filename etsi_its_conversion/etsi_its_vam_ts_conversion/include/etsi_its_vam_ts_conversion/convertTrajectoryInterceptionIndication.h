@@ -64,13 +64,8 @@ TrajectoryInterceptionIndication  ::= SEQUENCE {
 #include <etsi_its_vam_ts_conversion/convertStationId.h>
 #include <etsi_its_vam_ts_conversion/convertTrajectoryInterceptionConfidence.h>
 #include <etsi_its_vam_ts_conversion/convertTrajectoryInterceptionProbability.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/TrajectoryInterceptionIndication.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/trajectory_interception_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

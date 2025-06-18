@@ -61,13 +61,8 @@ LongitudinalLanePosition ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_LongitudinalLanePosition.h>
 #include <etsi_its_cpm_ts_conversion/convertLongitudinalLanePositionConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertLongitudinalLanePositionValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/LongitudinalLanePosition.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/longitudinal_lane_position.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

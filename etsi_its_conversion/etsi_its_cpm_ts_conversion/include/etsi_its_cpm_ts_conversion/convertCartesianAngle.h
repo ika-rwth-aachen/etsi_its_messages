@@ -61,13 +61,8 @@ CartesianAngle ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_CartesianAngle.h>
 #include <etsi_its_cpm_ts_conversion/convertAngleConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertCartesianAngleValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CartesianAngle.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cartesian_angle.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

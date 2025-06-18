@@ -68,13 +68,8 @@ VruSpecificExteriorLights ::= BIT STRING {
 #include <etsi_its_vam_ts_coding/vam_ts_VruSpecificExteriorLights.h>
 #include <etsi_its_vam_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruSpecificExteriorLights.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_specific_exterior_lights.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

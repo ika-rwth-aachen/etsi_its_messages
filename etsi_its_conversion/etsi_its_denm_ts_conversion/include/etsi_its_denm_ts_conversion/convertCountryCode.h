@@ -48,13 +48,8 @@ CountryCode ::= BIT STRING(SIZE(10))
 #include <etsi_its_denm_ts_coding/denm_ts_CountryCode.h>
 #include <etsi_its_denm_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CountryCode.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/country_code.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

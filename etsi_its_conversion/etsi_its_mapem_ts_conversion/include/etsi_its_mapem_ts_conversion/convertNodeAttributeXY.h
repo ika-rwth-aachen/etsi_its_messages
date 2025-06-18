@@ -58,13 +58,8 @@ NodeAttributeXY ::= ENUMERATED {
 
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeAttributeXY.h>
 
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeAttributeXY.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_attribute_xy.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

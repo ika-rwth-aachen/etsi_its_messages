@@ -48,15 +48,9 @@ RoadLaneSetList ::= SEQUENCE (SIZE(1..255)) OF GenericLane
 #include <etsi_its_mapem_ts_coding/mapem_ts_RoadLaneSetList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_GenericLane.h>
 #include <etsi_its_mapem_ts_conversion/convertGenericLane.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/GenericLane.h>
-#include <etsi_its_mapem_ts_msgs/RoadLaneSetList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/generic_lane.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/road_lane_set_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

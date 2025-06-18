@@ -117,13 +117,8 @@ PerceivedObject ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertObjectPerceptionQuality.h>
 #include <etsi_its_denm_ts_conversion/convertSequenceOfIdentifier1B.h>
 #include <etsi_its_denm_ts_conversion/convertVelocity3dWithConfidence.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PerceivedObject.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/perceived_object.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

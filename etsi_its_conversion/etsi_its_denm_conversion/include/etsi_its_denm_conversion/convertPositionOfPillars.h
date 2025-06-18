@@ -45,15 +45,9 @@ PositionOfPillars ::= SEQUENCE (SIZE(1..3, ...)) OF PosPillar
 #include <etsi_its_denm_coding/denm_PositionOfPillars.h>
 #include <etsi_its_denm_coding/denm_PosPillar.h>
 #include <etsi_its_denm_conversion/convertPosPillar.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PosPillar.h>
-#include <etsi_its_denm_msgs/PositionOfPillars.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/pos_pillar.hpp>
 #include <etsi_its_denm_msgs/msg/position_of_pillars.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

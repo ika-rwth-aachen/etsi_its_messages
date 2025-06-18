@@ -71,13 +71,8 @@ RadialShapeDetails ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_RadialShapeDetails.h>
 #include <etsi_its_denm_ts_conversion/convertCartesianAngleValue.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength12b.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RadialShapeDetails.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/radial_shape_details.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

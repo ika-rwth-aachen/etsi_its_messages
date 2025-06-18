@@ -58,13 +58,8 @@ AltitudeConfidence ::= ENUMERATED {
 
 #include <etsi_its_cam_coding/cam_AltitudeConfidence.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/AltitudeConfidence.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/altitude_confidence.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

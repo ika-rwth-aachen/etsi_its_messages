@@ -82,13 +82,8 @@ RadialShapeDetails ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_RadialShapeDetails.h>
 #include <etsi_its_cpm_ts_conversion/convertCartesianAngleValue.h>
 #include <etsi_its_cpm_ts_conversion/convertStandardLength12b.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/RadialShapeDetails.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/radial_shape_details.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

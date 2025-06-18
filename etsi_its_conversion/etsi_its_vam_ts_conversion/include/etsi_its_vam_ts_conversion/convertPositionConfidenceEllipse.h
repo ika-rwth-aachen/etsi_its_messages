@@ -66,13 +66,8 @@ PositionConfidenceEllipse ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_PositionConfidenceEllipse.h>
 #include <etsi_its_vam_ts_conversion/convertSemiAxisLength.h>
 #include <etsi_its_vam_ts_conversion/convertWgs84AngleValue.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/PositionConfidenceEllipse.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/position_confidence_ellipse.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

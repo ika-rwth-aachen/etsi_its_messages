@@ -72,13 +72,8 @@ AccelerationConfidence ::= INTEGER {
 #include <etsi_its_cpm_ts_coding/cpm_ts_AccelerationConfidence.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/AccelerationConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/acceleration_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

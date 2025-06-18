@@ -67,13 +67,8 @@ OriginatingVehicleContainer ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertCartesianAngle.h>
 #include <etsi_its_cpm_ts_conversion/convertTrailerDataSet.h>
 #include <etsi_its_cpm_ts_conversion/convertWgs84Angle.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/OriginatingVehicleContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/originating_vehicle_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

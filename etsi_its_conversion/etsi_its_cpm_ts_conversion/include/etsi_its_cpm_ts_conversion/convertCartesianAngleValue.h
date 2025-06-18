@@ -63,13 +63,8 @@ CartesianAngleValue ::= INTEGER {
 #include <etsi_its_cpm_ts_coding/cpm_ts_CartesianAngleValue.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CartesianAngleValue.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cartesian_angle_value.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

@@ -57,13 +57,8 @@ PathPoint ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_PathPoint.h>
 #include <etsi_its_denm_ts_conversion/convertDeltaReferencePosition.h>
 #include <etsi_its_denm_ts_conversion/convertPathDeltaTime.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathPoint.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_point.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

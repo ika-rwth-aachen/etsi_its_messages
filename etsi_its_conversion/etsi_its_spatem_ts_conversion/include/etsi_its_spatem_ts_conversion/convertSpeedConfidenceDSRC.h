@@ -53,13 +53,8 @@ SpeedConfidenceDSRC ::= ENUMERATED {
 
 #include <etsi_its_spatem_ts_coding/spatem_ts_SpeedConfidenceDSRC.h>
 
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/SpeedConfidenceDSRC.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/speed_confidence_dsrc.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

@@ -45,15 +45,9 @@ TrajectoryPointContainer ::= SEQUENCE SIZE(1..128, ...) OF TrajectoryPoint
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_TrajectoryPointContainer.h>
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_TrajectoryPoint.h>
 #include <etsi_its_mcm_uulm_conversion/convertTrajectoryPoint.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/TrajectoryPoint.h>
-#include <etsi_its_mcm_uulm_msgs/TrajectoryPointContainer.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/trajectory_point.hpp>
 #include <etsi_its_mcm_uulm_msgs/msg/trajectory_point_container.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

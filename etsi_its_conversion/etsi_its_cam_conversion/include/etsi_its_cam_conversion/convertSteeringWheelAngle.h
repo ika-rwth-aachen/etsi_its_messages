@@ -45,13 +45,8 @@ SteeringWheelAngle ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_SteeringWheelAngle.h>
 #include <etsi_its_cam_conversion/convertSteeringWheelAngleConfidence.h>
 #include <etsi_its_cam_conversion/convertSteeringWheelAngleValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/SteeringWheelAngle.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/steering_wheel_angle.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

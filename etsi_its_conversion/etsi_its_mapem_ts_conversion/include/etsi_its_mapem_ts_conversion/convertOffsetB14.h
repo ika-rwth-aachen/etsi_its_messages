@@ -45,13 +45,8 @@ Offset-B14 ::= INTEGER (-8192..8191)
 #include <etsi_its_mapem_ts_coding/mapem_ts_Offset-B14.h>
 #include <etsi_its_mapem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/OffsetB14.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/offset_b14.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

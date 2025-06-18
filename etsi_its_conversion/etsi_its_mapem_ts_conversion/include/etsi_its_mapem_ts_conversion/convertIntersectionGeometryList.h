@@ -48,15 +48,9 @@ IntersectionGeometryList ::= SEQUENCE (SIZE(1..32)) OF IntersectionGeometry
 #include <etsi_its_mapem_ts_coding/mapem_ts_IntersectionGeometryList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_IntersectionGeometry.h>
 #include <etsi_its_mapem_ts_conversion/convertIntersectionGeometry.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/IntersectionGeometry.h>
-#include <etsi_its_mapem_ts_msgs/IntersectionGeometryList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/intersection_geometry.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/intersection_geometry_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

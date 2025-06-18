@@ -46,13 +46,8 @@ PosConfidenceEllipse ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_PosConfidenceEllipse.h>
 #include <etsi_its_cam_conversion/convertHeadingValue.h>
 #include <etsi_its_cam_conversion/convertSemiAxisLength.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PosConfidenceEllipse.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/pos_confidence_ellipse.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

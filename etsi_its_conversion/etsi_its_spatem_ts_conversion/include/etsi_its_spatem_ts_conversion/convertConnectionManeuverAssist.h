@@ -54,13 +54,8 @@ ConnectionManeuverAssist ::= SEQUENCE {
 #include <etsi_its_spatem_ts_conversion/convertPedestrianBicycleDetect.h>
 #include <etsi_its_spatem_ts_conversion/convertWaitOnStopline.h>
 #include <etsi_its_spatem_ts_conversion/convertZoneLength.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/ConnectionManeuverAssist.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/connection_maneuver_assist.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

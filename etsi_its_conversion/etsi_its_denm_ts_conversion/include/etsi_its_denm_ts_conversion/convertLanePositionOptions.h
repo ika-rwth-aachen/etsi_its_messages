@@ -72,13 +72,8 @@ LanePositionOptions ::= CHOICE {
 #include <etsi_its_denm_ts_conversion/convertLanePositionWithLateralDetails.h>
 #include <etsi_its_denm_ts_conversion/convertLaneType.h>
 #include <etsi_its_denm_ts_conversion/convertTrafficIslandPosition.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/LanePositionOptions.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/lane_position_options.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

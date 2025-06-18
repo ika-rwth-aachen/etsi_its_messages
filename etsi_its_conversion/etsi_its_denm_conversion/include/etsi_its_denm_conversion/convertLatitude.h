@@ -42,13 +42,8 @@ Latitude ::= INTEGER {oneMicrodegreeNorth (10), oneMicrodegreeSouth (-10), unava
 #include <etsi_its_denm_coding/denm_Latitude.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/Latitude.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/latitude.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

@@ -51,15 +51,9 @@ SequenceOfTrajectoryInterceptionIndication ::=  SEQUENCE (SIZE(1..8,...)) OF Tra
 #include <etsi_its_vam_ts_coding/vam_ts_SequenceOfTrajectoryInterceptionIndication.h>
 #include <etsi_its_vam_ts_coding/vam_ts_TrajectoryInterceptionIndication.h>
 #include <etsi_its_vam_ts_conversion/convertTrajectoryInterceptionIndication.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/TrajectoryInterceptionIndication.h>
-#include <etsi_its_vam_ts_msgs/SequenceOfTrajectoryInterceptionIndication.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/trajectory_interception_indication.hpp>
 #include <etsi_its_vam_ts_msgs/msg/sequence_of_trajectory_interception_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

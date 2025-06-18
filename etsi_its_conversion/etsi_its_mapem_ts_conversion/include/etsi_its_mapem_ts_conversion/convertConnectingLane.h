@@ -48,13 +48,8 @@ ConnectingLane ::= SEQUENCE {
 #include <etsi_its_mapem_ts_coding/mapem_ts_ConnectingLane.h>
 #include <etsi_its_mapem_ts_conversion/convertAllowedManeuvers.h>
 #include <etsi_its_mapem_ts_conversion/convertLaneID.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/ConnectingLane.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/connecting_lane.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

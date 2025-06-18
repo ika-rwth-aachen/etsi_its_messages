@@ -46,13 +46,8 @@ VehicleIdentification ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_VehicleIdentification.h>
 #include <etsi_its_denm_conversion/convertVDS.h>
 #include <etsi_its_denm_conversion/convertWMInumber.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/VehicleIdentification.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/vehicle_identification.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

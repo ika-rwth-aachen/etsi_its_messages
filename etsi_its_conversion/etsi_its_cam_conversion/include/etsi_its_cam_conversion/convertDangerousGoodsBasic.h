@@ -62,13 +62,8 @@ DangerousGoodsBasic::= ENUMERATED {
 
 #include <etsi_its_cam_coding/cam_DangerousGoodsBasic.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/DangerousGoodsBasic.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/dangerous_goods_basic.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

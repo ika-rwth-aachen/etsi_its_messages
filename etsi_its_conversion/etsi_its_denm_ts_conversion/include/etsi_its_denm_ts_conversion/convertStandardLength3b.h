@@ -66,13 +66,8 @@ StandardLength3b ::= ENUMERATED {
 
 #include <etsi_its_denm_ts_coding/denm_ts_StandardLength3b.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/StandardLength3b.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/standard_length3b.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

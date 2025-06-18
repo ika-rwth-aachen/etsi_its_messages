@@ -60,13 +60,8 @@ DangerousGoodsExtended ::= SEQUENCE {
 #include <etsi_its_denm_conversion/convertPhoneNumber.h>
 #include <etsi_its_denm_coding/UTF8String.h>
 #include <etsi_its_primitives_conversion/convertUTF8String.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DangerousGoodsExtended.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/dangerous_goods_extended.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

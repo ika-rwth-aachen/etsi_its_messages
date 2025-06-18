@@ -45,13 +45,8 @@ VerticalAcceleration ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_VerticalAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cam_conversion/convertVerticalAccelerationValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/VerticalAcceleration.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/vertical_acceleration.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

@@ -62,13 +62,8 @@ ObjectDimensionConfidence ::= INTEGER {
 #include <etsi_its_cpm_ts_coding/cpm_ts_ObjectDimensionConfidence.h>
 #include <etsi_its_cpm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/ObjectDimensionConfidence.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/object_dimension_confidence.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

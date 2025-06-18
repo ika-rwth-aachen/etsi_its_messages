@@ -61,13 +61,8 @@ Speed ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_Speed.h>
 #include <etsi_its_cpm_ts_conversion/convertSpeedConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertSpeedValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/Speed.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/speed.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

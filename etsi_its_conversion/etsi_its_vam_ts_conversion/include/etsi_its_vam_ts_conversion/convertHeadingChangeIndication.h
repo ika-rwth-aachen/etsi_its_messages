@@ -58,13 +58,8 @@ HeadingChangeIndication ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_HeadingChangeIndication.h>
 #include <etsi_its_vam_ts_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_vam_ts_conversion/convertTurningDirection.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/HeadingChangeIndication.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/heading_change_indication.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

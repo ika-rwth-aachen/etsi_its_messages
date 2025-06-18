@@ -61,13 +61,8 @@ python3 \
 #include <etsi_its_cam_ts_conversion/convertClosedLanes.h>
 #include <etsi_its_cam_ts_conversion/convertLightBarSirenInUse.h>
 #include <etsi_its_cam_ts_conversion/convertRoadworksSubCauseCode.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/RoadWorksContainerBasic.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/road_works_container_basic.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

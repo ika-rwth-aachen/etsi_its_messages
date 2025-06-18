@@ -61,13 +61,8 @@ CartesianAngularVelocityComponent ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_CartesianAngularVelocityComponent.h>
 #include <etsi_its_cpm_ts_conversion/convertAngularSpeedConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertCartesianAngularVelocityComponentValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CartesianAngularVelocityComponent.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/cartesian_angular_velocity_component.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

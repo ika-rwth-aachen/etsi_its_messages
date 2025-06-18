@@ -70,13 +70,8 @@ BasicLaneInformation::= SEQUENCE{
 #include <etsi_its_denm_ts_conversion/convertLanePosition.h>
 #include <etsi_its_denm_ts_conversion/convertLaneWidth.h>
 #include <etsi_its_denm_ts_conversion/convertRoadSectionId.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/BasicLaneInformation.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/basic_lane_information.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

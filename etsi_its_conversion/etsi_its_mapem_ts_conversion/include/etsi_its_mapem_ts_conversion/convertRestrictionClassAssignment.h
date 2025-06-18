@@ -48,13 +48,8 @@ RestrictionClassAssignment ::= SEQUENCE {
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionClassAssignment.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionClassID.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionUserTypeList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RestrictionClassAssignment.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/restriction_class_assignment.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -69,13 +69,8 @@ PreCrashContainer ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertPerceivedObject.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength12b.h>
 #include <etsi_its_denm_ts_conversion/convertStationId.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PreCrashContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/pre_crash_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

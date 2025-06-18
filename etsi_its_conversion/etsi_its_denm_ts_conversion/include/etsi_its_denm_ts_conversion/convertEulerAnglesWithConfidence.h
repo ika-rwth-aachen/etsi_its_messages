@@ -65,13 +65,8 @@ EulerAnglesWithConfidence ::= SEQUENCE {
 
 #include <etsi_its_denm_ts_coding/denm_ts_EulerAnglesWithConfidence.h>
 #include <etsi_its_denm_ts_conversion/convertCartesianAngle.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/EulerAnglesWithConfidence.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/euler_angles_with_confidence.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

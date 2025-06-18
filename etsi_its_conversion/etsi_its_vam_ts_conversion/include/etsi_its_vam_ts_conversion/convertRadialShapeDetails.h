@@ -78,13 +78,8 @@ RadialShapeDetails ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_RadialShapeDetails.h>
 #include <etsi_its_vam_ts_conversion/convertCartesianAngleValue.h>
 #include <etsi_its_vam_ts_conversion/convertStandardLength12b.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/RadialShapeDetails.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/radial_shape_details.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

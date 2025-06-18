@@ -46,13 +46,8 @@ CauseCode ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_CauseCode.h>
 #include <etsi_its_cam_conversion/convertCauseCodeType.h>
 #include <etsi_its_cam_conversion/convertSubCauseCodeType.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/CauseCode.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/cause_code.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

@@ -62,13 +62,8 @@ PositionOfOccupants ::= BIT STRING {
 #include <etsi_its_denm_coding/denm_PositionOfOccupants.h>
 #include <etsi_its_denm_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PositionOfOccupants.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/position_of_occupants.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

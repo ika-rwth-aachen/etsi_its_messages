@@ -73,13 +73,8 @@ AccelerationControl ::= BIT STRING {
 #include <etsi_its_cam_ts_coding/cam_ts_AccelerationControl.h>
 #include <etsi_its_cam_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/AccelerationControl.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/acceleration_control.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

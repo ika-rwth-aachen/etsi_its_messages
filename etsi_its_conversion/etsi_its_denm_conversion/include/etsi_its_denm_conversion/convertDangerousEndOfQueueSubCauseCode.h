@@ -42,13 +42,8 @@ DangerousEndOfQueueSubCauseCode ::= INTEGER {unavailable(0), suddenEndOfQueue(1)
 #include <etsi_its_denm_coding/denm_DangerousEndOfQueueSubCauseCode.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DangerousEndOfQueueSubCauseCode.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/dangerous_end_of_queue_sub_cause_code.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

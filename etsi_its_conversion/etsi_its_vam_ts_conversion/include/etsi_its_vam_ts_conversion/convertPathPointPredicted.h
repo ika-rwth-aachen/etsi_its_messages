@@ -74,13 +74,8 @@ PathPointPredicted::= SEQUENCE {
 #include <etsi_its_vam_ts_conversion/convertDeltaLongitude.h>
 #include <etsi_its_vam_ts_conversion/convertDeltaTimeTenthOfSecond.h>
 #include <etsi_its_vam_ts_conversion/convertPosConfidenceEllipse.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/PathPointPredicted.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/path_point_predicted.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

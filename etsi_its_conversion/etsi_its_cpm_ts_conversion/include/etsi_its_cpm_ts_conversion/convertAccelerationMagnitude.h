@@ -61,13 +61,8 @@ AccelerationMagnitude::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_AccelerationMagnitude.h>
 #include <etsi_its_cpm_ts_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertAccelerationMagnitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/AccelerationMagnitude.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/acceleration_magnitude.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

@@ -42,13 +42,8 @@ WMInumber ::= IA5String (SIZE(1..3))
 #include <etsi_its_denm_coding/denm_WMInumber.h>
 #include <etsi_its_denm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/WMInumber.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/wm_inumber.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

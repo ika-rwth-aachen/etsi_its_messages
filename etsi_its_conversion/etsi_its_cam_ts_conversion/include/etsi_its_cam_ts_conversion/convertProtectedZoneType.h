@@ -55,13 +55,8 @@ ProtectedZoneType::= ENUMERATED {
 
 #include <etsi_its_cam_ts_coding/cam_ts_ProtectedZoneType.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/ProtectedZoneType.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/protected_zone_type.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

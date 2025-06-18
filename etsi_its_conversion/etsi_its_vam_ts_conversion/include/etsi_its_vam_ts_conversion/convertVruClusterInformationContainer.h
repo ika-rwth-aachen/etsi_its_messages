@@ -57,13 +57,8 @@ python3 \
 
 #include <etsi_its_vam_ts_coding/vam_ts_VruClusterInformationContainer.h>
 #include <etsi_its_vam_ts_conversion/convertVruClusterInformation.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruClusterInformationContainer.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_cluster_information_container.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

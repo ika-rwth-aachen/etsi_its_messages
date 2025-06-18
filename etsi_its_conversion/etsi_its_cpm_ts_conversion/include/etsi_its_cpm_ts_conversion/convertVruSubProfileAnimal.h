@@ -64,13 +64,8 @@ VruSubProfileAnimal ::= ENUMERATED {
 
 #include <etsi_its_cpm_ts_coding/cpm_ts_VruSubProfileAnimal.h>
 
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/VruSubProfileAnimal.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/vru_sub_profile_animal.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

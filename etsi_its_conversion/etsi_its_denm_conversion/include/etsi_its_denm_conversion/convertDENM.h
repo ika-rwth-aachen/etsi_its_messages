@@ -45,13 +45,8 @@ DENM ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_DENM.h>
 #include <etsi_its_denm_conversion/convertDecentralizedEnvironmentalNotificationMessage.h>
 #include <etsi_its_denm_conversion/convertItsPduHeader.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DENM.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/denm.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

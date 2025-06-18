@@ -81,13 +81,8 @@ PerceptionRegion ::= SEQUENCE {
 #include <etsi_its_cpm_ts_conversion/convertPerceivedObjectIds.h>
 #include <etsi_its_cpm_ts_conversion/convertSequenceOfIdentifier1B.h>
 #include <etsi_its_cpm_ts_conversion/convertShape.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/PerceptionRegion.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/perception_region.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

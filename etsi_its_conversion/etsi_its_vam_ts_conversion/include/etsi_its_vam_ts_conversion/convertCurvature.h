@@ -58,13 +58,8 @@ Curvature ::= SEQUENCE {
 #include <etsi_its_vam_ts_coding/vam_ts_Curvature.h>
 #include <etsi_its_vam_ts_conversion/convertCurvatureConfidence.h>
 #include <etsi_its_vam_ts_conversion/convertCurvatureValue.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/Curvature.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/curvature.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

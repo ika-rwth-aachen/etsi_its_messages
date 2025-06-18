@@ -42,13 +42,8 @@ VDS ::= IA5String (SIZE(6))
 #include <etsi_its_denm_coding/denm_VDS.h>
 #include <etsi_its_denm_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/VDS.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/vds.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

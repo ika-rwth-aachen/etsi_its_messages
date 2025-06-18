@@ -44,13 +44,8 @@ Termination ::= ENUMERATED {isCancellation(0), isNegation (1)}
 
 #include <etsi_its_denm_ts_coding/denm_ts_Termination.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Termination.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/termination.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

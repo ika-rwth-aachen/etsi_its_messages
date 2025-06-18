@@ -59,13 +59,8 @@ CollectivePerceptionMessage ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_CollectivePerceptionMessage.h>
 #include <etsi_its_cpm_ts_conversion/convertCpmPayload.h>
 #include <etsi_its_cpm_ts_conversion/convertItsPduHeader.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/CollectivePerceptionMessage.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/collective_perception_message.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

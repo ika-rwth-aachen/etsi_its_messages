@@ -52,13 +52,8 @@ TimeChangeDetails ::= SEQUENCE {
 #include <etsi_its_spatem_ts_coding/spatem_ts_TimeChangeDetails.h>
 #include <etsi_its_spatem_ts_conversion/convertTimeIntervalConfidence.h>
 #include <etsi_its_spatem_ts_conversion/convertTimeMark.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/TimeChangeDetails.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/time_change_details.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

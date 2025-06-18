@@ -51,15 +51,9 @@ RestrictedTypes ::= SEQUENCE (SIZE(1..3, ...)) OF StationType
 #include <etsi_its_denm_ts_coding/denm_ts_RestrictedTypes.h>
 #include <etsi_its_denm_ts_coding/denm_ts_StationType.h>
 #include <etsi_its_denm_ts_conversion/convertStationType.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/StationType.h>
-#include <etsi_its_denm_ts_msgs/RestrictedTypes.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/station_type.hpp>
 #include <etsi_its_denm_ts_msgs/msg/restricted_types.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

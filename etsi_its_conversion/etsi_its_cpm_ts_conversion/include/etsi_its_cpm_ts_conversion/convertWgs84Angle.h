@@ -62,13 +62,8 @@ Wgs84Angle ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_Wgs84Angle.h>
 #include <etsi_its_cpm_ts_conversion/convertWgs84AngleConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertWgs84AngleValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/Wgs84Angle.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/wgs84_angle.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {
