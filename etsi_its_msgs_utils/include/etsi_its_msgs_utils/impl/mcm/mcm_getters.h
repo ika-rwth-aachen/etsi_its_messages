@@ -54,9 +54,15 @@ namespace etsi_its_mcm_uulm_msgs::access {
   * @brief Get the Altitude value
   *
   * @param altitude to get the Altitude value from
-  * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
+  * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number (0 if unavailable)
   */
- inline double getAltitude(const Altitude& altitude) { return ((double)altitude.altitude_value.value) * 1e-2; }
+ inline double getAltitude(const Altitude& altitude) {
+  if (altitude.altitude_value.value == AltitudeValue::UNAVAILABLE) {
+    return 0.0; // Return 0 if altitude is unavailable
+  }
+
+  return ((double)altitude.altitude_value.value) * 1e-2;
+ }
 
 /**
  * @brief Get the UTM Position defined by the given ReferencePosition
