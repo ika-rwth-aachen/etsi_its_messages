@@ -178,6 +178,10 @@ inline std::vector<LongitudinalWaypoint> getLongitudinalWaypoints(const Maneuver
   return maneuver_constraints.longitudinal_maneuver_waypoint_container.array;
 }
 
+inline std::vector<LongitudinalWaypoint> getLongitudinalWaypoints(const MCM& mcm) {
+  return getLongitudinalWaypoints(getManeuverConstraints(mcm));
+}
+
 inline gm::Point getWaypointDelta(const LongitudinalWaypoint& longitudinal_waypoint) {
   gm::Point point;
   point.x = static_cast<double>(longitudinal_waypoint.waypoint.x_distance.value * 1e-2); // convert cm to m
