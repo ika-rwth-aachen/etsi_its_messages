@@ -183,5 +183,49 @@ inline void setFromUTMPosition(MCM& mcm, const gm::PointStamped& utm_position, c
   setReferencePosition(mcm, latitude, longitude, utm_position.point.z);
 }
 
+// ---------- road_user_container ----------
+
+/**
+ * @brief Set the SpeedValue object
+ *
+ * @param speed object to set
+ * @param value SpeedValue in m/s as decimal number
+ */
+inline void setSpeedValue(SpeedValue& speed, const double value) {
+  auto speed_val = std::round(value * 1e2);
+  throwIfOutOfRange(speed_val, SpeedValue::MIN, SpeedValue::MAX, "SpeedValue");
+  speed.value = static_cast<decltype(speed.value)>(speed_val);
+}
+
+/**
+ * @brief Set the HeadingValue object
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading object to set
+ * @param value Heading value in degree as decimal number
+ */
+inline void setHeadingValue(HeadingValue& heading, const double value) {
+  int64_t deg = (int64_t)std::round(value * 1e1);
+  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
+  heading.value = deg;
+}
+
+template <typename T>
+inline void setRoadUserDimension(T& dim, const double value) {
+  int64_t dim_value = (int64_t)std::round(value * 1e1);
+  throwIfOutOfRange(dim_value, T::MIN, T::MAX, "RoadUserDimension (Width/Length)");
+  dim.value = dim_value;
+}
+
+inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8_t type,
+                            const double speed, const double heading,
+                            const double length, const double width) {
+  road_user_container.road_user_state.road_user_type.value = type;
+  setSpeedValue(road_user_container.road_user_state.speed, speed);
+  setHeadingValue(road_user_container.road_user_state.heading, heading);
+  setRoadUserDimension(road_user_container.road_user_state.length, length);
+  setRoadUserDimension(road_user_container.road_user_state.width, width);
+}
 
 }  // namespace etsi_its_mcm_uulm_msgs::access
