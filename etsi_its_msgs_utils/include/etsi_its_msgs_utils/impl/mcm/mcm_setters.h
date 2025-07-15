@@ -228,4 +228,19 @@ inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8
   setRoadUserDimension(road_user_container.road_user_state.width, width);
 }
 
+inline void setCartesianCoordinateLarge(CartesianCoordinateLarge& coordinate, const double value) {
+  auto coord_value = std::round(value * 1e2); // convert m to cm
+  if (coord_value < CartesianCoordinateLarge::MIN) {
+    coord_value = CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE;
+  } else if (coord_value > CartesianCoordinateLarge::MAX) {
+    coord_value = CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE;
+  }
+  coordinate.value = static_cast<decltype(coordinate.value)>(coord_value);
+}
+
+inline void setWaypoint(Waypoint& waypoint, const double x, const double y) {
+  setCartesianCoordinateLarge(waypoint.x_distance, x);
+  setCartesianCoordinateLarge(waypoint.y_distance, y);
+}
+
 }  // namespace etsi_its_mcm_uulm_msgs::access
