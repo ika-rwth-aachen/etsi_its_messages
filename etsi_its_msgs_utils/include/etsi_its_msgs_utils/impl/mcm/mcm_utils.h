@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file impl/mcm/mcm_utils.h
- * @brief Utility functions for the ETSI ITS MCM (EN and TS)
+ * @brief Utility functions for the ETSI ITS MCM (TR)
  */
 
 #include <etsi_its_msgs_utils/impl/checks.h>

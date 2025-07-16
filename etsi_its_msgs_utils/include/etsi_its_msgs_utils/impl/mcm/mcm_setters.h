@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file impl/mcm/mcm_setters.h
- * @brief Setter functions for the UULM MCM (TS)
+ * @brief Setter functions for the UULM MCM (TR)
  */
 
 #pragma once
@@ -37,6 +37,19 @@ namespace etsi_its_mcm_uulm_msgs::access {
 
 // ---------- header ----------
 
+/**
+ * @brief Sets the ITS PDU header for the given MCM message.
+ *
+ * This function initializes the header of the provided MCM message with the specified
+ * station ID and protocol version. It sets the message ID to MCM, assigns the station ID,
+ * and validates the protocol version to ensure it is within the allowed range.
+ *
+ * @param mcm Reference to the MCM message whose header will be set.
+ * @param station_id The unique identifier of the ITS station.
+ * @param protocol_version The protocol version to use (default is 2).
+ *
+ * @throws std::out_of_range if the protocol_version is outside the valid range defined by OrdinalNumber1B::MIN and OrdinalNumber1B::MAX.
+ */
 inline void setItsPduHeader(MCM& mcm, const uint32_t station_id, const uint8_t protocol_version = 2) {
   mcm.header.message_id.value = MessageId::MCM;
   mcm.header.station_id.value = station_id;
@@ -211,6 +224,15 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
   heading.value = deg;
 }
 
+/**
+ * @brief Sets the dimension value for a road user (width or length).
+ *
+ * @tparam T Type representing the road user dimension, which must have static MIN and MAX members and a `value` member.
+ * @param dim Reference to the dimension object to be set.
+ * @param value The dimension value (in meters) to be set.
+ *
+ * @throws std::exception if the scaled value is out of the allowed range.
+ */
 template <typename T>
 inline void setRoadUserDimension(T& dim, const double value) {
   int64_t dim_value = (int64_t)std::round(value * 1e1);
@@ -218,6 +240,19 @@ inline void setRoadUserDimension(T& dim, const double value) {
   dim.value = dim_value;
 }
 
+/**
+ * @brief Sets the state of a road user in the given container.
+ *
+ * This function updates the road user type, speed, heading, length, and width
+ * of the specified RoadUserContainer object.
+ *
+ * @param road_user_container Reference to the RoadUserContainer to update.
+ * @param type The type of the road user (as a uint8_t value).
+ * @param speed The speed of the road user (in meters per second).
+ * @param heading The heading of the road user (in degrees).
+ * @param length The length of the road user (in meters).
+ * @param width The width of the road user (in meters).
+ */
 inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8_t type,
                             const double speed, const double heading,
                             const double length, const double width) {
@@ -228,6 +263,17 @@ inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8
   setRoadUserDimension(road_user_container.road_user_state.width, width);
 }
 
+/**
+ * @brief Sets the value of a CartesianCoordinateLarge object from a double value in meters.
+ *
+ * Converts the input value from meters to centimeters (by multiplying by 100 and rounding),
+ * and assigns it to the coordinate. If the converted value is outside the valid range
+ * defined by CartesianCoordinateLarge::MIN and CartesianCoordinateLarge::MAX, sets the value
+ * to NEGATIVE_OUT_OF_RANGE or POSITIVE_OUT_OF_RANGE accordingly.
+ *
+ * @param coordinate Reference to the CartesianCoordinateLarge object to set.
+ * @param value The coordinate value in meters.
+ */
 inline void setCartesianCoordinateLarge(CartesianCoordinateLarge& coordinate, const double value) {
   auto coord_value = std::round(value * 1e2); // convert m to cm
   if (coord_value < CartesianCoordinateLarge::MIN) {
@@ -238,6 +284,16 @@ inline void setCartesianCoordinateLarge(CartesianCoordinateLarge& coordinate, co
   coordinate.value = static_cast<decltype(coordinate.value)>(coord_value);
 }
 
+/**
+ * @brief Sets the coordinates of a Waypoint object.
+ *
+ * This function assigns the given x and y values to the waypoint's
+ * x_distance and y_distance members using the setCartesianCoordinateLarge function.
+ *
+ * @param waypoint Reference to the Waypoint object to be modified.
+ * @param x The x-coordinate value to set (in meters as decimal number).
+ * @param y The y-coordinate value to set (in meters as decimal number).
+ */
 inline void setWaypoint(Waypoint& waypoint, const double x, const double y) {
   setCartesianCoordinateLarge(waypoint.x_distance, x);
   setCartesianCoordinateLarge(waypoint.y_distance, y);
