@@ -234,7 +234,7 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   * @param nanosec Timestamp in nanoseconds
   * @return Delta time between the time stamp and the next time mark in nanoseconds
   */
- inline int64_t interpretTimeMarkValueAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
+ inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
   // calculate elapsed nanoseconds since the start of the last full hour in nanoseconds 
   int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
   int64_t abs_time_decoded_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
