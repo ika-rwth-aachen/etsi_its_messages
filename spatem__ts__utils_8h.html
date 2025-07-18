@@ -142,9 +142,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a85b380388e8aa682e7b4bb703061d9e4" id="r_a85b380388e8aa682e7b4bb703061d9e4"><td class="memItemLeft" align="right" valign="top">time_mark_value_interpretation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85b380388e8aa682e7b4bb703061d9e4">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueType</a> (const uint16_t time)</td></tr>
 <tr class="memdesc:a85b380388e8aa682e7b4bb703061d9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interprets the type of a TimeMark message See etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark".  <br /></td></tr>
 <tr class="separator:a85b380388e8aa682e7b4bb703061d9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43541f4a6593cbfa3a435721c00f0d46" id="r_a43541f4a6593cbfa3a435721c00f0d46"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43541f4a6593cbfa3a435721c00f0d46">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsNanoSeconds</a> (const uint16_t time, const uint64_t nanosec)</td></tr>
-<tr class="memdesc:a43541f4a6593cbfa3a435721c00f0d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the delta between the encoded time mark and the current timestamp.  <br /></td></tr>
-<tr class="separator:a43541f4a6593cbfa3a435721c00f0d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5891cbae0c4c7de6eb051cafb372f01" id="r_ad5891cbae0c4c7de6eb051cafb372f01"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5891cbae0c4c7de6eb051cafb372f01">etsi_its_spatem_ts_msgs::access::interpretTimeMarkDeltaTimeAsNanoSeconds</a> (const uint16_t time, const uint64_t nanosec)</td></tr>
+<tr class="memdesc:ad5891cbae0c4c7de6eb051cafb372f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the delta between the encoded time mark and the current timestamp.  <br /></td></tr>
+<tr class="separator:ad5891cbae0c4c7de6eb051cafb372f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84610814e3088a91f4c6a6e5c076b19b" id="r_a84610814e3088a91f4c6a6e5c076b19b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84610814e3088a91f4c6a6e5c076b19b">etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsSeconds</a> (const uint16_t time, const int32_t seconds, const uint32_t nanosec)</td></tr>
 <tr class="memdesc:a84610814e3088a91f4c6a6e5c076b19b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the delta between the encoded time mark and the current timestamp.  <br /></td></tr>
 <tr class="separator:a84610814e3088a91f4c6a6e5c076b19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -445,8 +445,8 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a43541f4a6593cbfa3a435721c00f0d46" name="a43541f4a6593cbfa3a435721c00f0d46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43541f4a6593cbfa3a435721c00f0d46">&#9670;&#160;</a></span>interpretTimeMarkValueAsNanoSeconds()</h2>
+<a id="ad5891cbae0c4c7de6eb051cafb372f01" name="ad5891cbae0c4c7de6eb051cafb372f01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5891cbae0c4c7de6eb051cafb372f01">&#9670;&#160;</a></span>interpretTimeMarkDeltaTimeAsNanoSeconds()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -455,7 +455,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t etsi_its_spatem_ts_msgs::access::interpretTimeMarkValueAsNanoSeconds </td>
+          <td class="memname">int64_t etsi_its_spatem_ts_msgs::access::interpretTimeMarkDeltaTimeAsNanoSeconds </td>
           <td>(</td>
           <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>time</em></span>, </td>
         </tr>
@@ -483,10 +483,10 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Delta time between the time stamp and the next time mark in nanoseconds </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="spatem__ts__utils_8h_source.html#l00237">237</a> of file <a class="el" href="spatem__ts__utils_8h_source.html">spatem_ts_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  237</span>                                                                                                 {</div>
+<div class="fragment"><div class="line"><span class="lineno">  237</span>                                                                                                     {</div>
 <div class="line"><span class="lineno">  238</span>  <span class="comment">// calculate elapsed nanoseconds since the start of the last full hour in nanoseconds </span></div>
 <div class="line"><span class="lineno">  239</span>  int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));</div>
-<div class="line"><span class="lineno">  240</span>  int64_t abs_time_decoded_nanosec = <span class="keyword">static_cast&lt;</span>int64_t<span class="keyword">&gt;</span>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS;</div>
+<div class="line"><span class="lineno">  240</span>  int64_t abs_time_decoded_nanosec = <span class="keyword">static_cast&lt;</span>int64_t<span class="keyword">&gt;</span>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;</div>
 <div class="line"><span class="lineno">  241</span>  int64_t rel_time_until_change =  abs_time_decoded_nanosec - abs_time_hour_nanosec;</div>
 <div class="line"><span class="lineno">  242</span> </div>
 <div class="line"><span class="lineno">  243</span>  <span class="comment">// adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )</span></div>
