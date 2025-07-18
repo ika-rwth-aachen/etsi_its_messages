@@ -471,7 +471,7 @@ void MAPEMDisplay::update(float, float) {
     
     // set pose of the corresponding utm scene node
     if (scene_nodes_utm_.find(utm_frame_key) == scene_nodes_utm_.end()) {
-      Ogre::SceneNode* scene_node = scene_node_->createChildSceneNode(utm_frame_key);
+      Ogre::SceneNode* scene_node = scene_node_->createChildSceneNode();
       scene_nodes_utm_.insert({utm_frame_key, scene_node});
     }
 
@@ -482,7 +482,7 @@ void MAPEMDisplay::update(float, float) {
     uint intersection_id = intsctn.getIntersectionID();
 
     if (scene_nodes_junctions_.find(intersection_id) == scene_nodes_junctions_.end()) {
-      Ogre::SceneNode* scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode(std::string("Junction: ") + std::to_string(intersection_id));
+      Ogre::SceneNode* scene_node = scene_nodes_utm_[utm_frame_key]->createChildSceneNode();
       scene_nodes_junctions_.insert({intersection_id, scene_node});
     }
 
