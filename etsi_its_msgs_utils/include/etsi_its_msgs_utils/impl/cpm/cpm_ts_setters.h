@@ -264,6 +264,33 @@ inline void setVelocityComponent(VelocityComponent& velocity, const double value
 }
 
 /**
+ * @brief Set a Cartesian Angle
+ * 
+ * @param angle The CartesianAngle object to be set.
+ * @param value Angle in radians to be set in the CartesianAngle object.
+ * @param confidence standard deviation of the angle in radians (default: infinity, which will map to AngleConfidence::UNAVAILABLE).
+ */
+inline void setCartesianAngle(CartesianAngle& angle, const double value,
+                              double confidence = std::numeric_limits<double>::infinity()) {
+  // wrap angle to 0..2pi
+  double wrapped_value = fmod(value, 2*M_PI);
+  if (wrapped_value < 0.0) {
+    wrapped_value += 2 * M_PI;
+  }
+  angle.value.value = static_cast<uint16_t>(wrapped_value * 180 / M_PI * 10); // convert to 0.1 degrees
+
+  confidence *= 180.0 / M_PI * 10.0 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to 0.1 degrees
+  // limit confidence range
+  if(confidence == std::numeric_limits<double>::infinity() || confidence <= 0.0) {
+    angle.confidence.value = AngleConfidence::UNAVAILABLE;
+  } else if (confidence > AngleConfidence::MAX || confidence < AngleConfidence::MIN) {
+    angle.confidence.value = AngleConfidence::OUT_OF_RANGE;
+  } else {
+    angle.confidence.value = static_cast<uint8_t>(confidence);
+  }
+}
+
+/**
  * Sets the velocity of a perceived object.
  *
  * This function sets the velocity of a perceived object using the provided Cartesian velocity components.
@@ -285,8 +312,42 @@ inline void setVelocityOfPerceivedObject(PerceivedObject& object, const gm::Vect
   if (cartesian_velocity.z != 0.0) {
     setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, cartesian_velocity.z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.velocity.cartesian_velocity.z_velocity_is_present = true;
+  } else {
+    object.velocity.cartesian_velocity.z_velocity_is_present = false;
   }
   object.velocity_is_present = true;
+}
+
+/**
+ * Sets the velocity of a perceived object.
+ *
+ * This function sets the velocity of a perceived object using the provided Polar velocity components.
+ * Optionally, confidence values can be specified for each velocity component.
+ *
+ * @param object The perceived object for which the velocity is being set.
+ * @param magnitude The magnitude of the velocity in m/s in the xy plane.
+ * @param angle The angle of the velocity in radians in the xy plane.
+ * @param z The z component of the velocity in m/s (default: 0.0).
+ * @param magnitude_std The standard deviation in m/s for the velocity magnitude (default: infinity).
+ * @param angle_std The standard deviation in radians for the angle (default: infinity).
+ * @param z_std The standard deviation in m/s for the z velocity component (default: infinity).
+ */
+inline void setPolarVelocityOfPerceivedObject(PerceivedObject& object,
+                                              const double magnitude,
+                                              const double angle,
+                                              const double z = 0.0,
+                                              const double magnitude_std = std::numeric_limits<double>::infinity(),
+                                              const double angle_std = std::numeric_limits<double>::infinity(),
+                                              const double z_std = std::numeric_limits<double>::infinity()) {
+  object.velocity.choice = Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY;
+  setSpeed(object.velocity.polar_velocity.velocity_magnitude, magnitude, magnitude_std);
+  setCartesianAngle(object.velocity.polar_velocity.velocity_direction, angle, angle_std);
+  if (z != 0.0) {
+    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+    object.velocity.polar_velocity.z_velocity_is_present = true;
+  } else {
+    object.velocity.polar_velocity.z_velocity_is_present = false;
+  }
 }
 
 /**
@@ -346,6 +407,37 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
     setAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration, cartesian_acceleration.z * 10,
                              z_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.acceleration.cartesian_acceleration.z_acceleration_is_present = true;
+  }
+  object.acceleration_is_present = true;
+}
+
+/**
+ * @brief Set the Polar Acceleration Of Perceived Object object
+ * 
+ * @param object PerceivedObject to set the Polar Acceleration for
+ * @param magnitude The magnitude of the acceleration in m/s^2 in the xy plane.
+ * @param angle The angle of the acceleration in radians in the xy plane.
+ * @param z The z component of the acceleration in m/s^2 (default: 0.0).
+ * @param magnitude_std The standard deviation in m/s^2 for the acceleration magnitude (default: infinity).
+ * @param angle_std The standard deviation in radians for the angle (default: infinity).
+ * @param z_std The standard deviation in m/s^2 for the z acceleration component (default: infinity).
+ */
+inline void setPolarAccelerationOfPerceivedObject(PerceivedObject& object,
+                                              const double magnitude,
+                                              const double angle,
+                                              const double z = 0.0,
+                                              const double magnitude_std = std::numeric_limits<double>::infinity(),
+                                              const double angle_std = std::numeric_limits<double>::infinity(),
+                                              const double z_std = std::numeric_limits<double>::infinity()) {
+  object.acceleration.choice = Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION;
+  setAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude, magnitude, magnitude_std);
+  setCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction, angle, angle_std);
+  if (z != 0.0) {
+    setAccelerationComponent(object.acceleration.polar_acceleration.z_acceleration, z * 10,
+                             z_std * 10 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+    object.acceleration.polar_acceleration.z_acceleration_is_present = true;
+  } else {
+    object.acceleration.polar_acceleration.z_acceleration_is_present = false;
   }
   object.acceleration_is_present = true;
 }
