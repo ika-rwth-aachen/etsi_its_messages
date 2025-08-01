@@ -37,10 +37,18 @@ namespace etsi_its_spatem_ts_msgs {
 
 namespace access {
 
-  const std::array<float, 4> color_grey {0.5, 0.5, 0.5, 1.0};
-  const std::array<float, 4> color_green {0.18, 0.79, 0.21, 1.0};
-  const std::array<float, 4> color_orange {0.9, 0.7, 0.09, 1.0};
-  const std::array<float, 4> color_red {0.8, 0.2, 0.2, 1.0};
+  static constexpr  std::array<float, 4> COLOR_GREY {0.5, 0.5, 0.5, 1.0};
+  static constexpr  std::array<float, 4> COLOR_GREEN {0.18, 0.79, 0.21, 1.0};
+  static constexpr  std::array<float, 4> COLOR_ORANGE {0.9, 0.7, 0.09, 1.0};
+  static constexpr  std::array<float, 4> COLOR_RED {0.8, 0.2, 0.2, 1.0};
+
+  static constexpr int HOUR_IN_SECONDS = 3600;
+  static constexpr int HALF_HOUR_IN_SECONDS = 1800;
+  static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL;
+
+  // ETSI Timemark value equals 0.1 seconds and 10e8 nanoseconds
+  static constexpr int64_t FACTOR_ETSI_TIMEMARK_TO_NANOSECONDS = 100000000LL;
+  static constexpr float FACTOR_ETSI_TIMEMARK_TO_SECONDS = 0.1f;
 
   enum time_mark_value_interpretation { normal, undefined, over_an_hour, leap_second };
 
@@ -156,38 +164,38 @@ namespace access {
     switch (value) {
 
       case MovementPhaseState::UNAVAILABLE:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
 
       case MovementPhaseState::DARK:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
       case MovementPhaseState::STOP_THEN_PROCEED:
-        color = color_red;
+        color = COLOR_RED;
         break;
       case MovementPhaseState::STOP_AND_REMAIN:
-        color = color_red;
+        color = COLOR_RED;
         break;
       case MovementPhaseState::PRE_MOVEMENT:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
-        color = color_green;
+        color = COLOR_GREEN;
         break;
       case MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
-        color = color_green;
+        color = COLOR_GREEN;
         break;
       case MovementPhaseState::PERMISSIVE_CLEARANCE:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::PROTECTED_CLEARANCE:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       case MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
-        color = color_orange;
+        color = COLOR_ORANGE;
         break;
       default:
-        color = color_grey;
+        color = COLOR_GREY;
         break;
   }
 
@@ -200,7 +208,7 @@ namespace access {
  * @param time The value inside the TimeMark message
  * @return Type as time_mark_value_interpretation 
  */
-time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
+inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
   time_mark_value_interpretation type;
 
   if (time == 36001) {
@@ -219,19 +227,45 @@ time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
   return type;
 }
 
-/**
- * @brief Calculate the amount of seconds until the given time is reached
- * 
- * @param time Encoded time value in the future
- * @param seconds Elapsed seconds since the start of the last full hour (timestamp)
- * @param nanosec Elapsed nanoseconds since the start of the last full hour (timestamp)
- * @return Time in seconds refered to the given timestamp
- */
-float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
+ /**
+  * @brief Calculates the delta between the encoded time mark and the current timestamp
+  
+  * @param time Encoded time value since the start of the last full hour in 0.1 seconds
+  * @param nanosec Timestamp in nanoseconds
+  * @return Delta time between the time stamp and the next time mark in nanoseconds
+  */
+ inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
+  // calculate elapsed nanoseconds since the start of the last full hour in nanoseconds 
+  int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
+  int64_t abs_time_decoded_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
+  int64_t rel_time_until_change =  abs_time_decoded_nanosec - abs_time_hour_nanosec;
+
+  // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
+  if (rel_time_until_change < - HALF_HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS) {
+    rel_time_until_change += HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
+  }
+
+  return rel_time_until_change;
+}
+
+ /**
+  * @brief Calculates the delta between the encoded time mark and the current timestamp
+  
+  * @param time Encoded time value since the start of the last full hour in 0.1 seconds
+  * @param seconds Timestamp in seconds
+  * @param nanosec Timestamp in nanoseconds
+  * @return Delta time between the time stamp and the next time mark in nanoseconds
+  */
+inline float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
   // calculate elapsed seconds since the start of the last full hour  
-  float abs_time_hour = ((int)(seconds)) % 3600 + (float)nanosec * 1e-9;
-  float rel_time_until_change = (float)time * 0.1f - abs_time_hour;
-            
+  float abs_time_hour = ((int)(seconds)) % HOUR_IN_SECONDS + (float)nanosec * 1e-9;
+  float rel_time_until_change = (float)time * FACTOR_ETSI_TIMEMARK_TO_SECONDS - abs_time_hour;
+
+  // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
+  if (rel_time_until_change < - HALF_HOUR_IN_SECONDS) {
+    rel_time_until_change += HOUR_IN_SECONDS;
+  }
+
   return rel_time_until_change;
 }
 
@@ -243,7 +277,7 @@ float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds
  * @param nanosec Elapsed nanoseconds since the start of the last full hour (timestamp)
  * @return Decoded String representation of the encoded time
  */
-std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
+inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
 {
   time_mark_value_interpretation time_type = interpretTimeMarkValueType(time);
 
@@ -272,6 +306,6 @@ std::string parseTimeMarkValueToString(const uint16_t time, const int32_t second
   return text_content;
 }
 
-
 } // namespace etsi_its_spatem_ts_msgs
+
 } // namespace access
