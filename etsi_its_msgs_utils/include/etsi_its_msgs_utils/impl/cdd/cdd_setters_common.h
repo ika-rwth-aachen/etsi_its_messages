@@ -154,6 +154,52 @@ inline void setSpeed(Speed& speed, const double value, const double confidence =
 }
 
 /**
+ * @brief Set the Acceleration Magnitude Value object
+ * 
+ * @param accel_mag_value object to set
+ * @param value AccelerationMagnitudeValue in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitudeValue>
+inline void setAccelerationMagnitudeValue(AccelerationMagnitudeValue& accel_mag_value, const double value) {
+  auto accel_mag = std::round(value * 1e1);
+  throwIfOutOfRange(accel_mag, AccelerationMagnitudeValue::MIN, AccelerationMagnitudeValue::MAX, "AccelerationMagnitudeValue");
+  accel_mag_value.value = static_cast<decltype(accel_mag_value.value)>(accel_mag);
+}
+
+/**
+ * @brief Set the AccelerationMagnitude Confidence object
+ * 
+ * @param accel_mag_confidence object to set
+ * @param value standard deviation in m/s^2 as decimal number
+ */
+template <typename AccelerationConfidence>
+inline void setAccelerationMagnitudeConfidence(AccelerationConfidence& accel_mag_confidence, const double value) {
+  auto accel_mag_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+  if (accel_mag_conf < AccelerationConfidence::MIN && accel_mag_conf > 0.0){
+    accel_mag_conf = AccelerationConfidence::MIN;
+  } else if (accel_mag_conf >= AccelerationConfidence::OUT_OF_RANGE || accel_mag_conf <= 0.0) {
+    accel_mag_conf = AccelerationConfidence::UNAVAILABLE;
+  }
+  accel_mag_confidence.value = static_cast<decltype(accel_mag_confidence.value)>(accel_mag_conf);
+}
+
+/**
+ * @brief Set the AccelerationMagnitude object
+ *
+ * AccelerationConfidence is set to UNAVAILABLE
+ *
+ * @param accel_mag object to set
+ * @param value AccelerationMagnitudeValue in m/s^2 as decimal number
+ * @param confidence standard deviation in m/s^2 as decimal number (default: infinity, mapping to AccelerationConfidence::UNAVAILABLE)
+ */
+template<typename AccelerationMagnitude>
+inline void setAccelerationMagnitude(AccelerationMagnitude& accel_mag, const double value,
+                                     const double confidence = std::numeric_limits<double>::infinity()) {
+  setAccelerationMagnitudeConfidence(accel_mag.acceleration_confidence, confidence);
+  setAccelerationMagnitudeValue(accel_mag.acceleration_magnitude_value, value);
+}
+
+/**
  * @brief Set the Acceleration Confidence object
  * 
  * @param accel_confidence object to set
@@ -270,6 +316,51 @@ template <typename Heading, typename HeadingConfidence = decltype(Heading::headi
 void setHeadingCDD(Heading& heading, const double value, double confidence = std::numeric_limits<double>::infinity()) {
   setHeadingConfidence(heading.heading_confidence, confidence);
   setHeadingValue(heading.heading_value, value);
+}
+
+/**
+ * @brief Set the Yaw Rate object
+ * 
+ * @param yaw_rate object to set
+ * @param value Yaw rate in degrees per second as decimal number
+ * @param confidence standard deviation of yaw rate in degrees per second as decimal number (default: infinity, mapping to YawRateConfidence::UNAVAILABLE)
+ */
+template <typename YawRate, typename YawRateValue = decltype(YawRate::yaw_rate_value), typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)>
+inline void setYawRateCDD(YawRate& yaw_rate, const double value,
+                                        double confidence = std::numeric_limits<double>::infinity()) {
+  double yaw_rate_in_001_degrees = value * 100.0;
+  // limit value range
+  if (yaw_rate_in_001_degrees < YawRateValue::MIN) {
+    yaw_rate_in_001_degrees = YawRateValue::MIN; // MIN should be NEGATIVE_OUT_OF_RANGE, but CAM only has MIN
+  } else if (yaw_rate_in_001_degrees > YawRateValue::MAX - 1) {
+    yaw_rate_in_001_degrees = YawRateValue::MAX - 1; // MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX
+  }
+  
+  yaw_rate.yaw_rate_value.value = yaw_rate_in_001_degrees;
+
+  double yaw_rate_std = confidence;
+  if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
+    yaw_rate.yaw_rate_confidence.value = YawRateConfidence::UNAVAILABLE;
+  } else {
+    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+    // How stupid is this?!
+    static const std::map<double, uint8_t> confidence_map = {
+        {0.01, YawRateConfidence::DEG_SEC_000_01},
+        {0.05, YawRateConfidence::DEG_SEC_000_05},
+        {0.1, YawRateConfidence::DEG_SEC_000_10},
+        {1.0, YawRateConfidence::DEG_SEC_001_00},
+        {5.0, YawRateConfidence::DEG_SEC_005_00},
+        {10.0, YawRateConfidence::DEG_SEC_010_00},
+        {100.0, YawRateConfidence::DEG_SEC_100_00},
+        {std::numeric_limits<double>::infinity(), YawRateConfidence::OUT_OF_RANGE},
+    };
+    for(const auto& [thresh, conf_val] : confidence_map) {
+      if (yaw_rate_std <= thresh) {
+        yaw_rate.yaw_rate_confidence.value = conf_val;
+        break;
+      }
+    }
+  }
 }
 
 /**
