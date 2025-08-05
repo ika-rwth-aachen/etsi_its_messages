@@ -4,7 +4,7 @@ var denm__setters_8h =
     [ "etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengfc7d53985d045d0dcaab7e94241c63f4.html", null ],
     [ "etsi_its_denm_msgs::access::confidenceEllipseFromCovMatrix", "denm__setters_8h.html#a01e842ca42c7e9801b4fb85ba43fd062", null ],
     [ "etsi_its_denm_msgs::access::confidenceEllipseFromWGSCovMatrix", "denm__setters_8h.html#ab37677b422516fedce421968ebfe13d6", null ],
-    [ "etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "impl_2denm_2denm__access_8h.html#a509b6187f55ea99970d24ff799403463", null ],
+    [ "etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "denm__access_8h.html#a509b6187f55ea99970d24ff799403463", null ],
     [ "etsi_its_denm_msgs::access::setAccelerationConfidence", "denm__setters_8h.html#a2f822b83b669c9684f98aad90d8abe92", null ],
     [ "etsi_its_denm_msgs::access::setAltitude", "denm__setters_8h.html#af199280816d3e209a21cf1d3151df769", null ],
     [ "etsi_its_denm_msgs::access::setAltitudeValue", "denm__setters_8h.html#a3b2da82f00c69548f3209d7c086f5dc1", null ],

@@ -4,7 +4,7 @@ var cam__ts__setters_8h =
     [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLca3fbdbd3bab6d77ee8ebffbc2d38b60.html", null ],
     [ "etsi_its_cam_ts_msgs::access::confidenceEllipseFromCovMatrix", "cam__ts__setters_8h.html#a337eca239448fd695e0d3824241e473e", null ],
     [ "etsi_its_cam_ts_msgs::access::confidenceEllipseFromWGSCovMatrix", "cam__ts__setters_8h.html#a39ccacffe703a0e622ce4fab14b80e8f", null ],
-    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "impl_2cam_2cam__ts__access_8h.html#abcb625b67f4226a9e33f48d16b4ef967", null ],
+    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "cam__ts__access_8h.html#abcb625b67f4226a9e33f48d16b4ef967", null ],
     [ "etsi_its_cam_ts_msgs::access::setAccelerationConfidence", "cam__ts__setters_8h.html#a756ef855c231d73801e3d6e17905780e", null ],
     [ "etsi_its_cam_ts_msgs::access::setAccelerationControl", "cam__ts__setters_8h.html#acaebb5d2958799aa4b3181585475ccfd", null ],
     [ "etsi_its_cam_ts_msgs::access::setAltitude", "cam__ts__setters_8h.html#a0816ea9dda35decb403ad00cb2b22bb4", null ],
@@ -57,6 +57,6 @@ var cam__ts__setters_8h =
     [ "etsi_its_cam_ts_msgs::access::setWGSPosConfidenceEllipse", "cam__ts__setters_8h.html#add80fe036a442c19a27272b0d650919b", null ],
     [ "etsi_its_cam_ts_msgs::access::setWGSPositionConfidenceEllipse", "cam__ts__setters_8h.html#ab0e7713d4f276f6d7f87abb10638f5d1", null ],
     [ "etsi_its_cam_ts_msgs::access::setWGSRefPosConfidence", "cam__ts__setters_8h.html#a3264c98d0395d6e5d31be47215d8bca9", null ],
-    [ "etsi_its_cam_ts_msgs::access::throwIfNotPresent", "impl_2cam_2cam__ts__access_8h.html#a5df6552bd3c95f4860fc64431cab1859", null ],
-    [ "etsi_its_cam_ts_msgs::access::throwIfOutOfRange", "impl_2cam_2cam__ts__access_8h.html#aa7f02bfe0bf19bc4e918cbd65f87d644", null ]
+    [ "etsi_its_cam_ts_msgs::access::throwIfNotPresent", "cam__ts__access_8h.html#a5df6552bd3c95f4860fc64431cab1859", null ],
+    [ "etsi_its_cam_ts_msgs::access::throwIfOutOfRange", "cam__ts__access_8h.html#aa7f02bfe0bf19bc4e918cbd65f87d644", null ]
 ];

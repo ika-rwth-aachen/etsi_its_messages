@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['denm_5faccess_2eh_0',['denm_access.h',['../denm__access_8h.html',1,'(Global Namespace)'],['../impl_2denm_2denm__access_8h.html',1,'(Global Namespace)']]],
+  ['denm_5faccess_2eh_0',['denm_access.h',['../denm__access_8h.html',1,'']]],
   ['denm_5faccess_2ehpp_1',['denm_access.hpp',['../denm__access_8hpp.html',1,'']]],
   ['denm_5fgetters_2eh_2',['denm_getters.h',['../denm__getters_8h.html',1,'']]],
   ['denm_5fsetters_2eh_3',['denm_setters.h',['../denm__setters_8h.html',1,'']]],
