@@ -15,6 +15,8 @@
 
   <license>MIT</license>
 
+  <depend>ros_environment</depend>
+
   <buildtool_depend>ament_cmake</buildtool_depend>
   <build_depend>rviz_ogre_vendor</build_depend>
   <build_depend>qtbase5-dev</build_depend>
@@ -39,7 +41,7 @@
   <exec_depend>libqt5-opengl</exec_depend>
   <exec_depend>libqt5-widgets</exec_depend>
   <exec_depend>rviz_ogre_vendor</exec_depend>
-  <exec_depend>rviz_satellite</exec_depend>
+  <exec_depend condition="$ROS_DISTRO != kilted">rviz_satellite</exec_depend> <!-- rviz_satellite currently not available for kilted -->
   <exec_depend>rviz2</exec_depend>
 
   <export>

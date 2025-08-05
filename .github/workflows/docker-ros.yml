@@ -29,3 +29,16 @@ jobs:
           rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
+
+  ros2-kilted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          platform: amd64
+          target: run
+          image-tag: ros2-kilted
+          base-image: rwthika/ros2:kilted
+          rmw-implementation: rmw_zenoh_cpp
+          command: ros2 launch etsi_its_conversion converter.launch.py
+          enable-recursive-vcs-import: 'false'
