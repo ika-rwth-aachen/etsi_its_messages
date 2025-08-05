@@ -77,6 +77,7 @@ class CPMRenderObject
     geometry_msgs::msg::Vector3 getVelocityOfObject(const uint8_t idx);
 
     struct Object {
+      uint16_t id;
       geometry_msgs::msg::Pose pose;
       geometry_msgs::msg::Vector3 dimensions;
       geometry_msgs::msg::Vector3 velocity;
