@@ -87,8 +87,6 @@ bool Converter::logLevelIsDebug() {
 
   auto logger_level = rcutils_logging_get_logger_effective_level(this->get_logger().get_name());
   return (logger_level == RCUTILS_LOG_SEVERITY_DEBUG);
-
-  return false;
 }
 
 

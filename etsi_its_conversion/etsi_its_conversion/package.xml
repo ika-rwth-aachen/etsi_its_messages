@@ -23,7 +23,7 @@
   <depend>etsi_its_mapem_ts_conversion</depend>
   <depend>etsi_its_mcm_uulm_conversion</depend>
   <depend>etsi_its_spatem_ts_conversion</depend>
-  <depend>etsi_its_vam_ts_conversion</depend>  <depend>std_msgs</depend>
+  <depend>etsi_its_vam_ts_conversion</depend>
   <depend>udp_msgs</depend>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
