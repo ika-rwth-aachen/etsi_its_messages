@@ -48,13 +48,8 @@ PhoneNumber ::= NumericString (SIZE(1..16))
 #include <etsi_its_denm_ts_coding/denm_ts_PhoneNumber.h>
 #include <etsi_its_denm_ts_coding/NumericString.h>
 #include <etsi_its_primitives_conversion/convertNumericString.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PhoneNumber.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/phone_number.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

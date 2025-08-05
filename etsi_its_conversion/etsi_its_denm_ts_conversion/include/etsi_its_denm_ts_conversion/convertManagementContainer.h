@@ -90,13 +90,8 @@ ManagementContainer ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertTermination.h>
 #include <etsi_its_denm_ts_conversion/convertTimestampIts.h>
 #include <etsi_its_denm_ts_conversion/convertTrafficDirection.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ManagementContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/management_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

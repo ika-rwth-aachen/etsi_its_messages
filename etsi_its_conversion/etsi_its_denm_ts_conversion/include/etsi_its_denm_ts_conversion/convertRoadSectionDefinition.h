@@ -77,13 +77,8 @@ RoadSectionDefinition::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertGeoPosition.h>
 #include <etsi_its_denm_ts_conversion/convertPathReferences.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength2B.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadSectionDefinition.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_section_definition.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

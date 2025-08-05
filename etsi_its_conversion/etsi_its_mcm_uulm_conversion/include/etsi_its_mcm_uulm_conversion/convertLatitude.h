@@ -59,13 +59,8 @@ Latitude ::= INTEGER {
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_Latitude.h>
 #include <etsi_its_mcm_uulm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/Latitude.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/latitude.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

@@ -57,13 +57,8 @@ LaneDataAttribute ::= CHOICE {
 #include <etsi_its_mapem_ts_conversion/convertMergeDivergeNodeAngle.h>
 #include <etsi_its_mapem_ts_conversion/convertRoadwayCrownAngle.h>
 #include <etsi_its_mapem_ts_conversion/convertSpeedLimitList.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneDataAttribute.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_data_attribute.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -52,15 +52,9 @@ SensorInformationContainer ::= SEQUENCE SIZE(1..128, ...) OF SensorInformation
 #include <etsi_its_cpm_ts_coding/cpm_ts_SensorInformationContainer.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_SensorInformation.h>
 #include <etsi_its_cpm_ts_conversion/convertSensorInformation.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/SensorInformation.h>
-#include <etsi_its_cpm_ts_msgs/SensorInformationContainer.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/sensor_information.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/sensor_information_container.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

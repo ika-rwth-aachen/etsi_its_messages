@@ -63,13 +63,8 @@ IntersectionState ::= SEQUENCE {
 #include <etsi_its_spatem_ts_conversion/convertMinuteOfTheYear.h>
 #include <etsi_its_spatem_ts_conversion/convertMovementList.h>
 #include <etsi_its_spatem_ts_conversion/convertMsgCount.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/IntersectionState.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/intersection_state.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

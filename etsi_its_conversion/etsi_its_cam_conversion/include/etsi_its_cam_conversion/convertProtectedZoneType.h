@@ -41,13 +41,8 @@ ProtectedZoneType::= ENUMERATED { permanentCenDsrcTolling (0), ..., temporaryCen
 
 #include <etsi_its_cam_coding/cam_ProtectedZoneType.h>
 
-#ifdef ROS1
-#include <etsi_its_cam_msgs/ProtectedZoneType.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/protected_zone_type.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

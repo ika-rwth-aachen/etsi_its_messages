@@ -48,15 +48,9 @@ SpeedLimitList ::= SEQUENCE (SIZE(1..9)) OF RegulatorySpeedLimit
 #include <etsi_its_mapem_ts_coding/mapem_ts_SpeedLimitList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_RegulatorySpeedLimit.h>
 #include <etsi_its_mapem_ts_conversion/convertRegulatorySpeedLimit.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RegulatorySpeedLimit.h>
-#include <etsi_its_mapem_ts_msgs/SpeedLimitList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/regulatory_speed_limit.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/speed_limit_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

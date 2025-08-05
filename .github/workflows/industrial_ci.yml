@@ -12,7 +12,6 @@ jobs:
           - humble
           - jazzy
         ROS_REPO:
-          - testing
           - main
     steps:
       - uses: actions/checkout@v3

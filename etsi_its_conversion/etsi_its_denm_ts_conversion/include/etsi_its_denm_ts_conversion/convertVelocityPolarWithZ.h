@@ -61,13 +61,8 @@ VelocityPolarWithZ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertCartesianAngle.h>
 #include <etsi_its_denm_ts_conversion/convertSpeed.h>
 #include <etsi_its_denm_ts_conversion/convertVelocityComponent.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/VelocityPolarWithZ.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/velocity_polar_with_z.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

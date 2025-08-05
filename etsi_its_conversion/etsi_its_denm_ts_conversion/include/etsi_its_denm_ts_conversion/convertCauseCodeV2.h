@@ -58,13 +58,8 @@ CauseCodeV2 ::= SEQUENCE {
 
 #include <etsi_its_denm_ts_coding/denm_ts_CauseCodeV2.h>
 #include <etsi_its_denm_ts_conversion/convertCauseCodeChoice.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/CauseCodeV2.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/cause_code_v2.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

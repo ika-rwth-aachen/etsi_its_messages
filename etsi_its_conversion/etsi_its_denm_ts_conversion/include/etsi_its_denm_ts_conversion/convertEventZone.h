@@ -51,13 +51,8 @@ EventZone::= EventHistory
 
 #include <etsi_its_denm_ts_coding/denm_ts_EventZone.h>
 #include <etsi_its_denm_ts_conversion/convertEventHistory.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/EventZone.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/event_zone.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

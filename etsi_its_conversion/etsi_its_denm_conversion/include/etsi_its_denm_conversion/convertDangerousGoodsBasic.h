@@ -62,13 +62,8 @@ DangerousGoodsBasic::= ENUMERATED {
 
 #include <etsi_its_denm_coding/denm_DangerousGoodsBasic.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_msgs/DangerousGoodsBasic.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/dangerous_goods_basic.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

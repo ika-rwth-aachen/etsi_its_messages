@@ -48,15 +48,9 @@ NodeSetXY ::= SEQUENCE (SIZE(2..63)) OF NodeXY
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeSetXY.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_NodeXY.h>
 #include <etsi_its_mapem_ts_conversion/convertNodeXY.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeXY.h>
-#include <etsi_its_mapem_ts_msgs/NodeSetXY.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_xy.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/node_set_xy.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

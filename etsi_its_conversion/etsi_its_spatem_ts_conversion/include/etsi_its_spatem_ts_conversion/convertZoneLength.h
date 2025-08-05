@@ -45,13 +45,8 @@ ZoneLength ::= INTEGER (0..10000)
 #include <etsi_its_spatem_ts_coding/spatem_ts_ZoneLength.h>
 #include <etsi_its_spatem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/ZoneLength.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/zone_length.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

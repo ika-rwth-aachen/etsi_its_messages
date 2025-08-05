@@ -58,13 +58,8 @@ VehicleLength ::= SEQUENCE {
 #include <etsi_its_cam_ts_coding/cam_ts_VehicleLength.h>
 #include <etsi_its_cam_ts_conversion/convertVehicleLengthConfidenceIndication.h>
 #include <etsi_its_cam_ts_conversion/convertVehicleLengthValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/VehicleLength.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/vehicle_length.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

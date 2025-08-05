@@ -42,13 +42,8 @@ PosCentMass ::= INTEGER {tenCentimeters(1), unavailable(63)} (1..63)
 #include <etsi_its_denm_coding/denm_PosCentMass.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PosCentMass.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/pos_cent_mass.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

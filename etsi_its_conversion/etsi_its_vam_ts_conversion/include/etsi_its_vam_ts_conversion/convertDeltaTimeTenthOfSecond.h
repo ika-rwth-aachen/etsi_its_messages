@@ -55,13 +55,8 @@ DeltaTimeTenthOfSecond::= INTEGER {
 #include <etsi_its_vam_ts_coding/vam_ts_DeltaTimeTenthOfSecond.h>
 #include <etsi_its_vam_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/DeltaTimeTenthOfSecond.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/delta_time_tenth_of_second.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

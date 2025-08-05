@@ -10,11 +10,10 @@ jobs:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
           platform: amd64
-          target: dev,run
+          target: run
           image-tag: ros2-humble
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
           enable-recursive-vcs-import: 'false'
 
   ros2-jazzy:
@@ -23,11 +22,10 @@ jobs:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
           platform: amd64
-          target: dev,run
+          target: run
           image-tag: ros2-jazzy
           enable-push-as-latest: 'true'
           base-image: rwthika/ros2:jazzy
           rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
           enable-recursive-vcs-import: 'false'

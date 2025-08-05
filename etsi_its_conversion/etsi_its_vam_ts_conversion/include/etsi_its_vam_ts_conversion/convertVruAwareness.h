@@ -54,13 +54,8 @@ python3 \
 #include <etsi_its_vam_ts_coding/vam_ts_VruAwareness.h>
 #include <etsi_its_vam_ts_conversion/convertGenerationDeltaTime.h>
 #include <etsi_its_vam_ts_conversion/convertVamParameters.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruAwareness.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_awareness.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

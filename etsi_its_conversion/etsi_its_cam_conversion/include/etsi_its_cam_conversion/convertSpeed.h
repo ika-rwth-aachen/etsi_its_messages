@@ -45,13 +45,8 @@ Speed ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_Speed.h>
 #include <etsi_its_cam_conversion/convertSpeedConfidence.h>
 #include <etsi_its_cam_conversion/convertSpeedValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/Speed.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/speed.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

@@ -58,13 +58,8 @@ EmergencyContainer ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertCauseCodeV2.h>
 #include <etsi_its_cam_ts_conversion/convertEmergencyPriority.h>
 #include <etsi_its_cam_ts_conversion/convertLightBarSirenInUse.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/EmergencyContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/emergency_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

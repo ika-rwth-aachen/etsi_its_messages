@@ -44,13 +44,8 @@ RSUContainerHighFrequency ::= SEQUENCE {
 
 #include <etsi_its_cam_coding/cam_RSUContainerHighFrequency.h>
 #include <etsi_its_cam_conversion/convertProtectedCommunicationZonesRSU.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/RSUContainerHighFrequency.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/rsu_container_high_frequency.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

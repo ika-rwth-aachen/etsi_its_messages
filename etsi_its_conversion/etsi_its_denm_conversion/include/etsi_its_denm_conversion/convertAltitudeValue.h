@@ -42,13 +42,8 @@ AltitudeValue ::= INTEGER {referenceEllipsoidSurface(0), oneCentimeter(1), unava
 #include <etsi_its_denm_coding/denm_AltitudeValue.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/AltitudeValue.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/altitude_value.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

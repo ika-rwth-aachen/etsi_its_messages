@@ -48,15 +48,9 @@ AdvisorySpeedList ::= SEQUENCE (SIZE(1..16)) OF AdvisorySpeed
 #include <etsi_its_spatem_ts_coding/spatem_ts_AdvisorySpeedList.h>
 #include <etsi_its_spatem_ts_coding/spatem_ts_AdvisorySpeed.h>
 #include <etsi_its_spatem_ts_conversion/convertAdvisorySpeed.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/AdvisorySpeed.h>
-#include <etsi_its_spatem_ts_msgs/AdvisorySpeedList.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/advisory_speed.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/advisory_speed_list.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

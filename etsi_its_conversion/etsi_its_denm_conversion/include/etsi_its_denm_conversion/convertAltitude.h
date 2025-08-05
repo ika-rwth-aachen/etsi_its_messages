@@ -45,13 +45,8 @@ Altitude ::= SEQUENCE {
 #include <etsi_its_denm_coding/denm_Altitude.h>
 #include <etsi_its_denm_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_denm_conversion/convertAltitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/Altitude.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/altitude.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

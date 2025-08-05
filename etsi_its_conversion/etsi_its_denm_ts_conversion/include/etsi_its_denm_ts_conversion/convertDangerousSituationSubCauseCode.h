@@ -68,13 +68,8 @@ DangerousSituationSubCauseCode ::= INTEGER {
 #include <etsi_its_denm_ts_coding/denm_ts_DangerousSituationSubCauseCode.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/DangerousSituationSubCauseCode.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/dangerous_situation_sub_cause_code.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

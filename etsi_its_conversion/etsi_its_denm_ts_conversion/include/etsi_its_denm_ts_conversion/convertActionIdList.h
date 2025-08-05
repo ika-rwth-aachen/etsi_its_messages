@@ -51,15 +51,9 @@ ActionIdList::= SEQUENCE (SIZE(1..8, ...)) OF ActionId
 #include <etsi_its_denm_ts_coding/denm_ts_ActionIdList.h>
 #include <etsi_its_denm_ts_coding/denm_ts_ActionId.h>
 #include <etsi_its_denm_ts_conversion/convertActionId.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/ActionId.h>
-#include <etsi_its_denm_ts_msgs/ActionIdList.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/action_id.hpp>
 #include <etsi_its_denm_ts_msgs/msg/action_id_list.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -71,13 +71,8 @@ SlowVehicleSubCauseCode ::= INTEGER {
 #include <etsi_its_denm_ts_coding/denm_ts_SlowVehicleSubCauseCode.h>
 #include <etsi_its_denm_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/SlowVehicleSubCauseCode.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/slow_vehicle_sub_cause_code.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

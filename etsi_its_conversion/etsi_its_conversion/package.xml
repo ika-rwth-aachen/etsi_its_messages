@@ -24,25 +24,14 @@
   <depend>etsi_its_mcm_uulm_conversion</depend>
   <depend>etsi_its_spatem_ts_conversion</depend>
   <depend>etsi_its_vam_ts_conversion</depend>
-  <depend>ros_environment</depend>
-  <depend>std_msgs</depend>
   <depend>udp_msgs</depend>
 
-  <!-- ROS 2 -->
-  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
-  <depend condition="$ROS_VERSION == 2">rclcpp</depend>
-  <depend condition="$ROS_VERSION == 2">rclcpp_components</depend>
-
-  <!-- ROS -->
-  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-  <depend condition="$ROS_VERSION == 1">nodelet</depend>
-  <depend condition="$ROS_VERSION == 1">roscpp</depend>
-  <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
 
   <export>
-    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
-    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
-    <nodelet condition="$ROS_VERSION == 1" plugin="${prefix}/nodelet_plugins.xml" />
+    <build_type>ament_cmake</build_type>
   </export>
 
 </package>

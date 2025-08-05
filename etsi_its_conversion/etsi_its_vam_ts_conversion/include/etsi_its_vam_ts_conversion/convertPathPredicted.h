@@ -55,15 +55,9 @@ PathPredicted::= SEQUENCE (SIZE(0..15,...)) OF PathPointPredicted
 #include <etsi_its_vam_ts_coding/vam_ts_PathPredicted.h>
 #include <etsi_its_vam_ts_coding/vam_ts_PathPointPredicted.h>
 #include <etsi_its_vam_ts_conversion/convertPathPointPredicted.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/PathPointPredicted.h>
-#include <etsi_its_vam_ts_msgs/PathPredicted.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/path_point_predicted.hpp>
 #include <etsi_its_vam_ts_msgs/msg/path_predicted.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

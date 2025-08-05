@@ -43,13 +43,8 @@ RescueContainer ::= SEQUENCE {
 
 #include <etsi_its_cam_coding/cam_RescueContainer.h>
 #include <etsi_its_cam_conversion/convertLightBarSirenInUse.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/RescueContainer.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/rescue_container.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

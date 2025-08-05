@@ -57,13 +57,8 @@ TrafficIslandPosition ::= SEQUENCE {
 
 #include <etsi_its_denm_ts_coding/denm_ts_TrafficIslandPosition.h>
 #include <etsi_its_denm_ts_conversion/convertLanePositionAndType.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/TrafficIslandPosition.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/traffic_island_position.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

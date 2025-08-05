@@ -51,13 +51,8 @@ python3 \
 
 #include <etsi_its_cam_ts_coding/cam_ts_LowFrequencyContainer.h>
 #include <etsi_its_cam_ts_conversion/convertBasicVehicleContainerLowFrequency.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/LowFrequencyContainer.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/low_frequency_container.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

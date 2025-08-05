@@ -156,54 +156,26 @@ def sortMessageFiles(files: List[str]) -> List[str]:
 
 def generateCMakeLists(msg_files: list, file_path: str, type: str) -> None:
     with open(file_path, "w") as f:
-        msg_file_lines = "\n".join([f"    \"msg/{msg_file}.msg\"" for msg_file in msg_files])
+        msg_file_lines = "\n".join([f"  \"msg/{msg_file}.msg\"" for msg_file in msg_files])
 
     cmake_content = f"""\
 cmake_minimum_required(VERSION 3.5)
 project(etsi_its_{type}_msgs)
 
-find_package(ros_environment REQUIRED QUIET)
-set(ROS_VERSION $ENV{{ROS_VERSION}})
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-# === ROS 2 (AMENT) ============================================================
-if(${{ROS_VERSION}} EQUAL 2)
-
-  find_package(ament_cmake REQUIRED)
-  find_package(rosidl_default_generators REQUIRED)
-
-  set(msg_files
+set(msg_files
 {msg_file_lines}
-  )
+)
 
-  rosidl_generate_interfaces(${{PROJECT_NAME}}
-    ${{msg_files}}
-  )
+rosidl_generate_interfaces(${{PROJECT_NAME}}
+  ${{msg_files}}
+)
 
-  ament_export_dependencies(rosidl_default_runtime)
+ament_export_dependencies(rosidl_default_runtime)
 
-  ament_package()
-
-# === ROS (CATKIN) =============================================================
-elseif(${{ROS_VERSION}} EQUAL 1)
-
-  find_package(catkin REQUIRED COMPONENTS
-    message_generation
-    std_msgs
-  )
-
-  add_message_files(DIRECTORY msg)
-
-  generate_messages(
-    DEPENDENCIES std_msgs
-  )
-
-  catkin_package(
-    CATKIN_DEPENDS
-      message_runtime
-      std_msgs
-  )
-
-endif()
+ament_package()
 """
 
     # Write the entire content to the file in one operation

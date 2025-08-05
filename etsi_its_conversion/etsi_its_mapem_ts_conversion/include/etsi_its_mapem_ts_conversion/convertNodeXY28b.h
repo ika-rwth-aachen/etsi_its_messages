@@ -47,13 +47,8 @@ Node-XY-28b ::= SEQUENCE {
 
 #include <etsi_its_mapem_ts_coding/mapem_ts_Node-XY-28b.h>
 #include <etsi_its_mapem_ts_conversion/convertOffsetB14.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/NodeXY28b.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/node_xy28b.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

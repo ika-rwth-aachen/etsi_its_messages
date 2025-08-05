@@ -48,15 +48,9 @@ OverlayLaneList ::= SEQUENCE (SIZE(1..5)) OF LaneID
 #include <etsi_its_mapem_ts_coding/mapem_ts_OverlayLaneList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_LaneID.h>
 #include <etsi_its_mapem_ts_conversion/convertLaneID.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneID.h>
-#include <etsi_its_mapem_ts_msgs/OverlayLaneList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_id.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/overlay_lane_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

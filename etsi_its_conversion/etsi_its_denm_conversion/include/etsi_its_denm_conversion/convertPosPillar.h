@@ -42,13 +42,8 @@ PosPillar ::= INTEGER {tenCentimeters(1), unavailable(30)} (1..30)
 #include <etsi_its_denm_coding/denm_PosPillar.h>
 #include <etsi_its_denm_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_denm_msgs/PosPillar.h>
-namespace denm_msgs = etsi_its_denm_msgs;
-#else
 #include <etsi_its_denm_msgs/msg/pos_pillar.hpp>
 namespace denm_msgs = etsi_its_denm_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_conversion {

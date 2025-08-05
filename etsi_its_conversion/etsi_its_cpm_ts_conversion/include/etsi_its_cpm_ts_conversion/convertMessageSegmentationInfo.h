@@ -61,13 +61,8 @@ MessageSegmentationInfo ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_MessageSegmentationInfo.h>
 #include <etsi_its_cpm_ts_conversion/convertCardinalNumber3b.h>
 #include <etsi_its_cpm_ts_conversion/convertOrdinalNumber3b.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/MessageSegmentationInfo.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/message_segmentation_info.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

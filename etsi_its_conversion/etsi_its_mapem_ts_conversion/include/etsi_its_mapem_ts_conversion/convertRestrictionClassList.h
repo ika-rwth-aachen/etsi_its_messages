@@ -48,15 +48,9 @@ RestrictionClassList ::= SEQUENCE (SIZE(1..254)) OF RestrictionClassAssignment
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionClassList.h>
 #include <etsi_its_mapem_ts_coding/mapem_ts_RestrictionClassAssignment.h>
 #include <etsi_its_mapem_ts_conversion/convertRestrictionClassAssignment.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/RestrictionClassAssignment.h>
-#include <etsi_its_mapem_ts_msgs/RestrictionClassList.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/restriction_class_assignment.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/restriction_class_list.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

@@ -58,13 +58,8 @@ RoadType ::= ENUMERATED {
 
 #include <etsi_its_denm_ts_coding/denm_ts_RoadType.h>
 
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/RoadType.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/road_type.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

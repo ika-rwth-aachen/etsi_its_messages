@@ -59,13 +59,8 @@ Provider ::= SEQUENCE {
 #include <etsi_its_denm_ts_coding/denm_ts_Provider.h>
 #include <etsi_its_denm_ts_conversion/convertCountryCode.h>
 #include <etsi_its_denm_ts_conversion/convertIssuerIdentifier.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/Provider.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/provider.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

@@ -61,13 +61,8 @@ VelocityComponent ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_VelocityComponent.h>
 #include <etsi_its_cpm_ts_conversion/convertSpeedConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertVelocityComponentValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/VelocityComponent.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/velocity_component.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

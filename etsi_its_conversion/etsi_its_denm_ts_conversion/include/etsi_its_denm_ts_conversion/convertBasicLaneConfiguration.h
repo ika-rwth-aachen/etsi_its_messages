@@ -51,15 +51,9 @@ BasicLaneConfiguration::= SEQUENCE(SIZE(1..16,...)) OF BasicLaneInformation
 #include <etsi_its_denm_ts_coding/denm_ts_BasicLaneConfiguration.h>
 #include <etsi_its_denm_ts_coding/denm_ts_BasicLaneInformation.h>
 #include <etsi_its_denm_ts_conversion/convertBasicLaneInformation.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/BasicLaneInformation.h>
-#include <etsi_its_denm_ts_msgs/BasicLaneConfiguration.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/basic_lane_information.hpp>
 #include <etsi_its_denm_ts_msgs/msg/basic_lane_configuration.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

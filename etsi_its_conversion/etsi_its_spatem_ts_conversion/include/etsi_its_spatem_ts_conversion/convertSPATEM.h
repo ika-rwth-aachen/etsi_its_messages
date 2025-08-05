@@ -54,13 +54,8 @@ SPATEM ::= SEQUENCE {
 #include <etsi_its_spatem_ts_coding/spatem_ts_SPATEM.h>
 #include <etsi_its_spatem_ts_conversion/convertItsPduHeader.h>
 #include <etsi_its_spatem_ts_conversion/convertSPAT.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/SPATEM.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/spatem.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

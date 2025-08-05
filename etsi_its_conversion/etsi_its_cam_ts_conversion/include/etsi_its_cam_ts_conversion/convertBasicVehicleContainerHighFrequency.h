@@ -122,13 +122,8 @@ BasicVehicleContainerHighFrequency ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertVehicleLength.h>
 #include <etsi_its_cam_ts_conversion/convertVehicleWidth.h>
 #include <etsi_its_cam_ts_conversion/convertYawRate.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/BasicVehicleContainerHighFrequency.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/basic_vehicle_container_high_frequency.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

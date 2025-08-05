@@ -65,13 +65,8 @@ ClosedLanes ::= SEQUENCE {
 #include <etsi_its_cam_ts_coding/cam_ts_ClosedLanes.h>
 #include <etsi_its_cam_ts_conversion/convertDrivingLaneStatus.h>
 #include <etsi_its_cam_ts_conversion/convertHardShoulderStatus.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/ClosedLanes.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/closed_lanes.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

@@ -71,13 +71,8 @@ StationaryVehicleContainer ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertNumberOfOccupants.h>
 #include <etsi_its_denm_ts_conversion/convertStationarySince.h>
 #include <etsi_its_denm_ts_conversion/convertVehicleIdentification.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/StationaryVehicleContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/stationary_vehicle_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

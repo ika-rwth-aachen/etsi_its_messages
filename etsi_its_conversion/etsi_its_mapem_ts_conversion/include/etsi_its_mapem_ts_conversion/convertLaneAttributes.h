@@ -50,13 +50,8 @@ LaneAttributes ::= SEQUENCE {
 #include <etsi_its_mapem_ts_conversion/convertLaneDirection.h>
 #include <etsi_its_mapem_ts_conversion/convertLaneSharing.h>
 #include <etsi_its_mapem_ts_conversion/convertLaneTypeAttributes.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/LaneAttributes.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/lane_attributes.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

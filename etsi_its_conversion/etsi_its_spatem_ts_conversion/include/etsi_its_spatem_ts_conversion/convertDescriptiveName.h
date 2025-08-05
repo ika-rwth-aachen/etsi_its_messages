@@ -45,13 +45,8 @@ DescriptiveName ::= IA5String (SIZE(1..63))
 #include <etsi_its_spatem_ts_coding/spatem_ts_DescriptiveName.h>
 #include <etsi_its_spatem_ts_coding/IA5String.h>
 #include <etsi_its_primitives_conversion/convertIA5String.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/DescriptiveName.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/descriptive_name.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

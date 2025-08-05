@@ -63,13 +63,8 @@ Altitude ::= SEQUENCE {
 #include <etsi_its_cpm_ts_coding/cpm_ts_Altitude.h>
 #include <etsi_its_cpm_ts_conversion/convertAltitudeConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertAltitudeValue.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/Altitude.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/altitude.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

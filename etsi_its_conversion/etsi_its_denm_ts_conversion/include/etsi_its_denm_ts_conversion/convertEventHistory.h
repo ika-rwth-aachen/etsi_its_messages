@@ -55,15 +55,9 @@ EventHistory::= SEQUENCE (SIZE(1..23)) OF EventPoint
 #include <etsi_its_denm_ts_coding/denm_ts_EventHistory.h>
 #include <etsi_its_denm_ts_coding/denm_ts_EventPoint.h>
 #include <etsi_its_denm_ts_conversion/convertEventPoint.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/EventPoint.h>
-#include <etsi_its_denm_ts_msgs/EventHistory.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/event_point.hpp>
 #include <etsi_its_denm_ts_msgs/msg/event_history.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

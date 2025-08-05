@@ -45,13 +45,8 @@ PublicTransportContainer ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_PublicTransportContainer.h>
 #include <etsi_its_cam_conversion/convertEmbarkationStatus.h>
 #include <etsi_its_cam_conversion/convertPtActivation.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/PublicTransportContainer.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/public_transport_container.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

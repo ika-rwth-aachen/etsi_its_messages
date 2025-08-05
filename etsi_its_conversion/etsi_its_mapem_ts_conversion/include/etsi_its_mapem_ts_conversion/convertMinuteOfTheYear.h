@@ -45,13 +45,8 @@ MinuteOfTheYear ::= INTEGER (0..527040)
 #include <etsi_its_mapem_ts_coding/mapem_ts_MinuteOfTheYear.h>
 #include <etsi_its_mapem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_mapem_ts_msgs/MinuteOfTheYear.h>
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs;
-#else
 #include <etsi_its_mapem_ts_msgs/msg/minute_of_the_year.hpp>
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_mapem_ts_conversion {

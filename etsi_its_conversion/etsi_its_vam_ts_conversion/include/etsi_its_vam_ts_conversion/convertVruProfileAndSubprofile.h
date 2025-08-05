@@ -65,13 +65,8 @@ VruProfileAndSubprofile ::= CHOICE {
 #include <etsi_its_vam_ts_conversion/convertVruSubProfileBicyclist.h>
 #include <etsi_its_vam_ts_conversion/convertVruSubProfileMotorcyclist.h>
 #include <etsi_its_vam_ts_conversion/convertVruSubProfilePedestrian.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruProfileAndSubprofile.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_profile_and_subprofile.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

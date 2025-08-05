@@ -45,15 +45,9 @@ YieldToRoadUserContainer ::= SEQUENCE SIZE(1..16, ...) OF ParticipatingRoadUserI
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_YieldToRoadUserContainer.h>
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_ParticipatingRoadUserIndex.h>
 #include <etsi_its_mcm_uulm_conversion/convertParticipatingRoadUserIndex.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/ParticipatingRoadUserIndex.h>
-#include <etsi_its_mcm_uulm_msgs/YieldToRoadUserContainer.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/participating_road_user_index.hpp>
 #include <etsi_its_mcm_uulm_msgs/msg/yield_to_road_user_container.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

@@ -52,15 +52,9 @@ PathPredictedList ::= SEQUENCE SIZE(1..16,...) OF PathPredicted2
 #include <etsi_its_denm_ts_coding/denm_ts_PathPredictedList.h>
 #include <etsi_its_denm_ts_coding/denm_ts_PathPredicted2.h>
 #include <etsi_its_denm_ts_conversion/convertPathPredicted2.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathPredicted2.h>
-#include <etsi_its_denm_ts_msgs/PathPredictedList.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_predicted2.hpp>
 #include <etsi_its_denm_ts_msgs/msg/path_predicted_list.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

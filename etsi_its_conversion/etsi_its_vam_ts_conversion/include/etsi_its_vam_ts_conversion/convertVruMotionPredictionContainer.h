@@ -81,13 +81,8 @@ python3 \
 #include <etsi_its_vam_ts_conversion/convertSequenceOfSafeDistanceIndication.h>
 #include <etsi_its_vam_ts_conversion/convertSequenceOfTrajectoryInterceptionIndication.h>
 #include <etsi_its_vam_ts_conversion/convertStabilityChangeIndication.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruMotionPredictionContainer.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_motion_prediction_container.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

@@ -48,15 +48,9 @@ MovementList ::= SEQUENCE (SIZE(1..255)) OF MovementState
 #include <etsi_its_spatem_ts_coding/spatem_ts_MovementList.h>
 #include <etsi_its_spatem_ts_coding/spatem_ts_MovementState.h>
 #include <etsi_its_spatem_ts_conversion/convertMovementState.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/MovementState.h>
-#include <etsi_its_spatem_ts_msgs/MovementList.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/movement_state.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/movement_list.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

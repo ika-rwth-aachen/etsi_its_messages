@@ -45,13 +45,8 @@ LongitudinalAcceleration ::= SEQUENCE {
 #include <etsi_its_cam_coding/cam_LongitudinalAcceleration.h>
 #include <etsi_its_cam_conversion/convertAccelerationConfidence.h>
 #include <etsi_its_cam_conversion/convertLongitudinalAccelerationValue.h>
-#ifdef ROS1
-#include <etsi_its_cam_msgs/LongitudinalAcceleration.h>
-namespace cam_msgs = etsi_its_cam_msgs;
-#else
 #include <etsi_its_cam_msgs/msg/longitudinal_acceleration.hpp>
 namespace cam_msgs = etsi_its_cam_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_conversion {

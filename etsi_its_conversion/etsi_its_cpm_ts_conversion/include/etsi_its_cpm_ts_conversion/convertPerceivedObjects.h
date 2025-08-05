@@ -52,15 +52,9 @@ PerceivedObjects::= SEQUENCE SIZE(0..255, ...) OF PerceivedObject (WITH COMPONEN
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceivedObjects.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_PerceivedObject.h>
 #include <etsi_its_cpm_ts_conversion/convertPerceivedObject.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/PerceivedObject.h>
-#include <etsi_its_cpm_ts_msgs/PerceivedObjects.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/perceived_object.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/perceived_objects.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

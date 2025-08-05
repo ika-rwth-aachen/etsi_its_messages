@@ -45,15 +45,9 @@ LongitudinalManeuverWaypointContainer ::= SEQUENCE SIZE(1..128, ...) OF Longitud
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_LongitudinalManeuverWaypointContainer.h>
 #include <etsi_its_mcm_uulm_coding/mcm_uulm_LongitudinalWaypoint.h>
 #include <etsi_its_mcm_uulm_conversion/convertLongitudinalWaypoint.h>
-#ifdef ROS1
-#include <etsi_its_mcm_uulm_msgs/LongitudinalWaypoint.h>
-#include <etsi_its_mcm_uulm_msgs/LongitudinalManeuverWaypointContainer.h>
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs;
-#else
 #include <etsi_its_mcm_uulm_msgs/msg/longitudinal_waypoint.hpp>
 #include <etsi_its_mcm_uulm_msgs/msg/longitudinal_maneuver_waypoint_container.hpp>
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-#endif
 
 
 namespace etsi_its_mcm_uulm_conversion {

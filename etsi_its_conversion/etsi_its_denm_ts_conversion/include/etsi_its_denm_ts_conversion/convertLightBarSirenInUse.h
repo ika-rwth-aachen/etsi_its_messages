@@ -58,13 +58,8 @@ LightBarSirenInUse ::= BIT STRING {
 #include <etsi_its_denm_ts_coding/denm_ts_LightBarSirenInUse.h>
 #include <etsi_its_denm_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/LightBarSirenInUse.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/light_bar_siren_in_use.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

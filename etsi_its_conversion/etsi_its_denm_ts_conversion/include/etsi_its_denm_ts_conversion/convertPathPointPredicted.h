@@ -81,13 +81,8 @@ PathPointPredicted::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertPathDeltaTimeChoice.h>
 #include <etsi_its_denm_ts_conversion/convertPosConfidenceEllipse.h>
 #include <etsi_its_denm_ts_conversion/convertStandardLength9b.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/PathPointPredicted.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/path_point_predicted.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

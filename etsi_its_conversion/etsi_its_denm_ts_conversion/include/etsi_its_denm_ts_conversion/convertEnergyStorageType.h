@@ -67,13 +67,8 @@ EnergyStorageType ::= BIT STRING {
 #include <etsi_its_denm_ts_coding/denm_ts_EnergyStorageType.h>
 #include <etsi_its_denm_ts_coding/BIT_STRING.h>
 #include <etsi_its_primitives_conversion/convertBIT_STRING.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/EnergyStorageType.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/energy_storage_type.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

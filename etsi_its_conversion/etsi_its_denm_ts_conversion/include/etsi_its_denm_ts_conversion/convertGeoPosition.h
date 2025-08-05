@@ -59,13 +59,8 @@ GeoPosition::= SEQUENCE{
 #include <etsi_its_denm_ts_conversion/convertAltitudeValue.h>
 #include <etsi_its_denm_ts_conversion/convertLatitude.h>
 #include <etsi_its_denm_ts_conversion/convertLongitude.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/GeoPosition.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/geo_position.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

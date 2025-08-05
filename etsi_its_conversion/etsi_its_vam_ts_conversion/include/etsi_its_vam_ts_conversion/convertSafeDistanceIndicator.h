@@ -55,13 +55,8 @@ SafeDistanceIndicator::= BOOLEAN
 #include <etsi_its_vam_ts_coding/vam_ts_SafeDistanceIndicator.h>
 #include <etsi_its_vam_ts_coding/BOOLEAN.h>
 #include <etsi_its_primitives_conversion/convertBOOLEAN.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/SafeDistanceIndicator.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/safe_distance_indicator.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

@@ -51,13 +51,8 @@ MovementEvent ::= SEQUENCE {
 #include <etsi_its_spatem_ts_conversion/convertAdvisorySpeedList.h>
 #include <etsi_its_spatem_ts_conversion/convertMovementPhaseState.h>
 #include <etsi_its_spatem_ts_conversion/convertTimeChangeDetails.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/MovementEvent.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/movement_event.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

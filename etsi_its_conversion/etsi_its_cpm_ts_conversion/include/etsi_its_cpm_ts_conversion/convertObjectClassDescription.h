@@ -55,15 +55,9 @@ ObjectClassDescription ::= SEQUENCE (SIZE(1..8)) OF ObjectClassWithConfidence
 #include <etsi_its_cpm_ts_coding/cpm_ts_ObjectClassDescription.h>
 #include <etsi_its_cpm_ts_coding/cpm_ts_ObjectClassWithConfidence.h>
 #include <etsi_its_cpm_ts_conversion/convertObjectClassWithConfidence.h>
-#ifdef ROS1
-#include <etsi_its_cpm_ts_msgs/ObjectClassWithConfidence.h>
-#include <etsi_its_cpm_ts_msgs/ObjectClassDescription.h>
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs;
-#else
 #include <etsi_its_cpm_ts_msgs/msg/object_class_with_confidence.hpp>
 #include <etsi_its_cpm_ts_msgs/msg/object_class_description.hpp>
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cpm_ts_conversion {

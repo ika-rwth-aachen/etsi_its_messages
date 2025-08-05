@@ -58,13 +58,8 @@ IntersectionReferenceId ::= SEQUENCE {
 
 #include <etsi_its_denm_ts_coding/denm_ts_IntersectionReferenceId.h>
 #include <etsi_its_denm_ts_conversion/convertIdentifier2B.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/IntersectionReferenceId.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/intersection_reference_id.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {

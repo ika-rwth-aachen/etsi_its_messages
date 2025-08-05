@@ -65,13 +65,8 @@ python3 \
 #include <etsi_its_vam_ts_conversion/convertClusterJoinInfo.h>
 #include <etsi_its_vam_ts_conversion/convertClusterLeaveInfo.h>
 #include <etsi_its_vam_ts_conversion/convertDeltaTimeQuarterSecond.h>
-#ifdef ROS1
-#include <etsi_its_vam_ts_msgs/VruClusterOperationContainer.h>
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs;
-#else
 #include <etsi_its_vam_ts_msgs/msg/vru_cluster_operation_container.hpp>
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_vam_ts_conversion {

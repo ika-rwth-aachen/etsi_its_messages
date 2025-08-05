@@ -58,13 +58,8 @@ CauseCodeV2 ::= SEQUENCE {
 
 #include <etsi_its_cam_ts_coding/cam_ts_CauseCodeV2.h>
 #include <etsi_its_cam_ts_conversion/convertCauseCodeChoice.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/CauseCodeV2.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/cause_code_v2.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

@@ -65,13 +65,8 @@ ReferencePositionWithConfidence ::= SEQUENCE {
 #include <etsi_its_cam_ts_conversion/convertLatitude.h>
 #include <etsi_its_cam_ts_conversion/convertLongitude.h>
 #include <etsi_its_cam_ts_conversion/convertPositionConfidenceEllipse.h>
-#ifdef ROS1
-#include <etsi_its_cam_ts_msgs/ReferencePositionWithConfidence.h>
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs;
-#else
 #include <etsi_its_cam_ts_msgs/msg/reference_position_with_confidence.hpp>
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_cam_ts_conversion {

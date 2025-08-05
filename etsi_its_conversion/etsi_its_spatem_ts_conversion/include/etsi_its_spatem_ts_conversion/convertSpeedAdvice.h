@@ -45,13 +45,8 @@ SpeedAdvice ::= INTEGER (0..500)
 #include <etsi_its_spatem_ts_coding/spatem_ts_SpeedAdvice.h>
 #include <etsi_its_spatem_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
-#ifdef ROS1
-#include <etsi_its_spatem_ts_msgs/SpeedAdvice.h>
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs;
-#else
 #include <etsi_its_spatem_ts_msgs/msg/speed_advice.hpp>
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_spatem_ts_conversion {

@@ -80,13 +80,8 @@ AlacarteContainer ::= SEQUENCE {
 #include <etsi_its_denm_ts_conversion/convertRoadWorksContainerExtended.h>
 #include <etsi_its_denm_ts_conversion/convertStationaryVehicleContainer.h>
 #include <etsi_its_denm_ts_conversion/convertTemperature.h>
-#ifdef ROS1
-#include <etsi_its_denm_ts_msgs/AlacarteContainer.h>
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs;
-#else
 #include <etsi_its_denm_ts_msgs/msg/alacarte_container.hpp>
 namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-#endif
 
 
 namespace etsi_its_denm_ts_conversion {
