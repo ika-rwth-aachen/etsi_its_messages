@@ -69,7 +69,7 @@ inline double getLongitude(const Longitude& longitude) { return ((double)longitu
  */
 inline double getAltitude(const Altitude& altitude) {
   if (altitude.altitude_value.value == AltitudeValue::UNAVAILABLE) {
-    return 0.0; // Return 0 if altitude is unavailable
+    return 0.0;
   }
   return ((double)altitude.altitude_value.value) * 1e-2;
 }

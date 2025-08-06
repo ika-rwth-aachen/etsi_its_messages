@@ -40,10 +40,6 @@ namespace etsi_its_mcm_uulm_msgs::access {
 /**
  * @brief Sets the ITS PDU header for the given MCM message.
  *
- * This function initializes the header of the provided MCM message with the specified
- * station ID and protocol version. It sets the message ID to MCM, assigns the station ID,
- * and validates the protocol version to ensure it is within the allowed range.
- *
  * @param mcm Reference to the MCM message whose header will be set.
  * @param station_id The unique identifier of the ITS station.
  * @param protocol_version The protocol version to use (default is 2).
@@ -131,8 +127,6 @@ inline void setAltitudeValue(AltitudeValue& altitude, const double value) {
 /**
  * @brief Set the Altitude object
  *
- * AltitudeConfidence is set to UNAVAILABLE
- *
  * @param altitude object to set
  * @param value Altitude value (above the reference ellipsoid surface) in meter as decimal number
  */
@@ -144,7 +138,6 @@ inline void setAltitude(Altitude& altitude, const double value) {
 /**
  * @brief Set the ReferencePosition for an MCM.
  * 
- * This function sets the latitude, longitude, and altitude of the MCMs reference position.
  * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
  * Resets all Confidence values to UNAVAILABLE.
  *
@@ -248,7 +241,7 @@ inline void setRoadUserDimension(T& dim, const double value) {
  *
  * @param road_user_container Reference to the RoadUserContainer to update.
  * @param type The type of the road user (as a uint8_t value).
- * @param speed The speed of the road user (in meters per second).
+ * @param speed The speed of the road user (in m/s).
  * @param heading The heading of the road user (in degrees).
  * @param length The length of the road user (in meters).
  * @param width The width of the road user (in meters).
@@ -264,11 +257,9 @@ inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8
 }
 
 /**
- * @brief Sets the value of a CartesianCoordinateLarge object from a double value in meters.
+ * @brief Sets the value of a CartesianCoordinateLarge object.
  *
- * Converts the input value from meters to centimeters (by multiplying by 100 and rounding),
- * and assigns it to the coordinate. If the converted value is outside the valid range
- * defined by CartesianCoordinateLarge::MIN and CartesianCoordinateLarge::MAX, sets the value
+ * If the converted value is outside the valid range, sets the value
  * to NEGATIVE_OUT_OF_RANGE or POSITIVE_OUT_OF_RANGE accordingly.
  *
  * @param coordinate Reference to the CartesianCoordinateLarge object to set.
@@ -286,9 +277,6 @@ inline void setCartesianCoordinateLarge(CartesianCoordinateLarge& coordinate, co
 
 /**
  * @brief Sets the coordinates of a Waypoint object.
- *
- * This function assigns the given x and y values to the waypoint's
- * x_distance and y_distance members using the setCartesianCoordinateLarge function.
  *
  * @param waypoint Reference to the Waypoint object to be modified.
  * @param x The x-coordinate value to set (in meters as decimal number).
