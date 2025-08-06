@@ -156,6 +156,28 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(velocity_y_std, vel_y_std_get, 1e-2);
   EXPECT_NEAR(velocity_z_std, vel_z_std_get, 1e-2);
 
+  // Polar velocity
+  double speed = randomDouble(0.1, 163.8);
+  double angle = randomDouble(0, 2.0 * M_PI);
+  double speed_std = randomDouble(0.01, 0.625);
+  double angle_std = randomDouble(0.001, 0.109);
+  cpm_ts_access::setPolarVelocityOfPerceivedObject(object, speed, angle, velocity.z, speed_std, angle_std, velocity_z_std);
+  double vel_x_expected = speed * cos(angle);
+  double vel_y_expected = speed * sin(angle);
+  auto vel_cart = cpm_ts_access::getCartesianVelocityOfPerceivedObject(object);
+  EXPECT_NEAR(vel_x_expected, vel_cart.x, 1e-1);
+  EXPECT_NEAR(vel_y_expected, vel_cart.y, 1e-1);
+  EXPECT_NEAR(velocity.z, vel_cart.z, 1e-1);
+
+  double vel_x_std_expected = speed_std * cos(angle) * cos(angle) +
+                          angle_std * speed * sin(angle) * sin(angle);
+  double vel_y_std_expected = speed_std * sin(angle) * sin(angle) +
+                          angle_std * speed * cos(angle) * cos(angle);
+  auto [vel_x_std, vel_y_std, vel_z_std] = cpm_ts_access::getCartesianVelocityConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(vel_x_std_expected, vel_x_std, 1e-1);
+  EXPECT_NEAR(vel_y_std_expected, vel_y_std, 1e-1);
+  EXPECT_NEAR(velocity_z_std, vel_z_std, 1e-1);
+
   // Acceleration
   gm::Vector3 acceleration;
   acceleration.x = randomDouble(-16.0, 16.0);
@@ -172,6 +194,27 @@ TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   EXPECT_NEAR(acceleration_x_std, acc_x_std_get, 1e-1);
   EXPECT_NEAR(acceleration_y_std, acc_y_std_get, 1e-1);
   EXPECT_NEAR(acceleration_z_std, acc_z_std_get, 1e-1);
+
+  // Polar acceleration
+  double acc_magnitude = randomDouble(0.1, 16.0);
+  double acc_angle = randomDouble(0, 2.0 * M_PI);
+  double acc_magnitude_std = randomDouble(0.1, 5.0);
+  double acc_angle_std = randomDouble(0.001, 0.109);
+  cpm_ts_access::setPolarAccelerationOfPerceivedObject(object, acc_magnitude, acc_angle, acceleration.z, acc_magnitude_std, acc_angle_std, acceleration_z_std);
+  double acc_x_expected = acc_magnitude * cos(acc_angle);
+  double acc_y_expected = acc_magnitude * sin(acc_angle);
+  auto acc_cart = cpm_ts_access::getCartesianAccelerationOfPerceivedObject(object);
+  EXPECT_NEAR(acc_x_expected, acc_cart.x, 1e-1);
+  EXPECT_NEAR(acc_y_expected, acc_cart.y, 1e-1);
+  EXPECT_NEAR(acceleration.z, acc_cart.z, 1e-1);
+  double acc_x_std_expected = acc_magnitude_std * cos(acc_angle) * cos(acc_angle) +
+                          acc_angle_std * acc_magnitude * sin(acc_angle) * sin(acc_angle);
+  double acc_y_std_expected = acc_magnitude_std * sin(acc_angle) * sin(acc_angle) +
+                          acc_angle_std * acc_magnitude * cos(acc_angle) * cos(acc_angle);
+  auto [acc_x_std, acc_y_std, acc_z_std] = cpm_ts_access::getCartesianAccelerationConfidenceOfPerceivedObject(object);
+  EXPECT_NEAR(acc_x_std_expected, acc_x_std, 1e-1);
+  EXPECT_NEAR(acc_y_std_expected, acc_y_std, 1e-1);
+  EXPECT_NEAR(acceleration_z_std, acc_z_std, 1e-1);
 
   // SensorInformation
   cpm_ts_msgs::WrappedCpmContainer sensor_information_container;

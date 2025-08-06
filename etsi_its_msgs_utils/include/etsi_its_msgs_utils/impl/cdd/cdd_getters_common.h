@@ -88,6 +88,28 @@ inline double getSpeedConfidence(const Speed& speed) {
 }
 
 /**
+ * @brief Get the AccelerationMagnitude value
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitude from
+ * @return double acceleration magnitude in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitude(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_magnitude_value.value) * 1e-1;
+}
+
+/**
+ * @brief Get the AccelerationMagnitude Confidence
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitudeConfidence from
+ * @return double acceleration magnitude standard deviation in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitudeConfidence(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-1;
+}
+
+/**
  * @brief Get the UTM Position defined by the given ReferencePosition
  *
  * The position is transformed into UTM by using GeographicLib::UTMUPS
@@ -140,6 +162,41 @@ inline double getHeadingCDD(const Heading& heading) { return ((double)heading.he
  */
 template <typename Heading>
 inline double getHeadingConfidenceCDD(const Heading& heading) { return ((double)heading.heading_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }
+
+/**
+ * @brief Get the Yaw Rate value
+ * 
+ * @param yaw_rate The YawRate object to get the yaw rate from
+ * @return double The yaw rate in degrees per second
+ */
+template <typename YawRate>
+inline double getYawRateCDD(const YawRate& yaw_rate) {
+  return ((double)yaw_rate.yaw_rate_value.value) * 1e-2; // Yaw rate in deg/s
+}
+
+/**
+ * @brief Get the Yaw Rate Confidence
+ * 
+ * @param yaw_rate The YawRate object to get the yaw rate confidence from
+ * @return double The yaw rate standard deviation in degrees per second
+ */
+template <typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)>
+inline double getYawRateConfidenceCDD(const YawRate& yaw_rate) {
+  auto val = yaw_rate.yaw_rate_confidence.value;
+  static const std::map<uint8_t, double> confidence_map = {
+      {YawRateConfidence::UNAVAILABLE, 0.0},
+      {YawRateConfidence::DEG_SEC_000_01, 0.01},
+      {YawRateConfidence::DEG_SEC_000_05, 0.05},
+      {YawRateConfidence::DEG_SEC_000_10, 0.1},
+      {YawRateConfidence::DEG_SEC_001_00, 1.0},
+      {YawRateConfidence::DEG_SEC_005_00, 5.0},
+      {YawRateConfidence::DEG_SEC_010_00, 10.0},
+      {YawRateConfidence::DEG_SEC_100_00, 100.0},
+      {YawRateConfidence::OUT_OF_RANGE, std::numeric_limits<double>::infinity()},
+  };
+  return confidence_map.at(val) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+}
+
 
 /**
  * @brief Get the Semi Axis object

@@ -428,15 +428,26 @@ inline double getVelocityComponentConfidence(const VelocityComponent &velocity) 
  * @throws std::invalid_argument If the velocity is no cartesian velocity.
  */
 inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &object) {
-  if (!object.velocity_is_present) throw std::invalid_argument("No velocity present in PerceivedObject");
-  if (object.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
-    throw std::invalid_argument("Velocity is not Cartesian");
+  if (!object.velocity_is_present) {
+    throw std::invalid_argument("No velocity present in PerceivedObject");
   }
   gm::Vector3 velocity;
-  velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
-  velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
-  if (object.velocity.cartesian_velocity.z_velocity_is_present) {
-    velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+  if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
+    double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
+    double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    velocity.x = speed * cos(angle);
+    velocity.y = speed * sin(angle);
+    if (object.velocity.polar_velocity.z_velocity_is_present) {
+      velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+    }
+  } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
+    velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
+    velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
+    if (object.velocity.cartesian_velocity.z_velocity_is_present) {
+      velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+    }
+  } else {
+    throw std::invalid_argument("Velocity is neither Polar nor Cartesian");
   }
   return velocity;
 }
@@ -450,16 +461,35 @@ inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &
  * @throws std::invalid_argument If the velocity is no cartesian velocity.
  */
 inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPerceivedObject(const PerceivedObject &object) {
-  if (!object.velocity_is_present) throw std::invalid_argument("No velocity present in PerceivedObject");
-  if (object.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
-    throw std::invalid_argument("Velocity is not Cartesian");
+  if (!object.velocity_is_present) {
+    throw std::invalid_argument("No velocity present in PerceivedObject");
   }
-  double x_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.x_velocity);
-  double y_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.y_velocity);
-  double z_confidence = object.velocity.cartesian_velocity.z_velocity_is_present
-                            ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
-                            : std::numeric_limits<double>::infinity();
-  return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
+    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+    double angle_confidence = getCartesianAngleConfidence(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
+    double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double lateral_confidence = speed * angle_confidence; // not exactly, but best approximation
+    double x_confidence = speed_confidence * cos(angle) * cos(angle) 
+                          + lateral_confidence * sin(angle) * sin(angle);
+    double y_confidence = speed_confidence * sin(angle) * sin(angle)
+                          + lateral_confidence * cos(angle) * cos(angle);
+    // neglect xy covariance, as it is not present in the output of this function
+    double z_confidence = object.velocity.polar_velocity.z_velocity_is_present
+                              ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
+    double x_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.x_velocity);
+    double y_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.y_velocity);
+    double z_confidence = object.velocity.cartesian_velocity.z_velocity_is_present
+                              ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else {
+    throw std::invalid_argument("Velocity is neither Polar nor Cartesian");
+  }
+  
 }
 
 /**
@@ -490,16 +520,29 @@ inline double getAccelerationComponentConfidence(const AccelerationComponent &ac
  * @throws std::invalid_argument If the acceleration is no cartesian acceleration.
  */
 inline gm::Vector3 getCartesianAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  if (!object.acceleration_is_present) throw std::invalid_argument("No acceleration present in PerceivedObject");
-  if (object.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
-    throw std::invalid_argument("Acceleration is not Cartesian");
+  if (!object.acceleration_is_present) {
+    throw std::invalid_argument("No acceleration present in PerceivedObject");
   }
   gm::Vector3 acceleration;
-  acceleration.x = getAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration);
-  acceleration.y = getAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration);
-  if (object.acceleration.cartesian_acceleration.z_acceleration_is_present) {
-    acceleration.z = getAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration);
+
+  if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
+    acceleration.x = getAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration);
+    acceleration.y = getAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration);
+    if (object.acceleration.cartesian_acceleration.z_acceleration_is_present) {
+      acceleration.z = getAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration);
+    }
+  } else if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION) {
+    double magnitude = getAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle = getCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    acceleration.x = magnitude * cos(angle);
+    acceleration.y = magnitude * sin(angle);
+    if (object.acceleration.polar_acceleration.z_acceleration_is_present) {
+      acceleration.z = getAccelerationComponent(object.acceleration.polar_acceleration.z_acceleration);
+    }
+  } else {
+    throw std::invalid_argument("Acceleration is neither Cartesian nor Polar");
   }
+
   return acceleration;
 }
 
@@ -513,15 +556,32 @@ inline gm::Vector3 getCartesianAccelerationOfPerceivedObject(const PerceivedObje
  */
 inline std::tuple<double, double, double> getCartesianAccelerationConfidenceOfPerceivedObject(const PerceivedObject &object) {
   if (!object.acceleration_is_present) throw std::invalid_argument("No acceleration present in PerceivedObject");
-  if (object.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
-    throw std::invalid_argument("Acceleration is not Cartesian");
+
+  if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
+    double x_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.x_acceleration);
+    double y_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.y_acceleration);
+    double z_confidence = object.acceleration.cartesian_acceleration.z_acceleration_is_present
+                              ? getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.z_acceleration)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION) {
+    double magnitude_confidence = getAccelerationMagnitudeConfidence(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle_confidence = getCartesianAngleConfidence(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double magnitude = getAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle = getCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double lateral_confidence = magnitude * angle_confidence; // best approximation
+    double x_confidence = magnitude_confidence * cos(angle) * cos(angle)
+                          + lateral_confidence * sin(angle) * sin(angle);
+    double y_confidence = magnitude_confidence * sin(angle) * sin(angle)
+                          + lateral_confidence * cos(angle) * cos(angle);
+    // neglect xy covariance, as it is not present in the output of this function
+    double z_confidence = object.acceleration.polar_acceleration.z_acceleration_is_present
+                              ? getAccelerationComponentConfidence(object.acceleration.polar_acceleration.z_acceleration)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else {
+    throw std::invalid_argument("Acceleration is neither Cartesian nor Polar");
   }
-  double x_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.x_acceleration);
-  double y_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.y_acceleration);
-  double z_confidence = object.acceleration.cartesian_acceleration.z_acceleration_is_present
-                            ? getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.z_acceleration)
-                            : std::numeric_limits<double>::infinity();
-  return std::make_tuple(x_confidence, y_confidence, z_confidence);
 }
 
 /**
