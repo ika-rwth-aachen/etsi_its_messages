@@ -37,165 +37,162 @@ namespace etsi_its_spatem_ts_msgs {
 
 namespace access {
 
-  static constexpr  std::array<float, 4> COLOR_GREY {0.5, 0.5, 0.5, 1.0};
-  static constexpr  std::array<float, 4> COLOR_GREEN {0.18, 0.79, 0.21, 1.0};
-  static constexpr  std::array<float, 4> COLOR_ORANGE {0.9, 0.7, 0.09, 1.0};
-  static constexpr  std::array<float, 4> COLOR_RED {0.8, 0.2, 0.2, 1.0};
+static constexpr std::array<float, 4> COLOR_GREY{0.5, 0.5, 0.5, 1.0};
+static constexpr std::array<float, 4> COLOR_GREEN{0.18, 0.79, 0.21, 1.0};
+static constexpr std::array<float, 4> COLOR_ORANGE{0.9, 0.7, 0.09, 1.0};
+static constexpr std::array<float, 4> COLOR_RED{0.8, 0.2, 0.2, 1.0};
 
-  static constexpr int HOUR_IN_SECONDS = 3600;
-  static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL;
+static constexpr int HOUR_IN_SECONDS = 3600;
+static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL;
 
-  // ETSI Timemark value equals 0.1 seconds and 10e8 nanoseconds
-  static constexpr int64_t FACTOR_ETSI_TIMEMARK_TO_NANOSECONDS = 100000000LL;
-  static constexpr float FACTOR_ETSI_TIMEMARK_TO_SECONDS = 0.1f;
+// ETSI Timemark value equals 0.1 seconds and 10e8 nanoseconds
+static constexpr int64_t FACTOR_ETSI_TIMEMARK_TO_NANOSECONDS = 100000000LL;
+static constexpr float FACTOR_ETSI_TIMEMARK_TO_SECONDS = 0.1f;
 
-  enum time_mark_value_interpretation { normal, undefined, over_an_hour, leap_second };
+enum time_mark_value_interpretation { normal, undefined, over_an_hour, leap_second };
 
-  /**
+/**
    * @brief Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp
    * 
    * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
    * @return uint64_t unix seconds of the beginning of the year
    */
-  inline uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
+inline uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
+  // Get current time as a time_point
+  time_t ts = static_cast<time_t>(unixSecond);  // Convert uint64_t to time_t
 
-    // Get current time as a time_point
-    time_t ts = static_cast<time_t>(unixSecond); // Convert uint64_t to time_t
+  struct tm* timeinfo;
+  timeinfo = gmtime(&ts);
 
-    struct tm* timeinfo;
-    timeinfo = gmtime(&ts);
+  // Set the timeinfo to the beginning of the year
+  timeinfo->tm_sec = 0;
+  timeinfo->tm_min = 0;
+  timeinfo->tm_hour = 0;
+  timeinfo->tm_mday = 1;
+  timeinfo->tm_mon = 0;
 
-    // Set the timeinfo to the beginning of the year
-    timeinfo->tm_sec = 0;
-    timeinfo->tm_min = 0;
-    timeinfo->tm_hour = 0;
-    timeinfo->tm_mday = 1;
-    timeinfo->tm_mon = 0;
+  return timegm(timeinfo);  // Convert struct tm back to Unix timestamp
+}
 
-    return timegm(timeinfo); // Convert struct tm back to Unix timestamp
-  }
-
-  /**
+/**
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
    * 
    * @param moy given MinuteOfTheYear object
    * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
    * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
    */
-  inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy, const uint64_t unix_nanoseconds_estimate) {
-    return ((uint64_t)(moy.value*60) + getUnixSecondsOfYear(unix_nanoseconds_estimate*1e-9))*1e9;
-  }
+inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy,
+                                                      const uint64_t unix_nanoseconds_estimate) {
+  return ((uint64_t)(moy.value * 60) + getUnixSecondsOfYear(unix_nanoseconds_estimate * 1e-9)) * 1e9;
+}
 
-  /**
+/**
    * @brief Interprets the TimeIntervalConfidence type as a float value (see etsi definition)
    * 
    * @param encoded_probability Value from msg type TimeIntervalConfidence
    * @return confidence as float value [0, 1]
    */
-  inline float interpretTimeIntervalConfidenceAsFloat(const uint16_t encoded_probability) {
-    float probability = 0;
+inline float interpretTimeIntervalConfidenceAsFloat(const uint16_t encoded_probability) {
+  float probability = 0;
 
-    switch (encoded_probability)
-    {
-      case 0:
-        probability = 0.21;
-        break;
-      case 1:
-        probability = 0.36;
-        break;
-      case 2: 
-        probability = 0.47;
-        break;
-      case 3:
-        probability = 0.56;
-        break;
-      case 4:
-        probability = 0.62;
-        break;
-      case 5: 
-        probability = 0.68;
-        break;
-      case 6:
-        probability = 0.73;
-        break;
-      case 7:
-        probability = 0.77;
-        break;
-      case 8:
-        probability = 0.81;
-        break;
-      case 9:
-        probability = 0.85;
-        break;
-      case 10:
-        probability = 0.88;
-        break;
-      case 11:
-        probability = 0.91;
-        break;
-      case 12:
-        probability = 0.94;
-        break;
-      case 13:
-        probability = 0.96;
-        break;
-      case 14:
-        probability = 0.98;
-        break; 
-      case 15:
-        probability = 1.0;
-        break;
-    }
-
-    return probability;
+  switch (encoded_probability) {
+    case 0:
+      probability = 0.21;
+      break;
+    case 1:
+      probability = 0.36;
+      break;
+    case 2:
+      probability = 0.47;
+      break;
+    case 3:
+      probability = 0.56;
+      break;
+    case 4:
+      probability = 0.62;
+      break;
+    case 5:
+      probability = 0.68;
+      break;
+    case 6:
+      probability = 0.73;
+      break;
+    case 7:
+      probability = 0.77;
+      break;
+    case 8:
+      probability = 0.81;
+      break;
+    case 9:
+      probability = 0.85;
+      break;
+    case 10:
+      probability = 0.88;
+      break;
+    case 11:
+      probability = 0.91;
+      break;
+    case 12:
+      probability = 0.94;
+      break;
+    case 13:
+      probability = 0.96;
+      break;
+    case 14:
+      probability = 0.98;
+      break;
+    case 15:
+      probability = 1.0;
+      break;
   }
 
-  /**
+  return probability;
+}
+
+/**
    * @brief Interprets the MovementPhaseState type as a color (see etsi definition)
    * 
    * @param value Encoded color value from msg type MovementPhaseState
    * @return 4-dimensional array with color values as follows: r, g, b, a, each of these values within a range between [0, 1]
    */
-  inline std::array<float, 4> interpretMovementPhaseStateAsColor(const uint8_t value)
-  {
-    std::array<float, 4> color;
+inline std::array<float, 4> interpretMovementPhaseStateAsColor(const uint8_t value) {
+  std::array<float, 4> color;
 
-    switch (value) {
+  switch (value) {
+    case MovementPhaseState::UNAVAILABLE:
+      color = COLOR_GREY;
+      break;
 
-      case MovementPhaseState::UNAVAILABLE:
-        color = COLOR_GREY;
-        break;
-
-      case MovementPhaseState::DARK:
-        color = COLOR_GREY;
-        break;
-      case MovementPhaseState::STOP_THEN_PROCEED:
-        color = COLOR_RED;
-        break;
-      case MovementPhaseState::STOP_AND_REMAIN:
-        color = COLOR_RED;
-        break;
-      case MovementPhaseState::PRE_MOVEMENT:
-        color = COLOR_ORANGE;
-        break;
-      case MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
-        color = COLOR_GREEN;
-        break;
-      case MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
-        color = COLOR_GREEN;
-        break;
-      case MovementPhaseState::PERMISSIVE_CLEARANCE:
-        color = COLOR_ORANGE;
-        break;
-      case MovementPhaseState::PROTECTED_CLEARANCE:
-        color = COLOR_ORANGE;
-        break;
-      case MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
-        color = COLOR_ORANGE;
-        break;
-      default:
-        color = COLOR_GREY;
-        break;
+    case MovementPhaseState::DARK:
+      color = COLOR_GREY;
+      break;
+    case MovementPhaseState::STOP_THEN_PROCEED:
+      color = COLOR_RED;
+      break;
+    case MovementPhaseState::STOP_AND_REMAIN:
+      color = COLOR_RED;
+      break;
+    case MovementPhaseState::PRE_MOVEMENT:
+      color = COLOR_ORANGE;
+      break;
+    case MovementPhaseState::PERMISSIVE_MOVEMENT_ALLOWED:
+      color = COLOR_GREEN;
+      break;
+    case MovementPhaseState::PROTECTED_MOVEMENT_ALLOWED:
+      color = COLOR_GREEN;
+      break;
+    case MovementPhaseState::PERMISSIVE_CLEARANCE:
+      color = COLOR_ORANGE;
+      break;
+    case MovementPhaseState::PROTECTED_CLEARANCE:
+      color = COLOR_ORANGE;
+      break;
+    case MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC:
+      color = COLOR_ORANGE;
+      break;
+    default:
+      color = COLOR_GREY;
+      break;
   }
 
   return color;
@@ -219,7 +216,7 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   } else if (time >= 35991 && time <= 35999) {
     // leap second
     type = time_mark_value_interpretation::leap_second;
-  } else { // time >= 0 && time <= 36000
+  } else {  // time >= 0 && time <= 36000
     type = time_mark_value_interpretation::normal;
   }
 
@@ -233,13 +230,14 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   * @param nanosec Unix timestamp in nanoseconds
   * @return Delta time between the timestamp and the given TimeMark in nanoseconds
   */
- inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
-  // calculate elapsed nanoseconds since the start of the last full hour 
+inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
+  // calculate elapsed nanoseconds since the start of the last full hour
   int64_t timestamp_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
   // convert TimeMark value to nanoseconds
-  int64_t timemark_in_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
+  int64_t timemark_in_nanosec =
+      static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
   // calculate relative time until the next change occurs
-  int64_t rel_time_until_change =  timemark_in_nanosec - timestamp_hour_nanosec;
+  int64_t rel_time_until_change = timemark_in_nanosec - timestamp_hour_nanosec;
 
   // adjust relative time if a jump to the next hour occurs (relative time should be inside the interval [0, 3600e9) )
   if (rel_time_until_change < 0) {
@@ -249,7 +247,7 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   return rel_time_until_change;
 }
 
- /**
+/**
   * @brief Calculates the delta between a TimeMark and a given timestamp
   
   * @param time TimeMark value since the start of the last full hour in 0.1 seconds
@@ -257,9 +255,11 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   * @param nanosec nanoseconds of current timestamp [0, 999999999]
   * @return Delta time between the timestamp and the given TimeMark in seconds
   */
-inline float interpretTimeMarkDeltaTimeValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
+inline float interpretTimeMarkDeltaTimeValueAsSeconds(const uint16_t time, const int32_t seconds,
+                                                      const uint32_t nanosec) {
   uint64_t timestamp_in_nanoseconds = seconds * FACTOR_SECONDS_TO_NANOSECONDS + nanosec;
-  return interpretTimeMarkDeltaTimeAsNanoSeconds(time, timestamp_in_nanoseconds) / static_cast<float>(FACTOR_SECONDS_TO_NANOSECONDS);
+  return interpretTimeMarkDeltaTimeAsNanoSeconds(time, timestamp_in_nanoseconds) /
+         static_cast<float>(FACTOR_SECONDS_TO_NANOSECONDS);
 }
 
 /**
@@ -270,8 +270,7 @@ inline float interpretTimeMarkDeltaTimeValueAsSeconds(const uint16_t time, const
  * @param nanosec nanoseconds of current timestamp [0, 999999999]
  * @return Decoded String representation of the encoded time
  */
-inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
-{
+inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
   time_mark_value_interpretation time_type = interpretTimeMarkValueType(time);
 
   std::string text_content;
@@ -299,6 +298,6 @@ inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t
   return text_content;
 }
 
-} // namespace etsi_its_spatem_ts_msgs
+}  // namespace access
 
-} // namespace access
+}  // namespace etsi_its_spatem_ts_msgs
