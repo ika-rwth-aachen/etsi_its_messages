@@ -19,5 +19,6 @@ var cam__setters__common_8h =
     [ "setVehicleDimensions", "cam__setters__common_8h.html#a54a29c23c98782ec9b2c2770526b6743", null ],
     [ "setVehicleLength", "cam__setters__common_8h.html#a234cf10e13b8acee801edcd9405451a6", null ],
     [ "setVehicleLengthValue", "cam__setters__common_8h.html#a56fb18d01480639649af1d9acb848b86", null ],
-    [ "setVehicleWidth", "cam__setters__common_8h.html#accca46176c8be97e41ff54618c6f307f", null ]
+    [ "setVehicleWidth", "cam__setters__common_8h.html#accca46176c8be97e41ff54618c6f307f", null ],
+    [ "setYawRate", "cam__setters__common_8h.html#a64b85ed6c990bc7bd79f8b09e889b2de", null ]
 ];

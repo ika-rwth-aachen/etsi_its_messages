@@ -1,6 +1,8 @@
 var cdd__getters__common_8h =
 [
     [ "CovMatrixFromConfidenceEllipse", "cdd__getters__common_8h.html#ad36d55ad387c074607b6ae7f375a671f", null ],
+    [ "getAccelerationMagnitude", "cdd__getters__common_8h.html#a4bded12f25d05571e53b28aed0ad7418", null ],
+    [ "getAccelerationMagnitudeConfidence", "cdd__getters__common_8h.html#a8e4d95d2db98429ecadf5a310100cef5", null ],
     [ "getAltitude", "cdd__getters__common_8h.html#ae1359c6a376fe023f67919e500ebfd10", null ],
     [ "getHeadingCDD", "cdd__getters__common_8h.html#a18a1111208f4b60b3f0337fd2d542886", null ],
     [ "getHeadingConfidenceCDD", "cdd__getters__common_8h.html#a9033bf11ae34c98e4a3dbd16270ecab2", null ],
@@ -14,5 +16,7 @@ var cdd__getters__common_8h =
     [ "getStationID", "cdd__getters__common_8h.html#adaf5c08f459273d06bd6af04e78147e8", null ],
     [ "getUTMPosition", "cdd__getters__common_8h.html#a38245f7df8936ac903c4192fe2420289", null ],
     [ "getWGSPosConfidenceEllipse", "cdd__getters__common_8h.html#a73279677fc3e62268fee8fab5c86ad9c", null ],
+    [ "getYawRateCDD", "cdd__getters__common_8h.html#aafbb902060d86315adce97dbe54134ef", null ],
+    [ "getYawRateConfidenceCDD", "cdd__getters__common_8h.html#a90ed27d3d614e8ebb7965e77f4c7d7f5", null ],
     [ "WGSCovMatrixFromConfidenceEllipse", "cdd__getters__common_8h.html#ade3bbe4e6301bd87ab421b498f744c75", null ]
 ];

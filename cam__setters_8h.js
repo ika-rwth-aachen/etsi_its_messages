@@ -7,6 +7,9 @@ var cam__setters_8h =
     [ "etsi_its_cam_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "cam__access_8h.html#aeb826dabafcacb7e3490907b40e14f84", null ],
     [ "etsi_its_cam_msgs::access::setAccelerationConfidence", "cam__setters_8h.html#ab6b98a103fcf48bf0d88a0b2aeb631da", null ],
     [ "etsi_its_cam_msgs::access::setAccelerationControl", "cam__setters_8h.html#af5d5608589777f53afd14896291a1dc7", null ],
+    [ "etsi_its_cam_msgs::access::setAccelerationMagnitude", "cam__setters_8h.html#a4d42e23c44eb3800827cf399f4a55158", null ],
+    [ "etsi_its_cam_msgs::access::setAccelerationMagnitudeConfidence", "cam__setters_8h.html#a91afb9e5d47189f70b511d6830fdf170", null ],
+    [ "etsi_its_cam_msgs::access::setAccelerationMagnitudeValue", "cam__setters_8h.html#ab5d657d826c4b900bf7da923dac65279", null ],
     [ "etsi_its_cam_msgs::access::setAltitude", "cam__setters_8h.html#ae3747dfbc9d9f2a4668e1de7ba85dab8", null ],
     [ "etsi_its_cam_msgs::access::setAltitudeValue", "cam__setters_8h.html#ad51d28b1f84b4bbab02c18d8732dbb6a", null ],
     [ "etsi_its_cam_msgs::access::setBitString", "cam__setters_8h.html#a309250f989633bf4555cb01058af3cb3", null ],
@@ -54,6 +57,8 @@ var cam__setters_8h =
     [ "etsi_its_cam_msgs::access::setVehicleWidth", "cam__setters_8h.html#a999944eebdfd50911fc190f24b3ef9bf", null ],
     [ "etsi_its_cam_msgs::access::setWGSPosConfidenceEllipse", "cam__setters_8h.html#a97136e0ce51ed90d11817c510552ea0a", null ],
     [ "etsi_its_cam_msgs::access::setWGSRefPosConfidence", "cam__setters_8h.html#ae0e4f7d2b53b6e02b1bc80bef9a3a684", null ],
+    [ "etsi_its_cam_msgs::access::setYawRate", "cam__setters_8h.html#a402f86a406467f01cda21087014812d6", null ],
+    [ "etsi_its_cam_msgs::access::setYawRateCDD", "cam__setters_8h.html#aef89d4fd7a151907abc7bca87115e9d7", null ],
     [ "etsi_its_cam_msgs::access::throwIfNotPresent", "cam__access_8h.html#a575e06b5dfc323b649b3bbc7eeb18587", null ],
     [ "etsi_its_cam_msgs::access::throwIfOutOfRange", "cam__access_8h.html#a64ea2727207893a1158725178cf66dca", null ]
 ];

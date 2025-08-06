@@ -3,6 +3,9 @@ var cdd__setters__common_8h =
     [ "confidenceEllipseFromCovMatrix", "cdd__setters__common_8h.html#a44d6aa0acb8afa65e275084c44c7a007", null ],
     [ "confidenceEllipseFromWGSCovMatrix", "cdd__setters__common_8h.html#ae30faf8ab5185e8c76d37f5e93cc51e3", null ],
     [ "setAccelerationConfidence", "cdd__setters__common_8h.html#a111985f5c6ff32d3a49c7de4845c3e0f", null ],
+    [ "setAccelerationMagnitude", "cdd__setters__common_8h.html#aac99ab296d3152a4bde2af3e2f4f9101", null ],
+    [ "setAccelerationMagnitudeConfidence", "cdd__setters__common_8h.html#a953775878a56b80b0ae42323580ee839", null ],
+    [ "setAccelerationMagnitudeValue", "cdd__setters__common_8h.html#a4efd91901185968cd6a6e1302306d0bf", null ],
     [ "setAltitude", "cdd__setters__common_8h.html#a6fefcb0e418912e7e920235a9e2e76d7", null ],
     [ "setAltitudeValue", "cdd__setters__common_8h.html#ab347d14233bc8d61c0db228b3f83bb6c", null ],
     [ "setFromUTMPosition", "cdd__setters__common_8h.html#a7caadf8dc8a612e122882f60ee663600", null ],
@@ -19,5 +22,6 @@ var cdd__setters__common_8h =
     [ "setSpeedConfidence", "cdd__setters__common_8h.html#a37166d105cac0ba586f4771bfc331e16", null ],
     [ "setSpeedValue", "cdd__setters__common_8h.html#a2c4e6201e1fc4116b6aaff2f9d35e5f0", null ],
     [ "setTimestampITS", "cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39", null ],
-    [ "setWGSPosConfidenceEllipse", "cdd__setters__common_8h.html#aac1510dd6a00dfe44cfbf5fd7003b4ea", null ]
+    [ "setWGSPosConfidenceEllipse", "cdd__setters__common_8h.html#aac1510dd6a00dfe44cfbf5fd7003b4ea", null ],
+    [ "setYawRateCDD", "cdd__setters__common_8h.html#a7c40f9aa54943934280a7a961645f37f", null ]
 ];

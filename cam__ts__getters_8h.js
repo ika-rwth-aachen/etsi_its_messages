@@ -2,6 +2,8 @@ var cam__ts__getters_8h =
 [
     [ "etsi_its_cam_ts_msgs::access::CovMatrixFromConfidenceEllipse", "cam__ts__getters_8h.html#ae35d7343ef47c1a6c48c216dba7c13e6", null ],
     [ "etsi_its_cam_ts_msgs::access::getAccelerationControl", "cam__ts__getters_8h.html#a619684849966c08150cf5353adb09530", null ],
+    [ "etsi_its_cam_ts_msgs::access::getAccelerationMagnitude", "cam__ts__getters_8h.html#ae8bf2ea3132755598a3db5c0d885bce2", null ],
+    [ "etsi_its_cam_ts_msgs::access::getAccelerationMagnitudeConfidence", "cam__ts__getters_8h.html#a76260777060dd04f24fc548deea77dec", null ],
     [ "etsi_its_cam_ts_msgs::access::getAltitude", "cam__ts__getters_8h.html#aca4d8d9b431b363ecbc21b825ac62b9a", null ],
     [ "etsi_its_cam_ts_msgs::access::getAltitude", "cam__ts__getters_8h.html#a692e1ec1e1fd385fe744be29e95a93d9", null ],
     [ "etsi_its_cam_ts_msgs::access::getBitString", "cam__ts__getters_8h.html#ac0d665950fca4c46a3e946fa4b9eef59", null ],
@@ -52,5 +54,9 @@ var cam__ts__getters_8h =
     [ "etsi_its_cam_ts_msgs::access::getWGSPosConfidenceEllipse", "cam__ts__getters_8h.html#a4ea0b88afa8ef4a468ac2d0edbc1f0a8", null ],
     [ "etsi_its_cam_ts_msgs::access::getWGSPositionConfidenceEllipse", "cam__ts__getters_8h.html#a0dcf1a9f09c1f38925ffbad4561c55bd", null ],
     [ "etsi_its_cam_ts_msgs::access::getWGSRefPosConfidence", "cam__ts__getters_8h.html#ab7e54e81a21b6da44847433e38310ca0", null ],
+    [ "etsi_its_cam_ts_msgs::access::getYawRate", "cam__ts__getters_8h.html#a7599d0dc8167dcba4a25e2b5521ac107", null ],
+    [ "etsi_its_cam_ts_msgs::access::getYawRateCDD", "cam__ts__getters_8h.html#a53ea16a3e6a67a0f9f799464c677f167", null ],
+    [ "etsi_its_cam_ts_msgs::access::getYawRateConfidence", "cam__ts__getters_8h.html#a187f0e279e43b1aef6d7b68c9e701e21", null ],
+    [ "etsi_its_cam_ts_msgs::access::getYawRateConfidenceCDD", "cam__ts__getters_8h.html#a62d611d7fda8f2b22343cdede4a16608", null ],
     [ "etsi_its_cam_ts_msgs::access::WGSCovMatrixFromConfidenceEllipse", "cam__ts__getters_8h.html#a550d8bc6573a0af79eacd0f6dac41afe", null ]
 ];

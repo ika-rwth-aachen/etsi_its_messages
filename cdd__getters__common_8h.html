@@ -138,6 +138,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a1ace47aab6b69006538d21caf03da1b0" id="r_a1ace47aab6b69006538d21caf03da1b0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ace47aab6b69006538d21caf03da1b0">getSpeedConfidence</a> (const Speed &amp;speed)</td></tr>
 <tr class="memdesc:a1ace47aab6b69006538d21caf03da1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Speed Confidence.  <br /></td></tr>
 <tr class="separator:a1ace47aab6b69006538d21caf03da1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bded12f25d05571e53b28aed0ad7418" id="r_a4bded12f25d05571e53b28aed0ad7418"><td class="memTemplParams" colspan="2">template&lt;typename AccelerationMagnitude&gt; </td></tr>
+<tr class="memitem:a4bded12f25d05571e53b28aed0ad7418"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a4bded12f25d05571e53b28aed0ad7418">getAccelerationMagnitude</a> (const AccelerationMagnitude &amp;acceleration_magnitude)</td></tr>
+<tr class="memdesc:a4bded12f25d05571e53b28aed0ad7418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the AccelerationMagnitude value.  <br /></td></tr>
+<tr class="separator:a4bded12f25d05571e53b28aed0ad7418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e4d95d2db98429ecadf5a310100cef5" id="r_a8e4d95d2db98429ecadf5a310100cef5"><td class="memTemplParams" colspan="2">template&lt;typename AccelerationMagnitude&gt; </td></tr>
+<tr class="memitem:a8e4d95d2db98429ecadf5a310100cef5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8e4d95d2db98429ecadf5a310100cef5">getAccelerationMagnitudeConfidence</a> (const AccelerationMagnitude &amp;acceleration_magnitude)</td></tr>
+<tr class="memdesc:a8e4d95d2db98429ecadf5a310100cef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the AccelerationMagnitude Confidence.  <br /></td></tr>
+<tr class="separator:a8e4d95d2db98429ecadf5a310100cef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38245f7df8936ac903c4192fe2420289" id="r_a38245f7df8936ac903c4192fe2420289"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a38245f7df8936ac903c4192fe2420289"><td class="memTemplItemLeft" align="right" valign="top">gm::PointStamped&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a38245f7df8936ac903c4192fe2420289">getUTMPosition</a> (const T &amp;reference_position, int &amp;zone, bool &amp;northp)</td></tr>
 <tr class="memdesc:a38245f7df8936ac903c4192fe2420289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UTM Position defined by the given ReferencePosition.  <br /></td></tr>
@@ -150,6 +158,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a9033bf11ae34c98e4a3dbd16270ecab2"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a9033bf11ae34c98e4a3dbd16270ecab2">getHeadingConfidenceCDD</a> (const Heading &amp;heading)</td></tr>
 <tr class="memdesc:a9033bf11ae34c98e4a3dbd16270ecab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Heading value.  <br /></td></tr>
 <tr class="separator:a9033bf11ae34c98e4a3dbd16270ecab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbb902060d86315adce97dbe54134ef" id="r_aafbb902060d86315adce97dbe54134ef"><td class="memTemplParams" colspan="2">template&lt;typename YawRate&gt; </td></tr>
+<tr class="memitem:aafbb902060d86315adce97dbe54134ef"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aafbb902060d86315adce97dbe54134ef">getYawRateCDD</a> (const YawRate &amp;yaw_rate)</td></tr>
+<tr class="memdesc:aafbb902060d86315adce97dbe54134ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Yaw Rate value.  <br /></td></tr>
+<tr class="separator:aafbb902060d86315adce97dbe54134ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ed27d3d614e8ebb7965e77f4c7d7f5" id="r_a90ed27d3d614e8ebb7965e77f4c7d7f5"><td class="memTemplParams" colspan="2">template&lt;typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)&gt; </td></tr>
+<tr class="memitem:a90ed27d3d614e8ebb7965e77f4c7d7f5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a90ed27d3d614e8ebb7965e77f4c7d7f5">getYawRateConfidenceCDD</a> (const YawRate &amp;yaw_rate)</td></tr>
+<tr class="memdesc:a90ed27d3d614e8ebb7965e77f4c7d7f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Yaw Rate Confidence.  <br /></td></tr>
+<tr class="separator:a90ed27d3d614e8ebb7965e77f4c7d7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6085591c7babf555270202e72bf507e3" id="r_a6085591c7babf555270202e72bf507e3"><td class="memTemplParams" colspan="2">template&lt;typename SemiAxisLength&gt; </td></tr>
 <tr class="memitem:a6085591c7babf555270202e72bf507e3"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a> (const SemiAxisLength &amp;semi_axis_length)</td></tr>
 <tr class="memdesc:a6085591c7babf555270202e72bf507e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Semi Axis object.  <br /></td></tr>
@@ -228,25 +244,107 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 4&gt; The covariance matrix in vehicle coordinates (x = longitudinal, y = lateral) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00181">181</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  181</span>                                                                                                                                                       {</div>
-<div class="line"><span class="lineno">  182</span>  std::array&lt;double, 4&gt; covariance_matrix;</div>
-<div class="line"><span class="lineno">  183</span>  <span class="keywordtype">double</span> semi_major_squared = semi_major * semi_major / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  184</span>  <span class="keywordtype">double</span> semi_minor_squared = semi_minor * semi_minor / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  185</span>  <span class="keywordtype">double</span> major_orientation_rad = major_orientation * M_PI / 180;</div>
-<div class="line"><span class="lineno">  186</span>  <span class="keywordtype">double</span> object_heading_rad = object_heading;</div>
-<div class="line"><span class="lineno">  187</span>  </div>
-<div class="line"><span class="lineno">  188</span>  <span class="keywordtype">double</span> angle_to_object = object_heading_rad - major_orientation_rad;</div>
-<div class="line"><span class="lineno">  189</span> </div>
-<div class="line"><span class="lineno">  190</span>  <span class="keywordtype">double</span> cos_angle = std::cos(angle_to_object);</div>
-<div class="line"><span class="lineno">  191</span>  <span class="keywordtype">double</span> sin_angle = std::sin(angle_to_object);</div>
-<div class="line"><span class="lineno">  192</span>  covariance_matrix[0] = semi_major_squared * cos_angle * cos_angle + semi_minor_squared * sin_angle * sin_angle;</div>
-<div class="line"><span class="lineno">  193</span>  covariance_matrix[1] = (semi_major_squared - semi_minor_squared) * cos_angle * sin_angle;</div>
-<div class="line"><span class="lineno">  194</span>  covariance_matrix[2] = covariance_matrix[1];</div>
-<div class="line"><span class="lineno">  195</span>  covariance_matrix[3] = semi_major_squared * sin_angle * sin_angle + semi_minor_squared * cos_angle * cos_angle;</div>
-<div class="line"><span class="lineno">  196</span> </div>
-<div class="line"><span class="lineno">  197</span>  <span class="keywordflow">return</span> covariance_matrix;</div>
-<div class="line"><span class="lineno">  198</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00238">238</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  238</span>                                                                                                                                                       {</div>
+<div class="line"><span class="lineno">  239</span>  std::array&lt;double, 4&gt; covariance_matrix;</div>
+<div class="line"><span class="lineno">  240</span>  <span class="keywordtype">double</span> semi_major_squared = semi_major * semi_major / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  241</span>  <span class="keywordtype">double</span> semi_minor_squared = semi_minor * semi_minor / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  242</span>  <span class="keywordtype">double</span> major_orientation_rad = major_orientation * M_PI / 180;</div>
+<div class="line"><span class="lineno">  243</span>  <span class="keywordtype">double</span> object_heading_rad = object_heading;</div>
+<div class="line"><span class="lineno">  244</span>  </div>
+<div class="line"><span class="lineno">  245</span>  <span class="keywordtype">double</span> angle_to_object = object_heading_rad - major_orientation_rad;</div>
+<div class="line"><span class="lineno">  246</span> </div>
+<div class="line"><span class="lineno">  247</span>  <span class="keywordtype">double</span> cos_angle = std::cos(angle_to_object);</div>
+<div class="line"><span class="lineno">  248</span>  <span class="keywordtype">double</span> sin_angle = std::sin(angle_to_object);</div>
+<div class="line"><span class="lineno">  249</span>  covariance_matrix[0] = semi_major_squared * cos_angle * cos_angle + semi_minor_squared * sin_angle * sin_angle;</div>
+<div class="line"><span class="lineno">  250</span>  covariance_matrix[1] = (semi_major_squared - semi_minor_squared) * cos_angle * sin_angle;</div>
+<div class="line"><span class="lineno">  251</span>  covariance_matrix[2] = covariance_matrix[1];</div>
+<div class="line"><span class="lineno">  252</span>  covariance_matrix[3] = semi_major_squared * sin_angle * sin_angle + semi_minor_squared * cos_angle * cos_angle;</div>
+<div class="line"><span class="lineno">  253</span> </div>
+<div class="line"><span class="lineno">  254</span>  <span class="keywordflow">return</span> covariance_matrix;</div>
+<div class="line"><span class="lineno">  255</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4bded12f25d05571e53b28aed0ad7418" name="a4bded12f25d05571e53b28aed0ad7418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bded12f25d05571e53b28aed0ad7418">&#9670;&#160;</a></span>getAccelerationMagnitude()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename AccelerationMagnitude&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getAccelerationMagnitude </td>
+          <td>(</td>
+          <td class="paramtype">const AccelerationMagnitude &amp;</td>          <td class="paramname"><span class="paramname"><em>acceleration_magnitude</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the AccelerationMagnitude value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">acceleration_magnitude</td><td>to get the AccelerationMagnitude from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double acceleration magnitude in m/s^2 as decimal number </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00097">97</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                                            {</div>
+<div class="line"><span class="lineno">   98</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)acceleration_magnitude.acceleration_magnitude_value.value) * 1e-1;</div>
+<div class="line"><span class="lineno">   99</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8e4d95d2db98429ecadf5a310100cef5" name="a8e4d95d2db98429ecadf5a310100cef5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e4d95d2db98429ecadf5a310100cef5">&#9670;&#160;</a></span>getAccelerationMagnitudeConfidence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename AccelerationMagnitude&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getAccelerationMagnitudeConfidence </td>
+          <td>(</td>
+          <td class="paramtype">const AccelerationMagnitude &amp;</td>          <td class="paramname"><span class="paramname"><em>acceleration_magnitude</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the AccelerationMagnitude Confidence. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">acceleration_magnitude</td><td>to get the AccelerationMagnitudeConfidence from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double acceleration magnitude standard deviation in m/s^2 as decimal number </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00108">108</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)acceleration_magnitude.acceleration_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-1;</div>
+<div class="line"><span class="lineno">  110</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,8 +420,8 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00131">131</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)heading.heading_value.value) * 1e-1; }</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00153">153</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  153</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)heading.heading_value.value) * 1e-1; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -362,8 +460,8 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading standard deviation in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00142">142</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  142</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)heading.heading_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00164">164</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>{ <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)heading.heading_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -475,15 +573,15 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::tuple&lt;double, double, double&gt; major axis length in meters, minor axis length in meters, and orientation in degrees </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00162">162</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>                                                                                                                         {</div>
-<div class="line"><span class="lineno">  163</span>  <span class="keywordflow">return</span> {</div>
-<div class="line"><span class="lineno">  164</span>    <a class="code hl_function" href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a>(position_confidence_ellipse.semi_major_confidence),</div>
-<div class="line"><span class="lineno">  165</span>    <a class="code hl_function" href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a>(position_confidence_ellipse.semi_minor_confidence),</div>
-<div class="line"><span class="lineno">  166</span>    position_confidence_ellipse.semi_major_orientation.value * 1e-1</div>
-<div class="line"><span class="lineno">  167</span>  };</div>
-<div class="line"><span class="lineno">  168</span>}</div>
-<div class="ttc" id="acdd__getters__common_8h_html_a6085591c7babf555270202e72bf507e3"><div class="ttname"><a href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a></div><div class="ttdeci">double getSemiAxis(const SemiAxisLength &amp;semi_axis_length)</div><div class="ttdoc">Get the Semi Axis object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00151">cdd_getters_common.h:151</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00219">219</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  219</span>                                                                                                                         {</div>
+<div class="line"><span class="lineno">  220</span>  <span class="keywordflow">return</span> {</div>
+<div class="line"><span class="lineno">  221</span>    <a class="code hl_function" href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a>(position_confidence_ellipse.semi_major_confidence),</div>
+<div class="line"><span class="lineno">  222</span>    <a class="code hl_function" href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a>(position_confidence_ellipse.semi_minor_confidence),</div>
+<div class="line"><span class="lineno">  223</span>    position_confidence_ellipse.semi_major_orientation.value * 1e-1</div>
+<div class="line"><span class="lineno">  224</span>  };</div>
+<div class="line"><span class="lineno">  225</span>}</div>
+<div class="ttc" id="acdd__getters__common_8h_html_a6085591c7babf555270202e72bf507e3"><div class="ttname"><a href="#a6085591c7babf555270202e72bf507e3">getSemiAxis</a></div><div class="ttdeci">double getSemiAxis(const SemiAxisLength &amp;semi_axis_length)</div><div class="ttdoc">Get the Semi Axis object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00208">cdd_getters_common.h:208</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -526,13 +624,13 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 4&gt; The covariance matrix of the position confidence ellipse in vehicle coordinates (x = longitudinal, y = lateral) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00223">223</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  223</span>                                                                                                                                        {</div>
-<div class="line"><span class="lineno">  224</span>  <span class="keyword">auto</span> [semi_major, semi_minor, major_orientation] = <a class="code hl_function" href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a>(position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  225</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation, object_heading);</div>
-<div class="line"><span class="lineno">  226</span>}</div>
-<div class="ttc" id="acdd__getters__common_8h_html_a91f57586b0393084c9ce98705680be88"><div class="ttname"><a href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; getPosConfidenceEllipse(const PosConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Extract major axis length, minor axis length and orientation from the given position confidence ellip...</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00162">cdd_getters_common.h:162</a></div></div>
-<div class="ttc" id="acdd__getters__common_8h_html_ad36d55ad387c074607b6ae7f375a671f"><div class="ttname"><a href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading)</div><div class="ttdoc">Convert the confidence ellipse to a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00181">cdd_getters_common.h:181</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00280">280</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  280</span>                                                                                                                                        {</div>
+<div class="line"><span class="lineno">  281</span>  <span class="keyword">auto</span> [semi_major, semi_minor, major_orientation] = <a class="code hl_function" href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a>(position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  282</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation, object_heading);</div>
+<div class="line"><span class="lineno">  283</span>}</div>
+<div class="ttc" id="acdd__getters__common_8h_html_a91f57586b0393084c9ce98705680be88"><div class="ttname"><a href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; getPosConfidenceEllipse(const PosConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Extract major axis length, minor axis length and orientation from the given position confidence ellip...</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00219">cdd_getters_common.h:219</a></div></div>
+<div class="ttc" id="acdd__getters__common_8h_html_ad36d55ad387c074607b6ae7f375a671f"><div class="ttname"><a href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading)</div><div class="ttdoc">Convert the confidence ellipse to a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00238">cdd_getters_common.h:238</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -570,10 +668,10 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double the semi axis length in meters </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00151">151</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  151</span>                                                                  {</div>
-<div class="line"><span class="lineno">  152</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper&lt;SemiAxisLength&gt;::value;</div>
-<div class="line"><span class="lineno">  153</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00208">208</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  208</span>                                                                  {</div>
+<div class="line"><span class="lineno">  209</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper&lt;SemiAxisLength&gt;::value;</div>
+<div class="line"><span class="lineno">  210</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -736,26 +834,26 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00102">102</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                                                           {</div>
-<div class="line"><span class="lineno">  103</span>  gm::PointStamped utm_point;</div>
-<div class="line"><span class="lineno">  104</span>  <span class="keywordtype">double</span> latitude = <a class="code hl_function" href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a>(reference_position.latitude);</div>
-<div class="line"><span class="lineno">  105</span>  <span class="keywordtype">double</span> longitude = <a class="code hl_function" href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a>(reference_position.longitude);</div>
-<div class="line"><span class="lineno">  106</span>  utm_point.point.z = <a class="code hl_function" href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a>(reference_position.altitude);</div>
-<div class="line"><span class="lineno">  107</span>  <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  108</span>    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);</div>
-<div class="line"><span class="lineno">  109</span>    std::string hemisphere;</div>
-<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">if</span> (northp) {</div>
-<div class="line"><span class="lineno">  111</span>      hemisphere = <span class="stringliteral">&quot;N&quot;</span>;</div>
-<div class="line"><span class="lineno">  112</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  113</span>      hemisphere = <span class="stringliteral">&quot;S&quot;</span>;</div>
-<div class="line"><span class="lineno">  114</span>    }</div>
-<div class="line"><span class="lineno">  115</span>    utm_point.header.frame_id = <span class="stringliteral">&quot;utm_&quot;</span> + std::to_string(zone) + hemisphere;</div>
-<div class="line"><span class="lineno">  116</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
-<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
-<div class="line"><span class="lineno">  118</span>  }</div>
-<div class="line"><span class="lineno">  119</span>  <span class="keywordflow">return</span> utm_point;</div>
-<div class="line"><span class="lineno">  120</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00124">124</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  124</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  125</span>  gm::PointStamped utm_point;</div>
+<div class="line"><span class="lineno">  126</span>  <span class="keywordtype">double</span> latitude = <a class="code hl_function" href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a>(reference_position.latitude);</div>
+<div class="line"><span class="lineno">  127</span>  <span class="keywordtype">double</span> longitude = <a class="code hl_function" href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a>(reference_position.longitude);</div>
+<div class="line"><span class="lineno">  128</span>  utm_point.point.z = <a class="code hl_function" href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a>(reference_position.altitude);</div>
+<div class="line"><span class="lineno">  129</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  130</span>    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);</div>
+<div class="line"><span class="lineno">  131</span>    std::string hemisphere;</div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">if</span> (northp) {</div>
+<div class="line"><span class="lineno">  133</span>      hemisphere = <span class="stringliteral">&quot;N&quot;</span>;</div>
+<div class="line"><span class="lineno">  134</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  135</span>      hemisphere = <span class="stringliteral">&quot;S&quot;</span>;</div>
+<div class="line"><span class="lineno">  136</span>    }</div>
+<div class="line"><span class="lineno">  137</span>    utm_point.header.frame_id = <span class="stringliteral">&quot;utm_&quot;</span> + std::to_string(zone) + hemisphere;</div>
+<div class="line"><span class="lineno">  138</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
+<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
+<div class="line"><span class="lineno">  140</span>  }</div>
+<div class="line"><span class="lineno">  141</span>  <span class="keywordflow">return</span> utm_point;</div>
+<div class="line"><span class="lineno">  142</span>}</div>
 <div class="ttc" id="acdd__getters__common_8h_html_a847d38d2334ce1dd7e3587b77e13fcf3"><div class="ttname"><a href="#a847d38d2334ce1dd7e3587b77e13fcf3">getLatitude</a></div><div class="ttdeci">double getLatitude(const Latitude &amp;latitude)</div><div class="ttdoc">Get the Latitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00054">cdd_getters_common.h:54</a></div></div>
 <div class="ttc" id="acdd__getters__common_8h_html_a91fca87ccb64088c1dd0cb68126c64a5"><div class="ttname"><a href="#a91fca87ccb64088c1dd0cb68126c64a5">getLongitude</a></div><div class="ttdeci">double getLongitude(const Longitude &amp;longitude)</div><div class="ttdoc">Get the Longitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00062">cdd_getters_common.h:62</a></div></div>
 <div class="ttc" id="acdd__getters__common_8h_html_ae1359c6a376fe023f67919e500ebfd10"><div class="ttname"><a href="#ae1359c6a376fe023f67919e500ebfd10">getAltitude</a></div><div class="ttdeci">double getAltitude(const Altitude &amp;altitude)</div><div class="ttdoc">Get the Altitude value.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00070">cdd_getters_common.h:70</a></div></div>
@@ -797,12 +895,106 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 4&gt; The covariance matrix of the position confidence ellipse in WGS coordinates (x = North, y = East) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00236">236</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  236</span>                                                                                                              {</div>
-<div class="line"><span class="lineno">  237</span>  <span class="keyword">auto</span> [semi_major, semi_minor, major_orientation] = <a class="code hl_function" href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a>(position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  238</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ade3bbe4e6301bd87ab421b498f744c75">WGSCovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation);</div>
-<div class="line"><span class="lineno">  239</span>}</div>
-<div class="ttc" id="acdd__getters__common_8h_html_ade3bbe4e6301bd87ab421b498f744c75"><div class="ttname"><a href="#ade3bbe4e6301bd87ab421b498f744c75">WGSCovMatrixFromConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; WGSCovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation)</div><div class="ttdoc">Convert the confidence ellipse to a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00210">cdd_getters_common.h:210</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00293">293</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  293</span>                                                                                                              {</div>
+<div class="line"><span class="lineno">  294</span>  <span class="keyword">auto</span> [semi_major, semi_minor, major_orientation] = <a class="code hl_function" href="#a91f57586b0393084c9ce98705680be88">getPosConfidenceEllipse</a>(position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  295</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ade3bbe4e6301bd87ab421b498f744c75">WGSCovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation);</div>
+<div class="line"><span class="lineno">  296</span>}</div>
+<div class="ttc" id="acdd__getters__common_8h_html_ade3bbe4e6301bd87ab421b498f744c75"><div class="ttname"><a href="#ade3bbe4e6301bd87ab421b498f744c75">WGSCovMatrixFromConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; WGSCovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation)</div><div class="ttdoc">Convert the confidence ellipse to a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__getters__common_8h_source.html#l00267">cdd_getters_common.h:267</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aafbb902060d86315adce97dbe54134ef" name="aafbb902060d86315adce97dbe54134ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafbb902060d86315adce97dbe54134ef">&#9670;&#160;</a></span>getYawRateCDD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename YawRate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getYawRateCDD </td>
+          <td>(</td>
+          <td class="paramtype">const YawRate &amp;</td>          <td class="paramname"><span class="paramname"><em>yaw_rate</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Yaw Rate value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">yaw_rate</td><td>The YawRate object to get the yaw rate from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double The yaw rate in degrees per second </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00173">173</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  173</span>                                                     {</div>
+<div class="line"><span class="lineno">  174</span>  <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)yaw_rate.yaw_rate_value.value) * 1e-2; <span class="comment">// Yaw rate in deg/s</span></div>
+<div class="line"><span class="lineno">  175</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a90ed27d3d614e8ebb7965e77f4c7d7f5" name="a90ed27d3d614e8ebb7965e77f4c7d7f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ed27d3d614e8ebb7965e77f4c7d7f5">&#9670;&#160;</a></span>getYawRateConfidenceCDD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double getYawRateConfidenceCDD </td>
+          <td>(</td>
+          <td class="paramtype">const YawRate &amp;</td>          <td class="paramname"><span class="paramname"><em>yaw_rate</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Yaw Rate Confidence. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">yaw_rate</td><td>The YawRate object to get the yaw rate confidence from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double The yaw rate standard deviation in degrees per second </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00184">184</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  184</span>                                                               {</div>
+<div class="line"><span class="lineno">  185</span>  <span class="keyword">auto</span> val = yaw_rate.yaw_rate_confidence.value;</div>
+<div class="line"><span class="lineno">  186</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;uint8_t, double&gt; confidence_map = {</div>
+<div class="line"><span class="lineno">  187</span>      {YawRateConfidence::UNAVAILABLE, 0.0},</div>
+<div class="line"><span class="lineno">  188</span>      {YawRateConfidence::DEG_SEC_000_01, 0.01},</div>
+<div class="line"><span class="lineno">  189</span>      {YawRateConfidence::DEG_SEC_000_05, 0.05},</div>
+<div class="line"><span class="lineno">  190</span>      {YawRateConfidence::DEG_SEC_000_10, 0.1},</div>
+<div class="line"><span class="lineno">  191</span>      {YawRateConfidence::DEG_SEC_001_00, 1.0},</div>
+<div class="line"><span class="lineno">  192</span>      {YawRateConfidence::DEG_SEC_005_00, 5.0},</div>
+<div class="line"><span class="lineno">  193</span>      {YawRateConfidence::DEG_SEC_010_00, 10.0},</div>
+<div class="line"><span class="lineno">  194</span>      {YawRateConfidence::DEG_SEC_100_00, 100.0},</div>
+<div class="line"><span class="lineno">  195</span>      {YawRateConfidence::OUT_OF_RANGE, std::numeric_limits&lt;double&gt;::infinity()},</div>
+<div class="line"><span class="lineno">  196</span>  };</div>
+<div class="line"><span class="lineno">  197</span>  <span class="keywordflow">return</span> confidence_map.at(val) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; </div>
+<div class="line"><span class="lineno">  198</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -850,11 +1042,11 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 4&gt; The covariance matrix in WGS coordinates (x = North, y = East) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00210">210</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  210</span>                                                                                                                             {</div>
-<div class="line"><span class="lineno">  211</span>  <span class="comment">// The WGS covariance matrix is the same as in vehicle coordinates, if it would have a heading of 0.0</span></div>
-<div class="line"><span class="lineno">  212</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation, 0.0);</div>
-<div class="line"><span class="lineno">  213</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__getters__common_8h_source.html#l00267">267</a> of file <a class="el" href="cdd__getters__common_8h_source.html">cdd_getters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  267</span>                                                                                                                             {</div>
+<div class="line"><span class="lineno">  268</span>  <span class="comment">// The WGS covariance matrix is the same as in vehicle coordinates, if it would have a heading of 0.0</span></div>
+<div class="line"><span class="lineno">  269</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad36d55ad387c074607b6ae7f375a671f">CovMatrixFromConfidenceEllipse</a>(semi_major, semi_minor, major_orientation, 0.0);</div>
+<div class="line"><span class="lineno">  270</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

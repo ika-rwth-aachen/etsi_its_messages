@@ -2,6 +2,8 @@ var cam__getters_8h =
 [
     [ "etsi_its_cam_msgs::access::CovMatrixFromConfidenceEllipse", "cam__getters_8h.html#ac4dee0dcba1e54d08b42c1cdbe744b5a", null ],
     [ "etsi_its_cam_msgs::access::getAccelerationControl", "cam__getters_8h.html#a2fbc27b9487c074256d695113af73487", null ],
+    [ "etsi_its_cam_msgs::access::getAccelerationMagnitude", "cam__getters_8h.html#a10b2d6a8c874cb42ea9e12af2674dbcf", null ],
+    [ "etsi_its_cam_msgs::access::getAccelerationMagnitudeConfidence", "cam__getters_8h.html#a5696f3e03000bb9891112dbf40c6bc73", null ],
     [ "etsi_its_cam_msgs::access::getAltitude", "cam__getters_8h.html#a38286e0d3d6ac7f1fccdb70ac6ec6949", null ],
     [ "etsi_its_cam_msgs::access::getAltitude", "cam__getters_8h.html#aecf9264221e3476cb0c1874df24c06c6", null ],
     [ "etsi_its_cam_msgs::access::getBitString", "cam__getters_8h.html#aeb65585dd4e82026ee72a95b49e1664d", null ],
@@ -49,5 +51,9 @@ var cam__getters_8h =
     [ "etsi_its_cam_msgs::access::getVehicleWidth", "cam__getters_8h.html#a5372ed38995e4c8b154d126970fdb3cd", null ],
     [ "etsi_its_cam_msgs::access::getWGSPosConfidenceEllipse", "cam__getters_8h.html#a3ace1dfe06b84952fae72bfcaf701b73", null ],
     [ "etsi_its_cam_msgs::access::getWGSRefPosConfidence", "cam__getters_8h.html#a4353ae35daddd7b99c9b842720bf998d", null ],
+    [ "etsi_its_cam_msgs::access::getYawRate", "cam__getters_8h.html#ae4ffaa1080feb5ba118d7c2b19ecd9b9", null ],
+    [ "etsi_its_cam_msgs::access::getYawRateCDD", "cam__getters_8h.html#a05e087cf144f34937adb29872ade6242", null ],
+    [ "etsi_its_cam_msgs::access::getYawRateConfidence", "cam__getters_8h.html#ace096e6a51d3b8456552cd2b69c796b1", null ],
+    [ "etsi_its_cam_msgs::access::getYawRateConfidenceCDD", "cam__getters_8h.html#a7d3265acc986ffe75db7e0a0840636fe", null ],
     [ "etsi_its_cam_msgs::access::WGSCovMatrixFromConfidenceEllipse", "cam__getters_8h.html#a53ee594bbc1e5b76c00cea70b568c3e2", null ]
 ];

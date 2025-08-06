@@ -6,6 +6,9 @@ var denm__setters_8h =
     [ "etsi_its_denm_msgs::access::confidenceEllipseFromWGSCovMatrix", "denm__setters_8h.html#ab37677b422516fedce421968ebfe13d6", null ],
     [ "etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "denm__access_8h.html#a509b6187f55ea99970d24ff799403463", null ],
     [ "etsi_its_denm_msgs::access::setAccelerationConfidence", "denm__setters_8h.html#a2f822b83b669c9684f98aad90d8abe92", null ],
+    [ "etsi_its_denm_msgs::access::setAccelerationMagnitude", "denm__setters_8h.html#ab47dd21f666fbe2e7caa4c72dfc78d99", null ],
+    [ "etsi_its_denm_msgs::access::setAccelerationMagnitudeConfidence", "denm__setters_8h.html#a9488d43707927e10d7f317e2aa1f70ab", null ],
+    [ "etsi_its_denm_msgs::access::setAccelerationMagnitudeValue", "denm__setters_8h.html#a345a94c2515cf72d0ad17df0d426ae97", null ],
     [ "etsi_its_denm_msgs::access::setAltitude", "denm__setters_8h.html#af199280816d3e209a21cf1d3151df769", null ],
     [ "etsi_its_denm_msgs::access::setAltitudeValue", "denm__setters_8h.html#a3b2da82f00c69548f3209d7c086f5dc1", null ],
     [ "etsi_its_denm_msgs::access::setBitString", "denm__setters_8h.html#ae9b67f26b61290cff23053e0c2d1cbfc", null ],
@@ -38,6 +41,7 @@ var denm__setters_8h =
     [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562", null ],
     [ "etsi_its_denm_msgs::access::setTimestampITS", "denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582", null ],
     [ "etsi_its_denm_msgs::access::setWGSPosConfidenceEllipse", "denm__setters_8h.html#ab6c7d3cc8288eadb2c2c8ed297377283", null ],
+    [ "etsi_its_denm_msgs::access::setYawRateCDD", "denm__setters_8h.html#a681b9f5f0693f4801437571af4c8ebd9", null ],
     [ "etsi_its_denm_msgs::access::throwIfNotPresent", "denm__setters_8h.html#a004b1bfc2e78a422b845a5ad61ece717", null ],
     [ "etsi_its_denm_msgs::access::throwIfOutOfRange", "denm__setters_8h.html#a08725084bdd2740ae6198b8c0eb3a09d", null ]
 ];

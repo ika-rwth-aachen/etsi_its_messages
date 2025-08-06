@@ -27,5 +27,7 @@ var cam__getters__common_8h =
     [ "getVehicleLength", "cam__getters__common_8h.html#a3e9e718d01370b615b5ec3bdbf52907e", null ],
     [ "getVehicleLength", "cam__getters__common_8h.html#ae6bae9511c2cb8b7f5662246a4a80592", null ],
     [ "getVehicleWidth", "cam__getters__common_8h.html#a39bda47d2d6d2d852af49e90212e9488", null ],
-    [ "getVehicleWidth", "cam__getters__common_8h.html#a49820ce7652181454f9ebb6d3a01cd32", null ]
+    [ "getVehicleWidth", "cam__getters__common_8h.html#a49820ce7652181454f9ebb6d3a01cd32", null ],
+    [ "getYawRate", "cam__getters__common_8h.html#aeba0d038d22e7d73f3e443f51cb1df85", null ],
+    [ "getYawRateConfidence", "cam__getters__common_8h.html#ab7a934de1bbd74addfbe4f09c570da90", null ]
 ];
