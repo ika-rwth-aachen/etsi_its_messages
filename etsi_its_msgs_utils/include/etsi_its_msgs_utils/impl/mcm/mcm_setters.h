@@ -60,15 +60,14 @@ inline void setItsPduHeader(MCM& mcm, const uint32_t station_id, const uint8_t p
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
  * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.)
  */
-inline void setGenerationDeltaTime(MCM& mcm, const uint64_t unix_nanosecs,
-                                   const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
-  
+inline void setGenerationDeltaTime(
+    MCM& mcm, const uint64_t unix_nanosecs,
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;
   uint16_t gdt_value = t_its % 65536;
   throwIfOutOfRange(gdt_value, GenerationDeltaTime::MIN, GenerationDeltaTime::MAX, "GenerationDeltaTime");
   mcm.mcm.generation_delta_time.value = gdt_value;
 }
-
 
 // ---------- basic_container ----------
 
@@ -146,20 +145,26 @@ inline void setAltitude(Altitude& altitude, const double value) {
  * @param longitude The longitude value in degree as decimal number.
  * @param altitude The altitude value (above the reference ellipsoid surface) in meter as decimal number (optional).
  */
-inline void setReferencePosition(MCM& mcm, const double latitude, const double longitude, const double altitude = AltitudeValue::UNAVAILABLE) {
+inline void setReferencePosition(MCM& mcm, const double latitude, const double longitude,
+                                 const double altitude = AltitudeValue::UNAVAILABLE) {
   setLatitude(mcm.mcm.mcm_parameters.basic_container.reference_position.latitude, latitude);
   setLongitude(mcm.mcm.mcm_parameters.basic_container.reference_position.longitude, longitude);
   if (altitude != AltitudeValue::UNAVAILABLE) {
     setAltitude(mcm.mcm.mcm_parameters.basic_container.reference_position.altitude, altitude);
   } else {
-    mcm.mcm.mcm_parameters.basic_container.reference_position.altitude.altitude_value.value = AltitudeValue::UNAVAILABLE;
-    mcm.mcm.mcm_parameters.basic_container.reference_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;
+    mcm.mcm.mcm_parameters.basic_container.reference_position.altitude.altitude_value.value =
+        AltitudeValue::UNAVAILABLE;
+    mcm.mcm.mcm_parameters.basic_container.reference_position.altitude.altitude_confidence.value =
+        AltitudeConfidence::UNAVAILABLE;
   }
 
   // reset PositionConfidenceEllipse to unavailable
-  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_length.value = SemiAxisLength::UNAVAILABLE;
-  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_minor_axis_length.value = SemiAxisLength::UNAVAILABLE;
-  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_orientation.value = Wgs84AngleValue::UNAVAILABLE;
+  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_length.value =
+      SemiAxisLength::UNAVAILABLE;
+  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_minor_axis_length.value =
+      SemiAxisLength::UNAVAILABLE;
+  mcm.mcm.mcm_parameters.basic_container.reference_position.position_confidence_ellipse.semi_major_axis_orientation
+      .value = Wgs84AngleValue::UNAVAILABLE;
 }
 
 /**
@@ -246,9 +251,8 @@ inline void setRoadUserDimension(T& dim, const double value) {
  * @param length The length of the road user (in meters).
  * @param width The width of the road user (in meters).
  */
-inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8_t type,
-                            const double speed, const double heading,
-                            const double length, const double width) {
+inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8_t type, const double speed,
+                             const double heading, const double length, const double width) {
   road_user_container.road_user_state.road_user_type.value = type;
   setSpeedValue(road_user_container.road_user_state.speed, speed);
   setHeadingValue(road_user_container.road_user_state.heading, heading);
@@ -266,7 +270,7 @@ inline void setRoadUserState(RoadUserContainer& road_user_container, const uint8
  * @param value The coordinate value in meters.
  */
 inline void setCartesianCoordinateLarge(CartesianCoordinateLarge& coordinate, const double value) {
-  auto coord_value = std::round(value * 1e2); // convert m to cm
+  auto coord_value = std::round(value * 1e2);  // convert m to cm
   if (coord_value < CartesianCoordinateLarge::MIN) {
     coord_value = CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE;
   } else if (coord_value > CartesianCoordinateLarge::MAX) {

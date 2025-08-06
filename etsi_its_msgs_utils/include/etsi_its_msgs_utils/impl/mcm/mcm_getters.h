@@ -41,15 +41,15 @@ namespace etsi_its_mcm_uulm_msgs::access {
  */
 inline double getLatitude(const Latitude& latitude) { return ((double)latitude.value) * 1e-7; }
 
- /**
+/**
   * @brief Get the Longitude value
   *
   * @param longitude to get the Longitude value from
   * @return Longitude value in degree as decimal number
   */
 inline double getLongitude(const Longitude& longitude) { return ((double)longitude.value) * 1e-7; }
- 
- /**
+
+/**
   * @brief Get the Altitude value
   *
   * @param altitude to get the Altitude value from
@@ -83,7 +83,8 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
   utm_point.point.z = getAltitude(reference_position.altitude);
   try {
     double scale;
-    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y, conv_angle, scale);
+    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y, conv_angle,
+                                   scale);
     std::string hemisphere;
     if (northp) {
       hemisphere = "N";
@@ -125,7 +126,7 @@ inline gm::PointStamped getUTMPosition(const MCM& mcm, int& zone, bool& northp, 
  * @return gm::PointStamped geometry_msgs::PointStamped of the given position
  */
 inline gm::PointStamped getUTMPosition(const MCM& mcm, int& zone, bool& northp) {
-  double conv_angle; // unused, but required by the function signature
+  double conv_angle;  // unused, but required by the function signature
   return getUTMPosition(mcm.mcm.mcm_parameters.basic_container.reference_position, zone, northp, conv_angle);
 }
 
@@ -139,12 +140,11 @@ inline gm::PointStamped getUTMPosition(const MCM& mcm, int& zone, bool& northp) 
  * @return gm::PointStamped geometry_msgs::PointStamped of the given position
  */
 inline gm::PointStamped getUTMPosition(const MCM& mcm) {
-  int zone; // unused, but required by the function signature
-  bool northp; // unused, but required by the function signature
-  double conv_angle; // unused, but required by the function signature
+  int zone;           // unused, but required by the function signature
+  bool northp;        // unused, but required by the function signature
+  double conv_angle;  // unused, but required by the function signature
   return getUTMPosition(mcm.mcm.mcm_parameters.basic_container.reference_position, zone, northp, conv_angle);
 }
-
 
 // ---------- suggested maneuver container getters ----------
 
@@ -278,9 +278,9 @@ inline std::vector<LongitudinalWaypoint> getLongitudinalWaypoints(const MCM& mcm
  */
 inline gm::Point getWaypointDelta(const LongitudinalWaypoint& longitudinal_waypoint) {
   gm::Point point;
-  point.x = static_cast<double>(longitudinal_waypoint.waypoint.x_distance.value * 1e-2); // convert cm to m
-  point.y = static_cast<double>(longitudinal_waypoint.waypoint.y_distance.value * 1e-2); // convert cm to m
-  point.z = 0.0; // z-coordinate is not used in longitudinal waypoints
+  point.x = static_cast<double>(longitudinal_waypoint.waypoint.x_distance.value * 1e-2);  // convert cm to m
+  point.y = static_cast<double>(longitudinal_waypoint.waypoint.y_distance.value * 1e-2);  // convert cm to m
+  point.z = 0.0;  // z-coordinate is not used in longitudinal waypoints
   return point;
 }
 
@@ -291,7 +291,7 @@ inline gm::Point getWaypointDelta(const LongitudinalWaypoint& longitudinal_waypo
  * @return The minimum arrival time delta in seconds.
  */
 inline double getMinArrivalTimeDelta(const LongitudinalWaypoint& longitudinal_waypoint) {
-  return static_cast<double>(longitudinal_waypoint.min_arrival_time.value * 1e-3); // convert ms to s
+  return static_cast<double>(longitudinal_waypoint.min_arrival_time.value * 1e-3);  // convert ms to s
 }
 
 /**
@@ -301,7 +301,7 @@ inline double getMinArrivalTimeDelta(const LongitudinalWaypoint& longitudinal_wa
  * @return The maximum arrival time delta in seconds.
  */
 inline double getMaxArrivalTimeDelta(const LongitudinalWaypoint& longitudinal_waypoint) {
-  return static_cast<double>(longitudinal_waypoint.max_arrival_time.value * 1e-3); // convert ms to s
+  return static_cast<double>(longitudinal_waypoint.max_arrival_time.value * 1e-3);  // convert ms to s
 }
 
 /**
@@ -317,7 +317,7 @@ inline double getMinVelocity(const LongitudinalWaypoint& longitudinal_waypoint) 
   } else if (longitudinal_waypoint.min_velocity.value == SpeedValue::UNAVAILABLE) {
     return std::numeric_limits<double>::quiet_NaN();
   }
-  return static_cast<double>(longitudinal_waypoint.min_velocity.value * 1e-2); // convert cm/s to m/s
+  return static_cast<double>(longitudinal_waypoint.min_velocity.value * 1e-2);  // convert cm/s to m/s
 }
 
 /**
@@ -333,7 +333,7 @@ inline double getMaxVelocity(const LongitudinalWaypoint& longitudinal_waypoint) 
   } else if (longitudinal_waypoint.max_velocity.value == SpeedValue::UNAVAILABLE) {
     return std::numeric_limits<double>::quiet_NaN();
   }
-  return static_cast<double>(longitudinal_waypoint.max_velocity.value * 1e-2); // convert cm/s to m/s
+  return static_cast<double>(longitudinal_waypoint.max_velocity.value * 1e-2);  // convert cm/s to m/s
 }
 
 // ---------- road user container getters ----------

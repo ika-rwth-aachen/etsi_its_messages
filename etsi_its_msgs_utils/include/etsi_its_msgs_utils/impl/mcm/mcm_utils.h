@@ -46,7 +46,8 @@ SOFTWARE.
 inline uint64_t getUnixNanosecondsFromGenerationDeltaTime(
     const GenerationDeltaTime& generation_delta_time, const uint64_t unix_timestamp_estimate,
     const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
-  uint64_t ms_estimate_after_utc_2004 = unix_timestamp_estimate * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;
+  uint64_t ms_estimate_after_utc_2004 =
+      unix_timestamp_estimate * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;
   uint64_t ms_after_utc_2004 = std::floor(ms_estimate_after_utc_2004 / 65536) * 65536 + generation_delta_time.value;
   return ms_after_utc_2004 * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;
 }
