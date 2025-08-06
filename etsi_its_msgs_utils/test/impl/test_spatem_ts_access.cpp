@@ -75,18 +75,30 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   float confidence_as_float2 = spatem_ts_access::interpretTimeIntervalConfidenceAsFloat(15);
   EXPECT_EQ(confidence_as_float2, 1.0f);
 
-  int random_int_time = randomInt(0, 35990);
-  int random_int_seconds = randomInt(0, 3599);
-  float time_mark_as_seconds = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time, random_int_seconds, 0);
-  EXPECT_EQ(time_mark_as_seconds, (float)random_int_time * 0.1f - random_int_seconds);
+  float tolerance = 1e-3f; // tolerance for floating point comparison
+  int time_mark = 25000; // 2500 seconds
+  int timestamp_seconds = 2000; // 2000 seconds
+  int timestamp_nanoseconds = 500000000; // 0.5 seconds
+  float delta_time_in_seconds = spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds, 499.5f, tolerance);
 
-  int random_int_time2 = randomInt(0, 35990);
-  int random_int_seconds2 = randomInt(0, 3599);
-  uint random_uint_nanosecs2 = (uint)randomInt(0, 1e3 - 1) * 1e6;
-  double tolerance = 1e-4;
+  time_mark = 10; // 1 second
+  timestamp_seconds = 3500; // 3500 seconds
+  timestamp_nanoseconds = 0; // 0 seconds
+  float delta_time_in_seconds2 = spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds2, 101.0f, tolerance);
 
-  float time_mark_as_seconds2 = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time2, random_int_seconds2, random_uint_nanosecs2);
-  EXPECT_NEAR(time_mark_as_seconds2, (float)random_int_time2 * 0.1f - (random_int_seconds2 + (float)random_uint_nanosecs2 * 1e-9), tolerance);
+  time_mark = 0; // 0 seconds
+  timestamp_seconds = 3600; // 3600 seconds
+  timestamp_nanoseconds = 0; // 0 seconds
+  float delta_time_in_seconds3 = spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds3, 0.0f, tolerance);
+
+  time_mark = 36000; // 3600 seconds
+  timestamp_seconds = 0; // 0 seconds
+  timestamp_nanoseconds = 0; // 0 seconds
+  float delta_time_in_seconds4 = spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds4, 3600.0f, tolerance);
 
   spatem_ts_access::time_mark_value_interpretation time_mark_value_type = spatem_ts_access::interpretTimeMarkValueType(36001);
   EXPECT_EQ(time_mark_value_type, spatem_ts_access::time_mark_value_interpretation::undefined);

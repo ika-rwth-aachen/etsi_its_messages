@@ -43,7 +43,6 @@ namespace access {
   static constexpr  std::array<float, 4> COLOR_RED {0.8, 0.2, 0.2, 1.0};
 
   static constexpr int HOUR_IN_SECONDS = 3600;
-  static constexpr int HALF_HOUR_IN_SECONDS = 1800;
   static constexpr int64_t FACTOR_SECONDS_TO_NANOSECONDS = 1000000000LL;
 
   // ETSI Timemark value equals 0.1 seconds and 10e8 nanoseconds
@@ -227,21 +226,23 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
   return type;
 }
 
- /**
-  * @brief Calculates the delta between the encoded time mark and the current timestamp
-  
-  * @param time Encoded time value since the start of the last full hour in 0.1 seconds
-  * @param nanosec Timestamp in nanoseconds
-  * @return Delta time between the time stamp and the next time mark in nanoseconds
+/**
+  * @brief Calculates the delta between a TimeMark and a given unix timestamp in nanoseconds
+
+  * @param time TimeMark value since the start of the last full hour in 0.1 seconds
+  * @param nanosec Unix timestamp in nanoseconds
+  * @return Delta time between the timestamp and the given TimeMark in nanoseconds
   */
  inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, const uint64_t nanosec) {
-  // calculate elapsed nanoseconds since the start of the last full hour in nanoseconds 
-  int64_t abs_time_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
-  int64_t abs_time_decoded_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
-  int64_t rel_time_until_change =  abs_time_decoded_nanosec - abs_time_hour_nanosec;
+  // calculate elapsed nanoseconds since the start of the last full hour 
+  int64_t timestamp_hour_nanosec = ((nanosec) % (HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS));
+  // convert TimeMark value to nanoseconds
+  int64_t timemark_in_nanosec = static_cast<int64_t>(time) * FACTOR_ETSI_TIMEMARK_TO_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
+  // calculate relative time until the next change occurs
+  int64_t rel_time_until_change =  timemark_in_nanosec - timestamp_hour_nanosec;
 
-  // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
-  if (rel_time_until_change < - HALF_HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS) {
+  // adjust relative time if a jump to the next hour occurs (relative time should be inside the interval [0, 3600e9) )
+  if (rel_time_until_change < 0) {
     rel_time_until_change += HOUR_IN_SECONDS * FACTOR_SECONDS_TO_NANOSECONDS;
   }
 
@@ -249,32 +250,24 @@ inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t 
 }
 
  /**
-  * @brief Calculates the delta between the encoded time mark and the current timestamp
+  * @brief Calculates the delta between a TimeMark and a given timestamp
   
-  * @param time Encoded time value since the start of the last full hour in 0.1 seconds
-  * @param seconds Timestamp in seconds
-  * @param nanosec Timestamp in nanoseconds
-  * @return Delta time between the time stamp and the next time mark in nanoseconds
+  * @param time TimeMark value since the start of the last full hour in 0.1 seconds
+  * @param seconds seconds of current timestamp
+  * @param nanosec nanoseconds of current timestamp [0, 999999999]
+  * @return Delta time between the timestamp and the given TimeMark in seconds
   */
-inline float interpretTimeMarkValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
-  // calculate elapsed seconds since the start of the last full hour  
-  float abs_time_hour = ((int)(seconds)) % HOUR_IN_SECONDS + (float)nanosec * 1e-9;
-  float rel_time_until_change = (float)time * FACTOR_ETSI_TIMEMARK_TO_SECONDS - abs_time_hour;
-
-  // adjust relative time if a jump to the next hour occurs (relative time inside the interval [-30:00, 30:00] )
-  if (rel_time_until_change < - HALF_HOUR_IN_SECONDS) {
-    rel_time_until_change += HOUR_IN_SECONDS;
-  }
-
-  return rel_time_until_change;
+inline float interpretTimeMarkDeltaTimeValueAsSeconds(const uint16_t time, const int32_t seconds, const uint32_t nanosec) {
+  uint64_t timestamp_in_nanoseconds = seconds * FACTOR_SECONDS_TO_NANOSECONDS + nanosec;
+  return interpretTimeMarkDeltaTimeAsNanoSeconds(time, timestamp_in_nanoseconds) / static_cast<float>(FACTOR_SECONDS_TO_NANOSECONDS);
 }
 
 /**
  * @brief Converts a value from message type TimeMarkValue into a string representation
  * 
  * @param time Time in 0.1 seconds until the next change occours in the future, counting from the last started hour
- * @param seconds Elapsed seconds since the start of the last full hour (timestamp)
- * @param nanosec Elapsed nanoseconds since the start of the last full hour (timestamp)
+ * @param seconds seconds of current timestamp
+ * @param nanosec nanoseconds of current timestamp [0, 999999999]
  * @return Decoded String representation of the encoded time
  */
 inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t seconds, const uint32_t nanosec)
@@ -294,7 +287,7 @@ inline std::string parseTimeMarkValueToString(const uint16_t time, const int32_t
       text_content = "leap second";
       break;
     case time_mark_value_interpretation::normal:
-      float rel_time_until_change = interpretTimeMarkValueAsSeconds(time, seconds, nanosec);
+      float rel_time_until_change = interpretTimeMarkDeltaTimeValueAsSeconds(time, seconds, nanosec);
 
       // set displayed precision to 0.1
       std::stringstream ss;
