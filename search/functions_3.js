@@ -7,6 +7,6 @@ var searchData=
   ['interpretmovementphasestateascolor_4',['interpretMovementPhaseStateAsColor',['../spatem__ts__utils_8h.html#a265c9b3e76c31299b5b4d32c6f0d8c08',1,'etsi_its_spatem_ts_msgs::access']]],
   ['interprettimeintervalconfidenceasfloat_5',['interpretTimeIntervalConfidenceAsFloat',['../spatem__ts__utils_8h.html#aacb7c330be55e7ca055d3d47dbcafd01',1,'etsi_its_spatem_ts_msgs::access']]],
   ['interprettimemarkdeltatimeasnanoseconds_6',['interpretTimeMarkDeltaTimeAsNanoSeconds',['../spatem__ts__utils_8h.html#ad5891cbae0c4c7de6eb051cafb372f01',1,'etsi_its_spatem_ts_msgs::access']]],
-  ['interprettimemarkvalueasseconds_7',['interpretTimeMarkValueAsSeconds',['../spatem__ts__utils_8h.html#a84610814e3088a91f4c6a6e5c076b19b',1,'etsi_its_spatem_ts_msgs::access']]],
+  ['interprettimemarkdeltatimevalueasseconds_7',['interpretTimeMarkDeltaTimeValueAsSeconds',['../spatem__ts__utils_8h.html#a670b227a893d743ea7482336a9a3c811',1,'etsi_its_spatem_ts_msgs::access']]],
   ['interprettimemarkvaluetype_8',['interpretTimeMarkValueType',['../spatem__ts__utils_8h.html#a85b380388e8aa682e7b4bb703061d9e4',1,'etsi_its_spatem_ts_msgs::access']]]
 ];

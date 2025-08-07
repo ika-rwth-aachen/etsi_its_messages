@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/cam/cam_ts_getters.h Source File</title>
+<title>etsi_its_messages: etsi_its_msgs_utils/include/etsi_its_msgs_utils/impl/mcm/mcm_utils.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ $(function() { codefold.init(0); });
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('cam__ts__getters_8h_source.html',''); initResizable(true); });
+$(function(){initNavTree('mcm__utils_8h_source.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,10 +103,10 @@ $(function(){initNavTree('cam__ts__getters_8h_source.html',''); initResizable(tr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">cam_ts_getters.h</div></div>
+  <div class="headertitle"><div class="title">mcm_utils.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="cam__ts__getters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="mcm__utils_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">=============================================================================</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">MIT License</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
@@ -133,43 +133,34 @@ $(function(){initNavTree('cam__ts__getters_8h_source.html',''); initResizable(tr
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>etsi_its_cam_ts_msgs::access {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="cam__ts__getters_8h.html#ac0d665950fca4c46a3e946fa4b9eef59">   43</a></span><span class="comment"> * where x is the longitudinal axis and y is the lateral axis of the vehicle.</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @param cam The CAM message to get the reference position from</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> * @return const std::array&lt;double, 4&gt; the covariance matrix, as specified above</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="cam__ts__getters_8h.html#a49c9061cdc2f68c6fec05a6c3aec7f4e">   47</a></span><span class="comment"> */</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="cam__ts__getters_8h.html#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="cam__ts__getters_8h.html#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cam__ts__getters_8h.html#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="cam__ts__getters_8h.html#ab7e54e81a21b6da44847433e38310ca0">getWGSRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="cam__ts__getters_8h.html#a9c62afada531358383da11cc4a3ec718">   63</a></span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cam__ts__getters_8h.html#a0dcf1a9f09c1f38925ffbad4561c55bd">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;<a class="code" href="checks_8h.html">etsi_its_msgs_utils/impl/checks.h</a>&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;<a class="code" href="constants_8h.html">etsi_its_msgs_utils/impl/constants.h</a>&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifndef ETSI_ITS_MSGS_UTILS_IMPL_MCM_MCM_UTILS_H</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define ETSI_ITS_MSGS_UTILS_IMPL_MCM_MCM_UTILS_H</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="mcm__utils_8h.html#a0d4ba885df0246096635f1fd5f080759">   46</a></span><span class="keyword">inline</span> uint64_t <a class="code hl_function" href="mcm__utils_8h.html#a0d4ba885df0246096635f1fd5f080759">getUnixNanosecondsFromGenerationDeltaTime</a>(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">const</span> GenerationDeltaTime&amp; generation_delta_time, <span class="keyword">const</span> uint64_t unix_timestamp_estimate,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">const</span> uint16_t n_leap_seconds = <a class="code hl_variable" href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a>.rbegin()-&gt;second) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  uint64_t ms_estimate_after_utc_2004 =</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      unix_timestamp_estimate * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  uint64_t ms_after_utc_2004 = std::floor(ms_estimate_after_utc_2004 / 65536) * 65536 + generation_delta_time.value;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordflow">return</span> ms_after_utc_2004 * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
 </div>
-<div class="ttc" id="acam__getters__common_8h_html"><div class="ttname"><a href="cam__getters__common_8h.html">cam_getters_common.h</a></div><div class="ttdoc">Common getter functions for the ETSI ITS CAM (EN and TS)</div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_a0dcf1a9f09c1f38925ffbad4561c55bd"><div class="ttname"><a href="cam__ts__getters_8h.html#a0dcf1a9f09c1f38925ffbad4561c55bd">etsi_its_cam_ts_msgs::access::getWGSPositionConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; getWGSPositionConfidenceEllipse(const PositionConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Get the covariance matrix of the position confidence ellipse.</div><div class="ttdef"><b>Definition</b> <a href="#l00383">cam_ts_getters.h:383</a></div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_ab7e54e81a21b6da44847433e38310ca0"><div class="ttname"><a href="cam__ts__getters_8h.html#ab7e54e81a21b6da44847433e38310ca0">etsi_its_cam_ts_msgs::access::getWGSRefPosConfidence</a></div><div class="ttdeci">const std::array&lt; double, 4 &gt; getWGSRefPosConfidence(const CAM &amp;cam)</div><div class="ttdoc">Get the confidence ellipse of the reference position as Covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00425">cam_ts_getters.h:425</a></div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_abc16ab085409645652623fd39b5649e3"><div class="ttname"><a href="cam__ts__getters_8h.html#abc16ab085409645652623fd39b5649e3">etsi_its_cam_ts_msgs::access::getRefPosConfidence</a></div><div class="ttdeci">const std::array&lt; double, 4 &gt; getRefPosConfidence(const CAM &amp;cam)</div><div class="ttdoc">Get the confidence ellipse of the reference position as Covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00411">cam_ts_getters.h:411</a></div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_aee609e5627bc60a2fee11cfbf5bf9393"><div class="ttname"><a href="cam__ts__getters_8h.html#aee609e5627bc60a2fee11cfbf5bf9393">etsi_its_cam_ts_msgs::access::getPositionConfidenceEllipse</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; getPositionConfidenceEllipse(PositionConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Extract major axis length, minor axis length and orientation from the given position confidence ellip...</div><div class="ttdef"><b>Definition</b> <a href="#l00354">cam_ts_getters.h:354</a></div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_afe466f298c3f04a36d884ca100f96931"><div class="ttname"><a href="cam__ts__getters_8h.html#afe466f298c3f04a36d884ca100f96931">etsi_its_cam_ts_msgs::access::getHeading</a></div><div class="ttdeci">double getHeading(const CAM &amp;cam)</div><div class="ttdoc">Get the Heading value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="#l00140">cam_ts_getters.h:140</a></div></div>
-<div class="ttc" id="acdd__v2-1-1__getters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__getters_8h.html">cdd_v2-1-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif  </span><span class="comment">// ETSI_ITS_MSGS_UTILS_IMPL_MCM_MCM_UTILS_H</span></div>
+<div class="ttc" id="achecks_8h_html"><div class="ttname"><a href="checks_8h.html">checks.h</a></div><div class="ttdoc">Sanity-check functions etc.</div></div>
+<div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">File containing constants that are used in the context of ETIS ITS Messages.</div></div>
+<div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="constants_8h.html#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00045">constants.h:45</a></div></div>
+<div class="ttc" id="amcm__utils_8h_html_a0d4ba885df0246096635f1fd5f080759"><div class="ttname"><a href="mcm__utils_8h.html#a0d4ba885df0246096635f1fd5f080759">getUnixNanosecondsFromGenerationDeltaTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const uint64_t unix_timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Get the Unix Nanoseconds from Generation Delta Time object.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">mcm_utils.h:46</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_829b657d6d3b62591de719156955a7f1.html">cam</a></li><li class="navelem"><a class="el" href="cam__ts__getters_8h.html">cam_ts_getters.h</a></li>
+    <li class="navelem"><a class="el" href="dir_bf0b42dcd353a2e75c2f62f60c2e623e.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_b2ebbb4f0f55a0c78a71d08de59a2686.html">include</a></li><li class="navelem"><a class="el" href="dir_920aca1f00d0ec9606509f5ff28f1191.html">etsi_its_msgs_utils</a></li><li class="navelem"><a class="el" href="dir_f021fdabe49e2e12eb2e4cde670eaddf.html">impl</a></li><li class="navelem"><a class="el" href="dir_9aae3e3996e4fb62392e2132a8e1b08a.html">mcm</a></li><li class="navelem"><a class="el" href="mcm__utils_8h.html">mcm_utils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

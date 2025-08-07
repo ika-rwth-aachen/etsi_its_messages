@@ -352,12 +352,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>std::tuple&lt;double, double, double&gt; semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="denm__setters_8h_source.html#l00508">508</a> of file <a class="el" href="denm__setters_8h_source.html">denm_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  543</span>                                   {</div>
-<div class="line"><span class="lineno">  544</span> </div>
-<div class="line"><span class="lineno">  545</span><span class="preprocessor">#include &lt;<a class="code" href="checks_8h.html">etsi_its_msgs_utils/impl/checks.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  546</span><span class="preprocessor">#include &lt;etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_setters.h&gt;</span></div>
-<div class="line"><span class="lineno">  547</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v1-3-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_setters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  548</span></div>
+<div class="fragment"></div>
 <div class="line"><span class="lineno">  556</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="#aeaf10da65cdf46166ac1180705da9d24">setItsPduHeader</a>(DENM&amp; denm, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
 <div class="line"><span class="lineno">  557</span>  <a class="code hl_function" href="#aeaf10da65cdf46166ac1180705da9d24">setItsPduHeader</a>(denm.header, ItsPduHeader::MESSAGE_ID_DENM, station_id, protocol_version);</div>
 <div class="line"><span class="lineno">  558</span>}</div>

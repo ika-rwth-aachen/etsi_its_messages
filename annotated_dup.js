@@ -32,6 +32,14 @@ var annotated_dup =
         ] ]
       ] ]
     ] ],
+    [ "etsi_its_mcm_uulm_msgs", null, [
+      [ "access", null, [
+        [ "etsi_its_msgs", null, [
+          [ "OneCentimeterHelper", "structetsi__its__mcm__uulm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
+          [ "OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__mcm__uulm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxi45d0baf2f5adb77c6f90da477de3bc8a.html", null ]
+        ] ]
+      ] ]
+    ] ],
     [ "etsi_its_msgs", null, [
       [ "OneCentimeterHelper", "structetsi__its__msgs_1_1OneCentimeterHelper.html", null ],
       [ "OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLength_00_01std_1_1void__t_3_01decltype45e7f73b825faac7e60cb4a332c33192.html", null ]
