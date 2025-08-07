@@ -21,7 +21,6 @@ jobs:
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
-          enable-singlearch-push: 'true'
 
   ros2-jazzy:
     runs-on: ubuntu-latest
@@ -36,7 +35,6 @@ jobs:
           rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
-          enable-slim: 'false'
 
   ros2-kilted:
     runs-on: ubuntu-latest
