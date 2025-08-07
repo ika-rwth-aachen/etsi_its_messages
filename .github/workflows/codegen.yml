@@ -1,7 +1,12 @@
 name: Code Generation
 
-# avoiding duplicate jobs on push with open pull_request: https://github.com/orgs/community/discussions/26940#discussioncomment-6656489
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
 

@@ -1,6 +1,12 @@
 name: industrial_ci
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   industrial_ci:
