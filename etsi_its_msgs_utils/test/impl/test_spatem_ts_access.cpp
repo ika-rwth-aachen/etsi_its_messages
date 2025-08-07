@@ -4,7 +4,6 @@
 namespace spatem_ts_access = etsi_its_spatem_ts_msgs::access;
 
 TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
-
   spatem_ts_msgs::IntersectionState intsct;
   unsigned int id = randomInt(spatem_ts_msgs::IntersectionID::MIN, spatem_ts_msgs::IntersectionID::MAX);
   spatem_ts_access::setIntersectionID(intsct, id);
@@ -21,7 +20,7 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   timeinfo.tm_hour = 1;
   timeinfo.tm_mday = 4;
   timeinfo.tm_mon = 0;
-  timeinfo.tm_year = 107; //years since 1900
+  timeinfo.tm_year = 107;  //years since 1900
   uint64_t unix_stamp = timegm(&timeinfo);
   // Set time to beginning of 2007: 01.01.2007 0:00
   timeinfo.tm_sec = 0;
@@ -29,15 +28,17 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   timeinfo.tm_hour = 0;
   timeinfo.tm_mday = 1;
   timeinfo.tm_mon = 0;
-  timeinfo.tm_year = 107; //years since 1900
-  EXPECT_EQ((timegm(&timeinfo)+60*moy)*1e9, spatem_ts_access::getUnixNanosecondsFromMinuteOfTheYear(spatem_ts_access::getMinuteOfTheYear(intsct), unix_stamp*1e9));
+  timeinfo.tm_year = 107;  //years since 1900
+  EXPECT_EQ((timegm(&timeinfo) + 60 * moy) * 1e9, spatem_ts_access::getUnixNanosecondsFromMinuteOfTheYear(
+                                                      spatem_ts_access::getMinuteOfTheYear(intsct), unix_stamp * 1e9));
 
   unsigned int dsecond = randomInt(spatem_ts_msgs::DSecond::MIN, spatem_ts_msgs::DSecond::MAX);
   spatem_ts_access::setDSecond(intsct, dsecond);
   EXPECT_EQ(dsecond, spatem_ts_access::getDSecond(intsct).value);
   EXPECT_EQ(true, intsct.time_stamp_is_present);
 
-  double dsecond_double = randomDouble(((double)spatem_ts_msgs::DSecond::MIN)*1e-3, ((double)spatem_ts_msgs::DSecond::MAX)*1e-3);
+  double dsecond_double =
+      randomDouble(((double)spatem_ts_msgs::DSecond::MIN) * 1e-3, ((double)spatem_ts_msgs::DSecond::MAX) * 1e-3);
   spatem_ts_access::setDSecond(intsct, dsecond_double);
   EXPECT_NEAR(dsecond_double, spatem_ts_access::getDSecondValue(intsct), 1e-3);
   EXPECT_EQ(true, intsct.time_stamp_is_present);
@@ -47,24 +48,25 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   spatem_ts_access::setSignalGroupID(movement_state, signal_group_id);
   EXPECT_EQ(signal_group_id, spatem_ts_access::getSignalGroupID(movement_state));
   movement_state.state_time_speed.array.resize(1);
-  unsigned int event_state = randomInt(spatem_ts_msgs::MovementPhaseState::UNAVAILABLE, spatem_ts_msgs::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC);
+  unsigned int event_state = randomInt(spatem_ts_msgs::MovementPhaseState::UNAVAILABLE,
+                                       spatem_ts_msgs::MovementPhaseState::CAUTION_CONFLICTING_TRAFFIC);
   movement_state.state_time_speed.array[0].event_state.value = event_state;
   EXPECT_EQ(event_state, spatem_ts_access::getCurrentMovementPhaseStateValue(movement_state));
 
   std::array<float, 4> movement_phase_state_color = spatem_ts_access::interpretMovementPhaseStateAsColor(5);
-  EXPECT_EQ(movement_phase_state_color[0], 0.18f); // color green
+  EXPECT_EQ(movement_phase_state_color[0], 0.18f);  // color green
   EXPECT_EQ(movement_phase_state_color[1], 0.79f);
   EXPECT_EQ(movement_phase_state_color[2], 0.21f);
   EXPECT_EQ(movement_phase_state_color[3], 1.0f);
 
   std::array<float, 4> movement_phase_state_color2 = spatem_ts_access::interpretMovementPhaseStateAsColor(9);
-  EXPECT_EQ(movement_phase_state_color2[0], 0.9f); // color orange
+  EXPECT_EQ(movement_phase_state_color2[0], 0.9f);  // color orange
   EXPECT_EQ(movement_phase_state_color2[1], 0.7f);
   EXPECT_EQ(movement_phase_state_color2[2], 0.09f);
   EXPECT_EQ(movement_phase_state_color2[3], 1.0f);
 
   std::array<float, 4> movement_phase_state_color3 = spatem_ts_access::interpretMovementPhaseStateAsColor(10);
-  EXPECT_EQ(movement_phase_state_color3[0], 0.5f); // color grey (out of definition range)
+  EXPECT_EQ(movement_phase_state_color3[0], 0.5f);  // color grey (out of definition range)
   EXPECT_EQ(movement_phase_state_color3[1], 0.5f);
   EXPECT_EQ(movement_phase_state_color3[2], 0.5f);
   EXPECT_EQ(movement_phase_state_color3[3], 1.0f);
@@ -75,29 +77,49 @@ TEST(etsi_its_spatem_ts_msgs, test_set_get_spatem) {
   float confidence_as_float2 = spatem_ts_access::interpretTimeIntervalConfidenceAsFloat(15);
   EXPECT_EQ(confidence_as_float2, 1.0f);
 
-  int random_int_time = randomInt(0, 35990);
-  int random_int_seconds = randomInt(0, 3599);
-  float time_mark_as_seconds = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time, random_int_seconds, 0);
-  EXPECT_EQ(time_mark_as_seconds, (float)random_int_time * 0.1f - random_int_seconds);
+  float tolerance = 1e-3f;                // tolerance for floating point comparison
+  int time_mark = 25000;                  // 2500 seconds
+  int timestamp_seconds = 2000;           // 2000 seconds
+  int timestamp_nanoseconds = 500000000;  // 0.5 seconds
+  float delta_time_in_seconds =
+      spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds, 499.5f, tolerance);
 
-  int random_int_time2 = randomInt(0, 35990);
-  int random_int_seconds2 = randomInt(0, 3599);
-  uint random_uint_nanosecs2 = (uint)randomInt(0, 1e3 - 1) * 1e6;
-  double tolerance = 1e-4;
+  time_mark = 10;             // 1 second
+  timestamp_seconds = 3500;   // 3500 seconds
+  timestamp_nanoseconds = 0;  // 0 seconds
+  float delta_time_in_seconds2 =
+      spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds2, 101.0f, tolerance);
 
-  float time_mark_as_seconds2 = spatem_ts_access::interpretTimeMarkValueAsSeconds(random_int_time2, random_int_seconds2, random_uint_nanosecs2);
-  EXPECT_NEAR(time_mark_as_seconds2, (float)random_int_time2 * 0.1f - (random_int_seconds2 + (float)random_uint_nanosecs2 * 1e-9), tolerance);
+  time_mark = 0;              // 0 seconds
+  timestamp_seconds = 3600;   // 3600 seconds
+  timestamp_nanoseconds = 0;  // 0 seconds
+  float delta_time_in_seconds3 =
+      spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds3, 0.0f, tolerance);
 
-  spatem_ts_access::time_mark_value_interpretation time_mark_value_type = spatem_ts_access::interpretTimeMarkValueType(36001);
+  time_mark = 36000;          // 3600 seconds
+  timestamp_seconds = 0;      // 0 seconds
+  timestamp_nanoseconds = 0;  // 0 seconds
+  float delta_time_in_seconds4 =
+      spatem_ts_access::interpretTimeMarkDeltaTimeValueAsSeconds(time_mark, timestamp_seconds, timestamp_nanoseconds);
+  EXPECT_NEAR(delta_time_in_seconds4, 3600.0f, tolerance);
+
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type =
+      spatem_ts_access::interpretTimeMarkValueType(36001);
   EXPECT_EQ(time_mark_value_type, spatem_ts_access::time_mark_value_interpretation::undefined);
 
-  spatem_ts_access::time_mark_value_interpretation time_mark_value_type2 = spatem_ts_access::interpretTimeMarkValueType(36000);
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type2 =
+      spatem_ts_access::interpretTimeMarkValueType(36000);
   EXPECT_EQ(time_mark_value_type2, spatem_ts_access::time_mark_value_interpretation::over_an_hour);
 
-  spatem_ts_access::time_mark_value_interpretation time_mark_value_type3 = spatem_ts_access::interpretTimeMarkValueType(35991);
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type3 =
+      spatem_ts_access::interpretTimeMarkValueType(35991);
   EXPECT_EQ(time_mark_value_type3, spatem_ts_access::time_mark_value_interpretation::leap_second);
 
-  spatem_ts_access::time_mark_value_interpretation time_mark_value_type4 = spatem_ts_access::interpretTimeMarkValueType(500);
+  spatem_ts_access::time_mark_value_interpretation time_mark_value_type4 =
+      spatem_ts_access::interpretTimeMarkValueType(500);
   EXPECT_EQ(time_mark_value_type4, spatem_ts_access::time_mark_value_interpretation::normal);
 
   std::string time_mark_as_string = spatem_ts_access::parseTimeMarkValueToString(36001, 0, 0);
