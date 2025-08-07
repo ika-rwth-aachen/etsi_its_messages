@@ -2,7 +2,7 @@
 
   <!-- Displays plugins -->
   <class
-    name="etsi_its_msgs/CAMDisplay"
+    name="etsi_its_msgs/CAM"
     type="etsi_its_msgs::displays::CAMDisplay"
     base_class_type="rviz_common::Display"
   >
@@ -13,7 +13,7 @@
   </class>
 
   <class
-    name="etsi_its_msgs/DENMDisplay"
+    name="etsi_its_msgs/DENM"
     type="etsi_its_msgs::displays::DENMDisplay"
     base_class_type="rviz_common::Display"
   >
@@ -24,7 +24,7 @@
   </class>
 
   <class
-    name="etsi_its_msgs/CPMDisplay"
+    name="etsi_its_msgs/CPM"
     type="etsi_its_msgs::displays::CPMDisplay"
     base_class_type="rviz_common::Display"
   >
@@ -35,7 +35,7 @@
   </class>
   
   <class
-    name="etsi_its_msgs/MAPEMDisplay"
+    name="etsi_its_msgs/MAPEM"
     type="etsi_its_msgs::displays::MAPEMDisplay"
     base_class_type="rviz_common::Display"
   >

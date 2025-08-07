@@ -116,6 +116,11 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY icons/classes/
+  DESTINATION share/${PROJECT_NAME}/icons/classes
+)
+
 ament_package(
   CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
 )

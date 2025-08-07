@@ -73,7 +73,7 @@ class CPMDisplay : public rviz_common::RosTopicDisplay<etsi_its_cpm_ts_msgs::msg
   rclcpp::Node::SharedPtr rviz_node_;
 
   // Properties
-  rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_speed_;
+  rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_object_id_, *show_speed_;
   rviz_common::properties::FloatProperty *buffer_timeout_, *bb_scale_, *char_height_;
   rviz_common::properties::ColorProperty *color_property_, *text_color_property_;
 

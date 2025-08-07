@@ -73,10 +73,12 @@ class CPMRenderObject
 
     uint8_t getNumberOfObjects();
     geometry_msgs::msg::Pose getPoseOfObject(const uint8_t idx);
+    uint16_t getIdOfObject(const uint8_t idx);
     geometry_msgs::msg::Vector3 getDimensionsOfObject(const uint8_t idx);
     geometry_msgs::msg::Vector3 getVelocityOfObject(const uint8_t idx);
 
     struct Object {
+      uint16_t id;
       geometry_msgs::msg::Pose pose;
       geometry_msgs::msg::Vector3 dimensions;
       geometry_msgs::msg::Vector3 velocity;

@@ -41,8 +41,15 @@ CPMRenderObject::CPMRenderObject(const etsi_its_cpm_ts_msgs::msg::CollectivePerc
     etsi_its_cpm_ts_msgs::msg::PerceivedObject perceived_obj = etsi_its_cpm_ts_msgs::access::getPerceivedObject(
       etsi_its_cpm_ts_msgs::access::getPerceivedObjectContainer(cpm), i);
     geometry_msgs::msg::PointStamped utm_position = etsi_its_cpm_ts_msgs::access::getUTMPositionOfPerceivedObject(cpm, perceived_obj);
-    
+    uint16_t object_id = 0;
+    try {
+      object_id = etsi_its_cpm_ts_msgs::access::getIdOfPerceivedObject(perceived_obj);
+    } catch (const std::invalid_argument &e) {
+      RCLCPP_WARN(rclcpp::get_logger("CPMRenderObject"), "Error getting object ID: %s. Using 0 as default.", e.what());
+    }
+
     Object obj;
+    obj.id = object_id;
     obj.pose.position = utm_position.point;
     if(perceived_obj.angles_is_present) obj.pose.orientation = etsi_its_cpm_ts_msgs::access::getOrientationOfPerceivedObject(perceived_obj);
     if(perceived_obj.object_dimension_x_is_present && perceived_obj.object_dimension_y_is_present && perceived_obj.object_dimension_z_is_present) {
@@ -70,6 +77,8 @@ std_msgs::msg::Header CPMRenderObject::getHeader() { return header_; }
 uint32_t CPMRenderObject::getStationID() { return station_id_; }
 
 geometry_msgs::msg::PointStamped CPMRenderObject::getReferencePosition() { return reference_position_; }
+
+uint16_t CPMRenderObject::getIdOfObject(const uint8_t idx) { return objects_[idx].id; }
 
 geometry_msgs::msg::Pose CPMRenderObject::getPoseOfObject(const uint8_t idx) { return objects_[idx].pose; }
 

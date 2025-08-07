@@ -223,7 +223,12 @@ inline PerceivedObject getPerceivedObject(const WrappedCpmContainer &container, 
  * @param object The PerceivedObject for which to retrieve the ID.
  * @return The ID of the perceived object.
  */
-inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) { return object.object_id.value; }
+inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_id_is_present) {
+    throw std::invalid_argument("No object_id present in PerceivedObject");
+  }
+  return object.object_id.value;
+}
 
 /**
  * @brief Retrieves the Cartesian coordinate value from a CartesianCoordinateWithConfidence object.
