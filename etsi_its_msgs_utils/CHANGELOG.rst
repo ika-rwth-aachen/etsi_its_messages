@@ -2,6 +2,23 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.3.0 (2025-08-07)
+------------------
+* Merge pull request `#89 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/89>`_ from ika-rwth-aachen/improvement/cpm-plugin
+  Add object ids to RViz CPM plugin; rename plugins; add icons
+* Merge pull request `#85 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/85>`_ from ika-rwth-aachen/mcm-access
+  Add access functions for MCM
+* Merge pull request `#81 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/81>`_ from FabianThomsen/feature/cam-yaw-rate
+  Add setters and getters for yaw rate in CAM and CAM TS
+* Merge pull request `#88 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/88>`_ from ika-rwth-aachen/kilted
+* Merge pull request `#83 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/83>`_ from ika-rwth-aachen/deprecate-ros1
+  Deprecate ROS 1 Noetic
+* Merge pull request `#86 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/86>`_ from ika-rwth-aachen/fix/spatem_time_mark_interpretation
+  Fix/spatem time mark interpretation
+* Merge pull request `#82 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/82>`_ from ika-rwth-aachen/fix/missing_inline_on_functions
+  Fix and adjust Spatem utils
+* Contributors: AlexanderWilczynski, Fabian Thomsen, Jean-Pierre Busch, Lennart Reiher
+
 3.2.1 (2025-05-16)
 ------------------
 
