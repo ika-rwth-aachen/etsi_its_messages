@@ -41,7 +41,7 @@
   <exec_depend>libqt5-opengl</exec_depend>
   <exec_depend>libqt5-widgets</exec_depend>
   <exec_depend>rviz_ogre_vendor</exec_depend>
-  <exec_depend condition="$ROS_DISTRO != kilted">rviz_satellite</exec_depend> <!-- rviz_satellite currently not available for kilted -->
+  <exec_depend>rviz_satellite</exec_depend>
   <exec_depend>rviz2</exec_depend>
 
   <export>
