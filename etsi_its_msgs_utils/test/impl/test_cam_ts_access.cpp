@@ -81,7 +81,6 @@ TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
 
   double yaw_rate = randomDouble(-327.65, 327.65);
   double yaw_rate_conf = randomDouble(0.0, 49.5);
-  std::cerr << "yaw_rate: " << yaw_rate << ", yaw_rate_conf: " << yaw_rate_conf << std::endl;
   cam_ts_access::setYawRate(cam, yaw_rate, yaw_rate_conf);
   EXPECT_NEAR(yaw_rate, cam_ts_access::getYawRate(cam), 1e-2);
   std::array<double, 7> yaw_std_possible_values{0.01, 0.05, 0.1, 1.0, 5.0, 10.0, 100.0};

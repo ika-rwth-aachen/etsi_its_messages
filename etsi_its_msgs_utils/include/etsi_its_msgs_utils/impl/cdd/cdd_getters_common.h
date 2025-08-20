@@ -189,7 +189,7 @@ template <typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw_r
 inline double getYawRateConfidenceCDD(const YawRate& yaw_rate) {
   auto val = yaw_rate.yaw_rate_confidence.value;
   static const std::map<uint8_t, double> confidence_map = {
-      {YawRateConfidence::UNAVAILABLE, 0.0},
+      {YawRateConfidence::UNAVAILABLE, std::numeric_limits<double>::infinity()},
       {YawRateConfidence::DEG_SEC_000_01, 0.01},
       {YawRateConfidence::DEG_SEC_000_05, 0.05},
       {YawRateConfidence::DEG_SEC_000_10, 0.1},
