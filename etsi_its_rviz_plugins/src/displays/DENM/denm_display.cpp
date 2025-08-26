@@ -130,7 +130,7 @@ void DENMDisplay::update(float, float) {
   if (denms_.empty() || !show_overlay_prop_->getBool()) {
     overlay_->hide();
   } else {
-    updateOverlay();
+    updateOverlay(denms_.begin()->second);
   }
 
   // Render all valid denms
@@ -206,7 +206,7 @@ void DENMDisplay::update(float, float) {
   }
 }
 
-void DENMDisplay::updateOverlay() {
+void DENMDisplay::updateOverlay(DENMRenderObject &denm_render_object) {
   overlay_->updateTextureSize(static_cast<unsigned int>(width_prop_->getInt()), static_cast<unsigned int>(height_prop_->getInt()));
   rviz_plugin::ScopedPixelBuffer buffer = overlay_->getBuffer();
 
@@ -224,7 +224,12 @@ void DENMDisplay::updateOverlay() {
     return;
   }
 
-  overlay_text_ = "DENM received!";
+  std::string overlay_text;
+  overlay_text+="StationID: " + std::to_string(denm_render_object.getStationID());
+  overlay_text+="\n";
+  overlay_text+="Cause: " + denm_render_object.getCauseCode();
+  overlay_text+="\n";
+  overlay_text+="SubCause: " + denm_render_object.getSubCauseCode();
 
   QImage Hud = buffer.getQImage(*overlay_, bg_color);
   QPainter painter(&Hud);
@@ -238,13 +243,13 @@ void DENMDisplay::updateOverlay() {
     overlay_font.setBold(true);
     painter.setFont(overlay_font);
   }
-  if (overlay_text_.length() > 0) {
+  if (overlay_text.length() > 0) {
     QString color_wrapped_text = QString("<span style=\"color: rgba(%1, %2, %3, %4)\">%5</span>")
         .arg(fg_color.red())
         .arg(fg_color.green())
         .arg(fg_color.blue())
         .arg(fg_color.alpha())
-        .arg(QString::fromStdString(QString::fromStdString(overlay_text_).replace("\n", "<br >").toStdString()));
+        .arg(QString::fromStdString(QString::fromStdString(overlay_text).replace("\n", "<br >").toStdString()));
     QStaticText static_text(color_wrapped_text);
     static_text.setTextWidth(w);
     painter.drawStaticText(0, 0, static_text);

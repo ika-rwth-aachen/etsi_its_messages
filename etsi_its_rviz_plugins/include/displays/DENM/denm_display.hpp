@@ -53,7 +53,7 @@ public:
 protected:
   void processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg) override;
   void update(float wall_dt, float ros_dt) override;
-  void updateOverlay();
+  void updateOverlay(DENMRenderObject &denm_render_object);
 
 private:
   Ogre::ManualObject * manual_object_;
@@ -77,7 +77,6 @@ private:
   rviz_common::properties::EnumProperty *font_prop_;
 
   std::shared_ptr<rviz_plugin::OverlayObject> overlay_;
-  std::string overlay_text_;
   QStringList font_families_;
 };
 
