@@ -6,6 +6,9 @@
 #include <OgreBillboardSet.h>
 #include <OgreMaterialManager.h>
 #include <OgreTechnique.h>
+#include <QPainter>
+#include <sstream>
+#include <QStaticText>
 
 #include "rviz_common/display_context.hpp"
 #include "rviz_common/frame_manager_iface.hpp"
@@ -13,6 +16,8 @@
 #include "rviz_common/properties/color_property.hpp"
 #include "rviz_common/properties/float_property.hpp"
 #include "rviz_common/properties/bool_property.hpp"
+#include "rviz_common/properties/enum_property.hpp"
+#include <rviz_rendering/render_system.hpp>
 
 #include "rviz_common/properties/parse_color.hpp"
 
@@ -41,6 +46,18 @@ DENMDisplay::DENMDisplay()
     "Show StationID", show_meta_);
   show_cause_code_ = new rviz_common::properties::BoolProperty("CauseCode", true, "Show CauseCode", show_meta_);
   show_sub_cause_code_ = new rviz_common::properties::BoolProperty("SubCauseCode", true, "Show SubCauseCode", show_meta_);
+
+
+  QFontDatabase database;
+  font_families_ = database.families();
+  font_property_ = new rviz_common::properties::EnumProperty("font", "DejaVu Sans Mono", "font", this, SLOT(updateFont()));
+  for (size_t i = 0; i < font_families_.size(); i++) {
+    font_property_->addOption(font_families_[i], (int) i);
+  }
+
+  static int i = 0;
+  overlay_.reset(new rviz_plugin::OverlayObject("Ogre Overlay number " + std::to_string(i)));
+  i++;
 }
 
 DENMDisplay::~DENMDisplay()
@@ -54,6 +71,8 @@ void DENMDisplay::onInitialize()
 {
   RTDClass::onInitialize();
 
+  rviz_rendering::RenderSystem::get()->prepareOverlays(scene_manager_);
+
   auto nodeAbstraction = context_->getRosNodeAbstraction().lock();
   rviz_node_ = nodeAbstraction->get_raw_node();
 
@@ -66,12 +85,13 @@ void DENMDisplay::reset()
 {
   RTDClass::reset();
   manual_object_->clear();
+  denms_.clear();
+  overlay_->hide();
 }
 
 void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg)
 {
   // Generate DENM render object from message
-  rclcpp::Time now = rviz_node_->now();
   DENMRenderObject denm(*msg);
   if (!denm.validateFloats()) {
         setStatus(
@@ -85,18 +105,70 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
   if (it != denms_.end()) it->second = denm; // Key exists, update the value
   else denms_.insert(std::make_pair(denm.getStationID(), denm)); 
   
-  return;
+  overlay_->show();
 }
 
-void DENMDisplay::update(float, float)
-{
-  
+void DENMDisplay::update(float, float) {
+    
   // Check for outdated DENMs
   for (auto it = denms_.begin(); it != denms_.end(); ) {
-        if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = denms_.erase(it);
-        else ++it;
+    if (it->second.getAge(rviz_node_->now()) > buffer_timeout_->getFloat()) it = denms_.erase(it);
+    else ++it;
   }
-  
+  if (denms_.empty()) {
+    overlay_->hide();
+  }
+
+  overlay_->updateTextureSize(static_cast<unsigned int>(128), static_cast<unsigned int>(128));
+  rviz_plugin::ScopedPixelBuffer buffer = overlay_->getBuffer();
+
+  QColor bg_color_ = QColor(0, 0, 0);
+  QColor fg_color_ = QColor(25, 255, 240);
+  int text_size_ = 12;
+  int line_width_ = 2;
+  int left_ = 0;
+  int top_ = 0;
+
+  std::stringstream ss;
+  ss << "DENM" << std::endl;
+  ss << "# valid objects: " << std::endl;
+  std::string text_ = ss.str();
+
+
+  {
+    QImage Hud = buffer.getQImage(*overlay_, bg_color_);
+    QPainter painter(&Hud);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(fg_color_, line_width_ || 1, Qt::SolidLine));
+    unsigned int w = overlay_->getTextureWidth();
+    unsigned int h = overlay_->getTextureHeight();
+
+    // font
+    if (text_size_ != 0) {
+      QFont font(font_.length() > 0 ? font_.c_str() : "Liberation Sans");
+      font.setPointSize(text_size_);
+      font.setBold(true);
+      painter.setFont(font);
+    }
+    if (text_.length() > 0) {
+      // painter.drawText(0, 0, w, h,
+      //                  Qt::TextWordWrap | Qt::AlignLeft | Qt::AlignTop,
+      //                  text_.c_str());
+      QString color_wrapped_text = QString("<span style=\"color: rgba(%1, %2, %3, %4)\">%5</span>")
+          .arg(fg_color_.red())
+          .arg(fg_color_.green())
+          .arg(fg_color_.blue())
+          .arg(fg_color_.alpha())
+          .arg(QString::fromStdString(QString::fromStdString(text_).replace("\n", "<br >").toStdString()));
+      QStaticText static_text(color_wrapped_text);
+      static_text.setTextWidth(w);
+      painter.drawStaticText(0, 0, static_text);
+    }
+    painter.end();
+  }
+  overlay_->setDimensions(overlay_->getTextureWidth(), overlay_->getTextureHeight());
+  overlay_->setPosition(left_, top_);
+
   // Render all valid denms
   arrows_.clear();
   texts_.clear();
@@ -167,6 +239,16 @@ void DENMDisplay::update(float, float)
       child_scene_node->attachObject(text_render.get());
       texts_.push_back(text_render);
     }
+  }
+}
+
+void DENMDisplay::updateFont() {
+  int font_index = font_property_->getOptionInt();
+  if (font_index < font_families_.size()) {
+    font_ = font_families_[font_index].toStdString();
+  } else {
+    RCLCPP_FATAL(rviz_node_->get_logger(), "Unexpected error at selecting font index %d.", font_index);
+    return;
   }
 }
 
