@@ -48,11 +48,11 @@ DENMDisplay::DENMDisplay()
   show_cause_code_ = new rviz_common::properties::BoolProperty("CauseCode", true, "Show CauseCode", show_meta_);
   show_sub_cause_code_ = new rviz_common::properties::BoolProperty("SubCauseCode", true, "Show SubCauseCode", show_meta_);
 
-  show_overlay_prop_ = new rviz_common::properties::BoolProperty("Overlay", true, "Display DENM as overlay", this);
-  bg_color_prop_ = new rviz_common::properties::ColorProperty("BG Color", QColor(0, 0, 0), "Background color of the overlay", show_overlay_prop_);
-  bg_alpha_prop_ = new rviz_common::properties::FloatProperty("BG Alpha", 1.0f, "Background alpha of the overlay", bg_color_prop_);
-  fg_color_prop_ = new rviz_common::properties::ColorProperty("FG Color", QColor(25, 255, 240), "Foreground color of the overlay", show_overlay_prop_);
-  fg_alpha_prop_ = new rviz_common::properties::FloatProperty("FG Alpha", 1.0f, "Foreground alpha of the overlay", fg_color_prop_);
+  show_overlay_prop_ = new rviz_common::properties::BoolProperty("Overlay", false, "Display DENM as overlay", this);
+  bg_color_prop_ = new rviz_common::properties::ColorProperty("BG Color", QColor(255, 85, 0), "Background color of the overlay", show_overlay_prop_);
+  bg_alpha_prop_ = new rviz_common::properties::FloatProperty("BG Alpha", 0.2f, "Background alpha of the overlay", bg_color_prop_);
+  fg_color_prop_ = new rviz_common::properties::ColorProperty("FG Color", QColor(255, 255, 255), "Foreground color of the overlay", show_overlay_prop_);
+  fg_alpha_prop_ = new rviz_common::properties::FloatProperty("FG Alpha", 0.8f, "Foreground alpha of the overlay", fg_color_prop_);
   top_offset_prop_ = new rviz_common::properties::IntProperty("Top Offset", 0, "Vertical offset of the overlay", show_overlay_prop_);
   left_offset_prop_ = new rviz_common::properties::IntProperty("Left Offset", 0, "Horizontal offset of the overlay", show_overlay_prop_);
   width_prop_ = new rviz_common::properties::IntProperty("Width", 128, "Width of the overlay", show_overlay_prop_);
@@ -207,14 +207,14 @@ void DENMDisplay::update(float, float) {
 }
 
 void DENMDisplay::updateOverlay(DENMRenderObject &denm_render_object) {
-  overlay_->updateTextureSize(static_cast<unsigned int>(width_prop_->getInt()), static_cast<unsigned int>(height_prop_->getInt()));
-  rviz_plugin::ScopedPixelBuffer buffer = overlay_->getBuffer();
+  // Prepare overlay text
+  std::string general_text = "Hazard warning!";
+  std::string subtext;
+  subtext += denm_render_object.getCauseCode();
+  subtext += "; ";
+  subtext += denm_render_object.getSubCauseCode();
 
-  QColor bg_color = bg_color_prop_->getColor();
-  bg_color.setAlphaF(bg_alpha_prop_->getFloat());
-  QColor fg_color = fg_color_prop_->getColor();
-  fg_color.setAlphaF(fg_alpha_prop_->getFloat());
-
+  // Prepare font
   QFont overlay_font;
   int font_index = font_prop_->getOptionInt();
   if (font_index < font_families_.size()) {
@@ -223,39 +223,63 @@ void DENMDisplay::updateOverlay(DENMRenderObject &denm_render_object) {
     RCLCPP_FATAL(rviz_node_->get_logger(), "Unexpected error at selecting font index %d.", font_index);
     return;
   }
+  int general_text_size = text_size_prop_->getInt();
+  int subtext_size = std::max(1, general_text_size / 2);
 
-  std::string overlay_text;
-  overlay_text+="StationID: " + std::to_string(denm_render_object.getStationID());
-  overlay_text+="\n";
-  overlay_text+="Cause: " + denm_render_object.getCauseCode();
-  overlay_text+="\n";
-  overlay_text+="SubCause: " + denm_render_object.getSubCauseCode();
+  // Measure text sizes
+  QFont general_font = overlay_font;
+  general_font.setPointSize(general_text_size);
+  general_font.setBold(true);
+
+  QFont sub_font = overlay_font;
+  sub_font.setPointSize(subtext_size);
+  sub_font.setBold(false);
+
+  QFontMetrics general_fm(general_font);
+  QFontMetrics sub_fm(sub_font);
+
+  int padding = 12;
+  int spacing = 4;
+
+  int general_width = general_fm.horizontalAdvance(QString::fromStdString(general_text));
+  int sub_width = sub_fm.horizontalAdvance(QString::fromStdString(subtext));
+  int width = std::max(general_width, sub_width) + padding * 2;
+  int height = general_fm.height() + sub_fm.height() + spacing + padding * 2;
+
+  // Update overlay texture size to fit text
+  overlay_->updateTextureSize(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
+  rviz_plugin::ScopedPixelBuffer buffer = overlay_->getBuffer();
+
+  QColor bg_color = bg_color_prop_->getColor();
+  bg_color.setAlphaF(bg_alpha_prop_->getFloat());
+  QColor fg_color = fg_color_prop_->getColor();
+  fg_color.setAlphaF(fg_alpha_prop_->getFloat());
 
   QImage Hud = buffer.getQImage(*overlay_, bg_color);
   QPainter painter(&Hud);
   painter.setRenderHint(QPainter::Antialiasing, true);
-  painter.setPen(QPen(fg_color, line_width_prop_->getInt() || 1, Qt::SolidLine));
-  unsigned int w = overlay_->getTextureWidth();
-  unsigned int h = overlay_->getTextureHeight();
 
-  if (text_size_prop_->getInt() != 0) {
-    overlay_font.setPointSize(text_size_prop_->getInt());
-    overlay_font.setBold(true);
-    painter.setFont(overlay_font);
-  }
-  if (overlay_text.length() > 0) {
-    QString color_wrapped_text = QString("<span style=\"color: rgba(%1, %2, %3, %4)\">%5</span>")
-        .arg(fg_color.red())
-        .arg(fg_color.green())
-        .arg(fg_color.blue())
-        .arg(fg_color.alpha())
-        .arg(QString::fromStdString(QString::fromStdString(overlay_text).replace("\n", "<br >").toStdString()));
-    QStaticText static_text(color_wrapped_text);
-    static_text.setTextWidth(w);
-    painter.drawStaticText(0, 0, static_text);
-    painter.end();
-  }
-  overlay_->setDimensions(overlay_->getTextureWidth(), overlay_->getTextureHeight());
+  // Draw rounded rectangle background for a nice look
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(bg_color);
+  painter.drawRoundedRect(0, 0, width, height, 16, 16);
+
+  // Draw general_text (centered)
+  painter.setPen(QPen(fg_color, line_width_prop_->getInt() > 0 ? line_width_prop_->getInt() : 1));
+  painter.setFont(general_font);
+  int general_x = (width - general_width) / 2;
+  int general_y = padding + general_fm.ascent();
+  painter.drawText(general_x, general_y, QString::fromStdString(general_text));
+
+  // Draw subtext (centered, below general_text)
+  painter.setFont(sub_font);
+  int sub_x = (width - sub_width) / 2;
+  int sub_y = general_y + spacing + sub_fm.ascent();
+  painter.drawText(sub_x, sub_y, QString::fromStdString(subtext));
+
+  painter.end();
+
+  overlay_->setDimensions(width, height);
   overlay_->setPosition(left_offset_prop_->getInt(), top_offset_prop_->getInt());
 }
 
