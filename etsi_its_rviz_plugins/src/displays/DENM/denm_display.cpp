@@ -31,7 +31,7 @@ DENMDisplay::DENMDisplay()
 {
   // General Properties
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
-    "Timeout", 0.1f,
+    "Timeout", 5.0f,
     "Time (in s) until visualizations disappear", this);
   buffer_timeout_->setMin(0);
   color_property_ = new rviz_common::properties::ColorProperty(
@@ -55,21 +55,19 @@ DENMDisplay::DENMDisplay()
   fg_alpha_prop_ = new rviz_common::properties::FloatProperty("FG Alpha", 0.8f, "Foreground alpha of the overlay", fg_color_prop_);
   top_offset_prop_ = new rviz_common::properties::IntProperty("Top Offset", 0, "Vertical offset of the overlay", show_overlay_prop_);
   left_offset_prop_ = new rviz_common::properties::IntProperty("Left Offset", 0, "Horizontal offset of the overlay", show_overlay_prop_);
-  width_prop_ = new rviz_common::properties::IntProperty("Width", 128, "Width of the overlay", show_overlay_prop_);
-  height_prop_ = new rviz_common::properties::IntProperty("Height", 128, "Height of the overlay", show_overlay_prop_);
-  text_size_prop_ = new rviz_common::properties::IntProperty("Text Size", 12, "Font size of the overlay text", show_overlay_prop_);
+  text_size_prop_ = new rviz_common::properties::IntProperty("Text Size", 16, "Font size of the overlay text", show_overlay_prop_);
   line_width_prop_ = new rviz_common::properties::IntProperty("Line Width", 1, "Line width of the overlay", show_overlay_prop_);
 
   QFontDatabase database;
   font_families_ = database.families();
   font_prop_ = new rviz_common::properties::EnumProperty("Font", "DejaVu Sans", "Font of the overlay text", show_overlay_prop_);
-  for (size_t i = 0; i < font_families_.size(); i++) {
-    font_prop_->addOption(font_families_[i], (int) i);
+  for (int i = 0; i < font_families_.size(); i++) {
+    font_prop_->addOption(font_families_[i], i);
   }
 
-  static int i = 0;
-  overlay_.reset(new rviz_plugin::OverlayObject("Ogre Overlay number " + std::to_string(i)));
-  i++;
+  static int idx = 0;
+  overlay_.reset(new rviz_plugin::OverlayObject("Ogre Overlay number " + std::to_string(idx)));
+  idx++;
 }
 
 DENMDisplay::~DENMDisplay()
@@ -260,7 +258,10 @@ void DENMDisplay::updateOverlay(DENMRenderObject &denm_render_object) {
   painter.setRenderHint(QPainter::Antialiasing, true);
 
   // Draw rounded rectangle background for a nice look
+  painter.setCompositionMode(QPainter::CompositionMode_Source);
   painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::transparent);
+  painter.drawRect(0, 0, width, height);
   painter.setBrush(bg_color);
   painter.drawRoundedRect(0, 0, width, height, 16, 16);
 

@@ -71,7 +71,7 @@ private:
 
   // overlay
   rviz_common::properties::BoolProperty *show_overlay_prop_;
-  rviz_common::properties::IntProperty *top_offset_prop_, *left_offset_prop_, *width_prop_, *height_prop_, *text_size_prop_, *line_width_prop_;
+  rviz_common::properties::IntProperty *top_offset_prop_, *left_offset_prop_, *text_size_prop_, *line_width_prop_;
   rviz_common::properties::ColorProperty *bg_color_prop_, *fg_color_prop_;
   rviz_common::properties::FloatProperty *bg_alpha_prop_, *fg_alpha_prop_;
   rviz_common::properties::EnumProperty *font_prop_;
