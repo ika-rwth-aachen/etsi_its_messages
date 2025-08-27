@@ -167,6 +167,10 @@ class Converter : public rclcpp::Node {
     rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 
+    // Reentrant callback group used together with a MultiThreadedExecutor to
+    // allow UDP and ROS callbacks to execute in parallel.
+    rclcpp::CallbackGroup::SharedPtr callback_group_;
+
 };
 
 
