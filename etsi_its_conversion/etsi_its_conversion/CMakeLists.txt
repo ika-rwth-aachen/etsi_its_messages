@@ -19,11 +19,9 @@ add_library(${PROJECT_NAME} SHARED src/Converter.cpp)
 
 rclcpp_components_register_node(${PROJECT_NAME}
   PLUGIN "etsi_its_conversion::Converter"
+  EXECUTABLE ${PROJECT_NAME}_node
+  EXECUTOR MultiThreadedExecutor
 )
-
-add_executable(${PROJECT_NAME}_node src/converter_node.cpp)
-target_link_libraries(${PROJECT_NAME}_node ${PROJECT_NAME})
-ament_target_dependencies(${PROJECT_NAME}_node rclcpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
