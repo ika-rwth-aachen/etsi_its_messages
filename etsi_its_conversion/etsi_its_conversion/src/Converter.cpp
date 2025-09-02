@@ -83,7 +83,7 @@ const int Converter::kPublisherQueueSizeParamDefault{10};
 const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{false};
 
 
-bool Converter::logLevelIsDebug() {
+bool Converter::logLevelIsDebug() const {
 
   auto logger_level = rcutils_logging_get_logger_effective_level(this->get_logger().get_name());
   return (logger_level == RCUTILS_LOG_SEVERITY_DEBUG);
@@ -297,7 +297,7 @@ void Converter::setup() {
 
 
 template <typename T_struct>
-bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct) {
+bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct) const {
 
   asn_dec_rval_t ret = asn_decode(0, ATS_UNALIGNED_BASIC_PER, type_descriptor, (void **)&asn1_struct, buffer, size);
   if (ret.code != RC_OK) {
@@ -311,7 +311,7 @@ bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, cons
 
 
 template <typename T_ros, typename T_struct>
-T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
+T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
 
   T_ros msg;
   conversion_fn(asn1_struct, msg);
@@ -321,7 +321,7 @@ T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_
 
 
 template <typename T_ros, typename T_struct>
-bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) {
+bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) const {
 
   T_struct asn1_struct{};
   bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, &asn1_struct);
@@ -333,7 +333,7 @@ bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, 
 
 
 template <typename T_ros, typename T_struct>
-T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
+T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) const {
 
   T_struct asn1_struct{};
   conversion_fn(msg, asn1_struct);
@@ -344,7 +344,7 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 
 
 template <typename T_struct>
-bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
+bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) const {
 
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
@@ -367,7 +367,7 @@ bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE
 }
 
 
-UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) {
+UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) const {
 
   UdpPacket udp_msg;
   if (has_btp_destination_port_) {
@@ -386,7 +386,7 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
 
 
 template <typename T_ros, typename T_struct>
-bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) {
+bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) const {
 
   // convert ROS msg to struct
   auto asn1_struct = this->rosMessageToStruct(msg, type_descriptor, conversion_fn);
@@ -408,7 +408,7 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
 }
 
 
-void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
+void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
 
   RCLCPP_DEBUG(this->get_logger(), "Received bitstring (total payload size: %ld)", udp_msg->data.size());
 
@@ -524,7 +524,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
 template <typename T_ros, typename T_struct>
 void Converter::rosCallback(const typename T_ros::UniquePtr msg,
-                            const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
+                            const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) const {
 
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' as ROS message", type.c_str());
 
