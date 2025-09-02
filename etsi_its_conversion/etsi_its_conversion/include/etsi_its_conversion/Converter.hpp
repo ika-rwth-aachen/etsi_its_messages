@@ -154,8 +154,10 @@ class Converter : public rclcpp::Node {
     int subscriber_queue_size_;
     int publisher_queue_size_;
 
+    rclcpp::CallbackGroup::SharedPtr callback_group_;
     rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
+
     rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
     rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
     rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
@@ -166,11 +168,6 @@ class Converter : public rclcpp::Node {
     rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
     rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
-
-    // Reentrant callback group used together with a MultiThreadedExecutor to
-    // allow UDP and ROS callbacks to execute in parallel.
-    rclcpp::CallbackGroup::SharedPtr callback_group_;
-
 };
 
 

@@ -191,11 +191,7 @@ void Converter::loadParameters() {
 
 void Converter::setup() {
 
-  // The converter subscribes to UDP and ROS topics simultaneously.
-  // A reentrant callback group allows callbacks within the same group to be
-  // executed concurrently when used with a multi-threaded executor. Without
-  // this, callbacks would be serialized even if multiple threads are
-  // available.
+  // create reentrant callback group for multi-threaded parallel subscription callback execution
   callback_group_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
   rclcpp::SubscriptionOptions subscriber_options;
   subscriber_options.callback_group = callback_group_;
