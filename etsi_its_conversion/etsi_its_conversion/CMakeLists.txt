@@ -20,6 +20,10 @@ add_library(${PROJECT_NAME} SHARED src/Converter.cpp)
 rclcpp_components_register_node(${PROJECT_NAME}
   PLUGIN "etsi_its_conversion::Converter"
   EXECUTABLE ${PROJECT_NAME}_node
+)
+rclcpp_components_register_node(${PROJECT_NAME}
+  PLUGIN "etsi_its_conversion::Converter"
+  EXECUTABLE ${PROJECT_NAME}_node_mt
   EXECUTOR MultiThreadedExecutor
 )
 

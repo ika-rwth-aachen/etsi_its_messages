@@ -46,7 +46,7 @@ def generate_launch_description():
     nodes = [
         Node(
             package="etsi_its_conversion",
-            executable="etsi_its_conversion_node",
+            executable="etsi_its_conversion_node_mt",
             namespace=LaunchConfiguration("namespace"),
             name=LaunchConfiguration("name"),
             parameters=[LaunchConfiguration("params")],
