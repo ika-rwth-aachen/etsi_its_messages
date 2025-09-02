@@ -411,10 +411,18 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
 void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
 
   RCLCPP_DEBUG(this->get_logger(), "Received bitstring (total payload size: %ld)", udp_msg->data.size());
+  if (udp_msg->data.size() == 0) {
+    RCLCPP_ERROR(this->get_logger(), "Received empty bitstring payload, dropping");
+    return;
+  }
 
   // auto-detect ETSI message type if BTP destination port is present
-  std::string detected_etsi_type = udp2ros_etsi_types_[0];
+  std::string detected_etsi_type = udp2ros_etsi_types_.empty() ? "unknown" : udp2ros_etsi_types_[0];
   if (has_btp_destination_port_) {
+    if (udp_msg->data.size() < btp_destination_port_offset_ + sizeof(uint16_t)) {
+      RCLCPP_ERROR(this->get_logger(), "Payload too short for BTP destination port (need %ld bytes), dropping", btp_destination_port_offset_ + sizeof(uint16_t));
+      return;
+    }
     const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
     uint16_t destination_port = ntohs(*btp_destination_port);
     if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
@@ -428,9 +436,12 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
     else detected_etsi_type = "unknown";
   }
 
-  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
-
   int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
+  if (msg_size <= 0) {
+    RCLCPP_ERROR(this->get_logger(), "Payload too short for ETSI message payload (offset %d), dropping", etsi_message_payload_offset_);
+    return;
+  }
+  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' (protocolVersion: %d) as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), *protocol_version , msg_size, udp_msg->data.size());
 
   if (detected_etsi_type == "cam" || detected_etsi_type == "cam_ts") {
