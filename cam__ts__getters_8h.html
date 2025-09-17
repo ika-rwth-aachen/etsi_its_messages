@@ -402,26 +402,26 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00356">356</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  389</span>                                     {</div>
-<div class="line"><span class="lineno">  390</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  391</span> </div>
-<div class="line"><span class="lineno">  392</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  393</span></div>
-<div class="line"><span class="lineno">  403</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  404</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  405</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  406</span>}</div>
-<div class="line"><span class="lineno">  407</span></div>
-<div class="line"><span class="lineno">  417</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  418</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  419</span>}</div>
-<div class="line"><span class="lineno">  420</span> </div>
-<div class="line"><span class="lineno">  421</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00358">358</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  391</span>                                     {</div>
+<div class="line"><span class="lineno">  392</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  393</span> </div>
+<div class="line"><span class="lineno">  394</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  395</span></div>
+<div class="line"><span class="lineno">  405</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  406</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  407</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  408</span>}</div>
+<div class="line"><span class="lineno">  409</span></div>
+<div class="line"><span class="lineno">  419</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  420</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  421</span>}</div>
+<div class="line"><span class="lineno">  422</span> </div>
+<div class="line"><span class="lineno">  423</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 <div class="ttc" id="acam__getters__common_8h_html"><div class="ttname"><a href="cam__getters__common_8h.html">cam_getters_common.h</a></div><div class="ttdoc">Common getter functions for the ETSI ITS CAM (EN and TS)</div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_abc16ab085409645652623fd39b5649e3"><div class="ttname"><a href="#abc16ab085409645652623fd39b5649e3">etsi_its_cam_ts_msgs::access::getRefPosConfidence</a></div><div class="ttdeci">const std::array&lt; double, 4 &gt; getRefPosConfidence(const CAM &amp;cam)</div><div class="ttdoc">Get the confidence ellipse of the reference position as Covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cam__ts__getters_8h_source.html#l00411">cam_ts_getters.h:411</a></div></div>
+<div class="ttc" id="acam__ts__getters_8h_html_abc16ab085409645652623fd39b5649e3"><div class="ttname"><a href="#abc16ab085409645652623fd39b5649e3">etsi_its_cam_ts_msgs::access::getRefPosConfidence</a></div><div class="ttdeci">const std::array&lt; double, 4 &gt; getRefPosConfidence(const CAM &amp;cam)</div><div class="ttdoc">Get the confidence ellipse of the reference position as Covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cam__ts__getters_8h_source.html#l00413">cam_ts_getters.h:413</a></div></div>
 <div class="ttc" id="acam__ts__getters_8h_html_aee609e5627bc60a2fee11cfbf5bf9393"><div class="ttname"><a href="#aee609e5627bc60a2fee11cfbf5bf9393">etsi_its_cam_ts_msgs::access::getPositionConfidenceEllipse</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; getPositionConfidenceEllipse(PositionConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Extract major axis length, minor axis length and orientation from the given position confidence ellip...</div><div class="ttdef"><b>Definition</b> <a href="cam__ts__getters_8h_source.html#l00354">cam_ts_getters.h:354</a></div></div>
-<div class="ttc" id="acam__ts__getters_8h_html_afe466f298c3f04a36d884ca100f96931"><div class="ttname"><a href="#afe466f298c3f04a36d884ca100f96931">etsi_its_cam_ts_msgs::access::getHeading</a></div><div class="ttdeci">double getHeading(const CAM &amp;cam)</div><div class="ttdoc">Get the Heading value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__ts__getters_8h_source.html#l00140">cam_ts_getters.h:140</a></div></div>
+<div class="ttc" id="acam__ts__getters_8h_html_afe466f298c3f04a36d884ca100f96931"><div class="ttname"><a href="#afe466f298c3f04a36d884ca100f96931">etsi_its_cam_ts_msgs::access::getHeading</a></div><div class="ttdeci">double getHeading(const CAM &amp;cam)</div><div class="ttdoc">Get the Heading value of CAM.</div><div class="ttdef"><b>Definition</b> <a href="cam__ts__getters_8h_source.html#l00142">cam_ts_getters.h:142</a></div></div>
 <div class="ttc" id="acdd__v2-1-1__getters_8h_html"><div class="ttname"><a href="cdd__v2-1-1__getters_8h.html">cdd_v2-1-1_getters.h</a></div><div class="ttdoc">Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.1.1.</div></div>
 <div class="ttc" id="acdd__v2-1-1__getters_8h_html_a33cb8b20e9a38c6289f0e1c5f171b89c"><div class="ttname"><a href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; getWGSPositionConfidenceEllipse(const PositionConfidenceEllipse &amp;position_confidence_ellipse)</div><div class="ttdoc">Get the covariance matrix of the position confidence ellipse.</div><div class="ttdef"><b>Definition</b> <a href="cdd__v2-1-1__getters_8h_source.html#l00116">cdd_v2-1-1_getters.h:116</a></div></div>
 </div><!-- fragment -->
@@ -616,22 +616,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Altitude value (above the reference ellipsoid surface) in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00128">128</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  161</span>                                     {</div>
-<div class="line"><span class="lineno">  162</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  163</span> </div>
-<div class="line"><span class="lineno">  164</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  165</span></div>
-<div class="line"><span class="lineno">  175</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  176</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  177</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  178</span>}</div>
-<div class="line"><span class="lineno">  179</span></div>
-<div class="line"><span class="lineno">  189</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  190</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  191</span>}</div>
-<div class="line"><span class="lineno">  192</span> </div>
-<div class="line"><span class="lineno">  193</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00130">130</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  163</span>                                     {</div>
+<div class="line"><span class="lineno">  164</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  167</span></div>
+<div class="line"><span class="lineno">  177</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  178</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  179</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  180</span>}</div>
+<div class="line"><span class="lineno">  181</span></div>
+<div class="line"><span class="lineno">  191</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  192</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  193</span>}</div>
+<div class="line"><span class="lineno">  194</span> </div>
+<div class="line"><span class="lineno">  195</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -718,22 +718,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00366">366</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  399</span>                                     {</div>
-<div class="line"><span class="lineno">  400</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  401</span> </div>
-<div class="line"><span class="lineno">  402</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  403</span></div>
-<div class="line"><span class="lineno">  413</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  414</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  415</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  416</span>}</div>
-<div class="line"><span class="lineno">  417</span></div>
-<div class="line"><span class="lineno">  427</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  428</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  429</span>}</div>
-<div class="line"><span class="lineno">  430</span> </div>
-<div class="line"><span class="lineno">  431</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00368">368</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  401</span>                                     {</div>
+<div class="line"><span class="lineno">  402</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  403</span> </div>
+<div class="line"><span class="lineno">  404</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  405</span></div>
+<div class="line"><span class="lineno">  415</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  416</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  417</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  418</span>}</div>
+<div class="line"><span class="lineno">  419</span></div>
+<div class="line"><span class="lineno">  429</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  430</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  431</span>}</div>
+<div class="line"><span class="lineno">  432</span> </div>
+<div class="line"><span class="lineno">  433</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -769,22 +769,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00396">396</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  429</span>                                     {</div>
-<div class="line"><span class="lineno">  430</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  431</span> </div>
-<div class="line"><span class="lineno">  432</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  433</span></div>
-<div class="line"><span class="lineno">  443</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  444</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  445</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  446</span>}</div>
-<div class="line"><span class="lineno">  447</span></div>
-<div class="line"><span class="lineno">  457</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  458</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  459</span>}</div>
-<div class="line"><span class="lineno">  460</span> </div>
-<div class="line"><span class="lineno">  461</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00398">398</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  431</span>                                     {</div>
+<div class="line"><span class="lineno">  432</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  433</span> </div>
+<div class="line"><span class="lineno">  434</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  435</span></div>
+<div class="line"><span class="lineno">  445</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  446</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  447</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  448</span>}</div>
+<div class="line"><span class="lineno">  449</span></div>
+<div class="line"><span class="lineno">  459</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  460</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  461</span>}</div>
+<div class="line"><span class="lineno">  462</span> </div>
+<div class="line"><span class="lineno">  463</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -820,22 +820,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00336">336</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  369</span>                                     {</div>
-<div class="line"><span class="lineno">  370</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  371</span> </div>
-<div class="line"><span class="lineno">  372</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  373</span></div>
-<div class="line"><span class="lineno">  383</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  384</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  385</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  386</span>}</div>
-<div class="line"><span class="lineno">  387</span></div>
-<div class="line"><span class="lineno">  397</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  398</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  399</span>}</div>
-<div class="line"><span class="lineno">  400</span> </div>
-<div class="line"><span class="lineno">  401</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00338">338</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  371</span>                                     {</div>
+<div class="line"><span class="lineno">  372</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  373</span> </div>
+<div class="line"><span class="lineno">  374</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  375</span></div>
+<div class="line"><span class="lineno">  385</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  386</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  387</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  388</span>}</div>
+<div class="line"><span class="lineno">  389</span></div>
+<div class="line"><span class="lineno">  399</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  400</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  401</span>}</div>
+<div class="line"><span class="lineno">  402</span> </div>
+<div class="line"><span class="lineno">  403</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -871,22 +871,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00326">326</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  359</span>                                     {</div>
-<div class="line"><span class="lineno">  360</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  361</span> </div>
-<div class="line"><span class="lineno">  362</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  363</span></div>
-<div class="line"><span class="lineno">  373</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  374</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  375</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  376</span>}</div>
-<div class="line"><span class="lineno">  377</span></div>
-<div class="line"><span class="lineno">  387</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  388</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  389</span>}</div>
-<div class="line"><span class="lineno">  390</span> </div>
-<div class="line"><span class="lineno">  391</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00328">328</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  361</span>                                     {</div>
+<div class="line"><span class="lineno">  362</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  363</span> </div>
+<div class="line"><span class="lineno">  364</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  365</span></div>
+<div class="line"><span class="lineno">  375</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  376</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  377</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  378</span>}</div>
+<div class="line"><span class="lineno">  379</span></div>
+<div class="line"><span class="lineno">  389</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  390</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  391</span>}</div>
+<div class="line"><span class="lineno">  392</span> </div>
+<div class="line"><span class="lineno">  393</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -922,22 +922,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>GenerationDeltaTime the GenerationDeltaTime </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00084">84</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
-<div class="line"><span class="lineno">  118</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  119</span> </div>
-<div class="line"><span class="lineno">  120</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  121</span></div>
-<div class="line"><span class="lineno">  131</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  132</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  133</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  134</span>}</div>
-<div class="line"><span class="lineno">  135</span></div>
-<div class="line"><span class="lineno">  145</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  146</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  147</span>}</div>
-<div class="line"><span class="lineno">  148</span> </div>
-<div class="line"><span class="lineno">  149</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00086">86</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>{</div>
+<div class="line"><span class="lineno">  120</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  121</span> </div>
+<div class="line"><span class="lineno">  122</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  123</span></div>
+<div class="line"><span class="lineno">  133</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  134</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  135</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  136</span>}</div>
+<div class="line"><span class="lineno">  137</span></div>
+<div class="line"><span class="lineno">  147</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  148</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  149</span>}</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -973,22 +973,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the GenerationDeltaTime-Value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00092">92</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  125</span>{</div>
-<div class="line"><span class="lineno">  126</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  129</span></div>
-<div class="line"><span class="lineno">  139</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  140</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  141</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  142</span>}</div>
-<div class="line"><span class="lineno">  143</span></div>
-<div class="line"><span class="lineno">  153</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  154</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  155</span>}</div>
-<div class="line"><span class="lineno">  156</span> </div>
-<div class="line"><span class="lineno">  157</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00094">94</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>{</div>
+<div class="line"><span class="lineno">  128</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  131</span></div>
+<div class="line"><span class="lineno">  141</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  142</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  143</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  144</span>}</div>
+<div class="line"><span class="lineno">  145</span></div>
+<div class="line"><span class="lineno">  155</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  156</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  157</span>}</div>
+<div class="line"><span class="lineno">  158</span> </div>
+<div class="line"><span class="lineno">  159</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1025,22 +1025,22 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00140">140</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  173</span>                                     {</div>
-<div class="line"><span class="lineno">  174</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  175</span> </div>
-<div class="line"><span class="lineno">  176</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  177</span></div>
-<div class="line"><span class="lineno">  187</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  188</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  189</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  190</span>}</div>
-<div class="line"><span class="lineno">  191</span></div>
-<div class="line"><span class="lineno">  201</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  202</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  203</span>}</div>
-<div class="line"><span class="lineno">  204</span> </div>
-<div class="line"><span class="lineno">  205</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00142">142</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>                                     {</div>
+<div class="line"><span class="lineno">  176</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  177</span> </div>
+<div class="line"><span class="lineno">  178</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  179</span></div>
+<div class="line"><span class="lineno">  189</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  190</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  191</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  192</span>}</div>
+<div class="line"><span class="lineno">  193</span></div>
+<div class="line"><span class="lineno">  203</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  204</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  205</span>}</div>
+<div class="line"><span class="lineno">  206</span> </div>
+<div class="line"><span class="lineno">  207</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1130,22 +1130,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Heading standard deviation in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00151">151</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  184</span>                                     {</div>
-<div class="line"><span class="lineno">  185</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  186</span> </div>
-<div class="line"><span class="lineno">  187</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  188</span></div>
-<div class="line"><span class="lineno">  198</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  199</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  200</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  201</span>}</div>
-<div class="line"><span class="lineno">  202</span></div>
-<div class="line"><span class="lineno">  212</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  213</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  214</span>}</div>
-<div class="line"><span class="lineno">  215</span> </div>
-<div class="line"><span class="lineno">  216</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00153">153</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  186</span>                                     {</div>
+<div class="line"><span class="lineno">  187</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  188</span> </div>
+<div class="line"><span class="lineno">  189</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  190</span></div>
+<div class="line"><span class="lineno">  200</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  201</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  202</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  203</span>}</div>
+<div class="line"><span class="lineno">  204</span></div>
+<div class="line"><span class="lineno">  214</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  215</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  216</span>}</div>
+<div class="line"><span class="lineno">  217</span> </div>
+<div class="line"><span class="lineno">  218</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1286,22 +1286,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lateral acceleration in m/s^2 as decimal number (left is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00264">264</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  297</span>                                     {</div>
-<div class="line"><span class="lineno">  298</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  299</span> </div>
-<div class="line"><span class="lineno">  300</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  301</span></div>
-<div class="line"><span class="lineno">  311</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  312</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  313</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  314</span>}</div>
-<div class="line"><span class="lineno">  315</span></div>
-<div class="line"><span class="lineno">  325</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  326</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  327</span>}</div>
-<div class="line"><span class="lineno">  328</span> </div>
-<div class="line"><span class="lineno">  329</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00266">266</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>                                     {</div>
+<div class="line"><span class="lineno">  300</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  301</span> </div>
+<div class="line"><span class="lineno">  302</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  303</span></div>
+<div class="line"><span class="lineno">  313</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  314</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  315</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  316</span>}</div>
+<div class="line"><span class="lineno">  317</span></div>
+<div class="line"><span class="lineno">  327</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  328</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  329</span>}</div>
+<div class="line"><span class="lineno">  330</span> </div>
+<div class="line"><span class="lineno">  331</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1388,22 +1388,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double standard deviation of the lateral acceleration in m/s^2 as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00280">280</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  313</span>                                     {</div>
-<div class="line"><span class="lineno">  314</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  315</span> </div>
-<div class="line"><span class="lineno">  316</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  317</span></div>
-<div class="line"><span class="lineno">  327</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  328</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  329</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  330</span>}</div>
-<div class="line"><span class="lineno">  331</span></div>
-<div class="line"><span class="lineno">  341</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  342</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  343</span>}</div>
-<div class="line"><span class="lineno">  344</span> </div>
-<div class="line"><span class="lineno">  345</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00282">282</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  315</span>                                     {</div>
+<div class="line"><span class="lineno">  316</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  317</span> </div>
+<div class="line"><span class="lineno">  318</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  319</span></div>
+<div class="line"><span class="lineno">  329</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  330</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  331</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  332</span>}</div>
+<div class="line"><span class="lineno">  333</span></div>
+<div class="line"><span class="lineno">  343</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  344</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  345</span>}</div>
+<div class="line"><span class="lineno">  346</span> </div>
+<div class="line"><span class="lineno">  347</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1439,22 +1439,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Latitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00108">108</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  141</span>                                     {</div>
-<div class="line"><span class="lineno">  142</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  143</span> </div>
-<div class="line"><span class="lineno">  144</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  145</span></div>
-<div class="line"><span class="lineno">  155</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  156</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  157</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  158</span>}</div>
-<div class="line"><span class="lineno">  159</span></div>
-<div class="line"><span class="lineno">  169</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  170</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  171</span>}</div>
-<div class="line"><span class="lineno">  172</span> </div>
-<div class="line"><span class="lineno">  173</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00110">110</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  143</span>                                     {</div>
+<div class="line"><span class="lineno">  144</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  147</span></div>
+<div class="line"><span class="lineno">  157</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  158</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  159</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  160</span>}</div>
+<div class="line"><span class="lineno">  161</span></div>
+<div class="line"><span class="lineno">  171</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  172</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  173</span>}</div>
+<div class="line"><span class="lineno">  174</span> </div>
+<div class="line"><span class="lineno">  175</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1526,22 +1526,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00386">386</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  419</span>                                     {</div>
-<div class="line"><span class="lineno">  420</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  421</span> </div>
-<div class="line"><span class="lineno">  422</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  423</span></div>
-<div class="line"><span class="lineno">  433</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  434</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  435</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  436</span>}</div>
-<div class="line"><span class="lineno">  437</span></div>
-<div class="line"><span class="lineno">  447</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  448</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  449</span>}</div>
-<div class="line"><span class="lineno">  450</span> </div>
-<div class="line"><span class="lineno">  451</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00388">388</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  421</span>                                     {</div>
+<div class="line"><span class="lineno">  422</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  423</span> </div>
+<div class="line"><span class="lineno">  424</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  425</span></div>
+<div class="line"><span class="lineno">  435</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  436</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  437</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  438</span>}</div>
+<div class="line"><span class="lineno">  439</span></div>
+<div class="line"><span class="lineno">  449</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  450</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  451</span>}</div>
+<div class="line"><span class="lineno">  452</span> </div>
+<div class="line"><span class="lineno">  453</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1577,22 +1577,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Longitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00118">118</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  151</span>                                     {</div>
-<div class="line"><span class="lineno">  152</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  153</span> </div>
-<div class="line"><span class="lineno">  154</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  155</span></div>
-<div class="line"><span class="lineno">  165</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  166</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  167</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  168</span>}</div>
-<div class="line"><span class="lineno">  169</span></div>
-<div class="line"><span class="lineno">  179</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  180</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  181</span>}</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00120">120</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  153</span>                                     {</div>
+<div class="line"><span class="lineno">  154</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  157</span></div>
+<div class="line"><span class="lineno">  167</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  168</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  169</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  170</span>}</div>
+<div class="line"><span class="lineno">  171</span></div>
+<div class="line"><span class="lineno">  181</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  182</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  183</span>}</div>
+<div class="line"><span class="lineno">  184</span> </div>
+<div class="line"><span class="lineno">  185</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1715,22 +1715,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>longitudinal acceleration in m/s^2 as decimal number (accelerating is positive) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00242">242</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  275</span>                                     {</div>
-<div class="line"><span class="lineno">  276</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  277</span> </div>
-<div class="line"><span class="lineno">  278</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  279</span></div>
-<div class="line"><span class="lineno">  289</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  290</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  291</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  292</span>}</div>
-<div class="line"><span class="lineno">  293</span></div>
-<div class="line"><span class="lineno">  303</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  304</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  305</span>}</div>
-<div class="line"><span class="lineno">  306</span> </div>
-<div class="line"><span class="lineno">  307</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00244">244</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  277</span>                                     {</div>
+<div class="line"><span class="lineno">  278</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  279</span> </div>
+<div class="line"><span class="lineno">  280</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  281</span></div>
+<div class="line"><span class="lineno">  291</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  292</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  293</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  294</span>}</div>
+<div class="line"><span class="lineno">  295</span></div>
+<div class="line"><span class="lineno">  305</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  306</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  307</span>}</div>
+<div class="line"><span class="lineno">  308</span> </div>
+<div class="line"><span class="lineno">  309</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1817,22 +1817,22 @@ template&lt;typename Heading&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double standard deviation of the longitudinal acceleration in m/s^2 as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00253">253</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  286</span>                                     {</div>
-<div class="line"><span class="lineno">  287</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  288</span> </div>
-<div class="line"><span class="lineno">  289</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  290</span></div>
-<div class="line"><span class="lineno">  300</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  301</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  302</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  303</span>}</div>
-<div class="line"><span class="lineno">  304</span></div>
-<div class="line"><span class="lineno">  314</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  315</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  316</span>}</div>
-<div class="line"><span class="lineno">  317</span> </div>
-<div class="line"><span class="lineno">  318</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00255">255</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  288</span>                                     {</div>
+<div class="line"><span class="lineno">  289</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  290</span> </div>
+<div class="line"><span class="lineno">  291</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  292</span></div>
+<div class="line"><span class="lineno">  302</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  303</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  304</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  305</span>}</div>
+<div class="line"><span class="lineno">  306</span></div>
+<div class="line"><span class="lineno">  316</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  317</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  318</span>}</div>
+<div class="line"><span class="lineno">  319</span> </div>
+<div class="line"><span class="lineno">  320</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2091,22 +2091,22 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>const std::array&lt;double, 4&gt; the covariance matrix, as specified above </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00411">411</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  444</span>                                     {</div>
-<div class="line"><span class="lineno">  445</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  446</span> </div>
-<div class="line"><span class="lineno">  447</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  448</span></div>
-<div class="line"><span class="lineno">  458</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  459</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  460</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  461</span>}</div>
-<div class="line"><span class="lineno">  462</span></div>
-<div class="line"><span class="lineno">  472</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  473</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  474</span>}</div>
-<div class="line"><span class="lineno">  475</span> </div>
-<div class="line"><span class="lineno">  476</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00413">413</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  446</span>                                     {</div>
+<div class="line"><span class="lineno">  447</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  448</span> </div>
+<div class="line"><span class="lineno">  449</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  450</span></div>
+<div class="line"><span class="lineno">  460</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  461</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  462</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  463</span>}</div>
+<div class="line"><span class="lineno">  464</span></div>
+<div class="line"><span class="lineno">  474</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  475</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  476</span>}</div>
+<div class="line"><span class="lineno">  477</span> </div>
+<div class="line"><span class="lineno">  478</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2195,22 +2195,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00376">376</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  409</span>                                     {</div>
-<div class="line"><span class="lineno">  410</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  411</span> </div>
-<div class="line"><span class="lineno">  412</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  413</span></div>
-<div class="line"><span class="lineno">  423</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  424</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  425</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  426</span>}</div>
-<div class="line"><span class="lineno">  427</span></div>
-<div class="line"><span class="lineno">  437</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  438</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  439</span>}</div>
-<div class="line"><span class="lineno">  440</span> </div>
-<div class="line"><span class="lineno">  441</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00378">378</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  411</span>                                     {</div>
+<div class="line"><span class="lineno">  412</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  413</span> </div>
+<div class="line"><span class="lineno">  414</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  415</span></div>
+<div class="line"><span class="lineno">  425</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  426</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  427</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  428</span>}</div>
+<div class="line"><span class="lineno">  429</span></div>
+<div class="line"><span class="lineno">  439</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  440</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  441</span>}</div>
+<div class="line"><span class="lineno">  442</span> </div>
+<div class="line"><span class="lineno">  443</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2246,22 +2246,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>speed value in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00221">221</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  254</span>                                     {</div>
-<div class="line"><span class="lineno">  255</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  256</span> </div>
-<div class="line"><span class="lineno">  257</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  258</span></div>
-<div class="line"><span class="lineno">  268</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  269</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  270</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  271</span>}</div>
-<div class="line"><span class="lineno">  272</span></div>
-<div class="line"><span class="lineno">  282</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  283</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  284</span>}</div>
-<div class="line"><span class="lineno">  285</span> </div>
-<div class="line"><span class="lineno">  286</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00223">223</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  256</span>                                     {</div>
+<div class="line"><span class="lineno">  257</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  258</span> </div>
+<div class="line"><span class="lineno">  259</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  260</span></div>
+<div class="line"><span class="lineno">  270</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  271</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  272</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  273</span>}</div>
+<div class="line"><span class="lineno">  274</span></div>
+<div class="line"><span class="lineno">  284</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  285</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  286</span>}</div>
+<div class="line"><span class="lineno">  287</span> </div>
+<div class="line"><span class="lineno">  288</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2348,22 +2348,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double standard deviation of the speed in m/s as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00231">231</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  264</span>                                     {</div>
-<div class="line"><span class="lineno">  265</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  266</span> </div>
-<div class="line"><span class="lineno">  267</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  268</span></div>
-<div class="line"><span class="lineno">  278</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  279</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  280</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  281</span>}</div>
-<div class="line"><span class="lineno">  282</span></div>
-<div class="line"><span class="lineno">  292</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  293</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  294</span>}</div>
-<div class="line"><span class="lineno">  295</span> </div>
-<div class="line"><span class="lineno">  296</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00233">233</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  266</span>                                     {</div>
+<div class="line"><span class="lineno">  267</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  268</span> </div>
+<div class="line"><span class="lineno">  269</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  270</span></div>
+<div class="line"><span class="lineno">  280</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  281</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  282</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  283</span>}</div>
+<div class="line"><span class="lineno">  284</span></div>
+<div class="line"><span class="lineno">  294</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  295</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  296</span>}</div>
+<div class="line"><span class="lineno">  297</span> </div>
+<div class="line"><span class="lineno">  298</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2450,22 +2450,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>stationID value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00076">76</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>{</div>
-<div class="line"><span class="lineno">  110</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  111</span> </div>
-<div class="line"><span class="lineno">  112</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  113</span></div>
-<div class="line"><span class="lineno">  123</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  124</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  125</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  126</span>}</div>
-<div class="line"><span class="lineno">  127</span></div>
-<div class="line"><span class="lineno">  137</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  138</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  139</span>}</div>
-<div class="line"><span class="lineno">  140</span> </div>
-<div class="line"><span class="lineno">  141</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00078">78</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>{</div>
+<div class="line"><span class="lineno">  112</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  113</span> </div>
+<div class="line"><span class="lineno">  114</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  115</span></div>
+<div class="line"><span class="lineno">  125</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  126</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  127</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  128</span>}</div>
+<div class="line"><span class="lineno">  129</span></div>
+<div class="line"><span class="lineno">  139</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  140</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  141</span>}</div>
+<div class="line"><span class="lineno">  142</span> </div>
+<div class="line"><span class="lineno">  143</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2537,22 +2537,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>stationType value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00100">100</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  133</span>{</div>
-<div class="line"><span class="lineno">  134</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  135</span> </div>
-<div class="line"><span class="lineno">  136</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  137</span></div>
-<div class="line"><span class="lineno">  147</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  148</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  149</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  150</span>}</div>
-<div class="line"><span class="lineno">  151</span></div>
-<div class="line"><span class="lineno">  161</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  162</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  163</span>}</div>
-<div class="line"><span class="lineno">  164</span> </div>
-<div class="line"><span class="lineno">  165</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00102">102</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  135</span>{</div>
+<div class="line"><span class="lineno">  136</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  137</span> </div>
+<div class="line"><span class="lineno">  138</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  139</span></div>
+<div class="line"><span class="lineno">  149</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  150</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  151</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  152</span>}</div>
+<div class="line"><span class="lineno">  153</span></div>
+<div class="line"><span class="lineno">  163</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  164</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  165</span>}</div>
+<div class="line"><span class="lineno">  166</span> </div>
+<div class="line"><span class="lineno">  167</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2589,22 +2589,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00314">314</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  347</span>                                     {</div>
-<div class="line"><span class="lineno">  348</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  349</span> </div>
-<div class="line"><span class="lineno">  350</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  351</span></div>
-<div class="line"><span class="lineno">  361</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  362</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  363</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  364</span>}</div>
-<div class="line"><span class="lineno">  365</span></div>
-<div class="line"><span class="lineno">  375</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  376</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  377</span>}</div>
-<div class="line"><span class="lineno">  378</span> </div>
-<div class="line"><span class="lineno">  379</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00316">316</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  349</span>                                     {</div>
+<div class="line"><span class="lineno">  350</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  351</span> </div>
+<div class="line"><span class="lineno">  352</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  353</span></div>
+<div class="line"><span class="lineno">  363</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  364</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  365</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  366</span>}</div>
+<div class="line"><span class="lineno">  367</span></div>
+<div class="line"><span class="lineno">  377</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  378</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  379</span>}</div>
+<div class="line"><span class="lineno">  380</span> </div>
+<div class="line"><span class="lineno">  381</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2652,22 +2652,22 @@ template&lt;typename SemiAxisLength&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::PointStamped geometry_msgs::PointStamped of the given position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00301">301</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  334</span>                                     {</div>
-<div class="line"><span class="lineno">  335</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  336</span> </div>
-<div class="line"><span class="lineno">  337</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  338</span></div>
-<div class="line"><span class="lineno">  348</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  349</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  350</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  351</span>}</div>
-<div class="line"><span class="lineno">  352</span></div>
-<div class="line"><span class="lineno">  362</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  363</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  364</span>}</div>
-<div class="line"><span class="lineno">  365</span> </div>
-<div class="line"><span class="lineno">  366</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00303">303</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  336</span>                                     {</div>
+<div class="line"><span class="lineno">  337</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  338</span> </div>
+<div class="line"><span class="lineno">  339</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  340</span></div>
+<div class="line"><span class="lineno">  350</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  351</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  352</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  353</span>}</div>
+<div class="line"><span class="lineno">  354</span></div>
+<div class="line"><span class="lineno">  364</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  365</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  366</span>}</div>
+<div class="line"><span class="lineno">  367</span> </div>
+<div class="line"><span class="lineno">  368</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2768,22 +2768,22 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle length value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00191">191</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  224</span>                                     {</div>
-<div class="line"><span class="lineno">  225</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  226</span> </div>
-<div class="line"><span class="lineno">  227</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  228</span></div>
-<div class="line"><span class="lineno">  238</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  239</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  240</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  241</span>}</div>
-<div class="line"><span class="lineno">  242</span></div>
-<div class="line"><span class="lineno">  252</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  253</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  254</span>}</div>
-<div class="line"><span class="lineno">  255</span> </div>
-<div class="line"><span class="lineno">  256</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00193">193</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  226</span>                                     {</div>
+<div class="line"><span class="lineno">  227</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  228</span> </div>
+<div class="line"><span class="lineno">  229</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  230</span></div>
+<div class="line"><span class="lineno">  240</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  241</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  242</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  243</span>}</div>
+<div class="line"><span class="lineno">  244</span></div>
+<div class="line"><span class="lineno">  254</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  255</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  256</span>}</div>
+<div class="line"><span class="lineno">  257</span> </div>
+<div class="line"><span class="lineno">  258</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2819,22 +2819,22 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle length value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00181">181</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  214</span>                                     {</div>
-<div class="line"><span class="lineno">  215</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  216</span> </div>
-<div class="line"><span class="lineno">  217</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  218</span></div>
-<div class="line"><span class="lineno">  228</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  229</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  230</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  231</span>}</div>
-<div class="line"><span class="lineno">  232</span></div>
-<div class="line"><span class="lineno">  242</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  243</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  244</span>}</div>
-<div class="line"><span class="lineno">  245</span> </div>
-<div class="line"><span class="lineno">  246</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00183">183</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  216</span>                                     {</div>
+<div class="line"><span class="lineno">  217</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  218</span> </div>
+<div class="line"><span class="lineno">  219</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  220</span></div>
+<div class="line"><span class="lineno">  230</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  231</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  232</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  233</span>}</div>
+<div class="line"><span class="lineno">  234</span></div>
+<div class="line"><span class="lineno">  244</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  245</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  246</span>}</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2870,22 +2870,22 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00210">210</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  243</span>                                     {</div>
-<div class="line"><span class="lineno">  244</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  245</span> </div>
-<div class="line"><span class="lineno">  246</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  247</span></div>
-<div class="line"><span class="lineno">  257</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  258</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  259</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  260</span>}</div>
-<div class="line"><span class="lineno">  261</span></div>
-<div class="line"><span class="lineno">  271</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  272</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  273</span>}</div>
-<div class="line"><span class="lineno">  274</span> </div>
-<div class="line"><span class="lineno">  275</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00212">212</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  245</span>                                     {</div>
+<div class="line"><span class="lineno">  246</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  249</span></div>
+<div class="line"><span class="lineno">  259</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  260</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  261</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  262</span>}</div>
+<div class="line"><span class="lineno">  263</span></div>
+<div class="line"><span class="lineno">  273</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  274</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  275</span>}</div>
+<div class="line"><span class="lineno">  276</span> </div>
+<div class="line"><span class="lineno">  277</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2921,22 +2921,22 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vehicle width value in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00202">202</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  235</span>{</div>
-<div class="line"><span class="lineno">  236</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  237</span> </div>
-<div class="line"><span class="lineno">  238</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  239</span></div>
-<div class="line"><span class="lineno">  249</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  250</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  251</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  252</span>}</div>
-<div class="line"><span class="lineno">  253</span></div>
-<div class="line"><span class="lineno">  263</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  264</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  265</span>}</div>
-<div class="line"><span class="lineno">  266</span> </div>
-<div class="line"><span class="lineno">  267</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00204">204</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  237</span>{</div>
+<div class="line"><span class="lineno">  238</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  239</span> </div>
+<div class="line"><span class="lineno">  240</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  241</span></div>
+<div class="line"><span class="lineno">  251</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  252</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  253</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  254</span>}</div>
+<div class="line"><span class="lineno">  255</span></div>
+<div class="line"><span class="lineno">  265</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  266</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  267</span>}</div>
+<div class="line"><span class="lineno">  268</span> </div>
+<div class="line"><span class="lineno">  269</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3081,22 +3081,22 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>const std::array&lt;double, 4&gt; the covariance matrix, as specified above </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00425">425</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  458</span>                                     {</div>
-<div class="line"><span class="lineno">  459</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  460</span> </div>
-<div class="line"><span class="lineno">  461</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  462</span></div>
-<div class="line"><span class="lineno">  472</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  473</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  474</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  475</span>}</div>
-<div class="line"><span class="lineno">  476</span></div>
-<div class="line"><span class="lineno">  486</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  487</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  488</span>}</div>
-<div class="line"><span class="lineno">  489</span> </div>
-<div class="line"><span class="lineno">  490</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00427">427</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  460</span>                                     {</div>
+<div class="line"><span class="lineno">  461</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  462</span> </div>
+<div class="line"><span class="lineno">  463</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  464</span></div>
+<div class="line"><span class="lineno">  474</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  475</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  476</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  477</span>}</div>
+<div class="line"><span class="lineno">  478</span></div>
+<div class="line"><span class="lineno">  488</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  489</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  490</span>}</div>
+<div class="line"><span class="lineno">  491</span> </div>
+<div class="line"><span class="lineno">  492</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3132,22 +3132,22 @@ template&lt;typename PositionConfidenceEllipse&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double yaw rate in degrees per second as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00161">161</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  194</span>                                     {</div>
-<div class="line"><span class="lineno">  195</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  196</span> </div>
-<div class="line"><span class="lineno">  197</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  198</span></div>
-<div class="line"><span class="lineno">  208</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  209</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  210</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  211</span>}</div>
-<div class="line"><span class="lineno">  212</span></div>
-<div class="line"><span class="lineno">  222</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  223</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  224</span>}</div>
-<div class="line"><span class="lineno">  225</span> </div>
-<div class="line"><span class="lineno">  226</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00163">163</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  196</span>                                     {</div>
+<div class="line"><span class="lineno">  197</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  198</span> </div>
+<div class="line"><span class="lineno">  199</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  200</span></div>
+<div class="line"><span class="lineno">  210</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  211</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  212</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  213</span>}</div>
+<div class="line"><span class="lineno">  214</span></div>
+<div class="line"><span class="lineno">  224</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  225</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  226</span>}</div>
+<div class="line"><span class="lineno">  227</span> </div>
+<div class="line"><span class="lineno">  228</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3236,22 +3236,22 @@ template&lt;typename YawRate&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>double yaw rate standard deviation in degrees per second as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00171">171</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  204</span>                                     {</div>
-<div class="line"><span class="lineno">  205</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  206</span> </div>
-<div class="line"><span class="lineno">  207</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
-<div class="line"><span class="lineno">  208</span></div>
-<div class="line"><span class="lineno">  218</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  219</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
-<div class="line"><span class="lineno">  220</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
-<div class="line"><span class="lineno">  221</span>}</div>
-<div class="line"><span class="lineno">  222</span></div>
-<div class="line"><span class="lineno">  232</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
-<div class="line"><span class="lineno">  233</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
-<div class="line"><span class="lineno">  234</span>}</div>
-<div class="line"><span class="lineno">  235</span> </div>
-<div class="line"><span class="lineno">  236</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
+<p class="definition">Definition at line <a class="el" href="cam__ts__getters_8h_source.html#l00173">173</a> of file <a class="el" href="cam__ts__getters_8h_source.html">cam_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>                                     {</div>
+<div class="line"><span class="lineno">  207</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-1-1__getters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-1-1_getters.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  208</span> </div>
+<div class="line"><span class="lineno">  209</span><span class="preprocessor">#include &lt;<a class="code" href="cam__getters__common_8h.html">etsi_its_msgs_utils/impl/cam/cam_getters_common.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  210</span></div>
+<div class="line"><span class="lineno">  220</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; <a class="code hl_function" href="#abc16ab085409645652623fd39b5649e3">getRefPosConfidence</a>(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  221</span>  <span class="keywordtype">double</span> object_heading = <a class="code hl_function" href="#afe466f298c3f04a36d884ca100f96931">getHeading</a>(cam) * M_PI / 180.0;</div>
+<div class="line"><span class="lineno">  222</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#aee609e5627bc60a2fee11cfbf5bf9393">getPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse, object_heading);</div>
+<div class="line"><span class="lineno">  223</span>}</div>
+<div class="line"><span class="lineno">  224</span></div>
+<div class="line"><span class="lineno">  234</span><span class="keyword">inline</span> <span class="keyword">const</span> std::array&lt;double, 4&gt; getWGSRefPosConfidence(<span class="keyword">const</span> CAM&amp; cam) {</div>
+<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="cdd__v2-1-1__getters_8h.html#a33cb8b20e9a38c6289f0e1c5f171b89c">getWGSPositionConfidenceEllipse</a>(cam.cam.cam_parameters.basic_container.reference_position.position_confidence_ellipse);</div>
+<div class="line"><span class="lineno">  236</span>}</div>
+<div class="line"><span class="lineno">  237</span> </div>
+<div class="line"><span class="lineno">  238</span>}  <span class="comment">// namespace etsi_its_cam_ts_msgs::access</span></div>
 </div><!-- fragment -->
 </div>
 </div>

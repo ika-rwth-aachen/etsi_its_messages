@@ -506,7 +506,9 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 <div class="line"><span class="lineno">   53</span><span class="keyword">inline</span> TimestampIts getReferenceTime(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> denm.denm.management.reference_time; }</div>
 <div class="line"><span class="lineno">   54</span></div>
 <div class="line"><span class="lineno">   61</span><span class="keyword">inline</span> uint64_t getReferenceTimeValue(<span class="keyword">const</span> DENM&amp; denm) { <span class="keywordflow">return</span> getReferenceTime(denm).value; }</div>
-<div class="line"><span class="lineno">   62</span></div><!-- fragment -->
+<div class="line"><span class="lineno">   62</span></div>
+<div class="ttc" id="adenm__getters_8h_html_a5e5bab36c415de9f3b65b51f86c9d0f8"><div class="ttname"><a href="#a5e5bab36c415de9f3b65b51f86c9d0f8">etsi_its_denm_msgs::access::getStationID</a></div><div class="ttdeci">uint32_t getStationID(const ItsPduHeader &amp;header)</div><div class="ttdoc">Get the StationID of ItsPduHeader.</div><div class="ttdef"><b>Definition</b> <a href="denm__getters_8h_source.html#l00047">denm_getters.h:47</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="af15f82cb20108e986fbca7e07dc6522e" name="af15f82cb20108e986fbca7e07dc6522e"></a>
@@ -579,7 +581,30 @@ template&lt;typename AccelerationMagnitude&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>causeCodeType value </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="denm__getters_8h_source.html#l00505">505</a> of file <a class="el" href="denm__getters_8h_source.html">denm_getters.h</a>.</p>
-<div class="fragment"></div>
+<div class="fragment"><div class="line"><span class="lineno">  506</span>                                                                  {</div>
+<div class="line"><span class="lineno">  507</span>      <span class="keywordflow">if</span> (sub_cause_code == 0)</div>
+<div class="line"><span class="lineno">  508</span>        sub_cause_code_type = <span class="stringliteral">&quot;unavailable&quot;</span>;</div>
+<div class="line"><span class="lineno">  509</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 1)</div>
+<div class="line"><span class="lineno">  510</span>        sub_cause_code_type = <span class="stringliteral">&quot;emergency electronic break lights&quot;</span>;</div>
+<div class="line"><span class="lineno">  511</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 2)</div>
+<div class="line"><span class="lineno">  512</span>        sub_cause_code_type = <span class="stringliteral">&quot;pre-crash system activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  513</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 3)</div>
+<div class="line"><span class="lineno">  514</span>        sub_cause_code_type = <span class="stringliteral">&quot;ESP (electronic stability program) activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  515</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 4)</div>
+<div class="line"><span class="lineno">  516</span>        sub_cause_code_type = <span class="stringliteral">&quot;ABS (anti-lock breaking system) activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  517</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 5)</div>
+<div class="line"><span class="lineno">  518</span>        sub_cause_code_type = <span class="stringliteral">&quot;AEB (automatic emergency breaking) activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  519</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 6)</div>
+<div class="line"><span class="lineno">  520</span>        sub_cause_code_type = <span class="stringliteral">&quot;break warning activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  521</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sub_cause_code == 7)</div>
+<div class="line"><span class="lineno">  522</span>        sub_cause_code_type = <span class="stringliteral">&quot;collision risk warning activated&quot;</span>;</div>
+<div class="line"><span class="lineno">  523</span>    }</div>
+<div class="line"><span class="lineno">  524</span>    <span class="keywordflow">return</span> sub_cause_code_type;</div>
+<div class="line"><span class="lineno">  525</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  526</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;SituationContainer is not present!&quot;</span>);</div>
+<div class="line"><span class="lineno">  527</span>  }</div>
+<div class="line"><span class="lineno">  528</span>}</div>
+<div class="line"><span class="lineno">  529</span></div>
 <div class="line"><span class="lineno">  536</span><span class="keyword">inline</span> std::vector&lt;bool&gt; <a class="code hl_function" href="#a14e472ccea4d007a2dbafa72ad4f03d0">getDrivingLaneStatus</a>(<span class="keyword">const</span> DrivingLaneStatus&amp; driving_lane_status) {</div>
 <div class="line"><span class="lineno">  537</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a3f578f4cbd8d3b3eb889b9e7251c5f14">getBitString</a>(driving_lane_status.value, driving_lane_status.bits_unused);</div>
 <div class="line"><span class="lineno">  538</span>}</div>

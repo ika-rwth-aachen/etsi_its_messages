@@ -231,7 +231,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   59</span>    MinuteOfTheYear moy = getMinuteOfTheYear(map);</div>
 <div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> moy.value;</div>
 <div class="line"><span class="lineno">   61</span>  }</div>
-<div class="line"><span class="lineno">   62</span></div><!-- fragment -->
+<div class="line"><span class="lineno">   62</span></div>
+<div class="ttc" id="amapem__ts__getters_8h_html_ae3ce949f1533ab99df9234bea3999d47"><div class="ttname"><a href="#ae3ce949f1533ab99df9234bea3999d47">etsi_its_mapem_ts_msgs::access::throwIfNotPresent</a></div><div class="ttdeci">void throwIfNotPresent(const bool is_present, const std::string val_desc)</div><div class="ttdoc">Throws an exception if the given value is not present.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00058">mapem_ts_getters.h:58</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="adf19653cd25d383f82c9abb23f2af619" name="adf19653cd25d383f82c9abb23f2af619"></a>
@@ -411,7 +413,13 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00213">213</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"></div>
+<div class="fragment"><div class="line"><span class="lineno">  246</span>                                 {</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span><span class="keyword">namespace </span>access {</div>
+<div class="line"><span class="lineno">  249</span> </div>
+<div class="line"><span class="lineno">  250</span><span class="preprocessor">#include &lt;etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h&gt;</span></div>
+<div class="line"><span class="lineno">  251</span><span class="preprocessor">#include &lt;<a class="code" href="checks_8h.html">etsi_its_msgs_utils/impl/checks.h</a>&gt;</span></div>
+<div class="line"><span class="lineno">  252</span></div>
 <div class="line"><span class="lineno">  259</span>  <span class="keyword">inline</span> MinuteOfTheYear <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(<span class="keyword">const</span> MapData&amp; map) {</div>
 <div class="line"><span class="lineno">  260</span>    <a class="code hl_function" href="checks_8h.html#a07c591f1c522ce5c9a73b5d923d47dfc">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
 <div class="line"><span class="lineno">  261</span>    <span class="keywordflow">return</span> map.time_stamp;</div>

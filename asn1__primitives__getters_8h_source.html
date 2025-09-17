@@ -137,31 +137,33 @@ $(function(){initNavTree('asn1__primitives__getters_8h_source.html',''); initRes
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">inline</span> std::vector&lt;bool&gt; getBitString(<span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; buffer, <span class="keyword">const</span> <span class="keywordtype">int</span> bits_unused) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// bit string size</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = buffer.size();</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  std::vector&lt;bool&gt; bits;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  bits.resize(n_bits - bits_unused, 0);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="comment">// loop over bytes in reverse order</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = n_bytes - 1; byte_idx &gt;= 0; byte_idx--) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="comment">// loop over bits in a byte</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = bits_per_byte - 1; bit_idx_in_byte &gt;= 0; bit_idx_in_byte--) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">int</span> bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">if</span> (byte_idx == 0 &amp;&amp; bit_idx &lt; bits_unused) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="comment">// extract bit from bitstring and set output array entry appropriately</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">bool</span> byte_has_true_bit = buffer[byte_idx] &amp; (1 &lt;&lt; bit_idx_in_byte);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">if</span> (byte_has_true_bit) bits[bits_per_byte-bit_idx-1] = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">return</span> bits;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif  </span><span class="comment">// ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_GETTERS_H</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="comment">// bit string size</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_byte = 8;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bytes = buffer.size();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> n_bits = n_bytes * bits_per_byte;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  std::vector&lt;bool&gt; bits;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  bits.resize(n_bits - bits_unused, 0);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="comment">// loop over bytes</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> byte_idx = 0; byte_idx &lt; n_bytes; byte_idx++) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">// loop over bits in a byte</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> bit_idx_in_byte = 0; bit_idx_in_byte &lt; bits_per_byte; bit_idx_in_byte++) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      <span class="comment">// map bit index in byte to bit index in total bitstring</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="keywordtype">int</span> bit_idx = bit_idx_in_byte + byte_idx * bits_per_byte;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      <span class="keywordflow">if</span> ((byte_idx + 1) &gt;= n_bytes &amp;&amp; (bit_idx_in_byte + bits_unused) &gt;= bits_per_byte) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <span class="comment">// extract bit from bitstring and set output array entry appropriately</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordtype">bool</span> byte_has_true_bit = <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(buffer[byte_idx] &amp; (1 &lt;&lt; (bits_per_byte - 1 - bit_idx_in_byte)));</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <span class="keywordflow">if</span> (byte_has_true_bit) bits[bit_idx] = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">return</span> bits;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif  </span><span class="comment">// ETSI_ITS_MSGS_UTILS_IMPL_ASN1_PRIMITIVES_GETTERS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
