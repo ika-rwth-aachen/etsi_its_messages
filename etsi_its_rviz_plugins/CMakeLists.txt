@@ -7,6 +7,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(etsi_its_cam_msgs REQUIRED)
+find_package(etsi_its_cam_ts_msgs REQUIRED)
 find_package(etsi_its_cpm_ts_msgs REQUIRED)
 find_package(etsi_its_denm_msgs REQUIRED)
 find_package(etsi_its_mapem_ts_msgs REQUIRED)
@@ -24,6 +25,7 @@ find_package(tf2_ros REQUIRED)
 
 set(display_headers_to_moc
   include/displays/CAM/cam_display.hpp
+  include/displays/CAM_TS/cam_ts_display.hpp
   include/displays/DENM/denm_display.hpp
   include/displays/DENM/overlay_object.hpp
   include/displays/CPM/cpm_display.hpp
@@ -37,6 +39,8 @@ endforeach()
 set(display_source_files
   src/displays/CAM/cam_display.cpp
   src/displays/CAM/cam_render_object.cpp
+  src/displays/CAM_TS/cam_ts_display.cpp
+  src/displays/CAM_TS/cam_ts_render_object.cpp
   src/displays/DENM/denm_display.cpp
   src/displays/DENM/denm_render_object.cpp
   src/displays/DENM/overlay_object.cpp
@@ -68,6 +72,7 @@ ament_target_dependencies(${PROJECT_NAME}
   PUBLIC
   rclcpp
   etsi_its_cam_msgs
+  etsi_its_cam_ts_msgs
   etsi_its_cpm_ts_msgs
   etsi_its_denm_msgs
   etsi_its_mapem_ts_msgs
@@ -85,6 +90,7 @@ ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 
 ament_export_dependencies(
   etsi_its_cam_msgs
+  etsi_its_cam_ts_msgs
   etsi_its_cpm_ts_msgs
   etsi_its_denm_msgs
   etsi_its_mapem_ts_msgs
