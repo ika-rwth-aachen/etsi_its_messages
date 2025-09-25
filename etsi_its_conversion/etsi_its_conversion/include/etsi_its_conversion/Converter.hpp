@@ -28,6 +28,10 @@ SOFTWARE.
 #include <string>
 #include <unordered_map>
 
+#include <etsi_its_conversion_services/srv/convert_cam_to_udp.hpp>
+#include <etsi_its_conversion_services/srv/convert_udp_to_cam.hpp>
+#include <etsi_its_conversion_services/srv/convert_udp_to_denm.hpp>
+#include <etsi_its_conversion_services/srv/convert_denm_to_udp.hpp>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_cam_ts_conversion/convertCAM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
@@ -49,30 +53,28 @@ SOFTWARE.
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 
+namespace etsi_its_conversion
+{
 
-namespace etsi_its_conversion {
+  using namespace udp_msgs::msg;
+  namespace conversion_srv = etsi_its_conversion_services::srv;
+  namespace cam_msgs = etsi_its_cam_msgs::msg;
+  namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
+  namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
+  namespace denm_msgs = etsi_its_denm_msgs::msg;
+  namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
+  namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
+  namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
+  namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
+  namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 
-
-using namespace udp_msgs::msg;
-namespace cam_msgs = etsi_its_cam_msgs::msg;
-namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
-namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
-namespace denm_msgs = etsi_its_denm_msgs::msg;
-namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
-namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
-namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
-namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
-namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
-
-
-class Converter : public rclcpp::Node {
+  class Converter : public rclcpp::Node
+  {
 
   public:
-
-    explicit Converter(const rclcpp::NodeOptions& options);
+    explicit Converter(const rclcpp::NodeOptions &options);
 
   protected:
-
     void loadParameters();
 
     void setup();
@@ -80,33 +82,42 @@ class Converter : public rclcpp::Node {
     bool logLevelIsDebug();
 
     template <typename T_struct>
-    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
+    bool decodeBufferToStruct(const uint8_t *buffer, const int size, const asn_TYPE_descriptor_t *type_descriptor, T_struct *asn1_struct);
 
     template <typename T_ros, typename T_struct>
-    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+    T_ros structToRosMessage(const T_struct &asn1_struct, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn);
 
     template <typename T_ros, typename T_struct>
-    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
+    bool decodeBufferToRosMessage(const uint8_t *buffer, const int size, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn, T_ros &msg);
 
-    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port);
+    UdpPacket bufferToUdpPacketMessage(const uint8_t *buffer, const int size, const int btp_header_destination_port);
 
     template <typename T_ros, typename T_struct>
-    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    T_struct rosMessageToStruct(const T_ros &msg, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn);
 
     template <typename T_struct>
-    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size);
+    bool encodeStructToBuffer(const T_struct &asn1_struct, const asn_TYPE_descriptor_t *type_descriptor, uint8_t *&buffer, int &size);
 
     template <typename T_ros, typename T_struct>
-    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port);
+    bool encodeRosMessageToUdpPacketMessage(const T_ros &msg, UdpPacket &udp_msg, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn, const int btp_header_destination_port);
+
+    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
+    void rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
+                          std::shared_ptr<T_response> response,
+                          const std::string &type,
+                          const asn_TYPE_descriptor_t *asn_type_descriptor,
+                          std::function<void(const T_ros &, T_struct &)> conversion_fn);
+
+    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
+    void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t *asn_type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn);
 
     void udpCallback(const UdpPacket::UniquePtr udp_msg);
 
     template <typename T_ros, typename T_struct>
     void rosCallback(const typename T_ros::UniquePtr msg,
-                     const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+                     const std::string &type, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn);
 
   protected:
-
     static const std::string kInputTopicUdp;
     static const std::string kOutputTopicUdp;
     static const std::string kInputTopicCam;
@@ -167,7 +178,10 @@ class Converter : public rclcpp::Node {
     rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 
-};
-
+    rclcpp::Service<conversion_srv::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
+    rclcpp::Service<conversion_srv::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
+    rclcpp::Service<conversion_srv::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+    rclcpp::Service<conversion_srv::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+  };
 
 }

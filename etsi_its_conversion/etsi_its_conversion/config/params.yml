@@ -1,8 +1,8 @@
 /**/*:
   ros__parameters:
     has_btp_destination_port: true
-    btp_destination_port_offset: 8  # default for Cohda Wireless MK-5 exampleETSI application
-    etsi_message_payload_offset: 78 # default for Cohda Wireless MK-5 exampleETSI application
+    btp_destination_port_offset: 0 #8  # default for Cohda Wireless MK-5 exampleETSI application
+    etsi_message_payload_offset: 4 #78 # default for Cohda Wireless MK-5 exampleETSI application
     ros2udp_etsi_types:
       - cam
       - cam_ts
