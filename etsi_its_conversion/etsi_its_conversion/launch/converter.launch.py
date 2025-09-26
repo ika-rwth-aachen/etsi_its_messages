@@ -6,6 +6,7 @@ from ament_index_python import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node, SetParameter
 
 
@@ -40,11 +41,13 @@ def generate_launch_description():
         DeclareLaunchArgument("params", default_value=os.path.join(get_package_share_directory("etsi_its_conversion"), "config", "params.yml"), description="path to parameter file"),
         DeclareLaunchArgument("log_level", default_value="info", description="ROS logging level (debug, info, warn, error, fatal)"),
         DeclareLaunchArgument("use_sim_time", default_value="false", description="use simulation clock"),
+        DeclareLaunchArgument("multi_threaded", default_value="false", description="use MultiThreadedExecutor"),
         *remappable_topics,
     ]
 
     nodes = [
         Node(
+            condition=UnlessCondition(LaunchConfiguration("multi_threaded")),
             package="etsi_its_conversion",
             executable="etsi_its_conversion_node",
             namespace=LaunchConfiguration("namespace"),
@@ -54,7 +57,19 @@ def generate_launch_description():
             remappings=[(la.default_value[0].text, LaunchConfiguration(la.name)) for la in remappable_topics],
             output="screen",
             emulate_tty=True,
-        )
+        ),
+        Node(
+            condition=IfCondition(LaunchConfiguration("multi_threaded")),
+            package="etsi_its_conversion",
+            executable="etsi_its_conversion_node_mt",
+            namespace=LaunchConfiguration("namespace"),
+            name=LaunchConfiguration("name"),
+            parameters=[LaunchConfiguration("params")],
+            arguments=["--ros-args", "--log-level", LaunchConfiguration("log_level")],
+            remappings=[(la.default_value[0].text, LaunchConfiguration(la.name)) for la in remappable_topics],
+            output="screen",
+            emulate_tty=True,
+        ),
     ]
 
     return LaunchDescription([
