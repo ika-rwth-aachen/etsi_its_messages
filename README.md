@@ -193,7 +193,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 
 | Parameter | Type | Description | Options |
 | --- | --- | --- | --- |
-| `has_btp_destination_port` | `bool` | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) |
+| `has_btp_destination_port` | `bool` | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) in their payload; for incoming UDP payloads: if `false`, destination port is expected in `src_port` field with fallback of `udp2ros_etsi_types[0]` |
 | `btp_destination_port_offset` | `int` | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
 | `ros2udp_etsi_types` | `string[]` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` (defaults to all supported ETSI types, including EN and TS versions) | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` |
