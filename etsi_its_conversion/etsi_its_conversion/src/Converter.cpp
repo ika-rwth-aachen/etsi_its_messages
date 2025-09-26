@@ -370,7 +370,6 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
   uint16_t destination_port = htons(btp_header_destination_port);
   udp_msg.src_port = destination_port;
   if (has_btp_destination_port_) {
-    
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
