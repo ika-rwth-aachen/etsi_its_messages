@@ -416,7 +416,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
   if (has_btp_destination_port_) {
     const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
     destination_port = ntohs(*btp_destination_port);
-  } else if (udp_msg→src_port != 0) {
+  } else if (udp_msg->src_port != 0) {
     destination_port = udp_msg->src_port;
   }
   if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
