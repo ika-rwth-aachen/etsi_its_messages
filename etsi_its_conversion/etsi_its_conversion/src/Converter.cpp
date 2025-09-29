@@ -365,15 +365,18 @@ bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE
 UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) {
 
   UdpPacket udp_msg;
+
+  // add BTP destination port and destination port info
+  uint16_t destination_port = htons(btp_header_destination_port);
+  udp_msg.src_port = destination_port;
   if (has_btp_destination_port_) {
-    // add BTP destination port and destination port info
-    uint16_t destination_port = htons(btp_header_destination_port);
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
     udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + 2 * sizeof(uint16_t));
     delete[] btp_header;
   }
+  
   udp_msg.data.insert(udp_msg.data.end(), buffer, buffer + size);
 
   return udp_msg;
@@ -409,19 +412,23 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
   // auto-detect ETSI message type if BTP destination port is present
   std::string detected_etsi_type = udp2ros_etsi_types_[0];
+  uint16_t destination_port;
   if (has_btp_destination_port_) {
     const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
-    uint16_t destination_port = ntohs(*btp_destination_port);
-    if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
-    else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
-    else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
-    else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
-    else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem_ts";
-    else if (destination_port == kBtpHeaderDestinationPortMcmUulm) detected_etsi_type = "mcm_uulm";
-    else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem_ts";
-    else if (destination_port == kBtpHeaderDestinationPortVamTs) detected_etsi_type = "vam_ts";
-    else detected_etsi_type = "unknown";
+    destination_port = ntohs(*btp_destination_port);
+  } else if (udp_msg->src_port != 0) {
+    destination_port = udp_msg->src_port;
   }
+  if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
+  else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
+  else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
+  else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
+  else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem_ts";
+  else if (destination_port == kBtpHeaderDestinationPortMcmUulm) detected_etsi_type = "mcm_uulm";
+  else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem_ts";
+  else if (destination_port == kBtpHeaderDestinationPortVamTs) detected_etsi_type = "vam_ts";
+  else detected_etsi_type = "unknown";
+  
 
   const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
 
