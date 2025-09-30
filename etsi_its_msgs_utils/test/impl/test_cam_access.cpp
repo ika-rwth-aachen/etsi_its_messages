@@ -185,4 +185,14 @@ TEST(etsi_its_cam_msgs, test_set_get_cam) {
       cam_msgs::LowFrequencyContainer::CHOICE_BASIC_VEHICLE_CONTAINER_LOW_FREQUENCY;
   cam_access::setExteriorLights(cam, exterior_lights);
   EXPECT_EQ(exterior_lights, cam_access::getExteriorLights(cam));
+
+  std::vector<uint8_t> expected_bit_string = {0b10101010, 0b10100000};
+  std::vector<bool> expected_bit_string_bools = {true, false, true, false, true, false, true, false, true, false, true, false};
+  std::vector<bool> bit_string_bools = cam_access::getBitString(expected_bit_string, 4);
+  EXPECT_EQ(expected_bit_string_bools, bit_string_bools);
+  cam_msgs::DrivingLaneStatus driving_lane_status;
+  cam_access::setBitString(driving_lane_status, expected_bit_string_bools);
+  EXPECT_EQ(expected_bit_string, driving_lane_status.value);
+  std::vector<bool> bit_string_bools_per_getter = cam_access::getDrivingLaneStatus(driving_lane_status);
+  EXPECT_EQ(expected_bit_string_bools, bit_string_bools_per_getter);
 }
