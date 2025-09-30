@@ -21,6 +21,11 @@ rclcpp_components_register_node(${PROJECT_NAME}
   PLUGIN "etsi_its_conversion::Converter"
   EXECUTABLE ${PROJECT_NAME}_node
 )
+rclcpp_components_register_node(${PROJECT_NAME}
+  PLUGIN "etsi_its_conversion::Converter"
+  EXECUTABLE ${PROJECT_NAME}_node_mt
+  EXECUTOR MultiThreadedExecutor
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
