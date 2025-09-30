@@ -336,7 +336,7 @@ inline void setYawRateCDD(YawRate& yaw_rate, const double value,
     yaw_rate_in_001_degrees = YawRateValue::MAX - 1; // MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX
   }
   
-  yaw_rate.yaw_rate_value.value = yaw_rate_in_001_degrees;
+  yaw_rate.yaw_rate_value.value = static_cast<decltype(yaw_rate.yaw_rate_value.value)>(yaw_rate_in_001_degrees);
 
   double yaw_rate_std = confidence;
   if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
