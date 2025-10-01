@@ -67,6 +67,25 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /etsi_its_conversion/cam/out
           Value: true
+        - Class: etsi_its_msgs/CAM_TS
+          Color: 0; 170; 255
+          Enabled: true
+          Metadata:
+            Color: 0; 170; 255
+            Scale: 4
+            Speed: true
+            StationID: true
+            Value: true
+          Name: CAM_TS
+          Scale: 1
+          Timeout: 2
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/cam_ts/out
+          Value: true
         - Class: etsi_its_msgs/DENM
           Color: 255; 0; 25
           Enabled: true
@@ -155,6 +174,25 @@ Visualization Manager:
             History Policy: Keep Last
             Reliability Policy: Reliable
             Value: /etsi_its_conversion/cam/in
+          Value: true
+        - Class: etsi_its_msgs/CAM_TS
+          Color: 0; 170; 255
+          Enabled: true
+          Metadata:
+            Color: 0; 170; 255
+            Scale: 4
+            Speed: true
+            StationID: true
+            Value: true
+          Name: CAM_TS
+          Scale: 1
+          Timeout: 2
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /etsi_its_conversion/cam_ts/in
           Value: true
         - Class: etsi_its_msgs/DENM
           Color: 255; 0; 25
