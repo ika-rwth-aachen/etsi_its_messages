@@ -69,117 +69,117 @@ namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 
 class Converter : public rclcpp::Node {
 
-public:
-  explicit Converter(const rclcpp::NodeOptions& options);
+  public:
+    explicit Converter(const rclcpp::NodeOptions& options);
 
-protected:
-  void loadParameters();
+  protected:
+    void loadParameters();
 
-  void setup();
+    void setup();
 
-  bool logLevelIsDebug();
+    bool logLevelIsDebug();
 
-  template <typename T_struct>
-  bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
+    template <typename T_struct>
+    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
 
-  template <typename T_ros, typename T_struct>
-  T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+    template <typename T_ros, typename T_struct>
+    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
 
-  template <typename T_ros, typename T_struct>
-  bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
+    template <typename T_ros, typename T_struct>
+    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
 
-  UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port);
+    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port);
 
-  template <typename T_ros, typename T_struct>
-  T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    template <typename T_ros, typename T_struct>
+    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
-  template <typename T_struct>
-  bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size);
+    template <typename T_struct>
+    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size);
 
-  template <typename T_ros, typename T_struct>
-  bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port);
+    template <typename T_ros, typename T_struct>
+    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port);
 
-  template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-  void rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
-                           std::shared_ptr<T_response> response,
-                           const std::string& type,
-                           const asn_TYPE_descriptor_t* asn_type_descriptor,
-                           std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
+    void rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
+                            std::shared_ptr<T_response> response,
+                            const std::string& type,
+                            const asn_TYPE_descriptor_t* asn_type_descriptor,
+                            std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
-  template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-  void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
+    void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
 
-  void udpCallback(const UdpPacket::UniquePtr udp_msg);
+    void udpCallback(const UdpPacket::UniquePtr udp_msg);
 
-  template <typename T_ros, typename T_struct>
-  void rosCallback(const typename T_ros::UniquePtr msg,
-                   const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    template <typename T_ros, typename T_struct>
+    void rosCallback(const typename T_ros::UniquePtr msg,
+                    const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
 
-protected:
-  static const std::string kInputTopicUdp;
-  static const std::string kOutputTopicUdp;
-  static const std::string kInputTopicCam;
-  static const std::string kOutputTopicCam;
-  static const std::string kInputTopicCamTs;
-  static const std::string kOutputTopicCamTs;
-  static const std::string kInputTopicCpmTs;
-  static const std::string kOutputTopicCpmTs;
-  static const std::string kInputTopicDenm;
-  static const std::string kOutputTopicDenm;
-  static const std::string kInputTopicDenmTs;
-  static const std::string kOutputTopicDenmTs;
-  static const std::string kInputTopicMapemTs;
-  static const std::string kOutputTopicMapemTs;
-  static const std::string kInputTopicMcmUulm;
-  static const std::string kOutputTopicMcmUulm;
-  static const std::string kInputTopicSpatemTs;
-  static const std::string kOutputTopicSpatemTs;
-  static const std::string kInputTopicVamTs;
-  static const std::string kOutputTopicVamTs;
+  protected:
+    static const std::string kInputTopicUdp;
+    static const std::string kOutputTopicUdp;
+    static const std::string kInputTopicCam;
+    static const std::string kOutputTopicCam;
+    static const std::string kInputTopicCamTs;
+    static const std::string kOutputTopicCamTs;
+    static const std::string kInputTopicCpmTs;
+    static const std::string kOutputTopicCpmTs;
+    static const std::string kInputTopicDenm;
+    static const std::string kOutputTopicDenm;
+    static const std::string kInputTopicDenmTs;
+    static const std::string kOutputTopicDenmTs;
+    static const std::string kInputTopicMapemTs;
+    static const std::string kOutputTopicMapemTs;
+    static const std::string kInputTopicMcmUulm;
+    static const std::string kOutputTopicMcmUulm;
+    static const std::string kInputTopicSpatemTs;
+    static const std::string kOutputTopicSpatemTs;
+    static const std::string kInputTopicVamTs;
+    static const std::string kOutputTopicVamTs;
 
-  static const std::string kHasBtpDestinationPortParam;
-  static const bool kHasBtpDestinationPortParamDefault;
-  static const std::string kBtpDestinationPortOffsetParam;
-  static const int kBtpDestinationPortOffsetParamDefault;
-  static const std::string kEtsiMessagePayloadOffsetParam;
-  static const int kEtsiMessagePayloadOffsetParamDefault;
-  static const std::string kRos2UdpEtsiTypesParam;
-  static const std::string kUdp2RosEtsiTypesParam;
-  static const std::vector<std::string> kEtsiTypesParamSupportedOptions;
-  static const std::vector<std::string> kRos2UdpEtsiTypesParamDefault;
-  static const std::vector<std::string> kUdp2RosEtsiTypesParamDefault;
-  static const std::string kSubscriberQueueSizeParam;
-  static const int kSubscriberQueueSizeParamDefault;
-  static const std::string kPublisherQueueSizeParam;
-  static const int kPublisherQueueSizeParamDefault;
-  static const std::string kCheckConstraintsBeforeEncodingParam;
-  static const bool kCheckConstraintsBeforeEncodingParamDefault;
+    static const std::string kHasBtpDestinationPortParam;
+    static const bool kHasBtpDestinationPortParamDefault;
+    static const std::string kBtpDestinationPortOffsetParam;
+    static const int kBtpDestinationPortOffsetParamDefault;
+    static const std::string kEtsiMessagePayloadOffsetParam;
+    static const int kEtsiMessagePayloadOffsetParamDefault;
+    static const std::string kRos2UdpEtsiTypesParam;
+    static const std::string kUdp2RosEtsiTypesParam;
+    static const std::vector<std::string> kEtsiTypesParamSupportedOptions;
+    static const std::vector<std::string> kRos2UdpEtsiTypesParamDefault;
+    static const std::vector<std::string> kUdp2RosEtsiTypesParamDefault;
+    static const std::string kSubscriberQueueSizeParam;
+    static const int kSubscriberQueueSizeParamDefault;
+    static const std::string kPublisherQueueSizeParam;
+    static const int kPublisherQueueSizeParamDefault;
+    static const std::string kCheckConstraintsBeforeEncodingParam;
+    static const bool kCheckConstraintsBeforeEncodingParamDefault;
 
-  bool has_btp_destination_port_;
-  int btp_destination_port_offset_;
-  int etsi_message_payload_offset_;
-  std::vector<std::string> ros2udp_etsi_types_;
-  std::vector<std::string> udp2ros_etsi_types_;
-  int subscriber_queue_size_;
-  int publisher_queue_size_;
+    bool has_btp_destination_port_;
+    int btp_destination_port_offset_;
+    int etsi_message_payload_offset_;
+    std::vector<std::string> ros2udp_etsi_types_;
+    std::vector<std::string> udp2ros_etsi_types_;
+    int subscriber_queue_size_;
+    int publisher_queue_size_;
 
-  rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
-  std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
-  rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
-  rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
-  rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
-  rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
-  rclcpp::Publisher<denm_ts_msgs::DENM>::SharedPtr publisher_denm_ts_;
-  rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
-  rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
-  rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
-  rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
-  rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
+    rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
+    std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
+    rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
+    rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
+    rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
+    rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
+    rclcpp::Publisher<denm_ts_msgs::DENM>::SharedPtr publisher_denm_ts_;
+    rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
+    rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
+    rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
+    rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
+    rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 
-  rclcpp::Service<conversion_srv::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
-  rclcpp::Service<conversion_srv::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
-  rclcpp::Service<conversion_srv::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
-  rclcpp::Service<conversion_srv::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+    rclcpp::Service<conversion_srv::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
+    rclcpp::Service<conversion_srv::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
+    rclcpp::Service<conversion_srv::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+    rclcpp::Service<conversion_srv::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
 };
 
 }
