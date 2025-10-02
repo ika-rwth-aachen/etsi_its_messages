@@ -82,13 +82,14 @@ const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
 const int Converter::kPublisherQueueSizeParamDefault{10};
 const bool Converter::kCheckConstraintsBeforeEncodingParamDefault{false};
 
+
 bool Converter::logLevelIsDebug() {
 
   auto logger_level = rcutils_logging_get_logger_effective_level(this->get_logger().get_name());
   return (logger_level == RCUTILS_LOG_SEVERITY_DEBUG);
 }
 
-Converter::Converter(const rclcpp::NodeOptions &options) : Node("converter", options) {
+Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", options) {
 
   this->loadParameters();
   this->setup();
@@ -126,7 +127,7 @@ void Converter::loadParameters() {
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   std::stringstream ss_ros2udp;
   ss_ros2udp << "list of ETSI types to convert from ROS to UDP, one of ";
-  for (const auto &e : kRos2UdpEtsiTypesParamDefault)
+  for (const auto& e : kRos2UdpEtsiTypesParamDefault)
     ss_ros2udp << e << ", ";
   param_desc.description = ss_ros2udp.str();
   this->declare_parameter(kRos2UdpEtsiTypesParam, kRos2UdpEtsiTypesParamDefault, param_desc);
@@ -135,12 +136,11 @@ void Converter::loadParameters() {
   }
 
   // check ros2udp_etsi_types
-  for (auto it = ros2udp_etsi_types_.begin(); it != ros2udp_etsi_types_.end();) {
+  for (auto it = ros2udp_etsi_types_.begin(); it != ros2udp_etsi_types_.end(); ) {
     if (std::find(kEtsiTypesParamSupportedOptions.begin(), kEtsiTypesParamSupportedOptions.end(), *it) == kEtsiTypesParamSupportedOptions.end()) {
       RCLCPP_WARN(this->get_logger(), "Invalid value '%s' for parameter '%s', removing", it->c_str(), kRos2UdpEtsiTypesParam.c_str());
       it = ros2udp_etsi_types_.erase(it);
-    }
-    else {
+    } else {
       ++it;
     }
   }
@@ -149,7 +149,7 @@ void Converter::loadParameters() {
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   std::stringstream ss_udp2ros;
   ss_udp2ros << "list of ETSI types to convert from UDP to ROS, one of ";
-  for (const auto &e : kUdp2RosEtsiTypesParamDefault)
+  for (const auto& e : kUdp2RosEtsiTypesParamDefault)
     ss_udp2ros << e << ", ";
   param_desc.description = ss_udp2ros.str();
   this->declare_parameter(kUdp2RosEtsiTypesParam, kUdp2RosEtsiTypesParamDefault, param_desc);
@@ -158,12 +158,11 @@ void Converter::loadParameters() {
   }
 
   // check udp2ros_etsi_types
-  for (auto it = udp2ros_etsi_types_.begin(); it != udp2ros_etsi_types_.end();) {
+  for (auto it = udp2ros_etsi_types_.begin(); it != udp2ros_etsi_types_.end(); ) {
     if (std::find(kEtsiTypesParamSupportedOptions.begin(), kEtsiTypesParamSupportedOptions.end(), *it) == kEtsiTypesParamSupportedOptions.end()) {
       RCLCPP_WARN(this->get_logger(), "Invalid value '%s' for parameter '%s', removing", it->c_str(), kRos2UdpEtsiTypesParam.c_str());
       it = udp2ros_etsi_types_.erase(it);
-    }
-    else {
+    } else {
       ++it;
     }
   }
@@ -233,7 +232,7 @@ void Converter::setup() {
             std::function<void(const cam_msgs::CAM &, cam_CAM_t &)>(etsi_its_cam_conversion::toStruct_CAM)));
 
     std::function<void(const cam_msgs::CAM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, std::placeholders::_1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM &, cam_CAM_t &)>(etsi_its_cam_conversion::toStruct_CAM));
+      std::bind(&Converter::rosCallback<cam_msgs::CAM, cam_CAM_t>, this, std::placeholders::_1, "cam", &asn_DEF_cam_CAM, std::function<void(const cam_msgs::CAM&, cam_CAM_t&)>(etsi_its_cam_conversion::toStruct_CAM));
     subscribers_["cam"] = this->create_subscription<cam_msgs::CAM>(kInputTopicCam, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -243,7 +242,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const cam_ts_msgs::CAM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>, this, std::placeholders::_1, "cam_ts", &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_msgs::CAM &, cam_ts_CAM_t &)>(etsi_its_cam_ts_conversion::toStruct_CAM));
+      std::bind(&Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>, this, std::placeholders::_1, "cam_ts", &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_msgs::CAM&, cam_ts_CAM_t&)>(etsi_its_cam_ts_conversion::toStruct_CAM));
     subscribers_["cam_ts"] = this->create_subscription<cam_ts_msgs::CAM>(kInputTopicCamTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM (TS) on '%s' to UDP messages on '%s'", subscribers_["cam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -253,7 +252,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cpm_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, std::placeholders::_1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage &, cpm_ts_CollectivePerceptionMessage_t &)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
+      std::bind(&Converter::rosCallback<cpm_ts_msgs::CollectivePerceptionMessage, cpm_ts_CollectivePerceptionMessage_t>, this, std::placeholders::_1, "cpm_ts", &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage&, cpm_ts_CollectivePerceptionMessage_t&)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage));
     subscribers_["cpm_ts"] = this->create_subscription<cpm_ts_msgs::CollectivePerceptionMessage>(kInputTopicCpmTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -292,7 +291,7 @@ void Converter::setup() {
             std::function<void(const denm_msgs::DENM &, denm_DENM_t &)>(etsi_its_denm_conversion::toStruct_DENM)));
 
     std::function<void(const denm_msgs::DENM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM &, denm_DENM_t &)>(etsi_its_denm_conversion::toStruct_DENM));
+      std::bind(&Converter::rosCallback<denm_msgs::DENM, denm_DENM_t>, this, std::placeholders::_1, "denm", &asn_DEF_denm_DENM, std::function<void(const denm_msgs::DENM&, denm_DENM_t&)>(etsi_its_denm_conversion::toStruct_DENM));
     subscribers_["denm"] = this->create_subscription<denm_msgs::DENM>(kInputTopicDenm, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -302,7 +301,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const denm_ts_msgs::DENM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<denm_ts_msgs::DENM, denm_ts_DENM_t>, this, std::placeholders::_1, "denm_ts", &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_msgs::DENM &, denm_ts_DENM_t &)>(etsi_its_denm_ts_conversion::toStruct_DENM));
+      std::bind(&Converter::rosCallback<denm_ts_msgs::DENM, denm_ts_DENM_t>, this, std::placeholders::_1, "denm_ts", &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_msgs::DENM&, denm_ts_DENM_t&)>(etsi_its_denm_ts_conversion::toStruct_DENM));
     subscribers_["denm_ts"] = this->create_subscription<denm_ts_msgs::DENM>(kInputTopicDenmTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs (TS) on '%s' to UDP messages on '%s'", subscribers_["denm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -312,7 +311,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mapem_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const mapem_ts_msgs::MAPEM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, std::placeholders::_1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM &, mapem_ts_MAPEM_t &)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
+      std::bind(&Converter::rosCallback<mapem_ts_msgs::MAPEM, mapem_ts_MAPEM_t>, this, std::placeholders::_1, "mapem_ts", &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_msgs::MAPEM&, mapem_ts_MAPEM_t&)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM));
     subscribers_["mapem_ts"] = this->create_subscription<mapem_ts_msgs::MAPEM>(kInputTopicMapemTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS MAPEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["mapem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -322,7 +321,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "mcm_uulm") != ros2udp_etsi_types_.end()) {
     std::function<void(const mcm_uulm_msgs::MCM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<mcm_uulm_msgs::MCM, mcm_uulm_MCM_t>, this, std::placeholders::_1, "mcm_uulm", &asn_DEF_mcm_uulm_MCM, std::function<void(const mcm_uulm_msgs::MCM &, mcm_uulm_MCM_t &)>(etsi_its_mcm_uulm_conversion::toStruct_MCM));
+      std::bind(&Converter::rosCallback<mcm_uulm_msgs::MCM, mcm_uulm_MCM_t>, this, std::placeholders::_1, "mcm_uulm", &asn_DEF_mcm_uulm_MCM, std::function<void(const mcm_uulm_msgs::MCM&, mcm_uulm_MCM_t&)>(etsi_its_mcm_uulm_conversion::toStruct_MCM));
     subscribers_["mcm_uulm"] = this->create_subscription<mcm_uulm_msgs::MCM>(kInputTopicMcmUulm, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS MCM (UULM) on '%s' to UDP messages on '%s'", subscribers_["mcm_uulm"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -332,7 +331,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "spatem_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const spatem_ts_msgs::SPATEM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, std::placeholders::_1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM &, spatem_ts_SPATEM_t &)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
+      std::bind(&Converter::rosCallback<spatem_ts_msgs::SPATEM, spatem_ts_SPATEM_t>, this, std::placeholders::_1, "spatem_ts", &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_msgs::SPATEM&, spatem_ts_SPATEM_t&)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM));
     subscribers_["spatem_ts"] = this->create_subscription<spatem_ts_msgs::SPATEM>(kInputTopicSpatemTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS SPATEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["spatem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -342,7 +341,7 @@ void Converter::setup() {
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "vam_ts") != ros2udp_etsi_types_.end()) {
     std::function<void(const vam_ts_msgs::VAM::UniquePtr)> callback =
-        std::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, std::placeholders::_1, "vam_ts", &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_msgs::VAM &, vam_ts_VAM_t &)>(etsi_its_vam_ts_conversion::toStruct_VAM));
+      std::bind(&Converter::rosCallback<vam_ts_msgs::VAM, vam_ts_VAM_t>, this, std::placeholders::_1, "vam_ts", &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_msgs::VAM&, vam_ts_VAM_t&)>(etsi_its_vam_ts_conversion::toStruct_VAM));
     subscribers_["vam_ts"] = this->create_subscription<vam_ts_msgs::VAM>(kInputTopicVamTs, subscriber_queue_size_, callback);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS VAM (TS) on '%s' to UDP messages on '%s'", subscribers_["vam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
@@ -363,7 +362,7 @@ bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, cons
 }
 
 template <typename T_ros, typename T_struct>
-T_ros Converter::structToRosMessage(const T_struct &asn1_struct, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn) {
+T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
 
   T_ros msg;
   conversion_fn(asn1_struct, msg);
@@ -372,8 +371,7 @@ T_ros Converter::structToRosMessage(const T_struct &asn1_struct, const asn_TYPE_
 }
 
 template <typename T_ros, typename T_struct>
-bool Converter::decodeBufferToRosMessage(const uint8_t *buffer, const int size, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn, T_ros &msg) {
-  RCLCPP_ERROR(this->get_logger(), "decodeBufferToRosMessage() called. Type: %s", __PRETTY_FUNCTION__);
+bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) {
 
   T_struct asn1_struct{};
   bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, &asn1_struct);
@@ -385,7 +383,7 @@ bool Converter::decodeBufferToRosMessage(const uint8_t *buffer, const int size, 
 }
 
 template <typename T_ros, typename T_struct>
-T_struct Converter::rosMessageToStruct(const T_ros &msg, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn) {
+T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
   T_struct asn1_struct{};
   conversion_fn(msg, asn1_struct);
@@ -396,20 +394,18 @@ T_struct Converter::rosMessageToStruct(const T_ros &msg, const asn_TYPE_descript
 }
 
 template <typename T_struct>
-bool Converter::encodeStructToBuffer(const T_struct &asn1_struct, const asn_TYPE_descriptor_t *type_descriptor, uint8_t *&buffer, int &size) {
+bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
 
   char error_buffer[1024];
   size_t error_length = sizeof(error_buffer);
   int check_ret = asn_check_constraints(type_descriptor, &asn1_struct, error_buffer, &error_length);
-  if (check_ret != 0)
-  {
+  if (check_ret != 0) {
     RCLCPP_ERROR(this->get_logger(), "Check of struct failed: %s", error_buffer);
     return false;
   }
 
   asn_encode_to_new_buffer_result_t ret = asn_encode_to_new_buffer(0, ATS_UNALIGNED_BASIC_PER, type_descriptor, &asn1_struct);
-  if (ret.result.encoded == -1)
-  {
+  if (ret.result.encoded == -1) {
     RCLCPP_ERROR(this->get_logger(), "Failed to encode message: %s", ret.result.failed_type->xml_tag);
     return false;
   }
@@ -420,16 +416,15 @@ bool Converter::encodeStructToBuffer(const T_struct &asn1_struct, const asn_TYPE
   return true;
 }
 
-UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t *buffer, const int size, const int btp_header_destination_port) {
+UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) {
 
   UdpPacket udp_msg;
-  if (has_btp_destination_port_)
-  {
+  if (has_btp_destination_port_) {
     // add BTP destination port and destination port info
     uint16_t destination_port = htons(btp_header_destination_port);
     uint16_t destination_port_info = 0;
-    uint16_t *btp_header = new uint16_t[2]{destination_port, destination_port_info};
-    uint8_t *btp_header_uint8 = reinterpret_cast<uint8_t *>(btp_header);
+    uint16_t* btp_header = new uint16_t[2]{destination_port, destination_port_info};
+    uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
     udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + 2 * sizeof(uint16_t));
     delete[] btp_header;
   }
@@ -439,13 +434,13 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t *buffer, const int s
 }
 
 template <typename T_ros, typename T_struct>
-bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros &msg, UdpPacket &udp_msg, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn, const int btp_header_destination_port) {
+bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) {
 
   // convert ROS msg to struct
   auto asn1_struct = this->rosMessageToStruct(msg, type_descriptor, conversion_fn);
 
   // encode struct to ASN1 bitstring
-  uint8_t *buffer = nullptr;
+  uint8_t* buffer = nullptr;
   int buffer_size;
   bool successful = this->encodeStructToBuffer(asn1_struct, type_descriptor, buffer, buffer_size);
   if (!successful)
@@ -463,12 +458,11 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros &msg, UdpPacket &
 
 template <typename T_ros, typename T_struct, typename T_request, typename T_response>
 void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
-                          std::shared_ptr<T_response> response, const std::string &type,
-                          const asn_TYPE_descriptor_t *asn_type_descriptor,
-                          std::function<void(const T_ros &, T_struct &)> conversion_fn) {
-  RCLCPP_DEBUG(this->get_logger(), "Type: %s", __PRETTY_FUNCTION__);
+                          std::shared_ptr<T_response> response, const std::string& type,
+                          const asn_TYPE_descriptor_t* asn_type_descriptor,
+                          std::function<void(const T_ros&, T_struct&)> conversion_fn) {
+
   const auto &msg = request->ros_msg;
-  //T_struct asn_msg;
 
   int btp_header_destination_port = 0;
   if (type == "cam" || type == "cam_ts")
@@ -485,15 +479,11 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
     btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
   else if (type == "vam_ts")
     btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
-  //conversion_fn(ros_msg, asn_msg);
 
-  //std::vector<uint8_t> udp_data;
-  //bool success = this->encodeRosMessageToBuffer(asn_type_descriptor, asn_msg, udp_data);
   UdpPacket udp_msg;
   bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(msg, udp_msg, asn_type_descriptor, conversion_fn, btp_header_destination_port);
 
-  if (!success)
-  {
+  if (!success) {
     RCLCPP_WARN(this->get_logger(), "Failed to encode ROS message to UDP packet");
     return;
   }
@@ -502,8 +492,8 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
 }
 
 template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t *asn_type_descriptor, std::function<void(const T_struct &, T_ros &)> conversion_fn) {
-  RCLCPP_DEBUG(this->get_logger(), "Type: %s", __PRETTY_FUNCTION__);
+void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
+  
   const UdpPacket* udp_msg = &request->udp_packet;
 
   RCLCPP_DEBUG(this->get_logger(), "Received bitstring (total payload size: %ld)", udp_msg->data.size());
@@ -557,7 +547,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
       detected_etsi_type = "unknown";
   }
 
-  const uint8_t *protocol_version = reinterpret_cast<const uint8_t *>(&udp_msg->data[etsi_message_payload_offset_]);
+  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
 
   int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' (protocolVersion: %d) as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), *protocol_version, msg_size, udp_msg->data.size());
@@ -661,7 +651,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
 template <typename T_ros, typename T_struct>
 void Converter::rosCallback(const typename T_ros::UniquePtr msg,
-                            const std::string &type, const asn_TYPE_descriptor_t *type_descriptor, std::function<void(const T_ros &, T_struct &)> conversion_fn) {
+                            const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' as ROS message", type.c_str());
 
