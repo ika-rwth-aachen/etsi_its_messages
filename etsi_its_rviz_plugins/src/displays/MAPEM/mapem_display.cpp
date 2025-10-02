@@ -31,6 +31,7 @@ SOFTWARE.
 #include <OgreBillboardSet.h>
 #include <OgreMaterialManager.h>
 #include <OgreTechnique.h>
+#include <cmath>
 
 #include "rviz_common/display_context.hpp"
 #include "rviz_common/frame_manager_iface.hpp"
@@ -373,72 +374,39 @@ void MAPEMDisplay::RenderSpatemShapes(Ogre::SceneNode *child_scene_node, Interse
 }
 
 void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state) {
+  // Safeguards
+  if (!child_scene_node) return;
+  if (lane.nodes.empty()) return;
+
+  // Only render when we have timing info
   std::string text_content;
+  if (intersection_movement_state && intersection_movement_state->time_change_details) {
+    auto time_change_details = intersection_movement_state->time_change_details;
+    auto & header = intersection_movement_state->header;
 
-  if (intersection_movement_state != nullptr) {
-    if (intersection_movement_state->time_change_details != nullptr) {
-      etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = intersection_movement_state->time_change_details;
-      std_msgs::msg::Header& header = intersection_movement_state->header;
-      
-      if (show_spatem_start_time->getBool()) {
-        text_content = "Start time: " 
-          + (time_change_details->start_time_is_present 
-            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->start_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
-          + "\n";
-      }
-
-      // 'Min end time' is the only required field 
-      if (show_spatem_min_end_time->getBool()) {
-        text_content += "Min end time: " 
-        + etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->min_end_time.value, header.stamp.sec, header.stamp.nanosec)
-        + "\n";
-      }
-              
-      if (show_spatem_max_end_time->getBool()) {
-        text_content += "Max end time: "
-          + (time_change_details->max_end_time_is_present 
-            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->max_end_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
-          + "\n";
-      }
-      if (show_spatem_likely_time->getBool()) {
-        text_content += "Likely time: "
-          + (time_change_details->likely_time_is_present 
-            ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->likely_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
-          + "\n";
-      }
-      if (show_spatem_confidence->getBool()) {
-        text_content += "Confidence: "
-          + (time_change_details->confidence_is_present 
-            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsFloat(time_change_details->confidence.value) * 100)) + "%" 
-            : "-") 
-          + "\n";
-      }
-      if (show_spatem_next_time->getBool()) {
-        text_content += "Next time: "
-          + (time_change_details->next_time_is_present 
-          ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->next_time.value, header.stamp.sec, header.stamp.nanosec)
-          : "-");
-      }
-    } else {
-      text_content = "no time info";
-    }
-  } else {
-    text_content = "-";
+    // Use min_end_time as the compact countdown in seconds (integer)
+    float seconds = etsi_its_spatem_ts_msgs::access::interpretTimeMarkDeltaTimeValueAsSeconds(
+      time_change_details->min_end_time.value, header.stamp.sec, header.stamp.nanosec);
+    int remaining = static_cast<int>(std::lround(seconds));
+    if (remaining < 0) remaining = 0;
+    text_content = std::to_string(remaining);
   }
 
-  std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_spatem_->getFloat());
+  // If nothing to show or user disabled all time fields, skip to avoid crashes
+  if (text_content.empty()) return;
+
+  auto text_render = std::make_shared<rviz_rendering::MovableText>(text_content, "Liberation Sans", char_height_spatem_->getFloat());
   Ogre::Vector3 halfSize = text_render->getBoundingBox().getHalfSize();
-  Ogre::Vector3 offset(
-  offset.x = lane.nodes.front().x - halfSize.x * 0.5,
-  offset.y = lane.nodes.front().y + halfSize.y,
-  offset.z = lane.nodes.front().z + 2);
+
+  // Center the text inside the state sphere at the lane's first node
+  Ogre::Vector3 offset;
+  offset.x = lane.nodes.front().x - halfSize.x;
+  offset.y = lane.nodes.front().y - halfSize.y;
+  offset.z = lane.nodes.front().z; // align with sphere center
 
   text_render->setGlobalTranslation(offset);
   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_spatem_->getColor());
-  text_render->setColor(text_color);        
+  text_render->setColor(text_color);
   child_scene_node->attachObject(text_render.get());
   texts_.push_back(text_render);
 }
@@ -527,8 +495,10 @@ void MAPEMDisplay::update(float, float) {
         // Visualize current traffic state
         RenderSpatemShapes(child_scene_node, intsctn.lanes[i], mvmnt_ptr);
 
-        // create graphical text to display time information for signal change (see TimeChangeDetail Etsi definition)
-        RenderSpatemTexts(child_scene_node, intsctn.lanes[i], mvmnt_ptr);
+        // Create graphical text (compact countdown) only when enabled
+        if (show_meta_spatem_->getBool()) {
+          RenderSpatemTexts(child_scene_node, intsctn.lanes[i], mvmnt_ptr);
+        }
       }
 
     }
