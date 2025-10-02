@@ -89,11 +89,13 @@ bool Converter::logLevelIsDebug() {
   return (logger_level == RCUTILS_LOG_SEVERITY_DEBUG);
 }
 
+
 Converter::Converter(const rclcpp::NodeOptions& options) : Node("converter", options) {
 
   this->loadParameters();
   this->setup();
 }
+
 
 void Converter::loadParameters() {
 
@@ -149,8 +151,7 @@ void Converter::loadParameters() {
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   std::stringstream ss_udp2ros;
   ss_udp2ros << "list of ETSI types to convert from UDP to ROS, one of ";
-  for (const auto& e : kUdp2RosEtsiTypesParamDefault)
-    ss_udp2ros << e << ", ";
+  for (const auto& e : kUdp2RosEtsiTypesParamDefault) ss_udp2ros << e << ", ";
   param_desc.description = ss_udp2ros.str();
   this->declare_parameter(kUdp2RosEtsiTypesParam, kUdp2RosEtsiTypesParamDefault, param_desc);
   if (!this->get_parameter(kUdp2RosEtsiTypesParam, udp2ros_etsi_types_)) {
@@ -355,8 +356,7 @@ bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, cons
     RCLCPP_ERROR(this->get_logger(), "Failed to decode message");
     return false;
   }
-  if (logLevelIsDebug())
-    asn_fprint(stdout, type_descriptor, asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, type_descriptor, asn1_struct);
 
   return true;
 }
@@ -375,8 +375,7 @@ bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, 
 
   T_struct asn1_struct{};
   bool success = this->decodeBufferToStruct(buffer, size, type_descriptor, &asn1_struct);
-  if (success)
-    msg = this->structToRosMessage(asn1_struct, type_descriptor, conversion_fn);
+  if (success) msg = this->structToRosMessage(asn1_struct, type_descriptor, conversion_fn);
   ASN_STRUCT_FREE_CONTENTS_ONLY(*type_descriptor, &asn1_struct);
 
   return success;
@@ -387,8 +386,7 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 
   T_struct asn1_struct{};
   conversion_fn(msg, asn1_struct);
-  if (logLevelIsDebug())
-    asn_fprint(stdout, type_descriptor, &asn1_struct);
+  if (logLevelIsDebug()) asn_fprint(stdout, type_descriptor, &asn1_struct);
 
   return asn1_struct;
 }
@@ -423,7 +421,7 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
     // add BTP destination port and destination port info
     uint16_t destination_port = htons(btp_header_destination_port);
     uint16_t destination_port_info = 0;
-    uint16_t* btp_header = new uint16_t[2]{destination_port, destination_port_info};
+    uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
     uint8_t* btp_header_uint8 = reinterpret_cast<uint8_t*>(btp_header);
     udp_msg.data.insert(udp_msg.data.end(), btp_header_uint8, btp_header_uint8 + 2 * sizeof(uint16_t));
     delete[] btp_header;
@@ -443,8 +441,7 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
   uint8_t* buffer = nullptr;
   int buffer_size;
   bool successful = this->encodeStructToBuffer(asn1_struct, type_descriptor, buffer, buffer_size);
-  if (!successful)
-    return false;
+  if (!successful) return false;
 
   // copy bitstring to ROS UDP msg
   udp_msg = this->bufferToUdpPacketMessage(buffer, buffer_size, btp_header_destination_port);
@@ -465,20 +462,13 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
   const auto &msg = request->ros_msg;
 
   int btp_header_destination_port = 0;
-  if (type == "cam" || type == "cam_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortCam;
-  else if (type == "cpm_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
-  else if (type == "denm" || type == "denm_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortDenm;
-  else if (type == "mapem_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortMapem;
-  else if (type == "mcm_uulm")
-    btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
-  else if (type == "spatem_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
-  else if (type == "vam_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
+  if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
+  else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
+  else if (type == "denm" || type == "denm_ts") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "mapem_ts") btp_header_destination_port = kBtpHeaderDestinationPortMapem;
+  else if (type == "mcm_uulm") btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
+  else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
+  else if (type == "vam_ts") btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
 
   UdpPacket udp_msg;
   bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(msg, udp_msg, asn_type_descriptor, conversion_fn, btp_header_destination_port);
@@ -523,28 +513,19 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
   // auto-detect ETSI message type if BTP destination port is present
   std::string detected_etsi_type = udp2ros_etsi_types_[0];
   if (has_btp_destination_port_) {
-    const uint16_t *btp_destination_port = reinterpret_cast<const uint16_t *>(&udp_msg->data[btp_destination_port_offset_]);
+    const uint16_t* btp_destination_port = reinterpret_cast<const uint16_t*>(&udp_msg->data[btp_destination_port_offset_]);
     uint16_t destination_port = ntohs(*btp_destination_port);
     RCLCPP_DEBUG(this->get_logger(), "Extracted DestinationPort: %d)", destination_port);
 
-    if (destination_port == kBtpHeaderDestinationPortCam)
-      detected_etsi_type = "cam";
-    else if (destination_port == kBtpHeaderDestinationPortCpmTs)
-      detected_etsi_type = "cpm_ts";
-    else if (destination_port == kBtpHeaderDestinationPortDenm)
-      detected_etsi_type = "denm";
-    else if (destination_port == kBtpHeaderDestinationPortIvi)
-      detected_etsi_type = "ivi";
-    else if (destination_port == kBtpHeaderDestinationPortMapem)
-      detected_etsi_type = "mapem_ts";
-    else if (destination_port == kBtpHeaderDestinationPortMcmUulm)
-      detected_etsi_type = "mcm_uulm";
-    else if (destination_port == kBtpHeaderDestinationPortSpatem)
-      detected_etsi_type = "spatem_ts";
-    else if (destination_port == kBtpHeaderDestinationPortVamTs)
-      detected_etsi_type = "vam_ts";
-    else
-      detected_etsi_type = "unknown";
+    if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
+    else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
+    else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
+    else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
+    else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem_ts";
+    else if (destination_port == kBtpHeaderDestinationPortMcmUulm) detected_etsi_type = "mcm_uulm";
+    else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem_ts";
+    else if (destination_port == kBtpHeaderDestinationPortVamTs) detected_etsi_type = "vam_ts";
+    else detected_etsi_type = "unknown";
   }
 
   const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
@@ -556,98 +537,83 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) { // CAM EN v1.4.1
       cam_msgs::CAM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t &, cam_msgs::CAM &)>(etsi_its_cam_conversion::toRos_CAM), msg);
-      if (!success)
-        return;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
+      if (!success) return;
       publisher_cam_->publish(msg);
     }
     if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) { // CAM TS v2.1.1
       cam_ts_msgs::CAM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_CAM_t &, cam_ts_msgs::CAM &)>(etsi_its_cam_ts_conversion::toRos_CAM), msg);
-      if (!success)
-        return;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_CAM_t&, cam_ts_msgs::CAM&)>(etsi_its_cam_ts_conversion::toRos_CAM), msg);
+      if (!success) return;
       publisher_cam_ts_->publish(msg);
     }
-  }
-  else if (detected_etsi_type == "cpm_ts") {
+  } else if (detected_etsi_type == "cpm_ts") {
 
     // decode buffer to ROS msg
     cpm_ts_msgs::CollectivePerceptionMessage msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_CollectivePerceptionMessage_t &, cpm_ts_msgs::CollectivePerceptionMessage &)>(etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage), msg);
-    if (!success)
-      return;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cpm_ts_CollectivePerceptionMessage, std::function<void(const cpm_ts_CollectivePerceptionMessage_t&, cpm_ts_msgs::CollectivePerceptionMessage&)>(etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage), msg);
+    if (!success) return;
 
     // publish msg
     publisher_cpm_ts_->publish(msg);
-  }
-  else if (detected_etsi_type == "denm" || detected_etsi_type == "denm_ts") {
+  } else if (detected_etsi_type == "denm" || detected_etsi_type == "denm_ts") {
 
     if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) { // DENM EN v1.3.1
       denm_msgs::DENM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_DENM, std::function<void(const denm_DENM_t &, denm_msgs::DENM &)>(etsi_its_denm_conversion::toRos_DENM), msg);
-      if (!success)
-        return;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_DENM, std::function<void(const denm_DENM_t&, denm_msgs::DENM&)>(etsi_its_denm_conversion::toRos_DENM), msg);
+      if (!success) return;
       publisher_denm_->publish(msg);
     }
     if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm_ts") != udp2ros_etsi_types_.end()) { // DENM TS v2.2.1
       denm_ts_msgs::DENM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM), msg);
-      if (!success)
-        return;
+      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_denm_ts_DENM, std::function<void(const denm_ts_DENM_t&, denm_ts_msgs::DENM&)>(etsi_its_denm_ts_conversion::toRos_DENM), msg);
+      if (!success) return;
       publisher_denm_ts_->publish(msg);
     }
-  }
-  else if (detected_etsi_type == "vam_ts") {
+  } else if (detected_etsi_type == "vam_ts") {
 
     // decode buffer to ROS msg
     vam_ts_msgs::VAM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_VAM_t &, vam_ts_msgs::VAM &)>(etsi_its_vam_ts_conversion::toRos_VAM), msg);
-    if (!success)
-      return;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_VAM_t&, vam_ts_msgs::VAM&)>(etsi_its_vam_ts_conversion::toRos_VAM), msg);
+    if (!success) return;
 
     // publish msg
     publisher_vam_ts_->publish(msg);
-  }
-  else if (detected_etsi_type == "mapem_ts") {
+  } else if (detected_etsi_type == "mapem_ts") {
 
     // decode buffer to ROS msg
     mapem_ts_msgs::MAPEM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_MAPEM_t &, mapem_ts_msgs::MAPEM &)>(etsi_its_mapem_ts_conversion::toRos_MAPEM), msg);
-    if (!success)
-      return;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mapem_ts_MAPEM, std::function<void(const mapem_ts_MAPEM_t&, mapem_ts_msgs::MAPEM&)>(etsi_its_mapem_ts_conversion::toRos_MAPEM), msg);
+    if (!success) return;
 
     // publish msg
     publisher_mapem_ts_->publish(msg);
-  }
-  else if (detected_etsi_type == "mcm_uulm") {
+  } else if (detected_etsi_type == "mcm_uulm") {
 
     // decode buffer to ROS msg
     mcm_uulm_msgs::MCM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mcm_uulm_MCM, std::function<void(const mcm_uulm_MCM_t &, mcm_uulm_msgs::MCM &)>(etsi_its_mcm_uulm_conversion::toRos_MCM), msg);
-    if (!success)
-      return;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_mcm_uulm_MCM, std::function<void(const mcm_uulm_MCM_t&, mcm_uulm_msgs::MCM&)>(etsi_its_mcm_uulm_conversion::toRos_MCM), msg);
+    if (!success) return;
 
     // publish msg
     publisher_mcm_uulm_->publish(msg);
-  }
-  else if (detected_etsi_type == "spatem_ts") {
+  } else if (detected_etsi_type == "spatem_ts") {
 
     // decode buffer to ROS msg
     spatem_ts_msgs::SPATEM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_SPATEM_t &, spatem_ts_msgs::SPATEM &)>(etsi_its_spatem_ts_conversion::toRos_SPATEM), msg);
-    if (!success)
-      return;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_spatem_ts_SPATEM, std::function<void(const spatem_ts_SPATEM_t&, spatem_ts_msgs::SPATEM&)>(etsi_its_spatem_ts_conversion::toRos_SPATEM), msg);
+    if (!success) return;
 
     // publish msg
     publisher_spatem_ts_->publish(msg);
-  }
-  else {
+  } else {
     RCLCPP_ERROR(this->get_logger(), "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
   }
 
   RCLCPP_INFO(this->get_logger(), "Published ETSI message of type '%s' as ROS message", detected_etsi_type.c_str());
 }
+
 
 template <typename T_ros, typename T_struct>
 void Converter::rosCallback(const typename T_ros::UniquePtr msg,
@@ -656,31 +622,24 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' as ROS message", type.c_str());
 
   int btp_header_destination_port = 0;
-  if (type == "cam" || type == "cam_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortCam;
-  else if (type == "cpm_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
-  else if (type == "denm" || type == "denm_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortDenm;
-  else if (type == "mapem_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortMapem;
-  else if (type == "mcm_uulm")
-    btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
-  else if (type == "spatem_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
-  else if (type == "vam_ts")
-    btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
+  if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
+  else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
+  else if (type == "denm" || type == "denm_ts") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "mapem_ts") btp_header_destination_port = kBtpHeaderDestinationPortMapem;
+  else if (type == "mcm_uulm") btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
+  else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
+  else if (type == "vam_ts") btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
 
   // encode ROS msg to UDP msg
   UdpPacket udp_msg;
   bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(*msg, udp_msg, type_descriptor, conversion_fn, btp_header_destination_port);
-  if (!success)
-    return;
+  if (!success) return;
 
   // publish UDP msg
   publisher_udp_->publish(udp_msg);
   int msg_size = has_btp_destination_port_ ? udp_msg.data.size() - 4 : udp_msg.data.size();
   RCLCPP_INFO(this->get_logger(), "Published ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", type.c_str(), msg_size, udp_msg.data.size());
 }
+
 
 } // end of namespace
