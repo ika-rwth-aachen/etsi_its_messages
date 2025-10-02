@@ -129,8 +129,7 @@ void Converter::loadParameters() {
   param_desc = rcl_interfaces::msg::ParameterDescriptor();
   std::stringstream ss_ros2udp;
   ss_ros2udp << "list of ETSI types to convert from ROS to UDP, one of ";
-  for (const auto& e : kRos2UdpEtsiTypesParamDefault)
-    ss_ros2udp << e << ", ";
+  for (const auto& e : kRos2UdpEtsiTypesParamDefault) ss_ros2udp << e << ", ";
   param_desc.description = ss_ros2udp.str();
   this->declare_parameter(kRos2UdpEtsiTypesParam, kRos2UdpEtsiTypesParamDefault, param_desc);
   if (!this->get_parameter(kRos2UdpEtsiTypesParam, ros2udp_etsi_types_)) {
@@ -188,6 +187,7 @@ void Converter::loadParameters() {
     RCLCPP_WARN(this->get_logger(), "Parameter '%s' is not set, defaulting to '%d'", kPublisherQueueSizeParam.c_str(), kPublisherQueueSizeParamDefault);
   }
 }
+
 
 void Converter::setup() {
 
@@ -348,6 +348,7 @@ void Converter::setup() {
   }
 }
 
+
 template <typename T_struct>
 bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct) {
 
@@ -361,6 +362,7 @@ bool Converter::decodeBufferToStruct(const uint8_t* buffer, const int size, cons
   return true;
 }
 
+
 template <typename T_ros, typename T_struct>
 T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
 
@@ -369,6 +371,7 @@ T_ros Converter::structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_
 
   return msg;
 }
+
 
 template <typename T_ros, typename T_struct>
 bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) {
@@ -381,6 +384,7 @@ bool Converter::decodeBufferToRosMessage(const uint8_t* buffer, const int size, 
   return success;
 }
 
+
 template <typename T_ros, typename T_struct>
 T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
@@ -390,6 +394,7 @@ T_struct Converter::rosMessageToStruct(const T_ros& msg, const asn_TYPE_descript
 
   return asn1_struct;
 }
+
 
 template <typename T_struct>
 bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) {
@@ -408,11 +413,12 @@ bool Converter::encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE
     return false;
   }
 
-  buffer = static_cast<uint8_t *>(ret.buffer);
+  buffer = static_cast<uint8_t*>(ret.buffer);
   size = ret.result.encoded;
 
   return true;
 }
+
 
 UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) {
 
@@ -547,6 +553,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
       if (!success) return;
       publisher_cam_ts_->publish(msg);
     }
+
   } else if (detected_etsi_type == "cpm_ts") {
 
     // decode buffer to ROS msg
@@ -556,6 +563,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     // publish msg
     publisher_cpm_ts_->publish(msg);
+
   } else if (detected_etsi_type == "denm" || detected_etsi_type == "denm_ts") {
 
     if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) { // DENM EN v1.3.1
@@ -570,6 +578,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
       if (!success) return;
       publisher_denm_ts_->publish(msg);
     }
+
   } else if (detected_etsi_type == "vam_ts") {
 
     // decode buffer to ROS msg
@@ -579,6 +588,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     // publish msg
     publisher_vam_ts_->publish(msg);
+
   } else if (detected_etsi_type == "mapem_ts") {
 
     // decode buffer to ROS msg
@@ -588,6 +598,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     // publish msg
     publisher_mapem_ts_->publish(msg);
+
   } else if (detected_etsi_type == "mcm_uulm") {
 
     // decode buffer to ROS msg
@@ -597,6 +608,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     // publish msg
     publisher_mcm_uulm_->publish(msg);
+
   } else if (detected_etsi_type == "spatem_ts") {
 
     // decode buffer to ROS msg
@@ -606,6 +618,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) {
 
     // publish msg
     publisher_spatem_ts_->publish(msg);
+
   } else {
     RCLCPP_ERROR(this->get_logger(), "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
@@ -642,4 +655,4 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
 }
 
 
-} // end of namespace
+}  // end of namespace
