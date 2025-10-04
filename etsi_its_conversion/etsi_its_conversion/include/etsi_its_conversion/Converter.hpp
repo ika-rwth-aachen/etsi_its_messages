@@ -77,27 +77,27 @@ class Converter : public rclcpp::Node {
 
     void setup();
 
-    bool logLevelIsDebug();
+    bool logLevelIsDebug() const;
 
     template <typename T_struct>
-    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct);
+    bool decodeBufferToStruct(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, T_struct* asn1_struct) const;
 
     template <typename T_ros, typename T_struct>
-    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
+    T_ros structToRosMessage(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
 
     template <typename T_ros, typename T_struct>
-    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg);
+    bool decodeBufferToRosMessage(const uint8_t* buffer, const int size, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn, T_ros& msg) const;
 
-    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port);
+    UdpPacket bufferToUdpPacketMessage(const uint8_t* buffer, const int size, const int btp_header_destination_port) const;
 
     template <typename T_ros, typename T_struct>
-    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+    T_struct rosMessageToStruct(const T_ros& msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
 
     template <typename T_struct>
-    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size);
+    bool encodeStructToBuffer(const T_struct& asn1_struct, const asn_TYPE_descriptor_t* type_descriptor, uint8_t*& buffer, int& size) const;
 
     template <typename T_ros, typename T_struct>
-    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port);
+    bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) const;
 
     template <typename T_ros, typename T_struct, typename T_request, typename T_response>
     void rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
@@ -109,11 +109,11 @@ class Converter : public rclcpp::Node {
     template <typename T_ros, typename T_struct, typename T_request, typename T_response>
     void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn);
 
-    void udpCallback(const UdpPacket::UniquePtr udp_msg);
+    void udpCallback(const UdpPacket::UniquePtr udp_msg) const;
 
     template <typename T_ros, typename T_struct>
     void rosCallback(const typename T_ros::UniquePtr msg,
-                    const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn);
+                     const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
 
   protected:
     static const std::string kInputTopicUdp;
@@ -163,23 +163,25 @@ class Converter : public rclcpp::Node {
     int subscriber_queue_size_;
     int publisher_queue_size_;
 
+    rclcpp::CallbackGroup::SharedPtr callback_group_;
     rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
-    rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
-    rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
-    rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
-    rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
-    rclcpp::Publisher<denm_ts_msgs::DENM>::SharedPtr publisher_denm_ts_;
-    rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
-    rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
-    rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
-    rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
-    rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 
     rclcpp::Service<conversion_srv::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
     rclcpp::Service<conversion_srv::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
     rclcpp::Service<conversion_srv::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
     rclcpp::Service<conversion_srv::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+
+    mutable rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
+    mutable rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
+    mutable rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
+    mutable rclcpp::Publisher<denm_msgs::DENM>::SharedPtr publisher_denm_;
+    mutable rclcpp::Publisher<denm_ts_msgs::DENM>::SharedPtr publisher_denm_ts_;
+    mutable rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
+    mutable rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
+    mutable rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
+    mutable rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
+    mutable rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 };
 
 }
