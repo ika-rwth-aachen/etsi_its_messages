@@ -29,9 +29,23 @@ SOFTWARE.
 #include <unordered_map>
 
 #include <etsi_its_conversion_srvs/srv/convert_cam_to_udp.hpp>
-#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam.hpp>
-#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_cam_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_cpm_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_denm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_denm_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_mapem_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_mcm_uulm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_spatem_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_vam_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cpm_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_mapem_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_mcm_uulm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_spatem_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_vam_ts.hpp>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_cam_ts_conversion/convertCAM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
@@ -168,10 +182,24 @@ class Converter : public rclcpp::Node {
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
 
     rclcpp::Service<conversion_srvs::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertCamTsToUdp>::SharedPtr convert_cam_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertCpmTsToUdp>::SharedPtr convert_cpm_ts_to_udp_service_;
     rclcpp::Service<conversion_srvs::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertDenmTsToUdp>::SharedPtr convert_denm_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertMapemTsToUdp>::SharedPtr convert_mapem_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertMcmUulmToUdp>::SharedPtr convert_mcm_uulm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertSpatemTsToUdp>::SharedPtr convert_spatem_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertVamTsToUdp>::SharedPtr convert_vam_ts_to_udp_service_;
 
     rclcpp::Service<conversion_srvs::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToCamTs>::SharedPtr convert_udp_to_cam_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToCpmTs>::SharedPtr convert_udp_to_cpm_ts_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToDenmTs>::SharedPtr convert_udp_to_denm_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToMapemTs>::SharedPtr convert_udp_to_mapem_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToMcmUulm>::SharedPtr convert_udp_to_mcm_uulm_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToSpatemTs>::SharedPtr convert_udp_to_spatem_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToVamTs>::SharedPtr convert_udp_to_vam_ts_service_;
 
     mutable rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
     mutable rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
