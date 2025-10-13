@@ -473,6 +473,7 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
                           const asn_TYPE_descriptor_t* asn_type_descriptor,
                           std::function<void(const T_ros&, T_struct&)> conversion_fn) {
 
+  RCLCPP_INFO(this->get_logger(), "Received service request to convert ROS ETSI message to bitstring");
   const auto &msg = request->ros_msg;
 
   int btp_header_destination_port = 0;
@@ -484,9 +485,9 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
   else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
   else if (type == "vam_ts") btp_header_destination_port = kBtpHeaderDestinationPortVamTs;
 
+  // encode ROS msg to UDP msg
   UdpPacket udp_msg;
   bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(msg, udp_msg, asn_type_descriptor, conversion_fn, btp_header_destination_port);
-
   if (!success) {
     RCLCPP_WARN(this->get_logger(), "Failed to encode ROS message to UDP packet");
     return;
@@ -499,19 +500,22 @@ template <typename T_ros, typename T_struct, typename T_request, typename T_resp
 void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
   
   const UdpPacket* udp_msg = &request->udp_packet;
-
-  RCLCPP_DEBUG(this->get_logger(), "Received bitstring (total payload size: %ld)", udp_msg->data.size());
-
-  T_ros ros_msg;
-
-  int msg_size = udp_msg->data.size();
-  if (has_btp_destination_port_) {
-    msg_size = msg_size - etsi_message_payload_offset_;
+  RCLCPP_DEBUG(this->get_logger(), "Received service request to convert bitstring (total payload size: %ld) to ROS ETSI message", udp_msg->data.size());
+  if (udp_msg->data.size() == 0) {
+    RCLCPP_ERROR(this->get_logger(), "Received empty bitstring payload, dropping");
+    return;
   }
-  RCLCPP_DEBUG(this->get_logger(), "msg size: %d)", msg_size);
 
+  // determine message size
+  int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
+  if (msg_size <= 0) {
+    RCLCPP_ERROR(this->get_logger(), "Payload too short for ETSI message payload (offset %d), dropping", etsi_message_payload_offset_);
+    return;
+  }
+
+  // decode buffer to ROS msg
+  T_ros ros_msg;
   bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, asn_type_descriptor, conversion_fn, ros_msg);
-
   if (!success) {
     RCLCPP_WARN(this->get_logger(), "Failed to decode UDP packet to ROS message");
     return;
