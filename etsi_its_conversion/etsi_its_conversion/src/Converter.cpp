@@ -243,6 +243,20 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAMs on '%s' to UDP messages on '%s'", subscribers_["cam"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_cam_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToCamTs>(
+        "~/udp_to_cam_ts",
+        std::bind(
+            &Converter::udpToRosSrvCallback<
+                cam_ts_msgs::CAM,
+                cam_ts_CAM_t,
+                conversion_srvs::ConvertUdpToCamTs::Request,
+                conversion_srvs::ConvertUdpToCamTs::Response>,
+            this,
+            std::placeholders::_1,
+            std::placeholders::_2,
+            &asn_DEF_cam_ts_CAM,
+            std::function<void(const cam_ts_CAM_t &, cam_ts_msgs::CAM &)>(etsi_its_cam_ts_conversion::toRos_CAM)));
+
     publisher_cam_ts_ = this->create_publisher<cam_ts_msgs::CAM>(kOutputTopicCamTs, publisher_queue_size_);
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CAM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_ts_->get_topic_name());
   }
@@ -253,6 +267,20 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM (TS) on '%s' to UDP messages on '%s'", subscribers_["cam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cpm_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_cpm_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToCpmTs>(
+        "~/udp_to_cpm_ts",
+        std::bind(
+            &Converter::udpToRosSrvCallback<
+                cpm_ts_msgs::CollectivePerceptionMessage,
+                cpm_ts_CollectivePerceptionMessage_t,
+                conversion_srvs::ConvertUdpToCpmTs::Request,
+                conversion_srvs::ConvertUdpToCpmTs::Response>,
+            this,
+            std::placeholders::_1,
+            std::placeholders::_2,
+            &asn_DEF_cpm_ts_CollectivePerceptionMessage,
+            std::function<void(const cpm_ts_CollectivePerceptionMessage_t &, cpm_ts_msgs::CollectivePerceptionMessage &)>(etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage)));
+
     publisher_cpm_ts_ = this->create_publisher<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_);
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CPM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cpm_ts_->get_topic_name());
   }
@@ -302,6 +330,20 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs on '%s' to UDP messages on '%s'", subscribers_["denm"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_denm_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToDenmTs>(
+        "~/udp_to_denm_ts",
+        std::bind(
+            &Converter::udpToRosSrvCallback<
+                denm_ts_msgs::DENM,
+                denm_ts_DENM_t,
+                conversion_srvs::ConvertUdpToDenmTs::Request,
+                conversion_srvs::ConvertUdpToDenmTs::Response>,
+            this,
+            std::placeholders::_1,
+            std::placeholders::_2,
+            &asn_DEF_denm_ts_DENM,
+            std::function<void(const denm_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM)));
+
     publisher_denm_ts_ = this->create_publisher<denm_ts_msgs::DENM>(kOutputTopicDenmTs, publisher_queue_size_);
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_ts_->get_topic_name());
   }
@@ -312,6 +354,20 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs (TS) on '%s' to UDP messages on '%s'", subscribers_["denm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_mapem_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToMapemTs>(
+        "~/udp_to_mapem_ts",
+        std::bind(
+            &Converter::udpToRosSrvCallback<
+                mapem_ts_msgs::MAPEM,
+                mapem_ts_MAPEM_t,
+                conversion_srvs::ConvertUdpToMapemTs::Request,
+                conversion_srvs::ConvertUdpToMapemTs::Response>,
+            this,
+            std::placeholders::_1,
+            std::placeholders::_2,
+            &asn_DEF_mapem_ts_MAPEM,
+            std::function<void(const mapem_ts_MAPEM_t &, mapem_ts_msgs::MAPEM &)>(etsi_its_mapem_ts_conversion::toRos_MAPEM)));
+
     publisher_mapem_ts_ = this->create_publisher<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_);
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type MAPEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_mapem_ts_->get_topic_name());
   }
