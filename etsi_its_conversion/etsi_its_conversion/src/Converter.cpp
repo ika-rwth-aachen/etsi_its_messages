@@ -471,7 +471,7 @@ template <typename T_ros, typename T_struct, typename T_request, typename T_resp
 void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
                           std::shared_ptr<T_response> response, const std::string& type,
                           const asn_TYPE_descriptor_t* asn_type_descriptor,
-                          std::function<void(const T_ros&, T_struct&)> conversion_fn) {
+                          std::function<void(const T_ros&, T_struct&)> conversion_fn) const {
 
   RCLCPP_INFO(this->get_logger(), "Received service request to convert ROS ETSI message to bitstring");
   const auto &msg = request->ros_msg;
@@ -497,7 +497,7 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
 }
 
 template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) {
+void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
   
   const UdpPacket* udp_msg = &request->udp_packet;
   RCLCPP_DEBUG(this->get_logger(), "Received service request to convert bitstring (total payload size: %ld) to ROS ETSI message", udp_msg->data.size());

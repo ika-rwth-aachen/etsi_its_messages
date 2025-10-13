@@ -168,8 +168,9 @@ class Converter : public rclcpp::Node {
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
 
     rclcpp::Service<conversion_srvs::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
-    rclcpp::Service<conversion_srvs::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
     rclcpp::Service<conversion_srvs::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+
+    rclcpp::Service<conversion_srvs::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
 
     mutable rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;

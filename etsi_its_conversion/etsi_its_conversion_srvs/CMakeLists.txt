@@ -5,16 +5,38 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 find_package(etsi_its_cam_msgs REQUIRED)
+find_package(etsi_its_cam_ts_msgs REQUIRED)
+find_package(etsi_its_cpm_ts_msgs REQUIRED)
 find_package(etsi_its_denm_msgs REQUIRED)
+find_package(etsi_its_denm_ts_msgs REQUIRED)
+find_package(etsi_its_mapem_ts_msgs REQUIRED)
+find_package(etsi_its_mcm_uulm_msgs REQUIRED)
+find_package(etsi_its_spatem_ts_msgs REQUIRED)
+find_package(etsi_its_vam_ts_msgs REQUIRED)
+
 find_package(udp_msgs REQUIRED)
 
 # Services
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ConvertCamToUdp.srv"
-  "srv/ConvertUdpToCam.srv"
+  "srv/ConvertCamTsToUdp.srv"
+  "srv/ConvertCpmTsToUdp.srv"
   "srv/ConvertDenmToUdp.srv"
+  "srv/ConvertDenmTsToUdp.srv"
+  "srv/ConvertMapemTsToUdp.srv"
+  "srv/ConvertMcmUulmToUdp.srv"
+  "srv/ConvertSpatemTsToUdp.srv"
+  "srv/ConvertUdpToCam.srv"
+  "srv/ConvertUdpToCamTs.srv"
+  "srv/ConvertUdpToCpmTs.srv"
   "srv/ConvertUdpToDenm.srv"
-  DEPENDENCIES etsi_its_cam_msgs etsi_its_denm_msgs udp_msgs
+  "srv/ConvertUdpToDenmTs.srv"
+  "srv/ConvertUdpToMapemTs.srv"
+  "srv/ConvertUdpToMcmUulm.srv"
+  "srv/ConvertUdpToSpatemTs.srv"
+  "srv/ConvertUdpToVamTs.srv"
+  "srv/ConvertVamTsToUdp.srv"
+  DEPENDENCIES etsi_its_cam_msgs etsi_its_cam_ts_msgs etsi_its_cpm_ts_msgs etsi_its_denm_msgs etsi_its_denm_ts_msgs etsi_its_mapem_ts_msgs etsi_its_mcm_uulm_msgs etsi_its_spatem_ts_msgs etsi_its_vam_ts_msgs udp_msgs
 )
 
 ament_export_dependencies(rosidl_default_runtime)

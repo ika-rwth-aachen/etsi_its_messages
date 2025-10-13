@@ -19,11 +19,25 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <build_depend>etsi_its_cam_msgs</build_depend>
+  <build_depend>etsi_its_cam_ts_msgs</build_depend>
+  <build_depend>etsi_its_cpm_ts_msgs</build_depend>
   <build_depend>etsi_its_denm_msgs</build_depend>
+  <build_depend>etsi_its_denm_ts_msgs</build_depend>
+  <build_depend>etsi_its_mapem_ts_msgs</build_depend>
+  <build_depend>etsi_its_mcm_uulm_msgs</build_depend>
+  <build_depend>etsi_its_spatem_ts_msgs</build_depend>
+  <build_depend>etsi_its_vam_ts_msgs</build_depend>
   <build_depend>udp_msgs</build_depend>
 
   <exec_depend>etsi_its_cam_msgs</exec_depend>
+  <exec_depend>etsi_its_cam_ts_msgs</exec_depend>
+  <exec_depend>etsi_its_cpm_ts_msgs</exec_depend>
   <exec_depend>etsi_its_denm_msgs</exec_depend>
+  <exec_depend>etsi_its_denm_ts_msgs</exec_depend>
+  <exec_depend>etsi_its_mapem_ts_msgs</exec_depend>
+  <exec_depend>etsi_its_mcm_uulm_msgs</exec_depend>
+  <exec_depend>etsi_its_spatem_ts_msgs</exec_depend>
+  <exec_depend>etsi_its_vam_ts_msgs</exec_depend>
   <exec_depend>udp_msgs</exec_depend>
 
 
