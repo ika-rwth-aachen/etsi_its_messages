@@ -4,7 +4,7 @@ project(etsi_its_conversion)
 find_package(ament_cmake REQUIRED)
 find_package(etsi_its_cam_conversion REQUIRED)
 find_package(etsi_its_cam_ts_conversion REQUIRED)
-find_package(etsi_its_conversion_services REQUIRED)
+find_package(etsi_its_conversion_srvs REQUIRED)
 find_package(etsi_its_cpm_ts_conversion REQUIRED)
 find_package(etsi_its_denm_conversion REQUIRED)
 find_package(etsi_its_denm_ts_conversion REQUIRED)
@@ -36,7 +36,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
 ament_target_dependencies(${PROJECT_NAME}
   etsi_its_cam_conversion
   etsi_its_cam_ts_conversion
-  etsi_its_conversion_services
+  etsi_its_conversion_srvs
   etsi_its_cpm_ts_conversion
   etsi_its_denm_conversion
   etsi_its_denm_ts_conversion

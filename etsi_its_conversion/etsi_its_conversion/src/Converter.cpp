@@ -204,14 +204,14 @@ void Converter::setup() {
     subscriber_udp_ = this->create_subscription<UdpPacket>(kInputTopicUdp, subscriber_queue_size_, std::bind(&Converter::udpCallback, this, std::placeholders::_1), subscriber_options);
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) {
-    convert_udp_to_cam_service_ = this->create_service<conversion_srv::ConvertUdpToCam>(
+    convert_udp_to_cam_service_ = this->create_service<conversion_srvs::ConvertUdpToCam>(
         "~/udp_to_cam",
         std::bind(
             &Converter::udpToRosSrvCallback<
                 cam_msgs::CAM,
                 cam_CAM_t,
-                conversion_srv::ConvertUdpToCam::Request,
-                conversion_srv::ConvertUdpToCam::Response>,
+                conversion_srvs::ConvertUdpToCam::Request,
+                conversion_srvs::ConvertUdpToCam::Response>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -222,14 +222,14 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type CAM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_cam_->get_topic_name());
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "cam") != ros2udp_etsi_types_.end()) {
-    convert_cam_to_udp_service_ = this->create_service<conversion_srv::ConvertCamToUdp>(
+    convert_cam_to_udp_service_ = this->create_service<conversion_srvs::ConvertCamToUdp>(
         "~/cam_to_udp",
         std::bind(
             &Converter::rosToUdpSrvCallback<
                 cam_msgs::CAM,
                 cam_CAM_t,
-                conversion_srv::ConvertCamToUdp::Request,
-                conversion_srv::ConvertCamToUdp::Response>,
+                conversion_srvs::ConvertCamToUdp::Request,
+                conversion_srvs::ConvertCamToUdp::Response>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -263,14 +263,14 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CPMs (TS) on '%s' to UDP messages on '%s'", subscribers_["cpm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
   }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "denm") != udp2ros_etsi_types_.end()) {
-    convert_udp_to_denm_service_ = this->create_service<conversion_srv::ConvertUdpToDenm>(
+    convert_udp_to_denm_service_ = this->create_service<conversion_srvs::ConvertUdpToDenm>(
         "~/udp_to_denm",
         std::bind(
             &Converter::udpToRosSrvCallback<
                 denm_msgs::DENM,
                 denm_DENM_t,
-                conversion_srv::ConvertUdpToDenm::Request,
-                conversion_srv::ConvertUdpToDenm::Response>,
+                conversion_srvs::ConvertUdpToDenm::Request,
+                conversion_srvs::ConvertUdpToDenm::Response>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -281,14 +281,14 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_->get_topic_name());
   }
   if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "denm") != ros2udp_etsi_types_.end()) {
-    convert_denm_to_udp_service_ = this->create_service<conversion_srv::ConvertDenmToUdp>(
+    convert_denm_to_udp_service_ = this->create_service<conversion_srvs::ConvertDenmToUdp>(
         "denm_to_udp",
         std::bind(
             &Converter::rosToUdpSrvCallback<
                 denm_msgs::DENM,
                 denm_DENM_t,
-                conversion_srv::ConvertDenmToUdp::Request,
-                conversion_srv::ConvertDenmToUdp::Response>,
+                conversion_srvs::ConvertDenmToUdp::Request,
+                conversion_srvs::ConvertDenmToUdp::Response>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,

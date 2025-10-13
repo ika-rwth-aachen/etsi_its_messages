@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(etsi_its_conversion_services)
+project(etsi_its_conversion_srvs)
 
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)

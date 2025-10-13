@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
 
-  <name>etsi_its_conversion_services</name>
+  <name>etsi_its_conversion_srvs</name>
   <version>3.3.0</version>
   <description>Services to convert ROS messages to and from ASN.1-encoded ETSI ITS messages</description>
 
@@ -12,6 +12,7 @@
   <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
   <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
   <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+  <author email="jens.staub@htwsaar.de">Jens Staub</author>
 
   <license>MIT</license>
 

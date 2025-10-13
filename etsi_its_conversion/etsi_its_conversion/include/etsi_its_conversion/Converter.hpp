@@ -28,10 +28,10 @@ SOFTWARE.
 #include <string>
 #include <unordered_map>
 
-#include <etsi_its_conversion_services/srv/convert_cam_to_udp.hpp>
-#include <etsi_its_conversion_services/srv/convert_udp_to_cam.hpp>
-#include <etsi_its_conversion_services/srv/convert_udp_to_denm.hpp>
-#include <etsi_its_conversion_services/srv/convert_denm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_cam_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_denm_to_udp.hpp>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_cam_ts_conversion/convertCAM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
@@ -56,7 +56,7 @@ SOFTWARE.
 namespace etsi_its_conversion {
 
 using namespace udp_msgs::msg;
-namespace conversion_srv = etsi_its_conversion_services::srv;
+namespace conversion_srvs = etsi_its_conversion_srvs::srv;
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
@@ -167,10 +167,10 @@ class Converter : public rclcpp::Node {
     rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
 
-    rclcpp::Service<conversion_srv::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
-    rclcpp::Service<conversion_srv::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
-    rclcpp::Service<conversion_srv::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
-    rclcpp::Service<conversion_srv::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+    rclcpp::Service<conversion_srvs::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
+    rclcpp::Service<conversion_srvs::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
 
     mutable rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
     mutable rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
