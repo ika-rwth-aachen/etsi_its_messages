@@ -121,7 +121,7 @@ class Converter : public rclcpp::Node {
                             std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
 
     template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-    void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
+    void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
 
     void udpCallback(const UdpPacket::UniquePtr udp_msg) const;
 

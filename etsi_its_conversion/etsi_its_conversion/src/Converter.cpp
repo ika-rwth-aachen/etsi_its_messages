@@ -215,6 +215,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "cam",
             &asn_DEF_cam_CAM,
             std::function<void(const cam_CAM_t &, cam_msgs::CAM &)>(etsi_its_cam_conversion::toRos_CAM)));
 
@@ -254,6 +255,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "cam_ts",
             &asn_DEF_cam_ts_CAM,
             std::function<void(const cam_ts_CAM_t &, cam_ts_msgs::CAM &)>(etsi_its_cam_ts_conversion::toRos_CAM)));
 
@@ -293,6 +295,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "cpm_ts",
             &asn_DEF_cpm_ts_CollectivePerceptionMessage,
             std::function<void(const cpm_ts_CollectivePerceptionMessage_t &, cpm_ts_msgs::CollectivePerceptionMessage &)>(etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage)));
 
@@ -332,6 +335,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "denm",
             &asn_DEF_denm_DENM,
             std::function<void(const denm_DENM_t &, denm_msgs::DENM &)>(etsi_its_denm_conversion::toRos_DENM)));
 
@@ -371,6 +375,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "denm_ts",
             &asn_DEF_denm_ts_DENM,
             std::function<void(const denm_ts_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM)));
 
@@ -410,6 +415,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "mapem_ts",
             &asn_DEF_mapem_ts_MAPEM,
             std::function<void(const mapem_ts_MAPEM_t &, mapem_ts_msgs::MAPEM &)>(etsi_its_mapem_ts_conversion::toRos_MAPEM)));
 
@@ -449,6 +455,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "mcm_uulm",
             &asn_DEF_mcm_uulm_MCM,
             std::function<void(const mcm_uulm_MCM_t &, mcm_uulm_msgs::MCM &)>(etsi_its_mcm_uulm_conversion::toRos_MCM)));
 
@@ -488,6 +495,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "spatem_ts",
             &asn_DEF_spatem_ts_SPATEM,
             std::function<void(const spatem_ts_SPATEM_t &, spatem_ts_msgs::SPATEM &)>(etsi_its_spatem_ts_conversion::toRos_SPATEM)));
 
@@ -527,6 +535,7 @@ void Converter::setup() {
             this,
             std::placeholders::_1,
             std::placeholders::_2,
+            "vam_ts",
             &asn_DEF_vam_ts_VAM,
             std::function<void(const vam_ts_VAM_t &, vam_ts_msgs::VAM &)>(etsi_its_vam_ts_conversion::toRos_VAM)));
 
@@ -676,7 +685,7 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
                           const asn_TYPE_descriptor_t* asn_type_descriptor,
                           std::function<void(const T_ros&, T_struct&)> conversion_fn) const {
 
-  RCLCPP_INFO(this->get_logger(), "Received service request to convert ROS ETSI message to bitstring");
+  RCLCPP_INFO(this->get_logger(), "Received service request to convert ETSI message of type '%s' from ROS message to bitstring", type.c_str());
   const auto &msg = request->ros_msg;
 
   int btp_header_destination_port = 0;
@@ -696,14 +705,17 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
     return;
   }
 
+  // return result
   response->udp_packet = udp_msg;
+  int msg_size = has_btp_destination_port_ ? udp_msg.data.size() - 4 : udp_msg.data.size();
+  RCLCPP_INFO(this->get_logger(), "Returned service result for ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", type.c_str(), msg_size, udp_msg.data.size());
 }
 
 template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
-  
+void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
+
   const UdpPacket* udp_msg = &request->udp_packet;
-  RCLCPP_DEBUG(this->get_logger(), "Received service request to convert bitstring (total payload size: %ld) to ROS ETSI message", udp_msg->data.size());
+  RCLCPP_INFO(this->get_logger(), "Received service request to convert bitstring (total payload size: %ld) to ROS ETSI message", udp_msg->data.size());
   if (udp_msg->data.size() == 0) {
     RCLCPP_ERROR(this->get_logger(), "Received empty bitstring payload, dropping");
     return;
@@ -724,7 +736,9 @@ void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, st
     return;
   }
 
+  // return result
   response->ros_msg = ros_msg;
+  RCLCPP_INFO(this->get_logger(), "Returned service result for ETSI message of type '%s' as ROS message", type.c_str());
 }
 
 void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
