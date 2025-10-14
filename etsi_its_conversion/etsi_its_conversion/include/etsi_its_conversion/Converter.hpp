@@ -113,15 +113,15 @@ class Converter : public rclcpp::Node {
     template <typename T_ros, typename T_struct>
     bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) const;
 
-    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-    void rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
-                            std::shared_ptr<T_response> response,
+    template <typename T_ros, typename T_struct, typename T_srv>
+    void rosToUdpSrvCallback(const std::shared_ptr<typename T_srv::Request> request,
+                            std::shared_ptr<typename T_srv::Response> response,
                             const std::string& type,
                             const asn_TYPE_descriptor_t* asn_type_descriptor,
                             std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
 
-    template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-    void udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
+    template <typename T_ros, typename T_struct, typename T_srv>
+    void udpToRosSrvCallback(const std::shared_ptr<typename T_srv::Request> request, std::shared_ptr<typename T_srv::Response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
 
     void udpCallback(const UdpPacket::UniquePtr udp_msg) const;
 

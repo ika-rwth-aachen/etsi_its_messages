@@ -228,8 +228,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 cam_msgs::CAM,
                 cam_CAM_t,
-                conversion_srvs::ConvertUdpToCam::Request,
-                conversion_srvs::ConvertUdpToCam::Response>,
+                conversion_srvs::ConvertUdpToCam>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -247,8 +246,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 cam_msgs::CAM,
                 cam_CAM_t,
-                conversion_srvs::ConvertCamToUdp::Request,
-                conversion_srvs::ConvertCamToUdp::Response>,
+                conversion_srvs::ConvertCamToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -268,8 +266,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 cam_ts_msgs::CAM,
                 cam_ts_CAM_t,
-                conversion_srvs::ConvertUdpToCamTs::Request,
-                conversion_srvs::ConvertUdpToCamTs::Response>,
+                conversion_srvs::ConvertUdpToCamTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -287,8 +284,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 cam_ts_msgs::CAM,
                 cam_ts_CAM_t,
-                conversion_srvs::ConvertCamTsToUdp::Request,
-                conversion_srvs::ConvertCamTsToUdp::Response>,
+                conversion_srvs::ConvertCamTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -308,8 +304,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 cpm_ts_msgs::CollectivePerceptionMessage,
                 cpm_ts_CollectivePerceptionMessage_t,
-                conversion_srvs::ConvertUdpToCpmTs::Request,
-                conversion_srvs::ConvertUdpToCpmTs::Response>,
+                conversion_srvs::ConvertUdpToCpmTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -327,8 +322,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 cpm_ts_msgs::CollectivePerceptionMessage,
                 cpm_ts_CollectivePerceptionMessage_t,
-                conversion_srvs::ConvertCpmTsToUdp::Request,
-                conversion_srvs::ConvertCpmTsToUdp::Response>,
+                conversion_srvs::ConvertCpmTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -348,8 +342,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 denm_msgs::DENM,
                 denm_DENM_t,
-                conversion_srvs::ConvertUdpToDenm::Request,
-                conversion_srvs::ConvertUdpToDenm::Response>,
+                conversion_srvs::ConvertUdpToDenm>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -367,8 +360,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 denm_msgs::DENM,
                 denm_DENM_t,
-                conversion_srvs::ConvertDenmToUdp::Request,
-                conversion_srvs::ConvertDenmToUdp::Response>,
+                conversion_srvs::ConvertDenmToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -388,8 +380,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 denm_ts_msgs::DENM,
                 denm_ts_DENM_t,
-                conversion_srvs::ConvertUdpToDenmTs::Request,
-                conversion_srvs::ConvertUdpToDenmTs::Response>,
+                conversion_srvs::ConvertUdpToDenmTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -407,8 +398,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 denm_ts_msgs::DENM,
                 denm_ts_DENM_t,
-                conversion_srvs::ConvertDenmTsToUdp::Request,
-                conversion_srvs::ConvertDenmTsToUdp::Response>,
+                conversion_srvs::ConvertDenmTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -428,8 +418,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 mapem_ts_msgs::MAPEM,
                 mapem_ts_MAPEM_t,
-                conversion_srvs::ConvertUdpToMapemTs::Request,
-                conversion_srvs::ConvertUdpToMapemTs::Response>,
+                conversion_srvs::ConvertUdpToMapemTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -447,8 +436,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 mapem_ts_msgs::MAPEM,
                 mapem_ts_MAPEM_t,
-                conversion_srvs::ConvertMapemTsToUdp::Request,
-                conversion_srvs::ConvertMapemTsToUdp::Response>,
+                conversion_srvs::ConvertMapemTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -468,8 +456,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 mcm_uulm_msgs::MCM,
                 mcm_uulm_MCM_t,
-                conversion_srvs::ConvertUdpToMcmUulm::Request,
-                conversion_srvs::ConvertUdpToMcmUulm::Response>,
+                conversion_srvs::ConvertUdpToMcmUulm>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -487,8 +474,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 mcm_uulm_msgs::MCM,
                 mcm_uulm_MCM_t,
-                conversion_srvs::ConvertMcmUulmToUdp::Request,
-                conversion_srvs::ConvertMcmUulmToUdp::Response>,
+                conversion_srvs::ConvertMcmUulmToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -508,8 +494,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 spatem_ts_msgs::SPATEM,
                 spatem_ts_SPATEM_t,
-                conversion_srvs::ConvertUdpToSpatemTs::Request,
-                conversion_srvs::ConvertUdpToSpatemTs::Response>,
+                conversion_srvs::ConvertUdpToSpatemTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -527,8 +512,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 spatem_ts_msgs::SPATEM,
                 spatem_ts_SPATEM_t,
-                conversion_srvs::ConvertSpatemTsToUdp::Request,
-                conversion_srvs::ConvertSpatemTsToUdp::Response>,
+                conversion_srvs::ConvertSpatemTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -548,8 +532,7 @@ void Converter::setup() {
             &Converter::udpToRosSrvCallback<
                 vam_ts_msgs::VAM,
                 vam_ts_VAM_t,
-                conversion_srvs::ConvertUdpToVamTs::Request,
-                conversion_srvs::ConvertUdpToVamTs::Response>,
+                conversion_srvs::ConvertUdpToVamTs>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -567,8 +550,7 @@ void Converter::setup() {
             &Converter::rosToUdpSrvCallback<
                 vam_ts_msgs::VAM,
                 vam_ts_VAM_t,
-                conversion_srvs::ConvertVamTsToUdp::Request,
-                conversion_srvs::ConvertVamTsToUdp::Response>,
+                conversion_srvs::ConvertVamTsToUdp>,
             this,
             std::placeholders::_1,
             std::placeholders::_2,
@@ -697,9 +679,9 @@ bool Converter::encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& 
   return true;
 }
 
-template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
-                          std::shared_ptr<T_response> response, const std::string& type,
+template <typename T_ros, typename T_struct, typename T_srv>
+void Converter::rosToUdpSrvCallback(const std::shared_ptr<typename T_srv::Request> request,
+                          std::shared_ptr<typename T_srv::Response> response, const std::string& type,
                           const asn_TYPE_descriptor_t* asn_type_descriptor,
                           std::function<void(const T_ros&, T_struct&)> conversion_fn) const {
 
@@ -729,8 +711,8 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<T_request> request,
   RCLCPP_INFO(this->get_logger(), "Returned service result for ETSI message of type '%s' as bitstring (message size: %d | total payload size: %ld)", type.c_str(), msg_size, udp_msg.data.size());
 }
 
-template <typename T_ros, typename T_struct, typename T_request, typename T_response>
-void Converter::udpToRosSrvCallback(const std::shared_ptr<T_request> request, std::shared_ptr<T_response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
+template <typename T_ros, typename T_struct, typename T_srv>
+void Converter::udpToRosSrvCallback(const std::shared_ptr<typename T_srv::Request> request, std::shared_ptr<typename T_srv::Response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const {
 
   const UdpPacket* udp_msg = &request->udp_packet;
   RCLCPP_INFO(this->get_logger(), "Received service request to convert bitstring (total payload size: %ld) to ROS ETSI message", udp_msg->data.size());
