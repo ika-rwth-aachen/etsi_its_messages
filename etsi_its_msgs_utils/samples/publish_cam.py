@@ -26,8 +26,10 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_cam_msgs.msg import *
+
 import utils
+from etsi_its_cam_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertCamToUdp
 
 
 class Publisher(Node):
@@ -35,11 +37,14 @@ class Publisher(Node):
     def __init__(self):
 
         super().__init__("cam_publisher")
-        topic = "/etsi_its_conversion/cam/in"
-        self.publisher = self.create_publisher(CAM, topic, 1)
+        self.type = "CAM"
+        self.publisher = self.create_publisher(CAM, "/etsi_its_conversion/cam/in", 1)
+        self.srv_client = self.create_client(ConvertCamToUdp, "/etsi_its_conversion/cam_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(0.1, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = CAM()
 
@@ -55,7 +60,7 @@ class Publisher(Node):
 
         basic_vehicle_container_high_frequency = BasicVehicleContainerHighFrequency()
         basic_vehicle_container_high_frequency.heading.heading_value.value = basic_vehicle_container_high_frequency.heading.heading_value.WGS84_NORTH
-        basic_vehicle_container_high_frequency.heading.heading_confidence.value = basic_vehicle_container_high_frequency.heading.heading_confidence.EQUAL_OR_WITHIN_ONE_DEGREE
+        basic_vehicle_container_high_frequency.heading.heading_confidence.value = 10
         basic_vehicle_container_high_frequency.speed.speed_value.value = basic_vehicle_container_high_frequency.speed.speed_value.ONE_CENTIMETER_PER_SEC
         basic_vehicle_container_high_frequency.speed.speed_confidence.value = basic_vehicle_container_high_frequency.speed.speed_confidence.EQUAL_OR_WITHIN_ONE_CENTIMETER_PER_SEC
         basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.value = basic_vehicle_container_high_frequency.vehicle_length.vehicle_length_value.TEN_CENTIMETERS * 42
@@ -63,13 +68,32 @@ class Publisher(Node):
         msg.cam.cam_parameters.high_frequency_container.choice = msg.cam.cam_parameters.high_frequency_container.CHOICE_BASIC_VEHICLE_CONTAINER_HIGH_FREQUENCY
         msg.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency = basic_vehicle_container_high_frequency
 
-        self.get_logger().info(f"Publishing CAM")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertCamToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

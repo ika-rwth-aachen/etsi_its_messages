@@ -26,8 +26,10 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_mapem_ts_msgs.msg import *
+
 import utils
+from etsi_its_mapem_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertMapemTsToUdp
 
 
 class Publisher(Node):
@@ -35,11 +37,15 @@ class Publisher(Node):
     def __init__(self):
 
         super().__init__("mapem_ts_publisher")
+        self.type = "MAPEM_TS"
         topic = "/etsi_its_conversion/mapem_ts/in"
         self.publisher = self.create_publisher(MAPEM, topic, 1)
+        self.srv_client = self.create_client(ConvertMapemTsToUdp, "/etsi_its_conversion/mapem_ts_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = MAPEM()
 
@@ -47,13 +53,32 @@ class Publisher(Node):
         msg.header.message_id = msg.header.MESSAGE_ID_MAPEM
         msg.header.station_id.value = 100
 
-        self.get_logger().info(f"Publishing MAPEM (TS)")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertMapemTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

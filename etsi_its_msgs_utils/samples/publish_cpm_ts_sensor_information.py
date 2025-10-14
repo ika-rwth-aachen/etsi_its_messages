@@ -28,16 +28,23 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_cpm_ts_msgs.msg import *
+
 import utils
+from etsi_its_cpm_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertCpmTsToUdp
+
 
 class Publisher(Node):
 
     def __init__(self):
 
         super().__init__("cpm_publisher")
+        self.type = "CPM_TS"
         topic = "/etsi_its_conversion/cpm_ts/in"
         self.publisher = self.create_publisher(CollectivePerceptionMessage, topic, 1)
+        self.srv_client = self.create_client(ConvertCpmTsToUdp, "/etsi_its_conversion/cpm_ts_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(0.1, self.publish)
 
     def get_lidar_sensor_information(self) -> SensorInformation:
@@ -57,7 +64,7 @@ class Publisher(Node):
         msg.perception_region_confidence_is_present = True
         msg.shadowing_applies = False
         return msg
-        
+
     def get_local_aggregation_sensor_information(self) -> SensorInformation:
         msg = SensorInformation()
         msg.sensor_type.value = SensorType.LOCAL_AGGREGATION
@@ -68,25 +75,25 @@ class Publisher(Node):
         msg.perception_region_shape.polygonal.shape_reference_point.y_coordinate.value = -150
         msg.perception_region_shape.polygonal.shape_reference_point.z_coordinate_is_present = True
         msg.perception_region_shape.polygonal.shape_reference_point.z_coordinate.value = 50
-        
+
         p1 = CartesianPosition3d()
         p1.x_coordinate.value = -10000
         p1.y_coordinate.value = -15000
         p1.z_coordinate.value = 500
         p1.z_coordinate_is_present = True
-        
+
         p2 = CartesianPosition3d()
         p2.x_coordinate.value = -8000
         p2.y_coordinate.value = 15000
         p2.z_coordinate.value = 500
         p2.z_coordinate_is_present = True
-        
+
         p3 = CartesianPosition3d()
         p3.x_coordinate.value = 13000
         p3.y_coordinate.value = 20000
         p3.z_coordinate.value = 500
         p3.z_coordinate_is_present = True
-        
+
         p4 = CartesianPosition3d()
         p4.x_coordinate.value = 13000
         p4.y_coordinate.value = 20000
@@ -101,7 +108,7 @@ class Publisher(Node):
         msg.shadowing_applies = False
         return msg
 
-    def publish(self) -> None:
+    def buildMessage(self) -> CollectivePerceptionMessage:
 
         msg = CollectivePerceptionMessage()
 
@@ -115,19 +122,38 @@ class Publisher(Node):
         cpm_container = WrappedCpmContainer()
         cpm_container.container_id.value = cpm_container.CHOICE_CONTAINER_DATA_SENSOR_INFORMATION_CONTAINER
 
-        # Get sensor informations 
+        # Get sensor informations
         lidar_sensor = self.get_lidar_sensor_information()
         local_aggretation_sensor = self.get_local_aggregation_sensor_information()
 
         cpm_container.container_data_sensor_information_container.array = [lidar_sensor, local_aggretation_sensor]
         msg.payload.cpm_containers.value.array.append(cpm_container)
 
-        self.get_logger().info(f"Publishing CPM")
+        return msg
+
+    def publish(self) -> None:
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertCpmTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

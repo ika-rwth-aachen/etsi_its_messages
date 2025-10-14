@@ -26,19 +26,26 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_cpm_ts_msgs.msg import *
+
 import utils
+from etsi_its_cpm_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertCpmTsToUdp
+
 
 class Publisher(Node):
 
     def __init__(self):
 
         super().__init__("cpm_publisher")
+        self.type = "CPM_TS"
         topic = "/etsi_its_conversion/cpm_ts/in"
         self.publisher = self.create_publisher(CollectivePerceptionMessage, topic, 1)
+        self.srv_client = self.create_client(ConvertCpmTsToUdp, "/etsi_its_conversion/cpm_ts_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(0.1, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = CollectivePerceptionMessage()
 
@@ -78,12 +85,31 @@ class Publisher(Node):
         cpm_container.container_data_perceived_object_container = perceived_object_container
         msg.payload.cpm_containers.value.array.append(cpm_container)
 
-        self.get_logger().info(f"Publishing CPM")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertCpmTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

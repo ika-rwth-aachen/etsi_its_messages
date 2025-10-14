@@ -26,19 +26,26 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_denm_ts_msgs.msg import *
+
 import utils
+from etsi_its_denm_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertDenmTsToUdp
+
 
 class Publisher(Node):
 
     def __init__(self):
 
         super().__init__("denm_ts_publisher")
+        self.type = "DENM_TS"
         topic = "/etsi_its_conversion/denm_ts/in"
         self.publisher = self.create_publisher(DENM, topic, 1)
+        self.srv_client = self.create_client(ConvertDenmTsToUdp, "/etsi_its_conversion/denm_ts_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = DENM()
 
@@ -68,13 +75,32 @@ class Publisher(Node):
         dangerous_goods_extended.company_name = "ika, RWTH Aachen" # UTF8String
         msg.denm.alacarte.stationary_vehicle.carrying_dangerous_goods = dangerous_goods_extended
 
-        self.get_logger().info(f"Publishing DENM (TS)")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertDenmTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

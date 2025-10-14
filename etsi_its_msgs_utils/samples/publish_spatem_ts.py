@@ -26,8 +26,10 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_spatem_ts_msgs.msg import *
+
 import utils
+from etsi_its_spatem_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertSpatemTsToUdp
 
 
 class Publisher(Node):
@@ -35,41 +37,64 @@ class Publisher(Node):
     def __init__(self):
 
         super().__init__("mapem_ts_publisher")
+        self.type = "SPATEM_TS"
         topic = "/etsi_its_conversion/spatem_ts/in"
         self.publisher = self.create_publisher(SPATEM, topic, 1)
+        self.srv_client = self.create_client(ConvertSpatemTsToUdp, "/etsi_its_conversion/spatem_ts_to_udp")
+        while not self.srv_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = SPATEM()
 
         msg.header.protocol_version = 2
         msg.header.message_id = msg.header.MESSAGE_ID_MAPEM
         msg.header.station_id.value = 100
-        
+
         movement_event = MovementEvent()
         movement_event.event_state.value = movement_event.event_state.PROTECTED_MOVEMENT_ALLOWED
-        
+
         movement_state = MovementState()
         movement_state.signal_group.value = 2
         movement_state.state_time_speed.array.append(movement_event)
-        
+
         intersection_state = IntersectionState()
         intersection_state.id.id.value = 1
         status_array = [0] * intersection_state.status.SIZE_BITS
         status_array[intersection_state.status.BIT_INDEX_MANUAL_CONTROL_IS_ENABLED] = 1
         intersection_state.status.value = status_array
         intersection_state.states.array.append(movement_state)
-        
+
         msg.spat.intersections.array.append(intersection_state)
 
-        self.get_logger().info(f"Publishing SPATEM (TS)")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertSpatemTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type}")
+        srv_future = self.srv_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()
