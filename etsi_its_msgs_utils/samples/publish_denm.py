@@ -40,8 +40,8 @@ class Publisher(Node):
         self.type = "DENM"
         topic = "/etsi_its_conversion/denm/in"
         self.publisher = self.create_publisher(DENM, topic, 1)
-        self.srv_to_udp_client = self.create_client(ConvertDenmToUdp, "/etsi_its_conversion/denm_to_udp")
-        self.srv_to_ros_client = self.create_client(ConvertUdpToDenm, "/etsi_its_conversion/udp_to_denm")
+        self.srv_to_udp_client = self.create_client(ConvertDenmToUdp, "/etsi_its_conversion/denm/udp")
+        self.srv_to_ros_client = self.create_client(ConvertUdpToDenm, "/etsi_its_conversion/udp/denm")
         while not self.srv_to_udp_client.wait_for_service(timeout_sec=1.0) or not self.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)

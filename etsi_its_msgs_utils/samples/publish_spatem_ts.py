@@ -40,8 +40,8 @@ class Publisher(Node):
         self.type = "SPATEM_TS"
         topic = "/etsi_its_conversion/spatem_ts/in"
         self.publisher = self.create_publisher(SPATEM, topic, 1)
-        self.srv_to_udp_client = self.create_client(ConvertSpatemTsToUdp, "/etsi_its_conversion/spatem_ts_to_udp")
-        self.srv_to_ros_client = self.create_client(ConvertUdpToSpatemTs, "/etsi_its_conversion/udp_to_spatem_ts")
+        self.srv_to_udp_client = self.create_client(ConvertSpatemTsToUdp, "/etsi_its_conversion/spatem_ts/udp")
+        self.srv_to_ros_client = self.create_client(ConvertUdpToSpatemTs, "/etsi_its_conversion/udp/spatem_ts")
         while not self.srv_to_udp_client.wait_for_service(timeout_sec=1.0) or not self.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
@@ -63,6 +63,7 @@ class Publisher(Node):
 
         intersection_state = IntersectionState()
         intersection_state.id.id.value = 1
+        # TODO: [etsi_its_conversion_node-1] [ERROR] [1760439484.976361316] [etsi_its_conversion]: Check of struct failed: IntersectionStatusObject: constraint failed (/docker-ros/ws/src/target/etsi_its_coding/etsi_its_spatem_ts_coding/src/spatem_ts_IntersectionStatusObject.c:36)
         status_array = [0] * intersection_state.status.SIZE_BITS
         status_array[intersection_state.status.BIT_INDEX_MANUAL_CONTROL_IS_ENABLED] = 1
         intersection_state.status.value = status_array
