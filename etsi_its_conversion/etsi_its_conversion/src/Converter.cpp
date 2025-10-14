@@ -372,7 +372,7 @@ void Converter::setup() {
             std::placeholders::_1,
             std::placeholders::_2,
             &asn_DEF_denm_ts_DENM,
-            std::function<void(const denm_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM)));
+            std::function<void(const denm_ts_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM)));
 
     publisher_denm_ts_ = this->create_publisher<denm_ts_msgs::DENM>(kOutputTopicDenmTs, publisher_queue_size_);
     RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type DENM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_denm_ts_->get_topic_name());
