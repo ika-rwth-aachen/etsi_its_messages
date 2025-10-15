@@ -372,8 +372,8 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
   UdpPacket udp_msg;
 
   // add BTP destination port and destination port info
+  udp_msg.src_port = btp_header_destination_port;
   uint16_t destination_port = htons(btp_header_destination_port);
-  udp_msg.src_port = destination_port;
   if (has_btp_destination_port_) {
     uint16_t destination_port_info = 0;
     uint16_t* btp_header = new uint16_t[2] {destination_port, destination_port_info};
