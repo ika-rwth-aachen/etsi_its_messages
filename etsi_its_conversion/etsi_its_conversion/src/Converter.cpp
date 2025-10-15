@@ -700,10 +700,7 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<typename T_srv::Reques
   // encode ROS msg to UDP msg
   UdpPacket udp_msg;
   bool success = this->encodeRosMessageToUdpPacketMessage<T_ros, T_struct>(msg, udp_msg, asn_type_descriptor, conversion_fn, btp_header_destination_port);
-  if (!success) {
-    RCLCPP_WARN(this->get_logger(), "Failed to encode ROS message to UDP packet");
-    return;
-  }
+  if (!success) return;
 
   // return result
   response->udp_packet = udp_msg;
