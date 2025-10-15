@@ -28,6 +28,24 @@ SOFTWARE.
 #include <string>
 #include <unordered_map>
 
+#include <etsi_its_conversion_srvs/srv/convert_cam_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_cam_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_cpm_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_denm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_denm_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_mapem_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_mcm_uulm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_spatem_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_vam_ts_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cam_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_cpm_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_denm_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_mapem_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_mcm_uulm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_spatem_ts.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_vam_ts.hpp>
 #include <etsi_its_cam_conversion/convertCAM.h>
 #include <etsi_its_cam_ts_conversion/convertCAM.h>
 #include <etsi_its_cpm_ts_conversion/convertCollectivePerceptionMessage.h>
@@ -49,11 +67,10 @@ SOFTWARE.
 #include <rclcpp/rclcpp.hpp>
 #include <udp_msgs/msg/udp_packet.hpp>
 
-
 namespace etsi_its_conversion {
 
-
 using namespace udp_msgs::msg;
+namespace conversion_srvs = etsi_its_conversion_srvs::srv;
 namespace cam_msgs = etsi_its_cam_msgs::msg;
 namespace cam_ts_msgs = etsi_its_cam_ts_msgs::msg;
 namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
@@ -64,15 +81,12 @@ namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 
-
 class Converter : public rclcpp::Node {
 
   public:
-
     explicit Converter(const rclcpp::NodeOptions& options);
 
   protected:
-
     void loadParameters();
 
     void setup();
@@ -99,6 +113,16 @@ class Converter : public rclcpp::Node {
     template <typename T_ros, typename T_struct>
     bool encodeRosMessageToUdpPacketMessage(const T_ros& msg, UdpPacket& udp_msg, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn, const int btp_header_destination_port) const;
 
+    template <typename T_ros, typename T_struct, typename T_srv>
+    void rosToUdpSrvCallback(const std::shared_ptr<typename T_srv::Request> request,
+                            std::shared_ptr<typename T_srv::Response> response,
+                            const std::string& type,
+                            const asn_TYPE_descriptor_t* asn_type_descriptor,
+                            std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
+
+    template <typename T_ros, typename T_struct, typename T_srv>
+    void udpToRosSrvCallback(const std::shared_ptr<typename T_srv::Request> request, std::shared_ptr<typename T_srv::Response> response, const std::string& type, const asn_TYPE_descriptor_t* asn_type_descriptor, std::function<void(const T_struct&, T_ros&)> conversion_fn) const;
+
     void udpCallback(const UdpPacket::UniquePtr udp_msg) const;
 
     template <typename T_ros, typename T_struct>
@@ -106,27 +130,44 @@ class Converter : public rclcpp::Node {
                      const std::string& type, const asn_TYPE_descriptor_t* type_descriptor, std::function<void(const T_ros&, T_struct&)> conversion_fn) const;
 
   protected:
-
     static const std::string kInputTopicUdp;
     static const std::string kOutputTopicUdp;
     static const std::string kInputTopicCam;
     static const std::string kOutputTopicCam;
+    static const std::string kServiceCamToUdp;
+    static const std::string kServiceUdpToCam;
     static const std::string kInputTopicCamTs;
     static const std::string kOutputTopicCamTs;
+    static const std::string kServiceCamTsToUdp;
+    static const std::string kServiceUdpToCamTs;
     static const std::string kInputTopicCpmTs;
     static const std::string kOutputTopicCpmTs;
+    static const std::string kServiceCpmTsToUdp;
+    static const std::string kServiceUdpToCpmTs;
     static const std::string kInputTopicDenm;
     static const std::string kOutputTopicDenm;
+    static const std::string kServiceDenmToUdp;
+    static const std::string kServiceUdpToDenm;
     static const std::string kInputTopicDenmTs;
     static const std::string kOutputTopicDenmTs;
+    static const std::string kServiceDenmTsToUdp;
+    static const std::string kServiceUdpToDenmTs;
     static const std::string kInputTopicMapemTs;
     static const std::string kOutputTopicMapemTs;
+    static const std::string kServiceMapemTsToUdp;
+    static const std::string kServiceUdpToMapemTs;
     static const std::string kInputTopicMcmUulm;
     static const std::string kOutputTopicMcmUulm;
+    static const std::string kServiceMcmUulmToUdp;
+    static const std::string kServiceUdpToMcmUulm;
     static const std::string kInputTopicSpatemTs;
     static const std::string kOutputTopicSpatemTs;
+    static const std::string kServiceSpatemTsToUdp;
+    static const std::string kServiceUdpToSpatemTs;
     static const std::string kInputTopicVamTs;
     static const std::string kOutputTopicVamTs;
+    static const std::string kServiceVamTsToUdp;
+    static const std::string kServiceUdpToVamTs;
 
     static const std::string kHasBtpDestinationPortParam;
     static const bool kHasBtpDestinationPortParamDefault;
@@ -158,6 +199,26 @@ class Converter : public rclcpp::Node {
     rclcpp::Subscription<UdpPacket>::SharedPtr subscriber_udp_;
     std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subscribers_;
 
+    rclcpp::Service<conversion_srvs::ConvertCamToUdp>::SharedPtr convert_cam_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertCamTsToUdp>::SharedPtr convert_cam_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertCpmTsToUdp>::SharedPtr convert_cpm_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertDenmToUdp>::SharedPtr convert_denm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertDenmTsToUdp>::SharedPtr convert_denm_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertMapemTsToUdp>::SharedPtr convert_mapem_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertMcmUulmToUdp>::SharedPtr convert_mcm_uulm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertSpatemTsToUdp>::SharedPtr convert_spatem_ts_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertVamTsToUdp>::SharedPtr convert_vam_ts_to_udp_service_;
+
+    rclcpp::Service<conversion_srvs::ConvertUdpToCam>::SharedPtr convert_udp_to_cam_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToCamTs>::SharedPtr convert_udp_to_cam_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToCpmTs>::SharedPtr convert_udp_to_cpm_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToDenm>::SharedPtr convert_udp_to_denm_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToDenmTs>::SharedPtr convert_udp_to_denm_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToMapemTs>::SharedPtr convert_udp_to_mapem_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToMcmUulm>::SharedPtr convert_udp_to_mcm_uulm_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToSpatemTs>::SharedPtr convert_udp_to_spatem_ts_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToVamTs>::SharedPtr convert_udp_to_vam_ts_service_;
+
     mutable rclcpp::Publisher<cam_msgs::CAM>::SharedPtr publisher_cam_;
     mutable rclcpp::Publisher<cam_ts_msgs::CAM>::SharedPtr publisher_cam_ts_;
     mutable rclcpp::Publisher<cpm_ts_msgs::CollectivePerceptionMessage>::SharedPtr publisher_cpm_ts_;
@@ -169,6 +230,5 @@ class Converter : public rclcpp::Node {
     mutable rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     mutable rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;
 };
-
 
 }

@@ -15,8 +15,11 @@
 
   <license>MIT</license>
 
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
   <depend>etsi_its_cam_conversion</depend>
   <depend>etsi_its_cam_ts_conversion</depend>
+  <depend>etsi_its_conversion_srvs</depend>
   <depend>etsi_its_cpm_ts_conversion</depend>
   <depend>etsi_its_denm_conversion</depend>
   <depend>etsi_its_denm_ts_conversion</depend>
@@ -24,11 +27,10 @@
   <depend>etsi_its_mcm_uulm_conversion</depend>
   <depend>etsi_its_spatem_ts_conversion</depend>
   <depend>etsi_its_vam_ts_conversion</depend>
-  <depend>udp_msgs</depend>
-
-  <buildtool_depend>ament_cmake</buildtool_depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
+  <depend>ros_environment</depend>
+  <depend>udp_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

@@ -4,6 +4,7 @@ project(etsi_its_conversion)
 find_package(ament_cmake REQUIRED)
 find_package(etsi_its_cam_conversion REQUIRED)
 find_package(etsi_its_cam_ts_conversion REQUIRED)
+find_package(etsi_its_conversion_srvs REQUIRED)
 find_package(etsi_its_cpm_ts_conversion REQUIRED)
 find_package(etsi_its_denm_conversion REQUIRED)
 find_package(etsi_its_denm_ts_conversion REQUIRED)
@@ -13,7 +14,12 @@ find_package(etsi_its_spatem_ts_conversion REQUIRED)
 find_package(etsi_its_vam_ts_conversion REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
+find_package(ros_environment REQUIRED)
 find_package(udp_msgs REQUIRED)
+
+if("$ENV{ROS_DISTRO}" STREQUAL "humble")
+  add_compile_definitions(ROS_DISTRO_HUMBLE)
+endif()
 
 add_library(${PROJECT_NAME} SHARED src/Converter.cpp)
 
@@ -35,6 +41,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
 ament_target_dependencies(${PROJECT_NAME}
   etsi_its_cam_conversion
   etsi_its_cam_ts_conversion
+  etsi_its_conversion_srvs
   etsi_its_cpm_ts_conversion
   etsi_its_denm_conversion
   etsi_its_denm_ts_conversion

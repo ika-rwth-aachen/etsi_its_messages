@@ -26,8 +26,10 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_vam_ts_msgs.msg import *
+
 import utils
+from etsi_its_vam_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertVamTsToUdp, ConvertUdpToVamTs
 
 
 class Publisher(Node):
@@ -35,11 +37,16 @@ class Publisher(Node):
     def __init__(self):
 
         super().__init__("vam_ts_publisher")
+        self.type = "VAM_TS"
         topic = "/etsi_its_conversion/vam_ts/in"
         self.publisher = self.create_publisher(VAM, topic, 1)
+        self.srv_to_udp_client = self.create_client(ConvertVamTsToUdp, "/etsi_its_conversion/vam_ts/udp")
+        self.srv_to_ros_client = self.create_client(ConvertUdpToVamTs, "/etsi_its_conversion/udp/vam_ts")
+        while not self.srv_to_udp_client.wait_for_service(timeout_sec=1.0) or not self.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = VAM()
 
@@ -63,13 +70,44 @@ class Publisher(Node):
         vru_high_frequency_container.device_usage.value = vru_high_frequency_container.device_usage.LISTENING_TO_AUDIO
         msg.vam.vam_parameters.vru_high_frequency_container = vru_high_frequency_container
 
-        self.get_logger().info(f"Publishing VAM (TS)")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertVamTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from ROS to UDP")
+        srv_future = self.srv_to_udp_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        result = srv_future.result()
+        if result is None:
+            self.get_logger().error("Service call failed")
+            return
+        self.get_logger().info("Service call succeeded")
+
+        udp_msg = result.udp_packet
+        srv_request = ConvertUdpToVamTs.Request(udp_packet=udp_msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from UDP to ROS")
+        srv_future = self.srv_to_ros_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()
