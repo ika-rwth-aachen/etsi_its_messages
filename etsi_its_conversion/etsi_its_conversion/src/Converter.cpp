@@ -35,6 +35,12 @@ RCLCPP_COMPONENTS_REGISTER_NODE(etsi_its_conversion::Converter)
 
 namespace etsi_its_conversion {
 
+#ifdef ROS_DISTRO_HUMBLE
+#define SERVICE_QOS rmw_qos_profile_services_default
+#else
+#define SERVICE_QOS rclcpp::ServicesQoS()
+#endif
+
 const int kBtpHeaderDestinationPortCam{2001};
 const int kBtpHeaderDestinationPortDenm{2002};
 const int kBtpHeaderDestinationPortMapem{2003};
@@ -233,7 +239,7 @@ void Converter::setup() {
         &asn_DEF_cam_CAM,
         std::function<void(const cam_CAM_t &, cam_msgs::CAM &)>(etsi_its_cam_conversion::toRos_CAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_cam_ = this->create_publisher<cam_msgs::CAM>(kOutputTopicCam, publisher_queue_size_);
@@ -252,7 +258,7 @@ void Converter::setup() {
         &asn_DEF_cam_CAM,
         std::function<void(const cam_msgs::CAM &, cam_CAM_t &)>(etsi_its_cam_conversion::toStruct_CAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const cam_msgs::CAM::UniquePtr)> callback =
@@ -273,7 +279,7 @@ void Converter::setup() {
         &asn_DEF_cam_ts_CAM,
         std::function<void(const cam_ts_CAM_t &, cam_ts_msgs::CAM &)>(etsi_its_cam_ts_conversion::toRos_CAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_cam_ts_ = this->create_publisher<cam_ts_msgs::CAM>(kOutputTopicCamTs, publisher_queue_size_);
@@ -292,7 +298,7 @@ void Converter::setup() {
         &asn_DEF_cam_ts_CAM,
         std::function<void(const cam_ts_msgs::CAM &, cam_ts_CAM_t &)>(etsi_its_cam_ts_conversion::toStruct_CAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const cam_ts_msgs::CAM::UniquePtr)> callback =
@@ -313,7 +319,7 @@ void Converter::setup() {
         &asn_DEF_cpm_ts_CollectivePerceptionMessage,
         std::function<void(const cpm_ts_CollectivePerceptionMessage_t &, cpm_ts_msgs::CollectivePerceptionMessage &)>(etsi_its_cpm_ts_conversion::toRos_CollectivePerceptionMessage)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_cpm_ts_ = this->create_publisher<cpm_ts_msgs::CollectivePerceptionMessage>(kOutputTopicCpmTs, publisher_queue_size_);
@@ -332,7 +338,7 @@ void Converter::setup() {
         &asn_DEF_cpm_ts_CollectivePerceptionMessage,
         std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage &, cpm_ts_CollectivePerceptionMessage_t &)>(etsi_its_cpm_ts_conversion::toStruct_CollectivePerceptionMessage)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const cpm_ts_msgs::CollectivePerceptionMessage::UniquePtr)> callback =
@@ -353,7 +359,7 @@ void Converter::setup() {
         &asn_DEF_denm_DENM,
         std::function<void(const denm_DENM_t &, denm_msgs::DENM &)>(etsi_its_denm_conversion::toRos_DENM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_denm_ = this->create_publisher<denm_msgs::DENM>(kOutputTopicDenm, publisher_queue_size_);
@@ -372,7 +378,7 @@ void Converter::setup() {
         &asn_DEF_denm_DENM,
         std::function<void(const denm_msgs::DENM &, denm_DENM_t &)>(etsi_its_denm_conversion::toStruct_DENM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const denm_msgs::DENM::UniquePtr)> callback =
@@ -393,7 +399,7 @@ void Converter::setup() {
         &asn_DEF_denm_ts_DENM,
         std::function<void(const denm_ts_DENM_t &, denm_ts_msgs::DENM &)>(etsi_its_denm_ts_conversion::toRos_DENM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_denm_ts_ = this->create_publisher<denm_ts_msgs::DENM>(kOutputTopicDenmTs, publisher_queue_size_);
@@ -412,7 +418,7 @@ void Converter::setup() {
         &asn_DEF_denm_ts_DENM,
         std::function<void(const denm_ts_msgs::DENM &, denm_ts_DENM_t &)>(etsi_its_denm_ts_conversion::toStruct_DENM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const denm_ts_msgs::DENM::UniquePtr)> callback =
@@ -433,7 +439,7 @@ void Converter::setup() {
         &asn_DEF_mapem_ts_MAPEM,
         std::function<void(const mapem_ts_MAPEM_t &, mapem_ts_msgs::MAPEM &)>(etsi_its_mapem_ts_conversion::toRos_MAPEM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_mapem_ts_ = this->create_publisher<mapem_ts_msgs::MAPEM>(kOutputTopicMapemTs, publisher_queue_size_);
@@ -452,7 +458,7 @@ void Converter::setup() {
         &asn_DEF_mapem_ts_MAPEM,
         std::function<void(const mapem_ts_msgs::MAPEM &, mapem_ts_MAPEM_t &)>(etsi_its_mapem_ts_conversion::toStruct_MAPEM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const mapem_ts_msgs::MAPEM::UniquePtr)> callback =
@@ -473,7 +479,7 @@ void Converter::setup() {
         &asn_DEF_mcm_uulm_MCM,
         std::function<void(const mcm_uulm_MCM_t &, mcm_uulm_msgs::MCM &)>(etsi_its_mcm_uulm_conversion::toRos_MCM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_mcm_uulm_ = this->create_publisher<mcm_uulm_msgs::MCM>(kOutputTopicMcmUulm, publisher_queue_size_);
@@ -492,7 +498,7 @@ void Converter::setup() {
         &asn_DEF_mcm_uulm_MCM,
         std::function<void(const mcm_uulm_msgs::MCM &, mcm_uulm_MCM_t &)>(etsi_its_mcm_uulm_conversion::toStruct_MCM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const mcm_uulm_msgs::MCM::UniquePtr)> callback =
@@ -513,7 +519,7 @@ void Converter::setup() {
         &asn_DEF_spatem_ts_SPATEM,
         std::function<void(const spatem_ts_SPATEM_t &, spatem_ts_msgs::SPATEM &)>(etsi_its_spatem_ts_conversion::toRos_SPATEM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_spatem_ts_ = this->create_publisher<spatem_ts_msgs::SPATEM>(kOutputTopicSpatemTs, publisher_queue_size_);
@@ -532,7 +538,7 @@ void Converter::setup() {
         &asn_DEF_spatem_ts_SPATEM,
         std::function<void(const spatem_ts_msgs::SPATEM &, spatem_ts_SPATEM_t &)>(etsi_its_spatem_ts_conversion::toStruct_SPATEM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const spatem_ts_msgs::SPATEM::UniquePtr)> callback =
@@ -553,7 +559,7 @@ void Converter::setup() {
         &asn_DEF_vam_ts_VAM,
         std::function<void(const vam_ts_VAM_t &, vam_ts_msgs::VAM &)>(etsi_its_vam_ts_conversion::toRos_VAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     publisher_vam_ts_ = this->create_publisher<vam_ts_msgs::VAM>(kOutputTopicVamTs, publisher_queue_size_);
@@ -572,7 +578,7 @@ void Converter::setup() {
         &asn_DEF_vam_ts_VAM,
         std::function<void(const vam_ts_msgs::VAM &, vam_ts_VAM_t &)>(etsi_its_vam_ts_conversion::toStruct_VAM)
       ),
-      rclcpp::ServicesQoS(),
+      SERVICE_QOS,
       callback_group_
     );
     std::function<void(const vam_ts_msgs::VAM::UniquePtr)> callback =

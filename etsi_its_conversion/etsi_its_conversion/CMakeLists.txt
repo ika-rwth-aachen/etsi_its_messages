@@ -14,7 +14,12 @@ find_package(etsi_its_spatem_ts_conversion REQUIRED)
 find_package(etsi_its_vam_ts_conversion REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
+find_package(ros_environment REQUIRED)
 find_package(udp_msgs REQUIRED)
+
+if("$ENV{ROS_DISTRO}" STREQUAL "humble")
+  add_compile_definitions(ROS_DISTRO_HUMBLE)
+endif()
 
 add_library(${PROJECT_NAME} SHARED src/Converter.cpp)
 
