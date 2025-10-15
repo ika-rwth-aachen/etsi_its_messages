@@ -63,9 +63,7 @@ class Publisher(Node):
 
         intersection_state = IntersectionState()
         intersection_state.id.id.value = 1
-        # TODO: [etsi_its_conversion_node-1] [ERROR] [1760439484.976361316] [etsi_its_conversion]: Check of struct failed: IntersectionStatusObject: constraint failed (/docker-ros/ws/src/target/etsi_its_coding/etsi_its_spatem_ts_coding/src/spatem_ts_IntersectionStatusObject.c:36)
-        status_array = [0] * intersection_state.status.SIZE_BITS
-        status_array[intersection_state.status.BIT_INDEX_MANUAL_CONTROL_IS_ENABLED] = 1
+        status_array = [0] * (intersection_state.status.SIZE_BITS // 8)
         intersection_state.status.value = status_array
         intersection_state.states.array.append(movement_state)
 
@@ -94,7 +92,6 @@ class Publisher(Node):
         self.get_logger().info("Service call succeeded")
 
         udp_msg = result.udp_packet
-        print(udp_msg)
         srv_request = ConvertUdpToSpatemTs.Request(udp_packet=udp_msg)
         self.get_logger().info(f"Calling service to convert {self.type} from UDP to ROS")
         srv_future = self.srv_to_ros_client.call_async(srv_request)
