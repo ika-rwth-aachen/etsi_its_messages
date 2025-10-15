@@ -86,9 +86,9 @@ const std::string Converter::kServiceUdpToVamTs{"~/udp/vam_ts"};
 const std::string Converter::kHasBtpDestinationPortParam{"has_btp_destination_port"};
 const bool Converter::kHasBtpDestinationPortParamDefault{true};
 const std::string Converter::kBtpDestinationPortOffsetParam{"btp_destination_port_offset"};
-const int Converter::kBtpDestinationPortOffsetParamDefault{8};
+const int Converter::kBtpDestinationPortOffsetParamDefault{0};
 const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payload_offset"};
-const int Converter::kEtsiMessagePayloadOffsetParamDefault{78};
+const int Converter::kEtsiMessagePayloadOffsetParamDefault{4};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
 const std::vector<std::string> Converter::kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
@@ -643,6 +643,7 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
 
   // add BTP destination port and destination port info
   uint16_t destination_port = htons(btp_header_destination_port);
+  // TODO: why was src_port 5355 oder so in CAM? -> wegen htons!
   udp_msg.src_port = destination_port;
   if (has_btp_destination_port_) {
     uint16_t destination_port_info = 0;
