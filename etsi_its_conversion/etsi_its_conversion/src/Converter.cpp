@@ -643,7 +643,6 @@ UdpPacket Converter::bufferToUdpPacketMessage(const uint8_t* buffer, const int s
 
   // add BTP destination port and destination port info
   uint16_t destination_port = htons(btp_header_destination_port);
-  // TODO: why was src_port 5355 oder so in CAM? -> wegen htons!
   udp_msg.src_port = destination_port;
   if (has_btp_destination_port_) {
     uint16_t destination_port_info = 0;
