@@ -156,7 +156,7 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 ```bash
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=8 -p etsi_message_payload_offset:=78
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=0 -p etsi_message_payload_offset:=4
 ```
 
 #### Subscribed Topics
