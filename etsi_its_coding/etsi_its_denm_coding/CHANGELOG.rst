@@ -2,6 +2,9 @@
 Changelog for package etsi_its_denm_coding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+
 3.3.0 (2025-08-07)
 ------------------
 * Merge pull request `#83 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/83>`_ from ika-rwth-aachen/deprecate-ros1

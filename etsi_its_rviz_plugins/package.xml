@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_rviz_plugins</name>
-  <version>3.3.0</version>
+  <version>3.4.0</version>
   <description>RViz plugins for etsi_its_messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>

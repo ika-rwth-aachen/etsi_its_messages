@@ -2,6 +2,17 @@
 Changelog for package etsi_its_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+* Merge pull request `#106 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/106>`_ from Tezozomoc47/make-converter-service-based
+  Add the service-based approach for message conversion
+* Merge pull request `#108 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/108>`_ from ika-rwth-aachen/fix-udp-src-port
+  Fix setting of BTP destination port in `udp_msg.src_port`
+* Merge pull request `#99 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/99>`_ from ika-rwth-aachen/codex/enable-parallel-execution-for-etsi_its_conversion
+* Merge pull request `#100 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/100>`_ from Tezozomoc47/use-udppacket-srcport-for-btp
+  Added filling of the UdpPacket.src_port to transport BtpDestinationPort information without touching the byte payload.
+* Contributors: Lennart Reiher, Tezozomoc47
+
 3.3.0 (2025-08-07)
 ------------------
 * Merge pull request `#83 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/83>`_ from ika-rwth-aachen/deprecate-ros1

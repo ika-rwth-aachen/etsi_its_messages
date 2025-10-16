@@ -2,6 +2,14 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+* Merge pull request `#106 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/106>`_ from Tezozomoc47/make-converter-service-based
+  Add the service-based approach for message conversion
+* Merge pull request `#105 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/105>`_ from ika-rwth-aachen/fix-bit-string-access
+  Fix getter/setter convenience access functions for BIT_STRING
+* Contributors: Lennart Reiher, Tezozomoc47
+
 3.3.0 (2025-08-07)
 ------------------
 * Merge pull request `#89 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/89>`_ from ika-rwth-aachen/improvement/cpm-plugin

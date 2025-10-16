@@ -2,6 +2,13 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+* Merge pull request `#96 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/96>`_ from ika-rwth-aachen/improvement/denm-plugin
+  Add overlay to DENM plugin
+* Merge pull request `#93 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/93>`_ from ika-rwth-aachen/rviz-satellite
+* Contributors: Jean-Pierre Busch, Lennart Reiher, Tezozomoc47
+
 3.3.0 (2025-08-07)
 ------------------
 * Merge pull request `#92 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/92>`_ from ika-rwth-aachen/fix-rviz-config
