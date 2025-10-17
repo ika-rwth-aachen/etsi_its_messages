@@ -287,6 +287,17 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     for doc, asn1 in asn1_docs.items():
         for type in asn1["types"]:
             if type not in asn1_types:
+                if "members" in asn1["types"][type]:
+                    # filter out None members (representing ASN1 extensions)
+                    asn1["types"][type]["members"] = [member for member in asn1["types"][type]["members"] if member is not None]
+                    # flatten lists in members (representing ASN1 extensions)
+                    flattened_members = []
+                    for member in asn1["types"][type]["members"]:
+                        if isinstance(member, list):
+                            flattened_members.extend(member)
+                        else:
+                            flattened_members.append(member)
+                    asn1["types"][type]["members"] = flattened_members
                 asn1_types[type] = asn1["types"][type]
             else:
                 raise ValueError(f"Type '{type}' from '{doc}' is a duplicate")
@@ -405,6 +416,11 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                     logging.warning(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
+                        f"yet supported")
+                elif member["type"] == "Container":
+                    logging.warning(
+                        f"Type '{member['type']}' of member '{member['name']}' "
+                        f"in '{asn1_type_name}' seems to relate to a 'Container' type, not "
                         f"yet supported")
                 else:
                     raise TypeError(
@@ -629,9 +645,17 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             if len(member_context["members"]) > 0:
                 if "name" in asn1_type_info:
                     member_context["members"][0]["choice_name"] = validCFieldAsGenByAsn1c(asn1_type_info["name"])
-                    member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["c_field_name"])
+                    if "c_field_name" in member_context["members"][0]:
+                        member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["c_field_name"])
+                    else:
+                        logging.warning(f"expected 'c_field_name' in member context for choice member '{member['name']}' in '{asn1_type_name}'")
+                        member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["ros_field_name"])
                     member_context["members"][0]["ros_field_name"] = validRosField(f"{asn1_type_info['name']}_{member_context['members'][0]['ros_field_name']}")
-                    member_context["members"][0]["c_field_name"] = validCFieldAsGenByAsn1c(f"{asn1_type_info['name']}_{member_context['members'][0]['c_field_name']}")
+                    if "c_field_name" in member_context["members"][0]:
+                        member_context["members"][0]["c_field_name"] = validCFieldAsGenByAsn1c(f"{asn1_type_info['name']}_{member_context['members'][0]['c_field_name']}")
+                    else:
+                        logging.warning(f"expected 'c_field_name' in member context for choice member '{member['name']}' in '{asn1_type_name}'")
+                        member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(f"{asn1_type_info['name']}_{member_context['members'][0]['ros_field_name']}")
                 member_context["members"][0]["is_choice"] = True
                 member_context["members"][0]["choice_var_name"] = name
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
@@ -731,8 +755,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             })
 
         context["members"].append(member_context)
-        
-    # list aka extension "[[ ]]"    
+
+    # list aka extension "[[ ]]"
     elif asn1_type_type == "EXTENSION":
         for sub_member in asn1_type_info:
             member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
@@ -755,7 +779,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": []
         })
-        
+
         if "optional" in asn1_type_info:
             context["members"][0]["optional"] = True
 

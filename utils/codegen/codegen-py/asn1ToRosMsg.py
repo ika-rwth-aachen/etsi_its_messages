@@ -211,14 +211,16 @@ def main():
         msg_type = "CAM"
     elif args.type == "denm_ts":
         msg_type = "DENM"
+    elif args.type == "ivim_ts":
+        msg_type = "IVIM"
     elif args.type == "mapem_ts":
         msg_type = "MAPEM"
+    elif args.type == "mcm_uulm":
+        msg_type = "MCM"
     elif args.type == "spatem_ts":
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
-    elif args.type == "mcm_uulm":
-        msg_type = "MCM"
     msg_files = findDependenciesOfRosMessageType(os.path.join(args.output_dir, f"{msg_type}.msg"), [msg_type])
     msg_files += additionalMessageTypes(args.output_dir, msg_type)
     msg_files = sortMessageFiles(msg_files)
