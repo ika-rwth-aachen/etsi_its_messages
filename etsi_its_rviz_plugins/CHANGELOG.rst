@@ -2,6 +2,55 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+* Merge pull request `#96 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/96>`_ from ika-rwth-aachen/improvement/denm-plugin
+  Add overlay to DENM plugin
+* Merge pull request `#93 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/93>`_ from ika-rwth-aachen/rviz-satellite
+* Contributors: Jean-Pierre Busch, Lennart Reiher, Tezozomoc47
+
+3.3.0 (2025-08-07)
+------------------
+* Merge pull request `#92 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/92>`_ from ika-rwth-aachen/fix-rviz-config
+  Fix rviz config after renaming displays
+* Merge pull request `#89 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/89>`_ from ika-rwth-aachen/improvement/cpm-plugin
+  Add object ids to RViz CPM plugin; rename plugins; add icons
+* Merge pull request `#88 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/88>`_ from ika-rwth-aachen/kilted
+* Merge pull request `#83 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/83>`_ from ika-rwth-aachen/deprecate-ros1
+  Deprecate ROS 1 Noetic
+* Merge pull request `#86 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/86>`_ from ika-rwth-aachen/fix/spatem_time_mark_interpretation
+  Fix/spatem time mark interpretation
+* Contributors: Fabian Thomsen, Jean-Pierre Busch, Lennart Reiher
+
+3.2.1 (2025-05-16)
+------------------
+
+3.2.0 (2025-04-22)
+------------------
+* Merge branch 'main' into uulm-mcm
+* Merge pull request `#73 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/73>`_ from ika-rwth-aachen/fix/spatem-viz
+  Fix visualization of SPATEMS on Startup of RViz
+* Merge pull request `#70 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/70>`_ from ika-rwth-aachen/improvement/display_different_utm_zones_at_once
+  Improvement/display different utm zones at once
+* Contributors: Guido Küppers, Jean-Pierre Busch
+
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge branch 'main' into denm-v2
+* Merge pull request `#65 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/65>`_ from ika-rwth-aachen/improvement/display_spatem_timing_information
+  Improvement/display spatem timing information
+* Merge pull request `#66 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/66>`_ from ika-rwth-aachen/fix/default-leap-seconds
+  Use `rbegin()` instead of `end()` to access last element of `std::map` storing the leap-second insertions
+* Merge pull request `#55 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/55>`_ from ika-rwth-aachen/feature/spat-map-plugin
+  RViz Plugin for SPATEM/MAPEM
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: AlexanderWilczynski, Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
+3.0.0 (2024-12-10)
+------------------
+
 2.4.0 (2024-11-19)
 ------------------
 * Merge pull request `#39 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/39>`_ from ika-rwth-aachen/feature/denm-launchfile-transformation

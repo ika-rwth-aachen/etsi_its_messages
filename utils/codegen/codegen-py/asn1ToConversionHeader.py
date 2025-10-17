@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,7 @@ import os
 from typing import Dict, List
 
 import jinja2
+from tqdm import tqdm
 
 from asn1CodeGenerationUtils import *
 
@@ -42,11 +43,11 @@ def parseCli():
     """
 
     parser = argparse.ArgumentParser(
-        description="Creates header files from ASN1 definitions for conversion between C structs and ROS messages.",
+        description="Creates header files from ASN.1 definitions for conversion between C structs and ROS messages.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument("files", type=str, nargs="+", help="ASN1 files")
-    parser.add_argument("-t", "--type", type=str, required=True, help="ASN1 type")
+    parser.add_argument("files", type=str, nargs="+", help="ASN.1 files")
+    parser.add_argument("-t", "--type", type=str, required=True, help="ASN.1 type")
     parser.add_argument("-o", "--output-dir", type=str, required=True, help="output directory")
 
     args = parser.parse_args()
@@ -76,14 +77,17 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     return jinja_templates
 
 
-def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], etsi_type: str, jinja_templates: jinja2.environment.Template) -> str:
-    """Converts parsed ASN1 type information to a conversion header string.
+def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict], asn1_raw: Dict[str, str], etsi_type: str, jinja_templates: jinja2.environment.Template) -> str:
+    """Converts parsed ASN.1 type information to a conversion header string.
 
     Args:
         type_name (str): type name
         asn1_type (Dict): type information
         asn1_types (Dict[str, Dict]): type information of all types by type
         asn1_values (Dict[str, Dict]): value information of all values by name
+        asn1_sets (Dict[str, Dict]): set information of all sets by name
+        asn1_classes (Dict[str, Dict]): class information of all classes by name
+        asn1_raw (Dict[str, str]): raw string definition by type
         etsi_type (str): ETSI message type, e.g., `cam`
         jinja_templates (Dict[str, jinja2.environment.Template]): jinja template
 
@@ -102,12 +106,16 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
         raise TypeError(f"No jinja template for type '{asn1_type['type']}'")
 
     # build jinja context based on asn1 type information
-    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values)
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes)
     if jinja_context is None:
         return None
 
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
+
+    # add raw asn1 definition as comment
+    if type_name in asn1_raw:
+        jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
 
     # add a dict entry for unique and sorted members (used for includes)
     seen = set()
@@ -158,50 +166,70 @@ def findDependenciesOfConversionHeaders(parent_file_path: str, type: str, file_l
                     new_file_list.append(msg_type)
                     new_file_list = findDependenciesOfConversionHeaders(f"{os.path.dirname(parent_file_path)}/{msg_type}.h", type, new_file_list)
 
-    # make sure there are no duplicates and sort alphabetically
-    new_file_list = sorted(list(set(new_file_list)))
-
     return new_file_list
+
+def additionalMessageTypes(path: str, msg_type: str) -> List[str]:
+    additional = []
+
+    for f in glob.glob(os.path.join(path, "*.h")):
+        msg_filename = os.path.splitext(os.path.basename(f))[0]
+        if msg_type == "DENM" and msg_filename.endswith("SubCauseCode"):
+            additional.append(msg_filename)
+
+    return additional
+
+def sortHeaderFiles(files: List[str]) -> List[str]:
+    # make sure there are no duplicates and sort alphabetically
+    return sorted(list(set(files)))
 
 def main():
 
     args = parseCli()
 
+    # parse ASN.1 files
+    print("Parsing ASN.1 files ...")
     asn1_docs, asn1_raw = parseAsn1Files(args.files)
-
     asn1_types = extractAsn1TypesFromDocs(asn1_docs)
     asn1_values = extractAsn1ValuesFromDocs(asn1_docs)
+    asn1_sets = extractAsn1SetsFromDocs(asn1_docs)
+    asn1_classes = extractAsn1ClassesFromDocs(asn1_docs)
 
     checkTypeMembersInAsn1(asn1_types)
 
+    # generate conversion headers
     jinja_templates = loadJinjaTemplates()
-
-    for type_name, asn1_type in asn1_types.items():
-
-        header = asn1TypeToConversionHeader(type_name, asn1_type, asn1_types, asn1_values, args.type, jinja_templates)
-
+    for type_name, asn1_type in (pbar := tqdm(asn1_types.items(), desc="Generating conversion headers")):
+        pbar.set_postfix_str(type_name)
+        header = asn1TypeToConversionHeader(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes, asn1_raw, args.type, jinja_templates)
         exportConversionHeader(header, type_name, args.output_dir)
 
-    ## remove all conversion files that are not required
+    # remove all files that are not required for top-level message type
+    print("Removing files not required for top-level message type ...")
     msg_type = args.type.upper()
-
-    # handle special cases
     if args.type == "cpm_ts":
         msg_type = "CollectivePerceptionMessage"
     elif args.type == "cam_ts":
         msg_type = "CAM"
+    elif args.type == "denm_ts":
+        msg_type = "DENM"
     elif args.type == "mapem_ts":
         msg_type = "MAPEM"
     elif args.type == "spatem_ts":
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
-
+    elif args.type == "mcm_uulm":
+        msg_type = "MCM"
     header_files = findDependenciesOfConversionHeaders(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, [f"convert{msg_type}"])
+    header_files += additionalMessageTypes(args.output_dir, msg_type)
+    header_files = sortHeaderFiles(header_files)
 
     for f in glob.glob(os.path.join(args.output_dir, "*.h")):
-        if os.path.splitext(os.path.basename(f))[0] not in header_files:
+        header_filename = os.path.splitext(os.path.basename(f))[0]
+        if header_filename not in header_files:
             os.remove(f)
+
+    print(f"Generated {len(header_files)} conversion headers for {msg_type}")
 
 if __name__ == "__main__":
 

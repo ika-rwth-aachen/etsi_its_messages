@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -66,5 +66,27 @@ inline uint16_t getLeapSecondInsertionsSince2004(const uint64_t unix_seconds) {
   --it;               // Move iterator to the element with a key less than or equal to givenUnixSecond
   return it->second;  // Return the corresponding value
 }
+
+// An interval containing 95% of the points in a 1D Gaussian distribution
+constexpr const double ONE_D_GAUSSIAN_FACTOR = 2.0;
+
+// An ellipse containing 95% of the points in a 2D Gaussian distribution
+// has size 2.4477*sigma_{major/minor}
+constexpr const double TWO_D_GAUSSIAN_FACTOR = 2.4477;
+
+
+// Helper struct to get the value of ONE_CENTIMETER from a given type, if it exists
+// Otherwise, it defaults to 1
+template <typename SemiAxisLength, typename = std::void_t<>>
+struct OneCentimeterHelper {
+    static constexpr int value = 1; // Default value
+};
+
+// Specialization for types that have ONE_CENTIMETER defined
+template <typename SemiAxisLength>
+struct OneCentimeterHelper<SemiAxisLength, std::void_t<decltype(SemiAxisLength::ONE_CENTIMETER)>> {
+    static constexpr int value = SemiAxisLength::ONE_CENTIMETER;
+};
+
 
 }  // namespace etsi_its_msgs

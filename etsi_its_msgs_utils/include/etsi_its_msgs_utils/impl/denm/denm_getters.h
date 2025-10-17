@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,7 @@ SOFTWARE.
 
 namespace etsi_its_denm_msgs::access {
 
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_getters.h>
 #include <etsi_its_msgs_utils/impl/cdd/cdd_v1-3-1_getters.h>
 
 /**
@@ -92,25 +93,33 @@ inline double getLongitude(const DENM& denm) { return getLongitude(denm.denm.man
 inline double getAltitude(const DENM& denm) { return getAltitude(denm.denm.management.event_position.altitude); }
 
 /**
- * @brief Get the Heading value
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading to get the Heading value from
- * @return Heading value in degree as decimal number
- */
-inline double getHeading(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
-
-/**
  * @brief Get the Heading object
  * 
  * @param denm DENM to get the Heading-Value from
- * @return getHeading value
+ * @return heading value in degree as decimal number
  */
 inline double getHeading(const DENM& denm) {
   if (denm.denm.location_is_present) {
     if (denm.denm.location.event_position_heading_is_present) {
-      return getHeading(denm.denm.location.event_position_heading);
+      return getHeadingCDD(denm.denm.location.event_position_heading);
+    } else {
+      throw std::invalid_argument("Heading is not present!");
+    }
+  } else {
+    throw std::invalid_argument("LocationContainer is not present!");
+  }
+}
+
+/**
+ * @brief Get the Heading confidence
+ * 
+ * @param denm DENM to get the Heading-Value from
+ * @return standard deviation of heading in degrees as decimal number
+ */
+inline double getHeadingConfidence(const DENM& denm) {
+  if (denm.denm.location_is_present) {
+    if (denm.denm.location.event_position_heading_is_present) {
+      return getHeadingConfidenceCDD(denm.denm.location.event_position_heading);
     } else {
       throw std::invalid_argument("Heading is not present!");
     }
@@ -163,6 +172,17 @@ inline bool getIsSpeedPresent(const DENM& denm) {
   } else {
     throw std::invalid_argument("LocationContainer is not present!");
   }
+}
+
+/**
+ * @brief Get the Speed Confidence
+ * 
+ * @param denm DENM to get the Speed Confidence from
+ * @return double standard deviation of the speed in m/s as decimal number
+ */
+inline double getSpeedConfidence(const DENM& denm) {
+  return getSpeedConfidence(
+    denm.denm.location.event_speed);
 }
 
 /**

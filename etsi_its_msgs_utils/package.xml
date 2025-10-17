@@ -2,7 +2,7 @@
 <package format="3">
 
   <name>etsi_its_msgs_utils</name>
-  <version>2.4.0</version>
+  <version>3.4.0</version>
   <description>ROS messages and utility functions for ETSI ITS messages</description>
 
   <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
@@ -18,15 +18,13 @@
   <depend>etsi_its_msgs</depend>
   <depend>geographiclib</depend>
   <depend>geometry_msgs</depend>
-  <depend>ros_environment</depend>
   <depend>tf2_geometry_msgs</depend>
 
-  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
 
   <export>
-    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
-    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 
 </package>

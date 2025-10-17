@@ -3,7 +3,7 @@ index 80474765..daa530dc 100644
 --- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h
 +++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_ConnectionTrajectory-addGrpC.h
 @@ -5,17 +5,17 @@
-  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-OER -no-gen-example -gen-UPER -gen-JER`
   */
  
 +/* Including external dependencies */
@@ -30,7 +30,7 @@ index 48c03456..e9469531 100644
 --- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h
 +++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_NodeOffsetPointXY.h
 @@ -5,11 +5,6 @@
-  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-OER -no-gen-example -gen-UPER -gen-JER`
   */
  
 -#ifndef	_mapem_ts_NodeOffsetPointXY_H_
@@ -58,7 +58,7 @@ index b5758b2d..f61d8c18 100644
 --- a/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h
 +++ b/etsi_its_coding/etsi_its_mapem_ts_coding/include/etsi_its_mapem_ts_coding/mapem_ts_RegionalExtension.h
 @@ -5,11 +5,6 @@
-  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-JER -no-gen-OER -no-gen-example -gen-UPER`
+  * 	`asn1c -fcompound-names -fprefix=mapem_ts_ -no-gen-BER -no-gen-XER -no-gen-OER -no-gen-example -gen-UPER -gen-JER`
   */
  
 -#ifndef	_mapem_ts_RegionalExtension_H_

@@ -8,7 +8,7 @@ const CONVERSION_TEMPLATE: &str =
 r#"/** ============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,13 +36,8 @@ SOFTWARE.
 {extra-includes}
 #include <etsi_its_{pdu}_coding/{pdu}_{c_filename}.h>
 {c_includes}
-#ifdef ROS1
-{ros1_includes}
-namespace {pdu}_msgs = etsi_its_{pdu}_msgs;
-#else
 {ros2_includes}
 namespace {pdu}_msgs = etsi_its_{pdu}_msgs::msg;
-#endif
 
 
 namespace etsi_its_{pdu}_conversion {
@@ -95,11 +90,6 @@ pub fn conversion_template(
         .collect::<Vec<String>>();
     c_includes_lines.sort();
     let c_includes = c_includes_lines.join("\n");
-    let ros1_includes = format!(
-        "#include <etsi_its_{pdu}_msgs/{ros_fn}.h>",
-        pdu = pdu,
-        ros_fn = to_ros_title_case(name)
-    );
     let ros2_includes = format!(
         "#include <etsi_its_{pdu}_msgs/msg/{ros_fn}.hpp>",
         pdu = pdu,
@@ -116,7 +106,6 @@ pub fn conversion_template(
     CONVERSION_TEMPLATE
         .replace("{extra-includes}", &extra_includes)
         .replace("{c_includes}", &c_includes)
-        .replace("{ros1_includes}", &ros1_includes)
         .replace("{ros2_includes}", &ros2_includes)
         .replace("{asn1_type}", asn1_type)
         .replace("{name}", &to_ros_title_case(name))

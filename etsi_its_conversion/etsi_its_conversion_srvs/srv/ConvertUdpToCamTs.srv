@@ -1,0 +1,3 @@
+udp_msgs/UdpPacket udp_packet
+---
+etsi_its_cam_ts_msgs/CAM ros_msg

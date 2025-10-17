@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,8 @@ SOFTWARE.
  */
 
 #pragma once
+
+#include <tuple>
 
 namespace etsi_its_cpm_ts_msgs::access {
 
@@ -166,7 +168,7 @@ inline WrappedCpmContainer getCpmContainer(const CollectivePerceptionMessage &cp
  * @return The perceived object container.
  */
 inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptionMessage &cpm) {
-  return getCpmContainer(cpm, CpmContainerId::PERCEIVED_OBJECT_CONTAINER);
+  return getCpmContainer(cpm, WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER);
 }
 
 /**
@@ -177,10 +179,10 @@ inline WrappedCpmContainer getPerceivedObjectContainer(const CollectivePerceptio
  * @throws std::invalid_argument if the container is not a PerceivedObjectContainer.
  */
 inline uint8_t getNumberOfPerceivedObjects(const WrappedCpmContainer &container) {
-  if (container.container_id.value != CpmContainerId::PERCEIVED_OBJECT_CONTAINER) {
+  if (container.container_id.value != WrappedCpmContainer::CHOICE_CONTAINER_DATA_PERCEIVED_OBJECT_CONTAINER) {
     throw std::invalid_argument("Container is not a PerceivedObjectContainer");
   }
-  uint8_t number = container.container_data.perceived_object_container.number_of_perceived_objects.value;
+  uint8_t number = container.container_data_perceived_object_container.number_of_perceived_objects.value;
   return number;
 }
 
@@ -210,7 +212,7 @@ inline PerceivedObject getPerceivedObject(const WrappedCpmContainer &container, 
   if (i >= getNumberOfPerceivedObjects(container)) {
     throw std::invalid_argument("Index out of range");
   }
-  return container.container_data.perceived_object_container.perceived_objects.array[i];
+  return container.container_data_perceived_object_container.perceived_objects.array[i];
 }
 
 /**
@@ -221,7 +223,12 @@ inline PerceivedObject getPerceivedObject(const WrappedCpmContainer &container, 
  * @param object The PerceivedObject for which to retrieve the ID.
  * @return The ID of the perceived object.
  */
-inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) { return object.object_id.value; }
+inline uint16_t getIdOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_id_is_present) {
+    throw std::invalid_argument("No object_id present in PerceivedObject");
+  }
+  return object.object_id.value;
+}
 
 /**
  * @brief Retrieves the Cartesian coordinate value from a CartesianCoordinateWithConfidence object.
@@ -260,6 +267,22 @@ inline gm::Point getPositionOfPerceivedObject(const PerceivedObject &object) {
 }
 
 /**
+ * @brief Get the Position Confidences Of Perceived Object
+ * 
+ * @param object The PerceivedObject to get the position confidences from
+ * @return std::tuple<double, double, double> x,y and z standard deviations of the positions in meters. 
+ *         The z standard deviation is infinity if the z coordinate is not present.
+ */
+inline std::tuple<double, double, double> getPositionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  double x_confidence = double(getCartesianCoordinateConfidence(object.position.x_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double y_confidence = double(getCartesianCoordinateConfidence(object.position.y_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double z_confidence = object.position.z_coordinate_is_present
+                            ? double(getCartesianCoordinateConfidence(object.position.z_coordinate)) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR
+                            : std::numeric_limits<double>::infinity();
+  return std::make_tuple(x_confidence, y_confidence, z_confidence);
+}
+
+/**
  * @brief Get the Cartesian angle of the PerceivedObject
  * 
  * @param object PerceivedObject to get the Cartesian angle from
@@ -291,15 +314,16 @@ inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &obj
   double roll{0}, pitch{0}, yaw{0};
 
   if (object.angles.x_angle_is_present) {
-    roll = (((double(getCartesianAngle(object.angles.x_angle)) / 10.0) - 180.0) / 180.0) *
-           M_PI;  // TODO: check if 0-360 -> -180-180 is correct
+    roll = (((double(getCartesianAngle(object.angles.x_angle)) / 10.0) ) / 180.0) *
+           M_PI;
   }
   if (object.angles.y_angle_is_present) {
-    pitch = (((double(getCartesianAngle(object.angles.y_angle)) / 10.0) - 180.0) / 180.0) *
-            M_PI;  // TODO: check if 0-360 -> -180-180 is correct
+    pitch = (((double(getCartesianAngle(object.angles.y_angle)) / 10.0) ) / 180.0) *
+            M_PI;
   }
-  yaw = (((double(getCartesianAngle(object.angles.z_angle)) / 10.0) - 180.0) / 180.0) *
-        M_PI;  // TODO: check if 0-360 -> -180-180 is correct
+  yaw = (((double(getCartesianAngle(object.angles.z_angle)) / 10.0)) / 180.0) *
+        M_PI;
+  // This wraps from -pi ti pi because setRPY only uses cos and sin of the angles
   q.setRPY(roll, pitch, yaw);
 
   return tf2::toMsg(q);
@@ -320,6 +344,20 @@ inline double getYawOfPerceivedObject(const PerceivedObject &object) {
 }
 
 /**
+ * @brief Get the Yaw Confidence Of Perceived Object object
+ * 
+ * @param object PerceivedObject to get the yaw confidence from
+ * @return double The standard deviation of the yaw angle in radians
+ * @throws std::invalid_argument If the angles are not present in the object.
+ */
+inline double getYawConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if(!object.angles_is_present) throw std::invalid_argument("No angles present in PerceivedObject");
+  double yaw_confidence = object.angles.z_angle.confidence.value / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  yaw_confidence *= M_PI / 180.0;  // convert to radians
+  return yaw_confidence;
+}
+
+/**
  * @brief Get the pose of the PerceivedObject
  * 
  * @param object PerceivedObject to get the pose from
@@ -336,12 +374,37 @@ inline gm::Pose getPoseOfPerceivedObject(const PerceivedObject &object) {
  * @brief Get the yaw rate of the PerceivedObject
  * 
  * @param object PerceivedObject to get the yaw rate from
- * @return int16_t yaw rate of the PerceivedObject in deg/s
+ * @return double yaw rate of the PerceivedObject in rad/s
  * @throws std::invalid_argument If the yaw rate is not present in the object.
  */
-inline int16_t getYawRateOfPerceivedObject(const PerceivedObject &object) {
+inline double getYawRateOfPerceivedObject(const PerceivedObject &object) {
   if (!object.z_angular_velocity_is_present) throw std::invalid_argument("No yaw rate present in PerceivedObject");
-  return object.z_angular_velocity.value.value;
+  return object.z_angular_velocity.value.value * M_PI / 180.0;  // convert to rad/s
+}
+
+/**
+ * @brief Get the Yaw Rate Confidence Of Perceived Object
+ * 
+ * @param object The PerceivedObject to get the yaw rate confidence from
+ * @return double The standard deviation of the yaw rate in rad/s
+ *                As defined in the TS, this is rounded up to the next possible value
+ * @throws std::invalid_argument If the yaw rate is not present in the object.
+ * 
+ */
+inline double getYawRateConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.z_angular_velocity_is_present) throw std::invalid_argument("No yaw rate present in PerceivedObject");
+  auto val = object.z_angular_velocity.confidence.value;
+  static const std::map<uint8_t, double> confidence_map = {
+      {AngularSpeedConfidence::UNAVAILABLE, 0.0},
+      {AngularSpeedConfidence::DEG_SEC_01, 1.0},
+      {AngularSpeedConfidence::DEG_SEC_02, 2.0},
+      {AngularSpeedConfidence::DEG_SEC_05, 5.0},
+      {AngularSpeedConfidence::DEG_SEC_10, 10.0},
+      {AngularSpeedConfidence::DEG_SEC_20, 20.0},
+      {AngularSpeedConfidence::DEG_SEC_50, 50.0},
+      {AngularSpeedConfidence::OUT_OF_RANGE, std::numeric_limits<double>::infinity()},
+  };
+  return confidence_map.at(val) * M_PI / 180.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;  // convert to rad/s
 }
 
 /**
@@ -359,7 +422,7 @@ inline double getVelocityComponent(const VelocityComponent &velocity) { return d
  * @return double value of the confidence of the velocity component in m/s
  */
 inline double getVelocityComponentConfidence(const VelocityComponent &velocity) {
-  return double(velocity.confidence.value) / 100.0;
+  return double(velocity.confidence.value) / 100.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 /**
@@ -370,17 +433,68 @@ inline double getVelocityComponentConfidence(const VelocityComponent &velocity) 
  * @throws std::invalid_argument If the velocity is no cartesian velocity.
  */
 inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &object) {
-  if (!object.velocity_is_present) throw std::invalid_argument("No velocity present in PerceivedObject");
-  if (object.velocity.choice != Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
-    throw std::invalid_argument("Velocity is not Cartesian");
+  if (!object.velocity_is_present) {
+    throw std::invalid_argument("No velocity present in PerceivedObject");
   }
   gm::Vector3 velocity;
-  velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
-  velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
-  if (object.velocity.cartesian_velocity.z_velocity_is_present) {
-    velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+  if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
+    double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
+    double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    velocity.x = speed * cos(angle);
+    velocity.y = speed * sin(angle);
+    if (object.velocity.polar_velocity.z_velocity_is_present) {
+      velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+    }
+  } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
+    velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
+    velocity.y = getVelocityComponent(object.velocity.cartesian_velocity.y_velocity);
+    if (object.velocity.cartesian_velocity.z_velocity_is_present) {
+      velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+    }
+  } else {
+    throw std::invalid_argument("Velocity is neither Polar nor Cartesian");
   }
   return velocity;
+}
+
+/**
+ * @brief Get the Cartesian Velocity Confidence Of Perceived Object object
+ * 
+ * @param object PerceivedObject to get the Cartesian velocity from
+ * @return std::tuple<double, double, double> the x,y and z standard deviations of the velocity in m/s
+ *         The z standard deviation is infinity if the z velocity is not present.
+ * @throws std::invalid_argument If the velocity is no cartesian velocity.
+ */
+inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.velocity_is_present) {
+    throw std::invalid_argument("No velocity present in PerceivedObject");
+  }
+  if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
+    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+    double angle_confidence = getCartesianAngleConfidence(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
+    double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double lateral_confidence = speed * angle_confidence; // not exactly, but best approximation
+    double x_confidence = speed_confidence * cos(angle) * cos(angle) 
+                          + lateral_confidence * sin(angle) * sin(angle);
+    double y_confidence = speed_confidence * sin(angle) * sin(angle)
+                          + lateral_confidence * cos(angle) * cos(angle);
+    // neglect xy covariance, as it is not present in the output of this function
+    double z_confidence = object.velocity.polar_velocity.z_velocity_is_present
+                              ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
+    double x_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.x_velocity);
+    double y_confidence = getVelocityComponentConfidence(object.velocity.cartesian_velocity.y_velocity);
+    double z_confidence = object.velocity.cartesian_velocity.z_velocity_is_present
+                              ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else {
+    throw std::invalid_argument("Velocity is neither Polar nor Cartesian");
+  }
+  
 }
 
 /**
@@ -400,7 +514,7 @@ inline double getAccelerationComponent(const AccelerationComponent &acceleration
  * @return double value of the confidence of the acceleration component in m/s^2
  */
 inline double getAccelerationComponentConfidence(const AccelerationComponent &acceleration) {
-  return double(acceleration.confidence.value) / 10.0;
+  return double(acceleration.confidence.value) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 /**
@@ -411,17 +525,68 @@ inline double getAccelerationComponentConfidence(const AccelerationComponent &ac
  * @throws std::invalid_argument If the acceleration is no cartesian acceleration.
  */
 inline gm::Vector3 getCartesianAccelerationOfPerceivedObject(const PerceivedObject &object) {
-  if (!object.acceleration_is_present) throw std::invalid_argument("No acceleration present in PerceivedObject");
-  if (object.acceleration.choice != Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
-    throw std::invalid_argument("Acceleration is not Cartesian");
+  if (!object.acceleration_is_present) {
+    throw std::invalid_argument("No acceleration present in PerceivedObject");
   }
   gm::Vector3 acceleration;
-  acceleration.x = getAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration);
-  acceleration.y = getAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration);
-  if (object.acceleration.cartesian_acceleration.z_acceleration_is_present) {
-    acceleration.z = getAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration);
+
+  if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
+    acceleration.x = getAccelerationComponent(object.acceleration.cartesian_acceleration.x_acceleration);
+    acceleration.y = getAccelerationComponent(object.acceleration.cartesian_acceleration.y_acceleration);
+    if (object.acceleration.cartesian_acceleration.z_acceleration_is_present) {
+      acceleration.z = getAccelerationComponent(object.acceleration.cartesian_acceleration.z_acceleration);
+    }
+  } else if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION) {
+    double magnitude = getAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle = getCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    acceleration.x = magnitude * cos(angle);
+    acceleration.y = magnitude * sin(angle);
+    if (object.acceleration.polar_acceleration.z_acceleration_is_present) {
+      acceleration.z = getAccelerationComponent(object.acceleration.polar_acceleration.z_acceleration);
+    }
+  } else {
+    throw std::invalid_argument("Acceleration is neither Cartesian nor Polar");
   }
+
   return acceleration;
+}
+
+/**
+ * @brief Get the Cartesian Acceleration Confidence Of Perceived Object 
+ * 
+ * @param object PerceivedObject to get the Cartesian acceleration from
+ * @return std::tuple<double, double, double> the x,y and z standard deviations of the acceleration in m/s^2
+ *        The z standard deviation is infinity if the z acceleration is not present.
+ * @throws std::invalid_argument If the acceleration is no cartesian acceleration.
+ */
+inline std::tuple<double, double, double> getCartesianAccelerationConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.acceleration_is_present) throw std::invalid_argument("No acceleration present in PerceivedObject");
+
+  if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_CARTESIAN_ACCELERATION) {
+    double x_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.x_acceleration);
+    double y_confidence = getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.y_acceleration);
+    double z_confidence = object.acceleration.cartesian_acceleration.z_acceleration_is_present
+                              ? getAccelerationComponentConfidence(object.acceleration.cartesian_acceleration.z_acceleration)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else if (object.acceleration.choice == Acceleration3dWithConfidence::CHOICE_POLAR_ACCELERATION) {
+    double magnitude_confidence = getAccelerationMagnitudeConfidence(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle_confidence = getCartesianAngleConfidence(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
+    double magnitude = getAccelerationMagnitude(object.acceleration.polar_acceleration.acceleration_magnitude);
+    double angle = getCartesianAngle(object.acceleration.polar_acceleration.acceleration_direction) * M_PI / 180.0 / 10.0; // convert to radians
+    double lateral_confidence = magnitude * angle_confidence; // best approximation
+    double x_confidence = magnitude_confidence * cos(angle) * cos(angle)
+                          + lateral_confidence * sin(angle) * sin(angle);
+    double y_confidence = magnitude_confidence * sin(angle) * sin(angle)
+                          + lateral_confidence * cos(angle) * cos(angle);
+    // neglect xy covariance, as it is not present in the output of this function
+    double z_confidence = object.acceleration.polar_acceleration.z_acceleration_is_present
+                              ? getAccelerationComponentConfidence(object.acceleration.polar_acceleration.z_acceleration)
+                              : std::numeric_limits<double>::infinity();
+    return std::make_tuple(x_confidence, y_confidence, z_confidence);
+  } else {
+    throw std::invalid_argument("Acceleration is neither Cartesian nor Polar");
+  }
 }
 
 /**
@@ -441,6 +606,18 @@ inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
 }
 
 /**
+ * @brief Gets the confidence of the x-dimension of a perceived object.
+ * 
+ * @param object  The PerceivedObject from which to retrieve the x-dimension confidence.
+ * @return uint8_t The confidence of the x-dimension of the perceived object in decimeters.
+ * @throws std::invalid_argument if the x-dimension is not present in the PerceivedObject.
+ */
+inline uint8_t getXDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_x_is_present) throw std::invalid_argument("No x-dimension present in PerceivedObject");
+  return object.object_dimension_x.confidence.value;
+}
+
+/**
  * @brief Retrieves the y-dimension of a perceived object.
  *
  * This function extracts the y-dimension from a given PerceivedObject.
@@ -454,6 +631,18 @@ inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
 inline uint16_t getYDimensionOfPerceivedObject(const PerceivedObject &object) {
   if (!object.object_dimension_y_is_present) throw std::invalid_argument("No y-dimension present in PerceivedObject");
   return object.object_dimension_y.value.value;
+}
+
+/**
+ * @brief Gets the confidence of the y-dimension of a perceived object.
+ * 
+ * @param object  The PerceivedObject from which to retrieve the y-dimension confidence.
+ * @return uint8_t The confidence of the y-dimension of the perceived object in decimeters.
+ * @throws std::invalid_argument if the y-dimension is not present in the PerceivedObject.
+ */
+inline uint8_t getYDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_y_is_present) throw std::invalid_argument("No y-dimension present in PerceivedObject");
+  return object.object_dimension_y.confidence.value;
 }
 
 /**
@@ -473,6 +662,18 @@ inline uint16_t getZDimensionOfPerceivedObject(const PerceivedObject &object) {
 }
 
 /**
+ * @brief Gets the confidence of the z-dimension of a perceived object.
+ * 
+ * @param object  The PerceivedObject from which to retrieve the z-dimension confidence.
+ * @return uint8_t The confidence of the z-dimension of the perceived object in decimeters.
+ * @throws std::invalid_argument if the z-dimension is not present in the PerceivedObject.
+ */
+inline uint8_t getZDimensionConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  if (!object.object_dimension_z_is_present) throw std::invalid_argument("No z-dimension present in PerceivedObject");
+  return object.object_dimension_z.confidence.value;
+}
+
+/**
  * @brief Retrieves the dimensions of a perceived object.
  *
  * This function extracts the dimensions of a perceived object from the given PerceivedObject.
@@ -487,6 +688,19 @@ inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object)
   dimensions.y = double(getYDimensionOfPerceivedObject(object)) / 10.0;
   dimensions.z = double(getZDimensionOfPerceivedObject(object)) / 10.0;
   return dimensions;
+}
+
+/**
+ * @brief Get the Dimensions Confidence Of Perceived Object 
+ * 
+ * @param object The PerceivedObject to get the dimensions confidence from
+ * @return std::tuple<double, double, double> the x,y and z standard deviations of the dimensions in meters
+ */
+inline std::tuple<double, double, double> getDimensionsConfidenceOfPerceivedObject(const PerceivedObject &object) {
+  double conf_x = double(getXDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double conf_y = double(getYDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  double conf_z = double(getZDimensionConfidenceOfPerceivedObject(object)) / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+  return {conf_x, conf_y, conf_z};
 }
 
 /**
@@ -511,6 +725,39 @@ inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePercepti
   utm_position.point.z = reference_position.point.z + relative_position.z;
 
   return utm_position;
+}
+
+/**
+ * @brief Get the confidence ellipse of the reference position as Covariance matrix
+ * 
+ * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
+ * where x is WGS84 North and y is East
+ * 
+ * @param cpm The CPM message to get the reference position from
+ * @return const std::array<double, 4> the covariance matrix, as specified above
+ */
+inline const std::array<double, 4> getWGSRefPosConfidence(const CollectivePerceptionMessage &cpm) {
+  return getWGSPosConfidenceEllipse(cpm.payload.management_container.reference_position.position_confidence_ellipse);
+}
+
+/**
+ * @brief Get the sensorId of a SensorInformation object.
+ * 
+ * @param sensor_information The SensorInformation to get the sensorId from
+ * @return uint8_t The sensorId of a SensorInformation object
+ */
+inline uint8_t getSensorID(const SensorInformation &sensor_information) {
+  return sensor_information.sensor_id.value;
+}
+
+/**
+ * @brief Get the sensorType of a SensorInformation object.
+ * 
+ * @param sensor_information The SensorInformation to get the sensorType from
+ * @return uint8_t The sensorType of a SensorInformation object
+ */
+inline uint8_t getSensorType(const SensorInformation &sensor_information) {
+  return sensor_information.sensor_type.value;
 }
 
 }  // namespace etsi_its_cpm_ts_msgs::access

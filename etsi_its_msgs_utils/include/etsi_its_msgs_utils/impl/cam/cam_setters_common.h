@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,18 +32,20 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CAM_CAM_SETTERS_COMMON_H
 
+#include <etsi_its_msgs_utils/impl/checks.h>
 #include <etsi_its_msgs_utils/impl/constants.h>
+#include <etsi_its_msgs_utils/impl/asn1_primitives/asn1_primitives_setters.h>
 
 /**
  * @brief Set the GenerationDeltaTime-Value
  *
  * @param generation_delta_time GenerationDeltaTime to set the GenerationDeltaTime-Value for
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
- * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+ * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.)
  */
 inline void setGenerationDeltaTime(
     GenerationDeltaTime& generation_delta_time, const uint64_t unix_nanosecs,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   TimestampIts t_its;
   setTimestampITS(t_its, unix_nanosecs, n_leap_seconds);
   uint16_t gdt_value = t_its.value % 65536;
@@ -56,11 +58,11 @@ inline void setGenerationDeltaTime(
  *
  * @param cam CAM to set the GenerationDeltaTime-Value for
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the GenerationDeltaTime-Value from
- * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Default: etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second)
+ * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp (Defaults to the todays number of leap seconds since 2004.)
  */
 inline void setGenerationDeltaTime(
     CAM& cam, const uint64_t unix_nanosecs,
-    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.end()->second) {
+    const uint16_t n_leap_seconds = etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin()->second) {
   setGenerationDeltaTime(cam.cam.generation_delta_time, unix_nanosecs, n_leap_seconds);
 }
 
@@ -75,34 +77,6 @@ inline void setStationType(CAM& cam, const uint8_t value) {
 }
 
 /**
- * @brief Set the HeadingValue object
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- *
- * @param heading object to set
- * @param value Heading value in degree as decimal number
- */
-inline void setHeadingValue(HeadingValue& heading, const double value) {
-  int64_t deg = (int64_t)std::round(value * 1e1);
-  throwIfOutOfRange(deg, HeadingValue::MIN, HeadingValue::MAX, "HeadingValue");
-  heading.value = deg;
-}
-
-/**
- * @brief Set the Heading object
- *
- * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
- * HeadingConfidence is set to UNAVAILABLE
- *
- * @param heading object to set
- * @param value Heading value in degree as decimal number
- */
-inline void setHeading(Heading& heading, const double value) {
-  heading.heading_confidence.value = HeadingConfidence::UNAVAILABLE;
-  setHeadingValue(heading.heading_value, value);
-}
-
-/**
  * @brief Set the Heading for a CAM
  *
  * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
@@ -110,10 +84,25 @@ inline void setHeading(Heading& heading, const double value) {
  *
  * @param cam CAM to set the ReferencePosition
  * @param value Heading value in degree as decimal number
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE)
  */
-inline void setHeading(CAM& cam, const double heading_val) {
-  setHeading(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
-             heading_val);
+inline void setHeading(CAM& cam, const double heading_val, const double confidence = std::numeric_limits<double>::infinity()) {
+  setHeadingCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.heading,
+             heading_val, confidence);
+}
+
+/**
+ * @brief Set the Yaw Rate for a CAM
+ *
+ * @param cam CAM to set the YawRate
+ * @param yaw_rate_val Yaw rate value in degrees per second as decimal number
+ * @param confidence standard deviation of yaw rate in degrees per second as decimal number (default: infinity, mapping to YawRateConfidence::UNAVAILABLE)
+ */
+
+inline void setYawRate(CAM& cam, const double yaw_rate_val,
+                     const double confidence = std::numeric_limits<double>::infinity()) {
+  setYawRateCDD(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.yaw_rate,
+                yaw_rate_val, confidence);
 }
 
 /**
@@ -174,8 +163,8 @@ inline void setVehicleDimensions(CAM& cam, const double vehicle_length, const do
  * @param cam CAM to set the speed value
  * @param speed_val speed value to set in m/s as decimal number
  */
-inline void setSpeed(CAM& cam, const double speed_val) {
-  setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val);
+inline void setSpeed(CAM& cam, const double speed_val, const double confidence = SpeedConfidence::UNAVAILABLE) {
+  setSpeed(cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.speed, speed_val, confidence);
 }
 
 /**
@@ -183,11 +172,13 @@ inline void setSpeed(CAM& cam, const double speed_val) {
  *
  * @param cam CAM to set the acceleration value s
  * @param lon_accel longitudinal acceleration to set in m/s^2 as decimal number (braking is negative), if not available use 16.1 m/s^2
+ * @param confidence standard deviation of the longitudinal acceleration in m/s^2 as decimal number
+ *                   Default is infinity, mapping to AccelerationConfidence::UNAVAILABLE
  */
-inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel) {
+inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel, const double confidence = std::numeric_limits<double>::infinity()) {
   setLongitudinalAcceleration(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.longitudinal_acceleration,
-      lon_accel);
+      lon_accel, confidence);
 }
 
 /**
@@ -195,11 +186,13 @@ inline void setLongitudinalAcceleration(CAM& cam, const double lon_accel) {
  *
  * @param cam CAM to set the acceleration value s
  * @param lat_accel lateral acceleration to set in m/s^2 as decimal number (left is positiv), if not available use 16.1 m/s^2
+ * @param confidence standard deviation of the lateral acceleration in m/s^2 as decimal number
+ *                   Default is infinity, mapping to AccelerationConfidence::UNAVAILABLE
  */
-inline void setLateralAcceleration(CAM& cam, const double lat_accel) {
+inline void setLateralAcceleration(CAM& cam, const double lat_accel, const double confidence = std::numeric_limits<double>::infinity()) {
   setLateralAcceleration(
       cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency.lateral_acceleration,
-      lat_accel);
+      lat_accel, confidence);
   cam.cam.cam_parameters.high_frequency_container.basic_vehicle_container_high_frequency
       .lateral_acceleration_is_present = true;
 }

@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,19 +26,27 @@
 
 import rclpy
 from rclpy.node import Node
-from etsi_its_denm_msgs.msg import *
+
 import utils
+from etsi_its_denm_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertDenmToUdp, ConvertUdpToDenm
+
 
 class Publisher(Node):
 
     def __init__(self):
 
         super().__init__("denm_publisher")
+        self.type = "DENM"
         topic = "/etsi_its_conversion/denm/in"
         self.publisher = self.create_publisher(DENM, topic, 1)
+        self.srv_to_udp_client = self.create_client(ConvertDenmToUdp, "/etsi_its_conversion/denm/udp")
+        self.srv_to_ros_client = self.create_client(ConvertUdpToDenm, "/etsi_its_conversion/udp/denm")
+        while not self.srv_to_udp_client.wait_for_service(timeout_sec=1.0) or not self.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
-    def publish(self):
+    def buildMessage(self):
 
         msg = DENM()
 
@@ -67,13 +75,44 @@ class Publisher(Node):
         dangerous_goods_extended.company_name = "ika, RWTH Aachen" # UTF8String
         msg.denm.alacarte.stationary_vehicle.carrying_dangerous_goods = dangerous_goods_extended
 
-        self.get_logger().info(f"Publishing DENM")
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
         self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertDenmToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from ROS to UDP")
+        srv_future = self.srv_to_udp_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        result = srv_future.result()
+        if result is None:
+            self.get_logger().error("Service call failed")
+            return
+        self.get_logger().info("Service call succeeded")
+
+        udp_msg = result.udp_packet
+        srv_request = ConvertUdpToDenm.Request(udp_packet=udp_msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from UDP to ROS")
+        srv_future = self.srv_to_ros_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
 
 
 if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
+    publisher.callService()
     rclpy.spin(publisher)
     rclpy.shutdown()

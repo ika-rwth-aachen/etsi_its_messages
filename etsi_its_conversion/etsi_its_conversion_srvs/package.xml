@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package format="3">
+
+  <name>etsi_its_conversion_srvs</name>
+  <version>3.4.0</version>
+  <description>Services to convert ROS messages to and from ASN.1-encoded ETSI ITS messages</description>
+
+  <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+
+  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
+  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+  <author email="jens.staub@htwsaar.de">Jens Staub</author>
+
+  <license>MIT</license>
+
+  <depend>etsi_its_cam_msgs</depend>
+  <depend>etsi_its_cam_ts_msgs</depend>
+  <depend>etsi_its_cpm_ts_msgs</depend>
+  <depend>etsi_its_denm_msgs</depend>
+  <depend>etsi_its_denm_ts_msgs</depend>
+  <depend>etsi_its_mapem_ts_msgs</depend>
+  <depend>etsi_its_mcm_uulm_msgs</depend>
+  <depend>etsi_its_spatem_ts_msgs</depend>
+  <depend>etsi_its_vam_ts_msgs</depend>
+  <depend>udp_msgs</depend>
+
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

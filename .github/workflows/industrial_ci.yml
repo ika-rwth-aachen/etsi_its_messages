@@ -1,6 +1,12 @@
 name: industrial_ci
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   industrial_ci:
@@ -9,12 +15,10 @@ jobs:
     strategy:
       matrix:
         ROS_DISTRO:
-          - noetic
           - humble
-          - iron
           - jazzy
+          - kilted
         ROS_REPO:
-          - testing
           - main
     steps:
       - uses: actions/checkout@v3

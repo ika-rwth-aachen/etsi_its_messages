@@ -1,21 +1,14 @@
 name: docker-ros
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-
-  ros-noetic:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ika-rwth-aachen/docker-ros@main
-        with:
-          platform: amd64
-          target: dev,run
-          image-tag: ros-noetic
-          base-image: rwthika/ros:noetic
-          command: roslaunch etsi_its_conversion converter.ros1.launch
-          enable-industrial-ci: 'true'
-          enable-recursive-vcs-import: 'false'
 
   ros2-humble:
     runs-on: ubuntu-latest
@@ -23,24 +16,10 @@ jobs:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
           platform: amd64
-          target: dev,run
+          target: run
           image-tag: ros2-humble
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
-          enable-recursive-vcs-import: 'false'
-
-  ros2-iron:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ika-rwth-aachen/docker-ros@main
-        with:
-          platform: amd64
-          target: dev,run
-          image-tag: ros2-iron
-          base-image: rwthika/ros2:iron
-          command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
           enable-recursive-vcs-import: 'false'
 
   ros2-jazzy:
@@ -49,10 +28,23 @@ jobs:
       - uses: ika-rwth-aachen/docker-ros@main
         with:
           platform: amd64
-          target: dev,run
+          target: run
           image-tag: ros2-jazzy
           enable-push-as-latest: 'true'
           base-image: rwthika/ros2:jazzy
+          rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
-          enable-industrial-ci: 'true'
+          enable-recursive-vcs-import: 'false'
+
+  ros2-kilted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          platform: amd64
+          target: run
+          image-tag: ros2-kilted
+          base-image: rwthika/ros2:kilted
+          rmw-implementation: rmw_zenoh_cpp
+          command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'

@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,9 @@ SOFTWARE.
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 #define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H
 
+#include <array>
+#include <cmath>
+#include <cstdint>
 #include <GeographicLib/UTMUPS.hpp>
 
 /**
@@ -62,9 +65,14 @@ inline double getLongitude(const Longitude& longitude) { return ((double)longitu
  * @brief Get the Altitude value
  *
  * @param altitude to get the Altitude value from
- * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
+ * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number (0 if unavailable)
  */
-inline double getAltitude(const Altitude& altitude) { return ((double)altitude.altitude_value.value) * 1e-2; }
+inline double getAltitude(const Altitude& altitude) {
+  if (altitude.altitude_value.value == AltitudeValue::UNAVAILABLE) {
+    return 0.0;
+  }
+  return ((double)altitude.altitude_value.value) * 1e-2;
+}
 
 /**
  * @brief Get the vehicle speed
@@ -75,34 +83,35 @@ inline double getAltitude(const Altitude& altitude) { return ((double)altitude.a
 inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
 /**
- * @brief Get a Bit String in form of bool vector
- *
- * @param buffer as uint8_t vector
- * @param bits_unused number of bits to ignore at the end of the bit string
- * @return std::vector<bool>
+ * @brief Get the Speed Confidence 
+ * 
+ * @param speed to get the SpeedConfidence from
+ * @return double speed standard deviation in m/s as decimal number
  */
-inline std::vector<bool> getBitString(const std::vector<uint8_t>& buffer, const int bits_unused) {
-  // bit string size
-  const int bits_per_byte = 8;
-  const int n_bytes = buffer.size();
-  const int n_bits = n_bytes * bits_per_byte;
-  std::vector<bool> bits;
-  bits.resize(n_bits - bits_unused, 0);
+inline double getSpeedConfidence(const Speed& speed) {
+  return ((double)speed.speed_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-2;
+}
 
-  // loop over bytes in reverse order
-  for (int byte_idx = n_bytes - 1; byte_idx >= 0; byte_idx--) {
-    // loop over bits in a byte
-    for (int bit_idx_in_byte = 0; bit_idx_in_byte < bits_per_byte; bit_idx_in_byte++) {
-      // map bit index in byte to bit index in total bitstring
-      int bit_idx = (n_bytes - byte_idx - 1) * bits_per_byte + bit_idx_in_byte;
-      if (byte_idx == 0 && bit_idx >= n_bits - bits_unused) break;
+/**
+ * @brief Get the AccelerationMagnitude value
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitude from
+ * @return double acceleration magnitude in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitude(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_magnitude_value.value) * 1e-1;
+}
 
-      // extract bit from bitstring and set output array entry appropriately
-      bool byte_has_true_bit = buffer[byte_idx] & (1 << bit_idx_in_byte);
-      if (byte_has_true_bit) bits[bit_idx] = 1;
-    }
-  }
-  return bits;
+/**
+ * @brief Get the AccelerationMagnitude Confidence
+ * 
+ * @param acceleration_magnitude to get the AccelerationMagnitudeConfidence from
+ * @return double acceleration magnitude standard deviation in m/s^2 as decimal number
+ */
+template <typename AccelerationMagnitude>
+inline double getAccelerationMagnitudeConfidence(const AccelerationMagnitude& acceleration_magnitude) {
+  return ((double)acceleration_magnitude.acceleration_confidence.value) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR * 1e-1;
 }
 
 /**
@@ -135,6 +144,160 @@ inline gm::PointStamped getUTMPosition(const T& reference_position, int& zone, b
     throw std::invalid_argument(e.what());
   }
   return utm_point;
+}
+
+/**
+ * @brief Get the Heading value
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the Heading value from
+ * @return Heading value in degree as decimal number
+ */
+template <typename Heading>
+inline double getHeadingCDD(const Heading& heading) { return ((double)heading.heading_value.value) * 1e-1; }
+
+/**
+ * @brief Get the Heading value
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the Heading standard deviation from
+ * @return Heading standard deviation in degree as decimal number
+ */
+template <typename Heading>
+inline double getHeadingConfidenceCDD(const Heading& heading) { return ((double)heading.heading_confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }
+
+/**
+ * @brief Get the Yaw Rate value
+ * 
+ * @param yaw_rate The YawRate object to get the yaw rate from
+ * @return double The yaw rate in degrees per second
+ */
+template <typename YawRate>
+inline double getYawRateCDD(const YawRate& yaw_rate) {
+  return ((double)yaw_rate.yaw_rate_value.value) * 1e-2; // Yaw rate in deg/s
+}
+
+/**
+ * @brief Get the Yaw Rate Confidence
+ * 
+ * @param yaw_rate The YawRate object to get the yaw rate confidence from
+ * @return double The yaw rate standard deviation in degrees per second
+ */
+template <typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw_rate_confidence)>
+inline double getYawRateConfidenceCDD(const YawRate& yaw_rate) {
+  auto val = yaw_rate.yaw_rate_confidence.value;
+  static const std::map<uint8_t, double> confidence_map = {
+      {YawRateConfidence::UNAVAILABLE, 0.0},
+      {YawRateConfidence::DEG_SEC_000_01, 0.01},
+      {YawRateConfidence::DEG_SEC_000_05, 0.05},
+      {YawRateConfidence::DEG_SEC_000_10, 0.1},
+      {YawRateConfidence::DEG_SEC_001_00, 1.0},
+      {YawRateConfidence::DEG_SEC_005_00, 5.0},
+      {YawRateConfidence::DEG_SEC_010_00, 10.0},
+      {YawRateConfidence::DEG_SEC_100_00, 100.0},
+      {YawRateConfidence::OUT_OF_RANGE, std::numeric_limits<double>::infinity()},
+  };
+  return confidence_map.at(val) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+}
+
+
+/**
+ * @brief Get the Semi Axis object
+ * 
+ * @param semi_axis_length The SemiAxisLength object to get the semi axis from
+ * @return double the semi axis length in meters
+ */
+template <typename SemiAxisLength>
+inline double getSemiAxis(const SemiAxisLength& semi_axis_length) {
+  return ((double)semi_axis_length.value) * 1e-2 / etsi_its_msgs::OneCentimeterHelper<SemiAxisLength>::value;
+}
+
+/**
+ * @brief Extract major axis length, minor axis length and orientation from the given position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to extract the values from
+ * @return std::tuple<double, double, double> major axis length in meters, minor axis length in meters, and orientation in degrees
+ */
+template <typename PosConfidenceEllipse>
+inline std::tuple<double, double, double> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse) {
+  return {
+    getSemiAxis(position_confidence_ellipse.semi_major_confidence),
+    getSemiAxis(position_confidence_ellipse.semi_minor_confidence),
+    position_confidence_ellipse.semi_major_orientation.value * 1e-1
+  };
+}
+
+/**
+ * @brief Convert the confidence ellipse to a covariance matrix
+ * 
+ * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
+ * 
+ * @param semi_major Semi major axis length in meters
+ * @param semi_minor Semi minor axis length in meters
+ * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
+ * @param object_heading object heading in radians, relative to WGS84
+ * @return std::array<double, 4> The covariance matrix in vehicle coordinates (x = longitudinal, y = lateral)
+ */
+inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation, const double object_heading) {
+  std::array<double, 4> covariance_matrix;
+  double semi_major_squared = semi_major * semi_major / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
+  double semi_minor_squared = semi_minor * semi_minor / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
+  double major_orientation_rad = major_orientation * M_PI / 180;
+  double object_heading_rad = object_heading;
+  
+  double angle_to_object = object_heading_rad - major_orientation_rad;
+
+  double cos_angle = std::cos(angle_to_object);
+  double sin_angle = std::sin(angle_to_object);
+  covariance_matrix[0] = semi_major_squared * cos_angle * cos_angle + semi_minor_squared * sin_angle * sin_angle;
+  covariance_matrix[1] = (semi_major_squared - semi_minor_squared) * cos_angle * sin_angle;
+  covariance_matrix[2] = covariance_matrix[1];
+  covariance_matrix[3] = semi_major_squared * sin_angle * sin_angle + semi_minor_squared * cos_angle * cos_angle;
+
+  return covariance_matrix;
+}
+
+/**
+ * @brief Convert the confidence ellipse to a covariance matrix
+ * 
+ * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
+ * 
+ * @param semi_major Semi major axis length in meters
+ * @param semi_minor Semi minor axis length in meters
+ * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
+ * @return std::array<double, 4> The covariance matrix in WGS coordinates (x = North, y = East)
+ */
+inline std::array<double, 4> WGSCovMatrixFromConfidenceEllipse(double semi_major, double semi_minor, double major_orientation) {
+  // The WGS covariance matrix is the same as in vehicle coordinates, if it would have a heading of 0.0
+  return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, 0.0);
+}
+
+/**
+ * @brief Get the covariance matrix of the position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
+ * @param object_heading The object heading in radians
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in vehicle coordinates (x = longitudinal, y = lateral)
+ */
+template <typename PosConfidenceEllipse>
+inline std::array<double, 4> getPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse, const double object_heading){
+  auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
+  return CovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation, object_heading);
+}
+
+/**
+ * @brief Get the covariance matrix of the position confidence ellipse
+ * 
+ * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
+ * @param object_heading The object heading in radians
+ * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in WGS coordinates (x = North, y = East)
+ */
+template <typename PosConfidenceEllipse>
+inline std::array<double, 4> getWGSPosConfidenceEllipse(const PosConfidenceEllipse& position_confidence_ellipse){
+  auto [semi_major, semi_minor, major_orientation] = getPosConfidenceEllipse(position_confidence_ellipse);
+  return WGSCovMatrixFromConfidenceEllipse(semi_major, semi_minor, major_orientation);
 }
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_GETTERS_COMMON_H

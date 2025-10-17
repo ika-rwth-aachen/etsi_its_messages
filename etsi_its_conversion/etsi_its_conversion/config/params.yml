@@ -1,14 +1,16 @@
-etsi_its_conversion:
+/**/*:
   ros__parameters:
     has_btp_destination_port: true
-    btp_destination_port_offset: 8  # default for Cohda Wireless MK-5 exampleETSI application
-    etsi_message_payload_offset: 78 # default for Cohda Wireless MK-5 exampleETSI application
+    btp_destination_port_offset: 0
+    etsi_message_payload_offset: 4
     ros2udp_etsi_types:
       - cam
       - cam_ts
       - cpm_ts
       - denm
+      - denm_ts
       - mapem_ts
+      - mcm_uulm
       - spatem_ts
       - vam_ts
     udp2ros_etsi_types:
@@ -16,8 +18,8 @@ etsi_its_conversion:
       - cpm_ts
       - denm
       - mapem_ts
+      - mcm_uulm
       - spatem_ts
       - vam_ts
     subscriber_queue_size: 10
     publisher_queue_size: 10
-    check_constraints_before_encoding: false # setting to true could lead to segmentation faults because of infinite recursion (https://github.com/vlm/asn1c/issues/410)

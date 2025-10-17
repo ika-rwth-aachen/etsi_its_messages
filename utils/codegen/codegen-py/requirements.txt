@@ -1,3 +1,4 @@
-asn1tools~=0.166.0
+asn1tools~=0.167.0
 Jinja2~=3.1.2
-numpy>=1.23.3
+numpy~=1.26.4
+tqdm~=4.67.1

@@ -1,0 +1,3 @@
+udp_msgs/UdpPacket udp_packet
+---
+etsi_its_cpm_ts_msgs/CollectivePerceptionMessage ros_msg

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+
+  <name>etsi_its_mcm_uulm_coding</name>
+  <version>3.4.0</version>
+  <description>C++ compatible C source code for draft MCM (TS) version of UULM generated from ASN.1 using asn1c</description>
+
+  <maintainer email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</maintainer>
+  <maintainer email="guido.kueppers@rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="lennart.reiher@rwth-aachen.de">Lennart Reiher</maintainer>
+
+  <author email="jean-pierre.busch@rwth-aachen.de">Jean-Pierre Busch</author>
+  <author email="guido.kueppers@rwth-aachen.de">Guido Küppers</author>
+  <author email="lennart.reiher@rwth-aachen.de">Lennart Reiher</author>
+
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

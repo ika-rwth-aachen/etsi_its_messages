@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal

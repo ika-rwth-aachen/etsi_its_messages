@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,6 +58,7 @@ CPMDisplay::CPMDisplay() {
       new rviz_common::properties::ColorProperty("Color", QColor(25, 0, 255), "Text color", show_meta_);
   char_height_ = new rviz_common::properties::FloatProperty("Scale", 0.5, "Scale of text", show_meta_);
   show_station_id_ = new rviz_common::properties::BoolProperty("StationID", true, "Show StationID", show_meta_);
+  show_object_id_ = new rviz_common::properties::BoolProperty("ObjectID", true, "Show ObjectID", show_meta_);
   show_speed_ = new rviz_common::properties::BoolProperty("Speed", true, "Show speed", show_meta_);
 }
 
@@ -192,6 +193,10 @@ void CPMDisplay::update(float, float) {
         std::string text;
         if (show_station_id_->getBool()) {
           text += "StationID: " + std::to_string(cpm.getStationID());
+          text += "\n";
+        }
+        if (show_object_id_->getBool()) {
+          text += "ObjectID: " + std::to_string(cpm.getIdOfObject(i));
           text += "\n";
         }
         if (show_speed_->getBool()) {

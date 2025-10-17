@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023-2024 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -73,10 +73,12 @@ class CPMRenderObject
 
     uint8_t getNumberOfObjects();
     geometry_msgs::msg::Pose getPoseOfObject(const uint8_t idx);
+    uint16_t getIdOfObject(const uint8_t idx);
     geometry_msgs::msg::Vector3 getDimensionsOfObject(const uint8_t idx);
     geometry_msgs::msg::Vector3 getVelocityOfObject(const uint8_t idx);
 
     struct Object {
+      uint16_t id;
       geometry_msgs::msg::Pose pose;
       geometry_msgs::msg::Vector3 dimensions;
       geometry_msgs::msg::Vector3 velocity;

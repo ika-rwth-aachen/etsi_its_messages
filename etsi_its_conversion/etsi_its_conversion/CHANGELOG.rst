@@ -2,6 +2,56 @@
 Changelog for package etsi_its_conversion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2025-10-16)
+------------------
+* Merge pull request `#106 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/106>`_ from Tezozomoc47/make-converter-service-based
+  Add the service-based approach for message conversion
+* Merge pull request `#108 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/108>`_ from ika-rwth-aachen/fix-udp-src-port
+  Fix setting of BTP destination port in `udp_msg.src_port`
+* Merge pull request `#99 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/99>`_ from ika-rwth-aachen/codex/enable-parallel-execution-for-etsi_its_conversion
+* Merge pull request `#100 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/100>`_ from Tezozomoc47/use-udppacket-srcport-for-btp
+  Added filling of the UdpPacket.src_port to transport BtpDestinationPort information without touching the byte payload.
+* Contributors: Lennart Reiher, Tezozomoc47
+
+3.3.0 (2025-08-07)
+------------------
+* Merge pull request `#83 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/83>`_ from ika-rwth-aachen/deprecate-ros1
+  Deprecate ROS 1 Noetic
+* Contributors: Lennart Reiher
+
+3.2.1 (2025-05-16)
+------------------
+* Merge pull request `#77 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/77>`_ from cubesys-GmbH/vam_constraint_check
+* Contributors: Lennart Reiher
+
+3.2.0 (2025-04-22)
+------------------
+* Merge pull request `#75 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/75>`_ from ika-rwth-aachen/uulm-mcm
+  Add MCM version of Ulm University
+* Merge branch 'main' into uulm-mcm
+* Merge pull request `#72 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/72>`_ from ika-rwth-aachen/fix-runtime-error
+  Fix critical runtime bug
+* Merge pull request `#69 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/69>`_ from ika-rwth-aachen/fix-udp-pub-sub
+  Only create UDP publisher/subscriber if required
+* Contributors: Jean-Pierre Busch, Lennart Reiher
+
+3.1.0 (2025-02-17)
+------------------
+* Merge pull request `#67 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/67>`_ from ika-rwth-aachen/update-copyright
+  Update copyright
+* Merge pull request `#64 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/64>`_ from ika-rwth-aachen/denm-v2
+  Support DENM v2 (TS)
+* Merge branch 'main' into feature/spat-map-plugin
+* Contributors: Guido Küppers, Jean-Pierre Busch, Lennart Reiher
+
+3.0.0 (2024-12-10)
+------------------
+* Merge pull request `#51 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/51>`_ from ika-rwth-aachen/improvement/converter-launch-file
+  Improve converter launch file for better configuration
+* Merge pull request `#28 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/28>`_ from ika-rwth-aachen/feature/spatem-mapem
+  SPATEM/MAPEM Support
+* Contributors: Jean-Pierre Busch, Lennart Reiher
+
 2.4.0 (2024-11-19)
 ------------------
 * Merge branch 'main' into feature/denm-launchfile-transformation

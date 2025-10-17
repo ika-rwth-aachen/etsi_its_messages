@@ -15,12 +15,12 @@ authors:
 
 preferred-citation:
   title: "V2AIX: A Multi-Modal Real-World Dataset of ETSI ITS V2X Messages in Public Road Traffic"
-  type: misc
-  # conference:
-  #   name:
-  # month:
-  year: 2023
-  # doi: ""
+  type: conference-paper
+  conference:
+    name: "International Conference on Intelligent Transportation Systems (ITSC)"
+  month: 9
+  year: 2024
+  doi: "10.1109/ITSC58415.2024.10920150"
   authors:
     - given-names: Guido
       family-names: Küppers

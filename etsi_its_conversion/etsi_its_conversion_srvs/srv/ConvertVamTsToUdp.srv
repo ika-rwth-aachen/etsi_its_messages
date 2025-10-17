@@ -1,0 +1,3 @@
+etsi_its_vam_ts_msgs/VAM ros_msg
+---
+udp_msgs/UdpPacket udp_packet
