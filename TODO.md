@@ -1,3 +1,7 @@
+- [ ] fixes needed for GddAttribute.msg, GddStructure.msg, ISO14823Code.msg (see TODOs in msg files)
+
+
+---------------------------------------------------
 Further modifications required for generating msgs
 ---------------------------------------------------
 

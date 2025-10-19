@@ -79,7 +79,18 @@ uint8 CHOICE_ROI = 5
 InternationalSigndistanceBetweenVehicles dbv
 uint8 CHOICE_DBV = 6
 
-InternationalSigndestinationInformation ddd
+# TODO: circular dependency
+# InternationalSigndestinationInformation
+# DDDIOLIST
+# DDDIO
+# DestinationPlaces
+# DestinationPlace
+# GddStructure
+# GddAttributes
+# GddAttribute
+# InternationalSigndestinationInformation
+# ---
+# InternationalSigndestinationInformation ddd
 uint8 CHOICE_DDD = 7
 
 InternationalSignsection set
