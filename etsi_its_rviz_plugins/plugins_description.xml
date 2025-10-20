@@ -13,6 +13,17 @@
   </class>
 
   <class
+    name="etsi_its_msgs/CAM_TS"
+    type="etsi_its_msgs::displays::CAMTSDisplay"
+    base_class_type="rviz_common::Display"
+  >
+    <description>
+      Displays data from a etsi_its_cam_ts_msgs::CAM.
+    </description>
+    <message_type>etsi_its_cam_ts_msgs/msg/CAM</message_type>
+  </class>
+
+  <class
     name="etsi_its_msgs/DENM"
     type="etsi_its_msgs::displays::DENMDisplay"
     base_class_type="rviz_common::Display"
