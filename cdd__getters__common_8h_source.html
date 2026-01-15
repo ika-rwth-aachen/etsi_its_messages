@@ -219,7 +219,7 @@ $(function(){initNavTree('cdd__getters__common_8h_source.html',''); initResizabl
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="cdd__getters__common_8h.html#a90ed27d3d614e8ebb7965e77f4c7d7f5">  189</a></span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="cdd__getters__common_8h.html#a90ed27d3d614e8ebb7965e77f4c7d7f5">getYawRateConfidenceCDD</a>(<span class="keyword">const</span> YawRate&amp; yaw_rate) {</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <span class="keyword">auto</span> val = yaw_rate.yaw_rate_confidence.value;</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;uint8_t, double&gt; confidence_map = {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      {YawRateConfidence::UNAVAILABLE, 0.0},</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      {YawRateConfidence::UNAVAILABLE, std::numeric_limits&lt;double&gt;::infinity()},</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      {YawRateConfidence::DEG_SEC_000_01, 0.01},</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      {YawRateConfidence::DEG_SEC_000_05, 0.05},</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      {YawRateConfidence::DEG_SEC_000_10, 0.1},</div>

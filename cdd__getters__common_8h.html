@@ -988,7 +988,7 @@ template&lt;typename YawRate, typename YawRateConfidence = decltype(YawRate::yaw
 <div class="fragment"><div class="line"><span class="lineno">  189</span>                                                               {</div>
 <div class="line"><span class="lineno">  190</span>  <span class="keyword">auto</span> val = yaw_rate.yaw_rate_confidence.value;</div>
 <div class="line"><span class="lineno">  191</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;uint8_t, double&gt; confidence_map = {</div>
-<div class="line"><span class="lineno">  192</span>      {YawRateConfidence::UNAVAILABLE, 0.0},</div>
+<div class="line"><span class="lineno">  192</span>      {YawRateConfidence::UNAVAILABLE, std::numeric_limits&lt;double&gt;::infinity()},</div>
 <div class="line"><span class="lineno">  193</span>      {YawRateConfidence::DEG_SEC_000_01, 0.01},</div>
 <div class="line"><span class="lineno">  194</span>      {YawRateConfidence::DEG_SEC_000_05, 0.05},</div>
 <div class="line"><span class="lineno">  195</span>      {YawRateConfidence::DEG_SEC_000_10, 0.1},</div>

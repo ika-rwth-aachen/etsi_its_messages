@@ -1473,7 +1473,7 @@ template&lt;typename YawRate, typename YawRateValue = decltype(YawRate::yaw_rate
 <div class="line"><span class="lineno">  336</span>    yaw_rate_in_001_degrees = YawRateValue::MAX - 1; <span class="comment">// MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX</span></div>
 <div class="line"><span class="lineno">  337</span>  }</div>
 <div class="line"><span class="lineno">  338</span>  </div>
-<div class="line"><span class="lineno">  339</span>  yaw_rate.yaw_rate_value.value = yaw_rate_in_001_degrees;</div>
+<div class="line"><span class="lineno">  339</span>  yaw_rate.yaw_rate_value.value = <span class="keyword">static_cast&lt;</span>decltype(yaw_rate.yaw_rate_value.value)<span class="keyword">&gt;</span>(yaw_rate_in_001_degrees);</div>
 <div class="line"><span class="lineno">  340</span> </div>
 <div class="line"><span class="lineno">  341</span>  <span class="keywordtype">double</span> yaw_rate_std = confidence;</div>
 <div class="line"><span class="lineno">  342</span>  <span class="keywordflow">if</span>(yaw_rate_std == std::numeric_limits&lt;double&gt;::infinity()) {</div>
