@@ -1,7 +1,7 @@
 var denm__setters_8h =
 [
-    [ "etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, typename >", "structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
-    [ "etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengfc7d53985d045d0dcaab7e94241c63f4.html", null ],
+    [ "etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, typename &gt;", "structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
+    [ "etsi_its_denm_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, std::void_t&lt; decltype(SemiAxisLength::ONE_CENTIMETER)&gt; &gt;", "structetsi__its__denm__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengfc7d53985d045d0dcaab7e94241c63f4.html", null ],
     [ "etsi_its_denm_msgs::access::confidenceEllipseFromCovMatrix", "denm__setters_8h.html#a01e842ca42c7e9801b4fb85ba43fd062", null ],
     [ "etsi_its_denm_msgs::access::confidenceEllipseFromWGSCovMatrix", "denm__setters_8h.html#ab37677b422516fedce421968ebfe13d6", null ],
     [ "etsi_its_denm_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "denm__access_8h.html#a509b6187f55ea99970d24ff799403463", null ],
@@ -36,9 +36,9 @@ var denm__setters_8h =
     [ "etsi_its_denm_msgs::access::setSpeed", "denm__setters_8h.html#ad3cbc34012a3bcee2402f930aa9cfc0b", null ],
     [ "etsi_its_denm_msgs::access::setSpeedConfidence", "denm__setters_8h.html#ac726a955d527bcf77fe7db1912495ead", null ],
     [ "etsi_its_denm_msgs::access::setSpeedValue", "denm__setters_8h.html#a2cc5fb52f53c8898a5e84542540be4db", null ],
-    [ "etsi_its_denm_msgs::access::setStationId", "denm__setters_8h.html#a69f818637d2ed4404ecdf3f8bcc1289b", null ],
+    [ "etsi_its_denm_msgs::access::setStationId", "denm__setters_8h.html#abea00b45a1b21aea54b8a64f4ea338df", null ],
     [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#a3e4e7ef8a5aa01a9e79d10591868830c", null ],
-    [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#af08f33b59ab90f3f75e7becb696ad562", null ],
+    [ "etsi_its_denm_msgs::access::setStationType", "denm__setters_8h.html#a5bed2a60a172fbac8189e9ccb6ad4ed2", null ],
     [ "etsi_its_denm_msgs::access::setTimestampITS", "denm__setters_8h.html#a5f75c29f07475c6fefba9d7246ebf582", null ],
     [ "etsi_its_denm_msgs::access::setWGSPosConfidenceEllipse", "denm__setters_8h.html#ab6c7d3cc8288eadb2c2c8ed297377283", null ],
     [ "etsi_its_denm_msgs::access::setYawRateCDD", "denm__setters_8h.html#a681b9f5f0693f4801437571af4c8ebd9", null ],

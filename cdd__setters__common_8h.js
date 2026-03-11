@@ -21,6 +21,8 @@ var cdd__setters__common_8h =
     [ "setSpeed", "cdd__setters__common_8h.html#a8e42f9909d4926e2f2bb2eb50532ec9f", null ],
     [ "setSpeedConfidence", "cdd__setters__common_8h.html#a37166d105cac0ba586f4771bfc331e16", null ],
     [ "setSpeedValue", "cdd__setters__common_8h.html#a2c4e6201e1fc4116b6aaff2f9d35e5f0", null ],
+    [ "setStationId", "cdd__setters__common_8h.html#a39fd3f7ebc10790e40f71ef7d6184e1c", null ],
+    [ "setStationType", "cdd__setters__common_8h.html#a5fe8929c25b15fa3171353560d587af1", null ],
     [ "setTimestampITS", "cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39", null ],
     [ "setWGSPosConfidenceEllipse", "cdd__setters__common_8h.html#aac1510dd6a00dfe44cfbf5fd7003b4ea", null ],
     [ "setYawRateCDD", "cdd__setters__common_8h.html#a7c40f9aa54943934280a7a961645f37f", null ]

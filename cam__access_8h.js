@@ -1,7 +1,7 @@
 var cam__access_8h =
 [
-    [ "etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, typename >", "structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
-    [ "etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengtb68a75d39429afb829a9bf7a19ddc663.html", null ],
+    [ "etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, typename &gt;", "structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
+    [ "etsi_its_cam_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, std::void_t&lt; decltype(SemiAxisLength::ONE_CENTIMETER)&gt; &gt;", "structetsi__its__cam__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLengtb68a75d39429afb829a9bf7a19ddc663.html", null ],
     [ "etsi_its_cam_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "cam__access_8h.html#aeb826dabafcacb7e3490907b40e14f84", null ],
     [ "etsi_its_cam_msgs::access::getTimestampITSFromGenerationDeltaTime", "cam__access_8h.html#abdb0b6860deb5b686ae0fff2043e4eac", null ],
     [ "etsi_its_cam_msgs::access::getUnixNanosecondsFromGenerationDeltaTime", "cam__access_8h.html#a1db5d94bb0bff52933c3e92f5b38357a", null ],

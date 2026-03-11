@@ -1,7 +1,7 @@
 var cam__ts__setters_8h =
 [
-    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, typename >", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
-    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper< SemiAxisLength, std::void_t< decltype(SemiAxisLength::ONE_CENTIMETER)> >", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLca3fbdbd3bab6d77ee8ebffbc2d38b60.html", null ],
+    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, typename &gt;", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper.html", null ],
+    [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::OneCentimeterHelper&lt; SemiAxisLength, std::void_t&lt; decltype(SemiAxisLength::ONE_CENTIMETER)&gt; &gt;", "structetsi__its__cam__ts__msgs_1_1access_1_1etsi__its__msgs_1_1OneCentimeterHelper_3_01SemiAxisLca3fbdbd3bab6d77ee8ebffbc2d38b60.html", null ],
     [ "etsi_its_cam_ts_msgs::access::confidenceEllipseFromCovMatrix", "cam__ts__setters_8h.html#a337eca239448fd695e0d3824241e473e", null ],
     [ "etsi_its_cam_ts_msgs::access::confidenceEllipseFromWGSCovMatrix", "cam__ts__setters_8h.html#a39ccacffe703a0e622ce4fab14b80e8f", null ],
     [ "etsi_its_cam_ts_msgs::access::etsi_its_msgs::getLeapSecondInsertionsSince2004", "cam__ts__access_8h.html#abcb625b67f4226a9e33f48d16b4ef967", null ],
@@ -49,9 +49,9 @@ var cam__ts__setters_8h =
     [ "etsi_its_cam_ts_msgs::access::setSpeed", "cam__ts__setters_8h.html#accaf8be79d8cfe708cc47cb40243d435", null ],
     [ "etsi_its_cam_ts_msgs::access::setSpeedConfidence", "cam__ts__setters_8h.html#a924d9855884bcc4f68e9724e0b158261", null ],
     [ "etsi_its_cam_ts_msgs::access::setSpeedValue", "cam__ts__setters_8h.html#ad77cafac86c0676ea669d5e979dc93d3", null ],
-    [ "etsi_its_cam_ts_msgs::access::setStationId", "cam__ts__setters_8h.html#a1e79956083913d1208b794220886aab7", null ],
+    [ "etsi_its_cam_ts_msgs::access::setStationId", "cam__ts__setters_8h.html#ab6cfbd6c608c548aedfb01496e16ca71", null ],
     [ "etsi_its_cam_ts_msgs::access::setStationType", "cam__ts__setters_8h.html#a8f913178b09650904218687822c3b927", null ],
-    [ "etsi_its_cam_ts_msgs::access::setStationType", "cam__ts__setters_8h.html#a7d66de4242ed68c8586b239dfd7df513", null ],
+    [ "etsi_its_cam_ts_msgs::access::setStationType", "cam__ts__setters_8h.html#a95484e96538a3bc284bb67f3acd2c744", null ],
     [ "etsi_its_cam_ts_msgs::access::setTimestampITS", "cam__ts__setters_8h.html#ada1a3222696ee7dcae2a4e886d0e7418", null ],
     [ "etsi_its_cam_ts_msgs::access::setVehicleDimensions", "cam__ts__setters_8h.html#a16ee4fbb3352e8de62579e2e1a0592d2", null ],
     [ "etsi_its_cam_ts_msgs::access::setVehicleLength", "cam__ts__setters_8h.html#ab37416099177b6b4d783e1322fe4d48a", null ],
