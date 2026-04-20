@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Based in https://github.com/ika-rwth-aachen/etsi_its_messages/blob/main/etsi_its_msgs_utils/samples/publish_spatem_ts.py
 
