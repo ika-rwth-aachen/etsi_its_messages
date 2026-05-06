@@ -50,6 +50,7 @@ void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name}}_t& in, {{etsi
 }
 
 void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {{etsi_type}}_{{asn1_type_name}}_t& out) {
+  (void)in;
   memset(&out, 0, sizeof({{etsi_type}}_{{asn1_type_name}}_t));
   // NULL type: no data to convert
 }
