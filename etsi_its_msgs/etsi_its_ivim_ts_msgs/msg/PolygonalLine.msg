@@ -43,10 +43,10 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # PolygonalLine::= CHOICE {
-# 	deltaPositions					DeltaPositions,
-# 	deltaPositionsWithAltitude		DeltaReferencePositions,
-# 	absolutePositions				AbsolutePositions,
-# 	absolutePositionsWithAltitude	AbsolutePositionsWAltitude,
+# 	deltaPositions					DeltaPositions, 
+# 	deltaPositionsWithAltitude		DeltaReferencePositions, 	
+# 	absolutePositions				AbsolutePositions, 
+# 	absolutePositionsWithAltitude	AbsolutePositionsWAltitude, 
 # 	...
 # 	}
 # ------------------------------------------------------------------------------

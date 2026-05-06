@@ -45,7 +45,7 @@
 # 	*/
 # 	}
 # 	licPlateNumber 		LicPlateNumber
-# 	alphabetIndicator 	AlphabetIndicator,
+# 	alphabetIndicator 	AlphabetIndicator, 
 # 	countryCode 		CountryCode,
 # CS4::= SEQUENCE {
 # /*
@@ -55,7 +55,7 @@
 # 	serviceAppLimit ServiceApplicationLimit
 # 	geographLimit	GeoGraphicalLimit,
 # 	stopTime		StopTime,
-# 	startTime		StartTime,
+# 	startTime		StartTime, 
 # CS3::= SEQUENCE {
 # 
 # 	}
@@ -68,14 +68,14 @@
 # 	issuerIdentifier	IssuerIdentifier,
 # 	countryCode			CountryCode,
 # CS1::= SEQUENCE {
-# 
+#  
 # DEFINITIONS AUTOMATIC TAGS::= BEGIN
-# AVIAEINumberingAndDataStructures {iso(1) standard(0) iso14816(14816) asnm1(1) version1(1)}
+# AVIAEINumberingAndDataStructures {iso(1) standard(0) iso14816(14816) asnm1(1) version1(1)} 
 # 
 # 
 # -- ISO 14816:2005 Amd.1:2015
 # 
-# --<OSS.PDU>--
+# --<OSS.PDU>-- 
 # IssuerIdentifier::= INTEGER(0 .. 16383)
 # ------------------------------------------------------------------------------
 

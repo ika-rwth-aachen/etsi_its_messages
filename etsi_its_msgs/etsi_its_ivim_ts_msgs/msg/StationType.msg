@@ -42,8 +42,24 @@
 # ------------------------------------------------------------------------------
 
 # --- ASN.1 Definition ---------------------------------------------------------
-# StationType ::= INTEGER {unknown(0), pedestrian(1), cyclist(2), moped(3), motorcycle(4), passengerCar(5), bus(6), 
-# lightTruck(7), heavyTruck(8), trailer(9), specialVehicles(10), tram(11), roadSideUnit(15)} (0..255)
+# StationType ::= ENUMERATED {
+# unspecified (0),
+# closedEntryWithPayment (1),
+# closedEntryWithoutPayment (2),
+# closedTransit (3),
+# closedExit (4),
+# closedCredit (5),
+# mixed (6),
+# passage (7), -- open exit
+# checkpoint (8),
+# reload (9),
+# reservedForFutureCENUse1 (10),
+# reservedForFutureCENUse2 (11),
+# reservedForFutureCENUse3 (12),
+# reservedForFutureCENUse4 (13),
+# privateUse5 (14),
+# privateUse6 (15)
+# }
 # ------------------------------------------------------------------------------
 
 uint8 value

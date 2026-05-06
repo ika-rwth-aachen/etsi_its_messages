@@ -45,7 +45,7 @@
 # MlcPart::= SEQUENCE{ -- new container part in V2
 # 	zoneId		Zid,
 # 	laneIds		LaneIds OPTIONAL
-# 	}
+# 	} 
 # ------------------------------------------------------------------------------
 
 Zid zone_id

@@ -45,7 +45,6 @@ extern asn_TYPE_member_t asn_MBR_ivim_ts_NodeXY_1[2];
 #endif
 
 /* Referred external types */
-#include "etsi_its_ivim_ts_coding/ivim_ts_NodeAttributeSetXY.h"
 
 #endif	/* _ivim_ts_NodeXY_H_ */
 #include <etsi_its_ivim_ts_coding/asn_internal.h>

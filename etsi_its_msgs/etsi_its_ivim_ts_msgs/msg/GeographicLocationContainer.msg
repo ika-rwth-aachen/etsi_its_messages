@@ -45,9 +45,9 @@
 # GeographicLocationContainer::= SEQUENCE {
 # 	referencePosition			ReferencePosition,
 # 	referencePositionTime 		TimestampIts OPTIONAL,
-# 	referencePositionHeading	Heading OPTIONAL,
+# 	referencePositionHeading	Heading OPTIONAL, 
 # 	referencePositionSpeed		Speed OPTIONAL,
-# 	parts 						GlcParts,
+# 	parts 						GlcParts, 
 # 	...
 # 	}
 # ------------------------------------------------------------------------------

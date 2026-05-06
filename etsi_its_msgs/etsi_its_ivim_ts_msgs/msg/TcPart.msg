@@ -43,10 +43,10 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # TcPart::= SEQUENCE {
-# 	detectionZoneIds		ZoneIds OPTIONAL,
-# 	relevanceZoneIds		ZoneIds,
-# 	direction				Direction OPTIONAL,
-# 	driverAwarenessZoneIds	ZoneIds OPTIONAL,
+# 	detectionZoneIds		ZoneIds OPTIONAL, 
+# 	relevanceZoneIds		ZoneIds, 
+# 	direction				Direction OPTIONAL, 
+# 	driverAwarenessZoneIds	ZoneIds OPTIONAL, 
 # 	minimumAwarenessTime	INTEGER (0..255) OPTIONAL,
 # 	applicableLanes			LanePositions OPTIONAL,
 # 	layoutId				INTEGER(1..4,...) OPTIONAL,
@@ -55,8 +55,8 @@
 # 	data					OCTET STRING,
 # 	...,
 # [[ --extension in V2
-# 	iviType					IviType,
-# 	laneStatus				LaneStatus OPTIONAL,
+# 	iviType					IviType, 
+# 	laneStatus				LaneStatus OPTIONAL,	
 # 	vehicleCharacteristics	VehicleCharacteristicsList OPTIONAL ]]
 # 	}
 # ------------------------------------------------------------------------------

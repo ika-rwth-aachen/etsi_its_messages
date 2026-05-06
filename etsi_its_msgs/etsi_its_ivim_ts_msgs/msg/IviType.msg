@@ -45,7 +45,7 @@
 # IviType::= INTEGER {
 # 	immediateDangerWarningMessages 			(0),
 # 	regulatoryMessages 						(1),
-# 	trafficRelatedInformationMessages 		(2),
+# 	trafficRelatedInformationMessages 		(2), 
 # 	pollutionMessages 						(3),
 # 	notTrafficRelatedInformationMessages 	(4)
 # 	-- other values  reserved for future use

@@ -44,7 +44,7 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # MapLocationContainer::=SEQUENCE{ -- new container in V2
 # 	reference		MapReference,
-# 	parts			MlcParts
+# 	parts			MlcParts 
 # 	}
 # ------------------------------------------------------------------------------
 

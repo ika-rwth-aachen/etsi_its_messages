@@ -47,8 +47,6 @@ extern asn_TYPE_member_t asn_MBR_ivim_ts_NodeAttributeSet_addGrpC_1[3];
 #endif
 
 /* Referred external types */
-#include "etsi_its_ivim_ts_coding/ivim_ts_NodeLink.h"
-#include "etsi_its_ivim_ts_coding/ivim_ts_Node.h"
 
 #endif	/* _ivim_ts_NodeAttributeSet_addGrpC_H_ */
 #include <etsi_its_ivim_ts_coding/asn_internal.h>

@@ -45,7 +45,7 @@
 # DriverCharacteristics::= INTEGER{
 # 	unexperiencedDrivers		(0),
 # 	experiencedDrivers			(1),
-# 	rfu1						(2),
+# 	rfu1						(2),	
 # 	rfu2						(3)
 # 	} (0..3)
 # ------------------------------------------------------------------------------

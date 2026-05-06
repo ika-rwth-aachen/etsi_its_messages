@@ -46,10 +46,10 @@
 # 	owner			Provider,
 # 	version			INTEGER(0..255),
 # 	pictogramCode	INTEGER(0..65535),
-# 	value			INTEGER (0..65535) OPTIONAL,
+# 	value			INTEGER (0..65535) OPTIONAL, 
 # 	unit			RSCUnit OPTIONAL,
 # 	attributes		ISO14823Attributes OPTIONAL
-# 	}
+# 	}	
 # ------------------------------------------------------------------------------
 
 Provider owner

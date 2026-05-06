@@ -6,6 +6,7 @@
  */
 
 #include "etsi_its_ivim_ts_coding/ivim_ts_NodeXY.h"
+#include "etsi_its_ivim_ts_coding/ivim_ts_NodeAttributeSetXY.h"
 
 asn_TYPE_member_t asn_MBR_ivim_ts_NodeXY_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct ivim_ts_NodeXY, delta),

@@ -42,8 +42,6 @@ extern asn_TYPE_member_t asn_MBR_ivim_ts_MapData_addGrpC_1[1];
 }
 #endif
 
-/* Referred external types */
-#include "etsi_its_ivim_ts_coding/ivim_ts_SignalHeadLocationList.h"
 
 #endif	/* _ivim_ts_MapData_addGrpC_H_ */
 #include <etsi_its_ivim_ts_coding/asn_internal.h>

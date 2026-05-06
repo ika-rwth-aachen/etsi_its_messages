@@ -44,7 +44,7 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # Text::= SEQUENCE {
 # 	layoutComponentId	INTEGER(1..4,...) OPTIONAL,
-# 	language			BIT STRING (SIZE(10)),
+# 	language			BIT STRING (SIZE(10)), 	
 # 	textContent			UTF8String
 # 	}
 # ------------------------------------------------------------------------------

@@ -44,10 +44,10 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # LayoutContainer::=SEQUENCE{
 # 	layoutId			INTEGER(1..4,...),
-# 	height				INTEGER(10..73) OPTIONAL,
+# 	height				INTEGER(10..73) OPTIONAL, 
 # 	width				INTEGER(10..265) OPTIONAL,
 # 	layoutComponents	LayoutComponents,
-# 	...
+# 	...  
 # 	}
 # ------------------------------------------------------------------------------
 

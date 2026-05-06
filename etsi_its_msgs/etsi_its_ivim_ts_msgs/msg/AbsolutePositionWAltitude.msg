@@ -45,7 +45,7 @@
 # AbsolutePositionWAltitude::= SEQUENCE{
 # 	latitude Latitude,
 # 	longitude Longitude,
-# 	altitude Altitude
+# 	altitude Altitude 
 # 	}
 # ------------------------------------------------------------------------------
 

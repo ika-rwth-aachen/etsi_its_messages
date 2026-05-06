@@ -44,11 +44,11 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # LaneCharacteristics::= SEQUENCE{
 # 	zoneDefinitionAccuracy		DefinitionAccuracy,
-# 	existinglaneMarkingStatus	LaneMarkingStatus,
+# 	existinglaneMarkingStatus	LaneMarkingStatus, 
 # 	newlaneMarkingColour		MarkingColour,
 # 	laneDelimitationLeft		LaneDelimitation,
 # 	laneDelimitationRight		LaneDelimitation,
-# 	mergingWith					Zid
+# 	mergingWith					Zid  
 # 	}
 # ------------------------------------------------------------------------------
 

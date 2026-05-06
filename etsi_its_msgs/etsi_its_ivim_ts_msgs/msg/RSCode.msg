@@ -46,7 +46,7 @@
 # 	layoutComponentId	INTEGER(1..4,...) OPTIONAL,
 # 	code				CHOICE {
 # 		viennaConvention	VcCode, -- see Vienna Convention Annex A
-# 		iso14823			ISO14823Code,
+# 		iso14823			ISO14823Code, 
 # 		itisCodes			INTEGER (0..65535), -- see SAE J2540
 # 		anyCatalogue		AnyCatalogue,
 # 		...

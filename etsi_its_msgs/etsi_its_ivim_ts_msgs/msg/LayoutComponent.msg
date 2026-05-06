@@ -44,10 +44,10 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # LayoutComponent::=SEQUENCE{
 # 	layoutComponentId	INTEGER(1..8,...),
-# 	height				INTEGER(10..73),
-# 	width				INTEGER(10..265),
+# 	height				INTEGER(10..73), 
+# 	width				INTEGER(10..265), 
 # 	x					INTEGER(10..265),
-# 	y					INTEGER(10..73),
+# 	y					INTEGER(10..73), 
 # 	textScripting		INTEGER {horizontal (0),  vertical (1)}(0..1)
 # ------------------------------------------------------------------------------
 

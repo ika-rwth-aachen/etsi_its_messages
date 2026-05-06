@@ -44,7 +44,7 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # TractorCharacteristics::=SEQUENCE{
 # 	equalTo			VehicleCharacteristicsFixValuesList OPTIONAL,
-#     notEqualTo		VehicleCharacteristicsFixValuesList OPTIONAL,
+#     notEqualTo		VehicleCharacteristicsFixValuesList OPTIONAL, 
 # 	ranges      	VehicleCharacteristicsRangesList OPTIONAL
 # 	}
 # ------------------------------------------------------------------------------

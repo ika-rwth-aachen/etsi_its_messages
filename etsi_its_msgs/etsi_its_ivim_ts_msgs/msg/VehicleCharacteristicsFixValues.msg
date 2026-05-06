@@ -43,7 +43,7 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # VehicleCharacteristicsFixValues::= CHOICE{
-# 	simpleVehicleType			StationType,
+# 	simpleVehicleType			StationType,	
 # 	euVehicleCategoryCode	 	EuVehicleCategoryCode,
 # 	iso3833VehicleType	 		Iso3833VehicleType,
 # 	euroAndCo2value				EnvironmentalCharacteristics,

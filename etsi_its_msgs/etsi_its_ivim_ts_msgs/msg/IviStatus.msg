@@ -43,10 +43,10 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # IviStatus::= INTEGER {
-# 	new 			(0),
-# 	update			(1),
-# 	cancellation	(2),
-# 	negation 		(3)
+# 	new 			(0),	
+# 	update			(1),	
+# 	cancellation	(2),	
+# 	negation 		(3)	
 # 	-- other values  reserved for future use
 # 	}(0..7)
 # ------------------------------------------------------------------------------

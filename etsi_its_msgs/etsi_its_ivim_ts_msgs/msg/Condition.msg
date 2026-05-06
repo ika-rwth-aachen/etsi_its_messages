@@ -46,13 +46,13 @@
 # 	dry	 				(0),
 # 	moist				(1),
 # 	wet				 	(2),
-# 	standingWater		(3),
+# 	standingWater		(3),	
 # 	frost				(4),
 # 	ice					(5),
 # 	snow 				(6),
 # 	slush				(7),
 # 	unvailable			(8)
-# -- values 9 to 15 reserved for future use
+# -- values 9 to 15 reserved for future use  
 # } (0..15, ...)
 # ------------------------------------------------------------------------------
 

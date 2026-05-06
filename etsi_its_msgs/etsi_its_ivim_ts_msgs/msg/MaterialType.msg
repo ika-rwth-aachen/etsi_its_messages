@@ -48,7 +48,7 @@
 # 	cobblestone			(2),
 # 	gravel 				(3),
 # 	unavailable			(7)
-# -- value 4, 5,6 reserved for future use
+# -- value 4, 5,6 reserved for future use 
 # } (0..7, ...)
 # ------------------------------------------------------------------------------
 

@@ -43,18 +43,18 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # LaneInformation::= SEQUENCE{
-# 	laneNumber			LanePosition,
+# 	laneNumber			LanePosition, 
 # 	direction			Direction,
 # 	validity			InternationalSign-applicablePeriod OPTIONAL,
-# 	laneType			LaneType,
+# 	laneType			LaneType, 
 # 	laneTypeQualifier	CompleteVehicleCharacteristics OPTIONAL,
-# 	laneStatus			LaneStatus,
-# 	laneWidth       	IviLaneWidth OPTIONAL,
+# 	laneStatus			LaneStatus, 	 
+# 	laneWidth       	IviLaneWidth OPTIONAL,       
 # 	...,
 # [[ --extension in V2
 # 	detectionZoneIds					ZoneIds OPTIONAL,
 # 	relevanceZoneIds					ZoneIds OPTIONAL,
-# 	laneCharacteristics					LaneCharacteristics	 OPTIONAL,
+# 	laneCharacteristics					LaneCharacteristics	 OPTIONAL, 
 # 	laneSurfaceStaticCharacteristics	RoadSurfaceStaticCharacteristics OPTIONAL,
 # 	laneSurfaceDynamicCharacteristics	RoadSurfaceDynamicCharacteristics OPTIONAL ]]
 # 	}

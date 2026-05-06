@@ -53,8 +53,34 @@
 
 DestinationType dest_type
 
-GddStructure dest_rs_code
-bool dest_rs_code_is_present
+uint8[] dest_rs_code_country_code
+bool dest_rs_code_country_code_is_present
+uint8 DEST_RS_CODE_COUNTRY_CODE_SIZE = 2
+
+uint8 dest_rs_code_service_category_code_choice
+
+uint8 dest_rs_code_service_category_code_traffic_sign_pictogram
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_DANGER_WARNING = 0
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_REGULATORY = 1
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_INFORMATIVE = 2
+uint8 DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM = 0
+
+uint8 dest_rs_code_service_category_code_public_facilities_pictogram
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM_PUBLIC_FACILITIES = 0
+uint8 DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM = 1
+
+uint8 dest_rs_code_service_category_code_ambient_or_road_condition_pictogram
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM_AMBIENT_CONDITION = 0
+uint8 DEST_RS_CODE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM_ROAD_CONDITION = 1
+uint8 DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM = 2
+
+uint8 dest_rs_code_nature
+uint8 DEST_RS_CODE_NATURE_MIN = 1
+uint8 DEST_RS_CODE_NATURE_MAX = 9
+
+uint8 dest_rs_code_serial_number
+uint8 DEST_RS_CODE_SERIAL_NUMBER_MIN = 0
+uint8 DEST_RS_CODE_SERIAL_NUMBER_MAX = 99
 
 uint8[] dest_blob
 bool dest_blob_is_present

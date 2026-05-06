@@ -43,18 +43,18 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # ISO14823Code ::= SEQUENCE{
-# 	pictogramCode           SEQUENCE {
-# 		countryCode             OCTET STRING (SIZE (2)) OPTIONAL,
-#         serviceCategoryCode     CHOICE {
+# 	pictogramCode           SEQUENCE {  
+# 		countryCode             OCTET STRING (SIZE (2)) OPTIONAL, 
+#         serviceCategoryCode     CHOICE { 
 # 			trafficSignPictogram              ENUMERATED {dangerWarning, regulatory, informative,...},
-# 			publicFacilitiesPictogram         ENUMERATED {publicFacilities, ...},
+# 			publicFacilitiesPictogram         ENUMERATED {publicFacilities, ...},  
 #             ambientOrRoadConditionPictogram   ENUMERATED {ambientCondition, roadCondition,...},
 # 		 ...},
 #          pictogramCategoryCode   SEQUENCE {
 #                   nature            INTEGER (1..9),
 #                   serialNumber      INTEGER (0..99)
 #             }},
-#       attributes        ISO14823Attributes OPTIONAL
+#       attributes        ISO14823Attributes OPTIONAL 
 #       }
 # ------------------------------------------------------------------------------
 
@@ -64,21 +64,19 @@ uint8 COUNTRY_CODE_SIZE = 2
 
 uint8 service_category_code_choice
 
-uint8 service_category_code_value
-uint8 SERVICE_CATEGORY_CODE_VALUE_DANGER_WARNING = 0
-uint8 SERVICE_CATEGORY_CODE_VALUE_REGULATORY = 1
-uint8 SERVICE_CATEGORY_CODE_VALUE_INFORMATIVE = 2
+uint8 service_category_code_traffic_sign_pictogram
+uint8 SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_DANGER_WARNING = 0
+uint8 SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_REGULATORY = 1
+uint8 SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM_INFORMATIVE = 2
 uint8 CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM = 0
 
-# TODO: duplicate field
-# uint8 service_category_code_value
-uint8 SERVICE_CATEGORY_CODE_VALUE_PUBLIC_FACILITIES = 0
+uint8 service_category_code_public_facilities_pictogram
+uint8 SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM_PUBLIC_FACILITIES = 0
 uint8 CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM = 1
 
-# TODO: duplicate field
-# uint8 service_category_code_value
-uint8 SERVICE_CATEGORY_CODE_VALUE_AMBIENT_CONDITION = 0
-uint8 SERVICE_CATEGORY_CODE_VALUE_ROAD_CONDITION = 1
+uint8 service_category_code_ambient_or_road_condition_pictogram
+uint8 SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM_AMBIENT_CONDITION = 0
+uint8 SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM_ROAD_CONDITION = 1
 uint8 CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM = 2
 
 uint8 nature

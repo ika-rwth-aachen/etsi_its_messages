@@ -8,6 +8,7 @@ find_package(etsi_its_conversion_srvs REQUIRED)
 find_package(etsi_its_cpm_ts_conversion REQUIRED)
 find_package(etsi_its_denm_conversion REQUIRED)
 find_package(etsi_its_denm_ts_conversion REQUIRED)
+find_package(etsi_its_ivim_ts_conversion REQUIRED)
 find_package(etsi_its_mapem_ts_conversion REQUIRED)
 find_package(etsi_its_mcm_uulm_conversion REQUIRED)
 find_package(etsi_its_spatem_ts_conversion REQUIRED)
@@ -45,6 +46,7 @@ ament_target_dependencies(${PROJECT_NAME}
   etsi_its_cpm_ts_conversion
   etsi_its_denm_conversion
   etsi_its_denm_ts_conversion
+  etsi_its_ivim_ts_conversion
   etsi_its_mapem_ts_conversion
   etsi_its_mcm_uulm_conversion
   etsi_its_spatem_ts_conversion

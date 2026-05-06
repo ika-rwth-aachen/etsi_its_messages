@@ -43,12 +43,12 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # VcCode::= SEQUENCE {
-# 	roadSignClass 	VcClass,  -- see Vienna Convention
+# 	roadSignClass 	VcClass,  -- see Vienna Convention 
 # 	roadSignCode	INTEGER (1..64),
 # 	vcOption		VcOption, -- e.g. the "a" in H, 3a
-# 	validity		ValidityPeriods OPTIONAL,
-# 	value			INTEGER (0..65535) OPTIONAL,
-# 	unit			RSCUnit OPTIONAL
+# 	validity		ValidityPeriods OPTIONAL, 
+# 	value			INTEGER (0..65535) OPTIONAL, 
+# 	unit			RSCUnit OPTIONAL			
 # 	}
 # ------------------------------------------------------------------------------
 

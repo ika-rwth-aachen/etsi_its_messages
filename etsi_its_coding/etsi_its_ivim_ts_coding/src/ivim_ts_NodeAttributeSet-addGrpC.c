@@ -6,6 +6,8 @@
  */
 
 #include "etsi_its_ivim_ts_coding/ivim_ts_NodeAttributeSet-addGrpC.h"
+#include "etsi_its_ivim_ts_coding/ivim_ts_NodeLink.h"
+#include "etsi_its_ivim_ts_coding/ivim_ts_Node.h"
 
 asn_TYPE_member_t asn_MBR_ivim_ts_NodeAttributeSet_addGrpC_1[] = {
 	{ ATF_POINTER, 3, offsetof(struct ivim_ts_NodeAttributeSet_addGrpC, ptvRequest),

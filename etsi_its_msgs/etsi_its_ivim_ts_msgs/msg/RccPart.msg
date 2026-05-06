@@ -44,7 +44,7 @@
 # --- ASN.1 Definition ---------------------------------------------------------
 # RccPart::= SEQUENCE{
 # 	relevanceZoneIds	ZoneIds,
-# 	roadType			RoadType,
+# 	roadType			RoadType, 
 # 	laneConfiguration	LaneConfiguration,
 # 	...
 # 	}

@@ -50,8 +50,8 @@
 # 	lac		LayoutContainer,
 # 	...,	-- original extension indicator of V1
 # [[ -- Extension in V2
-# 	avc		AutomatedVehicleContainer,
-# 	mlc		MapLocationContainer,
+# 	avc		AutomatedVehicleContainer,	
+# 	mlc		MapLocationContainer, 
 # 	rsc		RoadSurfaceContainer ]]
 # 	}
 # ------------------------------------------------------------------------------

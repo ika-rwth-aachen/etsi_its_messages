@@ -49,10 +49,10 @@
 # 		vehicleDimensions			VehicleDimensions,
 # 		vehicleWeightLimits			VehicleWeightLimits,
 # 		axleWeightLimits			AxleWeightLimits,
-# 		passengerCapacity 			PassengerCapacity,
+# 		passengerCapacity 			PassengerCapacity, 
 # 		exhaustEmissionValues		ExhaustEmissionValues,
 # 		dieselEmissionValues  		DieselEmissionValues,
-# 		soundLevel					SoundLevel,
+# 		soundLevel					SoundLevel, 
 # 		...
 # 		}
 # ------------------------------------------------------------------------------

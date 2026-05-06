@@ -43,11 +43,11 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # ComputedSegment::= SEQUENCE {
-# 	zoneId				Zid,
-# 	laneNumber			LanePosition,
+# 	zoneId				Zid, 
+# 	laneNumber			LanePosition,  
 # 	laneWidth			IviLaneWidth,
-# 	offsetDistance 		INTEGER (-32768..32767) OPTIONAL,
-# 	offsetPosition 		DeltaReferencePosition 	OPTIONAL
+# 	offsetDistance 		INTEGER (-32768..32767) OPTIONAL, 
+# 	offsetPosition 		DeltaReferencePosition 	OPTIONAL 
 # 	}
 # ------------------------------------------------------------------------------
 

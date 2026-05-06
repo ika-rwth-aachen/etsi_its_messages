@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+
+  <name>etsi_its_ivim_ts_conversion</name>
+  <version>0.1.0</version>
+  <description>Conversion functions for converting ROS messages to and from ASN.1-encoded ETSI ITS IVIMs (TS)</description>
+
+  <maintainer email="pascal@example.invalid">Pascal</maintainer>
+  <license>MIT</license>
+
+  <depend>etsi_its_ivim_ts_coding</depend>
+  <depend>etsi_its_ivim_ts_msgs</depend>
+  <depend>etsi_its_primitives_conversion</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <test_depend>python3</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

@@ -43,12 +43,12 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # GlcPart::= SEQUENCE {
-# 	zoneId						Zid,
+# 	zoneId						Zid, 
 # 	laneNumber					LanePosition OPTIONAL,
 # 	zoneExtension				INTEGER (0..255) OPTIONAL,
 # 	zoneHeading					HeadingValue OPTIONAL,
 # 	zone						Zone OPTIONAL,
-# 	...
+# 	... 
 # 	}
 # ------------------------------------------------------------------------------
 

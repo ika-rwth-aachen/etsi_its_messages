@@ -41,7 +41,6 @@ extern asn_per_constraints_t asn_PER_type_ivim_ts_NodeSetXY_constr_1;
 #endif
 
 /* Referred external types */
-#include "etsi_its_ivim_ts_coding/ivim_ts_NodeXY.h"
 
 #endif	/* _ivim_ts_NodeSetXY_H_ */
 #include <etsi_its_ivim_ts_coding/asn_internal.h>

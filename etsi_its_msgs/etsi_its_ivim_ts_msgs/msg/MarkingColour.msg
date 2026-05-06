@@ -49,7 +49,7 @@
 # 	red 				(3),
 # 	blue				(4),
 # 	unavailable			(7)
-# 	-- value 5,6 reserved for future use
+# 	-- value 5,6 reserved for future use 
 # } (0..7, ...)
 # ------------------------------------------------------------------------------
 

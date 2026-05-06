@@ -50,7 +50,7 @@
 # 	curb				(4),
 # 	unpaved				(5),
 # 	guardrail			(6)
-# 	-- value 7 reserved for future use
+# 	-- value 7 reserved for future use 
 # } (0..7, ...)
 # ------------------------------------------------------------------------------
 

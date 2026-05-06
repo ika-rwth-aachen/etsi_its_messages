@@ -43,7 +43,7 @@
 
 # --- ASN.1 Definition ---------------------------------------------------------
 # IviManagementContainer::= SEQUENCE {
-# 	serviceProviderId			Provider,
+# 	serviceProviderId			Provider, 
 # 	iviIdentificationNumber		IviIdentificationNumber,
 # 	timeStamp					TimestampIts OPTIONAL,
 # 	validFrom					TimestampIts OPTIONAL,

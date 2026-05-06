@@ -27,12 +27,50 @@
 import argparse
 import glob
 import os
+import subprocess
+import sys
+from pathlib import Path
 from typing import Dict, List
 
 import jinja2
 from tqdm import tqdm
 
 from asn1CodeGenerationUtils import *
+
+
+IVIM_ROS_TYPE_ALIASES = {
+    "TrailerDetails": "TrailerCharacteristicsFixValuesList",
+    "TrailerAxles": "TrailerCharacteristicsRangesList",
+}
+
+
+def applyRosTypeAliases(value, etsi_type: str):
+    if etsi_type != "ivim_ts":
+        return value
+    if isinstance(value, dict):
+        aliased = {k: applyRosTypeAliases(v, etsi_type) for k, v in value.items()}
+        if "ros_msg_type" in aliased and "ros2_msg_type_file_name" in aliased:
+            aliased["ros2_msg_type_file_name"] = validRosTypeHeader(aliased["ros_msg_type"].replace("[]", ""))
+        return aliased
+    if isinstance(value, list):
+        return [applyRosTypeAliases(v, etsi_type) for v in value]
+    if isinstance(value, str):
+        is_array = value.endswith("[]")
+        base = value[:-2] if is_array else value
+        mapped = IVIM_ROS_TYPE_ALIASES.get(base, base)
+        return f"{mapped}[]" if is_array else mapped
+    return value
+
+
+def applyEtsiTypePlaceholder(value, etsi_type: str):
+    if isinstance(value, dict):
+        return {k: applyEtsiTypePlaceholder(v, etsi_type) for k, v in value.items()}
+    if isinstance(value, list):
+        return [applyEtsiTypePlaceholder(v, etsi_type) for v in value]
+    if isinstance(value, str):
+        return value.replace("ETSI_TYPE_PLACEHOLDER", etsi_type)
+    return value
+
 
 
 def parseCli():
@@ -112,6 +150,10 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
 
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
+    jinja_context = applyEtsiTypePlaceholder(jinja_context, etsi_type)
+
+    # align a few IVIM ROS type names with the existing manually curated .msg files
+    jinja_context = applyRosTypeAliases(jinja_context, etsi_type)
 
     # add raw asn1 definition as comment
     if type_name in asn1_raw:
@@ -147,7 +189,9 @@ def exportConversionHeader(header: str, type_name: str, output_dir: str):
     os.makedirs(output_dir, exist_ok=True)
 
     # export ROS .msg using jinja template
-    filename = os.path.join(output_dir, f"convert{validRosType(type_name)}.h")
+    ros_type_name = validRosType(type_name)
+    ros_type_name = applyRosTypeAliases(ros_type_name, "ivim_ts") if output_dir.endswith("etsi_its_ivim_ts_conversion") else ros_type_name
+    filename = os.path.join(output_dir, f"convert{ros_type_name}.h")
     with open(filename, "w", encoding="utf-8") as file:
         file.write(header)
 
@@ -182,9 +226,39 @@ def sortHeaderFiles(files: List[str]) -> List[str]:
     # make sure there are no duplicates and sort alphabetically
     return sorted(list(set(files)))
 
+
+def normalizeInputFiles(args):
+    if args.type != "ivim_ts":
+        return
+
+    for file_name in args.files:
+        path = Path(file_name)
+        if not path.exists():
+            continue
+        raw = path.read_bytes()
+        try:
+            raw.decode("utf-8")
+        except UnicodeDecodeError:
+            for encoding in ("cp1252", "latin-1"):
+                try:
+                    path.write_text(raw.decode(encoding), encoding="utf-8")
+                    break
+                except UnicodeDecodeError:
+                    continue
+
+
+def postprocessGeneratedHeaders(args):
+    if args.type != "ivim_ts":
+        return
+
+    repo_root = Path(args.output_dir).resolve().parents[3]
+    script = repo_root / "etsi_its_conversion" / "etsi_its_ivim_ts_conversion" / "scripts" / "postprocess_conversion_headers.py"
+    subprocess.run([sys.executable, str(script)], check=True, cwd=repo_root)
+
 def main():
 
     args = parseCli()
+    normalizeInputFiles(args)
 
     # parse ASN.1 files
     print("Parsing ASN.1 files ...")
@@ -218,8 +292,12 @@ def main():
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
+    elif args.type == "ivim_ts":
+        msg_type = "IVIM"
     elif args.type == "mcm_uulm":
         msg_type = "MCM"
+    elif args.type == "ivim_ts":
+        msg_type = "IVIM"
     header_files = findDependenciesOfConversionHeaders(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, [f"convert{msg_type}"])
     header_files += additionalMessageTypes(args.output_dir, msg_type)
     header_files = sortHeaderFiles(header_files)
@@ -228,6 +306,8 @@ def main():
         header_filename = os.path.splitext(os.path.basename(f))[0]
         if header_filename not in header_files:
             os.remove(f)
+
+    postprocessGeneratedHeaders(args)
 
     print(f"Generated {len(header_files)} conversion headers for {msg_type}")
 

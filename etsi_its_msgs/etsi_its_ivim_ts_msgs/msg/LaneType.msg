@@ -57,14 +57,14 @@
 # 	hot					(11),
 # 	pedestrian			(12),
 # 	bikeLane			(13),
-# 	median              (14),
+# 	median              (14),   
 # 	striping			(15),
 # 	trackedVehicle		(16),
 # 	parking				(17),
 # 	emergency			(18),
 # 	verge 				(19),
 # 	minimumRiskManoeuvre(20)
-# -- values 21 to 31 reserved for future use
+# -- values 21 to 31 reserved for future use 
 # 	}(0..31)
 # ------------------------------------------------------------------------------
 

@@ -49,8 +49,8 @@
 # 	mergeL 				(3),
 # 	mergeLR 			(4),
 # 	provisionallyOpen 	(5),
-# 	diverging 			(6)
-# 	-- value 7 reserved for future use
+# 	diverging 			(6)	
+# 	-- value 7 reserved for future use 
 # } (0..7, ...)
 # ------------------------------------------------------------------------------
 
