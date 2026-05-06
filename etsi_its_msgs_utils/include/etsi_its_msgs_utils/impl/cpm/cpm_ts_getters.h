@@ -443,7 +443,7 @@ inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &
     velocity.x = speed * cos(angle);
     velocity.y = speed * sin(angle);
     if (object.velocity.polar_velocity.z_velocity_is_present) {
-      velocity.z = getVelocityComponent(object.velocity.cartesian_velocity.z_velocity);
+      velocity.z = getVelocityComponent(object.velocity.polar_velocity.z_velocity);
     }
   } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {
     velocity.x = getVelocityComponent(object.velocity.cartesian_velocity.x_velocity);
@@ -470,7 +470,7 @@ inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPercei
     throw std::invalid_argument("No velocity present in PerceivedObject");
   }
   if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_POLAR_VELOCITY) {
-    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
+    double speed_confidence = getSpeedConfidence(object.velocity.polar_velocity.velocity_magnitude);
     double angle_confidence = getCartesianAngleConfidence(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; // convert to radians
     double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
     double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
@@ -481,7 +481,7 @@ inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPercei
                           + lateral_confidence * cos(angle) * cos(angle);
     // neglect xy covariance, as it is not present in the output of this function
     double z_confidence = object.velocity.polar_velocity.z_velocity_is_present
-                              ? getVelocityComponentConfidence(object.velocity.cartesian_velocity.z_velocity)
+                              ? getVelocityComponentConfidence(object.velocity.polar_velocity.z_velocity)
                               : std::numeric_limits<double>::infinity();
     return std::make_tuple(x_confidence, y_confidence, z_confidence);
   } else if (object.velocity.choice == Velocity3dWithConfidence::CHOICE_CARTESIAN_VELOCITY) {

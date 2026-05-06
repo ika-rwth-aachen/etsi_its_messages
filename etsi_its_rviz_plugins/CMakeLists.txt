@@ -7,8 +7,10 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(etsi_its_cam_msgs REQUIRED)
+find_package(etsi_its_cam_ts_msgs REQUIRED)
 find_package(etsi_its_cpm_ts_msgs REQUIRED)
 find_package(etsi_its_denm_msgs REQUIRED)
+find_package(etsi_its_denm_ts_msgs REQUIRED)
 find_package(etsi_its_mapem_ts_msgs REQUIRED)
 find_package(etsi_its_spatem_ts_msgs REQUIRED)
 find_package(etsi_its_msgs_utils REQUIRED)
@@ -68,8 +70,10 @@ ament_target_dependencies(${PROJECT_NAME}
   PUBLIC
   rclcpp
   etsi_its_cam_msgs
+  etsi_its_cam_ts_msgs
   etsi_its_cpm_ts_msgs
   etsi_its_denm_msgs
+  etsi_its_denm_ts_msgs
   etsi_its_mapem_ts_msgs
   etsi_its_spatem_ts_msgs
   etsi_its_msgs_utils
@@ -85,8 +89,10 @@ ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 
 ament_export_dependencies(
   etsi_its_cam_msgs
+  etsi_its_cam_ts_msgs
   etsi_its_cpm_ts_msgs
   etsi_its_denm_msgs
+  etsi_its_denm_ts_msgs
   etsi_its_mapem_ts_msgs
   etsi_its_spatem_ts_msgs
   etsi_its_msgs_utils

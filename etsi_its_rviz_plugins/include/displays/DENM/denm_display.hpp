@@ -1,6 +1,7 @@
 #pragma once
 
 #include "etsi_its_denm_msgs/msg/denm.hpp"
+#include "etsi_its_denm_ts_msgs/msg/denm.hpp"
 
 #include "displays/DENM/denm_render_object.hpp"
 #include "displays/DENM/overlay_object.hpp"
@@ -35,10 +36,9 @@ namespace displays
 
 /**
  * @class DENMDisplay
- * @brief Displays an etsi_its_denm_msgs::DENM
+ * @brief Displays an etsi_its_denm_msgs::DENM or an etsi_its_denm_ts_msgs::DENM
  */
-class DENMDisplay : public
-  rviz_common::RosTopicDisplay<etsi_its_denm_msgs::msg::DENM>
+class DENMDisplay : public rviz_common::_RosTopicDisplay
 {
   Q_OBJECT
 
@@ -50,8 +50,32 @@ public:
 
   void reset() override;
 
+  void setTopic(const QString & topic, const QString & datatype) override;
+
+protected Q_SLOTS:
+  void updateTopic() override;
+
 protected:
-  void processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg) override;
+  // DENM type detection
+  enum class DenmType
+  {
+    NONE,
+    RELEASE_1,
+    RELEASE_2
+  };
+  DenmType detectDenmType(const std::string & topic);
+
+  void subscribe();
+  void unsubscribe();
+  void onEnable() override;
+  void onDisable() override;
+
+  // Unified handler that accepts either DENM (release 1) or DENM TS (release 2)
+  void processMessage(const std::variant<
+      etsi_its_denm_msgs::msg::DENM,
+      etsi_its_denm_ts_msgs::msg::DENM
+    > & msg_variant);
+
   void update(float wall_dt, float ros_dt) override;
   void updateOverlay(DENMRenderObject &denm_render_object);
 
@@ -59,6 +83,12 @@ private:
   Ogre::ManualObject * manual_object_;
 
   rclcpp::Node::SharedPtr rviz_node_;
+  std::shared_ptr<rclcpp::SubscriptionBase> subscription_;
+  rclcpp::TimerBase::SharedPtr topic_check_timer_;
+
+  DenmType active_denm_type_;
+  rclcpp::Time subscription_start_time_;
+  uint32_t messages_received_;
 
   // Properties
   rviz_common::properties::BoolProperty *show_meta_, *show_station_id_, *show_cause_code_, *show_sub_cause_code_;

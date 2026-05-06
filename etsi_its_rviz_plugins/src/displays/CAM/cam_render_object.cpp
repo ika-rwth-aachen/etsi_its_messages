@@ -23,37 +23,79 @@ SOFTWARE.
 ============================================================================= */
 
 #include "displays/CAM/cam_render_object.hpp"
+#include <variant>
+#include <type_traits>
+#include <cmath>
 
 namespace etsi_its_msgs
 {
 namespace displays
 {
 
-  CAMRenderObject::CAMRenderObject(etsi_its_cam_msgs::msg::CAM cam, rclcpp::Time receive_time, uint16_t n_leap_seconds) {
-
+  CAMRenderObject::CAMRenderObject(const std::variant<
+      etsi_its_cam_msgs::msg::CAM,
+      etsi_its_cam_ts_msgs::msg::CAM
+    > & cam_variant, rclcpp::Time receive_time, uint16_t n_leap_seconds)
+  {
     int zone;
     bool northp;
-    geometry_msgs::msg::PointStamped p = etsi_its_cam_msgs::access::getUTMPosition(cam, zone, northp);
+    geometry_msgs::msg::PointStamped p;
+    uint64_t nanosecs = 0;
+    uint32_t station_id_val = 0;
+    int station_type_val = 0;
+    double heading_deg = 0.0;
+    double vehicle_length = 0.0;
+    double vehicle_width = 0.0;
+    double vehicle_speed = 0.0;
+
+    if (const auto * r1 = std::get_if<etsi_its_cam_msgs::msg::CAM>(&cam_variant)) {
+      is_ts = false;
+      p = etsi_its_cam_msgs::access::getUTMPosition(*r1, zone, northp);
+      nanosecs = etsi_its_cam_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cam_msgs::access::getGenerationDeltaTime(*r1), receive_time.nanoseconds(), n_leap_seconds);
+      station_id_val = etsi_its_cam_msgs::access::getStationID(*r1);
+      station_type_val = etsi_its_cam_msgs::access::getStationType(*r1);
+      heading_deg = etsi_its_cam_msgs::access::getHeading(*r1);
+      vehicle_length = etsi_its_cam_msgs::access::getVehicleLength(*r1);
+      vehicle_width = etsi_its_cam_msgs::access::getVehicleWidth(*r1);
+      vehicle_speed = etsi_its_cam_msgs::access::getSpeed(*r1);
+    }
+    else if (const auto * r2 = std::get_if<etsi_its_cam_ts_msgs::msg::CAM>(&cam_variant)) {
+      is_ts = true;
+      p = etsi_its_cam_ts_msgs::access::getUTMPosition(*r2, zone, northp);
+      nanosecs = etsi_its_cam_ts_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cam_ts_msgs::access::getGenerationDeltaTime(*r2), receive_time.nanoseconds(), n_leap_seconds);
+      station_id_val = etsi_its_cam_ts_msgs::access::getStationID(*r2);
+      station_type_val = etsi_its_cam_ts_msgs::access::getStationType(*r2);
+      heading_deg = etsi_its_cam_ts_msgs::access::getHeading(*r2);
+      vehicle_length = etsi_its_cam_ts_msgs::access::getVehicleLength(*r2);
+      vehicle_width = etsi_its_cam_ts_msgs::access::getVehicleWidth(*r2);
+      vehicle_speed = etsi_its_cam_ts_msgs::access::getSpeed(*r2);
+    } else { // unexpected variant content (minimal safe initialization)
+      is_ts = false;
+      header.frame_id = "";
+      header.stamp = rclcpp::Time(0);
+      station_id = 0;
+      station_type = 0;
+      pose = geometry_msgs::msg::Pose();
+      dimensions = geometry_msgs::msg::Vector3();
+      speed = 0.0;
+      return;
+    }
+
+    // common initialization
     header.frame_id = p.header.frame_id;
-
-    uint64_t nanosecs = etsi_its_cam_msgs::access::getUnixNanosecondsFromGenerationDeltaTime(etsi_its_cam_msgs::access::getGenerationDeltaTime(cam), receive_time.nanoseconds(), n_leap_seconds);
     header.stamp = rclcpp::Time(nanosecs);
-
-    station_id = etsi_its_cam_msgs::access::getStationID(cam);
-    station_type = etsi_its_cam_msgs::access::getStationType(cam);
-
-    double heading = (90-etsi_its_cam_msgs::access::getHeading(cam))*M_PI/180.0; // 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
-    while(heading<0) heading+=2*M_PI;
+    station_id = station_id_val;
+    station_type = station_type_val;
+    double heading = (90.0 - heading_deg) * M_PI / 180.0;
+    while (heading < 0) heading += 2 * M_PI;
     pose.position = p.point;
     tf2::Quaternion orientation;
     orientation.setRPY(0.0, 0.0, heading);
     pose.orientation = tf2::toMsg(orientation);
-
-    dimensions.x = etsi_its_cam_msgs::access::getVehicleLength(cam);
-    dimensions.y = etsi_its_cam_msgs::access::getVehicleWidth(cam);
+    dimensions.x = vehicle_length;
+    dimensions.y = vehicle_width;
     dimensions.z = 1.6;
-
-    speed = etsi_its_cam_msgs::access::getSpeed(cam);
+    speed = vehicle_speed;
   }
 
   bool CAMRenderObject::validateFloats() {
@@ -85,7 +127,6 @@ namespace displays
   }
 
   geometry_msgs::msg::Vector3 CAMRenderObject::getDimensions() {
-
     return dimensions;
   }
 
@@ -93,5 +134,8 @@ namespace displays
     return speed;
   }
 
+  bool CAMRenderObject::isTS() {
+    return is_ts;
+  }
 }  // namespace displays
 }  // namespace etsi_its_msgs

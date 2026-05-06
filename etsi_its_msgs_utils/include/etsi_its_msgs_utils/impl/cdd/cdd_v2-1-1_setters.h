@@ -38,17 +38,6 @@ SOFTWARE.
 #include <cstring>
 
 /**
- * @brief Set the Station Id object
- *
- * @param station_id
- * @param id_value
- */
-inline void setStationId(StationId& station_id, const uint32_t id_value) {
-  throwIfOutOfRange(id_value, StationId::MIN, StationId::MAX, "StationId");
-  station_id.value = id_value;
-}
-
-/**
  * @brief Set the Its Pdu Header object
  *
  * @param header ItsPduHeader to be set
@@ -63,17 +52,6 @@ inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, cons
   header.message_id.value = message_id;
   throwIfOutOfRange(protocol_version, OrdinalNumber1B::MIN, OrdinalNumber1B::MAX, "ProtocolVersion");
   header.protocol_version.value = protocol_version;
-}
-
-/**
- * @brief Set the Station Type
- *
- * @param station_type
- * @param value
- */
-inline void setStationType(TrafficParticipantType& station_type, const uint8_t value) {
-  throwIfOutOfRange(value, TrafficParticipantType::MIN, TrafficParticipantType::MAX, "StationType");
-  station_type.value = value;
 }
 
 /**

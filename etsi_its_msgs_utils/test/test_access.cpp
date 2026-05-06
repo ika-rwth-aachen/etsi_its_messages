@@ -14,6 +14,9 @@
 #include <etsi_its_denm_msgs/msg/denm.hpp>
 #include <etsi_its_msgs_utils/denm_access.hpp>
 
+#include <etsi_its_denm_ts_msgs/msg/denm.hpp>
+#include <etsi_its_msgs_utils/denm_ts_access.hpp>
+
 #include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
 #include <etsi_its_msgs_utils/mapem_ts_access.hpp>
 
@@ -43,6 +46,9 @@ namespace cpm_ts_msgs = etsi_its_cpm_ts_msgs::msg;
 
 namespace denm_msgs = etsi_its_denm_msgs::msg;
 #include <impl/test_denm_access.cpp>
+
+namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
+#include <impl/test_denm_ts_access.cpp>
 
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 #include <impl/test_mapem_ts_access.cpp>

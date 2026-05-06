@@ -42,8 +42,6 @@ class Publisher(Node):
         self.publisher = self.create_publisher(DENM, topic, 1)
         self.srv_to_udp_client = self.create_client(ConvertDenmToUdp, "/etsi_its_conversion/denm/udp")
         self.srv_to_ros_client = self.create_client(ConvertUdpToDenm, "/etsi_its_conversion/udp/denm")
-        while not self.srv_to_udp_client.wait_for_service(timeout_sec=1.0) or not self.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("Waiting for conversion service to become available ...")
         self.timer = self.create_timer(1.0, self.publish)
 
     def buildMessage(self):
@@ -113,6 +111,9 @@ if __name__ == "__main__":
 
     rclpy.init()
     publisher = Publisher()
-    publisher.callService()
+    if publisher.srv_to_udp_client.wait_for_service(timeout_sec=1.0) and publisher.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
+        publisher.callService()
+    else:
+        publisher.get_logger().warning("Conversion services not available, skipping ...")
     rclpy.spin(publisher)
     rclpy.shutdown()

@@ -1,0 +1,48 @@
+services:
+
+  base-service:
+    restart: ${RESTART_POLICY:-no}
+    environment:
+      - DOCKER_UID
+      - DOCKER_GID
+      - LANG
+      - LANGUAGE
+      - LC_ALL
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  ros2-zenoh-service:
+    extends:
+      service: base-service
+    environment:
+      - RMW_IMPLEMENTATION=rmw_zenoh_cpp
+      - ZENOH_CONFIG_OVERRIDE=${ZENOH_SESSION_CONFIG_OVERRIDE:-connect/endpoints=["tcp/zenoh-router:7447"]}
+      - ZENOH_ROUTER_CHECK_ATTEMPTS=0
+      - RUST_LOG=zenoh=error
+
+  ros2-zenoh-gpu-x11-service:
+    extends:
+      service: ros2-zenoh-service
+    environment:
+      - DISPLAY=${DISPLAY}
+    deploy:
+      resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+  zenoh-router:
+    command: ros2 run rmw_zenoh_cpp rmw_zenohd
+    environment:
+      - RMW_IMPLEMENTATION=rmw_zenoh_cpp
+      - ZENOH_CONFIG_OVERRIDE=${ZENOH_ROUTER_CONFIG_OVERRIDE:-routing/router/peers_failover_brokering=true}
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/7447"]
+      interval: 1s
+      timeout: 1s
+      retries: 5

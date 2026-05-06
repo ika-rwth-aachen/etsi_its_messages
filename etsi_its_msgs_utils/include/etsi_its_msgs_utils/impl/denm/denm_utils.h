@@ -26,12 +26,13 @@ SOFTWARE.
 
 /**
  * @file impl/denm/denm_utils.h
- * @brief Utility functions for the ETSI ITS DENM (EN)
+ * @brief Utility functions for the ETSI ITS DENM (EN and TS)
  */
 
-#include <etsi_its_msgs_utils/impl/constants.h>
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_DENM_DENM_UTILS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_DENM_DENM_UTILS_H
 
-#pragma once
+#include <etsi_its_msgs_utils/impl/constants.h>
 
 /**
  * @brief Get the Unix-Nanoseconds from a given ReferenceTime object
@@ -46,3 +47,5 @@ inline uint64_t getUnixNanosecondsFromReferenceTime(const TimestampIts& referenc
       etsi_its_msgs::getLeapSecondInsertionsSince2004(static_cast<uint64_t>(unix_time_with_leap_seconds));
   return (unix_time_with_leap_seconds - n_leap_seconds) * 1e9;
 }
+
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_DENM_DENM_UTILS_H

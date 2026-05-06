@@ -28,6 +28,8 @@ namespace displays
 {
 
 DENMDisplay::DENMDisplay()
+  : active_denm_type_(DenmType::NONE),
+    messages_received_(0)
 {
   // General Properties
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
@@ -68,6 +70,8 @@ DENMDisplay::DENMDisplay()
   static int idx = 0;
   overlay_.reset(new rviz_plugin::OverlayObject("Ogre Overlay number " + std::to_string(idx)));
   idx++;
+
+  topic_property_->setDescription("etsi_its_denm_msgs/msg/DENM or etsi_its_denm_ts_msgs/msg/DENM topic to subscribe to.");
 }
 
 DENMDisplay::~DENMDisplay()
@@ -79,7 +83,7 @@ DENMDisplay::~DENMDisplay()
 
 void DENMDisplay::onInitialize()
 {
-  RTDClass::onInitialize();
+  rviz_common::_RosTopicDisplay::onInitialize();
 
   rviz_rendering::RenderSystem::get()->prepareOverlays(scene_manager_);
 
@@ -93,16 +97,156 @@ void DENMDisplay::onInitialize()
 
 void DENMDisplay::reset()
 {
-  RTDClass::reset();
+  Display::reset();
   manual_object_->clear();
   denms_.clear();
   overlay_->hide();
+  messages_received_ = 0;
 }
 
-void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr msg)
+void DENMDisplay::setTopic(const QString & topic, const QString & datatype)
+{
+  (void) datatype;
+  topic_property_->setString(topic);
+}
+
+void DENMDisplay::updateTopic()
+{
+  unsubscribe();
+  reset();
+  subscribe();
+  context_->queueRender();
+}
+
+DENMDisplay::DenmType DENMDisplay::detectDenmType(const std::string & topic)
+{
+  auto topics = rviz_node_->get_topic_names_and_types();
+
+  auto it = topics.find(topic);
+  if (it == topics.end()) {
+    return DenmType::NONE;
+  }
+
+  for (const auto & type : it->second) {
+    if (type == "etsi_its_denm_ts_msgs/msg/DENM") {
+      return DenmType::RELEASE_2;
+    }
+    if (type == "etsi_its_denm_msgs/msg/DENM") {
+      return DenmType::RELEASE_1;
+    }
+  }
+
+  return DenmType::NONE;
+}
+
+void DENMDisplay::subscribe()
+{
+  if (!isEnabled() ) {
+    return;
+  }
+
+  unsubscribe();
+
+  if (topic_property_->isEmpty()) {
+    setStatus(
+      rviz_common::properties::StatusProperty::Error,
+      "Topic",
+      QString("Error subscribing: Empty topic name"));
+    return;
+  }
+
+  const std::string topic = topic_property_->getTopicStd();
+
+  // Validate topic name
+  try {
+    rclcpp::expand_topic_or_service_name(
+      topic,
+      rviz_node_->get_name(),
+      rviz_node_->get_namespace());
+  } catch (const rclcpp::exceptions::InvalidTopicNameError & e) {
+    setStatus(
+      rviz_common::properties::StatusProperty::Error,
+      "Topic",
+      QString("Error subscribing: ") + e.what());
+    return;
+  }
+
+  DenmType denm_type = detectDenmType(topic);
+
+  if (denm_type == DenmType::RELEASE_1) {
+    subscription_ = rviz_node_->create_subscription<etsi_its_denm_msgs::msg::DENM>(
+      topic,
+      qos_profile,
+      [this](etsi_its_denm_msgs::msg::DENM::SharedPtr msg) {
+        processMessage(std::variant<etsi_its_denm_msgs::msg::DENM,etsi_its_denm_ts_msgs::msg::DENM>(*msg));
+      });
+    active_denm_type_ = DenmType::RELEASE_1;
+  }
+  else if (denm_type == DenmType::RELEASE_2) {
+    subscription_ = rviz_node_->create_subscription<etsi_its_denm_ts_msgs::msg::DENM>(
+      topic,
+      qos_profile,
+      [this](etsi_its_denm_ts_msgs::msg::DENM::ConstSharedPtr msg) {
+        this->processMessage(std::variant<etsi_its_denm_msgs::msg::DENM,etsi_its_denm_ts_msgs::msg::DENM>(*msg));
+      });
+    active_denm_type_ = DenmType::RELEASE_2;
+  }
+  else { // denm_type == DenmType::NONE, i.e. not found or wrong type
+    setStatus(
+      rviz_common::properties::StatusProperty::Warn, "Topic",
+      QString("Waiting for topic: ") + QString::fromStdString(topic)
+      + QString(" (etsi_its_denm_msgs/msg/DENM or etsi_its_denm_ts_msgs/msg/DENM)"));
+    
+    // Start periodic timer to check for topic availability
+    if (!topic_check_timer_) {
+      topic_check_timer_ = rviz_node_->create_wall_timer(
+        std::chrono::milliseconds(1000),
+        [this]() { subscribe(); });
+    }
+  }
+
+  if (subscription_) {
+    subscription_start_time_ = rviz_node_->now();
+    setStatus(rviz_common::properties::StatusProperty::Ok, "Topic", "OK");
+    // Cancel timer since the subscription was successful
+    if (topic_check_timer_) {
+      topic_check_timer_->cancel();
+      topic_check_timer_.reset();
+    }
+  }
+}
+
+void DENMDisplay::unsubscribe()
+{
+  subscription_.reset();
+  active_denm_type_ = DenmType::NONE;
+
+  // Cancel the timer
+  if (topic_check_timer_) {
+    topic_check_timer_->cancel();
+    topic_check_timer_.reset();
+  }
+}
+
+void DENMDisplay::onEnable()
+{
+  subscribe();
+}
+
+void DENMDisplay::onDisable()
+{
+  unsubscribe();
+  reset();
+}
+
+// Unified handler used by both release 1 and release 2
+void DENMDisplay::processMessage(const std::variant<
+    etsi_its_denm_msgs::msg::DENM,
+    etsi_its_denm_ts_msgs::msg::DENM
+  > & msg_variant)
 {
   // Generate DENM render object from message
-  DENMRenderObject denm(*msg);
+  DENMRenderObject denm(msg_variant);
   if (!denm.validateFloats()) {
         setStatus(
           rviz_common::properties::StatusProperty::Error, "Topic",
@@ -116,6 +260,10 @@ void DENMDisplay::processMessage(etsi_its_denm_msgs::msg::DENM::ConstSharedPtr m
   else denms_.insert(std::make_pair(denm.getStationID(), denm)); 
   
   overlay_->show();
+
+  ++messages_received_;
+  setStatus(
+    rviz_common::properties::StatusProperty::Ok, "Topic", QString::number(messages_received_) + " messages received");
 }
 
 void DENMDisplay::update(float, float) {

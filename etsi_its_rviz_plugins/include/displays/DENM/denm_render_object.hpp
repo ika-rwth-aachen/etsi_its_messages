@@ -1,4 +1,5 @@
 #include "etsi_its_denm_msgs/msg/denm.hpp"
+#include "etsi_its_denm_ts_msgs/msg/denm.hpp"
 
 #include <geometry_msgs/msg/pose.hpp>
 #include <geometry_msgs/msg/vector3.hpp>
@@ -7,8 +8,11 @@
 
 #include <tf2/LinearMath/Quaternion.h>
 #include <etsi_its_msgs_utils/denm_access.hpp>
+#include <etsi_its_msgs_utils/denm_ts_access.hpp>
 
 #include "rviz_common/validate_floats.hpp"
+#include <variant>
+#include <cmath>
 
 namespace etsi_its_msgs
 {
@@ -22,7 +26,16 @@ namespace displays
 class DENMRenderObject
 {
   public:
-    DENMRenderObject(etsi_its_denm_msgs::msg::DENM denm);
+    DENMRenderObject(const std::variant<
+        etsi_its_denm_msgs::msg::DENM,
+        etsi_its_denm_ts_msgs::msg::DENM
+      > & denm_variant);
+
+    DENMRenderObject(const etsi_its_denm_msgs::msg::DENM & denm)
+      : DENMRenderObject(std::variant<etsi_its_denm_msgs::msg::DENM, etsi_its_denm_ts_msgs::msg::DENM>(denm)) {}
+      
+    DENMRenderObject(const etsi_its_denm_ts_msgs::msg::DENM & denm)
+      : DENMRenderObject(std::variant<etsi_its_denm_msgs::msg::DENM, etsi_its_denm_ts_msgs::msg::DENM>(denm)) {}
 
     /**
      * @brief This function validates all float variables that are part of a DENMRenderObject
@@ -93,6 +106,14 @@ class DENMRenderObject
      * @return std::string
      */
     std::string getSubCauseCode();
+
+    /**
+     * @brief Check if the DENM object is TS (release 2)
+     *
+     * @return true if DENM object is TS, false otherwise
+     */
+    bool isTS();
+
   private:
     // member variables
     std_msgs::msg::Header header;
@@ -103,7 +124,7 @@ class DENMRenderObject
     geometry_msgs::msg::Pose pose;
     geometry_msgs::msg::Vector3 dimensions;
     double speed;
-
+    bool is_ts = false;
 };
 
 }  // namespace displays

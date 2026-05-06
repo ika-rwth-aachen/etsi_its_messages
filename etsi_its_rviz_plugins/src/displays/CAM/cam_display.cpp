@@ -47,6 +47,8 @@ namespace displays
 {
 
 CAMDisplay::CAMDisplay()
+  : active_cam_type_(CamType::NONE),
+    messages_received_(0)
 {
   // General Properties
   buffer_timeout_ = new rviz_common::properties::FloatProperty(
@@ -71,6 +73,7 @@ CAMDisplay::CAMDisplay()
   show_speed_ = new rviz_common::properties::BoolProperty("Speed", true,
     "Show speed", show_meta_);
 
+  topic_property_->setDescription("etsi_its_cam_msgs/msg/CAM or etsi_its_cam_ts_msgs/msg/CAM topic to subscribe to.");
 }
 
 CAMDisplay::~CAMDisplay()
@@ -82,7 +85,7 @@ CAMDisplay::~CAMDisplay()
 
 void CAMDisplay::onInitialize()
 {
-  RTDClass::onInitialize();
+  rviz_common::_RosTopicDisplay::onInitialize();
 
   auto nodeAbstraction = context_->getRosNodeAbstraction().lock();
   rviz_node_ = nodeAbstraction->get_raw_node();
@@ -94,11 +97,152 @@ void CAMDisplay::onInitialize()
 
 void CAMDisplay::reset()
 {
-  RTDClass::reset();
+  Display::reset();
   manual_object_->clear();
+  cams_.clear();
+  messages_received_ = 0;
 }
 
-void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
+void CAMDisplay::setTopic(const QString & topic, const QString & datatype)
+{
+  (void) datatype;
+  topic_property_->setString(topic);
+}
+
+void CAMDisplay::updateTopic()
+{
+  unsubscribe();
+  reset();
+  subscribe();
+  context_->queueRender();
+}
+
+CAMDisplay::CamType CAMDisplay::detectCamType(const std::string & topic)
+{
+  auto topics = rviz_node_->get_topic_names_and_types();
+
+  auto it = topics.find(topic);
+  if (it == topics.end()) {
+    return CamType::NONE;
+  }
+
+  for (const auto & type : it->second) {
+    if (type == "etsi_its_cam_ts_msgs/msg/CAM") {
+      return CamType::RELEASE_2;
+    }
+    if (type == "etsi_its_cam_msgs/msg/CAM") {
+      return CamType::RELEASE_1;
+    }
+  }
+
+  return CamType::NONE;
+}
+
+void CAMDisplay::subscribe()
+{
+  if (!isEnabled() ) {
+    return;
+  }
+
+  unsubscribe();
+
+  if (topic_property_->isEmpty()) {
+    setStatus(
+      rviz_common::properties::StatusProperty::Error,
+      "Topic",
+      QString("Error subscribing: Empty topic name"));
+    return;
+  }
+
+  const std::string topic = topic_property_->getTopicStd();
+
+  // Validate topic name
+  try {
+    rclcpp::expand_topic_or_service_name(
+      topic,
+      rviz_node_->get_name(),
+      rviz_node_->get_namespace());
+  } catch (const rclcpp::exceptions::InvalidTopicNameError & e) {
+    setStatus(
+      rviz_common::properties::StatusProperty::Error,
+      "Topic",
+      QString("Error subscribing: ") + e.what());
+    return;
+  }
+
+  CamType cam_type = detectCamType(topic);
+
+  if (cam_type == CamType::RELEASE_1) {
+    subscription_ = rviz_node_->create_subscription<etsi_its_cam_msgs::msg::CAM>(
+      topic,
+      qos_profile,
+      [this](etsi_its_cam_msgs::msg::CAM::SharedPtr msg) {
+        processMessage(std::variant<etsi_its_cam_msgs::msg::CAM,etsi_its_cam_ts_msgs::msg::CAM>(*msg));
+      });
+    active_cam_type_ = CamType::RELEASE_1;
+  }
+  else if (cam_type == CamType::RELEASE_2) {
+    subscription_ = rviz_node_->create_subscription<etsi_its_cam_ts_msgs::msg::CAM>(
+      topic,
+      qos_profile,
+      [this](etsi_its_cam_ts_msgs::msg::CAM::ConstSharedPtr msg) {
+        this->processMessage(std::variant<etsi_its_cam_msgs::msg::CAM,etsi_its_cam_ts_msgs::msg::CAM>(*msg));
+      });
+    active_cam_type_ = CamType::RELEASE_2;
+  }
+  else { // cam_type == CamType::NONE, i.e. not found or wrong type
+    setStatus(
+      rviz_common::properties::StatusProperty::Warn, "Topic",
+      QString("Waiting for topic: ") + QString::fromStdString(topic)
+      + QString(" (etsi_its_cam_msgs/msg/CAM or etsi_its_cam_ts_msgs/msg/CAM)"));
+    
+    // Start periodic timer to check for topic availability
+    if (!topic_check_timer_) {
+      topic_check_timer_ = rviz_node_->create_wall_timer(
+        std::chrono::milliseconds(1000),
+        [this]() { subscribe(); });
+    }
+  }
+
+  if (subscription_) {
+    subscription_start_time_ = rviz_node_->now();
+    setStatus(rviz_common::properties::StatusProperty::Ok, "Topic", "OK");
+    // Cancel timer since the subscription was successful
+    if (topic_check_timer_) {
+      topic_check_timer_->cancel();
+      topic_check_timer_.reset();
+    }
+  }
+}
+
+void CAMDisplay::unsubscribe()
+{
+  subscription_.reset();
+  active_cam_type_ = CamType::NONE;
+
+  // Cancel the timer
+  if (topic_check_timer_) {
+    topic_check_timer_->cancel();
+    topic_check_timer_.reset();
+  }
+}
+
+void CAMDisplay::onEnable()
+{
+  subscribe();
+}
+
+void CAMDisplay::onDisable()
+{
+  unsubscribe();
+  reset();
+}
+
+// Unified handler used by both release 1 and release 2
+void CAMDisplay::processMessage(const std::variant<
+    etsi_its_cam_msgs::msg::CAM,
+    etsi_its_cam_ts_msgs::msg::CAM
+  > & msg_variant)
 {
   // Generate CAM render object from message
   rclcpp::Time now = rviz_node_->now();
@@ -110,7 +254,7 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
     return;
   }
 
-  CAMRenderObject cam(*msg, now, getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds())));
+  CAMRenderObject cam(msg_variant, now, getLeapSecondInsertionsSince2004(static_cast<uint64_t>(now.seconds())));
   if (!cam.validateFloats()) {
     setStatus(
       rviz_common::properties::StatusProperty::Error, "Topic",
@@ -122,6 +266,10 @@ void CAMDisplay::processMessage(etsi_its_cam_msgs::msg::CAM::ConstSharedPtr msg)
   auto it = cams_.find(cam.getStationID());
   if (it != cams_.end()) it->second = cam; // Key exists, update the value
   else cams_.insert(std::make_pair(cam.getStationID(), cam));
+
+  ++messages_received_;
+  setStatus(
+    rviz_common::properties::StatusProperty::Ok, "Topic", QString::number(messages_received_) + " messages received");
 
   return;
 }

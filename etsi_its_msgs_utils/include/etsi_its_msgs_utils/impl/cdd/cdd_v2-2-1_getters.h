@@ -25,34 +25,37 @@ SOFTWARE.
 */
 
 /**
- * @file impl/cdd/cdd_v1-3-1_setters.h
- * @brief Setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1
+ * @file impl/cdd/cdd_v2-2-1_getters.h
+ * @brief Getter functions for the ETSI ITS Common Data Dictionary (CDD) v2.2.1
  */
 
-#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
-#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
-
-#include <etsi_its_msgs_utils/impl/cdd/cdd_setters_common.h>
-#include <etsi_its_msgs_utils/impl/checks.h>
+#ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_2_1_GETTERS_H
+#define ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_2_1_GETTERS_H
 #include <GeographicLib/UTMUPS.hpp>
-#include <cstring>
+
+#include <etsi_its_msgs_utils/impl/cdd/cdd_getters_common.h>
 
 /**
- * @brief Set the Its Pdu Header object
+ * @brief Get the WGS Heading value
  *
- * @param header ItsPduHeader to be set
- * @param message_id ID of the message
- * @param station_id
- * @param protocol_version
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the WGS Heading value from
+ * @return WGS Heading value in degree as decimal number
  */
-inline void setItsPduHeader(ItsPduHeader& header, const uint8_t message_id, const uint32_t station_id,
-                            const uint8_t protocol_version = 0) {
-  setStationId(header.station_id, station_id);
-  throwIfOutOfRange(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, "MessageID");
-  header.message_id = message_id;
-  throwIfOutOfRange(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,
-                    "ProtocolVersion");
-  header.protocol_version = protocol_version;
-}
+template <typename Wgs84Angle>
+inline double getWGSHeadingCDD(const Wgs84Angle& heading) { return ((double)heading.value.value) * 1e-1; }
 
-#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V1_3_1_SETTERS_H
+/**
+ * @brief Get the WGS Heading confidence
+ *
+ * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West
+ *
+ * @param heading to get the WGS Heading standard deviation from
+ * @return WGS Heading standard deviation in degree as decimal number
+ */
+
+template <typename Wgs84Angle>
+inline double getWGSHeadingConfidenceCDD(const Wgs84Angle& heading) { return ((double)heading.confidence.value) * 1e-1 / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; }
+
+#endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_V2_2_1_GETTERS_H

@@ -26,7 +26,7 @@ SOFTWARE.
 
 /**
  * @file impl/cdd/cdd_setters_common.h
- * @brief Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1 and v2.1.1
+ * @brief Common setter functions for the ETSI ITS Common Data Dictionary (CDD) v1.3.1, v2.1.1 and v2.2.1
  */
 
 #ifndef ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H
@@ -40,6 +40,30 @@ SOFTWARE.
 #include <cstdint>
 #include <cstring>
 #include <type_traits>
+
+/**
+ * @brief Set the Station Id object
+ *
+ * @param station_id
+ * @param id_value
+ */
+template <typename StationId>
+inline void setStationId(StationId& station_id, const uint32_t id_value) {
+  throwIfOutOfRange(id_value, StationId::MIN, StationId::MAX, "StationId");
+  station_id.value = id_value;
+}
+
+/**
+ * @brief Set the Station Type
+ *
+ * @param station_type
+ * @param value
+ */
+template <typename StationType>
+inline void setStationType(StationType& station_type, const uint8_t value) {
+  throwIfOutOfRange(value, StationType::MIN, StationType::MAX, "StationType");
+  station_type.value = value;
+}
 
 /**
  * @brief Set the TimestampITS object
@@ -336,7 +360,7 @@ inline void setYawRateCDD(YawRate& yaw_rate, const double value,
     yaw_rate_in_001_degrees = YawRateValue::MAX - 1; // MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX
   }
   
-  yaw_rate.yaw_rate_value.value = yaw_rate_in_001_degrees;
+  yaw_rate.yaw_rate_value.value = static_cast<decltype(yaw_rate.yaw_rate_value.value)>(yaw_rate_in_001_degrees);
 
   double yaw_rate_std = confidence;
   if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
@@ -483,7 +507,5 @@ inline void setWGSPosConfidenceEllipse(PosConfidenceEllipse& position_confidence
   auto [semi_major_axis, semi_minor_axis, orientation] = confidenceEllipseFromWGSCovMatrix(covariance_matrix);
   setPosConfidenceEllipse(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);
 }
-
-
 
 #endif  // ETSI_ITS_MSGS_UTILS_IMPL_CDD_CDD_SETTERS_COMMON_H

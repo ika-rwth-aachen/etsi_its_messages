@@ -343,7 +343,7 @@ inline void setPolarVelocityOfPerceivedObject(PerceivedObject& object,
   setSpeed(object.velocity.polar_velocity.velocity_magnitude, magnitude, magnitude_std);
   setCartesianAngle(object.velocity.polar_velocity.velocity_direction, angle, angle_std);
   if (z != 0.0) {
-    setVelocityComponent(object.velocity.cartesian_velocity.z_velocity, z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
+    setVelocityComponent(object.velocity.polar_velocity.z_velocity, z * 100, z_std * 100 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);
     object.velocity.polar_velocity.z_velocity_is_present = true;
   } else {
     object.velocity.polar_velocity.z_velocity_is_present = false;
