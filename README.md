@@ -83,6 +83,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_coding
 │   ├── etsi_its_denm_coding
 │   ├── etsi_its_denm_ts_coding
+│   ├── etsi_its_ivim_ts_coding
 │   ├── etsi_its_mapem_ts_coding
 │   ├── etsi_its_mcm_uulm_coding
 │   ├── etsi_its_spatem_ts_coding
@@ -94,6 +95,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
 │   ├── etsi_its_denm_ts_conversion
+│   ├── etsi_its_ivim_ts_conversion
 │   ├── etsi_its_mapem_ts_conversion
 │   ├── etsi_its_mcm_uulm_conversion
 │   ├── etsi_its_primitives_conversion
@@ -107,6 +109,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_msgs
 │   ├── etsi_its_denm_msgs
 │   ├── etsi_its_denm_ts_msgs
+│   ├── etsi_its_ivim_ts_msgs
 │   ├── etsi_its_mapem_ts_msgs
 │   ├── etsi_its_mcm_uulm_msgs
 │   ├── etsi_its_spatem_ts_msgs
@@ -157,7 +160,7 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 ```bash
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=0 -p etsi_message_payload_offset:=4
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,ivim_ts,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=0 -p etsi_message_payload_offset:=4
 ```
 
 #### Subscribed Topics
@@ -170,6 +173,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
 | `~/denm_ts/in` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) for conversion to UDP |
+| `~/ivim_ts/in` | `etsi_its_ivim_ts_msgs/msg/IVIM` | IVIM (TS) for conversion to UDP |
 | `~/mapem_ts/in` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) for conversion to UDP |
 | `~/mcm_uulm/in` | `etsi_its_mcm_uulm_msgs/msg/MCM` | MCM (UULM) for conversion to UDP |
 | `~/spatem_ts/in` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) for conversion to UDP |
@@ -185,6 +189,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
 | `~/denm_ts/out` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) converted from UDP payload |
+| `~/ivim_ts/out` | `etsi_its_ivim_ts_msgs/msg/IVIM` | IVIM (TS) converted from UDP payload |
 | `~/mapem_ts/out` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) converted from UDP payload |
 | `~/mcm_uulm/out` | `etsi_its_mcm_uulm_msgs/msg/MCM` | MCM (UULM) converted from UDP payload |
 | `~/spatem_ts/out` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) converted from UDP payload |
@@ -199,6 +204,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertCpmTsToUdp` | Convert ROS CPM (TS) to UDP payload |
 | `~/denm/udp` | `etsi_its_conversion_srvs/srv/ConvertDenmToUdp` | Convert ROS DENM to UDP payload |
 | `~/denm_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertDenmTsToUdp` | Convert ROS DENM (TS) to UDP payload |
+| `~/ivim_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertIvimTsToUdp` | Convert ROS IVIM (TS) to UDP payload |
 | `~/mapem_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertMapemTsToUdp` | Convert ROS MAPEM (TS) to UDP payload |
 | `~/mcm_uulm/udp` | `etsi_its_conversion_srvs/srv/ConvertMcmUulmToUdp` | Convert ROS MCM (UULM) to UDP payload |
 | `~/spatem_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertSpatemTsToUdp` | Convert ROS SPATEM (TS) to UDP payload |
@@ -208,6 +214,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/udp/cpm_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToCpmTs` | Convert UDP payload to ROS CPM (TS) |
 | `~/udp/denm` | `etsi_its_conversion_srvs/srv/ConvertUdpToDenm` | Convert UDP payload to ROS DENM |
 | `~/udp/denm_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToDenmTs` | Convert UDP payload to ROS DENM (TS) |
+| `~/udp/ivim_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToIvimTs` | Convert UDP payload to ROS IVIM (TS) |
 | `~/udp/mapem_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToMapemTs` | Convert UDP payload to ROS MAPEM (TS) |
 | `~/udp/mcm_uulm` | `etsi_its_conversion_srvs/srv/ConvertUdpToMcmUulm` | Convert UDP payload to ROS MCM (UULM) |
 | `~/udp/spatem_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToSpatemTs` | Convert UDP payload to ROS SPATEM (TS) |
@@ -220,8 +227,8 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `has_btp_destination_port` | `bool` | `true` |  | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) in their payload; for incoming UDP payloads: if `false`, destination port is expected in `src_port` field with fallback of `udp2ros_etsi_types[0]` |
 | `btp_destination_port_offset` | `int` | `0` |  | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | `4` |  | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
-| `ros2udp_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` |
-| `udp2ros_etsi_types` | `string[]` | `cam`, `cpm_ts`, `denm`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
+| `ros2udp_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` |
+| `udp2ros_etsi_types` | `string[]` | `cam`, `cpm_ts`, `denm`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
 | `subscriber_queue_size` | `int` | `10` |  | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | `10` |  | queue size for outgoing ROS messages |
 
