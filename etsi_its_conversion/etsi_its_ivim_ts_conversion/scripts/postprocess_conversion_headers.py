@@ -16,6 +16,7 @@ TYPE_ALIASES = {
     "DriverCharacteristics": "IVI_DriverCharacteristics",
     "TrailerCharacteristics": "IVI_TrailerCharacteristics",
     "StationType": "ITS_Container_StationType",
+    "Temperature": "IVI_Temperature",
     "Temperature2": "IVI_Temperature",
 }
 
@@ -31,6 +32,7 @@ HEADER_ALIASES = {
     "DriverCharacteristics": "IVI_DriverCharacteristics",
     "TrailerCharacteristics": "IVI_TrailerCharacteristics",
     "StationType": "ITS-Container_StationType",
+    "Temperature": "IVI_Temperature",
     "Temperature2": "IVI_Temperature",
 }
 
@@ -261,6 +263,27 @@ def rewrite_header(name: str, text: str) -> str:
             "  out.ioList = (ivim_ts_DDD_IO_LIST_t*) calloc(1, sizeof(ivim_ts_DDD_IO_LIST_t));\n"
             "  toStruct_DDDIOLIST(in.io_list, *out.ioList);\n",
         )
+
+    if name == "convertDestinationPlace.h":
+        text = text.replace(
+            "etsi_its_primitives_conversion::toRos_OCTET_STRING(in.destRSCode->pictogramCode.countryCode, out.dest_rs_code_country_code);\n"
+            "    out.dest_rs_code_country_code_is_present = true;",
+            "if (in.destRSCode->pictogramCode.countryCode) {\n"
+            "      etsi_its_primitives_conversion::toRos_OCTET_STRING(*in.destRSCode->pictogramCode.countryCode, out.dest_rs_code_country_code);\n"
+            "      out.dest_rs_code_country_code_is_present = true;\n"
+            "    }",
+        )
+        text = text.replace(
+            "etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.dest_rs_code_country_code, out.destRSCode->pictogramCode.countryCode);",
+            "out.destRSCode->pictogramCode.countryCode = (OCTET_STRING_t*) calloc(1, sizeof(OCTET_STRING_t));\n"
+            "    etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.dest_rs_code_country_code, *out.destRSCode->pictogramCode.countryCode);",
+        )
+        text = text.replace(
+            "ivim_ts_GddStructure_t__serviceCategoryCode_PR_",
+            "ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_",
+        )
+        text = text.replace("out.service_category_code_choice", "out.dest_rs_code_service_category_code_choice")
+        text = text.replace("in.service_category_code_choice", "in.dest_rs_code_service_category_code_choice")
 
     text = text.replace("ivim_ts_InternationalSign_destinationInformation.h", "ivim_ts_InternationalSign-destinationInformation.h")
     text = text.replace("ivim_ts_InternationalSign_distanceBetweenVehicles.h", "ivim_ts_InternationalSign-distanceBetweenVehicles.h")

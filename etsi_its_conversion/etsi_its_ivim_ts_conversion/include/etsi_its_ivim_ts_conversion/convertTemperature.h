@@ -47,7 +47,7 @@ Temperature::=INTEGER (-100..151)
 
 #pragma once
 
-#include <etsi_its_ivim_ts_coding/ivim_ts_Temperature.h>
+#include <etsi_its_ivim_ts_coding/ivim_ts_IVI_Temperature.h>
 #include <etsi_its_ivim_ts_coding/INTEGER.h>
 #include <etsi_its_primitives_conversion/convertINTEGER.h>
 #include <etsi_its_ivim_ts_msgs/msg/temperature.hpp>
@@ -56,12 +56,12 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 
 namespace etsi_its_ivim_ts_conversion {
 
-void toRos_Temperature(const ivim_ts_Temperature_t& in, ivim_ts_msgs::Temperature& out) {
+void toRos_Temperature(const ivim_ts_IVI_Temperature_t& in, ivim_ts_msgs::Temperature& out) {
   etsi_its_primitives_conversion::toRos_INTEGER(in, out.value);
 }
 
-void toStruct_Temperature(const ivim_ts_msgs::Temperature& in, ivim_ts_Temperature_t& out) {
-  memset(&out, 0, sizeof(ivim_ts_Temperature_t));
+void toStruct_Temperature(const ivim_ts_msgs::Temperature& in, ivim_ts_IVI_Temperature_t& out) {
+  memset(&out, 0, sizeof(ivim_ts_IVI_Temperature_t));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.value, out);
 }
 

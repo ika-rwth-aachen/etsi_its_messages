@@ -460,7 +460,7 @@ void Converter::setup() {
         std::placeholders::_2,
         "ivim_ts",
         &asn_DEF_ivim_ts_IVIM,
-        std::function<void(const ivim_ts_IVIM_t &, ivim_ts_msgs::IVIM &)>(etsi_its_ivim_ts_conversion::toRos_IVIM)
+        std::function<void(const ivim_ts_msgs::IVIM &, ivim_ts_IVIM_t &)>(etsi_its_ivim_ts_conversion::toStruct_IVIM)
       ),
       SERVICE_QOS,
       callback_group_

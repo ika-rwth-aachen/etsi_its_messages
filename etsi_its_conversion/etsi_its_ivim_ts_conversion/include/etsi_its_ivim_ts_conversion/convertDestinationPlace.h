@@ -70,23 +70,25 @@ namespace etsi_its_ivim_ts_conversion {
 void toRos_DestinationPlace(const ivim_ts_DestinationPlace_t& in, ivim_ts_msgs::DestinationPlace& out) {
   toRos_DestinationType(in.destType, out.dest_type);
   if (in.destRSCode) {
-    etsi_its_primitives_conversion::toRos_OCTET_STRING(in.destRSCode->pictogramCode.countryCode, out.dest_rs_code_country_code);
-    out.dest_rs_code_country_code_is_present = true;
+    if (in.destRSCode->pictogramCode.countryCode) {
+      etsi_its_primitives_conversion::toRos_OCTET_STRING(*in.destRSCode->pictogramCode.countryCode, out.dest_rs_code_country_code);
+      out.dest_rs_code_country_code_is_present = true;
+    }
+    if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_trafficSignPictogram) {
+      out.dest_rs_code_service_category_code_traffic_sign_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.trafficSignPictogram;
+      out.dest_rs_code_service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM;
+    }
+    if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_publicFacilitiesPictogram) {
+      out.dest_rs_code_service_category_code_public_facilities_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.publicFacilitiesPictogram;
+      out.dest_rs_code_service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM;
+    }
+    if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_ambientOrRoadConditionPictogram) {
+      out.dest_rs_code_service_category_code_ambient_or_road_condition_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.ambientOrRoadConditionPictogram;
+      out.dest_rs_code_service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM;
+    }
+    etsi_its_primitives_conversion::toRos_INTEGER(in.destRSCode->pictogramCode.pictogramCategoryCode.nature, out.dest_rs_code_nature);
+    etsi_its_primitives_conversion::toRos_INTEGER(in.destRSCode->pictogramCode.pictogramCategoryCode.serialNumber, out.dest_rs_code_serial_number);
   }
-  if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure_t__serviceCategoryCode_PR_trafficSignPictogram) {
-    out.dest_rs_code_service_category_code_traffic_sign_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.trafficSignPictogram;
-    out.service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM;
-  }
-  if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure_t__serviceCategoryCode_PR_publicFacilitiesPictogram) {
-    out.dest_rs_code_service_category_code_public_facilities_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.publicFacilitiesPictogram;
-    out.service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM;
-  }
-  if (in.destRSCode->pictogramCode.serviceCategoryCode.present == ivim_ts_GddStructure_t__serviceCategoryCode_PR_ambientOrRoadConditionPictogram) {
-    out.dest_rs_code_service_category_code_ambient_or_road_condition_pictogram = in.destRSCode->pictogramCode.serviceCategoryCode.choice.ambientOrRoadConditionPictogram;
-    out.service_category_code_choice = ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM;
-  }
-  etsi_its_primitives_conversion::toRos_INTEGER(in.destRSCode->pictogramCode.pictogramCategoryCode.nature, out.dest_rs_code_nature);
-  etsi_its_primitives_conversion::toRos_INTEGER(in.destRSCode->pictogramCode.pictogramCategoryCode.serialNumber, out.dest_rs_code_serial_number);
   if (in.destBlob) {
     etsi_its_primitives_conversion::toRos_OCTET_STRING(*in.destBlob, out.dest_blob);
     out.dest_blob_is_present = true;
@@ -106,22 +108,23 @@ void toStruct_DestinationPlace(const ivim_ts_msgs::DestinationPlace& in, ivim_ts
   toStruct_DestinationType(in.dest_type, out.destType);
   if (in.dest_rs_code_country_code_is_present) {
     if (!out.destRSCode) out.destRSCode = (ivim_ts_GddStructure_t*) calloc(1, sizeof(*out.destRSCode));
-    etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.dest_rs_code_country_code, out.destRSCode->pictogramCode.countryCode);
+    out.destRSCode->pictogramCode.countryCode = (OCTET_STRING_t*) calloc(1, sizeof(OCTET_STRING_t));
+    etsi_its_primitives_conversion::toStruct_OCTET_STRING(in.dest_rs_code_country_code, *out.destRSCode->pictogramCode.countryCode);
   }
   if (!out.destRSCode) out.destRSCode = (ivim_ts_GddStructure_t*) calloc(1, sizeof(*out.destRSCode));
-  if (in.service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM) {
+  if (in.dest_rs_code_service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_TRAFFIC_SIGN_PICTOGRAM) {
     out.destRSCode->pictogramCode.serviceCategoryCode.choice.trafficSignPictogram = in.dest_rs_code_service_category_code_traffic_sign_pictogram;
-    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure_t__serviceCategoryCode_PR_trafficSignPictogram;
+    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_trafficSignPictogram;
   }
   if (!out.destRSCode) out.destRSCode = (ivim_ts_GddStructure_t*) calloc(1, sizeof(*out.destRSCode));
-  if (in.service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM) {
+  if (in.dest_rs_code_service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_PUBLIC_FACILITIES_PICTOGRAM) {
     out.destRSCode->pictogramCode.serviceCategoryCode.choice.publicFacilitiesPictogram = in.dest_rs_code_service_category_code_public_facilities_pictogram;
-    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure_t__serviceCategoryCode_PR_publicFacilitiesPictogram;
+    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_publicFacilitiesPictogram;
   }
   if (!out.destRSCode) out.destRSCode = (ivim_ts_GddStructure_t*) calloc(1, sizeof(*out.destRSCode));
-  if (in.service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM) {
+  if (in.dest_rs_code_service_category_code_choice == ivim_ts_msgs::DestinationPlace::DEST_RS_CODE_CHOICE_SERVICE_CATEGORY_CODE_AMBIENT_OR_ROAD_CONDITION_PICTOGRAM) {
     out.destRSCode->pictogramCode.serviceCategoryCode.choice.ambientOrRoadConditionPictogram = in.dest_rs_code_service_category_code_ambient_or_road_condition_pictogram;
-    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure_t__serviceCategoryCode_PR_ambientOrRoadConditionPictogram;
+    out.destRSCode->pictogramCode.serviceCategoryCode.present = ivim_ts_GddStructure__pictogramCode__serviceCategoryCode_PR_ambientOrRoadConditionPictogram;
   }
   if (!out.destRSCode) out.destRSCode = (ivim_ts_GddStructure_t*) calloc(1, sizeof(*out.destRSCode));
   etsi_its_primitives_conversion::toStruct_INTEGER(in.dest_rs_code_nature, out.destRSCode->pictogramCode.pictogramCategoryCode.nature);
