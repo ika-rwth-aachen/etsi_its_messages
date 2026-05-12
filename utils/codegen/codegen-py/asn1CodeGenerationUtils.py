@@ -773,6 +773,21 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             member_name = validRosField(f"CHOICE_{member['name']}", is_const=True)
             if "name" in asn1_type_info:
                 member_name = validRosField(f"CHOICE_{asn1_type_info['name']}_{member['name']}", is_const=True)
+            # Handle NULL CHOICE alternatives: no data field, only a selector constant
+            if member.get("type") == "NULL":
+                context["members"].append({
+                    "ros_msg_type": "uint8",
+                    "ros_field_name": "choice",
+                    "c_field_name": validCFieldAsGenByAsn1c(member["name"]),
+                    "disabled": True,
+                    "is_null_choice": True,
+                    "constants": [{
+                        "ros_msg_type": "uint8",
+                        "ros_field_name": validRosField(member_name, is_const=True),
+                        "ros_value": im
+                    }]
+                })
+                continue
             member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
             if member_context is None:
                 continue

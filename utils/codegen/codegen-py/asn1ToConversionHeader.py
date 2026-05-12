@@ -96,7 +96,7 @@ def parseCli():
 def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     """Loads the jinja templates for conversion headers.
 
-    Templates available for types `CHOICE`, `CUSTOM`, `ENUMERATED`, `PRIMITIVE`, `SEQUENCE`, `SEQUENCE OF`.
+    Templates available for types `CHOICE`, `CUSTOM`, `ENUMERATED`, `NULL`, `PRIMITIVE`, `SEQUENCE`, `SEQUENCE OF`.
 
     Returns:
         Dict[str, jinja2.environment.Template]: jinja templates
@@ -108,6 +108,7 @@ def loadJinjaTemplates() -> Dict[str, jinja2.environment.Template]:
     jinja_templates["CHOICE"] = jinja_env.get_template("convertChoiceType.h.jinja2")
     jinja_templates["CUSTOM"] = jinja_env.get_template("convertCustomType.h.jinja2")
     jinja_templates["ENUMERATED"] = jinja_env.get_template("convertEnumeratedType.h.jinja2")
+    jinja_templates["NULL"] = jinja_env.get_template("convertNullType.h.jinja2")
     jinja_templates["PRIMITIVE"] = jinja_env.get_template("convertPrimitiveType.h.jinja2")
     jinja_templates["SEQUENCE"] = jinja_env.get_template("convertSequenceType.h.jinja2")
     jinja_templates["SEQUENCE OF"] = jinja_env.get_template("convertSequenceOfType.h.jinja2")
@@ -184,6 +185,9 @@ def exportConversionHeader(header: str, type_name: str, output_dir: str):
         type_name (str): type name / file name
         output_dir (str): output directory
     """
+
+    if header is None:
+        return
 
     # create output directory
     os.makedirs(output_dir, exist_ok=True)
