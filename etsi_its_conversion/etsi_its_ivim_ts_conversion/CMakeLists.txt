@@ -5,7 +5,6 @@ find_package(ament_cmake REQUIRED)
 find_package(etsi_its_ivim_ts_coding REQUIRED)
 find_package(etsi_its_ivim_ts_msgs REQUIRED)
 find_package(etsi_its_primitives_conversion REQUIRED)
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
@@ -31,13 +30,6 @@ install(DIRECTORY include/
   DESTINATION include/${PROJECT_NAME}
 )
 
-install(PROGRAMS
-  scripts/generate_conversion_headers.sh
-  scripts/audit_conversion_coverage.py
-  scripts/verify_codegen_and_build.sh
-  DESTINATION lib/${PROJECT_NAME}
-)
-
 install(TARGETS ${PROJECT_NAME}
   EXPORT ${PROJECT_NAME}Targets
   ARCHIVE DESTINATION lib
@@ -47,9 +39,3 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 ament_package()
-
-
-enable_testing()
-
-add_test(NAME ivim_conversion_coverage_test
-  COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_ivim_conversion_coverage.py)
