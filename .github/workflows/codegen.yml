@@ -71,21 +71,22 @@ jobs:
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_coding/etsi_its_cam_coding -di asn1c:ci
           - message: cam_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_coding/etsi_its_cam_ts_coding -di asn1c:ci
+          - message: cpm_ts
+            script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_coding/etsi_its_cpm_ts_coding -di asn1c:ci
           - message: denm
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_coding/etsi_its_denm_coding -di asn1c:ci
           - message: denm_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn -t denm_ts -o etsi_its_coding/etsi_its_denm_ts_coding -di asn1c:ci
-          - message: cpm_ts
-            script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_coding/etsi_its_cpm_ts_coding -di asn1c:ci
+          - message: ivim_ts
+            script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn -t ivim_ts -o etsi_its_coding/etsi_its_ivim_ts_coding -di asn1c:ci
           - message: mapem_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t mapem_ts -o etsi_its_coding/etsi_its_mapem_ts_coding -di asn1c:ci
+          - message: mcm_uulm
+            script: utils/codegen/asn1ToC/asn1ToC.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_coding/etsi_its_mcm_uulm_coding -di asn1c:ci
           - message: spatem_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_coding/etsi_its_spatem_ts_coding -di asn1c:ci
           - message: vam_ts
             script: utils/codegen/asn1ToC/asn1ToC.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_coding/etsi_its_vam_ts_coding -di asn1c:ci
-          - message: mcm_uulm
-            script: utils/codegen/asn1ToC/asn1ToC.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_coding/etsi_its_mcm_uulm_coding -di asn1c:ci
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -128,20 +129,22 @@ jobs:
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_msgs/etsi_its_cam_msgs/msg
           - message: cam_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
+          - message: cpm_ts
+            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
           - message: denm
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_msgs/etsi_its_denm_msgs/msg
           - message: denm_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn -t denm_ts -o etsi_its_msgs/etsi_its_denm_ts_msgs/msg
-          - message: cpm_ts
-            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
+          - message: ivim_ts
+            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn -t ivim_ts -o etsi_its_msgs/etsi_its_ivim_ts_msgs/msg
           - message: mapem_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t mapem_ts -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
+          - message: mcm_uulm
+            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
           - message: spatem_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
           - message: vam_ts
             script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
-          - message: mcm_uulm
-            script: utils/codegen/codegen-py/asn1ToRosMsg.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -152,7 +155,7 @@ jobs:
         with:
           python-version: "3.10"
           cache: pip
-      - name: Install dependencies 
+      - name: Install dependencies
         run: pip install -r ./utils/codegen/codegen-py/requirements.txt
       - name: etsi_its_${{ matrix.message }}_msgs
         run: |
@@ -176,20 +179,22 @@ jobs:
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cam_en302637_2/CAM-PDU-Descriptions.asn asn1/raw/cam_en302637_2/cdd/ITS-Container.asn -t cam -o etsi_its_conversion/etsi_its_cam_conversion/include/etsi_its_cam_conversion
           - message: cam_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cam_ts103900/CAM-PDU-Descriptions.asn asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn -t cam_ts -o etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion
+          - message: cpm_ts
+            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
           - message: denm
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/denm_en302637_3/DENM-PDU-Descriptions.asn asn1/raw/denm_en302637_3/cdd/ITS-Container.asn -t denm -o etsi_its_conversion/etsi_its_denm_conversion/include/etsi_its_denm_conversion
           - message: denm_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/denm_ts103831/DENM-PDU-Descriptions.asn asn1/patched/denm_ts103831/cdd/ETSI-ITS-CDD.asn -t denm_ts -o etsi_its_conversion/etsi_its_denm_ts_conversion/include/etsi_its_denm_ts_conversion
-          - message: cpm_ts
-            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn -t cpm_ts -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
+          - message: ivim_ts
+            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn -t ivim_ts -o etsi_its_conversion/etsi_its_ivim_ts_conversion/include/etsi_its_ivim_ts_conversion
           - message: mapem_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/is_ts103301/MAPEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t mapem_ts -o etsi_its_conversion/etsi_its_mapem_ts_conversion/include/etsi_its_mapem_ts_conversion
+          - message: mcm_uulm
+            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
           - message: spatem_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/is_ts103301/SPATEM-PDU-Descriptions.asn asn1/raw/is_ts103301/cdd/ITS-Container.asn asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn -t spatem_ts -o etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion
           - message: vam_ts
             script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn -t vam_ts -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion
-          - message: mcm_uulm
-            script: utils/codegen/codegen-py/asn1ToConversionHeader.py asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn -t mcm_uulm -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
