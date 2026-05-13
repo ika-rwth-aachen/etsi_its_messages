@@ -90,7 +90,7 @@ void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_
 {%- elif member.is_primitive %}
   etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.c_field_path}}, out.{{member.ros_field_name}});
 {%- elif member.is_choice %}
-  if (in.{{member.choice_field_path}}.present == {{member.choice_pr_type}}_{{member.choice_option_name}}) {
+  if (in.{{member.choice_field_path}}.present == {% if etsi_type == "ivim_ts" %}{{member.choice_pr_type}}_{{member.choice_option_name}}{% else %}{{member.choice_pr_type}}::{{member.choice_pr_type}}_{{member.choice_option_name}}{% endif %}) {
     toRos_{{member.ros_msg_type}}(in.{{member.choice_field_path}}.choice.{{member.choice_option_name}}, out.{{member.ros_field_name}});
     out.{{member.choice_var_name}} = {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}};
   }
@@ -163,7 +163,7 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
 {%- elif member.is_choice %}
   if (in.{{member.choice_var_name}} == {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}}) {
     toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.choice_field_path}}.choice.{{member.choice_option_name}});
-    out.{{member.choice_field_path}}.present = {{member.choice_pr_type}}_{{member.choice_option_name}};
+    out.{{member.choice_field_path}}.present = {% if etsi_type == "ivim_ts" %}{{member.choice_pr_type}}_{{member.choice_option_name}}{% else %}{{member.choice_pr_type}}::{{member.choice_pr_type}}_{{member.choice_option_name}}{% endif %};
   }
 {%- else %}
   toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.c_field_path}});

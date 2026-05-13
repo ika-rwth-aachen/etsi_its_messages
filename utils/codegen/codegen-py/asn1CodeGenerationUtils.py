@@ -239,7 +239,11 @@ def prefixCPathsForInlineMember(member: Dict, field_name: str, optional: bool, p
         if not (field_name == member.get("choice_name") and member["choice_field_path"] == member.get("choice_name")):
             member["choice_field_path"] = f"{field_name}{separator}{member['choice_field_path']}"
     if "choice_pr_type" in member:
-        member["choice_pr_type"] = f"{parent_type.replace('struct ', '')}__{member['choice_name']}_PR"
+        parent_type_name = parent_type.replace("struct ", "")
+        if parent_type_name.endswith(f"__{member['choice_name']}"):
+            member["choice_pr_type"] = f"{parent_type_name}_PR"
+        else:
+            member["choice_pr_type"] = f"{parent_type_name}__{member['choice_name']}_PR"
 
 
 def prefixCPathsForExtension(member: Dict, parent_type: str) -> None:
@@ -550,7 +554,7 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"in '{asn1_type_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict], inline_constraints: bool = False) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
@@ -591,7 +595,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
 
     # components-of
     if "components-of" in asn1_type_info:
-        member_context = asn1TypeToJinjaContext(asn1_type_name, asn1_types[asn1_type_info["components-of"]], asn1_types, asn1_values, asn1_sets, asn1_classes)
+        member_context = asn1TypeToJinjaContext(asn1_type_name, asn1_types[asn1_type_info["components-of"]], asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
         context["members"].extend(member_context["members"])
 
     # primitives
@@ -707,7 +711,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         for member in asn1_type_info["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is None:
                 continue
             if member.get("type") in ("SEQUENCE", "CHOICE") or member_context.get("inline_member"):
@@ -788,7 +792,17 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                     }]
                 })
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_for_context = member
+            if (
+                inline_constraints
+                and
+                "with-components" in member
+                and member.get("type") in asn1_types
+                and asn1_types[member["type"]]["type"] == "SEQUENCE"
+            ):
+                member_for_context = member.copy()
+                member_for_context.pop("with-components")
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member_for_context, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is None:
                 continue
             if len(member_context["members"]) > 0:
@@ -909,7 +923,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     # list aka extension "[[ ]]"
     elif asn1_type_type == "EXTENSION":
         for sub_member in asn1_type_info:
-            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is not None:
                 for sub_context in member_context["members"]:
                     prefixCPathsForExtension(sub_context, f"struct ETSI_TYPE_PLACEHOLDER_{asn1_type_name.replace('-', '_')}")
@@ -922,7 +936,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             logging.info(f"Skipping unsupported RegionalExtension in '{asn1_type_name}'")
             return None
 
-        if "with-components" in asn1_type_info and asn1_types[asn1_type_type]["type"] == "SEQUENCE":
+        if inline_constraints and "with-components" in asn1_type_info and asn1_types[asn1_type_type]["type"] == "SEQUENCE":
             constrained_type = deepcopy(asn1_types[asn1_type_type])
             absent_members = {
                 component[0]
@@ -934,7 +948,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                 member for member in constrained_type["members"]
                 if member is not None and member.get("name") not in absent_members
             ]
-            constrained_context = asn1TypeToJinjaContext(asn1_type_name, constrained_type, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            constrained_context = asn1TypeToJinjaContext(asn1_type_name, constrained_type, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             constrained_context["inline_member"] = True
             constrained_context["constraint_base_type"] = asn1_type_type
             return constrained_context
@@ -1026,7 +1040,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                                     "name": value[0].upper() + value[1:], # make sure type starts with upper case
                                     "type": value[0].upper() + value[1:] # make sure type starts with upper case
                                 })
-                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
                 context["members"].extend(member_context["members"])
 
     elif asn1_type_type == "NULL":

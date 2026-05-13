@@ -72,6 +72,12 @@ IVIM_CONVERSION_HEADER_ALIASES = {
     "Temperature2": "IVI_Temperature",
 }
 
+DENM_TS_EXTENSION_CONTAINERS = {
+    "AlacarteContainer",
+    "LocationContainer",
+    "SituationContainer",
+}
+
 
 def applyRosTypeAliases(value, etsi_type: str):
     if etsi_type != "ivim_ts":
@@ -99,6 +105,45 @@ def applyEtsiTypePlaceholder(value, etsi_type: str):
     if isinstance(value, str):
         return value.replace("ETSI_TYPE_PLACEHOLDER", etsi_type)
     return value
+
+
+def extensionMemberNames(asn1_definition: str):
+    """Extract first-level ASN.1 extension member names from a raw SEQUENCE body."""
+
+    if "{" not in asn1_definition or "}" not in asn1_definition:
+        return set()
+
+    body = asn1_definition.split("{", 1)[1].rsplit("}", 1)[0]
+    if "..." not in body:
+        return set()
+
+    after_extension_marker = body.split("...", 1)[1]
+    member_names = set()
+    for raw_line in after_extension_marker.splitlines():
+        line = raw_line.split("--", 1)[0].strip()
+        if not line:
+            continue
+        line = line.lstrip(",[").strip()
+        if not line or line.startswith(("...", "}")):
+            continue
+        match = re.match(r"([A-Za-z][A-Za-z0-9-]*)\s+", line)
+        if match:
+            member_names.add(validCFieldAsGenByAsn1c(match.group(1)))
+    return member_names
+
+
+def applyExtensionCPaths(jinja_context: Dict, asn1_definition: str) -> None:
+    extension_members = extensionMemberNames(asn1_definition)
+    if not extension_members:
+        return
+
+    for member in jinja_context["members"]:
+        if member.get("c_field_name") not in extension_members:
+            continue
+        if "c_field_path" not in member or member["c_field_path"] != member["c_field_name"]:
+            continue
+        member["c_field_path"] = f"ext1->{member['c_field_path']}"
+        member["c_presence_path"] = member["c_field_path"]
 
 
 
@@ -174,7 +219,7 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
         raise TypeError(f"No jinja template for type '{asn1_type['type']}'")
 
     # build jinja context based on asn1 type information
-    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes)
+    jinja_context = asn1TypeToJinjaContext(type_name, asn1_type, asn1_types, asn1_values, asn1_sets, asn1_classes, etsi_type == "ivim_ts")
     if jinja_context is None:
         return None
 
@@ -188,6 +233,8 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
     # add raw asn1 definition as comment
     if type_name in asn1_raw:
         jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
+        if etsi_type == "denm_ts" and type_name in DENM_TS_EXTENSION_CONTAINERS:
+            applyExtensionCPaths(jinja_context, asn1_raw[type_name])
 
     # add a dict entry for unique and sorted members (used for includes)
     seen = set()
@@ -226,6 +273,8 @@ def exportConversionHeader(header: str, type_name: str, output_dir: str):
     ros_type_name = applyRosTypeAliases(ros_type_name, "ivim_ts") if output_dir.endswith("etsi_its_ivim_ts_conversion") else ros_type_name
     filename = os.path.join(output_dir, f"convert{ros_type_name}.h")
     with open(filename, "w", encoding="utf-8") as file:
+        if not header.endswith("\n"):
+            header += "\n"
         file.write(header)
 
 def findDependenciesOfConversionHeaders(parent_file_path: str, type: str, file_list: List[str] = []) -> List[str]:
