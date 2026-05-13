@@ -63,13 +63,16 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_Zone(const ivim_ts_Zone_t& in, ivim_ts_msgs::Zone& out) {
-  switch (in.present) {case ivim_ts_Zone_PR_segment:
+  switch (in.present) {
+  case ivim_ts_Zone_PR_segment:
     toRos_Segment(in.choice.segment, out.segment);
     out.choice = ivim_ts_msgs::Zone::CHOICE_SEGMENT;
-    break;case ivim_ts_Zone_PR_area:
+    break;
+  case ivim_ts_Zone_PR_area:
     toRos_PolygonalLine(in.choice.area, out.area);
     out.choice = ivim_ts_msgs::Zone::CHOICE_AREA;
-    break;case ivim_ts_Zone_PR_computedSegment:
+    break;
+  case ivim_ts_Zone_PR_computedSegment:
     toRos_ComputedSegment(in.choice.computedSegment, out.computed_segment);
     out.choice = ivim_ts_msgs::Zone::CHOICE_COMPUTED_SEGMENT;
     break;
@@ -79,13 +82,16 @@ void toRos_Zone(const ivim_ts_Zone_t& in, ivim_ts_msgs::Zone& out) {
 
 void toStruct_Zone(const ivim_ts_msgs::Zone& in, ivim_ts_Zone_t& out) {
   memset(&out, 0, sizeof(ivim_ts_Zone_t));
-  switch (in.choice) {case ivim_ts_msgs::Zone::CHOICE_SEGMENT:
+  switch (in.choice) {
+  case ivim_ts_msgs::Zone::CHOICE_SEGMENT:
     toStruct_Segment(in.segment, out.choice.segment);
     out.present = ivim_ts_Zone_PR_segment;
-    break;case ivim_ts_msgs::Zone::CHOICE_AREA:
+    break;
+  case ivim_ts_msgs::Zone::CHOICE_AREA:
     toStruct_PolygonalLine(in.area, out.choice.area);
     out.present = ivim_ts_Zone_PR_area;
-    break;case ivim_ts_msgs::Zone::CHOICE_COMPUTED_SEGMENT:
+    break;
+  case ivim_ts_msgs::Zone::CHOICE_COMPUTED_SEGMENT:
     toStruct_ComputedSegment(in.computed_segment, out.choice.computedSegment);
     out.present = ivim_ts_Zone_PR_computedSegment;
     break;

@@ -72,28 +72,36 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_ISO14823Attribute(const ivim_ts_ISO14823Attribute_t& in, ivim_ts_msgs::ISO14823Attribute& out) {
-  switch (in.present) {case ivim_ts_ISO14823Attribute_PR_dtm:
+  switch (in.present) {
+  case ivim_ts_ISO14823Attribute_PR_dtm:
     toRos_InternationalSignapplicablePeriod(in.choice.dtm, out.dtm);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_DTM;
-    break;case ivim_ts_ISO14823Attribute_PR_edt:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_edt:
     toRos_InternationalSignexemptedApplicablePeriod(in.choice.edt, out.edt);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_EDT;
-    break;case ivim_ts_ISO14823Attribute_PR_dfl:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_dfl:
     toRos_InternationalSigndirectionalFlowOfLane(in.choice.dfl, out.dfl);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_DFL;
-    break;case ivim_ts_ISO14823Attribute_PR_ved:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_ved:
     toRos_InternationalSignapplicableVehicleDimensions(in.choice.ved, out.ved);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_VED;
-    break;case ivim_ts_ISO14823Attribute_PR_spe:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_spe:
     toRos_InternationalSignspeedLimits(in.choice.spe, out.spe);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_SPE;
-    break;case ivim_ts_ISO14823Attribute_PR_roi:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_roi:
     toRos_InternationalSignrateOfIncline(in.choice.roi, out.roi);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_ROI;
-    break;case ivim_ts_ISO14823Attribute_PR_dbv:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_dbv:
     toRos_InternationalSigndistanceBetweenVehicles(in.choice.dbv, out.dbv);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_DBV;
-    break;case ivim_ts_ISO14823Attribute_PR_ddd:
+    break;
+  case ivim_ts_ISO14823Attribute_PR_ddd:
     toRos_InternationalSigndestinationInformation(in.choice.ddd, out.ddd);
     out.choice = ivim_ts_msgs::ISO14823Attribute::CHOICE_DDD;
     break;
@@ -103,28 +111,36 @@ void toRos_ISO14823Attribute(const ivim_ts_ISO14823Attribute_t& in, ivim_ts_msgs
 
 void toStruct_ISO14823Attribute(const ivim_ts_msgs::ISO14823Attribute& in, ivim_ts_ISO14823Attribute_t& out) {
   memset(&out, 0, sizeof(ivim_ts_ISO14823Attribute_t));
-  switch (in.choice) {case ivim_ts_msgs::ISO14823Attribute::CHOICE_DTM:
+  switch (in.choice) {
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_DTM:
     toStruct_InternationalSignapplicablePeriod(in.dtm, out.choice.dtm);
     out.present = ivim_ts_ISO14823Attribute_PR_dtm;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_EDT:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_EDT:
     toStruct_InternationalSignexemptedApplicablePeriod(in.edt, out.choice.edt);
     out.present = ivim_ts_ISO14823Attribute_PR_edt;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_DFL:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_DFL:
     toStruct_InternationalSigndirectionalFlowOfLane(in.dfl, out.choice.dfl);
     out.present = ivim_ts_ISO14823Attribute_PR_dfl;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_VED:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_VED:
     toStruct_InternationalSignapplicableVehicleDimensions(in.ved, out.choice.ved);
     out.present = ivim_ts_ISO14823Attribute_PR_ved;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_SPE:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_SPE:
     toStruct_InternationalSignspeedLimits(in.spe, out.choice.spe);
     out.present = ivim_ts_ISO14823Attribute_PR_spe;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_ROI:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_ROI:
     toStruct_InternationalSignrateOfIncline(in.roi, out.choice.roi);
     out.present = ivim_ts_ISO14823Attribute_PR_roi;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_DBV:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_DBV:
     toStruct_InternationalSigndistanceBetweenVehicles(in.dbv, out.choice.dbv);
     out.present = ivim_ts_ISO14823Attribute_PR_dbv;
-    break;case ivim_ts_msgs::ISO14823Attribute::CHOICE_DDD:
+    break;
+  case ivim_ts_msgs::ISO14823Attribute::CHOICE_DDD:
     toStruct_InternationalSigndestinationInformation(in.ddd, out.choice.ddd);
     out.present = ivim_ts_ISO14823Attribute_PR_ddd;
     break;

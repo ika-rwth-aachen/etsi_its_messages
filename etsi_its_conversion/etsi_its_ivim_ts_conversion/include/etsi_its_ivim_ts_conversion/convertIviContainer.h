@@ -74,28 +74,36 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_IviContainer(const ivim_ts_IviContainer_t& in, ivim_ts_msgs::IviContainer& out) {
-  switch (in.present) {case ivim_ts_IviContainer_PR_glc:
+  switch (in.present) {
+  case ivim_ts_IviContainer_PR_glc:
     toRos_GeographicLocationContainer(in.choice.glc, out.glc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_GLC;
-    break;case ivim_ts_IviContainer_PR_giv:
+    break;
+  case ivim_ts_IviContainer_PR_giv:
     toRos_GeneralIviContainer(in.choice.giv, out.giv);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_GIV;
-    break;case ivim_ts_IviContainer_PR_rcc:
+    break;
+  case ivim_ts_IviContainer_PR_rcc:
     toRos_RoadConfigurationContainer(in.choice.rcc, out.rcc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_RCC;
-    break;case ivim_ts_IviContainer_PR_tc:
+    break;
+  case ivim_ts_IviContainer_PR_tc:
     toRos_TextContainer(in.choice.tc, out.tc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_TC;
-    break;case ivim_ts_IviContainer_PR_lac:
+    break;
+  case ivim_ts_IviContainer_PR_lac:
     toRos_LayoutContainer(in.choice.lac, out.lac);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_LAC;
-    break;case ivim_ts_IviContainer_PR_avc:
+    break;
+  case ivim_ts_IviContainer_PR_avc:
     toRos_AutomatedVehicleContainer(in.choice.avc, out.avc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_AVC;
-    break;case ivim_ts_IviContainer_PR_mlc:
+    break;
+  case ivim_ts_IviContainer_PR_mlc:
     toRos_MapLocationContainer(in.choice.mlc, out.mlc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_MLC;
-    break;case ivim_ts_IviContainer_PR_rsc:
+    break;
+  case ivim_ts_IviContainer_PR_rsc:
     toRos_RoadSurfaceContainer(in.choice.rsc, out.rsc);
     out.choice = ivim_ts_msgs::IviContainer::CHOICE_RSC;
     break;
@@ -105,28 +113,36 @@ void toRos_IviContainer(const ivim_ts_IviContainer_t& in, ivim_ts_msgs::IviConta
 
 void toStruct_IviContainer(const ivim_ts_msgs::IviContainer& in, ivim_ts_IviContainer_t& out) {
   memset(&out, 0, sizeof(ivim_ts_IviContainer_t));
-  switch (in.choice) {case ivim_ts_msgs::IviContainer::CHOICE_GLC:
+  switch (in.choice) {
+  case ivim_ts_msgs::IviContainer::CHOICE_GLC:
     toStruct_GeographicLocationContainer(in.glc, out.choice.glc);
     out.present = ivim_ts_IviContainer_PR_glc;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_GIV:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_GIV:
     toStruct_GeneralIviContainer(in.giv, out.choice.giv);
     out.present = ivim_ts_IviContainer_PR_giv;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_RCC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_RCC:
     toStruct_RoadConfigurationContainer(in.rcc, out.choice.rcc);
     out.present = ivim_ts_IviContainer_PR_rcc;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_TC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_TC:
     toStruct_TextContainer(in.tc, out.choice.tc);
     out.present = ivim_ts_IviContainer_PR_tc;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_LAC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_LAC:
     toStruct_LayoutContainer(in.lac, out.choice.lac);
     out.present = ivim_ts_IviContainer_PR_lac;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_AVC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_AVC:
     toStruct_AutomatedVehicleContainer(in.avc, out.choice.avc);
     out.present = ivim_ts_IviContainer_PR_avc;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_MLC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_MLC:
     toStruct_MapLocationContainer(in.mlc, out.choice.mlc);
     out.present = ivim_ts_IviContainer_PR_mlc;
-    break;case ivim_ts_msgs::IviContainer::CHOICE_RSC:
+    break;
+  case ivim_ts_msgs::IviContainer::CHOICE_RSC:
     toStruct_RoadSurfaceContainer(in.rsc, out.choice.rsc);
     out.present = ivim_ts_IviContainer_PR_rsc;
     break;

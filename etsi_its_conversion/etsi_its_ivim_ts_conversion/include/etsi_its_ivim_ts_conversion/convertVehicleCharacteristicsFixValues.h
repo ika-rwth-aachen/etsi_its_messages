@@ -71,25 +71,32 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_VehicleCharacteristicsFixValues(const ivim_ts_VehicleCharacteristicsFixValues_t& in, ivim_ts_msgs::VehicleCharacteristicsFixValues& out) {
-  switch (in.present) {case ivim_ts_VehicleCharacteristicsFixValues_PR_simpleVehicleType:
+  switch (in.present) {
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_simpleVehicleType:
     toRos_StationType(in.choice.simpleVehicleType, out.simple_vehicle_type);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_SIMPLE_VEHICLE_TYPE;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_euVehicleCategoryCode:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_euVehicleCategoryCode:
     toRos_EuVehicleCategoryCode(in.choice.euVehicleCategoryCode, out.eu_vehicle_category_code);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EU_VEHICLE_CATEGORY_CODE;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_iso3833VehicleType:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_iso3833VehicleType:
     toRos_Iso3833VehicleType(in.choice.iso3833VehicleType, out.iso3833_vehicle_type);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ISO3833_VEHICLE_TYPE;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_euroAndCo2value:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_euroAndCo2value:
     toRos_EnvironmentalCharacteristics(in.choice.euroAndCo2value, out.euro_and_co2value);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EURO_AND_CO2_VALUE;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_engineCharacteristics:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_engineCharacteristics:
     toRos_EngineCharacteristics(in.choice.engineCharacteristics, out.engine_characteristics);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ENGINE_CHARACTERISTICS;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_loadType:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_loadType:
     toRos_LoadType(in.choice.loadType, out.load_type);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_LOAD_TYPE;
-    break;case ivim_ts_VehicleCharacteristicsFixValues_PR_usage:
+    break;
+  case ivim_ts_VehicleCharacteristicsFixValues_PR_usage:
     toRos_VehicleRole(in.choice.usage, out.usage);
     out.choice = ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_USAGE;
     break;
@@ -99,25 +106,32 @@ void toRos_VehicleCharacteristicsFixValues(const ivim_ts_VehicleCharacteristicsF
 
 void toStruct_VehicleCharacteristicsFixValues(const ivim_ts_msgs::VehicleCharacteristicsFixValues& in, ivim_ts_VehicleCharacteristicsFixValues_t& out) {
   memset(&out, 0, sizeof(ivim_ts_VehicleCharacteristicsFixValues_t));
-  switch (in.choice) {case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_SIMPLE_VEHICLE_TYPE:
+  switch (in.choice) {
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_SIMPLE_VEHICLE_TYPE:
     toStruct_StationType(in.simple_vehicle_type, out.choice.simpleVehicleType);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_simpleVehicleType;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EU_VEHICLE_CATEGORY_CODE:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EU_VEHICLE_CATEGORY_CODE:
     toStruct_EuVehicleCategoryCode(in.eu_vehicle_category_code, out.choice.euVehicleCategoryCode);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_euVehicleCategoryCode;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ISO3833_VEHICLE_TYPE:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ISO3833_VEHICLE_TYPE:
     toStruct_Iso3833VehicleType(in.iso3833_vehicle_type, out.choice.iso3833VehicleType);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_iso3833VehicleType;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EURO_AND_CO2_VALUE:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_EURO_AND_CO2_VALUE:
     toStruct_EnvironmentalCharacteristics(in.euro_and_co2value, out.choice.euroAndCo2value);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_euroAndCo2value;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ENGINE_CHARACTERISTICS:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_ENGINE_CHARACTERISTICS:
     toStruct_EngineCharacteristics(in.engine_characteristics, out.choice.engineCharacteristics);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_engineCharacteristics;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_LOAD_TYPE:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_LOAD_TYPE:
     toStruct_LoadType(in.load_type, out.choice.loadType);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_loadType;
-    break;case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_USAGE:
+    break;
+  case ivim_ts_msgs::VehicleCharacteristicsFixValues::CHOICE_USAGE:
     toStruct_VehicleRole(in.usage, out.choice.usage);
     out.present = ivim_ts_VehicleCharacteristicsFixValues_PR_usage;
     break;

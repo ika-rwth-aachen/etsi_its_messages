@@ -6,7 +6,6 @@
  */
 
 #include "etsi_its_ivim_ts_coding/ivim_ts_NodeSetXY.h"
-#include "etsi_its_ivim_ts_coding/ivim_ts_NodeXY.h"
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_ivim_ts_NodeSetXY_constr_1 CC_NOTUSED = {

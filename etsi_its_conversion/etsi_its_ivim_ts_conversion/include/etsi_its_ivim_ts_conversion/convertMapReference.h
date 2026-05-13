@@ -60,10 +60,12 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_MapReference(const ivim_ts_MapReference_t& in, ivim_ts_msgs::MapReference& out) {
-  switch (in.present) {case ivim_ts_MapReference_PR_roadsegment:
+  switch (in.present) {
+  case ivim_ts_MapReference_PR_roadsegment:
     toRos_RoadSegmentReferenceID(in.choice.roadsegment, out.roadsegment);
     out.choice = ivim_ts_msgs::MapReference::CHOICE_ROADSEGMENT;
-    break;case ivim_ts_MapReference_PR_intersection:
+    break;
+  case ivim_ts_MapReference_PR_intersection:
     toRos_IntersectionReferenceID(in.choice.intersection, out.intersection);
     out.choice = ivim_ts_msgs::MapReference::CHOICE_INTERSECTION;
     break;
@@ -73,10 +75,12 @@ void toRos_MapReference(const ivim_ts_MapReference_t& in, ivim_ts_msgs::MapRefer
 
 void toStruct_MapReference(const ivim_ts_msgs::MapReference& in, ivim_ts_MapReference_t& out) {
   memset(&out, 0, sizeof(ivim_ts_MapReference_t));
-  switch (in.choice) {case ivim_ts_msgs::MapReference::CHOICE_ROADSEGMENT:
+  switch (in.choice) {
+  case ivim_ts_msgs::MapReference::CHOICE_ROADSEGMENT:
     toStruct_RoadSegmentReferenceID(in.roadsegment, out.choice.roadsegment);
     out.present = ivim_ts_MapReference_PR_roadsegment;
-    break;case ivim_ts_msgs::MapReference::CHOICE_INTERSECTION:
+    break;
+  case ivim_ts_msgs::MapReference::CHOICE_INTERSECTION:
     toStruct_IntersectionReferenceID(in.intersection, out.choice.intersection);
     out.present = ivim_ts_MapReference_PR_intersection;
     break;

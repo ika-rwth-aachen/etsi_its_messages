@@ -66,18 +66,28 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_EuVehicleCategoryCode(const ivim_ts_EuVehicleCategoryCode_t& in, ivim_ts_msgs::EuVehicleCategoryCode& out) {
-  switch (in.present) {case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryL:
+  switch (in.present) {
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryL:
     toRos_EuVehicleCategoryL(in.choice.euVehicleCategoryL, out.eu_vehicle_category_l);
     out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_L;
-    break;case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryM:
+    break;
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryM:
     toRos_EuVehicleCategoryM(in.choice.euVehicleCategoryM, out.eu_vehicle_category_m);
     out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_M;
-    break;case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryN:
+    break;
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryN:
     toRos_EuVehicleCategoryN(in.choice.euVehicleCategoryN, out.eu_vehicle_category_n);
     out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_N;
-    break;case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryO:
+    break;
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryO:
     toRos_EuVehicleCategoryO(in.choice.euVehicleCategoryO, out.eu_vehicle_category_o);
     out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_O;
+    break;
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehilcleCategoryT:
+    out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHILCLE_CATEGORY_T;
+    break;
+  case ivim_ts_EuVehicleCategoryCode_PR_euVehilcleCategoryG:
+    out.choice = ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHILCLE_CATEGORY_G;
     break;
   default: break;
   }
@@ -85,18 +95,28 @@ void toRos_EuVehicleCategoryCode(const ivim_ts_EuVehicleCategoryCode_t& in, ivim
 
 void toStruct_EuVehicleCategoryCode(const ivim_ts_msgs::EuVehicleCategoryCode& in, ivim_ts_EuVehicleCategoryCode_t& out) {
   memset(&out, 0, sizeof(ivim_ts_EuVehicleCategoryCode_t));
-  switch (in.choice) {case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_L:
+  switch (in.choice) {
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_L:
     toStruct_EuVehicleCategoryL(in.eu_vehicle_category_l, out.choice.euVehicleCategoryL);
     out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryL;
-    break;case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_M:
+    break;
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_M:
     toStruct_EuVehicleCategoryM(in.eu_vehicle_category_m, out.choice.euVehicleCategoryM);
     out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryM;
-    break;case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_N:
+    break;
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_N:
     toStruct_EuVehicleCategoryN(in.eu_vehicle_category_n, out.choice.euVehicleCategoryN);
     out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryN;
-    break;case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_O:
+    break;
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHICLE_CATEGORY_O:
     toStruct_EuVehicleCategoryO(in.eu_vehicle_category_o, out.choice.euVehicleCategoryO);
     out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehicleCategoryO;
+    break;
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHILCLE_CATEGORY_T:
+    out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehilcleCategoryT;
+    break;
+  case ivim_ts_msgs::EuVehicleCategoryCode::CHOICE_EU_VEHILCLE_CATEGORY_G:
+    out.present = ivim_ts_EuVehicleCategoryCode_PR_euVehilcleCategoryG;
     break;
   default: break;
   }

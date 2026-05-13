@@ -59,10 +59,12 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_Ext2(const ivim_ts_Ext2_t& in, ivim_ts_msgs::Ext2& out) {
-  switch (in.present) {case ivim_ts_Ext2_PR_content:
+  switch (in.present) {
+  case ivim_ts_Ext2_PR_content:
     out.content = in.choice.content;
     out.choice = ivim_ts_msgs::Ext2::CHOICE_CONTENT;
-    break;case ivim_ts_Ext2_PR_extension:
+    break;
+  case ivim_ts_Ext2_PR_extension:
     toRos_Ext3(in.choice.extension, out.extension);
     out.choice = ivim_ts_msgs::Ext2::CHOICE_EXTENSION;
     break;
@@ -72,10 +74,12 @@ void toRos_Ext2(const ivim_ts_Ext2_t& in, ivim_ts_msgs::Ext2& out) {
 
 void toStruct_Ext2(const ivim_ts_msgs::Ext2& in, ivim_ts_Ext2_t& out) {
   memset(&out, 0, sizeof(ivim_ts_Ext2_t));
-  switch (in.choice) {case ivim_ts_msgs::Ext2::CHOICE_CONTENT:
+  switch (in.choice) {
+  case ivim_ts_msgs::Ext2::CHOICE_CONTENT:
     out.choice.content = in.content;
     out.present = ivim_ts_Ext2_PR_content;
-    break;case ivim_ts_msgs::Ext2::CHOICE_EXTENSION:
+    break;
+  case ivim_ts_msgs::Ext2::CHOICE_EXTENSION:
     toStruct_Ext3(in.extension, out.choice.extension);
     out.present = ivim_ts_Ext2_PR_extension;
     break;

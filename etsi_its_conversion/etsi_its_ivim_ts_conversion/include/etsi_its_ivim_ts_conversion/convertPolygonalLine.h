@@ -65,16 +65,20 @@ namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace etsi_its_ivim_ts_conversion {
 
 void toRos_PolygonalLine(const ivim_ts_PolygonalLine_t& in, ivim_ts_msgs::PolygonalLine& out) {
-  switch (in.present) {case ivim_ts_PolygonalLine_PR_deltaPositions:
+  switch (in.present) {
+  case ivim_ts_PolygonalLine_PR_deltaPositions:
     toRos_DeltaPositions(in.choice.deltaPositions, out.delta_positions);
     out.choice = ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS;
-    break;case ivim_ts_PolygonalLine_PR_deltaPositionsWithAltitude:
+    break;
+  case ivim_ts_PolygonalLine_PR_deltaPositionsWithAltitude:
     toRos_DeltaReferencePositions(in.choice.deltaPositionsWithAltitude, out.delta_positions_with_altitude);
     out.choice = ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS_WITH_ALTITUDE;
-    break;case ivim_ts_PolygonalLine_PR_absolutePositions:
+    break;
+  case ivim_ts_PolygonalLine_PR_absolutePositions:
     toRos_AbsolutePositions(in.choice.absolutePositions, out.absolute_positions);
     out.choice = ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS;
-    break;case ivim_ts_PolygonalLine_PR_absolutePositionsWithAltitude:
+    break;
+  case ivim_ts_PolygonalLine_PR_absolutePositionsWithAltitude:
     toRos_AbsolutePositionsWAltitude(in.choice.absolutePositionsWithAltitude, out.absolute_positions_with_altitude);
     out.choice = ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS_WITH_ALTITUDE;
     break;
@@ -84,16 +88,20 @@ void toRos_PolygonalLine(const ivim_ts_PolygonalLine_t& in, ivim_ts_msgs::Polygo
 
 void toStruct_PolygonalLine(const ivim_ts_msgs::PolygonalLine& in, ivim_ts_PolygonalLine_t& out) {
   memset(&out, 0, sizeof(ivim_ts_PolygonalLine_t));
-  switch (in.choice) {case ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS:
+  switch (in.choice) {
+  case ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS:
     toStruct_DeltaPositions(in.delta_positions, out.choice.deltaPositions);
     out.present = ivim_ts_PolygonalLine_PR_deltaPositions;
-    break;case ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS_WITH_ALTITUDE:
+    break;
+  case ivim_ts_msgs::PolygonalLine::CHOICE_DELTA_POSITIONS_WITH_ALTITUDE:
     toStruct_DeltaReferencePositions(in.delta_positions_with_altitude, out.choice.deltaPositionsWithAltitude);
     out.present = ivim_ts_PolygonalLine_PR_deltaPositionsWithAltitude;
-    break;case ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS:
+    break;
+  case ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS:
     toStruct_AbsolutePositions(in.absolute_positions, out.choice.absolutePositions);
     out.present = ivim_ts_PolygonalLine_PR_absolutePositions;
-    break;case ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS_WITH_ALTITUDE:
+    break;
+  case ivim_ts_msgs::PolygonalLine::CHOICE_ABSOLUTE_POSITIONS_WITH_ALTITUDE:
     toStruct_AbsolutePositionsWAltitude(in.absolute_positions_with_altitude, out.choice.absolutePositionsWithAltitude);
     out.present = ivim_ts_PolygonalLine_PR_absolutePositionsWithAltitude;
     break;

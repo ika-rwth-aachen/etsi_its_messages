@@ -6,7 +6,6 @@
  */
 
 #include "etsi_its_ivim_ts_coding/ivim_ts_ConnectionManeuverAssist-addGrpC.h"
-#include "etsi_its_ivim_ts_coding/ivim_ts_ItsStationPositionList.h"
 
 asn_TYPE_member_t asn_MBR_ivim_ts_ConnectionManeuverAssist_addGrpC_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct ivim_ts_ConnectionManeuverAssist_addGrpC, itsStationPosition),
