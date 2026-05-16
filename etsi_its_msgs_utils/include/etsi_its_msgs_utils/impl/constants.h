@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ const uint64_t UNIX_SECONDS_2004 = 1072915200;  // Unix-Seconds for 2004-01-01T0
 
 /**
  * @brief std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion
- * 
+ *
  */
 const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004{
     {UNIX_SECONDS_2004, 0},  // 2004-01-01T00:00:00.000Z
@@ -53,7 +53,7 @@ const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004{
 
 /**
  * @brief Get the leap second insertions since 2004 for given unix seconds
- * 
+ *
  * @param unix_seconds the current unix seconds for that the leap second insertions since 2004 shall be provided
  * @return uint16_t the number of leap second insertions since 2004 for unix_seconds
  */

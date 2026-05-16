@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ namespace access {
 
     /**
    * @brief Get the value of MinuteOfTheYear object MapData object
-   * 
+   *
    * @param map object to get the MinuteOfTheYear from
    * @return MinuteOfTheYear the minute of the year object
    */
@@ -51,7 +51,7 @@ namespace access {
 
   /**
    * @brief Get the value of MinuteOfTheYear value from MapData object
-   * 
+   *
    * @param map object to get the MinuteOfTheYear value from
    * @return uint32_t the minute of the year value
    */
@@ -62,7 +62,7 @@ namespace access {
 
   /**
    * @brief Get the value of MinuteOfTheYear object from mapem
-   * 
+   *
    * @param mapem object to get the MinuteOfTheYear
    * @return MinuteOfTheYear the minute of the year object
    */
@@ -72,7 +72,7 @@ namespace access {
 
   /**
    * @brief Get the value of MinuteOfTheYear value from mapem
-   * 
+   *
    * @param mapem object to get the MinuteOfTheYear value from
    * @return uint32_t the minute of the year value
    */
@@ -82,7 +82,7 @@ namespace access {
 
   /**
    * @brief Get the IntersectionID value
-   * 
+   *
    * @param intsct_id IntersectionID object to get the value from
    * @return uint16_t the IntersectionID value
    */
@@ -92,7 +92,7 @@ namespace access {
 
   /**
    * @brief Get the IntersectionId of an IntersectionGeometry object
-   * 
+   *
    * @param intsct IntersectionGeometry object
    * @return uint16_t the IntersectionId value
    */
@@ -193,7 +193,7 @@ namespace access {
 
   /**
    * @brief Get the Point From NodeXY object
-   * 
+   *
    * @tparam T representing different NodeXY types (NodeXY20b, NodeXY22b...)
    * @param node_xy the NodeXY object
    * @return gm::Point geometry_msgs::Point representing the node point (values given in meters)

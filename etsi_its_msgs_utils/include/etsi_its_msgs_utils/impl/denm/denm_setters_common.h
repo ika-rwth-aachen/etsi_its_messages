@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ SOFTWARE.
 
 /**
  * @brief Set the ReferenceTime-value
- * 
+ *
  * @param denm DENM to set the ReferenceTime-Value for
  * @param unix_nanosecs Timestamp in unix-nanoseconds to set the ReferenceTime-Value from
  * @param n_leap_seconds Number of leap seconds since 2004 for the given timestamp  (Defaults to the todays number of leap seconds since 2004.)
@@ -78,7 +78,7 @@ inline void setReferencePosition(DENM& denm, const double latitude, const double
 
 /**
  * @brief Set the IsSpeedPresent object for DENM
- * 
+ *
  * @param denm DENM to set IsSpeedPresent
  * @param presence_of_speed IsSpeedPresent-Value (true or false)
  */
@@ -108,11 +108,11 @@ inline void setSpeed(DENM& denm, const double speed_val, const double confidence
 
 /**
  * @brief Set the ReferencePosition of a DENM from a given UTM-Position
- * 
+ *
  * The position is transformed to latitude and longitude by using GeographicLib::UTMUPS
  * The z-Coordinate is directly used as altitude value
  * The frame_id of the given utm_position must be set to 'utm_<zone><N/S>'
- * 
+ *
  * @param[out] denm DENM for which to set the ReferencePosition
  * @param[in] utm_position geometry_msgs::PointStamped describing the given utm position
  * @param[in] zone the UTM zone (zero means UPS) of the given position

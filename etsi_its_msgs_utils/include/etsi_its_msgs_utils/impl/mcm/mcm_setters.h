@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +136,7 @@ inline void setAltitude(Altitude& altitude, const double value) {
 
 /**
  * @brief Set the ReferencePosition for an MCM.
- * 
+ *
  * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
  * Resets all Confidence values to UNAVAILABLE.
  *

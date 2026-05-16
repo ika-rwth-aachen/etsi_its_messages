@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,7 +56,7 @@ namespace displays
       std::vector<bool> lane_dir = etsi_its_mapem_ts_msgs::access::getLaneDirection(gen_lane);
       if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::bidirectional;
       else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::no_travel;
-      else if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress; 
+      else if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress;
       else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::egress;
       else intsct_lane.direction = LaneDirection::unknown_direction;
       // LaneType
@@ -85,16 +85,16 @@ namespace displays
 
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY3:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy3);
-                  break;                        
-                  
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY4:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy4);
-                  break;                        
-              
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY5:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy5);
-                  break;                        
-                  
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY6:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy6);
                   break;

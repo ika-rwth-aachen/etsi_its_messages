@@ -3,7 +3,7 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -109,10 +109,10 @@ def findDependenciesOfRosMessageType(parent_file_path: str, file_list: List[str]
                 if msg_type not in new_file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg"):
                     new_file_list.append(msg_type)
                     new_file_list = findDependenciesOfRosMessageType(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg", new_file_list)
-    
+
     # make sure there are no duplicates and sort alphabetically
     new_file_list = sorted(list(set(new_file_list)))
-    
+
     return new_file_list
 
 def generateCMakeLists(msg_files: list, file_path: str, type: str) -> None:
@@ -195,7 +195,7 @@ def main():
 
     # generate CMakelists.txt and remove all msg files that are not required
     msg_type = args.type.upper()
-    
+
     # handle special cases
     if args.type == "cpm_ts":
         msg_type = "CollectivePerceptionMessage"
@@ -210,7 +210,7 @@ def main():
 
     msg_files = findDependenciesOfRosMessageType(os.path.join(args.output_dir, f"{msg_type}.msg"), [msg_type])
     generateCMakeLists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
-    
+
     for f in glob.glob(os.path.join(args.output_dir, "*.msg")):
         if os.path.splitext(os.path.basename(f))[0] not in msg_files:
             os.remove(f)

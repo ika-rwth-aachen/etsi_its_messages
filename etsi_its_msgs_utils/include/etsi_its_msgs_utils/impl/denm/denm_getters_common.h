@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,23 +44,23 @@ inline uint32_t getStationID(const DENM& denm) { return getStationID(denm.header
 
 /**
  * @brief Get the Reference Time object
- * 
+ *
  * @param denm DENM to get the ReferenceTime-Value from
- * @return TimestampIts 
+ * @return TimestampIts
  */
 inline TimestampIts getReferenceTime(const DENM& denm) { return denm.denm.management.reference_time; }
 
 /**
  * @brief Get the ReferenceTime-Value
- * 
- * @param denm DENM to get the ReferenceTime-Value from 
+ *
+ * @param denm DENM to get the ReferenceTime-Value from
  * @return uint64_t the ReferenceTime-Value
  */
 inline uint64_t getReferenceTimeValue(const DENM& denm) { return getReferenceTime(denm).value; }
 
 /**
  * @brief Get the stationType object
- * 
+ *
  * @param denm DENM to get the stationType value from
  * @return stationType value
  */
@@ -68,7 +68,7 @@ inline uint8_t getStationType(const DENM& denm) { return denm.denm.management.st
 
 /**
  * @brief Get the Latitude value of DENM
- * 
+ *
  * @param denm DENM to get the Latitude value from
  * @return Latitude value in degree as decimal number
  */
@@ -76,7 +76,7 @@ inline double getLatitude(const DENM& denm) { return getLatitude(denm.denm.manag
 
 /**
  * @brief Get the Longitude value of DENM
- * 
+ *
  * @param denm DENM to get the Longitude value from
  * @return Longitude value in degree as decimal number
  */
@@ -84,7 +84,7 @@ inline double getLongitude(const DENM& denm) { return getLongitude(denm.denm.man
 
 /**
  * @brief Get the Altitude value of DENM
- * 
+ *
  * @param denm DENM to get the Altitude value from
  * @return Altitude value (above the reference ellipsoid surface) in meter as decimal number
  */
@@ -92,7 +92,7 @@ inline double getAltitude(const DENM& denm) { return getAltitude(denm.denm.manag
 
 /**
  * @brief Get the IsHeadingPresent object
- * 
+ *
  * @param denm DENM to get the IsHeadingPresent-Value from
  * @return IsHeadingPresent-Value (true or false)
  */
@@ -106,7 +106,7 @@ inline bool getIsHeadingPresent(const DENM& denm) {
 
 /**
  * @brief Get the vehicle speed
- * 
+ *
  * @param denm DENM to get the speed value from
  * @return speed value in m/s as decimal number
  */
@@ -124,7 +124,7 @@ inline double getSpeed(const DENM& denm) {
 
 /**
  * @brief Get the IsSpeedPresent object
- * 
+ *
  * @param denm DENM to get the IsSpeedPresent-Value from
  * @return IsSpeedPresent-Value (true or false)
  */
@@ -138,7 +138,7 @@ inline bool getIsSpeedPresent(const DENM& denm) {
 
 /**
  * @brief Get the Speed Confidence
- * 
+ *
  * @param denm DENM to get the Speed Confidence from
  * @return double standard deviation of the speed in m/s as decimal number
  */
@@ -149,7 +149,7 @@ inline double getSpeedConfidence(const DENM& denm) {
 
 /**
  * @brief Get the UTM Position defined within the ManagementContainer of the DENM
- * 
+ *
  * @param denm DENM to get the UTM Position from
  * @param zone the UTM zone (zero means UPS)
  * @param northp hemisphere (true means north, false means south)
@@ -161,7 +161,7 @@ inline gm::PointStamped getUTMPosition(const DENM& denm, int& zone, bool& northp
 
 /**
  * @brief Get the UTM Position defined within the ManagementContainer of the DENM
- * 
+ *
  * @param denm DENM to get the UTM Position from
  * @return gm::PointStamped geometry_msgs::PointStamped of the given position
  */

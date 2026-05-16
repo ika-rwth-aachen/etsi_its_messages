@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -121,7 +121,7 @@ inline double getHeadingConfidence(const CAM& cam) {
 
 /**
  * @brief Get the Yaw Rate of CAM
- * 
+ *
  * @param cam CAM to get the YawRate from
  * @return double yaw rate in degrees per second as decimal number
  */
@@ -131,7 +131,7 @@ inline double getYawRate(const CAM& cam) {
 
 /**
  * @brief Get the Yaw Rate Confidence of CAM
- * 
+ *
  * @param cam CAM to get the YawRateConfidence from
  * @return double yaw rate standard deviation in degrees per second as decimal number
  */
@@ -191,7 +191,7 @@ inline double getSpeed(const CAM& cam) {
 
 /**
  * @brief Get the Speed Confidence
- * 
+ *
  * @param cam CAM to get the Speed Confidence from
  * @return double standard deviation of the speed in m/s as decimal number
  */
@@ -213,7 +213,7 @@ inline double getLongitudinalAcceleration(const CAM& cam) {
 
 /**
  * @brief Get the Longitudinal Acceleration Confidence
- * 
+ *
  * @param cam CAM to get the LongitudinalAccelerationConfidence from
  * @return double standard deviation of the longitudinal acceleration in m/s^2 as decimal number
  */
@@ -239,8 +239,8 @@ inline double getLateralAcceleration(const CAM& cam) {
 }
 
 /**
- * @brief Get the Lateral Acceleration Confidence 
- * 
+ * @brief Get the Lateral Acceleration Confidence
+ *
  * @param cam CAM to get the LateralAccelerationConfidence from
  * @return double standard deviation of the lateral acceleration in m/s^2 as decimal number
  */

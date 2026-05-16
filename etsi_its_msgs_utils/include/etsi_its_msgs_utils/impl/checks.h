@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,10 @@ SOFTWARE.
 
 /**
  * @brief Throws an exception if a given value is out of a defined range.
- * 
+ *
  * @tparam T1
- * @tparam T2 
- * @param val The value to check if it is in the range. 
+ * @tparam T2
+ * @param val The value to check if it is in the range.
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param val_desc Description of the value for the exception message.

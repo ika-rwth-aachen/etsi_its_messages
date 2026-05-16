@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ namespace access {
 
   /**
    * @brief Sets the IntersectionID value.
-   * 
+   *
    * @param intsct_id The IntersectionID object to set.
    * @param id The value to set.
    * @throws std::out_of_range if the id is out of the valid range.
@@ -52,7 +52,7 @@ namespace access {
 
   /**
    * @brief Sets the IntersectionID value in an IntersectionReferenceID object.
-   * 
+   *
    * @param intsct_ref_id The IntersectionReferenceID object to set.
    * @param id The value to set.
    * @throws std::out_of_range if the id is out of the valid range.
@@ -63,7 +63,7 @@ namespace access {
 
   /**
    * @brief Sets the IntersectionID value in an IntersectionState object.
-   * 
+   *
    * @param intsct The IntersectionState object to set.
    * @param id The value to set.
    * @throws std::out_of_range if the id is out of the valid range.
@@ -74,7 +74,7 @@ namespace access {
 
   /**
    * @brief Sets the MinuteOfTheYear value.
-   * 
+   *
    * @param moy The MinuteOfTheYear object to set.
    * @param moy_value The value to set.
    * @throws std::out_of_range if the moy_value is out of the valid range.
@@ -86,7 +86,7 @@ namespace access {
 
   /**
    * @brief Sets the MinuteOfTheYear value in an IntersectionState object.
-   * 
+   *
    * @param intsct The IntersectionState object to set.
    * @param moy_value The value to set.
    * @throws std::out_of_range if the moy_value is out of the valid range.
@@ -98,7 +98,7 @@ namespace access {
 
   /**
    * @brief Sets the DSecond value.
-   * 
+   *
    * @param dsecond The DSecond object to set.
    * @param dsecond_value The value to set.
    * @throws std::out_of_range if the dsecond_value is out of the valid range.
@@ -110,7 +110,7 @@ namespace access {
 
   /**
    * @brief Sets the DSecond value using a double.
-   * 
+   *
    * @param dsecond The DSecond object to set.
    * @param dsecond_value The value to set in seconds.
    * @throws std::out_of_range if the dsecond_value is out of the valid range.
@@ -122,7 +122,7 @@ namespace access {
 
   /**
    * @brief Sets the DSecond value in an IntersectionState object.
-   * 
+   *
    * @param intsct The IntersectionState object to set.
    * @param dsecond_value The value to set.
    * @throws std::out_of_range if the dsecond_value is out of the valid range.
@@ -134,7 +134,7 @@ namespace access {
 
   /**
    * @brief Sets the DSecond value in an IntersectionState object using a double.
-   * 
+   *
    * @param intsct The IntersectionState object to set.
    * @param dsecond_value The value to set in seconds.
    * @throws std::out_of_range if the dsecond_value is out of the valid range.
@@ -146,7 +146,7 @@ namespace access {
 
   /**
    * @brief Sets the SignalGroupID value.
-   * 
+   *
    * @param signal_group_id The SignalGroupID object to set.
    * @param id The value to set.
    * @throws std::out_of_range if the id is out of the valid range.
@@ -158,7 +158,7 @@ namespace access {
 
   /**
    * @brief Sets the SignalGroupID value in a MovementState object.
-   * 
+   *
    * @param movement_state The MovementState object to set.
    * @param id The value to set.
    * @throws std::out_of_range if the id is out of the valid range.

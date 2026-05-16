@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -195,7 +195,7 @@ void CAMDisplay::subscribe()
       rviz_common::properties::StatusProperty::Warn, "Topic",
       QString("Waiting for topic: ") + QString::fromStdString(topic)
       + QString(" (etsi_its_cam_msgs/msg/CAM or etsi_its_cam_ts_msgs/msg/CAM)"));
-    
+
     // Start periodic timer to check for topic availability
     if (!topic_check_timer_) {
       topic_check_timer_ = rviz_node_->create_wall_timer(

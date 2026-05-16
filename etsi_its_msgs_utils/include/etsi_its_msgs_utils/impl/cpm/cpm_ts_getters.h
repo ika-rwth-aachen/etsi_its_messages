@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ inline uint32_t getStationID(const CollectivePerceptionMessage &cpm) { return ge
 
 /**
    * @brief Get the Reference Time object
-   * 
+   *
    * @param cpm CPM to get the ReferenceTime-Value from
    * @return TimestampIts
    */
@@ -59,15 +59,15 @@ inline TimestampIts getReferenceTime(const CollectivePerceptionMessage &cpm) {
 
 /**
    * @brief Get the ReferenceTime-Value
-   * 
-   * @param cpm CPM to get the ReferenceTime-Value from 
+   *
+   * @param cpm CPM to get the ReferenceTime-Value from
    * @return uint64_t the ReferenceTime-Value in milliseconds
    */
 inline uint64_t getReferenceTimeValue(const CollectivePerceptionMessage &cpm) { return getReferenceTime(cpm).value; }
 
 /**
    * @brief Get the Latitude value of CPM
-   * 
+   *
    * @param cpm CPM to get the Latitude value from
    * @return Latitude value in degree as decimal number
    */
@@ -77,7 +77,7 @@ inline double getLatitude(const CollectivePerceptionMessage &cpm) {
 
 /**
    * @brief Get the Longitude value of CPM
-   * 
+   *
    * @param cpm CPM to get the Longitude value from
    * @return Longitude value in degree as decimal number
    */
@@ -87,7 +87,7 @@ inline double getLongitude(const CollectivePerceptionMessage &cpm) {
 
 /**
    * @brief Get the Altitude value of CPM
-   * 
+   *
    * @param cpm CPM to get the Altitude value from
    * @return Altitude value in (above the reference ellipsoid surface) in meter as decimal number
    */
@@ -268,9 +268,9 @@ inline gm::Point getPositionOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Get the Position Confidences Of Perceived Object
- * 
+ *
  * @param object The PerceivedObject to get the position confidences from
- * @return std::tuple<double, double, double> x,y and z standard deviations of the positions in meters. 
+ * @return std::tuple<double, double, double> x,y and z standard deviations of the positions in meters.
  *         The z standard deviation is infinity if the z coordinate is not present.
  */
 inline std::tuple<double, double, double> getPositionConfidenceOfPerceivedObject(const PerceivedObject &object) {
@@ -284,7 +284,7 @@ inline std::tuple<double, double, double> getPositionConfidenceOfPerceivedObject
 
 /**
  * @brief Get the Cartesian angle of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the Cartesian angle from
  * @return unit16_t Cartesian angle of the PerceivedObject in 0,1 degrees
  */
@@ -292,7 +292,7 @@ inline uint16_t getCartesianAngle(const CartesianAngle &angle) { return angle.va
 
 /**
  * @brief Get the confidence of the Cartesian angle
- * 
+ *
  * @param angle CartesianAngle to get the confidence from
  * @return uint8_t confidence of the Cartesian angle in 0,1 degrees
  */
@@ -331,7 +331,7 @@ inline gm::Quaternion getOrientationOfPerceivedObject(const PerceivedObject &obj
 
 /**
  * @brief Get the yaw of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the yaw from
  * @return double yaw of the PerceivedObject in radians from -pi to pi
  */
@@ -345,7 +345,7 @@ inline double getYawOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Get the Yaw Confidence Of Perceived Object object
- * 
+ *
  * @param object PerceivedObject to get the yaw confidence from
  * @return double The standard deviation of the yaw angle in radians
  * @throws std::invalid_argument If the angles are not present in the object.
@@ -359,7 +359,7 @@ inline double getYawConfidenceOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Get the pose of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the pose from
  * @return gm::Pose pose of the PerceivedObject (position in m, orientation in rad)
  */
@@ -372,7 +372,7 @@ inline gm::Pose getPoseOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Get the yaw rate of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the yaw rate from
  * @return double yaw rate of the PerceivedObject in rad/s
  * @throws std::invalid_argument If the yaw rate is not present in the object.
@@ -384,12 +384,12 @@ inline double getYawRateOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Get the Yaw Rate Confidence Of Perceived Object
- * 
+ *
  * @param object The PerceivedObject to get the yaw rate confidence from
  * @return double The standard deviation of the yaw rate in rad/s
  *                As defined in the TS, this is rounded up to the next possible value
  * @throws std::invalid_argument If the yaw rate is not present in the object.
- * 
+ *
  */
 inline double getYawRateConfidenceOfPerceivedObject(const PerceivedObject &object) {
   if (!object.z_angular_velocity_is_present) throw std::invalid_argument("No yaw rate present in PerceivedObject");
@@ -409,7 +409,7 @@ inline double getYawRateConfidenceOfPerceivedObject(const PerceivedObject &objec
 
 /**
  * @brief Get the velocity component of the PerceivedObject
- * 
+ *
  * @param velocity VelocityComponent to get the value from
  * @return double value of the velocity component in m/s
  */
@@ -417,7 +417,7 @@ inline double getVelocityComponent(const VelocityComponent &velocity) { return d
 
 /**
  * @brief Get the confidence of the velocity component
- * 
+ *
  * @param velocity VelocityComponent to get the confidence from
  * @return double value of the confidence of the velocity component in m/s
  */
@@ -427,7 +427,7 @@ inline double getVelocityComponentConfidence(const VelocityComponent &velocity) 
 
 /**
  * @brief Get the Cartesian velocity of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the Cartesian velocity from
  * @return gm::Vector3 Cartesian velocity of the PerceivedObject in m/s (local coordinate system)
  * @throws std::invalid_argument If the velocity is no cartesian velocity.
@@ -459,7 +459,7 @@ inline gm::Vector3 getCartesianVelocityOfPerceivedObject(const PerceivedObject &
 
 /**
  * @brief Get the Cartesian Velocity Confidence Of Perceived Object object
- * 
+ *
  * @param object PerceivedObject to get the Cartesian velocity from
  * @return std::tuple<double, double, double> the x,y and z standard deviations of the velocity in m/s
  *         The z standard deviation is infinity if the z velocity is not present.
@@ -475,7 +475,7 @@ inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPercei
     double speed = getSpeed(object.velocity.polar_velocity.velocity_magnitude);
     double angle = getCartesianAngle(object.velocity.polar_velocity.velocity_direction) * M_PI / 180.0 / 10.0; // convert to radians
     double lateral_confidence = speed * angle_confidence; // not exactly, but best approximation
-    double x_confidence = speed_confidence * cos(angle) * cos(angle) 
+    double x_confidence = speed_confidence * cos(angle) * cos(angle)
                           + lateral_confidence * sin(angle) * sin(angle);
     double y_confidence = speed_confidence * sin(angle) * sin(angle)
                           + lateral_confidence * cos(angle) * cos(angle);
@@ -494,12 +494,12 @@ inline std::tuple<double, double, double> getCartesianVelocityConfidenceOfPercei
   } else {
     throw std::invalid_argument("Velocity is neither Polar nor Cartesian");
   }
-  
+
 }
 
 /**
  * @brief Get the acceleration component of the PerceivedObject
- * 
+ *
  * @param acceleration AccelerationComponent to get the value from
  * @return double value of the acceleration component in m/s^2
  */
@@ -509,7 +509,7 @@ inline double getAccelerationComponent(const AccelerationComponent &acceleration
 
 /**
  * @brief Get the confidence of the acceleration component
- * 
+ *
  * @param acceleration AccelerationComponent to get the confidence from
  * @return double value of the confidence of the acceleration component in m/s^2
  */
@@ -519,7 +519,7 @@ inline double getAccelerationComponentConfidence(const AccelerationComponent &ac
 
 /**
  * @brief Get the Cartesian acceleration of the PerceivedObject
- * 
+ *
  * @param object PerceivedObject to get the Cartesian acceleration from
  * @return gm::Vector3 Cartesian acceleration of the PerceivedObject in m/s^2 (local coordinate system)
  * @throws std::invalid_argument If the acceleration is no cartesian acceleration.
@@ -552,8 +552,8 @@ inline gm::Vector3 getCartesianAccelerationOfPerceivedObject(const PerceivedObje
 }
 
 /**
- * @brief Get the Cartesian Acceleration Confidence Of Perceived Object 
- * 
+ * @brief Get the Cartesian Acceleration Confidence Of Perceived Object
+ *
  * @param object PerceivedObject to get the Cartesian acceleration from
  * @return std::tuple<double, double, double> the x,y and z standard deviations of the acceleration in m/s^2
  *        The z standard deviation is infinity if the z acceleration is not present.
@@ -593,7 +593,7 @@ inline std::tuple<double, double, double> getCartesianAccelerationConfidenceOfPe
  * @brief Gets the x-dimension of a perceived object.
  *
  * This function extracts the x-dimension from a given PerceivedObject.
- * If the x-dimension is not present in the object, it throws an 
+ * If the x-dimension is not present in the object, it throws an
  * std::invalid_argument exception.
  *
  * @param object The PerceivedObject from which to retrieve the x-dimension.
@@ -607,7 +607,7 @@ inline uint16_t getXDimensionOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Gets the confidence of the x-dimension of a perceived object.
- * 
+ *
  * @param object  The PerceivedObject from which to retrieve the x-dimension confidence.
  * @return uint8_t The confidence of the x-dimension of the perceived object in decimeters.
  * @throws std::invalid_argument if the x-dimension is not present in the PerceivedObject.
@@ -621,7 +621,7 @@ inline uint8_t getXDimensionConfidenceOfPerceivedObject(const PerceivedObject &o
  * @brief Retrieves the y-dimension of a perceived object.
  *
  * This function extracts the y-dimension from a given PerceivedObject.
- * If the y-dimension is not present in the object, it throws an 
+ * If the y-dimension is not present in the object, it throws an
  * std::invalid_argument exception.
  *
  * @param object The PerceivedObject from which to retrieve the y-dimension.
@@ -635,7 +635,7 @@ inline uint16_t getYDimensionOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Gets the confidence of the y-dimension of a perceived object.
- * 
+ *
  * @param object  The PerceivedObject from which to retrieve the y-dimension confidence.
  * @return uint8_t The confidence of the y-dimension of the perceived object in decimeters.
  * @throws std::invalid_argument if the y-dimension is not present in the PerceivedObject.
@@ -649,7 +649,7 @@ inline uint8_t getYDimensionConfidenceOfPerceivedObject(const PerceivedObject &o
  * @brief Retrieves the z-dimension of a perceived object.
  *
  * This function extracts the z-dimension from a given PerceivedObject.
- * If the z-dimension is not present in the object, it throws an 
+ * If the z-dimension is not present in the object, it throws an
  * std::invalid_argument exception.
  *
  * @param object The PerceivedObject from which to retrieve the z-dimension.
@@ -663,7 +663,7 @@ inline uint16_t getZDimensionOfPerceivedObject(const PerceivedObject &object) {
 
 /**
  * @brief Gets the confidence of the z-dimension of a perceived object.
- * 
+ *
  * @param object  The PerceivedObject from which to retrieve the z-dimension confidence.
  * @return uint8_t The confidence of the z-dimension of the perceived object in decimeters.
  * @throws std::invalid_argument if the z-dimension is not present in the PerceivedObject.
@@ -678,7 +678,7 @@ inline uint8_t getZDimensionConfidenceOfPerceivedObject(const PerceivedObject &o
  *
  * This function extracts the dimensions of a perceived object from the given PerceivedObject.
  * The dimensions are returned as a `gm::Vector3` object with the x, y, and z dimensions in meters.
- * 
+ *
  * @param object The `PerceivedObject` for which to calculate the dimensions.
  * @return The dimensions of the perceived object as a `gm::Vector3` object in meters.
  */
@@ -691,8 +691,8 @@ inline gm::Vector3 getDimensionsOfPerceivedObject(const PerceivedObject &object)
 }
 
 /**
- * @brief Get the Dimensions Confidence Of Perceived Object 
- * 
+ * @brief Get the Dimensions Confidence Of Perceived Object
+ *
  * @param object The PerceivedObject to get the dimensions confidence from
  * @return std::tuple<double, double, double> the x,y and z standard deviations of the dimensions in meters
  */
@@ -729,10 +729,10 @@ inline gm::PointStamped getUTMPositionOfPerceivedObject(const CollectivePercepti
 
 /**
  * @brief Get the confidence ellipse of the reference position as Covariance matrix
- * 
+ *
  * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
  * where x is WGS84 North and y is East
- * 
+ *
  * @param cpm The CPM message to get the reference position from
  * @return const std::array<double, 4> the covariance matrix, as specified above
  */
@@ -742,7 +742,7 @@ inline const std::array<double, 4> getWGSRefPosConfidence(const CollectivePercep
 
 /**
  * @brief Get the sensorId of a SensorInformation object.
- * 
+ *
  * @param sensor_information The SensorInformation to get the sensorId from
  * @return uint8_t The sensorId of a SensorInformation object
  */
@@ -752,7 +752,7 @@ inline uint8_t getSensorID(const SensorInformation &sensor_information) {
 
 /**
  * @brief Get the sensorType of a SensorInformation object.
- * 
+ *
  * @param sensor_information The SensorInformation to get the sensorType from
  * @return uint8_t The sensorType of a SensorInformation object
  */

@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ namespace access {
 
   /**
    * @brief Set the MinuteOfTheYear object
-   * 
+   *
    * @param moy MinuteOfTheYear object
    * @param moy_value value to set
    */
@@ -53,7 +53,7 @@ namespace access {
 
   /**
    * @brief Set the MinuteOfTheYear for a given MapData object
-   * 
+   *
    * @param map MapData object
    * @param moy_value value to set
    */
@@ -63,8 +63,8 @@ namespace access {
 
   /**
    * @brief Set the Minute Of The Year object
-   * 
-   * @param mapem 
+   *
+   * @param mapem
    */
   inline void setMinuteOfTheYear(MAPEM& mapem, const uint32_t moy_value) {
     setMinuteOfTheYear(mapem.map, moy_value);
@@ -73,7 +73,7 @@ namespace access {
 
   /**
    * @brief Set the IntersectionID value
-   * 
+   *
    * @param intsct_id IntersectionID object
    * @param id_value value to set
    */
@@ -84,7 +84,7 @@ namespace access {
 
   /**
    * @brief Set the IntersectionID for an IntersectionGeometry object
-   * 
+   *
    * @param intsct IntersectionGeometry object
    * @param id_value value to set
    */

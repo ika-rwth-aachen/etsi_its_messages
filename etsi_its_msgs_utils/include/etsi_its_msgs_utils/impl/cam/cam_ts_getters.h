@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,10 +38,10 @@ namespace etsi_its_cam_ts_msgs::access {
 
 /**
  * @brief Get the confidence ellipse of the reference position as Covariance matrix
- * 
+ *
  * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
  * where x is the longitudinal axis and y is the lateral axis of the vehicle.
- * 
+ *
  * @param cam The CAM message to get the reference position from
  * @return const std::array<double, 4> the covariance matrix, as specified above
  */
@@ -52,10 +52,10 @@ inline const std::array<double, 4> getRefPosConfidence(const CAM& cam) {
 
 /**
  * @brief Get the confidence ellipse of the reference position as Covariance matrix
- * 
+ *
  * The covariance matrix will have the entries cov_xx, cov_xy, cov_yx, cov_yy
  * where x is WGS84 North and y is East
- * 
+ *
  * @param cam The CAM message to get the reference position from
  * @return const std::array<double, 4> the covariance matrix, as specified above
  */

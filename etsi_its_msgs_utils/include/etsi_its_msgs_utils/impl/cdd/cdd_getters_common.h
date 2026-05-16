@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,8 +83,8 @@ inline double getAltitude(const Altitude& altitude) {
 inline double getSpeed(const Speed& speed) { return ((double)speed.speed_value.value) * 1e-2; }
 
 /**
- * @brief Get the Speed Confidence 
- * 
+ * @brief Get the Speed Confidence
+ *
  * @param speed to get the SpeedConfidence from
  * @return double speed standard deviation in m/s as decimal number
  */
@@ -94,7 +94,7 @@ inline double getSpeedConfidence(const Speed& speed) {
 
 /**
  * @brief Get the AccelerationMagnitude value
- * 
+ *
  * @param acceleration_magnitude to get the AccelerationMagnitude from
  * @return double acceleration magnitude in m/s^2 as decimal number
  */
@@ -105,7 +105,7 @@ inline double getAccelerationMagnitude(const AccelerationMagnitude& acceleration
 
 /**
  * @brief Get the AccelerationMagnitude Confidence
- * 
+ *
  * @param acceleration_magnitude to get the AccelerationMagnitudeConfidence from
  * @return double acceleration magnitude standard deviation in m/s^2 as decimal number
  */
@@ -170,7 +170,7 @@ inline double getHeadingConfidenceCDD(const Heading& heading) { return ((double)
 
 /**
  * @brief Get the Yaw Rate value
- * 
+ *
  * @param yaw_rate The YawRate object to get the yaw rate from
  * @return double The yaw rate in degrees per second
  */
@@ -181,7 +181,7 @@ inline double getYawRateCDD(const YawRate& yaw_rate) {
 
 /**
  * @brief Get the Yaw Rate Confidence
- * 
+ *
  * @param yaw_rate The YawRate object to get the yaw rate confidence from
  * @return double The yaw rate standard deviation in degrees per second
  */
@@ -199,13 +199,13 @@ inline double getYawRateConfidenceCDD(const YawRate& yaw_rate) {
       {YawRateConfidence::DEG_SEC_100_00, 100.0},
       {YawRateConfidence::OUT_OF_RANGE, std::numeric_limits<double>::infinity()},
   };
-  return confidence_map.at(val) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+  return confidence_map.at(val) / etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
 }
 
 
 /**
  * @brief Get the Semi Axis object
- * 
+ *
  * @param semi_axis_length The SemiAxisLength object to get the semi axis from
  * @return double the semi axis length in meters
  */
@@ -216,7 +216,7 @@ inline double getSemiAxis(const SemiAxisLength& semi_axis_length) {
 
 /**
  * @brief Extract major axis length, minor axis length and orientation from the given position confidence ellipse
- * 
+ *
  * @param position_confidence_ellipse The position confidence ellipse to extract the values from
  * @return std::tuple<double, double, double> major axis length in meters, minor axis length in meters, and orientation in degrees
  */
@@ -231,9 +231,9 @@ inline std::tuple<double, double, double> getPosConfidenceEllipse(const PosConfi
 
 /**
  * @brief Convert the confidence ellipse to a covariance matrix
- * 
+ *
  * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
- * 
+ *
  * @param semi_major Semi major axis length in meters
  * @param semi_minor Semi minor axis length in meters
  * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
@@ -246,7 +246,7 @@ inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, d
   double semi_minor_squared = semi_minor * semi_minor / (etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR);
   double major_orientation_rad = major_orientation * M_PI / 180;
   double object_heading_rad = object_heading;
-  
+
   double angle_to_object = object_heading_rad - major_orientation_rad;
 
   double cos_angle = std::cos(angle_to_object);
@@ -261,9 +261,9 @@ inline std::array<double, 4> CovMatrixFromConfidenceEllipse(double semi_major, d
 
 /**
  * @brief Convert the confidence ellipse to a covariance matrix
- * 
+ *
  * Note that the major_orientation is given in degrees, while the object_heading is given in radians!
- * 
+ *
  * @param semi_major Semi major axis length in meters
  * @param semi_minor Semi minor axis length in meters
  * @param major_orientation Orientation of the major axis in degrees, relative to WGS84
@@ -276,7 +276,7 @@ inline std::array<double, 4> WGSCovMatrixFromConfidenceEllipse(double semi_major
 
 /**
  * @brief Get the covariance matrix of the position confidence ellipse
- * 
+ *
  * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
  * @param object_heading The object heading in radians
  * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in vehicle coordinates (x = longitudinal, y = lateral)
@@ -289,7 +289,7 @@ inline std::array<double, 4> getPosConfidenceEllipse(const PosConfidenceEllipse&
 
 /**
  * @brief Get the covariance matrix of the position confidence ellipse
- * 
+ *
  * @param position_confidence_ellipse The position confidence ellipse to get the covariance matrix from
  * @param object_heading The object heading in radians
  * @return std::array<double, 4> The covariance matrix of the position confidence ellipse in WGS coordinates (x = North, y = East)

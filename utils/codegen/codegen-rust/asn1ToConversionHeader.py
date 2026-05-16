@@ -3,7 +3,7 @@
 # ==============================================================================
 # MIT License
 #
-# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -63,16 +63,16 @@ def findDependenciesOfConversionHeaders(parent_file_path: str, type: str, file_l
     with open(parent_file_path, 'r') as file:
         lines = file.readlines()
         for line in lines:
-            
+
             if line.startswith(f"#include <etsi_its_{type}_conversion/convert"):
                 msg_type = line.split("/")[1].split(".")[0]
                 if msg_type not in new_file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.h"):
                     new_file_list.append(msg_type)
                     new_file_list = findDependenciesOfConversionHeaders(f"{os.path.dirname(parent_file_path)}/{msg_type}.h", type, new_file_list)
-    
+
     # make sure there are no duplicates and sort alphabetically
     new_file_list = sorted(list(set(new_file_list)))
-    
+
     return new_file_list
 
 def main():
@@ -121,7 +121,7 @@ def main():
 
     ## remove all conversion files that are not required
     msg_type = args.type.upper()
-    
+
     # handle special cases
     if args.type == "cpm_ts":
         msg_type = "CollectivePerceptionMessage"

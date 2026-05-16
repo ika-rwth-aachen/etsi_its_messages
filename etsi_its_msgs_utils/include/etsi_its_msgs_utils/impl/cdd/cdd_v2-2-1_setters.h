@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,7 +71,7 @@ inline void setWGSHeadingValue(Wgs84AngleValue& heading, const double value) {
 
 /**
  * @brief Set the Wgs84AngleConfidence object
- * 
+ *
  * @param confidence object to set
  * @param value standard deviation of heading in degree as decimal number
  */
@@ -94,7 +94,7 @@ inline void setWGSHeadingConfidence(Wgs84AngleConfidence& confidence, const doub
  *
  * @param heading object to set
  * @param value Heading value in degree as decimal number
- * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to Wgs84AngleConfidence::UNAVAILABLE) 
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to Wgs84AngleConfidence::UNAVAILABLE)
  */
 template <typename Wgs84Angle, typename Wgs84AngleConfidence = decltype(Wgs84Angle::confidence)>
 void setWGSHeadingCDD(Wgs84Angle& heading, const double value, double confidence = std::numeric_limits<double>::infinity()) {

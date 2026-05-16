@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ enum time_mark_value_interpretation { normal, undefined, over_an_hour, leap_seco
 
 /**
    * @brief Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp
-   * 
+   *
    * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
    * @return uint64_t unix seconds of the beginning of the year
    */
@@ -76,7 +76,7 @@ inline uint64_t getUnixSecondsOfYear(const uint64_t unixSecond) {
 
 /**
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
-   * 
+   *
    * @param moy given MinuteOfTheYear object
    * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
    * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
@@ -88,7 +88,7 @@ inline uint64_t getUnixNanosecondsFromMinuteOfTheYear(const MinuteOfTheYear& moy
 
 /**
    * @brief Interprets the TimeIntervalConfidence type as a float value (see etsi definition)
-   * 
+   *
    * @param encoded_probability Value from msg type TimeIntervalConfidence
    * @return confidence as float value [0, 1]
    */
@@ -151,7 +151,7 @@ inline float interpretTimeIntervalConfidenceAsFloat(const uint16_t encoded_proba
 
 /**
    * @brief Interprets the MovementPhaseState type as a color (see etsi definition)
-   * 
+   *
    * @param value Encoded color value from msg type MovementPhaseState
    * @return 4-dimensional array with color values as follows: r, g, b, a, each of these values within a range between [0, 1]
    */
@@ -202,7 +202,7 @@ inline std::array<float, 4> interpretMovementPhaseStateAsColor(const uint8_t val
  * @brief Interprets the type of a TimeMark message
  * See etsi ASNI1 - IS TS 103 301 documentation for for the encoding of "TimeMark"
  * @param time The value inside the TimeMark message
- * @return Type as time_mark_value_interpretation 
+ * @return Type as time_mark_value_interpretation
  */
 inline time_mark_value_interpretation interpretTimeMarkValueType(const uint16_t time) {
   time_mark_value_interpretation type;
@@ -249,7 +249,7 @@ inline int64_t interpretTimeMarkDeltaTimeAsNanoSeconds(const uint16_t time, cons
 
 /**
   * @brief Calculates the delta between a TimeMark and a given timestamp
-  
+
   * @param time TimeMark value since the start of the last full hour in 0.1 seconds
   * @param seconds seconds of current timestamp
   * @param nanosec nanoseconds of current timestamp [0, 999999999]
@@ -264,7 +264,7 @@ inline float interpretTimeMarkDeltaTimeValueAsSeconds(const uint16_t time, const
 
 /**
  * @brief Converts a value from message type TimeMarkValue into a string representation
- * 
+ *
  * @param time Time in 0.1 seconds until the next change occours in the future, counting from the last started hour
  * @param seconds seconds of current timestamp
  * @param nanosec nanoseconds of current timestamp [0, 999999999]

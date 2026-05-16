@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ inline void setItsPduHeader(DENM& denm, const uint32_t station_id, const uint8_t
 
 /**
  * @brief Set the IsHeadingPresent object for DENM
- * 
+ *
  * @param denm DENM to set IsHeadingPresent
  * @param presence_of_heading IsHeadingPresent-Value (true or false)
  */

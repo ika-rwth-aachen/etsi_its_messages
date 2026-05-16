@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ namespace access {
 
   /**
    * @brief Get the unix seconds of the beginning of a year that corresponds to a given unix timestamp
-   * 
+   *
    * @param unixSecond timestamp that defines the year for that the unix seconds for the beginning of the year should be derived
    * @return uint64_t unix seconds of the beginning of the year
    */
@@ -64,7 +64,7 @@ namespace access {
 
   /**
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
-   * 
+   *
    * @param moy given MinuteOfTheYear object
    * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
    * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
@@ -75,7 +75,7 @@ namespace access {
 
   /**
    * @brief Get the unix nanoseconds from MapData object
-   * 
+   *
    * @param map given MapData object
    * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
    * @return uint64_t unix timestamp according to the given MinuteOfTheYear in nanoseconds
@@ -86,7 +86,7 @@ namespace access {
 
   /**
    * @brief Get the unix nanoseconds from MinuteOfTheYear object
-   * 
+   *
    * @param mapem given MAPEM object
    * @param unix_nanoseconds_estimate unix timestamp to derive the current year from in nanoseconds
    * @return uint64_t unix timestamp according to the stored MinuteOfTheYear in nanoseconds

@@ -2,7 +2,7 @@
 =============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ namespace etsi_its_denm_ts_msgs::access {
 
 /**
  * @brief Get the WGS Heading object
- * 
+ *
  * @param denm DENM to get the WGS Heading-Value from
  * @return heading value in degree as decimal number
  */
@@ -57,7 +57,7 @@ inline double getWGSHeading(const DENM& denm) {
 
 /**
  * @brief Get the WGS Heading confidence
- * 
+ *
  * @param denm DENM to get the WGSHeading-Value from
  * @return standard deviation of heading in degrees as decimal number
  */
@@ -75,7 +75,7 @@ inline double getWGSHeadingConfidence(const DENM& denm) {
 
 /**
  * @brief Get the Cause Code object
- * 
+ *
  * @param denm DENM to get the causeCode value from
  * @return causeCode value
  */
@@ -83,7 +83,7 @@ inline uint8_t getCauseCode(const DENM& denm) { return denm.denm.situation.event
 
 /**
  * @brief Get the Sub Cause Code object
- * 
+ *
  * @param denm DENM to get the subCauseCode value from
  * @return subCauseCode value
  */
@@ -154,7 +154,7 @@ inline uint8_t getSubCauseCode(const DENM& denm) {
  * @brief Get the Cause Code Type object
  *
  * https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf
- * 
+ *
  * @param denm DENM to get the causeCodeType value from
  * @return causeCodeType value
  */
@@ -232,9 +232,9 @@ inline std::string getCauseCodeType(const DENM& denm) {
  * @brief Get the Sub Cause Code Type object
  *
  * https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf
- * 
+ *
  * @param denm DENM to get the subCauseCodeType value from
- * @return causeCodeType value 
+ * @return causeCodeType value
  */
 inline std::string getSubCauseCodeType(const DENM& denm) {
   if (denm.denm.situation_is_present) {

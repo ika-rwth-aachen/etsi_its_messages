@@ -1,7 +1,7 @@
 /** ============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,7 @@ MAPEMDisplay::MAPEMDisplay() {
       rosidl_generator_traits::data_type<etsi_its_spatem_ts_msgs::msg::SPATEM>(),
       "Topic of corresponding SPATEMs", this, SLOT(changedSPATEMTopic()));
   spatem_qos_property_ = new rviz_common::properties::QosProfileProperty(spatem_topic_property_, qos_profile);
-  
+
   // MAPEM
   viz_mapem_ = new rviz_common::properties::BoolProperty("Visualize MAPEMs", true,
     "Show MAPEMs", this);
@@ -93,7 +93,7 @@ MAPEMDisplay::MAPEMDisplay() {
   // SPATEM
   viz_spatem_ = new rviz_common::properties::BoolProperty("Visualize SPATEMs", true,
     "Show SPATEMs corresponding to received MAPEMs", this, SLOT(changedSPATEMViz()));
-  
+
   spatem_timeout_ = new rviz_common::properties::FloatProperty(
     "SPATEM Timeout", 0.1f,
     "Time (in s) until SPAT disappears", viz_spatem_);
@@ -162,7 +162,7 @@ void MAPEMDisplay::changedSPATEMViz() {
   if(!viz_spatem_->getBool()) {
     deleteStatus("SPATEM Topic");
     spatem_subscriber_.reset();
-  } 
+  }
   else changedSPATEMTopic();
 }
 
@@ -175,7 +175,7 @@ void MAPEMDisplay::changedSPATEMTopic() {
         "SPATEM Topic",
         QString("Error subscribing: Empty topic name"));
       return;
-  } 
+  }
 
   std::map<std::string, std::vector<std::string>> published_topics = rviz_node_->get_topic_names_and_types();
   bool topic_available = false;
@@ -278,11 +278,11 @@ void MAPEMDisplay::processMessage(etsi_its_mapem_ts_msgs::msg::MAPEM::ConstShare
     if (it != intersections_.end()) {
       // Intersection exists, update the intersection but keep the MovementStates
       intsct.movement_states = it->second.movement_states;
-      it->second = intsct; 
-    } 
+      it->second = intsct;
+    }
     else intersections_.insert(std::make_pair(intsct.getIntersectionID(), intsct));
   }
-  
+
   return;
 }
 
@@ -320,7 +320,7 @@ void MAPEMDisplay::RenderMapemShapesLane(Ogre::SceneNode *child_scene_node, Inte
     p.z = lane.nodes[j].z;
     line->addPoint(p);
   }
-  lane_lines_.push_back(line); 
+  lane_lines_.push_back(line);
 }
 
 void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, IntersectionRenderObject& intsctn) {
@@ -329,7 +329,7 @@ void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, Intersect
   std::shared_ptr<rviz_rendering::MovableText> text_render = std::make_shared<rviz_rendering::MovableText>(text, "Liberation Sans", char_height_mapem_->getFloat());
   double height = mapem_sphere_scale_property_->getFloat();
   height+=text_render->getBoundingRadius();
-  
+
   Ogre::Vector3 offs(0.0, 0.0, height);
   text_render->setGlobalTranslation(offs);
   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_mapem_->getColor());
@@ -341,17 +341,17 @@ void MAPEMDisplay::RenderMapemTexts(Ogre::SceneNode *child_scene_node, Intersect
 void MAPEMDisplay::RenderSpatemShapes(Ogre::SceneNode *child_scene_node, IntersectionLane& lane, IntersectionMovementState* intersection_movement_state) {
   // Signal Groups
   if(viz_spatem_->getBool() && lane.signal_group_ids.size() && lane.direction != LaneDirection::egress) {
-        
+
     // create graphical circle to display current movement state phase
     std::shared_ptr<rviz_rendering::Shape> sg = std::make_shared<rviz_rendering::Shape>(rviz_rendering::Shape::Sphere, scene_manager_, child_scene_node);
-          
+
     // set the dimensions of sphere
     double scale = spatem_sphere_scale_property_->getFloat();
     Ogre::Vector3 dims;
     dims.x = 1.0 * scale;
     dims.y = 1.0 * scale;
     dims.z = 1.0 * scale;
-          
+
     sg->setScale(dims);
 
     // Set color according to state
@@ -379,46 +379,46 @@ void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, Intersec
     if (intersection_movement_state->time_change_details != nullptr) {
       etsi_its_spatem_ts_msgs::msg::TimeChangeDetails::SharedPtr time_change_details = intersection_movement_state->time_change_details;
       std_msgs::msg::Header& header = intersection_movement_state->header;
-      
+
       if (show_spatem_start_time->getBool()) {
-        text_content = "Start time: " 
-          + (time_change_details->start_time_is_present 
+        text_content = "Start time: "
+          + (time_change_details->start_time_is_present
             ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->start_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
+            : "-")
           + "\n";
       }
 
-      // 'Min end time' is the only required field 
+      // 'Min end time' is the only required field
       if (show_spatem_min_end_time->getBool()) {
-        text_content += "Min end time: " 
+        text_content += "Min end time: "
         + etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->min_end_time.value, header.stamp.sec, header.stamp.nanosec)
         + "\n";
       }
-              
+
       if (show_spatem_max_end_time->getBool()) {
         text_content += "Max end time: "
-          + (time_change_details->max_end_time_is_present 
+          + (time_change_details->max_end_time_is_present
             ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->max_end_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
+            : "-")
           + "\n";
       }
       if (show_spatem_likely_time->getBool()) {
         text_content += "Likely time: "
-          + (time_change_details->likely_time_is_present 
+          + (time_change_details->likely_time_is_present
             ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->likely_time.value, header.stamp.sec, header.stamp.nanosec)
-            : "-") 
+            : "-")
           + "\n";
       }
       if (show_spatem_confidence->getBool()) {
         text_content += "Confidence: "
-          + (time_change_details->confidence_is_present 
-            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsFloat(time_change_details->confidence.value) * 100)) + "%" 
-            : "-") 
+          + (time_change_details->confidence_is_present
+            ? std::to_string((int)(etsi_its_spatem_ts_msgs::access::interpretTimeIntervalConfidenceAsFloat(time_change_details->confidence.value) * 100)) + "%"
+            : "-")
           + "\n";
       }
       if (show_spatem_next_time->getBool()) {
         text_content += "Next time: "
-          + (time_change_details->next_time_is_present 
+          + (time_change_details->next_time_is_present
           ? etsi_its_spatem_ts_msgs::access::parseTimeMarkValueToString(time_change_details->next_time.value, header.stamp.sec, header.stamp.nanosec)
           : "-");
       }
@@ -438,7 +438,7 @@ void MAPEMDisplay::RenderSpatemTexts(Ogre::SceneNode *child_scene_node, Intersec
 
   text_render->setGlobalTranslation(offset);
   Ogre::ColourValue text_color = rviz_common::properties::qtToOgre(text_color_property_spatem_->getColor());
-  text_render->setColor(text_color);        
+  text_render->setColor(text_color);
   child_scene_node->attachObject(text_render.get());
   texts_.push_back(text_render);
 }
@@ -452,7 +452,7 @@ void MAPEMDisplay::update(float, float) {
           it->second.removeOutdatedMovemenStates(now, spatem_timeout_->getFloat());
           ++it;
         }
-  }  
+  }
   // Render all valid intersections
   intsct_ref_points_.clear();
   lane_lines_.clear();
@@ -468,7 +468,7 @@ void MAPEMDisplay::update(float, float) {
       return;
     }
     setTransformOk();
-    
+
     // set pose of the corresponding utm scene node
     if (scene_nodes_utm_.find(utm_frame_key) == scene_nodes_utm_.end()) {
       Ogre::SceneNode* scene_node = scene_node_->createChildSceneNode();

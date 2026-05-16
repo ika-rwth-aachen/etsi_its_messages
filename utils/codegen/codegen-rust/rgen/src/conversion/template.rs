@@ -4,11 +4,11 @@ use crate::conversion::ConversionOptions;
 
 use std::collections::{HashMap, HashSet};
 
-const CONVERSION_TEMPLATE: &str = 
+const CONVERSION_TEMPLATE: &str =
 r#"/** ============================================================================
 MIT License
 
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+Copyright (c) Institute for Automotive Engineering (ika), RWTH Aachen University
 Copyright (c) 2024 Instituto de Telecomunicações, Universidade de Aveiro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -99,7 +99,7 @@ pub fn conversion_template(
     let extra_includes = extra_includes
         .iter()
         .fold(
-            String::from(if extra_includes.len() > 0 { "\n" } else { "" }), 
+            String::from(if extra_includes.len() > 0 { "\n" } else { "" }),
             |acc, inc| acc + &format!("#include <{inc}>\n")
         );
 
@@ -346,7 +346,7 @@ pub fn sequence_or_set_template(
                         format!("  case {pdu}_{name}__{c_field_name}_PR_{ty}:\n    \
                                  toRos_{ty}(in.{c_field_name}.choice.{c_member}, out.{r_field_name}.{r_member});\n    \
                                  out.{r_field_name}.choice.value = {pdu}_msgs::{linked_with}::{r_const_member};\n    \
-                                 break;", 
+                                 break;",
                             pdu = &options.main_pdu,
                             linked_with = links.get(&c.linked_with).unwrap().name_type.ty,
                             c_field_name = member.name_type.name,
@@ -431,7 +431,7 @@ pub fn sequence_or_set_template(
                         format!("  case {pdu}_msgs::{linked_with}::{r_const_member}:\n    \
                                  toStruct_{ty}(in.{r_field_name}.{r_member}, out.{c_field_name}.choice.{c_member});\n    \
                                  out.{c_field_name}.present = {pdu}_{name}__{c_field_name}_PR::{pdu}_{name}__{c_field_name}_PR_{c_member};\n    \
-                                 break;", 
+                                 break;",
                             pdu = &options.main_pdu,
                             linked_with = links.get(&c.linked_with).unwrap().name_type.ty,
                             c_field_name = member.name_type.name,
@@ -470,7 +470,7 @@ pub fn sequence_or_set_template(
                 )
             }
         } else {
-            format!("etsi_its_primitives_conversion::toStruct_{ty}(in.{r_member}, {deref}out.{c_member});", 
+            format!("etsi_its_primitives_conversion::toStruct_{ty}(in.{r_member}, {deref}out.{c_member});",
                 ty = member.name_type.ty,
                 deref = if member.is_optional { "*" } else { "" },
                 c_member = member.name_type.name,
@@ -583,7 +583,7 @@ pub fn sequence_or_set_of_template(
                  {pdu}_{ty}_t* el = ({pdu}_{ty}_t*) calloc(1, sizeof({pdu}_{ty}_t));\n    \
                  toStruct_{ty}(in.array[i], *el);\n    \
                  if (asn_sequence_add(&out, el)) throw std::invalid_argument(\"Failed to add to A_SEQUENCE_OF\");\n  \
-                 }}", 
+                 }}",
                 ty = member_type,
                 pdu = &options.main_pdu);
 
