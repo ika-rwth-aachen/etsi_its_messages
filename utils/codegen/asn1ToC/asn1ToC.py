@@ -142,7 +142,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     patch_file = os.path.join(script_dir, f"patches/{args.type}.patch")
     if os.path.exists(patch_file):
-        subprocess.run(["git", "apply", patch_file], check=True)
+        subprocess.run(["git", "apply", "--unidiff-zero", patch_file], check=True)
 
     print(f"Generated C/C++ library for {args.type}")
 

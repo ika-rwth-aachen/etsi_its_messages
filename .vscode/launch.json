@@ -3,17 +3,50 @@
     "compounds": [
         {
             "name": "All (coding)",
-            "configurations": ["CAM (coding)", "CAM TS (coding)", "DENM (coding)", "DENM TS (coding)", "CPM TS (coding)", "VAM TS (coding)", "MAPEM TS (coding)", "SPATEM TS (coding)", "MCM UULM (coding)"],
+            "configurations": [
+                "CAM (coding)",
+                "CAM TS (coding)",
+                "CPM TS (coding)",
+                "DENM (coding)",
+                "DENM TS (coding)",
+                "IVIM TS (coding)",
+                "MAPEM TS (coding)",
+                "MCM UULM (coding)",
+                "SPATEM TS (coding)",
+                "VAM TS (coding)",
+            ],
             "stopAll": false
         },
         {
             "name": "All (msgs)",
-            "configurations": ["CAM (msgs)", "CAM TS (msgs)", "DENM (msgs)", "DENM TS (msgs)", "CPM TS (msgs)", "VAM TS (msgs)", "MAPEM TS (msgs)", "SPATEM TS (msgs)", "MCM UULM (msgs)"],
+            "configurations": [
+                "CAM (msgs)",
+                "CAM TS (msgs)",
+                "CPM TS (msgs)",
+                "DENM (msgs)",
+                "DENM TS (msgs)",
+                "IVIM TS (msgs)",
+                "MAPEM TS (msgs)",
+                "MCM UULM (msgs)",
+                "SPATEM TS (msgs)",
+                "VAM TS (msgs)",
+            ],
             "stopAll": false
         },
         {
             "name": "All (conversion)",
-            "configurations": ["CAM (conversion)", "CAM TS (conversion)", "DENM (conversion)", "DENM TS (conversion)", "CPM TS (conversion)", "VAM TS (conversion)", "MAPEM TS (conversion)", "SPATEM TS (conversion)", "MCM UULM (conversion)"],
+            "configurations": [
+                "CAM (conversion)",
+                "CAM TS (conversion)",
+                "CPM TS (conversion)",
+                "DENM (conversion)",
+                "DENM TS (conversion)",
+                "IVIM TS (conversion)",
+                "MAPEM TS (conversion)",
+                "MCM UULM (conversion)",
+                "SPATEM TS (conversion)",
+                "VAM TS (conversion)",
+            ],
             "stopAll": false
         }
     ],
@@ -121,6 +154,69 @@
             "justMyCode": true
         },
         {
+            "name": "CPM TS (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC/asn1ToC.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm_ts",
+                "-o",
+                "etsi_its_coding/etsi_its_cpm_ts_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CPM TS (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm_ts",
+                "-o",
+                "etsi_its_msgs/etsi_its_cpm_ts_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "CPM TS (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
+                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
+                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "-t",
+                "cpm_ts",
+                "-o",
+                "etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "DENM (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
@@ -223,115 +319,76 @@
             "justMyCode": true
         },
         {
-            "name": "CPM TS (coding)",
+            "name": "IVIM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC/asn1ToC.py",
             "args": [
-                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn",
+                "asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
-                "cpm_ts",
+                "ivim_ts",
                 "-o",
-                "etsi_its_coding/etsi_its_cpm_ts_coding"
+                "etsi_its_coding/etsi_its_ivim_ts_coding"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "CPM TS (msgs)",
+            "name": "IVIM TS (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
-                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn",
+                "asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
-                "cpm_ts",
+                "ivim_ts",
                 "-o",
-                "etsi_its_msgs/etsi_its_cpm_ts_msgs/msg"
+                "etsi_its_msgs/etsi_its_ivim_ts_msgs/msg"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "CPM TS (conversion)",
+            "name": "IVIM TS (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
-                "asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn",
-                "asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn",
-                "asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn",
+                "asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn",
+                "asn1/raw/is_ts103301/cdd/ITS-Container.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn",
+                "asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn",
+                "asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn",
+                "asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn",
+                "asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn",
                 "-t",
-                "cpm_ts",
+                "ivim_ts",
                 "-o",
-                "etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "VAM TS (coding)",
-            "preLaunchTask": "Patch ASN.1 files",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "utils/codegen/asn1ToC/asn1ToC.py",
-            "args": [
-                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
-                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
-                "-t",
-                "vam_ts",
-                "-o",
-                "etsi_its_coding/etsi_its_vam_ts_coding"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "VAM TS (msgs)",
-            "preLaunchTask": "Patch ASN.1 files",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
-            "args": [
-                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
-                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
-                "-t",
-                "vam_ts",
-                "-o",
-                "etsi_its_msgs/etsi_its_vam_ts_msgs/msg"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "VAM TS (conversion)",
-            "preLaunchTask": "Patch ASN.1 files",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
-            "args": [
-                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
-                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
-                "-t",
-                "vam_ts",
-                "-o",
-                "etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion"
+                "etsi_its_conversion/etsi_its_ivim_ts_conversion/include/etsi_its_ivim_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -397,6 +454,57 @@
             "justMyCode": true
         },
         {
+            "name": "MCM UULM (coding)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/asn1ToC/asn1ToC.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "-t",
+                "mcm_uulm",
+                "-o",
+                "etsi_its_coding/etsi_its_mcm_uulm_coding"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "MCM UULM (msgs)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "-t",
+                "mcm_uulm",
+                "-o",
+                "etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "MCM UULM (conversion)",
+            "preLaunchTask": "Patch ASN.1 files",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
+            "args": [
+                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
+                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "-t",
+                "mcm_uulm",
+                "-o",
+                "etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "SPATEM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
@@ -457,52 +565,52 @@
             "justMyCode": true
         },
         {
-            "name": "MCM UULM (coding)",
+            "name": "VAM TS (coding)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC/asn1ToC.py",
             "args": [
-                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
-                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "mcm_uulm",
+                "vam_ts",
                 "-o",
-                "etsi_its_coding/etsi_its_mcm_uulm_coding"
+                "etsi_its_coding/etsi_its_vam_ts_coding"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "MCM UULM (msgs)",
+            "name": "VAM TS (msgs)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-py/asn1ToRosMsg.py",
             "args": [
-                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
-                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "mcm_uulm",
+                "vam_ts",
                 "-o",
-                "etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg"
+                "etsi_its_msgs/etsi_its_vam_ts_msgs/msg"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "MCM UULM (conversion)",
+            "name": "VAM TS (conversion)",
             "preLaunchTask": "Patch ASN.1 files",
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/codegen-py/asn1ToConversionHeader.py",
             "args": [
-                "asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn",
-                "asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn",
+                "asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn",
+                "asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn",
                 "-t",
-                "mcm_uulm",
+                "vam_ts",
                 "-o",
-                "etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion"
+                "etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

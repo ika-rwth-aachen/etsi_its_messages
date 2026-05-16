@@ -1,0 +1,49 @@
+diff --git a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_ConnectionTrajectory-addGrpC.h b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_ConnectionTrajectory-addGrpC.h
+index 11148c87..669b7be1 100644
+--- a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_ConnectionTrajectory-addGrpC.h
++++ b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_ConnectionTrajectory-addGrpC.h
+@@ -7,0 +8,4 @@
++/* Including external dependencies */
++#include "etsi_its_ivim_ts_coding/ivim_ts_NodeSetXY.h"
++#include "etsi_its_ivim_ts_coding/ivim_ts_LaneConnectionID.h"
++#include <etsi_its_ivim_ts_coding/constr_SEQUENCE.h>
+@@ -14,5 +17,0 @@
+-/* Including external dependencies */
+-#include "etsi_its_ivim_ts_coding/ivim_ts_NodeSetXY.h"
+-#include "etsi_its_ivim_ts_coding/ivim_ts_LaneConnectionID.h"
+-#include <etsi_its_ivim_ts_coding/constr_SEQUENCE.h>
+-
+diff --git a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_NodeOffsetPointXY.h b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_NodeOffsetPointXY.h
+index 1c450ef3..82b4194c 100644
+--- a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_NodeOffsetPointXY.h
++++ b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_NodeOffsetPointXY.h
+@@ -8,6 +7,0 @@
+-#ifndef	_ivim_ts_NodeOffsetPointXY_H_
+-#define	_ivim_ts_NodeOffsetPointXY_H_
+-
+-
+-#include <etsi_its_ivim_ts_coding/asn_application.h>
+-
+@@ -23,0 +18,5 @@
++#ifndef	_ivim_ts_NodeOffsetPointXY_H_
++#define	_ivim_ts_NodeOffsetPointXY_H_
++
++
++#include <etsi_its_ivim_ts_coding/asn_application.h>
+diff --git a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_RegionalExtension.h b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_RegionalExtension.h
+index 7509447a..c0064e0b 100644
+--- a/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_RegionalExtension.h
++++ b/etsi_its_coding/etsi_its_ivim_ts_coding/include/etsi_its_ivim_ts_coding/ivim_ts_RegionalExtension.h
+@@ -8,6 +7,0 @@
+-#ifndef	_ivim_ts_RegionalExtension_H_
+-#define	_ivim_ts_RegionalExtension_H_
+-
+-
+-#include <etsi_its_ivim_ts_coding/asn_application.h>
+-
+@@ -31,0 +26,5 @@
++#ifndef	_ivim_ts_RegionalExtension_H_
++#define	_ivim_ts_RegionalExtension_H_
++
++
++#include <etsi_its_ivim_ts_coding/asn_application.h>

@@ -31,7 +31,7 @@ SOFTWARE.
 ----------------------------------------------------------------------------- */
 
 /** ASN.1 Definition -----------------------------------------------------------
-{% for line in asn1_definition.split("\n") -%}
+{% for line in (asn1_definition or "").split("\n") -%}
 {{ line.replace("/**", "*").replace("*/", "*") }}
 {% endfor -%}
 ----------------------------------------------------------------------------- */
@@ -41,7 +41,7 @@ SOFTWARE.
 #include <etsi_its_{{etsi_type}}_coding/{{etsi_type}}_{{asn1_type_name}}.h>
 {% for member in unique_sorted_members -%}
 {% if member.is_primitive -%}
-#include <etsi_its_{{etsi_type}}_coding/{{member.asn1_type_name}}.h>
+#include <etsi_its_{{etsi_type}}_coding/{{member.asn1_header_name}}.h>
 #include <etsi_its_primitives_conversion/convert{{member.asn1_type_name}}.h>
 {% elif not member.is_choice_var -%}
 #include <etsi_its_{{etsi_type}}_conversion/convert{{member.ros_msg_type|replace("[]", "")}}.h>
@@ -56,17 +56,25 @@ namespace etsi_its_{{etsi_type}}_conversion {
 void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_")}}_t& in, {{etsi_type}}_msgs::{{ros_msg_type}}& out) {
 {%- for member in members -%}
 {% if member.optional or (member.default and member.default.ros_value != 0) %}
-  if (in.{{member.extension_prefix}}{{member.c_field_name}}) {
-{%- if "[]" in member.ros_msg_type %}
-    for (int i = 0; i < in.{{member.extension_prefix}}{{member.c_field_name}}->list.count; ++i) {
+  if (in.{{member.c_presence_path}}) {
+{%- if member.is_primitive %}
+{%- if member.optional_parent %}
+    etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.c_field_path}}, out.{{member.ros_field_name}});
+{%- else %}
+    etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(*in.{{member.c_field_path}}, out.{{member.ros_field_name}});
+{%- endif %}
+{%- elif "[]" in member.ros_msg_type %}
+    for (int i = 0; i < in.{{member.c_field_path}}->list.count; ++i) {
       {{etsi_type}}_msgs::{{member.ros_msg_type|replace("[]", "")}} el;
-      toRos_{{member.ros_msg_type|replace("[]", "")}}(*(in.{{member.extension_prefix}}{{member.c_field_name}}->list.array[i]), el);
+      toRos_{{member.ros_msg_type|replace("[]", "")}}(*(in.{{member.c_field_path}}->list.array[i]), el);
       out.{{member.ros_field_name}}.push_back(el);
     }
-{%- elif member.is_primitive %}
-    etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(*in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
 {%- else %}
-    toRos_{{member.ros_msg_type}}(*in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
+{%- if member.optional_parent %}
+    toRos_{{member.ros_msg_type}}(in.{{member.c_field_path}}, out.{{member.ros_field_name}});
+{%- else %}
+    toRos_{{member.ros_msg_type}}(*in.{{member.c_field_path}}, out.{{member.ros_field_name}});
+{%- endif %}
 {%- endif %}
 {%- if member.optional %}
     out.{{member.ros_field_name}}_is_present = true;
@@ -74,20 +82,20 @@ void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name|replace("-", "_
   }
 {%- elif not member.is_choice_var %}
 {%- if "[]" in member.ros_msg_type %}
-  for (int i = 0; i < in.{{member.extension_prefix}}{{member.c_field_name}}.list.count; ++i) {
+  for (int i = 0; i < in.{{member.c_field_path}}.list.count; ++i) {
     {{etsi_type}}_msgs::{{member.ros_msg_type|replace("[]", "")}} el;
-    toRos_{{member.ros_msg_type|replace("[]", "")}}(*(in.{{member.extension_prefix}}{{member.c_field_name}}.list.array[i]), el);
+    toRos_{{member.ros_msg_type|replace("[]", "")}}(*(in.{{member.c_field_path}}.list.array[i]), el);
     out.{{member.ros_field_name}}.push_back(el);
   }
 {%- elif member.is_primitive %}
-  etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
+  etsi_its_primitives_conversion::toRos_{{member.asn1_type_name}}(in.{{member.c_field_path}}, out.{{member.ros_field_name}});
 {%- elif member.is_choice %}
-  if (in.{{member.choice_name}}.present == {{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR::{{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR_{{member.choice_option_name}}) {
-    toRos_{{member.ros_msg_type}}(in.{{member.choice_name}}.choice.{{member.choice_option_name}}, out.{{member.ros_field_name}});
-    out.{{member.choice_var_name}} = {{etsi_type}}_msgs::{{asn1_type_name}}::{{member.constants[0].ros_field_name}};
+  if (in.{{member.choice_field_path}}.present == {% if etsi_type == "ivim_ts" %}{{member.choice_pr_type}}_{{member.choice_option_name}}{% else %}{{member.choice_pr_type}}::{{member.choice_pr_type}}_{{member.choice_option_name}}{% endif %}) {
+    toRos_{{member.ros_msg_type}}(in.{{member.choice_field_path}}.choice.{{member.choice_option_name}}, out.{{member.ros_field_name}});
+    out.{{member.choice_var_name}} = {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}};
   }
 {%- else %}
-  toRos_{{member.ros_msg_type}}(in.{{member.extension_prefix}}{{member.c_field_name}}, out.{{member.ros_field_name}});
+  toRos_{{member.ros_msg_type}}(in.{{member.c_field_path}}, out.{{member.ros_field_name}});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}
@@ -98,54 +106,70 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
 {%- for member in members -%}
 {% if member.optional %}
   if (in.{{member.ros_field_name}}_is_present) {
-{%- if "[]" in member.ros_msg_type %}
+{%- for allocation in member.c_parent_allocations %}
+    if (!out.{{allocation.path}}) out.{{allocation.path}} = ({{allocation.type}}*) calloc(1, sizeof(*out.{{allocation.path}}));
+{%- endfor %}
+{%- if member.is_primitive %}
+{%- if member.optional_parent %}
+    etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, out.{{member.c_field_path}});
+{%- else %}
+    out.{{member.c_field_path}} = ({{member.c_type_name}}*) calloc(1, sizeof({{member.c_type_name}}));
+    etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.c_field_path}});
+{%- endif %}
+{%- elif "[]" in member.ros_msg_type %}
     for (int i = 0; i < in.{{member.ros_field_name}}.size(); ++i) {
       {{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t* el = ({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t));
       toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}[i], *el);
-      if (asn_sequence_add(&out.{{member.extension_prefix}}{{member.c_field_name}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+      if (asn_sequence_add(&out.{{member.c_field_path}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
     }
-{%- elif member.is_primitive %}
-    out.{{member.extension_prefix}}{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
-    etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- else %}
-    out.{{member.extension_prefix}}{{member.c_field_name}} = ({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")}}_t));
-    toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
+{%- if member.optional_parent %}
+    toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.c_field_path}});
+{%- else %}
+    out.{{member.c_field_path}} = ({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.asn1_type_name|replace("-", "_")}}_t));
+    toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, *out.{{member.c_field_path}});
+{%- endif %}
 {%- endif %}
   }
 {%- elif member.default and member.default.ros_value != 0 %}
-{%- if "[]" in member.ros_msg_type %}
+{%- for allocation in member.c_parent_allocations %}
+  if (!out.{{allocation.path}}) out.{{allocation.path}} = ({{allocation.type}}*) calloc(1, sizeof(*out.{{allocation.path}}));
+{%- endfor %}
+{%- if member.is_primitive %}
+  out.{{member.c_field_path}} = ({{member.c_type_name}}*) calloc(1, sizeof({{member.c_type_name}}));
+  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.c_field_path}});
+{%- elif "[]" in member.ros_msg_type %}
     for (int i = 0; i < in.{{member.ros_field_name}}.size(); ++i) {
       {{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t* el = ({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t));
       toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}[i], *el);
-      if (asn_sequence_add(&out.{{member.extension_prefix}}{{member.c_field_name}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+      if (asn_sequence_add(&out.{{member.c_field_path}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
     }
-{%- elif member.is_primitive %}
-  out.{{member.extension_prefix}}{{member.c_field_name}} = ({{member.asn1_type_name}}_t*) calloc(1, sizeof({{member.asn1_type_name}}_t));
-  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- else %}
-  out.{{member.extension_prefix}}{{member.c_field_name}} = ({{etsi_type}}_{{member.ros_msg_type}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type}}_t));
-  toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, *out.{{member.extension_prefix}}{{member.c_field_name}});
+  out.{{member.c_field_path}} = ({{etsi_type}}_{{member.ros_msg_type}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type}}_t));
+  toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, *out.{{member.c_field_path}});
 {%- endif %}
 {%- elif not member.is_choice_var %}
-{%- if "[]" in member.ros_msg_type %}
+{%- for allocation in member.c_parent_allocations %}
+  if (!out.{{allocation.path}}) out.{{allocation.path}} = ({{allocation.type}}*) calloc(1, sizeof(*out.{{allocation.path}}));
+{%- endfor %}
+{%- if member.is_primitive %}
+  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, out.{{member.c_field_path}});
+{%- elif "[]" in member.ros_msg_type %}
     for (int i = 0; i < in.{{member.ros_field_name}}.size(); ++i) {
       {{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t* el = ({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t*) calloc(1, sizeof({{etsi_type}}_{{member.ros_msg_type|replace("[]", "")}}_t));
       toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}[i], *el);
-      if (asn_sequence_add(&out.{{member.extension_prefix}}{{member.c_field_name}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
+      if (asn_sequence_add(&out.{{member.c_field_path}}, el)) throw std::invalid_argument("Failed to add to A_SEQUENCE_OF");
     }
-{%- elif member.is_primitive %}
-  etsi_its_primitives_conversion::toStruct_{{member.asn1_type_name}}(in.{{member.ros_field_name}}, out.{{member.extension_prefix}}{{member.c_field_name}});
 {%- elif member.is_choice %}
-  if (in.{{member.choice_var_name}} == {{etsi_type}}_msgs::{{asn1_type_name}}::{{member.constants[0].ros_field_name}}) {
-    toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.choice_name}}.choice.{{member.choice_option_name}});
-    out.{{member.choice_name}}.present = {{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR::{{etsi_type}}_{{asn1_type_name}}__{{member.choice_name}}_PR_{{member.choice_option_name}};
+  if (in.{{member.choice_var_name}} == {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}}) {
+    toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.choice_field_path}}.choice.{{member.choice_option_name}});
+    out.{{member.choice_field_path}}.present = {% if etsi_type == "ivim_ts" %}{{member.choice_pr_type}}_{{member.choice_option_name}}{% else %}{{member.choice_pr_type}}::{{member.choice_pr_type}}_{{member.choice_option_name}}{% endif %};
   }
 {%- else %}
-  toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.extension_prefix}}{{member.c_field_name}});
+  toStruct_{{member.ros_msg_type}}(in.{{member.ros_field_name}}, out.{{member.c_field_path}});
 {%- endif -%}
 {%- endif -%}
 {% endfor %}
 }
 
 }
-

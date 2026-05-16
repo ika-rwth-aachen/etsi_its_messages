@@ -31,7 +31,7 @@ SOFTWARE.
 ----------------------------------------------------------------------------- */
 
 /** ASN.1 Definition -----------------------------------------------------------
-{% for line in asn1_definition.split("\n") -%}
+{% for line in (asn1_definition or "").split("\n") -%}
 {{ line.replace("/**", "*").replace("*/", "*") }}
 {% endfor -%}
 ----------------------------------------------------------------------------- */
@@ -61,7 +61,7 @@ void toRos_{{ros_msg_type}}(const {{etsi_type}}_{{asn1_type_name}}_t& in, {{etsi
 {%- else %}
   case {{etsi_type}}_{{asn1_type_name}}_PR_{{member.c_field_name}}:
     toRos_{{member.ros_msg_type|replace("[]", "")}}(in.choice.{{member.c_field_name}}, out.{{member.ros_field_name}});
-    out.choice = {{etsi_type}}_msgs::{{ros_msg_type}}::{{(member.constants | last).ros_field_name}};
+    out.choice = {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}};
     break;
 {%- endif %}
 {%- endif %}
@@ -77,12 +77,20 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
 {%- if not member.is_choice_var %}
 {%- if member.is_null_choice %}
   case {{etsi_type}}_msgs::{{ros_msg_type}}::{{(member.constants | last).ros_field_name}}:
+{%- if etsi_type == "ivim_ts" %}
+    out.present = {{etsi_type}}_{{asn1_type_name}}_PR_{{member.c_field_name}};
+{%- else %}
     out.present = {{etsi_type}}_{{asn1_type_name}}_PR::{{etsi_type}}_{{asn1_type_name}}_PR_{{member.c_field_name}};
+{%- endif %}
     break;
 {%- else %}
-  case {{etsi_type}}_msgs::{{ros_msg_type}}::{{(member.constants | last).ros_field_name}}:
+  case {{etsi_type}}_msgs::{{ros_msg_type}}::{{member.choice_constant.ros_field_name}}:
     toStruct_{{member.ros_msg_type|replace("[]", "")}}(in.{{member.ros_field_name}}, out.choice.{{member.c_field_name}});
+{%- if etsi_type == "ivim_ts" %}
+    out.present = {{etsi_type}}_{{asn1_type_name}}_PR_{{member.c_field_name}};
+{%- else %}
     out.present = {{etsi_type}}_{{asn1_type_name}}_PR::{{etsi_type}}_{{asn1_type_name}}_PR_{{member.c_field_name}};
+{%- endif %}
     break;
 {%- endif %}
 {%- endif %}
@@ -92,4 +100,3 @@ void toStruct_{{ros_msg_type}}(const {{etsi_type}}_msgs::{{ros_msg_type}}& in, {
 }
 
 }
-

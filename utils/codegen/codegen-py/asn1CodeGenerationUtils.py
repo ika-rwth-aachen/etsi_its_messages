@@ -23,8 +23,10 @@
 # ==============================================================================
 
 import logging
+import os
 import re
 import sys
+from copy import deepcopy
 from typing import Dict, List, Optional, Tuple
 
 import asn1tools
@@ -36,7 +38,24 @@ logging.addLevelName(logging.WARNING, "\033[1;33m%s\033[1;0m" % logging.getLevel
 logging.addLevelName(logging.ERROR, "\033[1;31m%s\033[1;0m" % logging.getLevelName(logging.ERROR))
 
 
-AUTO_GENERATE_COMMAND = "python3 " + " ".join(sys.argv)
+def pathRelativeToCwd(arg: str) -> str:
+    """Converts absolute paths below the current workspace to relative paths."""
+
+    if not os.path.isabs(arg):
+        return arg
+
+    try:
+        relpath = os.path.relpath(arg, os.getcwd())
+    except ValueError:
+        return arg
+
+    if relpath == os.pardir or relpath.startswith(os.pardir + os.sep):
+        return arg
+
+    return relpath
+
+
+AUTO_GENERATE_COMMAND = "python3 " + " ".join(pathRelativeToCwd(arg) for arg in sys.argv)
 
 
 ASN1_PRIMITIVES_2_ROS = {
@@ -169,6 +188,84 @@ def noSpace(s: str) -> str:
     return s.replace(" ", "_")
 
 
+def cPrimitiveTypeAsGenByAsn1c(asn1_type_type: str, asn1_type_info: Dict) -> str:
+    """Returns the C storage type used by asn1c for primitive ASN.1 fields."""
+
+    if asn1_type_type == "INTEGER" and "restricted-to" in asn1_type_info:
+        return "long"
+    if asn1_type_type == "BIT STRING":
+        return "BIT_STRING_t"
+    if asn1_type_type == "OCTET STRING":
+        return "OCTET_STRING_t"
+    return f"{noSpace(asn1_type_type)}_t"
+
+
+def cPrimitiveHeaderAsGenByAsn1c(asn1_type_type: str) -> str:
+    """Returns the primitive header basename used by asn1c."""
+
+    return noSpace(asn1_type_type)
+
+
+def setDefaultCPaths(member: Dict) -> None:
+    if "c_field_name" not in member:
+        return
+    prefix = member.get("extension_prefix", "")
+    member.setdefault("c_field_path", f"{prefix}{member['c_field_name']}")
+    member.setdefault("c_presence_path", member["c_field_path"])
+    member.setdefault("c_parent_allocations", [])
+
+
+def prefixCPathsForInlineMember(member: Dict, field_name: str, optional: bool, parent_type: str) -> None:
+    """Prefixes flattened ROS members with their actual nested asn1c C path."""
+
+    setDefaultCPaths(member)
+    if "c_field_path" not in member and "choice_field_path" not in member:
+        return
+    separator = "->" if optional else "."
+    if "c_field_path" in member:
+        member["c_field_path"] = f"{field_name}{separator}{member['c_field_path']}"
+    if optional:
+        member["optional_parent"] = True
+        if "c_field_path" in member:
+            member["c_presence_path"] = field_name
+        member.setdefault("c_parent_allocations", [])
+        member["c_parent_allocations"].insert(0, {
+            "path": field_name,
+            "type": parent_type,
+        })
+    elif "c_field_path" in member:
+        member["c_presence_path"] = f"{field_name}.{member.get('c_presence_path', member.get('c_field_name', ''))}"
+    if "choice_field_path" in member:
+        if not (field_name == member.get("choice_name") and member["choice_field_path"] == member.get("choice_name")):
+            member["choice_field_path"] = f"{field_name}{separator}{member['choice_field_path']}"
+    if "choice_pr_type" in member:
+        parent_type_name = parent_type.replace("struct ", "")
+        if parent_type_name.endswith(f"__{member['choice_name']}"):
+            member["choice_pr_type"] = f"{parent_type_name}_PR"
+        else:
+            member["choice_pr_type"] = f"{parent_type_name}__{member['choice_name']}_PR"
+
+
+def prefixCPathsForExtension(member: Dict, parent_type: str) -> None:
+    setDefaultCPaths(member)
+    if "c_field_path" in member:
+        member["c_field_path"] = f"ext1->{member['c_field_path']}"
+        member["c_presence_path"] = f"ext1"
+    member.setdefault("c_parent_allocations", [])
+    member["c_parent_allocations"].insert(0, {
+        "path": "ext1",
+        "type": f"{parent_type}__ext1",
+    })
+
+
+def prefixRosNames(member: Dict, prefix: str) -> None:
+    member["ros_field_name"] = validRosField(f"{prefix}_{member['ros_field_name']}")
+    if "default" in member and member["default"] is not None:
+        member["default"]["ros_field_name"] = validRosField(f"{prefix}_{member['default']['ros_field_name']}", is_const=True)
+    for constant in member.get("constants", []):
+        constant["ros_field_name"] = validRosField(f"{prefix}_{constant['ros_field_name']}", is_const=True)
+
+
 def simplestRosIntegerType(min_value: int, max_value: int) -> str:
     """Returns the simplest/smallest ROS integer type covering the specified range.
 
@@ -215,8 +312,14 @@ def parseAsn1Files(files: List[str]) -> Tuple[Dict, Dict[str, str]]:
 
     asn1_raw = {}
     for file in files:
-        with open(file) as f:
-            lines = f.readlines()
+        try:
+            with open(file, encoding="utf-8") as f:
+                lines = f.readlines()
+        except UnicodeDecodeError:
+            with open(file, encoding="cp1252") as f:
+                text = f.read()
+            Path(file).write_text(text, encoding="utf-8")
+            lines = text.splitlines(keepends=True)
         raw_def = None
         for line_idx, line in enumerate(lines):
             if "::=" in line:
@@ -270,6 +373,18 @@ def docForAsn1Type(asn1_type: str, asn1_docs: Dict) -> Optional[str]:
     return None
 
 
+def duplicateTypePreference(doc: str) -> int:
+    """Returns preference for duplicate ASN.1 type definitions.
+
+    Higher values win. IVI-specific definitions should override imported legacy ISO
+    definitions for the IVIM generator.
+    """
+
+    if doc == "IVI":
+        return 100
+    return 0
+
+
 def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     """Extracts all parsed ASN1 type information from multiple ASN1 documents.
 
@@ -284,12 +399,33 @@ def extractAsn1TypesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
     """
 
     asn1_types = {}
+    asn1_type_docs = {}
     for doc, asn1 in asn1_docs.items():
         for type in asn1["types"]:
+            current_type = asn1["types"][type]
+            if "members" in current_type:
+                # filter out None members (representing ASN1 extensions)
+                current_type["members"] = [member for member in current_type["members"] if member is not None]
+                # flatten lists in members (representing ASN1 extensions)
+                flattened_members = []
+                for member in current_type["members"]:
+                    if isinstance(member, list):
+                        flattened_members.extend(member)
+                    else:
+                        flattened_members.append(member)
+                current_type["members"] = flattened_members
             if type not in asn1_types:
-                asn1_types[type] = asn1["types"][type]
+                asn1_types[type] = current_type
+                asn1_type_docs[type] = doc
             else:
-                raise ValueError(f"Type '{type}' from '{doc}' is a duplicate")
+                existing_doc = asn1_type_docs[type]
+                if duplicateTypePreference(doc) > duplicateTypePreference(existing_doc):
+                    print(f"WARNING: duplicate ASN.1 type '{type}' in '{doc}' - overriding definition from '{existing_doc}'")
+                    asn1_types[type] = current_type
+                    asn1_type_docs[type] = doc
+                else:
+                    print(f"WARNING: duplicate ASN.1 type '{type}' in '{doc}' - keeping definition from '{existing_doc}'")
+                    continue
 
     return asn1_types
 
@@ -312,7 +448,8 @@ def extractAsn1ValuesFromDocs(asn1_docs: Dict) -> Dict[str, Dict]:
             if value not in asn1_values:
                 asn1_values[value] = asn1["values"][value]
             else:
-                raise ValueError(f"Value '{value}' from '{doc}' is a duplicate")
+                print(f"WARNING: duplicate ASN.1 value '{value}' in '{doc}' - keeping first definition")
+                continue
 
     return asn1_values
 
@@ -406,13 +543,18 @@ def checkTypeMembersInAsn1(asn1_types: Dict[str, Dict]):
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' seems to relate to a 'CLASS' type, not "
                         f"yet supported")
+                elif member["type"] == "Container":
+                    logging.warning(
+                        f"Type '{member['type']}' of member '{member['name']}' "
+                        f"in '{asn1_type_name}' seems to relate to a 'Container' type, not "
+                        f"yet supported")
                 else:
                     raise TypeError(
                         f"Type '{member['type']}' of member '{member['name']}' "
                         f"in '{asn1_type_name}' is undefined")
 
 
-def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict]) -> Dict:
+def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types: Dict[str, Dict], asn1_values: Dict[str, Dict], asn1_sets: Dict[str, Dict], asn1_classes: Dict[str, Dict], inline_constraints: bool = False) -> Dict:
     """Builds a jinja context containing all type information required to fill the templates / code generation.
 
     Args:
@@ -453,7 +595,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
 
     # components-of
     if "components-of" in asn1_type_info:
-        member_context = asn1TypeToJinjaContext(asn1_type_name, asn1_types[asn1_type_info["components-of"]], asn1_types, asn1_values, asn1_sets, asn1_classes)
+        member_context = asn1TypeToJinjaContext(asn1_type_name, asn1_types[asn1_type_info["components-of"]], asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
         context["members"].extend(member_context["members"])
 
     # primitives
@@ -472,6 +614,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         # parse member to jinja context
         member_context = {
             "asn1_type_name": asn1_type_type,
+            "asn1_header_name": cPrimitiveHeaderAsGenByAsn1c(asn1_type_type),
+            "c_type_name": cPrimitiveTypeAsGenByAsn1c(asn1_type_type, asn1_type_info),
             "ros_msg_type": validRosType(ros_type),
             "ros_field_name": validRosField(name),
             "c_field_name": validCFieldAsGenByAsn1c(name),
@@ -567,9 +711,19 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         for member in asn1_type_info["members"]:
             if member is None:
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is None:
                 continue
+            if member.get("type") in ("SEQUENCE", "CHOICE") or member_context.get("inline_member"):
+                parent_field_name = validCFieldAsGenByAsn1c(member["name"])
+                if member_context.get("inline_member"):
+                    parent_type = f"{(context['etsi_type'] or 'ETSI_TYPE_PLACEHOLDER')}_{member_context.get('constraint_base_type', member['type']).replace('-', '_')}_t"
+                else:
+                    parent_type = f"struct {(context['etsi_type'] or 'ETSI_TYPE_PLACEHOLDER')}_{asn1_type_name.replace('-', '_')}__{parent_field_name}"
+                for sub_member in member_context["members"]:
+                    prefixCPathsForInlineMember(sub_member, parent_field_name, "optional" in member, parent_type)
+                    if member_context.get("inline_member"):
+                        prefixRosNames(sub_member, member["name"])
             if "optional" in member:
                 member_context["members"][0]["optional"] = True
             if "default" in member:
@@ -638,15 +792,33 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                     }]
                 })
                 continue
-            member_context = asn1TypeToJinjaContext(asn1_type_name, member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+            member_for_context = member
+            if (
+                inline_constraints
+                and
+                "with-components" in member
+                and member.get("type") in asn1_types
+                and asn1_types[member["type"]]["type"] == "SEQUENCE"
+            ):
+                member_for_context = member.copy()
+                member_for_context.pop("with-components")
+            member_context = asn1TypeToJinjaContext(asn1_type_name, member_for_context, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is None:
                 continue
             if len(member_context["members"]) > 0:
+                option_c_field_name = validCFieldAsGenByAsn1c(member["name"])
                 if "name" in asn1_type_info:
                     member_context["members"][0]["choice_name"] = validCFieldAsGenByAsn1c(asn1_type_info["name"])
-                    member_context["members"][0]["choice_option_name"] = validCFieldAsGenByAsn1c(member_context["members"][0]["c_field_name"])
-                    member_context["members"][0]["ros_field_name"] = validRosField(f"{asn1_type_info['name']}_{member_context['members'][0]['ros_field_name']}")
-                    member_context["members"][0]["c_field_name"] = validCFieldAsGenByAsn1c(f"{asn1_type_info['name']}_{member_context['members'][0]['c_field_name']}")
+                    member_context["members"][0]["choice_option_name"] = option_c_field_name
+                    if member_context["members"][0]["ros_field_name"] == "value":
+                        member_context["members"][0]["ros_field_name"] = validRosField(f"{asn1_type_info['name']}_{member['name']}")
+                    else:
+                        member_context["members"][0]["ros_field_name"] = validRosField(f"{asn1_type_info['name']}_{member_context['members'][0]['ros_field_name']}")
+                    member_context["members"][0]["c_field_name"] = option_c_field_name
+                    member_context["members"][0]["choice_field_path"] = member_context["members"][0]["choice_name"]
+                    member_context["members"][0]["choice_pr_type"] = f"ETSI_TYPE_PLACEHOLDER_{asn1_type_name.replace('-', '_')}__{member_context['members'][0]['choice_name']}_PR"
+                else:
+                    member_context["members"][0]["c_field_name"] = option_c_field_name
                 member_context["members"][0]["is_choice"] = True
                 member_context["members"][0]["choice_var_name"] = name
                 member_context["members"][0]["constants"] = member_context["members"][0].get("constants", [])
@@ -658,11 +830,12 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                     asn1_value_name = member_context["asn1_type_type"][0].lower() + member_context["asn1_type_type"][1:]
                     if asn1_value_name in asn1_values:
                         choice_value = asn1_values[asn1_value_name]["value"]
-                member_context["members"][0]["constants"].append({
+                member_context["members"][0]["choice_constant"] = {
                     "ros_msg_type": "uint8",
                     "ros_field_name": validRosField(member_name, is_const=True),
                     "ros_value": choice_value
-                })
+                }
+                member_context["members"][0]["constants"].append(member_context["members"][0]["choice_constant"])
             context["members"].extend(member_context["members"])
 
     # arrays
@@ -673,7 +846,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
         array_type = asn1_type_info['element']['type']
 
         if array_type == "RegionalExtension":
-            logging.warning(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported")
+            logging.info(f"Skipping unsupported RegionalExtension in '{asn1_type_name}'")
             return None
 
         member_context = {
@@ -746,21 +919,39 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             })
 
         context["members"].append(member_context)
-        
-    # list aka extension "[[ ]]"    
+
+    # list aka extension "[[ ]]"
     elif asn1_type_type == "EXTENSION":
         for sub_member in asn1_type_info:
-            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
-            member_context["members"][0]["extension_prefix"] = "ext1->"
+            member_context = asn1TypeToJinjaContext(asn1_type_name, sub_member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
             if member_context is not None:
+                for sub_context in member_context["members"]:
+                    prefixCPathsForExtension(sub_context, f"struct ETSI_TYPE_PLACEHOLDER_{asn1_type_name.replace('-', '_')}")
                 context["members"].extend(member_context["members"])
 
     # custom types
     elif asn1_type_type in asn1_types:
 
         if asn1_type_type == "RegionalExtension":
-            logging.warning(f"Handling of 'RegionalExtension' in '{asn1_type_name}' not yet supported")
+            logging.info(f"Skipping unsupported RegionalExtension in '{asn1_type_name}'")
             return None
+
+        if inline_constraints and "with-components" in asn1_type_info and asn1_types[asn1_type_type]["type"] == "SEQUENCE":
+            constrained_type = deepcopy(asn1_types[asn1_type_type])
+            absent_members = {
+                component[0]
+                for component in asn1_type_info["with-components"]
+                if isinstance(component, tuple) and len(component) == 2 and component[1] == "ABSENT"
+            }
+            constrained_type["name"] = asn1_type_info["name"] if "name" in asn1_type_info else constrained_type.get("name", "value")
+            constrained_type["members"] = [
+                member for member in constrained_type["members"]
+                if member is not None and member.get("name") not in absent_members
+            ]
+            constrained_context = asn1TypeToJinjaContext(asn1_type_name, constrained_type, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
+            constrained_context["inline_member"] = True
+            constrained_context["constraint_base_type"] = asn1_type_type
+            return constrained_context
 
         name = asn1_type_info["name"] if "name" in asn1_type_info else "value"
         context["members"].append({
@@ -770,7 +961,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
             "c_field_name": validCFieldAsGenByAsn1c(name),
             "constants": []
         })
-        
+
         if "optional" in asn1_type_info:
             context["members"][0]["optional"] = True
 
@@ -849,7 +1040,7 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
                                     "name": value[0].upper() + value[1:], # make sure type starts with upper case
                                     "type": value[0].upper() + value[1:] # make sure type starts with upper case
                                 })
-                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes)
+                member_context = asn1TypeToJinjaContext(asn1_type_name, class_member, asn1_types, asn1_values, asn1_sets, asn1_classes, inline_constraints)
                 context["members"].extend(member_context["members"])
 
     elif asn1_type_type == "NULL":
@@ -859,5 +1050,8 @@ def asn1TypeToJinjaContext(asn1_type_name: str, asn1_type_info: Dict, asn1_types
     else:
 
         logging.warning(f"Cannot handle type '{asn1_type_type}'")
+
+    for member in context["members"]:
+        setDefaultCPaths(member)
 
     return context

@@ -72,6 +72,10 @@ const std::string Converter::kInputTopicDenmTs{"~/denm_ts/in"};
 const std::string Converter::kOutputTopicDenmTs{"~/denm_ts/out"};
 const std::string Converter::kServiceDenmTsToUdp{"~/denm_ts/udp"};
 const std::string Converter::kServiceUdpToDenmTs{"~/udp/denm_ts"};
+const std::string Converter::kInputTopicIvimTs{"~/ivim_ts/in"};
+const std::string Converter::kOutputTopicIvimTs{"~/ivim_ts/out"};
+const std::string Converter::kServiceIvimTsToUdp{"~/ivim_ts/udp"};
+const std::string Converter::kServiceUdpToIvimTs{"~/udp/ivim_ts"};
 const std::string Converter::kInputTopicMapemTs{"~/mapem_ts/in"};
 const std::string Converter::kOutputTopicMapemTs{"~/mapem_ts/out"};
 const std::string Converter::kServiceMapemTsToUdp{"~/mapem_ts/udp"};
@@ -97,9 +101,9 @@ const std::string Converter::kEtsiMessagePayloadOffsetParam{"etsi_message_payloa
 const int Converter::kEtsiMessagePayloadOffsetParamDefault{4};
 const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
-const std::vector<std::string> Converter::kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "ivim_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
 const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = Converter::kEtsiTypesParamSupportedOptions;
-const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "ivim_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
@@ -427,6 +431,46 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs (TS) on '%s' to UDP messages on '%s'", subscribers_["denm_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
     RCLCPP_INFO(this->get_logger(), "Converting native ROS DENMs (TS) to UDP messages via service '%s'", convert_denm_ts_to_udp_service_->get_service_name());
   }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "ivim_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_ivim_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToIvimTs>(
+      kServiceUdpToIvimTs,
+      std::bind(
+        &Converter::udpToRosSrvCallback<ivim_ts_msgs::IVIM, ivim_ts_IVIM_t, conversion_srvs::ConvertUdpToIvimTs>,
+        this,
+        std::placeholders::_1,
+        std::placeholders::_2,
+        "ivim_ts",
+        &asn_DEF_ivim_ts_IVIM,
+        std::function<void(const ivim_ts_IVIM_t &, ivim_ts_msgs::IVIM &)>(etsi_its_ivim_ts_conversion::toRos_IVIM)
+      ),
+      SERVICE_QOS,
+      callback_group_
+    );
+    publisher_ivim_ts_ = this->create_publisher<ivim_ts_msgs::IVIM>(kOutputTopicIvimTs, publisher_queue_size_);
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type IVIM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_ivim_ts_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type IVIM (TS) to native ROS messages via service '%s'", convert_udp_to_ivim_ts_service_->get_service_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "ivim_ts") != ros2udp_etsi_types_.end()) {
+    convert_ivim_ts_to_udp_service_ = this->create_service<conversion_srvs::ConvertIvimTsToUdp>(
+      kServiceIvimTsToUdp,
+      std::bind(
+        &Converter::rosToUdpSrvCallback<ivim_ts_msgs::IVIM, ivim_ts_IVIM_t, conversion_srvs::ConvertIvimTsToUdp>,
+        this,
+        std::placeholders::_1,
+        std::placeholders::_2,
+        "ivim_ts",
+        &asn_DEF_ivim_ts_IVIM,
+        std::function<void(const ivim_ts_msgs::IVIM &, ivim_ts_IVIM_t &)>(etsi_its_ivim_ts_conversion::toStruct_IVIM)
+      ),
+      SERVICE_QOS,
+      callback_group_
+    );
+    std::function<void(const ivim_ts_msgs::IVIM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<ivim_ts_msgs::IVIM, ivim_ts_IVIM_t>, this, std::placeholders::_1, "ivim_ts", &asn_DEF_ivim_ts_IVIM, std::function<void(const ivim_ts_msgs::IVIM&, ivim_ts_IVIM_t&)>(etsi_its_ivim_ts_conversion::toStruct_IVIM));
+    subscribers_["ivim_ts"] = this->create_subscription<ivim_ts_msgs::IVIM>(kInputTopicIvimTs, subscriber_queue_size_, callback, subscriber_options);
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS IVMs (TS) on '%s' to UDP messages on '%s'", subscribers_["ivim_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS IVMs (TS) to UDP messages via service '%s'", convert_ivim_ts_to_udp_service_->get_service_name());
+  }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "mapem_ts") != udp2ros_etsi_types_.end()) {
     convert_udp_to_mapem_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToMapemTs>(
       kServiceUdpToMapemTs,
@@ -716,6 +760,7 @@ void Converter::rosToUdpSrvCallback(const std::shared_ptr<typename T_srv::Reques
   if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
   else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
   else if (type == "denm" || type == "denm_ts") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "ivim_ts") btp_header_destination_port = kBtpHeaderDestinationPortIvi;
   else if (type == "mapem_ts") btp_header_destination_port = kBtpHeaderDestinationPortMapem;
   else if (type == "mcm_uulm") btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
   else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;
@@ -786,7 +831,7 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
   if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
   else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
   else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
-  else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivi";
+  else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivim_ts";
   else if (destination_port == kBtpHeaderDestinationPortMapem) detected_etsi_type = "mapem_ts";
   else if (destination_port == kBtpHeaderDestinationPortMcmUulm) detected_etsi_type = "mcm_uulm";
   else if (destination_port == kBtpHeaderDestinationPortSpatem) detected_etsi_type = "spatem_ts";
@@ -842,15 +887,15 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
       publisher_denm_ts_->publish(msg);
     }
 
-  } else if (detected_etsi_type == "vam_ts") {
+  } else if (detected_etsi_type == "ivim_ts") {
 
     // decode buffer to ROS msg
-    vam_ts_msgs::VAM msg;
-    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_VAM_t&, vam_ts_msgs::VAM&)>(etsi_its_vam_ts_conversion::toRos_VAM), msg);
+    ivim_ts_msgs::IVIM msg;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_ivim_ts_IVIM, std::function<void(const ivim_ts_IVIM_t&, ivim_ts_msgs::IVIM&)>(etsi_its_ivim_ts_conversion::toRos_IVIM), msg);
     if (!success) return;
 
     // publish msg
-    publisher_vam_ts_->publish(msg);
+    publisher_ivim_ts_->publish(msg);
 
   } else if (detected_etsi_type == "mapem_ts") {
 
@@ -882,6 +927,16 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
     // publish msg
     publisher_spatem_ts_->publish(msg);
 
+  } else if (detected_etsi_type == "vam_ts") {
+
+    // decode buffer to ROS msg
+    vam_ts_msgs::VAM msg;
+    bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_vam_ts_VAM, std::function<void(const vam_ts_VAM_t&, vam_ts_msgs::VAM&)>(etsi_its_vam_ts_conversion::toRos_VAM), msg);
+    if (!success) return;
+
+    // publish msg
+    publisher_vam_ts_->publish(msg);
+
   } else {
     RCLCPP_ERROR(this->get_logger(), "Detected ETSI message type '%s' not yet supported, dropping message", detected_etsi_type.c_str());
     return;
@@ -901,6 +956,7 @@ void Converter::rosCallback(const typename T_ros::UniquePtr msg,
   if (type == "cam" || type == "cam_ts") btp_header_destination_port = kBtpHeaderDestinationPortCam;
   else if (type == "cpm_ts") btp_header_destination_port = kBtpHeaderDestinationPortCpmTs;
   else if (type == "denm" || type == "denm_ts") btp_header_destination_port = kBtpHeaderDestinationPortDenm;
+  else if (type == "ivim_ts") btp_header_destination_port = kBtpHeaderDestinationPortIvi;
   else if (type == "mapem_ts") btp_header_destination_port = kBtpHeaderDestinationPortMapem;
   else if (type == "mcm_uulm") btp_header_destination_port = kBtpHeaderDestinationPortMcmUulm;
   else if (type == "spatem_ts") btp_header_destination_port = kBtpHeaderDestinationPortSpatem;

@@ -25,6 +25,7 @@ stages:
   - ROS Messages
   - Conversion Headers
 
+
 asn1c-docker:
   stage: Build Docker Images
   before_script:
@@ -53,6 +54,7 @@ rgen-docker:
         docker push ${_RGEN_IMAGE_LATEST}
       fi
 
+
 etsi_its_cam_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
@@ -78,6 +80,25 @@ etsi_its_cam_ts_coding:
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
       -o etsi_its_coding/etsi_its_cam_ts_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_cpm_ts_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      utils/codegen/asn1ToC/asn1ToC.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -t cpm_ts
+      -o etsi_its_coding/etsi_its_cpm_ts_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -111,37 +132,26 @@ etsi_its_denm_ts_coding:
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi 
-
-etsi_its_cpm_ts_coding:
-  stage: asn1c
-  needs: ["asn1c-docker"]
-  script:
-    - >
-      utils/codegen/asn1ToC/asn1ToC.py
-      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
-      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -t cpm_ts
-      -o etsi_its_coding/etsi_its_cpm_ts_coding
-      -td /builds/$CI_PROJECT_PATH/tmp
-      -di ${_ASN1C_CI_IMAGE}
-    - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_vam_ts_coding:
+etsi_its_ivim_ts_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
   script:
     - >
       utils/codegen/asn1ToC/asn1ToC.py
-      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
-      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
-      -t vam_ts
-      -o etsi_its_coding/etsi_its_vam_ts_coding
+      asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn
+      asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn
+      -t ivim_ts
+      -o etsi_its_coding/etsi_its_ivim_ts_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -159,7 +169,22 @@ etsi_its_mapem_ts_coding:
       asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
       asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
       -t mapem_ts
-      -o etsi_its_coding/etsi_its_mapem_ts_coding 
+      -o etsi_its_coding/etsi_its_mapem_ts_coding
+      -td /builds/$CI_PROJECT_PATH/tmp
+      -di ${_ASN1C_CI_IMAGE}
+    - rm -rf /builds/$CI_PROJECT_PATH/tmp
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_mcm_uulm_coding:
+  stage: asn1c
+  needs: ["asn1c-docker"]
+  script:
+    - >
+      utils/codegen/asn1ToC/asn1ToC.py
+      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
+      -t mcm_uulm
+      -o etsi_its_coding/etsi_its_mcm_uulm_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
@@ -183,20 +208,21 @@ etsi_its_spatem_ts_coding:
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_mcm_uulm_coding:
+etsi_its_vam_ts_coding:
   stage: asn1c
   needs: ["asn1c-docker"]
   script:
     - >
       utils/codegen/asn1ToC/asn1ToC.py
-      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
-      -t mcm_uulm
-      -o etsi_its_coding/etsi_its_mcm_uulm_coding
+      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
+      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
+      -t vam_ts
+      -o etsi_its_coding/etsi_its_vam_ts_coding
       -td /builds/$CI_PROJECT_PATH/tmp
       -di ${_ASN1C_CI_IMAGE}
     - rm -rf /builds/$CI_PROJECT_PATH/tmp
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 
 etsi_its_cam_msgs:
   stage: ROS Messages
@@ -218,6 +244,21 @@ etsi_its_cam_ts_msgs:
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
       -o etsi_its_msgs/etsi_its_cam_ts_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_cpm_ts_msgs:
+  stage: ROS Messages
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToRosMsg.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -t cpm_ts
+      -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_msgs:
@@ -242,30 +283,23 @@ etsi_its_denm_ts_msgs:
       -o etsi_its_msgs/etsi_its_denm_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_cpm_ts_msgs:
+etsi_its_ivim_ts_msgs:
   stage: ROS Messages
   script:
     - >
       utils/codegen/codegen-py/asn1ToRosMsg.py
-      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
-      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -t cpm_ts
-      -o etsi_its_msgs/etsi_its_cpm_ts_msgs/msg
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
-
-etsi_its_vam_ts_msgs:
-  stage: ROS Messages
-  script:
-    - >
-      utils/codegen/codegen-py/asn1ToRosMsg.py
-      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
-      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
-      -t vam_ts
-      -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
+      asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn
+      asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn
+      -t ivim_ts
+      -o etsi_its_msgs/etsi_its_ivim_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_ts_msgs:
@@ -282,6 +316,17 @@ etsi_its_mapem_ts_msgs:
       -o etsi_its_msgs/etsi_its_mapem_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_mcm_uulm_msgs:
+  stage: ROS Messages
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToRosMsg.py
+      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
+      -t mcm_uulm
+      -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_spatem_ts_msgs:
   stage: ROS Messages
   script:
@@ -296,16 +341,17 @@ etsi_its_spatem_ts_msgs:
       -o etsi_its_msgs/etsi_its_spatem_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_mcm_uulm_msgs:
+etsi_its_vam_ts_msgs:
   stage: ROS Messages
   script:
     - >
       utils/codegen/codegen-py/asn1ToRosMsg.py
-      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
-      -t mcm_uulm
-      -o etsi_its_msgs/etsi_its_mcm_uulm_msgs/msg
+      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
+      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
+      -t vam_ts
+      -o etsi_its_msgs/etsi_its_vam_ts_msgs/msg
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 
 etsi_its_cam_conversion:
   stage: Conversion Headers
@@ -327,6 +373,21 @@ etsi_its_cam_ts_conversion:
       asn1/patched/cam_ts103900/cdd/ETSI-ITS-CDD.asn
       -t cam_ts
       -o etsi_its_conversion/etsi_its_cam_ts_conversion/include/etsi_its_cam_ts_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
+etsi_its_cpm_ts_conversion:
+  stage: Conversion Headers
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
+      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
+      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
+      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
+      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
+      -t cpm_ts
+      -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_denm_conversion:
@@ -351,30 +412,23 @@ etsi_its_denm_ts_conversion:
       -o etsi_its_conversion/etsi_its_denm_ts_conversion/include/etsi_its_denm_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_cpm_ts_conversion:
+etsi_its_ivim_ts_conversion:
   stage: Conversion Headers
   script:
     - >
       utils/codegen/codegen-py/asn1ToConversionHeader.py
-      asn1/raw/cpm_ts103324/asn/CPM-PDU-Descriptions.asn
-      asn1/raw/cpm_ts103324/asn/CPM-OriginatingStationContainers.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceivedObjectContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-PerceptionRegionContainer.asn
-      asn1/raw/cpm_ts103324/asn/CPM-SensorInformationContainer.asn
-      asn1/patched/cpm_ts103324/asn/cdd/ETSI-ITS-CDD.asn
-      -t cpm_ts
-      -o etsi_its_conversion/etsi_its_cpm_ts_conversion/include/etsi_its_cpm_ts_conversion
-    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
-
-etsi_its_vam_ts_conversion:
-  stage: Conversion Headers
-  script:
-    - >
-      utils/codegen/codegen-py/asn1ToConversionHeader.py
-      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
-      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
-      -t vam_ts
-      -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion
+      asn1/raw/is_ts103301/IVIM-PDU-Descriptions.asn
+      asn1/raw/is_ts103301/cdd/ITS-Container.asn
+      asn1/raw/is_ts103301/iso-patched/ISO24534-3_ElectronicRegistrationIdentificationVehicleDataModule-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14823-missing.asn
+      asn1/raw/is_ts103301/build/asn1/TS17419_2014_CITSapplMgmtIDs.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcGenericv7-patched.asn
+      asn1/raw/is_ts103301/iso-patched/ISO14906(2018)EfcDsrcApplicationv6-patched.asn
+      asn1/raw/is_ts103301/build/asn1/ISO-TS-19091-addgrp-C-2018-patched.asn
+      asn1/patched/is_ts103301/build/asn1/ISO14816_AVIAEINumberingAndDataStructures.asn
+      asn1/raw/is_ts103301/build/asn1/ISO19321IVIv2.asn
+      -t ivim_ts
+      -o etsi_its_conversion/etsi_its_ivim_ts_conversion/include/etsi_its_ivim_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
 etsi_its_mapem_ts_conversion:
@@ -391,6 +445,17 @@ etsi_its_mapem_ts_conversion:
       -o etsi_its_conversion/etsi_its_mapem_ts_conversion/include/etsi_its_mapem_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
+etsi_its_mcm_uulm_conversion:
+  stage: Conversion Headers
+  script:
+    - >
+      utils/codegen/codegen-py/asn1ToConversionHeader.py
+      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
+      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
+      -t mcm_uulm
+      -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
+    - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
+
 etsi_its_spatem_ts_conversion:
   stage: Conversion Headers
   script:
@@ -405,13 +470,13 @@ etsi_its_spatem_ts_conversion:
       -o etsi_its_conversion/etsi_its_spatem_ts_conversion/include/etsi_its_spatem_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi
 
-etsi_its_mcm_uulm_conversion:
+etsi_its_vam_ts_conversion:
   stage: Conversion Headers
   script:
     - >
       utils/codegen/codegen-py/asn1ToConversionHeader.py
-      asn1/patched/uulm_mcm_etsi/TS103561_LUKAS_MCM.asn
-      asn1/patched/uulm_mcm_etsi/ETSI-ITS-CDD.asn
-      -t mcm_uulm
-      -o etsi_its_conversion/etsi_its_mcm_uulm_conversion/include/etsi_its_mcm_uulm_conversion
+      asn1/raw/vam-ts103300_3/VAM-PDU-Descriptions.asn
+      asn1/patched/vam-ts103300_3/cdd/ETSI-ITS-CDD.asn
+      -t vam_ts
+      -o etsi_its_conversion/etsi_its_vam_ts_conversion/include/etsi_its_vam_ts_conversion
     - if [[ ! -z "$(git status --porcelain)" ]]; then echo "Code generation script resulted in changes to the repository" && git diff; exit 1; fi

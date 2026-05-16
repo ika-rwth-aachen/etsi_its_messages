@@ -9,13 +9,19 @@ echo "Finding .patch files in '$patches_dir' to apply to repositories in '$repos
 find "$patches_dir" -type f -name "*.patch" | while read -r patch_file; do
 
     # find the original repository path
-    relative_path="$(dirname ${patch_file#$patches_dir/})"
+    relative_path="$(dirname "${patch_file#$patches_dir/}")"
     repo_path="$repos_dir/$relative_path"
-    file_to_patch="$repo_path/$(basename ${patch_file%.patch})"
+    patch_file_name="$(basename "${patch_file%.patch}")"
+    file_to_patch="$repo_path/$patch_file_name"
+
+    if [ ! -f "$file_to_patch" ]; then
+        echo "  Skipping '$file_to_patch' because the source file is missing"
+        continue
+    fi
 
     # copy file to patch to temporary git repository
     tmp_repo_path="$(mktemp -d)"
-    tmp_file_to_patch="$tmp_repo_path/$(basename ${patch_file%.patch})"
+    tmp_file_to_patch="$tmp_repo_path/$patch_file_name"
     cp -r "$repo_path"/* "$tmp_repo_path"
     git -C "$tmp_repo_path" init --quiet
 
@@ -24,7 +30,7 @@ find "$patches_dir" -type f -name "*.patch" | while read -r patch_file; do
 
     # move patched file to the patched directory
     patched_path="$patched_dir/$relative_path"
-    patched_file="$patched_path/$(basename ${patch_file%.patch})"
+    patched_file="$patched_path/$patch_file_name"
     mkdir -p "$patched_path"
     mv "$tmp_file_to_patch" "$patched_file"
 

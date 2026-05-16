@@ -21,6 +21,7 @@
   <depend>etsi_its_cpm_ts_msgs</depend>
   <depend>etsi_its_denm_msgs</depend>
   <depend>etsi_its_denm_ts_msgs</depend>
+  <depend>etsi_its_ivim_ts_msgs</depend>
   <depend>etsi_its_mapem_ts_msgs</depend>
   <depend>etsi_its_mcm_uulm_msgs</depend>
   <depend>etsi_its_spatem_ts_msgs</depend>

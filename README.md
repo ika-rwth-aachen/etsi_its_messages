@@ -7,7 +7,7 @@
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/ROS 2-humble|jazzy|kilted-blueviolet"/>
-  <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|MAPEM|MCM|SPATEM|VAM-aqua"/>
+  <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|IVIM|MAPEM|MCM|SPATEM|VAM-aqua"/>
 </p>
 
 **ROS Support for ETSI ITS Messages for V2X Communication**
@@ -58,6 +58,7 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 | :white_check_mark: | CAM | Cooperative Awareness Message | [EN 302 637-2 V1.4.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263702/01.04.01_60/en_30263702v010401p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_en302637_2)) | [TS 103 900 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103900_103999/103900/02.01.01_60/ts_103900v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cam_ts103900)) | - |
 | :white_check_mark: | CPM | Collective Perception Message | - | [TS 103 324 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103324/02.01.01_60/ts_103324v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/cpm_ts103324)) | - |
 | :white_check_mark: | DENM | Decentralized Environmental Notification Message | [EN 302 637-3 V1.3.1](https://www.etsi.org/deliver/etsi_en/302600_302699/30263703/01.03.01_60/en_30263703v010301p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_en302637_3)) | [TS 103 831 V2.2.1](https://www.etsi.org/deliver/etsi_ts/103800_103899/103831/02.02.01_60/ts_103831v020201p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/denm_ts103831)) | - |
+| :white_check_mark: | IVIM | In-Vehicle Information Message | - | [TS 103 301 V2.1.1](https://cdn.standards.iteh.ai/samples/59277/21ee1e46b905419c84f44b40713f4bbc/ETSI-TS-103-301-V2-1-1-2021-03-.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1/)) |
 | :white_check_mark: | MAPEM | Map Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) | - |
 | :white_check_mark: | MCM | Maneuver Coordination Message | - | - | [TR 103 578 proposal by Ulm University](https://github.com/uulm-mrm/uulm_mcm_etsi) |
 | :white_check_mark: | SPATEM | Signal Phase and Timing Extended Message | - | [TS 103 301 V2.1.1](https://www.etsi.org/deliver/etsi_ts/103300_103399/103301/02.01.01_60/ts_103301v020101p.pdf) ([ASN.1](https://forge.etsi.org/rep/ITS/asn1/is_ts103301/-/tree/v2.1.1?ref_type=tags)) | - |
@@ -82,6 +83,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_coding
 │   ├── etsi_its_denm_coding
 │   ├── etsi_its_denm_ts_coding
+│   ├── etsi_its_ivim_ts_coding
 │   ├── etsi_its_mapem_ts_coding
 │   ├── etsi_its_mcm_uulm_coding
 │   ├── etsi_its_spatem_ts_coding
@@ -93,6 +95,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_conversion
 │   ├── etsi_its_denm_conversion
 │   ├── etsi_its_denm_ts_conversion
+│   ├── etsi_its_ivim_ts_conversion
 │   ├── etsi_its_mapem_ts_conversion
 │   ├── etsi_its_mcm_uulm_conversion
 │   ├── etsi_its_primitives_conversion
@@ -106,6 +109,7 @@ etsi_its_messages
 │   ├── etsi_its_cpm_ts_msgs
 │   ├── etsi_its_denm_msgs
 │   ├── etsi_its_denm_ts_msgs
+│   ├── etsi_its_ivim_ts_msgs
 │   ├── etsi_its_mapem_ts_msgs
 │   ├── etsi_its_mcm_uulm_msgs
 │   ├── etsi_its_spatem_ts_msgs
@@ -156,7 +160,7 @@ The conversion node bridges all ETSI ITS message types at the same time in both 
 ```bash
 ros2 launch etsi_its_conversion converter.launch.py
 # or
-ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=0 -p etsi_message_payload_offset:=4
+ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=[cam,cpm_ts,denm,ivim_ts,mapem_ts,mcm_uulm,spatem_ts,vam_ts] -p has_btp_destination_port:=true -p btp_destination_port_offset:=0 -p etsi_message_payload_offset:=4
 ```
 
 #### Subscribed Topics
@@ -169,6 +173,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/in` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM for conversion to UDP |
 | `~/denm/in` | `etsi_its_denm_msgs/msg/DENM` | DENM for conversion to UDP |
 | `~/denm_ts/in` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) for conversion to UDP |
+| `~/ivim_ts/in` | `etsi_its_ivim_ts_msgs/msg/IVIM` | IVIM (TS) for conversion to UDP |
 | `~/mapem_ts/in` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) for conversion to UDP |
 | `~/mcm_uulm/in` | `etsi_its_mcm_uulm_msgs/msg/MCM` | MCM (UULM) for conversion to UDP |
 | `~/spatem_ts/in` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) for conversion to UDP |
@@ -184,6 +189,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/out` | `etsi_its_cpm_ts_msgs/msg/CollectivePerceptionMessage` | CPM converted from UDP payload |
 | `~/denm/out` | `etsi_its_denm_msgs/msg/DENM` | DENM converted from UDP payload |
 | `~/denm_ts/out` | `etsi_its_denm_ts_msgs/msg/DENM` | DENM (TS) converted from UDP payload |
+| `~/ivim_ts/out` | `etsi_its_ivim_ts_msgs/msg/IVIM` | IVIM (TS) converted from UDP payload |
 | `~/mapem_ts/out` | `etsi_its_mapem_ts_msgs/msg/MAPEM` | MAPEM (TS) converted from UDP payload |
 | `~/mcm_uulm/out` | `etsi_its_mcm_uulm_msgs/msg/MCM` | MCM (UULM) converted from UDP payload |
 | `~/spatem_ts/out` | `etsi_its_spatem_ts_msgs/msg/SPATEM` | SPATEM (TS) converted from UDP payload |
@@ -198,6 +204,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/cpm_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertCpmTsToUdp` | Convert ROS CPM (TS) to UDP payload |
 | `~/denm/udp` | `etsi_its_conversion_srvs/srv/ConvertDenmToUdp` | Convert ROS DENM to UDP payload |
 | `~/denm_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertDenmTsToUdp` | Convert ROS DENM (TS) to UDP payload |
+| `~/ivim_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertIvimTsToUdp` | Convert ROS IVIM (TS) to UDP payload |
 | `~/mapem_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertMapemTsToUdp` | Convert ROS MAPEM (TS) to UDP payload |
 | `~/mcm_uulm/udp` | `etsi_its_conversion_srvs/srv/ConvertMcmUulmToUdp` | Convert ROS MCM (UULM) to UDP payload |
 | `~/spatem_ts/udp` | `etsi_its_conversion_srvs/srv/ConvertSpatemTsToUdp` | Convert ROS SPATEM (TS) to UDP payload |
@@ -207,6 +214,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `~/udp/cpm_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToCpmTs` | Convert UDP payload to ROS CPM (TS) |
 | `~/udp/denm` | `etsi_its_conversion_srvs/srv/ConvertUdpToDenm` | Convert UDP payload to ROS DENM |
 | `~/udp/denm_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToDenmTs` | Convert UDP payload to ROS DENM (TS) |
+| `~/udp/ivim_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToIvimTs` | Convert UDP payload to ROS IVIM (TS) |
 | `~/udp/mapem_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToMapemTs` | Convert UDP payload to ROS MAPEM (TS) |
 | `~/udp/mcm_uulm` | `etsi_its_conversion_srvs/srv/ConvertUdpToMcmUulm` | Convert UDP payload to ROS MCM (UULM) |
 | `~/udp/spatem_ts` | `etsi_its_conversion_srvs/srv/ConvertUdpToSpatemTs` | Convert UDP payload to ROS SPATEM (TS) |
@@ -219,8 +227,8 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `has_btp_destination_port` | `bool` | `true` |  | whether incoming/outgoing UDP messages include a [2-byte BTP destination port](https://www.etsi.org/deliver/etsi_en/302600_302699/3026360501/02.01.00_20/en_3026360501v020100a.pdf) in their payload; for incoming UDP payloads: if `false`, destination port is expected in `src_port` field with fallback of `udp2ros_etsi_types[0]` |
 | `btp_destination_port_offset` | `int` | `0` |  | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | `4` |  | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
-| `ros2udp_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` |
-| `udp2ros_etsi_types` | `string[]` | `cam`, `cpm_ts`, `denm`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
+| `ros2udp_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` |
+| `udp2ros_etsi_types` | `string[]` | `cam`, `cpm_ts`, `denm`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
 | `subscriber_queue_size` | `int` | `10` |  | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | `10` |  | queue size for outgoing ROS messages |
 
