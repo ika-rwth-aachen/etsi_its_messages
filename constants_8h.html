@@ -155,17 +155,17 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the number of leap second insertions since 2004 for unix_seconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00060">60</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>                                                                              {</div>
-<div class="line"><span class="lineno">   61</span>  <span class="comment">// Check if the map is empty</span></div>
-<div class="line"><span class="lineno">   62</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   63</span>  <span class="keyword">auto</span> it = <a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(</div>
-<div class="line"><span class="lineno">   64</span>      unix_seconds);  <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
-<div class="line"><span class="lineno">   65</span>  <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   66</span>  --it;               <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
-<div class="line"><span class="lineno">   67</span>  <span class="keywordflow">return</span> it-&gt;second;  <span class="comment">// Return the corresponding value</span></div>
-<div class="line"><span class="lineno">   68</span>}</div>
-<div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00045">constants.h:45</a></div></div>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00037">37</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                                              {</div>
+<div class="line"><span class="lineno">   38</span>  <span class="comment">// Check if the map is empty</span></div>
+<div class="line"><span class="lineno">   39</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.empty()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   40</span>  <span class="keyword">auto</span> it = <a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.upper_bound(</div>
+<div class="line"><span class="lineno">   41</span>      unix_seconds);  <span class="comment">// Find the first element greater than givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   42</span>  <span class="keywordflow">if</span> (it == <a class="code hl_variable" href="#abad21a88f0cc0e47918ce94a73f162e4">LEAP_SECOND_INSERTIONS_SINCE_2004</a>.begin()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   43</span>  --it;               <span class="comment">// Move iterator to the element with a key less than or equal to givenUnixSecond</span></div>
+<div class="line"><span class="lineno">   44</span>  <span class="keywordflow">return</span> it-&gt;second;  <span class="comment">// Return the corresponding value</span></div>
+<div class="line"><span class="lineno">   45</span>}</div>
+<div class="ttc" id="aconstants_8h_html_abad21a88f0cc0e47918ce94a73f162e4"><div class="ttname"><a href="#abad21a88f0cc0e47918ce94a73f162e4">etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004</a></div><div class="ttdeci">const std::map&lt; uint64_t, uint16_t &gt; LEAP_SECOND_INSERTIONS_SINCE_2004</div><div class="ttdoc">std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the in...</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00022">constants.h:22</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -192,15 +192,15 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 <p>std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion </p>
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00045">45</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                  {</div>
-<div class="line"><span class="lineno">   46</span>    {UNIX_SECONDS_2004, 0},  <span class="comment">// 2004-01-01T00:00:00.000Z</span></div>
-<div class="line"><span class="lineno">   47</span>    {1136073599, 1},         <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   48</span>    {1230767999, 2},         <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   49</span>    {1341100799, 3},         <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   50</span>    {1435708799, 4},         <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   51</span>    {1483228799, 5}          <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
-<div class="line"><span class="lineno">   52</span>};</div>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00022">22</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   22</span>                                                                  {</div>
+<div class="line"><span class="lineno">   23</span>    {UNIX_SECONDS_2004, 0},  <span class="comment">// 2004-01-01T00:00:00.000Z</span></div>
+<div class="line"><span class="lineno">   24</span>    {1136073599, 1},         <span class="comment">// 2005-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   25</span>    {1230767999, 2},         <span class="comment">// 2008-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   26</span>    {1341100799, 3},         <span class="comment">// 2012-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   27</span>    {1435708799, 4},         <span class="comment">// 2015-06-30T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   28</span>    {1483228799, 5}          <span class="comment">// 2016-12-31T23:59:59.000Z</span></div>
+<div class="line"><span class="lineno">   29</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -224,7 +224,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00071">71</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00048">48</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
 
 </div>
 </div>
@@ -248,7 +248,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00075">75</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00052">52</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +264,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00039">39</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constants_8h_source.html#l00016">16</a> of file <a class="el" href="constants_8h_source.html">constants.h</a>.</p>
 
 </div>
 </div>

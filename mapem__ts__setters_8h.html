@@ -173,13 +173,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00125">125</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  125</span>                                                                     {</div>
-<div class="line"><span class="lineno">  126</span>    int64_t alt_in_dm = (int64_t)std::round(value*1e1);</div>
-<div class="line"><span class="lineno">  127</span>    <span class="keywordflow">if</span>(alt_in_dm&gt;=Elevation::MIN &amp;&amp; alt_in_dm&lt;=Elevation::MAX) elevation.value = alt_in_dm;</div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_dm&lt;Elevation::MIN) elevation.value = Elevation::MIN;</div>
-<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_dm&gt;Elevation::MAX) elevation.value = Elevation::MAX;</div>
-<div class="line"><span class="lineno">  130</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00102">102</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                                     {</div>
+<div class="line"><span class="lineno">  103</span>    int64_t alt_in_dm = (int64_t)std::round(value*1e1);</div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">if</span>(alt_in_dm&gt;=Elevation::MIN &amp;&amp; alt_in_dm&lt;=Elevation::MAX) elevation.value = alt_in_dm;</div>
+<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_dm&lt;Elevation::MIN) elevation.value = Elevation::MIN;</div>
+<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(alt_in_dm&gt;Elevation::MAX) elevation.value = Elevation::MAX;</div>
+<div class="line"><span class="lineno">  107</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -219,11 +219,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00091">91</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   91</span>                                                                                       {</div>
-<div class="line"><span class="lineno">   92</span>    <a class="code hl_function" href="#a8632b6937eef5fd6eaa0012396286ed3">setIntersectionID</a>(intsct.id.id, id_value);</div>
-<div class="line"><span class="lineno">   93</span>  }</div>
-<div class="ttc" id="amapem__ts__setters_8h_html_a8632b6937eef5fd6eaa0012396286ed3"><div class="ttname"><a href="#a8632b6937eef5fd6eaa0012396286ed3">etsi_its_mapem_ts_msgs::access::setIntersectionID</a></div><div class="ttdeci">void setIntersectionID(IntersectionID &amp;intsct_id, const uint16_t id_value)</div><div class="ttdoc">Set the IntersectionID value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00080">mapem_ts_setters.h:80</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00068">68</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>                                                                                       {</div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_function" href="#a8632b6937eef5fd6eaa0012396286ed3">setIntersectionID</a>(intsct.id.id, id_value);</div>
+<div class="line"><span class="lineno">   70</span>  }</div>
+<div class="ttc" id="amapem__ts__setters_8h_html_a8632b6937eef5fd6eaa0012396286ed3"><div class="ttname"><a href="#a8632b6937eef5fd6eaa0012396286ed3">etsi_its_mapem_ts_msgs::access::setIntersectionID</a></div><div class="ttdeci">void setIntersectionID(IntersectionID &amp;intsct_id, const uint16_t id_value)</div><div class="ttdoc">Set the IntersectionID value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00057">mapem_ts_setters.h:57</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -263,12 +263,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00080">80</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>                                                                                    {</div>
-<div class="line"><span class="lineno">   81</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(id_value, IntersectionID::MIN, IntersectionID::MAX, <span class="stringliteral">&quot;IntersectionID&quot;</span>);</div>
-<div class="line"><span class="lineno">   82</span>    intsct_id.value = id_value;</div>
-<div class="line"><span class="lineno">   83</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_adf7bfa92543362f45e6d6c58368dcec5"><div class="ttname"><a href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">etsi_its_mapem_ts_msgs::access::throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00047">mapem_ts_getters.h:47</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00057">57</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>                                                                                    {</div>
+<div class="line"><span class="lineno">   58</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(id_value, IntersectionID::MIN, IntersectionID::MAX, <span class="stringliteral">&quot;IntersectionID&quot;</span>);</div>
+<div class="line"><span class="lineno">   59</span>    intsct_id.value = id_value;</div>
+<div class="line"><span class="lineno">   60</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_adf7bfa92543362f45e6d6c58368dcec5"><div class="ttname"><a href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">etsi_its_mapem_ts_msgs::access::throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00024">mapem_ts_getters.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -308,12 +308,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00101">101</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                                {</div>
-<div class="line"><span class="lineno">  102</span>    int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
-<div class="line"><span class="lineno">  103</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
-<div class="line"><span class="lineno">  104</span>    latitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">  105</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00078">78</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                {</div>
+<div class="line"><span class="lineno">   79</span>    int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   81</span>    latitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   82</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -353,12 +353,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00113">113</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>                                                                   {</div>
-<div class="line"><span class="lineno">  114</span>    int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
-<div class="line"><span class="lineno">  115</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
-<div class="line"><span class="lineno">  116</span>    longitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">  117</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00090">90</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                                   {</div>
+<div class="line"><span class="lineno">   91</span>    int64_t angle_in_10_micro_degree = (int64_t)std::round(deg*1e7);</div>
+<div class="line"><span class="lineno">   92</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   93</span>    longitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   94</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -398,11 +398,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00060">60</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>                                                                         {</div>
-<div class="line"><span class="lineno">   61</span>    <a class="code hl_function" href="#a5cc4cca377b7e3fa39a3cd8dd91884de">setMinuteOfTheYear</a>(map.time_stamp, moy_value);</div>
-<div class="line"><span class="lineno">   62</span>  }</div>
-<div class="ttc" id="amapem__ts__setters_8h_html_a5cc4cca377b7e3fa39a3cd8dd91884de"><div class="ttname"><a href="#a5cc4cca377b7e3fa39a3cd8dd91884de">etsi_its_mapem_ts_msgs::access::setMinuteOfTheYear</a></div><div class="ttdeci">void setMinuteOfTheYear(MinuteOfTheYear &amp;moy, const uint32_t moy_value)</div><div class="ttdoc">Set the MinuteOfTheYear object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00049">mapem_ts_setters.h:49</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00037">37</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                                         {</div>
+<div class="line"><span class="lineno">   38</span>    <a class="code hl_function" href="#a5cc4cca377b7e3fa39a3cd8dd91884de">setMinuteOfTheYear</a>(map.time_stamp, moy_value);</div>
+<div class="line"><span class="lineno">   39</span>  }</div>
+<div class="ttc" id="amapem__ts__setters_8h_html_a5cc4cca377b7e3fa39a3cd8dd91884de"><div class="ttname"><a href="#a5cc4cca377b7e3fa39a3cd8dd91884de">etsi_its_mapem_ts_msgs::access::setMinuteOfTheYear</a></div><div class="ttdeci">void setMinuteOfTheYear(MinuteOfTheYear &amp;moy, const uint32_t moy_value)</div><div class="ttdoc">Set the MinuteOfTheYear object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00026">mapem_ts_setters.h:26</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -441,11 +441,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00069">69</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   69</span>                                                                         {</div>
-<div class="line"><span class="lineno">   70</span>    <a class="code hl_function" href="#a5cc4cca377b7e3fa39a3cd8dd91884de">setMinuteOfTheYear</a>(mapem.map, moy_value);</div>
-<div class="line"><span class="lineno">   71</span>    mapem.map.time_stamp_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   72</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00046">46</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                                                                         {</div>
+<div class="line"><span class="lineno">   47</span>    <a class="code hl_function" href="#a5cc4cca377b7e3fa39a3cd8dd91884de">setMinuteOfTheYear</a>(mapem.map, moy_value);</div>
+<div class="line"><span class="lineno">   48</span>    mapem.map.time_stamp_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   49</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -485,11 +485,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00049">49</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                                                 {</div>
-<div class="line"><span class="lineno">   50</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, <span class="stringliteral">&quot;MinuteOfTheYear&quot;</span>);</div>
-<div class="line"><span class="lineno">   51</span>    moy.value = moy_value;</div>
-<div class="line"><span class="lineno">   52</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00026">26</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                                                                 {</div>
+<div class="line"><span class="lineno">   27</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#adf7bfa92543362f45e6d6c58368dcec5">throwIfOutOfRange</a>(moy_value, MinuteOfTheYear::MIN, MinuteOfTheYear::MAX, <span class="stringliteral">&quot;MinuteOfTheYear&quot;</span>);</div>
+<div class="line"><span class="lineno">   28</span>    moy.value = moy_value;</div>
+<div class="line"><span class="lineno">   29</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -541,11 +541,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00167">167</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  167</span>                                                                                                              {</div>
-<div class="line"><span class="lineno">  168</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(intsct.ref_point, latitude, longitude, altitude);</div>
-<div class="line"><span class="lineno">  169</span>  }</div>
-<div class="ttc" id="amapem__ts__setters_8h_html_a0542bb11ffa676cc8588dd5d2eaf4b50"><div class="ttname"><a href="#a0542bb11ffa676cc8588dd5d2eaf4b50">etsi_its_mapem_ts_msgs::access::setPosition3D</a></div><div class="ttdeci">void setPosition3D(Position3D &amp;pos, const double latitude, const double longitude)</div><div class="ttdoc">Set the Position3D object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00139">mapem_ts_setters.h:139</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00144">144</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>                                                                                                              {</div>
+<div class="line"><span class="lineno">  145</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(intsct.ref_point, latitude, longitude, altitude);</div>
+<div class="line"><span class="lineno">  146</span>  }</div>
+<div class="ttc" id="amapem__ts__setters_8h_html_a0542bb11ffa676cc8588dd5d2eaf4b50"><div class="ttname"><a href="#a0542bb11ffa676cc8588dd5d2eaf4b50">etsi_its_mapem_ts_msgs::access::setPosition3D</a></div><div class="ttdeci">void setPosition3D(Position3D &amp;pos, const double latitude, const double longitude)</div><div class="ttdoc">Set the Position3D object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00116">mapem_ts_setters.h:116</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -591,14 +591,14 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00139">139</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                                                                                            {</div>
-<div class="line"><span class="lineno">  140</span>    <a class="code hl_function" href="#a7e9a5a771bce0f1206ef7c5c2b0d4d9c">setLatitude</a>(pos.lat, latitude);</div>
-<div class="line"><span class="lineno">  141</span>    <a class="code hl_function" href="#ad47744f62548f6bcfecbe4c5f1cbc7c8">setLongitude</a>(pos.lon, longitude);</div>
-<div class="line"><span class="lineno">  142</span>    pos.elevation_is_present = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  143</span>  }</div>
-<div class="ttc" id="amapem__ts__setters_8h_html_a7e9a5a771bce0f1206ef7c5c2b0d4d9c"><div class="ttname"><a href="#a7e9a5a771bce0f1206ef7c5c2b0d4d9c">etsi_its_mapem_ts_msgs::access::setLatitude</a></div><div class="ttdeci">void setLatitude(Latitude &amp;latitude, const double deg)</div><div class="ttdoc">Set the Latitude object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00101">mapem_ts_setters.h:101</a></div></div>
-<div class="ttc" id="amapem__ts__setters_8h_html_ad47744f62548f6bcfecbe4c5f1cbc7c8"><div class="ttname"><a href="#ad47744f62548f6bcfecbe4c5f1cbc7c8">etsi_its_mapem_ts_msgs::access::setLongitude</a></div><div class="ttdeci">void setLongitude(Longitude &amp;longitude, const double deg)</div><div class="ttdoc">Set the Longitude object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00113">mapem_ts_setters.h:113</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00116">116</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  117</span>    <a class="code hl_function" href="#a7e9a5a771bce0f1206ef7c5c2b0d4d9c">setLatitude</a>(pos.lat, latitude);</div>
+<div class="line"><span class="lineno">  118</span>    <a class="code hl_function" href="#ad47744f62548f6bcfecbe4c5f1cbc7c8">setLongitude</a>(pos.lon, longitude);</div>
+<div class="line"><span class="lineno">  119</span>    pos.elevation_is_present = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  120</span>  }</div>
+<div class="ttc" id="amapem__ts__setters_8h_html_a7e9a5a771bce0f1206ef7c5c2b0d4d9c"><div class="ttname"><a href="#a7e9a5a771bce0f1206ef7c5c2b0d4d9c">etsi_its_mapem_ts_msgs::access::setLatitude</a></div><div class="ttdeci">void setLatitude(Latitude &amp;latitude, const double deg)</div><div class="ttdoc">Set the Latitude object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00078">mapem_ts_setters.h:78</a></div></div>
+<div class="ttc" id="amapem__ts__setters_8h_html_ad47744f62548f6bcfecbe4c5f1cbc7c8"><div class="ttname"><a href="#ad47744f62548f6bcfecbe4c5f1cbc7c8">etsi_its_mapem_ts_msgs::access::setLongitude</a></div><div class="ttdeci">void setLongitude(Longitude &amp;longitude, const double deg)</div><div class="ttdoc">Set the Longitude object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00090">mapem_ts_setters.h:90</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -650,13 +650,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00153">153</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                                                   {</div>
-<div class="line"><span class="lineno">  154</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(pos, latitude, longitude);</div>
-<div class="line"><span class="lineno">  155</span>    <a class="code hl_function" href="#a681aa2e76149d91369e34d773cffa2e3">setElevation</a>(pos.elevation, altitude);</div>
-<div class="line"><span class="lineno">  156</span>    pos.elevation_is_present = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  157</span>  }</div>
-<div class="ttc" id="amapem__ts__setters_8h_html_a681aa2e76149d91369e34d773cffa2e3"><div class="ttname"><a href="#a681aa2e76149d91369e34d773cffa2e3">etsi_its_mapem_ts_msgs::access::setElevation</a></div><div class="ttdeci">void setElevation(Elevation &amp;elevation, const double value)</div><div class="ttdoc">Set the Elevation object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00125">mapem_ts_setters.h:125</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00130">130</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  130</span>                                                                                                                   {</div>
+<div class="line"><span class="lineno">  131</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(pos, latitude, longitude);</div>
+<div class="line"><span class="lineno">  132</span>    <a class="code hl_function" href="#a681aa2e76149d91369e34d773cffa2e3">setElevation</a>(pos.elevation, altitude);</div>
+<div class="line"><span class="lineno">  133</span>    pos.elevation_is_present = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  134</span>  }</div>
+<div class="ttc" id="amapem__ts__setters_8h_html_a681aa2e76149d91369e34d773cffa2e3"><div class="ttname"><a href="#a681aa2e76149d91369e34d773cffa2e3">etsi_its_mapem_ts_msgs::access::setElevation</a></div><div class="ttdeci">void setElevation(Elevation &amp;elevation, const double value)</div><div class="ttdoc">Set the Elevation object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__setters_8h_source.html#l00102">mapem_ts_setters.h:102</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -709,21 +709,21 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00183">183</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  183</span>                                                                                                                                                  {</div>
-<div class="line"><span class="lineno">  184</span>    std::string required_frame_prefix = <span class="stringliteral">&quot;utm_&quot;</span>;</div>
-<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">if</span>(utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0)</div>
-<div class="line"><span class="lineno">  186</span>    {</div>
-<div class="line"><span class="lineno">  187</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Frame-ID of UTM Position &#39;&quot;</span>+utm_position.header.frame_id+<span class="stringliteral">&quot;&#39; does not start with required prefix &#39;&quot;</span>+required_frame_prefix+<span class="stringliteral">&quot;&#39;!&quot;</span>);</div>
-<div class="line"><span class="lineno">  188</span>    }</div>
-<div class="line"><span class="lineno">  189</span>    <span class="keywordtype">double</span> latitude, longitude;</div>
-<div class="line"><span class="lineno">  190</span>    <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  191</span>      GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);</div>
-<div class="line"><span class="lineno">  192</span>    } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
-<div class="line"><span class="lineno">  193</span>      <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
-<div class="line"><span class="lineno">  194</span>    }</div>
-<div class="line"><span class="lineno">  195</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(reference_position, latitude, longitude, utm_position.point.z);</div>
-<div class="line"><span class="lineno">  196</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__setters_8h_source.html#l00160">160</a> of file <a class="el" href="mapem__ts__setters_8h_source.html">mapem_ts_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>                                                                                                                                                  {</div>
+<div class="line"><span class="lineno">  161</span>    std::string required_frame_prefix = <span class="stringliteral">&quot;utm_&quot;</span>;</div>
+<div class="line"><span class="lineno">  162</span>    <span class="keywordflow">if</span>(utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0)</div>
+<div class="line"><span class="lineno">  163</span>    {</div>
+<div class="line"><span class="lineno">  164</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Frame-ID of UTM Position &#39;&quot;</span>+utm_position.header.frame_id+<span class="stringliteral">&quot;&#39; does not start with required prefix &#39;&quot;</span>+required_frame_prefix+<span class="stringliteral">&quot;&#39;!&quot;</span>);</div>
+<div class="line"><span class="lineno">  165</span>    }</div>
+<div class="line"><span class="lineno">  166</span>    <span class="keywordtype">double</span> latitude, longitude;</div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  168</span>      GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);</div>
+<div class="line"><span class="lineno">  169</span>    } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
+<div class="line"><span class="lineno">  170</span>      <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
+<div class="line"><span class="lineno">  171</span>    }</div>
+<div class="line"><span class="lineno">  172</span>    <a class="code hl_function" href="#a0542bb11ffa676cc8588dd5d2eaf4b50">setPosition3D</a>(reference_position, latitude, longitude, utm_position.point.z);</div>
+<div class="line"><span class="lineno">  173</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -763,11 +763,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00058">58</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                              {</div>
-<div class="line"><span class="lineno">   59</span>    MinuteOfTheYear moy = <a class="code hl_function" href="mapem__ts__getters_8h.html#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> moy.value;</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a893125a30ef31f4bfc8c1fe5fd3990c9"><div class="ttname"><a href="mapem__ts__getters_8h.html#a893125a30ef31f4bfc8c1fe5fd3990c9">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYear</a></div><div class="ttdeci">MinuteOfTheYear getMinuteOfTheYear(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear object MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00047">mapem_ts_getters.h:47</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00035">35</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>                                                              {</div>
+<div class="line"><span class="lineno">   36</span>    MinuteOfTheYear moy = <a class="code hl_function" href="mapem__ts__getters_8h.html#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> moy.value;</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a893125a30ef31f4bfc8c1fe5fd3990c9"><div class="ttname"><a href="mapem__ts__getters_8h.html#a893125a30ef31f4bfc8c1fe5fd3990c9">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYear</a></div><div class="ttdeci">MinuteOfTheYear getMinuteOfTheYear(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear object MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00024">mapem_ts_getters.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -820,13 +820,13 @@ template&lt;typename T1, typename T2&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00047">47</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                {</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
-<div class="line"><span class="lineno">   50</span>  }</div>
-<div class="line"><span class="lineno">   51</span> </div>
-<div class="ttc" id="amapem__ts__getters_8h_html_ae3ce949f1533ab99df9234bea3999d47"><div class="ttname"><a href="mapem__ts__getters_8h.html#ae3ce949f1533ab99df9234bea3999d47">etsi_its_mapem_ts_msgs::access::throwIfNotPresent</a></div><div class="ttdeci">void throwIfNotPresent(const bool is_present, const std::string val_desc)</div><div class="ttdoc">Throws an exception if the given value is not present.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00058">mapem_ts_getters.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00024">24</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   24</span>                                                                {</div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_function" href="mapem__ts__getters_8h.html#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
+<div class="line"><span class="lineno">   27</span>  }</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="ttc" id="amapem__ts__getters_8h_html_ae3ce949f1533ab99df9234bea3999d47"><div class="ttname"><a href="mapem__ts__getters_8h.html#ae3ce949f1533ab99df9234bea3999d47">etsi_its_mapem_ts_msgs::access::throwIfNotPresent</a></div><div class="ttdeci">void throwIfNotPresent(const bool is_present, const std::string val_desc)</div><div class="ttdoc">Throws an exception if the given value is not present.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00035">mapem_ts_getters.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -92,98 +92,75 @@ $(function(){initNavTree('denm__ts__setters_8h_source.html','',''); });
   <div class="headertitle"><div class="title">denm_ts_setters.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="denm__ts__setters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">=============================================================================</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">MIT License</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"></span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">copies or substantial portions of the Software.</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">SOFTWARE.</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">=============================================================================</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>etsi_its_denm_ts_msgs::access {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-2-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-2-1_setters.h</a>&gt;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;<a class="code" href="denm__setters__common_8h.html">etsi_its_msgs_utils/impl/denm/denm_setters_common.h</a>&gt;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a73fffa63809296880bb61d5f481f8b3a">   44</a></span><span class="comment"> * @param station_id</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @param protocol_version</span></div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aa142903e2909f95b180e573aa7669fb7">   46</a></span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#ab8c010b64f161b39ed1df1095f8dccc8">   47</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">setItsPduHeader</a>(DENM&amp; denm, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">   48</a></span>  <a class="code hl_function" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">setItsPduHeader</a>(denm.header, MessageId::DENM, station_id, protocol_version);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<a href="denm__ts__setters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>etsi_its_denm_ts_msgs::access {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="cdd__v2-2-1__setters_8h.html">etsi_its_msgs_utils/impl/cdd/cdd_v2-2-1_setters.h</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;<a class="code" href="denm__setters__common_8h.html">etsi_its_msgs_utils/impl/denm/denm_setters_common.h</a>&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a73fffa63809296880bb61d5f481f8b3a">   21</a></span><span class="comment"> * @param station_id</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * @param protocol_version</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aa142903e2909f95b180e573aa7669fb7">   23</a></span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#ab8c010b64f161b39ed1df1095f8dccc8">   24</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">setItsPduHeader</a>(DENM&amp; denm, <span class="keyword">const</span> uint32_t station_id, <span class="keyword">const</span> uint8_t protocol_version = 0) {</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">   25</a></span>  <a class="code hl_function" href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">setItsPduHeader</a>(denm.header, MessageId::DENM, station_id, protocol_version);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aadfe45c4687fbef8f42b9133e42001e4">   28</a></span><span class="comment">/**</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * @brief Set the IsWGSHeadingPresent object for DENM</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * @param denm DENM to set IsWGSHeadingPresent</span></div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * @param presence_of_heading IsWGSHeadingPresent-Value (true or false)</span></div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">   34</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">setIsWGSHeadingPresent</a>(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_heading) {</div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#afb70efffe4361c22f652b2215aeff810">   35</a></span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    denm.denm.location.event_position_heading_is_present = presence_of_heading;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  } <span class="keywordflow">else</span> {</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a4bcc801e757c9afa6bccb2a5e0956952">   38</a></span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#acc1f04d3779877266f41613ec2d9090e">   40</a></span>}</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a81cd24b2cb48058c3c6f3998b34849fb">   43</a></span><span class="comment"> * @brief Set the WGS Heading for a DENM</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> * Wgs84AngleConfidence is set to UNAVAILABLE</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> *</span></div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * @param denm DENM to set the WGS Heading</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> * @param heading_val Heading value in degree as decimal number</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to Wgs84AngleConfidence::UNAVAILABLE)</span></div>
 <div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aadfe45c4687fbef8f42b9133e42001e4">   51</a></span><span class="comment">/**</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> * @brief Set the IsWGSHeadingPresent object for DENM</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> * </span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> * @param denm DENM to set IsWGSHeadingPresent</span></div>
-</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> * @param presence_of_heading IsWGSHeadingPresent-Value (true or false)</span></div>
-</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">   57</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">setIsWGSHeadingPresent</a>(DENM&amp; denm, <span class="keywordtype">bool</span> presence_of_heading) {</div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#afb70efffe4361c22f652b2215aeff810">   58</a></span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    denm.denm.location.event_position_heading_is_present = presence_of_heading;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  } <span class="keywordflow">else</span> {</div>
-</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a4bcc801e757c9afa6bccb2a5e0956952">   61</a></span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#acc1f04d3779877266f41613ec2d9090e">   63</a></span>}</div>
-</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a81cd24b2cb48058c3c6f3998b34849fb">   66</a></span><span class="comment"> * @brief Set the WGS Heading for a DENM</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> * 0.0° equals WGS84 North, 90.0° equals WGS84 East, 180.0° equals WGS84 South and 270.0° equals WGS84 West</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> * Wgs84AngleConfidence is set to UNAVAILABLE</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> *</span></div>
-</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> * @param denm DENM to set the WGS Heading</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> * @param heading_val Heading value in degree as decimal number</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to Wgs84AngleConfidence::UNAVAILABLE)</span></div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a5b30401b28abd1a8f3ef71027fd9c760">   74</a></span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">   75</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">setWGSHeading</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> heading_val, <span class="keyword">const</span> <span class="keywordtype">double</span> confidence = std::numeric_limits&lt;double&gt;::infinity()) {</div>
-<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#acd3a99b3ceb39fc261a8282e0818f69a">   76</a></span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_function" href="denm__ts__setters_8h.html#a10f000ee5a0c56e480b87fddcde109a1">setWGSHeadingCDD</a>(denm.denm.location.event_position_heading, heading_val, confidence);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_function" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">setIsWGSHeadingPresent</a>(denm, <span class="keyword">true</span>);</div>
-<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aa32f3ebc531426aac72603b99930cb27">   79</a></span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}  <span class="comment">// namespace etsi_its_denm_ts_msgs::access</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a5b30401b28abd1a8f3ef71027fd9c760">   51</a></span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">   52</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">setWGSHeading</a>(DENM&amp; denm, <span class="keyword">const</span> <span class="keywordtype">double</span> heading_val, <span class="keyword">const</span> <span class="keywordtype">double</span> confidence = std::numeric_limits&lt;double&gt;::infinity()) {</div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#acd3a99b3ceb39fc261a8282e0818f69a">   53</a></span>  <span class="keywordflow">if</span> (denm.denm.location_is_present) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_function" href="denm__ts__setters_8h.html#a10f000ee5a0c56e480b87fddcde109a1">setWGSHeadingCDD</a>(denm.denm.location.event_position_heading, heading_val, confidence);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_function" href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">setIsWGSHeadingPresent</a>(denm, <span class="keyword">true</span>);</div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="denm__ts__setters_8h.html#aa32f3ebc531426aac72603b99930cb27">   56</a></span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;LocationContainer is not present!&quot;</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}  <span class="comment">// namespace etsi_its_denm_ts_msgs::access</span></div>
 </div>
 </div>
 </div>
@@ -193,10 +170,10 @@ $(function(){initNavTree('denm__ts__setters_8h_source.html','',''); });
 </div>
 <div class="ttc" id="acdd__v2-2-1__setters_8h_html"><div class="ttname"><a href="cdd__v2-2-1__setters_8h.html">cdd_v2-2-1_setters.h</a></div><div class="ttdoc">Setter functions for the ETSI ITS Common Data Dictionary (CDD) v2.2.1.</div></div>
 <div class="ttc" id="adenm__setters__common_8h_html"><div class="ttname"><a href="denm__setters__common_8h.html">denm_setters_common.h</a></div><div class="ttdoc">Common setter functions for the ETSI ITS DENM (EN and TS).</div></div>
-<div class="ttc" id="adenm__ts__setters_8h_html_a10f000ee5a0c56e480b87fddcde109a1"><div class="ttname"><a href="denm__ts__setters_8h.html#a10f000ee5a0c56e480b87fddcde109a1">etsi_its_denm_ts_msgs::access::setWGSHeadingCDD</a></div><div class="ttdeci">void setWGSHeadingCDD(Wgs84Angle &amp;heading, const double value, double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Wgs84Angle object.</div><div class="ttdef"><b>Definition</b> <a href="#l00100">denm_ts_setters.h:100</a></div></div>
-<div class="ttc" id="adenm__ts__setters_8h_html_a5f7036ee1c8ab89e8c04a277d44e8754"><div class="ttname"><a href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">etsi_its_denm_ts_msgs::access::setWGSHeading</a></div><div class="ttdeci">void setWGSHeading(DENM &amp;denm, const double heading_val, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the WGS Heading for a DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">denm_ts_setters.h:75</a></div></div>
-<div class="ttc" id="adenm__ts__setters_8h_html_a874ad7c513eb00eeb640ebc8c68baa72"><div class="ttname"><a href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">etsi_its_denm_ts_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">denm_ts_setters.h:48</a></div></div>
-<div class="ttc" id="adenm__ts__setters_8h_html_ab1b6b1134530c146b0cec958605f14a0"><div class="ttname"><a href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">etsi_its_denm_ts_msgs::access::setIsWGSHeadingPresent</a></div><div class="ttdeci">void setIsWGSHeadingPresent(DENM &amp;denm, bool presence_of_heading)</div><div class="ttdoc">Set the IsWGSHeadingPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00057">denm_ts_setters.h:57</a></div></div>
+<div class="ttc" id="adenm__ts__setters_8h_html_a10f000ee5a0c56e480b87fddcde109a1"><div class="ttname"><a href="denm__ts__setters_8h.html#a10f000ee5a0c56e480b87fddcde109a1">etsi_its_denm_ts_msgs::access::setWGSHeadingCDD</a></div><div class="ttdeci">void setWGSHeadingCDD(Wgs84Angle &amp;heading, const double value, double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the Wgs84Angle object.</div><div class="ttdef"><b>Definition</b> <a href="#l00077">denm_ts_setters.h:77</a></div></div>
+<div class="ttc" id="adenm__ts__setters_8h_html_a5f7036ee1c8ab89e8c04a277d44e8754"><div class="ttname"><a href="denm__ts__setters_8h.html#a5f7036ee1c8ab89e8c04a277d44e8754">etsi_its_denm_ts_msgs::access::setWGSHeading</a></div><div class="ttdeci">void setWGSHeading(DENM &amp;denm, const double heading_val, const double confidence=std::numeric_limits&lt; double &gt;::infinity())</div><div class="ttdoc">Set the WGS Heading for a DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00052">denm_ts_setters.h:52</a></div></div>
+<div class="ttc" id="adenm__ts__setters_8h_html_a874ad7c513eb00eeb640ebc8c68baa72"><div class="ttname"><a href="denm__ts__setters_8h.html#a874ad7c513eb00eeb640ebc8c68baa72">etsi_its_denm_ts_msgs::access::setItsPduHeader</a></div><div class="ttdeci">void setItsPduHeader(ItsPduHeader &amp;header, const uint8_t message_id, const uint32_t station_id, const uint8_t protocol_version=0)</div><div class="ttdoc">Set the Its Pdu Header object.</div><div class="ttdef"><b>Definition</b> <a href="#l00025">denm_ts_setters.h:25</a></div></div>
+<div class="ttc" id="adenm__ts__setters_8h_html_ab1b6b1134530c146b0cec958605f14a0"><div class="ttname"><a href="denm__ts__setters_8h.html#ab1b6b1134530c146b0cec958605f14a0">etsi_its_denm_ts_msgs::access::setIsWGSHeadingPresent</a></div><div class="ttdeci">void setIsWGSHeadingPresent(DENM &amp;denm, bool presence_of_heading)</div><div class="ttdoc">Set the IsWGSHeadingPresent object for DENM.</div><div class="ttdef"><b>Definition</b> <a href="#l00034">denm_ts_setters.h:34</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

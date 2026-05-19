@@ -153,13 +153,13 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mcm__utils_8h_source.html#l00046">46</a> of file <a class="el" href="mcm__utils_8h_source.html">mcm_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   48</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">   49</span>  uint64_t ms_estimate_after_utc_2004 =</div>
-<div class="line"><span class="lineno">   50</span>      unix_timestamp_estimate * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
-<div class="line"><span class="lineno">   51</span>  uint64_t ms_after_utc_2004 = std::floor(ms_estimate_after_utc_2004 / 65536) * 65536 + generation_delta_time.value;</div>
-<div class="line"><span class="lineno">   52</span>  <span class="keywordflow">return</span> ms_after_utc_2004 * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
-<div class="line"><span class="lineno">   53</span>}</div>
+<p class="definition">Definition at line <a class="el" href="mcm__utils_8h_source.html#l00023">23</a> of file <a class="el" href="mcm__utils_8h_source.html">mcm_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   25</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">   26</span>  uint64_t ms_estimate_after_utc_2004 =</div>
+<div class="line"><span class="lineno">   27</span>      unix_timestamp_estimate * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
+<div class="line"><span class="lineno">   28</span>  uint64_t ms_after_utc_2004 = std::floor(ms_estimate_after_utc_2004 / 65536) * 65536 + generation_delta_time.value;</div>
+<div class="line"><span class="lineno">   29</span>  <span class="keywordflow">return</span> ms_after_utc_2004 * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
+<div class="line"><span class="lineno">   30</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

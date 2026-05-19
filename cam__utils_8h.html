@@ -151,14 +151,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TimestampIts the corresponding TimestampITS object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00045">45</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">   47</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">   48</span>  t_its.value = std::floor(timestamp_estimate.value / 65536) * 65536 + generation_delta_time.value;</div>
-<div class="line"><span class="lineno">   49</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
-<div class="line"><span class="lineno">   50</span>  <span class="keywordflow">return</span> t_its;</div>
-<div class="line"><span class="lineno">   51</span>}</div>
-<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00046">checks.h:46</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00022">22</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">   24</span>  TimestampIts t_its;</div>
+<div class="line"><span class="lineno">   25</span>  t_its.value = std::floor(timestamp_estimate.value / 65536) * 65536 + generation_delta_time.value;</div>
+<div class="line"><span class="lineno">   26</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its.value, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
+<div class="line"><span class="lineno">   27</span>  <span class="keywordflow">return</span> t_its;</div>
+<div class="line"><span class="lineno">   28</span>}</div>
+<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00023">checks.h:23</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -205,12 +205,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00061">61</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">   64</span>  TimestampIts t_its = <a class="code hl_function" href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a>(generation_delta_time, timestamp_estimate);</div>
-<div class="line"><span class="lineno">   65</span>  <span class="keywordflow">return</span> t_its.value * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
-<div class="line"><span class="lineno">   66</span>}</div>
-<div class="ttc" id="acam__utils_8h_html_afe8b542db1ad5da910eb8838e9455b32"><div class="ttname"><a href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a></div><div class="ttdeci">TimestampIts getTimestampITSFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate)</div><div class="ttdoc">Get the TimestampITS from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00045">cam_utils.h:45</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00038">38</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   40</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">   41</span>  TimestampIts t_its = <a class="code hl_function" href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a>(generation_delta_time, timestamp_estimate);</div>
+<div class="line"><span class="lineno">   42</span>  <span class="keywordflow">return</span> t_its.value * 1e6 + etsi_its_msgs::UNIX_SECONDS_2004 * 1e9 - n_leap_seconds * 1e9;</div>
+<div class="line"><span class="lineno">   43</span>}</div>
+<div class="ttc" id="acam__utils_8h_html_afe8b542db1ad5da910eb8838e9455b32"><div class="ttname"><a href="#afe8b542db1ad5da910eb8838e9455b32">getTimestampITSFromGenerationDeltaTime</a></div><div class="ttdeci">TimestampIts getTimestampITSFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate)</div><div class="ttdoc">Get the TimestampITS from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00022">cam_utils.h:22</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -257,14 +257,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t the corresponding Unix-Nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00076">76</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">   79</span>  TimestampIts t_its;</div>
-<div class="line"><span class="lineno">   80</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_timestamp_estimate, n_leap_seconds);</div>
-<div class="line"><span class="lineno">   81</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a>(generation_delta_time, t_its, n_leap_seconds);</div>
-<div class="line"><span class="lineno">   82</span>}</div>
-<div class="ttc" id="acam__utils_8h_html_ad6aaa3ef81386dfd5dc631b6e0d5c829"><div class="ttname"><a href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00061">cam_utils.h:61</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_a34cebeddb7ba669741fd0a601abf1f39"><div class="ttname"><a href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00076">cdd_setters_common.h:76</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cam__utils_8h_source.html#l00053">53</a> of file <a class="el" href="cam__utils_8h_source.html">cam_utils.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">   56</span>  TimestampIts t_its;</div>
+<div class="line"><span class="lineno">   57</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a>(t_its, unix_timestamp_estimate, n_leap_seconds);</div>
+<div class="line"><span class="lineno">   58</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a>(generation_delta_time, t_its, n_leap_seconds);</div>
+<div class="line"><span class="lineno">   59</span>}</div>
+<div class="ttc" id="acam__utils_8h_html_ad6aaa3ef81386dfd5dc631b6e0d5c829"><div class="ttname"><a href="#ad6aaa3ef81386dfd5dc631b6e0d5c829">getUnixNanosecondsFromGenerationDeltaTime</a></div><div class="ttdeci">uint64_t getUnixNanosecondsFromGenerationDeltaTime(const GenerationDeltaTime &amp;generation_delta_time, const TimestampIts &amp;timestamp_estimate, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Get the Unix-Nanoseconds from a given GenerationDeltaTime object.</div><div class="ttdef"><b>Definition</b> <a href="cam__utils_8h_source.html#l00038">cam_utils.h:38</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a34cebeddb7ba669741fd0a601abf1f39"><div class="ttname"><a href="cdd__setters__common_8h.html#a34cebeddb7ba669741fd0a601abf1f39">setTimestampITS</a></div><div class="ttdeci">void setTimestampITS(TimestampIts &amp;timestamp_its, const uint64_t unix_nanosecs, const uint16_t n_leap_seconds=etsi_its_msgs::LEAP_SECOND_INSERTIONS_SINCE_2004.rbegin() -&gt;second)</div><div class="ttdoc">Set the TimestampITS object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00053">cdd_setters_common.h:53</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

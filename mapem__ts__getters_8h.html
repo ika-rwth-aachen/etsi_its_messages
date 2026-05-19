@@ -185,13 +185,13 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00043">43</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>  <span class="keyword">inline</span> uint32_t getMinuteOfTheYearValue(<span class="keyword">const</span> MapData&amp; map) {</div>
-<div class="line"><span class="lineno">   59</span>    MinuteOfTheYear moy = getMinuteOfTheYear(map);</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> moy.value;</div>
-<div class="line"><span class="lineno">   61</span>  }</div>
-<div class="line"><span class="lineno">   62</span></div>
-<div class="ttc" id="amapem__ts__getters_8h_html_ae3ce949f1533ab99df9234bea3999d47"><div class="ttname"><a href="#ae3ce949f1533ab99df9234bea3999d47">etsi_its_mapem_ts_msgs::access::throwIfNotPresent</a></div><div class="ttdeci">void throwIfNotPresent(const bool is_present, const std::string val_desc)</div><div class="ttdoc">Throws an exception if the given value is not present.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00058">mapem_ts_getters.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00020">20</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>  <span class="keyword">inline</span> uint32_t getMinuteOfTheYearValue(<span class="keyword">const</span> MapData&amp; map) {</div>
+<div class="line"><span class="lineno">   36</span>    MinuteOfTheYear moy = getMinuteOfTheYear(map);</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> moy.value;</div>
+<div class="line"><span class="lineno">   38</span>  }</div>
+<div class="line"><span class="lineno">   39</span></div>
+<div class="ttc" id="amapem__ts__getters_8h_html_ae3ce949f1533ab99df9234bea3999d47"><div class="ttname"><a href="#ae3ce949f1533ab99df9234bea3999d47">etsi_its_mapem_ts_msgs::access::throwIfNotPresent</a></div><div class="ttdeci">void throwIfNotPresent(const bool is_present, const std::string val_desc)</div><div class="ttdoc">Throws an exception if the given value is not present.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00035">mapem_ts_getters.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -227,10 +227,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Elevation value (above the reference ellipsoid surface) in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00129">129</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  129</span>                                                         {</div>
-<div class="line"><span class="lineno">  130</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)elevation.value)*1e-1;</div>
-<div class="line"><span class="lineno">  131</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00106">106</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>                                                         {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)elevation.value)*1e-1;</div>
+<div class="line"><span class="lineno">  108</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -266,12 +266,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Elevation value (above the reference ellipsoid surface) in meter as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00159">159</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  159</span>                                                          {</div>
-<div class="line"><span class="lineno">  160</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(ref_point.elevation_is_present, <span class="stringliteral">&quot;Position3D.elevation_is_present&quot;</span>);</div>
-<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#adf19653cd25d383f82c9abb23f2af619">getElevation</a>(ref_point.elevation);</div>
-<div class="line"><span class="lineno">  162</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_adf19653cd25d383f82c9abb23f2af619"><div class="ttname"><a href="#adf19653cd25d383f82c9abb23f2af619">etsi_its_mapem_ts_msgs::access::getElevation</a></div><div class="ttdeci">double getElevation(const Elevation &amp;elevation)</div><div class="ttdoc">Get the Elevation value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00129">mapem_ts_getters.h:129</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00136">136</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  136</span>                                                          {</div>
+<div class="line"><span class="lineno">  137</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(ref_point.elevation_is_present, <span class="stringliteral">&quot;Position3D.elevation_is_present&quot;</span>);</div>
+<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#adf19653cd25d383f82c9abb23f2af619">getElevation</a>(ref_point.elevation);</div>
+<div class="line"><span class="lineno">  139</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_adf19653cd25d383f82c9abb23f2af619"><div class="ttname"><a href="#adf19653cd25d383f82c9abb23f2af619">etsi_its_mapem_ts_msgs::access::getElevation</a></div><div class="ttdeci">double getElevation(const Elevation &amp;elevation)</div><div class="ttdoc">Get the Elevation value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00106">mapem_ts_getters.h:106</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -307,11 +307,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the IntersectionId value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00099">99</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   99</span>                                                                        {</div>
-<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a5872484fc9fc47309aec49f06f02ccc2">getIntersectionID</a>(intsct.id.id);</div>
-<div class="line"><span class="lineno">  101</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a5872484fc9fc47309aec49f06f02ccc2"><div class="ttname"><a href="#a5872484fc9fc47309aec49f06f02ccc2">etsi_its_mapem_ts_msgs::access::getIntersectionID</a></div><div class="ttdeci">uint16_t getIntersectionID(const IntersectionID &amp;intsct_id)</div><div class="ttdoc">Get the IntersectionID value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00089">mapem_ts_getters.h:89</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00076">76</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   76</span>                                                                        {</div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a5872484fc9fc47309aec49f06f02ccc2">getIntersectionID</a>(intsct.id.id);</div>
+<div class="line"><span class="lineno">   78</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a5872484fc9fc47309aec49f06f02ccc2"><div class="ttname"><a href="#a5872484fc9fc47309aec49f06f02ccc2">etsi_its_mapem_ts_msgs::access::getIntersectionID</a></div><div class="ttdeci">uint16_t getIntersectionID(const IntersectionID &amp;intsct_id)</div><div class="ttdoc">Get the IntersectionID value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00066">mapem_ts_getters.h:66</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -347,10 +347,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t the IntersectionID value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00089">89</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   89</span>                                                                     {</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">return</span> intsct_id.value;</div>
-<div class="line"><span class="lineno">   91</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00066">66</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                                                                     {</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> intsct_id.value;</div>
+<div class="line"><span class="lineno">   68</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -386,11 +386,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00190">190</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  190</span>                                                                           {</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a2ee57a05ce988a7302a174c2cfe6b35c">getLaneDirection</a>(generic_lane.lane_attributes);</div>
-<div class="line"><span class="lineno">  192</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a2ee57a05ce988a7302a174c2cfe6b35c"><div class="ttname"><a href="#a2ee57a05ce988a7302a174c2cfe6b35c">etsi_its_mapem_ts_msgs::access::getLaneDirection</a></div><div class="ttdeci">std::vector&lt; bool &gt; getLaneDirection(const LaneDirection &amp;lane_direction)</div><div class="ttdoc">Get the LaneDirection in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00170">mapem_ts_getters.h:170</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00167">167</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  167</span>                                                                           {</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a2ee57a05ce988a7302a174c2cfe6b35c">getLaneDirection</a>(generic_lane.lane_attributes);</div>
+<div class="line"><span class="lineno">  169</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a2ee57a05ce988a7302a174c2cfe6b35c"><div class="ttname"><a href="#a2ee57a05ce988a7302a174c2cfe6b35c">etsi_its_mapem_ts_msgs::access::getLaneDirection</a></div><div class="ttdeci">std::vector&lt; bool &gt; getLaneDirection(const LaneDirection &amp;lane_direction)</div><div class="ttdoc">Get the LaneDirection in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00147">mapem_ts_getters.h:147</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -426,10 +426,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00180">180</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  180</span>                                                                                 {</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a2ee57a05ce988a7302a174c2cfe6b35c">getLaneDirection</a>(lane_attributes.directional_use);</div>
-<div class="line"><span class="lineno">  182</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00157">157</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  157</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a2ee57a05ce988a7302a174c2cfe6b35c">getLaneDirection</a>(lane_attributes.directional_use);</div>
+<div class="line"><span class="lineno">  159</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -465,11 +465,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;bool&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00170">170</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  170</span>                                                                               {</div>
-<div class="line"><span class="lineno">  171</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#ac94a5699a6da9910e7f07a17da9e7619">getBitString</a>(lane_direction.value, lane_direction.bits_unused);</div>
-<div class="line"><span class="lineno">  172</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_ac94a5699a6da9910e7f07a17da9e7619"><div class="ttname"><a href="#ac94a5699a6da9910e7f07a17da9e7619">etsi_its_mapem_ts_msgs::access::getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00043">mapem_ts_getters.h:43</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00147">147</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  147</span>                                                                               {</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#ac94a5699a6da9910e7f07a17da9e7619">getBitString</a>(lane_direction.value, lane_direction.bits_unused);</div>
+<div class="line"><span class="lineno">  149</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_ac94a5699a6da9910e7f07a17da9e7619"><div class="ttname"><a href="#ac94a5699a6da9910e7f07a17da9e7619">etsi_its_mapem_ts_msgs::access::getBitString</a></div><div class="ttdeci">std::vector&lt; bool &gt; getBitString(const std::vector&lt; uint8_t &gt; &amp;buffer, const int bits_unused)</div><div class="ttdoc">Get a Bit String in form of bool vector.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00020">mapem_ts_getters.h:20</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -505,10 +505,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Latitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00109">109</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>                                                      {</div>
-<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)latitude.value)*1e-7;</div>
-<div class="line"><span class="lineno">  111</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00086">86</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                      {</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)latitude.value)*1e-7;</div>
+<div class="line"><span class="lineno">   88</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -544,11 +544,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Latitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00139">139</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                                                         {</div>
-<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#aabeee004dc794d3dad405577876f0637">getLatitude</a>(ref_point.lat);</div>
-<div class="line"><span class="lineno">  141</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_aabeee004dc794d3dad405577876f0637"><div class="ttname"><a href="#aabeee004dc794d3dad405577876f0637">etsi_its_mapem_ts_msgs::access::getLatitude</a></div><div class="ttdeci">double getLatitude(const Latitude &amp;latitude)</div><div class="ttdoc">Get the Latitude value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00109">mapem_ts_getters.h:109</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00116">116</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                         {</div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#aabeee004dc794d3dad405577876f0637">getLatitude</a>(ref_point.lat);</div>
+<div class="line"><span class="lineno">  118</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_aabeee004dc794d3dad405577876f0637"><div class="ttname"><a href="#aabeee004dc794d3dad405577876f0637">etsi_its_mapem_ts_msgs::access::getLatitude</a></div><div class="ttdeci">double getLatitude(const Latitude &amp;latitude)</div><div class="ttdoc">Get the Latitude value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00086">mapem_ts_getters.h:86</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -584,10 +584,10 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Longitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00119">119</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  119</span>                                                         {</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)longitude.value)*1e-7;</div>
-<div class="line"><span class="lineno">  121</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00096">96</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>                                                         {</div>
+<div class="line"><span class="lineno">   97</span>    <span class="keywordflow">return</span> ((<span class="keywordtype">double</span>)longitude.value)*1e-7;</div>
+<div class="line"><span class="lineno">   98</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -623,11 +623,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Longitude value in degree as decimal number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00149">149</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  149</span>                                                          {</div>
-<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a76a5aa7ca6541290d765651273c536e9">getLongitude</a>(ref_point.lon);</div>
-<div class="line"><span class="lineno">  151</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a76a5aa7ca6541290d765651273c536e9"><div class="ttname"><a href="#a76a5aa7ca6541290d765651273c536e9">etsi_its_mapem_ts_msgs::access::getLongitude</a></div><div class="ttdeci">double getLongitude(const Longitude &amp;longitude)</div><div class="ttdoc">Get the Longitude value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00119">mapem_ts_getters.h:119</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00126">126</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>                                                          {</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a76a5aa7ca6541290d765651273c536e9">getLongitude</a>(ref_point.lon);</div>
+<div class="line"><span class="lineno">  128</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a76a5aa7ca6541290d765651273c536e9"><div class="ttname"><a href="#a76a5aa7ca6541290d765651273c536e9">etsi_its_mapem_ts_msgs::access::getLongitude</a></div><div class="ttdeci">double getLongitude(const Longitude &amp;longitude)</div><div class="ttdoc">Get the Longitude value.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00096">mapem_ts_getters.h:96</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -663,11 +663,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>MinuteOfTheYear the minute of the year object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00047">47</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                {</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
-<div class="line"><span class="lineno">   50</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00024">24</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   24</span>                                                                {</div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
+<div class="line"><span class="lineno">   27</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -703,11 +703,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>MinuteOfTheYear the minute of the year object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00069">69</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   69</span>                                                                {</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(mapem.map);</div>
-<div class="line"><span class="lineno">   71</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a893125a30ef31f4bfc8c1fe5fd3990c9"><div class="ttname"><a href="#a893125a30ef31f4bfc8c1fe5fd3990c9">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYear</a></div><div class="ttdeci">MinuteOfTheYear getMinuteOfTheYear(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear object MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00047">mapem_ts_getters.h:47</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00046">46</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                                                                {</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(mapem.map);</div>
+<div class="line"><span class="lineno">   48</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a893125a30ef31f4bfc8c1fe5fd3990c9"><div class="ttname"><a href="#a893125a30ef31f4bfc8c1fe5fd3990c9">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYear</a></div><div class="ttdeci">MinuteOfTheYear getMinuteOfTheYear(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear object MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00024">mapem_ts_getters.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -743,11 +743,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint32_t the minute of the year value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00058">58</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                              {</div>
-<div class="line"><span class="lineno">   59</span>    MinuteOfTheYear moy = <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> moy.value;</div>
-<div class="line"><span class="lineno">   61</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00035">35</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>                                                              {</div>
+<div class="line"><span class="lineno">   36</span>    MinuteOfTheYear moy = <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> moy.value;</div>
+<div class="line"><span class="lineno">   38</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -783,11 +783,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint32_t the minute of the year value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00079">79</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   79</span>                                                              {</div>
-<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a9f0336c9ed18d5772cf2b45824c2a388">getMinuteOfTheYearValue</a>(mapem.map);</div>
-<div class="line"><span class="lineno">   81</span>  }</div>
-<div class="ttc" id="amapem__ts__getters_8h_html_a9f0336c9ed18d5772cf2b45824c2a388"><div class="ttname"><a href="#a9f0336c9ed18d5772cf2b45824c2a388">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYearValue</a></div><div class="ttdeci">uint32_t getMinuteOfTheYearValue(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear value from MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00058">mapem_ts_getters.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00056">56</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>                                                              {</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#a9f0336c9ed18d5772cf2b45824c2a388">getMinuteOfTheYearValue</a>(mapem.map);</div>
+<div class="line"><span class="lineno">   58</span>  }</div>
+<div class="ttc" id="amapem__ts__getters_8h_html_a9f0336c9ed18d5772cf2b45824c2a388"><div class="ttname"><a href="#a9f0336c9ed18d5772cf2b45824c2a388">etsi_its_mapem_ts_msgs::access::getMinuteOfTheYearValue</a></div><div class="ttdeci">uint32_t getMinuteOfTheYearValue(const MapData &amp;map)</div><div class="ttdoc">Get the value of MinuteOfTheYear value from MapData object.</div><div class="ttdef"><b>Definition</b> <a href="mapem__ts__getters_8h_source.html#l00035">mapem_ts_getters.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -831,13 +831,13 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gm::Point geometry_msgs::Point representing the node point (values given in meters) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00202">202</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  202</span>                                                      {</div>
-<div class="line"><span class="lineno">  203</span>    gm::Point p;</div>
-<div class="line"><span class="lineno">  204</span>    p.x = ((double)node_xy.x.value) * 1e-2;</div>
-<div class="line"><span class="lineno">  205</span>    p.y = ((double)node_xy.y.value) * 1e-2;</div>
-<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">return</span> p;</div>
-<div class="line"><span class="lineno">  207</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00179">179</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                      {</div>
+<div class="line"><span class="lineno">  180</span>    gm::Point p;</div>
+<div class="line"><span class="lineno">  181</span>    p.x = ((double)node_xy.x.value) * 1e-2;</div>
+<div class="line"><span class="lineno">  182</span>    p.y = ((double)node_xy.y.value) * 1e-2;</div>
+<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">return</span> p;</div>
+<div class="line"><span class="lineno">  184</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -877,10 +877,10 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00058">58</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                              {</div>
-<div class="line"><span class="lineno">   59</span>    MinuteOfTheYear moy = <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> moy.value;</div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00035">35</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>                                                              {</div>
+<div class="line"><span class="lineno">   36</span>    MinuteOfTheYear moy = <a class="code hl_function" href="#a893125a30ef31f4bfc8c1fe5fd3990c9">getMinuteOfTheYear</a>(map);</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> moy.value;</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -933,12 +933,12 @@ template&lt;typename T1, typename T2&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00047">47</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                {</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
-<div class="line"><span class="lineno">   50</span>  }</div>
-<div class="line"><span class="lineno">   51</span> </div>
+<p class="definition">Definition at line <a class="el" href="mapem__ts__getters_8h_source.html#l00024">24</a> of file <a class="el" href="mapem__ts__getters_8h_source.html">mapem_ts_getters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   24</span>                                                                {</div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_function" href="#ae3ce949f1533ab99df9234bea3999d47">throwIfNotPresent</a>(map.time_stamp_is_present, <span class="stringliteral">&quot;map.time_stamp&quot;</span>);</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">return</span> map.time_stamp;</div>
+<div class="line"><span class="lineno">   27</span>  }</div>
+<div class="line"><span class="lineno">   28</span> </div>
 </div><!-- fragment -->
 </div>
 </div>

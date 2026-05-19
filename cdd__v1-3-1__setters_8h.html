@@ -160,17 +160,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__v1-3-1__setters_8h_source.html#l00048">48</a> of file <a class="el" href="cdd__v1-3-1__setters_8h_source.html">cdd_v1-3-1_setters.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                              {</div>
-<div class="line"><span class="lineno">   50</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a39fd3f7ebc10790e40f71ef7d6184e1c">setStationId</a>(header.station_id, station_id);</div>
-<div class="line"><span class="lineno">   51</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, <span class="stringliteral">&quot;MessageID&quot;</span>);</div>
-<div class="line"><span class="lineno">   52</span>  header.message_id = message_id;</div>
-<div class="line"><span class="lineno">   53</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,</div>
-<div class="line"><span class="lineno">   54</span>                    <span class="stringliteral">&quot;ProtocolVersion&quot;</span>);</div>
-<div class="line"><span class="lineno">   55</span>  header.protocol_version = protocol_version;</div>
-<div class="line"><span class="lineno">   56</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a39fd3f7ebc10790e40f71ef7d6184e1c"><div class="ttname"><a href="cdd__setters__common_8h.html#a39fd3f7ebc10790e40f71ef7d6184e1c">setStationId</a></div><div class="ttdeci">void setStationId(StationId &amp;station_id, const uint32_t id_value)</div><div class="ttdoc">Set the Station Id object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00051">cdd_setters_common.h:51</a></div></div>
-<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00046">checks.h:46</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__v1-3-1__setters_8h_source.html#l00025">25</a> of file <a class="el" href="cdd__v1-3-1__setters_8h_source.html">cdd_v1-3-1_setters.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                                              {</div>
+<div class="line"><span class="lineno">   27</span>  <a class="code hl_function" href="cdd__setters__common_8h.html#a39fd3f7ebc10790e40f71ef7d6184e1c">setStationId</a>(header.station_id, station_id);</div>
+<div class="line"><span class="lineno">   28</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(message_id, ItsPduHeader::MESSAGE_ID_MIN, ItsPduHeader::MESSAGE_ID_MAX, <span class="stringliteral">&quot;MessageID&quot;</span>);</div>
+<div class="line"><span class="lineno">   29</span>  header.message_id = message_id;</div>
+<div class="line"><span class="lineno">   30</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(protocol_version, ItsPduHeader::PROTOCOL_VERSION_MIN, ItsPduHeader::PROTOCOL_VERSION_MAX,</div>
+<div class="line"><span class="lineno">   31</span>                    <span class="stringliteral">&quot;ProtocolVersion&quot;</span>);</div>
+<div class="line"><span class="lineno">   32</span>  header.protocol_version = protocol_version;</div>
+<div class="line"><span class="lineno">   33</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a39fd3f7ebc10790e40f71ef7d6184e1c"><div class="ttname"><a href="cdd__setters__common_8h.html#a39fd3f7ebc10790e40f71ef7d6184e1c">setStationId</a></div><div class="ttdeci">void setStationId(StationId &amp;station_id, const uint32_t id_value)</div><div class="ttdoc">Set the Station Id object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00028">cdd_setters_common.h:28</a></div></div>
+<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00023">checks.h:23</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

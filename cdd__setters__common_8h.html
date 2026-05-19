@@ -219,38 +219,38 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::tuple&lt;double, double, double&gt; semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00434">434</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  434</span>                                                                                                                                                  {</div>
-<div class="line"><span class="lineno">  435</span>  </div>
-<div class="line"><span class="lineno">  436</span>  <span class="keywordflow">if</span>(std::abs(covariance_matrix[1] - covariance_matrix[2]) &gt; 1e-6) {</div>
-<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Covariance matrix is not symmetric&quot;</span>);</div>
-<div class="line"><span class="lineno">  438</span>  }</div>
-<div class="line"><span class="lineno">  439</span>  <span class="keywordtype">double</span> trace = covariance_matrix[0] + covariance_matrix[3];</div>
-<div class="line"><span class="lineno">  440</span>  <span class="keywordtype">double</span> determinant = covariance_matrix[0] * covariance_matrix[3] - covariance_matrix[1] * covariance_matrix[1];</div>
-<div class="line"><span class="lineno">  441</span>  <span class="keywordflow">if</span> (determinant &lt;= 0 || covariance_matrix[0] &lt;= 0) {</div>
-<div class="line"><span class="lineno">  442</span>    <span class="comment">// https://sites.math.northwestern.edu/~clark/285/2006-07/handouts/pos-def.pdf:</span></div>
-<div class="line"><span class="lineno">  443</span>    <span class="comment">// Therefore, a necessary and sufficient condition for the quadratic form of a symmetric 2 × 2 matrix</span></div>
-<div class="line"><span class="lineno">  444</span>    <span class="comment">// to be positive definite is for det(A) &gt; 0 and a &gt; 0</span></div>
-<div class="line"><span class="lineno">  445</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Covariance matrix is not positive definite&quot;</span>);</div>
-<div class="line"><span class="lineno">  446</span>  }</div>
-<div class="line"><span class="lineno">  447</span>  <span class="keywordtype">double</span> eigenvalue1 = trace / 2 + std::sqrt(trace * trace / 4 - determinant);</div>
-<div class="line"><span class="lineno">  448</span>  <span class="keywordtype">double</span> eigenvalue2 = trace / 2 - std::sqrt(trace * trace / 4 - determinant);</div>
-<div class="line"><span class="lineno">  449</span>  <span class="keywordtype">double</span> semi_major_axis = std::sqrt(eigenvalue1) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;</div>
-<div class="line"><span class="lineno">  450</span>  <span class="keywordtype">double</span> semi_minor_axis = std::sqrt(eigenvalue2) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;</div>
-<div class="line"><span class="lineno">  451</span>  <span class="comment">// object_heading - orientation of the ellipse, as WGS84 has positive angles to the right</span></div>
-<div class="line"><span class="lineno">  452</span>  <span class="keywordtype">double</span> orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]);</div>
-<div class="line"><span class="lineno">  453</span>  orientation = orientation * 180 / M_PI; <span class="comment">// Convert to degrees</span></div>
-<div class="line"><span class="lineno">  454</span>  <span class="comment">// Normalize to [0, 180)</span></div>
-<div class="line"><span class="lineno">  455</span>  <span class="comment">// Not to 0, 360, as the ellipse is symmetric and the orientation is defined as the angle between the semi-major axis and the x-axis</span></div>
-<div class="line"><span class="lineno">  456</span>  orientation = std::fmod(orientation + 180, 180);</div>
-<div class="line"><span class="lineno">  457</span>  <span class="keywordflow">while</span> (orientation &lt; 0) {</div>
-<div class="line"><span class="lineno">  458</span>    orientation += 180;</div>
-<div class="line"><span class="lineno">  459</span>  }</div>
-<div class="line"><span class="lineno">  460</span>  <span class="keywordflow">while</span> (orientation &gt;= 180) {</div>
-<div class="line"><span class="lineno">  461</span>    orientation -= 180;</div>
-<div class="line"><span class="lineno">  462</span>  }</div>
-<div class="line"><span class="lineno">  463</span>  <span class="keywordflow">return</span> std::make_tuple(semi_major_axis, semi_minor_axis, orientation);</div>
-<div class="line"><span class="lineno">  464</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00411">411</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  411</span>                                                                                                                                                  {</div>
+<div class="line"><span class="lineno">  412</span> </div>
+<div class="line"><span class="lineno">  413</span>  <span class="keywordflow">if</span>(std::abs(covariance_matrix[1] - covariance_matrix[2]) &gt; 1e-6) {</div>
+<div class="line"><span class="lineno">  414</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Covariance matrix is not symmetric&quot;</span>);</div>
+<div class="line"><span class="lineno">  415</span>  }</div>
+<div class="line"><span class="lineno">  416</span>  <span class="keywordtype">double</span> trace = covariance_matrix[0] + covariance_matrix[3];</div>
+<div class="line"><span class="lineno">  417</span>  <span class="keywordtype">double</span> determinant = covariance_matrix[0] * covariance_matrix[3] - covariance_matrix[1] * covariance_matrix[1];</div>
+<div class="line"><span class="lineno">  418</span>  <span class="keywordflow">if</span> (determinant &lt;= 0 || covariance_matrix[0] &lt;= 0) {</div>
+<div class="line"><span class="lineno">  419</span>    <span class="comment">// https://sites.math.northwestern.edu/~clark/285/2006-07/handouts/pos-def.pdf:</span></div>
+<div class="line"><span class="lineno">  420</span>    <span class="comment">// Therefore, a necessary and sufficient condition for the quadratic form of a symmetric 2 × 2 matrix</span></div>
+<div class="line"><span class="lineno">  421</span>    <span class="comment">// to be positive definite is for det(A) &gt; 0 and a &gt; 0</span></div>
+<div class="line"><span class="lineno">  422</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Covariance matrix is not positive definite&quot;</span>);</div>
+<div class="line"><span class="lineno">  423</span>  }</div>
+<div class="line"><span class="lineno">  424</span>  <span class="keywordtype">double</span> eigenvalue1 = trace / 2 + std::sqrt(trace * trace / 4 - determinant);</div>
+<div class="line"><span class="lineno">  425</span>  <span class="keywordtype">double</span> eigenvalue2 = trace / 2 - std::sqrt(trace * trace / 4 - determinant);</div>
+<div class="line"><span class="lineno">  426</span>  <span class="keywordtype">double</span> semi_major_axis = std::sqrt(eigenvalue1) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno">  427</span>  <span class="keywordtype">double</span> semi_minor_axis = std::sqrt(eigenvalue2) * etsi_its_msgs::TWO_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno">  428</span>  <span class="comment">// object_heading - orientation of the ellipse, as WGS84 has positive angles to the right</span></div>
+<div class="line"><span class="lineno">  429</span>  <span class="keywordtype">double</span> orientation = object_heading - 0.5 * std::atan2(2 * covariance_matrix[1], covariance_matrix[0] - covariance_matrix[3]);</div>
+<div class="line"><span class="lineno">  430</span>  orientation = orientation * 180 / M_PI; <span class="comment">// Convert to degrees</span></div>
+<div class="line"><span class="lineno">  431</span>  <span class="comment">// Normalize to [0, 180)</span></div>
+<div class="line"><span class="lineno">  432</span>  <span class="comment">// Not to 0, 360, as the ellipse is symmetric and the orientation is defined as the angle between the semi-major axis and the x-axis</span></div>
+<div class="line"><span class="lineno">  433</span>  orientation = std::fmod(orientation + 180, 180);</div>
+<div class="line"><span class="lineno">  434</span>  <span class="keywordflow">while</span> (orientation &lt; 0) {</div>
+<div class="line"><span class="lineno">  435</span>    orientation += 180;</div>
+<div class="line"><span class="lineno">  436</span>  }</div>
+<div class="line"><span class="lineno">  437</span>  <span class="keywordflow">while</span> (orientation &gt;= 180) {</div>
+<div class="line"><span class="lineno">  438</span>    orientation -= 180;</div>
+<div class="line"><span class="lineno">  439</span>  }</div>
+<div class="line"><span class="lineno">  440</span>  <span class="keywordflow">return</span> std::make_tuple(semi_major_axis, semi_minor_axis, orientation);</div>
+<div class="line"><span class="lineno">  441</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -287,13 +287,13 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::tuple&lt;double, double, double&gt; semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00475">475</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  475</span>                                                                                                                        {</div>
-<div class="line"><span class="lineno">  476</span>  <span class="comment">// The resulting ellipse is the same as if the cov matrix was given in vehicle coordinates</span></div>
-<div class="line"><span class="lineno">  477</span>  <span class="comment">// and the object heading was set to 0.0</span></div>
-<div class="line"><span class="lineno">  478</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a>(covariance_matrix, 0.0);</div>
-<div class="line"><span class="lineno">  479</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a44d6aa0acb8afa65e275084c44c7a007"><div class="ttname"><a href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; confidenceEllipseFromCovMatrix(const std::array&lt; double, 4 &gt; &amp;covariance_matrix, const double object_heading)</div><div class="ttdoc">Gets the values needed to set a confidence ellipse from a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00434">cdd_setters_common.h:434</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00452">452</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  452</span>                                                                                                                        {</div>
+<div class="line"><span class="lineno">  453</span>  <span class="comment">// The resulting ellipse is the same as if the cov matrix was given in vehicle coordinates</span></div>
+<div class="line"><span class="lineno">  454</span>  <span class="comment">// and the object heading was set to 0.0</span></div>
+<div class="line"><span class="lineno">  455</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a>(covariance_matrix, 0.0);</div>
+<div class="line"><span class="lineno">  456</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a44d6aa0acb8afa65e275084c44c7a007"><div class="ttname"><a href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; confidenceEllipseFromCovMatrix(const std::array&lt; double, 4 &gt; &amp;covariance_matrix, const double object_heading)</div><div class="ttdoc">Gets the values needed to set a confidence ellipse from a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00411">cdd_setters_common.h:411</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -335,16 +335,16 @@ template&lt;typename AccelerationConfidence&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00233">233</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  233</span>                                                                                                    {</div>
-<div class="line"><span class="lineno">  234</span>  <span class="keyword">auto</span> accel_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">if</span> (accel_conf &lt; AccelerationConfidence::MIN &amp;&amp; accel_conf &gt; 0.0){</div>
-<div class="line"><span class="lineno">  236</span>    accel_conf = AccelerationConfidence::MIN;</div>
-<div class="line"><span class="lineno">  237</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_conf &gt;= AccelerationConfidence::OUT_OF_RANGE || accel_conf &lt;= 0.0) {</div>
-<div class="line"><span class="lineno">  238</span>    accel_conf = AccelerationConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  239</span>  }</div>
-<div class="line"><span class="lineno">  240</span>  accel_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(accel_confidence.value)<span class="keyword">&gt;</span>(accel_conf);</div>
-<div class="line"><span class="lineno">  241</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00210">210</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  210</span>                                                                                                    {</div>
+<div class="line"><span class="lineno">  211</span>  <span class="keyword">auto</span> accel_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  212</span>  <span class="keywordflow">if</span> (accel_conf &lt; AccelerationConfidence::MIN &amp;&amp; accel_conf &gt; 0.0){</div>
+<div class="line"><span class="lineno">  213</span>    accel_conf = AccelerationConfidence::MIN;</div>
+<div class="line"><span class="lineno">  214</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_conf &gt;= AccelerationConfidence::OUT_OF_RANGE || accel_conf &lt;= 0.0) {</div>
+<div class="line"><span class="lineno">  215</span>    accel_conf = AccelerationConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  216</span>  }</div>
+<div class="line"><span class="lineno">  217</span>  accel_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(accel_confidence.value)<span class="keyword">&gt;</span>(accel_conf);</div>
+<div class="line"><span class="lineno">  218</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -393,13 +393,13 @@ template&lt;typename AccelerationMagnitude&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00220">220</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>                                                                                                  {</div>
-<div class="line"><span class="lineno">  222</span>  <a class="code hl_function" href="#a953775878a56b80b0ae42323580ee839">setAccelerationMagnitudeConfidence</a>(accel_mag.acceleration_confidence, confidence);</div>
-<div class="line"><span class="lineno">  223</span>  <a class="code hl_function" href="#a4efd91901185968cd6a6e1302306d0bf">setAccelerationMagnitudeValue</a>(accel_mag.acceleration_magnitude_value, value);</div>
-<div class="line"><span class="lineno">  224</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a4efd91901185968cd6a6e1302306d0bf"><div class="ttname"><a href="#a4efd91901185968cd6a6e1302306d0bf">setAccelerationMagnitudeValue</a></div><div class="ttdeci">void setAccelerationMagnitudeValue(AccelerationMagnitudeValue &amp;accel_mag_value, const double value)</div><div class="ttdoc">Set the Acceleration Magnitude Value object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00187">cdd_setters_common.h:187</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_a953775878a56b80b0ae42323580ee839"><div class="ttname"><a href="#a953775878a56b80b0ae42323580ee839">setAccelerationMagnitudeConfidence</a></div><div class="ttdeci">void setAccelerationMagnitudeConfidence(AccelerationConfidence &amp;accel_mag_confidence, const double value)</div><div class="ttdoc">Set the AccelerationMagnitude Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00200">cdd_setters_common.h:200</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00197">197</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  198</span>                                                                                                  {</div>
+<div class="line"><span class="lineno">  199</span>  <a class="code hl_function" href="#a953775878a56b80b0ae42323580ee839">setAccelerationMagnitudeConfidence</a>(accel_mag.acceleration_confidence, confidence);</div>
+<div class="line"><span class="lineno">  200</span>  <a class="code hl_function" href="#a4efd91901185968cd6a6e1302306d0bf">setAccelerationMagnitudeValue</a>(accel_mag.acceleration_magnitude_value, value);</div>
+<div class="line"><span class="lineno">  201</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a4efd91901185968cd6a6e1302306d0bf"><div class="ttname"><a href="#a4efd91901185968cd6a6e1302306d0bf">setAccelerationMagnitudeValue</a></div><div class="ttdeci">void setAccelerationMagnitudeValue(AccelerationMagnitudeValue &amp;accel_mag_value, const double value)</div><div class="ttdoc">Set the Acceleration Magnitude Value object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00164">cdd_setters_common.h:164</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a953775878a56b80b0ae42323580ee839"><div class="ttname"><a href="#a953775878a56b80b0ae42323580ee839">setAccelerationMagnitudeConfidence</a></div><div class="ttdeci">void setAccelerationMagnitudeConfidence(AccelerationConfidence &amp;accel_mag_confidence, const double value)</div><div class="ttdoc">Set the AccelerationMagnitude Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00177">cdd_setters_common.h:177</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -441,16 +441,16 @@ template&lt;typename AccelerationConfidence&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00200">200</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  200</span>                                                                                                                 {</div>
-<div class="line"><span class="lineno">  201</span>  <span class="keyword">auto</span> accel_mag_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  202</span>  <span class="keywordflow">if</span> (accel_mag_conf &lt; AccelerationConfidence::MIN &amp;&amp; accel_mag_conf &gt; 0.0){</div>
-<div class="line"><span class="lineno">  203</span>    accel_mag_conf = AccelerationConfidence::MIN;</div>
-<div class="line"><span class="lineno">  204</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_mag_conf &gt;= AccelerationConfidence::OUT_OF_RANGE || accel_mag_conf &lt;= 0.0) {</div>
-<div class="line"><span class="lineno">  205</span>    accel_mag_conf = AccelerationConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  206</span>  }</div>
-<div class="line"><span class="lineno">  207</span>  accel_mag_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(accel_mag_confidence.value)<span class="keyword">&gt;</span>(accel_mag_conf);</div>
-<div class="line"><span class="lineno">  208</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00177">177</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  177</span>                                                                                                                 {</div>
+<div class="line"><span class="lineno">  178</span>  <span class="keyword">auto</span> accel_mag_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  179</span>  <span class="keywordflow">if</span> (accel_mag_conf &lt; AccelerationConfidence::MIN &amp;&amp; accel_mag_conf &gt; 0.0){</div>
+<div class="line"><span class="lineno">  180</span>    accel_mag_conf = AccelerationConfidence::MIN;</div>
+<div class="line"><span class="lineno">  181</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (accel_mag_conf &gt;= AccelerationConfidence::OUT_OF_RANGE || accel_mag_conf &lt;= 0.0) {</div>
+<div class="line"><span class="lineno">  182</span>    accel_mag_conf = AccelerationConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  183</span>  }</div>
+<div class="line"><span class="lineno">  184</span>  accel_mag_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(accel_mag_confidence.value)<span class="keyword">&gt;</span>(accel_mag_conf);</div>
+<div class="line"><span class="lineno">  185</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -492,13 +492,13 @@ template&lt;typename AccelerationMagnitudeValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00187">187</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  187</span>                                                                                                           {</div>
-<div class="line"><span class="lineno">  188</span>  <span class="keyword">auto</span> accel_mag = std::round(value * 1e1);</div>
-<div class="line"><span class="lineno">  189</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(accel_mag, AccelerationMagnitudeValue::MIN, AccelerationMagnitudeValue::MAX, <span class="stringliteral">&quot;AccelerationMagnitudeValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  190</span>  accel_mag_value.value = <span class="keyword">static_cast&lt;</span>decltype(accel_mag_value.value)<span class="keyword">&gt;</span>(accel_mag);</div>
-<div class="line"><span class="lineno">  191</span>}</div>
-<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00046">checks.h:46</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00164">164</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>                                                                                                           {</div>
+<div class="line"><span class="lineno">  165</span>  <span class="keyword">auto</span> accel_mag = std::round(value * 1e1);</div>
+<div class="line"><span class="lineno">  166</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(accel_mag, AccelerationMagnitudeValue::MIN, AccelerationMagnitudeValue::MAX, <span class="stringliteral">&quot;AccelerationMagnitudeValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  167</span>  accel_mag_value.value = <span class="keyword">static_cast&lt;</span>decltype(accel_mag_value.value)<span class="keyword">&gt;</span>(accel_mag);</div>
+<div class="line"><span class="lineno">  168</span>}</div>
+<div class="ttc" id="achecks_8h_html_a426a1dd8846d4184a2ca05dc5b9218cc"><div class="ttname"><a href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a></div><div class="ttdeci">void throwIfOutOfRange(const T1 &amp;val, const T2 &amp;min, const T2 &amp;max, const std::string val_desc)</div><div class="ttdoc">Throws an exception if a given value is out of a defined range.</div><div class="ttdef"><b>Definition</b> <a href="checks_8h_source.html#l00023">checks.h:23</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -539,12 +539,12 @@ template&lt;typename AccelerationMagnitudeValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00133">133</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  133</span>                                                                {</div>
-<div class="line"><span class="lineno">  134</span>  altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  135</span>  <a class="code hl_function" href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a>(altitude.altitude_value, value);</div>
-<div class="line"><span class="lineno">  136</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_ab347d14233bc8d61c0db228b3f83bb6c"><div class="ttname"><a href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a></div><div class="ttdeci">void setAltitudeValue(AltitudeValue &amp;altitude, const double value)</div><div class="ttdoc">Set the AltitudeValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00114">cdd_setters_common.h:114</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00110">110</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>                                                                {</div>
+<div class="line"><span class="lineno">  111</span>  altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  112</span>  <a class="code hl_function" href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a>(altitude.altitude_value, value);</div>
+<div class="line"><span class="lineno">  113</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_ab347d14233bc8d61c0db228b3f83bb6c"><div class="ttname"><a href="#ab347d14233bc8d61c0db228b3f83bb6c">setAltitudeValue</a></div><div class="ttdeci">void setAltitudeValue(AltitudeValue &amp;altitude, const double value)</div><div class="ttdoc">Set the AltitudeValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00091">cdd_setters_common.h:91</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -584,17 +584,17 @@ template&lt;typename AccelerationMagnitudeValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00114">114</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  114</span>                                                                          {</div>
-<div class="line"><span class="lineno">  115</span>  int64_t alt_in_cm = (int64_t)std::round(value * 1e2);</div>
-<div class="line"><span class="lineno">  116</span>  <span class="keywordflow">if</span> (alt_in_cm &gt;= AltitudeValue::MIN &amp;&amp; alt_in_cm &lt;= AltitudeValue::MAX) {</div>
-<div class="line"><span class="lineno">  117</span>    altitude.value = alt_in_cm;</div>
-<div class="line"><span class="lineno">  118</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &lt; AltitudeValue::MIN) {</div>
-<div class="line"><span class="lineno">  119</span>    altitude.value = AltitudeValue::MIN;</div>
-<div class="line"><span class="lineno">  120</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &gt; AltitudeValue::MAX) {</div>
-<div class="line"><span class="lineno">  121</span>    altitude.value = AltitudeValue::MAX;</div>
-<div class="line"><span class="lineno">  122</span>  }</div>
-<div class="line"><span class="lineno">  123</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00091">91</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                                                                          {</div>
+<div class="line"><span class="lineno">   92</span>  int64_t alt_in_cm = (int64_t)std::round(value * 1e2);</div>
+<div class="line"><span class="lineno">   93</span>  <span class="keywordflow">if</span> (alt_in_cm &gt;= AltitudeValue::MIN &amp;&amp; alt_in_cm &lt;= AltitudeValue::MAX) {</div>
+<div class="line"><span class="lineno">   94</span>    altitude.value = alt_in_cm;</div>
+<div class="line"><span class="lineno">   95</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &lt; AltitudeValue::MIN) {</div>
+<div class="line"><span class="lineno">   96</span>    altitude.value = AltitudeValue::MIN;</div>
+<div class="line"><span class="lineno">   97</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alt_in_cm &gt; AltitudeValue::MAX) {</div>
+<div class="line"><span class="lineno">   98</span>    altitude.value = AltitudeValue::MAX;</div>
+<div class="line"><span class="lineno">   99</span>  }</div>
+<div class="line"><span class="lineno">  100</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -649,22 +649,22 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00281">281</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  282</span>                                                  {</div>
-<div class="line"><span class="lineno">  283</span>  std::string required_frame_prefix = <span class="stringliteral">&quot;utm_&quot;</span>;</div>
-<div class="line"><span class="lineno">  284</span>  <span class="keywordflow">if</span> (utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0) {</div>
-<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Frame-ID of UTM Position &#39;&quot;</span> + utm_position.header.frame_id +</div>
-<div class="line"><span class="lineno">  286</span>                                <span class="stringliteral">&quot;&#39; does not start with required prefix &#39;&quot;</span> + required_frame_prefix + <span class="stringliteral">&quot;&#39;!&quot;</span>);</div>
-<div class="line"><span class="lineno">  287</span>  }</div>
-<div class="line"><span class="lineno">  288</span>  <span class="keywordtype">double</span> latitude, longitude;</div>
-<div class="line"><span class="lineno">  289</span>  <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  290</span>    GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);</div>
-<div class="line"><span class="lineno">  291</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
-<div class="line"><span class="lineno">  292</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
-<div class="line"><span class="lineno">  293</span>  }</div>
-<div class="line"><span class="lineno">  294</span>  <a class="code hl_function" href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a>(reference_position, latitude, longitude, utm_position.point.z);</div>
-<div class="line"><span class="lineno">  295</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_ad636aa0d0819278faf0226bc93ae77db"><div class="ttname"><a href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Sets the reference position in the given ReferencePostion object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00255">cdd_setters_common.h:255</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00258">258</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>                                                  {</div>
+<div class="line"><span class="lineno">  260</span>  std::string required_frame_prefix = <span class="stringliteral">&quot;utm_&quot;</span>;</div>
+<div class="line"><span class="lineno">  261</span>  <span class="keywordflow">if</span> (utm_position.header.frame_id.rfind(required_frame_prefix, 0) != 0) {</div>
+<div class="line"><span class="lineno">  262</span>    <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Frame-ID of UTM Position &#39;&quot;</span> + utm_position.header.frame_id +</div>
+<div class="line"><span class="lineno">  263</span>                                <span class="stringliteral">&quot;&#39; does not start with required prefix &#39;&quot;</span> + required_frame_prefix + <span class="stringliteral">&quot;&#39;!&quot;</span>);</div>
+<div class="line"><span class="lineno">  264</span>  }</div>
+<div class="line"><span class="lineno">  265</span>  <span class="keywordtype">double</span> latitude, longitude;</div>
+<div class="line"><span class="lineno">  266</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  267</span>    GeographicLib::UTMUPS::Reverse(zone, northp, utm_position.point.x, utm_position.point.y, latitude, longitude);</div>
+<div class="line"><span class="lineno">  268</span>  } <span class="keywordflow">catch</span> (GeographicLib::GeographicErr&amp; e) {</div>
+<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">throw</span> std::invalid_argument(e.what());</div>
+<div class="line"><span class="lineno">  270</span>  }</div>
+<div class="line"><span class="lineno">  271</span>  <a class="code hl_function" href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a>(reference_position, latitude, longitude, utm_position.point.z);</div>
+<div class="line"><span class="lineno">  272</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_ad636aa0d0819278faf0226bc93ae77db"><div class="ttname"><a href="#ad636aa0d0819278faf0226bc93ae77db">setReferencePosition</a></div><div class="ttdeci">void setReferencePosition(T &amp;ref_position, const double latitude, const double longitude, const double altitude=AltitudeValue::UNAVAILABLE)</div><div class="ttdoc">Sets the reference position in the given ReferencePostion object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00232">cdd_setters_common.h:232</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -705,13 +705,13 @@ template&lt;typename Heading, typename HeadingConfidence = decltype(Heading::hea
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00340">340</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  340</span>                                                                                                                {</div>
-<div class="line"><span class="lineno">  341</span>  <a class="code hl_function" href="#a84f6811e4259be16bc617b93aa1d7e9a">setHeadingConfidence</a>(heading.heading_confidence, confidence);</div>
-<div class="line"><span class="lineno">  342</span>  <a class="code hl_function" href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a>(heading.heading_value, value);</div>
-<div class="line"><span class="lineno">  343</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a84f6811e4259be16bc617b93aa1d7e9a"><div class="ttname"><a href="#a84f6811e4259be16bc617b93aa1d7e9a">setHeadingConfidence</a></div><div class="ttdeci">void setHeadingConfidence(HeadingConfidence &amp;heading_confidence, const double value)</div><div class="ttdoc">Set the Heading Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00319">cdd_setters_common.h:319</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_acd2d0a152b051457334ca142f42eefdc"><div class="ttname"><a href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a></div><div class="ttdeci">void setHeadingValue(HeadingValue &amp;heading, const double value)</div><div class="ttdoc">Set the HeadingValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00306">cdd_setters_common.h:306</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00317">317</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  317</span>                                                                                                                {</div>
+<div class="line"><span class="lineno">  318</span>  <a class="code hl_function" href="#a84f6811e4259be16bc617b93aa1d7e9a">setHeadingConfidence</a>(heading.heading_confidence, confidence);</div>
+<div class="line"><span class="lineno">  319</span>  <a class="code hl_function" href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a>(heading.heading_value, value);</div>
+<div class="line"><span class="lineno">  320</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a84f6811e4259be16bc617b93aa1d7e9a"><div class="ttname"><a href="#a84f6811e4259be16bc617b93aa1d7e9a">setHeadingConfidence</a></div><div class="ttdeci">void setHeadingConfidence(HeadingConfidence &amp;heading_confidence, const double value)</div><div class="ttdoc">Set the Heading Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00296">cdd_setters_common.h:296</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_acd2d0a152b051457334ca142f42eefdc"><div class="ttname"><a href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a></div><div class="ttdeci">void setHeadingValue(HeadingValue &amp;heading, const double value)</div><div class="ttdoc">Set the HeadingValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00283">cdd_setters_common.h:283</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -753,16 +753,16 @@ template&lt;typename HeadingConfidence&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00319">319</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  319</span>                                                                                            {</div>
-<div class="line"><span class="lineno">  320</span>  <span class="keyword">auto</span> heading_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  321</span>  <span class="keywordflow">if</span> (heading_conf &lt; HeadingConfidence::MIN &amp;&amp; heading_conf &gt; 0.0){</div>
-<div class="line"><span class="lineno">  322</span>    heading_conf = HeadingConfidence::MIN;</div>
-<div class="line"><span class="lineno">  323</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (heading_conf &gt;= HeadingConfidence::OUT_OF_RANGE || heading_conf &lt;= 0.0) {</div>
-<div class="line"><span class="lineno">  324</span>    heading_conf = HeadingConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  325</span>  }</div>
-<div class="line"><span class="lineno">  326</span>  heading_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(heading_confidence.value)<span class="keyword">&gt;</span>(heading_conf);</div>
-<div class="line"><span class="lineno">  327</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00296">296</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  296</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  297</span>  <span class="keyword">auto</span> heading_conf = std::round(value * 1e1 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  298</span>  <span class="keywordflow">if</span> (heading_conf &lt; HeadingConfidence::MIN &amp;&amp; heading_conf &gt; 0.0){</div>
+<div class="line"><span class="lineno">  299</span>    heading_conf = HeadingConfidence::MIN;</div>
+<div class="line"><span class="lineno">  300</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (heading_conf &gt;= HeadingConfidence::OUT_OF_RANGE || heading_conf &lt;= 0.0) {</div>
+<div class="line"><span class="lineno">  301</span>    heading_conf = HeadingConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  302</span>  }</div>
+<div class="line"><span class="lineno">  303</span>  heading_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(heading_confidence.value)<span class="keyword">&gt;</span>(heading_conf);</div>
+<div class="line"><span class="lineno">  304</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -805,12 +805,12 @@ template&lt;typename HeadingValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00306">306</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  306</span>                                                                       {</div>
-<div class="line"><span class="lineno">  307</span>  int64_t deg = (int64_t)std::round(value * 1e1);</div>
-<div class="line"><span class="lineno">  308</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(deg, HeadingValue::MIN, HeadingValue::MAX, <span class="stringliteral">&quot;HeadingValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  309</span>  heading.value = deg;</div>
-<div class="line"><span class="lineno">  310</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00283">283</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  283</span>                                                                       {</div>
+<div class="line"><span class="lineno">  284</span>  int64_t deg = (int64_t)std::round(value * 1e1);</div>
+<div class="line"><span class="lineno">  285</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(deg, HeadingValue::MIN, HeadingValue::MAX, <span class="stringliteral">&quot;HeadingValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  286</span>  heading.value = deg;</div>
+<div class="line"><span class="lineno">  287</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -850,12 +850,12 @@ template&lt;typename HeadingValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00090">90</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                              {</div>
-<div class="line"><span class="lineno">   91</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
-<div class="line"><span class="lineno">   92</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
-<div class="line"><span class="lineno">   93</span>  latitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">   94</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00067">67</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>                                                              {</div>
+<div class="line"><span class="lineno">   68</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
+<div class="line"><span class="lineno">   69</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(angle_in_10_micro_degree, Latitude::MIN, Latitude::MAX, <span class="stringliteral">&quot;Latitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   70</span>  latitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   71</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -895,12 +895,12 @@ template&lt;typename HeadingValue&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00102">102</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                                 {</div>
-<div class="line"><span class="lineno">  103</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
-<div class="line"><span class="lineno">  104</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
-<div class="line"><span class="lineno">  105</span>  longitude.value = angle_in_10_micro_degree;</div>
-<div class="line"><span class="lineno">  106</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00079">79</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>                                                                 {</div>
+<div class="line"><span class="lineno">   80</span>  int64_t angle_in_10_micro_degree = (int64_t)std::round(deg * 1e7);</div>
+<div class="line"><span class="lineno">   81</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(angle_in_10_micro_degree, Longitude::MIN, Longitude::MAX, <span class="stringliteral">&quot;Longitude&quot;</span>);</div>
+<div class="line"><span class="lineno">   82</span>  longitude.value = angle_in_10_micro_degree;</div>
+<div class="line"><span class="lineno">   83</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -954,13 +954,13 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00418">418</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  419</span>                                                          {</div>
-<div class="line"><span class="lineno">  420</span>  <a class="code hl_function" href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a>(position_confidence_ellipse.semi_major_confidence, semi_major_axis);</div>
-<div class="line"><span class="lineno">  421</span>  <a class="code hl_function" href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a>(position_confidence_ellipse.semi_minor_confidence, semi_minor_axis);</div>
-<div class="line"><span class="lineno">  422</span>  <a class="code hl_function" href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a>(position_confidence_ellipse.semi_major_orientation, orientation);</div>
-<div class="line"><span class="lineno">  423</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a51dd0bcaf9fa1175a8d3401afb3e83a8"><div class="ttname"><a href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a></div><div class="ttdeci">void setSemiAxis(SemiAxisLength &amp;semi_axis_length, const double length)</div><div class="ttdoc">Set the Semi Axis length.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00399">cdd_setters_common.h:399</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00395">395</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  396</span>                                                          {</div>
+<div class="line"><span class="lineno">  397</span>  <a class="code hl_function" href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a>(position_confidence_ellipse.semi_major_confidence, semi_major_axis);</div>
+<div class="line"><span class="lineno">  398</span>  <a class="code hl_function" href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a>(position_confidence_ellipse.semi_minor_confidence, semi_minor_axis);</div>
+<div class="line"><span class="lineno">  399</span>  <a class="code hl_function" href="#acd2d0a152b051457334ca142f42eefdc">setHeadingValue</a>(position_confidence_ellipse.semi_major_orientation, orientation);</div>
+<div class="line"><span class="lineno">  400</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a51dd0bcaf9fa1175a8d3401afb3e83a8"><div class="ttname"><a href="#a51dd0bcaf9fa1175a8d3401afb3e83a8">setSemiAxis</a></div><div class="ttdeci">void setSemiAxis(SemiAxisLength &amp;semi_axis_length, const double length)</div><div class="ttdoc">Set the Semi Axis length.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00376">cdd_setters_common.h:376</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1008,12 +1008,12 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00491">491</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  491</span>                                                                                                                                                                 {</div>
-<div class="line"><span class="lineno">  492</span>  <span class="keyword">auto</span> [semi_major_axis, semi_minor_axis, orientation] = <a class="code hl_function" href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a>(covariance_matrix, object_heading);</div>
-<div class="line"><span class="lineno">  493</span>  <a class="code hl_function" href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a>(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);</div>
-<div class="line"><span class="lineno">  494</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a13364486fb23eb934d90d98dd8997314"><div class="ttname"><a href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a></div><div class="ttdeci">void setPosConfidenceEllipse(PosConfidenceEllipse &amp;position_confidence_ellipse, const double semi_major_axis, const double semi_minor_axis, const double orientation)</div><div class="ttdoc">Set the Pos Confidence Ellipse object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00418">cdd_setters_common.h:418</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00468">468</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  468</span>                                                                                                                                                                 {</div>
+<div class="line"><span class="lineno">  469</span>  <span class="keyword">auto</span> [semi_major_axis, semi_minor_axis, orientation] = <a class="code hl_function" href="#a44d6aa0acb8afa65e275084c44c7a007">confidenceEllipseFromCovMatrix</a>(covariance_matrix, object_heading);</div>
+<div class="line"><span class="lineno">  470</span>  <a class="code hl_function" href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a>(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);</div>
+<div class="line"><span class="lineno">  471</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a13364486fb23eb934d90d98dd8997314"><div class="ttname"><a href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a></div><div class="ttdeci">void setPosConfidenceEllipse(PosConfidenceEllipse &amp;position_confidence_ellipse, const double semi_major_axis, const double semi_minor_axis, const double orientation)</div><div class="ttdoc">Set the Pos Confidence Ellipse object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00395">cdd_setters_common.h:395</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1068,21 +1068,21 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00255">255</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  256</span>                                                                                 {</div>
-<div class="line"><span class="lineno">  257</span>  <a class="code hl_function" href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a>(ref_position.latitude, latitude);</div>
-<div class="line"><span class="lineno">  258</span>  <a class="code hl_function" href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a>(ref_position.longitude, longitude);</div>
-<div class="line"><span class="lineno">  259</span>  <span class="keywordflow">if</span> (altitude != AltitudeValue::UNAVAILABLE) {</div>
-<div class="line"><span class="lineno">  260</span>    <a class="code hl_function" href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a>(ref_position.altitude, altitude);</div>
-<div class="line"><span class="lineno">  261</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  262</span>    ref_position.altitude.altitude_value.value = AltitudeValue::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  263</span>    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  264</span>  }</div>
-<div class="line"><span class="lineno">  265</span>  <span class="comment">// TODO: set confidence values</span></div>
-<div class="line"><span class="lineno">  266</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a0680a3f512b077ace2dac6efe44c2118"><div class="ttname"><a href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a></div><div class="ttdeci">void setLongitude(Longitude &amp;longitude, const double deg)</div><div class="ttdoc">Set the Longitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00102">cdd_setters_common.h:102</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_a6fefcb0e418912e7e920235a9e2e76d7"><div class="ttname"><a href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a></div><div class="ttdeci">void setAltitude(Altitude &amp;altitude, const double value)</div><div class="ttdoc">Set the Altitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00133">cdd_setters_common.h:133</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_ad06f7f27d89f95db3607743158a0be98"><div class="ttname"><a href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a></div><div class="ttdeci">void setLatitude(Latitude &amp;latitude, const double deg)</div><div class="ttdoc">Set the Latitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00090">cdd_setters_common.h:90</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00232">232</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  233</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  234</span>  <a class="code hl_function" href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a>(ref_position.latitude, latitude);</div>
+<div class="line"><span class="lineno">  235</span>  <a class="code hl_function" href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a>(ref_position.longitude, longitude);</div>
+<div class="line"><span class="lineno">  236</span>  <span class="keywordflow">if</span> (altitude != AltitudeValue::UNAVAILABLE) {</div>
+<div class="line"><span class="lineno">  237</span>    <a class="code hl_function" href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a>(ref_position.altitude, altitude);</div>
+<div class="line"><span class="lineno">  238</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  239</span>    ref_position.altitude.altitude_value.value = AltitudeValue::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  240</span>    ref_position.altitude.altitude_confidence.value = AltitudeConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  241</span>  }</div>
+<div class="line"><span class="lineno">  242</span>  <span class="comment">// TODO: set confidence values</span></div>
+<div class="line"><span class="lineno">  243</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a0680a3f512b077ace2dac6efe44c2118"><div class="ttname"><a href="#a0680a3f512b077ace2dac6efe44c2118">setLongitude</a></div><div class="ttdeci">void setLongitude(Longitude &amp;longitude, const double deg)</div><div class="ttdoc">Set the Longitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00079">cdd_setters_common.h:79</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a6fefcb0e418912e7e920235a9e2e76d7"><div class="ttname"><a href="#a6fefcb0e418912e7e920235a9e2e76d7">setAltitude</a></div><div class="ttdeci">void setAltitude(Altitude &amp;altitude, const double value)</div><div class="ttdoc">Set the Altitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00110">cdd_setters_common.h:110</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_ad06f7f27d89f95db3607743158a0be98"><div class="ttname"><a href="#ad06f7f27d89f95db3607743158a0be98">setLatitude</a></div><div class="ttdeci">void setLatitude(Latitude &amp;latitude, const double deg)</div><div class="ttdoc">Set the Latitude object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00067">cdd_setters_common.h:67</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1125,16 +1125,16 @@ template&lt;typename SemiAxisLength&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00399">399</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  399</span>                                                                               {</div>
-<div class="line"><span class="lineno">  400</span>  <span class="keywordtype">double</span> semi_axis_length_val = std::round(length * etsi_its_msgs::OneCentimeterHelper&lt;SemiAxisLength&gt;::value * 1e2);</div>
-<div class="line"><span class="lineno">  401</span>  <span class="keywordflow">if</span>(semi_axis_length_val &lt; SemiAxisLength::MIN) {</div>
-<div class="line"><span class="lineno">  402</span>    semi_axis_length_val = SemiAxisLength::MIN;</div>
-<div class="line"><span class="lineno">  403</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(semi_axis_length_val &gt;= SemiAxisLength::OUT_OF_RANGE) {</div>
-<div class="line"><span class="lineno">  404</span>    semi_axis_length_val = SemiAxisLength::OUT_OF_RANGE;</div>
-<div class="line"><span class="lineno">  405</span>  }  </div>
-<div class="line"><span class="lineno">  406</span>  semi_axis_length.value = <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(semi_axis_length_val);</div>
-<div class="line"><span class="lineno">  407</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00376">376</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  376</span>                                                                               {</div>
+<div class="line"><span class="lineno">  377</span>  <span class="keywordtype">double</span> semi_axis_length_val = std::round(length * etsi_its_msgs::OneCentimeterHelper&lt;SemiAxisLength&gt;::value * 1e2);</div>
+<div class="line"><span class="lineno">  378</span>  <span class="keywordflow">if</span>(semi_axis_length_val &lt; SemiAxisLength::MIN) {</div>
+<div class="line"><span class="lineno">  379</span>    semi_axis_length_val = SemiAxisLength::MIN;</div>
+<div class="line"><span class="lineno">  380</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(semi_axis_length_val &gt;= SemiAxisLength::OUT_OF_RANGE) {</div>
+<div class="line"><span class="lineno">  381</span>    semi_axis_length_val = SemiAxisLength::OUT_OF_RANGE;</div>
+<div class="line"><span class="lineno">  382</span>  }</div>
+<div class="line"><span class="lineno">  383</span>  semi_axis_length.value = <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(semi_axis_length_val);</div>
+<div class="line"><span class="lineno">  384</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1181,13 +1181,13 @@ template&lt;typename SemiAxisLength&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00175">175</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  175</span>                                                                                                                    {</div>
-<div class="line"><span class="lineno">  176</span>  <a class="code hl_function" href="#a37166d105cac0ba586f4771bfc331e16">setSpeedConfidence</a>(speed.speed_confidence, confidence);</div>
-<div class="line"><span class="lineno">  177</span>  <a class="code hl_function" href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a>(speed.speed_value, value);</div>
-<div class="line"><span class="lineno">  178</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_a2c4e6201e1fc4116b6aaff2f9d35e5f0"><div class="ttname"><a href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a></div><div class="ttdeci">void setSpeedValue(SpeedValue &amp;speed, const double value)</div><div class="ttdoc">Set the SpeedValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00144">cdd_setters_common.h:144</a></div></div>
-<div class="ttc" id="acdd__setters__common_8h_html_a37166d105cac0ba586f4771bfc331e16"><div class="ttname"><a href="#a37166d105cac0ba586f4771bfc331e16">setSpeedConfidence</a></div><div class="ttdeci">void setSpeedConfidence(SpeedConfidence &amp;speed_confidence, const double value)</div><div class="ttdoc">Set the Speed Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00156">cdd_setters_common.h:156</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00152">152</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  152</span>                                                                                                                    {</div>
+<div class="line"><span class="lineno">  153</span>  <a class="code hl_function" href="#a37166d105cac0ba586f4771bfc331e16">setSpeedConfidence</a>(speed.speed_confidence, confidence);</div>
+<div class="line"><span class="lineno">  154</span>  <a class="code hl_function" href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a>(speed.speed_value, value);</div>
+<div class="line"><span class="lineno">  155</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_a2c4e6201e1fc4116b6aaff2f9d35e5f0"><div class="ttname"><a href="#a2c4e6201e1fc4116b6aaff2f9d35e5f0">setSpeedValue</a></div><div class="ttdeci">void setSpeedValue(SpeedValue &amp;speed, const double value)</div><div class="ttdoc">Set the SpeedValue object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00121">cdd_setters_common.h:121</a></div></div>
+<div class="ttc" id="acdd__setters__common_8h_html_a37166d105cac0ba586f4771bfc331e16"><div class="ttname"><a href="#a37166d105cac0ba586f4771bfc331e16">setSpeedConfidence</a></div><div class="ttdeci">void setSpeedConfidence(SpeedConfidence &amp;speed_confidence, const double value)</div><div class="ttdoc">Set the Speed Confidence object.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00133">cdd_setters_common.h:133</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1227,16 +1227,16 @@ template&lt;typename SemiAxisLength&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00156">156</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  156</span>                                                                                      {</div>
-<div class="line"><span class="lineno">  157</span>  <span class="keyword">auto</span> speed_conf = std::round(value * 1e2 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
-<div class="line"><span class="lineno">  158</span>  <span class="keywordflow">if</span> (speed_conf &lt; SpeedConfidence::MIN &amp;&amp; speed_conf &gt; 0.0){</div>
-<div class="line"><span class="lineno">  159</span>    speed_conf = SpeedConfidence::MIN;</div>
-<div class="line"><span class="lineno">  160</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (speed_conf &gt;= SpeedConfidence::OUT_OF_RANGE || speed_conf &lt;= 0.0) {</div>
-<div class="line"><span class="lineno">  161</span>    speed_conf = SpeedConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  162</span>  }</div>
-<div class="line"><span class="lineno">  163</span>  speed_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(speed_confidence.value)<span class="keyword">&gt;</span>(speed_conf);</div>
-<div class="line"><span class="lineno">  164</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00133">133</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  133</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  134</span>  <span class="keyword">auto</span> speed_conf = std::round(value * 1e2 * etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR);</div>
+<div class="line"><span class="lineno">  135</span>  <span class="keywordflow">if</span> (speed_conf &lt; SpeedConfidence::MIN &amp;&amp; speed_conf &gt; 0.0){</div>
+<div class="line"><span class="lineno">  136</span>    speed_conf = SpeedConfidence::MIN;</div>
+<div class="line"><span class="lineno">  137</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (speed_conf &gt;= SpeedConfidence::OUT_OF_RANGE || speed_conf &lt;= 0.0) {</div>
+<div class="line"><span class="lineno">  138</span>    speed_conf = SpeedConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  139</span>  }</div>
+<div class="line"><span class="lineno">  140</span>  speed_confidence.value = <span class="keyword">static_cast&lt;</span>decltype(speed_confidence.value)<span class="keyword">&gt;</span>(speed_conf);</div>
+<div class="line"><span class="lineno">  141</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1276,12 +1276,12 @@ template&lt;typename SemiAxisLength&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00144">144</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  144</span>                                                                 {</div>
-<div class="line"><span class="lineno">  145</span>  <span class="keyword">auto</span> speed_val = std::round(value * 1e2);</div>
-<div class="line"><span class="lineno">  146</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
-<div class="line"><span class="lineno">  147</span>  speed.value = <span class="keyword">static_cast&lt;</span>decltype(speed.value)<span class="keyword">&gt;</span>(speed_val);</div>
-<div class="line"><span class="lineno">  148</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00121">121</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>                                                                 {</div>
+<div class="line"><span class="lineno">  122</span>  <span class="keyword">auto</span> speed_val = std::round(value * 1e2);</div>
+<div class="line"><span class="lineno">  123</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(speed_val, SpeedValue::MIN, SpeedValue::MAX, <span class="stringliteral">&quot;SpeedValue&quot;</span>);</div>
+<div class="line"><span class="lineno">  124</span>  speed.value = <span class="keyword">static_cast&lt;</span>decltype(speed.value)<span class="keyword">&gt;</span>(speed_val);</div>
+<div class="line"><span class="lineno">  125</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1323,11 +1323,11 @@ template&lt;typename StationId&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00051">51</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>                                                                         {</div>
-<div class="line"><span class="lineno">   52</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(id_value, StationId::MIN, StationId::MAX, <span class="stringliteral">&quot;StationId&quot;</span>);</div>
-<div class="line"><span class="lineno">   53</span>  station_id.value = id_value;</div>
-<div class="line"><span class="lineno">   54</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00028">28</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>                                                                         {</div>
+<div class="line"><span class="lineno">   29</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(id_value, StationId::MIN, StationId::MAX, <span class="stringliteral">&quot;StationId&quot;</span>);</div>
+<div class="line"><span class="lineno">   30</span>  station_id.value = id_value;</div>
+<div class="line"><span class="lineno">   31</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1369,11 +1369,11 @@ template&lt;typename StationType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00063">63</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                           {</div>
-<div class="line"><span class="lineno">   64</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(value, StationType::MIN, StationType::MAX, <span class="stringliteral">&quot;StationType&quot;</span>);</div>
-<div class="line"><span class="lineno">   65</span>  station_type.value = value;</div>
-<div class="line"><span class="lineno">   66</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00040">40</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   40</span>                                                                           {</div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(value, StationType::MIN, StationType::MAX, <span class="stringliteral">&quot;StationType&quot;</span>);</div>
+<div class="line"><span class="lineno">   42</span>  station_type.value = value;</div>
+<div class="line"><span class="lineno">   43</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1420,12 +1420,12 @@ template&lt;typename StationType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00076">76</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                                                   {</div>
-<div class="line"><span class="lineno">   79</span>  uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
-<div class="line"><span class="lineno">   80</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
-<div class="line"><span class="lineno">   81</span>  timestamp_its.value = t_its;</div>
-<div class="line"><span class="lineno">   82</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00053">53</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                                                                   {</div>
+<div class="line"><span class="lineno">   56</span>  uint64_t t_its = unix_nanosecs * 1e-6 + (uint64_t)(n_leap_seconds * 1e3) - etsi_its_msgs::UNIX_SECONDS_2004 * 1e3;</div>
+<div class="line"><span class="lineno">   57</span>  <a class="code hl_function" href="checks_8h.html#a426a1dd8846d4184a2ca05dc5b9218cc">throwIfOutOfRange</a>(t_its, TimestampIts::MIN, TimestampIts::MAX, <span class="stringliteral">&quot;TimestampIts&quot;</span>);</div>
+<div class="line"><span class="lineno">   58</span>  timestamp_its.value = t_its;</div>
+<div class="line"><span class="lineno">   59</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1468,12 +1468,12 @@ template&lt;typename PosConfidenceEllipse&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00506">506</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  506</span>                                                                                                                                       {</div>
-<div class="line"><span class="lineno">  507</span>  <span class="keyword">auto</span> [semi_major_axis, semi_minor_axis, orientation] = <a class="code hl_function" href="#ae30faf8ab5185e8c76d37f5e93cc51e3">confidenceEllipseFromWGSCovMatrix</a>(covariance_matrix);</div>
-<div class="line"><span class="lineno">  508</span>  <a class="code hl_function" href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a>(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);</div>
-<div class="line"><span class="lineno">  509</span>}</div>
-<div class="ttc" id="acdd__setters__common_8h_html_ae30faf8ab5185e8c76d37f5e93cc51e3"><div class="ttname"><a href="#ae30faf8ab5185e8c76d37f5e93cc51e3">confidenceEllipseFromWGSCovMatrix</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; confidenceEllipseFromWGSCovMatrix(const std::array&lt; double, 4 &gt; &amp;covariance_matrix)</div><div class="ttdoc">Gets the values needed to set a confidence ellipse from a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00475">cdd_setters_common.h:475</a></div></div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00483">483</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  483</span>                                                                                                                                       {</div>
+<div class="line"><span class="lineno">  484</span>  <span class="keyword">auto</span> [semi_major_axis, semi_minor_axis, orientation] = <a class="code hl_function" href="#ae30faf8ab5185e8c76d37f5e93cc51e3">confidenceEllipseFromWGSCovMatrix</a>(covariance_matrix);</div>
+<div class="line"><span class="lineno">  485</span>  <a class="code hl_function" href="#a13364486fb23eb934d90d98dd8997314">setPosConfidenceEllipse</a>(position_confidence_ellipse, semi_major_axis, semi_minor_axis, orientation);</div>
+<div class="line"><span class="lineno">  486</span>}</div>
+<div class="ttc" id="acdd__setters__common_8h_html_ae30faf8ab5185e8c76d37f5e93cc51e3"><div class="ttname"><a href="#ae30faf8ab5185e8c76d37f5e93cc51e3">confidenceEllipseFromWGSCovMatrix</a></div><div class="ttdeci">std::tuple&lt; double, double, double &gt; confidenceEllipseFromWGSCovMatrix(const std::array&lt; double, 4 &gt; &amp;covariance_matrix)</div><div class="ttdoc">Gets the values needed to set a confidence ellipse from a covariance matrix.</div><div class="ttdef"><b>Definition</b> <a href="cdd__setters__common_8h_source.html#l00452">cdd_setters_common.h:452</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1521,42 +1521,42 @@ template&lt;typename YawRate, typename YawRateValue = decltype(YawRate::yaw_rate
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00353">353</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  354</span>                                                                                               {</div>
-<div class="line"><span class="lineno">  355</span>  <span class="keywordtype">double</span> yaw_rate_in_001_degrees = value * 100.0;</div>
-<div class="line"><span class="lineno">  356</span>  <span class="comment">// limit value range</span></div>
-<div class="line"><span class="lineno">  357</span>  <span class="keywordflow">if</span> (yaw_rate_in_001_degrees &lt; YawRateValue::MIN) {</div>
-<div class="line"><span class="lineno">  358</span>    yaw_rate_in_001_degrees = YawRateValue::MIN; <span class="comment">// MIN should be NEGATIVE_OUT_OF_RANGE, but CAM only has MIN</span></div>
-<div class="line"><span class="lineno">  359</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (yaw_rate_in_001_degrees &gt; YawRateValue::MAX - 1) {</div>
-<div class="line"><span class="lineno">  360</span>    yaw_rate_in_001_degrees = YawRateValue::MAX - 1; <span class="comment">// MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX</span></div>
-<div class="line"><span class="lineno">  361</span>  }</div>
-<div class="line"><span class="lineno">  362</span>  </div>
-<div class="line"><span class="lineno">  363</span>  yaw_rate.yaw_rate_value.value = <span class="keyword">static_cast&lt;</span>decltype(yaw_rate.yaw_rate_value.value)<span class="keyword">&gt;</span>(yaw_rate_in_001_degrees);</div>
-<div class="line"><span class="lineno">  364</span> </div>
-<div class="line"><span class="lineno">  365</span>  <span class="keywordtype">double</span> yaw_rate_std = confidence;</div>
-<div class="line"><span class="lineno">  366</span>  <span class="keywordflow">if</span>(yaw_rate_std == std::numeric_limits&lt;double&gt;::infinity()) {</div>
-<div class="line"><span class="lineno">  367</span>    yaw_rate.yaw_rate_confidence.value = YawRateConfidence::UNAVAILABLE;</div>
-<div class="line"><span class="lineno">  368</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  369</span>    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; </div>
-<div class="line"><span class="lineno">  370</span>    <span class="comment">// How stupid is this?!</span></div>
-<div class="line"><span class="lineno">  371</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;double, uint8_t&gt; confidence_map = {</div>
-<div class="line"><span class="lineno">  372</span>        {0.01, YawRateConfidence::DEG_SEC_000_01},</div>
-<div class="line"><span class="lineno">  373</span>        {0.05, YawRateConfidence::DEG_SEC_000_05},</div>
-<div class="line"><span class="lineno">  374</span>        {0.1, YawRateConfidence::DEG_SEC_000_10},</div>
-<div class="line"><span class="lineno">  375</span>        {1.0, YawRateConfidence::DEG_SEC_001_00},</div>
-<div class="line"><span class="lineno">  376</span>        {5.0, YawRateConfidence::DEG_SEC_005_00},</div>
-<div class="line"><span class="lineno">  377</span>        {10.0, YawRateConfidence::DEG_SEC_010_00},</div>
-<div class="line"><span class="lineno">  378</span>        {100.0, YawRateConfidence::DEG_SEC_100_00},</div>
-<div class="line"><span class="lineno">  379</span>        {std::numeric_limits&lt;double&gt;::infinity(), YawRateConfidence::OUT_OF_RANGE},</div>
-<div class="line"><span class="lineno">  380</span>    };</div>
-<div class="line"><span class="lineno">  381</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [thresh, conf_val] : confidence_map) {</div>
-<div class="line"><span class="lineno">  382</span>      <span class="keywordflow">if</span> (yaw_rate_std &lt;= thresh) {</div>
-<div class="line"><span class="lineno">  383</span>        yaw_rate.yaw_rate_confidence.value = conf_val;</div>
-<div class="line"><span class="lineno">  384</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  385</span>      }</div>
-<div class="line"><span class="lineno">  386</span>    }</div>
-<div class="line"><span class="lineno">  387</span>  }</div>
-<div class="line"><span class="lineno">  388</span>}</div>
+<p class="definition">Definition at line <a class="el" href="cdd__setters__common_8h_source.html#l00330">330</a> of file <a class="el" href="cdd__setters__common_8h_source.html">cdd_setters_common.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  332</span>  <span class="keywordtype">double</span> yaw_rate_in_001_degrees = value * 100.0;</div>
+<div class="line"><span class="lineno">  333</span>  <span class="comment">// limit value range</span></div>
+<div class="line"><span class="lineno">  334</span>  <span class="keywordflow">if</span> (yaw_rate_in_001_degrees &lt; YawRateValue::MIN) {</div>
+<div class="line"><span class="lineno">  335</span>    yaw_rate_in_001_degrees = YawRateValue::MIN; <span class="comment">// MIN should be NEGATIVE_OUT_OF_RANGE, but CAM only has MIN</span></div>
+<div class="line"><span class="lineno">  336</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (yaw_rate_in_001_degrees &gt; YawRateValue::MAX - 1) {</div>
+<div class="line"><span class="lineno">  337</span>    yaw_rate_in_001_degrees = YawRateValue::MAX - 1; <span class="comment">// MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX</span></div>
+<div class="line"><span class="lineno">  338</span>  }</div>
+<div class="line"><span class="lineno">  339</span> </div>
+<div class="line"><span class="lineno">  340</span>  yaw_rate.yaw_rate_value.value = <span class="keyword">static_cast&lt;</span>decltype(yaw_rate.yaw_rate_value.value)<span class="keyword">&gt;</span>(yaw_rate_in_001_degrees);</div>
+<div class="line"><span class="lineno">  341</span> </div>
+<div class="line"><span class="lineno">  342</span>  <span class="keywordtype">double</span> yaw_rate_std = confidence;</div>
+<div class="line"><span class="lineno">  343</span>  <span class="keywordflow">if</span>(yaw_rate_std == std::numeric_limits&lt;double&gt;::infinity()) {</div>
+<div class="line"><span class="lineno">  344</span>    yaw_rate.yaw_rate_confidence.value = YawRateConfidence::UNAVAILABLE;</div>
+<div class="line"><span class="lineno">  345</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  346</span>    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;</div>
+<div class="line"><span class="lineno">  347</span>    <span class="comment">// How stupid is this?!</span></div>
+<div class="line"><span class="lineno">  348</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;double, uint8_t&gt; confidence_map = {</div>
+<div class="line"><span class="lineno">  349</span>        {0.01, YawRateConfidence::DEG_SEC_000_01},</div>
+<div class="line"><span class="lineno">  350</span>        {0.05, YawRateConfidence::DEG_SEC_000_05},</div>
+<div class="line"><span class="lineno">  351</span>        {0.1, YawRateConfidence::DEG_SEC_000_10},</div>
+<div class="line"><span class="lineno">  352</span>        {1.0, YawRateConfidence::DEG_SEC_001_00},</div>
+<div class="line"><span class="lineno">  353</span>        {5.0, YawRateConfidence::DEG_SEC_005_00},</div>
+<div class="line"><span class="lineno">  354</span>        {10.0, YawRateConfidence::DEG_SEC_010_00},</div>
+<div class="line"><span class="lineno">  355</span>        {100.0, YawRateConfidence::DEG_SEC_100_00},</div>
+<div class="line"><span class="lineno">  356</span>        {std::numeric_limits&lt;double&gt;::infinity(), YawRateConfidence::OUT_OF_RANGE},</div>
+<div class="line"><span class="lineno">  357</span>    };</div>
+<div class="line"><span class="lineno">  358</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [thresh, conf_val] : confidence_map) {</div>
+<div class="line"><span class="lineno">  359</span>      <span class="keywordflow">if</span> (yaw_rate_std &lt;= thresh) {</div>
+<div class="line"><span class="lineno">  360</span>        yaw_rate.yaw_rate_confidence.value = conf_val;</div>
+<div class="line"><span class="lineno">  361</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  362</span>      }</div>
+<div class="line"><span class="lineno">  363</span>    }</div>
+<div class="line"><span class="lineno">  364</span>  }</div>
+<div class="line"><span class="lineno">  365</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
