@@ -1,28 +1,5 @@
-/*
-=============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-=============================================================================
-*/
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 /**
  * @file impl/cdd/cdd_setters_common.h
@@ -149,7 +126,7 @@ inline void setSpeedValue(SpeedValue& speed, const double value) {
 
 /**
  * @brief Set the Speed Confidence object
- * 
+ *
  * @param speed_confidence object to set
  * @param value standard deviation in m/s as decimal number
  */
@@ -179,7 +156,7 @@ inline void setSpeed(Speed& speed, const double value, const double confidence =
 
 /**
  * @brief Set the Acceleration Magnitude Value object
- * 
+ *
  * @param accel_mag_value object to set
  * @param value AccelerationMagnitudeValue in m/s^2 as decimal number
  */
@@ -192,7 +169,7 @@ inline void setAccelerationMagnitudeValue(AccelerationMagnitudeValue& accel_mag_
 
 /**
  * @brief Set the AccelerationMagnitude Confidence object
- * 
+ *
  * @param accel_mag_confidence object to set
  * @param value standard deviation in m/s^2 as decimal number
  */
@@ -225,7 +202,7 @@ inline void setAccelerationMagnitude(AccelerationMagnitude& accel_mag, const dou
 
 /**
  * @brief Set the Acceleration Confidence object
- * 
+ *
  * @param accel_confidence object to set
  * @param value standard deviation in m/s^2 as decimal number
  */
@@ -242,10 +219,10 @@ inline void setAccelerationConfidence(AccelerationConfidence& accel_confidence, 
 
 /**
  * @brief Sets the reference position in the given ReferencePostion object.
- * 
+ *
  * This function sets the latitude, longitude, and altitude of the reference position.
  * If the altitude is not provided, it is set to AltitudeValue::UNAVAILABLE.
- * 
+ *
  * @param ref_position ReferencePostion or ReferencePositionWithConfidence object to set the reference position in.
  * @param latitude The latitude value position in degree as decimal number.
  * @param longitude The longitude value in degree as decimal number.
@@ -311,7 +288,7 @@ inline void setHeadingValue(HeadingValue& heading, const double value) {
 
 /**
  * @brief Set the Heading Confidence object
- * 
+ *
  * @param heading_confidence object to set
  * @param value standard deviation of heading in degree as decimal number
  */
@@ -334,7 +311,7 @@ inline void setHeadingConfidence(HeadingConfidence& heading_confidence, const do
  *
  * @param heading object to set
  * @param value Heading value in degree as decimal number
- * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE) 
+ * @param confidence standard deviation of heading in degree as decimal number (default: infinity, mapping to HeadingConfidence::UNAVAILABLE)
  */
 template <typename Heading, typename HeadingConfidence = decltype(Heading::heading_confidence)>
 void setHeadingCDD(Heading& heading, const double value, double confidence = std::numeric_limits<double>::infinity()) {
@@ -344,7 +321,7 @@ void setHeadingCDD(Heading& heading, const double value, double confidence = std
 
 /**
  * @brief Set the Yaw Rate object
- * 
+ *
  * @param yaw_rate object to set
  * @param value Yaw rate in degrees per second as decimal number
  * @param confidence standard deviation of yaw rate in degrees per second as decimal number (default: infinity, mapping to YawRateConfidence::UNAVAILABLE)
@@ -359,14 +336,14 @@ inline void setYawRateCDD(YawRate& yaw_rate, const double value,
   } else if (yaw_rate_in_001_degrees > YawRateValue::MAX - 1) {
     yaw_rate_in_001_degrees = YawRateValue::MAX - 1; // MAX - 1 should be POSITIVE_OUT_OF_RANGE, but CAM only has MAX
   }
-  
+
   yaw_rate.yaw_rate_value.value = static_cast<decltype(yaw_rate.yaw_rate_value.value)>(yaw_rate_in_001_degrees);
 
   double yaw_rate_std = confidence;
   if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
     yaw_rate.yaw_rate_confidence.value = YawRateConfidence::UNAVAILABLE;
   } else {
-    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR; 
+    yaw_rate_std *= etsi_its_msgs::ONE_D_GAUSSIAN_FACTOR;
     // How stupid is this?!
     static const std::map<double, uint8_t> confidence_map = {
         {0.01, YawRateConfidence::DEG_SEC_000_01},
@@ -389,9 +366,9 @@ inline void setYawRateCDD(YawRate& yaw_rate, const double value,
 
 /**
  * @brief Set the Semi Axis length
- * 
+ *
  * // See https://godbolt.org/z/Eceavfo99 on how the OneCentimeterHelper works with this template
- * 
+ *
  * @param semi_axis_length The SemiAxisLength to set
  * @param length the desired length in meters
  */
@@ -402,13 +379,13 @@ inline void setSemiAxis(SemiAxisLength& semi_axis_length, const double length) {
     semi_axis_length_val = SemiAxisLength::MIN;
   } else if(semi_axis_length_val >= SemiAxisLength::OUT_OF_RANGE) {
     semi_axis_length_val = SemiAxisLength::OUT_OF_RANGE;
-  }  
+  }
   semi_axis_length.value = static_cast<uint16_t>(semi_axis_length_val);
 }
 
 /**
  * @brief Set the Pos Confidence Ellipse object
- * 
+ *
  * @param[out] position_confidence_ellipse The PosConfidenceEllipse to set
  * @param[in] semi_major_axis length of the semi-major axis in meters
  * @param[in] semi_minor_axis length of the semi-minor axis in meters
@@ -424,7 +401,7 @@ inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_el
 
 /**
  * @brief Gets the values needed to set a confidence ellipse from a covariance matrix.
- * 
+ *
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
  *                          Its coordinate system is aligned with the object (x = longitudinal, y = lateral)
@@ -432,7 +409,7 @@ inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_el
  * @return std::tuple<double, double, double> semi_major_axis [m], semi_minor_axis [m], orientation [deg], with respect to WGS84
  */
 inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const std::array<double, 4>& covariance_matrix, const double object_heading) {
-  
+
   if(std::abs(covariance_matrix[1] - covariance_matrix[2]) > 1e-6) {
     throw std::invalid_argument("Covariance matrix is not symmetric");
   }
@@ -465,7 +442,7 @@ inline std::tuple<double, double, double> confidenceEllipseFromCovMatrix(const s
 
 /**
  * @brief Gets the values needed to set a confidence ellipse from a covariance matrix.
- * 
+ *
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
  *                          Its coordinate system is aligned with the WGS axes (x = North, y = East)
@@ -480,8 +457,8 @@ inline std::tuple<double, double, double> confidenceEllipseFromWGSCovMatrix(cons
 
 /**
  * @brief Set the Pos Confidence Ellipse object
- * 
- * @param position_confidence_ellipse 
+ *
+ * @param position_confidence_ellipse
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
  *                          Its coordinate system is aligned with the object (x = longitudinal, y = lateral)
@@ -495,8 +472,8 @@ inline void setPosConfidenceEllipse(PosConfidenceEllipse& position_confidence_el
 
 /**
  * @brief Set the Pos Confidence Ellipse object
- * 
- * @param position_confidence_ellipse 
+ *
+ * @param position_confidence_ellipse
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.
  *                          Its coordinate system is aligned with the WGS axes (x = North, y = East)

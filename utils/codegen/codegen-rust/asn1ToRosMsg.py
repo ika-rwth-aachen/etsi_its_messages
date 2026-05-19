@@ -1,28 +1,7 @@
 #!/usr/bin/env python3
 
-# ==============================================================================
-# MIT License
-#
-# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-# ==============================================================================
+# SPDX-License-Identifier: MIT
+# Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 import argparse
 import glob
@@ -109,10 +88,10 @@ def findDependenciesOfRosMessageType(parent_file_path: str, file_list: List[str]
                 if msg_type not in new_file_list and os.path.isfile(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg"):
                     new_file_list.append(msg_type)
                     new_file_list = findDependenciesOfRosMessageType(f"{os.path.dirname(parent_file_path)}/{msg_type}.msg", new_file_list)
-    
+
     # make sure there are no duplicates and sort alphabetically
     new_file_list = sorted(list(set(new_file_list)))
-    
+
     return new_file_list
 
 def generateCMakeLists(msg_files: list, file_path: str, type: str) -> None:
@@ -195,7 +174,7 @@ def main():
 
     # generate CMakelists.txt and remove all msg files that are not required
     msg_type = args.type.upper()
-    
+
     # handle special cases
     if args.type == "cpm_ts":
         msg_type = "CollectivePerceptionMessage"
@@ -210,7 +189,7 @@ def main():
 
     msg_files = findDependenciesOfRosMessageType(os.path.join(args.output_dir, f"{msg_type}.msg"), [msg_type])
     generateCMakeLists(msg_files, os.path.join(args.output_dir, "../CMakeLists.txt"), args.type)
-    
+
     for f in glob.glob(os.path.join(args.output_dir, "*.msg")):
         if os.path.splitext(os.path.basename(f))[0] not in msg_files:
             os.remove(f)

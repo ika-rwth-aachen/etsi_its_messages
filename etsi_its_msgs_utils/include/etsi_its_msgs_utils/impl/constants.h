@@ -1,28 +1,5 @@
-/*
-=============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-=============================================================================
-*/
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 /**
  * @file impl/constants.h
@@ -40,7 +17,7 @@ const uint64_t UNIX_SECONDS_2004 = 1072915200;  // Unix-Seconds for 2004-01-01T0
 
 /**
  * @brief std::map that stores all leap second insertions since 2004 with the corresponding unix-date of the insertion
- * 
+ *
  */
 const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004{
     {UNIX_SECONDS_2004, 0},  // 2004-01-01T00:00:00.000Z
@@ -53,7 +30,7 @@ const std::map<uint64_t, uint16_t> LEAP_SECOND_INSERTIONS_SINCE_2004{
 
 /**
  * @brief Get the leap second insertions since 2004 for given unix seconds
- * 
+ *
  * @param unix_seconds the current unix seconds for that the leap second insertions since 2004 shall be provided
  * @return uint16_t the number of leap second insertions since 2004 for unix_seconds
  */

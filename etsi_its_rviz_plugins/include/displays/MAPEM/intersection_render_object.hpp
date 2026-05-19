@@ -1,26 +1,5 @@
-/** ============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-============================================================================= */
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 #include "etsi_its_mapem_ts_msgs/msg/mapem.hpp"
 #include "etsi_its_spatem_ts_msgs/msg/spatem.hpp"
@@ -90,29 +69,29 @@ class IntersectionRenderObject
 
     /**
      * @brief Get the IntersectionID
-     * 
+     *
      * @return unsigned int intersection_id
      */
     unsigned int getIntersectionID();
 
     /**
      * @brief Get the header
-     * 
-     * @return std_msgs::msg::Header 
+     *
+     * @return std_msgs::msg::Header
      */
     std_msgs::msg::Header getHeader();
 
     /**
      * @brief Get the ref_position object
-     * 
-     * @return geometry_msgs::msg::Point 
+     *
+     * @return geometry_msgs::msg::Point
      */
     geometry_msgs::msg::Point getRefPosition();
 
     /**
      * @brief Return a tf2::Quaternion describing the rotation offset between true-north and grid-north in the UTM zone
-     * 
-     * @return tf2::Quaternion 
+     *
+     * @return tf2::Quaternion
      */
     tf2::Quaternion getGridConvergenceQuaternion();
 
@@ -126,7 +105,7 @@ class IntersectionRenderObject
     unsigned int intersection_id;
     std::vector<unsigned int> layer_ids;
     geometry_msgs::msg::PointStamped ref_point;
-    double grid_convergence_angle;    
+    double grid_convergence_angle;
 };
 
 }  // namespace displays

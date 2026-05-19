@@ -1,28 +1,5 @@
-/*
-=============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-=============================================================================
-*/
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 /**
  * @file impl/spatem/spatem_ts_getters.h
@@ -39,7 +16,7 @@ namespace access {
 
   /**
    * @brief Get the intersection-id
-   * 
+   *
    * @param intsct_id intersection-id object to get the value from
    * @return uint16_t id of the intersection
    */
@@ -49,7 +26,7 @@ namespace access {
 
   /**
    * @brief Get the intersection-id of an IntersectionReferenceID object
-   * 
+   *
    * @param intsct_ref_id IntersectionReferenceID object
    * @return uint16_t id of the intersection
    */
@@ -59,7 +36,7 @@ namespace access {
 
   /**
    * @brief Get the intersection-id of an IntersectionState object
-   * 
+   *
    * @param intsct IntersectionState object
    * @return uint16_t id of the intersection
    */
@@ -69,7 +46,7 @@ namespace access {
 
   /**
    * @brief Get the MinuteOfTheYear object from a given IntersectionState object
-   * 
+   *
    * @param intsct IntersectionState object to get the MinuteOfTheYear from
    * @return MinuteOfTheYear object
    */
@@ -80,7 +57,7 @@ namespace access {
 
   /**
    * @brief Get the DSecond object from a given IntersectionState object
-   * 
+   *
    * @param intsct IntersectionState object to get the DSecond from
    * @return DSecond object
    */
@@ -91,7 +68,7 @@ namespace access {
 
   /**
    * @brief Get the value of a DSecond object in seconds
-   * 
+   *
    * @param dsecond DSecond object to get the value from
    * @return double value of DSecond given in seconds
    */
@@ -101,9 +78,9 @@ namespace access {
 
   /**
    * @brief Get the value of an DSecond object from a given IntersectionState object
-   * 
-   * @param intsct 
-   * @return double 
+   *
+   * @param intsct
+   * @return double
    */
   inline double getDSecondValue(const IntersectionState& intsct) {
     return getDSecondValue(getDSecond(intsct));
@@ -111,7 +88,7 @@ namespace access {
 
   /**
    * @brief Get the Signal Group-ID of an SignalGroupID object
-   * 
+   *
    * @param signal_group_id SignalGroupID object to get the id from
    * @return uint8_t the id of the signal group
    */
@@ -121,7 +98,7 @@ namespace access {
 
   /**
    * @brief Get the Signal Group-ID of an MovementState object
-   * 
+   *
    * @param mvmt_state MovementState object to get the id from
    * @return uint8_t the id of the signal group
    */
@@ -131,7 +108,7 @@ namespace access {
 
   /**
    * @brief Get the current MovementEvent of a given MovementState object
-   * 
+   *
    * @param mvmt_event MovementState object to get the MovementEvent from
    * @return MovementEvent object
    */
@@ -144,7 +121,7 @@ namespace access {
 
   /**
    * @brief Get the Current MovementPhaseState object of a given MovementState object
-   * 
+   *
    * @param mvmt_state MovementState object to get the MovementPhaseState from
    * @return MovementPhaseState object
    */
@@ -154,7 +131,7 @@ namespace access {
 
   /**
    * @brief Get the Current MovementPhaseState object of a given MovementState object
-   * 
+   *
    * @param mvmt_state MovementState object to get the MovementPhaseState from
    * @return MovementPhaseState object
    */

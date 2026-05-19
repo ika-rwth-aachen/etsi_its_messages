@@ -1,28 +1,5 @@
-/*
-=============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-=============================================================================
-*/
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 /**
  * @file impl/cpm/cpm_ts_setters.h
@@ -120,11 +97,11 @@ inline void setIdOfPerceivedObject(PerceivedObject& object, const uint16_t id) {
 
 /**
  * @brief Sets the measurement delta time of a PerceivedObject.
- * 
+ *
  * This function sets the measurement delta time of a PerceivedObject.
- * The measurement delta time represents the time difference 
+ * The measurement delta time represents the time difference
  * between the reference time of the CPM and the measurement of the object.
- * 
+ *
  * @param object The PerceivedObject to set the measurement delta time for.
  * @param delta_time The measurement delta time to set in milliseconds. Default value is 0.
  * @throws std::invalid_argument if the delta_time is out of range.
@@ -139,13 +116,13 @@ inline void setMeasurementDeltaTimeOfPerceivedObject(PerceivedObject& object, co
 
 /**
  * @brief Sets the value and confidence of a CartesianCoordinateWithConfidence object.
- * 
+ *
  * This function sets the value and confidence of a CartesianCoordinateWithConfidence object.
  * The value is limited to the range defined by CartesianCoordinateLarge::NEGATIVE_OUT_OF_RANGE
  * and CartesianCoordinateLarge::POSITIVE_OUT_OF_RANGE. The confidence is limited to the range
  * defined by CoordinateConfidence::MIN and CoordinateConfidence::MAX. If the provided confidence
  * is out of range, the confidence value is set to CoordinateConfidence::OUT_OF_RANGE.
- * 
+ *
  * @param coordinate The CartesianCoordinateWithConfidence object to be modified.
  * @param value The value to be set in centimeters.
  * @param confidence The confidence to be set in centimeters (default: infinity, which will map to CoordinateConfidence::UNAVAILABLE).
@@ -265,7 +242,7 @@ inline void setVelocityComponent(VelocityComponent& velocity, const double value
 
 /**
  * @brief Set a Cartesian Angle
- * 
+ *
  * @param angle The CartesianAngle object to be set.
  * @param value Angle in radians to be set in the CartesianAngle object.
  * @param confidence standard deviation of the angle in radians (default: infinity, which will map to AngleConfidence::UNAVAILABLE).
@@ -413,7 +390,7 @@ inline void setAccelerationOfPerceivedObject(PerceivedObject& object, const gm::
 
 /**
  * @brief Set the Polar Acceleration Of Perceived Object object
- * 
+ *
  * @param object PerceivedObject to set the Polar Acceleration for
  * @param magnitude The magnitude of the acceleration in m/s^2 in the xy plane.
  * @param angle The angle of the acceleration in radians in the xy plane.
@@ -495,7 +472,7 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
   } else if (yaw_rate_in_degrees > CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE) {
     yaw_rate_in_degrees = CartesianAngularVelocityComponentValue::POSITIVE_OUT_OF_RANGE;
   }
-  
+
   object.z_angular_velocity.value.value = yaw_rate_in_degrees;
 
   if(yaw_rate_std == std::numeric_limits<double>::infinity()) {
@@ -526,14 +503,14 @@ inline void setYawRateOfPerceivedObject(PerceivedObject& object, const double ya
 
 /**
  * @brief Sets the object dimension with the given value and confidence.
- * 
+ *
  * This function sets the value and confidence of the object dimension based on the provided parameters.
  * The value is limited to the range defined by ObjectDimensionValue::MIN and ObjectDimensionValue::MAX.
  * If the provided value is outside this range, the dimension value is set to ObjectDimensionValue::OUT_OF_RANGE.
- * 
+ *
  * The confidence is limited to the range defined by ObjectDimensionConfidence::MIN and ObjectDimensionConfidence::MAX.
  * If the provided confidence is outside this range, the confidence value is set to ObjectDimensionConfidence::OUT_OF_RANGE.
- * 
+ *
  * @param dimension The object dimension to be set.
  * @param value The value of the object dimension in decimeters.
  * @param confidence The confidence of the object dimension in decimeters (optional, default is infinty, mapping to ObjectDimensionConfidence::UNAVAILABLE).
@@ -674,15 +651,15 @@ inline void initPerceivedObjectContainer(WrappedCpmContainer& container, const u
 
 /**
  * @brief Adds a PerceivedObject to the PerceivedObjectContainer / WrappedCpmContainer.
- * 
- * This function checks if the provided container is a PerceivedObjectContainer. If it is, 
- * the function adds the given PerceivedObject to the container's perceived_objects array 
- * and updates the number_of_perceived_objects value. If the container is not a 
+ *
+ * This function checks if the provided container is a PerceivedObjectContainer. If it is,
+ * the function adds the given PerceivedObject to the container's perceived_objects array
+ * and updates the number_of_perceived_objects value. If the container is not a
  * PerceivedObjectContainer, the function throws an std::invalid_argument exception.
- * 
+ *
  * @param container The WrappedCpmContainer to which the PerceivedObject will be added.
  * @param perceived_object The PerceivedObject to add to the container.
- * 
+ *
  * @throws std::invalid_argument if the container is not a PerceivedObjectContainer.
  */
 inline void addPerceivedObjectToContainer(WrappedCpmContainer& container, const PerceivedObject& perceived_object) {
@@ -698,13 +675,13 @@ inline void addPerceivedObjectToContainer(WrappedCpmContainer& container, const 
 /**
  * @brief Adds a container to the Collective Perception Message (CPM).
  *
- * This function adds a WrappedCpmContainer to the CPM's payload. It first checks 
- * if the current number of containers is less than the maximum allowed. If so, 
+ * This function adds a WrappedCpmContainer to the CPM's payload. It first checks
+ * if the current number of containers is less than the maximum allowed. If so,
  * it appends the container to the array. Otherwise, it throws an exception.
  *
  * @param cpm The Collective Perception Message to which the container will be added.
  * @param container The WrappedCpmContainer to be added to the CPM.
- * 
+ *
  * @throws std::invalid_argument if the maximum number of CPM-Containers is reached.
  */
 inline void addContainerToCPM(CollectivePerceptionMessage& cpm, const WrappedCpmContainer& container) {
@@ -718,7 +695,7 @@ inline void addContainerToCPM(CollectivePerceptionMessage& cpm, const WrappedCpm
 
 /**
  * @brief Set the confidence of the reference position
- * 
+ *
  * @param cpm CPM-Message to set the confidence
  * @param covariance_matrix The four values of the covariance matrix in the order: cov_xx, cov_xy, cov_yx, cov_yy
  *                          The matrix has to be SPD, otherwise a std::invalid_argument exception is thrown.

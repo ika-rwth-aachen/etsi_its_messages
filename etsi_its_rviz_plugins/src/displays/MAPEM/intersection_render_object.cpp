@@ -1,26 +1,5 @@
-/** ============================================================================
-MIT License
-
-Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-============================================================================= */
+// SPDX-License-Identifier: MIT
+// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University
 
 #include "displays/MAPEM/intersection_render_object.hpp"
 #include <etsi_its_msgs_utils/mapem_ts_access.hpp>
@@ -56,7 +35,7 @@ namespace displays
       std::vector<bool> lane_dir = etsi_its_mapem_ts_msgs::access::getLaneDirection(gen_lane);
       if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::bidirectional;
       else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::no_travel;
-      else if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress; 
+      else if(lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && !lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::ingress;
       else if(!lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_INGRESS_PATH] && lane_dir[etsi_its_mapem_ts_msgs::msg::LaneDirection::BIT_INDEX_EGRESS_PATH]) intsct_lane.direction = LaneDirection::egress;
       else intsct_lane.direction = LaneDirection::unknown_direction;
       // LaneType
@@ -85,16 +64,16 @@ namespace displays
 
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY3:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy3);
-                  break;                        
-                  
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY4:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy4);
-                  break;                        
-              
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY5:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy5);
-                  break;                        
-                  
+                  break;
+
               case etsi_its_mapem_ts_msgs::msg::NodeOffsetPointXY::CHOICE_NODE_XY6:
                   p = etsi_its_mapem_ts_msgs::access::getPointFromNodeXY(node_set.array[j].delta.node_xy6);
                   break;
