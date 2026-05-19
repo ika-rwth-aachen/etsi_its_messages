@@ -16,8 +16,6 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   _ASN1C_CI_IMAGE: ${CI_REGISTRY_IMAGE}/asn1c:${CI_COMMIT_REF_SLUG}_ci
   _ASN1C_IMAGE_LATEST: ${CI_REGISTRY_IMAGE}/asn1c:latest
-  _RGEN_CI_IMAGE: ${CI_REGISTRY_IMAGE}/rgen:${CI_COMMIT_REF_SLUG}_ci
-  _RGEN_IMAGE_LATEST: ${CI_REGISTRY_IMAGE}/rgen:latest
 
 stages:
   - Build Docker Images
@@ -38,20 +36,6 @@ asn1c-docker:
       if [[ "${CI_COMMIT_REF_SLUG}" == "${CI_DEFAULT_BRANCH}" ]]; then
         docker tag ${_ASN1C_CI_IMAGE} ${_ASN1C_IMAGE_LATEST}
         docker push ${_ASN1C_IMAGE_LATEST}
-      fi
-
-rgen-docker:
-  stage: Build Docker Images
-  before_script:
-    - cd utils/codegen/codegen-rust/docker
-    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
-  script:
-    - docker build -t ${_RGEN_CI_IMAGE} -f rgen.Dockerfile ..
-    - docker push ${_RGEN_CI_IMAGE}
-    - |-
-      if [[ "${CI_COMMIT_REF_SLUG}" == "${CI_DEFAULT_BRANCH}" ]]; then
-        docker tag ${_RGEN_CI_IMAGE} ${_RGEN_IMAGE_LATEST}
-        docker push ${_RGEN_IMAGE_LATEST}
       fi
 
 

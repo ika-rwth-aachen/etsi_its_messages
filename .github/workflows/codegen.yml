@@ -38,27 +38,12 @@ jobs:
       with:
         name: asn1c-image
         path: /tmp/asn1c-image.tar
-    - name: Build rgen docker image
-      uses: docker/build-push-action@v6
-      with:
-        context: utils/codegen/codegen-rust
-        file: utils/codegen/codegen-rust/docker/rgen.Dockerfile
-        tags: rgen:ci
-        outputs: type=docker,dest=/tmp/rgen-image.tar
-    - name: Upload rgen-image (artifact)
-      uses: actions/upload-artifact@v4
-      with:
-        name: rgen-image
-        path: /tmp/rgen-image.tar
     - name: Push Docker Images
       if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
       run: |
         docker load --input /tmp/asn1c-image.tar
         docker tag asn1c:ci ghcr.io/${{ github.repository }}:asn1c
         docker push ghcr.io/${{ github.repository }}:asn1c
-        docker load --input /tmp/rgen-image.tar
-        docker tag rgen:ci ghcr.io/${{ github.repository }}:rgen
-        docker push ghcr.io/${{ github.repository }}:rgen
 
   etsi_its_coding:
     name: asn1c
