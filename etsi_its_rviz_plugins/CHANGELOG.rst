@@ -2,6 +2,16 @@
 Changelog for package etsi_its_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.0 (2026-06-06)
+------------------
+* Merge pull request `#120 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/120>`_ from ika-rwth-aachen/copyright-without-year
+  Remove year from copyright notices
+* Merge pull request `#115 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/115>`_ from es-av-it-pt/denm-display
+  add support for DENM TS messages in RViz plugins
+* Merge pull request `#109 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/109>`_ from es-av-it-pt/cam-display
+  Add CAM display capable of subscribing to both CAM and CAM TS
+* Contributors: Guido Linden, Lennart Reiher, Pascal Sprenger
+
 3.4.0 (2025-10-16)
 ------------------
 * Merge pull request `#96 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/96>`_ from ika-rwth-aachen/improvement/denm-plugin

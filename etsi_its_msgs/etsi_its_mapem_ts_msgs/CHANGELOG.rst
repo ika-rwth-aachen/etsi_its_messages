@@ -2,6 +2,12 @@
 Changelog for package etsi_its_mapem_ts_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.0 (2026-06-06)
+------------------
+* Merge pull request `#120 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/120>`_ from ika-rwth-aachen/copyright-without-year
+  Remove year from copyright notices
+* Contributors: Lennart Reiher
+
 3.4.0 (2025-10-16)
 ------------------
 

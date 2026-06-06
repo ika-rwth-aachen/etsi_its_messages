@@ -2,6 +2,18 @@
 Changelog for package etsi_its_msgs_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.0 (2026-06-06)
+------------------
+* Merge pull request `#120 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/120>`_ from ika-rwth-aachen/copyright-without-year
+  Remove year from copyright notices
+* Merge pull request `#119 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/119>`_ from psprenger1/feature/ivim_sync_main
+* Merge pull request `#114 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/114>`_ from es-av-it-pt/denm-ts-access-functions
+  Add DENM TS access functions
+* Merge pull request `#95 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/95>`_ from FabianThomsen/fix/pr-90
+  Solve discussions from `#81 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/81>`_
+* Merge pull request `#110 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/110>`_ from ika-rwth-aachen/fix-example-pubs
+* Contributors: Diogo Oliveira, Guido Linden, Lennart Reiher, Pascal Sprenger
+
 3.4.0 (2025-10-16)
 ------------------
 * Merge pull request `#106 <https://github.com/ika-rwth-aachen/etsi_its_messages/issues/106>`_ from Tezozomoc47/make-converter-service-based
