@@ -29,8 +29,7 @@ ros2-jazzy:
     TARGET: dev,run
     IMAGE_TAG: ros2-jazzy
     ENABLE_PUSH_AS_LATEST: 'true'
-    BASE_IMAGE: rwthika/ros2:jazzy
-    RMW_IMPLEMENTATION: rmw_zenoh_cpp
+    BASE_IMAGE: gitlab.ika.rwth-aachen.de:5050/fb-fi/ops/docker-ros-ml-images/ros2:rmw-zenoh_jazzy-ros-base-zenoh_ci-amd64
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'

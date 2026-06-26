@@ -28,14 +28,19 @@ jobs:
   ros2-jazzy:
     runs-on: ubuntu-latest
     steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: gitlab.ika.rwth-aachen.de:5050
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITLAB_TOKEN }}
       - uses: ika-rwth-aachen/docker-ros@main
         with:
           platform: amd64
           target: run
           image-tag: ros2-jazzy
           enable-push-as-latest: 'true'
-          base-image: rwthika/ros2:jazzy
-          rmw-implementation: rmw_zenoh_cpp
+          base-image: gitlab.ika.rwth-aachen.de:5050/fb-fi/ops/docker-ros-ml-images/ros2:rmw-zenoh_jazzy-ros-base-zenoh_ci-amd64
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
 
