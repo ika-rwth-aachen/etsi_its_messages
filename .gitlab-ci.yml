@@ -28,7 +28,6 @@ ros2-jazzy:
     PLATFORM: amd64,arm64
     TARGET: dev,run
     IMAGE_TAG: ros2-jazzy
-    ENABLE_PUSH_AS_LATEST: 'true'
     BASE_IMAGE: rwthika/ros2:jazzy
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
@@ -45,6 +44,22 @@ ros2-kilted:
     TARGET: dev,run
     IMAGE_TAG: ros2-kilted
     BASE_IMAGE: rwthika/ros2:kilted
+    RMW_IMPLEMENTATION: rmw_zenoh_cpp
+    COMMAND: ros2 launch etsi_its_conversion converter.launch.py
+    ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+
+ros2-lyrical:
+  trigger:
+    include:
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    PLATFORM: amd64,arm64
+    TARGET: dev,run
+    IMAGE_TAG: ros2-lyrical
+    ENABLE_PUSH_AS_LATEST: 'true'
+    BASE_IMAGE: ros:lyrical-ros-base # TODO: rwthika/ros2:lyrical
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
