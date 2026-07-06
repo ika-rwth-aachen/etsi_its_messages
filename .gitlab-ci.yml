@@ -64,3 +64,18 @@ ros2-lyrical:
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
     ENABLE_RECURSIVE_VCS_IMPORT: 'false'
+
+ros2-rolling:
+  trigger:
+    include:
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    PLATFORM: amd64,arm64
+    TARGET: dev,run
+    IMAGE_TAG: ros2-rolling
+    BASE_IMAGE: ros:rolling-ros-base
+    RMW_IMPLEMENTATION: rmw_zenoh_cpp
+    COMMAND: ros2 launch etsi_its_conversion converter.launch.py
+    ENABLE_INDUSTRIAL_CI: 'true'
+    ENABLE_RECURSIVE_VCS_IMPORT: 'false'

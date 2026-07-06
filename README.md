@@ -6,7 +6,7 @@
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/codegen.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/docker-ros.yml/badge.svg"/></a>
   <a href="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml"><img src="https://github.com/ika-rwth-aachen/etsi_its_messages/actions/workflows/doc.yml/badge.svg"/></a>
-  <img src="https://img.shields.io/badge/ROS 2-humble|jazzy|kilted|lyrical-293754"/>
+  <img src="https://img.shields.io/badge/ROS 2-humble|jazzy|kilted|lyrical|rolling-293754"/>
   <img src="https://img.shields.io/badge/V2X-CAM|CPM|DENM|IVIM|MAPEM|MCM|SPATEM|VAM-aqua"/>
 </p>
 
