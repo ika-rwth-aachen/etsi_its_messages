@@ -13,7 +13,7 @@ ros2-humble:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros2-humble
+    IMAGE_TAG: humble
     BASE_IMAGE: rwthika/ros2:humble
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
     ENABLE_INDUSTRIAL_CI: 'true'
@@ -27,7 +27,7 @@ ros2-jazzy:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros2-jazzy
+    IMAGE_TAG: jazzy
     BASE_IMAGE: rwthika/ros2:jazzy
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
@@ -42,7 +42,7 @@ ros2-kilted:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros2-kilted
+    IMAGE_TAG: kilted
     BASE_IMAGE: rwthika/ros2:kilted
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
@@ -57,7 +57,7 @@ ros2-lyrical:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros2-lyrical
+    IMAGE_TAG: lyrical
     ENABLE_PUSH_AS_LATEST: 'true'
     BASE_IMAGE: ros:lyrical-ros-base # TODO: rwthika/ros2:lyrical
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
@@ -73,7 +73,7 @@ ros2-rolling:
   variables:
     PLATFORM: amd64,arm64
     TARGET: dev,run
-    IMAGE_TAG: ros2-rolling
+    IMAGE_TAG: rolling
     BASE_IMAGE: ros:rolling-ros-base
     RMW_IMPLEMENTATION: rmw_zenoh_cpp
     COMMAND: ros2 launch etsi_its_conversion converter.launch.py
