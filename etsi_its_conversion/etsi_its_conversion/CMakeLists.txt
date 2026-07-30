@@ -39,21 +39,21 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>)
 target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)
 
-ament_target_dependencies(${PROJECT_NAME}
-  etsi_its_cam_conversion
-  etsi_its_cam_ts_conversion
-  etsi_its_conversion_srvs
-  etsi_its_cpm_ts_conversion
-  etsi_its_denm_conversion
-  etsi_its_denm_ts_conversion
-  etsi_its_ivim_ts_conversion
-  etsi_its_mapem_ts_conversion
-  etsi_its_mcm_uulm_conversion
-  etsi_its_spatem_ts_conversion
-  etsi_its_vam_ts_conversion
-  rclcpp
-  rclcpp_components
-  udp_msgs
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  ${etsi_its_cam_conversion_TARGETS}
+  ${etsi_its_cam_ts_conversion_TARGETS}
+  ${etsi_its_conversion_srvs_TARGETS}
+  ${etsi_its_cpm_ts_conversion_TARGETS}
+  ${etsi_its_denm_conversion_TARGETS}
+  ${etsi_its_denm_ts_conversion_TARGETS}
+  ${etsi_its_ivim_ts_conversion_TARGETS}
+  ${etsi_its_mapem_ts_conversion_TARGETS}
+  ${etsi_its_mcm_uulm_conversion_TARGETS}
+  ${etsi_its_spatem_ts_conversion_TARGETS}
+  ${etsi_its_vam_ts_conversion_TARGETS}
+  rclcpp::rclcpp
+  rclcpp_components::component
+  ${udp_msgs_TARGETS}
 )
 
 install(TARGETS ${PROJECT_NAME}
