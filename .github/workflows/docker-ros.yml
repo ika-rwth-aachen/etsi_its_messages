@@ -20,7 +20,7 @@ jobs:
         with:
           platform: amd64
           target: run
-          image-tag: ros2-humble
+          image-tag: humble
           base-image: rwthika/ros2:humble
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
@@ -32,8 +32,7 @@ jobs:
         with:
           platform: amd64
           target: run
-          image-tag: ros2-jazzy
-          enable-push-as-latest: 'true'
+          image-tag: jazzy
           base-image: rwthika/ros2:jazzy
           rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
@@ -46,8 +45,22 @@ jobs:
         with:
           platform: amd64
           target: run
-          image-tag: ros2-kilted
+          image-tag: kilted
           base-image: rwthika/ros2:kilted
+          rmw-implementation: rmw_zenoh_cpp
+          command: ros2 launch etsi_its_conversion converter.launch.py
+          enable-recursive-vcs-import: 'false'
+
+  ros2-lyrical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          platform: amd64
+          target: run
+          image-tag: lyrical
+          enable-push-as-latest: 'true'
+          base-image: ros:lyrical-ros-base # TODO: rwthika/ros2:lyrical
           rmw-implementation: rmw_zenoh_cpp
           command: ros2 launch etsi_its_conversion converter.launch.py
           enable-recursive-vcs-import: 'false'
