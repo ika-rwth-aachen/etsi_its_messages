@@ -53,14 +53,15 @@ if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   ament_add_gtest(${PROJECT_NAME}-test test/test_access.cpp)
   target_include_directories(${PROJECT_NAME}-test PUBLIC test
+    ${GeographicLib_INCLUDE_DIRS}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
   )
-  ament_target_dependencies(${PROJECT_NAME}-test
-    etsi_its_msgs
-    GeographicLib
-    geometry_msgs
-    tf2_geometry_msgs
+  target_link_libraries(${PROJECT_NAME}-test
+    ${etsi_its_msgs_TARGETS}
+    ${GeographicLib_LIBRARIES}
+    ${geometry_msgs_TARGETS}
+    ${tf2_geometry_msgs_TARGETS}
   )
 endif()
 

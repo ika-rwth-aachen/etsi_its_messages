@@ -62,28 +62,24 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rviz_ogre_vendor::OgreMain
   rviz_ogre_vendor::OgreOverlay
+  rclcpp::rclcpp
+  ${etsi_its_cam_msgs_TARGETS}
+  ${etsi_its_cam_ts_msgs_TARGETS}
+  ${etsi_its_cpm_ts_msgs_TARGETS}
+  ${etsi_its_denm_msgs_TARGETS}
+  ${etsi_its_denm_ts_msgs_TARGETS}
+  ${etsi_its_mapem_ts_msgs_TARGETS}
+  ${etsi_its_spatem_ts_msgs_TARGETS}
+  ${etsi_its_msgs_utils_TARGETS}
+  rviz_common::rviz_common
+  rviz_default_plugins::rviz_default_plugins
+  rviz_rendering::rviz_rendering
+  tf2::tf2
+  ${tf2_geometry_msgs_TARGETS}
+  tf2_ros::tf2_ros
 )
 
 pluginlib_export_plugin_description_file(rviz_common plugins_description.xml)
-
-ament_target_dependencies(${PROJECT_NAME}
-  PUBLIC
-  rclcpp
-  etsi_its_cam_msgs
-  etsi_its_cam_ts_msgs
-  etsi_its_cpm_ts_msgs
-  etsi_its_denm_msgs
-  etsi_its_denm_ts_msgs
-  etsi_its_mapem_ts_msgs
-  etsi_its_spatem_ts_msgs
-  etsi_its_msgs_utils
-  rviz_common
-  rviz_default_plugins
-  rviz_rendering
-  tf2
-  tf2_geometry_msgs
-  tf2_ros
-)
 
 ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 
