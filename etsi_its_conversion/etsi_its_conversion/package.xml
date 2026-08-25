@@ -28,6 +28,7 @@
   <depend>etsi_its_mcm_uulm_conversion</depend>
   <depend>etsi_its_spatem_ts_conversion</depend>
   <depend>etsi_its_vam_ts_conversion</depend>
+  <depend>etsi_its_rtcmem_ts_conversion</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
   <depend>ros_environment</depend>

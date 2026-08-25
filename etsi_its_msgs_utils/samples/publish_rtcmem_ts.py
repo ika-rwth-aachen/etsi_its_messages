@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+
+# ==============================================================================
+# MIT License
+#
+# Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University
+# Copyright (c) 2026 Virtual Vehicle Research GmbH
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ==============================================================================
+
+import rclpy
+from rclpy.node import Node
+
+from etsi_its_rtcmem_ts_msgs.msg import *
+from etsi_its_conversion_srvs.srv import ConvertRtcmemTsToUdp, ConvertUdpToRtcmemTs
+
+
+class Publisher(Node):
+
+    def __init__(self):
+
+        super().__init__("rtcmem_ts_publisher")
+        self.type = "RTCMEM_TS"
+        topic = "/etsi_its_conversion/rtcmem_ts/in"
+        self.publisher = self.create_publisher(RTCMEM, topic, 1)
+        self.srv_to_udp_client = self.create_client(ConvertRtcmemTsToUdp, "/etsi_its_conversion/rtcmem_ts/udp")
+        self.srv_to_ros_client = self.create_client(ConvertUdpToRtcmemTs, "/etsi_its_conversion/udp/rtcmem_ts")
+        self.timer = self.create_timer(1.0, self.publish)
+
+    def buildMessage(self):
+
+        msg = RTCMEM()
+
+        # --- Header ----------------------------------------------------------------
+        msg.header.protocol_version = 2
+        msg.header.message_id = msg.header.MESSAGE_ID_RTCMEM
+        msg.header.station_id.value = 100
+
+        # --- RTCMcorrections --------------------------------------------------------
+        rtcm = msg.rtcmc
+
+        rtcm.msg_cnt.value = 1
+        rtcm.rev.value = rtcm.rev.RTCM_REV3
+        rtcm.time_stamp.value = 12345
+        rtcm.time_stamp_is_present = True
+        rtcm.anchor_point.lon.value = 0
+        rtcm.anchor_point.lat.value = 0
+        rtcm.anchor_point_is_present = True
+
+        status = rtcm.rtcm_header.status
+        status.value = [0]
+        status.bits_unused = 0
+        status.value[0] |= 1 << status.BIT_INDEX_IS_HEALTHY
+
+        rtcm.rtcm_header.offset_set.ant_offset_x.value = 0
+        rtcm.rtcm_header.offset_set.ant_offset_y.value = 0
+        rtcm.rtcm_header.offset_set.ant_offset_z.value = 0
+
+        rtcm.rtcm_header_is_present = True
+
+        rtcm_msg = RTCMmessage()
+        rtcm_msg.value = [0xD3, 0x00, 0x13]
+        rtcm.msgs.array.append(rtcm_msg)
+        return msg
+
+    def publish(self):
+
+        msg = self.buildMessage()
+        self.get_logger().info(f"Publishing {self.type}")
+        self.publisher.publish(msg)
+
+    def callService(self):
+
+        msg = self.buildMessage()
+        srv_request = ConvertRtcmemTsToUdp.Request(ros_msg=msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from ROS to UDP")
+        srv_future = self.srv_to_udp_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        result = srv_future.result()
+        if result is None:
+            self.get_logger().error("Service call failed")
+            return
+        self.get_logger().info("Service call succeeded")
+
+        udp_msg = result.udp_packet
+        srv_request = ConvertUdpToRtcmemTs.Request(udp_packet=udp_msg)
+        self.get_logger().info(f"Calling service to convert {self.type} from UDP to ROS")
+        srv_future = self.srv_to_ros_client.call_async(srv_request)
+        while not srv_future.done():
+            rclpy.spin_once(self)
+        if srv_future.result() is not None:
+            self.get_logger().info("Service call succeeded")
+        else:
+            self.get_logger().error("Service call failed")
+
+
+if __name__ == "__main__":
+
+    rclpy.init()
+    publisher = Publisher()
+    if publisher.srv_to_udp_client.wait_for_service(timeout_sec=1.0) and publisher.srv_to_ros_client.wait_for_service(timeout_sec=1.0):
+        publisher.callService()
+    else:
+        publisher.get_logger().warning("Conversion services not available, skipping ...")
+    rclpy.spin(publisher)
+    rclpy.shutdown()

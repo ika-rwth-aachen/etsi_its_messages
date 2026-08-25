@@ -13,6 +13,7 @@ find_package(etsi_its_mapem_ts_conversion REQUIRED)
 find_package(etsi_its_mcm_uulm_conversion REQUIRED)
 find_package(etsi_its_spatem_ts_conversion REQUIRED)
 find_package(etsi_its_vam_ts_conversion REQUIRED)
+find_package(etsi_its_rtcmem_ts_conversion REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(ros_environment REQUIRED)
@@ -51,6 +52,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${etsi_its_mcm_uulm_conversion_TARGETS}
   ${etsi_its_spatem_ts_conversion_TARGETS}
   ${etsi_its_vam_ts_conversion_TARGETS}
+  ${etsi_its_rtcmem_ts_conversion_TARGETS}
   rclcpp::rclcpp
   rclcpp_components::component
   ${udp_msgs_TARGETS}

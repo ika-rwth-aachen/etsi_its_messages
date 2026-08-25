@@ -205,6 +205,18 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
     jinja_context = applyEtsiTypePlaceholder(jinja_context, etsi_type)
+    jinja_context["use_full_license_header"] = etsi_type == "rtcmem_ts"
+    if etsi_type == "rtcmem_ts":
+        license_copyright_lines = [
+            "Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University",
+            "Copyright (c) 2026 Virtual Vehicle Research GmbH",
+        ]
+        jinja_context["license_copyright_block"] = "\n".join(license_copyright_lines)
+    else:
+        license_copyright_lines = [
+            "Copyright Institute for Automotive Engineering (ika), RWTH Aachen University",
+        ]
+        jinja_context["license_copyright_block"] = "\n".join(f"// {line}" for line in license_copyright_lines)
 
     # align a few IVIM ROS type names with the existing manually curated .msg files
     jinja_context = applyRosTypeAliases(jinja_context, etsi_type)
@@ -722,22 +734,24 @@ def main():
     # remove all files that are not required for top-level message type
     print("Removing files not required for top-level message type ...")
     msg_type = args.type.upper()
-    if args.type == "cpm_ts":
-        msg_type = "CollectivePerceptionMessage"
-    elif args.type == "cam_ts":
+    if args.type == "cam_ts":
         msg_type = "CAM"
+    elif args.type == "cpm_ts":
+        msg_type = "CollectivePerceptionMessage"
     elif args.type == "denm_ts":
         msg_type = "DENM"
+    elif args.type == "ivim_ts":
+        msg_type = "IVIM"
     elif args.type == "mapem_ts":
         msg_type = "MAPEM"
+    elif args.type == "mcm_uulm":
+        msg_type = "MCM"
+    elif args.type == "rtcmem_ts":
+        msg_type = "RTCMEM"
     elif args.type == "spatem_ts":
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
         msg_type = "VAM"
-    elif args.type == "ivim_ts":
-        msg_type = "IVIM"
-    elif args.type == "mcm_uulm":
-        msg_type = "MCM"
     header_files = findDependenciesOfConversionHeaders(os.path.join(args.output_dir, f"convert{msg_type}.h"), args.type, [f"convert{msg_type}"])
     header_files += additionalMessageTypes(args.output_dir, msg_type)
     header_files = sortHeaderFiles(header_files)

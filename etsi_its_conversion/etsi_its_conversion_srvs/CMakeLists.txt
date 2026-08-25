@@ -14,6 +14,7 @@ find_package(etsi_its_mapem_ts_msgs REQUIRED)
 find_package(etsi_its_mcm_uulm_msgs REQUIRED)
 find_package(etsi_its_spatem_ts_msgs REQUIRED)
 find_package(etsi_its_vam_ts_msgs REQUIRED)
+find_package(etsi_its_rtcmem_ts_msgs REQUIRED)
 
 find_package(udp_msgs REQUIRED)
 
@@ -28,6 +29,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ConvertMapemTsToUdp.srv"
   "srv/ConvertMcmUulmToUdp.srv"
   "srv/ConvertSpatemTsToUdp.srv"
+  "srv/ConvertRtcmemTsToUdp.srv"
   "srv/ConvertUdpToCam.srv"
   "srv/ConvertUdpToCamTs.srv"
   "srv/ConvertUdpToCpmTs.srv"
@@ -38,6 +40,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ConvertUdpToMcmUulm.srv"
   "srv/ConvertUdpToSpatemTs.srv"
   "srv/ConvertUdpToVamTs.srv"
+  "srv/ConvertUdpToRtcmemTs.srv"
   "srv/ConvertVamTsToUdp.srv"
   DEPENDENCIES
     etsi_its_cam_msgs
@@ -50,6 +53,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
     etsi_its_mcm_uulm_msgs
     etsi_its_spatem_ts_msgs
     etsi_its_vam_ts_msgs
+    etsi_its_rtcmem_ts_msgs 
     udp_msgs
 )
 

@@ -20,6 +20,9 @@
 #include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
 #include <etsi_its_msgs_utils/mapem_ts_access.hpp>
 
+#include <etsi_its_rtcmem_ts_msgs/msg/rtcmem.hpp>
+#include <etsi_its_msgs_utils/rtcmem_ts_access.hpp>
+
 #include <etsi_its_spatem_ts_msgs/msg/spatem.hpp>
 #include <etsi_its_msgs_utils/spatem_ts_access.hpp>
 
@@ -52,6 +55,9 @@ namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 #include <impl/test_mapem_ts_access.cpp>
+
+namespace rtcmem_ts_msgs = etsi_its_rtcmem_ts_msgs::msg;
+#include <impl/test_rtcmem_ts_access.cpp>
 
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 #include <impl/test_spatem_ts_access.cpp>

@@ -14,6 +14,7 @@
       - mcm_uulm
       - spatem_ts
       - vam_ts
+      - rtcmem_ts
     udp2ros_etsi_types:
       - cam
       - cpm_ts
@@ -23,5 +24,6 @@
       - mcm_uulm
       - spatem_ts
       - vam_ts
+      - rtcmem_ts
     subscriber_queue_size: 10
     publisher_queue_size: 10
