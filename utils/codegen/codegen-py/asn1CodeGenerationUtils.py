@@ -6,6 +6,7 @@ import os
 import re
 import sys
 from copy import deepcopy
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import asn1tools
