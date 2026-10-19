@@ -205,18 +205,15 @@ def asn1TypeToConversionHeader(type_name: str, asn1_type: Dict, asn1_types: Dict
     # add etsi type to context
     jinja_context["etsi_type"] = etsi_type
     jinja_context = applyEtsiTypePlaceholder(jinja_context, etsi_type)
-    jinja_context["use_full_license_header"] = etsi_type == "rtcmem_ts"
     if etsi_type == "rtcmem_ts":
-        license_copyright_lines = [
-            "Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University",
-            "Copyright (c) 2026 Virtual Vehicle Research GmbH",
-        ]
-        jinja_context["license_copyright_block"] = "\n".join(license_copyright_lines)
+        jinja_context["license_copyright_block"] = (
+            "// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University\n"
+            "// Copyright Virtual Vehicle Research GmbH"
+        )
     else:
-        license_copyright_lines = [
-            "Copyright Institute for Automotive Engineering (ika), RWTH Aachen University",
-        ]
-        jinja_context["license_copyright_block"] = "\n".join(f"// {line}" for line in license_copyright_lines)
+        jinja_context["license_copyright_block"] = (
+            "// Copyright Institute for Automotive Engineering (ika), RWTH Aachen University"
+        )
 
     # align a few IVIM ROS type names with the existing manually curated .msg files
     jinja_context = applyRosTypeAliases(jinja_context, etsi_type)

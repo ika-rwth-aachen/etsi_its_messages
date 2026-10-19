@@ -74,17 +74,15 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     if type_name in asn1_raw:
         jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
 
-    jinja_context["use_full_license_header"] = etsi_type == "rtcmem_ts"
     if etsi_type == "rtcmem_ts":
-        license_copyright_lines = [
-            "Copyright (c) 2023-2025 Institute for Automotive Engineering (ika), RWTH Aachen University",
-            "Copyright (c) 2026 Virtual Vehicle Research GmbH",
-        ]
+        jinja_context["license_copyright_block"] = (
+            "# Copyright Institute for Automotive Engineering (ika), RWTH Aachen University\n"
+            "# Copyright Virtual Vehicle Research GmbH"
+        )
     else:
-        license_copyright_lines = [
-            "Copyright Institute for Automotive Engineering (ika), RWTH Aachen University",
-        ]
-    jinja_context["license_copyright_block"] = "\n".join(f"# {line}" for line in license_copyright_lines)
+        jinja_context["license_copyright_block"] = (
+            "# Copyright Institute for Automotive Engineering (ika), RWTH Aachen University"
+        )
 
     # render jinja template with context
     ros_msg = jinja_template.render(jinja_context)

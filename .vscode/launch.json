@@ -510,7 +510,6 @@
             "type": "debugpy",
             "request": "launch",
             "program": "utils/codegen/asn1ToC/asn1ToC.py",
-            
             "args": [
                 "asn1/raw/is_ts103301/RTCMEM-PDU-Descriptions.asn",
                 "asn1/raw/is_ts103301/cdd/ITS-Container.asn",

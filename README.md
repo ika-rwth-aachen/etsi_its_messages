@@ -70,7 +70,7 @@ During runtime, the `etsi_its_conversion` ROS node converts incoming UDP payload
 
 > [!WARNING]
 > **Limitations**
-> - `RegionalExtension` (defined in [`ISO-TS-19091-addgrp-C-2018.asn`](https://standards.iso.org/iso/ts/19091/ed-2/en/ISO-TS-19091-addgrp-C-2018.asn)) is not covered in ROS-equivalents of MAPEM and SPATEM messages
+> - `RegionalExtension` (defined in [`ISO-TS-19091-addgrp-C-2018.asn`](https://standards.iso.org/iso/ts/19091/ed-2/en/ISO-TS-19091-addgrp-C-2018.asn)) is not covered in ROS-equivalents of MAPEM, SPATEM, and RTCMEM messages
 
 
 ## Packages
