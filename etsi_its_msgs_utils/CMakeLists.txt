@@ -24,7 +24,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
 )
 
 ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
-ament_export_dependencies(etsi_its_msgs geometry_msgs tf2_geometry_msgs)
+ament_export_dependencies(etsi_its_msgs GeographicLib geometry_msgs tf2_geometry_msgs)
 
 install(DIRECTORY include/
   DESTINATION include/${PROJECT_NAME}
