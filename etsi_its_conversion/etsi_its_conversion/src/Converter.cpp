@@ -535,6 +535,46 @@ void Converter::setup() {
     RCLCPP_INFO(this->get_logger(), "Converting native ROS MCM (UULM) on '%s' to UDP messages on '%s'", subscribers_["mcm_uulm"]->get_topic_name(), publisher_udp_->get_topic_name());
     RCLCPP_INFO(this->get_logger(), "Converting native ROS MCM (UULM) to UDP messages via service '%s'", convert_mcm_uulm_to_udp_service_->get_service_name());
   }
+  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "rtcmem_ts") != udp2ros_etsi_types_.end()) {
+    convert_udp_to_rtcmem_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToRtcmemTs>(
+      kServiceUdpToRtcmemTs,
+      std::bind(
+        &Converter::udpToRosSrvCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t, conversion_srvs::ConvertUdpToRtcmemTs>,
+        this,
+        std::placeholders::_1,
+        std::placeholders::_2,
+        "rtcmem_ts",
+        &asn_DEF_rtcmem_ts_RTCMEM,
+        std::function<void(const rtcmem_ts_RTCMEM_t &, rtcmem_ts_msgs::RTCMEM &)>(etsi_its_rtcmem_ts_conversion::toRos_RTCMEM)
+      ),
+      SERVICE_QOS,
+      callback_group_
+    );
+    publisher_rtcmem_ts_ = this->create_publisher<rtcmem_ts_msgs::RTCMEM>(kOutputTopicRtcmemTs, publisher_queue_size_);
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type RTCMEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_rtcmem_ts_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type RTCMEM (TS) to native ROS messages via service '%s'", convert_udp_to_rtcmem_ts_service_->get_service_name());
+  }
+  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "rtcmem_ts") != ros2udp_etsi_types_.end()) {
+    convert_rtcmem_ts_to_udp_service_ = this->create_service<conversion_srvs::ConvertRtcmemTsToUdp>(
+      kServiceRtcmemTsToUdp,
+      std::bind(
+        &Converter::rosToUdpSrvCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t, conversion_srvs::ConvertRtcmemTsToUdp>,
+        this,
+        std::placeholders::_1,
+        std::placeholders::_2,
+        "rtcmem_ts",
+        &asn_DEF_rtcmem_ts_RTCMEM,
+        std::function<void(const rtcmem_ts_msgs::RTCMEM &, rtcmem_ts_RTCMEM_t &)>(etsi_its_rtcmem_ts_conversion::toStruct_RTCMEM)
+      ),
+      SERVICE_QOS,
+      callback_group_
+    );
+    std::function<void(const rtcmem_ts_msgs::RTCMEM::UniquePtr)> callback =
+      std::bind(&Converter::rosCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t>, this, std::placeholders::_1, "rtcmem_ts", &asn_DEF_rtcmem_ts_RTCMEM, std::function<void(const rtcmem_ts_msgs::RTCMEM&, rtcmem_ts_RTCMEM_t&)>(etsi_its_rtcmem_ts_conversion::toStruct_RTCMEM));
+    subscribers_["rtcmem_ts"] = this->create_subscription<rtcmem_ts_msgs::RTCMEM>(kInputTopicRtcmemTs, subscriber_queue_size_, callback, subscriber_options);
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS RTCMEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["rtcmem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
+    RCLCPP_INFO(this->get_logger(), "Converting native ROS RTCMEMs (TS) to UDP messages via service '%s'", convert_rtcmem_ts_to_udp_service_->get_service_name());
+  }
   if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "spatem_ts") != udp2ros_etsi_types_.end()) {
     convert_udp_to_spatem_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToSpatemTs>(
       kServiceUdpToSpatemTs,
@@ -614,46 +654,6 @@ void Converter::setup() {
     subscribers_["vam_ts"] = this->create_subscription<vam_ts_msgs::VAM>(kInputTopicVamTs, subscriber_queue_size_, callback, subscriber_options);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS VAM (TS) on '%s' to UDP messages on '%s'", subscribers_["vam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
     RCLCPP_INFO(this->get_logger(), "Converting native ROS VAM (TS) to UDP messages via service '%s'", convert_vam_ts_to_udp_service_->get_service_name());
-  }
-  if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "rtcmem_ts") != udp2ros_etsi_types_.end()) {
-    convert_udp_to_rtcmem_ts_service_ = this->create_service<conversion_srvs::ConvertUdpToRtcmemTs>(
-      kServiceUdpToRtcmemTs,
-      std::bind(
-        &Converter::udpToRosSrvCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t, conversion_srvs::ConvertUdpToRtcmemTs>,
-        this,
-        std::placeholders::_1,
-        std::placeholders::_2,
-        "rtcmem_ts",
-        &asn_DEF_rtcmem_ts_RTCMEM,
-        std::function<void(const rtcmem_ts_RTCMEM_t &, rtcmem_ts_msgs::RTCMEM &)>(etsi_its_rtcmem_ts_conversion::toRos_RTCMEM)
-      ),
-      SERVICE_QOS,
-      callback_group_
-    );
-    publisher_rtcmem_ts_ = this->create_publisher<rtcmem_ts_msgs::RTCMEM>(kOutputTopicRtcmemTs, publisher_queue_size_);
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type RTCMEM (TS) on '%s' to native ROS messages on '%s'", subscriber_udp_->get_topic_name(), publisher_rtcmem_ts_->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting UDP messages of type RTCMEM (TS) to native ROS messages via service '%s'", convert_udp_to_rtcmem_ts_service_->get_service_name());
-  }
-  if (std::find(ros2udp_etsi_types_.begin(), ros2udp_etsi_types_.end(), "rtcmem_ts") != ros2udp_etsi_types_.end()) {
-    convert_rtcmem_ts_to_udp_service_ = this->create_service<conversion_srvs::ConvertRtcmemTsToUdp>(
-      kServiceRtcmemTsToUdp,
-      std::bind(
-        &Converter::rosToUdpSrvCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t, conversion_srvs::ConvertRtcmemTsToUdp>,
-        this,
-        std::placeholders::_1,
-        std::placeholders::_2,
-        "rtcmem_ts",
-        &asn_DEF_rtcmem_ts_RTCMEM,
-        std::function<void(const rtcmem_ts_msgs::RTCMEM &, rtcmem_ts_RTCMEM_t &)>(etsi_its_rtcmem_ts_conversion::toStruct_RTCMEM)
-      ),
-      SERVICE_QOS,
-      callback_group_
-    );
-    std::function<void(const rtcmem_ts_msgs::RTCMEM::UniquePtr)> callback =
-      std::bind(&Converter::rosCallback<rtcmem_ts_msgs::RTCMEM, rtcmem_ts_RTCMEM_t>, this, std::placeholders::_1, "rtcmem_ts", &asn_DEF_rtcmem_ts_RTCMEM, std::function<void(const rtcmem_ts_msgs::RTCMEM&, rtcmem_ts_RTCMEM_t&)>(etsi_its_rtcmem_ts_conversion::toStruct_RTCMEM));
-    subscribers_["rtcmem_ts"] = this->create_subscription<rtcmem_ts_msgs::RTCMEM>(kInputTopicRtcmemTs, subscriber_queue_size_, callback, subscriber_options);
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS RTCMEMs (TS) on '%s' to UDP messages on '%s'", subscribers_["rtcmem_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
-    RCLCPP_INFO(this->get_logger(), "Converting native ROS RTCMEMs (TS) to UDP messages via service '%s'", convert_rtcmem_ts_to_udp_service_->get_service_name());
   }
 }
 
