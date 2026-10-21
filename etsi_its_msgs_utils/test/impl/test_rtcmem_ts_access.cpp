@@ -37,15 +37,15 @@ TEST(etsi_its_rtcmem_ts_msgs, test_set_get_rtcmem) {
   timeinfo.tm_year = 126; // year 2026
   uint64_t unix_stamp = timegm(&timeinfo);
   EXPECT_EQ((unix_stamp + 60 * minute_of_year) * 1e9,
-            rtcm_ts_access::getUnixNanoseconds(rtcmem, unix_stamp * 1e9));
+            rtcmem_ts_access::getUnixNanoseconds(rtcmem, unix_stamp * 1e9));
 
   rtcmem_ts_msgs::RTCMmessage rtcm_message;
   std::vector<uint8_t> rtcm_message_data{0xD3, 0x00, 0x13};
-  rtcm_ts_access::setRTCMmessageValue(rtcm_message, rtcm_message_data);
-  rtcm_ts_access::setRTCMmessageList(rtcmem, {rtcm_message});
-  EXPECT_EQ(1u, rtcm_ts_access::getRTCMmessageCount(rtcmem));
-  EXPECT_EQ(rtcm_message_data, rtcm_ts_access::getRTCMmessageValue(rtcm_ts_access::getRTCMmessage(rtcmem, 0)));
+  rtcmem_ts_access::setRTCMmessageValue(rtcm_message, rtcm_message_data);
+  rtcmem_ts_access::setRTCMmessageList(rtcmem, {rtcm_message});
+  EXPECT_EQ(1u, rtcmem_ts_access::getRTCMmessageCount(rtcmem));
+  EXPECT_EQ(rtcm_message_data, rtcmem_ts_access::getRTCMmessageValue(rtcmem_ts_access::getRTCMmessage(rtcmem, 0)));
 
-  rtcm_ts_access::clearMinuteOfTheYear(rtcmem);
-  EXPECT_FALSE(rtcm_ts_access::hasMinuteOfTheYear(rtcmem));
+  rtcmem_ts_access::clearMinuteOfTheYear(rtcmem);
+  EXPECT_FALSE(rtcmem_ts_access::hasMinuteOfTheYear(rtcmem));
 }
