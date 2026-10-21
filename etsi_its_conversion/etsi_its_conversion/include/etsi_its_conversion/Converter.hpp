@@ -15,6 +15,7 @@
 #include <etsi_its_conversion_srvs/srv/convert_ivim_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_mapem_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_mcm_uulm_to_udp.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_rtcmem_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_spatem_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_vam_ts_to_udp.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_cam.hpp>
@@ -25,6 +26,7 @@
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_ivim_ts.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_mapem_ts.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_mcm_uulm.hpp>
+#include <etsi_its_conversion_srvs/srv/convert_udp_to_rtcmem_ts.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_spatem_ts.hpp>
 #include <etsi_its_conversion_srvs/srv/convert_udp_to_vam_ts.hpp>
 #include <etsi_its_cam_conversion/convertCAM.h>
@@ -35,6 +37,7 @@
 #include <etsi_its_ivim_ts_conversion/convertIVIM.h>
 #include <etsi_its_mapem_ts_conversion/convertMAPEM.h>
 #include <etsi_its_mcm_uulm_conversion/convertMCM.h>
+#include <etsi_its_rtcmem_ts_conversion/convertRTCMEM.h>
 #include <etsi_its_spatem_ts_conversion/convertSPATEM.h>
 #include <etsi_its_vam_ts_conversion/convertVAM.h>
 #include <etsi_its_cam_msgs/msg/cam.hpp>
@@ -45,6 +48,7 @@
 #include <etsi_its_ivim_ts_msgs/msg/ivim.hpp>
 #include <etsi_its_mapem_ts_msgs/msg/mapem.hpp>
 #include <etsi_its_mcm_uulm_msgs/msg/mcm.hpp>
+#include <etsi_its_rtcmem_ts_msgs/msg/rtcmem.hpp>
 #include <etsi_its_spatem_ts_msgs/msg/spatem.hpp>
 #include <etsi_its_vam_ts_msgs/msg/vam.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -62,6 +66,7 @@ namespace denm_ts_msgs = etsi_its_denm_ts_msgs::msg;
 namespace ivim_ts_msgs = etsi_its_ivim_ts_msgs::msg;
 namespace mapem_ts_msgs = etsi_its_mapem_ts_msgs::msg;
 namespace mcm_uulm_msgs = etsi_its_mcm_uulm_msgs::msg;
+namespace rtcmem_ts_msgs = etsi_its_rtcmem_ts_msgs::msg;
 namespace spatem_ts_msgs = etsi_its_spatem_ts_msgs::msg;
 namespace vam_ts_msgs = etsi_its_vam_ts_msgs::msg;
 
@@ -148,6 +153,10 @@ class Converter : public rclcpp::Node {
     static const std::string kOutputTopicMcmUulm;
     static const std::string kServiceMcmUulmToUdp;
     static const std::string kServiceUdpToMcmUulm;
+    static const std::string kInputTopicRtcmemTs;
+    static const std::string kOutputTopicRtcmemTs;
+    static const std::string kServiceRtcmemTsToUdp;
+    static const std::string kServiceUdpToRtcmemTs;
     static const std::string kInputTopicSpatemTs;
     static const std::string kOutputTopicSpatemTs;
     static const std::string kServiceSpatemTsToUdp;
@@ -195,6 +204,7 @@ class Converter : public rclcpp::Node {
     rclcpp::Service<conversion_srvs::ConvertIvimTsToUdp>::SharedPtr convert_ivim_ts_to_udp_service_;
     rclcpp::Service<conversion_srvs::ConvertMapemTsToUdp>::SharedPtr convert_mapem_ts_to_udp_service_;
     rclcpp::Service<conversion_srvs::ConvertMcmUulmToUdp>::SharedPtr convert_mcm_uulm_to_udp_service_;
+    rclcpp::Service<conversion_srvs::ConvertRtcmemTsToUdp>::SharedPtr convert_rtcmem_ts_to_udp_service_;
     rclcpp::Service<conversion_srvs::ConvertSpatemTsToUdp>::SharedPtr convert_spatem_ts_to_udp_service_;
     rclcpp::Service<conversion_srvs::ConvertVamTsToUdp>::SharedPtr convert_vam_ts_to_udp_service_;
 
@@ -206,6 +216,7 @@ class Converter : public rclcpp::Node {
     rclcpp::Service<conversion_srvs::ConvertUdpToIvimTs>::SharedPtr convert_udp_to_ivim_ts_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToMapemTs>::SharedPtr convert_udp_to_mapem_ts_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToMcmUulm>::SharedPtr convert_udp_to_mcm_uulm_service_;
+    rclcpp::Service<conversion_srvs::ConvertUdpToRtcmemTs>::SharedPtr convert_udp_to_rtcmem_ts_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToSpatemTs>::SharedPtr convert_udp_to_spatem_ts_service_;
     rclcpp::Service<conversion_srvs::ConvertUdpToVamTs>::SharedPtr convert_udp_to_vam_ts_service_;
 
@@ -217,6 +228,7 @@ class Converter : public rclcpp::Node {
     mutable rclcpp::Publisher<ivim_ts_msgs::IVIM>::SharedPtr publisher_ivim_ts_;
     mutable rclcpp::Publisher<mapem_ts_msgs::MAPEM>::SharedPtr publisher_mapem_ts_;
     mutable rclcpp::Publisher<mcm_uulm_msgs::MCM>::SharedPtr publisher_mcm_uulm_;
+    mutable rclcpp::Publisher<rtcmem_ts_msgs::RTCMEM>::SharedPtr publisher_rtcmem_ts_;
     mutable rclcpp::Publisher<spatem_ts_msgs::SPATEM>::SharedPtr publisher_spatem_ts_;
     mutable rclcpp::Publisher<vam_ts_msgs::VAM>::SharedPtr publisher_vam_ts_;
     mutable rclcpp::Publisher<UdpPacket>::SharedPtr publisher_udp_;

@@ -26,6 +26,7 @@
   <depend>etsi_its_mcm_uulm_msgs</depend>
   <depend>etsi_its_spatem_ts_msgs</depend>
   <depend>etsi_its_vam_ts_msgs</depend>
+  <depend>etsi_its_rtcmem_ts_msgs</depend>
   <depend>udp_msgs</depend>
 
   <buildtool_depend>rosidl_default_generators</buildtool_depend>
