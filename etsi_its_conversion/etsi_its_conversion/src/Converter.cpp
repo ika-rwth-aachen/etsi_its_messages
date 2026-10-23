@@ -82,7 +82,7 @@ const std::string Converter::kRos2UdpEtsiTypesParam{"ros2udp_etsi_types"};
 const std::string Converter::kUdp2RosEtsiTypesParam{"udp2ros_etsi_types"};
 const std::vector<std::string> Converter::kEtsiTypesParamSupportedOptions{"cam", "cam_ts", "cpm_ts", "denm", "denm_ts", "ivim_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
 const std::vector<std::string> Converter::kRos2UdpEtsiTypesParamDefault = Converter::kEtsiTypesParamSupportedOptions;
-const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cpm_ts", "denm", "ivim_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
+const std::vector<std::string> Converter::kUdp2RosEtsiTypesParamDefault{"cam", "cam_ts", "cpm_ts", "denm", "ivim_ts", "mapem_ts", "mcm_uulm", "spatem_ts", "vam_ts"};
 const std::string Converter::kSubscriberQueueSizeParam{"subscriber_queue_size"};
 const int Converter::kSubscriberQueueSizeParamDefault{10};
 const std::string Converter::kPublisherQueueSizeParam{"publisher_queue_size"};
@@ -285,7 +285,14 @@ void Converter::setup() {
       callback_group_
     );
     std::function<void(const cam_ts_msgs::CAM::UniquePtr)> callback =
-      std::bind(&Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>, this, std::placeholders::_1, "cam_ts", &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_msgs::CAM&, cam_ts_CAM_t&)>(etsi_its_cam_ts_conversion::toStruct_CAM));
+      std::bind(
+        &Converter::rosCallback<cam_ts_msgs::CAM, cam_ts_CAM_t>,
+        this,
+        std::placeholders::_1,
+        "cam_ts",
+        &asn_DEF_cam_ts_CAM,
+        std::function<void(const cam_ts_msgs::CAM&, cam_ts_CAM_t&)>(etsi_its_cam_ts_conversion::toStruct_CAM)
+      );
     subscribers_["cam_ts"] = this->create_subscription<cam_ts_msgs::CAM>(kInputTopicCamTs, subscriber_queue_size_, callback, subscriber_options);
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM (TS) on '%s' to UDP messages on '%s'", subscribers_["cam_ts"]->get_topic_name(), publisher_udp_->get_topic_name());
     RCLCPP_INFO(this->get_logger(), "Converting native ROS CAM (TS) to UDP messages via service '%s'", convert_cam_ts_to_udp_service_->get_service_name());
@@ -807,7 +814,20 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
   } else if (udp_msg->src_port != 0) {
     destination_port = udp_msg->src_port;
   }
-  if (destination_port == kBtpHeaderDestinationPortCam) detected_etsi_type = "cam";
+
+  int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
+  if (msg_size <= 0) {
+    RCLCPP_ERROR(this->get_logger(), "Payload too short for ETSI message payload (offset %d), dropping", etsi_message_payload_offset_);
+    return;
+  }
+
+  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
+  
+  if (destination_port == kBtpHeaderDestinationPortCam) {
+    if (*protocol_version == 1) detected_etsi_type = "cam"; 
+    else if (*protocol_version == 2) detected_etsi_type = "cam_ts";
+    else detected_etsi_type = "unknown";
+  }
   else if (destination_port == kBtpHeaderDestinationPortCpmTs) detected_etsi_type = "cpm_ts";
   else if (destination_port == kBtpHeaderDestinationPortDenm) detected_etsi_type = "denm";
   else if (destination_port == kBtpHeaderDestinationPortIvi) detected_etsi_type = "ivim_ts";
@@ -817,27 +837,40 @@ void Converter::udpCallback(const UdpPacket::UniquePtr udp_msg) const {
   else if (destination_port == kBtpHeaderDestinationPortVamTs) detected_etsi_type = "vam_ts";
   else detected_etsi_type = "unknown";
 
-
-  int msg_size = udp_msg->data.size() - etsi_message_payload_offset_;
-  if (msg_size <= 0) {
-    RCLCPP_ERROR(this->get_logger(), "Payload too short for ETSI message payload (offset %d), dropping", etsi_message_payload_offset_);
-    return;
-  }
-  const uint8_t* protocol_version = reinterpret_cast<const uint8_t*>(&udp_msg->data[etsi_message_payload_offset_]);
   RCLCPP_INFO(this->get_logger(), "Received ETSI message of type '%s' (protocolVersion: %d) as bitstring (message size: %d | total payload size: %ld)", detected_etsi_type.c_str(), *protocol_version , msg_size, udp_msg->data.size());
 
   if (detected_etsi_type == "cam" || detected_etsi_type == "cam_ts") {
 
-    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) { // CAM EN v1.4.1
+    if (detected_etsi_type == "cam" &&
+      std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam") != udp2ros_etsi_types_.end()) { // CAM EN v1.4.1
+      // decode buffer to ROS msg
       cam_msgs::CAM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_CAM, std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM), msg);
+      bool success = this->decodeBufferToRosMessage(
+        &udp_msg->data[etsi_message_payload_offset_],
+        msg_size,
+        &asn_DEF_cam_CAM,
+        std::function<void(const cam_CAM_t&, cam_msgs::CAM&)>(etsi_its_cam_conversion::toRos_CAM),
+        msg
+      );
       if (!success) return;
+
+      // publish msg
       publisher_cam_->publish(msg);
     }
-    if (std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) { // CAM TS v2.1.1
+    if (detected_etsi_type == "cam_ts" &&
+      std::find(udp2ros_etsi_types_.begin(), udp2ros_etsi_types_.end(), "cam_ts") != udp2ros_etsi_types_.end()) { // CAM TS v2.1.1
+      // decode buffer to ROS msg
       cam_ts_msgs::CAM msg;
-      bool success = this->decodeBufferToRosMessage(&udp_msg->data[etsi_message_payload_offset_], msg_size, &asn_DEF_cam_ts_CAM, std::function<void(const cam_ts_CAM_t&, cam_ts_msgs::CAM&)>(etsi_its_cam_ts_conversion::toRos_CAM), msg);
+      bool success = this->decodeBufferToRosMessage(
+        &udp_msg->data[etsi_message_payload_offset_],
+        msg_size,
+        &asn_DEF_cam_ts_CAM,
+        std::function<void(const cam_ts_CAM_t&, cam_ts_msgs::CAM&)>(etsi_its_cam_ts_conversion::toRos_CAM),
+        msg
+      );
       if (!success) return;
+
+      // publish msg
       publisher_cam_ts_->publish(msg);
     }
 

@@ -228,7 +228,7 @@ ros2 run etsi_its_conversion etsi_its_conversion_node --ros-args -p etsi_types:=
 | `btp_destination_port_offset` | `int` | `0` |  | number of bytes before an optional 2-byte BTP destination port, see `has_btp_destination_port` (always `0` in outgoing UDP payload) |
 | `etsi_message_payload_offset` | `int` | `4` |  | number of bytes before actual ETSI message payload (always `0` or `4` (if `has_btp_destination_port`) in outgoing UDP payload) |
 | `ros2udp_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `etsi_its_msgs` to `udp_msgs` |
-| `udp2ros_etsi_types` | `string[]` | `cam`, `cpm_ts`, `denm`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
+| `udp2ros_etsi_types` | `string[]` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | `cam`, `cam_ts`, `cpm_ts`, `denm`, `denm_ts`, `ivim_ts`, `mapem_ts`, `mcm_uulm`, `spatem_ts`, `vam_ts` | list of ETSI types to convert from `udp_msgs` to `etsi_its_msgs` |
 | `subscriber_queue_size` | `int` | `10` |  | queue size for incoming ROS messages |
 | `publisher_queue_size` | `int` | `10` |  | queue size for outgoing ROS messages |
 
