@@ -11,6 +11,10 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
 
   ros2-humble:
