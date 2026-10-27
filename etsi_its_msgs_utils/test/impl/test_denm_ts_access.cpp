@@ -6,7 +6,7 @@ namespace denm_ts_access = etsi_its_denm_ts_msgs::access;
 TEST(etsi_its_denm_ts_msgs, test_set_get_denm) {
   denm_ts_msgs::DENM denm;
 
-  int station_id = randomInt(denm_ts_msgs::StationId::MIN, denm_ts_msgs::StationId::MAX);
+  uint32_t station_id = randomInt(denm_ts_msgs::StationId::MIN, denm_ts_msgs::StationId::MAX);
   int protocol_version = randomInt(denm_ts_msgs::OrdinalNumber1B::MIN, denm_ts_msgs::OrdinalNumber1B::MAX);
   denm_ts_access::setItsPduHeader(denm, station_id, protocol_version);
   EXPECT_EQ(denm_ts_msgs::MessageId::DENM, denm.header.message_id.value);

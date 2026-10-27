@@ -6,7 +6,7 @@ namespace cpm_ts_access = etsi_its_cpm_ts_msgs::access;
 TEST(etsi_its_cpm_ts_msgs, test_set_get_cpm) {
   cpm_ts_msgs::CollectivePerceptionMessage cpm;
 
-  int station_id = randomInt(cpm_ts_msgs::StationId::MIN, cpm_ts_msgs::StationId::MAX);
+  uint32_t station_id = randomInt(cpm_ts_msgs::StationId::MIN, cpm_ts_msgs::StationId::MAX);
   int protocol_version = randomInt(cpm_ts_msgs::OrdinalNumber1B::MIN, cpm_ts_msgs::OrdinalNumber1B::MAX);
   cpm_ts_access::setItsPduHeader(cpm, station_id, protocol_version);
   EXPECT_EQ(cpm_ts_msgs::MessageId::CPM, cpm.header.message_id.value);

@@ -6,7 +6,7 @@ namespace cam_ts_access = etsi_its_cam_ts_msgs::access;
 TEST(etsi_its_cam_ts_msgs, test_set_get_cam) {
   cam_ts_msgs::CAM cam;
 
-  int station_id = randomInt(cam_ts_msgs::StationId::MIN, cam_ts_msgs::StationId::MAX);
+  uint32_t station_id = randomInt(cam_ts_msgs::StationId::MIN, cam_ts_msgs::StationId::MAX);
   int protocol_version = randomInt(cam_ts_msgs::OrdinalNumber1B::MIN, cam_ts_msgs::OrdinalNumber1B::MAX);
   cam_ts_access::setItsPduHeader(cam, station_id, protocol_version);
   EXPECT_EQ(cam_ts_msgs::MessageId::CAM, cam.header.message_id.value);
