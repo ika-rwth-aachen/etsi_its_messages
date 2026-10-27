@@ -32,10 +32,6 @@ set(display_headers_to_moc
   include/displays/MAPEM/mapem_display.hpp
 )
 
-foreach(header "${display_headers_to_moc}")
-  qt5_wrap_cpp(display_moc_files "${header}")
-endforeach()
-
 set(display_source_files
   src/displays/CAM/cam_display.cpp
   src/displays/CAM/cam_render_object.cpp
@@ -49,14 +45,16 @@ set(display_source_files
 )
 
 add_library(${PROJECT_NAME} SHARED
-  ${display_moc_files}
+  ${display_headers_to_moc}
   ${display_source_files}
 )
+
+# Use the Qt version exported by RViz for meta-object generation.
+set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC ON)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
-  ${Qt5Widgets_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
@@ -129,6 +127,4 @@ install(
   DESTINATION share/${PROJECT_NAME}/icons/classes
 )
 
-ament_package(
-  CONFIG_EXTRAS ${PROJECT_NAME}-extras.cmake
-)
+ament_package()
