@@ -11,6 +11,7 @@ find_package(etsi_its_denm_ts_conversion REQUIRED)
 find_package(etsi_its_ivim_ts_conversion REQUIRED)
 find_package(etsi_its_mapem_ts_conversion REQUIRED)
 find_package(etsi_its_mcm_uulm_conversion REQUIRED)
+find_package(etsi_its_rtcmem_ts_conversion REQUIRED)
 find_package(etsi_its_spatem_ts_conversion REQUIRED)
 find_package(etsi_its_vam_ts_conversion REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -49,6 +50,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${etsi_its_ivim_ts_conversion_TARGETS}
   ${etsi_its_mapem_ts_conversion_TARGETS}
   ${etsi_its_mcm_uulm_conversion_TARGETS}
+  ${etsi_its_rtcmem_ts_conversion_TARGETS}
   ${etsi_its_spatem_ts_conversion_TARGETS}
   ${etsi_its_vam_ts_conversion_TARGETS}
   rclcpp::rclcpp

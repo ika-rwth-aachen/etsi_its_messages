@@ -9,6 +9,7 @@ find_package(etsi_its_denm_msgs REQUIRED)
 find_package(etsi_its_denm_ts_msgs REQUIRED)
 find_package(etsi_its_ivim_ts_msgs REQUIRED)
 find_package(etsi_its_mapem_ts_msgs REQUIRED)
+find_package(etsi_its_rtcmem_ts_msgs REQUIRED)
 find_package(etsi_its_spatem_ts_msgs REQUIRED)
 find_package(etsi_its_vam_ts_msgs REQUIRED)
 
@@ -22,6 +23,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   ${etsi_its_denm_ts_msgs_TARGETS}
   ${etsi_its_ivim_ts_msgs_TARGETS}
   ${etsi_its_mapem_ts_msgs_TARGETS}
+  ${etsi_its_rtcmem_ts_msgs_TARGETS}
   ${etsi_its_spatem_ts_msgs_TARGETS}
   ${etsi_its_vam_ts_msgs_TARGETS}
 )
@@ -37,6 +39,7 @@ ament_export_dependencies(
   etsi_its_denm_ts_msgs
   etsi_its_ivim_ts_msgs
   etsi_its_mapem_ts_msgs
+  etsi_its_rtcmem_ts_msgs
   etsi_its_spatem_ts_msgs
   etsi_its_vam_ts_msgs
 )
