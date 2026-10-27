@@ -74,6 +74,16 @@ def asn1TypeToRosMsg(type_name: str, asn1_type: Dict, asn1_types: Dict[str, Dict
     if type_name in asn1_raw:
         jinja_context["asn1_definition"] = asn1_raw[type_name].rstrip("\n")
 
+    if etsi_type == "rtcmem_ts":
+        jinja_context["license_copyright_block"] = (
+            "# Copyright Institute for Automotive Engineering (ika), RWTH Aachen University\n"
+            "# Copyright Virtual Vehicle Research GmbH"
+        )
+    else:
+        jinja_context["license_copyright_block"] = (
+            "# Copyright Institute for Automotive Engineering (ika), RWTH Aachen University"
+        )
+
     # render jinja template with context
     ros_msg = jinja_template.render(jinja_context)
 
@@ -184,10 +194,10 @@ def main():
 
     # generate CMakeLists.txt and remove all files that are not required for top-level message type
     msg_type = args.type.upper()
-    if args.type == "cpm_ts":
-        msg_type = "CollectivePerceptionMessage"
-    elif args.type == "cam_ts":
+    if args.type == "cam_ts":
         msg_type = "CAM"
+    elif args.type == "cpm_ts":
+        msg_type = "CollectivePerceptionMessage"
     elif args.type == "denm_ts":
         msg_type = "DENM"
     elif args.type == "ivim_ts":
@@ -196,6 +206,8 @@ def main():
         msg_type = "MAPEM"
     elif args.type == "mcm_uulm":
         msg_type = "MCM"
+    elif args.type == "rtcmem_ts":
+        msg_type = "RTCMEM"
     elif args.type == "spatem_ts":
         msg_type = "SPATEM"
     elif args.type == "vam_ts":
