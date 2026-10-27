@@ -8,7 +8,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Quaternion.hpp>
 
 #include "rviz_common/validate_floats.hpp"
 
