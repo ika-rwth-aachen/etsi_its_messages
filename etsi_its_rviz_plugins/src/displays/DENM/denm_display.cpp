@@ -60,8 +60,12 @@ DENMDisplay::DENMDisplay()
   text_size_prop_ = new rviz_common::properties::IntProperty("Text Size", 16, "Font size of the overlay text", show_overlay_prop_);
   line_width_prop_ = new rviz_common::properties::IntProperty("Line Width", 1, "Line width of the overlay", show_overlay_prop_);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+  font_families_ = QFontDatabase::families();
+#else
   QFontDatabase database;
   font_families_ = database.families();
+#endif
   font_prop_ = new rviz_common::properties::EnumProperty("Font", "DejaVu Sans", "Font of the overlay text", show_overlay_prop_);
   for (int i = 0; i < font_families_.size(); i++) {
     font_prop_->addOption(font_families_[i], i);

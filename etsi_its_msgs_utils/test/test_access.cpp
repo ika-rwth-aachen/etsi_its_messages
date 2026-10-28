@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <cmath>
+#include <cstdint>
 #include <random>
 
 #include <etsi_its_cam_msgs/msg/cam.hpp>
@@ -31,8 +32,8 @@ double randomDouble(double min, double max) {
   std::uniform_real_distribution<double> uniform_distribution_double(min, max);
   return uniform_distribution_double(random_engine);
 }
-int randomInt(int min, int max) {
-  std::uniform_int_distribution<int> uniform_distribution_int(min, max);
+int64_t randomInt(int64_t min, int64_t max) {
+  std::uniform_int_distribution<int64_t> uniform_distribution_int(min, max);
   return uniform_distribution_int(random_engine);
 }
 
